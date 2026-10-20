@@ -1,0 +1,120 @@
+# module HOME.StreamService.Tidal.controllers.shell.LPTidalShellRouter
+
+[module] names: __doc__, typing, List, Optional, TypeVar, PyQt6.QtWidgets, QWidget, RouteEntry, TIDAL_SHELL_EMBEDDED_ITEM_IDS, TIDAL_SHELL_NO_HOME_TABS_ITEM_IDS, LPTidalShellRouteStack, findTidalShell, str, pushTidalPage, bool, shouldOpenTidalPageInShell, createTidalShellWithContentPage, isTidalShellHomeTabsVisible, isCurrentTidalDetailPage, object, _isDetailWidgetMatch
+  str: '\nTIDAL Shell 内部路由工具。\n'
+  str: 'List'
+  str: 'Optional'
+  str: 'TypeVar'
+  str: 'QWidget'
+  str: 'RouteEntry'
+  str: 'tidal_home'
+  str: 'tidal_collection'
+  str: 'tidal_search'
+  str: 'LPTidalShellRouteStack'
+  str: 'widget'
+  str: 'return'
+  str: 'findTidalShell'
+  str: 'parent'
+  str: 'widget'
+  str: 'itemId'
+  str: 'return'
+  str: 'pushTidalPage'
+  str: 'itemId'
+  str: 'return'
+  str: 'shouldOpenTidalPageInShell'
+  str: 'widget'
+  str: 'itemId'
+  str: 'return'
+  str: 'createTidalShellWithContentPage'
+  str: 'entries'
+  str: 'return'
+  str: 'isTidalShellHomeTabsVisible'
+  str: 'itemType'
+  str: 'itemId'
+  str: 'return'
+  str: 'isCurrentTidalDetailPage'
+  str: 'widget'
+  str: 'item_type'
+  str: 'item_id'
+  str: 'return'
+  str: '_isDetailWidgetMatch'
+
+def LPTidalShellRouteStack()  line 16
+  names: __name__, __module__, __qualname__, __doc__, __init__, RouteEntry, List, resetRoot, replaceRoot, push, Optional, pop, current, entries
+    str: 'LPTidalShellRouteStack'
+    str: 'TIDAL Shell 内部页面栈，负责维护内容页顺序和返回目标。'
+    str: 'LPTidalShellRouteStack.__init__'
+    str: 'entry'
+    str: 'return'
+    str: 'LPTidalShellRouteStack.resetRoot'
+    str: 'LPTidalShellRouteStack.replaceRoot'
+    str: 'LPTidalShellRouteStack.push'
+    str: 'return'
+    str: 'LPTidalShellRouteStack.pop'
+    str: 'LPTidalShellRouteStack.current'
+    str: 'LPTidalShellRouteStack.entries'
+
+  def LPTidalShellRouteStack.__init__(self)  line 19
+    names: _entries
+      str: '\n        初始化空路由栈。\n\n        :return: None。\n        '
+
+  def LPTidalShellRouteStack.resetRoot(self, entry)  line 27
+    names: list, _entries
+      str: '\n        重置根页面并返回被移除的旧页面。\n\n        :param entry: 新根页面。\n        :return: 被移除的旧页面列表。\n        '
+
+  def LPTidalShellRouteStack.replaceRoot(self, entry)  line 38
+    names: list, _entries
+      str: '\n        替换根页面并移除所有后续页面。\n\n        :param entry: 新根页面。\n        :return: 被移除的非根页面列表。\n        '
+
+  def LPTidalShellRouteStack.push(self, entry)  line 49
+    names: _entries, append
+      str: '\n        推入新页面。\n\n        :param entry: 新页面。\n        :return: 被裁剪的前进页面列表。\n        '
+
+  def LPTidalShellRouteStack.pop(self)  line 59
+    names: len, _entries, pop
+      str: '\n        弹出当前页面，根页面不可弹出。\n\n        :return: 被弹出的页面；无可弹页面时返回 None。\n        '
+
+  def LPTidalShellRouteStack.current(self)  line 69
+    names: _entries
+      str: '\n        返回当前页面。\n\n        :return: 当前页面；空栈返回 None。\n        '
+
+  def LPTidalShellRouteStack.entries(self)  line 77
+    names: list, _entries
+      str: '\n        返回页面栈快照。\n\n        :return: 页面列表副本。\n        '
+
+def findTidalShell(widget)  line 86
+  names: hasattr, parent, isinstance, QWidget
+    str: '\n    从当前页面向上查找 TIDAL Shell 容器。\n\n    :param widget: 当前页面。\n    :return: Shell 容器；未找到返回 None。\n    '
+    str: 'pushContentPage'
+    str: 'popContentPage'
+
+def pushTidalPage(parent, widget, itemId)  line 102
+  names: findTidalShell, shouldOpenTidalPageInShell, pushContentPage, LPGlobalUI, createTidalShellWithContentPage, navigationManager, push, openedAsTidalIndependentPage
+    str: '\n    在 Shell 内部或全局导航中推入 TIDAL 页面。\n\n    :param parent: 触发跳转的页面。\n    :param widget: 目标页面。\n    :param itemId: 页面标识。\n    :return: None。\n    '
+    str: 'Tidal'
+
+def shouldOpenTidalPageInShell(itemId)  line 126
+  names: str, strip, lower, TIDAL_SHELL_EMBEDDED_ITEM_IDS
+    str: '\n    判断页面是否应作为 TIDAL Shell 内容页内嵌展示。\n\n    :param itemId: 页面标识。\n    :return: 应放入 Shell 内容区返回 True。\n    '
+
+def createTidalShellWithContentPage(widget, itemId)  line 137
+  names: HOME.StreamService.Tidal.controllers.shell.LPTidalShellViewController, LPTidalShellViewController, pushContentPage
+    str: '\n    创建 TIDAL Shell 并把目标页面推入 Shell 内容栈。\n\n    :param widget: 目标内容页。\n    :param itemId: 页面标识。\n    :return: 已包含目标页面的 Shell。\n    '
+    str: 'LPTidalShellViewController'
+
+def isTidalShellHomeTabsVisible(entries)  line 152
+  names: str, getattr, TIDAL_SHELL_NO_HOME_TABS_ITEM_IDS
+    str: '\n    判断 Shell 顶部导航是否需要显示 Home/My Collection 页签。\n\n    :param entries: Shell 内部页面栈快照。\n    :return: 需要显示 Home/My Collection 页签返回 True。\n    '
+    str: 'stackedItemId'
+
+def isCurrentTidalDetailPage(itemType, itemId)  line 166
+  names: str, strip, lower, LPGlobalUI, getTopWidget, Exception, _isDetailWidgetMatch, __class__, __name__, getattr, current
+    str: '\n    判断当前顶层页面是否已经是指定类型 + ID 的 TIDAL 详情页。\n    主要用于 Album/Artist 详情页重复跳转防护（已在详情页内再次点击同一条目时跳过 push）。\n\n    支持两种情况：\n    - 全局导航栈顶（详情页通常以独立页面形式存在）\n    - Shell 容器作为顶层时，检查其内部 _route_stack 当前内容页\n\n    :param itemType: 详情类型（"album" / "artist" 等，内部会 lower）\n    :param itemId: 业务 ID（专辑ID 或 艺人ID）\n    :return: 如果当前正'
+    str: 'LPTidalShellViewController'
+    str: '_route_stack'
+
+def _isDetailWidgetMatch(widget, item_type, item_id)  line 211
+  names: str, getattr, strip, lower
+    str: '\n    内部辅助：判断一个 widget 是否为匹配的 TIDAL 详情页（基于 _item_type / _item_id）。\n    使用 hasattr 避免强依赖具体子类。\n    '
+    str: '_item_type'
+    str: '_item_id'

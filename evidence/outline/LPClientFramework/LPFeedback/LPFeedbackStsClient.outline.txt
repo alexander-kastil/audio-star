@@ -1,0 +1,170 @@
+# module LPClientFramework.LPFeedback.LPFeedbackStsClient
+
+[module] names: __doc__, base64, datetime, json, requests, LPClientFramework.LPFeedback.LPFeedbackConfig, FEEDBACK_DEFAULT_RECEIVER, FEEDBACK_TYPE_DEBUG, FRESHDESK_WEB_HOST, STS_ENDPOINT, STS_ORIGIN, STS_PROJECT, LPClientFramework.LPFeedback.LPFeedbackModels, LPFeedbackStsCredential, LPClientFramework.LPFeedback.LPLkp1Signer, LPLkp1Signer, _toBase64, _buildMessage, _buildTicketLink, _shortenUuid, _buildDeviceList, _buildEmailSubject, _buildReceivers, _buildEmailMetadata, _buildLogItem, LPFeedbackStsClient
+  str: 'Feedback 日志上传所需 STS 临时凭证客户端。'
+  str: 'FEEDBACK_DEFAULT_RECEIVER'
+  str: 'FEEDBACK_TYPE_DEBUG'
+  str: 'FRESHDESK_WEB_HOST'
+  str: 'STS_ENDPOINT'
+  str: 'STS_ORIGIN'
+  str: 'STS_PROJECT'
+  str: 'LPFeedbackStsCredential'
+  str: 'LPLkp1Signer'
+  str: '_toBase64'
+  str: '_buildMessage'
+  str: '_buildTicketLink'
+  str: '_shortenUuid'
+  str: '_buildDeviceList'
+  str: '_buildEmailSubject'
+  str: '_buildReceivers'
+  str: '_buildEmailMetadata'
+  str: '_buildLogItem'
+  str: 'LPFeedbackStsClient'
+
+def _toBase64(text)  line 22
+  names: base64, b64encode, encode, decode
+    str: '按安卓 Base64.NO_WRAP 约定对 UTF-8 文本做标准 Base64 编码。\n\n    参数:\n        text (str): 待编码的明文。\n    返回:\n        str: 不含换行的 Base64 字符串。\n    '
+    str: 'utf-8'
+    str: 'ascii'
+
+def _buildMessage(request, submission)  line 33
+  names: deviceName, feedbackType, osVersion, appVersion, confirmationId, currentDeviceName, subject, email, description, _buildTicketLink, ticketId, _buildDeviceList, deviceList, json, dumps
+    str: '构造 emailMetadata.message 解码前的 JSON 字符串，字段与安卓 NormalBuilder 对齐。\n\n    参数:\n        request (LPFeedbackRequest): 原始反馈请求。\n        submission (LPFeedbackSubmission): 已创建工单的任务信息。\n    返回:\n        str: message JSON 字符串（编码前）。\n    '
+    str: '|downloadUrl|'
+    str: '(null)'
+    str: 'DeviceName'
+    str: 'Type'
+    str: 'OSVersion'
+    str: 'AppVersion'
+    str: 'ConfirmationID'
+    str: 'DownloadUri'
+    str: 'Current device is'
+    str: 'Subject'
+    str: 'Email'
+    str: 'Comment'
+    str: 'TicketLink'
+    str: 'DeviceList'
+    str: ','
+    str: ':'
+    str: 'ensure_ascii'
+    str: 'separators'
+
+def _buildTicketLink(ticketId)  line 69
+  names: str, FRESHDESK_WEB_HOST
+    str: '构造 TicketLink，工单 ID 为空或 -1 时返回空字符串，与安卓 getTickLink() 一致。\n\n    参数:\n        ticketId (str): Freshdesk 工单 ID。\n    返回:\n        str: 工单链接或空字符串。\n    '
+    str: '-1'
+    str: '%s/a/tickets/%s'
+
+def _shortenUuid(rawUuid)  line 82
+  names: str, len, upper, startswith, replace
+    str: '按安卓 LPDeviceManagerUtil.UpnpUUID2UUID() 规则截取设备短 UUID。\n\n    规则: 空返回空串；长度<=24 原样返回；以 "UUID:" 开头则去前缀与连字符取前 24 位；\n    否则取前 24 位。\n\n    参数:\n        rawUuid (str): 设备原始 UUID（可能含 "uuid:"/"UUID:" 前缀）。\n    返回:\n        str: 短 UUID。\n    '
+    str: 'UUID:'
+    str: '-'
+
+def _buildDeviceList(deviceList)  line 105
+  names: isinstance, list, tuple, len, append, _shortenUuid, join
+    str: '构造 DeviceList（Freshdesk 格式），与安卓 getDeviceListOfFreshdesk() 一致。\n\n    格式: "[N]<name> [U]<shortUuid>,[N]<name> [U]<shortUuid>"\n    安卓 [N] 取 DeviceItemUtils.getName，[U] 取 UpnpUUID2UUID 短 UUID。\n\n    参数:\n        deviceList (list[tuple]): 元素为 (设备名, 设备UUID) 的列表。\n    返回:\n        str: 逗号分隔的设备列表字符串。\n    '
+    str: '[N]%s [U]%s'
+    str: ','
+
+def _buildEmailSubject(request)  line 128
+  names: datetime, now, strftime, STS_PROJECT, replace, appVersion
+    str: '构造邮件主题（编码前），与安卓 NormalBuilder.buildSubject() 对齐。\n\n    安卓格式（bFreshdesk=true 且非崩溃）: "Ticket # Debug log - <appName> Android <yyyy.MM.dd HH:mm> <sdkVersion>"\n    PC 端走 Freshdesk 工单流程（bFreshdesk 等价为 true），平台名替换为 "PC"。\n\n    参数:\n        request (LPFeedbackRequest): 原始反馈请求。\n    返回:\n        str: 主题字符串（编码前）。'
+    str: '%Y.%m.%d %H:%M'
+    str: 'Ticket # Debug log - %s PC %s %s'
+
+def _buildReceivers(feedbackType)  line 146
+  names: FEEDBACK_DEFAULT_RECEIVER
+    str: '根据反馈类型选择收件人，与安卓 LogContextUtil.getEmailAddress() 对齐。\n\n    参数:\n        feedbackType (str): 反馈类型常量。\n    返回:\n        str: 收件人邮箱。\n    '
+
+def _buildEmailMetadata(request, submission)  line 158
+  names: _toBase64, _buildMessage, _buildEmailSubject, _buildReceivers, feedbackType, json, dumps
+    str: '构造与安卓 EmailMetadata 对齐的 JSON 字符串。\n\n    结构: {"message": "<base64>", "subject": "<base64>", "receivers": "<base64>"}\n\n    参数:\n        request (LPFeedbackRequest): 原始反馈请求。\n        submission (LPFeedbackSubmission): 已创建工单的任务信息。\n    返回:\n        str: emailMetadata JSON 字符串。\n    '
+    str: 'message'
+    str: 'subject'
+    str: 'receivers'
+    str: ','
+    str: ':'
+    str: 'ensure_ascii'
+    str: 'separators'
+
+def _buildLogItem(request, submission)  line 177
+  names: STS_PROJECT, replace, subject, email, description, feedbackType, str, logDirectory, ticketId, json, dumps
+    str: '构造顶层 logItem（LogInfoItem 的 JSON 字符串），与安卓 GsonUtils.toJson(logInfoItem) 对齐。\n\n    覆盖安卓 LogInfoItem 的全部序列化字段，PC 不适用的取默认值（与安卓默认值一致）。\n\n    参数:\n        request (LPFeedbackRequest): 原始反馈请求。\n        submission (LPFeedbackSubmission): 已创建工单的任务信息。\n    返回:\n        str: logItem JSON 字符串。\n    '
+    str: 'custom_feedback'
+    str: '-1'
+    str: 'feedback'
+    str: 'appName'
+    str: 'appNameES'
+    str: 'subject'
+    str: 'email'
+    str: 'desc'
+    str: 'name'
+    str: 'feedback_type'
+    str: 'issueType'
+    str: 'musicService'
+    str: 'comment'
+    str: 'project'
+    str: 'zipFileName'
+    str: 'bOnlyCrash'
+    str: 'filePath'
+    str: 'custom'
+    str: 'ticketid'
+    str: 'isUserSend'
+    str: 'hasEmailReceivers'
+    str: 'deleteAfterUploaded'
+    str: 'actionType'
+    str: ','
+    str: ':'
+    str: 'ensure_ascii'
+    str: 'separators'
+
+def LPFeedbackStsClient()  line 214
+  names: __name__, __module__, __qualname__, __doc__, STS_ENDPOINT, STS_ORIGIN, STS_PROJECT, __init__, requestCredential
+    str: 'LPFeedbackStsClient'
+    str: '调用 datav3/log/feedbackUpload 并解析 S3 临时凭证。'
+    str: 'LPFeedbackStsClient.__init__'
+    str: 'LPFeedbackStsClient.requestCredential'
+
+  def LPFeedbackStsClient.__init__(self, endpoint, origin, project, session)  line 217
+    names: _endpoint, _origin, _project, requests, Session, _session
+      str: '初始化 STS 客户端。\n\n        参数:\n            endpoint (str): STS 接口地址。\n            origin (str): 客户端来源标识。\n            project (str): 项目名称。\n            session (requests.Session|None): 可注入的 requests 会话。\n        返回:\n            无。\n        '
+
+  def LPFeedbackStsClient.requestCredential(self, request, submission, archivePath)  line 233
+    names: deviceUuid, _project, confirmationId, str, ticketId, _buildLogItem, _buildEmailMetadata, appVersion, json, dumps, encode, LPLkp1Signer, sign, _endpoint, appUuid, _origin, _session, post, raise_for_status, LPFeedbackStsCredential, fromResponse
+      str: '请求一次 S3 上传所需的临时凭证。\n\n        参数:\n            request (LPFeedbackRequest): 原始反馈请求。\n            submission (LPFeedbackSubmission): 已创建工单的任务信息。\n            archivePath (str): 本地 ZIP 包路径。\n        返回:\n            LPFeedbackStsCredential: S3 临时凭证。\n        '
+      str: 'pc'
+      str: 'custom_feedback'
+      str: 'unknow'
+      str: '3'
+      str: '-1'
+      str: 'feedback'
+      str: 'osType'
+      str: 'logType'
+      str: 'uuid'
+      str: 'project'
+      str: 'formatVersion'
+      str: 'confirmationID'
+      str: 'ticketId'
+      str: 'logItem'
+      str: 'actionType'
+      str: 'emailMetadata'
+      str: 'FILE_PATH'
+      str: 'sdkVersion'
+      str: ','
+      str: ':'
+      str: 'ensure_ascii'
+      str: 'separators'
+      str: 'utf-8'
+      str: 'POST'
+      str: 'method'
+      str: 'url'
+      str: 'body'
+      str: 'uuid'
+      str: 'origin'
+      str: 'project'
+      str: 'application/json'
+      str: 'Content-Type'
+      str: 'data'
+      str: 'headers'
+      str: 'timeout'

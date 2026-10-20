@@ -1,0 +1,818 @@
+# module HOME.RecentlyPlayed.LPRecentlyPlayedViewController
+
+[module] names: __doc__, time, datetime, timedelta, PyQt6.QtCore, QCoreApplication, QModelIndex, QPoint, pyqtSignal, pyqtProperty, pyqtSlot, Qt, QUrl, QTimer, PyQt6.QtQml, QQmlContext, PyQt6.QtQuickWidgets, QQuickWidget, PyQt6.QtWidgets, QWidget, QVBoxLayout, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPMusicLibrary.LPRecentlyManager, LPRecentlyManager, RECENTLY_PLAYED_CHANGED_NOTIFY, LPClientFramework.LPUtility, getCacheImageUrl, logger, LPClientFramework.LPDeviceStreamServiceManager, DEVICE_ACCOUNT_UNKNOWN, LPClientFramework.LPStreamServiceManager, canFavorite, favoriteState, favoriteStateNeedsResync, favoriteStatus, recentlyCanPreset, recentlyDidSelect, recentlyFavoriteItemData, recentlyFavoriteTarget, recentlyOpensDetail, recentlyPlayListFromDetail, recentlyResourceUnavailable, playRecently, requestFavoriteResync, setFavorite, supportContents, HOME.RecentlyPlayed.LPRecentlyViewPreference, LPRecentlyViewPreference, LPClientFramework.LPConfig.LPFontConfig, Sub_Text, StackWidget_Title, Main_Text, Exception, DEFAULT_CARD_COLUMNS, VIEW_MODE_LIST, VIEW_MODE_CARD, TIDAL_GENRE_IMAGE_OWNER, DEVICE_ACCOUNT_FETCH_RETRY_INTERVAL, FAVORITE_RESYNC_THROTTLE_SECONDS, FAVORITE_RESYNC_THROTTLE_MAX_ENTRIES, FAVORITE_LOADING_ICON_SOURCE, frozenset, _RECENTLY_NO_HIGHLIGHT_TYPE_VALUES, SOURCE_ICON_MAP, DEFAULT_COVER_URL, DEFAULT_COVER_BY_TYPE, _sourceIconForSource, _typeTextForItem, _defaultCoverForType, _tidalGenreCoverUrl, _playlistMosaicInfo, _dateSectionTitle, QAbstractListModel, LPRecentlyListModel, LPRecentlyCardRowModel, LPRecentlyPlayedViewController
+  str: '\nRecently Played 页面主控制器。\n\n职责：\n- 懒加载 QML 页面（LPRecentlyPlayed.qml）\n- 监听 Recently 变更通知和当前设备媒体信息变化，刷新数据与播放态高亮\n- 维护 List / Card 两套数据模型\n- 处理点击与右键菜单删除流程\n- 把点击事件经 LPStreamServiceManager.recentlyDidSelect 分发给对应音源\n'
+  str: 'datetime'
+  str: 'timedelta'
+  str: 'QCoreApplication'
+  str: 'QModelIndex'
+  str: 'QPoint'
+  str: 'pyqtSignal'
+  str: 'pyqtProperty'
+  str: 'pyqtSlot'
+  str: 'Qt'
+  str: 'QUrl'
+  str: 'QTimer'
+  str: 'QQmlContext'
+  str: 'QQuickWidget'
+  str: 'QWidget'
+  str: 'QVBoxLayout'
+  str: 'LPUtility'
+  str: 'LPRecentlyManager'
+  str: 'RECENTLY_PLAYED_CHANGED_NOTIFY'
+  str: 'getCacheImageUrl'
+  str: 'logger'
+  str: 'DEVICE_ACCOUNT_UNKNOWN'
+  str: 'canFavorite'
+  str: 'favoriteState'
+  str: 'favoriteStateNeedsResync'
+  str: 'favoriteStatus'
+  str: 'recentlyCanPreset'
+  str: 'recentlyDidSelect'
+  str: 'recentlyFavoriteItemData'
+  str: 'recentlyFavoriteTarget'
+  str: 'recentlyOpensDetail'
+  str: 'recentlyPlayListFromDetail'
+  str: 'recentlyResourceUnavailable'
+  str: 'playRecently'
+  str: 'requestFavoriteResync'
+  str: 'setFavorite'
+  str: 'supportContents'
+  str: 'LPRecentlyViewPreference'
+  str: 'Sub_Text'
+  str: 'StackWidget_Title'
+  str: 'Main_Text'
+  str: 'list'
+  str: 'card'
+  str: 'recently_genres'
+  str: 'qrc:/images/btn_loading.png'
+  str: 'qrc:/images/playview_ms/qobuz_play.png'
+  str: 'qrc:/images/preset_icon/radioparadise.svg'
+  str: 'qrc:/images/playview_ms/dlna_play.png'
+  str: 'qrc:/images/playview_ms/tidal_play.png'
+  str: 'qrc:/images/preset_icon/wiimradio.svg'
+  str: 'Qobuz'
+  str: 'RadioParadise2'
+  str: 'PC_RemoteLocal'
+  str: 'Tidal'
+  str: 'WiiMRadio'
+  str: 'qrc:/images/Tidal/default_playlist.png'
+  str: 'qrc:/images/Tidal/default_album.png'
+  str: 'qrc:/images/defaultArtist.png'
+  str: 'qrc:/images/Tidal/default_station.png'
+  str: 'qrc:/images/Tidal/default_track.png'
+  str: '_sourceIconForSource'
+  str: '_typeTextForItem'
+  str: '_defaultCoverForType'
+  str: '_tidalGenreCoverUrl'
+  str: '_playlistMosaicInfo'
+  str: '_dateSectionTitle'
+  str: 'QAbstractListModel'
+  str: 'QModelIndex'
+  str: 'LPRecentlyListModel'
+  str: 'LPRecentlyCardRowModel'
+  str: 'LPRecentlyPlayedViewController'
+
+def _sourceIconForSource(source)  line 109
+  names: SOURCE_ICON_MAP, get
+
+def _typeTextForItem(rawItem)  line 115
+  names: int, get, TypeError, ValueError
+    str: '根据 typeValue 推导展示用的内容类型文案。'
+    str: 'typeValue'
+    str: 'Collection'
+    str: 'Playlist'
+    str: 'Album'
+    str: 'Artist'
+    str: 'Station'
+    str: 'Song'
+
+def _defaultCoverForType(typeValue)  line 132
+  names: int, TypeError, ValueError, DEFAULT_COVER_BY_TYPE, get, DEFAULT_COVER_URL
+    str: '根据 typeValue 返回对应的默认封面 qrc 路径。\n\n    Args:\n        typeValue: 原始记录中的内容类型整数值。\n\n    Returns:\n        默认封面 qrc 路径字符串；无专属映射时返回 DEFAULT_COVER_URL。\n    '
+
+def _tidalGenreCoverUrl(rawItem)  line 148
+  names: isinstance, dict, get, str, split, rstrip, len, strip
+    str: '提取 Recently 中 TIDAL Genre 播放记录的远端封面 URL。\n\n    Args:\n        rawItem: Recently 原始记录字典。\n\n    Returns:\n        命中 ``/v1/genres/{slug}/tracks`` 播放记录时返回封面 URL，否则返回空字符串。\n    '
+    str: 'source'
+    str: 'Tidal'
+    str: 'detail'
+    str: 'playList'
+    str: 'header'
+    str: 'searchUrl'
+    str: '?'
+    str: '/'
+    str: '_tidalGenreCoverUrl.<locals>.<listcomp>'
+    str: 'v1'
+    str: 'genres'
+    str: 'tracks'
+    str: 'trackImage'
+
+  def _tidalGenreCoverUrl.<listcomp>(.0)  line 170
+
+def _playlistMosaicInfo(rawItem)  line 182
+  names: isinstance, dict, int, get, TypeError, ValueError, list, tuple, len, append, extend, reversed
+    str: '判断 Recently 歌单记录是否应以四拼图展示封面（自建歌单无官方封面）。\n\n    与详情页 head 的 `trackImage or playlistImageList` 语义对齐：仅有曲目封面数组、\n    没有官方单图封面（recentlyPlaylistTrackImage 为空）的歌单，其 head 为四拼图，\n    Recently 卡片/列表也应同样展示，避免退回首曲单图导致与详情页不一致。\n\n    Args:\n        rawItem: Recently 原始记录字典。\n\n    Returns:\n        (isMosaic, mosaicImages'
+    str: 'typeValue'
+    str: 'detail'
+    str: 'playList'
+    str: 'header'
+    str: 'recentlyPlaylistTrackImage'
+    str: 'recentlyPlaylistImageList'
+    str: '_playlistMosaicInfo.<locals>.<listcomp>'
+
+  def _playlistMosaicInfo.<listcomp>(.0)  line 222
+    names: str, strip
+
+  def _playlistMosaicInfo.<listcomp>(.0)  line 237
+    names: getCacheImageUrl
+
+def _dateSectionTitle(createTime)  line 241
+  names: datetime, fromtimestamp, int, TypeError, ValueError, OSError, now, replace, days, strftime
+    str: '把 createTime（秒级时间戳）转成分组标题：Today / Yesterday / 完整日期。'
+    str: 'hour'
+    str: 'minute'
+    str: 'second'
+    str: 'microsecond'
+    str: 'Today'
+    str: 'Yesterday'
+    str: '%A, %B %d, %Y'
+
+def LPRecentlyListModel()  line 264
+  names: __name__, __module__, __qualname__, __doc__, Qt, ItemDataRole, UserRole, IndexRole, TitleRole, ImageRole, TypeTextRole, SourceIconRole, IsPlayingRole, PlayStateRole, CanNavigateRole, IsAccountMismatchRole, DateSectionRole, ItemIdRole, SourceRole, TrackIdRole, DefaultCoverRole, TypeValueRole, IsMosaicRole, MosaicImagesRole, pyqtSignal, countChanged, __init__, pyqtProperty, int, count, QModelIndex, rowCount, roleNames, DisplayRole, data, setItems, updatePlayState, itemAt, __classcell__
+    str: 'LPRecentlyListModel'
+    str: '给 List 模式用的扁平数据模型。'
+    str: 'LPRecentlyListModel.__init__'
+    str: 'notify'
+    str: 'LPRecentlyListModel.count'
+    str: 'LPRecentlyListModel.rowCount'
+    str: 'LPRecentlyListModel.roleNames'
+    str: 'LPRecentlyListModel.data'
+    str: 'LPRecentlyListModel.setItems'
+    str: 'LPRecentlyListModel.updatePlayState'
+    str: 'LPRecentlyListModel.itemAt'
+
+  def LPRecentlyListModel.__init__(self, parent)  line 285
+    names: super, __init__, itemList
+
+  def LPRecentlyListModel.count(self)  line 289
+    names: len, itemList
+
+  def LPRecentlyListModel.rowCount(self, parent)  line 293
+    names: len, itemList
+
+  def LPRecentlyListModel.roleNames(self)  line 296
+    names: IndexRole, TitleRole, ImageRole, TypeTextRole, SourceIconRole, IsPlayingRole, PlayStateRole, CanNavigateRole, IsAccountMismatchRole, DateSectionRole, ItemIdRole, SourceRole, TrackIdRole, DefaultCoverRole, TypeValueRole, IsMosaicRole, MosaicImagesRole
+
+  def LPRecentlyListModel.data(self, index, role)  line 317
+    names: isValid, row, len, itemList, IndexRole, TitleRole, get, ImageRole, TypeTextRole, SourceIconRole, IsPlayingRole, bool, PlayStateRole, CanNavigateRole, IsAccountMismatchRole, DateSectionRole, ItemIdRole, SourceRole, TrackIdRole, DefaultCoverRole, TypeValueRole, IsMosaicRole, MosaicImagesRole
+      str: 'title'
+      str: 'image'
+      str: 'typeText'
+      str: 'sourceIcon'
+      str: 'isPlaying'
+      str: 'playState'
+      str: 'canNavigate'
+      str: 'isAccountMismatch'
+      str: 'dateSection'
+      str: 'itemId'
+      str: 'source'
+      str: 'trackId'
+      str: 'defaultCover'
+      str: 'typeValue'
+      str: 'isMosaic'
+      str: 'mosaicImages'
+
+  def LPRecentlyListModel.setItems(self, items)  line 345
+    names: beginResetModel, list, itemList, endResetModel, countChanged, emit
+
+  def LPRecentlyListModel.updatePlayState(self, source, trackId, playState)  line 351
+    names: enumerate, itemList, int, get, _RECENTLY_NO_HIGHLIGHT_TYPE_VALUES, bool, index, dataChanged, emit, IsPlayingRole, PlayStateRole, str
+      str: 'typeValue'
+      str: 'isPlaying'
+      str: 'playState'
+      str: 'source'
+      str: 'trackId'
+
+  def LPRecentlyListModel.itemAt(self, row)  line 373
+    names: len, itemList
+
+def LPRecentlyCardRowModel()  line 379
+  names: __name__, __module__, __qualname__, __doc__, Qt, ItemDataRole, UserRole, SectionTitleRole, ShowSectionHeaderRole, ItemListRole, pyqtSignal, countChanged, __init__, pyqtProperty, int, count, QModelIndex, rowCount, roleNames, DisplayRole, data, setRows, __classcell__
+    str: 'LPRecentlyCardRowModel'
+    str: '给 Card 模式用的行模型：每行一个分组段，包含 sectionTitle 与 itemList。'
+    str: 'LPRecentlyCardRowModel.__init__'
+    str: 'notify'
+    str: 'LPRecentlyCardRowModel.count'
+    str: 'LPRecentlyCardRowModel.rowCount'
+    str: 'LPRecentlyCardRowModel.roleNames'
+    str: 'LPRecentlyCardRowModel.data'
+    str: 'LPRecentlyCardRowModel.setRows'
+
+  def LPRecentlyCardRowModel.__init__(self, parent)  line 387
+    names: super, __init__, rowList
+
+  def LPRecentlyCardRowModel.count(self)  line 391
+    names: len, rowList
+
+  def LPRecentlyCardRowModel.rowCount(self, parent)  line 395
+    names: len, rowList
+
+  def LPRecentlyCardRowModel.roleNames(self)  line 398
+    names: SectionTitleRole, ShowSectionHeaderRole, ItemListRole
+
+  def LPRecentlyCardRowModel.data(self, index, role)  line 405
+    names: isValid, row, len, rowList, SectionTitleRole, get, ShowSectionHeaderRole, bool, ItemListRole
+      str: 'sectionTitle'
+      str: 'showSectionHeader'
+      str: 'itemList'
+
+  def LPRecentlyCardRowModel.setRows(self, rows)  line 420
+    names: beginResetModel, list, rowList, endResetModel, countChanged, emit
+
+def LPRecentlyPlayedViewController()  line 427
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, displayModeChanged, hasRecentlyItemsChanged, isLoadingChanged, hasLoadedOnceChanged, viewModeChanged, recentlyMenuItemsChanged, __init__, setupUi, _registerNotifications, _onRecentlyChanged, _onDeviceChanged, deviceInfoUpdate, _ensureFavoriteCacheObserver, _onFavoriteCacheChanged, _onAccountChanged, reload, _buildDisplayItem, _ensureTidalGenreImageService, _onTidalGenreThumbnailReady, staticmethod, _accountFetchKey, _markAccountFetchInFlight, _clearAccountFetchInFlight, _resetAccountFetchInFlight, _isAccountFetchInFlight, _refreshAccountStatus, _updateAccountMismatch, _buildModels, _buildCardRows, _makeCardRow, _refreshPlayState, _syncCardRows, _syncCardPlayState, pyqtProperty, bool, hasRecentlyItems, isLoading, hasLoadedOnce, isListMode, isCardMode, str, viewModeButtonText, int, titleFontSize, dateTitleFontSize, cardTitleFontSize, cardSubtitleFontSize, defaultCoverUrl, pyqtSlot, onViewModeButtonClicked, viewWillAppear, viewWillDisappear, _dateChangedSinceLastBuild, _refreshDateSections, _scheduleMidnightRefresh, _onMidnightRefresh, _restoreViewModePreference, _saveViewModePreference, onCardViewportWidthChanged, onRecentlyCardClicked, onRecentlyCardPlayClicked, _showLocalResourceUnavailableToast, _showAccountMismatchToast, _showPlayFailedToast, list, recentlyMenuItemsForIndex, dict, _favoriteLoadingMenuItem, _favoriteUnavailableMenuItem, _shouldResyncFavorite, float, _pruneFavoriteResyncAt, onRecentlyMenuAction, QPoint, _openRecentlyPresetMenu, QWidget, _presetMenuAnchorFor, _setRecentlyFavorite, object, _onFavoriteResult, onRecentlyDeleteRequested, _removeRecentlyItemFromModels, _togglePlaybackForItem, _markItemAsPlaying, __classcell__
+    str: 'LPRecentlyPlayedViewController'
+    str: 'Recently Played 页面控制器。'
+    str: 'LPRecentlyPlayedViewController.__init__'
+    str: 'LPRecentlyPlayedViewController.setupUi'
+    str: 'LPRecentlyPlayedViewController._registerNotifications'
+    str: 'LPRecentlyPlayedViewController._onRecentlyChanged'
+    str: 'LPRecentlyPlayedViewController._onDeviceChanged'
+    str: 'LPRecentlyPlayedViewController.deviceInfoUpdate'
+    str: 'LPRecentlyPlayedViewController._ensureFavoriteCacheObserver'
+    str: 'LPRecentlyPlayedViewController._onFavoriteCacheChanged'
+    str: 'LPRecentlyPlayedViewController._onAccountChanged'
+    str: 'LPRecentlyPlayedViewController.reload'
+    str: 'LPRecentlyPlayedViewController._buildDisplayItem'
+    str: 'LPRecentlyPlayedViewController._ensureTidalGenreImageService'
+    str: 'LPRecentlyPlayedViewController._onTidalGenreThumbnailReady'
+    str: 'LPRecentlyPlayedViewController._accountFetchKey'
+    str: 'LPRecentlyPlayedViewController._markAccountFetchInFlight'
+    str: 'LPRecentlyPlayedViewController._clearAccountFetchInFlight'
+    str: 'LPRecentlyPlayedViewController._resetAccountFetchInFlight'
+    str: 'LPRecentlyPlayedViewController._isAccountFetchInFlight'
+    str: 'LPRecentlyPlayedViewController._refreshAccountStatus'
+    str: 'LPRecentlyPlayedViewController._updateAccountMismatch'
+    str: 'LPRecentlyPlayedViewController._buildModels'
+    str: 'LPRecentlyPlayedViewController._buildCardRows'
+    str: 'LPRecentlyPlayedViewController._makeCardRow'
+    str: 'LPRecentlyPlayedViewController._refreshPlayState'
+    str: 'LPRecentlyPlayedViewController._syncCardRows'
+    str: 'LPRecentlyPlayedViewController._syncCardPlayState'
+    str: 'notify'
+    str: 'LPRecentlyPlayedViewController.hasRecentlyItems'
+    str: 'LPRecentlyPlayedViewController.isLoading'
+    str: 'LPRecentlyPlayedViewController.hasLoadedOnce'
+    str: 'LPRecentlyPlayedViewController.isListMode'
+    str: 'LPRecentlyPlayedViewController.isCardMode'
+    str: 'LPRecentlyPlayedViewController.viewModeButtonText'
+    str: 'constant'
+    str: 'LPRecentlyPlayedViewController.titleFontSize'
+    str: 'LPRecentlyPlayedViewController.dateTitleFontSize'
+    str: 'LPRecentlyPlayedViewController.cardTitleFontSize'
+    str: 'LPRecentlyPlayedViewController.cardSubtitleFontSize'
+    str: 'LPRecentlyPlayedViewController.defaultCoverUrl'
+    str: 'LPRecentlyPlayedViewController.onViewModeButtonClicked'
+    str: 'LPRecentlyPlayedViewController.viewWillAppear'
+    str: 'LPRecentlyPlayedViewController.viewWillDisappear'
+    str: 'LPRecentlyPlayedViewController._dateChangedSinceLastBuild'
+    str: 'LPRecentlyPlayedViewController._refreshDateSections'
+    str: 'LPRecentlyPlayedViewController._scheduleMidnightRefresh'
+    str: 'LPRecentlyPlayedViewController._onMidnightRefresh'
+    str: 'LPRecentlyPlayedViewController._restoreViewModePreference'
+    str: 'LPRecentlyPlayedViewController._saveViewModePreference'
+    str: 'LPRecentlyPlayedViewController.onCardViewportWidthChanged'
+    str: 'LPRecentlyPlayedViewController.onRecentlyCardClicked'
+    str: 'LPRecentlyPlayedViewController.onRecentlyCardPlayClicked'
+    str: 'LPRecentlyPlayedViewController._showLocalResourceUnavailableToast'
+    str: 'LPRecentlyPlayedViewController._showAccountMismatchToast'
+    str: 'LPRecentlyPlayedViewController._showPlayFailedToast'
+    str: 'result'
+    str: 'index'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController.recentlyMenuItemsForIndex'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController._favoriteLoadingMenuItem'
+    str: 'LPRecentlyPlayedViewController._favoriteUnavailableMenuItem'
+    str: 'source'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController._shouldResyncFavorite'
+    str: 'now'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController._pruneFavoriteResyncAt'
+    str: 'actionKey'
+    str: 'index'
+    str: 'globalX'
+    str: 'globalY'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController.onRecentlyMenuAction'
+    str: 'item'
+    str: 'globalPos'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController._openRecentlyPresetMenu'
+    str: 'source'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController._presetMenuAnchorFor'
+    str: 'item'
+    str: 'desiredFavorite'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController._setRecentlyFavorite'
+    str: 'result'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController._onFavoriteResult'
+    str: 'LPRecentlyPlayedViewController.onRecentlyDeleteRequested'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPRecentlyPlayedViewController._removeRecentlyItemFromModels'
+    str: 'LPRecentlyPlayedViewController._togglePlaybackForItem'
+    str: 'LPRecentlyPlayedViewController._markItemAsPlaying'
+
+  def LPRecentlyPlayedViewController.__init__(self, parent)  line 441
+    names: super, __init__, LPRecentlyManager, instance, _recentlyManager, _rawList, _hasLoadedOnce, _isLoading, VIEW_MODE_CARD, _viewMode, _deviceAccountFetchInFlight, _suppressNextReload, _lastBuildDate, _recentlyDateTimer, _presetMenuAnchor, _favoriteResyncAt, _favoriteCacheObserverConnected, _tidalGenreImageService, _restoreViewModePreference, DEFAULT_CARD_COLUMNS, _cardColumns, _lastViewportWidth, LPRecentlyListModel, recentlyModel, LPRecentlyCardRowModel, recentlyCardModel, _quickWidget, _registerNotifications
+
+  def LPRecentlyPlayedViewController.setupUi(self)  line 486
+    names: layout, QVBoxLayout, setContentsMargins, QQuickWidget, setResizeMode, ResizeMode, SizeRootObjectToView, setAttribute, Qt, WidgetAttribute, WA_TranslucentBackground, setClearColor, LPGlobalUI, THEME_BACKGROUND_COLOR_UI, setStyleSheet, name, rootContext, setContextProperty, recentlyModel, recentlyCardModel, THEME_HIGH_HIGH_COLOR, THEME_DISABLE_COLOR, THEME_ACCENT_COLOR, setSource, QUrl, qmlPath, status, Status, Ready, logger, error, errors, toString, debug, addWidget, _quickWidget, reload
+      str: '懒加载 QML 页面，参考 DeviceDashboard 的 QQuickWidget 接入方式。'
+      str: 'background-color: %s;'
+      str: 'controller'
+      str: 'recentlyModel'
+      str: 'recentlyCardModel'
+      str: 'recentlyPlayedBgColor'
+      str: 'recentlyPlayedHighlightColor'
+      str: 'recentlyPlayedDisableColor'
+      str: 'recentlyPlayedAccentColor'
+      str: 'RecentlyPlayed/LPRecentlyPlayed.qml'
+      str: '[RecentlyPlayed] QML load failed status=%s'
+      str: '[RecentlyPlayed] qml error: %s'
+      str: '[RecentlyPlayed] QML loaded successfully'
+
+  def LPRecentlyPlayedViewController._registerNotifications(self)  line 525
+    names: LPUtility, addNotificationObserver, RECENTLY_PLAYED_CHANGED_NOTIFY, _onRecentlyChanged, _onDeviceChanged, _onAccountChanged, registerDeviceInfoChanged, Exception
+      str: 'DeviceChanged'
+      str: 'accountChanged'
+
+  def LPRecentlyPlayedViewController._onRecentlyChanged(self, _params)  line 534
+    names: _suppressNextReload, QTimer, singleShot, reload
+
+  def LPRecentlyPlayedViewController._onDeviceChanged(self, _params)  line 542
+    names: _resetAccountFetchInFlight, QTimer, singleShot, _refreshAccountStatus
+
+  def LPRecentlyPlayedViewController.deviceInfoUpdate(self, device, infoType, detail)  line 551
+    names: get, _clearAccountFetchInFlight, QTimer, singleShot, _refreshAccountStatus, recentlyMenuItemsChanged, emit, _refreshPlayState
+      str: '设备媒体信息/账号更新回调，刷新播放态或重算不可播放标记。'
+      str: 'accountRegister'
+      str: 'accountChange'
+      str: 'source'
+
+  def LPRecentlyPlayedViewController._ensureFavoriteCacheObserver(self)  line 563
+    names: _favoriteCacheObserverConnected, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, favoriteIdsChanged, connect, _onFavoriteCacheChanged, Exception, logger, error
+      str: '\n        懒连接收藏缓存变化信号，用于菜单打开期间就地刷新收藏项。\n\n        只在首次构建菜单时连接：首次打开菜单前不存在可见菜单，无需监听；\n        同时避免把收藏缓存的磁盘加载提前到页面构造阶段。\n\n        :return: None。\n        '
+      str: 'LPFavoriteCacheManager'
+      str: '[RecentlyPlayed] favorite cache observer failed: %s'
+
+  def LPRecentlyPlayedViewController._onFavoriteCacheChanged(self, _source, _user_id)  line 582
+    names: recentlyMenuItemsChanged, emit
+      str: '\n        收藏缓存变化回调：通知 QML 重算仍打开的收藏菜单项。\n\n        覆盖同步成功写入快照与收藏写入提交；缓存同步失败不发该信号，\n        此时需重新打开菜单才能看到 unavailable 终态。\n\n        :param _source: 变化的音源标识。\n        :param _user_id: 变化的账号 ID。\n        :return: None。\n        '
+
+  def LPRecentlyPlayedViewController._onAccountChanged(self, params)  line 595
+    names: get, getattr, LPGlobalUI, str, QTimer, singleShot, _refreshAccountStatus
+      str: 'accountChanged 通知回调：账号变化后重算 Recently 不可播放标记。'
+      str: 'device'
+      str: 'currentDevice'
+      str: 'uuid'
+
+  def LPRecentlyPlayedViewController.reload(self)  line 610
+    names: _isLoading, isLoadingChanged, emit, _recentlyManager, getRecentlyRawList, _rawList, Exception, logger, error, _hasLoadedOnce, hasLoadedOnceChanged, hasRecentlyItemsChanged, _buildModels, _refreshAccountStatus
+      str: '重新拉取原始数据并重建两套模型。'
+      str: '[RecentlyPlayed] reload failed: %s'
+
+  def LPRecentlyPlayedViewController._buildDisplayItem(self, rawItem, index)  line 630
+    names: get, _tidalGenreCoverUrl, _ensureTidalGenreImageService, ensureThumbnail, TIDAL_GENRE_IMAGE_OWNER, getCacheImageUrl, _playlistMosaicInfo, _defaultCoverForType, _typeTextForItem, _sourceIconForSource, str, bool, _recentlyManager, isAccountMismatch, LPGlobalUI, currentDevice, recordAccountName, _dateSectionTitle
+      str: '把一条原始记录转成 QML 直接消费的字典。'
+      str: 'detail'
+      str: 'trackImage'
+      str: 'visible'
+      str: 'priority'
+      str: 'ownerKey'
+      str: 'itemId'
+      str: 'trackName'
+      str: 'typeValue'
+      str: 'source'
+      str: 'trackId'
+      str: 'canNavigate'
+      str: 'createTime'
+      str: 'index'
+      str: 'itemId'
+      str: 'title'
+      str: 'image'
+      str: 'isMosaic'
+      str: 'mosaicImages'
+      str: 'defaultCover'
+      str: 'typeText'
+      str: 'sourceIcon'
+      str: 'source'
+      str: 'trackId'
+      str: 'typeValue'
+      str: 'canNavigate'
+      str: 'isAccountMismatch'
+      str: 'accountName'
+      str: 'isPlaying'
+      str: 'playState'
+      str: 'dateSection'
+      str: 'detail'
+      str: 'createTime'
+
+  def LPRecentlyPlayedViewController._ensureTidalGenreImageService(self)  line 673
+    names: _tidalGenreImageService, HOME.StreamService.Tidal.services.LPTidalImageService, LPTidalImageService, instance, thumbnailReady, connect, _onTidalGenreThumbnailReady
+      str: '懒创建并连接 Recently 的 TIDAL Genre Python 图片服务。\n\n        Returns:\n            LPTidalImageService 单例。\n        '
+      str: 'LPTidalImageService'
+
+  def LPRecentlyPlayedViewController._onTidalGenreThumbnailReady(self, imageUrl, imagePath)  line 687
+    names: str, strip, enumerate, _rawList, _tidalGenreCoverUrl, recentlyModel, itemAt, get, append, index, dataChanged, emit, LPRecentlyListModel, ImageRole, _syncCardRows
+      str: 'Python 下载完成后把对应 TIDAL Genre 行切换为本地缓存文件。\n\n        Args:\n            imageUrl: 原始远端封面 URL。\n            imagePath: Python 图片服务生成的本地 file URL。\n\n        Returns:\n            无。\n        '
+      str: 'image'
+
+  def LPRecentlyPlayedViewController._accountFetchKey(device, source)  line 722
+    names: str, getattr
+      str: '构造设备账号在途标记的键。\n\n        Args:\n            device: 设备对象；缺失 uuid 时该段为空字符串。\n            source: 音源标识。\n\n        Returns:\n            (device_uuid, source) 元组。\n        '
+      str: 'uuid'
+
+  def LPRecentlyPlayedViewController._markAccountFetchInFlight(self, device, source)  line 735
+    names: time, monotonic, _deviceAccountFetchInFlight, _accountFetchKey
+      str: '记录一次设备账号 GetUserInfo 在途请求。\n\n        Args:\n            device: 发起请求的设备对象。\n            source: 音源标识。\n\n        Returns:\n            None。\n        '
+
+  def LPRecentlyPlayedViewController._clearAccountFetchInFlight(self, device, source)  line 747
+    names: _deviceAccountFetchInFlight, pop, _accountFetchKey
+      str: '清除某设备某音源的在途标记（账号回调到达或请求发起失败时调用）。\n\n        Args:\n            device: 回调对应的设备对象。\n            source: 音源标识。\n\n        Returns:\n            None。\n        '
+
+  def LPRecentlyPlayedViewController._resetAccountFetchInFlight(self)  line 759
+    names: _deviceAccountFetchInFlight, clear
+      str: '清空全部在途标记（设备切换时调用，旧设备的在途请求不再代表新设备）。\n\n        Args:\n            无。\n\n        Returns:\n            None。\n        '
+
+  def LPRecentlyPlayedViewController._isAccountFetchInFlight(self, device, source)  line 770
+    names: _accountFetchKey, _deviceAccountFetchInFlight, get, time, monotonic, DEVICE_ACCOUNT_FETCH_RETRY_INTERVAL, pop
+      str: '判断某设备某音源是否仍处于在途状态；超时未回调视为可重试。\n\n        Args:\n            device: 当前设备对象。\n            source: 音源标识。\n\n        Returns:\n            在途且未超时返回 True，否则 False。\n        '
+
+  def LPRecentlyPlayedViewController._refreshAccountStatus(self)  line 791
+    names: _updateAccountMismatch, _refreshPlayState, getattr, LPGlobalUI, _rawList, get, _recentlyManager, sourceFromDetail, sourceNeedsDeviceAccount, _isAccountFetchInFlight, deviceAccountForSource, DEVICE_ACCOUNT_UNKNOWN, append, _markAccountFetchInFlight, updateUserInfoForSource, Exception, logger, error, _clearAccountFetchInFlight
+      str: '按当前设备账号状态重算 Recently 不可播放标记，并补齐未知账号状态。'
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'source'
+      str: 'detail'
+      str: '[RecentlyPlayed] updateUserInfoForSource failed source=%s err=%s'
+
+  def LPRecentlyPlayedViewController._updateAccountMismatch(self)  line 821
+    names: enumerate, _rawList, recentlyModel, itemAt, bool, _recentlyManager, isAccountMismatch, LPGlobalUI, currentDevice, get, append, index, dataChanged, emit, LPRecentlyListModel, IsAccountMismatchRole, _syncCardRows
+      str: '行级重算不可播放标记，只对变化行发 dataChanged，避免整表 reset 导致滚动回顶。'
+      str: 'isAccountMismatch'
+
+  def LPRecentlyPlayedViewController._buildModels(self)  line 843
+    names: enumerate, _rawList, recentlyModel, setItems, _buildCardRows, datetime, now, date, _lastBuildDate
+      str: '按日期分组重建 List/Card 模型，仅每组首行显示日期标题。'
+      str: 'LPRecentlyPlayedViewController._buildModels.<locals>.<listcomp>'
+
+    def LPRecentlyPlayedViewController._buildModels.<listcomp>(.0)  line 845
+      names: _buildDisplayItem
+
+  def LPRecentlyPlayedViewController._buildCardRows(self, items)  line 857
+    names: get, append, _makeCardRow, len, _cardColumns, recentlyCardModel, setRows
+      str: '把条目按 dateSection 分组并按列数拆行，写入 Card 模型。\n\n        Args:\n            items: 展示条目字典列表（与 List 模型共用同一批 item 字典）。\n\n        Returns:\n            无，直接写入 self.recentlyCardModel。\n        '
+      str: 'dateSection'
+
+  def LPRecentlyPlayedViewController._makeCardRow(sectionTitle, items, showSectionHeader)  line 891
+    names: bool, list
+      str: 'sectionTitle'
+      str: 'showSectionHeader'
+      str: 'itemList'
+
+  def LPRecentlyPlayedViewController._refreshPlayState(self)  line 899
+    names: LPGlobalUI, currentDevice, getattr, mediaInfo, recentlyModel, updatePlayState, _syncCardPlayState
+      str: '根据当前设备实时媒体信息刷新播放态高亮。'
+      str: 'mediaInfo'
+      str: 'trackSource'
+      str: 'trackId'
+      str: 'RadioParadise2'
+      str: 'itemId'
+      str: 'playState'
+
+  def LPRecentlyPlayedViewController._syncCardRows(self)  line 917
+    names: recentlyCardModel, rowList, range, len, index, dataChanged, emit, LPRecentlyCardRowModel, ItemListRole
+      str: '触发 Card 模型所有行刷新，行内 item 字典被就地更新时使用。'
+
+  def LPRecentlyPlayedViewController._syncCardPlayState(self)  line 926
+    names: _syncCardRows
+      str: '刷新 Card 模型播放态；复用行级同步逻辑。'
+
+  def LPRecentlyPlayedViewController.hasRecentlyItems(self)  line 934
+    names: len, _rawList
+
+  def LPRecentlyPlayedViewController.isLoading(self)  line 938
+    names: _isLoading
+
+  def LPRecentlyPlayedViewController.hasLoadedOnce(self)  line 942
+    names: _hasLoadedOnce
+
+  def LPRecentlyPlayedViewController.isListMode(self)  line 946
+    names: _viewMode, VIEW_MODE_LIST
+
+  def LPRecentlyPlayedViewController.isCardMode(self)  line 950
+    names: _viewMode, VIEW_MODE_CARD
+
+  def LPRecentlyPlayedViewController.viewModeButtonText(self)  line 954
+    names: _viewMode, VIEW_MODE_CARD
+      str: 'List'
+      str: 'Card'
+
+  def LPRecentlyPlayedViewController.titleFontSize(self)  line 958
+    names: int, StackWidget_Title
+
+  def LPRecentlyPlayedViewController.dateTitleFontSize(self)  line 962
+    names: int, Main_Text
+      str: '日期分组标题字号（px）。'
+
+  def LPRecentlyPlayedViewController.cardTitleFontSize(self)  line 967
+    names: int, Sub_Text
+
+  def LPRecentlyPlayedViewController.cardSubtitleFontSize(self)  line 971
+    names: int, Sub_Text
+
+  def LPRecentlyPlayedViewController.defaultCoverUrl(self)  line 975
+    names: DEFAULT_COVER_URL
+
+  def LPRecentlyPlayedViewController.onViewModeButtonClicked(self)  line 983
+    names: _viewMode, VIEW_MODE_CARD, VIEW_MODE_LIST, viewModeChanged, emit, displayModeChanged, _saveViewModePreference
+
+  def LPRecentlyPlayedViewController.viewWillAppear(self)  line 991
+    names: _restoreViewModePreference, _refreshAccountStatus, _dateChangedSinceLastBuild, _refreshDateSections, _scheduleMidnightRefresh
+      str: '\n        每次进入 Recently 页面时恢复视图模式、重算账号可播状态，并做跨天日期分组兜底刷新。\n\n        页面实例常驻复用，进入页面是唯一的统一入口：这里主动重算不可播放标记并补齐未知\n        的设备账号状态，避免沿用上次离开时的旧结论（例如上一台已登录设备的“可播”）。\n        跨天发生在页面隐藏期间时不会自动触发定时器，\n        因此进入页面时补一次日期比较，分组标题确实过期才就地刷新。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPRecentlyPlayedViewController.viewWillDisappear(self)  line 1012
+    names: _recentlyDateTimer, stop
+      str: '页面隐藏时停止跨天定时器，避免后台空转。'
+
+  def LPRecentlyPlayedViewController._dateChangedSinceLastBuild(self)  line 1021
+    names: _lastBuildDate, datetime, now, date
+      str: '判断自上次日期分组构建以来是否已跨天。\n\n        Returns:\n            已跨天返回 True，从未构建或未跨天返回 False。\n        '
+
+  def LPRecentlyPlayedViewController._refreshDateSections(self)  line 1032
+    names: datetime, now, date, recentlyModel, itemList, enumerate, _dateSectionTitle, get, index, dataChanged, emit, LPRecentlyListModel, DateSectionRole, _buildCardRows, _lastBuildDate
+      str: '跨天时刷新日期分组：List 轻量 dataChanged 不跳顶，Card 重建分组结构。\n\n        跨天后相对日期标题会变化（Today→Yesterday 等），List 模式逐行就地\n        更新 dateSection 并只对变化行发 dataChanged，避免整表 reset 导致滚动回顶；\n        Card 模式分组边界可能增删（如 Today 组消失），需要整体重建行模型。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'createTime'
+      str: 'dateSection'
+
+  def LPRecentlyPlayedViewController._scheduleMidnightRefresh(self)  line 1056
+    names: datetime, now, timedelta, replace, int, total_seconds, _recentlyDateTimer, QTimer, setSingleShot, timeout, connect, _onMidnightRefresh, start, max
+      str: '调度一次性定时器到下一个本地零点，跨天后自动刷新日期分组。'
+      str: 'days'
+      str: 'hour'
+      str: 'minute'
+      str: 'second'
+      str: 'microsecond'
+
+  def LPRecentlyPlayedViewController._onMidnightRefresh(self)  line 1069
+    names: _dateChangedSinceLastBuild, _refreshDateSections, _scheduleMidnightRefresh
+      str: '跨天定时器回调：日期确实变化才刷新分组，随后调度下一个零点。'
+
+  def LPRecentlyPlayedViewController._restoreViewModePreference(self)  line 1075
+    names: LPRecentlyViewPreference, readViewMode, _viewMode, viewModeChanged, emit
+      str: '\n        从本地偏好恢复视图模式，未保存或非法值保持默认卡片视图。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPRecentlyPlayedViewController._saveViewModePreference(self, mode)  line 1087
+    names: LPRecentlyViewPreference, saveViewMode
+      str: '\n        视图切换时将当前模式写入本地偏好。\n\n        :param mode: 视图模式，`card` 或 `list`。\n        :return: None。\n        '
+
+  def LPRecentlyPlayedViewController.onCardViewportWidthChanged(self, width)  line 1096
+    names: max, min, _cardColumns, _lastViewportWidth, _buildModels
+      str: '根据容器宽度重新计算每行卡片数，列数变化时才重建 Card 模型。'
+
+  def LPRecentlyPlayedViewController.onRecentlyCardClicked(self, index)  line 1113
+    names: recentlyModel, itemAt, get, isinstance, dict, _showAccountMismatchToast, recentlyOpensDetail, recentlyDidSelect, recentlyResourceUnavailable, _showLocalResourceUnavailableToast, _markItemAsPlaying
+      str: '处理条目点击：账号校验 -> 解析 detail -> 分发给音源。'
+      str: 'detail'
+      str: 'isAccountMismatch'
+
+  def LPRecentlyPlayedViewController.onRecentlyCardPlayClicked(self, index)  line 1139
+    names: recentlyModel, itemAt, get, isinstance, dict, _showPlayFailedToast, _showAccountMismatchToast, str, _togglePlaybackForItem, playRecently, _markItemAsPlaying, logger, debug
+      str: '处理封面播放按钮点击：当前条目播放/暂停切换，否则直接恢复播放，不进入详情页。'
+      str: 'detail'
+      str: 'isAccountMismatch'
+      str: 'isPlaying'
+      str: 'playState'
+      str: 'PLAYING'
+      str: 'TRANSITIONING'
+      str: 'PAUSED_PLAYBACK'
+      str: '[RecentlyPlayed] play button direct play not handled index=%s source=%r'
+      str: 'source'
+
+  def LPRecentlyPlayedViewController._showLocalResourceUnavailableToast(self, item)  line 1177
+    names: str, get, QCoreApplication, translate, getattr, LPGlobalUI, showToast
+      str: '\n        提示 Recently 本地音乐引用的文件已全部失效。\n\n        :param item: Recently 展示条目字典。\n        :return: None。\n        '
+      str: 'title'
+      str: 'RecentlyPlayed'
+      str: '"%s" is no longer available on this computer. It may have been deleted or moved.'
+      str: 'This local content is no longer available on this computer. It may have been deleted or moved.'
+      str: 'toast'
+      str: 'mainWindow'
+
+  def LPRecentlyPlayedViewController._showAccountMismatchToast(self, item)  line 1199
+    names: str, get, supportContents, getattr, LPGlobalUI, QCoreApplication, translate, format, logger, debug, showToast
+      str: '\n        弹“账号不匹配，需在设备登录对应账号”提示，拦截 Recently 点击。\n\n        Args:\n            item: Recently 条目字典。\n\n        Returns:\n            None。\n        '
+      str: 'source'
+      str: 'title'
+      str: 'accountName'
+      str: 'currentDevice'
+      str: 'name'
+      str: 'RecentlyPlayed'
+      str: 'To play the full content on {0}, please log in to {1} on the device and confirm that the account is {2}.'
+      str: '[RecentlyPlayed] click blocked: source=%r accountName=%r'
+      str: 'toast'
+      str: 'mainWindow'
+
+  def LPRecentlyPlayedViewController._showPlayFailedToast(self, item)  line 1225
+    names: str, get, QCoreApplication, translate, getattr, LPGlobalUI, showToast
+      str: '\n        直接恢复播放失败时弹通用失败提示。\n\n        Args:\n            item: Recently 条目字典。\n\n        Returns:\n            None。\n        '
+      str: 'title'
+      str: 'RecentlyPlayed'
+      str: '"%s" play failed'
+      str: 'Play failed'
+      str: 'toast'
+      str: 'mainWindow'
+
+  def LPRecentlyPlayedViewController.recentlyMenuItemsForIndex(self, index)  line 1247
+    names: _ensureFavoriteCacheObserver, recentlyModel, itemAt, get, isinstance, dict, QCoreApplication, translate, recentlyCanPreset, append, recentlyFavoriteTarget, tuple, len, str, favoriteStatus, _favoriteLoadingMenuItem, _favoriteUnavailableMenuItem, favoriteState, logger, debug, _shouldResyncFavorite, bool
+      str: '\n        返回 Recently 右键菜单项：删除恒有，Preset 与 Add to Favorites 按支持度追加。\n\n        账号不匹配（置灰）的条目在设备上无法播放，只能执行删除，因此不再追加 Preset 与收藏项；\n        卡片视图与列表视图共用本方法，两者行为一致。\n\n        :param index: 条目在扁平模型中的序号。\n        :return: LPMoreMenu 可渲染的菜单项字典列表。\n        '
+      str: 'detail'
+      str: 'delete'
+      str: 'RecentlyPlayed'
+      str: 'Delete'
+      str: 'qrc:/images/delete.png'
+      str: 'key'
+      str: 'text'
+      str: 'iconSource'
+      str: 'iconOpacity'
+      str: 'isAccountMismatch'
+      str: 'preset'
+      str: 'TrackMore'
+      str: 'Preset'
+      str: 'qrc:/images/lib/icon_preset.svg'
+      str: 'source'
+      str: 'syncing'
+      str: 'account_pending'
+      str: 'missing'
+      str: 'failed'
+      str: 'synced'
+      str: 'stale'
+      str: '[RecentlyPlayed] favorite state unavailable index=%s'
+      str: 'remove_favorite'
+      str: 'add_favorite'
+      str: 'Remove from Favorites'
+      str: 'Add to Favorites'
+      str: 'qrc:/images/lib/icon_favorite.svg'
+      str: 'qrc:/images/lib/icon_unfavorite.svg'
+
+  def LPRecentlyPlayedViewController._favoriteLoadingMenuItem(self)  line 1322
+    names: QCoreApplication, translate, FAVORITE_LOADING_ICON_SOURCE
+      str: '\n        返回收藏结论未就绪时的菜单项。\n\n        图标使用公共转圈图（``iconSpinning`` 由 LPMoreMenu 渲染为无限旋转），文本沿用可收藏态的\n        ``Add to Favorites``，结论就绪后由控制器就地替换；该项禁用，点击不会触发任何收藏动作。\n\n        :param: 无。\n        :return: LPMoreMenu 菜单项字典。\n        '
+      str: 'favorite_loading'
+      str: 'RecentlyPlayed'
+      str: 'Add to Favorites'
+      str: 'key'
+      str: 'text'
+      str: 'iconSource'
+      str: 'iconOpacity'
+      str: 'iconSpinning'
+      str: 'enabled'
+
+  def LPRecentlyPlayedViewController._favoriteUnavailableMenuItem(self)  line 1341
+    names: QCoreApplication, translate
+      str: '\n        返回收藏结论终态不可用时的菜单项（终态，不转圈）。\n\n        :param: 无。\n        :return: LPMoreMenu 菜单项字典。\n        '
+      str: 'favorite_unavailable'
+      str: 'RecentlyPlayed'
+      str: 'Favorite state unavailable'
+      str: 'qrc:/images/lib/icon_favorite.svg'
+      str: 'key'
+      str: 'text'
+      str: 'iconSource'
+      str: 'iconOpacity'
+      str: 'enabled'
+
+  def LPRecentlyPlayedViewController._shouldResyncFavorite(self, source, itemType, itemId)  line 1356
+    names: str, favoriteStateNeedsResync, time, monotonic, _favoriteResyncAt, get, FAVORITE_RESYNC_THROTTLE_SECONDS, requestFavoriteResync, _pruneFavoriteResyncAt
+      str: '\n        判断收藏菜单结论是否可能已过期，并在需要时触发一次定向收藏同步。\n\n        只要与服务端缓存存在分歧就返回 True（调用方按“加载中”展示，避免展示可能过期的\n        Add/Remove）；真正触发网络同步受节流窗口限制，同一 (source, itemType, itemId)\n        在窗口内只触发一次。\n\n        :param source: 音源标识。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 存在分歧（应按加载中展示）'
+
+  def LPRecentlyPlayedViewController._pruneFavoriteResyncAt(self, now)  line 1381
+    names: len, _favoriteResyncAt, FAVORITE_RESYNC_THROTTLE_MAX_ENTRIES, items, pop, clear
+      str: '\n        清理过期的收藏校正节流记录，避免键随浏览不断累积。\n\n        :param now: 当前单调时钟秒数。\n        :return: None。\n        '
+      str: 'LPRecentlyPlayedViewController._pruneFavoriteResyncAt.<locals>.<listcomp>'
+
+    def LPRecentlyPlayedViewController._pruneFavoriteResyncAt.<listcomp>(.0)  line 1390
+      names: FAVORITE_RESYNC_THROTTLE_SECONDS
+
+  def LPRecentlyPlayedViewController.onRecentlyMenuAction(self, actionKey, index, globalX, globalY)  line 1400
+    names: recentlyModel, itemAt, onRecentlyDeleteRequested, _openRecentlyPresetMenu, QPoint, int, _setRecentlyFavorite
+      str: '\n        处理 LPMoreMenu 菜单项触发：删除/Preset/收藏增删按动作分发。\n\n        :param actionKey: 菜单项 key。\n        :param index: 条目在扁平模型中的序号。\n        :param globalX: 右键点击的屏幕全局 X 坐标。\n        :param globalY: 右键点击的屏幕全局 Y 坐标。\n        :return: None。\n        '
+      str: 'delete'
+      str: 'preset'
+      str: 'add_favorite'
+      str: 'remove_favorite'
+      str: 'favorite_loading'
+      str: 'favorite_unavailable'
+
+  def LPRecentlyPlayedViewController._openRecentlyPresetMenu(self, item, globalPos)  line 1426
+    names: get, isinstance, dict, recentlyCanPreset, recentlyPlayListFromDetail, LPCommonWidgets.menu.LPPresetMenu, LPPresetMenu, _presetMenuAnchorFor, str, move, mapFromGlobal, setTitle, QCoreApplication, translate, showMenu
+      str: '\n        打开 Recently 条目对应的 PyQt Preset 子菜单，复用快照还原的播放列表。\n\n        :param item: Recently 条目字典。\n        :param globalPos: 右键点击的屏幕全局坐标，用于定位 Preset 菜单宿主。\n        :return: None。\n        '
+      str: 'detail'
+      str: 'LPPresetMenu'
+      str: 'source'
+      str: 'TrackMore'
+      str: 'Preset'
+
+  def LPRecentlyPlayedViewController._presetMenuAnchorFor(self, source)  line 1449
+    names: _presetMenuAnchor, QWidget, setFixedSize, hide, source
+      str: '\n        返回 Preset 子菜单复用的隐藏宿主控件，并设置音源属性。\n\n        :param source: 当前条目的音源标识。\n        :return: 带 source 属性的隐藏 QWidget。\n        '
+
+  def LPRecentlyPlayedViewController._setRecentlyFavorite(self, item, desiredFavorite)  line 1463
+    names: get, isinstance, dict, recentlyFavoriteTarget, tuple, len, logger, debug, str, recentlyFavoriteItemData, setFavorite, bool, _onFavoriteResult
+      str: '\n        按音源与目标状态设置 Recently 条目收藏，经 Manager 通用接口分发。\n\n        :param item: Recently 条目字典。\n        :param desiredFavorite: True 加入收藏；False 移出收藏。\n        :return: None。\n        '
+      str: 'detail'
+      str: '[RecentlyPlayed] favorite target unavailable source=%r'
+      str: 'source'
+
+  def LPRecentlyPlayedViewController._onFavoriteResult(self, result)  line 1490
+    names: isinstance, dict, bool, get, str, QCoreApplication, translate, getattr, LPGlobalUI, showToast
+      str: '\n        展示收藏操作结果 Toast，失败不得静默。\n\n        :param result: 服务回调的结果字典。\n        :return: None。\n        '
+      str: 'success'
+      str: 'desiredFavorite'
+      str: 'error'
+      str: 'not_logged_in'
+      str: 'RecentlyPlayed'
+      str: 'Please log in to manage favorites.'
+      str: 'Qobuz Favorite'
+      str: 'Added to Favorites'
+      str: 'Removed From Favorites'
+      str: 'Add Failed'
+      str: 'Remove Failed'
+      str: 'toast'
+      str: 'mainWindow'
+
+  def LPRecentlyPlayedViewController.onRecentlyDeleteRequested(self, index)  line 1518
+    names: recentlyModel, itemAt, get, _suppressNextReload, _recentlyManager, deleteRecentlyItems, Exception, logger, error, _removeRecentlyItemFromModels, reload
+      str: '\n        删除菜单项：先写库，再就地删除 List/Card 模型，避免全量 reload 导致滚动回顶。\n\n        :param index: 条目在扁平模型中的序号。\n        :return: None。\n        '
+      str: 'itemId'
+      str: '[RecentlyPlayed] delete failed itemId=%s err=%s'
+
+  def LPRecentlyPlayedViewController._removeRecentlyItemFromModels(self, itemId)  line 1547
+    names: next, enumerate, _rawList, pop, recentlyModel, itemList, beginRemoveRows, QModelIndex, endRemoveRows, countChanged, emit, recentlyCardModel, rowList, get, id, len, _cardColumns, extend, add, index, dataChanged, LPRecentlyCardRowModel, ItemListRole, bool, ShowSectionHeaderRole, hasRecentlyItemsChanged
+      str: '\n        按 itemId 就地删除原始列表、List 模型与 Card 模型中的条目。\n\n        列表模型走 beginRemoveRows/endRemoveRows；卡片模型删除后会把同组后续行\n        向前回填，保证非末行始终满列，行变空才走 beginRemoveRows/endRemoveRows，\n        避免整表 reset 导致 ListView 滚动回顶。\n\n        :param itemId: 待删除的 Recently 记录 itemId。\n        :return: 找到并删除返回 True，否则返回 False。\n   '
+      str: 'LPRecentlyPlayedViewController._removeRecentlyItemFromModels.<locals>.<genexpr>'
+      str: 'start'
+      str: 'index'
+      str: 'itemList'
+      str: 'sectionTitle'
+      str: 'showSectionHeader'
+
+    def LPRecentlyPlayedViewController._removeRecentlyItemFromModels.<genexpr>(.0)  line 1562
+      names: get
+        str: 'itemId'
+
+    def LPRecentlyPlayedViewController._removeRecentlyItemFromModels.<genexpr>(.0)  line 1572
+      names: get
+        str: 'itemId'
+
+    def LPRecentlyPlayedViewController._removeRecentlyItemFromModels.<genexpr>(.0)  line 1589
+      names: any, get
+        str: 'LPRecentlyPlayedViewController._removeRecentlyItemFromModels.<locals>.<genexpr>.<genexpr>'
+        str: 'itemList'
+
+      def LPRecentlyPlayedViewController._removeRecentlyItemFromModels.<genexpr>.<genexpr>(.0)  line 1592
+        names: get
+          str: 'itemId'
+
+    def LPRecentlyPlayedViewController._removeRecentlyItemFromModels.<genexpr>(.0)  line 1600
+      names: get
+        str: 'itemId'
+
+  def LPRecentlyPlayedViewController._togglePlaybackForItem(self, item)  line 1678
+    names: getattr, LPGlobalUI, str, get, callable, playState, asyncUpnpPost, _refreshPlayState
+      str: '当前条目正在设备上播放时，下发暂停/继续命令并乐观更新本地播放态。\n\n        :param item: Recently 条目字典。\n        :return: 已下发切换命令返回 True。\n        '
+      str: 'currentDevice'
+      str: 'playState'
+      str: 'PLAYING'
+      str: 'TRANSITIONING'
+      str: 'PAUSED_PLAYBACK'
+      str: 'Pause'
+      str: 'PLAYING'
+      str: 'Play'
+      str: 'updateMediaInfo'
+      str: 'mediaInfo'
+
+  def LPRecentlyPlayedViewController._markItemAsPlaying(self, item)  line 1707
+    names: get, recentlyModel, updatePlayState, _syncCardPlayState
+      str: '点击恢复播放后，立即把该条目标记为播放中，给即时反馈。'
+      str: 'source'
+      str: 'trackId'
+      str: 'PLAYING'

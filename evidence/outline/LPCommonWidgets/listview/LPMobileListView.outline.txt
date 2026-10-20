@@ -1,0 +1,201 @@
+# module LPCommonWidgets.listview.LPMobileListView
+
+[module] names: __doc__, PyQt6.QtCore, QMimeData, Qt, QPoint, QTimer, QPropertyAnimation, QEasingCurve, pyqtProperty, QEvent, QPointF, QModelIndex, PyQt6.QtGui, QDrag, QFont, QFontMetrics, QPixmap, QPainter, QColor, QCursor, QMouseEvent, PyQt6.QtWidgets, QListView, QAbstractItemView, LPGlobalUI, LPClientFramework.LPUtility, logger, LPMobileListView
+  str: '\n@Time ： 2025/9/26 17:19\n@Auth ： Chris\n@File ：LPMobileListView.py\n@Desc:\n'
+  str: 'QMimeData'
+  str: 'Qt'
+  str: 'QPoint'
+  str: 'QTimer'
+  str: 'QPropertyAnimation'
+  str: 'QEasingCurve'
+  str: 'pyqtProperty'
+  str: 'QEvent'
+  str: 'QPointF'
+  str: 'QModelIndex'
+  str: 'QDrag'
+  str: 'QFont'
+  str: 'QFontMetrics'
+  str: 'QPixmap'
+  str: 'QPainter'
+  str: 'QColor'
+  str: 'QCursor'
+  str: 'QMouseEvent'
+  str: 'QListView'
+  str: 'QAbstractItemView'
+  str: 'logger'
+  str: 'LPMobileListView'
+
+def LPMobileListView()  line 17
+  names: __name__, __module__, __qualname__, __init__, resizeEvent, _clearSuppressAutoShow, showScrollBar, hideScrollBar, setAllowDrag, mouseMoveEvent, resetDropState, startDrag, dropEvent, dragEnterEvent, dragMoveEvent, dragLeaveEvent, resetDragLeaveState, createDragPixmap, initScroll, needScroll, startAutoScroll, stopAutoScroll, startScroll, smoothScroll, resetScrollState, row_y_position, startAnimation, row_position, set_row_position, pyqtProperty, int, onAnimationFinished, clear_state_after_animation, realMove, canRowDrag, canRowDrop, onRowNotAllowDrop, getShowText, __classcell__
+    str: 'LPMobileListView'
+    str: 'LPMobileListView.__init__'
+    str: 'LPMobileListView.resizeEvent'
+    str: 'LPMobileListView._clearSuppressAutoShow'
+    str: 'LPMobileListView.showScrollBar'
+    str: 'LPMobileListView.hideScrollBar'
+    str: 'LPMobileListView.setAllowDrag'
+    str: 'LPMobileListView.mouseMoveEvent'
+    str: 'LPMobileListView.resetDropState'
+    str: 'LPMobileListView.startDrag'
+    str: 'LPMobileListView.dropEvent'
+    str: 'LPMobileListView.dragEnterEvent'
+    str: 'LPMobileListView.dragMoveEvent'
+    str: 'LPMobileListView.dragLeaveEvent'
+    str: 'LPMobileListView.resetDragLeaveState'
+    str: 'LPMobileListView.createDragPixmap'
+    str: 'LPMobileListView.initScroll'
+    str: 'LPMobileListView.needScroll'
+    str: 'LPMobileListView.startAutoScroll'
+    str: 'LPMobileListView.stopAutoScroll'
+    str: 'LPMobileListView.startScroll'
+    str: 'LPMobileListView.smoothScroll'
+    str: 'LPMobileListView.resetScrollState'
+    str: 'LPMobileListView.row_y_position'
+    str: 'LPMobileListView.startAnimation'
+    str: 'LPMobileListView.row_position'
+    str: 'LPMobileListView.set_row_position'
+    str: 'fget'
+    str: 'fset'
+    str: 'LPMobileListView.onAnimationFinished'
+    str: 'LPMobileListView.clear_state_after_animation'
+    str: 'LPMobileListView.realMove'
+    str: 'LPMobileListView.canRowDrag'
+    str: 'LPMobileListView.canRowDrop'
+    str: 'LPMobileListView.onRowNotAllowDrop'
+    str: 'LPMobileListView.getShowText'
+
+  def LPMobileListView.__init__(self, parent)  line 19
+    names: super, __init__, setVerticalScrollBarPolicy, Qt, ScrollBarPolicy, ScrollBarAsNeeded, setDragEnabled, setAcceptDrops, setDropIndicatorShown, setDefaultDropAction, DropAction, MoveAction, setDragDropMode, QAbstractItemView, DragDropMode, InternalMove, allowDrag, lastCursorPos, sourceRow, dropRow, dropPosition, initScroll, animations, QTimer, scrollBarTimer, setSingleShot, timeout, connect, hideScrollBar, _suppressAutoShow, verticalScrollBar, hide, setStyleSheet, valueChanged, showScrollBar
+      str: '\n            QScrollBar {\n                border: 0px;\n                background: transparent;\n                width:10px;\n                height:10px;\n                margin: 0px 0px 0px 0px;\n            }\n            QScrollBar:vertical {\n                background: transparent;\n                w'
+
+  def LPMobileListView.resizeEvent(self, event)  line 100
+    names: _suppressAutoShow, super, resizeEvent, QTimer, singleShot, _clearSuppressAutoShow
+      str: '尺寸变化期间抑制滚动条自动显示，避免沉浸切换等布局重排导致滚动条闪烁。'
+
+  def LPMobileListView._clearSuppressAutoShow(self)  line 106
+    names: _suppressAutoShow
+      str: '清除尺寸变化抑制标志。'
+
+  def LPMobileListView.showScrollBar(self)  line 110
+    names: _suppressAutoShow, verticalScrollBar, show, scrollBarTimer, start
+
+  def LPMobileListView.hideScrollBar(self)  line 117
+    names: verticalScrollBar, hide
+
+  def LPMobileListView.setAllowDrag(self, allow)  line 120
+    names: allowDrag
+
+  def LPMobileListView.mouseMoveEvent(self, event)  line 123
+    names: super, mouseMoveEvent, pos, lastCursorPos, accept
+
+  def LPMobileListView.resetDropState(self)  line 130
+    names: dropRow, sourceRow, dropPosition, selectionModel, clearSelection
+
+  def LPMobileListView.startDrag(self, supportedActions)  line 136
+    names: logger, debug, allowDrag, selectedIndexes, QMimeData, row, sourceRow, setData, str, encode, getShowText, setText, QDrag, setMimeData, createDragPixmap, setHotSpot, rect, topLeft, QPoint, setPixmap, exec, Qt, DropAction, MoveAction
+      str: '[LPMobileListView] startDrag'
+      str: 'application/x-pyqt-table-row'
+
+  def LPMobileListView.dropEvent(self, event)  line 171
+    names: mimeData, hasText, ignore, resetDropState, resetScrollState, int, data, indexAt, position, toPoint, row, model, rowCount, dropRow, dropPosition, canRowDrop, onRowNotAllowDrop, print, logger, debug, str, startAnimation, accept
+      str: 'application/x-pyqt-table-row'
+      str: 'below'
+      str: 'hahahhaahahahahh------------'
+      str: 'above'
+      str: 'chris source index == '
+      str: 'chris target  index == '
+      str: 'dropEvent == end'
+
+  def LPMobileListView.dragEnterEvent(self, event)  line 227
+    names: logger, debug, canRowDrag, sourceRow, accept, ignore
+      str: '拖动进入事件'
+      str: 'dragEnterEvent triggered!'
+      str: 'dragEnterEvent accept!'
+      str: 'dragEnterEvent ignore!'
+
+  def LPMobileListView.dragMoveEvent(self, event)  line 237
+    names: logger, debug, startScroll, position, toPoint, indexAt, isValid, visualRect, row, dropRow, y, center, dropPosition, update, accept
+      str: 'dragMoveEvent triggered!'
+      str: 'above'
+      str: 'below'
+
+  def LPMobileListView.dragLeaveEvent(self, event)  line 259
+    names: logger, debug, resetDragLeaveState, resetScrollState, super, dragLeaveEvent
+      str: 'dragLeaveEvent triggered!'
+
+  def LPMobileListView.resetDragLeaveState(self)  line 265
+    names: dropRow, dropPosition, selectionModel, clearSelection
+
+  def LPMobileListView.createDragPixmap(self, showText)  line 270
+
+  def LPMobileListView.initScroll(self)  line 274
+    names: QTimer, scrollTimer, setInterval, timeout, connect, smoothScroll, isScrolling, scrollDirection, isScrollingUp, isScrollingDown
+
+  def LPMobileListView.needScroll(self)  line 287
+    names: verticalScrollBar, maximum
+
+  def LPMobileListView.startAutoScroll(self, direction)  line 290
+    names: logger, debug, str, isScrolling, scrollDirection, scrollTimer, start
+      str: '开始自动滚动'
+      str: '[startAutoScroll] self.isScrolling --> '
+      str: 'start_auto_scroll self.is_scrolling --> '
+      str: 'start_auto_scroll self.scroll_direction --> '
+
+  def LPMobileListView.stopAutoScroll(self)  line 300
+    names: isScrolling, scrollTimer, stop
+      str: '停止自动滚动'
+
+  def LPMobileListView.startScroll(self, event)  line 306
+    names: needScroll, logger, debug, viewport, rect, int, position, y, startAutoScroll, height, stopAutoScroll, lastCursorPos, isScrollingDown, isScrollingUp, toPoint
+      str: 'start_scroll !!!!'
+      str: 'up'
+      str: 'start_scroll up !!!'
+      str: 'down'
+      str: 'start_scroll down !!!'
+      str: 'reverse direction --> start stop_auto_scroll'
+
+  def LPMobileListView.smoothScroll(self)  line 343
+    names: logger, debug, scrollDirection, verticalScrollBar, setValue, value
+      str: '平滑滚动的实现'
+      str: 'smooth_scroll !!!!'
+      str: 'up'
+      str: 'smooth_scroll up'
+      str: 'down'
+      str: 'smooth_scroll down'
+
+  def LPMobileListView.resetScrollState(self)  line 354
+    names: scrollTimer, stop, scrollDirection, isScrolling, isScrollingUp, isScrollingDown
+
+  def LPMobileListView.row_y_position(self, row)  line 362
+    names: model, index, visualRect, top
+
+  def LPMobileListView.startAnimation(self, sourceRow, targetRow, sourceIndex, targetIndex)  line 369
+    names: row_y_position, QPropertyAnimation, setStartValue, setEndValue, setDuration, setEasingCurve, QEasingCurve, Type, InOutQuad, finished, connect, animations, start
+      str: 'LPMobileListView.startAnimation.<locals>.<lambda>'
+
+    def LPMobileListView.startAnimation.<lambda>()  line 377
+      names: onAnimationFinished
+
+  def LPMobileListView.row_position(self)  line 381
+
+  def LPMobileListView.set_row_position(self, value)  line 384
+    names: update
+
+  def LPMobileListView.onAnimationFinished(self, sourceRow, targetRow, sourceIndex, targetIndex)  line 389
+    names: animations, realMove, clear_state_after_animation
+
+  def LPMobileListView.clear_state_after_animation(self)  line 396
+    names: selectionModel, clearSelection, QCursor, pos, QMouseEvent, QEvent, Type, MouseMove, QPointF, Qt, MouseButton, NoButton, KeyboardModifier, NoModifier, mouseMoveEvent
+
+  def LPMobileListView.realMove(self, source_row, target_row, source_index, target_index)  line 407
+
+  def LPMobileListView.canRowDrag(self, sourceRow)  line 412
+
+  def LPMobileListView.canRowDrop(self, targetRow)  line 415
+
+  def LPMobileListView.onRowNotAllowDrop(self, targetRow)  line 418
+    names: LPGlobalUI, toast, showToast
+      str: 'The row '
+      str: ' cannot be modified or deleted'
+
+  def LPMobileListView.getShowText(self, indexes)  line 422

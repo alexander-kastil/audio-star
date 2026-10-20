@@ -1,0 +1,861 @@
+# module HOME.StreamService.Tidal.controllers.base.LPTidalPlayController
+
+[module] names: __doc__, random, typing, Any, Dict, Iterable, List, Optional, Tuple, urllib.parse, parse_qsl, urlencode, urlsplit, urlunsplit, LPGlobalUI, PyQt6.QtCore, QCoreApplication, pyqtSlot, HOME.StreamService.Tidal.config.LPTidalImageConfig, LPTidalImageSize, buildTidalImageUrl, HOME.StreamService.Tidal.data.LPTidalDataProvider, LPTidalDataProvider, HOME.StreamService.Tidal.models.LPTidalListModel, LPTidalListModel, HOME.StreamService.Tidal.services.LPTidalRequestScheduler, LPTidalRequest, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalSeeAllDescriptor, LPTidalStore, LPClientFramework, LPUtility, LPClientFramework.LPDataModel.UpnpDataModel.LPUpnpAsyncDataModel, LPUpnpAsyncDataModel, LPClientFramework.LPMusicLibrary.LPRecentlyManager, LPRecentlyManager, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPPlayListSource, headerTypeValue, LPClientFramework.LPPlayList.LPTidalPlayList, LPTidalAccount, LPTidalPlayHeader, LPTidalPlayItem, LPTidalPlayList, TIDAL_FAVORITE_TRACKS_ID, TIDAL_FAVORITE_TRACKS_TITLE, tidalPlayingContextForPlaylist, tidalRecentlyNavigationType, LPClientFramework.LPShuffleManager, LPShuffleManager, LPClientFramework.LPUtility, logger, object, str, seeAllPlaybackIdentity, LPTidalPlayController
+  str: '\nTIDAL 播放推送控制器。\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'Iterable'
+  str: 'List'
+  str: 'Optional'
+  str: 'Tuple'
+  str: 'parse_qsl'
+  str: 'urlencode'
+  str: 'urlsplit'
+  str: 'urlunsplit'
+  str: 'QCoreApplication'
+  str: 'pyqtSlot'
+  str: 'LPTidalImageSize'
+  str: 'buildTidalImageUrl'
+  str: 'LPTidalDataProvider'
+  str: 'LPTidalListModel'
+  str: 'LPTidalRequest'
+  str: 'LPTidalSeeAllDescriptor'
+  str: 'LPTidalStore'
+  str: 'LPUtility'
+  str: 'LPUpnpAsyncDataModel'
+  str: 'LPRecentlyManager'
+  str: 'LPHeaderType'
+  str: 'LPPlayListSource'
+  str: 'headerTypeValue'
+  str: 'LPTidalAccount'
+  str: 'LPTidalPlayHeader'
+  str: 'LPTidalPlayItem'
+  str: 'LPTidalPlayList'
+  str: 'TIDAL_FAVORITE_TRACKS_ID'
+  str: 'TIDAL_FAVORITE_TRACKS_TITLE'
+  str: 'tidalPlayingContextForPlaylist'
+  str: 'tidalRecentlyNavigationType'
+  str: 'LPShuffleManager'
+  str: 'logger'
+  str: 'descriptor'
+  str: 'return'
+  str: 'seeAllPlaybackIdentity'
+  str: 'LPTidalPlayController'
+
+def seeAllPlaybackIdentity(descriptor)  line 39
+  names: str, getattr, strip, TIDAL_FAVORITE_TRACKS_ID
+    str: '\n    解析 See All 描述对应的队列 ID、StreamType 与封面。\n\n    普通 See All 用 sectionKey 作队列 ID、collection 作类型；artist Top Tracks 这类\n    带真实 itemId 的 track See All 用真实 ID 与详情页同款 StreamType 和封面，保证\n    写入 Recently 的快照与详情页播放一致，避免 Recently 恢复时用伪 sectionKey 误\n    导航到空详情页，封面也不会回退成首曲封面。\n\n    :param descriptor: LPTidalSeeAll'
+    str: 'collection'
+    str: 'itemId'
+    str: 'sectionKey'
+    str: 'favoriteTracks'
+    str: 'streamType'
+    str: 'collection'
+    str: 'imageUrl'
+
+def LPTidalPlayController()  line 66
+  names: __name__, __module__, __qualname__, __doc__, LPPlayListSource, Tidal, value, _source, str, __annotations__, _tidal_api_base_url, _upnp_model, Optional, LPUpnpAsyncDataModel, bool, guardTidalSupported, isCurrentDeviceSupportTidal, guardTidalLoggedIn, playTidalHomeTrack, playTidalSearchTrack, playTidalCollectionTrack, playTidalSeeAllTrack, playTidalDetailFirstTrack, int, playTidalDetailTrack, Any, playTidalTrackFromModel, playTidalMediaQueue, object, playTidalMediaQueueFromDetailResult, pyqtSlot, toggleCurrentPlaybackForItem, Iterable, Dict, _playTidalTrackItems, _queueSearchUrlForItem, _queueStartIndexForItem, List, _queueScopedTrackItems, LPTidalDataProvider, _tidalDataProvider, registerTidalDeviceInfoObserver, unregisterTidalDeviceInfoObserver, deviceInfoUpdate, LPTidalPlayList, _playPlaylist, _buildRecentlyPlayList, staticmethod, _copyObjectFields, LPTidalPlayItem, Tuple, _playingContextForPlaylist, _genreImageUrlForSearchUrl, _buildPlaylist, _playItemFromDict, _trackItemsFromModel, _itemsFromModel, _trackIndexById, _itemFromModelById, _firstPlayableTrack, _randomPlayableTrack, _isPlayableTidalTrack, _modelContainsItem, LPTidalListModel, _homeSectionForTrack, _searchUrlForHomeSection, LPTidalSeeAllDescriptor, _searchUrlForDescriptor, _detailSearchSpec, _detailSearchSpecForItem, _buildTidalSearchUrl, LPHeaderType, _headerTypeForStreamType, _durationSeconds, LPTidalAccount, _tidalPlaybackAccount, _tidalAccountFromCurrentDevice, _tidalUserId, _tidalCountryCode, _syncTidalPlayingInfoFromCurrentDevice, _syncPlayingInfoFromDevice, LPTidalStore, _tidalStore, _getUpnpModel, _showToast
+    str: 'LPTidalPlayController'
+    str: 'TIDAL 播放逻辑 Mixin，统一处理设备队列推送与播放态同步。'
+    str: '_source'
+    str: 'https://api.tidal.com'
+    str: '_tidal_api_base_url'
+    str: '_upnp_model'
+    str: 'return'
+    str: 'LPTidalPlayController.guardTidalSupported'
+    str: 'LPTidalPlayController.isCurrentDeviceSupportTidal'
+    str: 'LPTidalPlayController.guardTidalLoggedIn'
+    str: 'sectionKey'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalPlayController.playTidalHomeTrack'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalPlayController.playTidalSearchTrack'
+    str: 'LPTidalPlayController.playTidalCollectionTrack'
+    str: 'LPTidalPlayController.playTidalSeeAllTrack'
+    str: 'shuffle'
+    str: 'return'
+    str: 'LPTidalPlayController.playTidalDetailFirstTrack'
+    str: 'itemId'
+    str: 'startPlayIndex'
+    str: 'shuffle'
+    str: 'return'
+    str: 'LPTidalPlayController.playTidalDetailTrack'
+    str: 'model'
+    str: 'itemId'
+    str: 'search_url'
+    str: 'listTitle'
+    str: 'listId'
+    str: 'streamType'
+    str: 'imageUrl'
+    str: 'startPlayIndex'
+    str: 'allowInlineTracks'
+    str: 'inlineTrackUrls'
+    str: 'shuffle'
+    str: 'isUserPlaylist'
+    str: 'return'
+    str: 'LPTidalPlayController.playTidalTrackFromModel'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalPlayController.playTidalMediaQueue'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'result'
+    str: 'return'
+    str: 'LPTidalPlayController.playTidalMediaQueueFromDetailResult'
+    str: 'result'
+    str: 'LPTidalPlayController.toggleCurrentPlaybackForItem'
+    str: 'trackItems'
+    str: 'itemId'
+    str: 'searchUrl'
+    str: 'listTitle'
+    str: 'listId'
+    str: 'streamType'
+    str: 'imageUrl'
+    str: 'startPlayIndex'
+    str: 'allowInlineTracks'
+    str: 'inlineTrackUrls'
+    str: 'shuffle'
+    str: 'isUserPlaylist'
+    str: 'return'
+    str: 'LPTidalPlayController._playTidalTrackItems'
+    str: 'item'
+    str: 'fallbackSearchUrl'
+    str: 'return'
+    str: 'LPTidalPlayController._queueSearchUrlForItem'
+    str: 'item'
+    str: 'fallbackStartIndex'
+    str: 'return'
+    str: 'LPTidalPlayController._queueStartIndexForItem'
+    str: 'items'
+    str: 'selectedItem'
+    str: 'queueSearchUrl'
+    str: 'return'
+    str: 'LPTidalPlayController._queueScopedTrackItems'
+    str: 'LPTidalPlayController._tidalDataProvider'
+    str: 'LPTidalPlayController.registerTidalDeviceInfoObserver'
+    str: 'LPTidalPlayController.unregisterTidalDeviceInfoObserver'
+    str: 'device'
+    str: 'infoType'
+    str: 'detail'
+    str: 'return'
+    str: 'LPTidalPlayController.deviceInfoUpdate'
+    str: 'playlist'
+    str: 'startPlayIndex'
+    str: 'shuffle'
+    str: 'return'
+    str: 'LPTidalPlayController._playPlaylist'
+    str: 'playlist'
+    str: 'return'
+    str: 'LPTidalPlayController._buildRecentlyPlayList'
+    str: 'LPTidalPlayController._copyObjectFields'
+    str: 'playlist'
+    str: 'playItem'
+    str: 'return'
+    str: 'LPTidalPlayController._playingContextForPlaylist'
+    str: 'searchUrl'
+    str: 'return'
+    str: 'LPTidalPlayController._genreImageUrlForSearchUrl'
+    str: 'trackItems'
+    str: 'searchUrl'
+    str: 'listTitle'
+    str: 'listId'
+    str: 'streamType'
+    str: 'imageUrl'
+    str: 'inlineTrackUrls'
+    str: 'isUserPlaylist'
+    str: 'return'
+    str: 'LPTidalPlayController._buildPlaylist'
+    str: 'item'
+    str: 'searchUrl'
+    str: 'inlineTrackUrl'
+    str: 'return'
+    str: 'LPTidalPlayController._playItemFromDict'
+    str: 'model'
+    str: 'return'
+    str: 'LPTidalPlayController._trackItemsFromModel'
+    str: 'LPTidalPlayController._itemsFromModel'
+    str: 'items'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalPlayController._trackIndexById'
+    str: 'model'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalPlayController._itemFromModelById'
+    str: 'LPTidalPlayController._firstPlayableTrack'
+    str: 'LPTidalPlayController._randomPlayableTrack'
+    str: 'item'
+    str: 'return'
+    str: 'LPTidalPlayController._isPlayableTidalTrack'
+    str: 'LPTidalPlayController._modelContainsItem'
+    str: 'state'
+    str: 'sectionKey'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalPlayController._homeSectionForTrack'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalPlayController._searchUrlForHomeSection'
+    str: 'descriptor'
+    str: 'order'
+    str: 'direction'
+    str: 'return'
+    str: 'LPTidalPlayController._searchUrlForDescriptor'
+    str: 'LPTidalPlayController._detailSearchSpec'
+    str: 'LPTidalPlayController._detailSearchSpecForItem'
+    str: 'endpointPath'
+    str: 'params'
+    str: 'return'
+    str: 'LPTidalPlayController._buildTidalSearchUrl'
+    str: 'streamType'
+    str: 'return'
+    str: 'LPTidalPlayController._headerTypeForStreamType'
+    str: 'value'
+    str: 'return'
+    str: 'LPTidalPlayController._durationSeconds'
+    str: 'LPTidalPlayController._tidalPlaybackAccount'
+    str: 'LPTidalPlayController._tidalAccountFromCurrentDevice'
+    str: 'LPTidalPlayController._tidalUserId'
+    str: 'LPTidalPlayController._tidalCountryCode'
+    str: 'LPTidalPlayController._syncTidalPlayingInfoFromCurrentDevice'
+    str: 'device'
+    str: 'return'
+    str: 'LPTidalPlayController._syncPlayingInfoFromDevice'
+    str: 'LPTidalPlayController._tidalStore'
+    str: 'LPTidalPlayController._getUpnpModel'
+    str: 'text'
+    str: 'return'
+    str: 'LPTidalPlayController._showToast'
+
+  def LPTidalPlayController.guardTidalSupported(self)  line 73
+    names: isCurrentDeviceSupportTidal, logger, debug, _showToast, QCoreApplication, translate
+      str: '\n        校验当前设备是否支持 TIDAL。\n\n        :param: 无。\n        :return: 支持返回 True，否则返回 False。\n        '
+      str: "[TIDAL][Play] current device doesn't support TIDAL"
+      str: 'Tidal'
+      str: 'Current Device Does Not Support TIDAL. Please Upgrade the Firmware to get support.'
+
+  def LPTidalPlayController.isCurrentDeviceSupportTidal(self)  line 91
+    names: getattr, LPGlobalUI, isinstance, dict, _source, keys
+      str: '\n        判断当前设备 capability 是否声明支持 TIDAL。\n\n        :param: 无。\n        :return: 支持返回 True，否则返回 False。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'streamServiceCapability'
+
+  def LPTidalPlayController.guardTidalLoggedIn(self)  line 103
+    names: getattr, LPGlobalUI, LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager, LPTidalLoginManager, instance, syncAccountFromDevice, Exception, logger, debug, _tidalAccountFromCurrentDevice, str, strip, _tidalStore, accountState, bool, get, _showToast, QCoreApplication, translate
+      str: '\n        校验 TIDAL 是否已登录。\n\n        :param: 无。\n        :return: 已登录返回 True，否则返回 False。\n        '
+      str: 'currentDevice'
+      str: 'LPTidalLoginManager'
+      str: '[TIDAL][Play] sync account before play failed: %s'
+      str: 'userId'
+      str: 'isLoggedIn'
+      str: '[TIDAL][Play] play ignored because TIDAL account is not logged in'
+      str: 'Tidal'
+      str: 'Please log in to TIDAL First'
+
+  def LPTidalPlayController.playTidalHomeTrack(self, sectionKey, itemId)  line 128
+    names: _tidal_play_source, getattr, _homeSectionForTrack, logger, debug, _searchUrlForHomeSection, isinstance, dict, str, get, playTidalTrackFromModel
+      str: '\n        播放首页区块中的曲目。\n\n        :param sectionKey: 首页区块标识。\n        :param itemId: 曲目 ID。\n        :return: 成功发起播放返回 True。\n        '
+      str: 'home'
+      str: '_state'
+      str: '[TIDAL][Play] home track not found itemId=%s section=%s'
+      str: 'title'
+      str: 'TIDAL'
+      str: 'collection'
+      str: 'search_url'
+      str: 'listTitle'
+      str: 'listId'
+      str: 'streamType'
+
+  def LPTidalPlayController.playTidalSearchTrack(self, itemId)  line 153
+    names: _tidal_play_source, getattr, str, strip, lower, _modelContainsItem, _itemFromModelById, isinstance, dict, _queueSearchUrlForItem, playTidalTrackFromModel
+      str: '\n        播放搜索结果中的曲目。\n\n        :param itemId: 曲目 ID。\n        :return: 成功发起播放返回 True。\n        '
+      str: 'search'
+      str: '_state'
+      str: 'trackResults'
+      str: 'topResults'
+      str: 'searchFilter'
+      str: 'top'
+      str: 'Top'
+      str: 'TIDAL SEARCH Top'
+      str: 'TIDAL SEARCH'
+      str: 'TIDAL SEARCH Tracks'
+      str: 'song'
+      str: 'search_url'
+      str: 'listTitle'
+      str: 'listId'
+      str: 'streamType'
+      str: 'startPlayIndex'
+      str: 'allowInlineTracks'
+
+  def LPTidalPlayController.playTidalCollectionTrack(self, sectionKey, itemId)  line 201
+    names: _tidal_play_source, _tidalStore, collectionState, getattr, _modelContainsItem, hasattr, findItem, isinstance, dict, str, get, lower, _tidalUserId, _buildTidalSearchUrl, _tidalCountryCode, playTidalTrackFromModel, TIDAL_FAVORITE_TRACKS_TITLE, TIDAL_FAVORITE_TRACKS_ID
+      str: '\n        播放收藏页中的曲目。\n\n        :param sectionKey: 收藏区块标识。\n        :param itemId: 曲目 ID。\n        :return: 成功发起播放返回 True。\n        '
+      str: 'collection'
+      str: 'favoriteTracks'
+      str: 'findItem'
+      str: 'itemType'
+      str: 'track'
+      str: '/v1/users/'
+      str: '/favorites/tracks'
+      str: 'NAME'
+      str: 'ASC'
+      str: 'countryCode'
+      str: 'order'
+      str: 'orderDirection'
+      str: 'offset'
+      str: 'limit'
+      str: 'search_url'
+      str: 'listTitle'
+      str: 'listId'
+      str: 'streamType'
+
+  def LPTidalPlayController.playTidalSeeAllTrack(self, itemId)  line 236
+    names: _tidal_play_source, getattr, isinstance, LPTidalSeeAllDescriptor, itemType, _searchUrlForDescriptor, str, seeAllPlaybackIdentity, TIDAL_FAVORITE_TRACKS_ID, TIDAL_FAVORITE_TRACKS_TITLE, title, playTidalTrackFromModel
+      str: '\n        播放 See All 页面中的曲目。\n\n        :param itemId: 曲目 ID。\n        :return: 成功发起播放返回 True。\n        '
+      str: 'see_all'
+      str: '_state'
+      str: '_descriptor'
+      str: 'track'
+      str: 'items'
+      str: 'sortOrder'
+      str: 'sortDirection'
+      str: 'order'
+      str: 'direction'
+      str: 'TIDAL'
+      str: 'search_url'
+      str: 'listTitle'
+      str: 'listId'
+      str: 'streamType'
+      str: 'imageUrl'
+
+  def LPTidalPlayController.playTidalDetailFirstTrack(self, shuffle)  line 271
+    names: _tidal_play_source, getattr, _randomPlayableTrack, _firstPlayableTrack, isinstance, dict, logger, debug, HOME.StreamService.Tidal.services.LPTidalEventTrack, LPTidalEventTrack, LPGlobalUI, playback_event, str, Exception, playTidalDetailTrack, get
+      str: '\n        播放详情页中第一首或随机可播放曲目。\n\n        :param shuffle: 是否按当前已加载曲目随机起播。\n        :return: 成功发起播放返回 True。\n        '
+      str: 'detail'
+      str: '_state'
+      str: 'trackList'
+      str: '[TIDAL][Play] detail play ignored because track list is empty'
+      str: 'LPTidalEventTrack'
+      str: 'currentDevice'
+      str: 'failure'
+      str: 'track'
+      str: 'no_playable_track'
+      str: 'uuid'
+      str: 'firmwareVersion'
+      str: 'status'
+      str: 'source'
+      str: 'content_type'
+      str: 'error_reason'
+      str: 'device_uuid'
+      str: 'firmware_version'
+      str: 'itemId'
+      str: 'startPlayIndex'
+      str: 'shuffle'
+
+  def LPTidalPlayController.playTidalDetailTrack(self, itemId, startPlayIndex, shuffle)  line 300
+    names: _tidal_play_source, getattr, _detailSearchSpec, logger, debug, str, isinstance, dict, get, bool, playTidalTrackFromModel
+      str: '\n        播放详情页曲目列表中的指定曲目。\n\n        :param itemId: 曲目 ID。\n        :param startPlayIndex: 可选 1-based 起播索引。\n        :param shuffle: 可选随机播放偏好；None 表示不修改设备队列模式。\n        :return: 成功发起播放返回 True。\n        '
+      str: 'detail'
+      str: '_state'
+      str: 'trackList'
+      str: '[TIDAL][Play] detail type unsupported for playback type=%s itemId=%s'
+      str: '_item_type'
+      str: '_item_id'
+      str: 'detailInfo'
+      str: 'title'
+      str: 'TIDAL'
+      str: 'imageUrl'
+      str: 'isUserPlaylist'
+      str: 'search_url'
+      str: 'listTitle'
+      str: 'listId'
+      str: 'streamType'
+      str: 'imageUrl'
+      str: 'startPlayIndex'
+      str: 'shuffle'
+      str: 'isUserPlaylist'
+
+  def LPTidalPlayController.playTidalTrackFromModel(self, model, itemId, search_url, listTitle, listId, streamType, imageUrl, startPlayIndex, allowInlineTracks, inlineTrackUrls, shuffle, isUserPlaylist)  line 338
+    names: isinstance, list, _trackItemsFromModel, _playTidalTrackItems
+      str: '\n        从列表模型中构建 TIDAL 队列并播放指定曲目。\n\n        :param model: 包含曲目字典的列表模型。\n        :param itemId: 曲目 ID。\n        :param search_url: 设备后续拉取队列的 SearchUrl。\n        :param listTitle: 列表标题。\n        :param listId: 列表 ID。\n        :param streamType: 设备 StreamType。\n        :param imageUrl: 可选列表封面。\n        :param'
+      str: 'LPTidalPlayController.playTidalTrackFromModel.<locals>.<listcomp>'
+      str: 'searchUrl'
+      str: 'listTitle'
+      str: 'listId'
+      str: 'streamType'
+      str: 'imageUrl'
+      str: 'startPlayIndex'
+      str: 'allowInlineTracks'
+      str: 'inlineTrackUrls'
+      str: 'shuffle'
+      str: 'isUserPlaylist'
+
+    def LPTidalPlayController.playTidalTrackFromModel.<listcomp>(.0)  line 369
+      names: isinstance, dict
+
+  def LPTidalPlayController.playTidalMediaQueue(self, itemType, itemId)  line 385
+    names: _tidal_play_source, str, strip, lower, guardTidalSupported, guardTidalLoggedIn, int, getattr, setattr, Dict, Any, object, callable, playTidalMediaQueueFromDetailResult, cancelByTag, LPTidalRequest, enqueue
+      str: '\n        异步拉取 album/playlist 首屏队列并播放第一首可播放曲目。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 成功提交播放请求返回 True。\n        '
+      str: 'media_queue'
+      str: 'album'
+      str: 'playlist'
+      str: 'mix'
+      str: '_tidal_media_play_revision'
+      str: 'return'
+      str: 'LPTidalPlayController.playTidalMediaQueue.<locals>._load_detail'
+      str: 'result'
+      str: 'requestedRevision'
+      str: 'return'
+      str: 'LPTidalPlayController.playTidalMediaQueue.<locals>._handle_result'
+      str: '_ensure_scheduler'
+      str: 'tidal_play_queue'
+      str: 'play_queue::'
+      str: '::'
+      str: 'key'
+      str: 'tag'
+      str: 'task'
+      str: 'callback'
+      str: 'priority'
+
+    def LPTidalPlayController.playTidalMediaQueue._load_detail()  line 403
+      names: _tidalDataProvider, loadAlbumDetail, loadMixDetail, loadPlaylistDetail
+        str: '\n            拉取待播放媒体的详情队列。\n\n            :param: 无。\n            :return: 详情请求结果。\n            '
+        str: 'album'
+        str: 'mix'
+        str: 'offset'
+        str: 'limit'
+
+    def LPTidalPlayController.playTidalMediaQueue._handle_result(result, requestedRevision)  line 417
+      names: int, getattr, logger, debug, playTidalMediaQueueFromDetailResult
+        str: '\n            处理媒体队列详情请求结果。\n\n            :param result: 请求结果。\n            :param requestedRevision: 请求修订号。\n            :return: None。\n            '
+        str: '_tidal_media_play_revision'
+        str: '[TIDAL][Play] skip stale media queue callback type=%s itemId=%s revision=%s'
+        str: '[TIDAL][Play] media queue play failed type=%s itemId=%s'
+
+  def LPTidalPlayController.playTidalMediaQueueFromDetailResult(self, itemType, itemId, result)  line 450
+    names: _tidal_play_source, str, strip, lower, isinstance, dict, bool, get, _showToast, QCoreApplication, translate, _detailSearchSpecForItem, enumerate, _isPlayableTidalTrack, _playTidalTrackItems
+      str: '\n        从 album/playlist 详情请求结果构建队列并播放第一首可播放曲目。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param result: 数据提供器详情返回结果。\n        :return: 成功发起播放返回 True。\n        '
+      str: 'detail'
+      str: 'album'
+      str: 'playlist'
+      str: 'mix'
+      str: 'success'
+      str: 'Tidal'
+      str: 'Load Failed. Please try again.'
+      str: 'data'
+      str: 'LPTidalPlayController.playTidalMediaQueueFromDetailResult.<locals>.<listcomp>'
+      str: 'tracks'
+      str: 'This item has no playable Tracks'
+      str: 'detailInfo'
+      str: 'title'
+      str: 'imageUrl'
+      str: 'isUserPlaylist'
+      str: 'itemId'
+      str: 'searchUrl'
+      str: 'listTitle'
+      str: 'listId'
+      str: 'streamType'
+      str: 'imageUrl'
+      str: 'startPlayIndex'
+      str: 'isUserPlaylist'
+
+    def LPTidalPlayController.playTidalMediaQueueFromDetailResult.<listcomp>(.0)  line 475
+      names: isinstance, dict
+
+  def LPTidalPlayController.toggleCurrentPlaybackForItem(self, itemType, itemId)  line 502
+    names: str, strip, lower, startswith, split, _tidalStore, playingContextType, playingContextId, playingTrackId, getattr, LPGlobalUI, _source, playingState, callable, playState, setPlayingInfo, asyncUpnpPost
+      str: '\n        当前来源条目再次点击时切换设备暂停或继续状态。\n\n        :param itemType: 待切换的条目类型。\n        :param itemId: 待切换的条目 ID。\n        :return: 命中当前播放来源并已下发切换命令时返回 True。\n        '
+      str: 'favorite:'
+      str: ':'
+      str: 'track'
+      str: 'currentDevice'
+      str: 'mediaInfo'
+      str: 'trackSource'
+      str: 'playState'
+      str: 'PLAYING'
+      str: 'TRANSITIONING'
+      str: 'PAUSED_PLAYBACK'
+      str: 'Pause'
+      str: 'PLAYING'
+      str: 'Play'
+      str: 'updateMediaInfo'
+
+  def LPTidalPlayController._playTidalTrackItems(self, trackItems, itemId, searchUrl, listTitle, listId, streamType, imageUrl, startPlayIndex, allowInlineTracks, inlineTrackUrls, shuffle, isUserPlaylist)  line 550
+    names: str, strip, _trackIndexById, _isPlayableTidalTrack, _showToast, QCoreApplication, translate, _queueSearchUrlForItem, _queueStartIndexForItem, int, _queueScopedTrackItems, _buildPlaylist, _playPlaylist
+      str: '\n        从已归一化曲目列表中构建 TIDAL 队列并播放指定曲目。\n\n        :param trackItems: 已归一化曲目列表。\n        :param itemId: 起播曲目 ID。\n        :param searchUrl: 队列 SearchUrl。\n        :param listTitle: 列表标题。\n        :param listId: 列表 ID。\n        :param streamType: 设备 StreamType。\n        :param imageUrl: 列表封面。\n        :param s'
+      str: 'LPTidalPlayController._playTidalTrackItems.<locals>.<listcomp>'
+      str: 'Tidal'
+      str: 'This item is unavailable for streaming.'
+      str: 'trackItems'
+      str: 'searchUrl'
+      str: 'listTitle'
+      str: 'listId'
+      str: 'streamType'
+      str: 'imageUrl'
+      str: 'inlineTrackUrls'
+      str: 'isUserPlaylist'
+      str: 'shuffle'
+
+    def LPTidalPlayController._playTidalTrackItems.<listcomp>(.0)  line 585
+      names: isinstance, dict
+
+  def LPTidalPlayController._queueSearchUrlForItem(self, item, fallbackSearchUrl)  line 612
+    names: isinstance, dict, str, strip, get
+      str: '\n        返回当前曲目所在分页的队列 SearchUrl。\n\n        :param item: 选中的曲目字典。\n        :param fallbackSearchUrl: 入口级 SearchUrl。\n        :return: 可写入队列 XML 的 SearchUrl。\n        '
+      str: 'extra'
+      str: 'queueSearchUrl'
+
+  def LPTidalPlayController._queueStartIndexForItem(self, item, fallbackStartIndex)  line 627
+    names: isinstance, dict, get, int, TypeError, ValueError, max
+      str: '\n        返回当前曲目在分页队列中的 1-based 起播序号。\n\n        :param item: 选中的曲目字典。\n        :param fallbackStartIndex: 旧数据使用的起播序号。\n        :return: 1-based 起播序号。\n        '
+      str: 'extra'
+      str: 'queueStartIndex'
+
+  def LPTidalPlayController._queueScopedTrackItems(self, items, selectedItem, queueSearchUrl)  line 648
+    names: isinstance, dict, _queueSearchUrlForItem, str, strip
+      str: '\n        返回本次分页队列对应的可播放曲目列表。\n\n        :param items: 当前已加载曲目列表。\n        :param selectedItem: 选中的曲目。\n        :param queueSearchUrl: 本次队列 SearchUrl。\n        :return: 同页可播放曲目列表；旧数据返回原列表。\n        '
+      str: 'LPTidalPlayController._queueScopedTrackItems.<locals>.<listcomp>'
+
+    def LPTidalPlayController._queueScopedTrackItems.<listcomp>(.0)  line 660
+      names: isinstance, dict, _isPlayableTidalTrack, _queueSearchUrlForItem
+
+  def LPTidalPlayController._tidalDataProvider(self)  line 669
+    names: getattr, LPTidalDataProvider, setattr
+      str: '\n        返回当前控制器可用的数据提供器。\n\n        :param: 无。\n        :return: TIDAL 数据提供器。\n        '
+      str: '_provider'
+
+  def LPTidalPlayController.registerTidalDeviceInfoObserver(self)  line 682
+    names: getattr, LPUtility, registerDeviceInfoChanged, _tidal_device_observer_registered, _syncTidalPlayingInfoFromCurrentDevice
+      str: '\n        注册当前页面为设备媒体信息观察者。\n\n        :param: 无。\n        :return: None。\n        '
+      str: '_tidal_device_observer_registered'
+
+  def LPTidalPlayController.unregisterTidalDeviceInfoObserver(self)  line 695
+    names: getattr, LPUtility, deRegisterDeviceInfoChanged, _tidal_device_observer_registered
+      str: '\n        取消当前页面的设备媒体信息观察。\n\n        :param: 无。\n        :return: None。\n        '
+      str: '_tidal_device_observer_registered'
+
+  def LPTidalPlayController.deviceInfoUpdate(self, device, infoType, detail)  line 707
+    names: getattr, LPGlobalUI, str, get, strip, _tidalStore, reconcilePlayingContextQueueName, _syncPlayingInfoFromDevice
+      str: '\n        处理设备媒体信息变化并同步 TIDAL 播放高亮。\n\n        :param device: 触发通知的设备。\n        :param infoType: 通知类型。\n        :param detail: 通知内容。\n        :return: None。\n        '
+      str: 'media'
+      str: 'currentDevice'
+      str: 'uuid'
+      str: 'queueName'
+
+  def LPTidalPlayController._playPlaylist(self, playlist, startPlayIndex, shuffle)  line 726
+    names: str, getattr, header, LPGlobalUI, guardTidalSupported, guardTidalLoggedIn, logger, error, list, max, min, int, len, index, playOrigin, _playingContextForPlaylist, _tidalStore, setPlayingContext, headTitle, generateXML, LPShuffleManager, setShuffle, setNoShuffle, deviceStreamServiceManager, updateMediaInfoForSource, _source, guardMediaInfoRollback, setPlayingInfo, trackId, _buildRecentlyPlayList, object, _getUpnpModel, palyWithSearchUrl
+      str: '\n        下发播放列表到当前设备。\n\n        :param playlist: TIDAL 播放列表。\n        :param startPlayIndex: 1-based 起播索引。\n        :param shuffle: 可选随机播放偏好；None 表示不修改设备队列模式。\n        :return: 成功发起播放返回 True。\n        '
+      str: '_tidal_play_source'
+      str: 'unknown'
+      str: 'streamType'
+      str: 'currentDevice'
+      str: 'uuid'
+      str: 'firmwareVersion'
+      str: 'error_reason'
+      str: 'return'
+      str: 'LPTidalPlayController._playPlaylist.<locals>._report_playback_failure'
+      str: 'device_unsupported'
+      str: 'not_logged_in'
+      str: '[TIDAL][Play] play failed because current device is empty'
+      str: 'no_device'
+      str: 'empty_playlist'
+      str: 'search'
+      str: 'search_track'
+      str: 'TRANSITIONING'
+      str: 'response'
+      str: 'args'
+      str: 'return'
+      str: 'LPTidalPlayController._playPlaylist.<locals>._on_play_result'
+
+    def LPTidalPlayController._playPlaylist._report_playback_failure(error_reason)  line 741
+      names: HOME.StreamService.Tidal.services.LPTidalEventTrack, LPTidalEventTrack, playback_event, Exception
+        str: 'LPTidalEventTrack'
+        str: 'failure'
+        str: 'status'
+        str: 'source'
+        str: 'content_type'
+        str: 'error_reason'
+        str: 'device_uuid'
+        str: 'firmware_version'
+
+    def LPTidalPlayController._playPlaylist._on_play_result(response, *args)  line 785
+      names: bool, logger, debug, trackName, trackId, HOME.StreamService.Tidal.services.LPTidalEventTrack, LPTidalEventTrack, playback_event, Exception, LPRecentlyManager, instance, addRecentlyPlayedWithMusicList, tidalRecentlyNavigationType
+        str: '\n            处理设备 CreateQueue 返回。\n\n            :param response: 设备返回。\n            :param args: 透传参数。\n            :return: None。\n            '
+        str: '[TIDAL][Play] CreateQueue result=%s title=%s trackId=%s'
+        str: 'LPTidalEventTrack'
+        str: 'success'
+        str: 'status'
+        str: 'source'
+        str: 'content_type'
+        str: 'openMore'
+        str: 'canNavigate'
+        str: 'create_queue_failed'
+
+  def LPTidalPlayController._buildRecentlyPlayList(self, playlist)  line 822
+    names: isinstance, getattr, LPTidalPlayHeader, LPTidalPlayList, _copyObjectFields, header, LPTidalAccount, _tidalPlaybackAccount, _source, source, account, list, LPTidalPlayItem, trackSource, append, int, index, TypeError, ValueError, len
+      str: '\n        生成写入 Recently Played 的 TIDAL 播放列表快照。\n\n        :param playlist: 当前播放列表。\n        :return: 适合落库的 TIDAL 播放列表；无效时返回 None。\n        '
+      str: 'header'
+      str: 'list'
+      str: 'rawUserInfo'
+      str: 'credential'
+
+  def LPTidalPlayController._copyObjectFields(source, target, excludeKeys)  line 859
+    names: hasattr, set, vars, items, startswith, callable, setattr
+      str: '\n        复制对象的公开字段，避免把运行时对象直接写进 Recently 快照。\n\n        :param source: 源对象。\n        :param target: 目标对象。\n        :param excludeKeys: 需要跳过的字段集合。\n        :return: 复制后的目标对象。\n        '
+      str: '__dict__'
+      str: '_'
+
+  def LPTidalPlayController._playingContextForPlaylist(self, playlist, playItem)  line 878
+    names: tidalPlayingContextForPlaylist
+      str: '\n        从 PC 端待下发队列解析可供 UI 高亮的播放来源。\n\n        :param playlist: 待播放的 TIDAL 队列。\n        :param playItem: 当前起播曲目。\n        :return: 来源类型和来源 ID。\n        '
+
+  def LPTidalPlayController._genreImageUrlForSearchUrl(self, searchUrl)  line 892
+    names: str, strip, find, len, split, _tidalDataProvider, genreImageIdForPath, buildTidalImageUrl, LPTidalImageSize, SIZE_320
+      str: '\n        若队列 SearchUrl 为 /v1/genres/{slug}/tracks，返回该 genre 分类固定封面 URL。\n\n        与 iOS 端一致：从 genre 分类进入播放 tracks 时，封面（Recently 记录/UiPicUrl）\n        使用该分类的固定图片，而非当前曲目封面（B 动态 /v1/genres，失败回退内置映射）。\n\n        :param searchUrl: 队列 SearchUrl。\n        :return: 固定封面 URL；非 genre 队列或无法解析时返回空串。\n        '
+      str: '/v1/genres/'
+      str: '/'
+
+  def LPTidalPlayController._buildPlaylist(self, trackItems, searchUrl, listTitle, listId, streamType, imageUrl, inlineTrackUrls, isUserPlaylist)  line 915
+    names: _tidalPlaybackAccount, LPTidalPlayHeader, str, headTitle, headId, searchUrl, _genreImageUrlForSearchUrl, imageUrl, getattr, _tidalUserId, userId, streamId, showName, streamType, _headerTypeForStreamType, headType, bool, recentlyIsUserPlaylist, LPTidalPlayList, account, header, list, headerTypeValue, LPHeaderType, LP_HEADER_TYPE_COLLECTION, trackImage
+      str: '\n        根据归一化曲目字典构建 TIDAL 播放列表。\n\n        :param trackItems: 曲目字典列表。\n        :param searchUrl: 队列 SearchUrl。\n        :param listTitle: 列表标题。\n        :param listId: 列表 ID。\n        :param streamType: 设备 StreamType。\n        :param imageUrl: 列表封面。\n        :param inlineTrackUrls: 是否强制 Track URL 使用 wiimu_'
+      str: 'TIDAL'
+      str: 'userId'
+      str: 'playlist'
+      str: 'LPTidalPlayController._buildPlaylist.<locals>.<listcomp>'
+
+    def LPTidalPlayController._buildPlaylist.<listcomp>(.0)  line 961
+      names: isinstance, dict, _playItemFromDict
+        str: 'inlineTrackUrl'
+
+  def LPTidalPlayController._playItemFromDict(self, item, searchUrl, inlineTrackUrl)  line 970
+    names: LPTidalPlayItem, str, get, trackId, trackName, trackArtist, artistId, albumName, albumId, trackImage, trackUrl, searchUrl, _durationSeconds, trackDuration, bool, isExplicit, _isPlayableTidalTrack, allowStreaming
+      str: '\n        将归一化条目字典转换为播放条目。\n\n        :param item: 归一化条目。\n        :param searchUrl: 当前队列 SearchUrl。\n        :param inlineTrackUrl: 是否强制 Track URL 使用 wiimu_search。\n        :return: TIDAL 播放条目。\n        '
+      str: 'itemId'
+      str: 'title'
+      str: 'artistName'
+      str: 'subtitle'
+      str: 'artistId'
+      str: 'albumName'
+      str: 'albumId'
+      str: 'imageUrl'
+      str: 'wiimu_search://'
+      str: 'duration'
+      str: 'isExplicit'
+
+  def LPTidalPlayController._trackItemsFromModel(self, model)  line 1001
+    names: _itemsFromModel
+      str: '\n        从模型中取出曲目条目。\n\n        :param model: 列表模型。\n        :return: 曲目字典列表。\n        '
+      str: 'LPTidalPlayController._trackItemsFromModel.<locals>.<listcomp>'
+
+    def LPTidalPlayController._trackItemsFromModel.<listcomp>(.0)  line 1009
+
+  def LPTidalPlayController._itemsFromModel(self, model)  line 1015
+    names: isinstance, LPTidalListModel, hasattr, getattr, callable, range, int, itemAt, dict, append
+      str: '\n        从列表模型读取所有条目。\n\n        :param model: 列表模型。\n        :return: 条目字典列表。\n        '
+      str: 'itemAt'
+      str: 'count'
+
+  def LPTidalPlayController._trackIndexById(self, items, itemId)  line 1033
+    names: str, strip, enumerate, get
+      str: '\n        返回曲目在曲目列表中的索引。\n\n        :param items: 曲目字典列表。\n        :param itemId: 曲目 ID。\n        :return: 0-based 索引，找不到返回 -1。\n        '
+      str: 'itemId'
+
+  def LPTidalPlayController._itemFromModelById(self, model, itemId)  line 1047
+    names: str, strip, _trackItemsFromModel, get, dict
+      str: '\n        返回模型中指定 ID 的条目副本。\n\n        :param model: 列表模型。\n        :param itemId: 条目 ID。\n        :return: 条目字典副本，找不到返回 None。\n        '
+      str: 'itemId'
+
+  def LPTidalPlayController._firstPlayableTrack(self, model)  line 1063
+    names: _trackItemsFromModel, enumerate, _isPlayableTidalTrack
+      str: '\n        返回模型中第一首可播放曲目。\n\n        :param model: 曲目模型。\n        :return: `(0-based 行号, 曲目字典)`，找不到返回 `(-1, None)`。\n        '
+
+  def LPTidalPlayController._randomPlayableTrack(self, model)  line 1076
+    names: enumerate, _trackItemsFromModel, random, choice
+      str: '\n        返回模型中随机一首可播放曲目。\n\n        :param model: 曲目模型。\n        :return: `(0-based 行号, 曲目字典)`，找不到返回 `(-1, None)`。\n        '
+      str: 'LPTidalPlayController._randomPlayableTrack.<locals>.<listcomp>'
+
+    def LPTidalPlayController._randomPlayableTrack.<listcomp>(.0)  line 1083
+      names: _isPlayableTidalTrack
+
+  def LPTidalPlayController._isPlayableTidalTrack(self, item)  line 1092
+    names: isinstance, dict, get, bool
+      str: '\n        判断归一化曲目是否可播放。\n\n        :param item: 曲目字典。\n        :return: 可播放返回 True。\n        '
+      str: 'extra'
+      str: 'allowStreaming'
+      str: 'streamable'
+
+  def LPTidalPlayController._modelContainsItem(self, model, itemId)  line 1107
+    names: hasattr, int, findIndexById
+      str: '\n        判断模型中是否包含指定条目。\n\n        :param model: 列表模型。\n        :param itemId: 条目 ID。\n        :return: 包含返回 True。\n        '
+      str: 'findIndexById'
+
+  def LPTidalPlayController._homeSectionForTrack(self, state, sectionKey, itemId)  line 1119
+    names: getattr, str, strip, append, hasattr, extend, sectionKeys, itemsModelForSection, _modelContainsItem, itemAt, findIndexById, isinstance, dict, get, lower, sectionForKey
+      str: '\n        定位首页曲目所在区块。\n\n        :param state: 首页状态。\n        :param sectionKey: 优先使用的区块。\n        :param itemId: 曲目 ID。\n        :return: `(sectionKey, section, model)`。\n        '
+      str: 'sectionData'
+      str: 'sectionKeys'
+      str: 'LPTidalPlayController._homeSectionForTrack.<locals>.<listcomp>'
+      str: 'itemsModelForSection'
+      str: 'itemType'
+      str: 'track'
+      str: 'sectionForKey'
+
+    def LPTidalPlayController._homeSectionForTrack.<listcomp>(.0)  line 1136
+
+  def LPTidalPlayController._searchUrlForHomeSection(self, sectionKey)  line 1148
+    names: str, strip, startswith, endswith, len, _buildTidalSearchUrl, _tidalCountryCode, get
+      str: '\n        根据首页区块生成 SearchUrl。\n\n        :param sectionKey: 首页区块标识。\n        :return: 完整 SearchUrl。\n        '
+      str: 'featured-'
+      str: '-tracks'
+      str: '/v1/featured/'
+      str: '/tracks'
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'rising-new-tracks'
+      str: '/v1/rising/new/tracks'
+
+  def LPTidalPlayController._searchUrlForDescriptor(self, descriptor, order, direction)  line 1174
+    names: _tidalCountryCode, sourceKind, supportsSort, str, defaultOrder, strip, upper, defaultOrderDirection, _buildTidalSearchUrl, endpointPath
+      str: '\n        根据 See All 描述生成 SearchUrl。\n\n        :param descriptor: See All 描述。\n        :param order: 当前排序字段。\n        :param direction: 当前排序方向。\n        :return: 完整 SearchUrl。\n        '
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'page_module'
+      str: 'PHONE'
+      str: 'deviceType'
+      str: 'NAME'
+      str: 'order'
+      str: 'ASC'
+      str: 'orderDirection'
+
+  def LPTidalPlayController._detailSearchSpec(self)  line 1195
+    names: str, getattr, strip, lower, _detailSearchSpecForItem, _tidalCountryCode, _buildTidalSearchUrl
+      str: '\n        返回当前详情页播放使用的 SearchUrl 和 StreamType。\n\n        :param: 无。\n        :return: `(SearchUrl, StreamType)`，不支持时返回 None。\n        '
+      str: '_item_id'
+      str: '_item_type'
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'artist'
+      str: '/v1/artists/'
+      str: '/toptracks'
+      str: 'artist_radio'
+      str: '/radio'
+      str: 'playlist'
+      str: 'mix'
+      str: 'PHONE'
+      str: 'deviceType'
+      str: '/v1/mixes/'
+      str: '/items'
+      str: 'genre'
+      str: '/v1/genres/'
+      str: '/tracks'
+      str: 'collection'
+
+  def LPTidalPlayController._detailSearchSpecForItem(self, itemType, itemId)  line 1221
+    names: str, strip, lower, _tidalCountryCode, _buildTidalSearchUrl, update
+      str: '\n        返回指定详情条目的播放 SearchUrl 和 StreamType。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: `(SearchUrl, StreamType)`，不支持时返回 None。\n        '
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'album'
+      str: '/v1/albums/'
+      str: '/tracks'
+      str: 'playlist'
+      str: 'INDEX'
+      str: 'ASC'
+      str: 'order'
+      str: 'orderDirection'
+      str: '/v1/playlists/'
+      str: '/items'
+      str: 'mix'
+      str: 'deviceType'
+      str: 'PHONE'
+      str: '/v1/mixes/'
+
+  def LPTidalPlayController._buildTidalSearchUrl(self, endpointPath, params)  line 1244
+    names: str, strip, startswith, _tidal_api_base_url, urlsplit, dict, parse_qsl, query, items, urlunsplit, scheme, netloc, path, urlencode, fragment
+      str: '\n        构建 TIDAL 队列 SearchUrl。\n\n        :param endpointPath: TIDAL API 路径或完整 URL。\n        :param params: 查询参数。\n        :return: 完整 URL。\n        '
+      str: 'http://'
+      str: 'https://'
+      str: '/'
+      str: 'keep_blank_values'
+
+  def LPTidalPlayController._headerTypeForStreamType(self, streamType)  line 1267
+    names: str, strip, lower, LPHeaderType, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_ARTIST, LP_HEADER_TYPE_STATION, LP_HEADER_TYPE_SONG, LP_HEADER_TYPE_PLAYLIST, LP_HEADER_TYPE_COLLECTION
+      str: '\n        将 StreamType 转为 LPHeaderType。\n\n        :param streamType: StreamType 字符串。\n        :return: LPHeaderType 枚举。\n        '
+      str: 'album'
+      str: 'artist'
+      str: 'station'
+      str: 'song'
+      str: 'playlist'
+
+  def LPTidalPlayController._durationSeconds(self, value)  line 1287
+    names: isinstance, int, float, str, strip, isdigit, split, all
+      str: '\n        将时长字段转为整数秒。\n\n        :param value: 原始时长。\n        :return: 秒数。\n        '
+      str: ':'
+      str: 'LPTidalPlayController._durationSeconds.<locals>.<genexpr>'
+
+    def LPTidalPlayController._durationSeconds.<genexpr>(.0)  line 1302
+      names: isdigit
+
+  def LPTidalPlayController._tidalPlaybackAccount(self)  line 1309
+    names: _tidalAccountFromCurrentDevice, isinstance, LPTidalAccount, _tidalStore, accountState, str, get, userId, userName, token, sessionId, countryCode
+      str: '\n        返回用于生成 XML 的 TIDAL 账号。\n\n        :param: 无。\n        :return: TIDAL 账号对象。\n        '
+      str: 'userId'
+      str: 'userName'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+
+  def LPTidalPlayController._tidalAccountFromCurrentDevice(self)  line 1328
+    names: getattr, LPGlobalUI, hasattr, accountForSource, _source
+      str: '\n        从当前设备读取 TIDAL 账号。\n\n        :param: 无。\n        :return: 账号对象或 None。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'accountForSource'
+
+  def LPTidalPlayController._tidalUserId(self)  line 1341
+    names: _tidalAccountFromCurrentDevice, str, getattr, strip, _tidalStore, accountState, get
+      str: '\n        返回当前 TIDAL 用户 ID。\n\n        :param: 无。\n        :return: 用户 ID。\n        '
+      str: 'userId'
+
+  def LPTidalPlayController._tidalCountryCode(self)  line 1353
+    names: _tidalAccountFromCurrentDevice, str, getattr, strip, _tidalStore, accountState, get
+      str: '\n        返回当前 TIDAL 国家代码。\n\n        :param: 无。\n        :return: 国家代码，缺省 `US`。\n        '
+      str: 'countryCode'
+      str: 'US'
+
+  def LPTidalPlayController._syncTidalPlayingInfoFromCurrentDevice(self)  line 1366
+    names: _syncPlayingInfoFromDevice, getattr, LPGlobalUI
+      str: '\n        从当前设备同步 TIDAL 播放态。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'currentDevice'
+
+  def LPTidalPlayController._syncPlayingInfoFromDevice(self, device)  line 1375
+    names: _tidalStore, getattr, _source, setPlayingInfo
+      str: '\n        从指定设备同步 TIDAL 播放态。\n\n        :param device: 设备对象。\n        :return: None。\n        '
+      str: 'mediaInfo'
+      str: 'trackSource'
+      str: 'trackId'
+      str: 'playState'
+
+  def LPTidalPlayController._tidalStore(self)  line 1389
+    names: getattr, isinstance, LPTidalStore, instance
+      str: '\n        返回当前控制器持有的 Store 或全局 Store。\n\n        :param: 无。\n        :return: TIDAL Store。\n        '
+      str: '_store'
+
+  def LPTidalPlayController._getUpnpModel(self)  line 1399
+    names: _upnp_model, LPUpnpAsyncDataModel
+      str: '\n        返回 UPnP 异步数据模型。\n\n        :param: 无。\n        :return: LPUpnpAsyncDataModel 实例。\n        '
+
+  def LPTidalPlayController._showToast(self, text)  line 1410
+    names: getattr, LPGlobalUI, hasattr, showToast, str
+      str: '\n        显示提示文案。\n\n        :param text: 提示文案。\n        :return: None。\n        '
+      str: 'toast'
+      str: 'mainWindow'
+      str: 'showToast'

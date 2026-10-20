@@ -1,0 +1,1535 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nWiiMRadio 播放逻辑 Mixin。\n\n用法：让 WiiMRadio 的各页控制器（Home / SeeAll / CategoryDetail）继承此类，\n即可直接调用 playStation(stationItem) 触发电台播放，无需重复实现 XML 构建与\nUPnP 指令发送逻辑。\n\nstationItem 格式（由 LPWiiMRadioDataProvider 归一化后的字典）：\n    {\n        "stationId": str,   # 电台唯一 ID\n        "name":      str,   # 电台名称\n        "favicon":   str,   # 封面图地址\n        "streamUrl": str,   # 音频流地址\n    }\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 18           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Path',))
+              8 IMPORT_NAME              1 (pathlib)
+             10 IMPORT_FROM              2 (Path)
+             12 STORE_NAME               2 (Path)
+             14 POP_TOP
+
+ 19          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('Any', 'Dict', 'Optional', 'Tuple'))
+             20 IMPORT_NAME              3 (typing)
+             22 IMPORT_FROM              4 (Any)
+             24 STORE_NAME               4 (Any)
+             26 IMPORT_FROM              5 (Dict)
+             28 STORE_NAME               5 (Dict)
+             30 IMPORT_FROM              6 (Optional)
+             32 STORE_NAME               6 (Optional)
+             34 IMPORT_FROM              7 (Tuple)
+             36 STORE_NAME               7 (Tuple)
+             38 POP_TOP
+
+ 21          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               4 (None)
+             44 IMPORT_NAME              8 (LPGlobalUI)
+             46 STORE_NAME               8 (LPGlobalUI)
+
+ 22          48 LOAD_CONST               1 (0)
+             50 LOAD_CONST               5 (('QCoreApplication', 'Qt', 'QUrl', 'pyqtSlot'))
+             52 IMPORT_NAME              9 (PyQt6.QtCore)
+             54 IMPORT_FROM             10 (QCoreApplication)
+             56 STORE_NAME              10 (QCoreApplication)
+             58 IMPORT_FROM             11 (Qt)
+             60 STORE_NAME              11 (Qt)
+             62 IMPORT_FROM             12 (QUrl)
+             64 STORE_NAME              12 (QUrl)
+             66 IMPORT_FROM             13 (pyqtSlot)
+             68 STORE_NAME              13 (pyqtSlot)
+             70 POP_TOP
+
+ 23          72 LOAD_CONST               1 (0)
+             74 LOAD_CONST               6 (('QQmlContext',))
+             76 IMPORT_NAME             14 (PyQt6.QtQml)
+             78 IMPORT_FROM             15 (QQmlContext)
+             80 STORE_NAME              15 (QQmlContext)
+             82 POP_TOP
+
+ 24          84 LOAD_CONST               1 (0)
+             86 LOAD_CONST               7 (('ItemCard_Subtitle', 'ItemCard_Title', 'Main_Text', 'getFontFamily', 'Small_Title', 'StackWidget_Title', 'Sub_Text', 'Sub_Title'))
+             88 IMPORT_NAME             16 (LPClientFramework.LPConfig.LPFontConfig)
+             90 IMPORT_FROM             17 (ItemCard_Subtitle)
+             92 STORE_NAME              17 (ItemCard_Subtitle)
+             94 IMPORT_FROM             18 (ItemCard_Title)
+             96 STORE_NAME              18 (ItemCard_Title)
+             98 IMPORT_FROM             19 (Main_Text)
+            100 STORE_NAME              19 (Main_Text)
+            102 IMPORT_FROM             20 (getFontFamily)
+            104 STORE_NAME              20 (getFontFamily)
+            106 IMPORT_FROM             21 (Small_Title)
+            108 STORE_NAME              21 (Small_Title)
+            110 IMPORT_FROM             22 (StackWidget_Title)
+            112 STORE_NAME              22 (StackWidget_Title)
+            114 IMPORT_FROM             23 (Sub_Text)
+            116 STORE_NAME              23 (Sub_Text)
+            118 IMPORT_FROM             24 (Sub_Title)
+            120 STORE_NAME              24 (Sub_Title)
+            122 POP_TOP
+
+ 34         124 LOAD_CONST               1 (0)
+            126 LOAD_CONST               8 (('LPUpnpAsyncDataModel',))
+            128 IMPORT_NAME             25 (LPClientFramework.LPDataModel.UpnpDataModel.LPUpnpAsyncDataModel)
+            130 IMPORT_FROM             26 (LPUpnpAsyncDataModel)
+            132 STORE_NAME              26 (LPUpnpAsyncDataModel)
+            134 POP_TOP
+
+ 35         136 LOAD_CONST               1 (0)
+            138 LOAD_CONST               9 (('LPRecentlyManager',))
+            140 IMPORT_NAME             27 (LPClientFramework.LPMusicLibrary)
+            142 IMPORT_FROM             28 (LPRecentlyManager)
+            144 STORE_NAME              28 (LPRecentlyManager)
+            146 POP_TOP
+
+ 36         148 LOAD_CONST               1 (0)
+            150 LOAD_CONST              10 (('LPHeaderType', 'LPPlayListSource'))
+            152 IMPORT_NAME             29 (LPClientFramework.LPPlayList.LPPlayList)
+            154 IMPORT_FROM             30 (LPHeaderType)
+            156 STORE_NAME              30 (LPHeaderType)
+            158 IMPORT_FROM             31 (LPPlayListSource)
+            160 STORE_NAME              31 (LPPlayListSource)
+            162 POP_TOP
+
+ 37         164 LOAD_CONST               1 (0)
+            166 LOAD_CONST              11 (('MEDIATYPE_RADIO',))
+            168 IMPORT_NAME             32 (LPClientFramework.LPPublicDefine)
+            170 IMPORT_FROM             33 (MEDIATYPE_RADIO)
+            172 STORE_NAME              33 (MEDIATYPE_RADIO)
+            174 POP_TOP
+
+ 38         176 LOAD_CONST               1 (0)
+            178 LOAD_CONST              12 (('LPWiiMRadioPlayHeader', 'LPWiiMRadioPlayItem', 'LPWiiMRadioPlayList'))
+            180 IMPORT_NAME             34 (LPClientFramework.LPPlayList.LPWiiMRadioPlayList)
+            182 IMPORT_FROM             35 (LPWiiMRadioPlayHeader)
+            184 STORE_NAME              35 (LPWiiMRadioPlayHeader)
+            186 IMPORT_FROM             36 (LPWiiMRadioPlayItem)
+            188 STORE_NAME              36 (LPWiiMRadioPlayItem)
+            190 IMPORT_FROM             37 (LPWiiMRadioPlayList)
+            192 STORE_NAME              37 (LPWiiMRadioPlayList)
+            194 POP_TOP
+
+ 43         196 LOAD_CONST               1 (0)
+            198 LOAD_CONST              13 (('logger',))
+            200 IMPORT_NAME             38 (LPClientFramework.LPUtility)
+            202 IMPORT_FROM             39 (logger)
+            204 STORE_NAME              39 (logger)
+            206 POP_TOP
+
+ 46         208 LOAD_BUILD_CLASS
+            210 LOAD_CONST              14 (<code object LPWiiMRadioPlayController at 0x000001F3253AE5B0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 46>)
+            212 LOAD_CONST              15 ('LPWiiMRadioPlayController')
+            214 MAKE_FUNCTION            0
+            216 LOAD_CONST              15 ('LPWiiMRadioPlayController')
+            218 CALL_FUNCTION            2
+            220 STORE_NAME              40 (LPWiiMRadioPlayController)
+            222 LOAD_CONST               4 (None)
+            224 RETURN_VALUE
+
+=== LPWiiMRadioPlayController ===
+ 46           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPWiiMRadioPlayController')
+              6 STORE_NAME               2 (__qualname__)
+              8 SETUP_ANNOTATIONS
+
+ 47          10 LOAD_CONST               1 ('\n    WiiMRadio 播放逻辑 Mixin。\n\n    继承此类的控制器需保证在第一次调用 playStation 前已完成 QWidget 初始化，\n    因为 _upnp_model 延迟创建，无需在 __init__ 中手动调用 super().__init__()。\n    ')
+             12 STORE_NAME               3 (__doc__)
+
+ 54          14 LOAD_NAME                4 (LPPlayListSource)
+             16 LOAD_ATTR                5 (WiiMRadio)
+             18 LOAD_ATTR                6 (value)
+             20 STORE_NAME               7 (_source)
+             22 LOAD_NAME                8 (str)
+             24 LOAD_NAME                9 (__annotations__)
+             26 LOAD_CONST               2 ('_source')
+             28 STORE_SUBSCR
+
+ 55          30 LOAD_CONST               3 (None)
+             32 STORE_NAME              10 (_upnp_model)
+             34 LOAD_NAME               11 (Optional)
+             36 LOAD_NAME               12 (LPUpnpAsyncDataModel)
+             38 BINARY_SUBSCR
+             40 LOAD_NAME                9 (__annotations__)
+             42 LOAD_CONST               4 ('_upnp_model')
+             44 STORE_SUBSCR
+
+ 61          46 LOAD_NAME               13 (Dict)
+             48 LOAD_NAME                8 (str)
+             50 LOAD_NAME               14 (Any)
+             52 BUILD_TUPLE              2
+             54 BINARY_SUBSCR
+             56 LOAD_CONST               3 (None)
+             58 LOAD_CONST               5 (('stationItem', 'return'))
+             60 BUILD_CONST_KEY_MAP      2
+             62 LOAD_CONST               6 (<code object playStation at 0x000001F324E695B0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 61>)
+             64 LOAD_CONST               7 ('LPWiiMRadioPlayController.playStation')
+             66 MAKE_FUNCTION            4 (annotations)
+             68 STORE_NAME              15 (playStation)
+
+107          70 LOAD_NAME               13 (Dict)
+             72 LOAD_NAME                8 (str)
+             74 LOAD_NAME               14 (Any)
+             76 BUILD_TUPLE              2
+             78 BINARY_SUBSCR
+             80 LOAD_CONST               3 (None)
+             82 LOAD_CONST               5 (('stationItem', 'return'))
+             84 BUILD_CONST_KEY_MAP      2
+             86 LOAD_CONST               8 (<code object playOrToggleStation at 0x000001F324E69870, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 107>)
+             88 LOAD_CONST               9 ('LPWiiMRadioPlayController.playOrToggleStation')
+             90 MAKE_FUNCTION            4 (annotations)
+             92 STORE_NAME              16 (playOrToggleStation)
+
+137          94 LOAD_NAME               17 (bool)
+             96 LOAD_CONST              10 (('return',))
+             98 BUILD_CONST_KEY_MAP      1
+            100 LOAD_CONST              11 (<code object isCurrentDeviceSupportWiiMRadio at 0x000001F3253CEBE0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 137>)
+            102 LOAD_CONST              12 ('LPWiiMRadioPlayController.isCurrentDeviceSupportWiiMRadio')
+            104 MAKE_FUNCTION            4 (annotations)
+            106 STORE_NAME              18 (isCurrentDeviceSupportWiiMRadio)
+
+151         108 LOAD_CONST               3 (None)
+            110 LOAD_CONST              10 (('return',))
+            112 BUILD_CONST_KEY_MAP      1
+            114 LOAD_CONST              13 (<code object showUnsupportedToast at 0x000001F3253CE450, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 151>)
+            116 LOAD_CONST              14 ('LPWiiMRadioPlayController.showUnsupportedToast')
+            118 MAKE_FUNCTION            4 (annotations)
+            120 STORE_NAME              19 (showUnsupportedToast)
+
+164         122 LOAD_NAME               17 (bool)
+            124 LOAD_CONST              10 (('return',))
+            126 BUILD_CONST_KEY_MAP      1
+            128 LOAD_CONST              15 (<code object guardWiiMRadioSupported at 0x000001F3253CE0E0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 164>)
+            130 LOAD_CONST              16 ('LPWiiMRadioPlayController.guardWiiMRadioSupported')
+            132 MAKE_FUNCTION            4 (annotations)
+            134 STORE_NAME              20 (guardWiiMRadioSupported)
+
+178         136 LOAD_NAME               21 (pyqtSlot)
+            138 LOAD_NAME               17 (bool)
+            140 CALL_FUNCTION            1
+
+179         142 LOAD_NAME               17 (bool)
+            144 LOAD_CONST               3 (None)
+            146 LOAD_CONST              17 (('hovered', 'return'))
+            148 BUILD_CONST_KEY_MAP      2
+            150 LOAD_CONST              18 (<code object setCardCursorHovered at 0x000001F3253CED40, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 178>)
+            152 LOAD_CONST              19 ('LPWiiMRadioPlayController.setCardCursorHovered')
+            154 MAKE_FUNCTION            4 (annotations)
+            156 CALL_FUNCTION            1
+            158 STORE_NAME              22 (setCardCursorHovered)
+
+188         160 LOAD_NAME               21 (pyqtSlot)
+            162 LOAD_NAME                8 (str)
+            164 LOAD_NAME               17 (bool)
+            166 LOAD_NAME                8 (str)
+            168 CALL_FUNCTION            3
+
+189         170 LOAD_NAME                8 (str)
+            172 LOAD_NAME               17 (bool)
+            174 LOAD_NAME                8 (str)
+            176 LOAD_CONST               3 (None)
+            178 LOAD_CONST              20 (('sourceKey', 'hovered', 'cursorName', 'return'))
+            180 BUILD_CONST_KEY_MAP      4
+            182 LOAD_CONST              21 (<code object setHoverCursorState at 0x000001F3253CEC90, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 188>)
+            184 LOAD_CONST              22 ('LPWiiMRadioPlayController.setHoverCursorState')
+            186 MAKE_FUNCTION            4 (annotations)
+            188 CALL_FUNCTION            1
+            190 STORE_NAME              23 (setHoverCursorState)
+
+213         192 LOAD_NAME               21 (pyqtSlot)
+            194 LOAD_NAME                8 (str)
+            196 CALL_FUNCTION            1
+
+214         198 LOAD_NAME                8 (str)
+            200 LOAD_CONST               3 (None)
+            202 LOAD_CONST              23 (('cursorName', 'return'))
+            204 BUILD_CONST_KEY_MAP      2
+            206 LOAD_CONST              24 (<code object setHoverCursorShape at 0x000001F3253CE500, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 213>)
+            208 LOAD_CONST              25 ('LPWiiMRadioPlayController.setHoverCursorShape')
+            210 MAKE_FUNCTION            4 (annotations)
+            212 CALL_FUNCTION            1
+            214 STORE_NAME              24 (setHoverCursorShape)
+
+224         216 LOAD_NAME               21 (pyqtSlot)
+            218 CALL_FUNCTION            0
+
+225         220 LOAD_CONST               3 (None)
+            222 LOAD_CONST              10 (('return',))
+            224 BUILD_CONST_KEY_MAP      1
+            226 LOAD_CONST              26 (<code object clearHoverCursorStates at 0x000001F3253CE3A0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 224>)
+            228 LOAD_CONST              27 ('LPWiiMRadioPlayController.clearHoverCursorStates')
+            230 MAKE_FUNCTION            4 (annotations)
+            232 CALL_FUNCTION            1
+            234 STORE_NAME              25 (clearHoverCursorStates)
+
+239         236 LOAD_CONST               3 (None)
+            238 LOAD_CONST              10 (('return',))
+            240 BUILD_CONST_KEY_MAP      1
+            242 LOAD_CONST              28 (<code object _ensureHoverCursorStateStore at 0x000001F3253CEB30, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 239>)
+            244 LOAD_CONST              29 ('LPWiiMRadioPlayController._ensureHoverCursorStateStore')
+            246 MAKE_FUNCTION            4 (annotations)
+            248 STORE_NAME              26 (_ensureHoverCursorStateStore)
+
+250         250 LOAD_NAME                8 (str)
+            252 LOAD_NAME               27 (Qt)
+            254 LOAD_ATTR               28 (CursorShape)
+            256 LOAD_CONST              23 (('cursorName', 'return'))
+            258 BUILD_CONST_KEY_MAP      2
+            260 LOAD_CONST              30 (<code object _normalizeCursorShape at 0x000001F3253CE920, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 250>)
+            262 LOAD_CONST              31 ('LPWiiMRadioPlayController._normalizeCursorShape')
+            264 MAKE_FUNCTION            4 (annotations)
+            266 STORE_NAME              29 (_normalizeCursorShape)
+
+274         268 LOAD_CONST               3 (None)
+            270 LOAD_CONST              10 (('return',))
+            272 BUILD_CONST_KEY_MAP      1
+            274 LOAD_CONST              32 (<code object _syncQuickCursorFromHoverStates at 0x000001F3253CE7C0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 274>)
+            276 LOAD_CONST              33 ('LPWiiMRadioPlayController._syncQuickCursorFromHoverStates')
+            278 MAKE_FUNCTION            4 (annotations)
+            280 STORE_NAME              30 (_syncQuickCursorFromHoverStates)
+
+287         282 LOAD_NAME               27 (Qt)
+            284 LOAD_ATTR               28 (CursorShape)
+            286 LOAD_CONST               3 (None)
+            288 LOAD_CONST              34 (('cursorShape', 'return'))
+            290 BUILD_CONST_KEY_MAP      2
+            292 LOAD_CONST              35 (<code object _setQuickCursorShape at 0x000001F3253CEEA0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 287>)
+            294 LOAD_CONST              36 ('LPWiiMRadioPlayController._setQuickCursorShape')
+            296 MAKE_FUNCTION            4 (annotations)
+            298 STORE_NAME              31 (_setQuickCursorShape)
+
+301         300 LOAD_NAME               32 (QQmlContext)
+            302 LOAD_CONST               3 (None)
+            304 LOAD_CONST              37 (('ctx', 'return'))
+            306 BUILD_CONST_KEY_MAP      2
+            308 LOAD_CONST              38 (<code object _applySharedQmlContext at 0x000001F3253CE870, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 301>)
+            310 LOAD_CONST              39 ('LPWiiMRadioPlayController._applySharedQmlContext')
+            312 MAKE_FUNCTION            4 (annotations)
+            314 STORE_NAME              33 (_applySharedQmlContext)
+
+323         316 LOAD_NAME               32 (QQmlContext)
+            318 LOAD_CONST               3 (None)
+            320 LOAD_CONST              37 (('ctx', 'return'))
+            322 BUILD_CONST_KEY_MAP      2
+            324 LOAD_CONST              40 (<code object _clearSharedQmlContext at 0x000001F3253CE710, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 323>)
+            326 LOAD_CONST              41 ('LPWiiMRadioPlayController._clearSharedQmlContext')
+            328 MAKE_FUNCTION            4 (annotations)
+            330 STORE_NAME              34 (_clearSharedQmlContext)
+
+345         332 LOAD_NAME                8 (str)
+            334 LOAD_NAME                8 (str)
+            336 LOAD_NAME               35 (QUrl)
+            338 LOAD_CONST              42 (('qrcPath', 'fileName', 'return'))
+            340 BUILD_CONST_KEY_MAP      3
+            342 LOAD_CONST              43 (<code object _resolveWiiMRadioQmlUrl at 0x000001F3253CE2F0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 345>)
+            344 LOAD_CONST              44 ('LPWiiMRadioPlayController._resolveWiiMRadioQmlUrl')
+            346 MAKE_FUNCTION            4 (annotations)
+            348 STORE_NAME              36 (_resolveWiiMRadioQmlUrl)
+
+360         350 LOAD_NAME               12 (LPUpnpAsyncDataModel)
+            352 LOAD_CONST              10 (('return',))
+            354 BUILD_CONST_KEY_MAP      1
+            356 LOAD_CONST              45 (<code object _get_upnp_model at 0x000001F3253CEDF0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 360>)
+            358 LOAD_CONST              46 ('LPWiiMRadioPlayController._get_upnp_model')
+            360 MAKE_FUNCTION            4 (annotations)
+            362 STORE_NAME              37 (_get_upnp_model)
+
+370         364 LOAD_CONST               3 (None)
+            366 LOAD_CONST              10 (('return',))
+            368 BUILD_CONST_KEY_MAP      1
+            370 LOAD_CONST              47 (<code object _syncPlayingInfoFromCurrentDevice at 0x000001F3253CE5B0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 370>)
+            372 LOAD_CONST              48 ('LPWiiMRadioPlayController._syncPlayingInfoFromCurrentDevice')
+            374 MAKE_FUNCTION            4 (annotations)
+            376 STORE_NAME              38 (_syncPlayingInfoFromCurrentDevice)
+
+381         378 LOAD_NAME               11 (Optional)
+            380 LOAD_NAME               14 (Any)
+            382 BINARY_SUBSCR
+            384 LOAD_CONST               3 (None)
+            386 LOAD_CONST              49 (('device', 'return'))
+            388 BUILD_CONST_KEY_MAP      2
+            390 LOAD_CONST              50 (<code object _syncPlayingInfoFromDevice at 0x000001F3253CE240, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 381>)
+            392 LOAD_CONST              51 ('LPWiiMRadioPlayController._syncPlayingInfoFromDevice')
+            394 MAKE_FUNCTION            4 (annotations)
+            396 STORE_NAME              39 (_syncPlayingInfoFromDevice)
+
+399         398 LOAD_NAME               14 (Any)
+            400 LOAD_NAME                8 (str)
+            402 LOAD_NAME               17 (bool)
+            404 LOAD_CONST              52 (('device', 'stationId', 'return'))
+            406 BUILD_CONST_KEY_MAP      3
+            408 LOAD_CONST              53 (<code object _isCurrentStationPlayingSource at 0x000001F3253CE9D0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 399>)
+            410 LOAD_CONST              54 ('LPWiiMRadioPlayController._isCurrentStationPlayingSource')
+            412 MAKE_FUNCTION            4 (annotations)
+            414 STORE_NAME              40 (_isCurrentStationPlayingSource)
+
+414         416 LOAD_NAME               14 (Any)
+            418 LOAD_NAME                8 (str)
+            420 LOAD_NAME                8 (str)
+            422 LOAD_NAME                8 (str)
+            424 LOAD_CONST               3 (None)
+            426 LOAD_CONST              55 (('device', 'stationId', 'playState', 'command', 'return'))
+            428 BUILD_CONST_KEY_MAP      5
+            430 LOAD_CONST              56 (<code object _setCurrentStationPlaybackState at 0x000001F3253CE660, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 414>)
+            432 LOAD_CONST              57 ('LPWiiMRadioPlayController._setCurrentStationPlaybackState')
+            434 MAKE_FUNCTION            4 (annotations)
+            436 STORE_NAME              41 (_setCurrentStationPlaybackState)
+
+428         438 LOAD_NAME               13 (Dict)
+            440 LOAD_NAME                8 (str)
+            442 LOAD_NAME               14 (Any)
+            444 BUILD_TUPLE              2
+            446 BINARY_SUBSCR
+            448 LOAD_NAME               42 (LPWiiMRadioPlayList)
+            450 LOAD_CONST               5 (('stationItem', 'return'))
+            452 BUILD_CONST_KEY_MAP      2
+            454 LOAD_CONST              58 (<code object _build_playlist at 0x000001F3253AE870, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 428>)
+            456 LOAD_CONST              59 ('LPWiiMRadioPlayController._build_playlist')
+            458 MAKE_FUNCTION            4 (annotations)
+            460 STORE_NAME              43 (_build_playlist)
+            462 LOAD_CONST               3 (None)
+            464 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.playStation ===
+ 70           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (guardWiiMRadioSupported)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        12
+
+ 71           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+ 73     >>   12 LOAD_GLOBAL              1 (LPGlobalUI)
+             14 LOAD_ATTR                2 (currentDevice)
+             16 STORE_FAST               2 (device)
+
+ 74          18 LOAD_FAST                2 (device)
+             20 POP_JUMP_IF_TRUE        36
+
+ 75          22 LOAD_GLOBAL              3 (logger)
+             24 LOAD_METHOD              4 (error)
+             26 LOAD_CONST               2 ('[WiiMRadio] playStation failed: no current device')
+             28 CALL_METHOD              1
+             30 POP_TOP
+
+ 76          32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+ 78     >>   36 LOAD_GLOBAL              5 (isinstance)
+             38 LOAD_FAST                1 (stationItem)
+             40 LOAD_GLOBAL              6 (dict)
+             42 CALL_FUNCTION            2
+             44 POP_JUMP_IF_TRUE        60
+
+ 79          46 LOAD_GLOBAL              3 (logger)
+             48 LOAD_METHOD              4 (error)
+             50 LOAD_CONST               3 ('[WiiMRadio] playStation failed: invalid stationItem')
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+ 80          56 LOAD_CONST               1 (None)
+             58 RETURN_VALUE
+
+ 82     >>   60 LOAD_FAST                1 (stationItem)
+             62 LOAD_METHOD              7 (get)
+             64 LOAD_CONST               4 ('name')
+             66 LOAD_CONST               5 ('')
+             68 CALL_METHOD              2
+             70 STORE_DEREF              0 (name)
+
+ 83          72 LOAD_FAST                1 (stationItem)
+             74 LOAD_METHOD              7 (get)
+             76 LOAD_CONST               6 ('streamUrl')
+             78 LOAD_CONST               5 ('')
+             80 CALL_METHOD              2
+             82 STORE_FAST               3 (stream_url)
+
+ 84          84 LOAD_FAST                3 (stream_url)
+             86 POP_JUMP_IF_TRUE       104
+
+ 85          88 LOAD_GLOBAL              3 (logger)
+             90 LOAD_METHOD              8 (warning)
+             92 LOAD_CONST               7 ('[WiiMRadio] playStation: missing streamUrl, station=')
+             94 LOAD_DEREF               0 (name)
+             96 FORMAT_VALUE             0
+             98 BUILD_STRING             2
+            100 CALL_METHOD              1
+            102 POP_TOP
+
+ 87     >>  104 LOAD_FAST                0 (self)
+            106 LOAD_METHOD              9 (_build_playlist)
+            108 LOAD_FAST                1 (stationItem)
+            110 CALL_METHOD              1
+            112 STORE_DEREF              1 (playlist)
+
+ 88         114 LOAD_DEREF               1 (playlist)
+            116 LOAD_METHOD             10 (generateXML)
+            118 CALL_METHOD              0
+            120 STORE_FAST               4 (xml)
+
+ 89         122 LOAD_DEREF               1 (playlist)
+            124 LOAD_ATTR               11 (list)
+            126 LOAD_CONST               8 (0)
+            128 BINARY_SUBSCR
+            130 STORE_FAST               5 (play_item)
+
+ 92         132 LOAD_FAST                2 (device)
+            134 LOAD_ATTR               12 (deviceStreamServiceManager)
+            136 LOAD_METHOD             13 (updateMediaInfoForSource)
+            138 LOAD_FAST                2 (device)
+            140 LOAD_FAST                0 (self)
+            142 LOAD_ATTR               14 (_source)
+            144 LOAD_FAST                5 (play_item)
+            146 LOAD_DEREF               1 (playlist)
+            148 LOAD_ATTR               15 (header)
+            150 CALL_METHOD              4
+            152 POP_TOP
+
+ 93         154 LOAD_FAST                2 (device)
+            156 LOAD_METHOD             16 (guardMediaInfoRollback)
+            158 CALL_METHOD              0
+            160 POP_TOP
+
+ 95         162 LOAD_CLOSURE             0 (name)
+            164 LOAD_CLOSURE             1 (playlist)
+            166 BUILD_TUPLE              2
+            168 LOAD_CONST               9 (<code object _on_play_result at 0x000001F324E690E0, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 95>)
+            170 LOAD_CONST              10 ('LPWiiMRadioPlayController.playStation.<locals>._on_play_result')
+            172 MAKE_FUNCTION            8 (closure)
+            174 STORE_FAST               6 (_on_play_result)
+
+105         176 LOAD_FAST                0 (self)
+            178 LOAD_METHOD             17 (_get_upnp_model)
+            180 CALL_METHOD              0
+            182 LOAD_METHOD             18 (palyWithSearchUrl)
+            184 LOAD_FAST                2 (device)
+            186 LOAD_FAST                4 (xml)
+            188 LOAD_FAST                6 (_on_play_result)
+            190 CALL_METHOD              3
+            192 POP_TOP
+            194 LOAD_CONST               1 (None)
+            196 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.playStation._on_play_result ===
+ 96           0 LOAD_FAST                0 (response)
+              2 POP_JUMP_IF_FALSE       44
+
+ 97           4 LOAD_GLOBAL              0 (logger)
+              6 LOAD_METHOD              1 (debug)
+              8 LOAD_CONST               1 ('[WiiMRadio] play success: ')
+             10 LOAD_DEREF               0 (name)
+             12 FORMAT_VALUE             0
+             14 BUILD_STRING             2
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+ 98          20 LOAD_GLOBAL              2 (LPRecentlyManager)
+             22 LOAD_METHOD              3 (instance)
+             24 CALL_METHOD              0
+             26 LOAD_METHOD              4 (addRecentlyPlayedWithMusicList)
+             28 LOAD_DEREF               1 (playlist)
+
+ 99          30 LOAD_CONST               2 (True)
+
+100          32 LOAD_CONST               3 (False)
+
+ 98          34 LOAD_CONST               4 (('openMore', 'canNavigate'))
+             36 BUILD_CONST_KEY_MAP      2
+             38 CALL_METHOD              2
+             40 POP_TOP
+             42 JUMP_FORWARD            16 (to 60)
+
+103     >>   44 LOAD_GLOBAL              0 (logger)
+             46 LOAD_METHOD              1 (debug)
+             48 LOAD_CONST               5 ('[WiiMRadio] play failed: ')
+             50 LOAD_DEREF               0 (name)
+             52 FORMAT_VALUE             0
+             54 BUILD_STRING             2
+             56 CALL_METHOD              1
+             58 POP_TOP
+        >>   60 LOAD_CONST               0 (None)
+             62 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.playOrToggleStation ===
+117           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (guardWiiMRadioSupported)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        12
+
+118           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+120     >>   12 LOAD_GLOBAL              1 (isinstance)
+             14 LOAD_FAST                1 (stationItem)
+             16 LOAD_GLOBAL              2 (dict)
+             18 CALL_FUNCTION            2
+             20 POP_JUMP_IF_TRUE        36
+
+121          22 LOAD_GLOBAL              3 (logger)
+             24 LOAD_METHOD              4 (error)
+             26 LOAD_CONST               2 ('[WiiMRadio] playOrToggleStation failed: invalid stationItem')
+             28 CALL_METHOD              1
+             30 POP_TOP
+
+122          32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+124     >>   36 LOAD_GLOBAL              5 (str)
+             38 LOAD_FAST                1 (stationItem)
+             40 LOAD_METHOD              6 (get)
+             42 LOAD_CONST               3 ('stationId')
+             44 LOAD_CONST               4 ('')
+             46 CALL_METHOD              2
+             48 JUMP_IF_TRUE_OR_POP     52
+             50 LOAD_CONST               4 ('')
+        >>   52 CALL_FUNCTION            1
+             54 LOAD_METHOD              7 (strip)
+             56 CALL_METHOD              0
+             58 STORE_FAST               2 (station_id)
+
+125          60 LOAD_GLOBAL              8 (LPGlobalUI)
+             62 LOAD_ATTR                9 (currentDevice)
+             64 STORE_FAST               3 (device)
+
+126          66 LOAD_FAST                3 (device)
+             68 POP_JUMP_IF_FALSE      164
+             70 LOAD_FAST                0 (self)
+             72 LOAD_METHOD             10 (_isCurrentStationPlayingSource)
+             74 LOAD_FAST                3 (device)
+             76 LOAD_FAST                2 (station_id)
+             78 CALL_METHOD              2
+             80 POP_JUMP_IF_FALSE      164
+
+127          82 LOAD_GLOBAL              5 (str)
+             84 LOAD_GLOBAL             11 (getattr)
+             86 LOAD_FAST                3 (device)
+             88 LOAD_ATTR               12 (mediaInfo)
+             90 LOAD_CONST               5 ('playState')
+             92 LOAD_CONST               4 ('')
+             94 CALL_FUNCTION            3
+             96 JUMP_IF_TRUE_OR_POP    100
+             98 LOAD_CONST               4 ('')
+        >>  100 CALL_FUNCTION            1
+            102 STORE_FAST               4 (play_state)
+
+128         104 LOAD_FAST                4 (play_state)
+            106 LOAD_CONST               6 ('PLAYING')
+            108 COMPARE_OP               2 (==)
+            110 POP_JUMP_IF_FALSE      132
+
+129         112 LOAD_FAST                0 (self)
+            114 LOAD_METHOD             13 (_setCurrentStationPlaybackState)
+            116 LOAD_FAST                3 (device)
+            118 LOAD_FAST                2 (station_id)
+            120 LOAD_CONST               7 ('PAUSED_PLAYBACK')
+            122 LOAD_CONST               8 ('Pause')
+            124 CALL_METHOD              4
+            126 POP_TOP
+
+130         128 LOAD_CONST               1 (None)
+            130 RETURN_VALUE
+
+131     >>  132 LOAD_FAST                4 (play_state)
+            134 POP_JUMP_IF_FALSE      164
+            136 LOAD_FAST                4 (play_state)
+            138 LOAD_CONST               9 ('TRANSITIONING')
+            140 COMPARE_OP               3 (!=)
+            142 POP_JUMP_IF_FALSE      164
+
+132         144 LOAD_FAST                0 (self)
+            146 LOAD_METHOD             13 (_setCurrentStationPlaybackState)
+            148 LOAD_FAST                3 (device)
+            150 LOAD_FAST                2 (station_id)
+            152 LOAD_CONST               6 ('PLAYING')
+            154 LOAD_CONST              10 ('Play')
+            156 CALL_METHOD              4
+            158 POP_TOP
+
+133         160 LOAD_CONST               1 (None)
+            162 RETURN_VALUE
+
+135     >>  164 LOAD_FAST                0 (self)
+            166 LOAD_METHOD             14 (playStation)
+            168 LOAD_FAST                1 (stationItem)
+            170 CALL_METHOD              1
+            172 POP_TOP
+            174 LOAD_CONST               1 (None)
+            176 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.isCurrentDeviceSupportWiiMRadio ===
+144           0 LOAD_GLOBAL              0 (LPGlobalUI)
+              2 LOAD_ATTR                1 (currentDevice)
+              4 STORE_FAST               1 (device)
+
+145           6 LOAD_FAST                1 (device)
+              8 POP_JUMP_IF_TRUE        14
+
+146          10 LOAD_CONST               1 (False)
+             12 RETURN_VALUE
+
+148     >>   14 LOAD_FAST                1 (device)
+             16 LOAD_ATTR                2 (deviceStreamServiceManager)
+             18 LOAD_ATTR                3 (streamServiceCapability)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 BUILD_MAP                0
+        >>   24 STORE_FAST               2 (capability)
+
+149          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                4 (_source)
+             30 LOAD_FAST                2 (capability)
+             32 LOAD_METHOD              5 (keys)
+             34 CALL_METHOD              0
+             36 CONTAINS_OP              0
+             38 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.showUnsupportedToast ===
+158           0 LOAD_GLOBAL              0 (QCoreApplication)
+              2 LOAD_METHOD              1 (translate)
+
+159           4 LOAD_CONST               1 ('WiiMRadio')
+
+160           6 LOAD_CONST               2 ("Current device doesn't support WiiM Radio. \nPlease upgrade the firmware to get support.")
+
+158           8 CALL_METHOD              2
+             10 STORE_FAST               1 (text)
+
+162          12 LOAD_GLOBAL              2 (LPGlobalUI)
+             14 LOAD_ATTR                3 (toast)
+             16 LOAD_METHOD              4 (showToast)
+             18 LOAD_FAST                1 (text)
+             20 LOAD_GLOBAL              2 (LPGlobalUI)
+             22 LOAD_ATTR                5 (mainWindow)
+             24 CALL_METHOD              2
+             26 POP_TOP
+             28 LOAD_CONST               3 (None)
+             30 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.guardWiiMRadioSupported ===
+171           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (isCurrentDeviceSupportWiiMRadio)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_FALSE       12
+
+172           8 LOAD_CONST               1 (True)
+             10 RETURN_VALUE
+
+174     >>   12 LOAD_GLOBAL              1 (logger)
+             14 LOAD_METHOD              2 (debug)
+             16 LOAD_CONST               2 ("[WiiMRadio] current device doesn't support WiiMRadio")
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+175          22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              3 (showUnsupportedToast)
+             26 CALL_METHOD              0
+             28 POP_TOP
+
+176          30 LOAD_CONST               3 (False)
+             32 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.setCardCursorHovered ===
+186           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (setHoverCursorState)
+              4 LOAD_CONST               1 ('card')
+              6 LOAD_FAST                1 (hovered)
+              8 LOAD_CONST               2 ('pointinghand')
+             10 CALL_METHOD              3
+             12 POP_TOP
+             14 LOAD_CONST               3 (None)
+             16 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.setHoverCursorState ===
+198           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (sourceKey)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               4 (source_key)
+
+199          20 LOAD_FAST                4 (source_key)
+             22 POP_JUMP_IF_TRUE        28
+
+200          24 LOAD_CONST               2 (None)
+             26 RETURN_VALUE
+
+202     >>   28 LOAD_FAST                0 (self)
+             30 LOAD_METHOD              3 (_ensureHoverCursorStateStore)
+             32 CALL_METHOD              0
+             34 POP_TOP
+
+203          36 LOAD_FAST                2 (hovered)
+             38 POP_JUMP_IF_FALSE       78
+
+204          40 LOAD_FAST                0 (self)
+             42 DUP_TOP
+             44 LOAD_ATTR                4 (_hover_cursor_state_seq)
+             46 LOAD_CONST               3 (1)
+             48 INPLACE_ADD
+             50 ROT_TWO
+             52 STORE_ATTR               4 (_hover_cursor_state_seq)
+
+206          54 LOAD_FAST                0 (self)
+             56 LOAD_METHOD              5 (_normalizeCursorShape)
+             58 LOAD_FAST                3 (cursorName)
+             60 CALL_METHOD              1
+
+207          62 LOAD_FAST                0 (self)
+             64 LOAD_ATTR                4 (_hover_cursor_state_seq)
+
+205          66 BUILD_TUPLE              2
+             68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                6 (_hover_cursor_states)
+             72 LOAD_FAST                4 (source_key)
+             74 STORE_SUBSCR
+             76 JUMP_FORWARD            14 (to 92)
+
+210     >>   78 LOAD_FAST                0 (self)
+             80 LOAD_ATTR                6 (_hover_cursor_states)
+             82 LOAD_METHOD              7 (pop)
+             84 LOAD_FAST                4 (source_key)
+             86 LOAD_CONST               2 (None)
+             88 CALL_METHOD              2
+             90 POP_TOP
+
+211     >>   92 LOAD_FAST                0 (self)
+             94 LOAD_METHOD              8 (_syncQuickCursorFromHoverStates)
+             96 CALL_METHOD              0
+             98 POP_TOP
+            100 LOAD_CONST               2 (None)
+            102 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.setHoverCursorShape ===
+221           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (cursorName)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               2 (cursor_name)
+
+222          20 LOAD_FAST                0 (self)
+             22 LOAD_METHOD              3 (setHoverCursorState)
+             24 LOAD_CONST               2 ('__legacy__')
+             26 LOAD_FAST                2 (cursor_name)
+             28 LOAD_CONST               3 (('', 'arrow', 'default'))
+             30 CONTAINS_OP              1
+             32 LOAD_FAST                2 (cursor_name)
+             34 CALL_METHOD              3
+             36 POP_TOP
+             38 LOAD_CONST               4 (None)
+             40 RETURN_VALUE
+
+=== LPWiiMRadioPlayController.clearHoverCursorStates ===
+231           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_ensureHoverCursorStateStore)
+              4 CALL_METHOD              0
+              6 POP_TOP
+
+232           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_hover_cursor_states)
+             12 LOAD_METHOD              2 (clear)
+             14 CALL_METHOD              0
+             16 POP_TOP
+
+233          18 LOAD_FAST                0 (self)
+             20 LOAD_METHOD              3 (_setQuickCursorShape)
+             22 LOAD_GLOBAL              4 (Qt)
+             24 LOAD_ATTR                5 (CursorShape)
+             26 LOAD_ATTR                6 (ArrowCursor)
+             28 CALL_METHOD              1
+             30 POP_TOP
+             32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._ensureHoverCursorStateStore ===
+245           0 LOAD_GLOBAL              0 (hasattr)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_CONST               1 ('_hover_cursor_states')
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       24
+             10 LOAD_GLOBAL              0 (hasattr)
+             12 LOAD_FAST                0 (self)
+             14 LOAD_CONST               2 ('_hover_cursor_state_seq')
+             16 CALL_FUNCTION            2
+             18 POP_JUMP_IF_FALSE       24
+
+246          20 LOAD_CONST               3 (None)
+             22 RETURN_VALUE
+
+247     >>   24 BUILD_MAP                0
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               1 (_hover_cursor_states)
+
+248          30 LOAD_CONST               4 (0)
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               2 (_hover_cursor_state_seq)
+             36 LOAD_CONST               3 (None)
+             38 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._normalizeCursorShape ===
+257           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (cursorName)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               2 (cursor_name)
+
+259          20 LOAD_GLOBAL              3 (Qt)
+             22 LOAD_ATTR                4 (CursorShape)
+             24 LOAD_ATTR                5 (ArrowCursor)
+
+260          26 LOAD_GLOBAL              3 (Qt)
+             28 LOAD_ATTR                4 (CursorShape)
+             30 LOAD_ATTR                5 (ArrowCursor)
+
+261          32 LOAD_GLOBAL              3 (Qt)
+             34 LOAD_ATTR                4 (CursorShape)
+             36 LOAD_ATTR                6 (PointingHandCursor)
+
+262          38 LOAD_GLOBAL              3 (Qt)
+             40 LOAD_ATTR                4 (CursorShape)
+             42 LOAD_ATTR                6 (PointingHandCursor)
+
+263          44 LOAD_GLOBAL              3 (Qt)
+             46 LOAD_ATTR                4 (CursorShape)
+             48 LOAD_ATTR                6 (PointingHandCursor)
+
+264          50 LOAD_GLOBAL              3 (Qt)
+             52 LOAD_ATTR                4 (CursorShape)
+             54 LOAD_ATTR                7 (IBeamCursor)
+
+265          56 LOAD_GLOBAL              3 (Qt)
+             58 LOAD_ATTR                4 (CursorShape)
+             60 LOAD_ATTR                7 (IBeamCursor)
+
+266          62 LOAD_GLOBAL              3 (Qt)
+             64 LOAD_ATTR                4 (CursorShape)
+             66 LOAD_ATTR                7 (IBeamCursor)
+
+267          68 LOAD_GLOBAL              3 (Qt)
+             70 LOAD_ATTR                4 (CursorShape)
+             72 LOAD_ATTR                8 (ForbiddenCursor)
+
+268          74 LOAD_GLOBAL              3 (Qt)
+             76 LOAD_ATTR                4 (CursorShape)
+             78 LOAD_ATTR                8 (ForbiddenCursor)
+
+269          80 LOAD_GLOBAL              3 (Qt)
+             82 LOAD_ATTR                4 (CursorShape)
+             84 LOAD_ATTR                8 (ForbiddenCursor)
+
+270          86 LOAD_GLOBAL              3 (Qt)
+             88 LOAD_ATTR                4 (CursorShape)
+             90 LOAD_ATTR                8 (ForbiddenCursor)
+
+258          92 LOAD_CONST               2 (('arrow', 'default', 'pointinghand', 'pointing_hand', 'hand', 'ibeam', 'i_beam', 'text', 'forbidden', 'notallowed', 'not_allowed', 'disabled'))
+             94 BUILD_CONST_KEY_MAP     12
+             96 STORE_FAST               3 (cursor_shape_map)
+
+272          98 LOAD_FAST                3 (cursor_shape_map)
+            100 LOAD_METHOD              9 (get)
+            102 LOAD_FAST                2 (cursor_name)
+            104 LOAD_GLOBAL              3 (Qt)
+            106 LOAD_ATTR                4 (CursorShape)
+            108 LOAD_ATTR                5 (ArrowCursor)
+            110 CALL_METHOD              2
+            112 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._syncQuickCursorFromHoverStates ===
+280           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_ensureHoverCursorStateStore)
+              4 CALL_METHOD              0
+              6 POP_TOP
+
+281           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_hover_cursor_states)
+             12 POP_JUMP_IF_TRUE        32
+
+282          14 LOAD_FAST                0 (self)
+             16 LOAD_METHOD              2 (_setQuickCursorShape)
+             18 LOAD_GLOBAL              3 (Qt)
+             20 LOAD_ATTR                4 (CursorShape)
+             22 LOAD_ATTR                5 (ArrowCursor)
+             24 CALL_METHOD              1
+             26 POP_TOP
+
+283          28 LOAD_CONST               1 (None)
+             30 RETURN_VALUE
+
+284     >>   32 LOAD_GLOBAL              6 (max)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                1 (_hover_cursor_states)
+             38 LOAD_METHOD              7 (values)
+             40 CALL_METHOD              0
+             42 LOAD_CONST               2 (<code object <lambda> at 0x000001F3253CE030, file "StreamService\WiiMRadio\LPWiiMRadioPlayController.py", line 284>)
+             44 LOAD_CONST               3 ('LPWiiMRadioPlayController._syncQuickCursorFromHoverStates.<locals>.<lambda>')
+             46 MAKE_FUNCTION            0
+             48 LOAD_CONST               4 (('key',))
+             50 CALL_FUNCTION_KW         2
+             52 LOAD_CONST               5 (0)
+             54 BINARY_SUBSCR
+             56 STORE_FAST               1 (target_shape)
+
+285          58 LOAD_FAST                0 (self)
+             60 LOAD_METHOD              2 (_setQuickCursorShape)
+             62 LOAD_FAST                1 (target_shape)
+             64 CALL_METHOD              1
+             66 POP_TOP
+             68 LOAD_CONST               1 (None)
+             70 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._syncQuickCursorFromHoverStates.<lambda> ===
+284           0 LOAD_FAST                0 (item)
+              2 LOAD_CONST               1 (1)
+              4 BINARY_SUBSCR
+              6 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._setQuickCursorShape ===
+294           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_CONST               1 ('quickWidget')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               2 (quick)
+
+295          12 LOAD_FAST                2 (quick)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       24
+
+296          20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+297     >>   24 LOAD_FAST                2 (quick)
+             26 LOAD_METHOD              1 (cursor)
+             28 CALL_METHOD              0
+             30 LOAD_METHOD              2 (shape)
+             32 CALL_METHOD              0
+             34 LOAD_FAST                1 (cursorShape)
+             36 COMPARE_OP               2 (==)
+             38 POP_JUMP_IF_FALSE       44
+
+298          40 LOAD_CONST               2 (None)
+             42 RETURN_VALUE
+
+299     >>   44 LOAD_FAST                2 (quick)
+             46 LOAD_METHOD              3 (setCursor)
+             48 LOAD_FAST                1 (cursorShape)
+             50 CALL_METHOD              1
+             52 POP_TOP
+             54 LOAD_CONST               2 (None)
+             56 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._applySharedQmlContext ===
+308           0 LOAD_FAST                1 (ctx)
+              2 LOAD_METHOD              0 (setContextProperty)
+              4 LOAD_CONST               1 ('wiimRadioBgColor')
+              6 LOAD_GLOBAL              1 (LPGlobalUI)
+              8 LOAD_ATTR                2 (THEME_BACKGROUND_COLOR)
+             10 LOAD_METHOD              3 (name)
+             12 CALL_METHOD              0
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+309          18 LOAD_FAST                1 (ctx)
+             20 LOAD_METHOD              0 (setContextProperty)
+             22 LOAD_CONST               2 ('wiimRadioPlayingState')
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                4 (_store)
+             28 CALL_METHOD              2
+             30 POP_TOP
+
+310          32 LOAD_FAST                1 (ctx)
+             34 LOAD_METHOD              0 (setContextProperty)
+             36 LOAD_CONST               3 ('wiimRadioFontFamily')
+             38 LOAD_GLOBAL              5 (getFontFamily)
+             40 CALL_FUNCTION            0
+             42 CALL_METHOD              2
+             44 POP_TOP
+
+311          46 LOAD_FAST                1 (ctx)
+             48 LOAD_METHOD              0 (setContextProperty)
+             50 LOAD_CONST               4 ('wiimRadioThemeDefaultColor')
+             52 LOAD_GLOBAL              1 (LPGlobalUI)
+             54 LOAD_ATTR                6 (THEME_DEFAULT_COLOR)
+             56 LOAD_METHOD              3 (name)
+             58 CALL_METHOD              0
+             60 CALL_METHOD              2
+             62 POP_TOP
+
+312          64 LOAD_FAST                1 (ctx)
+             66 LOAD_METHOD              0 (setContextProperty)
+             68 LOAD_CONST               5 ('wiimRadioThemeDisableColor')
+             70 LOAD_GLOBAL              1 (LPGlobalUI)
+             72 LOAD_ATTR                7 (THEME_DISABLE_COLOR)
+             74 LOAD_METHOD              3 (name)
+             76 CALL_METHOD              0
+             78 CALL_METHOD              2
+             80 POP_TOP
+
+313          82 LOAD_FAST                1 (ctx)
+             84 LOAD_METHOD              0 (setContextProperty)
+             86 LOAD_CONST               6 ('wiimRadioThemeHighlightColor')
+             88 LOAD_GLOBAL              1 (LPGlobalUI)
+             90 LOAD_ATTR                8 (THEME_HIGH_HIGH_COLOR)
+             92 LOAD_METHOD              3 (name)
+             94 CALL_METHOD              0
+             96 CALL_METHOD              2
+             98 POP_TOP
+
+314         100 LOAD_FAST                1 (ctx)
+            102 LOAD_METHOD              0 (setContextProperty)
+            104 LOAD_CONST               7 ('wiimRadioPageTitlePointSize')
+            106 LOAD_GLOBAL              9 (float)
+            108 LOAD_GLOBAL             10 (StackWidget_Title)
+            110 CALL_FUNCTION            1
+            112 CALL_METHOD              2
+            114 POP_TOP
+
+315         116 LOAD_FAST                1 (ctx)
+            118 LOAD_METHOD              0 (setContextProperty)
+            120 LOAD_CONST               8 ('wiimRadioSectionTitlePointSize')
+            122 LOAD_GLOBAL              9 (float)
+            124 LOAD_GLOBAL             11 (Sub_Title)
+            126 CALL_FUNCTION            1
+            128 CALL_METHOD              2
+            130 POP_TOP
+
+316         132 LOAD_FAST                1 (ctx)
+            134 LOAD_METHOD              0 (setContextProperty)
+            136 LOAD_CONST               9 ('wiimRadioCategoryTitlePointSize')
+            138 LOAD_GLOBAL              9 (float)
+            140 LOAD_GLOBAL             10 (StackWidget_Title)
+            142 CALL_FUNCTION            1
+            144 CALL_METHOD              2
+            146 POP_TOP
+
+317         148 LOAD_FAST                1 (ctx)
+            150 LOAD_METHOD              0 (setContextProperty)
+            152 LOAD_CONST              10 ('wiimRadioItemCardTitlePointSize')
+            154 LOAD_GLOBAL              9 (float)
+            156 LOAD_GLOBAL             12 (ItemCard_Title)
+            158 CALL_FUNCTION            1
+            160 CALL_METHOD              2
+            162 POP_TOP
+
+318         164 LOAD_FAST                1 (ctx)
+            166 LOAD_METHOD              0 (setContextProperty)
+            168 LOAD_CONST              11 ('wiimRadioItemCardSubtitlePointSize')
+            170 LOAD_GLOBAL              9 (float)
+            172 LOAD_GLOBAL             13 (ItemCard_Subtitle)
+            174 CALL_FUNCTION            1
+            176 CALL_METHOD              2
+            178 POP_TOP
+
+319         180 LOAD_FAST                1 (ctx)
+            182 LOAD_METHOD              0 (setContextProperty)
+            184 LOAD_CONST              12 ('wiimRadioMainTextPointSize')
+            186 LOAD_GLOBAL              9 (float)
+            188 LOAD_GLOBAL             14 (Main_Text)
+            190 CALL_FUNCTION            1
+            192 CALL_METHOD              2
+            194 POP_TOP
+
+320         196 LOAD_FAST                1 (ctx)
+            198 LOAD_METHOD              0 (setContextProperty)
+            200 LOAD_CONST              13 ('wiimRadioSubTextPointSize')
+            202 LOAD_GLOBAL              9 (float)
+            204 LOAD_GLOBAL             15 (Sub_Text)
+            206 CALL_FUNCTION            1
+            208 CALL_METHOD              2
+            210 POP_TOP
+
+321         212 LOAD_FAST                1 (ctx)
+            214 LOAD_METHOD              0 (setContextProperty)
+            216 LOAD_CONST              14 ('wiimRadioSmallTitlePointSize')
+            218 LOAD_GLOBAL              9 (float)
+            220 LOAD_GLOBAL             16 (Small_Title)
+            222 CALL_FUNCTION            1
+            224 CALL_METHOD              2
+            226 POP_TOP
+            228 LOAD_CONST              15 (None)
+            230 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._clearSharedQmlContext ===
+330           0 LOAD_FAST                1 (ctx)
+              2 LOAD_METHOD              0 (setContextProperty)
+              4 LOAD_CONST               1 ('wiimRadioBgColor')
+              6 LOAD_CONST               2 ('')
+              8 CALL_METHOD              2
+             10 POP_TOP
+
+331          12 LOAD_FAST                1 (ctx)
+             14 LOAD_METHOD              0 (setContextProperty)
+             16 LOAD_CONST               3 ('wiimRadioPlayingState')
+             18 LOAD_CONST               4 (None)
+             20 CALL_METHOD              2
+             22 POP_TOP
+
+332          24 LOAD_FAST                1 (ctx)
+             26 LOAD_METHOD              0 (setContextProperty)
+             28 LOAD_CONST               5 ('wiimRadioFontFamily')
+             30 LOAD_CONST               2 ('')
+             32 CALL_METHOD              2
+             34 POP_TOP
+
+333          36 LOAD_FAST                1 (ctx)
+             38 LOAD_METHOD              0 (setContextProperty)
+             40 LOAD_CONST               6 ('wiimRadioThemeDefaultColor')
+             42 LOAD_CONST               2 ('')
+             44 CALL_METHOD              2
+             46 POP_TOP
+
+334          48 LOAD_FAST                1 (ctx)
+             50 LOAD_METHOD              0 (setContextProperty)
+             52 LOAD_CONST               7 ('wiimRadioThemeDisableColor')
+             54 LOAD_CONST               2 ('')
+             56 CALL_METHOD              2
+             58 POP_TOP
+
+335          60 LOAD_FAST                1 (ctx)
+             62 LOAD_METHOD              0 (setContextProperty)
+             64 LOAD_CONST               8 ('wiimRadioThemeHighlightColor')
+             66 LOAD_CONST               2 ('')
+             68 CALL_METHOD              2
+             70 POP_TOP
+
+336          72 LOAD_FAST                1 (ctx)
+             74 LOAD_METHOD              0 (setContextProperty)
+             76 LOAD_CONST               9 ('wiimRadioPageTitlePointSize')
+             78 LOAD_CONST               4 (None)
+             80 CALL_METHOD              2
+             82 POP_TOP
+
+337          84 LOAD_FAST                1 (ctx)
+             86 LOAD_METHOD              0 (setContextProperty)
+             88 LOAD_CONST              10 ('wiimRadioSectionTitlePointSize')
+             90 LOAD_CONST               4 (None)
+             92 CALL_METHOD              2
+             94 POP_TOP
+
+338          96 LOAD_FAST                1 (ctx)
+             98 LOAD_METHOD              0 (setContextProperty)
+            100 LOAD_CONST              11 ('wiimRadioCategoryTitlePointSize')
+            102 LOAD_CONST               4 (None)
+            104 CALL_METHOD              2
+            106 POP_TOP
+
+339         108 LOAD_FAST                1 (ctx)
+            110 LOAD_METHOD              0 (setContextProperty)
+            112 LOAD_CONST              12 ('wiimRadioItemCardTitlePointSize')
+            114 LOAD_CONST               4 (None)
+            116 CALL_METHOD              2
+            118 POP_TOP
+
+340         120 LOAD_FAST                1 (ctx)
+            122 LOAD_METHOD              0 (setContextProperty)
+            124 LOAD_CONST              13 ('wiimRadioItemCardSubtitlePointSize')
+            126 LOAD_CONST               4 (None)
+            128 CALL_METHOD              2
+            130 POP_TOP
+
+341         132 LOAD_FAST                1 (ctx)
+            134 LOAD_METHOD              0 (setContextProperty)
+            136 LOAD_CONST              14 ('wiimRadioMainTextPointSize')
+            138 LOAD_CONST               4 (None)
+            140 CALL_METHOD              2
+            142 POP_TOP
+
+342         144 LOAD_FAST                1 (ctx)
+            146 LOAD_METHOD              0 (setContextProperty)
+            148 LOAD_CONST              15 ('wiimRadioSubTextPointSize')
+            150 LOAD_CONST               4 (None)
+            152 CALL_METHOD              2
+            154 POP_TOP
+
+343         156 LOAD_FAST                1 (ctx)
+            158 LOAD_METHOD              0 (setContextProperty)
+            160 LOAD_CONST              16 ('wiimRadioSmallTitlePointSize')
+            162 LOAD_CONST               4 (None)
+            164 CALL_METHOD              2
+            166 POP_TOP
+            168 LOAD_CONST               4 (None)
+            170 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._resolveWiiMRadioQmlUrl ===
+355           0 LOAD_GLOBAL              0 (Path)
+              2 LOAD_GLOBAL              1 (__file__)
+              4 CALL_FUNCTION            1
+              6 LOAD_METHOD              2 (resolve)
+              8 CALL_METHOD              0
+             10 LOAD_ATTR                3 (parents)
+             12 LOAD_CONST               1 (3)
+             14 BINARY_SUBSCR
+             16 LOAD_CONST               2 ('resources')
+             18 BINARY_TRUE_DIVIDE
+             20 LOAD_CONST               3 ('qml')
+             22 BINARY_TRUE_DIVIDE
+             24 LOAD_CONST               4 ('WiiMRadio')
+             26 BINARY_TRUE_DIVIDE
+             28 LOAD_FAST                2 (fileName)
+             30 BINARY_TRUE_DIVIDE
+             32 STORE_FAST               3 (local_qml_path)
+
+356          34 LOAD_FAST                3 (local_qml_path)
+             36 LOAD_METHOD              4 (exists)
+             38 CALL_METHOD              0
+             40 POP_JUMP_IF_FALSE       56
+
+357          42 LOAD_GLOBAL              5 (QUrl)
+             44 LOAD_METHOD              6 (fromLocalFile)
+             46 LOAD_GLOBAL              7 (str)
+             48 LOAD_FAST                3 (local_qml_path)
+             50 CALL_FUNCTION            1
+             52 CALL_METHOD              1
+             54 RETURN_VALUE
+
+358     >>   56 LOAD_GLOBAL              5 (QUrl)
+             58 LOAD_FAST                1 (qrcPath)
+             60 CALL_FUNCTION            1
+             62 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._get_upnp_model ===
+366           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_upnp_model)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       18
+
+367          10 LOAD_GLOBAL              1 (LPUpnpAsyncDataModel)
+             12 CALL_FUNCTION            0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               0 (_upnp_model)
+
+368     >>   18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                0 (_upnp_model)
+             22 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._syncPlayingInfoFromCurrentDevice ===
+379           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_syncPlayingInfoFromDevice)
+              4 LOAD_GLOBAL              1 (LPGlobalUI)
+              6 LOAD_ATTR                2 (currentDevice)
+              8 CALL_METHOD              1
+             10 POP_TOP
+             12 LOAD_CONST               1 (None)
+             14 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._syncPlayingInfoFromDevice ===
+388           0 LOAD_FAST                1 (device)
+              2 POP_JUMP_IF_TRUE        22
+
+389           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                0 (_store)
+              8 LOAD_METHOD              1 (setPlayingInfo)
+             10 LOAD_CONST               1 ('')
+             12 LOAD_CONST               1 ('')
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+390          18 LOAD_CONST               2 (None)
+             20 RETURN_VALUE
+
+392     >>   22 LOAD_GLOBAL              2 (getattr)
+             24 LOAD_FAST                1 (device)
+             26 LOAD_CONST               3 ('mediaInfo')
+             28 LOAD_CONST               2 (None)
+             30 CALL_FUNCTION            3
+             32 STORE_FAST               2 (media)
+
+393          34 LOAD_FAST                2 (media)
+             36 POP_JUMP_IF_FALSE       50
+             38 LOAD_FAST                2 (media)
+             40 LOAD_ATTR                3 (trackSource)
+             42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                4 (_source)
+             46 COMPARE_OP               3 (!=)
+             48 POP_JUMP_IF_FALSE       68
+
+394     >>   50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                0 (_store)
+             54 LOAD_METHOD              1 (setPlayingInfo)
+             56 LOAD_CONST               1 ('')
+             58 LOAD_CONST               1 ('')
+             60 CALL_METHOD              2
+             62 POP_TOP
+
+395          64 LOAD_CONST               2 (None)
+             66 RETURN_VALUE
+
+397     >>   68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                0 (_store)
+             72 LOAD_METHOD              1 (setPlayingInfo)
+             74 LOAD_FAST                2 (media)
+             76 LOAD_ATTR                5 (trackId)
+             78 JUMP_IF_TRUE_OR_POP     82
+             80 LOAD_CONST               1 ('')
+        >>   82 LOAD_FAST                2 (media)
+             84 LOAD_ATTR                6 (playState)
+             86 JUMP_IF_TRUE_OR_POP     90
+             88 LOAD_CONST               1 ('')
+        >>   90 CALL_METHOD              2
+             92 POP_TOP
+             94 LOAD_CONST               2 (None)
+             96 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._isCurrentStationPlayingSource ===
+407           0 LOAD_FAST                2 (stationId)
+              2 POP_JUMP_IF_TRUE         8
+
+408           4 LOAD_CONST               1 (False)
+              6 RETURN_VALUE
+
+409     >>    8 LOAD_GLOBAL              0 (getattr)
+             10 LOAD_FAST                1 (device)
+             12 LOAD_CONST               2 ('mediaInfo')
+             14 LOAD_CONST               3 (None)
+             16 CALL_FUNCTION            3
+             18 STORE_FAST               3 (media)
+
+410          20 LOAD_FAST                3 (media)
+             22 POP_JUMP_IF_TRUE        28
+
+411          24 LOAD_CONST               1 (False)
+             26 RETURN_VALUE
+
+412     >>   28 LOAD_FAST                3 (media)
+             30 LOAD_ATTR                1 (trackSource)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                2 (_source)
+             36 COMPARE_OP               2 (==)
+             38 JUMP_IF_FALSE_OR_POP    56
+             40 LOAD_GLOBAL              3 (str)
+             42 LOAD_FAST                3 (media)
+             44 LOAD_ATTR                4 (trackId)
+             46 JUMP_IF_TRUE_OR_POP     50
+             48 LOAD_CONST               4 ('')
+        >>   50 CALL_FUNCTION            1
+             52 LOAD_FAST                2 (stationId)
+             54 COMPARE_OP               2 (==)
+        >>   56 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._setCurrentStationPlaybackState ===
+424           0 LOAD_FAST                3 (playState)
+              2 LOAD_FAST                1 (device)
+              4 LOAD_ATTR                0 (mediaInfo)
+              6 STORE_ATTR               1 (playState)
+
+425           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                2 (_store)
+             12 LOAD_METHOD              3 (setPlayingInfo)
+             14 LOAD_FAST                2 (stationId)
+             16 LOAD_FAST                3 (playState)
+             18 CALL_METHOD              2
+             20 POP_TOP
+
+426          22 LOAD_FAST                1 (device)
+             24 LOAD_METHOD              4 (asyncUpnpPost)
+             26 LOAD_FAST                4 (command)
+             28 LOAD_CONST               1 (None)
+             30 CALL_METHOD              2
+             32 POP_TOP
+             34 LOAD_CONST               1 (None)
+             36 RETURN_VALUE
+
+=== LPWiiMRadioPlayController._build_playlist ===
+435           0 LOAD_GLOBAL              0 (LPWiiMRadioPlayHeader)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               2 (header)
+
+436           6 LOAD_FAST                1 (stationItem)
+              8 LOAD_METHOD              1 (get)
+             10 LOAD_CONST               1 ('name')
+             12 LOAD_CONST               2 ('')
+             14 CALL_METHOD              2
+             16 LOAD_FAST                2 (header)
+             18 STORE_ATTR               2 (headTitle)
+
+437          20 LOAD_FAST                1 (stationItem)
+             22 LOAD_METHOD              1 (get)
+             24 LOAD_CONST               3 ('favicon')
+             26 LOAD_CONST               2 ('')
+             28 CALL_METHOD              2
+             30 LOAD_FAST                2 (header)
+             32 STORE_ATTR               3 (imageUrl)
+
+438          34 LOAD_GLOBAL              4 (MEDIATYPE_RADIO)
+             36 LOAD_FAST                2 (header)
+             38 STORE_ATTR               5 (mediaType)
+
+440          40 LOAD_GLOBAL              6 (LPHeaderType)
+             42 LOAD_ATTR                7 (LP_HEADER_TYPE_STATION)
+             44 LOAD_FAST                2 (header)
+             46 STORE_ATTR               8 (headType)
+
+442          48 LOAD_GLOBAL              9 (LPWiiMRadioPlayItem)
+             50 CALL_FUNCTION            0
+             52 STORE_FAST               3 (track)
+
+443          54 LOAD_FAST                1 (stationItem)
+             56 LOAD_METHOD              1 (get)
+             58 LOAD_CONST               4 ('stationId')
+             60 LOAD_CONST               2 ('')
+             62 CALL_METHOD              2
+             64 LOAD_FAST                3 (track)
+             66 STORE_ATTR              10 (trackId)
+
+444          68 LOAD_FAST                1 (stationItem)
+             70 LOAD_METHOD              1 (get)
+             72 LOAD_CONST               1 ('name')
+             74 LOAD_CONST               2 ('')
+             76 CALL_METHOD              2
+             78 LOAD_FAST                3 (track)
+             80 STORE_ATTR              11 (trackName)
+
+446          82 LOAD_FAST                1 (stationItem)
+             84 LOAD_METHOD              1 (get)
+             86 LOAD_CONST               1 ('name')
+             88 LOAD_CONST               2 ('')
+             90 CALL_METHOD              2
+             92 LOAD_FAST                3 (track)
+             94 STORE_ATTR              12 (itemName)
+
+447          96 LOAD_FAST                1 (stationItem)
+             98 LOAD_METHOD              1 (get)
+            100 LOAD_CONST               3 ('favicon')
+            102 LOAD_CONST               2 ('')
+            104 CALL_METHOD              2
+            106 LOAD_FAST                3 (track)
+            108 STORE_ATTR              13 (trackImage)
+
+448         110 LOAD_FAST                1 (stationItem)
+            112 LOAD_METHOD              1 (get)
+            114 LOAD_CONST               5 ('streamUrl')
+            116 LOAD_CONST               2 ('')
+            118 CALL_METHOD              2
+            120 LOAD_FAST                3 (track)
+            122 STORE_ATTR              14 (trackUrl)
+
+450         124 LOAD_GLOBAL             15 (LPWiiMRadioPlayList)
+            126 CALL_FUNCTION            0
+            128 STORE_FAST               4 (playlist)
+
+451         130 LOAD_FAST                2 (header)
+            132 LOAD_FAST                4 (playlist)
+            134 STORE_ATTR              16 (header)
+
+452         136 LOAD_FAST                3 (track)
+            138 BUILD_LIST               1
+            140 LOAD_FAST                4 (playlist)
+            142 STORE_ATTR              17 (list)
+
+453         144 LOAD_FAST                4 (playlist)
+            146 RETURN_VALUE

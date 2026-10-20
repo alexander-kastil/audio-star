@@ -1,0 +1,549 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (None)
+              4 IMPORT_NAME              0 (datetime)
+              6 STORE_NAME               0 (datetime)
+
+  2           8 LOAD_CONST               0 (0)
+             10 LOAD_CONST               2 (('escape',))
+             12 IMPORT_NAME              1 (xml.sax.saxutils)
+             14 IMPORT_FROM              2 (escape)
+             16 STORE_NAME               2 (escape)
+             18 POP_TOP
+
+  4          20 LOAD_CONST               0 (0)
+             22 LOAD_CONST               3 (('LPPlayMusicList', 'LPPlayHeader', 'LPPlayListSource', 'LPPlayItem'))
+             24 IMPORT_NAME              3 (LPClientFramework.LPPlayList.LPPlayList)
+             26 IMPORT_FROM              4 (LPPlayMusicList)
+             28 STORE_NAME               4 (LPPlayMusicList)
+             30 IMPORT_FROM              5 (LPPlayHeader)
+             32 STORE_NAME               5 (LPPlayHeader)
+             34 IMPORT_FROM              6 (LPPlayListSource)
+             36 STORE_NAME               6 (LPPlayListSource)
+             38 IMPORT_FROM              7 (LPPlayItem)
+             40 STORE_NAME               7 (LPPlayItem)
+             42 POP_TOP
+
+  7          44 LOAD_BUILD_CLASS
+             46 LOAD_CONST               4 (<code object LPLocalMusicPlayList at 0x000001F3253C4B30, file "LPClientFramework\LPPlayList\LPLocalMusicPlayList.py", line 7>)
+             48 LOAD_CONST               5 ('LPLocalMusicPlayList')
+             50 MAKE_FUNCTION            0
+             52 LOAD_CONST               5 ('LPLocalMusicPlayList')
+             54 LOAD_NAME                4 (LPPlayMusicList)
+             56 CALL_FUNCTION            3
+             58 STORE_NAME               8 (LPLocalMusicPlayList)
+
+113          60 LOAD_BUILD_CLASS
+             62 LOAD_CONST               6 (<code object LPLocalMusicPlayHeader at 0x000001F3253C47C0, file "LPClientFramework\LPPlayList\LPLocalMusicPlayList.py", line 113>)
+             64 LOAD_CONST               7 ('LPLocalMusicPlayHeader')
+             66 MAKE_FUNCTION            0
+             68 LOAD_CONST               7 ('LPLocalMusicPlayHeader')
+             70 LOAD_NAME                5 (LPPlayHeader)
+             72 CALL_FUNCTION            3
+             74 STORE_NAME               9 (LPLocalMusicPlayHeader)
+
+120          76 LOAD_BUILD_CLASS
+             78 LOAD_CONST               8 (<code object LPLocalMusicPlayItem at 0x000001F3253C4500, file "LPClientFramework\LPPlayList\LPLocalMusicPlayList.py", line 120>)
+             80 LOAD_CONST               9 ('LPLocalMusicPlayItem')
+             82 MAKE_FUNCTION            0
+             84 LOAD_CONST               9 ('LPLocalMusicPlayItem')
+             86 LOAD_NAME                7 (LPPlayItem)
+             88 CALL_FUNCTION            3
+             90 STORE_NAME              10 (LPLocalMusicPlayItem)
+             92 LOAD_CONST               1 (None)
+             94 RETURN_VALUE
+
+=== LPLocalMusicPlayList ===
+  7           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPLocalMusicPlayList')
+              6 STORE_NAME               2 (__qualname__)
+
+  8           8 LOAD_CONST               1 (<code object __init__ at 0x000001F3253C43A0, file "LPClientFramework\LPPlayList\LPLocalMusicPlayList.py", line 8>)
+             10 LOAD_CONST               2 ('LPLocalMusicPlayList.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+
+ 11          16 LOAD_CONST               3 (<code object generateBackupQueueXML at 0x000001F3253C4D40, file "LPClientFramework\LPPlayList\LPLocalMusicPlayList.py", line 11>)
+             18 LOAD_CONST               4 ('LPLocalMusicPlayList.generateBackupQueueXML')
+             20 MAKE_FUNCTION            0
+             22 STORE_NAME               4 (generateBackupQueueXML)
+
+102          24 LOAD_CONST               5 (<code object generateSetKeyMappingXML at 0x000001F3253C4450, file "LPClientFramework\LPPlayList\LPLocalMusicPlayList.py", line 102>)
+             26 LOAD_CONST               6 ('LPLocalMusicPlayList.generateSetKeyMappingXML')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               5 (generateSetKeyMappingXML)
+             32 LOAD_CONST               7 (None)
+             34 RETURN_VALUE
+
+=== LPLocalMusicPlayList.__init__ ===
+  9           0 LOAD_GLOBAL              0 (LPPlayMusicList)
+              2 LOAD_METHOD              1 (__init__)
+              4 LOAD_FAST                0 (self)
+              6 CALL_METHOD              1
+              8 POP_TOP
+             10 LOAD_CONST               0 (None)
+             12 RETURN_VALUE
+
+=== LPLocalMusicPlayList.generateBackupQueueXML ===
+ 52           0 LOAD_CONST               1 ('<?xml version="1.0"?><PlayList>')
+              2 STORE_FAST               3 (xmlStr)
+
+ 53           4 LOAD_FAST                3 (xmlStr)
+              6 LOAD_CONST               2 ('<ListName>%s</ListName>')
+              8 LOAD_GLOBAL              0 (escape)
+             10 LOAD_FAST                2 (listName)
+             12 CALL_FUNCTION            1
+             14 BINARY_MODULO
+             16 INPLACE_ADD
+             18 STORE_FAST               3 (xmlStr)
+
+ 54          20 LOAD_FAST                3 (xmlStr)
+             22 LOAD_CONST               3 ('<ListInfo>')
+             24 INPLACE_ADD
+             26 STORE_FAST               3 (xmlStr)
+
+ 55          28 LOAD_FAST                3 (xmlStr)
+             30 LOAD_CONST               4 ('<SourceName>%s</SourceName>')
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                1 (header)
+             36 LOAD_ATTR                2 (mediaSource)
+             38 BINARY_MODULO
+             40 INPLACE_ADD
+             42 STORE_FAST               3 (xmlStr)
+
+ 56          44 LOAD_FAST                3 (xmlStr)
+             46 LOAD_CONST               5 ('<TrackNumber>%d</TrackNumber>')
+             48 LOAD_GLOBAL              3 (len)
+             50 LOAD_FAST                1 (musicArray)
+             52 CALL_FUNCTION            1
+             54 BINARY_MODULO
+             56 INPLACE_ADD
+             58 STORE_FAST               3 (xmlStr)
+
+ 57          60 LOAD_FAST                3 (xmlStr)
+             62 LOAD_CONST               6 ('<TotalNumber>%d</TotalNumber>')
+             64 LOAD_GLOBAL              3 (len)
+             66 LOAD_FAST                1 (musicArray)
+             68 CALL_FUNCTION            1
+             70 BINARY_MODULO
+             72 INPLACE_ADD
+             74 STORE_FAST               3 (xmlStr)
+
+ 58          76 LOAD_FAST                3 (xmlStr)
+             78 LOAD_CONST               7 ('<Group_name>WiimuCustomList</Group_name>')
+             80 INPLACE_ADD
+             82 STORE_FAST               3 (xmlStr)
+
+ 59          84 LOAD_FAST                3 (xmlStr)
+             86 LOAD_CONST               8 ('<Radio>%s</Radio>')
+             88 LOAD_CONST               9 ('0')
+             90 BINARY_MODULO
+             92 INPLACE_ADD
+             94 STORE_FAST               3 (xmlStr)
+
+ 61          96 LOAD_FAST                3 (xmlStr)
+             98 LOAD_CONST              10 ('<SearchUrl>%s</SearchUrl>')
+            100 LOAD_GLOBAL              0 (escape)
+            102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                1 (header)
+            106 LOAD_ATTR                4 (searchUrl)
+            108 JUMP_IF_TRUE_OR_POP    112
+            110 LOAD_CONST              11 ('')
+        >>  112 CALL_FUNCTION            1
+            114 BINARY_MODULO
+            116 INPLACE_ADD
+            118 STORE_FAST               3 (xmlStr)
+
+ 62         120 LOAD_FAST                3 (xmlStr)
+            122 LOAD_CONST              12 ('<ContentType>songlist</ContentType>')
+            124 INPLACE_ADD
+            126 STORE_FAST               3 (xmlStr)
+
+ 63         128 LOAD_FAST                0 (self)
+            130 LOAD_METHOD              5 (getPicUrl)
+            132 CALL_METHOD              0
+            134 STORE_FAST               4 (picUrl)
+
+ 64         136 LOAD_FAST                3 (xmlStr)
+            138 LOAD_CONST              13 ('<PicUrl>%s</PicUrl>')
+            140 LOAD_GLOBAL              0 (escape)
+            142 LOAD_FAST                4 (picUrl)
+            144 POP_JUMP_IF_FALSE      150
+            146 LOAD_FAST                4 (picUrl)
+            148 JUMP_FORWARD             2 (to 152)
+        >>  150 LOAD_CONST              11 ('')
+        >>  152 CALL_FUNCTION            1
+            154 BINARY_MODULO
+            156 INPLACE_ADD
+            158 STORE_FAST               3 (xmlStr)
+
+ 65         160 LOAD_FAST                3 (xmlStr)
+            162 LOAD_CONST              14 ('</ListInfo>')
+            164 INPLACE_ADD
+            166 STORE_FAST               3 (xmlStr)
+
+ 66         168 LOAD_FAST                3 (xmlStr)
+            170 LOAD_CONST              15 ('<Tracks>')
+            172 INPLACE_ADD
+            174 STORE_FAST               3 (xmlStr)
+
+ 68         176 LOAD_GLOBAL              6 (range)
+            178 LOAD_GLOBAL              3 (len)
+            180 LOAD_FAST                1 (musicArray)
+            182 CALL_FUNCTION            1
+            184 CALL_FUNCTION            1
+            186 GET_ITER
+        >>  188 EXTENDED_ARG             1
+            190 FOR_ITER               348 (to 540)
+            192 STORE_FAST               5 (index)
+
+ 69         194 LOAD_FAST                1 (musicArray)
+            196 LOAD_FAST                5 (index)
+            198 BINARY_SUBSCR
+            200 STORE_FAST               6 (trackItem)
+
+ 71         202 LOAD_FAST                3 (xmlStr)
+            204 LOAD_CONST              16 ('<Track%d>')
+            206 LOAD_FAST                5 (index)
+            208 LOAD_CONST              17 (1)
+            210 BINARY_ADD
+            212 BINARY_MODULO
+            214 INPLACE_ADD
+            216 STORE_FAST               3 (xmlStr)
+
+ 72         218 LOAD_FAST                3 (xmlStr)
+            220 LOAD_CONST              18 ('<URL>%s</URL>')
+            222 LOAD_GLOBAL              0 (escape)
+            224 LOAD_FAST                6 (trackItem)
+            226 LOAD_ATTR                7 (trackUrl)
+            228 POP_JUMP_IF_FALSE      236
+            230 LOAD_FAST                6 (trackItem)
+            232 LOAD_ATTR                7 (trackUrl)
+            234 JUMP_FORWARD             2 (to 238)
+        >>  236 LOAD_CONST              11 ('')
+        >>  238 CALL_FUNCTION            1
+            240 BINARY_MODULO
+            242 INPLACE_ADD
+            244 STORE_FAST               3 (xmlStr)
+
+ 73         246 LOAD_FAST                3 (xmlStr)
+            248 LOAD_CONST              19 ('<Source>%s</Source>')
+            250 LOAD_FAST                0 (self)
+            252 LOAD_ATTR                1 (header)
+            254 LOAD_ATTR                2 (mediaSource)
+            256 BINARY_MODULO
+            258 INPLACE_ADD
+            260 STORE_FAST               3 (xmlStr)
+
+ 74         262 LOAD_FAST                3 (xmlStr)
+            264 LOAD_CONST              20 ('<Id>%s</Id>')
+            266 LOAD_GLOBAL              0 (escape)
+            268 LOAD_FAST                6 (trackItem)
+            270 LOAD_ATTR                8 (trackId)
+            272 EXTENDED_ARG             1
+            274 POP_JUMP_IF_FALSE      282
+            276 LOAD_FAST                6 (trackItem)
+            278 LOAD_ATTR                8 (trackId)
+            280 JUMP_FORWARD             2 (to 284)
+        >>  282 LOAD_CONST              11 ('')
+        >>  284 CALL_FUNCTION            1
+            286 BINARY_MODULO
+            288 INPLACE_ADD
+            290 STORE_FAST               3 (xmlStr)
+
+ 76         292 LOAD_FAST                3 (xmlStr)
+            294 LOAD_CONST              21 ('<Metadata>')
+            296 INPLACE_ADD
+            298 STORE_FAST               3 (xmlStr)
+
+ 78         300 LOAD_CONST              22 ('<?xml version="1.0" encoding="UTF-8"?><DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:song="www.linkplay.com/song/" xmlns:custom="www.linkplay.com/custom/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><upnp:class>object.item.audioItem.musicTrack</upnp:class><item>')
+            302 STORE_FAST               7 (metaData)
+
+ 83         304 LOAD_FAST                7 (metaData)
+            306 LOAD_CONST              23 ('<song:id>%s</song:id>')
+            308 LOAD_FAST                6 (trackItem)
+            310 LOAD_ATTR                8 (trackId)
+            312 BINARY_MODULO
+            314 INPLACE_ADD
+            316 STORE_FAST               7 (metaData)
+
+ 84         318 LOAD_FAST                7 (metaData)
+            320 LOAD_CONST              24 ('<song:albumid>%s</song:albumid>')
+            322 LOAD_FAST                6 (trackItem)
+            324 LOAD_ATTR                9 (albumId)
+            326 BINARY_MODULO
+            328 INPLACE_ADD
+            330 STORE_FAST               7 (metaData)
+
+ 85         332 LOAD_FAST                7 (metaData)
+            334 LOAD_CONST              25 ('<song:singerid>%s</song:singerid>')
+            336 LOAD_FAST                6 (trackItem)
+            338 LOAD_ATTR               10 (artistId)
+            340 BINARY_MODULO
+            342 INPLACE_ADD
+            344 STORE_FAST               7 (metaData)
+
+ 86         346 LOAD_FAST                7 (metaData)
+            348 LOAD_CONST              26 ('<dc:title>%s</dc:title>')
+            350 LOAD_GLOBAL              0 (escape)
+            352 LOAD_FAST                6 (trackItem)
+            354 LOAD_ATTR               11 (trackName)
+            356 EXTENDED_ARG             1
+            358 POP_JUMP_IF_FALSE      366
+            360 LOAD_FAST                6 (trackItem)
+            362 LOAD_ATTR               11 (trackName)
+            364 JUMP_FORWARD             2 (to 368)
+        >>  366 LOAD_CONST              11 ('')
+        >>  368 CALL_FUNCTION            1
+            370 BINARY_MODULO
+            372 INPLACE_ADD
+            374 STORE_FAST               7 (metaData)
+
+ 87         376 LOAD_FAST                7 (metaData)
+            378 LOAD_CONST              27 ('<upnp:artist>%s</upnp:artist>')
+            380 LOAD_GLOBAL              0 (escape)
+            382 LOAD_FAST                6 (trackItem)
+            384 LOAD_ATTR               12 (trackArtist)
+            386 EXTENDED_ARG             1
+            388 POP_JUMP_IF_FALSE      396
+            390 LOAD_FAST                6 (trackItem)
+            392 LOAD_ATTR               12 (trackArtist)
+            394 JUMP_FORWARD             2 (to 398)
+        >>  396 LOAD_CONST              11 ('')
+        >>  398 CALL_FUNCTION            1
+            400 BINARY_MODULO
+            402 INPLACE_ADD
+            404 STORE_FAST               7 (metaData)
+
+ 88         406 LOAD_FAST                7 (metaData)
+            408 LOAD_CONST              28 ('<upnp:album>%s</upnp:album>')
+            410 LOAD_GLOBAL              0 (escape)
+            412 LOAD_FAST                6 (trackItem)
+            414 LOAD_ATTR               13 (albumName)
+            416 EXTENDED_ARG             1
+            418 POP_JUMP_IF_FALSE      426
+            420 LOAD_FAST                6 (trackItem)
+            422 LOAD_ATTR               13 (albumName)
+            424 JUMP_FORWARD             2 (to 428)
+        >>  426 LOAD_CONST              11 ('')
+        >>  428 CALL_FUNCTION            1
+            430 BINARY_MODULO
+            432 INPLACE_ADD
+            434 STORE_FAST               7 (metaData)
+
+ 89         436 LOAD_FAST                7 (metaData)
+            438 LOAD_CONST              29 ('<res protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;" duration="%d">%s</res>')
+
+ 90         440 LOAD_FAST                6 (trackItem)
+            442 LOAD_ATTR               14 (trackDuration)
+            444 LOAD_GLOBAL              0 (escape)
+            446 LOAD_FAST                6 (trackItem)
+            448 LOAD_ATTR                7 (trackUrl)
+            450 EXTENDED_ARG             1
+            452 POP_JUMP_IF_FALSE      460
+            454 LOAD_FAST                6 (trackItem)
+            456 LOAD_ATTR                7 (trackUrl)
+            458 JUMP_FORWARD             2 (to 462)
+        >>  460 LOAD_CONST              11 ('')
+        >>  462 CALL_FUNCTION            1
+
+ 89         464 BUILD_TUPLE              2
+            466 BINARY_MODULO
+            468 INPLACE_ADD
+            470 STORE_FAST               7 (metaData)
+
+ 91         472 LOAD_FAST                7 (metaData)
+            474 LOAD_CONST              30 ('<upnp:albumArtURI>%s</upnp:albumArtURI>')
+            476 LOAD_GLOBAL              0 (escape)
+
+ 92         478 LOAD_FAST                6 (trackItem)
+            480 LOAD_ATTR               15 (trackImage)
+            482 EXTENDED_ARG             1
+            484 POP_JUMP_IF_FALSE      492
+            486 LOAD_FAST                6 (trackItem)
+            488 LOAD_ATTR               15 (trackImage)
+            490 JUMP_FORWARD             2 (to 494)
+        >>  492 LOAD_CONST              11 ('')
+
+ 91     >>  494 CALL_FUNCTION            1
+            496 BINARY_MODULO
+            498 INPLACE_ADD
+            500 STORE_FAST               7 (metaData)
+
+ 93         502 LOAD_FAST                7 (metaData)
+            504 LOAD_CONST              31 ('</item></DIDL-Lite>')
+            506 INPLACE_ADD
+            508 STORE_FAST               7 (metaData)
+
+ 95         510 LOAD_FAST                3 (xmlStr)
+            512 LOAD_GLOBAL              0 (escape)
+            514 LOAD_FAST                7 (metaData)
+            516 CALL_FUNCTION            1
+            518 INPLACE_ADD
+            520 STORE_FAST               3 (xmlStr)
+
+ 96         522 LOAD_FAST                3 (xmlStr)
+            524 LOAD_CONST              32 ('</Metadata></Track%d>')
+            526 LOAD_FAST                5 (index)
+            528 LOAD_CONST              17 (1)
+            530 BINARY_ADD
+            532 BINARY_MODULO
+            534 INPLACE_ADD
+            536 STORE_FAST               3 (xmlStr)
+            538 JUMP_ABSOLUTE          188
+
+ 98     >>  540 LOAD_FAST                3 (xmlStr)
+            542 LOAD_CONST              33 ('</Tracks></PlayList>')
+            544 INPLACE_ADD
+            546 STORE_FAST               3 (xmlStr)
+
+100         548 LOAD_FAST                3 (xmlStr)
+            550 RETURN_VALUE
+
+=== LPLocalMusicPlayList.generateSetKeyMappingXML ===
+103           0 LOAD_CONST               1 ('<Name>%s</Name>')
+              2 LOAD_GLOBAL              0 (escape)
+              4 LOAD_FAST                1 (name)
+              6 CALL_FUNCTION            1
+              8 BINARY_MODULO
+             10 STORE_FAST               2 (xmlStr)
+
+104          12 LOAD_FAST                2 (xmlStr)
+             14 LOAD_CONST               2 ('<Source>%s</Source>')
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (header)
+             20 LOAD_ATTR                2 (mediaSource)
+             22 BINARY_MODULO
+             24 INPLACE_ADD
+             26 STORE_FAST               2 (xmlStr)
+
+105          28 LOAD_FAST                2 (xmlStr)
+             30 LOAD_CONST               3 ('<ContentType>songlist</ContentType>')
+             32 INPLACE_ADD
+             34 STORE_FAST               2 (xmlStr)
+
+106          36 LOAD_FAST                0 (self)
+             38 LOAD_METHOD              3 (getPicUrl)
+             40 CALL_METHOD              0
+             42 STORE_FAST               3 (picUrl)
+
+107          44 LOAD_FAST                2 (xmlStr)
+             46 LOAD_CONST               4 ('<PicUrl>%s</PicUrl>')
+             48 LOAD_GLOBAL              0 (escape)
+             50 LOAD_FAST                3 (picUrl)
+             52 POP_JUMP_IF_FALSE       58
+             54 LOAD_FAST                3 (picUrl)
+             56 JUMP_FORWARD             2 (to 60)
+        >>   58 LOAD_CONST               5 ('')
+        >>   60 CALL_FUNCTION            1
+             62 BINARY_MODULO
+             64 INPLACE_ADD
+             66 STORE_FAST               2 (xmlStr)
+
+108          68 LOAD_FAST                2 (xmlStr)
+             70 LOAD_CONST               6 ('<RoutineId>Empty</RoutineId>')
+             72 INPLACE_ADD
+             74 STORE_FAST               2 (xmlStr)
+
+109          76 LOAD_FAST                2 (xmlStr)
+             78 LOAD_CONST               7 ('<Loop>1</Loop>')
+             80 INPLACE_ADD
+             82 STORE_FAST               2 (xmlStr)
+
+110          84 LOAD_FAST                2 (xmlStr)
+             86 LOAD_CONST               8 ('<Shuffle>1</Shuffle>')
+             88 INPLACE_ADD
+             90 STORE_FAST               2 (xmlStr)
+
+111          92 LOAD_FAST                2 (xmlStr)
+             94 RETURN_VALUE
+
+=== LPLocalMusicPlayHeader ===
+113           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPLocalMusicPlayHeader')
+              6 STORE_NAME               2 (__qualname__)
+
+114           8 LOAD_CONST               1 (<code object __init__ at 0x000001F3253C45B0, file "LPClientFramework\LPPlayList\LPLocalMusicPlayList.py", line 114>)
+             10 LOAD_CONST               2 ('LPLocalMusicPlayHeader.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+             16 LOAD_CONST               3 (None)
+             18 RETURN_VALUE
+
+=== LPLocalMusicPlayHeader.__init__ ===
+115           0 LOAD_GLOBAL              0 (LPPlayHeader)
+              2 LOAD_METHOD              1 (__init__)
+              4 LOAD_FAST                0 (self)
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+117          10 LOAD_GLOBAL              2 (LPPlayListSource)
+             12 LOAD_ATTR                3 (LocalMusic)
+             14 LOAD_ATTR                4 (value)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               5 (mediaSource)
+             20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+=== LPLocalMusicPlayItem ===
+120           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPLocalMusicPlayItem')
+              6 STORE_NAME               2 (__qualname__)
+
+121           8 LOAD_CONST               1 (<code object __init__ at 0x000001F3253C4920, file "LPClientFramework\LPPlayList\LPLocalMusicPlayList.py", line 121>)
+             10 LOAD_CONST               2 ('LPLocalMusicPlayItem.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+             16 LOAD_CONST               3 (None)
+             18 RETURN_VALUE
+
+=== LPLocalMusicPlayItem.__init__ ===
+122           0 LOAD_GLOBAL              0 (LPPlayItem)
+              2 LOAD_METHOD              1 (__init__)
+              4 LOAD_FAST                0 (self)
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+124          10 LOAD_CONST               0 (None)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (date)
+
+125          16 LOAD_CONST               0 (None)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               3 (localPath)
+
+126          22 LOAD_CONST               1 (0)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               4 (trackNumber)
+
+127          28 LOAD_GLOBAL              5 (LPPlayListSource)
+             30 LOAD_ATTR                6 (LocalMusic)
+             32 LOAD_ATTR                7 (value)
+             34 LOAD_FAST                0 (self)
+             36 STORE_ATTR               8 (trackSource)
+
+128          38 LOAD_CONST               0 (None)
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               9 (customUUID)
+
+129          44 LOAD_CONST               1 (0)
+             46 LOAD_FAST                0 (self)
+             48 STORE_ATTR              10 (bitrate)
+
+130          50 LOAD_CONST               1 (0)
+             52 LOAD_FAST                0 (self)
+             54 STORE_ATTR              11 (samplerate)
+
+131          56 LOAD_CONST               1 (0)
+             58 LOAD_FAST                0 (self)
+             60 STORE_ATTR              12 (channels)
+
+132          62 LOAD_CONST               0 (None)
+             64 LOAD_FAST                0 (self)
+             66 STORE_ATTR              13 (albumartist)
+             68 LOAD_CONST               0 (None)
+             70 RETURN_VALUE

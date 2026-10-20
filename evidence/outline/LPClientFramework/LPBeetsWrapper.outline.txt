@@ -1,0 +1,1895 @@
+# module LPClientFramework.LPBeetsWrapper
+
+[module] names: optparse, codecs, sqlite3, sys, copy, pathlib, Path, beets, ui, library, dbcore, util, config, beetsconfig, beets.ui, _setup, SubcommandsOptionParser, _open_library, _configure, decargs, commands, get_path_formats, get_replacements, importer, plugins, beetsplugins, os, threading, Thread, shutil, yaml, musicbrainzngs, json, time, queue, datetime, collections, deque, pickle, watchdog.tricks, Trick, watchdog.observers.polling, PollingObserver, Observer, PollingEmitter, watchdog.observers.api, BaseObserver, watchdog.utils.dirsnapshot, DirectorySnapshot, DirectorySnapshotDiff, LPPollingEmitter, LPPollingObserver, LPClientFramework, LPMusicDatabase, LPUtility, LPWikipedia, LPClientFramework.LPPlayList, LPLocalMusicPlayList, LPClientFramework.LPUtility, logger, LPPermission.LPPermissionUtils, LPPermissionUtils, UPNP_DIRID_ALLMUSICREROOT, UPNP_DIRID_GENREROOT, UPNP_DIRID_ALBUMROOT, UPNP_DIRID_ARTISTROOT, UPNP_DIRID_FOLDERROOT, UPNP_DIRID_PLAYLISTROOT, requests, DIS_C, DIS_S, enum, Enum, glib, _normalizePathString, _isSupportedMusicFilePath, _normalizeSupportedMusicFilePath, _iterMusicFilePaths, _countMusicFiles, _buildPathPrefixBlob, _queryTrackRowsByParentPrefix, _countTrackRowsByParentPrefix, _countAllIndexedMusicFiles, _emitBatchImportResultTelemetry, _iterTrackPathsByParentPrefix, object, LPBeetsWatchDog, beetsWatcherHandler, beetsWatchDog, importTrackQueue, importTrackThread, importTrackMBQueue, importTrackMBThread, beetsImportConfigBaseline, startupLocalMusicInitializationScheduled, LIBRARY_TASK_KIND_MANUAL_IMPORT, LIBRARY_TASK_KIND_STARTUP_IMPORT, LIBRARY_TASK_UI_NOTIFICATION_NAME, MY_MUSIC_DIR_TRACKING_NOTIFICATION_NAME, LPBeetsWrapperImportStatus, _postLibraryTaskUIUpdate, LPBeetsTaskType, LPBeetsStagedMergeSession, stagedMergeSession, stagedImportStatusCallback, setStagedImportStatusCallback, clearStagedImportStatusCallback, notifyStagedImportStatus, beginStagedMergeSession, activeStagedMergeSession, clearStagedMergeSession, LPBeetsTaskCoordinator, beetsTaskCoordinator, RLock, beetsCallLock, beetsStateLock, isDBBusy, isDBImporting, isUPnPDBScanning, isDBDeleting, beetsDBVersion, BEETS_ITEMS_INDEX_SCRIPT, _buildBeetsImportConfigBaseline, _cloneBeetsImportConfigBaseline, _resetBeetsImportConfig, _summarizeImportArgs, triggerBatchBeetsDbChange, addUPnPDBItemsBatch, addUPnPDBItem, _runRescanUPnPDBSync, rescanUPnPDB, statisicsUPnPDB, _getTrackedMyMusicDirSnapshot, STAGE_ROOT_DIR_NAME, STAGE_LIBRARY_FILE_NAME, defaultStageDir, _backupSqliteDatabase, _openStagedLibrary, createStageDatabase, _switchBeetsLibrary, _restoreBeetsLibrary, _countUPnPRows, runStagedImport, BEETS_OWNED_DELETE_ORDER, BEETS_OWNED_INSERT_ORDER, MERGE_SLOW_WARNING_SECONDS, _tableColumnSignature, _validateBeetsOwnedSchemas, _ensureNoInFlightBeetsWrites, mergeStagedBeetsTables, _cleanupStageDirectory, reopenMainLibrary, finishStagedImport, abortStagedImport, initBeets, stop, callBeets, isDBEmpty, _initTables, queryGenres, queryAlbumArtists, _checkGenreExists, _checkAlbumExists, _checkArtistExists, _getGenreCount, _getAlbumCount, _getArtistCount, _getAllMusicCount, queryTrackArtists, discogsLastTimestamp, discogsLimit, fetchMusicBrainzArtworkUrl, fetchDiscogsImage, queryAlbums, checkIfTrackExists, _trackNeedsMusicBrainz, _enqueueMBImport, queryTracks, _callBeetsFunction, replace_import_func, _historyContainsPath, _clearImporterState, _buildMusicFileArray, _removeFileFromBeetsInternal, _runRemoveDirTask, _runClearLibraryTask, _runDirSupplementTask, _runFileImportTask, _runFileDeleteTask, _runMBImportTask, _runBatchImportTask, _runStartupLocalMusicInitializationTask, removeDirAsync, clearLibraryIfNoMusicDir, scheduleStartupLocalMusicInitialization, removeFileFromBeets, importDirAsync, cancelManualImportAndDetachDir, maybeFirsttimeScanUPnPDB, importWithoutMusicBrain, isIndexedMusicFilePath, forceImportTrack, fetchMusicBrainzArtistInfo, _queryDebug, __name__, callback
+  str: 'Path'
+  str: 'ui'
+  str: 'library'
+  str: 'dbcore'
+  str: 'util'
+  str: 'config'
+  str: '_setup'
+  str: 'SubcommandsOptionParser'
+  str: '_open_library'
+  str: '_configure'
+  str: 'decargs'
+  str: 'commands'
+  str: 'get_path_formats'
+  str: 'get_replacements'
+  str: 'importer'
+  str: 'plugins'
+  str: 'Thread'
+  str: 'datetime'
+  str: 'deque'
+  str: 'Trick'
+  str: 'PollingObserver'
+  str: 'PollingEmitter'
+  str: 'BaseObserver'
+  str: 'DirectorySnapshot'
+  str: 'DirectorySnapshotDiff'
+  str: 'LPPollingEmitter'
+  str: 'LPPollingObserver'
+  str: 'LPMusicDatabase'
+  str: 'LPUtility'
+  str: 'LPWikipedia'
+  str: 'LPLocalMusicPlayList'
+  str: 'logger'
+  str: 'LPPermissionUtils'
+  str: '0$4'
+  str: '0$5'
+  str: '0$7'
+  str: '0$6'
+  str: '0$14'
+  str: '0$F'
+  str: '<redacted>'
+  str: '<redacted>'
+  str: 'Enum'
+  str: '_normalizePathString'
+  str: '_isSupportedMusicFilePath'
+  str: '_normalizeSupportedMusicFilePath'
+  str: '_iterMusicFilePaths'
+  str: '_countMusicFiles'
+  str: '_buildPathPrefixBlob'
+  str: '_queryTrackRowsByParentPrefix'
+  str: '_countTrackRowsByParentPrefix'
+  str: '_countAllIndexedMusicFiles'
+  str: '_emitBatchImportResultTelemetry'
+  str: '_iterTrackPathsByParentPrefix'
+  str: 'LPBeetsWatchDog'
+  str: 'beetsWatcherHandler'
+  str: 'manual_import'
+  str: 'startup_import'
+  str: 'LibraryTaskUIUpdate'
+  str: 'MyMusicDirTrackingUpdate'
+  str: 'LPBeetsWrapperImportStatus'
+  str: '_postLibraryTaskUIUpdate'
+  str: 'LPBeetsTaskType'
+  str: 'LPBeetsStagedMergeSession'
+  str: 'setStagedImportStatusCallback'
+  str: 'clearStagedImportStatusCallback'
+  str: 'notifyStagedImportStatus'
+  str: 'beginStagedMergeSession'
+  str: 'activeStagedMergeSession'
+  str: 'clearStagedMergeSession'
+  str: 'LPBeetsTaskCoordinator'
+  str: 'isDBBusy'
+  str: '\nCREATE INDEX IF NOT EXISTS idx_items_path ON items (path);\nCREATE INDEX IF NOT EXISTS idx_items_genre ON items (genre);\nCREATE INDEX IF NOT EXISTS idx_items_artist_title ON items (artist, title);\nCREATE INDEX IF NOT EXISTS idx_items_album_albumartist ON items (album, albumartist);\nCREATE INDEX IF N'
+  str: '_buildBeetsImportConfigBaseline'
+  str: '_cloneBeetsImportConfigBaseline'
+  str: '_resetBeetsImportConfig'
+  str: '_summarizeImportArgs'
+  str: 'triggerBatchBeetsDbChange'
+  str: 'addUPnPDBItemsBatch'
+  str: 'addUPnPDBItem'
+  str: '_runRescanUPnPDBSync'
+  str: 'rescanUPnPDB'
+  str: 'statisicsUPnPDB'
+  str: '_getTrackedMyMusicDirSnapshot'
+  str: 'beets-stage'
+  str: 'musiclibrary.db'
+  str: 'defaultStageDir'
+  str: '_backupSqliteDatabase'
+  str: '_openStagedLibrary'
+  str: 'createStageDatabase'
+  str: '_switchBeetsLibrary'
+  str: '_restoreBeetsLibrary'
+  str: '_countUPnPRows'
+  str: 'runStagedImport'
+  str: 'wiim_upnpitems'
+  str: 'item_attributes'
+  str: 'album_attributes'
+  str: 'items'
+  str: 'albums'
+  str: 'albums'
+  str: 'items'
+  str: 'album_attributes'
+  str: 'item_attributes'
+  str: 'wiim_upnpitems'
+  str: '_tableColumnSignature'
+  str: '_validateBeetsOwnedSchemas'
+  str: '_ensureNoInFlightBeetsWrites'
+  str: 'mergeStagedBeetsTables'
+  str: '_cleanupStageDirectory'
+  str: 'reopenMainLibrary'
+  str: 'finishStagedImport'
+  str: 'abortStagedImport'
+  str: 'initBeets'
+  str: 'stop'
+  str: 'callBeets'
+  str: 'isDBEmpty'
+  str: '_initTables'
+  str: 'albumcount'
+  str: 'queryGenres'
+  str: 'artist'
+  str: 'queryAlbumArtists'
+  str: '_checkGenreExists'
+  str: '_checkAlbumExists'
+  str: '_checkArtistExists'
+  str: '_getGenreCount'
+  str: '_getAlbumCount'
+  str: '_getArtistCount'
+  str: '_getAllMusicCount'
+  str: 'queryTrackArtists'
+  str: 'fetchMusicBrainzArtworkUrl'
+  str: 'fetchDiscogsImage'
+  str: 'album'
+  str: 'queryAlbums'
+  str: 'checkIfTrackExists'
+  str: '_trackNeedsMusicBrainz'
+  str: '_enqueueMBImport'
+  str: 'id'
+  str: 'queryTracks'
+  str: '_callBeetsFunction'
+  str: 'replace_import_func'
+  str: '_historyContainsPath'
+  str: '_clearImporterState'
+  str: '_buildMusicFileArray'
+  str: '_removeFileFromBeetsInternal'
+  str: '_runRemoveDirTask'
+  str: '_runClearLibraryTask'
+  str: '_runDirSupplementTask'
+  str: '_runFileImportTask'
+  str: '_runFileDeleteTask'
+  str: '_runMBImportTask'
+  str: '_runBatchImportTask'
+  str: '_runStartupLocalMusicInitializationTask'
+  str: 'removeDirAsync'
+  str: 'clearLibraryIfNoMusicDir'
+  str: 'scheduleStartupLocalMusicInitialization'
+  str: 'removeFileFromBeets'
+  str: 'importDirAsync'
+  str: 'cancelManualImportAndDetachDir'
+  str: 'maybeFirsttimeScanUPnPDB'
+  str: 'importWithoutMusicBrain'
+  str: 'isIndexedMusicFilePath'
+  str: 'forceImportTrack'
+  str: 'fetchMusicBrainzArtistInfo'
+  str: '_queryDebug'
+  str: '__main__'
+  str: 'callback'
+  str: '/Volumes'
+  str: 'albumcount'
+  str: 'artist'
+  str: 'album'
+  str: 'id'
+
+def LPPollingEmitter()  line 37
+  names: __name__, __module__, __qualname__, __doc__, on_thread_start, __classcell__
+    str: 'LPPollingEmitter'
+    str: '允许外部预设 _snapshot 的 PollingEmitter，避免启动时重复扫描目录。\n\n    当 _snapshot 已由外部（initDiff）预设时，on_thread_start 跳过全量扫描。\n    '
+    str: 'LPPollingEmitter.on_thread_start'
+
+  def LPPollingEmitter.on_thread_start(self)  line 43
+    names: _snapshot, super, on_thread_start
+
+def LPPollingObserver()  line 49
+  names: __name__, __module__, __qualname__, __doc__, __init__, __classcell__
+    str: 'LPPollingObserver'
+    str: '使用 LPPollingEmitter 的 PollingObserver，支持启动时注入预扫描快照。'
+    str: 'LPPollingObserver.__init__'
+
+  def LPPollingObserver.__init__(self, timeout)  line 52
+    names: super, __init__, LPPollingEmitter
+      str: 'emitter_class'
+      str: 'timeout'
+
+def _normalizePathString(path)  line 77
+  names: str, Path
+    str: '\n    将输入路径统一规范化为字符串。\n\n    参数:\n        path (str | Path | None): 原始路径。\n    返回:\n        str | None: 规范化后的路径字符串；输入为空时返回 None。\n    '
+
+def _isSupportedMusicFilePath(path)  line 91
+  names: _normalizePathString, Path, suffix, lower, len, LPUtility, musicFileType
+    str: '\n    判断路径是否为支持的音频文件。\n\n    参数:\n        path (str | Path | None): 待检查路径。\n    返回:\n        bool: 是支持的音频文件路径时返回 True，否则返回 False。\n    '
+
+def _normalizeSupportedMusicFilePath(path, requireExists)  line 111
+  names: _normalizePathString, os, path, isdir, _isSupportedMusicFilePath, exists
+    str: '\n    规范化并校验单文件任务输入路径。\n\n    参数:\n        path (str | Path | None): 待处理路径。\n        requireExists (bool): 是否要求路径当前存在。\n    返回:\n        str | None: 合法的音频文件路径；非法或不满足条件时返回 None。\n    '
+
+def _iterMusicFilePaths(dirPath)  line 137
+  names: _normalizePathString, os, walk, sort, str, Path, _isSupportedMusicFilePath
+    str: '\n    以稳定顺序遍历目录下全部支持的音频文件路径。\n\n    参数:\n        dirPath (str | Path): 目录路径。\n    返回:\n        generator[str, None, None]: 音频文件路径生成器。\n    '
+
+def _countMusicFiles(dirPath)  line 159
+  names: _iterMusicFilePaths
+    str: '\n    统计目录下支持的音频文件数量。\n\n    参数:\n        dirPath (str | Path): 目录路径。\n    返回:\n        int: 音频文件数量。\n    '
+
+def _buildPathPrefixBlob(path)  line 174
+  names: _normalizePathString, len, endswith, os, sep, util, bytestring_path, memoryview
+    str: '\n    将目录路径转换为数据库前缀查询使用的二进制参数。\n\n    参数:\n        path (str | Path): 目录路径。\n    返回:\n        tuple[memoryview, int]: 前缀二进制视图与长度。\n    '
+    str: '%s%s'
+
+def _queryTrackRowsByParentPrefix(parentPath, lastPath, limit)  line 196
+  names: _buildPathPrefixBlob, isinstance, str, util, bytestring_path, bytes, append, int, glib, transaction, query, tuple
+    str: '\n    按路径前缀分页查询 items 表中的曲目行。\n\n    参数:\n        parentPath (str | Path): 父目录前缀。\n        lastPath (str | bytes | None): 上一页最后一条路径，用于游标翻页。\n        limit (int): 单次查询上限。\n    返回:\n        list[sqlite3.Row]: 查询结果数组。\n    '
+    str: '\n        SELECT id, path\n        FROM items\n        WHERE substr(BYTELOWER(path), 1, ?) = BYTELOWER(?)\n    '
+    str: '%s AND path > ?'
+    str: '%s ORDER BY path LIMIT ?'
+
+def _countTrackRowsByParentPrefix(parentPath)  line 227
+  names: _buildPathPrefixBlob, glib, transaction, query, len, int
+    str: '\n    统计指定目录前缀下的曲目数量。\n\n    参数:\n        parentPath (str | Path): 父目录前缀。\n    返回:\n        int: 命中的曲目数量。\n    '
+    str: '\n            SELECT COUNT(id) AS track_count\n            FROM items\n            WHERE substr(BYTELOWER(path), 1, ?) = BYTELOWER(?)\n            '
+    str: 'track_count'
+
+def _countAllIndexedMusicFiles(lib)  line 252
+  names: glib, transaction, query, Exception, logger, warning, len, int
+    str: '\n    统计 beets items 表中的曲目总数。\n\n    参数:\n        lib: 目标 beets Library；未传时使用全局 glib。\n    返回:\n        int: 当前已入库曲目总数；查询失败时返回 0。\n    '
+    str: 'SELECT COUNT(*) AS track_count FROM items'
+    str: 'LPBeetsWrapper count indexed music files exception: %s'
+    str: 'track_count'
+
+def _emitBatchImportResultTelemetry(task, importResult)  line 277
+  names: LPClientFramework.LPEventTrack, LPEventsType, LPGlobalUI, isinstance, dict, int, time, max, get, update, eventTrack, logEvent, BEETS_IMPORT_RESULT, value, logger, debug, Exception, exception
+    str: '\n    上报批量导入结束埋点。\n\n    参数:\n        task (dict | None): 导入任务字典。\n        importResult (str): 导入结果，允许值为 success、canceled、failed。\n    返回:\n        None。\n    '
+    str: 'success'
+    str: 'canceled'
+    str: 'failed'
+    str: 'LPEventsType'
+    str: 'taskStartTimestampMs'
+    str: 'importStartedTimestampMs'
+    str: 'cancelRequestedTimestampMs'
+    str: 'importCount'
+    str: 'localSongCountBeforeImport'
+    str: 'import_count'
+    str: 'local_song_count'
+    str: 'import_result'
+    str: 'import_duration_ms'
+    str: 'canceled'
+    str: 'processedCountAtCancel'
+    str: 'processedCount'
+    str: 'cancel_elapsed_ms'
+    str: 'imported_count_at_cancel'
+    str: 'cancel_to_rescan_finish_duration_ms'
+    str: 'LPBeetsWrapper batch import telemetry reported task_id=%s result=%s params=%s'
+    str: 'id'
+    str: 'LPBeetsWrapper batch import telemetry exception: %s'
+
+def _iterTrackPathsByParentPrefix(parentPath, limit)  line 330
+  names: _queryTrackRowsByParentPrefix, len, isinstance, memoryview, tobytes, bytes, util, py3_path
+    str: '\n    以稳定顺序遍历指定目录前缀下的曲目路径。\n\n    参数:\n        parentPath (str | Path): 父目录前缀。\n        limit (int): 单次查询上限。\n    返回:\n        generator[str, None, None]: 曲目路径生成器。\n    '
+    str: 'lastPath'
+    str: 'limit'
+    str: 'path'
+
+def LPBeetsWatchDog()  line 353
+  names: __name__, __module__, __qualname__, __doc__, __init__, watchDirs, _buildFilterPattern, _createObserver, startWatch, stopWatch, dump, initDiff
+    str: 'LPBeetsWatchDog'
+    str: '负责维护本地音乐目录的实时监控观察器。'
+    str: 'LPBeetsWatchDog.__init__'
+    str: 'LPBeetsWatchDog.watchDirs'
+    str: 'LPBeetsWatchDog._buildFilterPattern'
+    str: 'LPBeetsWatchDog._createObserver'
+    str: 'LPBeetsWatchDog.startWatch'
+    str: 'LPBeetsWatchDog.stopWatch'
+    str: 'LPBeetsWatchDog.dump'
+    str: 'LPBeetsWatchDog.initDiff'
+
+  def LPBeetsWatchDog.__init__(self)  line 356
+    names: watchDict, _initSnapshots, threading, RLock, watchLock
+      str: '\n        初始化 WatchDog 管理器。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+
+  def LPBeetsWatchDog.watchDirs(self)  line 369
+    names: LPUtility, getMyMusicDirSnapshot, range, len, Path, parents, append
+      str: '\n        根据各文件夹是否互相包含，确定最小需要观察的文件夹数量。\n\n        参数:\n            无。\n        返回:\n            list[Path]: 需要观察的目录数组。\n        '
+
+  def LPBeetsWatchDog._buildFilterPattern(self)  line 400
+    names: LPUtility, musicFileType, append
+      str: '\n        构建监控文件匹配规则。\n\n        参数:\n            无。\n        返回:\n            list[str]: 监控文件匹配规则数组。\n        '
+      str: '*.%s'
+
+  def LPBeetsWatchDog._createObserver(self, dirPath, filterPattern)  line 414
+    names: logger, debug, datetime, now, LPPollingObserver, schedule, beetsWatcherHandler, _emitter_for_watch, get, _initSnapshots, _snapshot, start, OSError, error
+      str: '\n        创建并启动单个目录的 Observer。\n\n        如果 initDiff 阶段已为该目录创建了 DirectorySnapshot，\n        则将其注入 PollingEmitter 以避免重复扫描。\n\n        参数:\n            dirPath (Path): 需要观察的目录路径。\n            filterPattern (list[str]): 文件过滤规则。\n        返回:\n            Observer | None: 创建成功时返回 Observer，失败时返回 None。\n        '
+      str: '[watchdog] %s start'
+      str: 'patterns'
+      str: 'ignore_directories'
+      str: 'recursive'
+      str: '[watchdog] %s preset snapshot injected'
+      str: ' start_observer codeblock run time: '
+      str: 'skip OSError dir: '
+      str: ' ('
+      str: ')'
+
+  def LPBeetsWatchDog.startWatch(self)  line 452
+    names: logger, debug, watchDirs, _buildFilterPattern, set, watchLock, watchDict, keys, pop, append, stop, join, LPPermissionUtils, check_access_permission, warning, _createObserver
+      str: '\n        根据当前目录配置增量对齐所有 Observer。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: '[watchdog] start'
+      str: '[watchdog] %s stop'
+      str: 'startWatch the dir no permission access：'
+
+  def LPBeetsWatchDog.stopWatch(self)  line 504
+    names: logger, debug, watchLock, list, watchDict, items, clear, stop, join
+      str: '\n        停止全部 Observer。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: '[watchdog] stop'
+      str: '[watchdog] %s stop'
+
+  def LPBeetsWatchDog.dump(self)  line 524
+    names: watchLock, list, watchDict, items, logger, debug, LPPermissionUtils, check_access_permission, name, getattr, _lock, _snapshot, DirectorySnapshot, str, encode, hex, open, LPUtility, cacheDir, pickle, dump
+      str: '\n        将当前监控目录的快照写入缓存。\n\n        优先从 PollingEmitter 内部获取运行时快照（最后一次轮询周期的结果），\n        避免全量目录扫描。如果 emitter._snapshot 不可用则 fallback 到全量扫描。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: '[watchdog] %s dump'
+      str: 'dump check_access_permission reject -->'
+      str: '_emitter_for_watch'
+      str: '[watchdog] %s dump from emitter snapshot'
+      str: '[watchdog] %s dump fallback to DirectorySnapshot'
+      str: 'utf-8'
+      str: 'watchdog-%s.pickle'
+      str: 'wb'
+      str: '[watchdog] dump finish'
+
+  def LPBeetsWatchDog.initDiff(self)  line 569
+    names: isDBImporting, logger, debug, watchDirs, LPUtility, getMyMusicDirSnapshot, os, path, exists, removeMymusicDir, checkIfFilePathInMyMusic, removeDirAsync, str, encode, hex, cacheDir, LPPermissionUtils, check_access_permission, name, open, pickle, load, Exception, error, Path, unlink, DirectorySnapshot, _initSnapshots, DirectorySnapshotDiff, files_moved, files_deleted, files_created, files_modified, suffix, lower, musicFileType, removeFileFromBeets, forceImportTrack
+      str: '打开app时，对比与上次关闭时，观测路径的文件变化，自动导入、移除\n        '
+      str: '[watchdog] importing, ginore'
+      str: '[watchdog] dir remove: %s'
+      str: 'utf-8'
+      str: 'watchdog-%s.pickle'
+      str: 'initDiff check_access_permission reject -->'
+      str: '[watchdog] diff %s'
+      str: 'rb'
+      str: '[watchdog] load %s failed, %s, %s'
+      str: '[watchdog] delete %s'
+      str: '[watchdog] move %s'
+      str: '[watchdog] create %s'
+      str: '[watchdog] modified %s'
+      str: '[watchdog] diff %s finish'
+
+def beetsWatcherHandler()  line 669
+  names: __name__, __module__, __qualname__, __doc__, __init__, on_modified, on_created, on_moved, on_deleted
+    str: 'beetsWatcherHandler'
+    str: '仅处理音频文件事件的 watchdog 处理器。'
+    str: 'beetsWatcherHandler.__init__'
+    str: 'beetsWatcherHandler.on_modified'
+    str: 'beetsWatcherHandler.on_created'
+    str: 'beetsWatcherHandler.on_moved'
+    str: 'beetsWatcherHandler.on_deleted'
+
+  def beetsWatcherHandler.__init__(self, patterns, ignore_patterns, ignore_directories, case_sensitive)  line 672
+    names: Trick, __init__
+      str: '\n        初始化 watchdog 事件处理器。\n\n        参数:\n            patterns: 允许的文件匹配规则。\n            ignore_patterns: 需要忽略的匹配规则。\n            ignore_directories (bool): 是否忽略目录事件。\n            case_sensitive (bool): 是否区分大小写。\n        返回:\n            无。\n        '
+
+  def beetsWatcherHandler.on_modified(self, event)  line 686
+    names: isDBImporting, logger, debug, is_directory, src_path, forceImportTrack
+      str: '\n        处理文件修改事件。\n\n        参数:\n            event: watchdog 事件对象。\n        返回:\n            无。\n        '
+      str: '[watchdog] importing, ginore'
+      str: '[watchdog] modified %s'
+
+  def beetsWatcherHandler.on_created(self, event)  line 705
+    names: isDBImporting, logger, debug, is_directory, src_path, forceImportTrack
+      str: '\n        处理文件创建事件。\n\n        参数:\n            event: watchdog 事件对象。\n        返回:\n            无。\n        '
+      str: '[watchdog] importing, ginore'
+      str: '[watchdog] create %s'
+
+  def beetsWatcherHandler.on_moved(self, event)  line 724
+    names: logger, debug, src_path, isDBImporting, is_directory, removeFileFromBeets, forceImportTrack, dest_path
+      str: '\n        处理文件移动事件。\n\n        参数:\n            event: watchdog 事件对象。\n        返回:\n            无。\n        '
+      str: '[watchdog] move %s'
+      str: '[watchdog] importing, ginore'
+
+  def beetsWatcherHandler.on_deleted(self, event)  line 746
+    names: isDBImporting, logger, debug, is_directory, src_path, removeFileFromBeets
+      str: '\n        处理文件删除事件。\n\n        参数:\n            event: watchdog 事件对象。\n        返回:\n            无。\n        '
+      str: '[watchdog] importing, ignore'
+      str: '[watchdog] delete %s'
+
+def LPBeetsWrapperImportStatus()  line 779
+  names: __name__, __module__, __qualname__, preparing, importing, cancelling, finish, canceled
+    str: 'LPBeetsWrapperImportStatus'
+
+def _postLibraryTaskUIUpdate(kind, status, total, processed)  line 787
+  names: LPUtility, postNotification, LIBRARY_TASK_UI_NOTIFICATION_NAME
+    str: '\n    向 UI 发布本地音乐后台任务状态。\n\n    参数:\n        kind (str): 任务展示类型。\n        status (LPBeetsWrapperImportStatus): 任务当前阶段。\n        total (int): 当前导入阶段的曲目总数。\n        processed (int): 当前导入阶段已处理的曲目数。\n    返回:\n        无。\n    '
+    str: 'kind'
+    str: 'status'
+    str: 'total'
+    str: 'processed'
+
+def LPBeetsTaskType()  line 809
+  names: __name__, __module__, __qualname__, __doc__, startup_local_init, batch_import, remove_dir, clear_library, rescan_upnp, dir_supplement, file_import, file_delete, mb_import
+    str: 'LPBeetsTaskType'
+    str: '定义 beets 后台任务类型。'
+    str: 'startup_local_init'
+    str: 'batch_import'
+    str: 'remove_dir'
+    str: 'clear_library'
+    str: 'rescan_upnp'
+    str: 'dir_supplement'
+    str: 'file_import'
+    str: 'file_delete'
+    str: 'mb_import'
+
+def LPBeetsStagedMergeSession()  line 823
+  names: __name__, __module__, __qualname__, __doc__, LPBeetsTaskType, batch_import, dir_supplement, file_import, file_delete, remove_dir, clear_library, rescan_upnp, mb_import, frozenTaskTypes, __init__, begin, isActive, finish, abort, rejectsBeetsWrite, rejectsApplicationWrite, stagePath, setStagePath, taskId, mainGeneration
+    str: 'LPBeetsStagedMergeSession'
+    str: 'staged 导入会话：冻结 beets 写任务，允许应用表（Recently）继续写入。\n\n    职责仅限：保存 stage 路径、导入 task id、开始时主库 generation，并提供冻结判定。\n    不管理 Recently 连接，也不修改 Recently API。\n    '
+    str: 'LPBeetsStagedMergeSession.__init__'
+    str: 'LPBeetsStagedMergeSession.begin'
+    str: 'LPBeetsStagedMergeSession.isActive'
+    str: 'LPBeetsStagedMergeSession.finish'
+    str: 'LPBeetsStagedMergeSession.abort'
+    str: 'LPBeetsStagedMergeSession.rejectsBeetsWrite'
+    str: 'LPBeetsStagedMergeSession.rejectsApplicationWrite'
+    str: 'LPBeetsStagedMergeSession.stagePath'
+    str: 'LPBeetsStagedMergeSession.setStagePath'
+    str: 'LPBeetsStagedMergeSession.taskId'
+    str: 'LPBeetsStagedMergeSession.mainGeneration'
+
+  def LPBeetsStagedMergeSession.__init__(self, stagePath, taskId, mainGeneration)  line 842
+    names: threading, RLock, lock, active, str, stagePathValue, taskIdValue, mainGenerationValue
+      str: '\n        初始化 staged 导入会话。\n\n        参数:\n            stagePath (str | Path | None): 临时 stage 库目录。\n            taskId (int | None): 对应的导入任务 id。\n            mainGeneration (int): 会话开始时主库的全局代际号。\n        返回:\n            无。\n        '
+
+  def LPBeetsStagedMergeSession.begin(self)  line 859
+    names: lock, active, logger, debug, stagePathValue, taskIdValue, mainGenerationValue
+      str: '\n        激活会话，开始冻结 beets 写任务。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'LPBeetsStagedMergeSession begin stage=%s task_id=%s main_generation=%s'
+
+  def LPBeetsStagedMergeSession.isActive(self)  line 875
+    names: lock, active
+      str: '\n        判断会话是否处于冻结状态。\n\n        参数:\n            无。\n        返回:\n            bool: 冻结中返回 True。\n        '
+
+  def LPBeetsStagedMergeSession.finish(self)  line 887
+    names: lock, active, logger, debug, stagePathValue
+      str: '\n        结束会话（成功收尾）并解除冻结。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'LPBeetsStagedMergeSession finish stage=%s'
+
+  def LPBeetsStagedMergeSession.abort(self)  line 900
+    names: lock, active, logger, debug, stagePathValue
+      str: '\n        中止会话并解除冻结。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'LPBeetsStagedMergeSession abort stage=%s'
+
+  def LPBeetsStagedMergeSession.rejectsBeetsWrite(self, taskType)  line 913
+    names: lock, active, frozenTaskTypes
+      str: '\n        判断指定 beets 写任务类型是否被冻结拒绝。\n\n        参数:\n            taskType (LPBeetsTaskType): 任务类型。\n        返回:\n            bool: 冻结中且属于冻结类型时返回 True。\n        '
+
+  def LPBeetsStagedMergeSession.rejectsApplicationWrite(self, tableName)  line 928
+      str: '\n        判断指定应用表写入是否被冻结拒绝。\n\n        本期不冻结应用表：Recently 等应用表在回灌窗口内依赖 SQLite timeout 等待，\n        不转为写队列，因此此处恒为 False。\n\n        参数:\n            tableName (str): 应用表名（如 ``recently``）。\n        返回:\n            bool: 恒为 False。\n        '
+
+  def LPBeetsStagedMergeSession.stagePath(self)  line 942
+    names: stagePathValue
+      str: '\n        返回会话关联的 stage 库目录。\n\n        参数:\n            无。\n        返回:\n            str | None: stage 库目录。\n        '
+
+  def LPBeetsStagedMergeSession.setStagePath(self, stagePath)  line 953
+    names: lock, str, stagePathValue
+      str: '\n        设置会话关联的 stage 库目录。\n\n        会话需要在 stage 库创建完成前先冻结 beets 写（保证快照一致），\n        因此 stage 路径是在 createStageDatabase 之后回填的。\n\n        参数:\n            stagePath (str | Path | None): stage 库目录。\n        返回:\n            无。\n        '
+
+  def LPBeetsStagedMergeSession.taskId(self)  line 968
+    names: taskIdValue
+      str: '\n        返回会话关联的导入任务 id。\n\n        参数:\n            无。\n        返回:\n            int | None: 导入任务 id。\n        '
+
+  def LPBeetsStagedMergeSession.mainGeneration(self)  line 979
+    names: mainGenerationValue
+      str: '\n        返回会话开始时主库的全局代际号。\n\n        参数:\n            无。\n        返回:\n            int: 全局代际号。\n        '
+
+def setStagedImportStatusCallback(callback)  line 998
+  names: stagedImportStatusCallback
+    str: '\n    注册 staged 导入阶段状态回调。\n\n    参数:\n        callback (callable | None): 签名为 ``(status, total, processed)`` 的回调。\n    返回:\n        无。\n    '
+
+def clearStagedImportStatusCallback(callback)  line 1011
+  names: stagedImportStatusCallback
+    str: '\n    注销 staged 导入阶段状态回调。\n\n    参数:\n        callback (callable | None): 传入时仅在当前回调与之一致时注销，避免误清其他页面。\n    返回:\n        bool: 实际发生注销返回 True。\n    '
+
+def notifyStagedImportStatus(status, total, processed)  line 1029
+  names: stagedImportStatusCallback, Exception, logger, warning
+    str: '\n    将 staged 导入/回灌阶段状态回调给 UI。\n\n    参数:\n        status (LPBeetsWrapperImportStatus): 当前阶段状态。\n        total (int): 总文件数。\n        processed (int): 已处理文件数。\n    返回:\n        bool: 存在回调且调用成功返回 True。\n    '
+    str: 'LPBeetsWrapper notifyStagedImportStatus exception: %s'
+
+def beginStagedMergeSession(stagePath, taskId)  line 1053
+  names: beetsTaskCoordinator, globalGeneration, LPBeetsStagedMergeSession, begin, stagedMergeSession
+    str: '\n    创建并激活 staged 导入会话。\n\n    参数:\n        stagePath (str | Path | None): 临时 stage 库目录。\n        taskId (int | None): 对应的导入任务 id。\n    返回:\n        LPBeetsStagedMergeSession: 已激活的会话对象。\n    '
+    str: 'stagePath'
+    str: 'taskId'
+    str: 'mainGeneration'
+
+def activeStagedMergeSession()  line 1076
+  names: stagedMergeSession, isActive
+    str: '\n    返回当前激活的 staged 导入会话。\n\n    参数:\n        无。\n    返回:\n        LPBeetsStagedMergeSession | None: 冻结中的会话；未冻结时返回 None。\n    '
+
+def clearStagedMergeSession(session)  line 1092
+  names: stagedMergeSession
+    str: '\n    清理模块级 staged 会话引用。\n\n    参数:\n        session (LPBeetsStagedMergeSession | None): 传入时仅清理同一会话的引用。\n    返回:\n        bool: 实际发生清理返回 True。\n    '
+
+def LPBeetsTaskCoordinator()  line 1110
+  names: __name__, __module__, __qualname__, __doc__, __init__, start, stop, isExclusiveBusy, isStagedImportFrozen, hasActiveWriteTask, submitBatchImport, submitStartupLocalInit, submitRemoveDir, submitClearLibrary, submitRescan, submitDirSupplement, updateTaskProgress, cancelManualImportAndDetachDir, submitFileImport, submitFileDelete, submitMBImport, _workerLoop, _buildTask, _isExclusiveBusyLocked, _hasExclusiveTaskTypeLocked, _hasTaskLocked, _taskIdentifier, _pruneDeferredTasksLocked, _bumpDirGenerationLocked, _taskMatchesDir, _findTrackedParentDir, _isTaskValid, _isTaskValidLocked, _runTask
+    str: 'LPBeetsTaskCoordinator'
+    str: '统一协调 beets 后台写任务与延后任务。'
+    str: 'LPBeetsTaskCoordinator.__init__'
+    str: 'LPBeetsTaskCoordinator.start'
+    str: 'LPBeetsTaskCoordinator.stop'
+    str: 'LPBeetsTaskCoordinator.isExclusiveBusy'
+    str: 'LPBeetsTaskCoordinator.isStagedImportFrozen'
+    str: 'LPBeetsTaskCoordinator.hasActiveWriteTask'
+    str: 'LPBeetsTaskCoordinator.submitBatchImport'
+    str: 'LPBeetsTaskCoordinator.submitStartupLocalInit'
+    str: 'LPBeetsTaskCoordinator.submitRemoveDir'
+    str: 'LPBeetsTaskCoordinator.submitClearLibrary'
+    str: 'LPBeetsTaskCoordinator.submitRescan'
+    str: 'LPBeetsTaskCoordinator.submitDirSupplement'
+    str: 'LPBeetsTaskCoordinator.updateTaskProgress'
+    str: 'LPBeetsTaskCoordinator.cancelManualImportAndDetachDir'
+    str: 'LPBeetsTaskCoordinator.submitFileImport'
+    str: 'LPBeetsTaskCoordinator.submitFileDelete'
+    str: 'LPBeetsTaskCoordinator.submitMBImport'
+    str: 'LPBeetsTaskCoordinator._workerLoop'
+    str: 'LPBeetsTaskCoordinator._buildTask'
+    str: 'LPBeetsTaskCoordinator._isExclusiveBusyLocked'
+    str: 'LPBeetsTaskCoordinator._hasExclusiveTaskTypeLocked'
+    str: 'LPBeetsTaskCoordinator._hasTaskLocked'
+    str: 'LPBeetsTaskCoordinator._taskIdentifier'
+    str: 'LPBeetsTaskCoordinator._pruneDeferredTasksLocked'
+    str: 'LPBeetsTaskCoordinator._bumpDirGenerationLocked'
+    str: 'LPBeetsTaskCoordinator._taskMatchesDir'
+    str: 'LPBeetsTaskCoordinator._findTrackedParentDir'
+    str: 'LPBeetsTaskCoordinator._isTaskValid'
+    str: 'LPBeetsTaskCoordinator._isTaskValidLocked'
+    str: 'LPBeetsTaskCoordinator._runTask'
+
+  def LPBeetsTaskCoordinator.__init__(self)  line 1113
+    names: threading, Condition, condition, deque, exclusiveQueue, deferredQueue, workerThread, stopRequested, activeTask, nextTaskId, globalGeneration, dirGeneration
+      str: '\n        初始化任务协调器。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+
+  def LPBeetsTaskCoordinator.start(self)  line 1132
+    names: condition, stopRequested, workerThread, is_alive, threading, Thread, _workerLoop, start, logger, debug
+      str: '\n        启动后台协调线程。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'LPBeetsTaskCoordinator'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+      str: 'LPBeetsTaskCoordinator start'
+
+  def LPBeetsTaskCoordinator.stop(self)  line 1154
+    names: condition, stopRequested, workerThread, notify_all, logger, debug, join
+      str: '\n        停止后台协调线程。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'LPBeetsTaskCoordinator stop requested'
+      str: 'timeout'
+
+  def LPBeetsTaskCoordinator.isExclusiveBusy(self)  line 1173
+    names: condition, _isExclusiveBusyLocked
+      str: '\n        判断当前是否存在独占写任务。\n\n        参数:\n            无。\n        返回:\n            bool: 存在独占写任务或独占任务排队时返回 True。\n        '
+
+  def LPBeetsTaskCoordinator.isStagedImportFrozen(self, taskType)  line 1185
+    names: activeStagedMergeSession, rejectsBeetsWrite
+      str: '\n        判断指定 beets 写任务是否因 staged 导入冻结而被拒绝。\n\n        参数:\n            taskType (LPBeetsTaskType): 任务类型。\n        返回:\n            bool: 冻结中且属于冻结类型时返回 True。\n        '
+
+  def LPBeetsTaskCoordinator.hasActiveWriteTask(self, exceptTaskId)  line 1200
+    names: condition, activeTask, get
+      str: '\n        判断是否存在**正在执行**的 beets 写任务。\n\n        仅排队的任务不算在途：协调器一次只执行一个任务，而回灌发生在当前独占导入\n        任务内部，排队的任务只会在回灌与解冻之后才被执行。\n\n        参数:\n            exceptTaskId (int | None): 需要排除的任务 id（通常是本次 staged 导入任务自身）。\n        返回:\n            bool: 存在其他正在执行的写任务时返回 True。\n        '
+      str: 'id'
+
+  def LPBeetsTaskCoordinator.submitBatchImport(self, dirPath, callback)  line 1222
+    names: str, Path, int, time, isStagedImportFrozen, LPBeetsTaskType, batch_import, logger, debug, condition, _isExclusiveBusyLocked, _buildTask, exclusiveQueue, append, notify_all, value
+      str: '\n        提交首轮批量导入任务。\n\n        参数:\n            dirPath (str): 目录路径。\n            callback (callable | None): 导入进度回调。\n        返回:\n            bool: 提交成功返回 True；独占任务繁忙时返回 False。\n        '
+      str: 'LPBeetsTaskCoordinator reject batch_import dir=%s because staged import freeze'
+      str: 'LPBeetsTaskCoordinator reject batch_import dir=%s because exclusive task is busy'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'dirPath'
+      str: 'callback'
+      str: 'cancelRequested'
+      str: 'cancelRequestedTimestampMs'
+      str: 'totalCount'
+      str: 'processedCount'
+      str: 'processedCountAtCancel'
+      str: 'taskStartTimestampMs'
+      str: 'importStartedTimestampMs'
+      str: 'importCount'
+      str: 'localSongCountBeforeImport'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s dir=%s exclusive=%s'
+      str: 'id'
+      str: 'type'
+      str: 'exclusive'
+
+  def LPBeetsTaskCoordinator.submitStartupLocalInit(self)  line 1268
+    names: condition, _hasExclusiveTaskTypeLocked, LPBeetsTaskType, startup_local_init, logger, debug, _buildTask, exclusiveQueue, append, notify_all, value
+      str: '\n        提交启动期本地音乐初始化任务。\n\n        参数:\n            无。\n        返回:\n            bool: 已提交或已存在同类任务时返回 True。\n        '
+      str: 'LPBeetsTaskCoordinator skip duplicate startup_local_init'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s exclusive=%s'
+      str: 'id'
+      str: 'type'
+      str: 'exclusive'
+
+  def LPBeetsTaskCoordinator.submitRemoveDir(self, dirPath, force)  line 1295
+    names: str, Path, isStagedImportFrozen, LPBeetsTaskType, remove_dir, logger, debug, condition, _bumpDirGenerationLocked, _pruneDeferredTasksLocked, _buildTask, exclusiveQueue, append, notify_all, value
+      str: '\n        提交目录删除任务，并使该目录的旧延后任务失效。\n\n        参数:\n            dirPath (str): 目录路径。\n            force (bool): 是否强制删除目录下所有记录。\n        返回:\n            bool: 提交成功返回 True；独占任务繁忙时返回 False。\n        '
+      str: 'LPBeetsTaskCoordinator reject remove_dir dir=%s because staged import freeze'
+      str: 'LPBeetsTaskCoordinator.submitRemoveDir.<locals>.<lambda>'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'dirPath'
+      str: 'dirGeneration'
+      str: 'force'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s dir=%s dir_generation=%s pruned_deferred=%s'
+      str: 'id'
+      str: 'type'
+
+    def LPBeetsTaskCoordinator.submitRemoveDir.<lambda>(task)  line 1313
+      names: _taskMatchesDir
+
+  def LPBeetsTaskCoordinator.submitClearLibrary(self)  line 1331
+    names: isStagedImportFrozen, LPBeetsTaskType, clear_library, logger, debug, condition, _isExclusiveBusyLocked, globalGeneration, len, deferredQueue, clear, _buildTask, exclusiveQueue, append, notify_all, value
+      str: '\n        提交清库任务，并使全部旧延后任务失效。\n\n        参数:\n            无。\n        返回:\n            bool: 提交成功返回 True；独占任务繁忙时返回 False。\n        '
+      str: 'LPBeetsTaskCoordinator reject clear_library because staged import freeze'
+      str: 'LPBeetsTaskCoordinator reject clear_library because exclusive task is busy'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'globalGeneration'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s global_generation=%s cleared_deferred=%s'
+      str: 'id'
+      str: 'type'
+
+  def LPBeetsTaskCoordinator.submitRescan(self, callback)  line 1366
+    names: isStagedImportFrozen, LPBeetsTaskType, rescan_upnp, logger, debug, condition, _isExclusiveBusyLocked, _buildTask, exclusiveQueue, append, notify_all, value
+      str: '\n        提交一次独占的 UPnP 全量重扫任务。\n\n        参数:\n            callback (callable | None): 重扫完成回调。\n        返回:\n            bool: 提交成功返回 True；独占任务繁忙时返回 False。\n        '
+      str: 'LPBeetsTaskCoordinator reject rescan_upnp because staged import freeze'
+      str: 'LPBeetsTaskCoordinator reject rescan_upnp because exclusive task is busy'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'callback'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s exclusive=%s'
+      str: 'id'
+      str: 'type'
+      str: 'exclusive'
+
+  def LPBeetsTaskCoordinator.submitDirSupplement(self, dirPath, ignoreTrackedDirCheck)  line 1398
+    names: str, Path, isStagedImportFrozen, LPBeetsTaskType, dir_supplement, logger, debug, LPUtility, findOwningMyMusicDir, getMyMusicDirSnapshot, condition, _hasTaskLocked, _buildTask, deferredQueue, append, notify_all, value
+      str: '\n        提交目录慢速补全任务。\n\n        参数:\n            dirPath (str): 目录路径。\n            ignoreTrackedDirCheck (bool): 是否允许为已脱离跟踪的目录继续补全。\n        返回:\n            bool: 提交成功返回 True；目录无效时返回 False。\n        '
+      str: 'LPBeetsTaskCoordinator reject dir_supplement dir=%s because staged import freeze'
+      str: 'LPBeetsTaskCoordinator skip dir_supplement dir=%s because it is no longer tracked'
+      str: 'LPBeetsTaskCoordinator skip duplicate dir_supplement dir=%s'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'dirPath'
+      str: 'ignoreTrackedDirCheck'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s dir=%s dir_generation=%s ignore_tracked=%s'
+      str: 'id'
+      str: 'type'
+      str: 'dirGeneration'
+
+  def LPBeetsTaskCoordinator.updateTaskProgress(self, task, totalCount, processedCount)  line 1437
+    names: condition, activeTask, max, int
+      str: '\n        在线程安全上下文中更新任务进度快照。\n\n        参数:\n            task (dict): 任务字典。\n            totalCount (int | None): 总文件数。\n            processedCount (int | None): 已处理文件数。\n        返回:\n            无。\n        '
+      str: 'totalCount'
+      str: 'processedCount'
+
+  def LPBeetsTaskCoordinator.cancelManualImportAndDetachDir(self)  line 1458
+    names: condition, activeTask, get, LPBeetsTaskType, batch_import, max, int, dirGeneration, time, _bumpDirGenerationLocked, _pruneDeferredTasksLocked, LPUtility, removeMymusicDir
+      str: '\n        取消当前批量导入并立即将目录移出跟踪列表。\n\n        参数:\n            无。\n        返回:\n            dict: 取消结果，包含 accepted、dirPath、total、processed、dirRemoved 等字段。\n        '
+      str: 'exclusive'
+      str: 'type'
+      str: 'accepted'
+      str: 'dirPath'
+      str: 'total'
+      str: 'processed'
+      str: 'dirRemoved'
+      str: 'dirGeneration'
+      str: 'prunedCount'
+      str: 'dirPath'
+      str: 'totalCount'
+      str: 'processedCount'
+      str: 'cancelRequested'
+      str: 'processedCountAtCancel'
+      str: 'cancelRequestedTimestampMs'
+      str: 'LPBeetsTaskCoordinator.cancelManualImportAndDetachDir.<locals>.<lambda>'
+
+    def LPBeetsTaskCoordinator.cancelManualImportAndDetachDir.<lambda>(queuedTask)  line 1506
+      names: _taskMatchesDir
+
+  def LPBeetsTaskCoordinator.submitFileImport(self, path)  line 1522
+    names: _normalizeSupportedMusicFilePath, isStagedImportFrozen, LPBeetsTaskType, file_import, logger, debug, LPUtility, findOwningMyMusicDir, condition, _pruneDeferredTasksLocked, _hasTaskLocked, _buildTask, deferredQueue, append, notify_all, value
+      str: '\n        提交单曲导入/刷新任务。\n\n        参数:\n            path (str): 文件路径。\n        返回:\n            dict: `accepted` 表示任务是否被接受，`queued` 表示是否新建了队列任务。\n        '
+      str: 'accepted'
+      str: 'queued'
+      str: 'LPBeetsTaskCoordinator reject file_import path=%s because staged import freeze'
+      str: 'LPBeetsTaskCoordinator skip file_import path=%s because it is not in tracked dirs'
+      str: 'LPBeetsTaskCoordinator.submitFileImport.<locals>.<lambda>'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'dirPath'
+      str: 'path'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s path=%s dir=%s'
+      str: 'id'
+      str: 'type'
+
+    def LPBeetsTaskCoordinator.submitFileImport.<lambda>(task)  line 1546
+      names: get, LPBeetsTaskType, file_delete
+        str: 'path'
+        str: 'type'
+
+  def LPBeetsTaskCoordinator.submitFileDelete(self, path)  line 1566
+    names: _normalizeSupportedMusicFilePath, isStagedImportFrozen, LPBeetsTaskType, file_delete, logger, debug, LPUtility, findOwningMyMusicDir, _findTrackedParentDir, condition, _pruneDeferredTasksLocked, _buildTask, deferredQueue, append, notify_all, value
+      str: '\n        提交单曲删除任务。\n\n        参数:\n            path (str): 文件路径。\n        返回:\n            dict: `accepted` 表示任务是否被接受，`queued` 表示是否新建了队列任务。\n        '
+      str: 'accepted'
+      str: 'queued'
+      str: 'LPBeetsTaskCoordinator reject file_delete path=%s because staged import freeze'
+      str: 'LPBeetsTaskCoordinator.submitFileDelete.<locals>.<lambda>'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'dirPath'
+      str: 'path'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s path=%s dir=%s'
+      str: 'id'
+      str: 'type'
+
+    def LPBeetsTaskCoordinator.submitFileDelete.<lambda>(task)  line 1590
+      names: get, LPBeetsTaskType, file_import, mb_import, file_delete
+        str: 'path'
+        str: 'type'
+
+  def LPBeetsTaskCoordinator.submitMBImport(self, path)  line 1611
+    names: _normalizeSupportedMusicFilePath, isStagedImportFrozen, LPBeetsTaskType, mb_import, logger, debug, LPUtility, findOwningMyMusicDir, condition, _hasTaskLocked, _buildTask, deferredQueue, append, notify_all, value
+      str: '\n        提交低优先级 MusicBrainz 补全任务。\n\n        参数:\n            path (str): 文件路径。\n        返回:\n            bool: 提交成功返回 True；文件不属于本地音乐目录时返回 False。\n        '
+      str: 'LPBeetsTaskCoordinator reject mb_import path=%s because staged import freeze'
+      str: 'LPBeetsTaskCoordinator skip mb_import path=%s because it is not in tracked dirs'
+      str: 'taskType'
+      str: 'exclusive'
+      str: 'dirPath'
+      str: 'path'
+      str: 'LPBeetsTaskCoordinator submit task id=%s type=%s path=%s dir=%s'
+      str: 'id'
+      str: 'type'
+
+  def LPBeetsTaskCoordinator._workerLoop(self)  line 1652
+    names: condition, stopRequested, activeTask, len, exclusiveQueue, deferredQueue, popleft, wait, logger, debug, value, _isTaskValid, _isTaskValidLocked, get, append, notify_all, _runTask, Exception, exception
+      str: '\n        任务协调线程主循环。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'LPBeetsTaskCoordinator dispatch task id=%s type=%s exclusive=%s deferred_queue=%s exclusive_queue=%s'
+      str: 'id'
+      str: 'type'
+      str: 'exclusive'
+      str: 'LPBeetsTaskCoordinator requeue task id=%s type=%s next_index=%s'
+      str: 'index'
+      str: 'LPBeetsTaskCoordinator run task exception type=%s: %s'
+
+  def LPBeetsTaskCoordinator._buildTask(self, taskType, exclusive, dirPath, dirGeneration, globalGeneration, **extra)  line 1703
+    names: str, Path, dirGeneration, get, globalGeneration, nextTaskId, update
+      str: '\n        构造统一格式的任务字典。\n\n        参数:\n            taskType (LPBeetsTaskType): 任务类型。\n            exclusive (bool): 是否独占任务。\n            dirPath (str | None): 关联目录路径。\n            dirGeneration (int | None): 目录代际号。\n            globalGeneration (int | None): 全局代际号。\n            **extra: 其他附加字段。\n        返回:\n '
+      str: 'id'
+      str: 'type'
+      str: 'exclusive'
+      str: 'dirPath'
+      str: 'dirGeneration'
+      str: 'globalGeneration'
+
+  def LPBeetsTaskCoordinator._isExclusiveBusyLocked(self)  line 1735
+    names: activeTask, get, len, exclusiveQueue
+      str: '\n        在持锁上下文中判断独占任务是否繁忙。\n\n        参数:\n            无。\n        返回:\n            bool: 当前独占任务活跃或排队时返回 True。\n        '
+      str: 'exclusive'
+
+  def LPBeetsTaskCoordinator._hasExclusiveTaskTypeLocked(self, taskType)  line 1748
+    names: activeTask, get, exclusiveQueue
+      str: '\n        在持锁上下文中判断指定独占任务类型是否已存在。\n\n        参数:\n            taskType (LPBeetsTaskType): 需要检查的任务类型。\n        返回:\n            bool: 已存在返回 True。\n        '
+      str: 'exclusive'
+      str: 'type'
+
+  def LPBeetsTaskCoordinator._hasTaskLocked(self, taskType, identifier)  line 1766
+    names: activeTask, get, _taskIdentifier, deferredQueue
+      str: '\n        在持锁上下文中判断指定任务是否已存在。\n\n        参数:\n            taskType (LPBeetsTaskType): 任务类型。\n            identifier (str): 任务判重标识。\n        返回:\n            bool: 已存在返回 True。\n        '
+      str: 'exclusive'
+      str: 'type'
+
+  def LPBeetsTaskCoordinator._taskIdentifier(self, task)  line 1786
+    names: get
+      str: '\n        获取任务的去重标识。\n\n        参数:\n            task (dict): 任务字典。\n        返回:\n            str | None: 任务唯一标识。\n        '
+      str: 'path'
+      str: 'dirPath'
+
+  def LPBeetsTaskCoordinator._pruneDeferredTasksLocked(self, predicate)  line 1797
+    names: deque, deferredQueue, append
+      str: '\n        在持锁上下文中过滤延后任务队列。\n\n        参数:\n            predicate (callable): 返回 True 的任务会被移除。\n        返回:\n            int: 被移除的任务数量。\n        '
+
+  def LPBeetsTaskCoordinator._bumpDirGenerationLocked(self, dirPath)  line 1817
+    names: dirGeneration, get
+      str: '\n        在持锁上下文中递增目录代际号。\n\n        参数:\n            dirPath (str): 目录路径。\n        返回:\n            int: 递增后的目录代际号。\n        '
+
+  def LPBeetsTaskCoordinator._taskMatchesDir(self, task, dirPath)  line 1829
+    names: get, Path, parents
+      str: '\n        判断任务是否属于指定目录或其子路径。\n\n        参数:\n            task (dict): 任务字典。\n            dirPath (str): 目录路径。\n        返回:\n            bool: 命中返回 True。\n        '
+      str: 'dirPath'
+      str: 'path'
+
+  def LPBeetsTaskCoordinator._findTrackedParentDir(self, path)  line 1853
+    names: Path, list, dirGeneration, keys, parents
+      str: '\n        从已知目录代际映射中查找路径所属目录。\n\n        参数:\n            path (str): 文件路径。\n        返回:\n            str | None: 命中的父目录路径。\n        '
+
+  def LPBeetsTaskCoordinator._isTaskValid(self, task)  line 1869
+    names: condition, _isTaskValidLocked
+      str: '\n        在线程安全上下文中判断任务是否仍然有效。\n\n        参数:\n            task (dict): 任务字典。\n        返回:\n            bool: 任务仍有效返回 True。\n        '
+
+  def LPBeetsTaskCoordinator._isTaskValidLocked(self, task)  line 1881
+    names: get, globalGeneration, logger, debug, value, dirGeneration
+      str: '\n        在持锁上下文中判断任务是否仍然有效。\n\n        参数:\n            task (dict): 任务字典。\n        返回:\n            bool: 任务仍有效返回 True。\n        '
+      str: 'globalGeneration'
+      str: 'LPBeetsTaskCoordinator drop task id=%s type=%s because global_generation mismatch task=%s current=%s'
+      str: 'id'
+      str: 'type'
+      str: 'dirPath'
+      str: 'dirGeneration'
+      str: 'LPBeetsTaskCoordinator drop task id=%s type=%s dir=%s because dir_generation mismatch task=%s current=%s'
+
+  def LPBeetsTaskCoordinator._runTask(self, task)  line 1907
+    names: LPBeetsTaskType, startup_local_init, _runStartupLocalMusicInitializationTask, batch_import, _runBatchImportTask, remove_dir, _runRemoveDirTask, clear_library, _runClearLibraryTask, rescan_upnp, _runRescanUPnPDBSync, get, dir_supplement, _runDirSupplementTask, file_import, _runFileImportTask, file_delete, _runFileDeleteTask, mb_import, _runMBImportTask
+      str: '\n        执行单个任务。\n\n        参数:\n            task (dict): 任务字典。\n        返回:\n            dict | None: 需要继续执行的延后任务；任务完成时返回 None。\n        '
+      str: 'type'
+      str: 'callback'
+
+def isDBBusy()  line 1961
+  names: beetsTaskCoordinator, isExclusiveBusy, isDBImporting, isUPnPDBScanning, isDBDeleting
+    str: '\n    判断当前是否存在独占写任务。\n\n    参数:\n        无。\n    返回:\n        bool: 当前存在独占写任务时返回 True。\n    '
+
+def _buildBeetsImportConfigBaseline(userImportConfig)  line 1990
+  names: copy, deepcopy, commands, import_cmd, parser, defaults, isinstance, dict, update
+    str: '\n    构建 beets import 子配置的基线快照。\n\n    参数:\n        userImportConfig (dict | None): 用户配置文件中的 import 配置。\n    返回:\n        dict: 合并 parser 默认值与用户配置后的基线字典。\n    '
+
+def _cloneBeetsImportConfigBaseline()  line 2005
+  names: beetsImportConfigBaseline, copy, deepcopy, commands, import_cmd, parser, defaults
+    str: '\n    获取一份可安全修改的 import 基线配置拷贝。\n\n    参数:\n        无。\n    返回:\n        dict: import 基线配置字典。\n    '
+
+def _resetBeetsImportConfig()  line 2019
+  names: _cloneBeetsImportConfigBaseline, beetsconfig, set
+    str: '\n    将 beets import 子配置复位到应用初始化时的基线状态。\n\n    参数:\n        无。\n    返回:\n        dict: 本次用于复位的 import 配置字典。\n    '
+    str: 'import'
+
+def _summarizeImportArgs(args, previewCount)  line 2033
+  names: list, max, len
+    str: '\n    生成导入命令参数的简短摘要。\n\n    参数:\n        args (list | tuple | None): 导入命令参数数组。\n        previewCount (int): 预览展示的参数数量。\n    返回:\n        str: 参数摘要字符串。\n    '
+    str: 'count=0 preview=[] extra=0'
+    str: 'count=%s preview=%s extra=%s'
+
+def triggerBatchBeetsDbChange(batchPaths, lib)  line 2052
+  names: len, glib, time, set, str, encode, list, items, dbcore, MatchQuery, id, add, append, Exception, logger, warning, debug, addUPnPDBItemsBatch
+    str: '批量导入完成后对本批所有曲目触发增量 UPnP 更新。\n    :param batchPaths: 当前批次导入的文件路径列表。\n    :param lib: 目标 beets Library；未传时使用全局 glib。staged 导入必须传入 stage 库。\n    :returns: None。\n    '
+    str: 'path'
+    str: 'LPBeetsWrapper triggerBatchBeetsDbChange query exception path=%s: %s'
+    str: 'LPBeetsWrapper triggerBatchBeetsDbChange no items found for batch of %d paths'
+    str: 'LPBeetsWrapper triggerBatchBeetsDbChange batch=%d paths, %d items found'
+    str: 'LPBeetsWrapper triggerBatchBeetsDbChange done, elapsed=%.2fs'
+
+def addUPnPDBItemsBatch(itemModels, lib)  line 2094
+  names: isUPnPDBScanning, logger, debug, glib, queryGenres, queryAlbums, queryAlbumArtists, get, Exception, warning, transaction, query, UPNP_DIRID_ALLMUSICREROOT, UPNP_DIRID_GENREROOT, UPNP_DIRID_ALBUMROOT, UPNP_DIRID_ARTISTROOT, util, py3_path, len, mutate, add
+    str: '批量将多个 beets 条目写入 wiim_upnpitems 表。\n    预加载容器映射，单事务写入整批，避免每首都做全库聚合查询。\n    :param itemModels: beets 条目模型列表。\n    :param lib: beets 库实例，未传则使用全局 glib。\n    :returns: None。\n    '
+    str: 'LPBeetsWrapper addUPnPDBItemsBatch skipped: UPnP DB scanning in progress'
+    str: 'lib'
+    str: 'genre'
+    str: 'album'
+    str: 'artist'
+    str: 'LPBeetsWrapper addUPnPDBItemsBatch preload exception: %s'
+    str: 'SELECT COUNT(id) FROM wiim_upnpitems where `upnp_parentid`=?'
+    str: 'COUNT(id)'
+    str: 'SELECT item_id FROM wiim_upnpitems WHERE upnp_parentid=?'
+    str: 'addUPnPDBItemsBatch.<locals>.<setcomp>'
+    str: 'LPBeetsWrapper addUPnPDBItemsBatch count preload exception: %s'
+    str: '\n        INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_refid, upnp_class, item_id, upnp_thumbnail, upnp_date, child_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\n        '
+    str: '\n        INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, child_count) VALUES (?, ?, ?, ?, ?);\n        '
+    str: '\n        INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, item_id, upnp_thumbnail, upnp_date, child_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?);\n        '
+    str: '\n        INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, upnp_thumbnail, child_count) VALUES (?, ?, ?, ?, ?, ?);\n        '
+    str: '64'
+    str: 'id'
+    str: 'path'
+    str: 'year'
+    str: '%d-%d-%d'
+    str: 'month'
+    str: 'day'
+    str: '%s$%d'
+    str: 'container.genre.musicGenre'
+    str: 'title'
+    str: '%s$%s'
+    str: 'item.audioItem.musicTrack'
+    str: 'container.album.musicAlbum'
+    str: 'container.person.musicArtist'
+    str: '?'
+    str: 'LPBeetsWrapper addUPnPDBItemsBatch item exception id=%s title=%s: %s'
+    str: 'LPBeetsWrapper addUPnPDBItemsBatch transaction exception: %s'
+    str: 'LPBeetsWrapper addUPnPDBItemsBatch done: success=%d skip=%d error=%d'
+
+  def addUPnPDBItemsBatch.<setcomp>(.0)  line 2154
+      str: 'item_id'
+
+def addUPnPDBItem(itemModel, lib)  line 2247
+  names: isUPnPDBScanning, logger, debug, glib, transaction, query, UPNP_DIRID_ALLMUSICREROOT, len, UPNP_DIRID_GENREROOT, _checkGenreExists, _getGenreCount, mutate, util, py3_path, Exception, warning, UPNP_DIRID_ALBUMROOT, _checkAlbumExists, _getAlbumCount, UPNP_DIRID_ARTISTROOT, _checkArtistExists, _getArtistCount, _getAllMusicCount
+    str: '添加一个UPnP条目。\n    :param itemModel: beets条目模型。\n    :param lib: beets库实例，未传则使用全局glib。\n    :returns: None。\n    '
+    str: 'LPBeetswrapper addUPnPDBItem already running'
+    str: 'SELECT COUNT(id) FROM wiim_upnpitems where `item_id`=? AND `upnp_parentid`=?'
+    str: 'id'
+    str: 'COUNT(id)'
+    str: '\n        INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_refid, upnp_class, item_id, upnp_thumbnail, upnp_date, child_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\n        '
+    str: '64'
+    str: 'genre'
+    str: '\n            INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, child_count) VALUES (?, ?, ?, ?, ?);\n            '
+    str: '%s$%d'
+    str: 'container.genre.musicGenre'
+    str: 'path'
+    str: 'year'
+    str: '%d-%d-%d'
+    str: 'month'
+    str: 'day'
+    str: 'title'
+    str: '%s$%s'
+    str: 'item.audioItem.musicTrack'
+    str: 'LPBeetswrapper addUPnPDBItem genre exception %s'
+    str: '\n        INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, item_id, upnp_thumbnail, upnp_date, child_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?);\n        '
+    str: 'album'
+    str: 'container.album.musicAlbum'
+    str: 'LPBeetswrapper addUPnPDBItem album exception %s'
+    str: '\n        INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, upnp_thumbnail, child_count) VALUES (?, ?, ?, ?, ?, ?);\n        '
+    str: 'artist'
+    str: 'container.person.musicArtist'
+    str: 'LPBeetswrapper addUPnPDBItem artist exception %s'
+    str: 'LPBeetswrapper addUPnPDBItem allmusic exception %s'
+
+def _runRescanUPnPDBSync(callback)  line 2370
+  names: isUPnPDBScanning, logger, debug, glib, transaction, mutate, UPNP_DIRID_GENREROOT, queryGenres, enumerate, queryTracks, list, trackName, trackId, localPath, date, Exception, warning, UPNP_DIRID_ALBUMROOT, queryAlbums, UPNP_DIRID_ARTISTROOT, queryAlbumArtists, UPNP_DIRID_FOLDERROOT, LPUtility, getMyMusicDirSnapshot, util, bytestring_path, memoryview, query, len, os, path, basename, UPNP_DIRID_ALLMUSICREROOT, objectForUserconfig, datetime, now, strftime, updateUserconfig
+    str: '\n    同步重建 UPnP Server 数据库。\n\n    参数:\n        callback (callable | None): 重建完成回调。\n    返回:\n        无。\n    '
+    str: 'LPBeetswrapper rescanUPnPDB already running'
+    str: 'DELETE FROM wiim_upnpitems'
+    str: '\n            INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_refid, upnp_class, item_id, upnp_thumbnail, upnp_date, child_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\n            '
+    str: '64'
+    str: 'LPBeetswrapper rescanUPnPDB genres start'
+    str: '\n            INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, child_count) VALUES (?, ?, ?, ?, ?);\n            '
+    str: '%s$%d'
+    str: 'genre'
+    str: 'container.genre.musicGenre'
+    str: 'childCount'
+    str: 'genre'
+    str: 'strict'
+    str: '%s$%s'
+    str: 'item.audioItem.musicTrack'
+    str: 'LPBeetswrapper rescanUPnPDB genre exception %s'
+    str: 'LPBeetswrapper rescanUPnPDB albums start'
+    str: '\n            INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, item_id, upnp_thumbnail, upnp_date, child_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?);\n            '
+    str: 'album'
+    str: 'container.album.musicAlbum'
+    str: 'id'
+    str: 'path'
+    str: 'date'
+    str: 'artist'
+    str: 'album'
+    str: 'artist'
+    str: 'strict'
+    str: 'LPBeetswrapper rescanUPnPDB album exception %s'
+    str: 'LPBeetswrapper rescanUPnPDB artists start'
+    str: '\n            INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, upnp_thumbnail, child_count) VALUES (?, ?, ?, ?, ?, ?);\n            '
+    str: 'container.person.musicArtist'
+    str: 'avatar_url'
+    str: 'artist'
+    str: 'strict'
+    str: 'LPBeetswrapper rescanUPnPDB artist exception %s'
+    str: 'LPBeetswrapper rescanUPnPDB folders start'
+    str: '\n            INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, child_count, extra_data) VALUES (?, ?, ?, ?, ?, ?);\n            '
+    str: 'SELECT COUNT(id) from items WHERE substr(BYTELOWER(path), 1, ?) = BYTELOWER(?)'
+    str: 'COUNT(id)'
+    str: 'container.storageFolder'
+    str: 'parentPath'
+    str: 'LPBeetswrapper rescanUPnPDB folder exception %s'
+    str: 'LPBeetswrapper rescanUPnPDB playlists start'
+    str: 'LPBeetswrapper rescanUPnPDB tracks start'
+    str: 'INSERT OR IGNORE INTO wiim_upnpitems (upnp_title, upnp_id, upnp_parentid, upnp_class, child_count) VALUES ("All Music", "%s", "0", "container.storageFolder", %d);'
+    str: 'LPBeetswrapper rescanUPnPDB allmusic exception %s'
+    str: 'upnpserver'
+    str: '%Y-%m-%d %H:%M:%S'
+    str: 'lastUpdate'
+    str: 'LPBeetswrapper rescanUPnPDB finish'
+
+def rescanUPnPDB(callback)  line 2507
+  names: beetsTaskCoordinator, _runRescanUPnPDBSync, submitRescan
+    str: '\n    提交一次独占的 UPnP 全量重扫任务。\n\n    参数:\n        callback (callable | None): 重扫完成回调。\n    返回:\n        bool: 提交成功返回 True；独占任务繁忙时返回 False。\n    '
+
+def statisicsUPnPDB()  line 2523
+  names: glib, transaction, query, UPNP_DIRID_GENREROOT, UPNP_DIRID_ALBUMROOT, UPNP_DIRID_ALLMUSICREROOT, UPNP_DIRID_ARTISTROOT, UPNP_DIRID_FOLDERROOT, UPNP_DIRID_PLAYLISTROOT
+    str: 'SELECT COUNT(id) FROM wiim_upnpitems where `upnp_parentid`=?'
+    str: 'COUNT(id)'
+    str: 'trackCount'
+    str: 'albumCount'
+    str: 'artistCount'
+    str: 'folderCount'
+    str: 'genreCount'
+    str: 'playlistCount'
+
+def _getTrackedMyMusicDirSnapshot()  line 2564
+  names: LPUtility, getMyMusicDirSnapshot
+    str: '\n    获取当前已跟踪的本地音乐目录快照。\n\n    参数:\n        无。\n    返回:\n        list[str]: 规范化后的目录路径数组。\n    '
+    str: '_getTrackedMyMusicDirSnapshot.<locals>.<listcomp>'
+
+  def _getTrackedMyMusicDirSnapshot.<listcomp>(.0)  line 2573
+    names: str, Path
+
+def defaultStageDir(taskId)  line 2581
+  names: Path, LPUtility, cacheDir, STAGE_ROOT_DIR_NAME, int, time
+    str: '\n    返回 task 专属 stage 目录。\n\n    参数:\n        taskId (int | None): 导入任务 id；未传时用时间戳生成。\n    返回:\n        Path: 应用 cache 目录下的 stage 目录。\n    '
+    str: 'task-%d'
+    str: 'task-%s'
+
+def _backupSqliteDatabase(sourcePath, destinationPath)  line 2597
+  names: LPMusicDatabase, connect, sqlite3, str, backup, close
+    str: '\n    用 SQLite backup API 从源库一致备份到目标库（源库以只读方式打开）。\n\n    参数:\n        sourcePath (str | Path): 源库路径。\n        destinationPath (str | Path): 目标库路径。\n    返回:\n        无。\n    '
+    str: 'readonly'
+
+def _openStagedLibrary(stageDbPath)  line 2618
+  names: glib, directory, path_formats, replacements, util, bytestring_path, beetsconfig, as_filename, get_path_formats, get_replacements, library, Library, str
+    str: '\n    为 stage 库打开独立 Library 实例。\n\n    不修改全局 beets 配置：directory / path_formats / replacements 与主库保持一致。\n\n    参数:\n        stageDbPath (str | Path): stage 库路径。\n    返回:\n        library.Library: stage 库实例（调用方负责关闭）。\n    '
+    str: 'directory'
+
+def createStageDatabase(sourcePath, stageDir, taskId)  line 2641
+  names: Path, LPMusicDatabase, databasePath, defaultStageDir, STAGE_LIBRARY_FILE_NAME, mkdir, exists, unlink, _backupSqliteDatabase, connect, close, _openStagedLibrary, _initTables, _close, Exception, logger, error, debug
+    str: '\n    创建并初始化 stage 库。\n\n    主库以只读方式打开做一致备份，整个过程不写入主库；stage 失败时保留 stage\n    目录供诊断，但绝不删除或修改主库文件。\n\n    参数:\n        sourcePath (str | Path | None): 主库路径；未传时取 LPMusicDatabase.databasePath()。\n        stageDir (str | Path | None): stage 目录；未传时按 taskId 生成。\n        taskId (int | None): 导入任务 id，用于生成 stage 目录名。\n'
+    str: 'parents'
+    str: 'exist_ok'
+    str: 'createStageDatabase failed stage=%s main=%s: %s'
+    str: 'createStageDatabase ready stage=%s main=%s'
+
+def _switchBeetsLibrary(libraryPath)  line 2685
+  names: beetsconfig, set_args, str, Path
+    str: '\n    将全局 beets 配置的 library 指向指定库。\n\n    ``callBeets()`` 的 import 子命令通过 beets 全局配置解析库路径，因此 staged\n    导入期间必须把配置切到 stage 库，结束后再切回主库。\n\n    参数:\n        libraryPath (str | Path): 目标库路径。\n    返回:\n        无。\n    '
+    str: 'library'
+
+def _restoreBeetsLibrary()  line 2700
+  names: beetsconfig, set_args, LPMusicDatabase, databasePath, as_posix
+    str: '\n    将全局 beets 配置的 library 切回主库。\n\n    参数:\n        无。\n    返回:\n        无。\n    '
+    str: 'library'
+
+def _countUPnPRows(lib)  line 2712
+  names: glib, transaction, query
+    str: '\n    统计 wiim_upnpitems 行数。\n\n    参数:\n        lib: 目标 beets Library；未传时使用全局 glib。\n    返回:\n        int: 行数。\n    '
+    str: 'SELECT COUNT(*) AS row_count FROM wiim_upnpitems'
+    str: 'row_count'
+
+def runStagedImport(stageDbPath, filePaths, batchSize, onBatch, shouldCancel)  line 2731
+  names: Path, max, int, _openStagedLibrary, str, len, _countAllIndexedMusicFiles, _countUPnPRows, isDBImporting, _switchBeetsLibrary, range, callBeets, triggerBatchBeetsDbChange, Exception, logger, exception, _restoreBeetsLibrary, _close, debug
+    str: '\n    在 stage 库上执行真实 beets 导入与 UPnP 增量投影。\n\n    全程不写主库：导入期间把 beets 配置的 library 切到 stage，用独立 Library\n    实例做查询与 UPnP 写入，结束时切回主库。取消或失败时不回灌，stage 目录保留\n    供诊断。\n\n    参数:\n        stageDbPath (str | Path): stage 库路径（由 createStageDatabase 生成）。\n        filePaths (list): 待导入文件路径列表。\n        batchSize (int): 每批处'
+    str: 'runStagedImport.<locals>.<listcomp>'
+    str: 'stagePath'
+    str: 'requestedCount'
+    str: 'processedCount'
+    str: 'itemsImported'
+    str: 'upnpUpdated'
+    str: 'canceled'
+    str: 'failed'
+    str: 'error'
+    str: 'canceled'
+    str: 'import'
+    str: '-I'
+    str: '-A'
+    str: '-s'
+    str: 'processedCount'
+    str: 'failed'
+    str: 'error'
+    str: 'LPBeetsWrapper runStagedImport exception stage=%s: %s'
+    str: 'itemsImported'
+    str: 'upnpUpdated'
+    str: 'LPBeetsWrapper runStagedImport done stage=%s requested=%s processed=%s imported=%s upnp_updated=%s canceled=%s failed=%s'
+    str: 'requestedCount'
+
+  def runStagedImport.<listcomp>(.0)  line 2753
+    names: str
+
+def _tableColumnSignature(conn, tableName)  line 2828
+  names: execute, fetchall
+    str: '\n    读取表列定义签名（列名 + 类型 + 顺序）。\n\n    参数:\n        conn (sqlite3.Connection): 已打开目标库的连接。\n        tableName (str): 表名。\n    返回:\n        list[tuple]: (列名, 类型) 列表；表不存在时返回空列表。\n    '
+    str: 'PRAGMA table_info(%s)'
+    str: '_tableColumnSignature.<locals>.<listcomp>'
+
+  def _tableColumnSignature.<listcomp>(.0)  line 2839
+
+def _validateBeetsOwnedSchemas(mainPath, stagePath)  line 2842
+  names: LPMusicDatabase, connect, BEETS_OWNED_INSERT_ORDER, _tableColumnSignature, ValueError, execute, fetchone, close
+    str: '\n    校验主库与 stage 库的 beets-owned 表结构完全一致。\n\n    参数:\n        mainPath (Path): 主库路径。\n        stagePath (Path): stage 库路径。\n    返回:\n        dict: 每张表的 stage 行数。\n    '
+    str: 'readonly'
+    str: '主库缺少 beets-owned 表: %s'
+    str: 'stage 库缺少 beets-owned 表: %s'
+    str: 'beets-owned 表结构不一致 table=%s main=%s stage=%s'
+    str: 'SELECT COUNT(*) FROM %s'
+
+def _ensureNoInFlightBeetsWrites(exceptTaskId)  line 2878
+  names: beetsTaskCoordinator, hasActiveWriteTask, RuntimeError
+    str: '\n    回灌前确认没有其他正在执行的 beets 写任务。\n\n    参数:\n        exceptTaskId (int | None): 允许的任务 id（本次 staged 导入任务自身）。\n    返回:\n        无。\n    '
+    str: 'exceptTaskId'
+    str: '存在在途 beets 写任务，拒绝回灌'
+
+def mergeStagedBeetsTables(mainDbPath, stageDbPath, exceptTaskId)  line 2894
+  names: Path, LPMusicDatabase, databasePath, ValueError, _ensureNoInFlightBeetsWrites, _validateBeetsOwnedSchemas, time, perf_counter, logger, info, connect, isolation_level, execute, fetchone, as_posix, BEETS_OWNED_DELETE_ORDER, BEETS_OWNED_INSERT_ORDER, Exception, close, str, MERGE_SLOW_WARNING_SECONDS, warning, debug
+    str: '\n    在主库的单个事务中整体替换 beets-owned 表。\n\n    不替换整个数据库文件、不触碰 Recently 等应用-owned 表；任何异常都回滚，\n    并保留 stage 目录供诊断。\n\n    参数:\n        mainDbPath (str | Path | None): 主库路径；未传时取 LPMusicDatabase.databasePath()。\n        stageDbPath (str | Path): stage 库路径。\n        exceptTaskId (int | None): 本次 staged 导入任务 id；回灌由该任务'
+    str: 'mergeStagedBeetsTables 需要 stage 库路径'
+    str: 'exceptTaskId'
+    str: 'LPBeetsWrapper staged merge started main=%s stage=%s rows=%s'
+    str: 'PRAGMA journal_mode;'
+    str: 'ATTACH DATABASE ? AS stage'
+    str: 'BEGIN IMMEDIATE'
+    str: 'DELETE FROM %s'
+    str: 'INSERT INTO %s SELECT * FROM stage.%s'
+    str: 'COMMIT'
+    str: 'ROLLBACK'
+    str: 'DETACH DATABASE stage'
+    str: 'mainPath'
+    str: 'stagePath'
+    str: 'tableRows'
+    str: 'mergeSeconds'
+    str: 'journalMode'
+    str: 'LPBeetsWrapper staged merge slow: %.3fs rows=%s journal=%s'
+    str: 'LPBeetsWrapper staged merge done: %.3fs rows=%s journal=%s'
+
+def _cleanupStageDirectory(stagePath)  line 2972
+  names: shutil, rmtree, str, Exception, logger, warning
+    str: '\n    删除 stage 目录（含 WAL/SHM 等附属文件）。\n\n    参数:\n        stagePath (str | Path): stage 目录。\n    返回:\n        bool: 删除成功返回 True；失败仅告警。\n    '
+    str: 'LPBeetsWrapper cleanup stage failed stage=%s: %s'
+
+def reopenMainLibrary()  line 2989
+  names: glib, _close, Exception, logger, warning, _restoreBeetsLibrary, _open_library, _configure, debug, LPMusicDatabase, databasePath
+    str: '\n    关闭旧主库连接，并用共享主库路径重新打开 beets Library。\n\n    参数:\n        无。\n    返回:\n        library.Library: 重新打开的主库实例。\n    '
+    str: 'LPBeetsWrapper reopenMainLibrary close exception: %s'
+    str: 'LPBeetsWrapper reopenMainLibrary done library=%s'
+
+def finishStagedImport(session, stageCleanup, notifyUi)  line 3016
+  names: reopenMainLibrary, notifyStagedImportStatus, LPBeetsWrapperImportStatus, finish, LPUtility, postNotification, stagePath, _cleanupStageDirectory, logger, warning, clearStagedMergeSession, debug
+    str: '\n    回灌成功后的收尾：重建主库连接、通知 UI、清理 stage、解除冻结。\n\n    参数:\n        session (LPBeetsStagedMergeSession | None): 当前 staged 会话。\n        stageCleanup (bool): 是否清理 stage 目录，默认 True。\n        notifyUi (bool): 是否发送一次导入完成状态给 UI；生产批量导入路径会自带\n            更详细的 finish 回调，此时传 False 避免重复结束态。\n    返回:\n        dict: 收尾摘要（stag'
+    str: 'LibUpdateNotify'
+    str: 'LPBeetsWrapper finishStagedImport keep stage: %s'
+    str: 'stagePath'
+    str: 'stageCleaned'
+    str: 'notified'
+    str: 'mainLibraryReopened'
+    str: 'uiNotified'
+    str: 'LPBeetsWrapper finishStagedImport done summary=%s'
+
+def abortStagedImport(session, error)  line 3056
+  names: glib, reopenMainLibrary, stagePath, logger, warning, abort, clearStagedMergeSession, debug
+    str: '\n    导入或回灌失败时的收尾：保留 stage 目录供诊断、解除冻结。\n\n    主库保持可用：若全局 glib 缺失（例如启动早期失败）则重连主库，保证运行时\n    不会长期落在 stage 库上；不回灌、不发送成功通知。\n\n    参数:\n        session (LPBeetsStagedMergeSession | None): 当前 staged 会话。\n        error (str | None): 失败原因，仅用于日志与摘要。\n    返回:\n        dict: 收尾摘要（stagePath、error、mainLibraryReopened）。\n '
+    str: 'LPBeetsWrapper abortStagedImport keep stage for diagnosis stage=%s error=%s'
+    str: 'stagePath'
+    str: 'error'
+    str: 'mainLibraryReopened'
+    str: 'LPBeetsWrapper abortStagedImport done summary=%s'
+
+def initBeets()  line 3094
+  names: LPBeetsWatchDog, beetsWatchDog, queue, Queue, importTrackQueue, importTrackMBQueue, startupLocalMusicInitializationScheduled, LPUtility, appLocalDataPath, userDataDir, str, parent, resolve, as_posix, os, environ, logger, debug, path, exists, mkdir, shutil, copy, codecs, open, yaml, safe_load, read, get, Exception, error, getattr, sys, LPMusicDatabase, databasePath, append, dump, _buildBeetsImportConfigBaseline, beetsImportConfigBaseline, _configure, _open_library, glib, LPBeetsTaskCoordinator, beetsTaskCoordinator, start, _initTables, objectForUserconfig, pcName, updateUserconfig, initDiff, startWatch
+    str: '初始化beets的配置\n    1. 设置环境变量\n    2. 查看是否需要更新beets配置文件\n    3. 修改配置文件，例如library路径等\n    4. WatchDog start\n    5. 可能需要更新统计文件\n    '
+    str: 'beets-config.yaml'
+    str: 'beets'
+    str: 'config.yaml'
+    str: 'BEETSDIR'
+    str: 'beets config path: %s'
+    str: 'init beets config file: %s'
+    str: 'r'
+    str: 'utf-8'
+    str: 'ignore'
+    str: 'errors'
+    str: 'wiimversion'
+    str: 'beets local config(%s) > user config(%s), update'
+    str: 'beets config load error: %s'
+    str: 'frozen'
+    str: './beetsplug'
+    str: './LPClientFramework/beetsplug'
+    str: 'library'
+    str: 'pluginpath'
+    str: 'w'
+    str: 'import'
+    str: 'LPBeetsWrapper import baseline ready incremental=%s singletons=%s autotag=%s resume=%s'
+    str: 'incremental'
+    str: 'singletons'
+    str: 'autotag'
+    str: 'resume'
+    str: 'upnpserver'
+    str: 'enable'
+    str: 'WiiM Home: %s'
+    str: 'name'
+
+def stop()  line 3194
+  names: beetsWatchDog, logger, debug, beetsTaskCoordinator, stop, dump, stopWatch
+    str: '停止beets相关后台任务。\n    :returns: None。\n    '
+    str: '[beets] stop skipped because beetsWatchDog is not initialized'
+
+def callBeets(args)  line 3208
+  names: beetsCallLock, _callBeetsFunction
+    str: '调用beets命令。\n    :param args: beets命令参数列表。\n    :returns: None。\n    https://wiki.musicbrainz.org/MusicBrainz_API/Rate_Limiting\n    FIXME: 虽然musicbrainzngs已经针对调用频率做了限制，但是没有考虑队列的问题。\n    例如1000首歌正在一首一首的index，但此时如果有一个任务需要插进来，就需要自己处理好\n    '
+
+def isDBEmpty()  line 3220
+  names: glib, transaction, query
+    str: '数据库是否为空\n    '
+    str: 'SELECT COUNT(*) FROM items'
+
+def _initTables(lib)  line 3229
+  names: glib, time, perf_counter, transaction, script, query, mutate, BEETS_ITEMS_INDEX_SCRIPT, beetsDBVersion, format, logger, info, LPGlobalUI, eventTrack, LPClientFramework.LPEventTrack, LPEventsType, logEvent, DB_INDEX_CREATE, value, int
+    str: '初始化业务扩展表结构。\n    :param lib: 目标 beets Library；未传时使用全局 glib。\n    :returns: None。\n    '
+    str: 'CREATE TABLE IF NOT EXISTS wiim_artists (\n        id INTEGER PRIMARY KEY,\n        artist TEXT,\n        mb_urllist TEXT,\n        avatar_url TEXT,\n        thumbnail_url TEXT,\n        avatar_suburl TEXT,\n        wikidata TEXT,\n        wikipedia TEXT,\n        UNIQUE(id, artist)\n        );'
+    str: 'CREATE TABLE IF NOT EXISTS wiim_upnpitems (\n        id INTEGER PRIMARY KEY,\n        upnp_title TEXT,\n        upnp_id TEXT,\n        upnp_parentid TEXT,\n        upnp_refid TEXT,\n        upnp_class TEXT,\n        item_id INTEGER,\n        upnp_thumbnail TEXT,\n        child_count INTEGER,\n        upnp_dat'
+    str: 'PRAGMA user_version'
+    str: '_initTables.<locals>.<setcomp>'
+    str: 'PRAGMA table_info(wiim_artists)'
+    str: 'wikidata'
+    str: 'ALTER TABLE wiim_artists ADD Column wikidata TEXT'
+    str: 'wikipedia'
+    str: 'ALTER TABLE wiim_artists ADD Column wikipedia TEXT'
+    str: 'PRAGMA user_version = {v:d}'
+    str: 'v'
+    str: 'index create finish, cost=%.3fs'
+    str: 'eventTrack'
+    str: 'LPEventsType'
+    str: 'cost_ms'
+    str: 'db_version_from'
+    str: 'db_version_to'
+
+  def _initTables.<setcomp>(.0)  line 3269
+      str: 'name'
+
+def queryGenres(sortBy, lib)  line 3294
+  names: glib, transaction, query, len, strip, util, py3_path, append
+    str: '查询流派列表。\n    :param sortBy: 排序字段，支持genre/albumcount。\n    :param lib: 目标 beets Library；未传时使用全局 glib。\n    :returns: 流派信息数组。\n    '
+    str: 'genre'
+    str: 'select distinct genre, COUNT(album) from items GROUP BY genre ORDER BY genre COLLATE NOCASE'
+    str: 'albumcount'
+    str: 'SELECT distinct genre, COUNT(album) FROM items GROUP BY genre ORDER BY COUNT(album) DESC'
+    str: 'select path from items where genre=? limit 4'
+    str: 'path'
+    str: 'COUNT(album)'
+    str: 'genre'
+    str: 'childCount'
+    str: 'path'
+
+def queryAlbumArtists(key, sortBy, strict, lib)  line 3328
+  names: glib, transaction, append, query, tuple, len
+    str: '查询专辑艺术家信息。\n    :param key: 过滤关键字。\n    :param sortBy: 排序字段。\n    :param strict: 是否严格匹配。\n    :param lib: 目标 beets Library；未传时使用全局 glib。\n    :returns: 艺术家信息数组。\n    '
+    str: "\n    SELECT\n        COALESCE(NULLIF(i.albumartist, ''), i.artist) AS final_artist,\n        COALESCE(NULLIF(i.mb_albumartistid, ''), i.mb_artistid) AS final_mb_artistid,\n        w.avatar_url,\n        COUNT(DISTINCT i.album) AS album_count\n    FROM items AS i\n    LEFT JOIN wiim_artists AS w\n        ON"
+    str: 'artist'
+    str: '%s where final_artist = ?'
+    str: '%%'
+    str: '%s where final_artist like ?'
+    str: '%s GROUP BY final_artist ORDER BY final_artist COLLATE NOCASE'
+    str: 'albumcount'
+    str: '%s GROUP BY final_artist ORDER BY album_count DESC'
+    str: 'playcount'
+    str: 'final_artist'
+    str: 'album_count'
+    str: 'avatar_url'
+    str: 'final_mb_artistid'
+    str: 'artist'
+    str: 'childCount'
+    str: 'avatar_url'
+    str: 'mb_artistid'
+
+def _checkGenreExists(tx, genre)  line 3390
+  names: query, UPNP_DIRID_GENREROOT
+    str: '检查指定 genre 是否已存在于 UPNP_DIRID_GENREROOT 下。\n    :param tx: 数据库事务对象。\n    :param genre: 流派名称。\n    :returns: True 如果已存在，否则 False。\n    '
+    str: 'SELECT COUNT(*) as cnt FROM wiim_upnpitems WHERE upnp_title=? AND upnp_parentid=?'
+    str: 'cnt'
+
+def _checkAlbumExists(tx, album)  line 3403
+  names: query, UPNP_DIRID_ALBUMROOT
+    str: '检查指定 album 是否已存在于 UPNP_DIRID_ALBUMROOT 下。\n    :param tx: 数据库事务对象。\n    :param album: 专辑名称。\n    :returns: True 如果已存在，否则 False。\n    '
+    str: 'SELECT COUNT(*) as cnt FROM wiim_upnpitems WHERE upnp_title=? AND upnp_parentid=?'
+    str: 'cnt'
+
+def _checkArtistExists(tx, artist)  line 3416
+  names: query, UPNP_DIRID_ARTISTROOT
+    str: '检查指定 artist 是否已存在于 UPNP_DIRID_ARTISTROOT 下。\n    :param tx: 数据库事务对象。\n    :param artist: 艺术家名称。\n    :returns: True 如果已存在，否则 False。\n    '
+    str: 'SELECT COUNT(*) as cnt FROM wiim_upnpitems WHERE upnp_title=? AND upnp_parentid=?'
+    str: 'cnt'
+
+def _getGenreCount(tx)  line 3429
+  names: query, UPNP_DIRID_GENREROOT
+    str: '获取 UPNP_DIRID_GENREROOT 下的子容器数量。\n    :param tx: 数据库事务对象。\n    :returns: 子容器数量（int）。\n    '
+    str: 'SELECT COUNT(*) as cnt FROM wiim_upnpitems WHERE upnp_parentid=?'
+    str: 'cnt'
+
+def _getAlbumCount(tx)  line 3441
+  names: query, UPNP_DIRID_ALBUMROOT
+    str: '获取 UPNP_DIRID_ALBUMROOT 下的子容器数量。\n    :param tx: 数据库事务对象。\n    :returns: 子容器数量（int）。\n    '
+    str: 'SELECT COUNT(*) as cnt FROM wiim_upnpitems WHERE upnp_parentid=?'
+    str: 'cnt'
+
+def _getArtistCount(tx)  line 3453
+  names: query, UPNP_DIRID_ARTISTROOT
+    str: '获取 UPNP_DIRID_ARTISTROOT 下的子容器数量。\n    :param tx: 数据库事务对象。\n    :returns: 子容器数量（int）。\n    '
+    str: 'SELECT COUNT(*) as cnt FROM wiim_upnpitems WHERE upnp_parentid=?'
+    str: 'cnt'
+
+def _getAllMusicCount(tx)  line 3465
+  names: query, UPNP_DIRID_ALLMUSICREROOT
+    str: '获取 UPNP_DIRID_ALLMUSICREROOT 下的 track 数量。\n    :param tx: 数据库事务对象。\n    :returns: track 数量（int）。\n    '
+    str: 'SELECT COUNT(*) as cnt FROM wiim_upnpitems WHERE upnp_parentid=?'
+    str: 'cnt'
+
+def queryTrackArtists(key, strict)  line 3478
+  names: glib, transaction, append, query, tuple
+    str: 'SELECT items.artist, items.mb_artistid, wiim_artists.avatar_url, COUNT(items.album) from items left join wiim_artists on wiim_artists.artist = items.artist'
+    str: '%s where items.artist = ?'
+    str: '%%'
+    str: '%s where items.artist like ?'
+    str: '%s GROUP BY items.artist, items.mb_artistid, wiim_artists.avatar_url'
+    str: 'artist'
+    str: 'avatar_url'
+    str: 'mb_artistid'
+    str: 'artist'
+    str: 'childCount'
+    str: 'avatar_url'
+    str: 'mb_artistid'
+
+def fetchMusicBrainzArtworkUrl(artistName, mbid)  line 3505
+  names: glib, transaction, query, len, logger, debug, musicbrainzngs, search_artists, get, Exception, warning, get_artist_by_id, discogsLimit, time, discogsLastTimestamp, replace, DIS_C, DIS_S, LPUtility, appVersion, requests, status_code, text, headers, int, json, append, dumps, mutate
+    str: 'Default wiki image\n    '
+    str: 'select avatar_url, thumbnail_url, avatar_suburl from wiim_artists where artist=?'
+    str: 'avatar_url'
+    str: 'thumbnail_url'
+    str: 'avatar_suburl'
+    str: 'artist'
+    str: 'avatar_url'
+    str: 'thumbnail_url'
+    str: 'avatar_suburl'
+    str: 'fetchMusicBrainzArtworkUrl.<locals>._insertEmptyRecord'
+    str: 'musicbrainzngs.search_artists start: %s'
+    str: 'limit'
+    str: 'strict'
+    str: 'artist-list'
+    str: 'id'
+    str: 'musicbrainzngs.search_artists exception %s, %s, %s'
+    str: 'musicbrainzngs.get_artist_by_id start: %s'
+    str: 'url-rels'
+    str: 'includes'
+    str: 'artist'
+    str: 'url-relation-list'
+    str: 'musicbrainzngs.get_artist_by_id found no discogs url'
+    str: 'musicbrainzngs.get_artist_by_id artistName:%s, mbid=%s, %s'
+    str: 'type'
+    str: 'discogs'
+    str: 'target'
+    str: 'discogs exceed limit: %d, %s'
+    str: 'www.discogs.com/artist'
+    str: 'api.discogs.com/artists'
+    str: 'discogs start: %s'
+    str: '%s?key=%s&secret=%s'
+    str: 'User-Agent'
+    str: 'WiiMHome/%s +https://wiimhome.com/'
+    str: 'headers'
+    str: 'timeout'
+    str: 'discogs.artist artistName:%s, mbid=%s, %s'
+    str: 'discogs exception: %s, %s, %s, %s'
+    str: 'discogs finish: %s'
+    str: 'X-Discogs-Ratelimit-Remaining'
+    str: 'na'
+    str: 'images'
+    str: 'primary'
+    str: 'uri'
+    str: 'uri150'
+    str: 'secondary'
+    str: '\n        INSERT OR IGNORE INTO wiim_artists (artist, mb_urllist, avatar_url, thumbnail_url, avatar_suburl) VALUES (?, ?, ?, ?, ?);\n        '
+
+  def fetchMusicBrainzArtworkUrl._insertEmptyRecord()  line 3527
+    names: glib, transaction, mutate
+      str: '\n            INSERT OR IGNORE INTO wiim_artists (artist, mb_urllist, avatar_url, thumbnail_url, avatar_suburl) VALUES (?, "", "na", "", "");\n            '
+
+def fetchDiscogsImage(url)  line 3648
+  names: LPUtility, fetchUrlQPixmap, appVersion, get
+    str: 'User-Agent'
+    str: 'WiiMHome/%s +https://wiimhome.com/'
+    str: 'headers'
+    str: 'image'
+
+def queryAlbums(key, sortBy, artist, strict, lib)  line 3658
+  names: extend, append, glib, transaction, query, tuple, util, py3_path, keys, encode, hex, LPUtility, fetchLocalIP, mediaServerPort
+    str: '查询专辑列表。\n    :param key: 搜索关键字。\n    :param sortBy: 排序字段。\n    :param artist: 指定艺术家。\n    :param strict: 是否严格匹配。\n    :param lib: 目标 beets Library；未传时使用全局 glib。\n    :returns: 专辑信息数组。\n    '
+    str: 'SELECT DISTINCT id, album, artist, path, COUNT(id), year, month, day, albumartist, mb_albumid FROM items'
+    str: '%%'
+    str: '%s WHERE album LIKE ? or albumartist LIKE ? or artist LIKE ?'
+    str: '%s WHERE album = ?'
+    str: 'SELECT id, album, albumartist, artist, path, COUNT(id), mb_albumid FROM items WHERE albumartist = ? or artist = ?'
+    str: "%s GROUP BY album, COALESCE(NULLIF(albumartist, ''), artist)"
+    str: 'album'
+    str: '%s ORDER BY TRIM(album) COLLATE NOCASE'
+    str: 'artist'
+    str: "%s ORDER BY TRIM(COALESCE(NULLIF(albumartist, ''), artist)) COLLATE NOCASE"
+    str: 'playcount'
+    str: 'dateadd'
+    str: '%s ORDER BY added COLLATE NOCASE'
+    str: 'path'
+    str: 'year'
+    str: '%d-%d-%d'
+    str: 'month'
+    str: 'day'
+    str: 'utf-8'
+    str: 'http://%s:%d/media/cover/%s'
+    str: 'albumartist'
+    str: 'id'
+    str: 'COUNT(id)'
+    str: 'mb_albumid'
+    str: 'album'
+    str: 'artist'
+    str: 'path'
+    str: 'id'
+    str: 'childCount'
+    str: 'date'
+    str: 'imageUrl'
+    str: 'mb_albumid'
+
+def checkIfTrackExists(path)  line 3713
+  names: isinstance, str, encode, glib, transaction, query, len
+    str: 'Is path exists in db\n    '
+    str: 'select id from items where path=?'
+
+def _trackNeedsMusicBrainz(path)  line 3725
+  names: isinstance, str, encode, glib, transaction, query, len
+    str: '判断曲目是否需要继续补全MusicBrainz信息。\n    :param path: 曲目路径（str或bytes）。\n    :returns: True表示需要补全，False表示不需要。\n    '
+    str: 'select mb_artistid, mb_albumartistid from items where path=?'
+    str: 'mb_artistid'
+    str: 'mb_albumartistid'
+
+def _enqueueMBImport(filePath)  line 3744
+  names: beetsTaskCoordinator, submitMBImport
+    str: '\n    提交低优先级 MusicBrainz 补全任务。\n\n    参数:\n        filePath (str): 文件路径。\n    返回:\n        bool: 提交成功返回 True。\n    '
+
+def queryTracks(title, artist, album, sortBy, desc, strict, genre, parentPath, pageSize, offset)  line 3761
+  names: append, extend, type, str, util, bytestring_path, bytes, memoryview, len, LPUtility, fetchLocalIP, glib, transaction, query, tuple, LPLocalMusicPlayList, LPLocalMusicPlayHeader, headTitle, header, LPLocalMusicPlayItem, trackId, trackName, trackNumber, trackDuration, py3_path, encode, hex, mediaServerPort, trackUrl, trackImage, localPath, trackArtist, albumName, trackCount, bitrate, samplerate, channels, albumartist, date, list
+    str: '查询曲目列表。\n    :param title: 标题关键字。\n    :param artist: 艺术家关键字。\n    :param album: 专辑关键字。\n    :param sortBy: 排序字段。\n    :param desc: 是否倒序。\n    :param strict: 是否严格匹配。\n    :param genre: 流派关键字。\n    :param parentPath: 父路径前缀。\n    :param pageSize: 分页大小。\n    :param offset: 分页偏移。\n    :returns: 本地播放列表对象。\n    '
+    str: 'SELECT id, title, length, albumartist, artist, album, path, track, bitrate, samplerate, channels, year, month, day FROM items'
+    str: '%s WHERE'
+    str: '%s title = ?'
+    str: '%%%s%%'
+    str: '%s title LIKE ?'
+    str: '%s album = ? AND (albumartist = ? or artist =?)'
+    str: '%%'
+    str: '%s album LIKE ? AND (albumartist like ? or artist like ?)'
+    str: '%s album = ?'
+    str: '%s album LIKE ?'
+    str: '%s artist = ?'
+    str: '%s artist LIKE ?'
+    str: '%s genre = ?'
+    str: '%s genre LIKE ?'
+    str: '%s substr(BYTELOWER(path), 1, ?) = BYTELOWER(?)'
+    str: 'id'
+    str: 'artist'
+    str: 'album'
+    str: 'title'
+    str: 'genre'
+    str: 'length'
+    str: 'track'
+    str: 'length'
+    str: '%s ORDER BY %s COLLATE NOCASE'
+    str: 'track'
+    str: '%s ORDER BY CAST(%s AS int)'
+    str: '%s ORDER BY TRIM(%s) COLLATE NOCASE'
+    str: '%s DESC'
+    str: '%s LIMIT ? OFFSET ?'
+    str: 'MyMusic Tracks'
+    str: 'title'
+    str: 'id'
+    str: 'path'
+    str: 'utf-8'
+    str: 'http://%s:%d/media/music/%s'
+    str: 'http://%s:%d/media/cover/%s'
+    str: 'artist'
+    str: 'album'
+    str: 'bitrate'
+    str: 'samplerate'
+    str: 'channels'
+    str: 'albumartist'
+    str: 'year'
+    str: '%d-%d-%d'
+    str: 'month'
+    str: 'day'
+
+def _callBeetsFunction(args)  line 3899
+  names: SubcommandsOptionParser, add_format_option, library, Item, Album, add_option, optparse, SUPPRESS_HELP, parse_global_options, _setup, range, len, name, replace_import_func, func, add_subcommand, parse_subcommand, send, _close
+    str: '--format-item'
+    str: 'flags'
+    str: 'target'
+    str: '--format-album'
+    str: '-l'
+    str: '--library'
+    str: 'library'
+    str: 'library database file to use'
+    str: 'dest'
+    str: 'help'
+    str: '-d'
+    str: '--directory'
+    str: 'directory'
+    str: 'destination music directory'
+    str: '-v'
+    str: '--verbose'
+    str: 'verbose'
+    str: 'count'
+    str: 'log more details (use twice for even more)'
+    str: 'dest'
+    str: 'action'
+    str: 'help'
+    str: '-c'
+    str: '--config'
+    str: 'config'
+    str: 'path to configuration file'
+    str: '-p'
+    str: '--plugins'
+    str: 'plugins'
+    str: 'a comma-separated list of plugins to load'
+    str: '-h'
+    str: '--help'
+    str: 'help'
+    str: 'store_true'
+    str: 'show this help message and exit'
+    str: '--version'
+    str: 'version'
+    str: 'import'
+    str: 'cli_exit'
+    str: 'lib'
+
+def replace_import_func(lib, opts, args)  line 3939
+  names: _resetBeetsImportConfig, beetsconfig, set_args, copy, logger, debug, get, _summarizeImportArgs, library, decargs, ui, UserError, commands, import_files
+    str: 'replace beets/ui/commands.py/import_func\n    https://github.com/beetbox/beets/issues/3228#issuecomment-485268746\n    解码问题，造成windows下特殊字符文件无法引入。改为默认utf-8\n    '
+    str: 'import'
+    str: 'move'
+    str: 'LPBeetsWrapper import effective config incremental=%s singletons=%s autotag=%s resume=%s args=%s'
+    str: 'incremental'
+    str: 'singletons'
+    str: 'autotag'
+    str: 'resume'
+    str: 'no path specified'
+    str: 'replace_import_func.<locals>.<listcomp>'
+
+  def replace_import_func.<listcomp>(.0)  line 3970
+    names: encode
+      str: 'utf-8'
+      str: 'surrogateescape'
+
+def _historyContainsPath(pathBytes)  line 3976
+  names: beetsStateLock, tuple, importer, history_get
+    str: '\n    检查指定路径是否已经记录在 beets 历史状态中。\n\n    参数:\n        pathBytes (bytes): UTF-8 编码后的文件路径。\n    返回:\n        bool: 已存在于历史状态时返回 True。\n    '
+
+def _clearImporterState()  line 3989
+  names: beetsStateLock, importer, _open_state, set, HISTORY_KEY, PROGRESS_KEY, _save_state
+    str: '\n    清空 beets 的导入历史与进度状态。\n\n    参数:\n        无。\n    返回:\n        无。\n    '
+
+def _buildMusicFileArray(dirPath)  line 4006
+  names: list, _iterMusicFilePaths
+    str: '\n    构建目录内的音频文件数组。\n\n    参数:\n        dirPath (str): 目录路径。\n    返回:\n        list[str]: 音频文件绝对路径数组。\n    '
+
+def _removeFileFromBeetsInternal(path, notify)  line 4018
+  names: logger, debug, list, glib, items, dbcore, MatchQuery, str, encode, len, transaction, remove, LPUtility, postNotification, Exception, error
+    str: '\n    在单写入线程内同步删除 beets 条目。\n\n    参数:\n        path (str): 需要删除的文件路径。\n        notify (bool): 是否发送库刷新通知。\n    返回:\n        bool: 实际删除了条目时返回 True。\n    '
+    str: '_removeFileFromBeetsInternal.<locals>._history_remove'
+    str: 'beets remove %s'
+    str: 'path'
+    str: 'LibUpdateNotify'
+    str: 'beets remove exception %s, %s'
+
+  def _removeFileFromBeetsInternal._history_remove(paths)  line 4028
+    names: beetsStateLock, importer, _open_state, HISTORY_KEY, remove, tuple, Exception, _save_state
+      str: '\n        从 beets 历史状态中移除指定路径。\n\n        参数:\n            paths (list[bytes]): 需要删除的路径字节数组。\n        返回:\n            无。\n        '
+
+def _runRemoveDirTask(task)  line 4070
+  names: get, _normalizePathString, bool, isDBDeleting, LPUtility, postNotification, beetsWatchDog, startWatch, _runRescanUPnPDBSync
+    str: '\n    执行目录删除独占任务。\n\n    参数:\n        task (dict): 任务字典。\n    返回:\n        dict: 清理摘要，包含删除数量与保留数量。\n    '
+    str: '_runRemoveDirTask.<locals>._removeDirFromBeetsInternal'
+    str: 'dirPath'
+    str: 'force'
+    str: 'dirPath'
+    str: 'force'
+    str: 'beforeCount'
+    str: 'removedCount'
+    str: 'retainedCount'
+    str: 'force'
+    str: 'removedCount'
+    str: 'LibUpdateNotify'
+
+  def _runRemoveDirTask._removeDirFromBeetsInternal(dirPath, force)  line 4079
+    names: _normalizePathString, bool, _countTrackRowsByParentPrefix, _iterTrackPathsByParentPrefix, LPUtility, checkIfFilePathInMyMusic, _removeFileFromBeetsInternal, max
+      str: '\n        在单写入线程内同步清理目录下的 beets 条目。\n\n        参数:\n            dirPath (str | Path): 目标目录路径。\n            force (bool): 是否强制删除目录下全部曲目。\n        返回:\n            dict: 清理摘要，包含 beforeCount、removedCount、retainedCount。\n        '
+      str: 'dirPath'
+      str: 'force'
+      str: 'beforeCount'
+      str: 'removedCount'
+      str: 'retainedCount'
+      str: 'beforeCount'
+      str: 'limit'
+      str: 'notify'
+      str: 'retainedCount'
+      str: 'removedCount'
+
+def _runClearLibraryTask(task)  line 4138
+  names: isDBDeleting, glib, transaction, query, mutate, _clearImporterState, logger, debug, LPUtility, postNotification, Exception, error, beetsWatchDog, startWatch, _runRescanUPnPDBSync
+    str: '\n    执行清库独占任务。\n\n    参数:\n        task (dict): 任务字典。\n    返回:\n        无。\n    '
+    str: 'SELECT COUNT(*) FROM items'
+    str: 'COUNT(*)'
+    str: 'DELETE FROM items'
+    str: 'DELETE FROM wiim_upnpitems'
+    str: 'LPBeetsWrapper clearLibraryIfNoMusicDir finish: items %s -> %s'
+    str: 'LibUpdateNotify'
+    str: 'LPBeetsWrapper clearLibraryIfNoMusicDir exception %s'
+
+def _runDirSupplementTask(task)  line 4173
+  names: get, os, path, exists, logger, debug, time, _queryTrackRowsByParentPrefix, len, info, enumerate, isinstance, memoryview, tobytes, bytes, util, py3_path, encode, _historyContainsPath, LPUtility, checkIfFilePathInMyMusic, callBeets, _removeFileFromBeetsInternal
+    str: '\n    执行目录慢速补全的单步任务。\n\n    参数:\n        task (dict): 任务字典。\n    返回:\n        dict | None: 仍有剩余文件时返回更新后的任务；完成时返回 None。\n    '
+    str: 'dirPath'
+    str: 'LPBeetsWrapper dir supplement stop task_id=%s dir=%s because dir is missing'
+    str: 'id'
+    str: 'startTime'
+    str: 'processedCount'
+    str: 'LPBeetsWrapper dir supplement init task_id=%s dir=%s dir_generation=%s'
+    str: 'dirGeneration'
+    str: 'lastPath'
+    str: 'lastPath'
+    str: 'limit'
+    str: 'beets import finish %s, %d, %d'
+    str: 'LPBeetsWrapper dir supplement done task_id=%s dir=%s processed=%s'
+    str: 'ignoreTrackedDirCheck'
+    str: 'start'
+    str: 'path'
+    str: 'utf-8'
+    str: 'LPBeetsWrapper dir supplement skip task_id=%s dir=%s path=%s because path left tracked dirs before import'
+    str: 'LPBeetsWrapper dir supplement import task_id=%s dir=%s scan_index=%s/%s path=%s skipped_missing=%s skipped_history=%s'
+    str: 'import'
+    str: '-s'
+    str: '-i'
+    str: '-a'
+    str: 'LPBeetsWrapper dir supplement post-cleanup task_id=%s dir=%s path=%s because path left tracked dirs after import'
+    str: 'LPBeetsWrapper dir supplement done task_id=%s dir=%s processed=%s skipped_missing=%s skipped_history=%s skipped_untracked=%s'
+    str: 'LPBeetsWrapper dir supplement yield task_id=%s dir=%s next_path=%s skipped_missing=%s skipped_history=%s skipped_untracked=%s'
+
+def _runFileImportTask(task)  line 4276
+  names: _normalizeSupportedMusicFilePath, get, LPUtility, checkIfFilePathInMyMusic, logger, debug, callBeets, os, path, exists, _removeFileFromBeetsInternal, beetsTaskCoordinator, _isTaskValid, postNotification, _trackNeedsMusicBrainz, _enqueueMBImport
+    str: '\n    执行单曲导入或刷新任务。\n\n    参数:\n        task (dict): 任务字典。\n    返回:\n        无。\n    '
+    str: 'path'
+    str: 'requireExists'
+    str: 'beets import %s'
+    str: 'import'
+    str: '-I'
+    str: '-s'
+    str: '-A'
+    str: 'notify'
+    str: 'LibUpdateNotify'
+
+def _runFileDeleteTask(task)  line 4312
+  names: _normalizeSupportedMusicFilePath, get, _removeFileFromBeetsInternal
+    str: '\n    执行单曲删除任务。\n\n    参数:\n        task (dict): 任务字典。\n    返回:\n        无。\n    '
+    str: 'path'
+    str: 'notify'
+
+def _runMBImportTask(task)  line 4328
+  names: _normalizeSupportedMusicFilePath, get, LPUtility, checkIfFilePathInMyMusic, logger, debug, callBeets
+    str: '\n    执行低优先级 MusicBrainz 补全任务。\n\n    参数:\n        task (dict): 任务字典。\n    返回:\n        无。\n    '
+    str: 'path'
+    str: 'requireExists'
+    str: 'beets mb import %s'
+    str: 'import'
+    str: '-I'
+    str: '-s'
+    str: '-a'
+
+def _runBatchImportTask(task)  line 4348
+  names: get, time, isDBImporting, int, _countMusicFiles, _countAllIndexedMusicFiles, LPBeetsWrapperImportStatus, preparing, importing, beetsTaskCoordinator, updateTaskProgress, beginStagedMergeSession, createStageDatabase, setStagePath, Path, parent, _iterMusicFilePaths, os, path, exists, logger, warning, append, runStagedImport, mergeStagedBeetsTables, LPMusicDatabase, databasePath, debug, finishStagedImport, Exception, str, exception, abortStagedImport, info, _runRemoveDirTask, canceled, _emitBatchImportResultTelemetry, finish, beetsWatchDog, startWatch, _runRescanUPnPDBSync, _isTaskValid, LPUtility, checkIfFilePathInMyMusic, submitDirSupplement
+    str: '\n    执行首轮批量导入独占任务（staged 流程）。\n\n    导入与 UPnP 投影全部写入临时 stage 库，成功后在主库单个事务中仅替换\n    beets-owned 表；取消或失败时不回灌主库，主库在导入期间保持可读（Recently 等\n    应用表仍可写）。\n\n    参数:\n        task (dict): 任务字典。\n    返回:\n        无。\n    '
+    str: 'dirPath'
+    str: 'callback'
+    str: 'rescanAfterImport'
+    str: 'submitDirSupplementAfterImport'
+    str: '_runBatchImportTask.<locals>._onBatchImported'
+    str: 'importStartedTimestampMs'
+    str: 'importCount'
+    str: 'localSongCountBeforeImport'
+    str: 'totalCount'
+    str: 'processedCount'
+    str: 'id'
+    str: 'taskId'
+    str: 'beets import exception: %s'
+    str: '_runBatchImportTask.<locals>.<lambda>'
+    str: 'batchSize'
+    str: 'onBatch'
+    str: 'shouldCancel'
+    str: 'failed'
+    str: 'error'
+    str: 'canceled'
+    str: 'cancelRequested'
+    str: 'exceptTaskId'
+    str: 'LPBeetsWrapper batch import merged dir=%s task_id=%s merge_seconds=%.3f rows=%s'
+    str: 'mergeSeconds'
+    str: 'tableRows'
+    str: 'notifyUi'
+    str: 'LPBeetsWrapper batch import exception dir=%s: %s'
+    str: 'error'
+    str: 'beets soft import finish %s, %d, %d'
+    str: 'dirPath'
+    str: 'force'
+    str: 'retainedCount'
+    str: 'LPBeetsWrapper batch import canceled cleanup dir=%s task_id=%s summary=%s'
+    str: 'LPBeetsWrapper batch import defer rescan dir=%s task_id=%s'
+    str: 'LPBeetsWrapper batch import defer dir supplement dir=%s task_id=%s'
+    str: 'success'
+    str: 'LPBeetsWrapper batch import follow-up dir supplement dir=%s submitted=%s task_id=%s'
+    str: 'LPBeetsWrapper batch import skip follow-up dir supplement dir=%s task_id=%s valid=%s still_tracked=%s'
+
+  def _runBatchImportTask._onBatchImported(batchPaths)  line 4378
+    names: len, beetsTaskCoordinator, updateTaskProgress, get, LPBeetsWrapperImportStatus, cancelling, importing
+      str: '\n        单批导入完成后的进度回调。\n\n        参数:\n            batchPaths (list): 本批已处理的文件路径。\n        返回:\n            无。\n        '
+      str: 'processedCount'
+      str: 'cancelRequested'
+
+  def _runBatchImportTask.<lambda>()  line 4433
+    names: bool, get
+      str: 'cancelRequested'
+
+def _runStartupLocalMusicInitializationTask(task)  line 4539
+  names: _getTrackedMyMusicDirSnapshot, get, logger, debug, len, _postLibraryTaskUIUpdate, LIBRARY_TASK_KIND_STARTUP_IMPORT, LPBeetsWrapperImportStatus, preparing, isDBEmpty, LPUtility, objectForUserconfig, beetsTaskCoordinator, _isTaskValid, finish, checkIfFilePathInMyMusic, _runBatchImportTask, _runRescanUPnPDBSync, importDirAsync
+    str: '\n    执行启动期本地音乐初始化任务。\n\n    参数:\n        task (dict): 任务字典。\n    返回:\n        无。\n    '
+    str: 'id'
+    str: 'LPBeetsWrapper startup_local_init begin task_id=%s tracked_dirs=%s'
+    str: 'LPBeetsWrapper startup_local_init skip because no tracked dir task_id=%s'
+    str: '_runStartupLocalMusicInitializationTask.<locals>._startupImportProgressCallback'
+    str: 'upnpserver'
+    str: 'lastUpdate'
+    str: 'db_empty'
+    str: 'db_non_empty'
+    str: 'LPBeetsWrapper startup_local_init branch=%s task_id=%s tracked_dirs=%s need_first_upnp_rescan=%s'
+    str: 'LPBeetsWrapper startup_local_init stop because task invalid task_id=%s'
+    str: 'LPBeetsWrapper startup_local_init skip batch_import dir=%s task_id=%s because dir is no longer tracked'
+    str: 'LPBeetsWrapper startup_local_init run batch_import dir=%s task_id=%s'
+    str: 'id'
+    str: 'dirPath'
+    str: 'callback'
+    str: 'rescanAfterImport'
+    str: 'submitDirSupplementAfterImport'
+    str: 'LPBeetsWrapper startup_local_init skip rescan because task invalid task_id=%s'
+    str: 'LPBeetsWrapper startup_local_init run shared upnp rescan task_id=%s'
+    str: 'LPBeetsWrapper startup_local_init run first upnp rescan task_id=%s'
+    str: 'LPBeetsWrapper startup_local_init skip upnp rescan task_id=%s'
+    str: 'LPBeetsWrapper startup_local_init stop before supplement because task invalid task_id=%s'
+    str: 'LPBeetsWrapper startup_local_init submit dir supplement dir=%s submitted=%s task_id=%s'
+    str: 'LPBeetsWrapper startup_local_init finish task_id=%s'
+
+  def _runStartupLocalMusicInitializationTask._startupImportProgressCallback(status, total, processed)  line 4564
+    names: LPBeetsWrapperImportStatus, preparing, importing, _postLibraryTaskUIUpdate, LIBRARY_TASK_KIND_STARTUP_IMPORT
+      str: '\n        转发启动期单目录批量导入进度。\n\n        单目录结束态不直接结束自动任务，因为后续目录、UPnP 重扫及补全任务\n        仍可能继续执行；整个启动期任务完成后再统一发送 finish。\n\n        参数:\n            status (LPBeetsWrapperImportStatus): 单目录导入状态。\n            total (int): 当前目录曲目总数。\n            processed (int): 当前目录已处理曲目数。\n        返回:\n            无。\n        '
+
+def removeDirAsync(dirPath, force)  line 4667
+  names: beetsTaskCoordinator, _runRemoveDirTask, str, Path, submitRemoveDir, logger, debug
+    str: '\n    提交目录删除独占任务。\n\n    参数:\n        dirPath (str): 需要移除的目录路径。\n        force (bool): 是否强制删除目录下所有记录。\n    返回:\n        bool: 提交成功返回 True；独占任务繁忙时返回 False。\n    '
+    str: 'dirPath'
+    str: 'force'
+    str: 'force'
+    str: 'LPBeetsWrapper removeDirAsync busy'
+
+def clearLibraryIfNoMusicDir()  line 4690
+  names: LPUtility, myMusicDirCount, beetsTaskCoordinator, _runClearLibraryTask, submitClearLibrary, logger, debug
+    str: '\n    当本地音乐目录为空时提交清库任务。\n\n    参数:\n        无。\n    返回:\n        bool: 已提交清库任务返回 True；条件不满足或独占任务繁忙时返回 False。\n    '
+    str: 'LPBeetsWrapper clearLibraryIfNoMusicDir busy'
+
+def scheduleStartupLocalMusicInitialization()  line 4712
+  names: _getTrackedMyMusicDirSnapshot, logger, debug, len, startupLocalMusicInitializationScheduled, beetsStateLock, beetsTaskCoordinator, _runStartupLocalMusicInitializationTask, LPBeetsTaskType, startup_local_init, submitStartupLocalInit
+    str: '\n    提交一次启动期本地音乐初始化任务。\n\n    参数:\n        无。\n    返回:\n        bool: 已提交、已执行或已跳过重复提交时返回 True。\n    '
+    str: 'LPBeetsWrapper startup_local_init schedule requested tracked_dirs=%s already_scheduled=%s'
+    str: 'LPBeetsWrapper startup_local_init schedule skipped because it is already scheduled'
+    str: 'LPBeetsWrapper startup_local_init run inline because coordinator is unavailable'
+    str: 'id'
+    str: 'type'
+    str: 'LPBeetsWrapper startup_local_init submit result=%s tracked_dirs=%s'
+
+def removeFileFromBeets(path, notify)  line 4752
+  names: _normalizeSupportedMusicFilePath, beetsTaskCoordinator, _removeFileFromBeetsInternal, submitFileDelete
+    str: '\n    提交单曲删除任务，或在无协调器时直接执行。\n\n    参数:\n        path (str): 需要删除的文件路径。\n        notify (bool): 是否发送刷新通知。\n    返回:\n        dict: `accepted` 表示任务是否被接受，`queued` 表示是否进入协调器队列。\n    '
+    str: 'accepted'
+    str: 'queued'
+    str: 'notify'
+
+def importDirAsync(dirPath)  line 4773
+  names: beetsTaskCoordinator, str, Path, _runDirSupplementTask, submitDirSupplement
+    str: '\n    提交目录慢速补全任务。\n\n    参数:\n        dirPath (str): 需要补全的目录路径。\n    返回:\n        bool: 提交成功返回 True。\n    '
+    str: 'dirPath'
+    str: 'lastPath'
+    str: 'processedCount'
+    str: 'startTime'
+    str: 'globalGeneration'
+    str: 'dirGeneration'
+
+def cancelManualImportAndDetachDir()  line 4800
+  names: beetsTaskCoordinator, cancelManualImportAndDetachDir, get, beetsWatchDog, startWatch, LPUtility, postNotification, MY_MUSIC_DIR_TRACKING_NOTIFICATION_NAME, LIBRARY_TASK_UI_NOTIFICATION_NAME, LIBRARY_TASK_KIND_MANUAL_IMPORT, LPBeetsWrapperImportStatus, cancelling
+    str: '\n    取消当前手动导入任务，并立即将目录移出本地音乐跟踪列表。\n\n    参数:\n        无。\n    返回:\n        dict: 取消结果，包含 accepted、dirPath、total、processed 等字段。\n    '
+    str: 'accepted'
+    str: 'dirPath'
+    str: 'total'
+    str: 'processed'
+    str: 'dirRemoved'
+    str: 'accepted'
+    str: 'dirRemoved'
+    str: 'removed'
+    str: 'dirPath'
+    str: 'action'
+    str: 'dirPath'
+    str: 'total'
+    str: 'processed'
+    str: 'kind'
+    str: 'status'
+    str: 'total'
+    str: 'processed'
+
+def maybeFirsttimeScanUPnPDB(callback)  line 4846
+  names: LPUtility, objectForUserconfig, get, rescanUPnPDB
+    str: 'upnpserver'
+    str: 'lastUpdate'
+    str: 'maybeFirsttimeScanUPnPDB.<locals>._rescanUPnPDBCallback'
+
+  def maybeFirsttimeScanUPnPDB._rescanUPnPDBCallback()  line 4850
+
+def importWithoutMusicBrain(dirPath, callback)  line 4861
+  names: str, Path, beetsTaskCoordinator, _runBatchImportTask, submitBatchImport, logger, debug
+    str: '\n    不走 MusicBrainz 匹配的快速导入流程。\n\n    参数:\n        dirPath (str): 导入目录路径。\n        callback (callable | None): 导入进度回调。\n    返回:\n        bool: 已提交或已直接执行返回 True；独占任务繁忙导致未提交时返回 False。\n    '
+    str: 'dirPath'
+    str: 'callback'
+    str: 'globalGeneration'
+    str: 'dirGeneration'
+    str: 'LPBeetsWrapper importWithoutMusicBrain busy dir=%s'
+
+def isIndexedMusicFilePath(filePath)  line 4887
+  names: _normalizeSupportedMusicFilePath, glib, transaction, query, util, bytestring_path, Exception, logger, warning
+    str: '\n    判断文件路径是否已存在于本地音乐数据库。\n\n    参数:\n        filePath (str | Path): 待检查的文件路径。\n    返回:\n        bool: 路径已入库返回 True，否则返回 False。\n    '
+    str: 'SELECT COUNT(id) FROM items WHERE path=?'
+    str: 'COUNT(id)'
+    str: 'LPBeetsWrapper isIndexedMusicFilePath exception path=%s: %s'
+
+def forceImportTrack(path)  line 4912
+  names: _normalizeSupportedMusicFilePath, beetsTaskCoordinator, os, path, exists, LPUtility, findOwningMyMusicDir, _runFileImportTask, submitFileImport
+    str: '\n    提交单曲导入或刷新任务。\n\n    参数:\n        path (str): 文件路径。\n    返回:\n        dict: `accepted` 表示任务是否被接受，`queued` 表示是否进入协调器队列。\n    '
+    str: 'accepted'
+    str: 'queued'
+    str: 'path'
+
+def fetchMusicBrainzArtistInfo(artistName, mbid)  line 4934
+  names: glib, transaction, query, len, json, loads, logger, debug, musicbrainzngs, get_artist_by_id, get, Exception, warning, LPUtility, currentLan, rsplit, wikidata.client, Client, data, type, dict, mutate, dumps, urllib.parse, unquote, LPWikipedia, Wikipedia, ExtractFormat, HTML, cacheDir, page, exists, summary
+    str: 'select id, mb_urllist, wikidata, wikipedia from wiim_artists where artist=?'
+    str: 'mb_urllist'
+    str: 'wikidata'
+    str: 'wikipedia'
+    str: 'id'
+    str: 'musicbrainzngs.get_artist_by_id start: %s'
+    str: 'url-rels'
+    str: 'includes'
+    str: 'artist'
+    str: 'url-relation-list'
+    str: 'musicbrainzngs.get_artist_by_id artistName:%s, mbid=%s, %s'
+    str: 'lan'
+    str: 'en'
+    str: 'target'
+    str: 'type-id'
+    str: '99429741-f3f6-484b-84f8-23af51991770'
+    str: 'facebook'
+    str: 'Facebook'
+    str: 'instagram'
+    str: 'Instagram'
+    str: 'twitter'
+    str: 'Twitter'
+    str: '689870a4-a1e4-4912-b17f-7b2664215698'
+    str: '/'
+    str: 'Client'
+    str: 'load'
+    str: 'UPDATE wiim_artists SET wikidata=? where id=?'
+    str: 'sitelinks'
+    str: '%swiki'
+    str: 'url'
+    str: 'unquote'
+    str: 'linkplay_requests.sql'
+    str: 'language'
+    str: 'extract_format'
+    str: 'cachePath'
+    str: 'summary'
+    str: 'UPDATE wiim_artists SET wikipedia=? where id=?'
+    str: 'Wiki'
+    str: 'social'
+    str: 'wiki'
+
+def _queryDebug()  line 5050
+  names: glib, transaction, query, tuple, util, py3_path, print, os, path, exists
+    str: 'SELECT title, path FROM items'
+    str: 'path'
+    str: 'title'
+
+def callback(data)  line 5064
+  names: print

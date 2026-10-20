@@ -1,0 +1,47 @@
+# module HOME.PlayView.LPPlayViewBackWidget
+
+[module] names: __doc__, PyQt6.QtCore, Qt, PyQt6.QtGui, QPixmap, QPainter, PyQt6.QtWidgets, QWidget, LPPlayViewBackWidget
+  str: '\n@Time ： 2025/11/27 17:11\n@Auth ： Chris\n@File ：LPPlayViewBackWidget.py\n@Desc:\n'
+  str: 'Qt'
+  str: 'QPixmap'
+  str: 'QPainter'
+  str: 'QWidget'
+  str: 'LPPlayViewBackWidget'
+
+def LPPlayViewBackWidget()  line 13
+  names: __name__, __module__, __qualname__, __doc__, __init__, Qt, GlobalColor, black, QPixmap, setDefaultBackground, setBackground, _scaleToWidget, resizeEvent, paintEvent, __classcell__
+    str: 'LPPlayViewBackWidget'
+    str: '播放页背景控件，负责绘制封面模糊背景或默认纯色背景。\n\n    历史实现继承 QOpenGLWidget（硬件 GL 表面），双显卡 Windows 机器上\n    切换全屏会触发驱动级显示模式切换导致 1~2 秒黑屏；改为 QWidget +\n    QPainter 软件光栅化绘制以规避该问题。始终从原始图缩放，避免对已\n    缩放图反复缩放导致的画质劣化和耗时累积。\n    '
+    str: 'LPPlayViewBackWidget.__init__'
+    str: 'pixmap'
+    str: 'LPPlayViewBackWidget.setDefaultBackground'
+    str: 'LPPlayViewBackWidget.setBackground'
+    str: 'source'
+    str: 'return'
+    str: 'LPPlayViewBackWidget._scaleToWidget'
+    str: 'LPPlayViewBackWidget.resizeEvent'
+    str: 'LPPlayViewBackWidget.paintEvent'
+
+  def LPPlayViewBackWidget.__init__(self, parent)  line 22
+    names: super, __init__, setAutoFillBackground, setAttribute, Qt, WidgetAttribute, WA_OpaquePaintEvent, sourcePixmap, pixmap, GlobalColor, black, default_color, default_source_pixmap, default_pixmap
+      str: '初始化背景控件。\n\n        参数:\n            parent (QWidget | None): 父控件。\n        返回:\n            无。\n        '
+
+  def LPPlayViewBackWidget.setDefaultBackground(self, pixmap, color)  line 40
+    names: default_source_pixmap, default_color, isNull, _scaleToWidget, default_pixmap, update
+      str: '设置默认背景。\n\n        参数:\n            pixmap (QPixmap | None): 默认背景图，可为空；为空时仅使用颜色。\n            color: 默认背景颜色。\n        返回:\n            无。\n        '
+
+  def LPPlayViewBackWidget.setBackground(self, pixmap)  line 57
+    names: isNull, sourcePixmap, pixmap, _scaleToWidget, update
+      str: '切歌时调用，设置新背景。\n\n        参数:\n            pixmap (QPixmap): 原始未缩放的封面背景图。\n        返回:\n            无。\n        '
+
+  def LPPlayViewBackWidget._scaleToWidget(self, source)  line 73
+    names: isNull, width, height, scaled, size, Qt, AspectRatioMode, KeepAspectRatioByExpanding, TransformationMode, SmoothTransformation
+      str: '将原始图等比放大缩放到覆盖当前控件区域。\n\n        参数:\n            source (QPixmap): 原始未缩放图。\n        返回:\n            QPixmap: 缩放后的 pixmap；控件尺寸无效时原样返回。\n        '
+
+  def LPPlayViewBackWidget.resizeEvent(self, event)  line 89
+    names: sourcePixmap, _scaleToWidget, pixmap, default_source_pixmap, default_pixmap, super, resizeEvent
+      str: '尺寸变化时从原始图重新缩放，避免对已缩放图链式缩放。\n\n        参数:\n            event (QResizeEvent): Qt 尺寸变化事件。\n        返回:\n            无。\n        '
+
+  def LPPlayViewBackWidget.paintEvent(self, event)  line 103
+    names: QPainter, setRenderHint, RenderHint, SmoothPixmapTransform, pixmap, drawPixmap, rect, default_pixmap, fillRect, default_color, end
+      str: '软件绘制背景：优先封面背景图，其次默认图，最后纯色。\n\n        参数:\n            event (QPaintEvent): Qt 绘制事件。\n        返回:\n            无。\n        '

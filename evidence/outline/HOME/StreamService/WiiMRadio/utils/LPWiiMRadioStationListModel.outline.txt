@@ -1,0 +1,223 @@
+# module HOME.StreamService.WiiMRadio.utils.LPWiiMRadioStationListModel
+
+[module] names: __doc__, typing, Any, Dict, List, Optional, PyQt6.QtCore, QAbstractListModel, QModelIndex, QObject, Qt, pyqtSlot, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioRequestScheduler, LPWiiMRadioRequestScheduler, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioThumbnailService, LPWiiMRadioThumbnailService, LPClientFramework.LPUtility, logger, LPWiiMRadioStationListModel
+  str: '\nWiiMRadio station 增量列表模型。\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'QAbstractListModel'
+  str: 'QModelIndex'
+  str: 'QObject'
+  str: 'Qt'
+  str: 'pyqtSlot'
+  str: 'LPWiiMRadioRequestScheduler'
+  str: 'LPWiiMRadioThumbnailService'
+  str: 'logger'
+  str: 'LPWiiMRadioStationListModel'
+
+def LPWiiMRadioStationListModel()  line 16
+  names: __name__, __module__, __qualname__, MAX_ITEMS, PRELOAD_BEFORE, PRELOAD_AFTER, int, Qt, ItemDataRole, UserRole, STATION_ID_ROLE, NAME_ROLE, FAVICON_ROLE, STREAM_URL_ROLE, FAVICON_THUMB_PATH_ROLE, CITY_ROLE, REGION_ROLE, COUNTRY_ROLE, COUNTRY_CODE_ROLE, GENRES_ROLE, Optional, QObject, __init__, __del__, QModelIndex, rowCount, DisplayRole, Any, data, Dict, bytes, roleNames, cleanup, reconnect, pyqtSlot, updateVisibleRange, clearVisibleRange, clear, List, str, resetItems, bool, isFull, appendItems, count, itemsSnapshot, findItemByStationId, uniqueFaviconCount, updateThumbnailPathByStationId, _onThumbnailReady, _normalize_items, _normalize_item, _schedule_visible_range_thumbnails, __classcell__
+    str: 'LPWiiMRadioStationListModel'
+    str: 'parent'
+    str: 'LPWiiMRadioStationListModel.__init__'
+    str: 'LPWiiMRadioStationListModel.__del__'
+    str: 'parent'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel.rowCount'
+    str: 'index'
+    str: 'role'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel.data'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel.roleNames'
+    str: 'LPWiiMRadioStationListModel.cleanup'
+    str: 'LPWiiMRadioStationListModel.reconnect'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel.updateVisibleRange'
+    str: 'LPWiiMRadioStationListModel.clearVisibleRange'
+    str: 'LPWiiMRadioStationListModel.clear'
+    str: 'items'
+    str: 'maxItems'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel.resetItems'
+    str: 'LPWiiMRadioStationListModel.isFull'
+    str: 'LPWiiMRadioStationListModel.appendItems'
+    str: 'LPWiiMRadioStationListModel.count'
+    str: 'LPWiiMRadioStationListModel.itemsSnapshot'
+    str: 'stationId'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel.findItemByStationId'
+    str: 'LPWiiMRadioStationListModel.uniqueFaviconCount'
+    str: 'stationId'
+    str: 'thumbnailPath'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel.updateThumbnailPathByStationId'
+    str: 'faviconUrl'
+    str: 'thumbnailPath'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel._onThumbnailReady'
+    str: 'LPWiiMRadioStationListModel._normalize_items'
+    str: 'item'
+    str: 'return'
+    str: 'LPWiiMRadioStationListModel._normalize_item'
+    str: 'LPWiiMRadioStationListModel._schedule_visible_range_thumbnails'
+
+  def LPWiiMRadioStationListModel.__init__(self, parent)  line 32
+    names: super, __init__, _items, logger, debug, len, set, _station_ids, LPWiiMRadioThumbnailService, instance, _thumbnail_service, thumbnailReady, connect, _onThumbnailReady, _visible_first_index, _visible_last_index
+      str: '\n        初始化 station 列表模型。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'LPWiiMRadioStationListModel _items '
+
+  def LPWiiMRadioStationListModel.__del__(self)  line 48
+    names: logger, debug
+      str: 'LPWiiMRadioStationListModel enter __del__'
+
+  def LPWiiMRadioStationListModel.rowCount(self, parent)  line 51
+    names: isValid, len, _items
+      str: '\n        返回模型当前行数。\n\n        :param parent: 父级索引。\n        :return: 当前条目数量。\n        '
+
+  def LPWiiMRadioStationListModel.data(self, index, role)  line 62
+    names: isValid, row, len, _items, STATION_ID_ROLE, get, NAME_ROLE, FAVICON_ROLE, STREAM_URL_ROLE, FAVICON_THUMB_PATH_ROLE, CITY_ROLE, REGION_ROLE, COUNTRY_ROLE, COUNTRY_CODE_ROLE, GENRES_ROLE
+      str: '\n        根据索引与 role 返回模型数据。\n\n        :param index: 目标索引。\n        :param role: Qt role 值。\n        :return: role 对应的数据值。\n        '
+      str: 'stationId'
+      str: 'name'
+      str: 'favicon'
+      str: 'streamUrl'
+      str: 'faviconThumbPath'
+      str: 'city'
+      str: 'region'
+      str: 'country'
+      str: 'countryCode'
+      str: 'genres'
+
+  def LPWiiMRadioStationListModel.roleNames(self)  line 98
+    names: STATION_ID_ROLE, NAME_ROLE, FAVICON_ROLE, STREAM_URL_ROLE, FAVICON_THUMB_PATH_ROLE, CITY_ROLE, REGION_ROLE, COUNTRY_ROLE, COUNTRY_CODE_ROLE, GENRES_ROLE
+      str: '\n        返回模型 role 与名称映射。\n\n        :param: 无。\n        :return: role 名称字典。\n        '
+
+  def LPWiiMRadioStationListModel.cleanup(self)  line 118
+    names: clearVisibleRange, _thumbnail_service, thumbnailReady, disconnect, _onThumbnailReady, RuntimeError, TypeError
+      str: '\n        页面不可见时断开 thumbnailReady 信号，并清除可见区范围，避免继续调度图片任务。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioStationListModel.reconnect(self)  line 131
+    names: _thumbnail_service, thumbnailReady, disconnect, _onThumbnailReady, RuntimeError, TypeError, connect
+      str: '\n        重新连接 thumbnailReady 信号，供页面重新可见时调用。\n        先断后连防止重复注册。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioStationListModel.updateVisibleRange(self, firstIndex, lastIndex)  line 145
+    names: len, _items, _visible_first_index, _visible_last_index, max, int, min, _schedule_visible_range_thumbnails
+      str: '\n        更新当前可见区索引范围，并按“可见区 + 预取窗口”调度缩略图。\n\n        :param firstIndex: 当前首个可见索引。\n        :param lastIndex: 当前最后一个可见索引。\n        :return: None。\n        '
+
+  def LPWiiMRadioStationListModel.clearVisibleRange(self)  line 173
+    names: _visible_first_index, _visible_last_index
+      str: '\n        清空当前可见区范围，停止后续基于 viewport 的预取调度。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioStationListModel.clear(self)  line 184
+    names: _items, beginResetModel, _station_ids, clear, _visible_first_index, _visible_last_index, endResetModel
+      str: '\n        清空模型数据。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioStationListModel.resetItems(self, items, maxItems)  line 200
+    names: MAX_ITEMS, min, _normalize_items, beginResetModel, _items, _station_ids, endResetModel, _schedule_visible_range_thumbnails, len
+      str: '\n        重置模型数据，并按 stationId 去重。\n\n        :param items: 输入条目列表。\n        :param maxItems: 最大条目上限，<=0 表示不限制。\n        :return: 重置后条目数。\n        '
+      str: 'maxItems'
+      str: 'LPWiiMRadioStationListModel.resetItems.<locals>.<setcomp>'
+
+    def LPWiiMRadioStationListModel.resetItems.<setcomp>(.0)  line 212
+      names: get
+        str: 'stationId'
+
+  def LPWiiMRadioStationListModel.isFull(self)  line 217
+    names: len, _items, MAX_ITEMS
+      str: '\n        返回当前模型是否已达到最大条目上限。\n\n        :param: 无。\n        :return: 达到 MAX_ITEMS 时返回 True，否则返回 False。\n        '
+
+  def LPWiiMRadioStationListModel.appendItems(self, items, maxItems)  line 226
+    names: MAX_ITEMS, min, _normalize_item, get, _station_ids, len, _items, append, beginInsertRows, QModelIndex, extend, add, endInsertRows, _schedule_visible_range_thumbnails
+      str: '\n        追加模型数据，并自动去重。\n\n        :param items: 输入条目列表。\n        :param maxItems: 最大条目上限，<=0 表示不限制。\n        :return: 本次实际追加的条目数。\n        '
+      str: 'stationId'
+
+  def LPWiiMRadioStationListModel.count(self)  line 266
+    names: len, _items
+      str: '\n        返回当前条目数量。\n\n        :param: 无。\n        :return: 当前模型条目数。\n        '
+
+  def LPWiiMRadioStationListModel.itemsSnapshot(self)  line 275
+    names: _items
+      str: '\n        返回当前条目浅拷贝快照。\n\n        :param: 无。\n        :return: 条目列表快照。\n        '
+      str: 'LPWiiMRadioStationListModel.itemsSnapshot.<locals>.<listcomp>'
+
+    def LPWiiMRadioStationListModel.itemsSnapshot.<listcomp>(.0)  line 282
+      names: dict
+
+  def LPWiiMRadioStationListModel.findItemByStationId(self, stationId)  line 284
+    names: str, strip, _items, get, dict
+      str: '\n        根据 stationId 查询条目。\n\n        :param stationId: 电台唯一标识。\n        :return: 找到返回条目副本，否则返回 None。\n        '
+      str: 'stationId'
+
+  def LPWiiMRadioStationListModel.uniqueFaviconCount(self)  line 299
+    names: len, _items
+      str: '\n        统计当前模型中有效 favicon 的唯一数量。\n\n        :param: 无。\n        :return: 唯一 favicon 数量。\n        '
+      str: 'LPWiiMRadioStationListModel.uniqueFaviconCount.<locals>.<setcomp>'
+
+    def LPWiiMRadioStationListModel.uniqueFaviconCount.<setcomp>(.0)  line 306
+      names: get
+        str: 'favicon'
+
+  def LPWiiMRadioStationListModel.updateThumbnailPathByStationId(self, stationId, thumbnailPath)  line 308
+    names: str, strip, enumerate, _items, get, index, dataChanged, emit, FAVICON_THUMB_PATH_ROLE
+      str: '\n        根据 stationId 更新条目的本地缩略图路径。\n\n        :param stationId: 电台唯一标识。\n        :param thumbnailPath: 本地缩略图 `file://` 路径。\n        :return: 条目被更新返回 True，否则返回 False。\n        '
+      str: 'stationId'
+      str: 'faviconThumbPath'
+
+  def LPWiiMRadioStationListModel._onThumbnailReady(self, faviconUrl, thumbnailPath)  line 332
+    names: str, strip, enumerate, _items, get, append, index, dataChanged, emit, FAVICON_THUMB_PATH_ROLE
+      str: '\n        处理缩略图服务完成事件，并将对应条目切换到本地缩略图路径。\n\n        :param faviconUrl: 已完成缩略图生成的原始 favicon URL。\n        :param thumbnailPath: 可供 QML 使用的本地缩略图 `file://` 路径。\n        :return: None。\n        '
+      str: 'favicon'
+      str: 'faviconThumbPath'
+
+  def LPWiiMRadioStationListModel._normalize_items(self, items, maxItems)  line 359
+    names: set, _normalize_item, get, add, append, len
+      str: '\n        归一化输入列表并按 stationId 去重。\n\n        :param items: 输入条目列表。\n        :param maxItems: 最大条目上限，<=0 表示不限制。\n        :return: 归一化后的条目列表。\n        '
+      str: 'stationId'
+
+  def LPWiiMRadioStationListModel._normalize_item(self, item)  line 382
+    names: isinstance, dict, str, get, strip, upper
+      str: '\n        将输入条目归一化为标准结构。\n\n        :param item: 输入条目对象。\n        :return: 归一化后的条目；非法输入返回 None。\n        '
+      str: 'stationId'
+      str: 'stationID'
+      str: 'StationID'
+      str: 'name'
+      str: 'Name'
+      str: 'favicon'
+      str: 'Favicon'
+      str: 'streamUrl'
+      str: 'StreamUrl'
+      str: 'faviconThumbPath'
+      str: 'FaviconThumbPath'
+      str: 'city'
+      str: 'City'
+      str: 'region'
+      str: 'Subcountry'
+      str: 'subcountry'
+      str: 'Region'
+      str: 'country'
+      str: 'Country'
+      str: 'countryCode'
+      str: 'CountryCode'
+      str: 'genres'
+      str: 'Genres'
+      str: 'stationId'
+      str: 'name'
+      str: 'favicon'
+      str: 'streamUrl'
+      str: 'faviconThumbPath'
+      str: 'city'
+      str: 'region'
+      str: 'country'
+      str: 'countryCode'
+      str: 'genres'
+
+  def LPWiiMRadioStationListModel._schedule_visible_range_thumbnails(self)  line 411
+    names: _visible_first_index, _visible_last_index, _items, max, PRELOAD_BEFORE, min, len, PRELOAD_AFTER, range, isinstance, dict, str, get, strip, LPWiiMRadioRequestScheduler, PRIORITY_VISIBLE, PRIORITY_PRELOAD, _thumbnail_service, ensureThumbnail, append, index, dataChanged, emit, FAVICON_THUMB_PATH_ROLE
+      str: '\n        根据当前可见区范围调度缩略图加载，并即时回填已命中的磁盘缓存路径。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'favicon'
+      str: 'faviconThumbPath'
+      str: 'priority'

@@ -1,0 +1,171 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('macOS 原生菜单动作桥接。\n\n将从 WiiMHome.py 中拆分出的 LPMacMenuActionBridge 桥接类迁移至此，\n负责把 macOS 原生应用菜单(About/Check for Updates/Send Feedback)的点击\n转发到持有该桥接对象的委托（菜单控制器）。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  9           4 LOAD_CONST               1 (None)
+              6 STORE_GLOBAL             1 (_MacMenuActionBridgeClass)
+
+ 12           8 LOAD_CONST               2 (<code object ensureMacMenuActionBridgeClass at 0x000001F3253AEA80, file "Menu\LPMenuBridge.py", line 12>)
+             10 LOAD_CONST               3 ('ensureMacMenuActionBridgeClass')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               2 (ensureMacMenuActionBridgeClass)
+             16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+=== ensureMacMenuActionBridgeClass ===
+ 22           0 LOAD_GLOBAL              0 (_MacMenuActionBridgeClass)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    1
+              6 POP_JUMP_IF_FALSE       12
+
+ 23           8 LOAD_GLOBAL              0 (_MacMenuActionBridgeClass)
+             10 RETURN_VALUE
+
+ 25     >>   12 SETUP_FINALLY           24 (to 38)
+
+ 26          14 LOAD_CONST               2 (0)
+             16 LOAD_CONST               1 (None)
+             18 IMPORT_NAME              1 (objc)
+             20 STORE_DEREF              1 (objc)
+
+ 27          22 LOAD_CONST               2 (0)
+             24 LOAD_CONST               3 (('NSObject',))
+             26 IMPORT_NAME              2 (Foundation)
+             28 IMPORT_FROM              3 (NSObject)
+             30 STORE_FAST               0 (NSObject)
+             32 POP_TOP
+             34 POP_BLOCK
+             36 JUMP_FORWARD            20 (to 58)
+
+ 28     >>   38 DUP_TOP
+             40 LOAD_GLOBAL              4 (Exception)
+             42 JUMP_IF_NOT_EXC_MATCH    56
+             44 POP_TOP
+             46 POP_TOP
+             48 POP_TOP
+
+ 29          50 POP_EXCEPT
+             52 LOAD_CONST               1 (None)
+             54 RETURN_VALUE
+        >>   56 RERAISE
+
+ 31     >>   58 LOAD_BUILD_CLASS
+             60 LOAD_CLOSURE             0 (LPMacMenuActionBridge)
+             62 LOAD_CLOSURE             1 (objc)
+             64 BUILD_TUPLE              2
+             66 LOAD_CONST               4 (<code object LPMacMenuActionBridge at 0x000001F3253AE9D0, file "Menu\LPMenuBridge.py", line 31>)
+             68 LOAD_CONST               5 ('LPMacMenuActionBridge')
+             70 MAKE_FUNCTION            8 (closure)
+             72 LOAD_CONST               5 ('LPMacMenuActionBridge')
+             74 LOAD_FAST                0 (NSObject)
+             76 CALL_FUNCTION            3
+             78 STORE_DEREF              0 (LPMacMenuActionBridge)
+
+ 80          80 LOAD_DEREF               0 (LPMacMenuActionBridge)
+             82 STORE_GLOBAL             0 (_MacMenuActionBridgeClass)
+
+ 81          84 LOAD_GLOBAL              0 (_MacMenuActionBridgeClass)
+             86 RETURN_VALUE
+
+=== ensureMacMenuActionBridgeClass.LPMacMenuActionBridge ===
+ 31           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('ensureMacMenuActionBridgeClass.<locals>.LPMacMenuActionBridge')
+              6 STORE_NAME               2 (__qualname__)
+
+ 32           8 LOAD_CONST               1 ('将 macOS 原生菜单动作转发到菜单控制器的桥接类。')
+             10 STORE_NAME               3 (__doc__)
+
+ 34          12 LOAD_CLOSURE             0 (LPMacMenuActionBridge)
+             14 LOAD_CLOSURE             1 (objc)
+             16 BUILD_TUPLE              2
+             18 LOAD_CONST               2 (<code object initWithOwner_ at 0x000001F3253AE710, file "Menu\LPMenuBridge.py", line 34>)
+             20 LOAD_CONST               3 ('ensureMacMenuActionBridgeClass.<locals>.LPMacMenuActionBridge.initWithOwner_')
+             22 MAKE_FUNCTION            8 (closure)
+             24 STORE_NAME               4 (initWithOwner_)
+
+ 50          26 LOAD_CLASSDEREF          1 (objc)
+             28 LOAD_METHOD              5 (signature)
+             30 LOAD_CONST               4 (b'v@:@')
+             32 CALL_METHOD              1
+
+ 51          34 LOAD_CONST               5 (<code object handleCheckForUpdates_ at 0x000001F3253AE870, file "Menu\LPMenuBridge.py", line 50>)
+             36 LOAD_CONST               6 ('ensureMacMenuActionBridgeClass.<locals>.LPMacMenuActionBridge.handleCheckForUpdates_')
+             38 MAKE_FUNCTION            0
+             40 CALL_FUNCTION            1
+             42 STORE_NAME               6 (handleCheckForUpdates_)
+
+ 65          44 LOAD_CLASSDEREF          1 (objc)
+             46 LOAD_METHOD              5 (signature)
+             48 LOAD_CONST               4 (b'v@:@')
+             50 CALL_METHOD              1
+
+ 66          52 LOAD_CONST               7 (<code object handleSendFeedback_ at 0x000001F3253AE240, file "Menu\LPMenuBridge.py", line 65>)
+             54 LOAD_CONST               8 ('ensureMacMenuActionBridgeClass.<locals>.LPMacMenuActionBridge.handleSendFeedback_')
+             56 MAKE_FUNCTION            0
+             58 CALL_FUNCTION            1
+             60 STORE_NAME               7 (handleSendFeedback_)
+             62 LOAD_CONST               9 (None)
+             64 RETURN_VALUE
+
+=== ensureMacMenuActionBridgeClass.LPMacMenuActionBridge.initWithOwner_ ===
+ 43           0 LOAD_DEREF               1 (objc)
+              2 LOAD_METHOD              0 (super)
+              4 LOAD_DEREF               0 (LPMacMenuActionBridge)
+              6 LOAD_FAST                0 (self)
+              8 CALL_METHOD              2
+             10 LOAD_METHOD              1 (init)
+             12 CALL_METHOD              0
+             14 STORE_FAST               0 (self)
+
+ 44          16 LOAD_FAST                0 (self)
+             18 LOAD_CONST               1 (None)
+             20 IS_OP                    0
+             22 POP_JUMP_IF_FALSE       28
+
+ 45          24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+ 47     >>   28 LOAD_FAST                1 (owner)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               2 (_owner)
+
+ 48          34 LOAD_FAST                0 (self)
+             36 RETURN_VALUE
+
+=== ensureMacMenuActionBridgeClass.LPMacMenuActionBridge.handleCheckForUpdates_ ===
+ 60           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_owner)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       14
+
+ 61          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+ 63     >>   14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                0 (_owner)
+             18 LOAD_METHOD              1 (checkForUpdates)
+             20 CALL_METHOD              0
+             22 POP_TOP
+             24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+=== ensureMacMenuActionBridgeClass.LPMacMenuActionBridge.handleSendFeedback_ ===
+ 75           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_owner)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       14
+
+ 76          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+ 78     >>   14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                0 (_owner)
+             18 LOAD_METHOD              1 (openFeedback)
+             20 CALL_METHOD              0
+             22 POP_TOP
+             24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE

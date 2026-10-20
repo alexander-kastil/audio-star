@@ -1,0 +1,63 @@
+# module LPClientFramework.LPCache.LPFileCache
+
+[module] names: __doc__, json, threading, enum, Enum, LPClientFramework.LPUtility, logger, FileCache
+  str: '\n@Time ： 2025/5/7 13:45\n@Auth ： Chris\n@File ：LPFileCache.py\n@Desc:\n'
+  str: 'Enum'
+  str: 'logger'
+  str: 'FileCache'
+
+def FileCache()  line 15
+  names: __name__, __module__, __qualname__, __init__, _getLock, _getFilePath, Enum, writeCache, readCache, updateCache
+    str: 'FileCache'
+    str: 'json'
+    str: 'FileCache.__init__'
+    str: 'FileCache._getLock'
+    str: 'FileCache._getFilePath'
+    str: 'type'
+    str: 'FileCache.writeCache'
+    str: 'FileCache.readCache'
+    str: 'FileCache.updateCache'
+    str: 'json'
+
+  def FileCache.__init__(self, cacheDir, fileType)  line 16
+    names: cacheDir, mkdir, fileType, _locks
+      str: 'parents'
+      str: 'exist_ok'
+
+  def FileCache._getLock(self, type)  line 23
+    names: _locks, threading, RLock
+
+  def FileCache._getFilePath(self, type)  line 28
+    names: cacheDir, value, fileType
+      str: 'Cache.'
+
+  def FileCache.writeCache(self, type, data)  line 31
+    names: _getLock, _getFilePath
+      str: 'FileCache.writeCache.<locals>._write'
+
+    def FileCache.writeCache._write()  line 35
+      names: fileType, open, json, dump, ValueError
+        str: 'json'
+        str: 'w'
+        str: 'utf-8'
+        str: 'encoding'
+        str: 'indent'
+        str: 'writeCache unsupported fileType: '
+
+  def FileCache.readCache(self, type)  line 45
+    names: _getLock, _getFilePath
+      str: 'FileCache.readCache.<locals>._read'
+
+    def FileCache.readCache._read()  line 49
+      names: exists, writeCache, value, fileType, open, json, load, ValueError
+        str: 'json'
+        str: 'r'
+        str: 'utf-8'
+        str: 'encoding'
+        str: 'readCache unsupported fileType: '
+
+  def FileCache.updateCache(self, type, updateFunc, *args)  line 63
+    names: _getLock, readCache, writeCache, logger, debug
+      str: '\n        从文件读取旧数据，使用 updateFunc(data) 生成新数据，再写入。\n        '
+      str: '[FileCache] '
+      str: ' updateCache finished!'

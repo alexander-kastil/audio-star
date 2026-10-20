@@ -1,0 +1,120 @@
+# module HOME.StreamService.Qobuz.Component.LPQobuzAlbumTrackTableView
+
+[module] names: __doc__, PyQt6.QtCore, QAbstractTableModel, Qt, QCoreApplication, QModelIndex, pyqtSignal, QRect, PyQt6.QtGui, QMovie, QIcon, QFont, QPixmap, QColor, QCursor, QPainter, QFontMetrics, PyQt6.QtWidgets, QStyle, QToolTip, LPGlobalUI, HOME.LPSuperTableView, LPSuperTableDelegate, HOME.StreamService.Qobuz.Util, LPQobuzUtil, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, TABLE_COLUMNS, LPQobuzAlbumTracksTableModel, LPQobuzAlbumTrackTableDelegate
+  str: '\n@Time ： 2025/7/22 16:58\n@Auth ： Chris\n@File ：LPQobuzAlbumTrackTableView.py\n@Desc:\n'
+  str: 'QAbstractTableModel'
+  str: 'Qt'
+  str: 'QCoreApplication'
+  str: 'QModelIndex'
+  str: 'pyqtSignal'
+  str: 'QRect'
+  str: 'QMovie'
+  str: 'QIcon'
+  str: 'QFont'
+  str: 'QPixmap'
+  str: 'QColor'
+  str: 'QCursor'
+  str: 'QPainter'
+  str: 'QFontMetrics'
+  str: 'QStyle'
+  str: 'QToolTip'
+  str: 'LPSuperTableDelegate'
+  str: 'LPQobuzUtil'
+  str: 'LPUtility'
+  str: 'LPPlayListSource'
+  str: 'LPQobuzAlbumTracksTableModel'
+  str: 'LPQobuzAlbumTrackTableDelegate'
+
+def LPQobuzAlbumTracksTableModel()  line 19
+  names: __name__, __module__, __qualname__, __init__, Qt, ItemDataRole, DisplayRole, headerData, rowCount, columnCount, data, QModelIndex, removeRows, addItemList, getheaderRows, __classcell__
+    str: 'LPQobuzAlbumTracksTableModel'
+    str: 'LPQobuzAlbumTracksTableModel.__init__'
+    str: 'LPQobuzAlbumTracksTableModel.headerData'
+    str: 'LPQobuzAlbumTracksTableModel.rowCount'
+    str: 'LPQobuzAlbumTracksTableModel.columnCount'
+    str: 'LPQobuzAlbumTracksTableModel.data'
+    str: 'LPQobuzAlbumTracksTableModel.removeRows'
+    str: 'LPQobuzAlbumTracksTableModel.addItemList'
+    str: 'LPQobuzAlbumTracksTableModel.getheaderRows'
+
+  def LPQobuzAlbumTracksTableModel.__init__(self, playList, parent)  line 21
+    names: super, __init__, playList, list, _data, set, headerRows
+
+  def LPQobuzAlbumTracksTableModel.headerData(self, section, orientation, role)  line 28
+    names: QCoreApplication, translate, append, Qt, Orientation, Horizontal, ItemDataRole, DisplayRole, super, headerData
+      str: 'track'
+      str: '#'
+      str: 'id'
+      str: 'title'
+      str: 'title'
+      str: 'AlbumDetail'
+      str: 'Track'
+      str: 'artist'
+      str: 'Artist'
+      str: 'length'
+      str: 'Duration'
+      str: 'options'
+
+  def LPQobuzAlbumTracksTableModel.rowCount(self, parent)  line 45
+    names: len, _data
+
+  def LPQobuzAlbumTracksTableModel.columnCount(self, parent)  line 48
+    names: rowCount, TABLE_COLUMNS
+
+  def LPQobuzAlbumTracksTableModel.data(self, index, role)  line 51
+    names: row, column, rowCount, columnCount, _data, Qt, ItemDataRole, DisplayRole, LPGlobalUI, currentDevice, deviceStreamServiceManager, isCurrentPlayItem, LPPlayListSource, Qobuz, value, trackName, trackArtist, parentalWarning, artistId, LPQobuzUtil, formatTrackDuration, trackDuration, isFavorite, UserRole, playList, header, mediaCount, getheaderRows
+      str: '%s'
+      str: 'artist'
+      str: 'duration'
+      str: 'favorite'
+      str: 'more'
+
+  def LPQobuzAlbumTracksTableModel.removeRows(self, row, count, parent)  line 92
+    names: len, _data, beginRemoveRows, endRemoveRows
+
+  def LPQobuzAlbumTracksTableModel.addItemList(self, playList)  line 101
+    names: len, _data, list, beginInsertRows, QModelIndex, extend, endInsertRows
+
+  def LPQobuzAlbumTracksTableModel.getheaderRows(self)  line 111
+    names: playList, header, mediaCount, enumerate, _data, trackNumber, headerRows, add
+
+def LPQobuzAlbumTrackTableDelegate()  line 123
+  names: __name__, __module__, __qualname__, pyqtSignal, QModelIndex, favClicked, optClicked, __init__, editorEvent, paint, helpEvent, update_view, cleanup_table_view, isMultiCD, __classcell__
+    str: 'LPQobuzAlbumTrackTableDelegate'
+    str: 'LPQobuzAlbumTrackTableDelegate.__init__'
+    str: 'LPQobuzAlbumTrackTableDelegate.editorEvent'
+    str: 'LPQobuzAlbumTrackTableDelegate.paint'
+    str: 'LPQobuzAlbumTrackTableDelegate.helpEvent'
+    str: 'LPQobuzAlbumTrackTableDelegate.update_view'
+    str: 'LPQobuzAlbumTrackTableDelegate.cleanup_table_view'
+    str: 'LPQobuzAlbumTrackTableDelegate.isMultiCD'
+
+  def LPQobuzAlbumTrackTableDelegate.__init__(self, parent)  line 128
+    names: super, __init__, table_view, QMovie, LPGlobalUI, imagePath, play_movie, start, playingRow, frameChanged, connect, update_view, favoriteSize, LPUtility, tintImage, THEME_HIGH_HIGH_COLOR, favPixmap, QPixmap, unFavPixmap
+      str: 'dark_playing.gif'
+      str: 'favorite.png'
+      str: 'unfavorite.png'
+
+  def LPQobuzAlbumTrackTableDelegate.editorEvent(self, event, model, option, index)  line 144
+    names: type, Type, MouseButtonRelease, isMultiCD, data, Qt, ItemDataRole, UserRole, trackNumber, rect, column, QRect, x, y, favoriteSize, contains, position, toPoint, favClicked, emit, optClicked, super, editorEvent
+
+  def LPQobuzAlbumTrackTableDelegate.paint(self, painter, option, index)  line 176
+    names: super, paint, data, row, playingRow, setPen, LPGlobalUI, THEME_HIGH_HIGH_COLOR, THEME_DEFAULT_COLOR, rect, isMultiCD, Qt, ItemDataRole, UserRole, trackNumber, state, QStyle, StateFlag, State_MouseOver, State_Selected, widget, viewport, mapFromGlobal, QCursor, pos, y, visualRect, top, QRect, x, width, height, fillRect, QColor, column, save, setRenderHint, QPainter, RenderHint, Antialiasing, setBrush, PenStyle, NoPen, drawRoundedRect, THEME_DISABLE_COLOR, drawText, AlignmentFlag, AlignCenter, mediaNumber, restore, currentDevice, mediaInfo, playState, play_movie, currentPixmap, drawPixmap, QIcon, QPixmap, imagePath, addPixmap, QFont, setUnderline, setFont, AlignLeft, AlignVCenter, QFontMetrics, font, elidedText, TextElideMode, ElideRight, boundingRect, styleObject, lastCursorPos, cursor, CursorShape, PointingHandCursor, lastCursorActionIndex, setCursor, ArrowCursor, favPixmap, unFavPixmap
+      str: 'CD '
+      str: 'PLAYING'
+      str: 'dark_pause.png'
+      str: 'qobuz/e_warning.png'
+      str: 'more.png'
+
+  def LPQobuzAlbumTrackTableDelegate.helpEvent(self, event, view, option, index)  line 395
+    names: type, Type, ToolTip, data, Qt, ItemDataRole, UserRole, isMultiCD, trackNumber, rect, QFontMetrics, font, pos, globalPos, column, trackName, QRect, x, y, width, height, elidedText, TextElideMode, ElideRight, horizontalAdvance, contains, QToolTip, showText, trackArtist, parentalWarning, super, helpEvent
+      str: 'role'
+
+  def LPQobuzAlbumTrackTableDelegate.update_view(self)  line 470
+    names: playingRow, table_view, model, index, data, Qt, ItemDataRole, DisplayRole, update
+
+  def LPQobuzAlbumTrackTableDelegate.cleanup_table_view(self)  line 483
+    names: play_movie, stop
+
+  def LPQobuzAlbumTrackTableDelegate.isMultiCD(self, index)  line 486
+    names: data, Qt, ItemDataRole, UserRole

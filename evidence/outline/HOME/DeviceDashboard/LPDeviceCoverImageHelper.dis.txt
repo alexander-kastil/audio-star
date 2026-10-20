@@ -1,0 +1,175 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/5/7\n@Auth ： OpenCode\n@File ：LPDeviceCoverImageHelper.py\n@Desc: 设备列表封面图片绘制工具。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  9           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Qt',))
+              8 IMPORT_NAME              1 (PyQt6.QtCore)
+             10 IMPORT_FROM              2 (Qt)
+             12 STORE_NAME               2 (Qt)
+             14 POP_TOP
+
+ 10          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('QPainter', 'QPainterPath', 'QPixmap'))
+             20 IMPORT_NAME              3 (PyQt6.QtGui)
+             22 IMPORT_FROM              4 (QPainter)
+             24 STORE_NAME               4 (QPainter)
+             26 IMPORT_FROM              5 (QPainterPath)
+             28 STORE_NAME               5 (QPainterPath)
+             30 IMPORT_FROM              6 (QPixmap)
+             32 STORE_NAME               6 (QPixmap)
+             34 POP_TOP
+
+ 13          36 LOAD_CONST               8 ((0,))
+             38 LOAD_NAME                6 (QPixmap)
+             40 LOAD_NAME                7 (int)
+             42 LOAD_NAME                7 (int)
+             44 LOAD_NAME                7 (int)
+             46 LOAD_NAME                6 (QPixmap)
+             48 LOAD_CONST               4 (('pixmap', 'width', 'height', 'radius', 'return'))
+             50 BUILD_CONST_KEY_MAP      5
+             52 LOAD_CONST               5 (<code object coverCanvasPixmap at 0x000001F324E60870, file "DeviceDashboard\LPDeviceCoverImageHelper.py", line 13>)
+             54 LOAD_CONST               6 ('coverCanvasPixmap')
+             56 MAKE_FUNCTION            5 (defaults, annotations)
+             58 STORE_NAME               8 (coverCanvasPixmap)
+             60 LOAD_CONST               7 (None)
+             62 RETURN_VALUE
+
+=== coverCanvasPixmap ===
+ 25           0 LOAD_GLOBAL              0 (max)
+              2 LOAD_CONST               1 (1)
+              4 LOAD_GLOBAL              1 (int)
+              6 LOAD_FAST                1 (width)
+              8 CALL_FUNCTION            1
+             10 CALL_FUNCTION            2
+             12 STORE_FAST               1 (width)
+
+ 26          14 LOAD_GLOBAL              0 (max)
+             16 LOAD_CONST               1 (1)
+             18 LOAD_GLOBAL              1 (int)
+             20 LOAD_FAST                2 (height)
+             22 CALL_FUNCTION            1
+             24 CALL_FUNCTION            2
+             26 STORE_FAST               2 (height)
+
+ 27          28 LOAD_GLOBAL              2 (QPixmap)
+             30 LOAD_FAST                1 (width)
+             32 LOAD_FAST                2 (height)
+             34 CALL_FUNCTION            2
+             36 STORE_FAST               4 (canvas)
+
+ 28          38 LOAD_FAST                4 (canvas)
+             40 LOAD_METHOD              3 (fill)
+             42 LOAD_GLOBAL              4 (Qt)
+             44 LOAD_ATTR                5 (GlobalColor)
+             46 LOAD_ATTR                6 (transparent)
+             48 CALL_METHOD              1
+             50 POP_TOP
+
+ 29          52 LOAD_FAST                0 (pixmap)
+             54 LOAD_CONST               2 (None)
+             56 IS_OP                    0
+             58 POP_JUMP_IF_TRUE        68
+             60 LOAD_FAST                0 (pixmap)
+             62 LOAD_METHOD              7 (isNull)
+             64 CALL_METHOD              0
+             66 POP_JUMP_IF_FALSE       72
+
+ 30     >>   68 LOAD_FAST                4 (canvas)
+             70 RETURN_VALUE
+
+ 32     >>   72 LOAD_FAST                0 (pixmap)
+             74 LOAD_METHOD              8 (scaled)
+
+ 33          76 LOAD_FAST                1 (width)
+
+ 34          78 LOAD_FAST                2 (height)
+
+ 35          80 LOAD_GLOBAL              4 (Qt)
+             82 LOAD_ATTR                9 (AspectRatioMode)
+             84 LOAD_ATTR               10 (KeepAspectRatio)
+
+ 36          86 LOAD_GLOBAL              4 (Qt)
+             88 LOAD_ATTR               11 (TransformationMode)
+             90 LOAD_ATTR               12 (SmoothTransformation)
+
+ 32          92 CALL_METHOD              4
+             94 STORE_FAST               5 (scaled_pixmap)
+
+ 38          96 LOAD_GLOBAL              1 (int)
+             98 LOAD_FAST                1 (width)
+            100 LOAD_FAST                5 (scaled_pixmap)
+            102 LOAD_METHOD             13 (width)
+            104 CALL_METHOD              0
+            106 BINARY_SUBTRACT
+            108 LOAD_CONST               3 (2)
+            110 BINARY_TRUE_DIVIDE
+            112 CALL_FUNCTION            1
+            114 STORE_FAST               6 (draw_x)
+
+ 39         116 LOAD_GLOBAL              1 (int)
+            118 LOAD_FAST                2 (height)
+            120 LOAD_FAST                5 (scaled_pixmap)
+            122 LOAD_METHOD             14 (height)
+            124 CALL_METHOD              0
+            126 BINARY_SUBTRACT
+            128 LOAD_CONST               3 (2)
+            130 BINARY_TRUE_DIVIDE
+            132 CALL_FUNCTION            1
+            134 STORE_FAST               7 (draw_y)
+
+ 41         136 LOAD_GLOBAL             15 (QPainter)
+            138 LOAD_FAST                4 (canvas)
+            140 CALL_FUNCTION            1
+            142 STORE_FAST               8 (painter)
+
+ 42         144 LOAD_FAST                8 (painter)
+            146 LOAD_METHOD             16 (setRenderHint)
+            148 LOAD_GLOBAL             15 (QPainter)
+            150 LOAD_ATTR               17 (RenderHint)
+            152 LOAD_ATTR               18 (Antialiasing)
+            154 CALL_METHOD              1
+            156 POP_TOP
+
+ 43         158 LOAD_FAST                3 (radius)
+            160 LOAD_CONST               4 (0)
+            162 COMPARE_OP               4 (>)
+            164 POP_JUMP_IF_FALSE      202
+
+ 44         166 LOAD_GLOBAL             19 (QPainterPath)
+            168 CALL_FUNCTION            0
+            170 STORE_FAST               9 (path)
+
+ 45         172 LOAD_FAST                9 (path)
+            174 LOAD_METHOD             20 (addRoundedRect)
+            176 LOAD_CONST               4 (0)
+            178 LOAD_CONST               4 (0)
+            180 LOAD_FAST                1 (width)
+            182 LOAD_FAST                2 (height)
+            184 LOAD_FAST                3 (radius)
+            186 LOAD_FAST                3 (radius)
+            188 CALL_METHOD              6
+            190 POP_TOP
+
+ 46         192 LOAD_FAST                8 (painter)
+            194 LOAD_METHOD             21 (setClipPath)
+            196 LOAD_FAST                9 (path)
+            198 CALL_METHOD              1
+            200 POP_TOP
+
+ 47     >>  202 LOAD_FAST                8 (painter)
+            204 LOAD_METHOD             22 (drawPixmap)
+            206 LOAD_FAST                6 (draw_x)
+            208 LOAD_FAST                7 (draw_y)
+            210 LOAD_FAST                5 (scaled_pixmap)
+            212 CALL_METHOD              3
+            214 POP_TOP
+
+ 48         216 LOAD_FAST                8 (painter)
+            218 LOAD_METHOD             23 (end)
+            220 CALL_METHOD              0
+            222 POP_TOP
+
+ 49         224 LOAD_FAST                4 (canvas)
+            226 RETURN_VALUE

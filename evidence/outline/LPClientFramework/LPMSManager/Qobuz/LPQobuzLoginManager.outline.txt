@@ -1,0 +1,159 @@
+# module LPClientFramework.LPMSManager.Qobuz.LPQobuzLoginManager
+
+[module] names: __doc__, json, os, webbrowser, PyQt6.QtCore, pyqtSignal, QObject, pyqtSlot, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPConfig, LPUIPath, LPClientFramework.LPDataModel.UpnpDataModel.LPUpnpAsyncDataModel, LPUpnpAsyncDataModel, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPUtility, logger, LPCommonWidgets.page.LPMSUnsupportedPage, LPMSUnsupportedPage, LPCommonWidgets.page.UI.LPMSUnsupportedPage_ui, Ui_MSUnsupportedWidget, LPQobuzLoginManager
+  str: '\n@Time ： 2025/7/21 16:51\n@Auth ： Chris\n@File ：LPQobuzLoginManager.py\n@Desc:\n'
+  str: 'pyqtSignal'
+  str: 'QObject'
+  str: 'pyqtSlot'
+  str: 'LPUtility'
+  str: 'LPUIPath'
+  str: 'LPUpnpAsyncDataModel'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'LPMSUnsupportedPage'
+  str: 'Ui_MSUnsupportedWidget'
+  str: 'LPQobuzLoginManager'
+
+def LPQobuzLoginManager()  line 25
+  names: __name__, __module__, __qualname__, pyqtSignal, unsupportedSignal, getUserInfoFinishSignal, updateAccountSignal, updateAccountEndSignal, showLoginPageSignal, closeLoginPageSignal, bool, popAllSourcePageSignal, clearCacheSignal, initAccountAboutSignal, __init__, getAccount, getUserInfo, onOAuthExCodeReceived, onAccountChanged, pyqtSlot, updateAccount, updateAccountEnd, showLoginPage, closeLoginPage, beginBrowserLogin, tryPushQobuz, onDeviceChanged, getUserInfoForDeviceChanged, popAllSourcePage, logout, showUnsupportedPage, clearCache, __classcell__
+    str: 'LPQobuzLoginManager'
+    str: 'LPQobuzLoginManager.__init__'
+    str: 'LPQobuzLoginManager.getAccount'
+    str: 'LPQobuzLoginManager.getUserInfo'
+    str: 'LPQobuzLoginManager.onOAuthExCodeReceived'
+    str: 'LPQobuzLoginManager.onAccountChanged'
+    str: 'LPQobuzLoginManager.updateAccount'
+    str: 'LPQobuzLoginManager.updateAccountEnd'
+    str: 'LPQobuzLoginManager.showLoginPage'
+    str: 'LPQobuzLoginManager.closeLoginPage'
+    str: 'LPQobuzLoginManager.beginBrowserLogin'
+    str: 'LPQobuzLoginManager.tryPushQobuz'
+    str: 'LPQobuzLoginManager.onDeviceChanged'
+    str: 'LPQobuzLoginManager.getUserInfoForDeviceChanged'
+    str: 'LPQobuzLoginManager.popAllSourcePage'
+    str: 'LPQobuzLoginManager.logout'
+    str: 'LPQobuzLoginManager.showUnsupportedPage'
+    str: 'LPQobuzLoginManager.clearCache'
+
+  def LPQobuzLoginManager.__init__(self)  line 46
+    names: super, __init__, LPUtility, addNotificationObserver, onOAuthExCodeReceived, onAccountChanged, onDeviceChanged, updateAccountSignal, connect, updateAccount, LPPlayListSource, Qobuz, value, source, account, LPUpnpAsyncDataModel, upnpModel, redirectUrl, loginPage, showLoginPageSignal, showLoginPage, closeLoginPageSignal, closeLoginPage, updateAccountEndSignal, updateAccountEnd, popAllSourcePageSignal, popAllSourcePage, unsupportedSignal, showUnsupportedPage, clearCacheSignal, clearCache, tokenProvider
+      str: 'OAuthCodeChanged'
+      str: 'accountChangedForSource'
+      str: 'DeviceChanged'
+      str: 'https://www.qobuz.com/signin/oauth2?client_id=155398957&redirect_uri=https://auth.wiimhome.com/qobuz/wiimhome&response_type=code&state=pc'
+
+  def LPQobuzLoginManager.getAccount(self, device)  line 70
+    names: deviceStreamServiceManager, accountForSource, source, account
+
+  def LPQobuzLoginManager.getUserInfo(self, device)  line 75
+    names: upnpModel, getUserInfo, source
+      str: 'LPQobuzLoginManager.getUserInfo.<locals>.callback'
+      str: 'callback'
+
+    def LPQobuzLoginManager.getUserInfo.callback(response, *args)  line 76
+      names: json, loads, Exception, logger, debug, unsupportedSignal, emit, get, showLoginPageSignal, deviceStreamServiceManager, registerAccountForSource, source, accountForSource, account
+        str: 'Result'
+        str: 'qobuz getUserInfo ==== unsupported'
+        str: 'userId'
+        str: 'qobuz getUserInfo ==== show loginPage'
+        str: '[Qobuz] getUserInfo failed!'
+
+  def LPQobuzLoginManager.onOAuthExCodeReceived(self, params)  line 103
+    names: logger, debug, get, uuid, LPGlobalUI, currentDevice, source, upnpModel, userLoginByCode
+      str: 'LPQobuzLoginManager.onOAuthExCodeReceived.<locals>.callback'
+      str: 'qobuz onOAuthExCodeReceived ==== '
+      str: 'device'
+      str: 'notify'
+      str: 'source'
+      str: 'exchange_code'
+      str: 'callback'
+
+    def LPQobuzLoginManager.onOAuthExCodeReceived.callback(response)  line 104
+      names: logger, debug
+        str: 'qobuz ExchangeCodeReceiveCallback ==== end auth'
+
+  def LPQobuzLoginManager.onAccountChanged(self, params)  line 120
+    names: get, uuid, LPGlobalUI, currentDevice, source, logger, debug, updateAccountSignal, emit
+      str: 'device'
+      str: 'notify'
+      str: 'source'
+      str: 'qobuz accountChanged ===='
+
+  def LPQobuzLoginManager.updateAccount(self)  line 133
+    names: getAccount, LPGlobalUI, currentDevice, account, userId, logger, debug, tokenProvider, setAccount, closeLoginPageSignal, emit, initAccountAboutSignal, updateAccountEndSignal, getUserInfo
+      str: '按当前设备账号刷新 Qobuz 登录状态，未登录时进入登录页。'
+      str: 'qobuz updateAccount ==== account'
+      str: 'qobuz updateAccount ==== not account'
+
+  def LPQobuzLoginManager.updateAccountEnd(self)  line 149
+    names: HOME.StreamService.Qobuz.Browse.LPQobuzViewController, LPQobuzViewController, HOME.StreamService.Qobuz.Browse.UI.LPQobuzViewController_ui, Ui_qobuzWidget, LPGlobalUI, navigationManager, push, loadUI, LPUIPath, QobuzViewControllerUI
+      str: 'LPQobuzViewController'
+      str: 'Ui_qobuzWidget'
+      str: 'qobuz'
+
+  def LPQobuzLoginManager.showLoginPage(self)  line 160
+    names: HOME.StreamService.Qobuz.Login.LPQobuzLoginViewController, LPQobuzLoginViewController, HOME.StreamService.Qobuz.Login.UI.LPQobuzLoginViewController_ui, Ui_qobuzLoginWidget, LPGlobalUI, loadUI, LPUIPath, QobuzLoginViewControllerUI, loginPage, navigationManager, push, logger, debug
+      str: 'LPQobuzLoginViewController'
+      str: 'Ui_qobuzLoginWidget'
+      str: 'qobuz login'
+      str: 'qobuz showLoginPage ==== '
+
+  def LPQobuzLoginManager.closeLoginPage(self)  line 170
+    names: loginPage, LPGlobalUI, rootStackedWidget, removeWidget, logger, debug
+      str: 'qobuz closeLoginPage ==== '
+
+  def LPQobuzLoginManager.beginBrowserLogin(self)  line 177
+    names: webbrowser, open, redirectUrl, logger, debug
+      str: 'qobuz beginBrowserLogin ==== '
+
+  def LPQobuzLoginManager.tryPushQobuz(self)  line 182
+    names: updateAccountSignal, emit
+
+  def LPQobuzLoginManager.onDeviceChanged(self, params)  line 187
+    names: LPGlobalUI, getTopWidget, hasattr, source, logger, debug, currentDevice, get, uuid, deviceStreamServiceManager, streamServiceCapability, keys, account, unsupportedSignal, emit, popAllSourcePageSignal, accountForSource, getUserInfoForDeviceChanged, userId, tryPushQobuz
+      str: 'source'
+      str: 'onDeviceChanged -- in top widget --> '
+      str: 'device'
+      str: 'onDeviceChanged [unsupported] pop all'
+      str: 'onDeviceChanged get no newAccount, try push qobuz'
+      str: 'onDeviceChanged [not oldAccount & newAccount.userId] pop all'
+      str: 'onDeviceChanged [not oldAccount & newAccount.userId] try push qobuz'
+      str: 'onDeviceChanged [newAccount.userId == oldAccount.userId] return'
+      str: 'onDeviceChanged ==== tryPushQobuz because  newAccount.userId--'
+      str: ' != oldAccount.userId--'
+      str: ' pop all'
+
+  def LPQobuzLoginManager.getUserInfoForDeviceChanged(self, device, oldAccount)  line 237
+    names: upnpModel, getUserInfo, source
+      str: 'LPQobuzLoginManager.getUserInfoForDeviceChanged.<locals>.callback'
+      str: 'callback'
+
+    def LPQobuzLoginManager.getUserInfoForDeviceChanged.callback(response, *args)  line 238
+      names: json, loads, Exception, unsupportedSignal, emit, popAllSourcePageSignal, logger, debug, get, showLoginPageSignal, deviceStreamServiceManager, registerAccountForSource, source, accountForSource, account, userId, tryPushQobuz
+        str: 'Result'
+        str: 'qobuz getUserInfoForDeviceChanged ==== tryPushQobuz no userInfo pop all'
+        str: 'userId'
+        str: 'qobuz getUserInfoForDeviceChanged ==== tryPushQobuz no userId pop all'
+        str: 'qobuz getUserInfoForDeviceChanged ==== tryPushQobuz because  userId pop all'
+        str: '[Qobuz] getUserInfo failed!'
+
+  def LPQobuzLoginManager.popAllSourcePage(self, excludeTop)  line 273
+    names: LPGlobalUI, navigationManager, popAll, source
+
+  def LPQobuzLoginManager.logout(self)  line 278
+    names: str, getattr, account, strip, LPGlobalUI, currentDevice, deviceStreamServiceManager, logoutAccountForSource, source, showLoginPageSignal, emit, popAllSourcePageSignal, LPClientFramework.LPFavoriteSyncCoordinator, LPFavoriteSyncCoordinator, instance, clearUser, Exception, logger, warning
+      str: 'userId'
+      str: 'LPFavoriteSyncCoordinator'
+      str: 'Qobuz'
+      str: '[Qobuz] favorite cache clear on logout failed: %s'
+
+  def LPQobuzLoginManager.showUnsupportedPage(self)  line 294
+    names: LPGlobalUI, loadUI, LPUIPath, MSUnsupportedPageUI, Ui_MSUnsupportedWidget, LPMSUnsupportedPage, source, navigationManager, push, logger, debug
+      str: 'qobuz unsupported'
+      str: 'qobuz showUnsupportedPage ==== '
+
+  def LPQobuzLoginManager.clearCache(self)  line 301
+    names: LPUtility, cacheDir, os, listdir, path, join, isfile, remove, Exception, logger, debug
+      str: 'Qobuz'
+      str: 'Error Qobuz Cache deleting '
+      str: ': '

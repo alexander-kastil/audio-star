@@ -1,0 +1,118 @@
+# module LPClientFramework.LPFeedback.LPFeedbackModels
+
+[module] names: __doc__, dataclasses, dataclass, field, typing, Dict, List, LPFeedbackRequest, LPFeedbackSubmission, LPFeedbackStsCredential
+  str: 'PC Feedback 单向提交流程使用的数据模型。'
+  str: 'dataclass'
+  str: 'field'
+  str: 'Dict'
+  str: 'List'
+  str: 'frozen'
+  str: 'LPFeedbackRequest'
+  str: 'LPFeedbackSubmission'
+  str: 'LPFeedbackStsCredential'
+
+def LPFeedbackRequest()  line 8
+  names: __name__, __module__, __qualname__, __doc__, str, __annotations__, List, feedbackType, osVersion, deviceName, currentDeviceName, field, list, deviceList, tuple
+    str: 'LPFeedbackRequest'
+    str: '用户填写的反馈内容及本机上下文快照。'
+    str: 'subject'
+    str: 'email'
+    str: 'description'
+    str: 'attachmentPaths'
+    str: 'appVersion'
+    str: 'platformName'
+    str: 'appUuid'
+    str: 'deviceUuid'
+    str: 'logDirectory'
+    str: 'FeedbackDebug'
+    str: 'feedbackType'
+    str: 'osVersion'
+    str: 'deviceName'
+    str: 'currentDeviceName'
+    str: 'default_factory'
+    str: 'deviceList'
+
+def LPFeedbackSubmission()  line 30
+  names: __name__, __module__, __qualname__, __doc__, str, __annotations__, LPFeedbackRequest, ticketId, stage, downloadUrl, archivePath, field, dict, extra, Dict, toRecord
+    str: 'LPFeedbackSubmission'
+    str: '一次发送任务在创建工单后的可持久化状态。'
+    str: 'submissionId'
+    str: 'confirmationId'
+    str: 'request'
+    str: 'ticketId'
+    str: 'created'
+    str: 'stage'
+    str: 'downloadUrl'
+    str: 'archivePath'
+    str: 'default_factory'
+    str: 'extra'
+    str: 'LPFeedbackSubmission.toRecord'
+
+  def LPFeedbackSubmission.toRecord(self)  line 43
+    names: submissionId, confirmationId, ticketId, stage, downloadUrl, archivePath, list, request, attachmentPaths, appVersion, platformName, appUuid, deviceUuid, dict, extra
+      str: '转换为可直接写入 JSON 状态文件的字典。\n\n        参数:\n            无。\n        返回:\n            dict: 不包含明文描述的状态记录，避免重复落盘用户反馈正文。\n        '
+      str: 'schemaVersion'
+      str: 'submissionId'
+      str: 'confirmationId'
+      str: 'ticketId'
+      str: 'stage'
+      str: 'downloadUrl'
+      str: 'archivePath'
+      str: 'attachmentPaths'
+      str: 'appVersion'
+      str: 'platform'
+      str: 'appUuid'
+      str: 'deviceUuid'
+      str: 'extra'
+
+def LPFeedbackStsCredential()  line 68
+  names: __name__, __module__, __qualname__, __doc__, str, __annotations__, List, classmethod, fromResponse
+    str: 'LPFeedbackStsCredential'
+    str: 'STS 下发的 S3 临时凭证和目标对象信息。'
+    str: 'accessKey'
+    str: 'secretKey'
+    str: 'sessionToken'
+    str: 'bucketName'
+    str: 'bucketRegion'
+    str: 'fileKey'
+    str: 'downloadUrl'
+    str: 's3Metadata'
+    str: 'LPFeedbackStsCredential.fromResponse'
+
+  def LPFeedbackStsCredential.fromResponse(cls, responseData)  line 81
+    names: get, any, RuntimeError, str
+      str: '从 STS 响应的 api.data 节点构造临时凭证。\n\n        参数:\n            responseData (dict): STS 完整 JSON 响应。\n        返回:\n            LPFeedbackStsCredential: 已校验必要字段的凭证对象。\n        异常:\n            RuntimeError: 响应结构或必要字段缺失时抛出。\n        '
+      str: 'api'
+      str: 'data'
+      str: 'id'
+      str: 'cert'
+      str: 'token'
+      str: 'bucketName'
+      str: 'bucketRegion'
+      str: 'fileKey'
+      str: 'downloadUrl'
+      str: 'LPFeedbackStsCredential.fromResponse.<locals>.<genexpr>'
+      str: 'Feedback upload credentials are invalid.'
+      str: 'id'
+      str: 'cert'
+      str: 'token'
+      str: 'bucketName'
+      str: 'bucketRegion'
+      str: 'fileKey'
+      str: 'downloadUrl'
+      str: 'LPFeedbackStsCredential.fromResponse.<locals>.<listcomp>'
+      str: 's3Metadata'
+      str: 'accessKey'
+      str: 'secretKey'
+      str: 'sessionToken'
+      str: 'bucketName'
+      str: 'bucketRegion'
+      str: 'fileKey'
+      str: 'downloadUrl'
+      str: 's3Metadata'
+
+    def LPFeedbackStsCredential.fromResponse.<genexpr>(.0)  line 94
+      names: get
+
+    def LPFeedbackStsCredential.fromResponse.<listcomp>(.0)  line 104
+      names: str

@@ -1,0 +1,34 @@
+<UserControl x:Class="AudioStar.Desktop.Views.NowPlayingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:res="clr-namespace:AudioStar.Desktop.Resources"
+             xmlns:views="clr-namespace:AudioStar.Desktop.Views">
+    <Grid Margin="{StaticResource PageMargin}" DataContext="{Binding Player}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Now playing" Style="{StaticResource PageTitle}" />
+        <Grid Grid.Row="1" Margin="0,14,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.1*" />
+                <ColumnDefinition Width="28" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <views:CoverArt Source="{Binding CoverUri}" Width="400" Height="400" CornerRadius="12" />
+            </Viewbox>
+            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                <TextBlock Text="{Binding Title}" Style="{StaticResource NowPlayingTitle}" res:Interaction.FullTextToolTip="True" />
+                <TextBlock Text="{Binding Artist}" Style="{StaticResource NowPlayingArtist}" Margin="0,8,0,0" res:Interaction.FullTextToolTip="True" Visibility="{Binding Artist, Converter={StaticResource NotNullToVisibility}}" />
+                <TextBlock Text="{Binding Album}" Style="{StaticResource NowPlayingAlbum}" Margin="0,4,0,0" res:Interaction.FullTextToolTip="True" Visibility="{Binding Album, Converter={StaticResource NotNullToVisibility}}" />
+                <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                    <Border Style="{StaticResource Badge}" Margin="0,0,12,0" VerticalAlignment="Center" Visibility="{Binding Quality, Converter={StaticResource NotNullToVisibility}}">
+                        <TextBlock Text="{Binding Quality}" Style="{StaticResource Subtle}" />
+                    </Border>
+                    <TextBlock Text="{Binding SpeakerName, StringFormat=Playing on {0}}" Style="{StaticResource Subtle}" VerticalAlignment="Center" Visibility="{Binding HasSpeaker, Converter={StaticResource BoolToVisibility}}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,406 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('Feedback 单次提交的 JSON 状态文件管理器。')
+              2 STORE_NAME               0 (__doc__)
+
+  4           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+  5          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (os)
+             18 STORE_NAME               2 (os)
+
+  6          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (tempfile)
+             26 STORE_NAME               3 (tempfile)
+
+  7          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (time)
+             34 STORE_NAME               4 (time)
+
+  8          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               3 (('Path',))
+             40 IMPORT_NAME              5 (pathlib)
+             42 IMPORT_FROM              6 (Path)
+             44 STORE_NAME               6 (Path)
+             46 POP_TOP
+
+ 11          48 LOAD_BUILD_CLASS
+             50 LOAD_CONST               4 (<code object LPFeedbackJsonStore at 0x000001F3253C4190, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 11>)
+             52 LOAD_CONST               5 ('LPFeedbackJsonStore')
+             54 MAKE_FUNCTION            0
+             56 LOAD_CONST               5 ('LPFeedbackJsonStore')
+             58 CALL_FUNCTION            2
+             60 STORE_NAME               7 (LPFeedbackJsonStore)
+             62 LOAD_CONST               2 (None)
+             64 RETURN_VALUE
+
+=== LPFeedbackJsonStore ===
+ 11           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeedbackJsonStore')
+              6 STORE_NAME               2 (__qualname__)
+
+ 12           8 LOAD_CONST               1 ('以原子替换方式维护单次发送状态，不读取或恢复历史任务。')
+             10 STORE_NAME               3 (__doc__)
+
+ 14          12 LOAD_CONST               2 (<code object __init__ at 0x000001F3253C4D40, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 14>)
+             14 LOAD_CONST               3 ('LPFeedbackJsonStore.__init__')
+             16 MAKE_FUNCTION            0
+             18 STORE_NAME               4 (__init__)
+
+ 24          20 LOAD_CONST               4 (<code object create at 0x000001F3253C4870, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 24>)
+             22 LOAD_CONST               5 ('LPFeedbackJsonStore.create')
+             24 MAKE_FUNCTION            0
+             26 STORE_NAME               5 (create)
+
+ 34          28 LOAD_CONST               6 (<code object update at 0x000001F3253C45B0, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 34>)
+             30 LOAD_CONST               7 ('LPFeedbackJsonStore.update')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               6 (update)
+
+ 48          36 LOAD_CONST               8 (<code object markFailed at 0x000001F3253C4B30, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 48>)
+             38 LOAD_CONST               9 ('LPFeedbackJsonStore.markFailed')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               7 (markFailed)
+
+ 63          44 LOAD_CONST              10 (<code object remove at 0x000001F3253C47C0, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 63>)
+             46 LOAD_CONST              11 ('LPFeedbackJsonStore.remove')
+             48 MAKE_FUNCTION            0
+             50 STORE_NAME               8 (remove)
+
+ 77          52 LOAD_CONST              12 (<code object read at 0x000001F3253C4EA0, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 77>)
+             54 LOAD_CONST              13 ('LPFeedbackJsonStore.read')
+             56 MAKE_FUNCTION            0
+             58 STORE_NAME               9 (read)
+
+ 91          60 LOAD_CONST              14 (<code object _pathFor at 0x000001F3253C4660, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 91>)
+             62 LOAD_CONST              15 ('LPFeedbackJsonStore._pathFor')
+             64 MAKE_FUNCTION            0
+             66 STORE_NAME              10 (_pathFor)
+
+106          68 LOAD_CONST              16 (<code object _write at 0x000001F3253C4450, file "LPClientFramework\LPFeedback\LPFeedbackJsonStore.py", line 106>)
+             70 LOAD_CONST              17 ('LPFeedbackJsonStore._write')
+             72 MAKE_FUNCTION            0
+             74 STORE_NAME              11 (_write)
+             76 LOAD_CONST              18 (None)
+             78 RETURN_VALUE
+
+=== LPFeedbackJsonStore.__init__ ===
+ 22           0 LOAD_GLOBAL              0 (Path)
+              2 LOAD_FAST                1 (rootDirectory)
+              4 CALL_FUNCTION            1
+              6 LOAD_FAST                0 (self)
+              8 STORE_ATTR               1 (_rootDirectory)
+             10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+=== LPFeedbackJsonStore.create ===
+ 32           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_write)
+              4 LOAD_FAST                1 (record)
+              6 CALL_METHOD              1
+              8 RETURN_VALUE
+
+=== LPFeedbackJsonStore.update ===
+ 44           0 LOAD_FAST                2 (stage)
+              2 LOAD_FAST                1 (record)
+              4 LOAD_CONST               1 ('stage')
+              6 STORE_SUBSCR
+
+ 45           8 LOAD_FAST                1 (record)
+             10 LOAD_METHOD              0 (update)
+             12 LOAD_FAST                3 (changes)
+             14 CALL_METHOD              1
+             16 POP_TOP
+
+ 46          18 LOAD_FAST                0 (self)
+             20 LOAD_METHOD              1 (_write)
+             22 LOAD_FAST                1 (record)
+             24 CALL_METHOD              1
+             26 RETURN_VALUE
+
+=== LPFeedbackJsonStore.markFailed ===
+ 58           0 LOAD_CONST               1 ('failed')
+              2 LOAD_FAST                1 (record)
+              4 LOAD_CONST               2 ('stage')
+              6 STORE_SUBSCR
+
+ 59           8 LOAD_FAST                2 (stage)
+             10 LOAD_FAST                1 (record)
+             12 LOAD_CONST               3 ('failedStage')
+             14 STORE_SUBSCR
+
+ 60          16 LOAD_GLOBAL              0 (str)
+             18 LOAD_FAST                3 (errorMessage)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               4 ('Unknown feedback error.')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_FAST                1 (record)
+             28 LOAD_CONST               5 ('error')
+             30 STORE_SUBSCR
+
+ 61          32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              1 (_write)
+             36 LOAD_FAST                1 (record)
+             38 CALL_METHOD              1
+             40 RETURN_VALUE
+
+=== LPFeedbackJsonStore.remove ===
+ 71           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_pathFor)
+              4 LOAD_FAST                1 (record)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (path)
+
+ 72          10 SETUP_FINALLY           12 (to 24)
+
+ 73          12 LOAD_FAST                2 (path)
+             14 LOAD_METHOD              1 (unlink)
+             16 CALL_METHOD              0
+             18 POP_TOP
+             20 POP_BLOCK
+             22 JUMP_FORWARD            18 (to 42)
+
+ 74     >>   24 DUP_TOP
+             26 LOAD_GLOBAL              2 (FileNotFoundError)
+             28 JUMP_IF_NOT_EXC_MATCH    40
+             30 POP_TOP
+             32 POP_TOP
+             34 POP_TOP
+
+ 75          36 POP_EXCEPT
+             38 JUMP_FORWARD             2 (to 42)
+        >>   40 RERAISE
+        >>   42 LOAD_CONST               1 (None)
+             44 RETURN_VALUE
+
+=== LPFeedbackJsonStore.read ===
+ 85           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_pathFor)
+              4 LOAD_CONST               1 ('submissionId')
+              6 LOAD_FAST                1 (submissionId)
+              8 BUILD_MAP                1
+             10 CALL_METHOD              1
+             12 STORE_FAST               2 (path)
+
+ 86          14 LOAD_FAST                2 (path)
+             16 LOAD_METHOD              1 (exists)
+             18 CALL_METHOD              0
+             20 POP_JUMP_IF_TRUE        26
+
+ 87          22 LOAD_CONST               2 (None)
+             24 RETURN_VALUE
+
+ 88     >>   26 LOAD_FAST                2 (path)
+             28 LOAD_ATTR                2 (open)
+             30 LOAD_CONST               3 ('r')
+             32 LOAD_CONST               4 ('utf-8')
+             34 LOAD_CONST               5 (('encoding',))
+             36 CALL_FUNCTION_KW         2
+             38 SETUP_WITH              26 (to 66)
+             40 STORE_FAST               3 (stateFile)
+
+ 89          42 LOAD_GLOBAL              3 (json)
+             44 LOAD_METHOD              4 (load)
+             46 LOAD_FAST                3 (stateFile)
+             48 CALL_METHOD              1
+             50 POP_BLOCK
+             52 ROT_TWO
+             54 LOAD_CONST               2 (None)
+             56 DUP_TOP
+             58 DUP_TOP
+             60 CALL_FUNCTION            3
+             62 POP_TOP
+             64 RETURN_VALUE
+        >>   66 WITH_EXCEPT_START
+             68 POP_JUMP_IF_TRUE        72
+             70 RERAISE
+        >>   72 POP_TOP
+             74 POP_TOP
+             76 POP_TOP
+             78 POP_EXCEPT
+             80 POP_TOP
+             82 LOAD_CONST               2 (None)
+             84 RETURN_VALUE
+
+=== LPFeedbackJsonStore._pathFor ===
+101           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (record)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 BUILD_MAP                0
+        >>    8 LOAD_METHOD              1 (get)
+             10 LOAD_CONST               1 ('submissionId')
+             12 CALL_METHOD              1
+             14 JUMP_IF_TRUE_OR_POP     18
+             16 LOAD_CONST               2 ('')
+        >>   18 CALL_FUNCTION            1
+             20 LOAD_METHOD              2 (strip)
+             22 CALL_METHOD              0
+             24 STORE_FAST               2 (submissionId)
+
+102          26 LOAD_FAST                2 (submissionId)
+             28 POP_JUMP_IF_TRUE        38
+
+103          30 LOAD_GLOBAL              3 (ValueError)
+             32 LOAD_CONST               3 ('Feedback state record requires submissionId.')
+             34 CALL_FUNCTION            1
+             36 RAISE_VARARGS            1
+
+104     >>   38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                4 (_rootDirectory)
+             42 LOAD_FAST                2 (submissionId)
+             44 LOAD_CONST               4 ('.json')
+             46 BINARY_ADD
+             48 BINARY_TRUE_DIVIDE
+             50 RETURN_VALUE
+
+=== LPFeedbackJsonStore._write ===
+114           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_rootDirectory)
+              4 LOAD_ATTR                1 (mkdir)
+              6 LOAD_CONST               1 (True)
+              8 LOAD_CONST               1 (True)
+             10 LOAD_CONST               2 (('parents', 'exist_ok'))
+             12 CALL_FUNCTION_KW         2
+             14 POP_TOP
+
+115          16 LOAD_GLOBAL              2 (int)
+             18 LOAD_GLOBAL              3 (time)
+             20 LOAD_METHOD              3 (time)
+             22 CALL_METHOD              0
+             24 CALL_FUNCTION            1
+             26 LOAD_FAST                1 (record)
+             28 LOAD_CONST               3 ('updatedAt')
+             30 STORE_SUBSCR
+
+116          32 LOAD_FAST                1 (record)
+             34 LOAD_METHOD              4 (setdefault)
+             36 LOAD_CONST               4 ('createdAt')
+             38 LOAD_FAST                1 (record)
+             40 LOAD_CONST               3 ('updatedAt')
+             42 BINARY_SUBSCR
+             44 CALL_METHOD              2
+             46 POP_TOP
+
+117          48 LOAD_FAST                0 (self)
+             50 LOAD_METHOD              5 (_pathFor)
+             52 LOAD_FAST                1 (record)
+             54 CALL_METHOD              1
+             56 STORE_FAST               2 (targetPath)
+
+118          58 LOAD_GLOBAL              6 (tempfile)
+             60 LOAD_ATTR                7 (mkstemp)
+
+119          62 LOAD_FAST                2 (targetPath)
+             64 LOAD_ATTR                8 (stem)
+             66 LOAD_CONST               5 ('.')
+             68 BINARY_ADD
+
+120          70 LOAD_CONST               6 ('.tmp')
+
+121          72 LOAD_GLOBAL              9 (str)
+             74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                0 (_rootDirectory)
+             78 CALL_FUNCTION            1
+
+118          80 LOAD_CONST               7 (('prefix', 'suffix', 'dir'))
+             82 CALL_FUNCTION_KW         3
+             84 UNPACK_SEQUENCE          2
+             86 STORE_FAST               3 (fileDescriptor)
+             88 STORE_FAST               4 (temporaryPath)
+
+123          90 SETUP_FINALLY          128 (to 220)
+
+124          92 LOAD_GLOBAL             10 (os)
+             94 LOAD_ATTR               11 (fdopen)
+             96 LOAD_FAST                3 (fileDescriptor)
+             98 LOAD_CONST               8 ('w')
+            100 LOAD_CONST               9 ('utf-8')
+            102 LOAD_CONST              10 (('encoding',))
+            104 CALL_FUNCTION_KW         3
+            106 SETUP_WITH              58 (to 166)
+            108 STORE_FAST               5 (stateFile)
+
+125         110 LOAD_GLOBAL             12 (json)
+            112 LOAD_ATTR               13 (dump)
+            114 LOAD_FAST                1 (record)
+            116 LOAD_FAST                5 (stateFile)
+            118 LOAD_CONST              11 (False)
+            120 LOAD_CONST               1 (True)
+            122 LOAD_CONST              12 (2)
+            124 LOAD_CONST              13 (('ensure_ascii', 'sort_keys', 'indent'))
+            126 CALL_FUNCTION_KW         5
+            128 POP_TOP
+
+126         130 LOAD_FAST                5 (stateFile)
+            132 LOAD_METHOD             14 (flush)
+            134 CALL_METHOD              0
+            136 POP_TOP
+
+127         138 LOAD_GLOBAL             10 (os)
+            140 LOAD_METHOD             15 (fsync)
+            142 LOAD_FAST                5 (stateFile)
+            144 LOAD_METHOD             16 (fileno)
+            146 CALL_METHOD              0
+            148 CALL_METHOD              1
+            150 POP_TOP
+            152 POP_BLOCK
+            154 LOAD_CONST              14 (None)
+            156 DUP_TOP
+            158 DUP_TOP
+            160 CALL_FUNCTION            3
+            162 POP_TOP
+            164 JUMP_FORWARD            16 (to 182)
+        >>  166 WITH_EXCEPT_START
+            168 POP_JUMP_IF_TRUE       172
+            170 RERAISE
+        >>  172 POP_TOP
+            174 POP_TOP
+            176 POP_TOP
+            178 POP_EXCEPT
+            180 POP_TOP
+
+128     >>  182 LOAD_GLOBAL             10 (os)
+            184 LOAD_METHOD             17 (replace)
+            186 LOAD_FAST                4 (temporaryPath)
+            188 LOAD_FAST                2 (targetPath)
+            190 CALL_METHOD              2
+            192 POP_TOP
+            194 POP_BLOCK
+
+130         196 LOAD_GLOBAL             10 (os)
+            198 LOAD_ATTR               18 (path)
+            200 LOAD_METHOD             19 (exists)
+            202 LOAD_FAST                4 (temporaryPath)
+            204 CALL_METHOD              1
+            206 POP_JUMP_IF_FALSE      244
+
+131         208 LOAD_GLOBAL             10 (os)
+            210 LOAD_METHOD             20 (unlink)
+            212 LOAD_FAST                4 (temporaryPath)
+            214 CALL_METHOD              1
+            216 POP_TOP
+            218 JUMP_FORWARD            24 (to 244)
+
+130     >>  220 LOAD_GLOBAL             10 (os)
+            222 LOAD_ATTR               18 (path)
+            224 LOAD_METHOD             19 (exists)
+            226 LOAD_FAST                4 (temporaryPath)
+            228 CALL_METHOD              1
+            230 POP_JUMP_IF_FALSE      242
+
+131         232 LOAD_GLOBAL             10 (os)
+            234 LOAD_METHOD             20 (unlink)
+            236 LOAD_FAST                4 (temporaryPath)
+            238 CALL_METHOD              1
+            240 POP_TOP
+        >>  242 RERAISE
+
+132     >>  244 LOAD_FAST                2 (targetPath)
+            246 RETURN_VALUE

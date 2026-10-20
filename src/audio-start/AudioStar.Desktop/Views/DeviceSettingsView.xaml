@@ -1,0 +1,80 @@
+<UserControl x:Class="AudioStar.Desktop.Views.DeviceSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:AudioStar.Desktop.ViewModels"
+             xmlns:res="clr-namespace:AudioStar.Desktop.Resources">
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="SettingsGridPanel">
+            <res:AdaptiveGrid Style="{StaticResource SettingsGrid}" />
+        </ItemsPanelTemplate>
+
+        <DataTemplate x:Key="SettingTemplate" DataType="{x:Type vm:SettingItemViewModel}">
+            <Border Style="{StaticResource SettingCell}">
+                <Grid>
+                    <CheckBox Content="{Binding Label}" IsChecked="{Binding ToggleValue, Mode=TwoWay}" Visibility="{Binding IsToggle, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding Label}" />
+                    <StackPanel Visibility="{Binding IsChoice, Converter={StaticResource BoolToVisibility}}">
+                        <TextBlock Text="{Binding Label}" Style="{StaticResource FieldLabel}" />
+                        <ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding Choices}" SelectedItem="{Binding SelectedChoice, Mode=TwoWay}" DisplayMemberPath="Label" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding Label}" />
+                    </StackPanel>
+                    <StackPanel Visibility="{Binding IsNumber, Converter={StaticResource BoolToVisibility}}">
+                        <TextBlock Text="{Binding Label}" Style="{StaticResource FieldLabel}" />
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Right" Width="44" TextAlignment="Right" VerticalAlignment="Center" Text="{Binding NumberValue, StringFormat={}{0:0}}" />
+                            <Slider Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding NumberValue, Mode=TwoWay}" SmallChange="1" LargeChange="5" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding Label}" />
+                        </DockPanel>
+                    </StackPanel>
+                    <StackPanel Visibility="{Binding IsText, Converter={StaticResource BoolToVisibility}}">
+                        <TextBlock Text="{Binding Label}" Style="{StaticResource FieldLabel}" />
+                        <DockPanel>
+                            <Button DockPanel.Dock="Right" Content="Apply" Margin="8,0,0,0" VerticalAlignment="Center" Command="{Binding ApplyTextCommand}" ToolTip="Apply this value" />
+                            <TextBox Text="{Binding TextValue, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="{Binding Label}" ToolTip="{Binding Label}" />
+                        </DockPanel>
+                    </StackPanel>
+                    <DockPanel VerticalAlignment="Center" Visibility="{Binding IsAction, Converter={StaticResource BoolToVisibility}}">
+                        <Button DockPanel.Dock="Right" Content="Run" Margin="8,0,0,0" Command="{Binding RunCommand}" ToolTip="{Binding Label}" />
+                        <TextBlock Text="{Binding Label}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                    </DockPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="InputTemplate" DataType="{x:Type vm:InputRow}">
+            <Border Style="{StaticResource SettingCell}">
+                <DockPanel VerticalAlignment="Center">
+                    <Button DockPanel.Dock="Right" Content="Switch" Margin="8,0,0,0" Command="{Binding SwitchCommand}" ToolTip="Switch the speaker to this input" />
+                    <TextBlock Text="{Binding Title}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CategoryTemplate" DataType="{x:Type vm:SettingsCategoryViewModel}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="{StaticResource ScrollGutter}">
+                <StackPanel Margin="0,12,10,12">
+                    <ItemsControl ItemsSource="{Binding Items}" ItemTemplate="{StaticResource SettingTemplate}" ItemsPanel="{StaticResource SettingsGridPanel}" />
+                    <StackPanel Visibility="{Binding HasInputs, Converter={StaticResource BoolToVisibility}}">
+                        <TextBlock Text="Input selector" Style="{StaticResource SectionHeading}" Margin="0,18,0,6" />
+                        <Border Style="{StaticResource SectionRule}" />
+                        <ItemsControl ItemsSource="{Binding Inputs}" ItemTemplate="{StaticResource InputTemplate}" ItemsPanel="{StaticResource SettingsGridPanel}" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Margin="{StaticResource PageMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Device settings" Style="{StaticResource PageTitle}" />
+                <ProgressBar IsIndeterminate="True" Height="3" Margin="0,8,0,0" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}" />
+        </StackPanel>
+        <TabControl Grid.Row="1" Margin="0,10,0,0"
+                    ItemsSource="{Binding Categories}"
+                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                    ContentTemplate="{StaticResource CategoryTemplate}"
+                    DisplayMemberPath="Header" />
+        <TextBlock Grid.Row="1" Style="{StaticResource EmptyState}" Text="{Binding EmptyText}" Visibility="{Binding IsEmpty, Converter={StaticResource BoolToVisibility}}" />
+    </Grid>
+</UserControl>

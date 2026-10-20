@@ -1,0 +1,116 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('Feedback 用户偏好的本地持久化封装。')
+              2 STORE_NAME               0 (__doc__)
+
+  5           4 LOAD_BUILD_CLASS
+              6 LOAD_CONST               1 (<code object LPFeedbackPreferences at 0x000001F3253DA7C0, file "LPClientFramework\LPFeedback\LPFeedbackPreferences.py", line 5>)
+              8 LOAD_CONST               2 ('LPFeedbackPreferences')
+             10 MAKE_FUNCTION            0
+             12 LOAD_CONST               2 ('LPFeedbackPreferences')
+             14 CALL_FUNCTION            2
+             16 STORE_NAME               1 (LPFeedbackPreferences)
+             18 LOAD_CONST               3 (None)
+             20 RETURN_VALUE
+
+=== LPFeedbackPreferences ===
+  5           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeedbackPreferences')
+              6 STORE_NAME               2 (__qualname__)
+
+  6           8 LOAD_CONST               1 ('使用应用设置存储 Feedback 表单中需要跨会话保留的字段。')
+             10 STORE_NAME               3 (__doc__)
+
+  8          12 LOAD_CONST               2 ('feedback/email')
+             14 STORE_NAME               4 (_EMAIL_KEY)
+
+ 10          16 LOAD_CONST               3 (<code object __init__ at 0x000001F3253DABE0, file "LPClientFramework\LPFeedback\LPFeedbackPreferences.py", line 10>)
+             18 LOAD_CONST               4 ('LPFeedbackPreferences.__init__')
+             20 MAKE_FUNCTION            0
+             22 STORE_NAME               5 (__init__)
+
+ 20          24 LOAD_CONST               5 (<code object loadEmail at 0x000001F3253DA660, file "LPClientFramework\LPFeedback\LPFeedbackPreferences.py", line 20>)
+             26 LOAD_CONST               6 ('LPFeedbackPreferences.loadEmail')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               6 (loadEmail)
+
+ 31          32 LOAD_CONST               7 (<code object saveEmail at 0x000001F3253DA870, file "LPClientFramework\LPFeedback\LPFeedbackPreferences.py", line 31>)
+             34 LOAD_CONST               8 ('LPFeedbackPreferences.saveEmail')
+             36 MAKE_FUNCTION            0
+             38 STORE_NAME               7 (saveEmail)
+             40 LOAD_CONST               9 (None)
+             42 RETURN_VALUE
+
+=== LPFeedbackPreferences.__init__ ===
+ 18           0 LOAD_FAST                1 (settingsStore)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_settingsStore)
+              6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+=== LPFeedbackPreferences.loadEmail ===
+ 28           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_settingsStore)
+              4 LOAD_METHOD              1 (value)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                2 (_EMAIL_KEY)
+             10 LOAD_CONST               1 ('')
+             12 CALL_METHOD              2
+             14 STORE_FAST               1 (email)
+
+ 29          16 LOAD_GLOBAL              3 (str)
+             18 LOAD_FAST                1 (email)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              4 (strip)
+             28 CALL_METHOD              0
+             30 RETURN_VALUE
+
+=== LPFeedbackPreferences.saveEmail ===
+ 39           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (email)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               2 (normalizedEmail)
+
+ 40          16 LOAD_FAST                2 (normalizedEmail)
+             18 POP_JUMP_IF_TRUE        28
+
+ 41          20 LOAD_FAST                0 (self)
+             22 LOAD_METHOD              2 (loadEmail)
+             24 CALL_METHOD              0
+             26 RETURN_VALUE
+
+ 42     >>   28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                3 (_settingsStore)
+             32 LOAD_METHOD              4 (setValue)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                5 (_EMAIL_KEY)
+             38 LOAD_FAST                2 (normalizedEmail)
+             40 CALL_METHOD              2
+             42 POP_TOP
+
+ 43          44 LOAD_GLOBAL              6 (getattr)
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                3 (_settingsStore)
+             50 LOAD_CONST               2 ('sync')
+             52 LOAD_CONST               3 (None)
+             54 CALL_FUNCTION            3
+             56 STORE_FAST               3 (syncMethod)
+
+ 44          58 LOAD_GLOBAL              7 (callable)
+             60 LOAD_FAST                3 (syncMethod)
+             62 CALL_FUNCTION            1
+             64 POP_JUMP_IF_FALSE       72
+
+ 45          66 LOAD_FAST                3 (syncMethod)
+             68 CALL_FUNCTION            0
+             70 POP_TOP
+
+ 46     >>   72 LOAD_FAST                2 (normalizedEmail)
+             74 RETURN_VALUE

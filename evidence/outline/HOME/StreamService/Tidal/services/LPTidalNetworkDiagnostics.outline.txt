@@ -1,0 +1,71 @@
+# module HOME.StreamService.Tidal.services.LPTidalNetworkDiagnostics
+
+[module] names: __doc__, pathlib, Path, logging, typing, Optional, PyQt6.QtCore, QObject, PyQt6.QtNetwork, QNetworkDiskCache, QNetworkReply, QNetworkRequest, PyQt6.QtQuickWidgets, QQuickWidget, getLogger, logger, _LPTidalQmlNetworkDiagnostics, str, installTidalQmlNetworkDiagnostics
+  str: '\nTIDAL QML 网络缓存诊断工具。\n'
+  str: 'Path'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'QNetworkDiskCache'
+  str: 'QNetworkReply'
+  str: 'QNetworkRequest'
+  str: 'QQuickWidget'
+  str: 'linkplay'
+  str: '_LPTidalQmlNetworkDiagnostics'
+  str: 'quickWidget'
+  str: 'tag'
+  str: 'return'
+  str: 'installTidalQmlNetworkDiagnostics'
+
+def _LPTidalQmlNetworkDiagnostics()  line 17
+  names: __name__, __module__, __qualname__, __doc__, str, Optional, QObject, __init__, QNetworkReply, logReply, bytes, _raw_header, bool, _looks_like_image_url, __classcell__
+    str: '_LPTidalQmlNetworkDiagnostics'
+    str: '记录 TIDAL QML 网络回复的缓存命中和图片加载信息。'
+    str: 'tag'
+    str: 'parent'
+    str: '_LPTidalQmlNetworkDiagnostics.__init__'
+    str: 'reply'
+    str: 'return'
+    str: '_LPTidalQmlNetworkDiagnostics.logReply'
+    str: 'reply'
+    str: 'headerName'
+    str: 'return'
+    str: '_LPTidalQmlNetworkDiagnostics._raw_header'
+    str: 'url'
+    str: 'return'
+    str: '_LPTidalQmlNetworkDiagnostics._looks_like_image_url'
+
+  def _LPTidalQmlNetworkDiagnostics.__init__(self, tag, parent)  line 20
+    names: super, __init__, str, _tag
+      str: '\n        初始化 QML 网络诊断对象。\n\n        :param tag: 页面标识。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'tidal_qml'
+
+  def _LPTidalQmlNetworkDiagnostics.logReply(self, reply)  line 31
+    names: url, toString, _raw_header, lower, startswith, _looks_like_image_url, attribute, QNetworkRequest, Attribute, HttpStatusCodeAttribute, bool, SourceIsFromCacheAttribute, int, error, value, QNetworkReply, NetworkError, NoError, errorString, logger, debug, _tag, bytesAvailable
+      str: '\n        记录一次 QML 网络回复。\n\n        :param reply: Qt 网络回复对象。\n        :return: None。\n        '
+      str: 'image/'
+      str: '[TidalQmlImage][CacheTrace] tag=%s url=%s status=%s from_cache=%s content_type=%s content_length=%s cache_control=%s bytes_available=%s error_code=%s error=%s'
+
+  def _LPTidalQmlNetworkDiagnostics._raw_header(self, reply, headerName)  line 65
+    names: bytes, rawHeader, decode, Exception
+      str: '\n        读取网络回复原始头。\n\n        :param reply: Qt 网络回复对象。\n        :param headerName: Header 名称。\n        :return: Header 字符串。\n        '
+      str: 'utf-8'
+      str: 'replace'
+      str: 'errors'
+
+  def _LPTidalQmlNetworkDiagnostics._looks_like_image_url(self, url)  line 78
+    names: Path, str, split, suffix, lower
+      str: '\n        判断 URL 是否像图片资源。\n\n        :param url: 资源 URL。\n        :return: 像图片资源返回 True。\n        '
+      str: '?'
+      str: '.jpg'
+      str: '.jpeg'
+      str: '.png'
+      str: '.gif'
+      str: '.svg'
+      str: '.webp'
+
+def installTidalQmlNetworkDiagnostics(quickWidget, tag)  line 89
+  names: LPClientFramework.LPUtility, cacheCoverDir, QNetworkDiskCache, setCacheDirectory, str, setMaximumCacheSize, engine, networkAccessManager, setCache, _LPTidalQmlNetworkDiagnostics, finished, connect, logReply, _tidal_network_diagnostics, logger, debug, maximumCacheSize
+    str: '\n    为 TIDAL QQuickWidget 安装图片磁盘缓存和诊断日志。\n\n    :param quickWidget: TIDAL QQuickWidget。\n    :param tag: 页面标识。\n    :return: None。\n    '
+    str: 'cacheCoverDir'
+    str: '[TidalQmlImage][CacheTrace] installed tag=%s cache_dir=%s max_bytes=%s'
+    str: 'tidal_qml'

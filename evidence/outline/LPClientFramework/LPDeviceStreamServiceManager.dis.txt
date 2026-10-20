@@ -1,0 +1,1186 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/1/3 9:36\n@Auth ： Chris\n@File ：LPDeviceAccountManager.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+  9          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('import_module',))
+             16 IMPORT_NAME              2 (importlib)
+             18 IMPORT_FROM              3 (import_module)
+             20 STORE_NAME               3 (import_module)
+             22 POP_TOP
+
+ 10          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('Queue', 'Empty'))
+             28 IMPORT_NAME              4 (queue)
+             30 IMPORT_FROM              5 (Queue)
+             32 STORE_NAME               5 (Queue)
+             34 IMPORT_FROM              6 (Empty)
+             36 STORE_NAME               6 (Empty)
+             38 POP_TOP
+
+ 11          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               5 (('Thread',))
+             44 IMPORT_NAME              7 (threading)
+             46 IMPORT_FROM              8 (Thread)
+             48 STORE_NAME               8 (Thread)
+             50 POP_TOP
+
+ 12          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               6 (('Type',))
+             56 IMPORT_NAME              9 (typing)
+             58 IMPORT_FROM             10 (Type)
+             60 STORE_NAME              10 (Type)
+             62 POP_TOP
+
+ 14          64 LOAD_CONST               1 (0)
+             66 LOAD_CONST               2 (None)
+             68 IMPORT_NAME             11 (LPGlobalUI)
+             70 STORE_NAME              11 (LPGlobalUI)
+
+ 15          72 LOAD_CONST               1 (0)
+             74 LOAD_CONST               7 (('isWiiMRadioEnabled',))
+             76 IMPORT_NAME             12 (LPClientFramework.LPConfig.LPAppFeatureConfig)
+             78 IMPORT_FROM             13 (isWiiMRadioEnabled)
+             80 STORE_NAME              13 (isWiiMRadioEnabled)
+             82 POP_TOP
+
+ 16          84 LOAD_CONST               1 (0)
+             86 LOAD_CONST               8 (('LPUtility',))
+             88 IMPORT_NAME             14 (LPClientFramework)
+             90 IMPORT_FROM             15 (LPUtility)
+             92 STORE_NAME              15 (LPUtility)
+             94 POP_TOP
+
+ 17          96 LOAD_CONST               1 (0)
+             98 LOAD_CONST               9 (('LPAccount', 'LPPlayListSource'))
+            100 IMPORT_NAME             16 (LPClientFramework.LPPlayList.LPPlayList)
+            102 IMPORT_FROM             17 (LPAccount)
+            104 STORE_NAME              17 (LPAccount)
+            106 IMPORT_FROM             18 (LPPlayListSource)
+            108 STORE_NAME              18 (LPPlayListSource)
+            110 POP_TOP
+
+ 18         112 LOAD_CONST               1 (0)
+            114 LOAD_CONST              10 (('LPRadioParadise2Account',))
+            116 IMPORT_NAME             19 (LPClientFramework.LPPlayList.LPRadioParadise2PlayList)
+            118 IMPORT_FROM             20 (LPRadioParadise2Account)
+            120 STORE_NAME              20 (LPRadioParadise2Account)
+            122 POP_TOP
+
+ 19         124 LOAD_CONST               1 (0)
+            126 LOAD_CONST              11 (('LPStreamService', 'supportContents'))
+            128 IMPORT_NAME             21 (LPClientFramework.LPStreamServiceManager)
+            130 IMPORT_FROM             22 (LPStreamService)
+            132 STORE_NAME              22 (LPStreamService)
+            134 IMPORT_FROM             23 (supportContents)
+            136 STORE_NAME              24 (defaultSupportContents)
+            138 POP_TOP
+
+ 20         140 LOAD_CONST               1 (0)
+            142 LOAD_CONST              12 (('logger',))
+            144 IMPORT_NAME             25 (LPClientFramework.LPUtility)
+            146 IMPORT_FROM             26 (logger)
+            148 STORE_NAME              26 (logger)
+            150 POP_TOP
+
+ 24         152 LOAD_NAME               27 (object)
+            154 CALL_FUNCTION            0
+            156 STORE_NAME              28 (DEVICE_ACCOUNT_UNKNOWN)
+
+ 27         158 LOAD_BUILD_CLASS
+            160 LOAD_CONST              13 (<code object LPDeviceStreamServiceManager at 0x000001F3253CE2F0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 27>)
+            162 LOAD_CONST              14 ('LPDeviceStreamServiceManager')
+            164 MAKE_FUNCTION            0
+            166 LOAD_CONST              14 ('LPDeviceStreamServiceManager')
+            168 CALL_FUNCTION            2
+            170 STORE_NAME              29 (LPDeviceStreamServiceManager)
+            172 LOAD_CONST               2 (None)
+            174 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager ===
+ 27           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPDeviceStreamServiceManager')
+              6 STORE_NAME               2 (__qualname__)
+
+ 28           8 LOAD_CONST               1 ('设备流媒体服务管理器，负责注册、调用各音源的服务实例。\n\n    内部维护一个单工作线程（_mediaInfoWorker），用于异步刷新 mediaInfo。\n    工作线程从 _mediaInfoQueue 中取任务执行，队列深度始终 ≤ 1：\n    新任务入队前会先清空队列，保证快速切歌时只执行最后一次请求，\n    避免多线程并发导致的乱序或 UI 闪烁。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+ 36          12 LOAD_CONST               2 (<code object __init__ at 0x000001F3253DA920, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 36>)
+             14 LOAD_CONST               3 ('LPDeviceStreamServiceManager.__init__')
+             16 MAKE_FUNCTION            0
+             18 STORE_NAME               4 (__init__)
+
+ 54          20 LOAD_CONST               4 (<code object startMediaInfoWorker at 0x000001F3253DA190, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 54>)
+             22 LOAD_CONST               5 ('LPDeviceStreamServiceManager.startMediaInfoWorker')
+             24 MAKE_FUNCTION            0
+             26 STORE_NAME               5 (startMediaInfoWorker)
+
+ 70          28 LOAD_CONST               6 (<code object _mediaInfoWorkerLoop at 0x000001F324E69920, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 70>)
+             30 LOAD_CONST               7 ('LPDeviceStreamServiceManager._mediaInfoWorkerLoop')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               6 (_mediaInfoWorkerLoop)
+
+ 85          36 LOAD_NAME                7 (staticmethod)
+
+ 86          38 LOAD_CONST               8 (<code object pcServiceCapability at 0x000001F324E697C0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 85>)
+             40 LOAD_CONST               9 ('LPDeviceStreamServiceManager.pcServiceCapability')
+             42 MAKE_FUNCTION            0
+             44 CALL_FUNCTION            1
+             46 STORE_NAME               8 (pcServiceCapability)
+
+ 90          48 LOAD_CONST              10 (<code object registerDeviceStreamService at 0x000001F324E692F0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 90>)
+             50 LOAD_CONST              11 ('LPDeviceStreamServiceManager.registerDeviceStreamService')
+             52 MAKE_FUNCTION            0
+             54 STORE_NAME               9 (registerDeviceStreamService)
+
+107          56 LOAD_CONST              12 (<code object updateAppStreamServiceCapability at 0x000001F324E69870, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 107>)
+             58 LOAD_CONST              13 ('LPDeviceStreamServiceManager.updateAppStreamServiceCapability')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME              10 (updateAppStreamServiceCapability)
+
+115          64 LOAD_NAME               11 (str)
+             66 LOAD_NAME               12 (dict)
+             68 LOAD_CONST              14 (('source', 'return'))
+             70 BUILD_CONST_KEY_MAP      2
+             72 LOAD_CONST              15 (<code object deviceCapabilityForSource at 0x000001F324E69450, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 115>)
+             74 LOAD_CONST              16 ('LPDeviceStreamServiceManager.deviceCapabilityForSource')
+             76 MAKE_FUNCTION            4 (annotations)
+             78 STORE_NAME              13 (deviceCapabilityForSource)
+
+124          80 LOAD_NAME               14 (Type)
+             82 LOAD_NAME               15 (LPStreamService)
+             84 BINARY_SUBSCR
+             86 LOAD_CONST              17 (('return',))
+             88 BUILD_CONST_KEY_MAP      1
+             90 LOAD_CONST              18 (<code object streamServiceForSource at 0x000001F324E69500, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 124>)
+             92 LOAD_CONST              19 ('LPDeviceStreamServiceManager.streamServiceForSource')
+             94 MAKE_FUNCTION            4 (annotations)
+             96 STORE_NAME              16 (streamServiceForSource)
+
+131          98 LOAD_CONST              20 (<code object guiBehaviorForSource at 0x000001F324E690E0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 131>)
+            100 LOAD_CONST              21 ('LPDeviceStreamServiceManager.guiBehaviorForSource')
+            102 MAKE_FUNCTION            0
+            104 STORE_NAME              17 (guiBehaviorForSource)
+
+137         106 LOAD_CONST              22 (<code object guiCanForSource at 0x000001F3253CE240, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 137>)
+            108 LOAD_CONST              23 ('LPDeviceStreamServiceManager.guiCanForSource')
+            110 MAKE_FUNCTION            0
+            112 STORE_NAME              18 (guiCanForSource)
+
+150         114 LOAD_CONST              24 (<code object deviceAccountForSource at 0x000001F3253CE660, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 150>)
+            116 LOAD_CONST              25 ('LPDeviceStreamServiceManager.deviceAccountForSource')
+            118 MAKE_FUNCTION            0
+            120 STORE_NAME              19 (deviceAccountForSource)
+
+161         122 LOAD_CONST              26 (<code object recordDeviceAccount at 0x000001F3253CED40, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 161>)
+            124 LOAD_CONST              27 ('LPDeviceStreamServiceManager.recordDeviceAccount')
+            126 MAKE_FUNCTION            0
+            128 STORE_NAME              20 (recordDeviceAccount)
+
+176         130 LOAD_CONST              28 (<code object recordDeviceAccountNotify at 0x000001F3253CEC90, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 176>)
+            132 LOAD_CONST              29 ('LPDeviceStreamServiceManager.recordDeviceAccountNotify')
+            134 MAKE_FUNCTION            0
+            136 STORE_NAME              21 (recordDeviceAccountNotify)
+
+190         138 LOAD_NAME                7 (staticmethod)
+
+191         140 LOAD_NAME               22 (bool)
+            142 LOAD_CONST              17 (('return',))
+            144 BUILD_CONST_KEY_MAP      1
+            146 LOAD_CONST              30 (<code object _userinfoHasIdentity at 0x000001F3253CE500, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 190>)
+            148 LOAD_CONST              31 ('LPDeviceStreamServiceManager._userinfoHasIdentity')
+            150 MAKE_FUNCTION            4 (annotations)
+            152 CALL_FUNCTION            1
+            154 STORE_NAME              23 (_userinfoHasIdentity)
+
+219         156 LOAD_NAME                7 (staticmethod)
+
+220         158 LOAD_CONST              32 (<code object _notifyPayload at 0x000001F3253CEEA0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 219>)
+            160 LOAD_CONST              33 ('LPDeviceStreamServiceManager._notifyPayload')
+            162 MAKE_FUNCTION            0
+            164 CALL_FUNCTION            1
+            166 STORE_NAME              24 (_notifyPayload)
+
+238         168 LOAD_CONST              34 (<code object accountForSource at 0x000001F3253CE450, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 238>)
+            170 LOAD_CONST              35 ('LPDeviceStreamServiceManager.accountForSource')
+            172 MAKE_FUNCTION            0
+            174 STORE_NAME              25 (accountForSource)
+
+245         176 LOAD_CONST              36 (<code object registerAccountForSource at 0x000001F3253CEF50, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 245>)
+            178 LOAD_CONST              37 ('LPDeviceStreamServiceManager.registerAccountForSource')
+            180 MAKE_FUNCTION            0
+            182 STORE_NAME              26 (registerAccountForSource)
+
+259         184 LOAD_CONST              38 (<code object logoutAccountForSource at 0x000001F3253CE3A0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 259>)
+            186 LOAD_CONST              39 ('LPDeviceStreamServiceManager.logoutAccountForSource')
+            188 MAKE_FUNCTION            0
+            190 STORE_NAME              27 (logoutAccountForSource)
+
+265         192 LOAD_CONST              40 (<code object loginAccountForSource at 0x000001F3253CE9D0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 265>)
+            194 LOAD_CONST              41 ('LPDeviceStreamServiceManager.loginAccountForSource')
+            196 MAKE_FUNCTION            0
+            198 STORE_NAME              28 (loginAccountForSource)
+
+269         200 LOAD_NAME                7 (staticmethod)
+
+270         202 LOAD_CONST              42 (<code object supportContents at 0x000001F3253CE920, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 269>)
+            204 LOAD_CONST              43 ('LPDeviceStreamServiceManager.supportContents')
+            206 MAKE_FUNCTION            0
+            208 CALL_FUNCTION            1
+            210 STORE_NAME              29 (supportContents)
+
+292         212 LOAD_CONST              44 (<code object isCurrentPlayChannel at 0x000001F3253CE030, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 292>)
+            214 LOAD_CONST              45 ('LPDeviceStreamServiceManager.isCurrentPlayChannel')
+            216 MAKE_FUNCTION            0
+            218 STORE_NAME              30 (isCurrentPlayChannel)
+
+297         220 LOAD_CONST              46 (<code object isCurrentPlayItem at 0x000001F3253CE870, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 297>)
+            222 LOAD_CONST              47 ('LPDeviceStreamServiceManager.isCurrentPlayItem')
+            224 MAKE_FUNCTION            0
+            226 STORE_NAME              31 (isCurrentPlayItem)
+
+302         228 LOAD_CONST              48 (<code object accountChangedForSource at 0x000001F3253CE7C0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 302>)
+            230 LOAD_CONST              49 ('LPDeviceStreamServiceManager.accountChangedForSource')
+            232 MAKE_FUNCTION            0
+            234 STORE_NAME              32 (accountChangedForSource)
+
+308         236 LOAD_CONST              53 ((None,))
+            238 LOAD_CONST              51 (<code object updateMediaInfoForSource at 0x000001F3253CE710, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 308>)
+            240 LOAD_CONST              52 ('LPDeviceStreamServiceManager.updateMediaInfoForSource')
+            242 MAKE_FUNCTION            1 (defaults)
+            244 STORE_NAME              33 (updateMediaInfoForSource)
+            246 LOAD_CONST              50 (None)
+            248 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.__init__ ===
+ 37           0 BUILD_MAP                0
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (streamServiceDict)
+
+ 39           6 LOAD_FAST                1 (device)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (device)
+
+ 42          12 BUILD_MAP                0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_deviceAccountState)
+
+ 44          18 LOAD_CONST               0 (None)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (streamServiceCapability)
+
+ 45          24 BUILD_LIST               0
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (_deviceCapabilityList)
+
+ 51          30 LOAD_GLOBAL              5 (Queue)
+             32 CALL_FUNCTION            0
+             34 LOAD_FAST                0 (self)
+             36 STORE_ATTR               6 (_mediaInfoQueue)
+
+ 52          38 LOAD_CONST               0 (None)
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               7 (_mediaInfoWorker)
+             44 LOAD_CONST               0 (None)
+             46 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.startMediaInfoWorker ===
+ 60           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_mediaInfoWorker)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    1
+              8 POP_JUMP_IF_FALSE       24
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_mediaInfoWorker)
+             14 LOAD_METHOD              1 (is_alive)
+             16 CALL_METHOD              0
+             18 POP_JUMP_IF_FALSE       24
+
+ 61          20 LOAD_CONST               1 (None)
+             22 RETURN_VALUE
+
+ 63     >>   24 LOAD_GLOBAL              2 (Thread)
+
+ 64          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                3 (_mediaInfoWorkerLoop)
+
+ 65          30 LOAD_CONST               2 ('mediaInfoWorker')
+
+ 66          32 LOAD_CONST               3 (True)
+
+ 63          34 LOAD_CONST               4 (('target', 'name', 'daemon'))
+             36 CALL_FUNCTION_KW         3
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               0 (_mediaInfoWorker)
+
+ 68          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                0 (_mediaInfoWorker)
+             46 LOAD_METHOD              4 (start)
+             48 CALL_METHOD              0
+             50 POP_TOP
+             52 LOAD_CONST               1 (None)
+             54 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager._mediaInfoWorkerLoop ===
+ 78     >>    0 SETUP_FINALLY           44 (to 46)
+
+ 79           2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_mediaInfoQueue)
+              6 LOAD_ATTR                1 (get)
+              8 LOAD_CONST               1 (True)
+             10 LOAD_CONST               2 (('block',))
+             12 CALL_FUNCTION_KW         1
+             14 STORE_FAST               1 (task)
+
+ 80          16 LOAD_FAST                1 (task)
+             18 UNPACK_SEQUENCE          4
+             20 STORE_FAST               2 (service)
+             22 STORE_FAST               3 (dev)
+             24 STORE_FAST               4 (data)
+             26 STORE_FAST               5 (hdr)
+
+ 81          28 LOAD_FAST                2 (service)
+             30 LOAD_METHOD              2 (updateMediaInfoWithItem)
+             32 LOAD_FAST                3 (dev)
+             34 LOAD_FAST                4 (data)
+             36 LOAD_FAST                5 (hdr)
+             38 CALL_METHOD              3
+             40 POP_TOP
+             42 POP_BLOCK
+             44 JUMP_ABSOLUTE            0
+
+ 82     >>   46 DUP_TOP
+             48 LOAD_GLOBAL              3 (Exception)
+             50 JUMP_IF_NOT_EXC_MATCH    96
+             52 POP_TOP
+             54 STORE_FAST               6 (e)
+             56 POP_TOP
+             58 SETUP_FINALLY           28 (to 88)
+
+ 83          60 LOAD_GLOBAL              4 (logger)
+             62 LOAD_METHOD              5 (error)
+             64 LOAD_CONST               3 ('[mediaInfoWorker] update failed: ')
+             66 LOAD_FAST                6 (e)
+             68 FORMAT_VALUE             0
+             70 BUILD_STRING             2
+             72 CALL_METHOD              1
+             74 POP_TOP
+             76 POP_BLOCK
+             78 POP_EXCEPT
+             80 LOAD_CONST               4 (None)
+             82 STORE_FAST               6 (e)
+             84 DELETE_FAST              6 (e)
+             86 JUMP_ABSOLUTE            0
+        >>   88 LOAD_CONST               4 (None)
+             90 STORE_FAST               6 (e)
+             92 DELETE_FAST              6 (e)
+             94 RERAISE
+        >>   96 RERAISE
+             98 JUMP_ABSOLUTE            0
+            100 LOAD_CONST               4 (None)
+            102 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.pcServiceCapability ===
+ 87           0 LOAD_GLOBAL              0 (LPDeviceStreamServiceManager)
+              2 LOAD_METHOD              1 (supportContents)
+              4 CALL_METHOD              0
+              6 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.registerDeviceStreamService ===
+ 91           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (streamServiceCapability)
+              4 POP_JUMP_IF_TRUE        20
+
+ 92           6 LOAD_GLOBAL              1 (logger)
+              8 LOAD_METHOD              2 (debug)
+             10 LOAD_CONST               1 ('app no need registerDeviceStreamService')
+             12 CALL_METHOD              1
+             14 POP_TOP
+
+ 93          16 LOAD_CONST               0 (None)
+             18 RETURN_VALUE
+
+ 95     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                0 (streamServiceCapability)
+             24 LOAD_METHOD              3 (items)
+             26 CALL_METHOD              0
+             28 GET_ITER
+        >>   30 FOR_ITER                90 (to 122)
+             32 UNPACK_SEQUENCE          2
+             34 STORE_FAST               1 (source)
+             36 STORE_FAST               2 (valueDict)
+
+ 96          38 LOAD_FAST                2 (valueDict)
+             40 LOAD_METHOD              4 (get)
+             42 LOAD_CONST               2 ('module')
+             44 LOAD_CONST               0 (None)
+             46 CALL_METHOD              2
+             48 STORE_FAST               3 (moduleName)
+
+ 97          50 LOAD_FAST                2 (valueDict)
+             52 LOAD_METHOD              4 (get)
+             54 LOAD_CONST               3 ('class')
+             56 LOAD_CONST               0 (None)
+             58 CALL_METHOD              2
+             60 STORE_FAST               4 (className)
+
+ 98          62 LOAD_FAST                3 (moduleName)
+             64 POP_JUMP_IF_FALSE       30
+             66 LOAD_FAST                4 (className)
+             68 POP_JUMP_IF_FALSE       30
+
+ 99          70 LOAD_GLOBAL              5 (import_module)
+             72 LOAD_FAST                3 (moduleName)
+             74 CALL_FUNCTION            1
+             76 STORE_FAST               5 (m)
+
+100          78 LOAD_GLOBAL              6 (getattr)
+             80 LOAD_FAST                5 (m)
+             82 LOAD_FAST                4 (className)
+             84 CALL_FUNCTION            2
+             86 STORE_FAST               6 (c)
+
+101          88 LOAD_FAST                6 (c)
+             90 LOAD_FAST                1 (source)
+             92 CALL_FUNCTION            1
+             94 STORE_FAST               7 (service)
+
+103          96 LOAD_GLOBAL              1 (logger)
+             98 LOAD_METHOD              2 (debug)
+            100 LOAD_CONST               4 ('[LPDeviceStreamServiceManager] register: %s')
+            102 LOAD_FAST                1 (source)
+            104 BINARY_MODULO
+            106 CALL_METHOD              1
+            108 POP_TOP
+
+104         110 LOAD_FAST                7 (service)
+            112 LOAD_FAST                0 (self)
+            114 LOAD_ATTR                7 (streamServiceDict)
+            116 LOAD_FAST                1 (source)
+            118 STORE_SUBSCR
+            120 JUMP_ABSOLUTE           30
+        >>  122 LOAD_CONST               0 (None)
+            124 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.updateAppStreamServiceCapability ===
+108           0 LOAD_FAST                1 (deviceCapability)
+              2 POP_JUMP_IF_FALSE       12
+              4 LOAD_GLOBAL              0 (list)
+              6 LOAD_FAST                1 (deviceCapability)
+              8 CALL_FUNCTION            1
+             10 JUMP_FORWARD             2 (to 14)
+        >>   12 BUILD_LIST               0
+        >>   14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               1 (_deviceCapabilityList)
+
+109          18 LOAD_FAST                0 (self)
+             20 LOAD_METHOD              2 (supportContents)
+             22 CALL_METHOD              0
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               3 (streamServiceCapability)
+
+110          28 LOAD_CONST               1 (<code object <listcomp> at 0x000001F324E693A0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 110>)
+             30 LOAD_CONST               2 ('LPDeviceStreamServiceManager.updateAppStreamServiceCapability.<locals>.<listcomp>')
+             32 MAKE_FUNCTION            0
+             34 LOAD_FAST                1 (deviceCapability)
+             36 GET_ITER
+             38 CALL_FUNCTION            1
+             40 STORE_FAST               2 (deviceStreamService)
+
+111          42 LOAD_GLOBAL              0 (list)
+             44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                3 (streamServiceCapability)
+             48 LOAD_METHOD              4 (keys)
+             50 CALL_METHOD              0
+             52 CALL_FUNCTION            1
+             54 GET_ITER
+        >>   56 FOR_ITER                24 (to 82)
+             58 STORE_FAST               3 (key)
+
+112          60 LOAD_FAST                3 (key)
+             62 LOAD_FAST                2 (deviceStreamService)
+             64 CONTAINS_OP              1
+             66 POP_JUMP_IF_FALSE       56
+
+113          68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                3 (streamServiceCapability)
+             72 LOAD_METHOD              5 (pop)
+             74 LOAD_FAST                3 (key)
+             76 CALL_METHOD              1
+             78 POP_TOP
+             80 JUMP_ABSOLUTE           56
+        >>   82 LOAD_CONST               0 (None)
+             84 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.updateAppStreamServiceCapability.<listcomp> ===
+110           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (item)
+              8 LOAD_FAST                1 (item)
+             10 LOAD_CONST               0 ('id')
+             12 BINARY_SUBSCR
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.deviceCapabilityForSource ===
+117           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_deviceCapabilityList)
+              4 POP_JUMP_IF_FALSE       10
+              6 LOAD_FAST                1 (source)
+              8 POP_JUMP_IF_TRUE        14
+
+118     >>   10 BUILD_MAP                0
+             12 RETURN_VALUE
+
+119     >>   14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                0 (_deviceCapabilityList)
+             18 GET_ITER
+        >>   20 FOR_ITER                36 (to 58)
+             22 STORE_FAST               2 (item)
+
+120          24 LOAD_GLOBAL              1 (isinstance)
+             26 LOAD_FAST                2 (item)
+             28 LOAD_GLOBAL              2 (dict)
+             30 CALL_FUNCTION            2
+             32 POP_JUMP_IF_FALSE       20
+             34 LOAD_FAST                2 (item)
+             36 LOAD_METHOD              3 (get)
+             38 LOAD_CONST               1 ('id')
+             40 CALL_METHOD              1
+             42 LOAD_FAST                1 (source)
+             44 COMPARE_OP               2 (==)
+             46 POP_JUMP_IF_FALSE       20
+
+121          48 LOAD_FAST                2 (item)
+             50 ROT_TWO
+             52 POP_TOP
+             54 RETURN_VALUE
+             56 JUMP_ABSOLUTE           20
+
+122     >>   58 BUILD_MAP                0
+             60 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.streamServiceForSource ===
+125           0 LOAD_FAST                1 (source)
+              2 LOAD_CONST               0 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+              8 LOAD_CONST               0 (None)
+             10 RETURN_VALUE
+
+127     >>   12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                0 (streamServiceDict)
+             16 LOAD_METHOD              1 (get)
+             18 LOAD_FAST                1 (source)
+             20 LOAD_CONST               0 (None)
+             22 CALL_METHOD              2
+             24 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.guiBehaviorForSource ===
+132           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                1 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               3 (service)
+
+133          10 LOAD_FAST                3 (service)
+             12 POP_JUMP_IF_FALSE       24
+
+134          14 LOAD_FAST                3 (service)
+             16 LOAD_METHOD              1 (streamGuiBehavior)
+             18 LOAD_FAST                2 (device)
+             20 CALL_METHOD              1
+             22 RETURN_VALUE
+
+135     >>   24 LOAD_CONST               0 (None)
+             26 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.guiCanForSource ===
+141           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                1 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               4 (service)
+
+143          10 LOAD_FAST                4 (service)
+             12 POP_JUMP_IF_TRUE        22
+
+144          14 LOAD_GLOBAL              1 (LPStreamService)
+             16 LOAD_FAST                1 (source)
+             18 CALL_FUNCTION            1
+             20 STORE_FAST               4 (service)
+
+145     >>   22 LOAD_FAST                4 (service)
+             24 LOAD_METHOD              2 (guiCan)
+             26 LOAD_FAST                2 (device)
+             28 LOAD_FAST                3 (key)
+             30 CALL_METHOD              2
+             32 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.deviceAccountForSource ===
+157           0 LOAD_FAST                1 (source)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+158           8 LOAD_GLOBAL              0 (DEVICE_ACCOUNT_UNKNOWN)
+             10 RETURN_VALUE
+
+159     >>   12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                1 (_deviceAccountState)
+             16 LOAD_METHOD              2 (get)
+             18 LOAD_FAST                1 (source)
+             20 LOAD_GLOBAL              0 (DEVICE_ACCOUNT_UNKNOWN)
+             22 CALL_METHOD              2
+             24 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.recordDeviceAccount ===
+169           0 LOAD_FAST                1 (source)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+170           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+171     >>   12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              0 (_userinfoHasIdentity)
+             16 LOAD_FAST                2 (userinfo)
+             18 CALL_METHOD              1
+             20 POP_JUMP_IF_FALSE       34
+
+172          22 LOAD_FAST                2 (userinfo)
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                1 (_deviceAccountState)
+             28 LOAD_FAST                1 (source)
+             30 STORE_SUBSCR
+             32 JUMP_FORWARD            10 (to 44)
+
+174     >>   34 LOAD_CONST               1 (None)
+             36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                1 (_deviceAccountState)
+             40 LOAD_FAST                1 (source)
+             42 STORE_SUBSCR
+        >>   44 LOAD_CONST               1 (None)
+             46 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.recordDeviceAccountNotify ===
+184           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                2 (notify)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       22
+             10 LOAD_FAST                2 (notify)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_CONST               1 ('eventType')
+             16 LOAD_CONST               2 (None)
+             18 CALL_METHOD              2
+             20 JUMP_FORWARD             2 (to 24)
+        >>   22 LOAD_CONST               2 (None)
+        >>   24 STORE_FAST               3 (event_type)
+
+185          26 LOAD_FAST                3 (event_type)
+             28 LOAD_CONST               3 ('accountChange')
+             30 COMPARE_OP               2 (==)
+             32 POP_JUMP_IF_FALSE       54
+
+186          34 LOAD_FAST                0 (self)
+             36 LOAD_METHOD              3 (recordDeviceAccount)
+             38 LOAD_FAST                1 (source)
+             40 LOAD_FAST                0 (self)
+             42 LOAD_METHOD              4 (_notifyPayload)
+             44 LOAD_FAST                2 (notify)
+             46 CALL_METHOD              1
+             48 CALL_METHOD              2
+             50 POP_TOP
+             52 JUMP_FORWARD            20 (to 74)
+
+187     >>   54 LOAD_FAST                3 (event_type)
+             56 LOAD_CONST               4 ('logout')
+             58 COMPARE_OP               2 (==)
+             60 POP_JUMP_IF_FALSE       74
+
+188          62 LOAD_FAST                0 (self)
+             64 LOAD_METHOD              3 (recordDeviceAccount)
+             66 LOAD_FAST                1 (source)
+             68 LOAD_CONST               2 (None)
+             70 CALL_METHOD              2
+             72 POP_TOP
+        >>   74 LOAD_CONST               2 (None)
+             76 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager._userinfoHasIdentity ===
+202           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (userinfo)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+203          10 LOAD_CONST               1 (False)
+             12 RETURN_VALUE
+
+204     >>   14 LOAD_FAST                0 (userinfo)
+             16 BUILD_LIST               1
+             18 STORE_FAST               1 (candidates)
+
+205          20 LOAD_FAST                0 (userinfo)
+             22 LOAD_METHOD              2 (get)
+             24 LOAD_CONST               2 ('user')
+             26 LOAD_CONST               3 (None)
+             28 CALL_METHOD              2
+             30 STORE_FAST               2 (nested)
+
+206          32 LOAD_GLOBAL              0 (isinstance)
+             34 LOAD_FAST                2 (nested)
+             36 LOAD_GLOBAL              1 (dict)
+             38 CALL_FUNCTION            2
+             40 POP_JUMP_IF_FALSE       52
+
+207          42 LOAD_FAST                1 (candidates)
+             44 LOAD_METHOD              3 (append)
+             46 LOAD_FAST                2 (nested)
+             48 CALL_METHOD              1
+             50 POP_TOP
+
+208     >>   52 BUILD_SET                0
+             54 LOAD_CONST               4 (frozenset({'loginname', 'sessionid', 'id', 'uid', 'username', 'email', 'contactemail', 'showname', 'userid', 'anonuserid'}))
+             56 SET_UPDATE               1
+             58 STORE_FAST               3 (identity_keys)
+
+212          60 LOAD_FAST                1 (candidates)
+             62 GET_ITER
+        >>   64 FOR_ITER                82 (to 148)
+             66 STORE_FAST               4 (item)
+
+213          68 LOAD_FAST                4 (item)
+             70 LOAD_METHOD              4 (items)
+             72 CALL_METHOD              0
+             74 GET_ITER
+        >>   76 FOR_ITER                68 (to 146)
+             78 UNPACK_SEQUENCE          2
+             80 STORE_FAST               5 (key)
+             82 STORE_FAST               6 (value)
+
+214          84 LOAD_CONST               5 ('')
+             86 LOAD_METHOD              5 (join)
+             88 LOAD_CONST               6 (<code object <genexpr> at 0x000001F3253CEB30, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 214>)
+             90 LOAD_CONST               7 ('LPDeviceStreamServiceManager._userinfoHasIdentity.<locals>.<genexpr>')
+             92 MAKE_FUNCTION            0
+             94 LOAD_GLOBAL              6 (str)
+             96 LOAD_FAST                5 (key)
+             98 CALL_FUNCTION            1
+            100 LOAD_METHOD              7 (lower)
+            102 CALL_METHOD              0
+            104 GET_ITER
+            106 CALL_FUNCTION            1
+            108 CALL_METHOD              1
+            110 STORE_FAST               7 (normalized)
+
+215         112 LOAD_FAST                7 (normalized)
+            114 LOAD_FAST                3 (identity_keys)
+            116 CONTAINS_OP              0
+            118 POP_JUMP_IF_FALSE       76
+            120 LOAD_GLOBAL              6 (str)
+            122 LOAD_FAST                6 (value)
+            124 JUMP_IF_TRUE_OR_POP    128
+            126 LOAD_CONST               5 ('')
+        >>  128 CALL_FUNCTION            1
+            130 LOAD_METHOD              8 (strip)
+            132 CALL_METHOD              0
+            134 POP_JUMP_IF_FALSE       76
+
+216         136 POP_TOP
+            138 POP_TOP
+            140 LOAD_CONST               8 (True)
+            142 RETURN_VALUE
+            144 JUMP_ABSOLUTE           76
+        >>  146 JUMP_ABSOLUTE           64
+
+217     >>  148 LOAD_CONST               1 (False)
+            150 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager._userinfoHasIdentity.<genexpr> ===
+214           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                18 (to 22)
+              4 STORE_FAST               1 (ch)
+              6 LOAD_FAST                1 (ch)
+              8 LOAD_METHOD              0 (isalnum)
+             10 CALL_METHOD              0
+             12 POP_JUMP_IF_FALSE        2
+             14 LOAD_FAST                1 (ch)
+             16 YIELD_VALUE
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            2
+        >>   22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager._notifyPayload ===
+227           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (notify)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       22
+             10 LOAD_FAST                0 (notify)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_CONST               1 ('payload')
+             16 BUILD_MAP                0
+             18 CALL_METHOD              2
+             20 JUMP_FORWARD             2 (to 24)
+        >>   22 BUILD_MAP                0
+        >>   24 STORE_FAST               1 (payload)
+
+228          26 LOAD_GLOBAL              0 (isinstance)
+             28 LOAD_FAST                1 (payload)
+             30 LOAD_GLOBAL              1 (dict)
+             32 CALL_FUNCTION            2
+             34 POP_JUMP_IF_FALSE       40
+
+229          36 LOAD_FAST                1 (payload)
+             38 RETURN_VALUE
+
+230     >>   40 LOAD_GLOBAL              0 (isinstance)
+             42 LOAD_FAST                1 (payload)
+             44 LOAD_GLOBAL              3 (str)
+             46 CALL_FUNCTION            2
+             48 POP_JUMP_IF_FALSE      108
+             50 LOAD_FAST                1 (payload)
+             52 POP_JUMP_IF_FALSE      108
+
+231          54 SETUP_FINALLY           30 (to 86)
+
+232          56 LOAD_GLOBAL              4 (json)
+             58 LOAD_METHOD              5 (loads)
+             60 LOAD_FAST                1 (payload)
+             62 CALL_METHOD              1
+             64 STORE_FAST               2 (parsed)
+
+233          66 LOAD_GLOBAL              0 (isinstance)
+             68 LOAD_FAST                2 (parsed)
+             70 LOAD_GLOBAL              1 (dict)
+             72 CALL_FUNCTION            2
+             74 POP_JUMP_IF_FALSE       80
+             76 LOAD_FAST                2 (parsed)
+             78 JUMP_FORWARD             2 (to 82)
+        >>   80 BUILD_MAP                0
+        >>   82 POP_BLOCK
+             84 RETURN_VALUE
+
+234     >>   86 DUP_TOP
+             88 LOAD_GLOBAL              6 (Exception)
+             90 JUMP_IF_NOT_EXC_MATCH   106
+             92 POP_TOP
+             94 POP_TOP
+             96 POP_TOP
+
+235          98 BUILD_MAP                0
+            100 ROT_FOUR
+            102 POP_EXCEPT
+            104 RETURN_VALUE
+        >>  106 RERAISE
+
+236     >>  108 BUILD_MAP                0
+            110 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.accountForSource ===
+239           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                1 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (service)
+
+240          10 LOAD_FAST                2 (service)
+             12 POP_JUMP_IF_FALSE       22
+
+241          14 LOAD_FAST                2 (service)
+             16 LOAD_METHOD              1 (getAccount)
+             18 CALL_METHOD              0
+             20 RETURN_VALUE
+
+243     >>   22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.registerAccountForSource ===
+254           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (recordDeviceAccount)
+              4 LOAD_FAST                1 (source)
+              6 LOAD_FAST                2 (userinfo)
+              8 CALL_METHOD              2
+             10 POP_TOP
+
+255          12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              1 (streamServiceForSource)
+             16 LOAD_FAST                1 (source)
+             18 CALL_METHOD              1
+             20 STORE_FAST               3 (service)
+
+256          22 LOAD_FAST                3 (service)
+             24 POP_JUMP_IF_FALSE       36
+
+257          26 LOAD_FAST                3 (service)
+             28 LOAD_METHOD              2 (registerAccount)
+             30 LOAD_FAST                2 (userinfo)
+             32 CALL_METHOD              1
+             34 POP_TOP
+        >>   36 LOAD_CONST               1 (None)
+             38 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.logoutAccountForSource ===
+260           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                1 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (service)
+
+261          10 LOAD_FAST                2 (service)
+             12 POP_JUMP_IF_FALSE       22
+
+262          14 LOAD_FAST                2 (service)
+             16 LOAD_METHOD              1 (logoutAccount)
+             18 CALL_METHOD              0
+             20 POP_TOP
+
+263     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              2 (recordDeviceAccount)
+             26 LOAD_FAST                1 (source)
+             28 LOAD_CONST               0 (None)
+             30 CALL_METHOD              2
+             32 POP_TOP
+             34 LOAD_CONST               0 (None)
+             36 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.loginAccountForSource ===
+266           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                1 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               5 (service)
+
+267          10 LOAD_FAST                5 (service)
+             12 POP_JUMP_IF_FALSE       28
+
+268          14 LOAD_FAST                5 (service)
+             16 LOAD_METHOD              1 (loginAccount)
+             18 LOAD_FAST                2 (username)
+             20 LOAD_FAST                3 (password)
+             22 LOAD_FAST                4 (finishedMethod)
+             24 CALL_METHOD              3
+             26 RETURN_VALUE
+        >>   28 LOAD_CONST               0 (None)
+             30 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.supportContents ===
+278           0 LOAD_GLOBAL              0 (LPUtility)
+              2 LOAD_METHOD              1 (appLocalDataPath)
+              4 CALL_METHOD              0
+              6 LOAD_CONST               1 ('LPSupportedStreamServiceConfig.json')
+              8 BINARY_TRUE_DIVIDE
+             10 STORE_FAST               0 (config_path)
+
+279          12 LOAD_GLOBAL              2 (open)
+             14 LOAD_FAST                0 (config_path)
+             16 LOAD_CONST               2 ('r')
+             18 LOAD_CONST               3 ('utf-8')
+             20 LOAD_CONST               4 (('encoding',))
+             22 CALL_FUNCTION_KW         3
+             24 SETUP_WITH              26 (to 52)
+             26 STORE_FAST               1 (f)
+
+280          28 LOAD_GLOBAL              3 (json)
+             30 LOAD_METHOD              4 (load)
+             32 LOAD_FAST                1 (f)
+             34 CALL_METHOD              1
+             36 STORE_FAST               2 (retDict)
+             38 POP_BLOCK
+             40 LOAD_CONST               5 (None)
+             42 DUP_TOP
+             44 DUP_TOP
+             46 CALL_FUNCTION            3
+             48 POP_TOP
+             50 JUMP_FORWARD            16 (to 68)
+        >>   52 WITH_EXCEPT_START
+             54 POP_JUMP_IF_TRUE        58
+             56 RERAISE
+        >>   58 POP_TOP
+             60 POP_TOP
+             62 POP_TOP
+             64 POP_EXCEPT
+             66 POP_TOP
+
+281     >>   68 LOAD_GLOBAL              5 (defaultSupportContents)
+             70 CALL_FUNCTION            0
+             72 STORE_DEREF              0 (defaults)
+
+283          74 LOAD_CLOSURE             0 (defaults)
+             76 BUILD_TUPLE              1
+             78 LOAD_CONST               6 (<code object <dictcomp> at 0x000001F3253CEDF0, file "LPClientFramework\LPDeviceStreamServiceManager.py", line 283>)
+             80 LOAD_CONST               7 ('LPDeviceStreamServiceManager.supportContents.<locals>.<dictcomp>')
+             82 MAKE_FUNCTION            8 (closure)
+
+285          84 LOAD_FAST                2 (retDict)
+             86 LOAD_METHOD              6 (items)
+             88 CALL_METHOD              0
+
+283          90 GET_ITER
+             92 CALL_FUNCTION            1
+             94 STORE_FAST               2 (retDict)
+
+287          96 LOAD_GLOBAL              7 (isWiiMRadioEnabled)
+             98 CALL_FUNCTION            0
+            100 POP_JUMP_IF_TRUE       114
+
+289         102 LOAD_FAST                2 (retDict)
+            104 LOAD_METHOD              8 (pop)
+            106 LOAD_CONST               8 ('WiiMRadio')
+            108 LOAD_CONST               5 (None)
+            110 CALL_METHOD              2
+            112 POP_TOP
+
+290     >>  114 LOAD_FAST                2 (retDict)
+            116 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.supportContents.<dictcomp> ===
+283           0 BUILD_MAP                0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                30 (to 36)
+
+285           6 UNPACK_SEQUENCE          2
+              8 STORE_FAST               1 (source)
+             10 STORE_FAST               2 (config)
+
+284          12 LOAD_FAST                1 (source)
+             14 BUILD_MAP                0
+             16 LOAD_DEREF               0 (defaults)
+             18 LOAD_METHOD              0 (get)
+             20 LOAD_FAST                1 (source)
+             22 BUILD_MAP                0
+             24 CALL_METHOD              2
+             26 DICT_UPDATE              1
+             28 LOAD_FAST                2 (config)
+             30 DICT_UPDATE              1
+             32 MAP_ADD                  2
+             34 JUMP_ABSOLUTE            4
+        >>   36 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.isCurrentPlayChannel ===
+293           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                1 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               4 (streamService)
+
+294          10 LOAD_FAST                4 (streamService)
+             12 POP_JUMP_IF_FALSE       26
+
+295          14 LOAD_FAST                4 (streamService)
+             16 LOAD_METHOD              1 (isCurrentPlayChannel)
+             18 LOAD_FAST                2 (device)
+             20 LOAD_FAST                3 (channelItem)
+             22 CALL_METHOD              2
+             24 RETURN_VALUE
+        >>   26 LOAD_CONST               0 (None)
+             28 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.isCurrentPlayItem ===
+298           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                1 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               4 (streamService)
+
+299          10 LOAD_FAST                4 (streamService)
+             12 POP_JUMP_IF_FALSE       26
+
+300          14 LOAD_FAST                4 (streamService)
+             16 LOAD_METHOD              1 (isCurrentPlayItem)
+             18 LOAD_FAST                2 (device)
+             20 LOAD_FAST                3 (playItem)
+             22 CALL_METHOD              2
+             24 RETURN_VALUE
+        >>   26 LOAD_CONST               0 (None)
+             28 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.accountChangedForSource ===
+303           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                2 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               4 (service)
+
+304          10 LOAD_FAST                4 (service)
+             12 POP_JUMP_IF_FALSE       26
+
+305          14 LOAD_FAST                4 (service)
+             16 LOAD_METHOD              1 (accountChanged)
+             18 LOAD_FAST                1 (device)
+             20 LOAD_FAST                3 (notify)
+             22 CALL_METHOD              2
+             24 POP_TOP
+        >>   26 LOAD_CONST               0 (None)
+             28 RETURN_VALUE
+
+=== LPDeviceStreamServiceManager.updateMediaInfoForSource ===
+319           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamServiceForSource)
+              4 LOAD_FAST                2 (source)
+              6 CALL_METHOD              1
+              8 STORE_FAST               5 (service)
+
+321          10 LOAD_FAST                5 (service)
+             12 POP_JUMP_IF_TRUE        22
+
+322          14 LOAD_GLOBAL              1 (LPStreamService)
+             16 LOAD_FAST                2 (source)
+             18 CALL_FUNCTION            1
+             20 STORE_FAST               5 (service)
+
+325     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                2 (_mediaInfoQueue)
+             26 LOAD_METHOD              3 (empty)
+             28 CALL_METHOD              0
+             30 POP_JUMP_IF_TRUE        72
+
+326          32 SETUP_FINALLY           14 (to 48)
+
+327          34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                2 (_mediaInfoQueue)
+             38 LOAD_METHOD              4 (get_nowait)
+             40 CALL_METHOD              0
+             42 POP_TOP
+             44 POP_BLOCK
+             46 JUMP_ABSOLUTE           22
+
+328     >>   48 DUP_TOP
+             50 LOAD_GLOBAL              5 (Empty)
+             52 JUMP_IF_NOT_EXC_MATCH    68
+             54 POP_TOP
+             56 POP_TOP
+             58 POP_TOP
+
+329          60 POP_EXCEPT
+             62 JUMP_ABSOLUTE           72
+             64 POP_EXCEPT
+             66 JUMP_ABSOLUTE           22
+        >>   68 RERAISE
+             70 JUMP_ABSOLUTE           22
+
+331     >>   72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR                2 (_mediaInfoQueue)
+             76 LOAD_METHOD              6 (put)
+             78 LOAD_FAST                5 (service)
+             80 LOAD_FAST                1 (device)
+             82 LOAD_FAST                3 (data)
+             84 LOAD_FAST                4 (header)
+             86 BUILD_TUPLE              4
+             88 CALL_METHOD              1
+             90 POP_TOP
+             92 LOAD_CONST               1 (None)
+             94 RETURN_VALUE

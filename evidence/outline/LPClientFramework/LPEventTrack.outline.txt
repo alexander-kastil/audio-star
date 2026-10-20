@@ -1,0 +1,386 @@
+# module LPClientFramework.LPEventTrack
+
+[module] names: __doc__, enum, functools, hashlib, json, os, platform, string, threading, time, random, uuid, uuidModule, typing, Any, Dict, Optional, Tuple, requests, LPGlobalUI, LPClientFramework.LPUtility, cacheDir, logger, pcUUID, appVersion, localeGeoContext, Enum, LPEventsType, LPEventTrack, LPAuthenticatedRequestClient, str, logEvent, __name__, track
+  str: '\n@Time ： 2025/3/10 10:22\n@Auth ： Chris\n@File ：LPEventTrack.py\n@Desc:\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'Optional'
+  str: 'Tuple'
+  str: 'cacheDir'
+  str: 'logger'
+  str: 'pcUUID'
+  str: 'appVersion'
+  str: 'localeGeoContext'
+  str: 'LPEventsType'
+  str: 'LPEventTrack'
+  str: 'LPAuthenticatedRequestClient'
+  str: 'name'
+  str: 'logEvent'
+  str: '__main__'
+  str: 'test_event'
+
+def LPEventsType()  line 27
+  names: __name__, __module__, __qualname__, FIRST_RUN, APP_OPEN, SCREEN_VIEW, BUTTON_Click, DB_INDEX_CREATE, BEETS_IMPORT_RESULT, NETWORK_CONTEXT_SNAPSHOT, DEVICE_DISCOVERY_REPORT, DEVICE_DISCOVERY_FAILURE
+    str: 'LPEventsType'
+    str: 'first_run'
+    str: 'app_open'
+    str: 'screen_view'
+    str: 'button_click'
+    str: 'db_index_create'
+    str: 'beets_import_result'
+    str: 'network_context_snapshot'
+    str: 'device_discovery_report'
+    str: 'device_discovery_failure'
+
+def LPEventTrack()  line 40
+  names: __name__, __module__, __qualname__, BATCH_SIZE, FLUSH_INTERVAL, MAX_RETRY_COUNT, DEBUG_DUMP_TO_LOCAL_FILE, __init__, _updateHeaders, _getTimestamp, _getRandomString, _sha256Hash, _getHashAppId, _getSignKey, _defaultEventParams, str, logEvent, _append_event, _read_queue_locked, _write_queue_locked, _ensure_flush_worker, _flush_worker, _do_flush_locked, _dump_batch_to_local_file, _send_batch
+    str: 'LPEventTrack'
+    str: 'LPEventTrack.__init__'
+    str: 'LPEventTrack._updateHeaders'
+    str: 'LPEventTrack._getTimestamp'
+    str: 'LPEventTrack._getRandomString'
+    str: 'LPEventTrack._sha256Hash'
+    str: 'LPEventTrack._getHashAppId'
+    str: 'LPEventTrack._getSignKey'
+    str: 'LPEventTrack._defaultEventParams'
+    str: 'eventName'
+    str: 'LPEventTrack.logEvent'
+    str: 'LPEventTrack._append_event'
+    str: 'LPEventTrack._read_queue_locked'
+    str: 'LPEventTrack._write_queue_locked'
+    str: 'LPEventTrack._ensure_flush_worker'
+    str: 'LPEventTrack._flush_worker'
+    str: 'LPEventTrack._do_flush_locked'
+    str: 'LPEventTrack._dump_batch_to_local_file'
+    str: 'LPEventTrack._send_batch'
+
+  def LPEventTrack.__init__(self)  line 49
+    names: url, headers, str, uuidModule, uuid4, sessionId, appId, appKey, appSecret, cacheDir, _queue_file, _debug_dump_file, threading, RLock, _queue_lock, Condition, _queue_condition, _flush_thread
+      str: 'https://api.linkplay.com/apiv1/mp/collect'
+      str: 'Content-Type'
+      str: 'application/json'
+      str: '<redacted>'
+      str: '<redacted>'
+      str: '<redacted>'
+      str: 'event_track_queue.json'
+      str: 'event_track_debug_dump.jsonl'
+
+  def LPEventTrack._updateHeaders(self)  line 72
+    names: appKey, str, _getTimestamp, _getRandomString, _getHashAppId, _getSignKey, appSecret, headers, update
+      str: '\n        更新事件上报请求头中的签名字段。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'accessKey'
+      str: 'timestamp'
+      str: 'nonce'
+      str: 'sign'
+      str: 'appId'
+
+  def LPEventTrack._getTimestamp(self)  line 94
+    names: int, time
+      str: '\n        获取毫秒级时间戳。\n\n        参数:\n            无\n        返回:\n            int: 当前毫秒时间戳。\n        '
+
+  def LPEventTrack._getRandomString(self, length)  line 105
+    names: join, random, choices, string, ascii_letters, digits
+      str: '\n        生成随机字符串。\n\n        参数:\n            length (int): 目标字符串长度。\n        返回:\n            str: 生成后的随机字符串。\n        '
+      str: 'k'
+
+  def LPEventTrack._sha256Hash(self, inputStr, upper)  line 117
+    names: hashlib, sha256, encode, hexdigest, upper, lower
+      str: '\n        对输入字符串做 SHA-256 摘要。\n\n        参数:\n            inputStr (str): 待摘要的原始字符串。\n            upper (bool): 是否返回大写十六进制字符串。\n        返回:\n            str: SHA-256 摘要结果。\n        '
+      str: 'utf-8'
+
+  def LPEventTrack._getHashAppId(self)  line 130
+    names: appKey, appId, _sha256Hash
+      str: '\n        生成哈希后的 appId。\n\n        参数:\n            无\n        返回:\n            str: 哈希后的 appId。\n        '
+
+  def LPEventTrack._getSignKey(self, appId, accessKey, secretKey, nonce, timestamp)  line 143
+    names: all, _sha256Hash
+      str: '\n        生成请求签名。\n\n        参数:\n            appId (str): 哈希后的 appId。\n            accessKey (str): 应用 access key。\n            secretKey (str): 应用 secret key。\n            nonce (str): 随机串。\n            timestamp (str): 毫秒时间戳字符串。\n        返回:\n            str | None: 生成成功返回签名，参数不完整时返回 None。\n        '
+      str: 'accessKey='
+      str: '&appId='
+      str: '&nonce='
+      str: '&timestamp='
+      str: '&secretKey='
+
+  def LPEventTrack._defaultEventParams(self, clientId, eventName)  line 163
+    names: appVersion, sessionId, platform, system, LPEventsType, APP_OPEN, value, localeGeoContext, update, get
+      str: '\n        构建事件上报默认参数。\n\n        参数:\n            clientId (str): 客户端唯一标识。\n            eventName (str): 事件名称\n        返回:\n            dict: 默认事件参数字典。\n        '
+      str: 'app_ver'
+      str: 'client_id'
+      str: 'app_session_id'
+      str: 'system'
+      str: 'country_code'
+      str: 'ZZ'
+      str: 'language_code'
+      str: 'und'
+      str: 'script_code'
+      str: 'locale_name'
+      str: 'timezone'
+      str: 'country_code'
+      str: 'language_code'
+      str: 'script_code'
+      str: 'locale_name'
+      str: 'timezone'
+
+  def LPEventTrack.logEvent(self, eventName, params)  line 192
+    names: pcUUID, _defaultEventParams, isinstance, dict, update, time, _append_event, _ensure_flush_worker
+      str: '将事件写入本地缓存队列，达到阈值时唤醒批量推送。'
+      str: 'name'
+      str: 'params'
+      str: 'retry_count'
+      str: 'created_at'
+
+  def LPEventTrack._append_event(self, client_id, event_record)  line 209
+    names: _queue_lock, _read_queue_locked, append, _write_queue_locked, len, BATCH_SIZE, _queue_condition, notify
+      str: '线程安全地追加事件到本地队列文件。'
+      str: 'client_id'
+      str: 'pending_events'
+
+  def LPEventTrack._read_queue_locked(self)  line 219
+    names: _queue_file, exists, open, read, strip, json, loads, Exception, logger, exception, time
+      str: '在持有锁的情况下读取队列文件，损坏时返回空队列。'
+      str: 'r'
+      str: 'utf-8'
+      str: 'encoding'
+      str: '[EventTrack] Failed to read queue file, resetting'
+      str: 'client_id'
+      str: 'pending_events'
+      str: 'retry_count'
+      str: 'created_at'
+      str: 'last_flush_at'
+      str: 'last_error'
+
+  def LPEventTrack._write_queue_locked(self, queue_data)  line 238
+    names: str, _queue_file, open, json, dump, os, replace, Exception, logger, exception
+      str: '在持有锁的情况下原子写入队列文件（先写临时文件再替换）。'
+      str: '.tmp'
+      str: 'w'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'indent'
+      str: '[EventTrack] Failed to write queue file'
+
+  def LPEventTrack._ensure_flush_worker(self)  line 248
+    names: _queue_lock, _flush_thread, is_alive, threading, Thread, _flush_worker, start
+      str: '确保后台 flush 线程已启动（延迟启动，避免模块导入时创建线程）。'
+      str: 'target'
+      str: 'daemon'
+
+  def LPEventTrack._flush_worker(self)  line 256
+    names: _queue_lock, _read_queue_locked, len, get, BATCH_SIZE, _do_flush_locked, _queue_condition, wait, FLUSH_INTERVAL
+      str: '后台线程：队列达到 BATCH_SIZE 立即发送，否则定时检查。'
+      str: 'pending_events'
+      str: 'timeout'
+
+  def LPEventTrack._do_flush_locked(self)  line 270
+    names: _read_queue_locked, get, BATCH_SIZE, _send_batch, time, _write_queue_locked, MAX_RETRY_COUNT, len, logger, warning
+      str: '在持有锁的情况下执行批量发送。'
+      str: 'pending_events'
+      str: 'client_id'
+      str: 'LPEventTrack._do_flush_locked.<locals>.<listcomp>'
+      str: 'client_id'
+      str: 'events'
+      str: 'retry_count'
+      str: 'last_flush_at'
+      str: 'last_error'
+      str: 'batch_post_failed'
+      str: 'max_retry_exceeded_dropped'
+      str: '[EventTrack] Retry count exceeded MAX_RETRY_COUNT=%d, dropping %d events'
+
+    def LPEventTrack._do_flush_locked.<listcomp>(.0)  line 280
+        str: 'name'
+        str: 'params'
+        str: 'name'
+        str: 'params'
+
+  def LPEventTrack._dump_batch_to_local_file(self, payload)  line 304
+    names: time, strftime, open, _debug_dump_file, write, json, dumps, logger, debug, len, get, Exception, exception
+      str: '\n        调试模式下把本批事件追加写入本地 JSONL 文件，替代真实网络发送。\n\n        参数:\n            payload (dict): 与真实发送一致的批量上报请求体。\n        返回:\n            bool: 写入成功返回 True，失败返回 False（False 会走原有重试/丢弃逻辑）。\n        '
+      str: '%Y-%m-%d %H:%M:%S'
+      str: 'dumped_at'
+      str: 'payload'
+      str: 'a'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'ensure_ascii'
+      str: '[EventTrack] DEBUG_DUMP Batch dumped to local file, events=%d, file=%s'
+      str: 'events'
+      str: '[EventTrack] DEBUG_DUMP Failed to dump batch to local file'
+
+  def LPEventTrack._send_batch(self, payload)  line 329
+    names: DEBUG_DUMP_TO_LOCAL_FILE, _dump_batch_to_local_file, _updateHeaders, get, startswith, logger, debug, repr, requests, post, url, headers, json, dumps, ok, len, status_code, error, Exception, exception, str
+      str: '发送批量 POST 请求，返回 True 表示成功。'
+      str: 'events'
+      str: 'name'
+      str: 'ota'
+      str: '[otaLogEvent] %s'
+      str: 'headers'
+      str: 'data'
+      str: '[EventTrack] Batch sent successfully, events=%d, status=%d'
+      str: '[EventTrack] Batch send failed, status=%d, events=%d'
+      str: '[EventTrack] Batch send exception: '
+
+def LPAuthenticatedRequestClient()  line 357
+  names: __name__, __module__, __qualname__, __doc__, str, int, __init__, Dict, Any, Tuple, post, Optional, get, put, postTextBody, bool, _send, _buildUrl, _updateHeaders, _getTimestamp, _getRandomString, _sha256Hash, _getHashAppId, _getSignKey
+    str: 'LPAuthenticatedRequestClient'
+    str: '\n    通用鉴权 HTTP 客户端。\n\n    支持可配置的 API host、app_id、access_key、secret_key，与 LPEventTrack\n    使用相同鉴权算法，用于 WiiMRadio 等云 API 请求。\n    '
+    str: 'api_host'
+    str: 'app_id'
+    str: 'access_key'
+    str: 'secret_key'
+    str: 'timeout'
+    str: 'LPAuthenticatedRequestClient.__init__'
+    str: 'endpoint'
+    str: 'payload'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient.post'
+    str: 'endpoint'
+    str: 'params'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient.get'
+    str: 'LPAuthenticatedRequestClient.put'
+    str: 'text/plain'
+    str: 'endpoint'
+    str: 'contentType'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient.postTextBody'
+    str: 'params'
+    str: 'jsonData'
+    str: 'data'
+    str: 'contentType'
+    str: 'parseJson'
+    str: 'method'
+    str: 'endpoint'
+    str: 'params'
+    str: 'jsonData'
+    str: 'contentType'
+    str: 'parseJson'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient._send'
+    str: 'endpoint'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient._buildUrl'
+    str: 'LPAuthenticatedRequestClient._updateHeaders'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient._getTimestamp'
+    str: 'length'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient._getRandomString'
+    str: 'inputStr'
+    str: 'upper'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient._sha256Hash'
+    str: 'LPAuthenticatedRequestClient._getHashAppId'
+    str: 'appId'
+    str: 'accessKey'
+    str: 'secretKey'
+    str: 'nonce'
+    str: 'timestamp'
+    str: 'return'
+    str: 'LPAuthenticatedRequestClient._getSignKey'
+    str: 'text/plain'
+
+  def LPAuthenticatedRequestClient.__init__(self, api_host, app_id, access_key, secret_key, timeout, session)  line 365
+    names: rstrip, api_host, app_id, access_key, secret_key, timeout, headers, _session
+      str: '\n        初始化鉴权客户端。\n\n        参数:\n            api_host (str): API 根地址，如 https://cloud-api.linkplay.com/prod/。\n            app_id (str): 应用 ID。\n            access_key (str): 访问密钥。\n            secret_key (str): 私钥。\n            timeout (int): 请求超时秒数。\n            session (object | None): 可选 requests.Sessi'
+      str: '/'
+      str: 'Content-Type'
+      str: 'application/json'
+
+  def LPAuthenticatedRequestClient.post(self, endpoint, payload)  line 395
+    names: isinstance, dict, TypeError, _updateHeaders, _buildUrl, _session, requests, post, headers, timeout, raise_for_status, text, strip, json, loads, status_code
+      str: '\n        发起带鉴权头的 JSON POST 请求。\n\n        参数:\n            endpoint (str): 接口路径，如 /radio/station/list。\n            payload (dict): 请求体字典。\n        返回:\n            tuple[dict, int]: 解析后的响应字典和 HTTP 状态码。\n        '
+      str: 'payload must be a dict'
+      str: 'headers'
+      str: 'json'
+      str: 'timeout'
+      str: 'verify'
+
+  def LPAuthenticatedRequestClient.get(self, endpoint, params)  line 425
+    names: isinstance, dict, TypeError, _updateHeaders, _buildUrl, _session, requests, get, headers, timeout, logger, debug, url, status_code, raise_for_status, text, strip, json, loads
+      str: '\n        发起带鉴权头的 GET 请求。\n\n        参数:\n            endpoint (str): 接口路径，如 /apiv1/tool/location。\n            params (dict | None): 查询参数字典。\n        返回:\n            tuple[dict, int]: 解析后的响应字典和 HTTP 状态码。\n        '
+      str: 'params must be a dict or None'
+      str: 'headers'
+      str: 'params'
+      str: 'timeout'
+      str: 'http get '
+      str: ' -> resp '
+
+  def LPAuthenticatedRequestClient.put(self, endpoint, payload)  line 455
+    names: isinstance, dict, TypeError, _send
+      str: '\n        发起带鉴权头的 JSON PUT 请求（对应更新工单 PUT /tickets/{id}）。\n\n        参数:\n            endpoint (str): 接口路径，如 /tickets/123。\n            payload (dict): 请求体字典。\n        返回:\n            tuple[dict, int]: 解析后的响应字典和 HTTP 状态码。\n        '
+      str: 'payload must be a dict'
+      str: 'PUT'
+      str: 'jsonData'
+
+  def LPAuthenticatedRequestClient.postTextBody(self, endpoint, body, contentType)  line 469
+    names: isinstance, str, encode, _send
+      str: '\n        发起带鉴权头的非 JSON POST 请求（对应回复工单 POST /tickets/{id}/notes）。\n\n        参数:\n            endpoint (str): 接口路径。\n            body (str|bytes): 请求体，str 会被转为 UTF-8 bytes。\n            contentType (str): 内容类型，默认 text/plain。\n        返回:\n            tuple[dict, int]: 解析后的响应字典和 HTTP 状态码。\n        '
+      str: 'utf-8'
+      str: 'POST'
+      str: 'data'
+      str: 'contentType'
+
+  def LPAuthenticatedRequestClient._send(self, method, endpoint, params, jsonData, data, contentType, parseJson)  line 484
+    names: _updateHeaders, _buildUrl, dict, headers, _session, requests, timeout, request, logger, debug, url, status_code, raise_for_status, text, strip, json, loads
+      str: '\n        统一的鉴权请求内核，供新增动词复用（既有 get/post 不改动）。\n\n        参数:\n            method (str): HTTP 方法（PUT/POST 等）。\n            endpoint (str): 接口路径。\n            params (dict|None): 查询参数。\n            jsonData (dict|None): JSON 请求体（与 data 二选一）。\n            data (bytes|None): 原始请求体。\n            contentType (str|'
+      str: 'Content-Type'
+      str: 'headers'
+      str: 'timeout'
+      str: 'params'
+      str: 'json'
+      str: 'data'
+      str: 'http '
+      str: ' -> resp '
+
+  def LPAuthenticatedRequestClient._buildUrl(self, endpoint)  line 536
+    names: startswith, api_host
+      str: '\n        拼接完整请求 URL。\n\n        参数:\n            endpoint (str): 接口路径。\n        返回:\n            str: 完整 URL。\n        '
+      str: '/'
+
+  def LPAuthenticatedRequestClient._updateHeaders(self)  line 548
+    names: str, _getTimestamp, _getRandomString, _getHashAppId, _getSignKey, access_key, secret_key, headers, update
+      str: '\n        更新请求头中的认证字段。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'accessKey'
+      str: 'timestamp'
+      str: 'nonce'
+      str: 'sign'
+      str: 'appId'
+
+  def LPAuthenticatedRequestClient._getTimestamp(self)  line 573
+    names: int, time
+      str: '\n        获取毫秒级时间戳。\n\n        参数:\n            无。\n        返回:\n            int: 当前毫秒时间戳。\n        '
+
+  def LPAuthenticatedRequestClient._getRandomString(self, length)  line 584
+    names: join, random, choices, string, ascii_letters, digits
+      str: '\n        生成随机字符串。\n\n        参数:\n            length (int): 目标字符串长度。\n        返回:\n            str: 生成后的随机字符串。\n        '
+      str: 'k'
+
+  def LPAuthenticatedRequestClient._sha256Hash(self, inputStr, upper)  line 595
+    names: hashlib, sha256, encode, hexdigest, upper, lower
+      str: '\n        对输入字符串做 SHA-256 摘要。\n\n        参数:\n            inputStr (str): 待摘要的原始字符串。\n            upper (bool): 是否返回大写十六进制字符串。\n        返回:\n            str: SHA-256 摘要结果。\n        '
+      str: 'utf-8'
+
+  def LPAuthenticatedRequestClient._getHashAppId(self)  line 608
+    names: access_key, app_id, _sha256Hash
+      str: '\n        生成哈希后的 appId。\n\n        参数:\n            无。\n        返回:\n            str: 哈希后的 appId。\n        '
+
+  def LPAuthenticatedRequestClient._getSignKey(self, appId, accessKey, secretKey, nonce, timestamp)  line 620
+    names: all, _sha256Hash
+      str: '\n        生成请求签名。\n\n        参数:\n            appId (str): 哈希后的 appId。\n            accessKey (str): 应用 access key。\n            secretKey (str): 应用 secret key。\n            nonce (str): 随机串。\n            timestamp (str): 毫秒时间戳字符串。\n        返回:\n            str | None: 生成成功返回签名，参数不完整时返回 None。\n        '
+      str: 'accessKey='
+      str: '&appId='
+      str: '&nonce='
+      str: '&timestamp='
+      str: '&secretKey='
+
+def logEvent(name, params)  line 653
+    str: '\n    事件上报装饰器：在目标函数执行后自动上报指定事件。\n\n    参数:\n        name (str): 事件名称。\n        params (dict | None): 固定事件参数。\n    返回:\n        callable: 装饰器函数。\n    '
+    str: 'logEvent.<locals>.decorator'
+
+  def logEvent.decorator(func)  line 663
+    names: functools, wraps
+      str: 'logEvent.<locals>.decorator.<locals>.wrapper'
+
+    def logEvent.decorator.wrapper(*args, **kwargs)  line 665
+      names: logger, debug, __name__, LPGlobalUI, eventTrack, logEvent
+        str: 'executing --> '

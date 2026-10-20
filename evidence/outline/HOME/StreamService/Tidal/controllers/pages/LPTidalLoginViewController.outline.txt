@@ -1,0 +1,116 @@
+# module HOME.StreamService.Tidal.controllers.pages.LPTidalLoginViewController
+
+[module] names: __doc__, string, Template, typing, Optional, PyQt6.QtCore, QTimer, pyqtSlot, PyQt6.QtWidgets, QWidget, LPGlobalUI, LPClientFramework.LPConfig.LPFontConfig, MyMusic_Title, Qobuz_Sub_Title, LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager, LPTidalLoginManager, LPClientFramework.LPUtility, logger, LPTidalLoginViewController
+  str: 'TIDAL QWidget 登录页控制器。'
+  str: 'Template'
+  str: 'Optional'
+  str: 'QTimer'
+  str: 'pyqtSlot'
+  str: 'QWidget'
+  str: 'MyMusic_Title'
+  str: 'Qobuz_Sub_Title'
+  str: 'LPTidalLoginManager'
+  str: 'logger'
+  str: 'LPTidalLoginViewController'
+
+def LPTidalLoginViewController()  line 16
+  names: __name__, __module__, __qualname__, __doc__, Optional, QWidget, bool, __init__, setupUi, __del__, viewWillAppear, viewWillDisappear, _connectLoginSignal, _disconnectLoginSignal, _isCurrentLoginPage, pyqtSlot, onBrowserLoginClicked, dict, _onLoginSucceeded, int, _doEnterAfterLogin, _safeCleanupAfterLogin, _removeSelfFromStack, __classcell__
+    str: 'LPTidalLoginViewController'
+    str: '展示 TIDAL OAuth 登录入口并在登录成功后进入 TIDAL Shell。'
+    str: 'parent'
+    str: 'enterHomeOnSuccess'
+    str: 'LPTidalLoginViewController.__init__'
+    str: 'ui'
+    str: 'return'
+    str: 'LPTidalLoginViewController.setupUi'
+    str: 'LPTidalLoginViewController.__del__'
+    str: 'return'
+    str: 'LPTidalLoginViewController.viewWillAppear'
+    str: 'LPTidalLoginViewController.viewWillDisappear'
+    str: 'LPTidalLoginViewController._connectLoginSignal'
+    str: 'LPTidalLoginViewController._disconnectLoginSignal'
+    str: 'LPTidalLoginViewController._isCurrentLoginPage'
+    str: 'LPTidalLoginViewController.onBrowserLoginClicked'
+    str: 'accountState'
+    str: 'return'
+    str: 'LPTidalLoginViewController._onLoginSucceeded'
+    str: 'revision'
+    str: 'return'
+    str: 'LPTidalLoginViewController._doEnterAfterLogin'
+    str: 'LPTidalLoginViewController._safeCleanupAfterLogin'
+    str: 'LPTidalLoginViewController._removeSelfFromStack'
+
+  def LPTidalLoginViewController.__init__(self, parent, enterHomeOnSuccess)  line 19
+    names: super, __init__, LPTidalLoginManager, instance, _login_manager, bool, _enter_home_on_success, _login_entering, _login_signal_connected, _view_revision, HOME.StreamService.Tidal.controllers.pages.UI.LPTidalLoginViewController_ui, Ui_tidalLoginWidget, _ui, setupUi, tidalLabel, tipLabel, loginButton
+      str: '\n        初始化 TIDAL QWidget 登录页。\n\n        :param parent: 父级 QWidget。\n        :param enterHomeOnSuccess: 登录成功后是否进入 TIDAL 首页。\n        :return: None。\n        '
+      str: 'Ui_tidalLoginWidget'
+
+  def LPTidalLoginViewController.setupUi(self, ui)  line 42
+    names: Template, setStyleSheet, substitute, MyMusic_Title, Qobuz_Sub_Title, LPGlobalUI, THEME_FONT_COLOR_UI, name, THEME_DISABLE_COLOR, THEME_BUTTON_BACK_COLOR_UI, loginButton, clicked, connect, onBrowserLoginClicked
+      str: '\n        完成 Designer UI 加载后的样式和信号配置。\n\n        :param ui: 已加载控件属性的当前页面。\n        :return: None。\n        '
+      str: '\n            QLabel#tidalLabel {\n                font-size: ${titleFontSize}pt;\n                color: $fontColor;\n            }\n            QLabel#tipLabel {\n                font-size: ${tipFontSize}pt;\n                color: $tipFontColor;\n            }\n            QPushButton#loginButton {\n      '
+      str: 'titleFontSize'
+      str: 'tipFontSize'
+      str: 'buttonFontSize'
+      str: 'fontColor'
+      str: 'tipFontColor'
+      str: 'buttonBackground'
+
+  def LPTidalLoginViewController.__del__(self)  line 76
+    names: _disconnectLoginSignal
+      str: '\n        析构时兜底断开登录成功信号。\n\n        :return: None。\n        '
+
+  def LPTidalLoginViewController.viewWillAppear(self)  line 84
+    names: int, getattr, _view_revision, _login_entering, _connectLoginSignal, _login_manager, clearErrorMessage, syncAccountFromDevice, LPGlobalUI
+      str: '\n        页面显示时恢复登录成功监听，并同步设备侧 TIDAL 登录状态。\n\n        :return: None。\n        '
+      str: '_view_revision'
+      str: 'currentDevice'
+
+  def LPTidalLoginViewController.viewWillDisappear(self)  line 96
+    names: int, getattr, _view_revision, _login_entering, _disconnectLoginSignal
+      str: '\n        页面隐藏时断开登录成功监听，避免隐藏页面抢占导航。\n\n        :return: None。\n        '
+      str: '_view_revision'
+
+  def LPTidalLoginViewController._connectLoginSignal(self)  line 106
+    names: bool, getattr, _login_manager, loginSucceeded, connect, _onLoginSucceeded, _login_signal_connected
+      str: '幂等连接登录成功信号。\n\n        :return: None。\n        '
+      str: '_login_signal_connected'
+
+  def LPTidalLoginViewController._disconnectLoginSignal(self)  line 116
+    names: bool, getattr, _login_manager, loginSucceeded, disconnect, _onLoginSucceeded, TypeError, RuntimeError, _login_signal_connected
+      str: '幂等断开登录成功信号。\n\n        :return: None。\n        '
+      str: '_login_signal_connected'
+
+  def LPTidalLoginViewController._isCurrentLoginPage(self)  line 129
+    names: getattr, LPGlobalUI, currentWidget
+      str: '判断当前页面是否仍为导航栈顶的 TIDAL 登录页。\n\n        :return: 仍在栈顶返回 True，否则返回 False。\n        '
+      str: 'rootStackedWidget'
+
+  def LPTidalLoginViewController.onBrowserLoginClicked(self)  line 137
+    names: logger, info, _login_manager, beginBrowserLogin
+      str: '\n        点击登录按钮时启动 TIDAL OAuth 浏览器登录。\n\n        :return: None。\n        '
+      str: '[TIDAL] login entry clicked'
+
+  def LPTidalLoginViewController._onLoginSucceeded(self, accountState)  line 147
+    names: _login_entering, _isCurrentLoginPage, int, getattr, QTimer, singleShot
+      str: '\n        登录成功后将导航操作排入下一轮事件循环。\n\n        :param accountState: 登录后的账号状态。\n        :return: None。\n        '
+      str: '_view_revision'
+      str: 'LPTidalLoginViewController._onLoginSucceeded.<locals>.<lambda>'
+
+    def LPTidalLoginViewController._onLoginSucceeded.<lambda>()  line 161
+      names: _doEnterAfterLogin
+
+  def LPTidalLoginViewController._doEnterAfterLogin(self, revision)  line 163
+    names: int, getattr, _isCurrentLoginPage, _login_entering, _disconnectLoginSignal, _enter_home_on_success, _login_manager, showHomePage, QTimer, singleShot, _safeCleanupAfterLogin
+      str: '\n        先推入 Shell 再安全移除登录页，防止嵌套消息泵中 use-after-free。\n\n        顺序说明：\n        1. 断开信号，防止重复触发。\n        2. 先把 TIDAL Shell push 到导航栈顶，确保 QWidget 树稳定。\n        3. 用 QTimer.singleShot 把"移除旧登录页 + deleteLater"延迟到\n           下一轮事件循环，避免和可能在同一轮触发的 Windows API\n           （_doActiveWindow → SetForegroundWindow → 嵌'
+      str: '_view_revision'
+
+  def LPTidalLoginViewController._safeCleanupAfterLogin(self)  line 190
+    names: _removeSelfFromStack, deleteLater
+      str: '\n        在 Shell 入栈后的下一轮事件循环中安全清理登录页。\n\n        :return: None。\n        '
+
+  def LPTidalLoginViewController._removeSelfFromStack(self)  line 199
+    names: getattr, LPGlobalUI, indexOf, viewWillDisappear, currentIndex, setCurrentIndex, widget, callable, removeWidget
+      str: '\n        从全局导航栈中按身份移除当前登录页。\n\n        :return: None。\n        '
+      str: 'rootStackedWidget'
+      str: 'viewWillAppear'

@@ -1,0 +1,137 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/11/5 9:47\n@Auth ： Chris\n@File ：LPPlayViewMouseMonitor.py\n@Desc: application level filter for play view\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('QObject', 'QEvent'))
+              8 IMPORT_NAME              1 (PyQt6.QtCore)
+             10 IMPORT_FROM              2 (QObject)
+             12 STORE_NAME               2 (QObject)
+             14 IMPORT_FROM              3 (QEvent)
+             16 STORE_NAME               3 (QEvent)
+             18 POP_TOP
+
+ 10          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               3 (None)
+             24 IMPORT_NAME              4 (LPGlobalUI)
+             26 STORE_NAME               4 (LPGlobalUI)
+
+ 13          28 LOAD_NAME                5 (frozenset)
+
+ 14          30 LOAD_NAME                3 (QEvent)
+             32 LOAD_ATTR                6 (Type)
+             34 LOAD_ATTR                7 (MouseMove)
+
+ 15          36 LOAD_NAME                3 (QEvent)
+             38 LOAD_ATTR                6 (Type)
+             40 LOAD_ATTR                8 (Wheel)
+
+ 16          42 LOAD_NAME                3 (QEvent)
+             44 LOAD_ATTR                6 (Type)
+             46 LOAD_ATTR                9 (HoverMove)
+
+ 17          48 LOAD_NAME                3 (QEvent)
+             50 LOAD_ATTR                6 (Type)
+             52 LOAD_ATTR               10 (MouseButtonPress)
+
+ 13          54 BUILD_TUPLE              4
+             56 CALL_FUNCTION            1
+             58 STORE_NAME              11 (PLAY_VIEW_ACTIVITY_EVENT_TYPES)
+
+ 22          60 LOAD_BUILD_CLASS
+             62 LOAD_CONST               4 (<code object LPPlayViewMouseMonitor at 0x000001F3253C4B30, file "LPClientFramework\LPEventFilter\LPPlayViewMouseMonitor.py", line 22>)
+             64 LOAD_CONST               5 ('LPPlayViewMouseMonitor')
+             66 MAKE_FUNCTION            0
+             68 LOAD_CONST               5 ('LPPlayViewMouseMonitor')
+             70 LOAD_NAME                2 (QObject)
+             72 CALL_FUNCTION            3
+             74 STORE_NAME              12 (LPPlayViewMouseMonitor)
+             76 LOAD_CONST               3 (None)
+             78 RETURN_VALUE
+
+=== LPPlayViewMouseMonitor ===
+ 22           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPPlayViewMouseMonitor')
+              6 STORE_NAME               2 (__qualname__)
+
+ 23           8 LOAD_CONST               1 ('在应用级别监听全屏播放页的用户活动。')
+             10 STORE_NAME               3 (__doc__)
+
+ 25          12 LOAD_CLOSURE             0 (__class__)
+             14 BUILD_TUPLE              1
+             16 LOAD_CONST               2 (<code object __init__ at 0x000001F3253C4190, file "LPClientFramework\LPEventFilter\LPPlayViewMouseMonitor.py", line 25>)
+             18 LOAD_CONST               3 ('LPPlayViewMouseMonitor.__init__')
+             20 MAKE_FUNCTION            8 (closure)
+             22 STORE_NAME               4 (__init__)
+
+ 32          24 LOAD_CONST               4 (<code object eventFilter at 0x000001F3253C4240, file "LPClientFramework\LPEventFilter\LPPlayViewMouseMonitor.py", line 32>)
+             26 LOAD_CONST               5 ('LPPlayViewMouseMonitor.eventFilter')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               5 (eventFilter)
+             32 LOAD_CLOSURE             0 (__class__)
+             34 DUP_TOP
+             36 STORE_NAME               6 (__classcell__)
+             38 RETURN_VALUE
+
+=== LPPlayViewMouseMonitor.__init__ ===
+ 27           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 28          10 LOAD_GLOBAL              2 (LPGlobalUI)
+             12 LOAD_ATTR                3 (mainWindow)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               4 (mianUI)
+
+ 29          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                4 (mianUI)
+             22 LOAD_ATTR                5 (playViewController)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               6 (playView)
+             28 LOAD_CONST               1 (None)
+             30 RETURN_VALUE
+
+=== LPPlayViewMouseMonitor.eventFilter ===
+ 41           0 LOAD_FAST                2 (event)
+              2 LOAD_METHOD              0 (type)
+              4 CALL_METHOD              0
+              6 LOAD_GLOBAL              1 (PLAY_VIEW_ACTIVITY_EVENT_TYPES)
+              8 CONTAINS_OP              1
+             10 POP_JUMP_IF_FALSE       16
+
+ 42          12 LOAD_CONST               1 (False)
+             14 RETURN_VALUE
+
+ 43     >>   16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                2 (playView)
+             20 POP_JUMP_IF_FALSE       30
+             22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                3 (mianUI)
+             26 LOAD_ATTR                4 (isPlayViewShow)
+             28 POP_JUMP_IF_TRUE        34
+
+ 44     >>   30 LOAD_CONST               1 (False)
+             32 RETURN_VALUE
+
+ 45     >>   34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                3 (mianUI)
+             38 LOAD_METHOD              5 (isFullScreen)
+             40 CALL_METHOD              0
+             42 POP_JUMP_IF_TRUE        48
+
+ 46          44 LOAD_CONST               1 (False)
+             46 RETURN_VALUE
+
+ 47     >>   48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                2 (playView)
+             52 LOAD_METHOD              6 (handleMouseMove)
+             54 LOAD_FAST                2 (event)
+             56 CALL_METHOD              1
+             58 POP_TOP
+
+ 48          60 LOAD_CONST               1 (False)
+             62 RETURN_VALUE

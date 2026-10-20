@@ -1,0 +1,652 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/7/14\n@Auth ： AI Assistant\n@File ：LPNativeCrashHandler_mac.py\n@Desc ：macOS 平台原生崩溃处理器实现。\n\n工作原理:\n  macOS 有内置的 CrashReporter 守护进程，任何进程崩溃时系统会自动:\n    1. 生成 .crash 文件到 ~/Library/Logs/DiagnosticReports/\n    2. 包含所有线程调用栈、寄存器、加载的 dylib 列表\n  因此本模块不需要（也不可能）自己生成 .dmp，而是:\n    1. 注册 POSIX 信号处理器，崩溃时写一个 .signo 标记文件辅助定位\n    2. 配合 faulthandler 输出 Python traceback\n    3. 配合 qInstallMessageHandler 捕获 Qt 致命消息\n\n  用户提交崩溃信息时，只需将:\n    - DiagnosticReports 下的 .crash 文件\n    - crashes/ 目录下的 .signo / .traceback.txt / qt_fatal.log\n    - 业务日志\n  一起打包发送即可。\n\n捕获范围:\n  - SIGSEGV (11): 访问违规（空指针/野指针/缓冲区溢出）\n  - SIGBUS  (10): 总线错误（未对齐访问、mmap 失败等）\n  - SIGILL  (4) : 非法指令\n  - SIGFPE  (8) : 浮点异常（除零等）\n  - SIGABRT (6) : abort() / qFatal() / pure virtual call\n\n无法捕获:\n  - SIGKILL (9): 外部 kill -9，不可被捕获\n  - SIGTERM (15): 正常终止信号，不是崩溃\n  - 系统强制退出 / 断电 / 内核恐慌\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 36           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (os)
+             10 STORE_NAME               1 (os)
+
+ 37          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (sys)
+             18 STORE_NAME               2 (sys)
+
+ 38          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (signal)
+             26 STORE_NAME               3 (signal)
+
+ 39          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (datetime)
+             34 STORE_NAME               4 (datetime)
+
+ 42          36 LOAD_CONST               3 (False)
+             38 STORE_GLOBAL             5 (_last_traceback_written)
+
+ 45          40 LOAD_CONST               4 (<code object _get_crash_dir at 0x000001F324E763A0, file "LPClientFramework\util\LPNativeCrashHandler_mac.py", line 45>)
+             42 LOAD_CONST               5 ('_get_crash_dir')
+             44 MAKE_FUNCTION            0
+             46 STORE_NAME               6 (_get_crash_dir)
+
+ 60          48 LOAD_CONST               6 (<code object _write_signal_marker at 0x000001F324E76F50, file "LPClientFramework\util\LPNativeCrashHandler_mac.py", line 60>)
+             50 LOAD_CONST               7 ('_write_signal_marker')
+             52 MAKE_FUNCTION            0
+             54 STORE_NAME               7 (_write_signal_marker)
+
+ 99          56 LOAD_CONST               8 (<code object _write_python_traceback_mac at 0x000001F324E767C0, file "LPClientFramework\util\LPNativeCrashHandler_mac.py", line 99>)
+             58 LOAD_CONST               9 ('_write_python_traceback_mac')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME               8 (_write_python_traceback_mac)
+
+123          64 LOAD_CONST              10 (<code object _crash_signal_handler at 0x000001F324E76660, file "LPClientFramework\util\LPNativeCrashHandler_mac.py", line 123>)
+             66 LOAD_CONST              11 ('_crash_signal_handler')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME               9 (_crash_signal_handler)
+
+160          72 LOAD_CONST              12 (<code object _qt_fatal_message_handler at 0x000001F324E76190, file "LPClientFramework\util\LPNativeCrashHandler_mac.py", line 160>)
+             74 LOAD_CONST              13 ('_qt_fatal_message_handler')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME              10 (_qt_fatal_message_handler)
+
+200          80 LOAD_CONST              14 (<code object install_qt_fatal_handler at 0x000001F324E765B0, file "LPClientFramework\util\LPNativeCrashHandler_mac.py", line 200>)
+             82 LOAD_CONST              15 ('install_qt_fatal_handler')
+             84 MAKE_FUNCTION            0
+             86 STORE_NAME              11 (install_qt_fatal_handler)
+
+219          88 LOAD_CONST              16 (<code object _install_darwin at 0x000001F324E76450, file "LPClientFramework\util\LPNativeCrashHandler_mac.py", line 219>)
+             90 LOAD_CONST              17 ('_install_darwin')
+             92 MAKE_FUNCTION            0
+             94 STORE_NAME              12 (_install_darwin)
+             96 LOAD_CONST               2 (None)
+             98 RETURN_VALUE
+
+=== _get_crash_dir ===
+ 55           0 LOAD_GLOBAL              0 (os)
+              2 LOAD_ATTR                1 (path)
+              4 LOAD_METHOD              2 (expanduser)
+              6 LOAD_CONST               1 ('~/Library/Logs/WiiMHome/crashes')
+              8 CALL_METHOD              1
+             10 STORE_FAST               0 (crash_dir)
+
+ 56          12 LOAD_GLOBAL              0 (os)
+             14 LOAD_ATTR                3 (makedirs)
+             16 LOAD_FAST                0 (crash_dir)
+             18 LOAD_CONST               2 (True)
+             20 LOAD_CONST               3 (('exist_ok',))
+             22 CALL_FUNCTION_KW         2
+             24 POP_TOP
+
+ 57          26 LOAD_FAST                0 (crash_dir)
+             28 RETURN_VALUE
+
+=== _write_signal_marker ===
+ 75           0 SETUP_FINALLY          212 (to 214)
+
+ 76           2 LOAD_GLOBAL              0 (_get_crash_dir)
+              4 CALL_FUNCTION            0
+              6 STORE_FAST               1 (crash_dir)
+
+ 77           8 LOAD_GLOBAL              1 (datetime)
+             10 LOAD_ATTR                1 (datetime)
+             12 LOAD_METHOD              2 (now)
+             14 CALL_METHOD              0
+             16 LOAD_METHOD              3 (strftime)
+             18 LOAD_CONST               1 ('%Y%m%d_%H%M%S_%f')
+             20 CALL_METHOD              1
+             22 STORE_FAST               2 (ts)
+
+ 78          24 LOAD_GLOBAL              4 (os)
+             26 LOAD_ATTR                5 (path)
+             28 LOAD_METHOD              6 (join)
+             30 LOAD_FAST                1 (crash_dir)
+             32 LOAD_CONST               2 ('crash_')
+             34 LOAD_FAST                2 (ts)
+             36 FORMAT_VALUE             0
+             38 LOAD_CONST               3 ('.signo')
+             40 BUILD_STRING             3
+             42 CALL_METHOD              2
+             44 STORE_FAST               3 (signo_path)
+
+ 82          46 LOAD_GLOBAL              7 (signal)
+             48 LOAD_ATTR                8 (SIGSEGV)
+             50 LOAD_CONST               4 ('SIGSEGV')
+
+ 83          52 LOAD_GLOBAL              7 (signal)
+             54 LOAD_ATTR                9 (SIGBUS)
+             56 LOAD_CONST               5 ('SIGBUS')
+
+ 84          58 LOAD_GLOBAL              7 (signal)
+             60 LOAD_ATTR               10 (SIGILL)
+             62 LOAD_CONST               6 ('SIGILL')
+
+ 85          64 LOAD_GLOBAL              7 (signal)
+             66 LOAD_ATTR               11 (SIGFPE)
+             68 LOAD_CONST               7 ('SIGFPE')
+
+ 86          70 LOAD_GLOBAL              7 (signal)
+             72 LOAD_ATTR               12 (SIGABRT)
+             74 LOAD_CONST               8 ('SIGABRT')
+
+ 81          76 BUILD_MAP                5
+             78 STORE_FAST               4 (signal_names)
+
+ 88          80 LOAD_FAST                4 (signal_names)
+             82 LOAD_METHOD             13 (get)
+             84 LOAD_FAST                0 (signum)
+             86 LOAD_CONST               9 ('SIGNAL_')
+             88 LOAD_FAST                0 (signum)
+             90 FORMAT_VALUE             0
+             92 BUILD_STRING             2
+             94 CALL_METHOD              2
+             96 STORE_FAST               5 (sig_name)
+
+ 90          98 LOAD_GLOBAL             14 (open)
+            100 LOAD_FAST                3 (signo_path)
+            102 LOAD_CONST              10 ('w')
+            104 LOAD_CONST              11 ('utf-8')
+            106 LOAD_CONST              12 (('encoding',))
+            108 CALL_FUNCTION_KW         3
+            110 SETUP_WITH              80 (to 192)
+            112 STORE_FAST               6 (f)
+
+ 91         114 LOAD_FAST                6 (f)
+            116 LOAD_METHOD             15 (write)
+            118 LOAD_CONST              13 ('signal=')
+            120 LOAD_FAST                5 (sig_name)
+            122 FORMAT_VALUE             0
+            124 LOAD_CONST              14 (' (')
+            126 LOAD_FAST                0 (signum)
+            128 FORMAT_VALUE             0
+            130 LOAD_CONST              15 (')\n')
+            132 BUILD_STRING             5
+            134 CALL_METHOD              1
+            136 POP_TOP
+
+ 92         138 LOAD_FAST                6 (f)
+            140 LOAD_METHOD             15 (write)
+            142 LOAD_CONST              16 ('pid=')
+            144 LOAD_GLOBAL              4 (os)
+            146 LOAD_METHOD             16 (getpid)
+            148 CALL_METHOD              0
+            150 FORMAT_VALUE             0
+            152 LOAD_CONST              17 ('\n')
+            154 BUILD_STRING             3
+            156 CALL_METHOD              1
+            158 POP_TOP
+
+ 93         160 LOAD_FAST                6 (f)
+            162 LOAD_METHOD             15 (write)
+            164 LOAD_CONST              18 ('timestamp=')
+            166 LOAD_FAST                2 (ts)
+            168 FORMAT_VALUE             0
+            170 LOAD_CONST              17 ('\n')
+            172 BUILD_STRING             3
+            174 CALL_METHOD              1
+            176 POP_TOP
+            178 POP_BLOCK
+            180 LOAD_CONST              19 (None)
+            182 DUP_TOP
+            184 DUP_TOP
+            186 CALL_FUNCTION            3
+            188 POP_TOP
+            190 JUMP_FORWARD            16 (to 208)
+        >>  192 WITH_EXCEPT_START
+            194 POP_JUMP_IF_TRUE       198
+            196 RERAISE
+        >>  198 POP_TOP
+            200 POP_TOP
+            202 POP_TOP
+            204 POP_EXCEPT
+            206 POP_TOP
+
+ 94     >>  208 LOAD_FAST                3 (signo_path)
+            210 POP_BLOCK
+            212 RETURN_VALUE
+
+ 95     >>  214 DUP_TOP
+            216 LOAD_GLOBAL             17 (Exception)
+            218 JUMP_IF_NOT_EXC_MATCH   232
+            220 POP_TOP
+            222 POP_TOP
+            224 POP_TOP
+
+ 96         226 POP_EXCEPT
+            228 LOAD_CONST              19 (None)
+            230 RETURN_VALUE
+        >>  232 RERAISE
+            234 LOAD_CONST              19 (None)
+            236 RETURN_VALUE
+
+=== _write_python_traceback_mac ===
+109           0 SETUP_FINALLY          118 (to 120)
+
+110           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (None)
+              6 IMPORT_NAME              0 (faulthandler)
+              8 STORE_FAST               0 (faulthandler)
+
+111          10 LOAD_GLOBAL              1 (_get_crash_dir)
+             12 CALL_FUNCTION            0
+             14 STORE_FAST               1 (crash_dir)
+
+112          16 LOAD_GLOBAL              2 (datetime)
+             18 LOAD_ATTR                2 (datetime)
+             20 LOAD_METHOD              3 (now)
+             22 CALL_METHOD              0
+             24 LOAD_METHOD              4 (strftime)
+             26 LOAD_CONST               3 ('%Y%m%d_%H%M%S_%f')
+             28 CALL_METHOD              1
+             30 STORE_FAST               2 (ts)
+
+113          32 LOAD_GLOBAL              5 (os)
+             34 LOAD_ATTR                6 (path)
+             36 LOAD_METHOD              7 (join)
+             38 LOAD_FAST                1 (crash_dir)
+             40 LOAD_CONST               4 ('traceback_')
+             42 LOAD_FAST                2 (ts)
+             44 FORMAT_VALUE             0
+             46 LOAD_CONST               5 ('.txt')
+             48 BUILD_STRING             3
+             50 CALL_METHOD              2
+             52 STORE_FAST               3 (tb_path)
+
+114          54 LOAD_GLOBAL              8 (open)
+             56 LOAD_FAST                3 (tb_path)
+             58 LOAD_CONST               6 ('w')
+             60 LOAD_CONST               7 ('utf-8')
+             62 LOAD_CONST               8 (('encoding',))
+             64 CALL_FUNCTION_KW         3
+             66 SETUP_WITH              30 (to 98)
+             68 STORE_FAST               4 (tb_f)
+
+115          70 LOAD_FAST                0 (faulthandler)
+             72 LOAD_ATTR                9 (dump_traceback)
+             74 LOAD_FAST                4 (tb_f)
+             76 LOAD_CONST               9 (True)
+             78 LOAD_CONST              10 (('file', 'all_threads'))
+             80 CALL_FUNCTION_KW         2
+             82 POP_TOP
+             84 POP_BLOCK
+             86 LOAD_CONST               2 (None)
+             88 DUP_TOP
+             90 DUP_TOP
+             92 CALL_FUNCTION            3
+             94 POP_TOP
+             96 JUMP_FORWARD            16 (to 114)
+        >>   98 WITH_EXCEPT_START
+            100 POP_JUMP_IF_TRUE       104
+            102 RERAISE
+        >>  104 POP_TOP
+            106 POP_TOP
+            108 POP_TOP
+            110 POP_EXCEPT
+            112 POP_TOP
+
+116     >>  114 LOAD_FAST                3 (tb_path)
+            116 POP_BLOCK
+            118 RETURN_VALUE
+
+117     >>  120 DUP_TOP
+            122 LOAD_GLOBAL             10 (Exception)
+            124 JUMP_IF_NOT_EXC_MATCH   138
+            126 POP_TOP
+            128 POP_TOP
+            130 POP_TOP
+
+118         132 POP_EXCEPT
+            134 LOAD_CONST               2 (None)
+            136 RETURN_VALUE
+        >>  138 RERAISE
+            140 LOAD_CONST               2 (None)
+            142 RETURN_VALUE
+
+=== _crash_signal_handler ===
+143           0 LOAD_GLOBAL              0 (_last_traceback_written)
+              2 POP_JUMP_IF_FALSE       22
+
+144           4 LOAD_GLOBAL              1 (signal)
+              6 LOAD_METHOD              1 (signal)
+              8 LOAD_FAST                0 (signum)
+             10 LOAD_GLOBAL              1 (signal)
+             12 LOAD_ATTR                2 (SIG_DFL)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+145          18 LOAD_CONST               1 (None)
+             20 RETURN_VALUE
+
+146     >>   22 LOAD_CONST               2 (True)
+             24 STORE_GLOBAL             0 (_last_traceback_written)
+
+148          26 SETUP_FINALLY           18 (to 46)
+
+149          28 LOAD_GLOBAL              3 (_write_signal_marker)
+             30 LOAD_FAST                0 (signum)
+             32 CALL_FUNCTION            1
+             34 POP_TOP
+
+150          36 LOAD_GLOBAL              4 (_write_python_traceback_mac)
+             38 CALL_FUNCTION            0
+             40 POP_TOP
+             42 POP_BLOCK
+             44 JUMP_FORWARD            18 (to 64)
+
+151     >>   46 DUP_TOP
+             48 LOAD_GLOBAL              5 (Exception)
+             50 JUMP_IF_NOT_EXC_MATCH    62
+             52 POP_TOP
+             54 POP_TOP
+             56 POP_TOP
+
+152          58 POP_EXCEPT
+             60 JUMP_FORWARD             2 (to 64)
+        >>   62 RERAISE
+
+155     >>   64 LOAD_GLOBAL              1 (signal)
+             66 LOAD_METHOD              1 (signal)
+             68 LOAD_FAST                0 (signum)
+             70 LOAD_GLOBAL              1 (signal)
+             72 LOAD_ATTR                2 (SIG_DFL)
+             74 CALL_METHOD              2
+             76 POP_TOP
+             78 LOAD_CONST               1 (None)
+             80 RETURN_VALUE
+
+=== _qt_fatal_message_handler ===
+171           0 LOAD_FAST                0 (msg_type)
+              2 LOAD_ATTR                0 (value)
+              4 LOAD_CONST               1 (3)
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE      222
+
+172          10 SETUP_FINALLY          192 (to 204)
+
+173          12 LOAD_GLOBAL              1 (_get_crash_dir)
+             14 CALL_FUNCTION            0
+             16 STORE_FAST               3 (crash_dir)
+
+174          18 LOAD_GLOBAL              2 (datetime)
+             20 LOAD_ATTR                2 (datetime)
+             22 LOAD_METHOD              3 (now)
+             24 CALL_METHOD              0
+             26 LOAD_METHOD              4 (strftime)
+             28 LOAD_CONST               2 ('%Y%m%d_%H%M%S')
+             30 CALL_METHOD              1
+             32 STORE_FAST               4 (ts)
+
+175          34 LOAD_GLOBAL              5 (os)
+             36 LOAD_ATTR                6 (path)
+             38 LOAD_METHOD              7 (join)
+             40 LOAD_FAST                3 (crash_dir)
+             42 LOAD_CONST               3 ('qt_fatal_')
+             44 LOAD_FAST                4 (ts)
+             46 FORMAT_VALUE             0
+             48 LOAD_CONST               4 ('.log')
+             50 BUILD_STRING             3
+             52 CALL_METHOD              2
+             54 STORE_FAST               5 (log_path)
+
+176          56 LOAD_GLOBAL              8 (open)
+             58 LOAD_FAST                5 (log_path)
+             60 LOAD_CONST               5 ('w')
+             62 LOAD_CONST               6 ('utf-8')
+             64 LOAD_CONST               7 (('encoding',))
+             66 CALL_FUNCTION_KW         3
+             68 SETUP_WITH             114 (to 184)
+             70 STORE_FAST               6 (f)
+
+177          72 LOAD_FAST                6 (f)
+             74 LOAD_METHOD              9 (write)
+             76 LOAD_CONST               8 ('QtFatalMsg: ')
+             78 LOAD_FAST                2 (message)
+             80 FORMAT_VALUE             0
+             82 LOAD_CONST               9 ('\n')
+             84 BUILD_STRING             3
+             86 CALL_METHOD              1
+             88 POP_TOP
+
+178          90 LOAD_FAST                6 (f)
+             92 LOAD_METHOD              9 (write)
+             94 LOAD_CONST              10 ('  File: ')
+             96 LOAD_FAST                1 (context)
+             98 LOAD_ATTR               10 (file)
+            100 FORMAT_VALUE             0
+            102 LOAD_CONST               9 ('\n')
+            104 BUILD_STRING             3
+            106 CALL_METHOD              1
+            108 POP_TOP
+
+179         110 LOAD_FAST                6 (f)
+            112 LOAD_METHOD              9 (write)
+            114 LOAD_CONST              11 ('  Line: ')
+            116 LOAD_FAST                1 (context)
+            118 LOAD_ATTR               11 (line)
+            120 FORMAT_VALUE             0
+            122 LOAD_CONST               9 ('\n')
+            124 BUILD_STRING             3
+            126 CALL_METHOD              1
+            128 POP_TOP
+
+180         130 LOAD_FAST                6 (f)
+            132 LOAD_METHOD              9 (write)
+            134 LOAD_CONST              12 ('  Function: ')
+            136 LOAD_FAST                1 (context)
+            138 LOAD_ATTR               12 (function)
+            140 FORMAT_VALUE             0
+            142 LOAD_CONST               9 ('\n')
+            144 BUILD_STRING             3
+            146 CALL_METHOD              1
+            148 POP_TOP
+
+181         150 LOAD_FAST                6 (f)
+            152 LOAD_METHOD              9 (write)
+            154 LOAD_CONST              13 ('  Category: ')
+            156 LOAD_FAST                1 (context)
+            158 LOAD_ATTR               13 (category)
+            160 FORMAT_VALUE             0
+            162 LOAD_CONST               9 ('\n')
+            164 BUILD_STRING             3
+            166 CALL_METHOD              1
+            168 POP_TOP
+            170 POP_BLOCK
+            172 LOAD_CONST              14 (None)
+            174 DUP_TOP
+            176 DUP_TOP
+            178 CALL_FUNCTION            3
+            180 POP_TOP
+            182 JUMP_FORWARD            16 (to 200)
+        >>  184 WITH_EXCEPT_START
+            186 POP_JUMP_IF_TRUE       190
+            188 RERAISE
+        >>  190 POP_TOP
+            192 POP_TOP
+            194 POP_TOP
+            196 POP_EXCEPT
+            198 POP_TOP
+        >>  200 POP_BLOCK
+            202 JUMP_FORWARD            18 (to 222)
+
+182     >>  204 DUP_TOP
+            206 LOAD_GLOBAL             14 (Exception)
+            208 JUMP_IF_NOT_EXC_MATCH   220
+            210 POP_TOP
+            212 POP_TOP
+            214 POP_TOP
+
+183         216 POP_EXCEPT
+            218 JUMP_FORWARD             2 (to 222)
+        >>  220 RERAISE
+
+186     >>  222 SETUP_FINALLY           28 (to 252)
+
+187         224 LOAD_CONST              15 (0)
+            226 LOAD_CONST              16 (('qFormatLogMessage',))
+            228 IMPORT_NAME             15 (PyQt6.QtCore)
+            230 IMPORT_FROM             16 (qFormatLogMessage)
+            232 STORE_FAST               7 (qFormatLogMessage)
+            234 POP_TOP
+
+188         236 LOAD_FAST                7 (qFormatLogMessage)
+            238 LOAD_FAST                0 (msg_type)
+            240 LOAD_FAST                1 (context)
+            242 LOAD_FAST                2 (message)
+            244 CALL_FUNCTION            3
+            246 STORE_FAST               8 (formatted_message)
+            248 POP_BLOCK
+            250 JUMP_FORWARD            24 (to 276)
+
+189     >>  252 DUP_TOP
+            254 LOAD_GLOBAL             14 (Exception)
+            256 EXTENDED_ARG             1
+            258 JUMP_IF_NOT_EXC_MATCH   274
+            260 POP_TOP
+            262 POP_TOP
+            264 POP_TOP
+
+190         266 LOAD_FAST                2 (message)
+            268 STORE_FAST               8 (formatted_message)
+            270 POP_EXCEPT
+            272 JUMP_FORWARD             2 (to 276)
+        >>  274 RERAISE
+
+191     >>  276 SETUP_FINALLY           32 (to 310)
+
+192         278 LOAD_GLOBAL             17 (sys)
+            280 LOAD_ATTR               18 (stderr)
+            282 LOAD_METHOD              9 (write)
+            284 LOAD_FAST                8 (formatted_message)
+            286 FORMAT_VALUE             0
+            288 LOAD_CONST               9 ('\n')
+            290 BUILD_STRING             2
+            292 CALL_METHOD              1
+            294 POP_TOP
+
+193         296 LOAD_GLOBAL             17 (sys)
+            298 LOAD_ATTR               18 (stderr)
+            300 LOAD_METHOD             19 (flush)
+            302 CALL_METHOD              0
+            304 POP_TOP
+            306 POP_BLOCK
+            308 JUMP_FORWARD            20 (to 330)
+
+194     >>  310 DUP_TOP
+            312 LOAD_GLOBAL             14 (Exception)
+            314 EXTENDED_ARG             1
+            316 JUMP_IF_NOT_EXC_MATCH   328
+            318 POP_TOP
+            320 POP_TOP
+            322 POP_TOP
+
+195         324 POP_EXCEPT
+            326 JUMP_FORWARD             2 (to 330)
+        >>  328 RERAISE
+        >>  330 LOAD_CONST              14 (None)
+            332 RETURN_VALUE
+
+=== install_qt_fatal_handler ===
+212           0 SETUP_FINALLY           24 (to 26)
+
+213           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (('qInstallMessageHandler',))
+              6 IMPORT_NAME              0 (PyQt6.QtCore)
+              8 IMPORT_FROM              1 (qInstallMessageHandler)
+             10 STORE_FAST               0 (qInstallMessageHandler)
+             12 POP_TOP
+
+214          14 LOAD_FAST                0 (qInstallMessageHandler)
+             16 LOAD_GLOBAL              2 (_qt_fatal_message_handler)
+             18 CALL_FUNCTION            1
+             20 POP_TOP
+             22 POP_BLOCK
+             24 JUMP_FORWARD            18 (to 44)
+
+215     >>   26 DUP_TOP
+             28 LOAD_GLOBAL              3 (Exception)
+             30 JUMP_IF_NOT_EXC_MATCH    42
+             32 POP_TOP
+             34 POP_TOP
+             36 POP_TOP
+
+216          38 POP_EXCEPT
+             40 JUMP_FORWARD             2 (to 44)
+        >>   42 RERAISE
+        >>   44 LOAD_CONST               3 (None)
+             46 RETURN_VALUE
+
+=== _install_darwin ===
+232           0 BUILD_LIST               0
+              2 STORE_FAST               0 (fatal_signals)
+
+233           4 LOAD_CONST               1 (('SIGSEGV', 'SIGBUS', 'SIGILL', 'SIGFPE', 'SIGABRT'))
+              6 GET_ITER
+        >>    8 FOR_ITER                34 (to 44)
+             10 STORE_FAST               1 (sig_name)
+
+234          12 LOAD_GLOBAL              0 (getattr)
+             14 LOAD_GLOBAL              1 (signal)
+             16 LOAD_FAST                1 (sig_name)
+             18 LOAD_CONST               2 (None)
+             20 CALL_FUNCTION            3
+             22 STORE_FAST               2 (sig)
+
+235          24 LOAD_FAST                2 (sig)
+             26 LOAD_CONST               2 (None)
+             28 IS_OP                    1
+             30 POP_JUMP_IF_FALSE        8
+
+236          32 LOAD_FAST                0 (fatal_signals)
+             34 LOAD_METHOD              2 (append)
+             36 LOAD_FAST                2 (sig)
+             38 CALL_METHOD              1
+             40 POP_TOP
+             42 JUMP_ABSOLUTE            8
+
+238     >>   44 LOAD_FAST                0 (fatal_signals)
+             46 GET_ITER
+        >>   48 FOR_ITER                40 (to 90)
+             50 STORE_FAST               2 (sig)
+
+239          52 SETUP_FINALLY           16 (to 70)
+
+240          54 LOAD_GLOBAL              1 (signal)
+             56 LOAD_METHOD              1 (signal)
+             58 LOAD_FAST                2 (sig)
+             60 LOAD_GLOBAL              3 (_crash_signal_handler)
+             62 CALL_METHOD              2
+             64 POP_TOP
+             66 POP_BLOCK
+             68 JUMP_ABSOLUTE           48
+
+241     >>   70 DUP_TOP
+             72 LOAD_GLOBAL              4 (Exception)
+             74 JUMP_IF_NOT_EXC_MATCH    86
+             76 POP_TOP
+             78 POP_TOP
+             80 POP_TOP
+
+242          82 POP_EXCEPT
+             84 JUMP_ABSOLUTE           48
+        >>   86 RERAISE
+             88 JUMP_ABSOLUTE           48
+
+244     >>   90 LOAD_GLOBAL              5 (_get_crash_dir)
+             92 CALL_FUNCTION            0
+             94 STORE_FAST               3 (crash_dir)
+
+245          96 LOAD_GLOBAL              6 (print)
+             98 LOAD_CONST               3 ('[CrashHandler] macOS 崩溃处理器已安装，dump 目录: ')
+            100 LOAD_FAST                3 (crash_dir)
+            102 FORMAT_VALUE             0
+            104 BUILD_STRING             2
+            106 CALL_FUNCTION            1
+            108 POP_TOP
+
+246         110 LOAD_GLOBAL              6 (print)
+            112 LOAD_CONST               4 ('[CrashHandler] 系统 .crash 文件位置: ~/Library/Logs/DiagnosticReports/')
+            114 CALL_FUNCTION            1
+            116 POP_TOP
+            118 LOAD_CONST               2 (None)
+            120 RETURN_VALUE

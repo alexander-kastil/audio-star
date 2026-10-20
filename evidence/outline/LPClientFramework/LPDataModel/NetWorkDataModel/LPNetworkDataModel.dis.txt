@@ -1,0 +1,222 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/2/14 16:19\n@Auth ： Chris\n@File ：LPUpnpAsyncDataModel.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (threading)
+             10 STORE_NAME               1 (threading)
+
+ 10          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (requests_cache)
+             18 STORE_NAME               2 (requests_cache)
+
+ 11          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               3 (('pyqtSignal', 'QObject'))
+             24 IMPORT_NAME              3 (PyQt6.QtCore)
+             26 IMPORT_FROM              4 (pyqtSignal)
+             28 STORE_NAME               4 (pyqtSignal)
+             30 IMPORT_FROM              5 (QObject)
+             32 STORE_NAME               5 (QObject)
+             34 POP_TOP
+
+ 13          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              6 (LPGlobalUI)
+             42 STORE_NAME               6 (LPGlobalUI)
+
+ 14          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               4 (('LPUtility',))
+             48 IMPORT_NAME              7 (LPClientFramework)
+             50 IMPORT_FROM              8 (LPUtility)
+             52 STORE_NAME               8 (LPUtility)
+             54 POP_TOP
+
+ 15          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               5 (('logger',))
+             60 IMPORT_NAME              9 (LPClientFramework.LPUtility)
+             62 IMPORT_FROM             10 (logger)
+             64 STORE_NAME              10 (logger)
+             66 POP_TOP
+
+ 16          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               6 (('Timeout',))
+             72 IMPORT_NAME             11 (requests)
+             74 IMPORT_FROM             12 (Timeout)
+             76 STORE_NAME              12 (Timeout)
+             78 POP_TOP
+
+ 19          80 LOAD_BUILD_CLASS
+             82 LOAD_CONST               7 (<code object LPNetworkDataModel at 0x000001F324E69030, file "LPClientFramework\LPDataModel\NetWorkDataModel\LPNetworkDataModel.py", line 19>)
+             84 LOAD_CONST               8 ('LPNetworkDataModel')
+             86 MAKE_FUNCTION            0
+             88 LOAD_CONST               8 ('LPNetworkDataModel')
+             90 LOAD_NAME                5 (QObject)
+             92 CALL_FUNCTION            3
+             94 STORE_NAME              13 (LPNetworkDataModel)
+             96 LOAD_CONST               2 (None)
+             98 RETURN_VALUE
+
+=== LPNetworkDataModel ===
+ 19           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPNetworkDataModel')
+              6 STORE_NAME               2 (__qualname__)
+
+ 20           8 LOAD_NAME                3 (pyqtSignal)
+             10 CALL_FUNCTION            0
+             12 STORE_NAME               4 (timeoutSignal)
+
+ 22          14 LOAD_CONST               8 ((None,))
+             16 LOAD_CLOSURE             0 (__class__)
+             18 BUILD_TUPLE              1
+             20 LOAD_CONST               2 (<code object __init__ at 0x000001F324E69190, file "LPClientFramework\LPDataModel\NetWorkDataModel\LPNetworkDataModel.py", line 22>)
+             22 LOAD_CONST               3 ('LPNetworkDataModel.__init__')
+             24 MAKE_FUNCTION            9 (defaults, closure)
+             26 STORE_NAME               5 (__init__)
+
+ 27          28 LOAD_CONST               4 (<code object getData at 0x000001F324E69EA0, file "LPClientFramework\LPDataModel\NetWorkDataModel\LPNetworkDataModel.py", line 27>)
+             30 LOAD_CONST               5 ('LPNetworkDataModel.getData')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               6 (getData)
+
+ 31          36 LOAD_CONST               6 (<code object worker at 0x000001F324E69A80, file "LPClientFramework\LPDataModel\NetWorkDataModel\LPNetworkDataModel.py", line 31>)
+             38 LOAD_CONST               7 ('LPNetworkDataModel.worker')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               7 (worker)
+             44 LOAD_CLOSURE             0 (__class__)
+             46 DUP_TOP
+             48 STORE_NAME               8 (__classcell__)
+             50 RETURN_VALUE
+
+=== LPNetworkDataModel.__init__ ===
+ 23           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 24          12 LOAD_GLOBAL              2 (LPUtility)
+             14 LOAD_ATTR                3 (cacheDir)
+             16 LOAD_CONST               1 ('request_cache')
+             18 BINARY_TRUE_DIVIDE
+             20 STORE_FAST               2 (request_cache_path)
+
+ 25          22 LOAD_GLOBAL              4 (requests_cache)
+             24 LOAD_ATTR                5 (CachedSession)
+             26 LOAD_GLOBAL              6 (str)
+             28 LOAD_FAST                2 (request_cache_path)
+             30 CALL_FUNCTION            1
+             32 LOAD_CONST               2 (3600)
+             34 LOAD_CONST               3 (('expire_after',))
+             36 CALL_FUNCTION_KW         2
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               7 (session)
+             42 LOAD_CONST               0 (None)
+             44 RETURN_VALUE
+
+=== LPNetworkDataModel.getData ===
+ 28           0 LOAD_GLOBAL              0 (threading)
+              2 LOAD_ATTR                1 (Thread)
+              4 LOAD_FAST                1 (worker)
+              6 LOAD_FAST                2 (url)
+              8 LOAD_FAST                3 (callback)
+             10 BUILD_LIST               2
+             12 LOAD_FAST                4 (args)
+             14 LIST_EXTEND              1
+             16 LIST_TO_TUPLE
+             18 LOAD_CONST               1 (('target', 'args'))
+             20 CALL_FUNCTION_KW         2
+             22 STORE_FAST               5 (thread)
+
+ 29          24 LOAD_FAST                5 (thread)
+             26 LOAD_METHOD              2 (start)
+             28 CALL_METHOD              0
+             30 POP_TOP
+             32 LOAD_CONST               0 (None)
+             34 RETURN_VALUE
+
+=== LPNetworkDataModel.worker ===
+ 32           0 LOAD_CONST               0 (None)
+              2 STORE_FAST               4 (response)
+
+ 33           4 SETUP_FINALLY           58 (to 64)
+
+ 34           6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (session)
+             10 LOAD_ATTR                1 (get)
+             12 LOAD_FAST                1 (url)
+             14 LOAD_CONST               1 (5)
+             16 LOAD_CONST               2 (('timeout',))
+             18 CALL_FUNCTION_KW         2
+             20 STORE_FAST               4 (response)
+
+ 35          22 LOAD_FAST                4 (response)
+             24 LOAD_ATTR                2 (from_cache)
+             26 POP_JUMP_IF_FALSE       34
+
+ 36          28 LOAD_CONST               3 ('load from cache')
+             30 STORE_FAST               5 (status)
+             32 JUMP_FORWARD             4 (to 38)
+
+ 38     >>   34 LOAD_CONST               4 ('load from network')
+             36 STORE_FAST               5 (status)
+
+ 39     >>   38 LOAD_GLOBAL              3 (logger)
+             40 LOAD_METHOD              4 (debug)
+             42 LOAD_CONST               5 ('url--')
+             44 LOAD_FAST                1 (url)
+             46 BINARY_ADD
+             48 LOAD_CONST               6 (' ')
+             50 BINARY_ADD
+             52 LOAD_FAST                5 (status)
+             54 BINARY_ADD
+             56 CALL_METHOD              1
+             58 POP_TOP
+             60 POP_BLOCK
+             62 JUMP_FORWARD            50 (to 114)
+
+ 40     >>   64 DUP_TOP
+             66 LOAD_GLOBAL              5 (Timeout)
+             68 JUMP_IF_NOT_EXC_MATCH   112
+             70 POP_TOP
+             72 POP_TOP
+             74 POP_TOP
+
+ 41          76 LOAD_GLOBAL              3 (logger)
+             78 LOAD_METHOD              4 (debug)
+             80 LOAD_CONST               5 ('url--')
+             82 LOAD_FAST                1 (url)
+             84 BINARY_ADD
+             86 LOAD_CONST               6 (' ')
+             88 BINARY_ADD
+             90 LOAD_CONST               7 ('request timeout!')
+             92 BINARY_ADD
+             94 CALL_METHOD              1
+             96 POP_TOP
+
+ 42          98 LOAD_FAST                0 (self)
+            100 LOAD_ATTR                6 (timeoutSignal)
+            102 LOAD_METHOD              7 (emit)
+            104 CALL_METHOD              0
+            106 POP_TOP
+            108 POP_EXCEPT
+            110 JUMP_FORWARD             2 (to 114)
+        >>  112 RERAISE
+
+ 44     >>  114 LOAD_FAST                2 (callback)
+            116 POP_JUMP_IF_FALSE      134
+
+ 45         118 LOAD_FAST                2 (callback)
+            120 LOAD_FAST                4 (response)
+            122 BUILD_LIST               1
+            124 LOAD_FAST                3 (args)
+            126 LIST_EXTEND              1
+            128 LIST_TO_TUPLE
+            130 CALL_FUNCTION_EX         0
+            132 POP_TOP
+        >>  134 LOAD_CONST               0 (None)
+            136 RETURN_VALUE

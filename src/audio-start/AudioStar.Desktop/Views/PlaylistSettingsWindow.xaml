@@ -1,0 +1,23 @@
+<Window x:Class="AudioStar.Desktop.Views.PlaylistSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Playlist settings"
+        Width="520"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        FocusManager.FocusedElement="{Binding ElementName=UrlBox}"
+        Background="{DynamicResource AppBackgroundBrush}"
+        Foreground="{DynamicResource AppTextBrush}">
+    <StackPanel Margin="22">
+        <TextBlock Text="Playlist settings" Style="{StaticResource PageTitle}" />
+        <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Margin="0,10,0,0" TextTrimming="CharacterEllipsis" />
+        <TextBlock Text="URL" Style="{StaticResource SectionTitle}" />
+        <TextBox x:Name="UrlBox" Text="{Binding Url, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Playlist URL" ToolTip="The link of the playlist" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Style="{StaticResource AccentButton}" Content="Save" IsDefault="True" Click="Save_Click" ToolTip="Use this URL for the playlist" />
+            <Button Content="Cancel" IsCancel="True" Margin="8,0,0,0" ToolTip="Close without changing the playlist" />
+        </StackPanel>
+    </StackPanel>
+</Window>

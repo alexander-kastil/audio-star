@@ -1,0 +1,569 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL 埋点事件辅助类。\n\n线程安全，无 Qt 依赖。\n使用方式：直接 import 并调用类方法，无需实例化。\n\n## 当前已实施的事件\n\n| 事件名          | 触发条件                                      |\n|-----------------|-----------------------------------------------|\n| tidal_login     | 登录成功或失败（注意数据脱敏）                |\n| tidal_api_error | 非 2xx / 非 304 的 API 响应                   |\n| tidal_playback  | 播放事件（成功/失败），当前仅 TIDAL 使用      |\n\n## 暂不实施的事件（P2 — 后续按需添加）\n\n| 事件名                   | 说明                                 |\n|--------------------------|--------------------------------------|\n| tidal_page_error         | 页面加载异常，需在各页面 viewWillAppear 添加 |\n| tidal_playlist_error     | 歌单操作（创建/添加/移除/排序）失败  |\n| tidal_detail_load_error  | 详情页（album/artist/playlist/mix）加载失败 |\n| tidal_image_load_error   | 图片下载失败（network/disk_full/permission） |\n| tidal_scheduler_blocked  | 请求队列积压超过阈值                 |\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 27           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (hashlib)
+             10 STORE_NAME               1 (hashlib)
+
+ 28          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (threading)
+             18 STORE_NAME               2 (threading)
+
+ 29          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (time)
+             26 STORE_NAME               3 (time)
+
+ 30          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('Any', 'Dict', 'List', 'Optional'))
+             32 IMPORT_NAME              4 (typing)
+             34 IMPORT_FROM              5 (Any)
+             36 STORE_NAME               5 (Any)
+             38 IMPORT_FROM              6 (Dict)
+             40 STORE_NAME               6 (Dict)
+             42 IMPORT_FROM              7 (List)
+             44 STORE_NAME               7 (List)
+             46 IMPORT_FROM              8 (Optional)
+             48 STORE_NAME               8 (Optional)
+             50 POP_TOP
+
+ 33          52 LOAD_BUILD_CLASS
+             54 LOAD_CONST               4 (<code object LPTidalEventTrack at 0x000001F3253C4660, file "StreamService\Tidal\services\LPTidalEventTrack.py", line 33>)
+             56 LOAD_CONST               5 ('LPTidalEventTrack')
+             58 MAKE_FUNCTION            0
+             60 LOAD_CONST               5 ('LPTidalEventTrack')
+             62 CALL_FUNCTION            2
+             64 STORE_NAME               9 (LPTidalEventTrack)
+             66 LOAD_CONST               2 (None)
+             68 RETURN_VALUE
+
+=== LPTidalEventTrack ===
+ 33           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalEventTrack')
+              6 STORE_NAME               2 (__qualname__)
+              8 SETUP_ANNOTATIONS
+
+ 34          10 LOAD_CONST               1 ('轻量级 TIDAL 埋点辅助类。全部类方法，无 Qt 依赖，线程安全。')
+             12 STORE_NAME               3 (__doc__)
+
+ 36          14 BUILD_MAP                0
+             16 STORE_NAME               4 (_timers)
+             18 LOAD_NAME                5 (Dict)
+             20 LOAD_NAME                6 (str)
+             22 LOAD_NAME                7 (float)
+             24 BUILD_TUPLE              2
+             26 BINARY_SUBSCR
+             28 LOAD_NAME                8 (__annotations__)
+             30 LOAD_CONST               2 ('_timers')
+             32 STORE_SUBSCR
+
+ 37          34 LOAD_NAME                9 (threading)
+             36 LOAD_METHOD             10 (RLock)
+             38 CALL_METHOD              0
+             40 STORE_NAME              11 (_lock)
+
+ 38          42 LOAD_CONST               3 ('tidal_')
+             44 STORE_NAME              12 (_PREFIX)
+
+ 39          46 LOAD_CONST               4 ('tidal')
+             48 STORE_NAME              13 (_SOURCE)
+
+ 43          50 LOAD_NAME               14 (classmethod)
+
+ 44          52 LOAD_NAME                6 (str)
+             54 LOAD_NAME                6 (str)
+             56 LOAD_CONST               5 (('device_uuid', 'return'))
+             58 BUILD_CONST_KEY_MAP      2
+             60 LOAD_CONST               6 (<code object _desensitize_uuid at 0x000001F3253AE450, file "StreamService\Tidal\services\LPTidalEventTrack.py", line 43>)
+             62 LOAD_CONST               7 ('LPTidalEventTrack._desensitize_uuid')
+             64 MAKE_FUNCTION            4 (annotations)
+             66 CALL_FUNCTION            1
+             68 STORE_NAME              15 (_desensitize_uuid)
+
+ 50          70 LOAD_NAME               14 (classmethod)
+
+ 51          72 LOAD_NAME                6 (str)
+             74 LOAD_CONST               8 (('return',))
+             76 BUILD_CONST_KEY_MAP      1
+             78 LOAD_CONST               9 (<code object _eventCountryCode at 0x000001F3253AE5B0, file "StreamService\Tidal\services\LPTidalEventTrack.py", line 50>)
+             80 LOAD_CONST              10 ('LPTidalEventTrack._eventCountryCode')
+             82 MAKE_FUNCTION            4 (annotations)
+             84 CALL_FUNCTION            1
+             86 STORE_NAME              16 (_eventCountryCode)
+
+ 69          88 LOAD_NAME               14 (classmethod)
+
+ 70          90 LOAD_CONST              29 ((None,))
+             92 LOAD_NAME                6 (str)
+             94 LOAD_NAME               17 (Optional)
+             96 LOAD_NAME                5 (Dict)
+             98 LOAD_NAME                6 (str)
+            100 LOAD_NAME               18 (Any)
+            102 BUILD_TUPLE              2
+            104 BINARY_SUBSCR
+            106 BINARY_SUBSCR
+            108 LOAD_CONST              11 (None)
+            110 LOAD_CONST              12 (('event_suffix', 'params', 'return'))
+            112 BUILD_CONST_KEY_MAP      3
+            114 LOAD_CONST              13 (<code object _log at 0x000001F3253AE870, file "StreamService\Tidal\services\LPTidalEventTrack.py", line 69>)
+            116 LOAD_CONST              14 ('LPTidalEventTrack._log')
+            118 MAKE_FUNCTION            5 (defaults, annotations)
+            120 CALL_FUNCTION            1
+            122 STORE_NAME              19 (_log)
+
+ 81         124 LOAD_NAME               14 (classmethod)
+
+ 82         126 LOAD_NAME               18 (Any)
+            128 LOAD_NAME                6 (str)
+            130 LOAD_CONST              15 (('status_code', 'return'))
+            132 BUILD_CONST_KEY_MAP      2
+            134 LOAD_CONST              16 (<code object _classify at 0x000001F3253C4190, file "StreamService\Tidal\services\LPTidalEventTrack.py", line 81>)
+            136 LOAD_CONST              17 ('LPTidalEventTrack._classify')
+            138 MAKE_FUNCTION            4 (annotations)
+            140 CALL_FUNCTION            1
+            142 STORE_NAME              20 (_classify)
+
+105         144 LOAD_NAME               14 (classmethod)
+
+106         146 LOAD_CONST              30 (('', '', None, '', '', ''))
+
+108         148 LOAD_NAME               21 (bool)
+
+109         150 LOAD_NAME                6 (str)
+
+110         152 LOAD_NAME                6 (str)
+
+111         154 LOAD_NAME                6 (str)
+
+112         156 LOAD_NAME               17 (Optional)
+            158 LOAD_NAME                7 (float)
+            160 BINARY_SUBSCR
+
+113         162 LOAD_NAME                6 (str)
+
+114         164 LOAD_NAME                6 (str)
+
+115         166 LOAD_NAME                6 (str)
+
+116         168 LOAD_CONST              11 (None)
+
+106         170 LOAD_CONST              19 (('success', 'method', 'error_code', 'error_message', 'duration_ms', 'device_uuid', 'account_country_code', 'subscription_type', 'return'))
+            172 BUILD_CONST_KEY_MAP      9
+            174 LOAD_CONST              20 (<code object login_event at 0x000001F3253C4710, file "StreamService\Tidal\services\LPTidalEventTrack.py", line 105>)
+            176 LOAD_CONST              21 ('LPTidalEventTrack.login_event')
+            178 MAKE_FUNCTION            5 (defaults, annotations)
+            180 CALL_FUNCTION            1
+            182 STORE_NAME              22 (login_event)
+
+138         184 LOAD_NAME               14 (classmethod)
+
+139         186 LOAD_CONST              31 ((0, 0, '', None))
+
+141         188 LOAD_NAME                6 (str)
+
+142         190 LOAD_NAME                6 (str)
+
+143         192 LOAD_NAME               18 (Any)
+
+144         194 LOAD_NAME               23 (int)
+
+145         196 LOAD_NAME               23 (int)
+
+146         198 LOAD_NAME                6 (str)
+
+147         200 LOAD_NAME               18 (Any)
+
+148         202 LOAD_CONST              11 (None)
+
+139         204 LOAD_CONST              23 (('endpoint', 'method', 'status_code', 'elapsed_ms', 'retry_count', 'account_country_code', 'error', 'return'))
+            206 BUILD_CONST_KEY_MAP      8
+            208 LOAD_CONST              24 (<code object api_error at 0x000001F3253C45B0, file "StreamService\Tidal\services\LPTidalEventTrack.py", line 138>)
+            210 LOAD_CONST              25 ('LPTidalEventTrack.api_error')
+            212 MAKE_FUNCTION            5 (defaults, annotations)
+            214 CALL_FUNCTION            1
+            216 STORE_NAME              24 (api_error)
+
+167         218 LOAD_NAME               14 (classmethod)
+
+168         220 LOAD_CONST              32 (('', '', '', '', '', None))
+
+170         222 LOAD_NAME                6 (str)
+
+171         224 LOAD_NAME                6 (str)
+
+172         226 LOAD_NAME                6 (str)
+
+173         228 LOAD_NAME                6 (str)
+
+174         230 LOAD_NAME                6 (str)
+
+175         232 LOAD_NAME                6 (str)
+
+176         234 LOAD_NAME               17 (Optional)
+            236 LOAD_NAME                7 (float)
+            238 BINARY_SUBSCR
+
+177         240 LOAD_CONST              11 (None)
+
+168         242 LOAD_CONST              26 (('status', 'source', 'content_type', 'error_reason', 'device_uuid', 'firmware_version', 'duration_ms', 'return'))
+            244 BUILD_CONST_KEY_MAP      8
+            246 LOAD_CONST              27 (<code object playback_event at 0x000001F3253C4A80, file "StreamService\Tidal\services\LPTidalEventTrack.py", line 167>)
+            248 LOAD_CONST              28 ('LPTidalEventTrack.playback_event')
+            250 MAKE_FUNCTION            5 (defaults, annotations)
+            252 CALL_FUNCTION            1
+            254 STORE_NAME              25 (playback_event)
+            256 LOAD_CONST              11 (None)
+            258 RETURN_VALUE
+
+=== LPTidalEventTrack._desensitize_uuid ===
+ 46           0 LOAD_FAST                1 (device_uuid)
+              2 POP_JUMP_IF_TRUE         8
+
+ 47           4 LOAD_CONST               1 ('')
+              6 RETURN_VALUE
+
+ 48     >>    8 LOAD_GLOBAL              0 (str)
+             10 LOAD_FAST                1 (device_uuid)
+             12 CALL_FUNCTION            1
+             14 LOAD_CONST               2 (None)
+             16 LOAD_CONST               3 (8)
+             18 BUILD_SLICE              2
+             20 BINARY_SUBSCR
+             22 RETURN_VALUE
+
+=== LPTidalEventTrack._eventCountryCode ===
+ 63           0 SETUP_FINALLY           20 (to 22)
+
+ 64           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (('eventCountryCode',))
+              6 IMPORT_NAME              0 (LPClientFramework.LPUtility)
+              8 IMPORT_FROM              1 (eventCountryCode)
+             10 STORE_FAST               1 (eventCountryCode)
+             12 POP_TOP
+
+ 65          14 LOAD_FAST                1 (eventCountryCode)
+             16 CALL_FUNCTION            0
+             18 POP_BLOCK
+             20 RETURN_VALUE
+
+ 66     >>   22 DUP_TOP
+             24 LOAD_GLOBAL              2 (Exception)
+             26 JUMP_IF_NOT_EXC_MATCH    40
+             28 POP_TOP
+             30 POP_TOP
+             32 POP_TOP
+
+ 67          34 POP_EXCEPT
+             36 LOAD_CONST               3 ('ZZ')
+             38 RETURN_VALUE
+        >>   40 RERAISE
+             42 LOAD_CONST               4 (None)
+             44 RETURN_VALUE
+
+=== LPTidalEventTrack._log ===
+ 71           0 LOAD_FAST                1 (event_suffix)
+              2 POP_JUMP_IF_TRUE         8
+
+ 72           4 LOAD_CONST               0 (None)
+              6 RETURN_VALUE
+
+ 73     >>    8 LOAD_FAST                0 (cls)
+             10 LOAD_ATTR                0 (_PREFIX)
+             12 FORMAT_VALUE             0
+             14 LOAD_FAST                1 (event_suffix)
+             16 FORMAT_VALUE             0
+             18 BUILD_STRING             2
+             20 STORE_FAST               3 (event_name)
+
+ 74          22 LOAD_GLOBAL              1 (isinstance)
+             24 LOAD_FAST                2 (params)
+             26 LOAD_GLOBAL              2 (dict)
+             28 CALL_FUNCTION            2
+             30 POP_JUMP_IF_FALSE       40
+             32 LOAD_GLOBAL              2 (dict)
+             34 LOAD_FAST                2 (params)
+             36 CALL_FUNCTION            1
+             38 JUMP_FORWARD             2 (to 42)
+        >>   40 BUILD_MAP                0
+        >>   42 STORE_FAST               4 (safe_params)
+
+ 75          44 SETUP_FINALLY           26 (to 72)
+
+ 76          46 LOAD_CONST               1 (0)
+             48 LOAD_CONST               0 (None)
+             50 IMPORT_NAME              3 (LPGlobalUI)
+             52 STORE_FAST               5 (LPGlobalUI)
+
+ 77          54 LOAD_FAST                5 (LPGlobalUI)
+             56 LOAD_ATTR                4 (eventTrack)
+             58 LOAD_METHOD              5 (logEvent)
+             60 LOAD_FAST                3 (event_name)
+             62 LOAD_FAST                4 (safe_params)
+             64 CALL_METHOD              2
+             66 POP_TOP
+             68 POP_BLOCK
+             70 JUMP_FORWARD            18 (to 90)
+
+ 78     >>   72 DUP_TOP
+             74 LOAD_GLOBAL              6 (Exception)
+             76 JUMP_IF_NOT_EXC_MATCH    88
+             78 POP_TOP
+             80 POP_TOP
+             82 POP_TOP
+
+ 79          84 POP_EXCEPT
+             86 JUMP_FORWARD             2 (to 90)
+        >>   88 RERAISE
+        >>   90 LOAD_CONST               0 (None)
+             92 RETURN_VALUE
+
+=== LPTidalEventTrack._classify ===
+ 83           0 SETUP_FINALLY           16 (to 18)
+
+ 84           2 LOAD_GLOBAL              0 (int)
+              4 LOAD_FAST                1 (status_code)
+              6 JUMP_IF_TRUE_OR_POP     10
+              8 LOAD_CONST               1 (0)
+        >>   10 CALL_FUNCTION            1
+             12 STORE_FAST               2 (sc)
+             14 POP_BLOCK
+             16 JUMP_FORWARD            26 (to 44)
+
+ 85     >>   18 DUP_TOP
+             20 LOAD_GLOBAL              1 (TypeError)
+             22 LOAD_GLOBAL              2 (ValueError)
+             24 BUILD_TUPLE              2
+             26 JUMP_IF_NOT_EXC_MATCH    42
+             28 POP_TOP
+             30 POP_TOP
+             32 POP_TOP
+
+ 86          34 LOAD_CONST               1 (0)
+             36 STORE_FAST               2 (sc)
+             38 POP_EXCEPT
+             40 JUMP_FORWARD             2 (to 44)
+        >>   42 RERAISE
+
+ 87     >>   44 LOAD_FAST                2 (sc)
+             46 LOAD_CONST               2 (401)
+             48 COMPARE_OP               2 (==)
+             50 POP_JUMP_IF_FALSE       56
+
+ 88          52 LOAD_CONST               3 ('auth')
+             54 RETURN_VALUE
+
+ 89     >>   56 LOAD_FAST                2 (sc)
+             58 LOAD_CONST               4 (403)
+             60 COMPARE_OP               2 (==)
+             62 POP_JUMP_IF_FALSE       68
+
+ 90          64 LOAD_CONST               5 ('region')
+             66 RETURN_VALUE
+
+ 91     >>   68 LOAD_FAST                2 (sc)
+             70 LOAD_CONST               6 (429)
+             72 COMPARE_OP               2 (==)
+             74 POP_JUMP_IF_FALSE       80
+
+ 92          76 LOAD_CONST               7 ('rate_limit')
+             78 RETURN_VALUE
+
+ 93     >>   80 LOAD_FAST                2 (sc)
+             82 LOAD_CONST               8 (404)
+             84 COMPARE_OP               2 (==)
+             86 POP_JUMP_IF_FALSE       92
+
+ 94          88 LOAD_CONST               9 ('not_found')
+             90 RETURN_VALUE
+
+ 95     >>   92 LOAD_FAST                2 (sc)
+             94 LOAD_CONST              10 (500)
+             96 COMPARE_OP               5 (>=)
+             98 POP_JUMP_IF_FALSE      104
+
+ 96         100 LOAD_CONST              11 ('server')
+            102 RETURN_VALUE
+
+ 97     >>  104 LOAD_FAST                2 (sc)
+            106 LOAD_CONST               1 (0)
+            108 COMPARE_OP               2 (==)
+            110 POP_JUMP_IF_FALSE      116
+
+ 98         112 LOAD_CONST              12 ('network')
+            114 RETURN_VALUE
+
+ 99     >>  116 LOAD_CONST              13 (400)
+            118 LOAD_FAST                2 (sc)
+            120 DUP_TOP
+            122 ROT_THREE
+            124 COMPARE_OP               1 (<=)
+            126 POP_JUMP_IF_FALSE      136
+            128 LOAD_CONST              10 (500)
+            130 COMPARE_OP               0 (<)
+            132 POP_JUMP_IF_FALSE      144
+            134 JUMP_FORWARD             4 (to 140)
+        >>  136 POP_TOP
+            138 JUMP_FORWARD             4 (to 144)
+
+100     >>  140 LOAD_CONST              14 ('client_error')
+            142 RETURN_VALUE
+
+101     >>  144 LOAD_CONST              15 ('unknown')
+            146 RETURN_VALUE
+
+=== LPTidalEventTrack.login_event ===
+123           0 LOAD_FAST                1 (success)
+
+124           2 LOAD_FAST                2 (method)
+
+125           4 LOAD_FAST                3 (error_code)
+
+126           6 LOAD_FAST                4 (error_message)
+
+127           8 LOAD_FAST                0 (cls)
+             10 LOAD_METHOD              0 (_desensitize_uuid)
+             12 LOAD_FAST                6 (device_uuid)
+             14 CALL_METHOD              1
+
+128          16 LOAD_FAST                7 (account_country_code)
+
+129          18 LOAD_FAST                0 (cls)
+             20 LOAD_METHOD              1 (_eventCountryCode)
+             22 CALL_METHOD              0
+
+130          24 LOAD_FAST                8 (subscription_type)
+
+122          26 LOAD_CONST               1 (('success', 'method', 'error_code', 'error_message', 'device_uuid', 'tidal_account_country_code', 'country_code', 'subscription_type'))
+             28 BUILD_CONST_KEY_MAP      8
+             30 STORE_FAST               9 (params)
+
+132          32 LOAD_FAST                5 (duration_ms)
+             34 LOAD_CONST               2 (None)
+             36 IS_OP                    1
+             38 POP_JUMP_IF_FALSE       52
+
+133          40 LOAD_GLOBAL              2 (int)
+             42 LOAD_FAST                5 (duration_ms)
+             44 CALL_FUNCTION            1
+             46 LOAD_FAST                9 (params)
+             48 LOAD_CONST               3 ('duration_ms')
+             50 STORE_SUBSCR
+
+134     >>   52 LOAD_FAST                0 (cls)
+             54 LOAD_METHOD              3 (_log)
+             56 LOAD_CONST               4 ('login')
+             58 LOAD_FAST                9 (params)
+             60 CALL_METHOD              2
+             62 POP_TOP
+             64 LOAD_CONST               2 (None)
+             66 RETURN_VALUE
+
+=== LPTidalEventTrack.api_error ===
+154           0 LOAD_FAST                0 (cls)
+              2 LOAD_METHOD              0 (_log)
+              4 LOAD_CONST               1 ('api_error')
+
+155           6 LOAD_GLOBAL              1 (str)
+              8 LOAD_FAST                1 (endpoint)
+             10 JUMP_IF_TRUE_OR_POP     14
+             12 LOAD_CONST               2 ('')
+        >>   14 CALL_FUNCTION            1
+
+156          16 LOAD_GLOBAL              1 (str)
+             18 LOAD_FAST                2 (method)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               2 ('')
+        >>   24 CALL_FUNCTION            1
+
+157          26 LOAD_GLOBAL              2 (int)
+             28 LOAD_FAST                3 (status_code)
+             30 JUMP_IF_TRUE_OR_POP     34
+             32 LOAD_CONST               3 (0)
+        >>   34 CALL_FUNCTION            1
+
+158          36 LOAD_FAST                0 (cls)
+             38 LOAD_METHOD              3 (_classify)
+             40 LOAD_FAST                3 (status_code)
+             42 CALL_METHOD              1
+
+159          44 LOAD_GLOBAL              2 (int)
+             46 LOAD_FAST                4 (elapsed_ms)
+             48 JUMP_IF_TRUE_OR_POP     52
+             50 LOAD_CONST               3 (0)
+        >>   52 CALL_FUNCTION            1
+
+160          54 LOAD_GLOBAL              2 (int)
+             56 LOAD_FAST                5 (retry_count)
+             58 JUMP_IF_TRUE_OR_POP     62
+             60 LOAD_CONST               3 (0)
+        >>   62 CALL_FUNCTION            1
+
+161          64 LOAD_GLOBAL              1 (str)
+             66 LOAD_FAST                6 (account_country_code)
+             68 JUMP_IF_TRUE_OR_POP     72
+             70 LOAD_CONST               2 ('')
+        >>   72 CALL_FUNCTION            1
+
+162          74 LOAD_FAST                0 (cls)
+             76 LOAD_METHOD              4 (_eventCountryCode)
+             78 CALL_METHOD              0
+
+154          80 LOAD_CONST               4 (('endpoint', 'method', 'status_code', 'error_type', 'elapsed_ms', 'retry_count', 'tidal_account_country_code', 'country_code'))
+             82 BUILD_CONST_KEY_MAP      8
+             84 CALL_METHOD              2
+             86 POP_TOP
+             88 LOAD_CONST               5 (None)
+             90 RETURN_VALUE
+
+=== LPTidalEventTrack.playback_event ===
+180           0 LOAD_FAST                0 (cls)
+              2 LOAD_ATTR                0 (_SOURCE)
+
+181           4 LOAD_GLOBAL              1 (str)
+              6 LOAD_FAST                2 (source)
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 LOAD_CONST               1 ('')
+        >>   12 CALL_FUNCTION            1
+
+182          14 LOAD_FAST                1 (status)
+
+183          16 LOAD_FAST                3 (content_type)
+
+184          18 LOAD_FAST                4 (error_reason)
+
+185          20 LOAD_FAST                0 (cls)
+             22 LOAD_METHOD              2 (_desensitize_uuid)
+             24 LOAD_FAST                5 (device_uuid)
+             26 CALL_METHOD              1
+
+186          28 LOAD_FAST                6 (firmware_version)
+
+179          30 LOAD_CONST               2 (('source', 'caller_source', 'status', 'content_type', 'error_reason', 'device_uuid', 'firmware_version'))
+             32 BUILD_CONST_KEY_MAP      7
+             34 STORE_FAST               8 (params)
+
+188          36 LOAD_FAST                7 (duration_ms)
+             38 LOAD_CONST               3 (None)
+             40 IS_OP                    1
+             42 POP_JUMP_IF_FALSE       56
+
+189          44 LOAD_GLOBAL              3 (int)
+             46 LOAD_FAST                7 (duration_ms)
+             48 CALL_FUNCTION            1
+             50 LOAD_FAST                8 (params)
+             52 LOAD_CONST               4 ('duration_ms')
+             54 STORE_SUBSCR
+
+190     >>   56 LOAD_FAST                0 (cls)
+             58 LOAD_METHOD              4 (_log)
+             60 LOAD_CONST               5 ('playback')
+             62 LOAD_FAST                8 (params)
+             64 CALL_METHOD              2
+             66 POP_TOP
+             68 LOAD_CONST               3 (None)
+             70 RETURN_VALUE

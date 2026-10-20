@@ -1,0 +1,173 @@
+# module LPClientFramework.LPPlayList.LPQobuzPlayList
+
+[module] names: __doc__, datetime, threading, html, escape, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPPlayMusicList, LPPlayHeader, LPPlayListSource, LPPlayItem, LPAccount, LPQobuzLibPageState, LPQobuzAccount, LPQobuzPlayList, HeadTitle_Weekly_Q, HeadTitle_Favorite_Tracks, HeadTitle_Purchased_Tracks, RECENTLY_FAVORITE_TRACKS_ID, RECENTLY_PURCHASED_TRACKS_ID, LPQobuzPlayHeader, LPQobuzPlayItem
+  str: '\n@Time ： 2025/6/6 13:42\n@Auth ： Chris\n@File ：LPQobuzPlayList.py\n@Desc:\n'
+  str: 'escape'
+  str: 'LPUtility'
+  str: 'LPPlayMusicList'
+  str: 'LPPlayHeader'
+  str: 'LPPlayListSource'
+  str: 'LPPlayItem'
+  str: 'LPAccount'
+  str: 'LPQobuzLibPageState'
+  str: 'LPQobuzAccount'
+  str: 'LPQobuzPlayList'
+  str: 'My Weekly Q'
+  str: 'Qobuz Favorite Tracks'
+  str: 'Qobuz Purchased Tracks'
+  str: 'qobuzFavoriteTracks'
+  str: 'qobuzPurchasedTracks'
+  str: 'LPQobuzPlayHeader'
+  str: 'LPQobuzPlayItem'
+
+def LPQobuzLibPageState()  line 17
+  names: __name__, __module__, __qualname__, __init__, resetPageState
+    str: 'LPQobuzLibPageState'
+    str: 'LPQobuzLibPageState.__init__'
+    str: 'LPQobuzLibPageState.resetPageState'
+
+  def LPQobuzLibPageState.__init__(self, limit, updating)  line 18
+    names: limit, total, offset, updating, needRefresh
+
+  def LPQobuzLibPageState.resetPageState(self, limit)  line 25
+    names: limit, total, offset
+
+def LPQobuzAccount()  line 32
+  names: __name__, __module__, __qualname__, __init__, __classcell__
+    str: 'LPQobuzAccount'
+    str: 'LPQobuzAccount.__init__'
+
+  def LPQobuzAccount.__init__(self)  line 33
+    names: super, __init__, LPPlayListSource, Qobuz, value, source, email, subscription, maxStreaming, userStreaming, LPQobuzLibPageState, threading, Lock, dataBinding
+      str: 'playList'
+      str: 'pageState'
+      str: 'loaded'
+      str: 'lock'
+      str: 'My Playlists'
+      str: 'Favorite Artists'
+      str: 'Favorite Albums'
+      str: 'Favorite Tracks'
+      str: 'Purchased Albums'
+      str: 'Purchased Tracks'
+
+def LPQobuzPlayList()  line 52
+  names: __name__, __module__, __qualname__, __init__, generateXML, generateTrackPlayXML, getRequestQualityStr, getReplayGainType, generateBackupQueueXML, generateSetKeyMappingXML, __classcell__
+    str: 'LPQobuzPlayList'
+    str: 'LPQobuzPlayList.__init__'
+    str: 'LPQobuzPlayList.generateXML'
+    str: 'LPQobuzPlayList.generateTrackPlayXML'
+    str: 'LPQobuzPlayList.getRequestQualityStr'
+    str: 'LPQobuzPlayList.getReplayGainType'
+    str: 'LPQobuzPlayList.generateBackupQueueXML'
+    str: 'LPQobuzPlayList.generateSetKeyMappingXML'
+
+  def LPQobuzPlayList.__init__(self)  line 53
+    names: super, __init__, qualityMap
+      str: '5'
+      str: '6'
+      str: '7'
+      str: '27'
+
+  def LPQobuzPlayList.generateXML(self, startPlayIndex, playSection)  line 63
+    names: escape, header, headTitle, mediaSource, searchUrl, imageUrl, getRequestQualityStr, getReplayGainType
+      str: '<?xml version="1.0"?><PlayList>'
+      str: '<ListName>%s</ListName>'
+      str: '<ListInfo>'
+      str: '<SourceName>%s</SourceName>'
+      str: '<SearchUrl>%s</SearchUrl>'
+      str: '<ContentType>songlist</ContentType>'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<StartPlayIndex>%s</StartPlayIndex>'
+      str: '<PlaySection>%s</PlaySection>'
+      str: '<requestQuality>%s</requestQuality>'
+      str: '<EnableReplayGain>1</EnableReplayGain>'
+      str: '<ReplayGainType>%s</ReplayGainType>'
+      str: '</ListInfo>'
+      str: '</PlayList>'
+
+  def LPQobuzPlayList.generateTrackPlayXML(self, musicArray, startPlayIndex)  line 80
+    names: escape, header, headTitle, mediaSource, len, imageUrl, getRequestQualityStr, getReplayGainType, range, trackId, str, albumId, artistId, trackName, trackArtist, albumName, trackDuration, trackUrl, trackImage
+      str: '<?xml version="1.0"?><PlayList>'
+      str: '<ListName>%s</ListName>'
+      str: 'Qobuz'
+      str: '<ListInfo>'
+      str: '<SourceName>%s</SourceName>'
+      str: '<ContentType>songlist</ContentType>'
+      str: '<TrackNumber>%d</TrackNumber>'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<StartPlayIndex>%s</StartPlayIndex>'
+      str: '<requestQuality>%s</requestQuality>'
+      str: '<EnableReplayGain>1</EnableReplayGain>'
+      str: '<ReplayGainType>%s</ReplayGainType>'
+      str: '</ListInfo>'
+      str: '<Tracks>'
+      str: '<Track%d>'
+      str: '<URL>wiimu_search://%s</URL>'
+      str: '<Source>%s</Source>'
+      str: '<Id>%s</Id>'
+      str: '<Metadata>'
+      str: '<?xml version="1.0" encoding="UTF-8"?><DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:song="www.linkplay.com/song/" xmlns:custom="www.linkplay.com/custom/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><upnp:class>object.item.a'
+      str: '<song:id>%s</song:id>'
+      str: '<song:albumid>%s</song:albumid>'
+      str: '<song:singerid>%s</song:singerid>'
+      str: '<dc:title>%s</dc:title>'
+      str: '<upnp:artist>%s</upnp:artist>'
+      str: '<upnp:album>%s</upnp:album>'
+      str: '<res protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;" duration="%d">%s</res>'
+      str: '<upnp:albumArtURI>%s</upnp:albumArtURI>'
+      str: '</item></DIDL-Lite>'
+      str: '</Metadata></Track%d>'
+      str: '</Tracks></PlayList>'
+
+  def LPQobuzPlayList.getRequestQualityStr(self)  line 126
+    names: LPUtility, settings, LPClientFramework.LPMSManager.Qobuz.LPQobuzManager, LPQobuzManager, instance, loginMgr, account, userId, beginGroup, LPPlayListSource, Qobuz, value, endGroup, qualityMap, get
+      str: 'LPQobuzManager'
+      str: '/'
+      str: 'quality'
+
+  def LPQobuzPlayList.getReplayGainType(self)  line 143
+    names: LPUtility, settings, LPClientFramework.LPMSManager.Qobuz.LPQobuzManager, LPQobuzManager, instance, loginMgr, account, userId, beginGroup, LPPlayListSource, Qobuz, value, endGroup
+      str: 'LPQobuzManager'
+      str: '/'
+      str: 'replayGain'
+
+  def LPQobuzPlayList.generateBackupQueueXML(self, listName, playSection)  line 160
+    names: escape, header, mediaSource, searchUrl, getPicUrl
+      str: '\n        <?xml version="1.0"?>\n        <PlayList>\n            <ListName>RP Rock Mix_#~2025-04-01 11:27:20</ListName>\n            <ListInfo>\n                <SourceName>RadioParadise2</SourceName>\n                <SearchUrl>https://api.radioparadise.com/api/gapless?chan=2&amp;bitrate=4&amp;C_user_id='
+      str: '<?xml version="1.0"?><PlayList>'
+      str: '<ListName>%s</ListName>'
+      str: '<ListInfo>'
+      str: '<SourceName>%s</SourceName>'
+      str: '<SearchUrl>%s</SearchUrl>'
+      str: '<ContentType>songlist</ContentType>'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<PlaySection>%s</PlaySection>'
+      str: '<Login_username></Login_username>'
+      str: '</ListInfo>'
+      str: '</PlayList>'
+
+  def LPQobuzPlayList.generateSetKeyMappingXML(self, name)  line 187
+    names: escape, header, mediaSource, getPicUrl
+      str: '<Name>%s</Name>'
+      str: '<Source>%s</Source>'
+      str: '<ContentType>songlist</ContentType>'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<RoutineId>Empty</RoutineId>'
+      str: '<Loop>0</Loop>'
+      str: '<Shuffle>0</Shuffle>'
+
+def LPQobuzPlayHeader()  line 209
+  names: __name__, __module__, __qualname__, __init__, __classcell__
+    str: 'LPQobuzPlayHeader'
+    str: 'LPQobuzPlayHeader.__init__'
+
+  def LPQobuzPlayHeader.__init__(self)  line 210
+    names: super, __init__, LPPlayListSource, Qobuz, value, mediaSource, duration, qualityStr, hires, total, limit, offset, searchQueryText, descText, weeklyQBaseline, mediaCount, date, trackArtist, parentalWarning, label, trackOwner, ownerId, isPublic, graphics, recentlyNavigateId, recentlyPlaylistTrackImage, recentlyPlaylistImageList, recentlyIsUserPlaylist
+
+def LPQobuzPlayItem()  line 243
+  names: __name__, __module__, __qualname__, __init__, __classcell__
+    str: 'LPQobuzPlayItem'
+    str: 'LPQobuzPlayItem.__init__'
+
+  def LPQobuzPlayItem.__init__(self)  line 244
+    names: super, __init__, searchUrl, startIndex, date, trackVersion, trackNumber, LPPlayListSource, Qobuz, value, trackSource, customUUID, bitrate, samplerate, trackOwner, ownerId, genreObjArr, genrePath, isPublic, isTrack, isAlbum, isArtist, isPlaylist, isGenre, parentalWarning, tracksCount, hires, isFavorite, dateAdd, releaseDate, streamable, label, mediaNumber, lastUpdate, albumImage, playlistImageList, playlistTrackId, artistName, artistImage

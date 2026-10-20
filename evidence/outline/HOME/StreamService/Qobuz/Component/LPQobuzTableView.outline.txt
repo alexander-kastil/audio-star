@@ -1,0 +1,130 @@
+# module HOME.StreamService.Qobuz.Component.LPQobuzTableView
+
+[module] names: __doc__, queue, threading, time, PyQt6.QtCore, QAbstractTableModel, Qt, QCoreApplication, QRect, pyqtSignal, QModelIndex, PyQt6.QtGui, QMovie, QIcon, QPixmap, QFont, QPainter, QColor, QFontMetrics, PyQt6.QtWidgets, QStyle, QAbstractItemView, QToolTip, LPGlobalUI, HOME.LPSuperTableView, LPSuperTableDelegate, HOME.StreamService.Qobuz.Util, LPQobuzUtil, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPUtility, logger, TABLE_COLUMNS, LPQobuzTracksTableWithCoverModel, LPQobuzTrackTableWithCoverDelegate
+  str: '\n@Time ： 2025/7/1 11:38\n@Auth ： Chris\n@File ：LPQobuzTableView.py\n@Desc:\n'
+  str: 'QAbstractTableModel'
+  str: 'Qt'
+  str: 'QCoreApplication'
+  str: 'QRect'
+  str: 'pyqtSignal'
+  str: 'QModelIndex'
+  str: 'QMovie'
+  str: 'QIcon'
+  str: 'QPixmap'
+  str: 'QFont'
+  str: 'QPainter'
+  str: 'QColor'
+  str: 'QFontMetrics'
+  str: 'QStyle'
+  str: 'QAbstractItemView'
+  str: 'QToolTip'
+  str: 'LPSuperTableDelegate'
+  str: 'LPQobuzUtil'
+  str: 'LPUtility'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'LPQobuzTracksTableWithCoverModel'
+  str: 'LPQobuzTrackTableWithCoverDelegate'
+
+def LPQobuzTracksTableWithCoverModel()  line 26
+  names: __name__, __module__, __qualname__, __init__, Qt, ItemDataRole, DisplayRole, headerData, rowCount, columnCount, data, QModelIndex, removeRows, addItemList, fetchPixmap, __classcell__
+    str: 'LPQobuzTracksTableWithCoverModel'
+    str: 'LPQobuzTracksTableWithCoverModel.__init__'
+    str: 'LPQobuzTracksTableWithCoverModel.headerData'
+    str: 'LPQobuzTracksTableWithCoverModel.rowCount'
+    str: 'LPQobuzTracksTableWithCoverModel.columnCount'
+    str: 'LPQobuzTracksTableWithCoverModel.data'
+    str: 'LPQobuzTracksTableWithCoverModel.removeRows'
+    str: 'LPQobuzTracksTableWithCoverModel.addItemList'
+    str: 'LPQobuzTracksTableWithCoverModel.fetchPixmap'
+
+  def LPQobuzTracksTableWithCoverModel.__init__(self, playList, parent)  line 27
+    names: super, __init__, playList, list, _data, queue, Queue, trackImageQueue, fetchImageThread
+
+  def LPQobuzTracksTableWithCoverModel.headerData(self, section, orientation, role)  line 34
+    names: QCoreApplication, translate, append, Qt, Orientation, Horizontal, ItemDataRole, DisplayRole, super, headerData
+      str: 'track'
+      str: '#'
+      str: 'id'
+      str: 'title'
+      str: 'title'
+      str: 'AlbumDetail'
+      str: 'Track'
+      str: 'artist'
+      str: 'Artist'
+      str: 'length'
+      str: 'Duration'
+      str: 'options'
+
+  def LPQobuzTracksTableWithCoverModel.rowCount(self, parent)  line 51
+    names: len, _data
+
+  def LPQobuzTracksTableWithCoverModel.columnCount(self, parent)  line 54
+    names: rowCount, TABLE_COLUMNS
+
+  def LPQobuzTracksTableWithCoverModel.data(self, index, role)  line 57
+    names: row, column, rowCount, columnCount, Qt, ItemDataRole, DisplayRole, _data, LPGlobalUI, currentDevice, deviceStreamServiceManager, isCurrentPlayItem, LPPlayListSource, Qobuz, value, trackImage, len, fetchPixmap, trackName, trackVersion, trackArtist, parentalWarning, artistId, LPQobuzUtil, formatTrackDuration, trackDuration, isFavorite, UserRole
+      str: '%s'
+      str: 'artist'
+      str: 'duration'
+      str: 'favorite'
+      str: 'more'
+
+  def LPQobuzTracksTableWithCoverModel.removeRows(self, row, count, parent)  line 95
+    names: len, _data, beginRemoveRows, endRemoveRows
+
+  def LPQobuzTracksTableWithCoverModel.addItemList(self, playList)  line 104
+    names: len, _data, list, beginInsertRows, QModelIndex, extend, endInsertRows
+
+  def LPQobuzTracksTableWithCoverModel.fetchPixmap(self, index, imageUrl)  line 115
+    names: LPUtility, checkCachedPixmapWithUrl, trackImageQueue, put, fetchImageThread, threading, Thread, start
+      str: 'value'
+      str: 'index'
+      str: 'LPQobuzTracksTableWithCoverModel.fetchPixmap.<locals>._fetchImageMethod'
+      str: 'target'
+      str: 'daemon'
+
+    def LPQobuzTracksTableWithCoverModel.fetchPixmap._fetchImageMethod()  line 129
+      names: trackImageQueue, empty, time, sleep, get, LPUtility, fetchUrlQPixmap, dataChanged, emit, task_done
+        str: 'value'
+        str: 'index'
+        str: 'image'
+
+def LPQobuzTrackTableWithCoverDelegate()  line 150
+  names: __name__, __module__, __qualname__, pyqtSignal, QModelIndex, favClicked, optClicked, __init__, editorEvent, paint, helpEvent, update_view, cleanup_table_view, __classcell__
+    str: 'LPQobuzTrackTableWithCoverDelegate'
+    str: 'LPQobuzTrackTableWithCoverDelegate.__init__'
+    str: 'LPQobuzTrackTableWithCoverDelegate.editorEvent'
+    str: 'LPQobuzTrackTableWithCoverDelegate.paint'
+    str: 'LPQobuzTrackTableWithCoverDelegate.helpEvent'
+    str: 'LPQobuzTrackTableWithCoverDelegate.update_view'
+    str: 'LPQobuzTrackTableWithCoverDelegate.cleanup_table_view'
+
+  def LPQobuzTrackTableWithCoverDelegate.__init__(self, parent)  line 155
+    names: super, __init__, table_view, QMovie, LPGlobalUI, imagePath, play_movie, start, frameChanged, connect, update_view, playingRow, favoriteSize, LPUtility, tintImage, THEME_HIGH_HIGH_COLOR, favPixmap, QPixmap, unFavPixmap
+      str: 'dark_playing.gif'
+      str: 'favorite.png'
+      str: 'unfavorite.png'
+
+  def LPQobuzTrackTableWithCoverDelegate.editorEvent(self, event, model, option, index)  line 170
+    names: type, Type, MouseButtonRelease, rect, column, QRect, x, y, favoriteSize, contains, position, toPoint, favClicked, emit, optClicked, super, editorEvent
+
+  def LPQobuzTrackTableWithCoverDelegate.paint(self, painter, option, index)  line 187
+    names: super, paint, data, row, playingRow, setPen, LPGlobalUI, THEME_HIGH_HIGH_COLOR, THEME_DEFAULT_COLOR, rect, column, currentDevice, mediaInfo, playState, QRect, x, y, play_movie, currentPixmap, drawPixmap, QIcon, QPixmap, imagePath, addPixmap, width, height, QFont, setUnderline, setFont, drawText, Qt, AlignmentFlag, AlignLeft, AlignVCenter, LPUtility, getCachedPixmapWithUrl, QFontMetrics, font, elidedText, TextElideMode, ElideRight, boundingRect, styleObject, lastCursorPos, cursor, CursorShape, PointingHandCursor, lastCursorActionIndex, setCursor, ArrowCursor, favPixmap, unFavPixmap, ItemDataRole, UserRole, streamable, save, setRenderHint, QPainter, RenderHint, Antialiasing, fillRect, QColor, restore
+      str: 'PLAYING'
+      str: 'dark_pause.png'
+      str: 'miniBar/trackDefault.png'
+      str: ' ('
+      str: ')'
+      str: 'qobuz/e_warning.png'
+      str: 'more.png'
+
+  def LPQobuzTrackTableWithCoverDelegate.helpEvent(self, event, view, option, index)  line 366
+    names: type, Type, ToolTip, data, Qt, ItemDataRole, UserRole, rect, QFontMetrics, font, pos, globalPos, column, trackName, QRect, x, y, width, height, elidedText, TextElideMode, ElideRight, horizontalAdvance, contains, QToolTip, showText, trackArtist, parentalWarning, super, helpEvent
+      str: 'role'
+
+  def LPQobuzTrackTableWithCoverDelegate.update_view(self)  line 431
+    names: playingRow, table_view, model, index, data, Qt, ItemDataRole, DisplayRole, update
+
+  def LPQobuzTrackTableWithCoverDelegate.cleanup_table_view(self)  line 444
+    names: play_movie, stop

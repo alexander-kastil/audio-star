@@ -1,0 +1,211 @@
+# module LPClientFramework.LPMediaServer
+
+[module] names: requests, html, threading, Thread, bs4, BeautifulSoup, LPClientFramework, UPnPTool, urllib.parse, urlparse, LPClientFramework.LPUtility, logger, object, LPContentDirectory, LPMediaServer
+  str: 'Thread'
+  str: 'BeautifulSoup'
+  str: 'UPnPTool'
+  str: 'urlparse'
+  str: 'logger'
+  str: 'LPContentDirectory'
+  str: 'LPMediaServer'
+
+def LPContentDirectory()  line 12
+  names: __name__, __module__, __qualname__, audioContainerArray, videoContainerArray, imageContainerArray, __init__, property, isContainer, isAudio, trackImage, search, loadNextPage, parseContainer, parseItem, upnpPost
+    str: 'LPContentDirectory'
+    str: 'object.container'
+    str: 'object.item.audioitem'
+    str: 'object.container.genre.musicgenre'
+    str: 'object.container.album.musicalbum'
+    str: 'object.container.person.movieactor'
+    str: 'object.item.videoitem'
+    str: 'object.container.album.videoalbum'
+    str: 'object.container.genre.moviegenre'
+    str: 'object.item.imageitem.photo'
+    str: 'object.container.album.photoalbum'
+    str: 'object.item.imageitem'
+    str: 'LPContentDirectory.__init__'
+    str: 'LPContentDirectory.isContainer'
+    str: 'LPContentDirectory.isAudio'
+    str: 'LPContentDirectory.trackImage'
+    str: 'LPContentDirectory.search'
+    str: 'LPContentDirectory.loadNextPage'
+    str: 'LPContentDirectory.parseContainer'
+    str: 'LPContentDirectory.parseItem'
+    str: 'LPContentDirectory.upnpPost'
+
+  def LPContentDirectory.__init__(self, ip, port, parentContentDirectory, server)  line 19
+    names: ip, upnpPort, objectID, parentContentDirectory, server, subItems, directoryClass, title, icon, artist, album, albumArtURI, date, creator, duration, genre, bitRate, frequency, channels, size, trackUri, isFetching
+      str: 'object.container'
+
+  def LPContentDirectory.isContainer(self)  line 47
+    names: audioContainerArray, videoContainerArray, imageContainerArray, directoryClass, lower, startswith
+      str: 'object.container'
+
+  def LPContentDirectory.isAudio(self)  line 55
+    names: directoryClass, startswith
+      str: 'object.item.audioItem'
+
+  def LPContentDirectory.trackImage(self)  line 59
+    names: icon, albumArtURI
+
+  def LPContentDirectory.search(self, keyword, requestFinishMethod)  line 64
+    names: Thread, start
+      str: 'LPContentDirectory.search.<locals>._singleSearch'
+      str: 'LPContentDirectory.search.<locals>._requestSearch'
+      str: 'target'
+      str: 'args'
+
+    def LPContentDirectory.search._singleSearch(searchType)  line 65
+      names: upnpPost, get, BeautifulSoup, html, unescape, findAll, parseContainer, append, parseItem
+        str: 'artist'
+        str: 'upnp:class = "object.container.person.musicArtist" and (upnp:artist contains "'
+        str: '" or dc:title contains "'
+        str: '")'
+        str: 'album'
+        str: 'upnp:class = "object.container.album.musicAlbum" and (upnp:album contains "'
+        str: '" or upnp:artist contains "'
+        str: 'playlist'
+        str: 'upnp:class = "object.container.playlistContainer" and dc:title contains "'
+        str: '"'
+        str: 'upnp:class derivedfrom "object.item.audioItem" and (dc:title contains "'
+        str: '" or dc:creator contains "'
+        str: 'Search'
+        str: 'SearchCriteria'
+        str: 'error'
+        str: 'data'
+        str: 'lxml'
+        str: 'container'
+        str: 'item'
+
+    def LPContentDirectory.search._requestSearch(requestFinishMethod)  line 101
+      names: subItems, clear, server, supportSearch, LPContentDirectory, ip, upnpPort, hasattr, controlURL, objectID, len, title, parentContentDirectory, append
+        str: 'artist'
+        str: 'album'
+        str: 'playlist'
+        str: 'track'
+        str: 'controlURL'
+        str: 'custom-%s'
+        str: '%s (%d)'
+
+  def LPContentDirectory.loadNextPage(self, start, count, callback)  line 130
+    names: objectID, startswith, Thread, start
+      str: 'custom'
+      str: 'LPContentDirectory.loadNextPage.<locals>._requestSubItems'
+      str: 'target'
+      str: 'args'
+
+    def LPContentDirectory.loadNextPage._requestSubItems(callback)  line 134
+      names: upnpPost, str, get, BeautifulSoup, html, unescape, findAll, parseContainer, subItems, append, parseItem
+        str: 'Browse'
+        str: 'StartingIndex'
+        str: 'RequestedCount'
+        str: 'SortCriteria'
+        str: 'error'
+        str: 'data'
+        str: 'lxml'
+        str: 'container'
+        str: 'item'
+
+  def LPContentDirectory.parseContainer(self, item)  line 172
+    names: LPContentDirectory, ip, upnpPort, server, controlURL, get, objectID, find, text, title, directoryClass, findAll, lower, videoContainerArray, imageContainerArray
+      str: 'id'
+      str: 'dc:title'
+      str: 'upnp:class'
+      str: 'upnp:searchclass'
+      str: 'includederived'
+      str: '1'
+
+  def LPContentDirectory.parseItem(self, item)  line 194
+    names: LPContentDirectory, ip, upnpPort, server, controlURL, get, objectID, find, text, title, directoryClass, isAudio, creator, albumArtURI, icon, album, date, genre, artist, findAll, bitRate, duration, channels, frequency, size, trackUri
+      str: 'id'
+      str: 'dc:title'
+      str: 'upnp:class'
+      str: 'dc:creator'
+      str: 'upnp:albumarturi'
+      str: 'upnp:icon'
+      str: 'upnp:album'
+      str: 'dc:date'
+      str: 'upnp:genre'
+      str: 'upnp:artist'
+      str: 'res'
+      str: 'protocolinfo'
+      str: 'audio/'
+      str: 'bitrate'
+      str: 'duration'
+      str: 'nraudiochannels'
+      str: 'samplefrequency'
+      str: 'size'
+
+  def LPContentDirectory.upnpPost(self, command, inParams)  line 256
+    names: objectID, update, UPnPTool, upnpPost, ip, upnpPort, controlURL, get
+      str: 'Browse'
+      str: 'BrowseDirectChildren'
+      str: '*'
+      str: 'ObjectID'
+      str: 'BrowseFlag'
+      str: 'Filter'
+      str: 'http://%s:%d%s'
+      str: 'ContentDirectory:1'
+      str: 'Result'
+      str: 'TotalMatches'
+      str: 'NumberReturned'
+      str: 'error'
+      str: 'Result'
+      str: 'TotalMatches'
+      str: 'NumberReturned'
+      str: 'data'
+      str: 'total'
+      str: 'returned'
+      str: 'Search'
+      str: '0'
+      str: 'ContainerID'
+      str: 'Filter'
+      str: 'StartingIndex'
+      str: 'RequestedCount'
+      str: 'SortCriteria'
+      str: 'data'
+      str: 'No data returned'
+
+def LPMediaServer()  line 292
+  names: __name__, __module__, __qualname__, __init__, start, requestDescXML, browse, search
+    str: 'LPMediaServer'
+    str: 'LPMediaServer.__init__'
+    str: 'LPMediaServer.start'
+    str: 'LPMediaServer.requestDescXML'
+    str: 'LPMediaServer.browse'
+    str: 'LPMediaServer.search'
+
+  def LPMediaServer.__init__(self, ip, upnpPort, descURL)  line 293
+    names: ip, upnpPort, uuid, friendlyName, modelName, descURL, supportSearch, LPContentDirectory, directory, objectID, searchDirectory, contentDirectoryControlURL
+      str: '0'
+      str: 'search'
+
+  def LPMediaServer.start(self, requestFinishMethod)  line 313
+    names: Thread, requestDescXML, setDaemon, start
+      str: 'target'
+      str: 'args'
+
+  def LPMediaServer.requestDescXML(self, requestFinishMethod)  line 319
+    names: requests, session, get, descURL, Exception, logger, warning, status_code, BeautifulSoup, text, find, string, split, uuid, friendlyName, modelName, findAll, contentDirectoryControlURL, directory, controlURL, searchDirectory, urlparse, scheme, hostname, port, lower, supportSearch
+      str: 'timeout'
+      str: 'LPMediaServer requestDescXML: %s'
+      str: 'xml'
+      str: 'friendlyName'
+      str: 'modelName'
+      str: 'UDN'
+      str: ':'
+      str: 'service'
+      str: 'serviceType'
+      str: 'urn:schemas-upnp-org:service:ContentDirectory:1'
+      str: 'controlURL'
+      str: 'SCPDURL'
+      str: '%s://%s:%d%s'
+      str: 'actionList'
+      str: 'name'
+      str: 'search'
+
+  def LPMediaServer.browse(self, requestFinishMethod)  line 381
+    names: directory, browse
+
+  def LPMediaServer.search(self, keyword, requestFinishMethod)  line 385
+    names: searchDirectory, search

@@ -1,0 +1,3550 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n设备发现埋点引擎。\n\n按 docs/plans/2026-08-18-network-discovery-telemetry-merged.md 实施：\n- network_context_snapshot：网络上下文归因时间线，只在状态变化瞬间发送（状态去重）。\n- device_discovery_report：启动 / 网络变更后的发现结果收敛上报\n  （静止收敛 + 强制上限，SSDP/mDNS 分协议计数）。\n- device_discovery_failure：离线设备未上线诊断（云端 queryDeviceStateV2 +\n  本地 SOAP/TCP443/ICMP/mDNS 可见性，六位 casecode + samessid/samebssid）。\n\n对齐 iOS 口径：\n- casecode 六位二进制（高位→低位）：gateway_ip_valid / http_ok / tcp443_ok /\n  ping_ok / multicast_found / cloud_online。\n- samessid / samebssid：SSID 大写 hex 比较；IoT source 且 iotVersion==2.0.1 时\n  云端 wlanSsid 实为 BSSID；BSSID 归一化（去分隔符小写）比较；任一侧缺失记 2。\n- otaStatus 存在且 != 8（OTA 中）时不发送诊断事件；云端查询失败或返回空\n  （设备未注册）时降级发送（cloud_online=false）。\n- 设备 UUID 明文上报（`device_id_hashes` / `device_id_hash` / `device_list`\n  值直接为 24 位短 UUID，字段名沿用）；网络上下文顶层平铺明文网络字段\n  （ssid hex / bssid / ip / gateway），与 iOS 展示口径一致。\n所有公开钩子均吞异常，埋点故障不影响设备发现主流程。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 24           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (hashlib)
+             10 STORE_NAME               1 (hashlib)
+
+ 25          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (ipaddress)
+             18 STORE_NAME               2 (ipaddress)
+
+ 26          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (threading)
+             26 STORE_NAME               3 (threading)
+
+ 27          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (time)
+             34 STORE_NAME               4 (time)
+
+ 29          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              5 (LPGlobalUI)
+             42 STORE_NAME               5 (LPGlobalUI)
+
+ 30          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               3 (('LPUtility',))
+             48 IMPORT_NAME              6 (LPClientFramework)
+             50 IMPORT_FROM              7 (LPUtility)
+             52 STORE_NAME               7 (LPUtility)
+             54 POP_TOP
+
+ 31          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               4 (('queryDeviceStateV2',))
+             60 IMPORT_NAME              8 (LPClientFramework.LPCloudDeviceState)
+             62 IMPORT_FROM              9 (queryDeviceStateV2)
+             64 STORE_NAME               9 (queryDeviceStateV2)
+             66 POP_TOP
+
+ 32          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               5 (('LPEventsType',))
+             72 IMPORT_NAME             10 (LPClientFramework.LPEventTrack)
+             74 IMPORT_FROM             11 (LPEventsType)
+             76 STORE_NAME              11 (LPEventsType)
+             78 POP_TOP
+
+ 33          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               6 (('upnpPost',))
+             84 IMPORT_NAME             12 (LPClientFramework.UPnPTool)
+             86 IMPORT_FROM             13 (upnpPost)
+             88 STORE_NAME              13 (upnpPost)
+             90 POP_TOP
+
+ 34          92 LOAD_CONST               1 (0)
+             94 LOAD_CONST               7 (('logger',))
+             96 IMPORT_NAME             14 (LPClientFramework.LPUtility)
+             98 IMPORT_FROM             15 (logger)
+            100 STORE_NAME              15 (logger)
+            102 POP_TOP
+
+ 37         104 LOAD_CONST               8 (15)
+            106 STORE_NAME              16 (START_SETTLE_SECONDS)
+
+ 39         108 LOAD_CONST               9 (10)
+            110 STORE_NAME              17 (CHANGE_SETTLE_SECONDS)
+
+ 41         112 LOAD_CONST               8 (15)
+            114 STORE_NAME              18 (QUIET_SECONDS)
+
+ 43         116 LOAD_CONST              10 (60)
+            118 STORE_NAME              19 (FORCE_REPORT_SECONDS)
+
+ 45         120 LOAD_CONST               8 (15)
+            122 STORE_NAME              20 (DIAG_TIMEOUT_SECONDS)
+
+ 47         124 LOAD_CONST              11 (5)
+            126 STORE_NAME              21 (CLOUD_QUERY_TIMEOUT_SECONDS)
+
+ 49         128 LOAD_CONST               8 (15)
+            130 STORE_NAME              22 (GW_RECENT_WINDOW_SECONDS)
+
+ 52         132 LOAD_CONST              12 (<code object deviceIdHash at 0x000001F324E75920, file "LPClientFramework\LPDiscoveryTelemetry.py", line 52>)
+            134 LOAD_CONST              13 ('deviceIdHash')
+            136 MAKE_FUNCTION            0
+            138 STORE_NAME              23 (deviceIdHash)
+
+ 67         140 LOAD_CONST              14 (('internet_ok', 'gateway_status', 'gateway_class', 'if_type', 'local_ip_valid', 'ssid_present', 'network_info_raw_ok', 'ssid', 'bssid', 'ip', 'gateway'))
+            142 STORE_NAME              24 (_CONTEXT_EXPOSE_KEYS)
+
+ 73         144 LOAD_CONST              15 (100)
+            146 STORE_NAME              25 (_FIREBASE_VALUE_LIMIT)
+
+ 76         148 LOAD_BUILD_CLASS
+            150 LOAD_CONST              16 (<code object LPDiscoveryTelemetry at 0x000001F3253AE450, file "LPClientFramework\LPDiscoveryTelemetry.py", line 76>)
+            152 LOAD_CONST              17 ('LPDiscoveryTelemetry')
+            154 MAKE_FUNCTION            0
+            156 LOAD_CONST              17 ('LPDiscoveryTelemetry')
+            158 CALL_FUNCTION            2
+            160 STORE_NAME              26 (LPDiscoveryTelemetry)
+            162 LOAD_CONST               2 (None)
+            164 RETURN_VALUE
+
+=== deviceIdHash ===
+ 61           0 LOAD_FAST                0 (uuidStr)
+              2 POP_JUMP_IF_TRUE         8
+
+ 62           4 LOAD_CONST               1 ('')
+              6 RETURN_VALUE
+
+ 63     >>    8 LOAD_GLOBAL              0 (hashlib)
+             10 LOAD_METHOD              1 (sha1)
+             12 LOAD_FAST                0 (uuidStr)
+             14 LOAD_METHOD              2 (encode)
+             16 LOAD_CONST               2 ('utf-8')
+             18 CALL_METHOD              1
+             20 CALL_METHOD              1
+             22 LOAD_METHOD              3 (hexdigest)
+             24 CALL_METHOD              0
+             26 LOAD_CONST               3 (None)
+             28 LOAD_CONST               4 (8)
+             30 BUILD_SLICE              2
+             32 BINARY_SUBSCR
+             34 RETURN_VALUE
+
+=== LPDiscoveryTelemetry ===
+ 76           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPDiscoveryTelemetry')
+              6 STORE_NAME               2 (__qualname__)
+
+ 77           8 LOAD_CONST               1 ('设备发现埋点引擎：持有会话级状态，接收发现管理器的钩子调用并产出统一事件。')
+             10 STORE_NAME               3 (__doc__)
+
+ 79          12 LOAD_CONST               2 (<code object __init__ at 0x000001F3253B4870, file "LPClientFramework\LPDiscoveryTelemetry.py", line 79>)
+             14 LOAD_CONST               3 ('LPDiscoveryTelemetry.__init__')
+             16 MAKE_FUNCTION            0
+             18 STORE_NAME               4 (__init__)
+
+113          20 LOAD_CONST               4 (<code object _classifyGateway at 0x000001F3253B4920, file "LPClientFramework\LPDiscoveryTelemetry.py", line 113>)
+             22 LOAD_CONST               5 ('LPDiscoveryTelemetry._classifyGateway')
+             24 MAKE_FUNCTION            0
+             26 STORE_NAME               5 (_classifyGateway)
+
+138          28 LOAD_CONST               6 (<code object buildNetworkContext at 0x000001F3253DA450, file "LPClientFramework\LPDiscoveryTelemetry.py", line 138>)
+             30 LOAD_CONST               7 ('LPDiscoveryTelemetry.buildNetworkContext')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               6 (buildNetworkContext)
+
+183          36 LOAD_CONST               8 (<code object _snapshotStateKey at 0x000001F3253DA5B0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 183>)
+             38 LOAD_CONST               9 ('LPDiscoveryTelemetry._snapshotStateKey')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               7 (_snapshotStateKey)
+
+196          44 LOAD_NAME                8 (_FIREBASE_VALUE_LIMIT)
+             46 BUILD_TUPLE              1
+             48 LOAD_CONST              10 (<code object _joinList at 0x000001F3253DA7C0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 196>)
+             50 LOAD_CONST              11 ('LPDiscoveryTelemetry._joinList')
+             52 MAKE_FUNCTION            1 (defaults)
+             54 STORE_NAME               9 (_joinList)
+
+212          56 LOAD_CONST              12 (<code object _cleanContextForEvent at 0x000001F3253DA870, file "LPClientFramework\LPDiscoveryTelemetry.py", line 212>)
+             58 LOAD_CONST              13 ('LPDiscoveryTelemetry._cleanContextForEvent')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME              10 (_cleanContextForEvent)
+
+231          64 LOAD_CONST              14 (<code object _flattenDeviceFields at 0x000001F3253DAA80, file "LPClientFramework\LPDiscoveryTelemetry.py", line 231>)
+             66 LOAD_CONST              15 ('LPDiscoveryTelemetry._flattenDeviceFields')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME              11 (_flattenDeviceFields)
+
+257          72 LOAD_CONST              16 (<code object snapshot at 0x000001F3253DA2F0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 257>)
+             74 LOAD_CONST              17 ('LPDiscoveryTelemetry.snapshot')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME              12 (snapshot)
+
+290          80 LOAD_CONST              18 (<code object appStart at 0x000001F3253DA9D0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 290>)
+             82 LOAD_CONST              19 ('LPDiscoveryTelemetry.appStart')
+             84 MAKE_FUNCTION            0
+             86 STORE_NAME              13 (appStart)
+
+306          88 LOAD_CONST              20 (<code object _appStartWorker at 0x000001F3253B0450, file "LPClientFramework\LPDiscoveryTelemetry.py", line 306>)
+             90 LOAD_CONST              21 ('LPDiscoveryTelemetry._appStartWorker')
+             92 MAKE_FUNCTION            0
+             94 STORE_NAME              14 (_appStartWorker)
+
+314          96 LOAD_CONST              22 (<code object onNetworkChanged at 0x000001F3253B0240, file "LPClientFramework\LPDiscoveryTelemetry.py", line 314>)
+             98 LOAD_CONST              23 ('LPDiscoveryTelemetry.onNetworkChanged')
+            100 MAKE_FUNCTION            0
+            102 STORE_NAME              15 (onNetworkChanged)
+
+335         104 LOAD_CONST              24 (<code object _startSettleCycle at 0x000001F3253A2B30, file "LPClientFramework\LPDiscoveryTelemetry.py", line 335>)
+            106 LOAD_CONST              25 ('LPDiscoveryTelemetry._startSettleCycle')
+            108 MAKE_FUNCTION            0
+            110 STORE_NAME              16 (_startSettleCycle)
+
+363         112 LOAD_CONST              26 (<code object _settleLoop at 0x000001F3253A2DF0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 363>)
+            114 LOAD_CONST              27 ('LPDiscoveryTelemetry._settleLoop')
+            116 MAKE_FUNCTION            0
+            118 STORE_NAME              17 (_settleLoop)
+
+397         120 LOAD_CONST              28 (<code object _onlineUuids at 0x000001F3253A2920, file "LPClientFramework\LPDiscoveryTelemetry.py", line 397>)
+            122 LOAD_CONST              29 ('LPDiscoveryTelemetry._onlineUuids')
+            124 MAKE_FUNCTION            0
+            126 STORE_NAME              18 (_onlineUuids)
+
+411         128 LOAD_CONST              30 (<code object _report at 0x000001F3253A27C0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 411>)
+            130 LOAD_CONST              31 ('LPDiscoveryTelemetry._report')
+            132 MAKE_FUNCTION            0
+            134 STORE_NAME              19 (_report)
+
+469         136 LOAD_CONST              32 (<code object onInternetPoll at 0x000001F3253A2D40, file "LPClientFramework\LPDiscoveryTelemetry.py", line 469>)
+            138 LOAD_CONST              33 ('LPDiscoveryTelemetry.onInternetPoll')
+            140 MAKE_FUNCTION            0
+            142 STORE_NAME              20 (onInternetPoll)
+
+488         144 LOAD_CONST              34 (<code object onGatewayPoll at 0x000001F3253A2C90, file "LPClientFramework\LPDiscoveryTelemetry.py", line 488>)
+            146 LOAD_CONST              35 ('LPDiscoveryTelemetry.onGatewayPoll')
+            148 MAKE_FUNCTION            0
+            150 STORE_NAME              21 (onGatewayPoll)
+
+514         152 LOAD_CONST              36 (<code object onDeviceSeen at 0x000001F3253A2F50, file "LPClientFramework\LPDiscoveryTelemetry.py", line 514>)
+            154 LOAD_CONST              37 ('LPDiscoveryTelemetry.onDeviceSeen')
+            156 MAKE_FUNCTION            0
+            158 STORE_NAME              22 (onDeviceSeen)
+
+533         160 LOAD_CONST              38 (<code object onDeviceAdded at 0x000001F3253A2A80, file "LPClientFramework\LPDiscoveryTelemetry.py", line 533>)
+            162 LOAD_CONST              39 ('LPDiscoveryTelemetry.onDeviceAdded')
+            164 MAKE_FUNCTION            0
+            166 STORE_NAME              23 (onDeviceAdded)
+
+552         168 LOAD_CONST              40 (<code object onDeviceRemoved at 0x000001F324E69B30, file "LPClientFramework\LPDiscoveryTelemetry.py", line 552>)
+            170 LOAD_CONST              41 ('LPDiscoveryTelemetry.onDeviceRemoved')
+            172 MAKE_FUNCTION            0
+            174 STORE_NAME              24 (onDeviceRemoved)
+
+570         176 LOAD_CONST              42 (<code object onAllDevicesRemoved at 0x000001F324E69BE0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 570>)
+            178 LOAD_CONST              43 ('LPDiscoveryTelemetry.onAllDevicesRemoved')
+            180 MAKE_FUNCTION            0
+            182 STORE_NAME              25 (onAllDevicesRemoved)
+
+587         184 LOAD_CONST              44 (<code object _checkOfflineDevices at 0x000001F324E69F50, file "LPClientFramework\LPDiscoveryTelemetry.py", line 587>)
+            186 LOAD_CONST              45 ('LPDiscoveryTelemetry._checkOfflineDevices')
+            188 MAKE_FUNCTION            0
+            190 STORE_NAME              26 (_checkOfflineDevices)
+
+616         192 LOAD_CONST              46 (<code object _checkOfflineDevicesInner at 0x000001F324E69030, file "LPClientFramework\LPDiscoveryTelemetry.py", line 616>)
+            194 LOAD_CONST              47 ('LPDiscoveryTelemetry._checkOfflineDevicesInner')
+            196 MAKE_FUNCTION            0
+            198 STORE_NAME              27 (_checkOfflineDevicesInner)
+
+647         200 LOAD_CONST              48 (<code object _isValidIPv4 at 0x000001F324E69C90, file "LPClientFramework\LPDiscoveryTelemetry.py", line 647>)
+            202 LOAD_CONST              49 ('LPDiscoveryTelemetry._isValidIPv4')
+            204 MAKE_FUNCTION            0
+            206 STORE_NAME              28 (_isValidIPv4)
+
+664         208 LOAD_CONST              50 (<code object _probeHttp at 0x000001F324E69710, file "LPClientFramework\LPDiscoveryTelemetry.py", line 664>)
+            210 LOAD_CONST              51 ('LPDiscoveryTelemetry._probeHttp')
+            212 MAKE_FUNCTION            0
+            214 STORE_NAME              29 (_probeHttp)
+
+690         216 LOAD_CONST              52 (<code object _diagnoseDevice at 0x000001F324E69660, file "LPClientFramework\LPDiscoveryTelemetry.py", line 690>)
+            218 LOAD_CONST              53 ('LPDiscoveryTelemetry._diagnoseDevice')
+            220 MAKE_FUNCTION            0
+            222 STORE_NAME              30 (_diagnoseDevice)
+
+811         224 LOAD_CONST              54 (<code object _normalizeBssid at 0x000001F3253CE0E0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 811>)
+            226 LOAD_CONST              55 ('LPDiscoveryTelemetry._normalizeBssid')
+            228 MAKE_FUNCTION            0
+            230 STORE_NAME              31 (_normalizeBssid)
+            232 LOAD_CONST              56 (None)
+            234 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.__init__ ===
+ 89           0 LOAD_FAST                1 (deviceManager)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (deviceManager)
+
+ 91           6 LOAD_GLOBAL              1 (threading)
+              8 LOAD_METHOD              2 (RLock)
+             10 CALL_METHOD              0
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               3 (_lock)
+
+ 92          16 LOAD_CONST               1 (None)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               4 (_lastSnapshotState)
+
+ 93          22 LOAD_CONST               1 (None)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               5 (_lastGwRaw)
+
+ 94          28 LOAD_CONST               1 (None)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               6 (_lastInternetOk)
+
+ 95          34 LOAD_CONST               2 (0.0)
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               7 (_lastGwChangeTs)
+
+ 97          40 LOAD_CONST               3 (0)
+             42 LOAD_FAST                0 (self)
+             44 STORE_ATTR               8 (_sequence)
+
+ 98          46 LOAD_CONST               2 (0.0)
+             48 LOAD_FAST                0 (self)
+             50 STORE_ATTR               9 (_phaseStartTs)
+
+ 99          52 LOAD_CONST               2 (0.0)
+             54 LOAD_FAST                0 (self)
+             56 STORE_ATTR              10 (_lastSetChangeTs)
+
+100          58 LOAD_GLOBAL              1 (threading)
+             60 LOAD_METHOD             11 (Event)
+             62 CALL_METHOD              0
+             64 LOAD_FAST                0 (self)
+             66 STORE_ATTR              12 (_settleStopEvent)
+
+101          68 LOAD_CONST               1 (None)
+             70 LOAD_FAST                0 (self)
+             72 STORE_ATTR              13 (_settleThread)
+
+102          74 LOAD_GLOBAL             14 (set)
+             76 CALL_FUNCTION            0
+             78 LOAD_FAST                0 (self)
+             80 STORE_ATTR              15 (_reportedKeys)
+
+104          82 BUILD_MAP                0
+             84 LOAD_FAST                0 (self)
+             86 STORE_ATTR              16 (_deviceSources)
+
+105          88 LOAD_GLOBAL             14 (set)
+             90 CALL_FUNCTION            0
+             92 LOAD_FAST                0 (self)
+             94 STORE_ATTR              17 (_cumulativeUuids)
+
+106          96 BUILD_MAP                0
+             98 LOAD_FAST                0 (self)
+            100 STORE_ATTR              18 (_pendingRemovals)
+
+107         102 LOAD_GLOBAL             14 (set)
+            104 CALL_FUNCTION            0
+            106 LOAD_FAST                0 (self)
+            108 STORE_ATTR              19 (_diagnosedHashes)
+
+108         110 LOAD_CONST               4 (False)
+            112 LOAD_FAST                0 (self)
+            114 STORE_ATTR              20 (_diagBusy)
+
+109         116 LOAD_CONST               4 (False)
+            118 LOAD_FAST                0 (self)
+            120 STORE_ATTR              21 (_appStartDone)
+            122 LOAD_CONST               1 (None)
+            124 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._classifyGateway ===
+122           0 LOAD_FAST                1 (gateway)
+              2 POP_JUMP_IF_TRUE         8
+
+123           4 LOAD_CONST               1 ('empty')
+              6 RETURN_VALUE
+
+124     >>    8 SETUP_FINALLY           14 (to 24)
+
+125          10 LOAD_GLOBAL              0 (ipaddress)
+             12 LOAD_METHOD              1 (IPv4Address)
+             14 LOAD_FAST                1 (gateway)
+             16 CALL_METHOD              1
+             18 STORE_FAST               2 (addr)
+             20 POP_BLOCK
+             22 JUMP_FORWARD            20 (to 44)
+
+126     >>   24 DUP_TOP
+             26 LOAD_GLOBAL              2 (Exception)
+             28 JUMP_IF_NOT_EXC_MATCH    42
+             30 POP_TOP
+             32 POP_TOP
+             34 POP_TOP
+
+127          36 POP_EXCEPT
+             38 LOAD_CONST               2 ('other')
+             40 RETURN_VALUE
+        >>   42 RERAISE
+
+128     >>   44 LOAD_FAST                2 (addr)
+             46 LOAD_GLOBAL              0 (ipaddress)
+             48 LOAD_METHOD              3 (ip_network)
+             50 LOAD_CONST               3 ('192.168.0.0/16')
+             52 CALL_METHOD              1
+             54 CONTAINS_OP              0
+             56 POP_JUMP_IF_FALSE       62
+
+129          58 LOAD_CONST               4 ('rfc1918_192')
+             60 RETURN_VALUE
+
+130     >>   62 LOAD_FAST                2 (addr)
+             64 LOAD_GLOBAL              0 (ipaddress)
+             66 LOAD_METHOD              3 (ip_network)
+             68 LOAD_CONST               5 ('10.0.0.0/8')
+             70 CALL_METHOD              1
+             72 CONTAINS_OP              0
+             74 POP_JUMP_IF_FALSE       80
+
+131          76 LOAD_CONST               6 ('rfc1918_10')
+             78 RETURN_VALUE
+
+132     >>   80 LOAD_FAST                2 (addr)
+             82 LOAD_GLOBAL              0 (ipaddress)
+             84 LOAD_METHOD              3 (ip_network)
+             86 LOAD_CONST               7 ('172.16.0.0/12')
+             88 CALL_METHOD              1
+             90 CONTAINS_OP              0
+             92 POP_JUMP_IF_FALSE       98
+
+133          94 LOAD_CONST               8 ('rfc1918_172')
+             96 RETURN_VALUE
+
+134     >>   98 LOAD_FAST                2 (addr)
+            100 LOAD_ATTR                4 (is_global)
+            102 POP_JUMP_IF_FALSE      108
+
+135         104 LOAD_CONST               9 ('public')
+            106 RETURN_VALUE
+
+136     >>  108 LOAD_CONST               2 ('other')
+            110 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.buildNetworkContext ===
+149           0 LOAD_GLOBAL              0 (LPUtility)
+              2 LOAD_METHOD              1 (fetchNetworkInfo)
+              4 CALL_METHOD              0
+              6 JUMP_IF_TRUE_OR_POP     10
+              8 BUILD_MAP                0
+        >>   10 STORE_DEREF              0 (networkInfo)
+
+150          12 LOAD_DEREF               0 (networkInfo)
+             14 LOAD_METHOD              2 (get)
+             16 LOAD_CONST               1 ('gateway')
+             18 LOAD_CONST               2 ('')
+             20 CALL_METHOD              2
+             22 JUMP_IF_TRUE_OR_POP     26
+             24 LOAD_CONST               2 ('')
+        >>   26 STORE_FAST               2 (gateway)
+
+151          28 LOAD_DEREF               0 (networkInfo)
+             30 LOAD_METHOD              2 (get)
+             32 LOAD_CONST               3 ('localIP')
+             34 LOAD_CONST               2 ('')
+             36 CALL_METHOD              2
+             38 JUMP_IF_TRUE_OR_POP     42
+             40 LOAD_CONST               2 ('')
+        >>   42 STORE_FAST               3 (localIP)
+
+152          44 LOAD_GLOBAL              0 (LPUtility)
+             46 LOAD_METHOD              3 (ssidToHexString)
+             48 LOAD_GLOBAL              0 (LPUtility)
+             50 LOAD_METHOD              4 (currentSSID)
+             52 CALL_METHOD              0
+             54 JUMP_IF_TRUE_OR_POP     58
+             56 LOAD_CONST               2 ('')
+        >>   58 CALL_METHOD              1
+             60 JUMP_IF_TRUE_OR_POP     64
+             62 LOAD_CONST               2 ('')
+        >>   64 STORE_FAST               4 (appSsidHex)
+
+153          66 LOAD_GLOBAL              0 (LPUtility)
+             68 LOAD_METHOD              5 (currentBSSID)
+             70 CALL_METHOD              0
+             72 JUMP_IF_TRUE_OR_POP     76
+             74 LOAD_CONST               2 ('')
+        >>   76 STORE_FAST               5 (appBssid)
+
+155          78 LOAD_FAST                2 (gateway)
+             80 POP_JUMP_IF_FALSE       86
+             82 LOAD_CONST               4 ('valid')
+             84 JUMP_FORWARD             2 (to 88)
+        >>   86 LOAD_CONST               5 ('empty')
+        >>   88 STORE_FAST               6 (gatewayStatus)
+
+156          90 LOAD_GLOBAL              6 (time)
+             92 LOAD_METHOD              6 (time)
+             94 CALL_METHOD              0
+             96 LOAD_FAST                0 (self)
+             98 LOAD_ATTR                7 (_lastGwChangeTs)
+            100 BINARY_SUBTRACT
+            102 LOAD_GLOBAL              8 (GW_RECENT_WINDOW_SECONDS)
+            104 COMPARE_OP               0 (<)
+            106 POP_JUMP_IF_FALSE      112
+
+157         108 LOAD_CONST               6 ('recently_changed')
+            110 STORE_FAST               6 (gatewayStatus)
+
+159     >>  112 LOAD_GLOBAL              0 (LPUtility)
+            114 LOAD_METHOD              9 (fetchNetworkType)
+            116 CALL_METHOD              0
+            118 STORE_FAST               7 (ifType)
+
+161         120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR               10 (_lock)
+            124 SETUP_WITH              22 (to 148)
+            126 POP_TOP
+
+162         128 LOAD_FAST                0 (self)
+            130 LOAD_ATTR               11 (_lastInternetOk)
+            132 STORE_FAST               8 (internetOk)
+            134 POP_BLOCK
+            136 LOAD_CONST               7 (None)
+            138 DUP_TOP
+            140 DUP_TOP
+            142 CALL_FUNCTION            3
+            144 POP_TOP
+            146 JUMP_FORWARD            16 (to 164)
+        >>  148 WITH_EXCEPT_START
+            150 POP_JUMP_IF_TRUE       154
+            152 RERAISE
+        >>  154 POP_TOP
+            156 POP_TOP
+            158 POP_TOP
+            160 POP_EXCEPT
+            162 POP_TOP
+
+163     >>  164 LOAD_FAST                8 (internetOk)
+            166 LOAD_CONST               7 (None)
+            168 IS_OP                    0
+            170 POP_JUMP_IF_FALSE      224
+
+164         172 LOAD_GLOBAL              0 (LPUtility)
+            174 LOAD_METHOD             12 (pingGoogle)
+            176 CALL_METHOD              0
+            178 STORE_FAST               8 (internetOk)
+
+165         180 LOAD_FAST                0 (self)
+            182 LOAD_ATTR               10 (_lock)
+            184 SETUP_WITH              22 (to 208)
+            186 POP_TOP
+
+166         188 LOAD_FAST                8 (internetOk)
+            190 LOAD_FAST                0 (self)
+            192 STORE_ATTR              11 (_lastInternetOk)
+            194 POP_BLOCK
+            196 LOAD_CONST               7 (None)
+            198 DUP_TOP
+            200 DUP_TOP
+            202 CALL_FUNCTION            3
+            204 POP_TOP
+            206 JUMP_FORWARD            16 (to 224)
+        >>  208 WITH_EXCEPT_START
+            210 POP_JUMP_IF_TRUE       214
+            212 RERAISE
+        >>  214 POP_TOP
+            216 POP_TOP
+            218 POP_TOP
+            220 POP_EXCEPT
+            222 POP_TOP
+
+169     >>  224 LOAD_FAST                1 (reason)
+
+170         226 LOAD_GLOBAL             13 (bool)
+            228 LOAD_FAST                8 (internetOk)
+            230 CALL_FUNCTION            1
+
+171         232 LOAD_FAST                6 (gatewayStatus)
+
+172         234 LOAD_FAST                0 (self)
+            236 LOAD_METHOD             14 (_classifyGateway)
+            238 LOAD_FAST                2 (gateway)
+            240 CALL_METHOD              1
+
+173         242 LOAD_FAST                7 (ifType)
+            244 LOAD_CONST               8 (('wifi', 'eth'))
+            246 CONTAINS_OP              0
+            248 POP_JUMP_IF_FALSE      254
+            250 LOAD_FAST                7 (ifType)
+            252 JUMP_FORWARD             2 (to 256)
+        >>  254 LOAD_CONST               9 ('none')
+
+174     >>  256 LOAD_GLOBAL             13 (bool)
+            258 LOAD_FAST                3 (localIP)
+            260 CALL_FUNCTION            1
+            262 EXTENDED_ARG             1
+            264 JUMP_IF_FALSE_OR_POP   272
+            266 LOAD_FAST                3 (localIP)
+            268 LOAD_CONST              10 ('0.0.0.0')
+            270 COMPARE_OP               3 (!=)
+
+175     >>  272 LOAD_GLOBAL             13 (bool)
+            274 LOAD_FAST                4 (appSsidHex)
+            276 CALL_FUNCTION            1
+
+176         278 LOAD_GLOBAL             15 (all)
+            280 LOAD_CLOSURE             0 (networkInfo)
+            282 BUILD_TUPLE              1
+            284 LOAD_CONST              11 (<code object <genexpr> at 0x000001F3253DA3A0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 176>)
+            286 LOAD_CONST              12 ('LPDiscoveryTelemetry.buildNetworkContext.<locals>.<genexpr>')
+            288 MAKE_FUNCTION            8 (closure)
+            290 LOAD_CONST              13 (('gateway', 'interface', 'netmask', 'localIP'))
+            292 GET_ITER
+            294 CALL_FUNCTION            1
+            296 CALL_FUNCTION            1
+
+177         298 LOAD_FAST                4 (appSsidHex)
+
+178         300 LOAD_FAST                5 (appBssid)
+
+179         302 LOAD_FAST                3 (localIP)
+
+180         304 LOAD_FAST                2 (gateway)
+
+168         306 LOAD_CONST              14 (('reason', 'internet_ok', 'gateway_status', 'gateway_class', 'if_type', 'local_ip_valid', 'ssid_present', 'network_info_raw_ok', 'ssid', 'bssid', 'ip', 'gateway'))
+            308 BUILD_CONST_KEY_MAP     12
+            310 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.buildNetworkContext.<genexpr> ===
+176           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                16 (to 20)
+              4 STORE_FAST               1 (key)
+              6 LOAD_DEREF               0 (networkInfo)
+              8 LOAD_METHOD              0 (get)
+             10 LOAD_FAST                1 (key)
+             12 CALL_METHOD              1
+             14 YIELD_VALUE
+             16 POP_TOP
+             18 JUMP_ABSOLUTE            2
+        >>   20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._snapshotStateKey ===
+192           0 LOAD_CONST               1 (('internet_ok', 'gateway_status', 'gateway_class', 'if_type', 'local_ip_valid', 'ssid_present', 'network_info_raw_ok'))
+              2 STORE_FAST               2 (keys)
+
+194           4 LOAD_GLOBAL              0 (tuple)
+              6 LOAD_CLOSURE             0 (context)
+              8 BUILD_TUPLE              1
+             10 LOAD_CONST               2 (<code object <genexpr> at 0x000001F3253DA660, file "LPClientFramework\LPDiscoveryTelemetry.py", line 194>)
+             12 LOAD_CONST               3 ('LPDiscoveryTelemetry._snapshotStateKey.<locals>.<genexpr>')
+             14 MAKE_FUNCTION            8 (closure)
+             16 LOAD_FAST                2 (keys)
+             18 GET_ITER
+             20 CALL_FUNCTION            1
+             22 CALL_FUNCTION            1
+             24 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._snapshotStateKey.<genexpr> ===
+194           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                16 (to 20)
+              4 STORE_FAST               1 (key)
+              6 LOAD_DEREF               0 (context)
+              8 LOAD_METHOD              0 (get)
+             10 LOAD_FAST                1 (key)
+             12 CALL_METHOD              1
+             14 YIELD_VALUE
+             16 POP_TOP
+             18 JUMP_ABSOLUTE            2
+        >>   20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._joinList ===
+207           0 LOAD_CONST               1 (',')
+              2 LOAD_METHOD              0 (join)
+              4 LOAD_CONST               2 (<code object <genexpr> at 0x000001F3253DA710, file "LPClientFramework\LPDiscoveryTelemetry.py", line 207>)
+              6 LOAD_CONST               3 ('LPDiscoveryTelemetry._joinList.<locals>.<genexpr>')
+              8 MAKE_FUNCTION            0
+             10 LOAD_GLOBAL              1 (sorted)
+             12 LOAD_FAST                1 (items)
+             14 CALL_FUNCTION            1
+             16 GET_ITER
+             18 CALL_FUNCTION            1
+             20 CALL_METHOD              1
+             22 STORE_FAST               3 (joined)
+
+208          24 LOAD_GLOBAL              2 (len)
+             26 LOAD_FAST                3 (joined)
+             28 CALL_FUNCTION            1
+             30 LOAD_FAST                2 (limit)
+             32 COMPARE_OP               1 (<=)
+             34 POP_JUMP_IF_FALSE       40
+
+209          36 LOAD_FAST                3 (joined)
+             38 RETURN_VALUE
+
+210     >>   40 LOAD_FAST                3 (joined)
+             42 LOAD_CONST               4 (None)
+             44 LOAD_GLOBAL              3 (max)
+             46 LOAD_CONST               5 (0)
+             48 LOAD_FAST                2 (limit)
+             50 LOAD_CONST               6 (3)
+             52 BINARY_SUBTRACT
+             54 CALL_FUNCTION            2
+             56 BUILD_SLICE              2
+             58 BINARY_SUBSCR
+             60 LOAD_CONST               7 ('...')
+             62 BINARY_ADD
+             64 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._joinList.<genexpr> ===
+207           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (x)
+              6 LOAD_GLOBAL              0 (str)
+              8 LOAD_FAST                1 (x)
+             10 CALL_FUNCTION            1
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._cleanContextForEvent ===
+221           0 BUILD_MAP                0
+              2 STORE_FAST               2 (result)
+
+222           4 LOAD_GLOBAL              0 (_CONTEXT_EXPOSE_KEYS)
+              6 GET_ITER
+        >>    8 FOR_ITER                52 (to 62)
+             10 STORE_FAST               3 (key)
+
+223          12 LOAD_FAST                1 (context)
+             14 LOAD_METHOD              1 (get)
+             16 LOAD_FAST                3 (key)
+             18 CALL_METHOD              1
+             20 STORE_FAST               4 (value)
+
+224          22 LOAD_GLOBAL              2 (isinstance)
+             24 LOAD_FAST                4 (value)
+             26 LOAD_GLOBAL              3 (bool)
+             28 CALL_FUNCTION            2
+             30 POP_JUMP_IF_FALSE       40
+
+225          32 LOAD_GLOBAL              4 (int)
+             34 LOAD_FAST                4 (value)
+             36 CALL_FUNCTION            1
+             38 STORE_FAST               4 (value)
+
+226     >>   40 LOAD_FAST                4 (value)
+             42 LOAD_CONST               1 (None)
+             44 IS_OP                    0
+             46 POP_JUMP_IF_FALSE       52
+
+227          48 LOAD_CONST               2 ('')
+             50 STORE_FAST               4 (value)
+
+228     >>   52 LOAD_FAST                4 (value)
+             54 LOAD_FAST                2 (result)
+             56 LOAD_FAST                3 (key)
+             58 STORE_SUBSCR
+             60 JUMP_ABSOLUTE            8
+
+229     >>   62 LOAD_FAST                2 (result)
+             64 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._flattenDeviceFields ===
+240           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (deviceInfo)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       24
+             10 LOAD_FAST                1 (deviceInfo)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_CONST               1 ('networkInfo')
+             16 CALL_METHOD              1
+             18 JUMP_IF_TRUE_OR_POP     26
+             20 BUILD_MAP                0
+             22 JUMP_FORWARD             2 (to 26)
+        >>   24 BUILD_MAP                0
+        >>   26 STORE_FAST               2 (networkInfo)
+
+241          28 LOAD_CONST               2 (<code object _plain at 0x000001F3253DABE0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 241>)
+             30 LOAD_CONST               3 ('LPDiscoveryTelemetry._flattenDeviceFields.<locals>._plain')
+             32 MAKE_FUNCTION            0
+             34 STORE_FAST               3 (_plain)
+
+245          36 LOAD_FAST                2 (networkInfo)
+             38 POP_JUMP_IF_FALSE       60
+             40 LOAD_FAST                2 (networkInfo)
+             42 LOAD_METHOD              2 (get)
+             44 LOAD_CONST               4 ('wlan0')
+             46 CALL_METHOD              1
+             48 JUMP_IF_TRUE_OR_POP     62
+             50 LOAD_FAST                2 (networkInfo)
+             52 LOAD_METHOD              2 (get)
+             54 LOAD_CONST               5 ('eth0')
+             56 CALL_METHOD              1
+             58 JUMP_FORWARD             2 (to 62)
+        >>   60 LOAD_CONST               6 ('')
+        >>   62 STORE_FAST               4 (cloudIP)
+
+246          64 LOAD_FAST                0 (self)
+             66 LOAD_METHOD              3 (_isValidIPv4)
+             68 LOAD_FAST                4 (cloudIP)
+             70 CALL_METHOD              1
+             72 POP_JUMP_IF_TRUE        78
+
+247          74 LOAD_CONST               6 ('')
+             76 STORE_FAST               4 (cloudIP)
+
+249     >>   78 LOAD_FAST                3 (_plain)
+             80 LOAD_GLOBAL              0 (isinstance)
+             82 LOAD_FAST                1 (deviceInfo)
+             84 LOAD_GLOBAL              1 (dict)
+             86 CALL_FUNCTION            2
+             88 POP_JUMP_IF_FALSE      100
+             90 LOAD_FAST                1 (deviceInfo)
+             92 LOAD_METHOD              2 (get)
+             94 LOAD_CONST               7 ('connectStatus')
+             96 CALL_METHOD              1
+             98 JUMP_FORWARD             2 (to 102)
+        >>  100 LOAD_CONST               6 ('')
+        >>  102 CALL_FUNCTION            1
+
+250         104 LOAD_FAST                3 (_plain)
+            106 LOAD_GLOBAL              0 (isinstance)
+            108 LOAD_FAST                1 (deviceInfo)
+            110 LOAD_GLOBAL              1 (dict)
+            112 CALL_FUNCTION            2
+            114 POP_JUMP_IF_FALSE      126
+            116 LOAD_FAST                1 (deviceInfo)
+            118 LOAD_METHOD              2 (get)
+            120 LOAD_CONST               8 ('source')
+            122 CALL_METHOD              1
+            124 JUMP_FORWARD             2 (to 128)
+        >>  126 LOAD_CONST               6 ('')
+        >>  128 CALL_FUNCTION            1
+
+251         130 LOAD_FAST                3 (_plain)
+            132 LOAD_GLOBAL              0 (isinstance)
+            134 LOAD_FAST                1 (deviceInfo)
+            136 LOAD_GLOBAL              1 (dict)
+            138 CALL_FUNCTION            2
+            140 POP_JUMP_IF_FALSE      152
+            142 LOAD_FAST                1 (deviceInfo)
+            144 LOAD_METHOD              2 (get)
+            146 LOAD_CONST               9 ('iotVersion')
+            148 CALL_METHOD              1
+            150 JUMP_FORWARD             2 (to 154)
+        >>  152 LOAD_CONST               6 ('')
+        >>  154 CALL_FUNCTION            1
+
+252         156 LOAD_FAST                3 (_plain)
+            158 LOAD_GLOBAL              0 (isinstance)
+            160 LOAD_FAST                1 (deviceInfo)
+            162 LOAD_GLOBAL              1 (dict)
+            164 CALL_FUNCTION            2
+            166 POP_JUMP_IF_FALSE      178
+            168 LOAD_FAST                1 (deviceInfo)
+            170 LOAD_METHOD              2 (get)
+            172 LOAD_CONST              10 ('otaStatus')
+            174 CALL_METHOD              1
+            176 JUMP_FORWARD             2 (to 180)
+        >>  178 LOAD_CONST               6 ('')
+        >>  180 CALL_FUNCTION            1
+
+253         182 LOAD_FAST                3 (_plain)
+            184 LOAD_GLOBAL              0 (isinstance)
+            186 LOAD_FAST                2 (networkInfo)
+            188 LOAD_GLOBAL              1 (dict)
+            190 CALL_FUNCTION            2
+            192 POP_JUMP_IF_FALSE      204
+            194 LOAD_FAST                2 (networkInfo)
+            196 LOAD_METHOD              2 (get)
+            198 LOAD_CONST              11 ('wlanRssi')
+            200 CALL_METHOD              1
+            202 JUMP_FORWARD             2 (to 206)
+        >>  204 LOAD_CONST               6 ('')
+        >>  206 CALL_FUNCTION            1
+
+254         208 LOAD_FAST                4 (cloudIP)
+
+248         210 LOAD_CONST              12 (('dev_connect_status', 'dev_source', 'dev_iot_version', 'dev_ota_status', 'dev_wlan_rssi', 'dev_ip'))
+            212 BUILD_CONST_KEY_MAP      6
+            214 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._flattenDeviceFields._plain ===
+242           0 LOAD_FAST                0 (value)
+              2 LOAD_CONST               0 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+243           8 LOAD_CONST               1 ('')
+             10 RETURN_VALUE
+
+244     >>   12 LOAD_GLOBAL              0 (str)
+             14 LOAD_FAST                0 (value)
+             16 CALL_FUNCTION            1
+             18 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.snapshot ===
+269           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (buildNetworkContext)
+              4 LOAD_FAST                1 (reason)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (context)
+
+270          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_snapshotStateKey)
+             14 LOAD_FAST                2 (context)
+             16 CALL_METHOD              1
+             18 STORE_FAST               3 (stateKey)
+
+271          20 LOAD_FAST                1 (reason)
+             22 LOAD_CONST               1 (('app_start', 'network_change'))
+             24 CONTAINS_OP              0
+             26 STORE_FAST               4 (alwaysSend)
+
+272          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                2 (_lock)
+             32 SETUP_WITH              40 (to 74)
+             34 POP_TOP
+
+273          36 LOAD_FAST                3 (stateKey)
+             38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                3 (_lastSnapshotState)
+             42 COMPARE_OP               3 (!=)
+             44 STORE_FAST               5 (changed)
+
+274          46 LOAD_FAST                5 (changed)
+             48 POP_JUMP_IF_TRUE        54
+             50 LOAD_FAST                4 (alwaysSend)
+             52 POP_JUMP_IF_FALSE       60
+
+275     >>   54 LOAD_FAST                3 (stateKey)
+             56 LOAD_FAST                0 (self)
+             58 STORE_ATTR               3 (_lastSnapshotState)
+        >>   60 POP_BLOCK
+             62 LOAD_CONST               2 (None)
+             64 DUP_TOP
+             66 DUP_TOP
+             68 CALL_FUNCTION            3
+             70 POP_TOP
+             72 JUMP_FORWARD            16 (to 90)
+        >>   74 WITH_EXCEPT_START
+             76 POP_JUMP_IF_TRUE        80
+             78 RERAISE
+        >>   80 POP_TOP
+             82 POP_TOP
+             84 POP_TOP
+             86 POP_EXCEPT
+             88 POP_TOP
+
+276     >>   90 LOAD_FAST                5 (changed)
+             92 POP_JUMP_IF_TRUE        98
+             94 LOAD_FAST                4 (alwaysSend)
+             96 POP_JUMP_IF_FALSE      200
+
+278     >>   98 LOAD_GLOBAL              4 (dict)
+            100 LOAD_FAST                2 (context)
+            102 CALL_FUNCTION            1
+            104 STORE_FAST               6 (eventParams)
+
+279         106 LOAD_FAST                6 (eventParams)
+            108 LOAD_METHOD              5 (items)
+            110 CALL_METHOD              0
+            112 GET_ITER
+        >>  114 FOR_ITER                48 (to 164)
+            116 UNPACK_SEQUENCE          2
+            118 STORE_FAST               7 (key)
+            120 STORE_FAST               8 (value)
+
+280         122 LOAD_GLOBAL              6 (isinstance)
+            124 LOAD_FAST                8 (value)
+            126 LOAD_GLOBAL              7 (bool)
+            128 CALL_FUNCTION            2
+            130 POP_JUMP_IF_FALSE      146
+
+281         132 LOAD_GLOBAL              8 (int)
+            134 LOAD_FAST                8 (value)
+            136 CALL_FUNCTION            1
+            138 LOAD_FAST                6 (eventParams)
+            140 LOAD_FAST                7 (key)
+            142 STORE_SUBSCR
+            144 JUMP_ABSOLUTE          114
+
+282     >>  146 LOAD_FAST                8 (value)
+            148 LOAD_CONST               2 (None)
+            150 IS_OP                    0
+            152 POP_JUMP_IF_FALSE      114
+
+283         154 LOAD_CONST               3 ('')
+            156 LOAD_FAST                6 (eventParams)
+            158 LOAD_FAST                7 (key)
+            160 STORE_SUBSCR
+            162 JUMP_ABSOLUTE          114
+
+284     >>  164 LOAD_GLOBAL              9 (LPGlobalUI)
+            166 LOAD_ATTR               10 (eventTrack)
+            168 LOAD_METHOD             11 (logEvent)
+            170 LOAD_GLOBAL             12 (LPEventsType)
+            172 LOAD_ATTR               13 (NETWORK_CONTEXT_SNAPSHOT)
+            174 LOAD_ATTR               14 (value)
+            176 LOAD_FAST                6 (eventParams)
+            178 CALL_METHOD              2
+            180 POP_TOP
+
+285         182 LOAD_GLOBAL             15 (logger)
+            184 LOAD_METHOD             16 (info)
+            186 LOAD_CONST               4 ('[discovery-telemetry] snapshot sent, reason=%s, state=%s')
+            188 LOAD_FAST                1 (reason)
+            190 LOAD_FAST                3 (stateKey)
+            192 BUILD_TUPLE              2
+            194 BINARY_MODULO
+            196 CALL_METHOD              1
+            198 POP_TOP
+
+286     >>  200 LOAD_FAST                2 (context)
+            202 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.appStart ===
+299           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              44 (to 50)
+              6 POP_TOP
+
+300           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_appStartDone)
+             12 POP_JUMP_IF_FALSE       30
+
+301          14 POP_BLOCK
+             16 LOAD_CONST               1 (None)
+             18 DUP_TOP
+             20 DUP_TOP
+             22 CALL_FUNCTION            3
+             24 POP_TOP
+             26 LOAD_CONST               1 (None)
+             28 RETURN_VALUE
+
+302     >>   30 LOAD_CONST               2 (True)
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               1 (_appStartDone)
+             36 POP_BLOCK
+             38 LOAD_CONST               1 (None)
+             40 DUP_TOP
+             42 DUP_TOP
+             44 CALL_FUNCTION            3
+             46 POP_TOP
+             48 JUMP_FORWARD            16 (to 66)
+        >>   50 WITH_EXCEPT_START
+             52 POP_JUMP_IF_TRUE        56
+             54 RERAISE
+        >>   56 POP_TOP
+             58 POP_TOP
+             60 POP_TOP
+             62 POP_EXCEPT
+             64 POP_TOP
+
+304     >>   66 LOAD_GLOBAL              2 (threading)
+             68 LOAD_ATTR                3 (Thread)
+             70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR                4 (_appStartWorker)
+             74 LOAD_CONST               3 ('DiscoveryTelemetryAppStart')
+             76 LOAD_CONST               2 (True)
+             78 LOAD_CONST               4 (('target', 'name', 'daemon'))
+             80 CALL_FUNCTION_KW         3
+             82 LOAD_METHOD              5 (start)
+             84 CALL_METHOD              0
+             86 POP_TOP
+             88 LOAD_CONST               1 (None)
+             90 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._appStartWorker ===
+308           0 SETUP_FINALLY           26 (to 28)
+
+309           2 LOAD_FAST                0 (self)
+              4 LOAD_METHOD              0 (snapshot)
+              6 LOAD_CONST               1 ('app_start')
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+310          12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              1 (_startSettleCycle)
+             16 LOAD_CONST               1 ('app_start')
+             18 LOAD_GLOBAL              2 (START_SETTLE_SECONDS)
+             20 CALL_METHOD              2
+             22 POP_TOP
+             24 POP_BLOCK
+             26 JUMP_FORWARD            50 (to 78)
+
+311     >>   28 DUP_TOP
+             30 LOAD_GLOBAL              3 (Exception)
+             32 JUMP_IF_NOT_EXC_MATCH    76
+             34 POP_TOP
+             36 STORE_FAST               1 (e)
+             38 POP_TOP
+             40 SETUP_FINALLY           26 (to 68)
+
+312          42 LOAD_GLOBAL              4 (logger)
+             44 LOAD_METHOD              5 (warning)
+             46 LOAD_CONST               2 ('[discovery-telemetry] appStart exception: %s')
+             48 LOAD_FAST                1 (e)
+             50 BINARY_MODULO
+             52 CALL_METHOD              1
+             54 POP_TOP
+             56 POP_BLOCK
+             58 POP_EXCEPT
+             60 LOAD_CONST               3 (None)
+             62 STORE_FAST               1 (e)
+             64 DELETE_FAST              1 (e)
+             66 JUMP_FORWARD            10 (to 78)
+        >>   68 LOAD_CONST               3 (None)
+             70 STORE_FAST               1 (e)
+             72 DELETE_FAST              1 (e)
+             74 RERAISE
+        >>   76 RERAISE
+        >>   78 LOAD_CONST               3 (None)
+             80 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.onNetworkChanged ===
+325           0 SETUP_FINALLY          104 (to 106)
+
+326           2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_lock)
+              6 SETUP_WITH              36 (to 44)
+              8 POP_TOP
+
+327          10 LOAD_FAST                0 (self)
+             12 DUP_TOP
+             14 LOAD_ATTR                1 (_sequence)
+             16 LOAD_CONST               1 (1)
+             18 INPLACE_ADD
+             20 ROT_TWO
+             22 STORE_ATTR               1 (_sequence)
+
+328          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                1 (_sequence)
+             28 STORE_FAST               3 (sequence)
+             30 POP_BLOCK
+             32 LOAD_CONST               2 (None)
+             34 DUP_TOP
+             36 DUP_TOP
+             38 CALL_FUNCTION            3
+             40 POP_TOP
+             42 JUMP_FORWARD            16 (to 60)
+        >>   44 WITH_EXCEPT_START
+             46 POP_JUMP_IF_TRUE        50
+             48 RERAISE
+        >>   50 POP_TOP
+             52 POP_TOP
+             54 POP_TOP
+             56 POP_EXCEPT
+             58 POP_TOP
+
+329     >>   60 LOAD_FAST                0 (self)
+             62 LOAD_METHOD              2 (snapshot)
+             64 LOAD_CONST               3 ('network_change')
+             66 CALL_METHOD              1
+             68 POP_TOP
+
+330          70 LOAD_FAST                0 (self)
+             72 LOAD_METHOD              3 (_startSettleCycle)
+             74 LOAD_CONST               3 ('network_change')
+             76 LOAD_GLOBAL              4 (CHANGE_SETTLE_SECONDS)
+             78 CALL_METHOD              2
+             80 POP_TOP
+
+331          82 LOAD_GLOBAL              5 (logger)
+             84 LOAD_METHOD              6 (info)
+             86 LOAD_CONST               4 ('[discovery-telemetry] network change %s -> %s, sequence=%d')
+             88 LOAD_FAST                1 (oldGW)
+             90 LOAD_FAST                2 (newGW)
+             92 LOAD_FAST                3 (sequence)
+             94 BUILD_TUPLE              3
+             96 BINARY_MODULO
+             98 CALL_METHOD              1
+            100 POP_TOP
+            102 POP_BLOCK
+            104 JUMP_FORWARD            50 (to 156)
+
+332     >>  106 DUP_TOP
+            108 LOAD_GLOBAL              7 (Exception)
+            110 JUMP_IF_NOT_EXC_MATCH   154
+            112 POP_TOP
+            114 STORE_FAST               4 (e)
+            116 POP_TOP
+            118 SETUP_FINALLY           26 (to 146)
+
+333         120 LOAD_GLOBAL              5 (logger)
+            122 LOAD_METHOD              8 (warning)
+            124 LOAD_CONST               5 ('[discovery-telemetry] onNetworkChanged exception: %s')
+            126 LOAD_FAST                4 (e)
+            128 BINARY_MODULO
+            130 CALL_METHOD              1
+            132 POP_TOP
+            134 POP_BLOCK
+            136 POP_EXCEPT
+            138 LOAD_CONST               2 (None)
+            140 STORE_FAST               4 (e)
+            142 DELETE_FAST              4 (e)
+            144 JUMP_FORWARD            10 (to 156)
+        >>  146 LOAD_CONST               2 (None)
+            148 STORE_FAST               4 (e)
+            150 DELETE_FAST              4 (e)
+            152 RERAISE
+        >>  154 RERAISE
+        >>  156 LOAD_CONST               2 (None)
+            158 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._startSettleCycle ===
+345           0 LOAD_GLOBAL              0 (time)
+              2 LOAD_METHOD              0 (time)
+              4 CALL_METHOD              0
+              6 STORE_FAST               3 (now)
+
+346           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_lock)
+             12 SETUP_WITH             114 (to 128)
+             14 POP_TOP
+
+347          16 LOAD_FAST                3 (now)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               2 (_phaseStartTs)
+
+348          22 LOAD_FAST                3 (now)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               3 (_lastSetChangeTs)
+
+349          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                4 (_settleThread)
+             32 LOAD_CONST               1 (None)
+             34 IS_OP                    1
+             36 POP_JUMP_IF_FALSE       58
+             38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                4 (_settleThread)
+             42 LOAD_METHOD              5 (is_alive)
+             44 CALL_METHOD              0
+             46 POP_JUMP_IF_FALSE       58
+
+350          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                6 (_settleStopEvent)
+             52 LOAD_METHOD              7 (set)
+             54 CALL_METHOD              0
+             56 POP_TOP
+
+351     >>   58 LOAD_GLOBAL              8 (threading)
+             60 LOAD_METHOD              9 (Event)
+             62 CALL_METHOD              0
+             64 STORE_FAST               4 (stopEvent)
+
+352          66 LOAD_FAST                4 (stopEvent)
+             68 LOAD_FAST                0 (self)
+             70 STORE_ATTR               6 (_settleStopEvent)
+
+353          72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR               10 (_sequence)
+             76 STORE_FAST               5 (sequence)
+
+354          78 LOAD_GLOBAL              8 (threading)
+             80 LOAD_ATTR               11 (Thread)
+
+355          82 LOAD_FAST                0 (self)
+             84 LOAD_ATTR               12 (_settleLoop)
+
+356          86 LOAD_FAST                1 (phase)
+             88 LOAD_FAST                5 (sequence)
+             90 LOAD_FAST                2 (baseDelay)
+             92 LOAD_FAST                3 (now)
+             94 LOAD_FAST                4 (stopEvent)
+             96 BUILD_TUPLE              5
+
+357          98 LOAD_CONST               2 ('DiscoveryTelemetrySettle')
+
+358         100 LOAD_CONST               3 (True)
+
+354         102 LOAD_CONST               4 (('target', 'args', 'name', 'daemon'))
+            104 CALL_FUNCTION_KW         4
+            106 STORE_FAST               6 (thread)
+
+360         108 LOAD_FAST                6 (thread)
+            110 LOAD_FAST                0 (self)
+            112 STORE_ATTR               4 (_settleThread)
+            114 POP_BLOCK
+            116 LOAD_CONST               1 (None)
+            118 DUP_TOP
+            120 DUP_TOP
+            122 CALL_FUNCTION            3
+            124 POP_TOP
+            126 JUMP_FORWARD            16 (to 144)
+        >>  128 WITH_EXCEPT_START
+            130 POP_JUMP_IF_TRUE       134
+            132 RERAISE
+        >>  134 POP_TOP
+            136 POP_TOP
+            138 POP_TOP
+            140 POP_EXCEPT
+            142 POP_TOP
+
+361     >>  144 LOAD_FAST                6 (thread)
+            146 LOAD_METHOD             13 (start)
+            148 CALL_METHOD              0
+            150 POP_TOP
+            152 LOAD_CONST               1 (None)
+            154 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._settleLoop ===
+377           0 SETUP_FINALLY          186 (to 188)
+
+378     >>    2 LOAD_FAST                5 (stopEvent)
+              4 LOAD_METHOD              0 (is_set)
+              6 CALL_METHOD              0
+              8 POP_JUMP_IF_TRUE       184
+
+379          10 LOAD_GLOBAL              1 (time)
+             12 LOAD_METHOD              2 (sleep)
+             14 LOAD_CONST               1 (1)
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+380          20 LOAD_FAST                5 (stopEvent)
+             22 LOAD_METHOD              0 (is_set)
+             24 CALL_METHOD              0
+             26 POP_JUMP_IF_FALSE       34
+
+381          28 POP_BLOCK
+             30 LOAD_CONST               2 (None)
+             32 RETURN_VALUE
+
+382     >>   34 LOAD_GLOBAL              1 (time)
+             36 LOAD_METHOD              1 (time)
+             38 CALL_METHOD              0
+             40 STORE_FAST               6 (now)
+
+383          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                3 (_lock)
+             46 SETUP_WITH              22 (to 70)
+             48 POP_TOP
+
+384          50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                4 (_lastSetChangeTs)
+             54 STORE_FAST               7 (lastSetChange)
+             56 POP_BLOCK
+             58 LOAD_CONST               2 (None)
+             60 DUP_TOP
+             62 DUP_TOP
+             64 CALL_FUNCTION            3
+             66 POP_TOP
+             68 JUMP_FORWARD            16 (to 86)
+        >>   70 WITH_EXCEPT_START
+             72 POP_JUMP_IF_TRUE        76
+             74 RERAISE
+        >>   76 POP_TOP
+             78 POP_TOP
+             80 POP_TOP
+             82 POP_EXCEPT
+             84 POP_TOP
+
+385     >>   86 LOAD_FAST                6 (now)
+             88 LOAD_FAST                4 (phaseStart)
+             90 BINARY_SUBTRACT
+             92 LOAD_FAST                3 (baseDelay)
+             94 COMPARE_OP               5 (>=)
+             96 POP_JUMP_IF_FALSE      140
+
+386          98 LOAD_FAST                6 (now)
+            100 LOAD_FAST                7 (lastSetChange)
+            102 BINARY_SUBTRACT
+            104 LOAD_GLOBAL              5 (QUIET_SECONDS)
+            106 COMPARE_OP               5 (>=)
+
+385         108 POP_JUMP_IF_FALSE      140
+
+387         110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR                6 (_report)
+            114 LOAD_FAST                1 (phase)
+            116 LOAD_FAST                2 (sequence)
+            118 LOAD_CONST               3 (True)
+            120 LOAD_CONST               4 (('settled',))
+            122 CALL_FUNCTION_KW         3
+            124 POP_TOP
+
+388         126 LOAD_FAST                0 (self)
+            128 LOAD_METHOD              7 (_checkOfflineDevices)
+            130 CALL_METHOD              0
+            132 POP_TOP
+
+389         134 POP_BLOCK
+            136 LOAD_CONST               2 (None)
+            138 RETURN_VALUE
+
+390     >>  140 LOAD_FAST                6 (now)
+            142 LOAD_FAST                4 (phaseStart)
+            144 BINARY_SUBTRACT
+            146 LOAD_GLOBAL              8 (FORCE_REPORT_SECONDS)
+            148 COMPARE_OP               5 (>=)
+            150 POP_JUMP_IF_FALSE        2
+
+391         152 LOAD_FAST                0 (self)
+            154 LOAD_ATTR                6 (_report)
+            156 LOAD_FAST                1 (phase)
+            158 LOAD_FAST                2 (sequence)
+            160 LOAD_CONST               5 (False)
+            162 LOAD_CONST               4 (('settled',))
+            164 CALL_FUNCTION_KW         3
+            166 POP_TOP
+
+392         168 LOAD_FAST                0 (self)
+            170 LOAD_METHOD              7 (_checkOfflineDevices)
+            172 CALL_METHOD              0
+            174 POP_TOP
+
+393         176 POP_BLOCK
+            178 LOAD_CONST               2 (None)
+            180 RETURN_VALUE
+            182 JUMP_ABSOLUTE            2
+        >>  184 POP_BLOCK
+            186 JUMP_FORWARD            50 (to 238)
+
+394     >>  188 DUP_TOP
+            190 LOAD_GLOBAL              9 (Exception)
+            192 JUMP_IF_NOT_EXC_MATCH   236
+            194 POP_TOP
+            196 STORE_FAST               8 (e)
+            198 POP_TOP
+            200 SETUP_FINALLY           26 (to 228)
+
+395         202 LOAD_GLOBAL             10 (logger)
+            204 LOAD_METHOD             11 (warning)
+            206 LOAD_CONST               6 ('[discovery-telemetry] settleLoop exception: %s')
+            208 LOAD_FAST                8 (e)
+            210 BINARY_MODULO
+            212 CALL_METHOD              1
+            214 POP_TOP
+            216 POP_BLOCK
+            218 POP_EXCEPT
+            220 LOAD_CONST               2 (None)
+            222 STORE_FAST               8 (e)
+            224 DELETE_FAST              8 (e)
+            226 JUMP_FORWARD            10 (to 238)
+        >>  228 LOAD_CONST               2 (None)
+            230 STORE_FAST               8 (e)
+            232 DELETE_FAST              8 (e)
+            234 RERAISE
+        >>  236 RERAISE
+        >>  238 LOAD_CONST               2 (None)
+            240 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._onlineUuids ===
+406           0 SETUP_FINALLY           24 (to 26)
+
+407           2 LOAD_GLOBAL              0 (set)
+              4 LOAD_CONST               1 (<code object <genexpr> at 0x000001F3253A2BE0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 407>)
+              6 LOAD_CONST               2 ('LPDiscoveryTelemetry._onlineUuids.<locals>.<genexpr>')
+              8 MAKE_FUNCTION            0
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (deviceManager)
+             14 LOAD_ATTR                2 (deviceList)
+             16 GET_ITER
+             18 CALL_FUNCTION            1
+             20 CALL_FUNCTION            1
+             22 POP_BLOCK
+             24 RETURN_VALUE
+
+408     >>   26 DUP_TOP
+             28 LOAD_GLOBAL              3 (Exception)
+             30 JUMP_IF_NOT_EXC_MATCH    48
+             32 POP_TOP
+             34 POP_TOP
+             36 POP_TOP
+
+409          38 LOAD_GLOBAL              0 (set)
+             40 CALL_FUNCTION            0
+             42 ROT_FOUR
+             44 POP_EXCEPT
+             46 RETURN_VALUE
+        >>   48 RERAISE
+             50 LOAD_CONST               3 (None)
+             52 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._onlineUuids.<genexpr> ===
+407           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                18 (to 22)
+              4 STORE_FAST               1 (d)
+              6 LOAD_FAST                1 (d)
+              8 LOAD_ATTR                0 (uuid)
+             10 POP_JUMP_IF_FALSE        2
+             12 LOAD_FAST                1 (d)
+             14 LOAD_ATTR                0 (uuid)
+             16 YIELD_VALUE
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            2
+        >>   22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._report ===
+422           0 EXTENDED_ARG             1
+              2 SETUP_FINALLY          366 (to 370)
+
+423           4 LOAD_FAST                1 (phase)
+              6 LOAD_FAST                2 (sequence)
+              8 BUILD_TUPLE              2
+             10 STORE_FAST               4 (reportKey)
+
+424          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                0 (_lock)
+             16 SETUP_WITH              78 (to 96)
+             18 POP_TOP
+
+425          20 LOAD_FAST                4 (reportKey)
+             22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                1 (_reportedKeys)
+             26 CONTAINS_OP              0
+             28 POP_JUMP_IF_FALSE       48
+
+426          30 POP_BLOCK
+             32 LOAD_CONST               1 (None)
+             34 DUP_TOP
+             36 DUP_TOP
+             38 CALL_FUNCTION            3
+             40 POP_TOP
+             42 POP_BLOCK
+             44 LOAD_CONST               1 (None)
+             46 RETURN_VALUE
+
+427     >>   48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                1 (_reportedKeys)
+             52 LOAD_METHOD              2 (add)
+             54 LOAD_FAST                4 (reportKey)
+             56 CALL_METHOD              1
+             58 POP_TOP
+
+428          60 LOAD_GLOBAL              3 (int)
+             62 LOAD_GLOBAL              4 (time)
+             64 LOAD_METHOD              4 (time)
+             66 CALL_METHOD              0
+             68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                5 (_phaseStartTs)
+             72 BINARY_SUBTRACT
+             74 LOAD_CONST               2 (1000)
+             76 BINARY_MULTIPLY
+             78 CALL_FUNCTION            1
+             80 STORE_FAST               5 (elapsedMs)
+             82 POP_BLOCK
+             84 LOAD_CONST               1 (None)
+             86 DUP_TOP
+             88 DUP_TOP
+             90 CALL_FUNCTION            3
+             92 POP_TOP
+             94 JUMP_FORWARD            16 (to 112)
+        >>   96 WITH_EXCEPT_START
+             98 POP_JUMP_IF_TRUE       102
+            100 RERAISE
+        >>  102 POP_TOP
+            104 POP_TOP
+            106 POP_TOP
+            108 POP_EXCEPT
+            110 POP_TOP
+
+430     >>  112 LOAD_FAST                0 (self)
+            114 LOAD_METHOD              6 (_onlineUuids)
+            116 CALL_METHOD              0
+            118 STORE_FAST               6 (online)
+
+431         120 LOAD_CONST               3 (0)
+            122 STORE_FAST               7 (ssdpCount)
+
+432         124 LOAD_CONST               3 (0)
+            126 STORE_FAST               8 (mdnsCount)
+
+433         128 LOAD_FAST                0 (self)
+            130 LOAD_ATTR                0 (_lock)
+            132 SETUP_WITH              84 (to 218)
+            134 POP_TOP
+
+434         136 LOAD_FAST                6 (online)
+            138 GET_ITER
+        >>  140 FOR_ITER                52 (to 194)
+            142 STORE_FAST               9 (uuid)
+
+435         144 LOAD_FAST                0 (self)
+            146 LOAD_ATTR                7 (_deviceSources)
+            148 LOAD_METHOD              8 (get)
+            150 LOAD_FAST                9 (uuid)
+            152 LOAD_GLOBAL              9 (set)
+            154 CALL_FUNCTION            0
+            156 CALL_METHOD              2
+            158 STORE_FAST              10 (sources)
+
+436         160 LOAD_CONST               4 ('ssdp')
+            162 LOAD_FAST               10 (sources)
+            164 CONTAINS_OP              0
+            166 POP_JUMP_IF_FALSE      176
+
+437         168 LOAD_FAST                7 (ssdpCount)
+            170 LOAD_CONST               5 (1)
+            172 INPLACE_ADD
+            174 STORE_FAST               7 (ssdpCount)
+
+438     >>  176 LOAD_CONST               6 ('mdns')
+            178 LOAD_FAST               10 (sources)
+            180 CONTAINS_OP              0
+            182 POP_JUMP_IF_FALSE      140
+
+439         184 LOAD_FAST                8 (mdnsCount)
+            186 LOAD_CONST               5 (1)
+            188 INPLACE_ADD
+            190 STORE_FAST               8 (mdnsCount)
+            192 JUMP_ABSOLUTE          140
+
+440     >>  194 LOAD_GLOBAL             10 (len)
+            196 LOAD_FAST                0 (self)
+            198 LOAD_ATTR               11 (_cumulativeUuids)
+            200 CALL_FUNCTION            1
+            202 STORE_FAST              11 (cumulative)
+            204 POP_BLOCK
+            206 LOAD_CONST               1 (None)
+            208 DUP_TOP
+            210 DUP_TOP
+            212 CALL_FUNCTION            3
+            214 POP_TOP
+            216 JUMP_FORWARD            16 (to 234)
+        >>  218 WITH_EXCEPT_START
+            220 POP_JUMP_IF_TRUE       224
+            222 RERAISE
+        >>  224 POP_TOP
+            226 POP_TOP
+            228 POP_TOP
+            230 POP_EXCEPT
+            232 POP_TOP
+
+442     >>  234 LOAD_FAST                0 (self)
+            236 LOAD_METHOD             12 (snapshot)
+            238 LOAD_CONST               7 ('report_pending')
+            240 CALL_METHOD              1
+            242 STORE_FAST              12 (context)
+
+446         244 LOAD_FAST                1 (phase)
+
+447         246 LOAD_FAST                2 (sequence)
+
+448         248 LOAD_GLOBAL              3 (int)
+            250 LOAD_GLOBAL             10 (len)
+            252 LOAD_FAST                6 (online)
+            254 CALL_FUNCTION            1
+            256 LOAD_CONST               3 (0)
+            258 COMPARE_OP               4 (>)
+            260 CALL_FUNCTION            1
+
+449         262 LOAD_GLOBAL             10 (len)
+            264 LOAD_FAST                6 (online)
+            266 CALL_FUNCTION            1
+
+450         268 LOAD_FAST               11 (cumulative)
+
+451         270 LOAD_FAST                7 (ssdpCount)
+
+452         272 LOAD_FAST                8 (mdnsCount)
+
+453         274 LOAD_FAST                0 (self)
+            276 LOAD_METHOD             13 (_joinList)
+            278 LOAD_GLOBAL             14 (sorted)
+            280 LOAD_FAST                6 (online)
+            282 CALL_FUNCTION            1
+            284 CALL_METHOD              1
+
+454         286 LOAD_FAST                5 (elapsedMs)
+
+455         288 LOAD_GLOBAL              3 (int)
+            290 LOAD_FAST                3 (settled)
+            292 CALL_FUNCTION            1
+
+458         294 LOAD_GLOBAL             15 (LPUtility)
+            296 LOAD_METHOD             16 (eventCountryCode)
+            298 CALL_METHOD              0
+
+445         300 LOAD_CONST               8 (('phase', 'sequence', 'found_any', 'device_count', 'device_count_cumulative', 'ssdp_count', 'mdns_count', 'device_id_hashes', 'elapsed_ms', 'settled', 'country_code'))
+            302 BUILD_CONST_KEY_MAP     11
+            304 STORE_FAST              13 (params)
+
+460         306 LOAD_FAST               13 (params)
+            308 LOAD_METHOD             17 (update)
+            310 LOAD_FAST                0 (self)
+            312 LOAD_METHOD             18 (_cleanContextForEvent)
+            314 LOAD_FAST               12 (context)
+            316 CALL_METHOD              1
+            318 CALL_METHOD              1
+            320 POP_TOP
+
+461         322 LOAD_GLOBAL             19 (LPGlobalUI)
+            324 LOAD_ATTR               20 (eventTrack)
+            326 LOAD_METHOD             21 (logEvent)
+            328 LOAD_GLOBAL             22 (LPEventsType)
+            330 LOAD_ATTR               23 (DEVICE_DISCOVERY_REPORT)
+            332 LOAD_ATTR               24 (value)
+            334 LOAD_FAST               13 (params)
+            336 CALL_METHOD              2
+            338 POP_TOP
+
+462         340 LOAD_GLOBAL             25 (logger)
+            342 LOAD_METHOD             26 (info)
+            344 LOAD_CONST               9 ('[discovery-telemetry] report sent, phase=%s seq=%d settled=%s count=%d')
+
+463         346 LOAD_FAST                1 (phase)
+            348 LOAD_FAST                2 (sequence)
+            350 LOAD_FAST                3 (settled)
+            352 LOAD_GLOBAL             10 (len)
+            354 LOAD_FAST                6 (online)
+            356 CALL_FUNCTION            1
+
+462         358 BUILD_TUPLE              4
+            360 BINARY_MODULO
+            362 CALL_METHOD              1
+            364 POP_TOP
+            366 POP_BLOCK
+            368 JUMP_FORWARD            52 (to 422)
+
+464     >>  370 DUP_TOP
+            372 LOAD_GLOBAL             27 (Exception)
+            374 EXTENDED_ARG             1
+            376 JUMP_IF_NOT_EXC_MATCH   420
+            378 POP_TOP
+            380 STORE_FAST              14 (e)
+            382 POP_TOP
+            384 SETUP_FINALLY           26 (to 412)
+
+465         386 LOAD_GLOBAL             25 (logger)
+            388 LOAD_METHOD             28 (warning)
+            390 LOAD_CONST              10 ('[discovery-telemetry] report exception: %s')
+            392 LOAD_FAST               14 (e)
+            394 BINARY_MODULO
+            396 CALL_METHOD              1
+            398 POP_TOP
+            400 POP_BLOCK
+            402 POP_EXCEPT
+            404 LOAD_CONST               1 (None)
+            406 STORE_FAST              14 (e)
+            408 DELETE_FAST             14 (e)
+            410 JUMP_FORWARD            10 (to 422)
+        >>  412 LOAD_CONST               1 (None)
+            414 STORE_FAST              14 (e)
+            416 DELETE_FAST             14 (e)
+            418 RERAISE
+        >>  420 RERAISE
+        >>  422 LOAD_CONST               1 (None)
+            424 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.onInternetPoll ===
+478           0 SETUP_FINALLY           94 (to 96)
+
+479           2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_lock)
+              6 SETUP_WITH              28 (to 36)
+              8 POP_TOP
+
+480          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (_lastInternetOk)
+             14 STORE_FAST               2 (previous)
+
+481          16 LOAD_FAST                1 (internetOk)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               1 (_lastInternetOk)
+             22 POP_BLOCK
+             24 LOAD_CONST               1 (None)
+             26 DUP_TOP
+             28 DUP_TOP
+             30 CALL_FUNCTION            3
+             32 POP_TOP
+             34 JUMP_FORWARD            16 (to 52)
+        >>   36 WITH_EXCEPT_START
+             38 POP_JUMP_IF_TRUE        42
+             40 RERAISE
+        >>   42 POP_TOP
+             44 POP_TOP
+             46 POP_TOP
+             48 POP_EXCEPT
+             50 POP_TOP
+
+482     >>   52 LOAD_FAST                2 (previous)
+             54 LOAD_CONST               1 (None)
+             56 IS_OP                    1
+             58 POP_JUMP_IF_FALSE       92
+             60 LOAD_FAST                2 (previous)
+             62 LOAD_FAST                1 (internetOk)
+             64 COMPARE_OP               3 (!=)
+             66 POP_JUMP_IF_FALSE       92
+
+483          68 LOAD_GLOBAL              2 (threading)
+             70 LOAD_ATTR                3 (Thread)
+             72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR                4 (snapshot)
+             76 LOAD_CONST               2 (('internet_change',))
+
+484          78 LOAD_CONST               3 ('DiscoveryTelemetryInternetSnap')
+             80 LOAD_CONST               4 (True)
+
+483          82 LOAD_CONST               5 (('target', 'args', 'name', 'daemon'))
+             84 CALL_FUNCTION_KW         4
+             86 LOAD_METHOD              5 (start)
+             88 CALL_METHOD              0
+             90 POP_TOP
+        >>   92 POP_BLOCK
+             94 JUMP_FORWARD            50 (to 146)
+
+485     >>   96 DUP_TOP
+             98 LOAD_GLOBAL              6 (Exception)
+            100 JUMP_IF_NOT_EXC_MATCH   144
+            102 POP_TOP
+            104 STORE_FAST               3 (e)
+            106 POP_TOP
+            108 SETUP_FINALLY           26 (to 136)
+
+486         110 LOAD_GLOBAL              7 (logger)
+            112 LOAD_METHOD              8 (warning)
+            114 LOAD_CONST               6 ('[discovery-telemetry] onInternetPoll exception: %s')
+            116 LOAD_FAST                3 (e)
+            118 BINARY_MODULO
+            120 CALL_METHOD              1
+            122 POP_TOP
+            124 POP_BLOCK
+            126 POP_EXCEPT
+            128 LOAD_CONST               1 (None)
+            130 STORE_FAST               3 (e)
+            132 DELETE_FAST              3 (e)
+            134 JUMP_FORWARD            10 (to 146)
+        >>  136 LOAD_CONST               1 (None)
+            138 STORE_FAST               3 (e)
+            140 DELETE_FAST              3 (e)
+            142 RERAISE
+        >>  144 RERAISE
+        >>  146 LOAD_CONST               1 (None)
+            148 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.onGatewayPoll ===
+499           0 SETUP_FINALLY          120 (to 122)
+
+500           2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_lock)
+              6 SETUP_WITH              62 (to 70)
+              8 POP_TOP
+
+501          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (_lastGwRaw)
+             14 LOAD_CONST               1 (None)
+             16 IS_OP                    0
+             18 STORE_FAST               3 (initializing)
+
+502          20 LOAD_FAST                3 (initializing)
+             22 UNARY_NOT
+             24 JUMP_IF_FALSE_OR_POP    34
+             26 LOAD_FAST                1 (gatewayRaw)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                1 (_lastGwRaw)
+             32 COMPARE_OP               3 (!=)
+        >>   34 STORE_FAST               4 (changed)
+
+503          36 LOAD_FAST                1 (gatewayRaw)
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               1 (_lastGwRaw)
+
+504          42 LOAD_FAST                4 (changed)
+             44 POP_JUMP_IF_FALSE       56
+
+505          46 LOAD_GLOBAL              2 (time)
+             48 LOAD_METHOD              2 (time)
+             50 CALL_METHOD              0
+             52 LOAD_FAST                0 (self)
+             54 STORE_ATTR               3 (_lastGwChangeTs)
+        >>   56 POP_BLOCK
+             58 LOAD_CONST               1 (None)
+             60 DUP_TOP
+             62 DUP_TOP
+             64 CALL_FUNCTION            3
+             66 POP_TOP
+             68 JUMP_FORWARD            16 (to 86)
+        >>   70 WITH_EXCEPT_START
+             72 POP_JUMP_IF_TRUE        76
+             74 RERAISE
+        >>   76 POP_TOP
+             78 POP_TOP
+             80 POP_TOP
+             82 POP_EXCEPT
+             84 POP_TOP
+
+506     >>   86 LOAD_FAST                4 (changed)
+             88 POP_JUMP_IF_FALSE      118
+             90 LOAD_FAST                2 (signalEmitted)
+             92 POP_JUMP_IF_TRUE       118
+
+507          94 LOAD_GLOBAL              4 (threading)
+             96 LOAD_ATTR                5 (Thread)
+             98 LOAD_FAST                0 (self)
+            100 LOAD_ATTR                6 (snapshot)
+            102 LOAD_CONST               2 (('gw_change',))
+
+508         104 LOAD_CONST               3 ('DiscoveryTelemetryGwSnap')
+            106 LOAD_CONST               4 (True)
+
+507         108 LOAD_CONST               5 (('target', 'args', 'name', 'daemon'))
+            110 CALL_FUNCTION_KW         4
+            112 LOAD_METHOD              7 (start)
+            114 CALL_METHOD              0
+            116 POP_TOP
+        >>  118 POP_BLOCK
+            120 JUMP_FORWARD            50 (to 172)
+
+509     >>  122 DUP_TOP
+            124 LOAD_GLOBAL              8 (Exception)
+            126 JUMP_IF_NOT_EXC_MATCH   170
+            128 POP_TOP
+            130 STORE_FAST               5 (e)
+            132 POP_TOP
+            134 SETUP_FINALLY           26 (to 162)
+
+510         136 LOAD_GLOBAL              9 (logger)
+            138 LOAD_METHOD             10 (warning)
+            140 LOAD_CONST               6 ('[discovery-telemetry] onGatewayPoll exception: %s')
+            142 LOAD_FAST                5 (e)
+            144 BINARY_MODULO
+            146 CALL_METHOD              1
+            148 POP_TOP
+            150 POP_BLOCK
+            152 POP_EXCEPT
+            154 LOAD_CONST               1 (None)
+            156 STORE_FAST               5 (e)
+            158 DELETE_FAST              5 (e)
+            160 JUMP_FORWARD            10 (to 172)
+        >>  162 LOAD_CONST               1 (None)
+            164 STORE_FAST               5 (e)
+            166 DELETE_FAST              5 (e)
+            168 RERAISE
+        >>  170 RERAISE
+        >>  172 LOAD_CONST               1 (None)
+            174 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.onDeviceSeen ===
+524           0 LOAD_FAST                1 (uuid)
+              2 POP_JUMP_IF_TRUE         8
+
+525           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+526     >>    8 SETUP_FINALLY           78 (to 88)
+
+527          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_lock)
+             14 SETUP_WITH              52 (to 68)
+             16 POP_TOP
+
+528          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                1 (_deviceSources)
+             22 LOAD_METHOD              2 (setdefault)
+             24 LOAD_FAST                1 (uuid)
+             26 LOAD_GLOBAL              3 (set)
+             28 CALL_FUNCTION            0
+             30 CALL_METHOD              2
+             32 LOAD_METHOD              4 (add)
+             34 LOAD_FAST                2 (serviceType)
+             36 CALL_METHOD              1
+             38 POP_TOP
+
+529          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                5 (_pendingRemovals)
+             44 LOAD_METHOD              6 (pop)
+             46 LOAD_FAST                1 (uuid)
+             48 LOAD_CONST               1 (None)
+             50 CALL_METHOD              2
+             52 POP_TOP
+             54 POP_BLOCK
+             56 LOAD_CONST               1 (None)
+             58 DUP_TOP
+             60 DUP_TOP
+             62 CALL_FUNCTION            3
+             64 POP_TOP
+             66 JUMP_FORWARD            16 (to 84)
+        >>   68 WITH_EXCEPT_START
+             70 POP_JUMP_IF_TRUE        74
+             72 RERAISE
+        >>   74 POP_TOP
+             76 POP_TOP
+             78 POP_TOP
+             80 POP_EXCEPT
+             82 POP_TOP
+        >>   84 POP_BLOCK
+             86 JUMP_FORWARD            50 (to 138)
+
+530     >>   88 DUP_TOP
+             90 LOAD_GLOBAL              7 (Exception)
+             92 JUMP_IF_NOT_EXC_MATCH   136
+             94 POP_TOP
+             96 STORE_FAST               3 (e)
+             98 POP_TOP
+            100 SETUP_FINALLY           26 (to 128)
+
+531         102 LOAD_GLOBAL              8 (logger)
+            104 LOAD_METHOD              9 (warning)
+            106 LOAD_CONST               2 ('[discovery-telemetry] onDeviceSeen exception: %s')
+            108 LOAD_FAST                3 (e)
+            110 BINARY_MODULO
+            112 CALL_METHOD              1
+            114 POP_TOP
+            116 POP_BLOCK
+            118 POP_EXCEPT
+            120 LOAD_CONST               1 (None)
+            122 STORE_FAST               3 (e)
+            124 DELETE_FAST              3 (e)
+            126 JUMP_FORWARD            10 (to 138)
+        >>  128 LOAD_CONST               1 (None)
+            130 STORE_FAST               3 (e)
+            132 DELETE_FAST              3 (e)
+            134 RERAISE
+        >>  136 RERAISE
+        >>  138 LOAD_CONST               1 (None)
+            140 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.onDeviceAdded ===
+542           0 LOAD_FAST                1 (uuid)
+              2 POP_JUMP_IF_TRUE         8
+
+543           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+544     >>    8 SETUP_FINALLY           78 (to 88)
+
+545          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_lock)
+             14 SETUP_WITH              52 (to 68)
+             16 POP_TOP
+
+546          18 LOAD_GLOBAL              1 (time)
+             20 LOAD_METHOD              1 (time)
+             22 CALL_METHOD              0
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               2 (_lastSetChangeTs)
+
+547          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                3 (_cumulativeUuids)
+             32 LOAD_METHOD              4 (add)
+             34 LOAD_FAST                1 (uuid)
+             36 CALL_METHOD              1
+             38 POP_TOP
+
+548          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                5 (_pendingRemovals)
+             44 LOAD_METHOD              6 (pop)
+             46 LOAD_FAST                1 (uuid)
+             48 LOAD_CONST               1 (None)
+             50 CALL_METHOD              2
+             52 POP_TOP
+             54 POP_BLOCK
+             56 LOAD_CONST               1 (None)
+             58 DUP_TOP
+             60 DUP_TOP
+             62 CALL_FUNCTION            3
+             64 POP_TOP
+             66 JUMP_FORWARD            16 (to 84)
+        >>   68 WITH_EXCEPT_START
+             70 POP_JUMP_IF_TRUE        74
+             72 RERAISE
+        >>   74 POP_TOP
+             76 POP_TOP
+             78 POP_TOP
+             80 POP_EXCEPT
+             82 POP_TOP
+        >>   84 POP_BLOCK
+             86 JUMP_FORWARD            50 (to 138)
+
+549     >>   88 DUP_TOP
+             90 LOAD_GLOBAL              7 (Exception)
+             92 JUMP_IF_NOT_EXC_MATCH   136
+             94 POP_TOP
+             96 STORE_FAST               2 (e)
+             98 POP_TOP
+            100 SETUP_FINALLY           26 (to 128)
+
+550         102 LOAD_GLOBAL              8 (logger)
+            104 LOAD_METHOD              9 (warning)
+            106 LOAD_CONST               2 ('[discovery-telemetry] onDeviceAdded exception: %s')
+            108 LOAD_FAST                2 (e)
+            110 BINARY_MODULO
+            112 CALL_METHOD              1
+            114 POP_TOP
+            116 POP_BLOCK
+            118 POP_EXCEPT
+            120 LOAD_CONST               1 (None)
+            122 STORE_FAST               2 (e)
+            124 DELETE_FAST              2 (e)
+            126 JUMP_FORWARD            10 (to 138)
+        >>  128 LOAD_CONST               1 (None)
+            130 STORE_FAST               2 (e)
+            132 DELETE_FAST              2 (e)
+            134 RERAISE
+        >>  136 RERAISE
+        >>  138 LOAD_CONST               1 (None)
+            140 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.onDeviceRemoved ===
+561           0 LOAD_FAST                1 (uuid)
+              2 POP_JUMP_IF_TRUE         8
+
+562           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+563     >>    8 SETUP_FINALLY           66 (to 76)
+
+564          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_lock)
+             14 SETUP_WITH              40 (to 56)
+             16 POP_TOP
+
+565          18 LOAD_GLOBAL              1 (time)
+             20 LOAD_METHOD              1 (time)
+             22 CALL_METHOD              0
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               2 (_lastSetChangeTs)
+
+566          28 LOAD_GLOBAL              1 (time)
+             30 LOAD_METHOD              1 (time)
+             32 CALL_METHOD              0
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                3 (_pendingRemovals)
+             38 LOAD_FAST                1 (uuid)
+             40 STORE_SUBSCR
+             42 POP_BLOCK
+             44 LOAD_CONST               1 (None)
+             46 DUP_TOP
+             48 DUP_TOP
+             50 CALL_FUNCTION            3
+             52 POP_TOP
+             54 JUMP_FORWARD            16 (to 72)
+        >>   56 WITH_EXCEPT_START
+             58 POP_JUMP_IF_TRUE        62
+             60 RERAISE
+        >>   62 POP_TOP
+             64 POP_TOP
+             66 POP_TOP
+             68 POP_EXCEPT
+             70 POP_TOP
+        >>   72 POP_BLOCK
+             74 JUMP_FORWARD            50 (to 126)
+
+567     >>   76 DUP_TOP
+             78 LOAD_GLOBAL              4 (Exception)
+             80 JUMP_IF_NOT_EXC_MATCH   124
+             82 POP_TOP
+             84 STORE_FAST               2 (e)
+             86 POP_TOP
+             88 SETUP_FINALLY           26 (to 116)
+
+568          90 LOAD_GLOBAL              5 (logger)
+             92 LOAD_METHOD              6 (warning)
+             94 LOAD_CONST               2 ('[discovery-telemetry] onDeviceRemoved exception: %s')
+             96 LOAD_FAST                2 (e)
+             98 BINARY_MODULO
+            100 CALL_METHOD              1
+            102 POP_TOP
+            104 POP_BLOCK
+            106 POP_EXCEPT
+            108 LOAD_CONST               1 (None)
+            110 STORE_FAST               2 (e)
+            112 DELETE_FAST              2 (e)
+            114 JUMP_FORWARD            10 (to 126)
+        >>  116 LOAD_CONST               1 (None)
+            118 STORE_FAST               2 (e)
+            120 DELETE_FAST              2 (e)
+            122 RERAISE
+        >>  124 RERAISE
+        >>  126 LOAD_CONST               1 (None)
+            128 RETURN_VALUE
+
+=== LPDiscoveryTelemetry.onAllDevicesRemoved ===
+579           0 SETUP_FINALLY           52 (to 54)
+
+580           2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_lock)
+              6 SETUP_WITH              26 (to 34)
+              8 POP_TOP
+
+581          10 LOAD_GLOBAL              1 (time)
+             12 LOAD_METHOD              1 (time)
+             14 CALL_METHOD              0
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               2 (_lastSetChangeTs)
+             20 POP_BLOCK
+             22 LOAD_CONST               1 (None)
+             24 DUP_TOP
+             26 DUP_TOP
+             28 CALL_FUNCTION            3
+             30 POP_TOP
+             32 JUMP_FORWARD            16 (to 50)
+        >>   34 WITH_EXCEPT_START
+             36 POP_JUMP_IF_TRUE        40
+             38 RERAISE
+        >>   40 POP_TOP
+             42 POP_TOP
+             44 POP_TOP
+             46 POP_EXCEPT
+             48 POP_TOP
+        >>   50 POP_BLOCK
+             52 JUMP_FORWARD            50 (to 104)
+
+582     >>   54 DUP_TOP
+             56 LOAD_GLOBAL              3 (Exception)
+             58 JUMP_IF_NOT_EXC_MATCH   102
+             60 POP_TOP
+             62 STORE_FAST               1 (e)
+             64 POP_TOP
+             66 SETUP_FINALLY           26 (to 94)
+
+583          68 LOAD_GLOBAL              4 (logger)
+             70 LOAD_METHOD              5 (warning)
+             72 LOAD_CONST               2 ('[discovery-telemetry] onAllDevicesRemoved exception: %s')
+             74 LOAD_FAST                1 (e)
+             76 BINARY_MODULO
+             78 CALL_METHOD              1
+             80 POP_TOP
+             82 POP_BLOCK
+             84 POP_EXCEPT
+             86 LOAD_CONST               1 (None)
+             88 STORE_FAST               1 (e)
+             90 DELETE_FAST              1 (e)
+             92 JUMP_FORWARD            10 (to 104)
+        >>   94 LOAD_CONST               1 (None)
+             96 STORE_FAST               1 (e)
+             98 DELETE_FAST              1 (e)
+            100 RERAISE
+        >>  102 RERAISE
+        >>  104 LOAD_CONST               1 (None)
+            106 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._checkOfflineDevices ===
+597           0 SETUP_FINALLY          104 (to 106)
+
+598           2 LOAD_DEREF               0 (self)
+              4 LOAD_ATTR                0 (_lock)
+              6 SETUP_WITH              46 (to 54)
+              8 POP_TOP
+
+599          10 LOAD_DEREF               0 (self)
+             12 LOAD_ATTR                1 (_diagBusy)
+             14 POP_JUMP_IF_FALSE       34
+
+600          16 POP_BLOCK
+             18 LOAD_CONST               1 (None)
+             20 DUP_TOP
+             22 DUP_TOP
+             24 CALL_FUNCTION            3
+             26 POP_TOP
+             28 POP_BLOCK
+             30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+601     >>   34 LOAD_CONST               2 (True)
+             36 LOAD_DEREF               0 (self)
+             38 STORE_ATTR               1 (_diagBusy)
+             40 POP_BLOCK
+             42 LOAD_CONST               1 (None)
+             44 DUP_TOP
+             46 DUP_TOP
+             48 CALL_FUNCTION            3
+             50 POP_TOP
+             52 JUMP_FORWARD            16 (to 70)
+        >>   54 WITH_EXCEPT_START
+             56 POP_JUMP_IF_TRUE        60
+             58 RERAISE
+        >>   60 POP_TOP
+             62 POP_TOP
+             64 POP_TOP
+             66 POP_EXCEPT
+             68 POP_TOP
+
+603     >>   70 LOAD_CLOSURE             0 (self)
+             72 BUILD_TUPLE              1
+             74 LOAD_CONST               3 (<code object _worker at 0x000001F324E69190, file "LPClientFramework\LPDiscoveryTelemetry.py", line 603>)
+             76 LOAD_CONST               4 ('LPDiscoveryTelemetry._checkOfflineDevices.<locals>._worker')
+             78 MAKE_FUNCTION            8 (closure)
+             80 STORE_FAST               1 (_worker)
+
+610          82 LOAD_GLOBAL              2 (threading)
+             84 LOAD_ATTR                3 (Thread)
+             86 LOAD_FAST                1 (_worker)
+             88 LOAD_CONST               5 ('DiscoveryTelemetryDiag')
+             90 LOAD_CONST               2 (True)
+             92 LOAD_CONST               6 (('target', 'name', 'daemon'))
+             94 CALL_FUNCTION_KW         3
+             96 LOAD_METHOD              4 (start)
+             98 CALL_METHOD              0
+            100 POP_TOP
+            102 POP_BLOCK
+            104 JUMP_FORWARD            94 (to 200)
+
+611     >>  106 DUP_TOP
+            108 LOAD_GLOBAL              5 (Exception)
+            110 JUMP_IF_NOT_EXC_MATCH   198
+            112 POP_TOP
+            114 STORE_FAST               2 (e)
+            116 POP_TOP
+            118 SETUP_FINALLY           70 (to 190)
+
+612         120 LOAD_GLOBAL              6 (logger)
+            122 LOAD_METHOD              7 (warning)
+            124 LOAD_CONST               7 ('[discovery-telemetry] checkOfflineDevices exception: %s')
+            126 LOAD_FAST                2 (e)
+            128 BINARY_MODULO
+            130 CALL_METHOD              1
+            132 POP_TOP
+
+613         134 LOAD_DEREF               0 (self)
+            136 LOAD_ATTR                0 (_lock)
+            138 SETUP_WITH              22 (to 162)
+            140 POP_TOP
+
+614         142 LOAD_CONST               8 (False)
+            144 LOAD_DEREF               0 (self)
+            146 STORE_ATTR               1 (_diagBusy)
+            148 POP_BLOCK
+            150 LOAD_CONST               1 (None)
+            152 DUP_TOP
+            154 DUP_TOP
+            156 CALL_FUNCTION            3
+            158 POP_TOP
+            160 JUMP_FORWARD            16 (to 178)
+        >>  162 WITH_EXCEPT_START
+            164 POP_JUMP_IF_TRUE       168
+            166 RERAISE
+        >>  168 POP_TOP
+            170 POP_TOP
+            172 POP_TOP
+            174 POP_EXCEPT
+            176 POP_TOP
+        >>  178 POP_BLOCK
+            180 POP_EXCEPT
+            182 LOAD_CONST               1 (None)
+            184 STORE_FAST               2 (e)
+            186 DELETE_FAST              2 (e)
+            188 JUMP_FORWARD            10 (to 200)
+        >>  190 LOAD_CONST               1 (None)
+            192 STORE_FAST               2 (e)
+            194 DELETE_FAST              2 (e)
+            196 RERAISE
+        >>  198 RERAISE
+        >>  200 LOAD_CONST               1 (None)
+            202 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._checkOfflineDevices._worker ===
+604           0 SETUP_FINALLY           56 (to 58)
+
+605           2 LOAD_DEREF               0 (self)
+              4 LOAD_METHOD              0 (_checkOfflineDevicesInner)
+              6 CALL_METHOD              0
+              8 POP_TOP
+             10 POP_BLOCK
+
+607          12 LOAD_DEREF               0 (self)
+             14 LOAD_ATTR                1 (_lock)
+             16 SETUP_WITH              22 (to 40)
+             18 POP_TOP
+
+608          20 LOAD_CONST               1 (False)
+             22 LOAD_DEREF               0 (self)
+             24 STORE_ATTR               2 (_diagBusy)
+             26 POP_BLOCK
+             28 LOAD_CONST               0 (None)
+             30 DUP_TOP
+             32 DUP_TOP
+             34 CALL_FUNCTION            3
+             36 POP_TOP
+             38 JUMP_ABSOLUTE          104
+        >>   40 WITH_EXCEPT_START
+             42 POP_JUMP_IF_TRUE        46
+             44 RERAISE
+        >>   46 POP_TOP
+             48 POP_TOP
+             50 POP_TOP
+             52 POP_EXCEPT
+             54 POP_TOP
+             56 JUMP_FORWARD            46 (to 104)
+
+607     >>   58 LOAD_DEREF               0 (self)
+             60 LOAD_ATTR                1 (_lock)
+             62 SETUP_WITH              22 (to 86)
+             64 POP_TOP
+
+608          66 LOAD_CONST               1 (False)
+             68 LOAD_DEREF               0 (self)
+             70 STORE_ATTR               2 (_diagBusy)
+             72 POP_BLOCK
+             74 LOAD_CONST               0 (None)
+             76 DUP_TOP
+             78 DUP_TOP
+             80 CALL_FUNCTION            3
+             82 POP_TOP
+             84 JUMP_FORWARD            16 (to 102)
+        >>   86 WITH_EXCEPT_START
+             88 POP_JUMP_IF_TRUE        92
+             90 RERAISE
+        >>   92 POP_TOP
+             94 POP_TOP
+             96 POP_TOP
+             98 POP_EXCEPT
+            100 POP_TOP
+        >>  102 RERAISE
+        >>  104 LOAD_CONST               0 (None)
+            106 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._checkOfflineDevicesInner ===
+618           0 EXTENDED_ARG             1
+              2 SETUP_FINALLY          360 (to 364)
+
+619           4 LOAD_GLOBAL              0 (LPUtility)
+              6 LOAD_METHOD              1 (fetchNetworkInfo)
+              8 CALL_METHOD              0
+             10 JUMP_IF_TRUE_OR_POP     14
+             12 BUILD_MAP                0
+        >>   14 LOAD_METHOD              2 (get)
+             16 LOAD_CONST               1 ('gateway')
+             18 CALL_METHOD              1
+             20 STORE_FAST               1 (gateway)
+
+620          22 LOAD_FAST                1 (gateway)
+             24 POP_JUMP_IF_TRUE        32
+
+621          26 POP_BLOCK
+             28 LOAD_CONST               2 (None)
+             30 RETURN_VALUE
+
+622     >>   32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              3 (_onlineUuids)
+             36 CALL_METHOD              0
+             38 STORE_FAST               2 (online)
+
+623          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                4 (deviceManager)
+             44 LOAD_METHOD              5 (getCachedDevices)
+             46 LOAD_FAST                1 (gateway)
+             48 CALL_METHOD              1
+             50 JUMP_IF_TRUE_OR_POP     54
+             52 BUILD_LIST               0
+        >>   54 STORE_FAST               3 (cachedDevices)
+
+624          56 LOAD_FAST                3 (cachedDevices)
+             58 GET_ITER
+        >>   60 FOR_ITER               118 (to 180)
+             62 STORE_FAST               4 (entry)
+
+625          64 LOAD_FAST                4 (entry)
+             66 LOAD_METHOD              6 (items)
+             68 CALL_METHOD              0
+             70 GET_ITER
+        >>   72 FOR_ITER               104 (to 178)
+             74 UNPACK_SEQUENCE          2
+             76 STORE_FAST               5 (uuid)
+             78 STORE_FAST               6 (row)
+
+626          80 LOAD_FAST                5 (uuid)
+             82 POP_JUMP_IF_FALSE       72
+             84 LOAD_FAST                5 (uuid)
+             86 LOAD_FAST                2 (online)
+             88 CONTAINS_OP              0
+             90 POP_JUMP_IF_FALSE       94
+
+627          92 JUMP_ABSOLUTE           72
+
+628     >>   94 LOAD_FAST                0 (self)
+             96 LOAD_ATTR                7 (_lock)
+             98 SETUP_WITH              44 (to 144)
+            100 POP_TOP
+
+629         102 LOAD_GLOBAL              8 (deviceIdHash)
+            104 LOAD_FAST                5 (uuid)
+            106 CALL_FUNCTION            1
+            108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR                9 (_diagnosedHashes)
+            112 CONTAINS_OP              0
+            114 POP_JUMP_IF_FALSE      130
+
+630         116 POP_BLOCK
+            118 LOAD_CONST               2 (None)
+            120 DUP_TOP
+            122 DUP_TOP
+            124 CALL_FUNCTION            3
+            126 POP_TOP
+            128 JUMP_ABSOLUTE           72
+        >>  130 POP_BLOCK
+            132 LOAD_CONST               2 (None)
+            134 DUP_TOP
+            136 DUP_TOP
+            138 CALL_FUNCTION            3
+            140 POP_TOP
+            142 JUMP_FORWARD            16 (to 160)
+        >>  144 WITH_EXCEPT_START
+            146 POP_JUMP_IF_TRUE       150
+            148 RERAISE
+        >>  150 POP_TOP
+            152 POP_TOP
+            154 POP_TOP
+            156 POP_EXCEPT
+            158 POP_TOP
+
+631     >>  160 LOAD_FAST                0 (self)
+            162 LOAD_METHOD             10 (_diagnoseDevice)
+            164 LOAD_FAST                5 (uuid)
+            166 LOAD_FAST                6 (row)
+            168 JUMP_IF_TRUE_OR_POP    172
+            170 BUILD_MAP                0
+        >>  172 CALL_METHOD              2
+            174 POP_TOP
+            176 JUMP_ABSOLUTE           72
+        >>  178 JUMP_ABSOLUTE           60
+
+634     >>  180 LOAD_GLOBAL             11 (time)
+            182 LOAD_METHOD             11 (time)
+            184 CALL_METHOD              0
+            186 STORE_DEREF              0 (now)
+
+635         188 LOAD_FAST                0 (self)
+            190 LOAD_ATTR                7 (_lock)
+            192 SETUP_WITH              40 (to 234)
+            194 POP_TOP
+
+636         196 LOAD_CLOSURE             0 (now)
+            198 BUILD_TUPLE              1
+            200 LOAD_CONST               3 (<code object <listcomp> at 0x000001F324E69240, file "LPClientFramework\LPDiscoveryTelemetry.py", line 636>)
+            202 LOAD_CONST               4 ('LPDiscoveryTelemetry._checkOfflineDevicesInner.<locals>.<listcomp>')
+            204 MAKE_FUNCTION            8 (closure)
+            206 LOAD_FAST                0 (self)
+            208 LOAD_ATTR               12 (_pendingRemovals)
+            210 LOAD_METHOD              6 (items)
+            212 CALL_METHOD              0
+            214 GET_ITER
+            216 CALL_FUNCTION            1
+            218 STORE_FAST               7 (dropped)
+            220 POP_BLOCK
+            222 LOAD_CONST               2 (None)
+            224 DUP_TOP
+            226 DUP_TOP
+            228 CALL_FUNCTION            3
+            230 POP_TOP
+            232 JUMP_FORWARD            16 (to 250)
+        >>  234 WITH_EXCEPT_START
+            236 POP_JUMP_IF_TRUE       240
+            238 RERAISE
+        >>  240 POP_TOP
+            242 POP_TOP
+            244 POP_TOP
+            246 POP_EXCEPT
+            248 POP_TOP
+
+638     >>  250 LOAD_FAST                7 (dropped)
+            252 GET_ITER
+        >>  254 FOR_ITER               104 (to 360)
+            256 UNPACK_SEQUENCE          2
+            258 STORE_FAST               5 (uuid)
+            260 STORE_FAST               8 (_)
+
+639         262 LOAD_FAST                0 (self)
+            264 LOAD_ATTR                7 (_lock)
+            266 SETUP_WITH              60 (to 328)
+            268 POP_TOP
+
+640         270 LOAD_FAST                0 (self)
+            272 LOAD_ATTR               12 (_pendingRemovals)
+            274 LOAD_METHOD             13 (pop)
+            276 LOAD_FAST                5 (uuid)
+            278 LOAD_CONST               2 (None)
+            280 CALL_METHOD              2
+            282 POP_TOP
+
+641         284 LOAD_GLOBAL              8 (deviceIdHash)
+            286 LOAD_FAST                5 (uuid)
+            288 CALL_FUNCTION            1
+            290 LOAD_FAST                0 (self)
+            292 LOAD_ATTR                9 (_diagnosedHashes)
+            294 CONTAINS_OP              0
+            296 EXTENDED_ARG             1
+            298 POP_JUMP_IF_FALSE      314
+
+642         300 POP_BLOCK
+            302 LOAD_CONST               2 (None)
+            304 DUP_TOP
+            306 DUP_TOP
+            308 CALL_FUNCTION            3
+            310 POP_TOP
+            312 JUMP_ABSOLUTE          254
+        >>  314 POP_BLOCK
+            316 LOAD_CONST               2 (None)
+            318 DUP_TOP
+            320 DUP_TOP
+            322 CALL_FUNCTION            3
+            324 POP_TOP
+            326 JUMP_FORWARD            18 (to 346)
+        >>  328 WITH_EXCEPT_START
+            330 EXTENDED_ARG             1
+            332 POP_JUMP_IF_TRUE       336
+            334 RERAISE
+        >>  336 POP_TOP
+            338 POP_TOP
+            340 POP_TOP
+            342 POP_EXCEPT
+            344 POP_TOP
+
+643     >>  346 LOAD_FAST                0 (self)
+            348 LOAD_METHOD             10 (_diagnoseDevice)
+            350 LOAD_FAST                5 (uuid)
+            352 BUILD_MAP                0
+            354 CALL_METHOD              2
+            356 POP_TOP
+            358 JUMP_ABSOLUTE          254
+        >>  360 POP_BLOCK
+            362 JUMP_FORWARD            52 (to 416)
+
+644     >>  364 DUP_TOP
+            366 LOAD_GLOBAL             14 (Exception)
+            368 EXTENDED_ARG             1
+            370 JUMP_IF_NOT_EXC_MATCH   414
+            372 POP_TOP
+            374 STORE_FAST               9 (e)
+            376 POP_TOP
+            378 SETUP_FINALLY           26 (to 406)
+
+645         380 LOAD_GLOBAL             15 (logger)
+            382 LOAD_METHOD             16 (warning)
+            384 LOAD_CONST               5 ('[discovery-telemetry] checkOfflineDevicesInner exception: %s')
+            386 LOAD_FAST                9 (e)
+            388 BINARY_MODULO
+            390 CALL_METHOD              1
+            392 POP_TOP
+            394 POP_BLOCK
+            396 POP_EXCEPT
+            398 LOAD_CONST               2 (None)
+            400 STORE_FAST               9 (e)
+            402 DELETE_FAST              9 (e)
+            404 JUMP_FORWARD            10 (to 416)
+        >>  406 LOAD_CONST               2 (None)
+            408 STORE_FAST               9 (e)
+            410 DELETE_FAST              9 (e)
+            412 RERAISE
+        >>  414 RERAISE
+        >>  416 LOAD_CONST               2 (None)
+            418 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._checkOfflineDevicesInner.<listcomp> ===
+636           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                28 (to 34)
+              6 UNPACK_SEQUENCE          2
+              8 STORE_FAST               1 (uuid)
+             10 STORE_FAST               2 (ts)
+
+637          12 LOAD_DEREF               0 (now)
+             14 LOAD_FAST                2 (ts)
+             16 BINARY_SUBTRACT
+             18 LOAD_GLOBAL              0 (QUIET_SECONDS)
+             20 COMPARE_OP               5 (>=)
+             22 POP_JUMP_IF_FALSE        4
+
+636          24 LOAD_FAST                1 (uuid)
+             26 LOAD_FAST                2 (ts)
+             28 BUILD_TUPLE              2
+             30 LIST_APPEND              2
+             32 JUMP_ABSOLUTE            4
+        >>   34 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._isValidIPv4 ===
+656           0 LOAD_FAST                1 (ipStr)
+              2 POP_JUMP_IF_FALSE       12
+              4 LOAD_FAST                1 (ipStr)
+              6 LOAD_CONST               1 ('0.0.0.0')
+              8 COMPARE_OP               2 (==)
+             10 POP_JUMP_IF_FALSE       16
+
+657     >>   12 LOAD_CONST               2 (False)
+             14 RETURN_VALUE
+
+658     >>   16 SETUP_FINALLY           16 (to 34)
+
+659          18 LOAD_GLOBAL              0 (ipaddress)
+             20 LOAD_METHOD              1 (IPv4Address)
+             22 LOAD_FAST                1 (ipStr)
+             24 CALL_METHOD              1
+             26 POP_TOP
+
+660          28 POP_BLOCK
+             30 LOAD_CONST               3 (True)
+             32 RETURN_VALUE
+
+661     >>   34 DUP_TOP
+             36 LOAD_GLOBAL              2 (Exception)
+             38 JUMP_IF_NOT_EXC_MATCH    52
+             40 POP_TOP
+             42 POP_TOP
+             44 POP_TOP
+
+662          46 POP_EXCEPT
+             48 LOAD_CONST               2 (False)
+             50 RETURN_VALUE
+        >>   52 RERAISE
+             54 LOAD_CONST               4 (None)
+             56 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._probeHttp ===
+673           0 LOAD_FAST                1 (ip)
+              2 POP_JUMP_IF_TRUE        14
+
+674           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               1 (0)
+              8 LOAD_CONST               2 (('result', 'errorcode'))
+             10 BUILD_CONST_KEY_MAP      2
+             12 RETURN_VALUE
+
+675     >>   14 SETUP_FINALLY          106 (to 122)
+
+676          16 LOAD_GLOBAL              0 (upnpPost)
+
+677          18 LOAD_CONST               3 ('http://%s:59152/upnp/control/rendercontrol1')
+             20 LOAD_FAST                1 (ip)
+             22 BINARY_MODULO
+
+678          24 LOAD_CONST               4 ('RenderingControl:1')
+
+679          26 LOAD_CONST               5 ('GetControlDeviceInfo')
+
+680          28 LOAD_CONST               6 ('InstanceID')
+             30 LOAD_CONST               7 ('0')
+             32 BUILD_MAP                1
+
+681          34 LOAD_CONST               8 ('Status')
+             36 BUILD_LIST               1
+
+682          38 LOAD_CONST               9 (3)
+
+676          40 LOAD_CONST              10 (('timeout',))
+             42 CALL_FUNCTION_KW         6
+             44 STORE_FAST               2 (response)
+
+684          46 LOAD_GLOBAL              1 (bool)
+             48 LOAD_FAST                2 (response)
+             50 CALL_FUNCTION            1
+             52 JUMP_IF_FALSE_OR_POP    80
+             54 LOAD_FAST                2 (response)
+             56 LOAD_METHOD              2 (get)
+             58 LOAD_CONST              11 ('status_code')
+             60 CALL_METHOD              1
+             62 LOAD_CONST              12 (200)
+             64 COMPARE_OP               2 (==)
+             66 JUMP_IF_FALSE_OR_POP    80
+             68 LOAD_GLOBAL              1 (bool)
+             70 LOAD_FAST                2 (response)
+             72 LOAD_METHOD              2 (get)
+             74 LOAD_CONST               8 ('Status')
+             76 CALL_METHOD              1
+             78 CALL_FUNCTION            1
+        >>   80 STORE_FAST               3 (ok)
+
+685          82 LOAD_FAST                3 (ok)
+             84 POP_JUMP_IF_FALSE       90
+             86 LOAD_CONST              13 (1)
+             88 JUMP_FORWARD             2 (to 92)
+        >>   90 LOAD_CONST               1 (0)
+        >>   92 LOAD_FAST                2 (response)
+             94 POP_JUMP_IF_FALSE      112
+             96 LOAD_GLOBAL              3 (int)
+             98 LOAD_FAST                2 (response)
+            100 LOAD_METHOD              2 (get)
+            102 LOAD_CONST              11 ('status_code')
+            104 LOAD_CONST               1 (0)
+            106 CALL_METHOD              2
+            108 CALL_FUNCTION            1
+            110 JUMP_FORWARD             2 (to 114)
+        >>  112 LOAD_CONST               1 (0)
+        >>  114 LOAD_CONST               2 (('result', 'errorcode'))
+            116 BUILD_CONST_KEY_MAP      2
+            118 POP_BLOCK
+            120 RETURN_VALUE
+
+686     >>  122 DUP_TOP
+            124 LOAD_GLOBAL              4 (Exception)
+            126 JUMP_IF_NOT_EXC_MATCH   180
+            128 POP_TOP
+            130 STORE_FAST               4 (e)
+            132 POP_TOP
+            134 SETUP_FINALLY           36 (to 172)
+
+687         136 LOAD_GLOBAL              5 (logger)
+            138 LOAD_METHOD              6 (warning)
+            140 LOAD_CONST              14 ('[discovery-telemetry] probeHttp exception: %s')
+            142 LOAD_FAST                4 (e)
+            144 BINARY_MODULO
+            146 CALL_METHOD              1
+            148 POP_TOP
+
+688         150 LOAD_CONST               1 (0)
+            152 LOAD_CONST              15 (-1)
+            154 LOAD_CONST               2 (('result', 'errorcode'))
+            156 BUILD_CONST_KEY_MAP      2
+            158 POP_BLOCK
+            160 ROT_FOUR
+            162 POP_EXCEPT
+            164 LOAD_CONST              16 (None)
+            166 STORE_FAST               4 (e)
+            168 DELETE_FAST              4 (e)
+            170 RETURN_VALUE
+        >>  172 LOAD_CONST              16 (None)
+            174 STORE_FAST               4 (e)
+            176 DELETE_FAST              4 (e)
+            178 RERAISE
+        >>  180 RERAISE
+            182 LOAD_CONST              16 (None)
+            184 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._diagnoseDevice ===
+700           0 LOAD_GLOBAL              0 (deviceIdHash)
+              2 LOAD_FAST                1 (uuid)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               3 (deviceHash)
+
+701           8 EXTENDED_ARG             4
+             10 SETUP_FINALLY         1098 (to 1110)
+
+702          12 LOAD_GLOBAL              1 (time)
+             14 LOAD_METHOD              1 (time)
+             16 CALL_METHOD              0
+             18 STORE_FAST               4 (startedAt)
+
+705          20 LOAD_GLOBAL              2 (queryDeviceStateV2)
+             22 LOAD_FAST                1 (uuid)
+             24 LOAD_GLOBAL              3 (CLOUD_QUERY_TIMEOUT_SECONDS)
+             26 LOAD_CONST               1 (('timeout',))
+             28 CALL_FUNCTION_KW         2
+             30 STORE_FAST               5 (cloudInfo)
+
+706          32 LOAD_GLOBAL              4 (isinstance)
+             34 LOAD_FAST                5 (cloudInfo)
+             36 LOAD_GLOBAL              5 (dict)
+             38 CALL_FUNCTION            2
+             40 POP_JUMP_IF_FALSE       46
+             42 LOAD_FAST                5 (cloudInfo)
+             44 JUMP_FORWARD             2 (to 48)
+        >>   46 BUILD_MAP                0
+        >>   48 STORE_FAST               6 (deviceInfo)
+
+707          50 LOAD_FAST                6 (deviceInfo)
+             52 LOAD_METHOD              6 (get)
+             54 LOAD_CONST               2 ('networkInfo')
+             56 CALL_METHOD              1
+             58 JUMP_IF_TRUE_OR_POP     62
+             60 BUILD_MAP                0
+        >>   62 STORE_FAST               7 (networkInfo)
+
+712          64 LOAD_FAST                5 (cloudInfo)
+             66 LOAD_CONST               3 (None)
+             68 IS_OP                    1
+             70 POP_JUMP_IF_FALSE      204
+
+713          72 SETUP_FINALLY           18 (to 92)
+
+714          74 LOAD_GLOBAL              7 (int)
+             76 LOAD_FAST                6 (deviceInfo)
+             78 LOAD_METHOD              6 (get)
+             80 LOAD_CONST               4 ('otaStatus')
+             82 CALL_METHOD              1
+             84 CALL_FUNCTION            1
+             86 STORE_FAST               8 (otaStatus)
+             88 POP_BLOCK
+             90 JUMP_FORWARD            26 (to 118)
+
+715     >>   92 DUP_TOP
+             94 LOAD_GLOBAL              8 (TypeError)
+             96 LOAD_GLOBAL              9 (ValueError)
+             98 BUILD_TUPLE              2
+            100 JUMP_IF_NOT_EXC_MATCH   116
+            102 POP_TOP
+            104 POP_TOP
+            106 POP_TOP
+
+716         108 LOAD_CONST               3 (None)
+            110 STORE_FAST               8 (otaStatus)
+            112 POP_EXCEPT
+            114 JUMP_FORWARD             2 (to 118)
+        >>  116 RERAISE
+
+717     >>  118 LOAD_FAST                8 (otaStatus)
+            120 LOAD_CONST               3 (None)
+            122 IS_OP                    1
+            124 POP_JUMP_IF_FALSE      204
+            126 LOAD_FAST                8 (otaStatus)
+            128 LOAD_CONST               5 (8)
+            130 COMPARE_OP               3 (!=)
+            132 POP_JUMP_IF_FALSE      204
+
+718         134 LOAD_DEREF               2 (self)
+            136 LOAD_ATTR               10 (_lock)
+            138 SETUP_WITH              28 (to 168)
+            140 POP_TOP
+
+719         142 LOAD_DEREF               2 (self)
+            144 LOAD_ATTR               11 (_diagnosedHashes)
+            146 LOAD_METHOD             12 (add)
+            148 LOAD_FAST                3 (deviceHash)
+            150 CALL_METHOD              1
+            152 POP_TOP
+            154 POP_BLOCK
+            156 LOAD_CONST               3 (None)
+            158 DUP_TOP
+            160 DUP_TOP
+            162 CALL_FUNCTION            3
+            164 POP_TOP
+            166 JUMP_FORWARD            16 (to 184)
+        >>  168 WITH_EXCEPT_START
+            170 POP_JUMP_IF_TRUE       174
+            172 RERAISE
+        >>  174 POP_TOP
+            176 POP_TOP
+            178 POP_TOP
+            180 POP_EXCEPT
+            182 POP_TOP
+
+720     >>  184 LOAD_GLOBAL             13 (logger)
+            186 LOAD_METHOD             14 (info)
+            188 LOAD_CONST               6 ('[discovery-telemetry] skip diagnosis, device in OTA: %s')
+            190 LOAD_FAST                3 (deviceHash)
+            192 BINARY_MODULO
+            194 CALL_METHOD              1
+            196 POP_TOP
+
+721         198 POP_BLOCK
+            200 LOAD_CONST               3 (None)
+            202 RETURN_VALUE
+
+724     >>  204 LOAD_FAST                7 (networkInfo)
+            206 LOAD_METHOD              6 (get)
+            208 LOAD_CONST               7 ('wlan0')
+            210 CALL_METHOD              1
+            212 JUMP_IF_TRUE_OR_POP    216
+            214 LOAD_CONST               8 ('')
+        >>  216 STORE_FAST               9 (cloudIP)
+
+725         218 LOAD_DEREF               2 (self)
+            220 LOAD_METHOD             15 (_isValidIPv4)
+            222 LOAD_FAST                9 (cloudIP)
+            224 CALL_METHOD              1
+            226 POP_JUMP_IF_TRUE       242
+
+726         228 LOAD_FAST                7 (networkInfo)
+            230 LOAD_METHOD              6 (get)
+            232 LOAD_CONST               9 ('eth0')
+            234 CALL_METHOD              1
+            236 JUMP_IF_TRUE_OR_POP    240
+            238 LOAD_CONST               8 ('')
+        >>  240 STORE_FAST               9 (cloudIP)
+
+727     >>  242 LOAD_DEREF               2 (self)
+            244 LOAD_METHOD             15 (_isValidIPv4)
+            246 LOAD_FAST                9 (cloudIP)
+            248 CALL_METHOD              1
+            250 STORE_FAST              10 (gatewayIpValid)
+
+728         252 LOAD_FAST               10 (gatewayIpValid)
+            254 EXTENDED_ARG             1
+            256 POP_JUMP_IF_FALSE      262
+            258 LOAD_FAST                9 (cloudIP)
+            260 JUMP_FORWARD            14 (to 276)
+        >>  262 LOAD_FAST                2 (cachedRow)
+            264 LOAD_METHOD              6 (get)
+            266 LOAD_CONST              10 ('ip')
+            268 CALL_METHOD              1
+            270 EXTENDED_ARG             1
+            272 JUMP_IF_TRUE_OR_POP    276
+            274 LOAD_CONST               8 ('')
+        >>  276 STORE_DEREF              0 (probeIP)
+
+731         278 LOAD_CONST              11 (0)
+            280 LOAD_CONST              11 (0)
+            282 LOAD_CONST              12 (('result', 'errorcode'))
+            284 BUILD_CONST_KEY_MAP      2
+            286 LOAD_CONST              13 (False)
+            288 LOAD_CONST              13 (False)
+            290 LOAD_CONST              14 (('http', 'tcp', 'ping'))
+            292 BUILD_CONST_KEY_MAP      3
+            294 STORE_DEREF              1 (probeResults)
+
+732         296 BUILD_LIST               0
+            298 STORE_FAST              11 (threads)
+
+733         300 LOAD_DEREF               2 (self)
+            302 LOAD_METHOD             15 (_isValidIPv4)
+            304 LOAD_DEREF               0 (probeIP)
+            306 CALL_METHOD              1
+            308 EXTENDED_ARG             1
+            310 POP_JUMP_IF_FALSE      468
+
+734         312 LOAD_FAST               11 (threads)
+            314 LOAD_METHOD             16 (append)
+            316 LOAD_GLOBAL             17 (threading)
+            318 LOAD_ATTR               18 (Thread)
+
+735         320 LOAD_CLOSURE             0 (probeIP)
+            322 LOAD_CLOSURE             1 (probeResults)
+            324 LOAD_CLOSURE             2 (self)
+            326 BUILD_TUPLE              3
+            328 LOAD_CONST              15 (<code object <lambda> at 0x000001F324E69A80, file "LPClientFramework\LPDiscoveryTelemetry.py", line 735>)
+            330 LOAD_CONST              16 ('LPDiscoveryTelemetry._diagnoseDevice.<locals>.<lambda>')
+            332 MAKE_FUNCTION            8 (closure)
+            334 LOAD_CONST              17 (True)
+
+734         336 LOAD_CONST              18 (('target', 'daemon'))
+            338 CALL_FUNCTION_KW         2
+            340 CALL_METHOD              1
+            342 POP_TOP
+
+736         344 LOAD_FAST               11 (threads)
+            346 LOAD_METHOD             16 (append)
+            348 LOAD_GLOBAL             17 (threading)
+            350 LOAD_ATTR               18 (Thread)
+
+737         352 LOAD_CLOSURE             0 (probeIP)
+            354 LOAD_CLOSURE             1 (probeResults)
+            356 BUILD_TUPLE              2
+            358 LOAD_CONST              19 (<code object <lambda> at 0x000001F324E695B0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 737>)
+            360 LOAD_CONST              16 ('LPDiscoveryTelemetry._diagnoseDevice.<locals>.<lambda>')
+            362 MAKE_FUNCTION            8 (closure)
+            364 LOAD_CONST              17 (True)
+
+736         366 LOAD_CONST              18 (('target', 'daemon'))
+            368 CALL_FUNCTION_KW         2
+            370 CALL_METHOD              1
+            372 POP_TOP
+
+738         374 LOAD_FAST               11 (threads)
+            376 LOAD_METHOD             16 (append)
+            378 LOAD_GLOBAL             17 (threading)
+            380 LOAD_ATTR               18 (Thread)
+
+739         382 LOAD_CLOSURE             0 (probeIP)
+            384 LOAD_CLOSURE             1 (probeResults)
+            386 BUILD_TUPLE              2
+            388 LOAD_CONST              20 (<code object <lambda> at 0x000001F324E699D0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 739>)
+            390 LOAD_CONST              16 ('LPDiscoveryTelemetry._diagnoseDevice.<locals>.<lambda>')
+            392 MAKE_FUNCTION            8 (closure)
+            394 LOAD_CONST              17 (True)
+
+738         396 LOAD_CONST              18 (('target', 'daemon'))
+            398 CALL_FUNCTION_KW         2
+            400 CALL_METHOD              1
+            402 POP_TOP
+
+740         404 LOAD_FAST               11 (threads)
+            406 GET_ITER
+        >>  408 FOR_ITER                14 (to 424)
+            410 STORE_FAST              12 (t)
+
+741         412 LOAD_FAST               12 (t)
+            414 LOAD_METHOD             19 (start)
+            416 CALL_METHOD              0
+            418 POP_TOP
+            420 EXTENDED_ARG             1
+            422 JUMP_ABSOLUTE          408
+
+742     >>  424 LOAD_FAST                4 (startedAt)
+            426 LOAD_GLOBAL             20 (DIAG_TIMEOUT_SECONDS)
+            428 BINARY_ADD
+            430 STORE_FAST              13 (deadline)
+
+743         432 LOAD_FAST               11 (threads)
+            434 GET_ITER
+        >>  436 FOR_ITER                30 (to 468)
+            438 STORE_FAST              12 (t)
+
+744         440 LOAD_FAST               12 (t)
+            442 LOAD_METHOD             21 (join)
+            444 LOAD_GLOBAL             22 (max)
+            446 LOAD_CONST              21 (0.1)
+            448 LOAD_FAST               13 (deadline)
+            450 LOAD_GLOBAL              1 (time)
+            452 LOAD_METHOD              1 (time)
+            454 CALL_METHOD              0
+            456 BINARY_SUBTRACT
+            458 CALL_FUNCTION            2
+            460 CALL_METHOD              1
+            462 POP_TOP
+            464 EXTENDED_ARG             1
+            466 JUMP_ABSOLUTE          436
+
+746     >>  468 LOAD_DEREF               2 (self)
+            470 LOAD_METHOD             23 (_onlineUuids)
+            472 CALL_METHOD              0
+            474 STORE_FAST              14 (online)
+
+747         476 LOAD_DEREF               2 (self)
+            478 LOAD_ATTR               10 (_lock)
+            480 SETUP_WITH              32 (to 514)
+            482 POP_TOP
+
+748         484 LOAD_DEREF               2 (self)
+            486 LOAD_ATTR               24 (_deviceSources)
+            488 LOAD_METHOD              6 (get)
+            490 LOAD_FAST                1 (uuid)
+            492 LOAD_GLOBAL             25 (set)
+            494 CALL_FUNCTION            0
+            496 CALL_METHOD              2
+            498 STORE_FAST              15 (sources)
+            500 POP_BLOCK
+            502 LOAD_CONST               3 (None)
+            504 DUP_TOP
+            506 DUP_TOP
+            508 CALL_FUNCTION            3
+            510 POP_TOP
+            512 JUMP_FORWARD            18 (to 532)
+        >>  514 WITH_EXCEPT_START
+            516 EXTENDED_ARG             2
+            518 POP_JUMP_IF_TRUE       522
+            520 RERAISE
+        >>  522 POP_TOP
+            524 POP_TOP
+            526 POP_TOP
+            528 POP_EXCEPT
+            530 POP_TOP
+
+749     >>  532 LOAD_FAST                1 (uuid)
+            534 LOAD_FAST               14 (online)
+            536 CONTAINS_OP              0
+            538 EXTENDED_ARG             2
+            540 JUMP_IF_TRUE_OR_POP    556
+            542 LOAD_GLOBAL             26 (bool)
+            544 LOAD_FAST               15 (sources)
+            546 LOAD_CONST              22 ('ssdp')
+            548 LOAD_CONST              23 ('mdns')
+            550 BUILD_SET                2
+            552 BINARY_AND
+            554 CALL_FUNCTION            1
+        >>  556 STORE_FAST              16 (multicastFound)
+
+753         558 LOAD_FAST               10 (gatewayIpValid)
+
+754         560 LOAD_GLOBAL             26 (bool)
+            562 LOAD_DEREF               1 (probeResults)
+            564 LOAD_CONST              24 ('http')
+            566 BINARY_SUBSCR
+            568 LOAD_METHOD              6 (get)
+            570 LOAD_CONST              25 ('result')
+            572 CALL_METHOD              1
+            574 CALL_FUNCTION            1
+
+755         576 LOAD_GLOBAL             26 (bool)
+            578 LOAD_DEREF               1 (probeResults)
+            580 LOAD_METHOD              6 (get)
+            582 LOAD_CONST              26 ('tcp')
+            584 CALL_METHOD              1
+            586 CALL_FUNCTION            1
+
+756         588 LOAD_GLOBAL             26 (bool)
+            590 LOAD_DEREF               1 (probeResults)
+            592 LOAD_METHOD              6 (get)
+            594 LOAD_CONST              27 ('ping')
+            596 CALL_METHOD              1
+            598 CALL_FUNCTION            1
+
+757         600 LOAD_FAST               16 (multicastFound)
+
+758         602 LOAD_FAST                6 (deviceInfo)
+            604 LOAD_METHOD              6 (get)
+            606 LOAD_CONST              28 ('connectStatus')
+            608 CALL_METHOD              1
+            610 LOAD_CONST              29 ('online')
+            612 COMPARE_OP               2 (==)
+
+752         614 BUILD_LIST               6
+            616 STORE_FAST              17 (bits)
+
+760         618 LOAD_CONST               8 ('')
+            620 LOAD_METHOD             21 (join)
+            622 LOAD_CONST              30 (<code object <genexpr> at 0x000001F324E69DF0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 760>)
+            624 LOAD_CONST              31 ('LPDiscoveryTelemetry._diagnoseDevice.<locals>.<genexpr>')
+            626 MAKE_FUNCTION            0
+            628 LOAD_FAST               17 (bits)
+            630 GET_ITER
+            632 CALL_FUNCTION            1
+            634 CALL_METHOD              1
+            636 STORE_FAST              18 (casecode)
+
+763         638 LOAD_GLOBAL             27 (str)
+            640 LOAD_FAST                6 (deviceInfo)
+            642 LOAD_METHOD              6 (get)
+            644 LOAD_CONST              32 ('iotVersion')
+            646 CALL_METHOD              1
+            648 EXTENDED_ARG             2
+            650 JUMP_IF_TRUE_OR_POP    654
+            652 LOAD_CONST               8 ('')
+        >>  654 CALL_FUNCTION            1
+            656 STORE_FAST              19 (iotVersion)
+
+764         658 LOAD_GLOBAL             27 (str)
+            660 LOAD_FAST                6 (deviceInfo)
+            662 LOAD_METHOD              6 (get)
+            664 LOAD_CONST              33 ('source')
+            666 CALL_METHOD              1
+            668 EXTENDED_ARG             2
+            670 JUMP_IF_TRUE_OR_POP    674
+            672 LOAD_CONST               8 ('')
+        >>  674 CALL_FUNCTION            1
+            676 STORE_FAST              20 (source)
+
+765         678 LOAD_FAST               20 (source)
+            680 LOAD_CONST              34 ('IoT')
+            682 COMPARE_OP               2 (==)
+            684 EXTENDED_ARG             2
+            686 POP_JUMP_IF_FALSE      720
+            688 LOAD_FAST               19 (iotVersion)
+            690 LOAD_CONST              35 ('2.0.1')
+            692 COMPARE_OP               2 (==)
+            694 EXTENDED_ARG             2
+            696 POP_JUMP_IF_FALSE      720
+
+766         698 LOAD_CONST               8 ('')
+            700 STORE_FAST              21 (deviceSsidHex)
+
+767         702 LOAD_FAST                7 (networkInfo)
+            704 LOAD_METHOD              6 (get)
+            706 LOAD_CONST              36 ('wlanSsid')
+            708 CALL_METHOD              1
+            710 EXTENDED_ARG             2
+            712 JUMP_IF_TRUE_OR_POP    716
+            714 LOAD_CONST               8 ('')
+        >>  716 STORE_FAST              22 (deviceBssid)
+            718 JUMP_FORWARD            32 (to 752)
+
+769     >>  720 LOAD_FAST                7 (networkInfo)
+            722 LOAD_METHOD              6 (get)
+            724 LOAD_CONST              36 ('wlanSsid')
+            726 CALL_METHOD              1
+            728 EXTENDED_ARG             2
+            730 JUMP_IF_TRUE_OR_POP    734
+            732 LOAD_CONST               8 ('')
+        >>  734 STORE_FAST              21 (deviceSsidHex)
+
+770         736 LOAD_FAST                7 (networkInfo)
+            738 LOAD_METHOD              6 (get)
+            740 LOAD_CONST              37 ('wlanBssid')
+            742 CALL_METHOD              1
+            744 EXTENDED_ARG             2
+            746 JUMP_IF_TRUE_OR_POP    750
+            748 LOAD_CONST               8 ('')
+        >>  750 STORE_FAST              22 (deviceBssid)
+
+771     >>  752 LOAD_GLOBAL             28 (LPUtility)
+            754 LOAD_METHOD             29 (ssidToHexString)
+            756 LOAD_GLOBAL             28 (LPUtility)
+            758 LOAD_METHOD             30 (currentSSID)
+            760 CALL_METHOD              0
+            762 CALL_METHOD              1
+            764 STORE_FAST              23 (appSsidHex)
+
+772         766 LOAD_FAST               23 (appSsidHex)
+            768 EXTENDED_ARG             3
+            770 POP_JUMP_IF_FALSE      802
+            772 LOAD_FAST               21 (deviceSsidHex)
+            774 EXTENDED_ARG             3
+            776 POP_JUMP_IF_FALSE      802
+
+773         778 LOAD_FAST               23 (appSsidHex)
+            780 LOAD_FAST               21 (deviceSsidHex)
+            782 LOAD_METHOD             31 (upper)
+            784 CALL_METHOD              0
+            786 COMPARE_OP               2 (==)
+            788 EXTENDED_ARG             3
+            790 POP_JUMP_IF_FALSE      796
+            792 LOAD_CONST              38 (1)
+            794 JUMP_FORWARD             2 (to 798)
+        >>  796 LOAD_CONST              11 (0)
+        >>  798 STORE_FAST              24 (samessid)
+            800 JUMP_FORWARD             4 (to 806)
+
+775     >>  802 LOAD_CONST              39 (2)
+            804 STORE_FAST              24 (samessid)
+
+776     >>  806 LOAD_GLOBAL             28 (LPUtility)
+            808 LOAD_METHOD             32 (currentBSSID)
+            810 CALL_METHOD              0
+            812 EXTENDED_ARG             3
+            814 JUMP_IF_TRUE_OR_POP    818
+            816 LOAD_CONST               8 ('')
+        >>  818 STORE_FAST              25 (appBssid)
+
+777         820 LOAD_FAST               25 (appBssid)
+            822 EXTENDED_ARG             3
+            824 POP_JUMP_IF_FALSE      864
+            826 LOAD_FAST               22 (deviceBssid)
+            828 EXTENDED_ARG             3
+            830 POP_JUMP_IF_FALSE      864
+
+778         832 LOAD_DEREF               2 (self)
+            834 LOAD_METHOD             33 (_normalizeBssid)
+            836 LOAD_FAST               25 (appBssid)
+            838 CALL_METHOD              1
+            840 LOAD_DEREF               2 (self)
+            842 LOAD_METHOD             33 (_normalizeBssid)
+            844 LOAD_FAST               22 (deviceBssid)
+            846 CALL_METHOD              1
+            848 COMPARE_OP               2 (==)
+            850 EXTENDED_ARG             3
+            852 POP_JUMP_IF_FALSE      858
+            854 LOAD_CONST              38 (1)
+            856 JUMP_FORWARD             2 (to 860)
+        >>  858 LOAD_CONST              11 (0)
+        >>  860 STORE_FAST              26 (samebssid)
+            862 JUMP_FORWARD             4 (to 868)
+
+780     >>  864 LOAD_CONST              39 (2)
+            866 STORE_FAST              26 (samebssid)
+
+783     >>  868 LOAD_DEREF               2 (self)
+            870 LOAD_ATTR               10 (_lock)
+            872 SETUP_WITH              58 (to 932)
+            874 POP_TOP
+
+784         876 LOAD_FAST                3 (deviceHash)
+            878 LOAD_DEREF               2 (self)
+            880 LOAD_ATTR               11 (_diagnosedHashes)
+            882 CONTAINS_OP              0
+            884 EXTENDED_ARG             3
+            886 POP_JUMP_IF_FALSE      906
+
+785         888 POP_BLOCK
+            890 LOAD_CONST               3 (None)
+            892 DUP_TOP
+            894 DUP_TOP
+            896 CALL_FUNCTION            3
+            898 POP_TOP
+            900 POP_BLOCK
+            902 LOAD_CONST               3 (None)
+            904 RETURN_VALUE
+
+786     >>  906 LOAD_DEREF               2 (self)
+            908 LOAD_ATTR               11 (_diagnosedHashes)
+            910 LOAD_METHOD             12 (add)
+            912 LOAD_FAST                3 (deviceHash)
+            914 CALL_METHOD              1
+            916 POP_TOP
+            918 POP_BLOCK
+            920 LOAD_CONST               3 (None)
+            922 DUP_TOP
+            924 DUP_TOP
+            926 CALL_FUNCTION            3
+            928 POP_TOP
+            930 JUMP_FORWARD            18 (to 950)
+        >>  932 WITH_EXCEPT_START
+            934 EXTENDED_ARG             3
+            936 POP_JUMP_IF_TRUE       940
+            938 RERAISE
+        >>  940 POP_TOP
+            942 POP_TOP
+            944 POP_TOP
+            946 POP_EXCEPT
+            948 POP_TOP
+
+788     >>  950 LOAD_DEREF               2 (self)
+            952 LOAD_METHOD             34 (snapshot)
+            954 LOAD_CONST              40 ('report_pending')
+            956 CALL_METHOD              1
+            958 STORE_FAST              27 (context)
+
+790         960 LOAD_FAST                1 (uuid)
+
+791         962 LOAD_FAST               18 (casecode)
+
+792         964 LOAD_GLOBAL              7 (int)
+            966 LOAD_DEREF               1 (probeResults)
+            968 LOAD_CONST              24 ('http')
+            970 BINARY_SUBSCR
+            972 LOAD_METHOD              6 (get)
+            974 LOAD_CONST              25 ('result')
+            976 LOAD_CONST              11 (0)
+            978 CALL_METHOD              2
+            980 CALL_FUNCTION            1
+
+793         982 LOAD_GLOBAL              7 (int)
+            984 LOAD_DEREF               1 (probeResults)
+            986 LOAD_CONST              24 ('http')
+            988 BINARY_SUBSCR
+            990 LOAD_METHOD              6 (get)
+            992 LOAD_CONST              41 ('errorcode')
+            994 LOAD_CONST              11 (0)
+            996 CALL_METHOD              2
+            998 CALL_FUNCTION            1
+
+794        1000 LOAD_FAST               24 (samessid)
+
+795        1002 LOAD_FAST               26 (samebssid)
+
+796        1004 LOAD_DEREF               2 (self)
+           1006 LOAD_METHOD             35 (_joinList)
+           1008 LOAD_GLOBAL             36 (sorted)
+           1010 LOAD_FAST               14 (online)
+           1012 CALL_FUNCTION            1
+           1014 CALL_METHOD              1
+
+797        1016 LOAD_GLOBAL             37 (len)
+           1018 LOAD_FAST               14 (online)
+           1020 CALL_FUNCTION            1
+
+789        1022 LOAD_CONST              42 (('device_id_hash', 'casecode', 'httpcode_result', 'httpcode_errorcode', 'samessid', 'samebssid', 'device_list', 'device_num'))
+           1024 BUILD_CONST_KEY_MAP      8
+           1026 STORE_FAST              28 (params)
+
+803        1028 LOAD_FAST               28 (params)
+           1030 LOAD_METHOD             38 (update)
+           1032 LOAD_DEREF               2 (self)
+           1034 LOAD_METHOD             39 (_cleanContextForEvent)
+           1036 LOAD_FAST               27 (context)
+           1038 CALL_METHOD              1
+           1040 CALL_METHOD              1
+           1042 POP_TOP
+
+804        1044 LOAD_FAST               28 (params)
+           1046 LOAD_METHOD             38 (update)
+           1048 LOAD_DEREF               2 (self)
+           1050 LOAD_METHOD             40 (_flattenDeviceFields)
+           1052 LOAD_FAST                6 (deviceInfo)
+           1054 CALL_METHOD              1
+           1056 CALL_METHOD              1
+           1058 POP_TOP
+
+805        1060 LOAD_GLOBAL             41 (LPGlobalUI)
+           1062 LOAD_ATTR               42 (eventTrack)
+           1064 LOAD_METHOD             43 (logEvent)
+           1066 LOAD_GLOBAL             44 (LPEventsType)
+           1068 LOAD_ATTR               45 (DEVICE_DISCOVERY_FAILURE)
+           1070 LOAD_ATTR               46 (value)
+           1072 LOAD_FAST               28 (params)
+           1074 CALL_METHOD              2
+           1076 POP_TOP
+
+806        1078 LOAD_GLOBAL             13 (logger)
+           1080 LOAD_METHOD             14 (info)
+           1082 LOAD_CONST              43 ('[discovery-telemetry] failure sent, device=%s casecode=%s elapsed=%.1fs')
+
+807        1084 LOAD_FAST                3 (deviceHash)
+           1086 LOAD_FAST               18 (casecode)
+           1088 LOAD_GLOBAL              1 (time)
+           1090 LOAD_METHOD              1 (time)
+           1092 CALL_METHOD              0
+           1094 LOAD_FAST                4 (startedAt)
+           1096 BINARY_SUBTRACT
+
+806        1098 BUILD_TUPLE              3
+           1100 BINARY_MODULO
+           1102 CALL_METHOD              1
+           1104 POP_TOP
+           1106 POP_BLOCK
+           1108 JUMP_FORWARD            56 (to 1166)
+
+808     >> 1110 DUP_TOP
+           1112 LOAD_GLOBAL             47 (Exception)
+           1114 EXTENDED_ARG             4
+           1116 JUMP_IF_NOT_EXC_MATCH  1164
+           1118 POP_TOP
+           1120 STORE_FAST              29 (e)
+           1122 POP_TOP
+           1124 SETUP_FINALLY           30 (to 1156)
+
+809        1126 LOAD_GLOBAL             13 (logger)
+           1128 LOAD_METHOD             48 (warning)
+           1130 LOAD_CONST              44 ('[discovery-telemetry] diagnoseDevice %s exception: %s')
+           1132 LOAD_FAST                3 (deviceHash)
+           1134 LOAD_FAST               29 (e)
+           1136 BUILD_TUPLE              2
+           1138 BINARY_MODULO
+           1140 CALL_METHOD              1
+           1142 POP_TOP
+           1144 POP_BLOCK
+           1146 POP_EXCEPT
+           1148 LOAD_CONST               3 (None)
+           1150 STORE_FAST              29 (e)
+           1152 DELETE_FAST             29 (e)
+           1154 JUMP_FORWARD            10 (to 1166)
+        >> 1156 LOAD_CONST               3 (None)
+           1158 STORE_FAST              29 (e)
+           1160 DELETE_FAST             29 (e)
+           1162 RERAISE
+        >> 1164 RERAISE
+        >> 1166 LOAD_CONST               3 (None)
+           1168 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._diagnoseDevice.<lambda> ===
+735           0 LOAD_DEREF               1 (probeResults)
+              2 LOAD_ATTR                0 (update)
+              4 LOAD_DEREF               2 (self)
+              6 LOAD_METHOD              1 (_probeHttp)
+              8 LOAD_DEREF               0 (probeIP)
+             10 CALL_METHOD              1
+             12 LOAD_CONST               1 (('http',))
+             14 CALL_FUNCTION_KW         1
+             16 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._diagnoseDevice.<lambda> ===
+737           0 LOAD_DEREF               1 (probeResults)
+              2 LOAD_ATTR                0 (update)
+              4 LOAD_GLOBAL              1 (LPUtility)
+              6 LOAD_METHOD              2 (tcpProbeHost)
+              8 LOAD_DEREF               0 (probeIP)
+             10 LOAD_CONST               1 (443)
+             12 LOAD_CONST               2 (3)
+             14 CALL_METHOD              3
+             16 LOAD_CONST               3 (('tcp',))
+             18 CALL_FUNCTION_KW         1
+             20 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._diagnoseDevice.<lambda> ===
+739           0 LOAD_DEREF               1 (probeResults)
+              2 LOAD_ATTR                0 (update)
+              4 LOAD_GLOBAL              1 (LPUtility)
+              6 LOAD_METHOD              2 (icmpPingHost)
+              8 LOAD_DEREF               0 (probeIP)
+             10 LOAD_CONST               1 (3)
+             12 CALL_METHOD              2
+             14 LOAD_CONST               2 (('ping',))
+             16 CALL_FUNCTION_KW         1
+             18 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._diagnoseDevice.<genexpr> ===
+760           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                18 (to 22)
+              4 STORE_FAST               1 (bit)
+              6 LOAD_FAST                1 (bit)
+              8 POP_JUMP_IF_FALSE       14
+             10 LOAD_CONST               0 ('1')
+             12 JUMP_FORWARD             2 (to 16)
+        >>   14 LOAD_CONST               1 ('0')
+        >>   16 YIELD_VALUE
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            2
+        >>   22 LOAD_CONST               2 (None)
+             24 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._normalizeBssid ===
+820           0 LOAD_CONST               1 ('')
+              2 LOAD_METHOD              0 (join)
+              4 LOAD_CONST               2 (<code object <genexpr> at 0x000001F3253CEBE0, file "LPClientFramework\LPDiscoveryTelemetry.py", line 820>)
+              6 LOAD_CONST               3 ('LPDiscoveryTelemetry._normalizeBssid.<locals>.<genexpr>')
+              8 MAKE_FUNCTION            0
+             10 LOAD_FAST                1 (bssid)
+             12 LOAD_METHOD              1 (lower)
+             14 CALL_METHOD              0
+             16 GET_ITER
+             18 CALL_FUNCTION            1
+             20 CALL_METHOD              1
+             22 RETURN_VALUE
+
+=== LPDiscoveryTelemetry._normalizeBssid.<genexpr> ===
+820           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                18 (to 22)
+              4 STORE_FAST               1 (ch)
+              6 LOAD_FAST                1 (ch)
+              8 LOAD_CONST               0 ('0123456789abcdef')
+             10 CONTAINS_OP              0
+             12 POP_JUMP_IF_FALSE        2
+             14 LOAD_FAST                1 (ch)
+             16 YIELD_VALUE
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            2
+        >>   22 LOAD_CONST               1 (None)
+             24 RETURN_VALUE

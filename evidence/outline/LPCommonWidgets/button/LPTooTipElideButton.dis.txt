@@ -1,0 +1,177 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/1/28 17:24\n@Auth ： Chris\n@File ：LPToolTipElideButton.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('QEvent', 'QRect', 'Qt'))
+              8 IMPORT_NAME              1 (PyQt6.QtCore)
+             10 IMPORT_FROM              2 (QEvent)
+             12 STORE_NAME               2 (QEvent)
+             14 IMPORT_FROM              3 (QRect)
+             16 STORE_NAME               3 (QRect)
+             18 IMPORT_FROM              4 (Qt)
+             20 STORE_NAME               4 (Qt)
+             22 POP_TOP
+
+  9          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               3 (('QFontMetrics',))
+             28 IMPORT_NAME              5 (PyQt6.QtGui)
+             30 IMPORT_FROM              6 (QFontMetrics)
+             32 STORE_NAME               6 (QFontMetrics)
+             34 POP_TOP
+
+ 10          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               4 (('QToolTip', 'QPushButton'))
+             40 IMPORT_NAME              7 (PyQt6.QtWidgets)
+             42 IMPORT_FROM              8 (QToolTip)
+             44 STORE_NAME               8 (QToolTip)
+             46 IMPORT_FROM              9 (QPushButton)
+             48 STORE_NAME               9 (QPushButton)
+             50 POP_TOP
+
+ 12          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               5 (('LPElideButton',))
+             56 IMPORT_NAME             10 (LPCommonWidgets.button.LPElideButton)
+             58 IMPORT_FROM             11 (LPElideButton)
+             60 STORE_NAME              11 (LPElideButton)
+             62 POP_TOP
+
+ 15          64 LOAD_BUILD_CLASS
+             66 LOAD_CONST               6 (<code object LPToolTipElideButton at 0x000001F324E7B3A0, file "LPCommonWidgets\button\LPTooTipElideButton.py", line 15>)
+             68 LOAD_CONST               7 ('LPToolTipElideButton')
+             70 MAKE_FUNCTION            0
+             72 LOAD_CONST               7 ('LPToolTipElideButton')
+             74 LOAD_NAME               11 (LPElideButton)
+             76 CALL_FUNCTION            3
+             78 STORE_NAME              12 (LPToolTipElideButton)
+             80 LOAD_CONST               8 (None)
+             82 RETURN_VALUE
+
+=== LPToolTipElideButton ===
+ 15           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPToolTipElideButton')
+              6 STORE_NAME               2 (__qualname__)
+
+ 17           8 LOAD_CLOSURE             0 (__class__)
+             10 BUILD_TUPLE              1
+             12 LOAD_CONST               1 (<code object _updateElidedText at 0x000001F3253DF190, file "LPCommonWidgets\button\LPTooTipElideButton.py", line 17>)
+             14 LOAD_CONST               2 ('LPToolTipElideButton._updateElidedText')
+             16 MAKE_FUNCTION            8 (closure)
+             18 STORE_NAME               3 (_updateElidedText)
+
+ 22          20 LOAD_CLOSURE             0 (__class__)
+             22 BUILD_TUPLE              1
+             24 LOAD_CONST               3 (<code object event at 0x000001F324E7B450, file "LPCommonWidgets\button\LPTooTipElideButton.py", line 22>)
+             26 LOAD_CONST               4 ('LPToolTipElideButton.event')
+             28 MAKE_FUNCTION            8 (closure)
+             30 STORE_NAME               4 (event)
+             32 LOAD_CLOSURE             0 (__class__)
+             34 DUP_TOP
+             36 STORE_NAME               5 (__classcell__)
+             38 RETURN_VALUE
+
+=== LPToolTipElideButton._updateElidedText ===
+ 18           0 LOAD_GLOBAL              0 (QFontMetrics)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_METHOD              1 (font)
+              6 CALL_METHOD              0
+              8 CALL_FUNCTION            1
+             10 STORE_FAST               1 (metrics)
+
+ 19          12 LOAD_FAST                1 (metrics)
+             14 LOAD_METHOD              2 (elidedText)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                3 (full_text)
+             20 LOAD_GLOBAL              4 (Qt)
+             22 LOAD_ATTR                5 (TextElideMode)
+             24 LOAD_ATTR                6 (ElideRight)
+             26 LOAD_FAST                0 (self)
+             28 LOAD_METHOD              7 (width)
+             30 CALL_METHOD              0
+             32 CALL_METHOD              3
+             34 STORE_FAST               2 (elided)
+
+ 20          36 LOAD_GLOBAL              8 (super)
+             38 LOAD_GLOBAL              9 (QPushButton)
+             40 LOAD_FAST                0 (self)
+             42 CALL_FUNCTION            2
+             44 LOAD_METHOD             10 (setText)
+             46 LOAD_FAST                2 (elided)
+             48 CALL_METHOD              1
+             50 POP_TOP
+             52 LOAD_CONST               0 (None)
+             54 RETURN_VALUE
+
+=== LPToolTipElideButton.event ===
+ 23           0 LOAD_FAST                1 (event)
+              2 LOAD_METHOD              0 (type)
+              4 CALL_METHOD              0
+              6 LOAD_GLOBAL              1 (QEvent)
+              8 LOAD_ATTR                2 (Type)
+             10 LOAD_ATTR                3 (ToolTip)
+             12 COMPARE_OP               2 (==)
+             14 POP_JUMP_IF_FALSE      110
+
+ 24          16 LOAD_FAST                1 (event)
+             18 STORE_FAST               2 (help_event)
+
+ 25          20 LOAD_GLOBAL              4 (QFontMetrics)
+             22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              5 (font)
+             26 CALL_METHOD              0
+             28 CALL_FUNCTION            1
+             30 STORE_FAST               3 (fm)
+
+ 26          32 LOAD_FAST                3 (fm)
+             34 LOAD_METHOD              6 (horizontalAdvance)
+             36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                7 (full_text)
+             40 CALL_METHOD              1
+             42 STORE_FAST               4 (text_width)
+
+ 27          44 LOAD_GLOBAL              8 (QRect)
+             46 LOAD_CONST               1 (0)
+             48 LOAD_CONST               1 (0)
+             50 LOAD_FAST                4 (text_width)
+             52 LOAD_FAST                0 (self)
+             54 LOAD_METHOD              9 (height)
+             56 CALL_METHOD              0
+             58 CALL_FUNCTION            4
+             60 STORE_FAST               5 (text_rect)
+
+ 28          62 LOAD_FAST                5 (text_rect)
+             64 LOAD_METHOD             10 (contains)
+             66 LOAD_FAST                2 (help_event)
+             68 LOAD_METHOD             11 (pos)
+             70 CALL_METHOD              0
+             72 CALL_METHOD              1
+             74 POP_JUMP_IF_FALSE       98
+
+ 29          76 LOAD_GLOBAL             12 (QToolTip)
+             78 LOAD_METHOD             13 (showText)
+             80 LOAD_FAST                2 (help_event)
+             82 LOAD_METHOD             14 (globalPos)
+             84 CALL_METHOD              0
+             86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                7 (full_text)
+             90 LOAD_FAST                0 (self)
+             92 CALL_METHOD              3
+             94 POP_TOP
+             96 JUMP_FORWARD             8 (to 106)
+
+ 31     >>   98 LOAD_GLOBAL             12 (QToolTip)
+            100 LOAD_METHOD             15 (hideText)
+            102 CALL_METHOD              0
+            104 POP_TOP
+
+ 32     >>  106 LOAD_CONST               2 (True)
+            108 RETURN_VALUE
+
+ 33     >>  110 LOAD_GLOBAL             16 (super)
+            112 CALL_FUNCTION            0
+            114 LOAD_METHOD             17 (event)
+            116 LOAD_FAST                1 (event)
+            118 CALL_METHOD              1
+            120 RETURN_VALUE

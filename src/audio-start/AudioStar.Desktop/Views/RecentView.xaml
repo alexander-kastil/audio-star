@@ -1,0 +1,38 @@
+<UserControl x:Class="AudioStar.Desktop.Views.RecentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:AudioStar.Desktop.Views">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="{StaticResource PageMarginRoomy}">
+            <TextBlock Text="Recently played" Style="{StaticResource PageTitle}" />
+            <TextBlock Text="Replay plays the item on the speaker chosen in the sidebar." Style="{StaticResource Subtle}" />
+            <ProgressBar IsIndeterminate="True" Height="3" Margin="0,10,0,0" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}" />
+            <ItemsControl ItemsSource="{Binding Rows}" Margin="0,16,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource Card}" Width="210" Margin="0,0,14,14">
+                            <StackPanel>
+                                <views:CoverArt Source="{Binding ArtworkUri}" Width="184" Height="184" />
+                                <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" ToolTip="{Binding Title}" />
+                                <TextBlock Text="{Binding Subtitle}" Style="{StaticResource Subtle}" FontSize="12" MinHeight="16" ToolTip="{Binding Subtitle}" />
+                                <TextBlock Text="{Binding PlayedText}" Style="{StaticResource Subtle}" FontSize="11" />
+                                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                    <Button Style="{StaticResource IconButton}" Content="&#xE768;"
+                                            Command="{Binding DataContext.ReplayCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" ToolTip="Replay on the current speaker" />
+                                    <Button Style="{StaticResource IconButton}" Content="&#xE74D;"
+                                            Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" ToolTip="Remove from recently played" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Style="{StaticResource EmptyState}" Text="No recently played" Visibility="{Binding IsEmpty, Converter={StaticResource BoolToVisibility}}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

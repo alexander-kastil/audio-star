@@ -1,0 +1,151 @@
+# module LPClientFramework.LPMSManager.Qobuz.LPQobuzLibraryCacheManager
+
+[module] names: __doc__, enum, threading, time, functools, partial, PyQt6.QtCore, QObject, pyqtSignal, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPClientFramework.LPPlayList.LPQobuzPlayList, LPQobuzAccount, LPQobuzLibPageState, LPClientFramework.LPUtility, logger, Enum, LPQobuzLibCache, LPQobuzLibraryCacheManager
+  str: '\n@Time ： 2025/8/18 17:24\n@Auth ： Chris\n@File ：LPQobuzLibraryCacheManager.py\n@Desc:\n'
+  str: 'partial'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'LPUtility'
+  str: 'LPHeaderType'
+  str: 'LPQobuzAccount'
+  str: 'LPQobuzLibPageState'
+  str: 'logger'
+  str: 'LPQobuzLibCache'
+  str: 'LPQobuzLibraryCacheManager'
+
+def LPQobuzLibCache()  line 20
+  names: __name__, __module__, __qualname__, FavAlbum, MyPlaylist, FavTrack, FavArtist, PurAlbum, PurTrack
+    str: 'LPQobuzLibCache'
+    str: 'favAlbumCache.pkl'
+    str: 'myPlaylistCache.pkl'
+    str: 'favTrackCache.pkl'
+    str: 'favArtistCache.pkl'
+    str: 'purAlbumCache.pkl'
+    str: 'purTrackCache.pkl'
+
+def LPQobuzLibraryCacheManager()  line 28
+  names: __name__, __module__, __qualname__, pyqtSignal, object, str, libCacheChangedSignal, cacheNeedUpdateSignal, libPlaylistLoadedSignal, __init__, LPQobuzAccount, initLibCache, requestBindingData, onRequestDataCallback, updateCache, resetPageState, loadCache, saveCache, list, checkUpdate, refreshUpdate, __classcell__
+    str: 'LPQobuzLibraryCacheManager'
+    str: 'LPQobuzLibraryCacheManager.__init__'
+    str: 'account'
+    str: 'LPQobuzLibraryCacheManager.initLibCache'
+    str: 'account'
+    str: 'sectionKey'
+    str: 'LPQobuzLibraryCacheManager.requestBindingData'
+    str: 'LPQobuzLibraryCacheManager.onRequestDataCallback'
+    str: 'LPQobuzLibraryCacheManager.updateCache'
+    str: 'LPQobuzLibraryCacheManager.resetPageState'
+    str: 'LPQobuzLibraryCacheManager.loadCache'
+    str: 'LPQobuzLibraryCacheManager.saveCache'
+    str: 'sectionKeys'
+    str: 'LPQobuzLibraryCacheManager.checkUpdate'
+    str: 'LPQobuzLibraryCacheManager.refreshUpdate'
+
+  def LPQobuzLibraryCacheManager.__init__(self, parent)  line 34
+    names: super, __init__, qobuz, LPHeaderType, LP_HEADER_TYPE_PLAYLIST, requestMgr, fetchMyPlaylistData, LPQobuzLibCache, MyPlaylist, LP_HEADER_TYPE_ARTIST, fetchFavoriteData, FavArtist, LP_HEADER_TYPE_ALBUM, FavAlbum, LP_HEADER_TYPE_COLLECTION, FavTrack, fetchPurchaseData, PurAlbum, PurTrack, sectionBinding, threading, Lock, checkLock
+      str: 'listFrame'
+      str: 'playlist'
+      str: 'component'
+      str: 'headType'
+      str: 'dataMethod'
+      str: 'cacheName'
+      str: 'updateTimeKey'
+      str: 'favorite_artist'
+      str: 'favorite_album'
+      str: 'tableFrame'
+      str: 'favorite_track'
+      str: 'purchase'
+      str: 'My Playlists'
+      str: 'Favorite Artists'
+      str: 'Favorite Albums'
+      str: 'Favorite Tracks'
+      str: 'Purchased Albums'
+      str: 'Purchased Tracks'
+
+  def LPQobuzLibraryCacheManager.initLibCache(self, account)  line 52
+    names: logger, debug, userId, showName, threading, Thread, start
+      str: 'LPQobuzLibraryCacheManager.initLibCache.<locals>._target'
+      str: 'account.userId->'
+      str: ' account.showName->'
+      str: ' initLibCache ====='
+      str: 'target'
+      str: 'daemon'
+
+    def LPQobuzLibraryCacheManager.initLibCache._target()  line 53
+      names: dataBinding, items, loadCache, logger, debug, userId, showName, libPlaylistLoadedSignal, emit
+        str: 'account.userId->'
+        str: ' account.showName->'
+        str: ' section = '
+        str: ' initLibCache from cache'
+        str: 'playList'
+        str: 'My Playlists'
+
+  def LPQobuzLibraryCacheManager.requestBindingData(self, account, sectionKey)  line 73
+    names: sectionBinding, dataBinding, partial, onRequestDataCallback, qobuz, requestMgr, fetchMyPlaylistData, fetch, offset, limit, fetchFavoriteData
+      str: 'headType'
+      str: 'dataMethod'
+      str: 'pageState'
+      str: 'offset'
+      str: 'limit'
+      str: 'useCache'
+
+  def LPQobuzLibraryCacheManager.onRequestDataCallback(self, account, sectionKey, result)  line 91
+    names: sectionBinding, dataBinding, data, header, total, offset, list, extend, limit, int, time, updating, needRefresh, libCacheChangedSignal, emit, libPlaylistLoadedSignal, saveCache, logger, debug, userId, showName, refreshUpdate, requestBindingData
+      str: 'pageState'
+      str: 'playList'
+      str: 'lock'
+      str: 'My Playlists'
+      str: 'account.userId->'
+      str: ' account.showName->'
+      str: ' section->'
+      str: ' requesting data end'
+      str: ' refresh because needRefresh'
+
+  def LPQobuzLibraryCacheManager.updateCache(self, account, sectionKey)  line 130
+    names: logger, debug, userId, showName, requestBindingData
+      str: 'account.userId->'
+      str: ' account.showName->'
+      str: ' section->'
+      str: ' updateCache...'
+
+  def LPQobuzLibraryCacheManager.resetPageState(self, account, sectionKey)  line 135
+    names: sectionBinding, dataBinding, resetPageState
+      str: 'component'
+      str: 'pageState'
+      str: 'tableFrame'
+
+  def LPQobuzLibraryCacheManager.loadCache(self, account, sectionKey)  line 146
+    names: sectionBinding, getCacheDir, value, logger, debug, userId, showName, qobuz, pklCache, tryLoad, getattr, warning
+      str: '\n        外部判断是否为None\n        '
+      str: 'cacheName'
+      str: '[qobuz loadCache] account.userId->'
+      str: ' account.showName->'
+      str: '---'
+      str: 'list'
+      str: '[qobuz loadCache] discard invalid '
+      str: ' cache: list is None'
+
+  def LPQobuzLibraryCacheManager.saveCache(self, account, sectionKey, dataObj)  line 166
+    names: sectionBinding, getCacheDir, value, qobuz, pklCache, save, logger, debug
+      str: 'cacheName'
+      str: 'account.userId->{account.userId} account.showName->{account.showName} libcache manager saveCache failed--no CacheDir'
+
+  def LPQobuzLibraryCacheManager.checkUpdate(self, sectionKeys)  line 179
+    names: qobuz, currentAccount, requestMgr, fetchLastUpdate, fetch
+      str: '检查每个 section 是否需要更新, 不拉实际数据'
+      str: 'LPQobuzLibraryCacheManager.checkUpdate.<locals>.callback'
+
+    def LPQobuzLibraryCacheManager.checkUpdate.callback(result)  line 181
+      names: data, sectionBinding, dataBinding, get, append, time, refreshUpdate
+        str: 'updateTimeKey'
+        str: 'lock'
+        str: 'playList'
+
+  def LPQobuzLibraryCacheManager.refreshUpdate(self, account, sectionKey)  line 213
+    names: dataBinding, updating, needRefresh, logger, debug, userId, showName, resetPageState, updateCache
+      str: 'lock'
+      str: 'pageState'
+      str: 'account.userId->'
+      str: ' account.showName->'
+      str: ' section->'
+      str: ' set needRefresh = True'

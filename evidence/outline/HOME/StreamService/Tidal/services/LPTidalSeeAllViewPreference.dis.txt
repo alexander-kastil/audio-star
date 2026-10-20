@@ -1,0 +1,527 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL See All 视图模式偏好服务。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Optional',))
+              8 IMPORT_NAME              1 (typing)
+             10 IMPORT_FROM              2 (Optional)
+             12 STORE_NAME               2 (Optional)
+             14 POP_TOP
+
+  8          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('LPUtility',))
+             20 IMPORT_NAME              3 (LPClientFramework)
+             22 IMPORT_FROM              4 (LPUtility)
+             24 STORE_NAME               4 (LPUtility)
+             26 POP_TOP
+
+  9          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               4 (('LPPlayListSource',))
+             32 IMPORT_NAME              5 (LPClientFramework.LPPlayList.LPPlayList)
+             34 IMPORT_FROM              6 (LPPlayListSource)
+             36 STORE_NAME               6 (LPPlayListSource)
+             38 POP_TOP
+
+ 10          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               5 (('logger',))
+             44 IMPORT_NAME              7 (LPClientFramework.LPUtility)
+             46 IMPORT_FROM              8 (logger)
+             48 STORE_NAME               8 (logger)
+             50 POP_TOP
+
+ 13          52 LOAD_BUILD_CLASS
+             54 LOAD_CONST               6 (<code object LPTidalSeeAllViewPreference at 0x000001F3253C4D40, file "StreamService\Tidal\services\LPTidalSeeAllViewPreference.py", line 13>)
+             56 LOAD_CONST               7 ('LPTidalSeeAllViewPreference')
+             58 MAKE_FUNCTION            0
+             60 LOAD_CONST               7 ('LPTidalSeeAllViewPreference')
+             62 CALL_FUNCTION            2
+             64 STORE_NAME               9 (LPTidalSeeAllViewPreference)
+             66 LOAD_CONST               8 (None)
+             68 RETURN_VALUE
+
+=== LPTidalSeeAllViewPreference ===
+ 13           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalSeeAllViewPreference')
+              6 STORE_NAME               2 (__qualname__)
+
+ 14           8 LOAD_CONST               1 ('负责维护 TIDAL 所有 See All 页面共享的网格/列表视图模式偏好。')
+             10 STORE_NAME               3 (__doc__)
+
+ 17          12 LOAD_CONST               2 ('seeAllViewMode')
+             14 STORE_NAME               4 (PREFERENCE_KEY)
+
+ 18          16 LOAD_CONST               3 ('grid')
+             18 STORE_NAME               5 (DEFAULT_MODE)
+
+ 19          20 LOAD_CONST               4 (('grid', 'list'))
+             22 STORE_NAME               6 (VALID_MODES)
+
+ 21          24 LOAD_NAME                7 (classmethod)
+
+ 22          26 LOAD_NAME                8 (str)
+             28 LOAD_NAME                8 (str)
+             30 LOAD_CONST               5 (('mode', 'return'))
+             32 BUILD_CONST_KEY_MAP      2
+             34 LOAD_CONST               6 (<code object _normalizeMode at 0x000001F3253C4920, file "StreamService\Tidal\services\LPTidalSeeAllViewPreference.py", line 21>)
+             36 LOAD_CONST               7 ('LPTidalSeeAllViewPreference._normalizeMode')
+             38 MAKE_FUNCTION            4 (annotations)
+             40 CALL_FUNCTION            1
+             42 STORE_NAME               9 (_normalizeMode)
+
+ 34          44 LOAD_NAME                7 (classmethod)
+
+ 35          46 LOAD_NAME                8 (str)
+             48 LOAD_NAME               10 (Optional)
+             50 LOAD_NAME                8 (str)
+             52 BINARY_SUBSCR
+             54 LOAD_CONST               8 (('userId', 'return'))
+             56 BUILD_CONST_KEY_MAP      2
+             58 LOAD_CONST               9 (<code object readViewMode at 0x000001F3253C4870, file "StreamService\Tidal\services\LPTidalSeeAllViewPreference.py", line 34>)
+             60 LOAD_CONST              10 ('LPTidalSeeAllViewPreference.readViewMode')
+             62 MAKE_FUNCTION            4 (annotations)
+             64 CALL_FUNCTION            1
+             66 STORE_NAME              11 (readViewMode)
+
+ 65          68 LOAD_NAME                7 (classmethod)
+
+ 66          70 LOAD_NAME                8 (str)
+             72 LOAD_NAME                8 (str)
+             74 LOAD_NAME               12 (bool)
+             76 LOAD_CONST              11 (('userId', 'mode', 'return'))
+             78 BUILD_CONST_KEY_MAP      3
+             80 LOAD_CONST              12 (<code object saveViewMode at 0x000001F3253C49D0, file "StreamService\Tidal\services\LPTidalSeeAllViewPreference.py", line 65>)
+             82 LOAD_CONST              13 ('LPTidalSeeAllViewPreference.saveViewMode')
+             84 MAKE_FUNCTION            4 (annotations)
+             86 CALL_FUNCTION            1
+             88 STORE_NAME              13 (saveViewMode)
+             90 LOAD_CONST              14 (None)
+             92 RETURN_VALUE
+
+=== LPTidalSeeAllViewPreference._normalizeMode ===
+ 29           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (mode)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               2 (value)
+
+ 30          20 LOAD_FAST                2 (value)
+             22 LOAD_FAST                0 (cls)
+             24 LOAD_ATTR                3 (VALID_MODES)
+             26 CONTAINS_OP              1
+             28 POP_JUMP_IF_FALSE       36
+
+ 31          30 LOAD_FAST                0 (cls)
+             32 LOAD_ATTR                4 (DEFAULT_MODE)
+             34 RETURN_VALUE
+
+ 32     >>   36 LOAD_FAST                2 (value)
+             38 RETURN_VALUE
+
+=== LPTidalSeeAllViewPreference.readViewMode ===
+ 42           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (userId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               2 (user_id)
+
+ 43          16 LOAD_GLOBAL              2 (getattr)
+             18 LOAD_GLOBAL              3 (LPUtility)
+             20 LOAD_CONST               2 ('settings')
+             22 LOAD_CONST               3 (None)
+             24 CALL_FUNCTION            3
+             26 STORE_FAST               3 (settings)
+
+ 44          28 LOAD_FAST                2 (user_id)
+             30 POP_JUMP_IF_FALSE       40
+             32 LOAD_FAST                3 (settings)
+             34 LOAD_CONST               3 (None)
+             36 IS_OP                    0
+             38 POP_JUMP_IF_FALSE       44
+
+ 45     >>   40 LOAD_CONST               3 (None)
+             42 RETURN_VALUE
+
+ 46     >>   44 LOAD_CONST               4 (False)
+             46 STORE_FAST               4 (group_opened)
+
+ 47          48 SETUP_FINALLY          176 (to 226)
+             50 SETUP_FINALLY           46 (to 98)
+
+ 48          52 LOAD_FAST                3 (settings)
+             54 LOAD_METHOD              4 (beginGroup)
+             56 LOAD_GLOBAL              5 (LPPlayListSource)
+             58 LOAD_ATTR                6 (Tidal)
+             60 LOAD_ATTR                7 (value)
+             62 FORMAT_VALUE             0
+             64 LOAD_CONST               5 ('/')
+             66 LOAD_FAST                2 (user_id)
+             68 FORMAT_VALUE             0
+             70 BUILD_STRING             3
+             72 CALL_METHOD              1
+             74 POP_TOP
+
+ 49          76 LOAD_CONST               6 (True)
+             78 STORE_FAST               4 (group_opened)
+
+ 50          80 LOAD_FAST                3 (settings)
+             82 LOAD_METHOD              7 (value)
+             84 LOAD_FAST                0 (cls)
+             86 LOAD_ATTR                8 (PREFERENCE_KEY)
+             88 LOAD_CONST               1 ('')
+             90 CALL_METHOD              2
+             92 STORE_FAST               5 (raw_value)
+             94 POP_BLOCK
+             96 JUMP_FORWARD            88 (to 186)
+
+ 51     >>   98 DUP_TOP
+            100 LOAD_GLOBAL              9 (Exception)
+            102 JUMP_IF_NOT_EXC_MATCH   184
+            104 POP_TOP
+            106 STORE_FAST               6 (exc)
+            108 POP_TOP
+            110 SETUP_FINALLY           64 (to 176)
+
+ 52         112 LOAD_GLOBAL             10 (logger)
+            114 LOAD_METHOD             11 (debug)
+            116 LOAD_CONST               7 ('[TIDAL] read see all view mode failed error=%s')
+            118 LOAD_FAST                6 (exc)
+            120 CALL_METHOD              2
+            122 POP_TOP
+
+ 53         124 POP_BLOCK
+            126 POP_EXCEPT
+            128 LOAD_CONST               3 (None)
+            130 STORE_FAST               6 (exc)
+            132 DELETE_FAST              6 (exc)
+            134 POP_BLOCK
+
+ 55         136 LOAD_FAST                4 (group_opened)
+            138 POP_JUMP_IF_FALSE      172
+
+ 56         140 SETUP_FINALLY           12 (to 154)
+
+ 57         142 LOAD_FAST                3 (settings)
+            144 LOAD_METHOD             12 (endGroup)
+            146 CALL_METHOD              0
+            148 POP_TOP
+            150 POP_BLOCK
+            152 JUMP_FORWARD            18 (to 172)
+
+ 58     >>  154 DUP_TOP
+            156 LOAD_GLOBAL              9 (Exception)
+            158 JUMP_IF_NOT_EXC_MATCH   170
+            160 POP_TOP
+            162 POP_TOP
+            164 POP_TOP
+
+ 59         166 POP_EXCEPT
+            168 JUMP_FORWARD             2 (to 172)
+        >>  170 RERAISE
+
+ 53     >>  172 LOAD_CONST               3 (None)
+            174 RETURN_VALUE
+        >>  176 LOAD_CONST               3 (None)
+            178 STORE_FAST               6 (exc)
+            180 DELETE_FAST              6 (exc)
+            182 RERAISE
+        >>  184 RERAISE
+        >>  186 POP_BLOCK
+
+ 55         188 LOAD_FAST                4 (group_opened)
+            190 POP_JUMP_IF_FALSE      224
+
+ 56         192 SETUP_FINALLY           12 (to 206)
+
+ 57         194 LOAD_FAST                3 (settings)
+            196 LOAD_METHOD             12 (endGroup)
+            198 CALL_METHOD              0
+            200 POP_TOP
+            202 POP_BLOCK
+            204 JUMP_FORWARD            18 (to 224)
+
+ 58     >>  206 DUP_TOP
+            208 LOAD_GLOBAL              9 (Exception)
+            210 JUMP_IF_NOT_EXC_MATCH   222
+            212 POP_TOP
+            214 POP_TOP
+            216 POP_TOP
+
+ 59         218 POP_EXCEPT
+            220 JUMP_FORWARD             2 (to 224)
+        >>  222 RERAISE
+        >>  224 JUMP_FORWARD            42 (to 268)
+
+ 55     >>  226 LOAD_FAST                4 (group_opened)
+            228 EXTENDED_ARG             1
+            230 POP_JUMP_IF_FALSE      266
+
+ 56         232 SETUP_FINALLY           12 (to 246)
+
+ 57         234 LOAD_FAST                3 (settings)
+            236 LOAD_METHOD             12 (endGroup)
+            238 CALL_METHOD              0
+            240 POP_TOP
+            242 POP_BLOCK
+            244 JUMP_FORWARD            20 (to 266)
+
+ 58     >>  246 DUP_TOP
+            248 LOAD_GLOBAL              9 (Exception)
+            250 EXTENDED_ARG             1
+            252 JUMP_IF_NOT_EXC_MATCH   264
+            254 POP_TOP
+            256 POP_TOP
+            258 POP_TOP
+
+ 59         260 POP_EXCEPT
+            262 JUMP_FORWARD             2 (to 266)
+        >>  264 RERAISE
+        >>  266 RERAISE
+
+ 60     >>  268 LOAD_GLOBAL              0 (str)
+            270 LOAD_FAST                5 (raw_value)
+            272 EXTENDED_ARG             1
+            274 JUMP_IF_TRUE_OR_POP    278
+            276 LOAD_CONST               1 ('')
+        >>  278 CALL_FUNCTION            1
+            280 LOAD_METHOD              1 (strip)
+            282 CALL_METHOD              0
+            284 LOAD_METHOD             13 (lower)
+            286 CALL_METHOD              0
+            288 STORE_FAST               7 (value)
+
+ 61         290 LOAD_FAST                7 (value)
+            292 LOAD_FAST                0 (cls)
+            294 LOAD_ATTR               14 (VALID_MODES)
+            296 CONTAINS_OP              1
+            298 EXTENDED_ARG             1
+            300 POP_JUMP_IF_FALSE      306
+
+ 62         302 LOAD_CONST               3 (None)
+            304 RETURN_VALUE
+
+ 63     >>  306 LOAD_FAST                7 (value)
+            308 RETURN_VALUE
+
+=== LPTidalSeeAllViewPreference.saveViewMode ===
+ 74           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (userId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               3 (user_id)
+
+ 75          16 LOAD_FAST                0 (cls)
+             18 LOAD_METHOD              2 (_normalizeMode)
+             20 LOAD_FAST                2 (mode)
+             22 CALL_METHOD              1
+             24 STORE_FAST               4 (normalized_mode)
+
+ 76          26 LOAD_GLOBAL              3 (getattr)
+             28 LOAD_GLOBAL              4 (LPUtility)
+             30 LOAD_CONST               2 ('settings')
+             32 LOAD_CONST               3 (None)
+             34 CALL_FUNCTION            3
+             36 STORE_FAST               5 (settings)
+
+ 77          38 LOAD_FAST                3 (user_id)
+             40 POP_JUMP_IF_FALSE       50
+             42 LOAD_FAST                5 (settings)
+             44 LOAD_CONST               3 (None)
+             46 IS_OP                    0
+             48 POP_JUMP_IF_FALSE       54
+
+ 78     >>   50 LOAD_CONST               4 (False)
+             52 RETURN_VALUE
+
+ 79     >>   54 LOAD_CONST               4 (False)
+             56 STORE_FAST               6 (group_opened)
+
+ 80          58 EXTENDED_ARG             0
+             60 SETUP_FINALLY          240 (to 302)
+             62 SETUP_FINALLY          104 (to 168)
+
+ 81          64 LOAD_FAST                5 (settings)
+             66 LOAD_METHOD              5 (beginGroup)
+             68 LOAD_GLOBAL              6 (LPPlayListSource)
+             70 LOAD_ATTR                7 (Tidal)
+             72 LOAD_ATTR                8 (value)
+             74 FORMAT_VALUE             0
+             76 LOAD_CONST               5 ('/')
+             78 LOAD_FAST                3 (user_id)
+             80 FORMAT_VALUE             0
+             82 BUILD_STRING             3
+             84 CALL_METHOD              1
+             86 POP_TOP
+
+ 82          88 LOAD_CONST               6 (True)
+             90 STORE_FAST               6 (group_opened)
+
+ 83          92 LOAD_FAST                5 (settings)
+             94 LOAD_METHOD              9 (setValue)
+             96 LOAD_FAST                0 (cls)
+             98 LOAD_ATTR               10 (PREFERENCE_KEY)
+            100 LOAD_FAST                4 (normalized_mode)
+            102 CALL_METHOD              2
+            104 POP_TOP
+
+ 84         106 LOAD_GLOBAL             11 (hasattr)
+            108 LOAD_FAST                5 (settings)
+            110 LOAD_CONST               7 ('sync')
+            112 CALL_FUNCTION            2
+            114 POP_JUMP_IF_FALSE      124
+
+ 85         116 LOAD_FAST                5 (settings)
+            118 LOAD_METHOD             12 (sync)
+            120 CALL_METHOD              0
+            122 POP_TOP
+
+ 86     >>  124 POP_BLOCK
+            126 POP_BLOCK
+
+ 91         128 LOAD_FAST                6 (group_opened)
+            130 POP_JUMP_IF_FALSE      164
+
+ 92         132 SETUP_FINALLY           12 (to 146)
+
+ 93         134 LOAD_FAST                5 (settings)
+            136 LOAD_METHOD             13 (endGroup)
+            138 CALL_METHOD              0
+            140 POP_TOP
+            142 POP_BLOCK
+            144 JUMP_FORWARD            18 (to 164)
+
+ 94     >>  146 DUP_TOP
+            148 LOAD_GLOBAL             14 (Exception)
+            150 JUMP_IF_NOT_EXC_MATCH   162
+            152 POP_TOP
+            154 POP_TOP
+            156 POP_TOP
+
+ 95         158 POP_EXCEPT
+            160 JUMP_FORWARD             2 (to 164)
+        >>  162 RERAISE
+
+ 86     >>  164 LOAD_CONST               6 (True)
+            166 RETURN_VALUE
+
+ 87     >>  168 DUP_TOP
+            170 LOAD_GLOBAL             14 (Exception)
+            172 EXTENDED_ARG             1
+            174 JUMP_IF_NOT_EXC_MATCH   256
+            176 POP_TOP
+            178 STORE_FAST               7 (exc)
+            180 POP_TOP
+            182 SETUP_FINALLY           64 (to 248)
+
+ 88         184 LOAD_GLOBAL             15 (logger)
+            186 LOAD_METHOD             16 (debug)
+            188 LOAD_CONST               8 ('[TIDAL] save see all view mode failed error=%s')
+            190 LOAD_FAST                7 (exc)
+            192 CALL_METHOD              2
+            194 POP_TOP
+
+ 89         196 POP_BLOCK
+            198 POP_EXCEPT
+            200 LOAD_CONST               3 (None)
+            202 STORE_FAST               7 (exc)
+            204 DELETE_FAST              7 (exc)
+            206 POP_BLOCK
+
+ 91         208 LOAD_FAST                6 (group_opened)
+            210 POP_JUMP_IF_FALSE      244
+
+ 92         212 SETUP_FINALLY           12 (to 226)
+
+ 93         214 LOAD_FAST                5 (settings)
+            216 LOAD_METHOD             13 (endGroup)
+            218 CALL_METHOD              0
+            220 POP_TOP
+            222 POP_BLOCK
+            224 JUMP_FORWARD            18 (to 244)
+
+ 94     >>  226 DUP_TOP
+            228 LOAD_GLOBAL             14 (Exception)
+            230 JUMP_IF_NOT_EXC_MATCH   242
+            232 POP_TOP
+            234 POP_TOP
+            236 POP_TOP
+
+ 95         238 POP_EXCEPT
+            240 JUMP_FORWARD             2 (to 244)
+        >>  242 RERAISE
+
+ 89     >>  244 LOAD_CONST               4 (False)
+            246 RETURN_VALUE
+        >>  248 LOAD_CONST               3 (None)
+            250 STORE_FAST               7 (exc)
+            252 DELETE_FAST              7 (exc)
+            254 RERAISE
+        >>  256 RERAISE
+            258 POP_BLOCK
+
+ 91         260 LOAD_FAST                6 (group_opened)
+            262 EXTENDED_ARG             1
+            264 POP_JUMP_IF_FALSE      344
+
+ 92         266 SETUP_FINALLY           12 (to 280)
+
+ 93         268 LOAD_FAST                5 (settings)
+            270 LOAD_METHOD             13 (endGroup)
+            272 CALL_METHOD              0
+            274 POP_TOP
+            276 POP_BLOCK
+            278 JUMP_FORWARD            20 (to 300)
+
+ 94     >>  280 DUP_TOP
+            282 LOAD_GLOBAL             14 (Exception)
+            284 EXTENDED_ARG             1
+            286 JUMP_IF_NOT_EXC_MATCH   298
+            288 POP_TOP
+            290 POP_TOP
+            292 POP_TOP
+
+ 95         294 POP_EXCEPT
+            296 JUMP_FORWARD             2 (to 300)
+        >>  298 RERAISE
+        >>  300 JUMP_FORWARD            42 (to 344)
+
+ 91     >>  302 LOAD_FAST                6 (group_opened)
+            304 EXTENDED_ARG             1
+            306 POP_JUMP_IF_FALSE      342
+
+ 92         308 SETUP_FINALLY           12 (to 322)
+
+ 93         310 LOAD_FAST                5 (settings)
+            312 LOAD_METHOD             13 (endGroup)
+            314 CALL_METHOD              0
+            316 POP_TOP
+            318 POP_BLOCK
+            320 JUMP_FORWARD            20 (to 342)
+
+ 94     >>  322 DUP_TOP
+            324 LOAD_GLOBAL             14 (Exception)
+            326 EXTENDED_ARG             1
+            328 JUMP_IF_NOT_EXC_MATCH   340
+            330 POP_TOP
+            332 POP_TOP
+            334 POP_TOP
+
+ 95         336 POP_EXCEPT
+            338 JUMP_FORWARD             2 (to 342)
+        >>  340 RERAISE
+        >>  342 RERAISE
+        >>  344 LOAD_CONST               3 (None)
+            346 RETURN_VALUE

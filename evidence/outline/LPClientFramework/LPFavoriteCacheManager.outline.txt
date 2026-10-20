@@ -1,0 +1,388 @@
+# module LPClientFramework.LPFavoriteCacheManager
+
+[module] names: __doc__, json, threading, time, pathlib, Path, typing, Callable, Dict, List, Optional, PyQt6.QtCore, QObject, pyqtSignal, LPClientFramework.LPUtility, cacheDir, logger, WIIMRADIO_LOCAL_USER_ID, _FAVORITE_TYPE_KEY_MAP, _EMPTY_IDS, str, __annotations__, _ITEM_ID_KEYS, tuple, object, _normalizeFavoriteType, _normalizeIds, _itemIdFromObject, _normalizeItems, LPFavoriteCacheManager
+  str: '\n账号级收藏状态本地缓存。\n'
+  str: 'Path'
+  str: 'Callable'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'cacheDir'
+  str: 'logger'
+  str: 'local'
+  str: 'tracks'
+  str: 'albums'
+  str: 'artists'
+  str: 'playlists'
+  str: 'videos'
+  str: 'stations'
+  str: 'track'
+  str: 'tracks'
+  str: 'song'
+  str: 'songs'
+  str: 'album'
+  str: 'albums'
+  str: 'artist'
+  str: 'artists'
+  str: 'playlist'
+  str: 'playlists'
+  str: 'video'
+  str: 'videos'
+  str: 'station'
+  str: 'stations'
+  str: 'artists'
+  str: 'albums'
+  str: 'tracks'
+  str: 'playlists'
+  str: 'videos'
+  str: 'stations'
+  str: '_EMPTY_IDS'
+  str: 'stationId'
+  str: 'stationID'
+  str: 'StationID'
+  str: 'id'
+  str: 'id'
+  str: 'trackId'
+  str: 'itemId'
+  str: 'id'
+  str: 'albumId'
+  str: 'itemId'
+  str: 'id'
+  str: 'artistId'
+  str: 'itemId'
+  str: 'id'
+  str: 'playlistId'
+  str: 'itemId'
+  str: 'id'
+  str: 'videoId'
+  str: 'itemId'
+  str: 'stations'
+  str: 'tracks'
+  str: 'albums'
+  str: 'artists'
+  str: 'playlists'
+  str: 'videos'
+  str: '_ITEM_ID_KEYS'
+  str: 'itemType'
+  str: 'return'
+  str: '_normalizeFavoriteType'
+  str: 'ids'
+  str: 'return'
+  str: '_normalizeIds'
+  str: 'typeKey'
+  str: 'item'
+  str: 'return'
+  str: '_itemIdFromObject'
+  str: 'items'
+  str: 'return'
+  str: '_normalizeItems'
+  str: 'LPFavoriteCacheManager'
+
+def _normalizeFavoriteType(itemType)  line 61
+  names: _FAVORITE_TYPE_KEY_MAP, get, str, strip, lower
+    str: '\n    把条目类型归一化为缓存类型 key。\n\n    :param itemType: 原始条目类型。\n    :return: 缓存类型 key；未知类型返回 None。\n    '
+
+def _normalizeIds(ids)  line 73
+  names: _EMPTY_IDS, isinstance, dict, items, _normalizeFavoriteType, set, list, tuple, str, strip, add, append
+    str: '\n    归一化收藏 ID 字典，保证全部类型 key 都存在且值为去重字符串列表。\n\n    :param ids: 原始收藏 ID 字典。\n    :return: 归一化后的收藏 ID 字典。\n    '
+    str: '_normalizeIds.<locals>.<dictcomp>'
+
+  def _normalizeIds.<dictcomp>(.0)  line 80
+
+def _itemIdFromObject(typeKey, item)  line 98
+  names: isinstance, dict, _ITEM_ID_KEYS, get, str, strip
+    str: '\n    从完整收藏对象中解析条目 ID。\n\n    :param typeKey: 缓存类型 key。\n    :param item: 完整收藏对象字典。\n    :return: 去首尾空白的条目 ID；无法解析返回空字符串。\n    '
+    str: 'id'
+    str: 'itemId'
+
+def _normalizeItems(items)  line 118
+  names: isinstance, dict, items, _normalizeFavoriteType, set, list, tuple, _itemIdFromObject, add, append
+    str: '\n    归一化完整收藏对象字典，按类型去重并保留字典副本。\n\n    :param items: 原始完整对象字典。\n    :return: 归一化后的完整对象字典。\n    '
+
+def LPFavoriteCacheManager()  line 146
+  names: __name__, __module__, __qualname__, __doc__, _instance, pyqtSignal, str, favoriteIdsChanged, object, projectionChanged, CACHE_VERSION, classmethod, instance, Optional, QObject, Path, __init__, threading, RLock, _entryLock, _pathFor, Dict, _emptyEntry, _loadAll, _persistLocked, List, _emitChanged, _dispatchProjection, favoriteIds, snapshot, favoriteItems, bool, isFavorite, status, float, applyServerSnapshot, applyLocalChange, markSyncing, markFailed, markSynced, clearUser, clearAll, Callable, setProjectionCallback, __classcell__
+    str: 'LPFavoriteCacheManager'
+    str: '账号级收藏状态本地缓存，收藏读取的唯一数据源。'
+    str: 'return'
+    str: 'LPFavoriteCacheManager.instance'
+    str: 'parent'
+    str: 'cacheRoot'
+    str: 'LPFavoriteCacheManager.__init__'
+    str: 'source'
+    str: 'userId'
+    str: 'return'
+    str: 'LPFavoriteCacheManager._entryLock'
+    str: 'LPFavoriteCacheManager._pathFor'
+    str: 'LPFavoriteCacheManager._emptyEntry'
+    str: 'LPFavoriteCacheManager._loadAll'
+    str: 'source'
+    str: 'userId'
+    str: 'entry'
+    str: 'return'
+    str: 'LPFavoriteCacheManager._persistLocked'
+    str: 'source'
+    str: 'userId'
+    str: 'ids'
+    str: 'return'
+    str: 'LPFavoriteCacheManager._emitChanged'
+    str: 'LPFavoriteCacheManager._dispatchProjection'
+    str: 'source'
+    str: 'userId'
+    str: 'itemType'
+    str: 'return'
+    str: 'LPFavoriteCacheManager.favoriteIds'
+    str: 'LPFavoriteCacheManager.snapshot'
+    str: 'LPFavoriteCacheManager.favoriteItems'
+    str: 'source'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPFavoriteCacheManager.isFavorite'
+    str: 'LPFavoriteCacheManager.status'
+    str: 'source'
+    str: 'userId'
+    str: 'ids'
+    str: 'snapshotAt'
+    str: 'items'
+    str: 'return'
+    str: 'LPFavoriteCacheManager.applyServerSnapshot'
+    str: 'source'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'isFavorite'
+    str: 'itemData'
+    str: 'return'
+    str: 'LPFavoriteCacheManager.applyLocalChange'
+    str: 'LPFavoriteCacheManager.markSyncing'
+    str: 'LPFavoriteCacheManager.markFailed'
+    str: 'LPFavoriteCacheManager.markSynced'
+    str: 'LPFavoriteCacheManager.clearUser'
+    str: 'LPFavoriteCacheManager.clearAll'
+    str: 'source'
+    str: 'callback'
+    str: 'return'
+    str: 'LPFavoriteCacheManager.setProjectionCallback'
+
+  def LPFavoriteCacheManager.instance(cls)  line 158
+    names: _instance
+      str: '\n        返回全局单例。\n\n        :return: 全局缓存管理器实例。\n        '
+
+  def LPFavoriteCacheManager.__init__(self, parent, cacheRoot)  line 169
+    names: super, __init__, Path, cacheDir, _cache_root, _entries, threading, Lock, _global_lock, _locks, _projection_callbacks, mkdir, projectionChanged, connect, _dispatchProjection, _loadAll
+      str: '\n        初始化缓存管理器并加载磁盘存量。\n\n        :param parent: 父级 QObject。\n        :param cacheRoot: 测试注入的缓存根目录；缺省使用应用缓存目录。\n        :return: None。\n        '
+      str: 'favorites'
+      str: 'parents'
+      str: 'exist_ok'
+
+  def LPFavoriteCacheManager._entryLock(self, source, userId)  line 187
+    names: _global_lock, _locks, get, threading, RLock
+      str: '\n        返回指定账号缓存条目的重入锁。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: 条目级 RLock。\n        '
+
+  def LPFavoriteCacheManager._pathFor(self, source, userId)  line 203
+    names: _cache_root
+      str: '\n        返回指定账号缓存文件路径。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: 缓存文件路径。\n        '
+      str: '_'
+      str: '.json'
+
+  def LPFavoriteCacheManager._emptyEntry(self)  line 213
+    names: _EMPTY_IDS, items, CACHE_VERSION
+      str: '\n        构造空缓存条目。\n\n        :return: 缓存条目字典。\n        '
+      str: 'LPFavoriteCacheManager._emptyEntry.<locals>.<dictcomp>'
+      str: 'missing'
+      str: 'ids'
+      str: 'items'
+      str: 'updatedAt'
+      str: 'version'
+      str: 'status'
+      str: 'localChanges'
+
+    def LPFavoriteCacheManager._emptyEntry.<dictcomp>(.0)  line 220
+      names: list
+
+    def LPFavoriteCacheManager._emptyEntry.<dictcomp>(.0)  line 221
+
+  def LPFavoriteCacheManager._loadAll(self)  line 228
+    names: sorted, _cache_root, glob, stem, split, open, json, load, isinstance, dict, _normalizeIds, get, _normalizeItems, float, int, CACHE_VERSION, _entries, Exception, logger, warning
+      str: '\n        从缓存目录加载全部账号快照，加载成功的条目状态标记为 stale。\n\n        :return: None。\n        '
+      str: '*.json'
+      str: '_'
+      str: 'r'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'ids'
+      str: 'localChanges'
+      str: 'items'
+      str: 'updatedAt'
+      str: 'version'
+      str: 'stale'
+      str: 'ids'
+      str: 'items'
+      str: 'updatedAt'
+      str: 'version'
+      str: 'status'
+      str: 'localChanges'
+      str: '[FavoriteCache] load failed path=%s error=%s'
+
+  def LPFavoriteCacheManager._persistLocked(self, source, userId, entry)  line 260
+    names: _pathFor, with_suffix, CACHE_VERSION, get, open, json, dump, replace, Exception, logger, warning
+      str: '\n        在持锁状态下把缓存条目写入磁盘（临时文件替换）。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param entry: 缓存条目字典。\n        :return: None。\n        '
+      str: '.json.tmp'
+      str: 'updatedAt'
+      str: 'ids'
+      str: 'items'
+      str: 'localChanges'
+      str: 'version'
+      str: 'updatedAt'
+      str: 'ids'
+      str: 'items'
+      str: 'localChanges'
+      str: 'w'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'ensure_ascii'
+      str: '[FavoriteCache] persist failed source=%s userId=%s error=%s'
+
+  def LPFavoriteCacheManager._emitChanged(self, source, userId, ids)  line 285
+    names: favoriteIdsChanged, emit, projectionChanged
+      str: '\n        发出变化信号并调用源投影回调。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param ids: 最新收藏 ID 字典副本。\n        :return: None。\n        '
+
+  def LPFavoriteCacheManager._dispatchProjection(self, source, userId, ids)  line 297
+    names: _projection_callbacks, get, Exception, logger, warning
+      str: '\n        在主线程执行投影回调（信号连接保证后台线程发射时排队到主线程）。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param ids: 最新收藏 ID 字典副本。\n        :return: None。\n        '
+      str: '[FavoriteCache] projection callback failed source=%s error=%s'
+
+  def LPFavoriteCacheManager.favoriteIds(self, source, userId, itemType)  line 313
+    names: _normalizeFavoriteType, _entryLock, _entries, get, list
+      str: '\n        返回指定账号与条目类型的收藏 ID 列表。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param itemType: 条目类型。\n        :return: 收藏 ID 列表；缓存未就绪或类型未知时返回 None。\n        '
+      str: 'ids'
+
+  def LPFavoriteCacheManager.snapshot(self, source, userId)  line 331
+    names: _entryLock, _entries, get, items
+      str: '\n        返回指定账号的完整收藏 ID 快照。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: 收藏 ID 字典副本；缓存未就绪时返回 None。\n        '
+      str: 'LPFavoriteCacheManager.snapshot.<locals>.<dictcomp>'
+      str: 'ids'
+
+    def LPFavoriteCacheManager.snapshot.<dictcomp>(.0)  line 343
+      names: list
+
+  def LPFavoriteCacheManager.favoriteItems(self, source, userId, itemType)  line 345
+    names: _normalizeFavoriteType, _entryLock, _entries, get
+      str: '\n        返回指定账号与条目类型的完整收藏对象列表。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param itemType: 条目类型。\n        :return: 完整收藏对象列表；缓存未就绪或类型未知时返回 None。\n        '
+      str: 'LPFavoriteCacheManager.favoriteItems.<locals>.<listcomp>'
+      str: 'items'
+
+    def LPFavoriteCacheManager.favoriteItems.<listcomp>(.0)  line 361
+      names: dict
+
+  def LPFavoriteCacheManager.isFavorite(self, source, userId, itemType, itemId)  line 363
+    names: _normalizeFavoriteType, str, strip, _entryLock, _entries, get
+      str: '\n        返回指定条目当前收藏状态。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 已收藏返回 True；未收藏返回 False；缓存未就绪或参数无效返回 None。\n        '
+      str: 'ids'
+
+  def LPFavoriteCacheManager.status(self, source, userId)  line 383
+    names: _entryLock, _entries, get
+      str: '\n        返回指定账号缓存运行状态。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: missing/syncing/synced/stale/failed 之一。\n        '
+      str: 'missing'
+      str: 'status'
+
+  def LPFavoriteCacheManager.applyServerSnapshot(self, source, userId, ids, snapshotAt, items)  line 397
+    names: time, float, _entryLock, _entries, setdefault, _emptyEntry, get, logger, debug, _normalizeIds, items, list, isinstance, dict, insert, _normalizeItems, any, next, _persistLocked, _emitChanged
+      str: '\n        用服务端收藏 ID 全集覆盖本地缓存，保留晚于快照时间的本地单条变更；\n        早于缓存当前更新时间的旧快照直接丢弃，避免在途旧数据覆盖新状态。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param ids: 服务端收藏 ID 字典。\n        :param snapshotAt: 服务端快照时间戳；缺省使用当前时间。\n        :param items: 可选的完整收藏对象字典；传入时同步覆盖对应类型对象。\n        :return: None。\n   '
+      str: 'updatedAt'
+      str: '[FavoriteCache] skip stale snapshot source=%s userId=%s snapshotAt=%s updatedAt=%s'
+      str: 'localChanges'
+      str: 'at'
+      str: 'value'
+      str: 'LPFavoriteCacheManager.applyServerSnapshot.<locals>.<listcomp>'
+      str: 'ids'
+      str: 'LPFavoriteCacheManager.applyServerSnapshot.<locals>.<genexpr>'
+      str: 'items'
+      str: 'LPFavoriteCacheManager.applyServerSnapshot.<locals>.<dictcomp>'
+      str: 'synced'
+      str: 'status'
+
+    def LPFavoriteCacheManager.applyServerSnapshot.<listcomp>(.0)  line 444
+
+    def LPFavoriteCacheManager.applyServerSnapshot.<listcomp>(.0)  line 451
+      names: dict
+
+    def LPFavoriteCacheManager.applyServerSnapshot.<genexpr>(.0)  line 459
+      names: _itemIdFromObject
+
+    def LPFavoriteCacheManager.applyServerSnapshot.<genexpr>(.0)  line 461
+      names: _itemIdFromObject
+
+    def LPFavoriteCacheManager.applyServerSnapshot.<listcomp>(.0)  line 471
+      names: _itemIdFromObject
+
+    def LPFavoriteCacheManager.applyServerSnapshot.<dictcomp>(.0)  line 477
+        str: 'LPFavoriteCacheManager.applyServerSnapshot.<locals>.<dictcomp>.<listcomp>'
+
+      def LPFavoriteCacheManager.applyServerSnapshot.<dictcomp>.<listcomp>(.0)  line 478
+        names: dict
+
+    def LPFavoriteCacheManager.applyServerSnapshot.<dictcomp>(.0)  line 484
+      names: list
+
+  def LPFavoriteCacheManager.applyLocalChange(self, source, userId, itemType, itemId, isFavorite, itemData)  line 487
+    names: _normalizeFavoriteType, str, strip, _entryLock, _entries, setdefault, _emptyEntry, insert, isinstance, dict, next, enumerate, remove, bool, time, _persistLocked, items, _emitChanged
+      str: '\n        应用一次已确认的本地收藏变更并记录变更时间，防止旧快照覆盖。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param isFavorite: True 加入收藏；False 移出收藏。\n        :param itemData: 加入收藏时的完整条目对象；缺省仅维护 ID。\n        :return: None。\n        '
+      str: 'ids'
+      str: 'items'
+      str: 'LPFavoriteCacheManager.applyLocalChange.<locals>.<genexpr>'
+      str: 'LPFavoriteCacheManager.applyLocalChange.<locals>.<listcomp>'
+      str: 'localChanges'
+      str: 'value'
+      str: 'at'
+      str: 'LPFavoriteCacheManager.applyLocalChange.<locals>.<dictcomp>'
+
+    def LPFavoriteCacheManager.applyLocalChange.<genexpr>(.0)  line 521
+      names: _itemIdFromObject
+
+    def LPFavoriteCacheManager.applyLocalChange.<listcomp>(.0)  line 535
+      names: _itemIdFromObject
+
+    def LPFavoriteCacheManager.applyLocalChange.<dictcomp>(.0)  line 539
+      names: list
+
+  def LPFavoriteCacheManager.markSyncing(self, source, userId)  line 542
+    names: _entryLock, _entries, setdefault, _emptyEntry
+      str: '\n        标记指定账号正在同步。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: None。\n        '
+      str: 'syncing'
+      str: 'status'
+
+  def LPFavoriteCacheManager.markFailed(self, source, userId)  line 554
+    names: _entryLock, _entries, setdefault, _emptyEntry
+      str: '\n        标记指定账号同步失败，保留已有数据。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: None。\n        '
+      str: 'failed'
+      str: 'status'
+
+  def LPFavoriteCacheManager.markSynced(self, source, userId)  line 566
+    names: _entryLock, _entries, setdefault, _emptyEntry
+      str: '\n        把指定账号缓存标记为已同步，不改动收藏数据。\n\n        用于本地收藏（如 WiiMRadio）：状态需要收敛为 synced，但数据必须原样保留，\n        不能像 applyServerSnapshot 那样用快照覆盖现有条目。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: None。\n        '
+      str: 'synced'
+      str: 'status'
+
+  def LPFavoriteCacheManager.clearUser(self, source, userId)  line 581
+    names: _entryLock, _entries, pop, _pathFor, unlink, FileNotFoundError, Exception, logger, warning, _EMPTY_IDS, _emitChanged
+      str: '\n        清空指定账号的内存缓存并删除磁盘文件。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: None。\n        '
+      str: '[FavoriteCache] clear file failed source=%s userId=%s error=%s'
+      str: 'LPFavoriteCacheManager.clearUser.<locals>.<dictcomp>'
+
+    def LPFavoriteCacheManager.clearUser.<dictcomp>(.0)  line 598
+
+  def LPFavoriteCacheManager.clearAll(self)  line 601
+    names: list, _entries, keys, clearUser
+      str: '\n        清空全部账号缓存。\n\n        :return: None。\n        '
+
+  def LPFavoriteCacheManager.setProjectionCallback(self, source, callback)  line 611
+    names: _projection_callbacks, _global_lock, _entries, snapshot, Exception, logger, warning
+      str: '\n        注册/清除指定音源的投影回调。\n\n        注册时立即用该音源已有的缓存快照回放一次，避免回调晚于缓存加载而漏初始化投影。\n\n        :param source: 音源标识。\n        :param callback: 回调签名 (source, userId, ids)；传 None 清除。\n        :return: None。\n        '
+      str: 'LPFavoriteCacheManager.setProjectionCallback.<locals>.<listcomp>'
+      str: '[FavoriteCache] projection replay failed source=%s userId=%s error=%s'
+
+    def LPFavoriteCacheManager.setProjectionCallback.<listcomp>(.0)  line 625

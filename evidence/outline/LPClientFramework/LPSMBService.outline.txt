@@ -1,0 +1,161 @@
+# module LPClientFramework.LPSMBService
+
+[module] names: __doc__, __future__, annotations, logging, threading, time, urllib.parse, urllib, typing, Dict, Optional, Tuple, getLogger, logger, _importErrorLogged, Lock, _importErrorLock, _mask_smb_url, object, LPSMBService
+  str: 'SMB 访问服务：严格只访问 URL 指定的文件，绝不跨文件回退。\n\n作为 PC 端统一的 SMB 封面/资源读取入口，供 ``LPUtility`` / ``LPMediaInfo`` /\n``LPGlobalQmlImageService`` 等上层把 ``smb://`` URL 转成字节。\n\n强制约束（务必遵守）：\n1. 只读 URL path 指定的那一个文件；读不到就返回 None，绝不去读同目录其他封面文件。\n2. 打开文件使用 ``share_access="rwd"``（读+写+删除全共享），与 macOS 系统 SMB 客户端\n   行为一致，可与服务器上以写方式打开的句柄'
+  str: 'annotations'
+  str: 'Dict'
+  str: 'Optional'
+  str: 'Tuple'
+  str: 'linkplay'
+  str: 'str'
+  str: 'url'
+  str: 'return'
+  str: '_mask_smb_url'
+  str: 'LPSMBService'
+
+def _mask_smb_url(url)  line 37
+  names: urllib, parse, urlsplit, str, hostname, port, username, unquote, urlunsplit, scheme, path, query, fragment, Exception
+    str: '去掉 SMB URL 中的明文口令，供日志安全打印。\n\n    参数:\n        url (str): 原始 ``smb://`` 地址。\n    返回:\n        str: 口令替换掉（不输出）后的地址；解析失败时原样返回，保证日志不丢信息。\n    '
+    str: '%s:%d'
+    str: '%s@%s'
+
+def LPSMBService()  line 61
+  names: __name__, __module__, __qualname__, __doc__, shared, __init__, classmethod, get_shared, staticmethod, mask_smb_url, is_smb_artwork_url, parse_smb_url, read_smb_file_bytes, invalidate, _describe_target, _log_import_failure, _read_with_retry, _prune_cache_locked
+    str: 'LPSMBService'
+    str: 'SMB 访问服务单例：负责 smb:// URL 解析、建连并读取指定文件字节。\n\n    线程安全：内部用锁保护缓存与按 URL 的读锁；``smbclient`` 本身线程安全，\n    可放后台线程直接调用。\n    '
+    str: 'LPSMBService.__init__'
+    str: "'LPSMBService'"
+    str: 'return'
+    str: 'LPSMBService.get_shared'
+    str: 'str'
+    str: 'url'
+    str: 'return'
+    str: 'LPSMBService.mask_smb_url'
+    str: 'bool'
+    str: 'LPSMBService.is_smb_artwork_url'
+    str: 'Optional[dict]'
+    str: 'LPSMBService.parse_smb_url'
+    str: 'int'
+    str: 'float'
+    str: 'Optional[bytes]'
+    str: 'url'
+    str: 'timeout'
+    str: 'attempts'
+    str: 'retry_delay'
+    str: 'return'
+    str: 'LPSMBService.read_smb_file_bytes'
+    str: 'None'
+    str: 'LPSMBService.invalidate'
+    str: 'dict'
+    str: 'parsed'
+    str: 'return'
+    str: 'LPSMBService._describe_target'
+    str: 'Exception'
+    str: 'exc'
+    str: 'return'
+    str: 'LPSMBService._log_import_failure'
+    str: 'parsed'
+    str: 'timeout'
+    str: 'attempts'
+    str: 'retry_delay'
+    str: 'return'
+    str: 'LPSMBService._read_with_retry'
+    str: 'LPSMBService._prune_cache_locked'
+
+  def LPSMBService.__init__(self)  line 70
+    names: threading, Lock, _lock, _url_locks, _bytes_cache, _cache_limit
+      str: '初始化缓存与并发控制结构。'
+
+  def LPSMBService.get_shared(cls)  line 77
+    names: shared
+      str: '获取进程级共享实例。\n\n        返回：\n            LPSMBService: 共享单例。\n        '
+
+  def LPSMBService.mask_smb_url(url)  line 88
+    names: _mask_smb_url
+      str: '对外暴露的 URL 脱敏入口，供上层日志复用。\n\n        参数:\n            url (str): 原始 ``smb://`` 地址。\n        返回:\n            str: 去掉明文口令后的地址。\n        '
+
+  def LPSMBService.is_smb_artwork_url(url)  line 99
+    names: str, strip, lower, startswith
+      str: '判断是否为 ``smb://`` 协议地址。\n\n        参数：\n            url (str): 待判断地址。\n        返回：\n            bool: 以 ``smb://`` 开头返回 True。\n        '
+      str: 'smb://'
+
+  def LPSMBService.parse_smb_url(url)  line 110
+    names: urllib, parse, urlsplit, Exception, scheme, lower, hostname, path, split, join, port, unquote, username, password
+      str: '解析 ``smb://[user:pass@]host[:port]/share/path`` 成连接要素。\n\n        参数：\n            url (str): smb:// 地址。\n        返回：\n            dict | None: 成功时包含 ``host/port/user/password/share/file_path/unc``；\n                        解析失败返回 None。\n        '
+      str: 'smb'
+      str: 'LPSMBService.parse_smb_url.<locals>.<listcomp>'
+      str: '/'
+      str: '\\'
+      str: '\\\\%s\\%s%s'
+      str: 'host'
+      str: 'port'
+      str: 'user'
+      str: 'password'
+      str: 'share'
+      str: 'file_path'
+      str: 'unc'
+
+    def LPSMBService.parse_smb_url.<listcomp>(.0)  line 131
+      names: urllib, parse, unquote
+
+  def LPSMBService.read_smb_file_bytes(self, url, timeout, attempts, retry_delay)  line 150
+    names: is_smb_artwork_url, logger, debug, mask_smb_url, _lock, _bytes_cache, get, len, _url_locks, setdefault, threading, Lock, parse_smb_url, warning, _read_with_retry, time, _prune_cache_locked, _describe_target
+      str: '读取 URL 指定文件的字节（只读该文件，不做跨文件回退）。\n\n        参数：\n            url (str): ``smb://`` 地址。\n            timeout (int): 连接超时（秒）。\n            attempts (int): 最大尝试次数（对同一文件）。\n            retry_delay (float): 初始重试间隔（秒），指数递增。\n        返回：\n            bytes | None: 读取成功返回字节，失败返回 None。\n        '
+      str: 'SMB 读取跳过（非 smb 地址）: url=%s'
+      str: 'SMB 内存缓存命中: url=%s, size=%d'
+      str: 'SMB URL 解析失败（host/share/path 不合法）: url=%s'
+      str: 'SMB 读取成功: %s, size=%d'
+      str: 'SMB 读取最终失败: %s, url=%s, timeout=%ss, attempts=%d'
+
+  def LPSMBService.invalidate(self, url)  line 200
+    names: _lock, _bytes_cache, pop, _url_locks
+      str: '使指定 URL 的缓存失效（供服务器原图更换后主动刷新）。\n\n        参数：\n            url (str): 需要失效的 ``smb://`` 地址。\n        返回：\n            无\n        '
+
+  def LPSMBService._describe_target(parsed)  line 216
+    names: get
+      str: '生成不含口令的 SMB 目标描述，供日志定位具体文件。\n\n        参数：\n            parsed (dict): ``parse_smb_url`` 的解析结果。\n        返回：\n            str: 形如 ``host=... port=... user=... unc=...`` 的描述文本。\n        '
+      str: 'host=%s, port=%s, user=%s, unc=%s'
+      str: 'host'
+      str: 'port'
+      str: 'user'
+      str: '<anonymous>'
+      str: 'unc'
+
+  def LPSMBService._log_import_failure(exc)  line 232
+    names: _importErrorLock, _importErrorLogged, logger, warning, type, __name__
+      str: '记录 smbclient 惰性导入失败（整个进程只提示一次）。\n\n        参数：\n            exc (Exception): 导入过程中抛出的异常。\n        返回：\n            无\n        '
+      str: 'SMB 依赖导入失败，smb:// 封面一律读不到: error=%s: %s；请在运行/打包环境安装依赖: pip install smbprotocol==1.16.1 cryptography pyspnego'
+
+  def LPSMBService._read_with_retry(self, parsed, timeout, attempts, retry_delay)  line 253
+    names: smbclient, Exception, _log_import_failure, range, time, register_session, TypeError, open_file, read, logger, debug, len, type, __name__, sleep, warning
+      str: '按重试策略读取指定文件字节。\n\n        参数：\n            parsed (dict): ``parse_smb_url`` 的解析结果。\n            timeout (int): 连接超时（秒）。\n            attempts (int): 最大尝试次数。\n            retry_delay (float): 初始重试间隔（秒）。\n        返回：\n            bytes | None: 读取成功返回字节，失败返回 None。\n        '
+      str: 'unc'
+      str: 'host'
+      str: 'user'
+      str: 'password'
+      str: 'port'
+      str: 'username'
+      str: 'password'
+      str: 'port'
+      str: 'connection_timeout'
+      str: 'username'
+      str: 'password'
+      str: 'port'
+      str: 'rb'
+      str: 'rwd'
+      str: 'mode'
+      str: 'share_access'
+      str: 'SMB 单次读取成功: unc=%s, attempt=%d/%d, size=%d, cost=%.3fs'
+      str: 'SMB 单次读取失败: unc=%s, host=%s, port=%s, user=%s, attempt=%d/%d, timeout=%ss, cost=%.3fs, error=%s: %s'
+      str: '<anonymous>'
+      str: 'SMB 读取失败，已用尽重试: unc=%s, attempts=%d, last_error=%s: %s'
+      str: 'None'
+
+  def LPSMBService._prune_cache_locked(self)  line 318
+    names: len, _bytes_cache, _cache_limit, sorted, pop
+      str: '在持有 ``self._lock`` 时裁剪字节缓存，避免无限增长。\n\n        参数：\n            无\n        返回：\n            无\n        '
+      str: 'LPSMBService._prune_cache_locked.<locals>.<lambda>'
+      str: 'key'
+
+    def LPSMBService._prune_cache_locked.<lambda>(k)  line 329
+      names: _bytes_cache

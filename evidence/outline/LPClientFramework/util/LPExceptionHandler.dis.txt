@@ -1,0 +1,138 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/2/8 16:04\n@Auth ： Chris\n@File ：LPExceptionHandler.py\n@Desc: 全局未处理异常处理器。\n\n既把异常写入应用日志，又（若注入了 LPCrashDumper）落盘成独立 crash 文件，\n供 feedback 日志包打包上传。crash 落盘器由 configureCrashDumper 在应用启动时注入。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 12           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (traceback)
+             10 STORE_NAME               1 (traceback)
+
+ 14          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('logger',))
+             16 IMPORT_NAME              2 (LPClientFramework.LPUtility)
+             18 IMPORT_FROM              3 (logger)
+             20 STORE_NAME               3 (logger)
+             22 POP_TOP
+
+ 17          24 LOAD_CONST               2 (None)
+             26 STORE_GLOBAL             4 (_crashDumper)
+
+ 20          28 LOAD_CONST               4 (<code object configureCrashDumper at 0x000001F324E767C0, file "LPClientFramework\util\LPExceptionHandler.py", line 20>)
+             30 LOAD_CONST               5 ('configureCrashDumper')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               5 (configureCrashDumper)
+
+ 33          36 LOAD_BUILD_CLASS
+             38 LOAD_CONST               6 (<code object LPExceptionHandler at 0x000001F324E76660, file "LPClientFramework\util\LPExceptionHandler.py", line 33>)
+             40 LOAD_CONST               7 ('LPExceptionHandler')
+             42 MAKE_FUNCTION            0
+             44 LOAD_CONST               7 ('LPExceptionHandler')
+             46 CALL_FUNCTION            2
+             48 STORE_NAME               6 (LPExceptionHandler)
+             50 LOAD_CONST               2 (None)
+             52 RETURN_VALUE
+
+=== configureCrashDumper ===
+ 30           0 LOAD_FAST                0 (dumper)
+              2 STORE_GLOBAL             0 (_crashDumper)
+              4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+=== LPExceptionHandler ===
+ 33           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPExceptionHandler')
+              6 STORE_NAME               2 (__qualname__)
+
+ 34           8 LOAD_CONST               1 ('全局异常处理器（作为 sys.excepthook 使用）。')
+             10 STORE_NAME               3 (__doc__)
+
+ 36          12 LOAD_CONST               2 (<code object __init__ at 0x000001F324E76190, file "LPClientFramework\util\LPExceptionHandler.py", line 36>)
+             14 LOAD_CONST               3 ('LPExceptionHandler.__init__')
+             16 MAKE_FUNCTION            0
+             18 STORE_NAME               4 (__init__)
+
+ 39          20 LOAD_NAME                5 (staticmethod)
+
+ 40          22 LOAD_CONST               4 (<code object globalHandler at 0x000001F324E763A0, file "LPClientFramework\util\LPExceptionHandler.py", line 39>)
+             24 LOAD_CONST               5 ('LPExceptionHandler.globalHandler')
+             26 MAKE_FUNCTION            0
+             28 CALL_FUNCTION            1
+             30 STORE_NAME               6 (globalHandler)
+             32 LOAD_CONST               6 (None)
+             34 RETURN_VALUE
+
+=== LPExceptionHandler.__init__ ===
+ 37           0 LOAD_CONST               0 (None)
+              2 RETURN_VALUE
+
+=== LPExceptionHandler.globalHandler ===
+ 51           0 LOAD_CONST               1 ('')
+              2 LOAD_METHOD              0 (join)
+              4 LOAD_GLOBAL              1 (traceback)
+              6 LOAD_METHOD              2 (format_exception)
+              8 LOAD_FAST                0 (exc_type)
+             10 LOAD_FAST                1 (exc_value)
+             12 LOAD_FAST                2 (exc_traceback)
+             14 CALL_METHOD              3
+             16 CALL_METHOD              1
+             18 STORE_FAST               3 (errorMessage)
+
+ 52          20 LOAD_GLOBAL              3 (logger)
+             22 LOAD_METHOD              4 (error)
+             24 LOAD_CONST               2 ('=======[Global Exception Capture] Error Occurred ======')
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+ 53          30 LOAD_GLOBAL              3 (logger)
+             32 LOAD_METHOD              4 (error)
+             34 LOAD_FAST                3 (errorMessage)
+             36 CALL_METHOD              1
+             38 POP_TOP
+
+ 54          40 LOAD_GLOBAL              5 (_crashDumper)
+             42 LOAD_CONST               3 (None)
+             44 IS_OP                    1
+             46 POP_JUMP_IF_FALSE      118
+
+ 55          48 SETUP_FINALLY           18 (to 68)
+
+ 56          50 LOAD_GLOBAL              5 (_crashDumper)
+             52 LOAD_METHOD              6 (dump)
+             54 LOAD_FAST                0 (exc_type)
+             56 LOAD_FAST                1 (exc_value)
+             58 LOAD_FAST                2 (exc_traceback)
+             60 CALL_METHOD              3
+             62 POP_TOP
+             64 POP_BLOCK
+             66 JUMP_FORWARD            50 (to 118)
+
+ 57     >>   68 DUP_TOP
+             70 LOAD_GLOBAL              7 (Exception)
+             72 JUMP_IF_NOT_EXC_MATCH   116
+             74 POP_TOP
+             76 STORE_FAST               4 (e)
+             78 POP_TOP
+             80 SETUP_FINALLY           26 (to 108)
+
+ 58          82 LOAD_GLOBAL              3 (logger)
+             84 LOAD_METHOD              4 (error)
+             86 LOAD_CONST               4 ('[ExceptionHandler] crash dump failed: %s')
+             88 LOAD_FAST                4 (e)
+             90 BINARY_MODULO
+             92 CALL_METHOD              1
+             94 POP_TOP
+             96 POP_BLOCK
+             98 POP_EXCEPT
+            100 LOAD_CONST               3 (None)
+            102 STORE_FAST               4 (e)
+            104 DELETE_FAST              4 (e)
+            106 JUMP_FORWARD            10 (to 118)
+        >>  108 LOAD_CONST               3 (None)
+            110 STORE_FAST               4 (e)
+            112 DELETE_FAST              4 (e)
+            114 RERAISE
+        >>  116 RERAISE
+        >>  118 LOAD_CONST               3 (None)
+            120 RETURN_VALUE

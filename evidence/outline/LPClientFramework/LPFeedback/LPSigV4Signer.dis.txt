@@ -1,0 +1,600 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nAWS Signature Version 4 签名工具。\n\n用途：feedback 日志上传到 S3 时，用 STS 下发的临时凭证\n（AccessKeyId / SecretAccessKey / SessionToken）对一次 HTTP 请求做 SigV4 签名，\n返回可直接附加到请求上的头集合。\n\n设计要点：\n- 仅依赖 Python 标准库（hashlib / hmac / datetime / urllib），不引入 boto3，\n  避免给桌面打包增加约 60MB+ 体积。\n- 纯函数式、无副作用，便于单元测试。\n- 参考实现：AWS Signature Version 4 官方参考。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 16           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (datetime)
+             10 STORE_NAME               1 (datetime)
+
+ 17          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (hashlib)
+             18 STORE_NAME               2 (hashlib)
+
+ 18          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (hmac)
+             26 STORE_NAME               3 (hmac)
+
+ 19          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('Dict', 'Optional'))
+             32 IMPORT_NAME              4 (typing)
+             34 IMPORT_FROM              5 (Dict)
+             36 STORE_NAME               5 (Dict)
+             38 IMPORT_FROM              6 (Optional)
+             40 STORE_NAME               6 (Optional)
+             42 POP_TOP
+
+ 20          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               4 (('urlparse', 'parse_qsl', 'quote'))
+             48 IMPORT_NAME              7 (urllib.parse)
+             50 IMPORT_FROM              8 (urlparse)
+             52 STORE_NAME               8 (urlparse)
+             54 IMPORT_FROM              9 (parse_qsl)
+             56 STORE_NAME               9 (parse_qsl)
+             58 IMPORT_FROM             10 (quote)
+             60 STORE_NAME              10 (quote)
+             62 POP_TOP
+
+ 23          64 LOAD_BUILD_CLASS
+             66 LOAD_CONST               5 (<code object LPSigV4Signer at 0x000001F3253C49D0, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 23>)
+             68 LOAD_CONST               6 ('LPSigV4Signer')
+             70 MAKE_FUNCTION            0
+             72 LOAD_CONST               6 ('LPSigV4Signer')
+             74 CALL_FUNCTION            2
+             76 STORE_NAME              11 (LPSigV4Signer)
+             78 LOAD_CONST               2 (None)
+             80 RETURN_VALUE
+
+=== LPSigV4Signer ===
+ 23           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPSigV4Signer')
+              6 STORE_NAME               2 (__qualname__)
+
+ 24           8 LOAD_CONST               1 ('AWS SigV4 签名器，提供静态签名方法。')
+             10 STORE_NAME               3 (__doc__)
+
+ 26          12 LOAD_NAME                4 (staticmethod)
+
+ 27          14 LOAD_NAME                5 (bytes)
+             16 LOAD_NAME                6 (str)
+             18 LOAD_CONST               2 (('data', 'return'))
+             20 BUILD_CONST_KEY_MAP      2
+             22 LOAD_CONST               3 (<code object _sha256Hex at 0x000001F3253DA9D0, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 26>)
+             24 LOAD_CONST               4 ('LPSigV4Signer._sha256Hex')
+             26 MAKE_FUNCTION            4 (annotations)
+             28 CALL_FUNCTION            1
+             30 STORE_NAME               7 (_sha256Hex)
+
+ 38          32 LOAD_NAME                4 (staticmethod)
+
+ 39          34 LOAD_NAME                5 (bytes)
+             36 LOAD_NAME                6 (str)
+             38 LOAD_NAME                5 (bytes)
+             40 LOAD_CONST               5 (('key', 'msg', 'return'))
+             42 BUILD_CONST_KEY_MAP      3
+             44 LOAD_CONST               6 (<code object _hmacSha256 at 0x000001F3253DA7C0, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 38>)
+             46 LOAD_CONST               7 ('LPSigV4Signer._hmacSha256')
+             48 MAKE_FUNCTION            4 (annotations)
+             50 CALL_FUNCTION            1
+             52 STORE_NAME               8 (_hmacSha256)
+
+ 51          54 LOAD_NAME                4 (staticmethod)
+
+ 52          56 LOAD_NAME                6 (str)
+             58 LOAD_NAME                6 (str)
+             60 LOAD_CONST               8 (('path', 'return'))
+             62 BUILD_CONST_KEY_MAP      2
+             64 LOAD_CONST               9 (<code object _canonicalUri at 0x000001F3253DA450, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 51>)
+             66 LOAD_CONST              10 ('LPSigV4Signer._canonicalUri')
+             68 MAKE_FUNCTION            4 (annotations)
+             70 CALL_FUNCTION            1
+             72 STORE_NAME               9 (_canonicalUri)
+
+ 67          74 LOAD_NAME                4 (staticmethod)
+
+ 68          76 LOAD_NAME                6 (str)
+             78 LOAD_NAME                6 (str)
+             80 LOAD_CONST              11 (('query', 'return'))
+             82 BUILD_CONST_KEY_MAP      2
+             84 LOAD_CONST              12 (<code object _canonicalQuery at 0x000001F3253C4EA0, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 67>)
+             86 LOAD_CONST              13 ('LPSigV4Signer._canonicalQuery')
+             88 MAKE_FUNCTION            4 (annotations)
+             90 CALL_FUNCTION            1
+             92 STORE_NAME              10 (_canonicalQuery)
+
+ 83          94 LOAD_NAME                4 (staticmethod)
+
+ 93          96 LOAD_CONST              14 (None)
+
+ 94          98 LOAD_CONST              14 (None)
+
+ 84         100 LOAD_CONST              15 (('sessionToken', 'extraHeaders'))
+            102 BUILD_CONST_KEY_MAP      2
+
+ 86         104 LOAD_NAME                6 (str)
+
+ 87         106 LOAD_NAME                6 (str)
+
+ 88         108 LOAD_NAME                5 (bytes)
+
+ 89         110 LOAD_NAME                6 (str)
+
+ 90         112 LOAD_NAME                6 (str)
+
+ 91         114 LOAD_NAME                6 (str)
+
+ 92         116 LOAD_NAME                6 (str)
+
+ 93         118 LOAD_NAME               11 (Optional)
+            120 LOAD_NAME                6 (str)
+            122 BINARY_SUBSCR
+
+ 94         124 LOAD_NAME               11 (Optional)
+            126 LOAD_NAME               12 (Dict)
+            128 LOAD_NAME                6 (str)
+            130 LOAD_NAME                6 (str)
+            132 BUILD_TUPLE              2
+            134 BINARY_SUBSCR
+            136 BINARY_SUBSCR
+
+ 95         138 LOAD_NAME               12 (Dict)
+            140 LOAD_NAME                6 (str)
+            142 LOAD_NAME                6 (str)
+            144 BUILD_TUPLE              2
+            146 BINARY_SUBSCR
+
+ 84         148 LOAD_CONST              16 (('method', 'url', 'body', 'accessKey', 'secretKey', 'region', 'service', 'sessionToken', 'extraHeaders', 'return'))
+            150 BUILD_CONST_KEY_MAP     10
+            152 LOAD_CONST              17 (<code object sign at 0x000001F3253C45B0, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 83>)
+            154 LOAD_CONST              18 ('LPSigV4Signer.sign')
+            156 MAKE_FUNCTION            6 (kwdefaults, annotations)
+            158 CALL_FUNCTION            1
+            160 STORE_NAME              13 (sign)
+            162 LOAD_CONST              14 (None)
+            164 RETURN_VALUE
+
+=== LPSigV4Signer._sha256Hex ===
+ 36           0 LOAD_GLOBAL              0 (hashlib)
+              2 LOAD_METHOD              1 (sha256)
+              4 LOAD_FAST                0 (data)
+              6 JUMP_IF_TRUE_OR_POP     10
+              8 LOAD_CONST               1 (b'')
+        >>   10 CALL_METHOD              1
+             12 LOAD_METHOD              2 (hexdigest)
+             14 CALL_METHOD              0
+             16 RETURN_VALUE
+
+=== LPSigV4Signer._hmacSha256 ===
+ 49           0 LOAD_GLOBAL              0 (hmac)
+              2 LOAD_METHOD              1 (new)
+              4 LOAD_FAST                0 (key)
+              6 LOAD_FAST                1 (msg)
+              8 LOAD_METHOD              2 (encode)
+             10 LOAD_CONST               1 ('utf-8')
+             12 CALL_METHOD              1
+             14 LOAD_GLOBAL              3 (hashlib)
+             16 LOAD_ATTR                4 (sha256)
+             18 CALL_METHOD              3
+             20 LOAD_METHOD              5 (digest)
+             22 CALL_METHOD              0
+             24 RETURN_VALUE
+
+=== LPSigV4Signer._canonicalUri ===
+ 61           0 LOAD_FAST                0 (path)
+              2 POP_JUMP_IF_TRUE         8
+
+ 62           4 LOAD_CONST               1 ('/')
+              6 RETURN_VALUE
+
+ 63     >>    8 LOAD_FAST                0 (path)
+             10 LOAD_METHOD              0 (startswith)
+             12 LOAD_CONST               1 ('/')
+             14 CALL_METHOD              1
+             16 POP_JUMP_IF_TRUE        26
+
+ 64          18 LOAD_CONST               1 ('/')
+             20 LOAD_FAST                0 (path)
+             22 BINARY_ADD
+             24 STORE_FAST               0 (path)
+
+ 65     >>   26 LOAD_GLOBAL              1 (quote)
+             28 LOAD_FAST                0 (path)
+             30 LOAD_CONST               1 ('/')
+             32 LOAD_CONST               2 (('safe',))
+             34 CALL_FUNCTION_KW         2
+             36 RETURN_VALUE
+
+=== LPSigV4Signer._canonicalQuery ===
+ 77           0 LOAD_FAST                0 (query)
+              2 POP_JUMP_IF_TRUE         8
+
+ 78           4 LOAD_CONST               1 ('')
+              6 RETURN_VALUE
+
+ 79     >>    8 LOAD_GLOBAL              0 (sorted)
+             10 LOAD_GLOBAL              1 (parse_qsl)
+             12 LOAD_FAST                0 (query)
+             14 LOAD_CONST               2 (True)
+             16 LOAD_CONST               3 (('keep_blank_values',))
+             18 CALL_FUNCTION_KW         2
+             20 LOAD_CONST               4 (<code object <lambda> at 0x000001F3253DAA80, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 79>)
+             22 LOAD_CONST               5 ('LPSigV4Signer._canonicalQuery.<locals>.<lambda>')
+             24 MAKE_FUNCTION            0
+             26 LOAD_CONST               6 (('key',))
+             28 CALL_FUNCTION_KW         2
+             30 STORE_FAST               1 (pairs)
+
+ 80          32 LOAD_CONST               7 (<code object <genexpr> at 0x000001F3253DA5B0, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 80>)
+             34 LOAD_CONST               8 ('LPSigV4Signer._canonicalQuery.<locals>.<genexpr>')
+             36 MAKE_FUNCTION            0
+             38 LOAD_FAST                1 (pairs)
+             40 GET_ITER
+             42 CALL_FUNCTION            1
+             44 STORE_FAST               2 (encoded)
+
+ 81          46 LOAD_CONST               9 ('&')
+             48 LOAD_METHOD              2 (join)
+             50 LOAD_CONST              10 (<code object <genexpr> at 0x000001F3253C47C0, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 81>)
+             52 LOAD_CONST               8 ('LPSigV4Signer._canonicalQuery.<locals>.<genexpr>')
+             54 MAKE_FUNCTION            0
+             56 LOAD_FAST                2 (encoded)
+             58 GET_ITER
+             60 CALL_FUNCTION            1
+             62 CALL_METHOD              1
+             64 RETURN_VALUE
+
+=== LPSigV4Signer._canonicalQuery.<lambda> ===
+ 79           0 LOAD_FAST                0 (kv)
+              2 LOAD_CONST               1 (0)
+              4 BINARY_SUBSCR
+              6 RETURN_VALUE
+
+=== LPSigV4Signer._canonicalQuery.<genexpr> ===
+ 80           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                34 (to 38)
+              4 UNPACK_SEQUENCE          2
+              6 STORE_FAST               1 (k)
+              8 STORE_FAST               2 (v)
+             10 LOAD_GLOBAL              0 (quote)
+             12 LOAD_FAST                1 (k)
+             14 LOAD_CONST               0 ('-_.~')
+             16 LOAD_CONST               1 (('safe',))
+             18 CALL_FUNCTION_KW         2
+             20 LOAD_GLOBAL              0 (quote)
+             22 LOAD_FAST                2 (v)
+             24 LOAD_CONST               0 ('-_.~')
+             26 LOAD_CONST               1 (('safe',))
+             28 CALL_FUNCTION_KW         2
+             30 BUILD_TUPLE              2
+             32 YIELD_VALUE
+             34 POP_TOP
+             36 JUMP_ABSOLUTE            2
+        >>   38 LOAD_CONST               2 (None)
+             40 RETURN_VALUE
+
+=== LPSigV4Signer._canonicalQuery.<genexpr> ===
+ 81           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                22 (to 26)
+              4 UNPACK_SEQUENCE          2
+              6 STORE_FAST               1 (k)
+              8 STORE_FAST               2 (v)
+             10 LOAD_CONST               0 ('%s=%s')
+             12 LOAD_FAST                1 (k)
+             14 LOAD_FAST                2 (v)
+             16 BUILD_TUPLE              2
+             18 BINARY_MODULO
+             20 YIELD_VALUE
+             22 POP_TOP
+             24 JUMP_ABSOLUTE            2
+        >>   26 LOAD_CONST               1 (None)
+             28 RETURN_VALUE
+
+=== LPSigV4Signer.sign ===
+113           0 LOAD_GLOBAL              0 (urlparse)
+              2 LOAD_FAST                1 (url)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               9 (parsed)
+
+114           8 LOAD_FAST                9 (parsed)
+             10 LOAD_ATTR                1 (netloc)
+             12 STORE_FAST              10 (host)
+
+115          14 LOAD_GLOBAL              2 (datetime)
+             16 LOAD_ATTR                2 (datetime)
+             18 LOAD_METHOD              3 (now)
+             20 LOAD_GLOBAL              2 (datetime)
+             22 LOAD_ATTR                4 (timezone)
+             24 LOAD_ATTR                5 (utc)
+             26 CALL_METHOD              1
+             28 STORE_FAST              11 (now)
+
+116          30 LOAD_FAST               11 (now)
+             32 LOAD_METHOD              6 (strftime)
+             34 LOAD_CONST               1 ('%Y%m%dT%H%M%SZ')
+             36 CALL_METHOD              1
+             38 STORE_FAST              12 (amzDate)
+
+117          40 LOAD_FAST               11 (now)
+             42 LOAD_METHOD              6 (strftime)
+             44 LOAD_CONST               2 ('%Y%m%d')
+             46 CALL_METHOD              1
+             48 STORE_FAST              13 (dateStamp)
+
+120          50 LOAD_FAST               10 (host)
+             52 LOAD_FAST               12 (amzDate)
+             54 LOAD_CONST               3 (('host', 'x-amz-date'))
+             56 BUILD_CONST_KEY_MAP      2
+             58 STORE_DEREF              0 (headersToSign)
+
+121          60 LOAD_FAST                8 (extraHeaders)
+             62 POP_JUMP_IF_FALSE      102
+
+122          64 LOAD_FAST                8 (extraHeaders)
+             66 LOAD_METHOD              7 (items)
+             68 CALL_METHOD              0
+             70 GET_ITER
+        >>   72 FOR_ITER                28 (to 102)
+             74 UNPACK_SEQUENCE          2
+             76 STORE_FAST              14 (k)
+             78 STORE_FAST              15 (v)
+
+123          80 LOAD_FAST               15 (v)
+             82 LOAD_METHOD              8 (strip)
+             84 CALL_METHOD              0
+             86 LOAD_DEREF               0 (headersToSign)
+             88 LOAD_FAST               14 (k)
+             90 LOAD_METHOD              9 (lower)
+             92 CALL_METHOD              0
+             94 LOAD_METHOD              8 (strip)
+             96 CALL_METHOD              0
+             98 STORE_SUBSCR
+            100 JUMP_ABSOLUTE           72
+
+124     >>  102 LOAD_FAST                7 (sessionToken)
+            104 POP_JUMP_IF_FALSE      114
+
+125         106 LOAD_FAST                7 (sessionToken)
+            108 LOAD_DEREF               0 (headersToSign)
+            110 LOAD_CONST               4 ('x-amz-security-token')
+            112 STORE_SUBSCR
+
+127     >>  114 LOAD_GLOBAL             10 (LPSigV4Signer)
+            116 LOAD_METHOD             11 (_sha256Hex)
+            118 LOAD_FAST                2 (body)
+            120 CALL_METHOD              1
+            122 STORE_FAST              16 (payloadHash)
+
+128         124 LOAD_FAST               16 (payloadHash)
+            126 LOAD_DEREF               0 (headersToSign)
+            128 LOAD_CONST               5 ('x-amz-content-sha256')
+            130 STORE_SUBSCR
+
+131         132 LOAD_CONST               6 ('')
+            134 LOAD_METHOD             12 (join)
+            136 LOAD_CLOSURE             0 (headersToSign)
+            138 BUILD_TUPLE              1
+            140 LOAD_CONST               7 (<code object <genexpr> at 0x000001F3253C4660, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 131>)
+            142 LOAD_CONST               8 ('LPSigV4Signer.sign.<locals>.<genexpr>')
+            144 MAKE_FUNCTION            8 (closure)
+            146 LOAD_GLOBAL             13 (sorted)
+            148 LOAD_DEREF               0 (headersToSign)
+            150 CALL_FUNCTION            1
+            152 GET_ITER
+            154 CALL_FUNCTION            1
+            156 CALL_METHOD              1
+            158 STORE_FAST              17 (canonicalHeaders)
+
+132         160 LOAD_CONST               9 (';')
+            162 LOAD_METHOD             12 (join)
+            164 LOAD_CONST              10 (<code object <genexpr> at 0x000001F3253C4190, file "LPClientFramework\LPFeedback\LPSigV4Signer.py", line 132>)
+            166 LOAD_CONST               8 ('LPSigV4Signer.sign.<locals>.<genexpr>')
+            168 MAKE_FUNCTION            0
+            170 LOAD_GLOBAL             13 (sorted)
+            172 LOAD_DEREF               0 (headersToSign)
+            174 CALL_FUNCTION            1
+            176 GET_ITER
+            178 CALL_FUNCTION            1
+            180 CALL_METHOD              1
+            182 STORE_FAST              18 (signedHeaders)
+
+133         184 LOAD_CONST              11 ('\n')
+            186 LOAD_METHOD             12 (join)
+
+134         188 LOAD_FAST                0 (method)
+            190 LOAD_METHOD             14 (upper)
+            192 CALL_METHOD              0
+
+135         194 LOAD_GLOBAL             10 (LPSigV4Signer)
+            196 LOAD_METHOD             15 (_canonicalUri)
+            198 LOAD_FAST                9 (parsed)
+            200 LOAD_ATTR               16 (path)
+            202 CALL_METHOD              1
+
+136         204 LOAD_GLOBAL             10 (LPSigV4Signer)
+            206 LOAD_METHOD             17 (_canonicalQuery)
+            208 LOAD_FAST                9 (parsed)
+            210 LOAD_ATTR               18 (query)
+            212 CALL_METHOD              1
+
+137         214 LOAD_FAST               17 (canonicalHeaders)
+
+138         216 LOAD_FAST               18 (signedHeaders)
+
+139         218 LOAD_FAST               16 (payloadHash)
+
+133         220 BUILD_LIST               6
+            222 CALL_METHOD              1
+            224 STORE_FAST              19 (canonicalRequest)
+
+143         226 LOAD_CONST              12 ('%s/%s/%s/aws4_request')
+            228 LOAD_FAST               13 (dateStamp)
+            230 LOAD_FAST                5 (region)
+            232 LOAD_FAST                6 (service)
+            234 BUILD_TUPLE              3
+            236 BINARY_MODULO
+            238 STORE_FAST              20 (credentialScope)
+
+144         240 LOAD_GLOBAL             10 (LPSigV4Signer)
+            242 LOAD_METHOD             11 (_sha256Hex)
+            244 LOAD_FAST               19 (canonicalRequest)
+            246 LOAD_METHOD             19 (encode)
+            248 LOAD_CONST              13 ('utf-8')
+            250 CALL_METHOD              1
+            252 CALL_METHOD              1
+            254 STORE_FAST              21 (hashedCanonicalRequest)
+
+145         256 LOAD_CONST              11 ('\n')
+            258 LOAD_METHOD             12 (join)
+
+146         260 LOAD_CONST              14 ('AWS4-HMAC-SHA256')
+
+147         262 LOAD_FAST               12 (amzDate)
+
+148         264 LOAD_FAST               20 (credentialScope)
+
+149         266 LOAD_FAST               21 (hashedCanonicalRequest)
+
+145         268 BUILD_LIST               4
+            270 CALL_METHOD              1
+            272 STORE_FAST              22 (stringToSign)
+
+153         274 LOAD_GLOBAL             10 (LPSigV4Signer)
+            276 LOAD_METHOD             20 (_hmacSha256)
+            278 LOAD_CONST              15 ('AWS4')
+            280 LOAD_FAST                4 (secretKey)
+            282 BINARY_ADD
+            284 LOAD_METHOD             19 (encode)
+            286 LOAD_CONST              13 ('utf-8')
+            288 CALL_METHOD              1
+            290 LOAD_FAST               13 (dateStamp)
+            292 CALL_METHOD              2
+            294 STORE_FAST              23 (kDate)
+
+154         296 LOAD_GLOBAL             10 (LPSigV4Signer)
+            298 LOAD_METHOD             20 (_hmacSha256)
+            300 LOAD_FAST               23 (kDate)
+            302 LOAD_FAST                5 (region)
+            304 CALL_METHOD              2
+            306 STORE_FAST              24 (kRegion)
+
+155         308 LOAD_GLOBAL             10 (LPSigV4Signer)
+            310 LOAD_METHOD             20 (_hmacSha256)
+            312 LOAD_FAST               24 (kRegion)
+            314 LOAD_FAST                6 (service)
+            316 CALL_METHOD              2
+            318 STORE_FAST              25 (kService)
+
+156         320 LOAD_GLOBAL             10 (LPSigV4Signer)
+            322 LOAD_METHOD             20 (_hmacSha256)
+            324 LOAD_FAST               25 (kService)
+            326 LOAD_CONST              16 ('aws4_request')
+            328 CALL_METHOD              2
+            330 STORE_FAST              26 (kSigning)
+
+157         332 LOAD_GLOBAL             21 (hmac)
+            334 LOAD_METHOD             22 (new)
+            336 LOAD_FAST               26 (kSigning)
+            338 LOAD_FAST               22 (stringToSign)
+            340 LOAD_METHOD             19 (encode)
+            342 LOAD_CONST              13 ('utf-8')
+            344 CALL_METHOD              1
+            346 LOAD_GLOBAL             23 (hashlib)
+            348 LOAD_ATTR               24 (sha256)
+            350 CALL_METHOD              3
+            352 LOAD_METHOD             25 (hexdigest)
+            354 CALL_METHOD              0
+            356 STORE_FAST              27 (signature)
+
+161         358 LOAD_CONST              17 ('AWS4-HMAC-SHA256 Credential=%s/%s, SignedHeaders=%s, Signature=%s')
+
+163         360 LOAD_FAST                3 (accessKey)
+            362 LOAD_FAST               20 (credentialScope)
+            364 LOAD_FAST               18 (signedHeaders)
+            366 LOAD_FAST               27 (signature)
+            368 BUILD_TUPLE              4
+
+161         370 BINARY_MODULO
+
+160         372 STORE_FAST              28 (authorization)
+
+166         374 LOAD_FAST               12 (amzDate)
+
+167         376 LOAD_FAST               16 (payloadHash)
+
+168         378 LOAD_FAST               28 (authorization)
+
+165         380 LOAD_CONST              18 (('x-amz-date', 'x-amz-content-sha256', 'Authorization'))
+            382 BUILD_CONST_KEY_MAP      3
+            384 STORE_FAST              29 (result)
+
+170         386 LOAD_FAST                7 (sessionToken)
+            388 EXTENDED_ARG             1
+            390 POP_JUMP_IF_FALSE      400
+
+171         392 LOAD_FAST                7 (sessionToken)
+            394 LOAD_FAST               29 (result)
+            396 LOAD_CONST               4 ('x-amz-security-token')
+            398 STORE_SUBSCR
+
+173     >>  400 LOAD_FAST                8 (extraHeaders)
+            402 EXTENDED_ARG             1
+            404 POP_JUMP_IF_FALSE      448
+
+174         406 LOAD_FAST                8 (extraHeaders)
+            408 LOAD_METHOD              7 (items)
+            410 CALL_METHOD              0
+            412 GET_ITER
+        >>  414 FOR_ITER                32 (to 448)
+            416 UNPACK_SEQUENCE          2
+            418 STORE_FAST              14 (k)
+            420 STORE_FAST              15 (v)
+
+175         422 LOAD_FAST               14 (k)
+            424 LOAD_METHOD              9 (lower)
+            426 CALL_METHOD              0
+            428 LOAD_FAST               29 (result)
+            430 CONTAINS_OP              1
+            432 EXTENDED_ARG             1
+            434 POP_JUMP_IF_FALSE      414
+
+176         436 LOAD_FAST               15 (v)
+            438 LOAD_FAST               29 (result)
+            440 LOAD_FAST               14 (k)
+            442 STORE_SUBSCR
+            444 EXTENDED_ARG             1
+            446 JUMP_ABSOLUTE          414
+
+177     >>  448 LOAD_FAST               29 (result)
+            450 RETURN_VALUE
+
+=== LPSigV4Signer.sign.<genexpr> ===
+131           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                22 (to 26)
+              4 STORE_FAST               1 (k)
+              6 LOAD_CONST               0 ('%s:%s\n')
+              8 LOAD_FAST                1 (k)
+             10 LOAD_DEREF               0 (headersToSign)
+             12 LOAD_FAST                1 (k)
+             14 BINARY_SUBSCR
+             16 BUILD_TUPLE              2
+             18 BINARY_MODULO
+             20 YIELD_VALUE
+             22 POP_TOP
+             24 JUMP_ABSOLUTE            2
+        >>   26 LOAD_CONST               1 (None)
+             28 RETURN_VALUE
+
+=== LPSigV4Signer.sign.<genexpr> ===
+132           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                10 (to 14)
+              4 STORE_FAST               1 (k)
+              6 LOAD_FAST                1 (k)
+              8 YIELD_VALUE
+             10 POP_TOP
+             12 JUMP_ABSOLUTE            2
+        >>   14 LOAD_CONST               0 (None)
+             16 RETURN_VALUE

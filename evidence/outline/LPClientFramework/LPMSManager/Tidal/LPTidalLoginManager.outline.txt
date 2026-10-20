@@ -1,0 +1,704 @@
+# module LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager
+
+[module] names: __doc__, json, sys, threading, time, urllib.parse, urllib, webbrowser, typing, Any, Dict, Iterable, Optional, PyQt6.QtCore, QObject, pyqtProperty, pyqtSignal, pyqtSlot, LPGlobalUI, HOME.StreamService.Tidal.data.LPTidalDataProvider, LPTidalDataProvider, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, LPClientFramework, LPUtility, LPClientFramework.LPDataModel.UpnpDataModel.LPUpnpAsyncDataModel, LPUpnpAsyncDataModel, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPUtility, logger, LPClientFramework.util.aes, AESCipher, LPTidalLoginManager
+  str: '\nTIDAL 登录管理器。\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'Iterable'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'pyqtProperty'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'LPTidalDataProvider'
+  str: 'LPTidalStore'
+  str: 'LPUtility'
+  str: 'LPUpnpAsyncDataModel'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'AESCipher'
+  str: 'LPTidalLoginManager'
+
+def LPTidalLoginManager()  line 26
+  names: __name__, __module__, __qualname__, __doc__, _instance, Optional, __annotations__, USER_INFO_VERSION, TOKEN_REFRESH_LEEWAY_SECONDS, TOKEN_REFRESH_TIMEOUT_SECONDS, pyqtSignal, loadingStateChanged, errorMessageChanged, accountStateChanged, dict, loginSucceeded, logoutSucceeded, showLoginPageSignal, showHomePageSignal, QObject, __init__, classmethod, instance, pyqtProperty, bool, isLoading, str, errorMessage, currentUserId, pyqtSlot, login, logout, _performLogoutCleanup, clearErrorMessage, beginBrowserLogin, Dict, Any, loginUrlFromUserInfo, tryPushTidal, object, syncAccountFromDevice, fetchAccountFromDevice, ensureFreshToken, _fetchAccountForEntry, _fetchAccountFromDeviceBlocking, _shouldRefreshToken, showLoginPage, ensureTidalLoggedInOrShowLogin, showHomePage, _removeStaleShellPage, _currentDeviceUuid, _reusableShellPage, _onShellDestroyed, clearTidalNavigationPages, _isTidalNavigationWidget, _deviceSupportsTidal, _userInfoFromResponse, _isAccountLoggedIn, _isUserInfoLoggedIn, _userIdFromUserInfo, _tokenFromUserInfo, _writeAccountState, _account_to_state, _extractAccountState, _normalizeSubscription, Iterable, _iterPayloadObjects, _firstStringValue, int, _intValue, float, _floatValue, _decodeDeviceValue, _errorMessageFromResult, _setLoading, _setErrorMessage, _registerObservers, onOAuthExCodeReceived, onAccountChanged, onDeviceChanged, deviceInfoUpdate, __classcell__
+    str: 'LPTidalLoginManager'
+    str: '负责 TIDAL OAuth code 登录、设备账号同步、登出和订阅状态更新。'
+    str: '_instance'
+    str: '2'
+    str: 'parent'
+    str: 'LPTidalLoginManager.__init__'
+    str: 'parent'
+    str: 'return'
+    str: 'LPTidalLoginManager.instance'
+    str: 'notify'
+    str: 'return'
+    str: 'LPTidalLoginManager.isLoading'
+    str: 'LPTidalLoginManager.errorMessage'
+    str: 'LPTidalLoginManager.currentUserId'
+    str: 'username'
+    str: 'password'
+    str: 'return'
+    str: 'LPTidalLoginManager.login'
+    str: 'LPTidalLoginManager.logout'
+    str: 'userId'
+    str: 'return'
+    str: 'LPTidalLoginManager._performLogoutCleanup'
+    str: 'LPTidalLoginManager.clearErrorMessage'
+    str: 'LPTidalLoginManager.beginBrowserLogin'
+    str: 'userinfo'
+    str: 'return'
+    str: 'LPTidalLoginManager.loginUrlFromUserInfo'
+    str: 'LPTidalLoginManager.tryPushTidal'
+    str: 'result'
+    str: 'device'
+    str: 'fetchIfMissing'
+    str: 'LPTidalLoginManager.syncAccountFromDevice'
+    str: 'device'
+    str: 'return'
+    str: 'LPTidalLoginManager.fetchAccountFromDevice'
+    str: 'force'
+    str: 'return'
+    str: 'LPTidalLoginManager.ensureFreshToken'
+    str: 'LPTidalLoginManager._fetchAccountForEntry'
+    str: 'scheduled'
+    str: 'device'
+    str: 'reason'
+    str: 'return'
+    str: 'LPTidalLoginManager._fetchAccountFromDeviceBlocking'
+    str: 'LPTidalLoginManager._shouldRefreshToken'
+    str: 'LPTidalLoginManager.showLoginPage'
+    str: 'LPTidalLoginManager.ensureTidalLoggedInOrShowLogin'
+    str: 'LPTidalLoginManager.showHomePage'
+    str: 'shellPage'
+    str: 'return'
+    str: 'LPTidalLoginManager._removeStaleShellPage'
+    str: 'LPTidalLoginManager._currentDeviceUuid'
+    str: 'deviceUuid'
+    str: 'LPTidalLoginManager._reusableShellPage'
+    str: 'destroyedObject'
+    str: 'return'
+    str: 'LPTidalLoginManager._onShellDestroyed'
+    str: 'LPTidalLoginManager.clearTidalNavigationPages'
+    str: 'widget'
+    str: 'return'
+    str: 'LPTidalLoginManager._isTidalNavigationWidget'
+    str: 'LPTidalLoginManager._deviceSupportsTidal'
+    str: 'response'
+    str: 'return'
+    str: 'LPTidalLoginManager._userInfoFromResponse'
+    str: 'account'
+    str: 'return'
+    str: 'LPTidalLoginManager._isAccountLoggedIn'
+    str: 'LPTidalLoginManager._isUserInfoLoggedIn'
+    str: 'LPTidalLoginManager._userIdFromUserInfo'
+    str: 'LPTidalLoginManager._tokenFromUserInfo'
+    str: 'accountState'
+    str: 'fallbackUserName'
+    str: 'return'
+    str: 'LPTidalLoginManager._writeAccountState'
+    str: 'LPTidalLoginManager._account_to_state'
+    str: 'responseData'
+    str: 'return'
+    str: 'LPTidalLoginManager._extractAccountState'
+    str: 'LPTidalLoginManager._normalizeSubscription'
+    str: 'LPTidalLoginManager._iterPayloadObjects'
+    str: 'payload'
+    str: 'keys'
+    str: 'return'
+    str: 'LPTidalLoginManager._firstStringValue'
+    str: 'value'
+    str: 'return'
+    str: 'LPTidalLoginManager._intValue'
+    str: 'LPTidalLoginManager._floatValue'
+    str: 'LPTidalLoginManager._decodeDeviceValue'
+    str: 'result'
+    str: 'fallback'
+    str: 'return'
+    str: 'LPTidalLoginManager._errorMessageFromResult'
+    str: 'isLoading'
+    str: 'return'
+    str: 'LPTidalLoginManager._setLoading'
+    str: 'message'
+    str: 'return'
+    str: 'LPTidalLoginManager._setErrorMessage'
+    str: 'LPTidalLoginManager._registerObservers'
+    str: 'params'
+    str: 'return'
+    str: 'LPTidalLoginManager.onOAuthExCodeReceived'
+    str: 'LPTidalLoginManager.onAccountChanged'
+    str: 'LPTidalLoginManager.onDeviceChanged'
+    str: 'device'
+    str: 'infoType'
+    str: 'detail'
+    str: 'return'
+    str: 'LPTidalLoginManager.deviceInfoUpdate'
+    str: 'scheduled'
+
+  def LPTidalLoginManager.__init__(self, parent)  line 42
+    names: super, __init__, LPTidalDataProvider, _provider, LPTidalStore, instance, _store, LPUpnpAsyncDataModel, _upnpModel, _account, LPPlayListSource, Tidal, value, source, _is_loading, _error_message, _pending_user_info_device_uuid, _pending_entry_device_uuid, _pending_oauth_login_device_uuid, _shell_page, _shell_device_uuid, threading, RLock, _refresh_lock, Condition, _refresh_condition, _refreshing_device_uuid, _registerObservers, showLoginPageSignal, connect, showLoginPage, showHomePageSignal, showHomePage, syncAccountFromDevice, getattr, LPGlobalUI
+      str: '\n        初始化登录管理器。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+      str: 'currentDevice'
+
+  def LPTidalLoginManager.instance(cls, parent)  line 70
+    names: _instance, parent, setParent
+      str: '\n        返回登录管理器单例。\n\n        :param parent: 可选父对象。\n        :return: 登录管理器单例。\n        '
+
+  def LPTidalLoginManager.isLoading(self)  line 84
+    names: _is_loading
+      str: '\n        返回当前是否正在执行登录或登出请求。\n\n        :return: 正在请求返回 True。\n        '
+
+  def LPTidalLoginManager.errorMessage(self)  line 93
+    names: _error_message
+      str: '\n        返回最近一次登录或登出的错误信息。\n\n        :return: 错误信息。\n        '
+
+  def LPTidalLoginManager.currentUserId(self)  line 102
+    names: _account, str, getattr
+      str: '\n        返回当前 TIDAL 用户 ID。\n\n        :return: 用户 ID。\n        '
+      str: 'userId'
+
+  def LPTidalLoginManager.login(self, username, password)  line 112
+    names: str, strip, _setErrorMessage, _setLoading, _provider, loginByUsername, isinstance, dict, bool, get, _errorMessageFromResult, logger, warning, _extractAccountState, _writeAccountState, loginSucceeded, emit, LPClientFramework.LPFavoriteSyncCoordinator, LPFavoriteSyncCoordinator, instance, requestSync, source, Exception
+      str: '\n        使用用户名和密码登录 TIDAL。\n\n        :param username: 用户名或邮箱。\n        :param password: 密码。\n        :return: None。\n        '
+      str: 'Please enter your username and password.'
+      str: 'success'
+      str: 'Invalid email or password. Please try again.'
+      str: '[TIDAL] username login failed'
+      str: 'data'
+      str: 'userId'
+      str: 'Login response did not include a user ID.'
+      str: '[TIDAL] username login missing userId'
+      str: 'fallbackUserName'
+      str: 'LPFavoriteSyncCoordinator'
+      str: 'force'
+      str: '[TIDAL] favorite sync on login failed: '
+
+  def LPTidalLoginManager.logout(self)  line 153
+    names: str, _store, accountState, get, strip, getattr, LPGlobalUI, hasattr, deviceStreamServiceManager, logoutAccountForSource, source, Exception, logger, warning, syncAccountFromDevice, _performLogoutCleanup, logoutSucceeded, emit
+      str: '\n        登出当前 TIDAL 账号。\n        通过设备 UPnP UserLogout 完成登出，PC 不直接调用 Tidal HTTP API。\n\n        :return: None。\n        '
+      str: 'userId'
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: '[TIDAL] logout device account failed: '
+
+  def LPTidalLoginManager._performLogoutCleanup(self, userId)  line 172
+    names: LPClientFramework.LPFavoriteSyncCoordinator, LPFavoriteSyncCoordinator, str, strip, _store, accountState, get, instance, clearUser, source, Exception, logger, warning, clearAllUserContent, _provider, clearCaches, HOME.StreamService.Tidal.services.LPTidalImageService, LPTidalImageService, cancelPendingAndClear
+      str: '\n        执行登出后的统一清理，主动登出和被动登出共用。\n\n        清空 Store 全部用户业务状态、DataProvider 的 HTTP 缓存，\n        并取消图片服务在途下载请求；TIDAL 没有 tokenProvider，token 随\n        Store 的 accountState 一起被 setAccountState(False,...) 清空。\n\n        :param userId: 登出前的用户 ID；为空时回退读取 store 当前值。\n        :return: None。\n        '
+      str: 'LPFavoriteSyncCoordinator'
+      str: 'userId'
+      str: '[TIDAL] favorite cache clear on logout failed: '
+      str: '[TIDAL] clearAllUserContent failed: '
+      str: '[TIDAL] provider clearCaches failed: '
+      str: 'LPTidalImageService'
+      str: '[TIDAL] image service cancelPendingAndClear failed: '
+
+  def LPTidalLoginManager.clearErrorMessage(self)  line 204
+    names: _setErrorMessage
+      str: '\n        清空登录错误文案。\n\n        :return: None。\n        '
+
+  def LPTidalLoginManager.beginBrowserLogin(self)  line 213
+    names: getattr, LPGlobalUI, hasattr, _setErrorMessage, _deviceSupportsTidal, HOME.StreamService.Tidal.services.LPTidalEventTrack, LPTidalEventTrack, login_event, Exception, _setLoading, Optional, Dict, str, Any, object, _upnpModel, getUserInfo, source
+      str: '\n        从设备读取 TIDAL 登录参数并打开系统浏览器登录页。\n\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'No device is available for TIDAL login.'
+      str: 'TIDAL is not supported on this device.'
+      str: 'LPTidalEventTrack'
+      str: 'browser'
+      str: 'device_unsupported'
+      str: 'success'
+      str: 'method'
+      str: 'error_code'
+      str: 'error_message'
+      str: 'response'
+      str: 'callback_device'
+      str: 'return'
+      str: 'LPTidalLoginManager.beginBrowserLogin.<locals>.callback'
+
+    def LPTidalLoginManager.beginBrowserLogin.callback(response, callback_device)  line 240
+      names: str, getattr, LPGlobalUI, _setLoading, _userInfoFromResponse, loginUrlFromUserInfo, _setErrorMessage, logger, warning, sorted, keys, HOME.StreamService.Tidal.services.LPTidalEventTrack, LPTidalEventTrack, login_event, Exception, debug, webbrowser, open
+        str: '\n            处理登录参数查询结果并打开授权页。\n\n            :param response: 设备 GetUserInfo 返回。\n            :param callback_device: 发起查询的设备。\n            :return: None。\n            '
+        str: 'uuid'
+        str: 'currentDevice'
+        str: 'Unable to get TIDAL login parameters from this device.'
+        str: '[TIDAL] beginBrowserLogin missing login url device=%s keys=%s'
+        str: 'LPTidalEventTrack'
+        str: 'browser'
+        str: 'missing_login_url'
+        str: 'success'
+        str: 'method'
+        str: 'error_code'
+        str: 'error_message'
+        str: 'device_uuid'
+        str: '[TIDAL] beginBrowserLogin open authorize url device=%s'
+
+  def LPTidalLoginManager.loginUrlFromUserInfo(self, userinfo)  line 279
+    names: isinstance, dict, _decodeDeviceValue, _firstStringValue, urllib, parse, unquote, urlencode
+      str: '\n        根据设备返回的 TIDAL 登录参数构造 Android 一致的 authorize URL。\n\n        :param userinfo: 设备 GetUserInfo 返回的用户信息。\n        :return: 可打开的登录 URL，缺参数时返回空字符串。\n        '
+      str: 'clientId'
+      str: 'client_id'
+      str: 'redirectUrl'
+      str: 'redirectURI'
+      str: 'redirect_uri'
+      str: 'en'
+      str: 'code'
+      str: 'pc'
+      str: 'true'
+      str: 'lang'
+      str: 'response_type'
+      str: 'redirect_uri'
+      str: 'client_id'
+      str: 'state'
+      str: 'restrictSignup'
+      str: 'https://login.tidal.com/authorize?'
+
+  def LPTidalLoginManager.tryPushTidal(self)  line 303
+    names: getattr, LPGlobalUI, hasattr, _pending_entry_device_uuid, showLoginPageSignal, emit, str, syncAccountFromDevice, showHomePageSignal, _deviceSupportsTidal, _fetchAccountForEntry
+      str: '\n        尝试进入 TIDAL；设备已登录时进入首页，未登录时进入登录页。\n\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'uuid'
+      str: 'fetchIfMissing'
+
+  def LPTidalLoginManager.syncAccountFromDevice(self, device, fetchIfMissing)  line 331
+    names: getattr, LPGlobalUI, hasattr, logger, debug, _account, _store, setAccountState, deviceStreamServiceManager, accountForSource, source, str, bool, strip, accountState, get, _isAccountLoggedIn, _writeAccountState, _account_to_state, fetchAccountFromDevice
+      str: '\n        从设备读取 TIDAL 登录状态并同步到 Store。\n\n        :param device: 设备对象，缺省时使用当前设备。\n        :param fetchIfMissing: 本地未缓存账号时是否主动向设备拉取。\n        :return: 当前账号对象或 None。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: '[TIDAL][LoginState] syncAccountFromDevice no device fetchIfMissing=%s'
+      str: '[TIDAL][LoginState] syncAccountFromDevice device=%s fetchIfMissing=%s has_account=%s userId=%s has_token=%s has_session=%s store_before_logged_in=%s'
+      str: 'uuid'
+      str: 'userId'
+      str: 'token'
+      str: 'accessToken'
+      str: 'sessionId'
+      str: 'isLoggedIn'
+      str: '[TIDAL][LoginState] syncAccountFromDevice accepted account device=%s userId=%s'
+      str: '[TIDAL][LoginState] syncAccountFromDevice cleared store device=%s fetchIfMissing=%s'
+
+  def LPTidalLoginManager.fetchAccountFromDevice(self, device)  line 379
+    names: getattr, LPGlobalUI, hasattr, _deviceSupportsTidal, str, _pending_user_info_device_uuid, logger, debug, USER_INFO_VERSION, Optional, Dict, Any, object, _upnpModel, getUserInfo, source
+      str: '\n        主动从设备读取 TIDAL 用户信息并注册到设备音源服务。\n\n        :param device: 设备对象，缺省时使用当前设备。\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'uuid'
+      str: '[TIDAL][LoginState] fetchAccountFromDevice skip pending device=%s'
+      str: '[TIDAL][LoginState] fetchAccountFromDevice request device=%s version=%s'
+      str: 'response'
+      str: 'callback_device'
+      str: 'return'
+      str: 'LPTidalLoginManager.fetchAccountFromDevice.<locals>.callback'
+
+    def LPTidalLoginManager.fetchAccountFromDevice.callback(response, callback_device)  line 404
+      names: str, getattr, _pending_user_info_device_uuid, LPGlobalUI, _userInfoFromResponse, isinstance, dict, get, logger, debug, sorted, keys, _userIdFromUserInfo, bool, _tokenFromUserInfo, _firstStringValue, _isUserInfoLoggedIn, _account, _store, setAccountState, accountStateChanged, emit, deviceStreamServiceManager, registerAccountForSource, source, syncAccountFromDevice
+        str: '\n            处理设备 GetUserInfo 返回并同步登录态。\n\n            :param response: 设备返回结果。\n            :param callback_device: 发起请求的设备。\n            :return: None。\n            '
+        str: 'uuid'
+        str: 'currentDevice'
+        str: 'user'
+        str: '[TIDAL][LoginState] fetchAccountFromDevice response device=%s status=%s keys=%s user_keys=%s userId=%s has_token=%s has_session=%s'
+        str: 'status_code'
+        str: 'sessionId'
+        str: 'session_id'
+        str: 'sid'
+        str: '[TIDAL][LoginState] fetchAccountFromDevice cleared store because response is not logged in device=%s'
+        str: 'fetchIfMissing'
+
+  def LPTidalLoginManager.ensureFreshToken(self, force)  line 444
+    names: getattr, LPGlobalUI, hasattr, _deviceSupportsTidal, _shouldRefreshToken, bool, str, _store, accountState, get, strip, _fetchAccountFromDeviceBlocking
+      str: '\n        确保当前 TIDAL token 仍在安全有效期内，必要时从设备同步新账号信息。\n\n        :param force: 是否忽略过期时间并强制同步。\n        :return: 有可用登录 token 返回 True。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'token'
+      str: '401_retry'
+      str: 'scheduled'
+      str: 'reason'
+
+  def LPTidalLoginManager._fetchAccountForEntry(self, device)  line 460
+    names: Optional, Dict, str, Any, object, _upnpModel, getUserInfo, source
+      str: '\n        为侧边栏入口读取设备 TIDAL 账号，并根据结果进入首页或登录页。\n\n        :param device: 当前设备对象。\n        :return: None。\n        '
+      str: 'response'
+      str: 'callback_device'
+      str: 'return'
+      str: 'LPTidalLoginManager._fetchAccountForEntry.<locals>.callback'
+
+    def LPTidalLoginManager._fetchAccountForEntry.callback(response, callback_device)  line 467
+      names: str, getattr, LPGlobalUI, _pending_entry_device_uuid, _userInfoFromResponse, _isUserInfoLoggedIn, _account, _store, setAccountState, accountStateChanged, emit, showLoginPageSignal, deviceStreamServiceManager, registerAccountForSource, source, syncAccountFromDevice, showHomePageSignal
+        str: '\n            处理入口登录态查询结果。\n\n            :param response: 设备返回结果。\n            :param callback_device: 发起查询的设备。\n            :return: None。\n            '
+        str: 'uuid'
+        str: 'currentDevice'
+        str: 'fetchIfMissing'
+
+  def LPTidalLoginManager._fetchAccountFromDeviceBlocking(self, device, reason)  line 499
+    names: str, getattr, _refresh_condition, _refreshing_device_uuid, time, TOKEN_REFRESH_TIMEOUT_SECONDS, wait, bool, _store, accountState, get, strip, threading, Condition, Optional, Dict, Any, object, _upnpModel, getUserInfo, source, notify_all
+      str: '\n        阻塞等待设备 GetUserInfo 返回，并复用并发中的刷新请求。\n\n        :param device: 当前设备对象。\n        :param reason: 刷新原因（scheduled / 401_retry）。\n        :return: 刷新后有可用 token 返回 True。\n        '
+      str: 'uuid'
+      str: 'token'
+      str: 'done'
+      str: 'ok'
+      str: 'response'
+      str: 'callback_device'
+      str: 'return'
+      str: 'LPTidalLoginManager._fetchAccountFromDeviceBlocking.<locals>.callback'
+      str: 'done'
+      str: 'ok'
+
+    def LPTidalLoginManager._fetchAccountFromDeviceBlocking.callback(response, callback_device)  line 523
+      names: str, getattr, LPGlobalUI, _userInfoFromResponse, _isUserInfoLoggedIn, deviceStreamServiceManager, registerAccountForSource, source, syncAccountFromDevice, _isAccountLoggedIn, _account, _store, setAccountState, accountStateChanged, emit, notify_all, _refresh_condition, _refreshing_device_uuid
+        str: '\n            处理阻塞刷新请求的设备响应。\n\n            :param response: 设备返回结果。\n            :param callback_device: 发起请求的设备。\n            :return: None。\n            '
+        str: 'uuid'
+        str: 'currentDevice'
+        str: 'fetchIfMissing'
+        str: 'done'
+        str: 'ok'
+
+  def LPTidalLoginManager._shouldRefreshToken(self)  line 571
+    names: _store, accountState, str, get, strip, _floatValue, time, TOKEN_REFRESH_LEEWAY_SECONDS
+      str: '\n        判断 Store 中的 token 是否已经进入刷新安全窗口。\n\n        :return: 需要刷新返回 True。\n        '
+      str: 'token'
+      str: 'tokenExpiresAt'
+
+  def LPTidalLoginManager.showLoginPage(self)  line 586
+    names: HOME.StreamService.Tidal.controllers.pages.LPTidalLoginViewController, LPTidalLoginViewController, getattr, LPGlobalUI, currentWidget, __class__, __name__, str, lower, logger, debug, clearTidalNavigationPages, navigationManager, push
+      str: '\n        展示 TIDAL 登录页。\n\n        :return: None。\n        '
+      str: 'LPTidalLoginViewController'
+      str: 'rootStackedWidget'
+      str: 'LPTidalLoginViewController'
+      str: 'stackedItemId'
+      str: 'tidal_login'
+      str: '[TIDAL] skip duplicate Login navigation'
+      str: 'enterHomeOnSuccess'
+
+  def LPTidalLoginManager.ensureTidalLoggedInOrShowLogin(self)  line 608
+    names: bool, _store, accountState, get, showLoginPage
+      str: '\n        统一未登录守卫：已登录直接放行，未登录清理 TIDAL 页面并跳转登录页。\n\n        :return: 当前已登录返回 True；未登录并已触发登录页跳转返回 False。\n        '
+      str: 'isLoggedIn'
+
+  def LPTidalLoginManager.showHomePage(self)  line 619
+    names: getattr, LPGlobalUI, currentWidget, _currentDeviceUuid, __class__, __name__, str, logger, debug, _shell_page, _shell_device_uuid, HOME.StreamService.Tidal.controllers.shell.LPTidalShellViewController, LPTidalShellViewController, _reusableShellPage, navigationManager, push, clearTidalNavigationPages, tidalDeviceUuid, destroyed, connect, _onShellDestroyed, _removeStaleShellPage
+      str: '\n        展示 TIDAL 首页。\n\n        :return: None。\n        '
+      str: 'rootStackedWidget'
+      str: 'LPTidalShellViewController'
+      str: 'tidalDeviceUuid'
+      str: '[TIDAL] skip duplicate Shell navigation'
+      str: 'LPTidalShellViewController'
+      str: '[TIDAL][Entry] push Shell device=%s'
+      str: 'Tidal'
+
+  def LPTidalLoginManager._removeStaleShellPage(self, shellPage)  line 666
+    names: getattr, LPGlobalUI, indexOf, HOME.StreamService.Tidal.services.LPTidalQmlContext, clearTidalCursorBridge, removeWidget, deleteLater, RuntimeError
+      str: '移除设备切换后遗留的旧 Shell 页面。\n\n        :param shellPage: 待移除的旧 Shell。\n        :return: None。\n        '
+      str: 'rootStackedWidget'
+      str: 'clearTidalCursorBridge'
+
+  def LPTidalLoginManager._currentDeviceUuid(self)  line 685
+    names: getattr, LPGlobalUI, str
+      str: '返回当前设备 UUID。\n\n        :return: 当前设备 UUID，无设备时返回空字符串。\n        '
+      str: 'currentDevice'
+      str: 'uuid'
+
+  def LPTidalLoginManager._reusableShellPage(self, deviceUuid)  line 693
+    names: _shell_page, _shell_device_uuid, parent, RuntimeError
+      str: '返回可供当前设备复用的 TIDAL Shell。\n\n        :param deviceUuid: 当前设备 UUID。\n        :return: 可复用的 Shell，条件不满足时返回 None。\n        '
+
+  def LPTidalLoginManager._onShellDestroyed(self, destroyedObject)  line 710
+    names: _shell_page, sender, _shell_device_uuid
+      str: '清除已销毁 Shell 的缓存引用。\n\n        :param destroyedObject: Qt destroyed 信号携带的对象。\n        :return: None。\n        '
+
+  def LPTidalLoginManager.clearTidalNavigationPages(self)  line 721
+    names: _shell_page, _shell_device_uuid, getattr, LPGlobalUI, currentWidget, range, count, widget, _isTidalNavigationWidget, append, callable, viewWillDisappear, str, lower, startswith, HOME.StreamService.Tidal.services.LPTidalQmlContext, clearTidalCursorBridge, Exception, removeWidget, deleteLater
+      str: '\n        清理导航栈里已经隐藏的 TIDAL 页面。\n\n        :return: None。\n        '
+      str: 'rootStackedWidget'
+      str: 'viewWillDisappear'
+      str: 'stackedItemId'
+      str: 'tidal_'
+      str: 'clearTidalCursorBridge'
+
+  def LPTidalLoginManager._isTidalNavigationWidget(self, widget)  line 758
+    names: str, getattr, lower, startswith
+      str: '\n        判断控件是否属于 TIDAL 页面栈。\n\n        :param widget: 待判断控件。\n        :return: 属于 TIDAL 页面返回 True。\n        '
+      str: 'stackedItemId'
+      str: 'Tidal'
+      str: 'tidal_'
+
+  def LPTidalLoginManager._deviceSupportsTidal(self, device)  line 768
+    names: getattr, source
+      str: '\n        判断设备当前是否可以请求 TIDAL 用户信息。\n\n        :param device: 设备对象。\n        :return: 可以请求返回 True。\n        '
+      str: 'deviceStreamServiceManager'
+      str: 'streamServiceCapability'
+
+  def LPTidalLoginManager._userInfoFromResponse(self, response)  line 783
+    names: isinstance, dict, get, str, json, loads, Exception, logger, warning
+      str: '\n        从设备 GetUserInfo 响应中解析用户信息。\n\n        :param response: 设备返回结果。\n        :return: 用户信息字典。\n        '
+      str: 'Result'
+      str: '[TIDAL] parse GetUserInfo failed: '
+
+  def LPTidalLoginManager._isAccountLoggedIn(self, account)  line 803
+    names: str, getattr, strip, bool
+      str: '\n        判断账号对象是否具备 Android 一致的有效登录态。\n\n        :param account: 账号对象。\n        :return: 同时具备用户 ID 和 token 返回 True。\n        '
+      str: 'userId'
+      str: 'token'
+      str: 'accessToken'
+
+  def LPTidalLoginManager._isUserInfoLoggedIn(self, userinfo)  line 816
+    names: isinstance, dict, bool, _userIdFromUserInfo, _tokenFromUserInfo
+      str: '\n        判断设备返回的用户信息是否包含有效登录信息。\n\n        :param userinfo: 设备返回的用户信息。\n        :return: 同时具备用户 ID 和 token 返回 True。\n        '
+
+  def LPTidalLoginManager._userIdFromUserInfo(self, userinfo)  line 827
+    names: _firstStringValue, get, isinstance, dict
+      str: '\n        从设备用户信息中读取用户 ID。\n\n        :param userinfo: 设备返回的用户信息。\n        :return: 用户 ID。\n        '
+      str: 'userId'
+      str: 'user_id'
+      str: 'id'
+      str: 'user'
+
+  def LPTidalLoginManager._tokenFromUserInfo(self, userinfo)  line 842
+    names: _firstStringValue
+      str: '\n        从设备用户信息中读取访问令牌字段。\n\n        :param userinfo: 设备返回的用户信息。\n        :return: 访问令牌。\n        '
+      str: 'accessToken'
+      str: 'token'
+      str: 'access_token'
+
+  def LPTidalLoginManager._writeAccountState(self, accountState, fallbackUserName)  line 851
+    names: str, get, strip, dict, logger, debug, bool, _store, setAccountState, _intValue, _floatValue, accountStateChanged, emit
+      str: '\n        将账号状态写回 Store。\n\n        :param accountState: 规范化后的账号状态。\n        :param fallbackUserName: 备用用户名。\n        :return: None。\n        '
+      str: 'userId'
+      str: 'userName'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+      str: 'email'
+      str: 'subscription'
+      str: 'subscriptionTitle'
+      str: 'title'
+      str: 'validUntil'
+      str: 'extra'
+      str: '[TIDAL][LoginState] writeAccountState userId=%s userName=%s has_token=%s has_session=%s country=%s subscription_title=%s'
+      str: 'title'
+      str: 'expiresIn'
+      str: 'tokenUpdatedAt'
+      str: 'tokenExpiresAt'
+      str: 'supportReplayGain'
+      str: 'showAutoplay'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+      str: 'email'
+      str: 'expiresIn'
+      str: 'tokenUpdatedAt'
+      str: 'tokenExpiresAt'
+      str: 'supportReplayGain'
+      str: 'showAutoplay'
+
+  def LPTidalLoginManager._account_to_state(self, account)  line 895
+    names: _normalizeSubscription, str, getattr, bool, strip, _intValue, _floatValue, get
+      str: '\n        将设备账号对象转换为 Store 状态字典。\n\n        :param account: 设备账号对象。\n        :return: 账号状态字典。\n        '
+      str: 'isLoggedIn'
+      str: 'userId'
+      str: 'userName'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+      str: 'subscription'
+      str: '_rawAccount'
+      str: 'showName'
+      str: 'userName'
+      str: 'email'
+      str: 'userId'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+      str: 'expiresIn'
+      str: 'expressIn'
+      str: 'tokenUpdatedAt'
+      str: 'tokenExpiresAt'
+      str: 'title'
+      str: 'supportReplayGain'
+      str: 'showAutoplay'
+      str: 'isLoggedIn'
+      str: 'userId'
+      str: 'userName'
+      str: 'email'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+      str: 'expiresIn'
+      str: 'tokenUpdatedAt'
+      str: 'tokenExpiresAt'
+      str: 'subscription'
+      str: 'subscriptionTitle'
+      str: 'supportReplayGain'
+      str: 'showAutoplay'
+      str: '_rawAccount'
+
+  def LPTidalLoginManager._extractAccountState(self, responseData)  line 933
+    names: _iterPayloadObjects, _firstStringValue, get, isinstance, dict, str, bool
+      str: '\n        从登录响应中提取账号状态。\n\n        :param responseData: 登录接口响应数据。\n        :return: 账号状态字典。\n        '
+      str: 'userId'
+      str: 'user_id'
+      str: 'id'
+      str: 'userName'
+      str: 'username'
+      str: 'email'
+      str: 'name'
+      str: 'accessToken'
+      str: 'token'
+      str: 'access_token'
+      str: 'sessionId'
+      str: 'session_id'
+      str: 'sid'
+      str: 'countryCode'
+      str: 'country'
+      str: 'subscription'
+      str: 'subscriptionInfo'
+      str: 'title'
+      str: 'validUntil'
+      str: 'extra'
+      str: 'isLoggedIn'
+      str: 'userId'
+      str: 'userName'
+      str: 'email'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+      str: 'expiresIn'
+      str: 'tokenUpdatedAt'
+      str: 'tokenExpiresAt'
+      str: 'subscription'
+
+  def LPTidalLoginManager._normalizeSubscription(self, account)  line 982
+    names: getattr, isinstance, dict, str, get
+      str: '\n        归一化账号订阅信息。\n\n        :param account: 设备账号对象。\n        :return: 订阅信息字典。\n        '
+      str: 'subscription'
+      str: 'title'
+      str: 'description'
+      str: 'type'
+      str: 'validUntil'
+      str: 'expiresAt'
+      str: 'expirationDate'
+      str: 'title'
+      str: 'validUntil'
+      str: 'extra'
+      str: 'credential'
+
+  def LPTidalLoginManager._iterPayloadObjects(self, responseData)  line 1007
+    names: isinstance, dict, get, append
+      str: '\n        遍历登录响应里常见的嵌套对象。\n\n        :param responseData: 登录接口响应数据。\n        :return: 字典对象迭代器。\n        '
+      str: 'data'
+      str: 'user'
+      str: 'account'
+      str: 'profile'
+      str: 'user'
+
+  def LPTidalLoginManager._firstStringValue(self, payload, *keys)  line 1026
+    names: get, str, strip
+      str: '\n        从字典中按顺序取第一个非空字符串值。\n\n        :param payload: 原始字典。\n        :param keys: 候选键名。\n        :return: 字符串值。\n        '
+
+  def LPTidalLoginManager._intValue(self, value)  line 1040
+    names: int, float, str, strip, Exception
+      str: '\n        将数字字段转换为 int。\n\n        :param value: 原始字段值。\n        :return: 可转换时返回整数，否则返回 0。\n        '
+
+  def LPTidalLoginManager._floatValue(self, value)  line 1052
+    names: float, str, strip, Exception
+      str: '\n        将时间字段转换为 float。\n\n        :param value: 原始字段值。\n        :return: 可转换时返回浮点数，否则返回 0。\n        '
+
+  def LPTidalLoginManager._decodeDeviceValue(self, value)  line 1064
+    names: str, getattr, LPGlobalUI, AESCipher, decrypt2, Exception
+      str: '\n        使用当前设备 UUID 前 16 位解密设备返回的敏感字段。\n\n        :param value: 设备返回字段。\n        :return: 解密后的字段；解密失败时返回原值。\n        '
+      str: 'currentDevice'
+      str: 'uuid'
+
+  def LPTidalLoginManager._errorMessageFromResult(self, result, fallback)  line 1083
+    names: isinstance, dict, get, str
+      str: '\n        从请求结果中提取错误文案。\n\n        :param result: 请求结果。\n        :param fallback: 默认错误文案。\n        :return: 错误文案。\n        '
+      str: 'error'
+      str: 'data'
+      str: 'message'
+
+  def LPTidalLoginManager._setLoading(self, isLoading)  line 1102
+    names: bool, _is_loading, loadingStateChanged, emit
+      str: '\n        更新加载状态。\n\n        :param isLoading: 是否加载中。\n        :return: None。\n        '
+
+  def LPTidalLoginManager._setErrorMessage(self, message)  line 1115
+    names: str, _error_message, errorMessageChanged, emit
+      str: '\n        更新错误文案。\n\n        :param message: 错误文案。\n        :return: None。\n        '
+
+  def LPTidalLoginManager._registerObservers(self)  line 1128
+    names: LPUtility, addNotificationObserver, onOAuthExCodeReceived, onAccountChanged, onDeviceChanged, registerDeviceInfoChanged
+      str: '\n        注册设备登录状态监听。\n\n        :return: None。\n        '
+      str: 'OAuthCodeChanged'
+      str: 'accountChangedForSource'
+      str: 'DeviceChanged'
+
+  def LPTidalLoginManager.onOAuthExCodeReceived(self, params)  line 1139
+    names: isinstance, dict, get, source, getattr, LPGlobalUI, str, logger, warning, strip, _setLoading, _setErrorMessage, _pending_oauth_login_device_uuid, Optional, Dict, Any, debug, _upnpModel, userLoginByCode
+      str: '\n        处理 OAuth callback 收到的 TIDAL code，并交给设备 UserLogin。\n\n        :param params: OAuthCodeChanged 通知参数。\n        :return: None。\n        '
+      str: 'device'
+      str: 'notify'
+      str: 'source'
+      str: 'currentDevice'
+      str: 'uuid'
+      str: 'state'
+      str: 'login_state'
+      str: 'pc'
+      str: '[TIDAL] ignore OAuth code because state mismatch device=%s'
+      str: 'exchange_code'
+      str: 'response'
+      str: 'return'
+      str: 'LPTidalLoginManager.onOAuthExCodeReceived.<locals>.callback'
+      str: '[TIDAL] onOAuthExCodeReceived call UserLogin device=%s'
+
+    def LPTidalLoginManager.onOAuthExCodeReceived.callback(response)  line 1171
+      names: _setLoading, logger, debug, _pending_oauth_login_device_uuid, _setErrorMessage, warning, HOME.StreamService.Tidal.services.LPTidalEventTrack, LPTidalEventTrack, login_event, _error_message, Exception
+        str: '\n            处理设备 UserLogin 命令结果，账号状态等待设备 notify 同步。\n\n            :param response: 设备 UserLogin 返回。\n            :return: None。\n            '
+        str: '[TIDAL] UserLogin accepted, wait for accountChange notify device=%s'
+        str: 'TIDAL login failed. Please try again.'
+        str: '[TIDAL] UserLogin failed device=%s'
+        str: 'LPTidalEventTrack'
+        str: 'browser'
+        str: 'oauth_failed'
+        str: 'success'
+        str: 'method'
+        str: 'error_code'
+        str: 'error_message'
+        str: 'device_uuid'
+
+  def LPTidalLoginManager.onAccountChanged(self, params)  line 1201
+    names: isinstance, dict, get, source, getattr, LPGlobalUI, bool, _store, accountState, str, strip, syncAccountFromDevice, _performLogoutCleanup, logoutSucceeded, emit, _pending_oauth_login_device_uuid, HOME.StreamService.Tidal.services.LPTidalEventTrack, LPTidalEventTrack, login_event, Exception, loginSucceeded, LPClientFramework.LPFavoriteSyncCoordinator, LPFavoriteSyncCoordinator, instance, requestSync, logger, warning
+      str: '\n        处理设备账号变化通知。\n\n        :param params: 通知参数。\n        :return: None。\n        '
+      str: 'device'
+      str: 'notify'
+      str: 'source'
+      str: 'currentDevice'
+      str: 'uuid'
+      str: 'isLoggedIn'
+      str: 'userId'
+      str: 'LPTidalEventTrack'
+      str: 'browser'
+      str: 'countryCode'
+      str: 'success'
+      str: 'method'
+      str: 'device_uuid'
+      str: 'account_country_code'
+      str: 'LPFavoriteSyncCoordinator'
+      str: 'force'
+      str: '[TIDAL] favorite sync on passive login failed: '
+
+  def LPTidalLoginManager.onDeviceChanged(self, params)  line 1250
+    names: isinstance, dict, get, getattr, LPGlobalUI, _shell_device_uuid, str, _shell_page, syncAccountFromDevice
+      str: '\n        处理设备切换通知。\n\n        :param params: 通知参数。\n        :return: None。\n        '
+      str: 'device'
+      str: 'currentDevice'
+      str: 'uuid'
+
+  def LPTidalLoginManager.deviceInfoUpdate(self, device, infoType, detail)  line 1270
+    names: isinstance, dict, get, source, getattr, LPGlobalUI, hasattr, deviceStreamServiceManager, accountForSource, logger, debug, str, bool, strip, syncAccountFromDevice
+      str: '\n        处理设备通用账号注册完成通知。\n\n        :param device: 触发通知的设备。\n        :param infoType: 通知类型。\n        :param detail: 通知详情。\n        :return: None。\n        '
+      str: 'accountRegister'
+      str: 'source'
+      str: 'currentDevice'
+      str: 'uuid'
+      str: 'deviceStreamServiceManager'
+      str: '[TIDAL][LoginState] deviceInfoUpdate accountRegister device=%s has_account=%s userId=%s has_token=%s'
+      str: 'userId'
+      str: 'token'
+      str: 'fetchIfMissing'

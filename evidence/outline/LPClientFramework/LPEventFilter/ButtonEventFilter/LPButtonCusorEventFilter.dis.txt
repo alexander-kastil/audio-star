@@ -1,0 +1,138 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/2/7 17:22\n@Auth ： Chris\n@File ：LPButtonCusorEventFilter.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Qt',))
+              8 IMPORT_NAME              1 (PyQt6.QtCore)
+             10 IMPORT_FROM              2 (Qt)
+             12 STORE_NAME               2 (Qt)
+             14 POP_TOP
+
+  9          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('QIcon',))
+             20 IMPORT_NAME              3 (PyQt6.QtGui)
+             22 IMPORT_FROM              4 (QIcon)
+             24 STORE_NAME               4 (QIcon)
+             26 POP_TOP
+
+ 10          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               4 (('QApplication', 'QPushButton'))
+             32 IMPORT_NAME              5 (PyQt6.QtWidgets)
+             34 IMPORT_FROM              6 (QApplication)
+             36 STORE_NAME               6 (QApplication)
+             38 IMPORT_FROM              7 (QPushButton)
+             40 STORE_NAME               7 (QPushButton)
+             42 POP_TOP
+
+ 12          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               5 (('LPSingleEventFilter',))
+             48 IMPORT_NAME              8 (LPClientFramework.LPEventFilter.LPSingleEventFilter)
+             50 IMPORT_FROM              9 (LPSingleEventFilter)
+             52 STORE_NAME               9 (LPSingleEventFilter)
+             54 POP_TOP
+
+ 15          56 LOAD_BUILD_CLASS
+             58 LOAD_CONST               6 (<code object LPButtonCursorEventFilter at 0x000001F3253C4870, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPButtonCusorEventFilter.py", line 15>)
+             60 LOAD_CONST               7 ('LPButtonCursorEventFilter')
+             62 MAKE_FUNCTION            0
+             64 LOAD_CONST               7 ('LPButtonCursorEventFilter')
+             66 LOAD_NAME                9 (LPSingleEventFilter)
+             68 CALL_FUNCTION            3
+             70 STORE_NAME              10 (LPButtonCursorEventFilter)
+             72 LOAD_CONST               8 (None)
+             74 RETURN_VALUE
+
+=== LPButtonCursorEventFilter ===
+ 15           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPButtonCursorEventFilter')
+              6 STORE_NAME               2 (__qualname__)
+
+ 17           8 LOAD_CLOSURE             0 (__class__)
+             10 BUILD_TUPLE              1
+             12 LOAD_CONST               1 (<code object __init__ at 0x000001F3253C4240, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPButtonCusorEventFilter.py", line 17>)
+             14 LOAD_CONST               2 ('LPButtonCursorEventFilter.__init__')
+             16 MAKE_FUNCTION            8 (closure)
+             18 STORE_NAME               3 (__init__)
+
+ 24          20 LOAD_CLOSURE             0 (__class__)
+             22 BUILD_TUPLE              1
+             24 LOAD_CONST               3 (<code object eventFilter at 0x000001F3253C4A80, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPButtonCusorEventFilter.py", line 24>)
+             26 LOAD_CONST               4 ('LPButtonCursorEventFilter.eventFilter')
+             28 MAKE_FUNCTION            8 (closure)
+             30 STORE_NAME               4 (eventFilter)
+             32 LOAD_CLOSURE             0 (__class__)
+             34 DUP_TOP
+             36 STORE_NAME               5 (__classcell__)
+             38 RETURN_VALUE
+
+=== LPButtonCursorEventFilter.__init__ ===
+ 18           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (button)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 20          12 LOAD_FAST                1 (button)
+             14 LOAD_METHOD              2 (setIcon)
+             16 LOAD_GLOBAL              3 (QIcon)
+             18 LOAD_FAST                2 (image)
+             20 CALL_FUNCTION            1
+             22 CALL_METHOD              1
+             24 POP_TOP
+             26 LOAD_CONST               0 (None)
+             28 RETURN_VALUE
+
+=== LPButtonCursorEventFilter.eventFilter ===
+ 25           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (obj)
+              4 LOAD_GLOBAL              1 (QPushButton)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       74
+
+ 26          10 LOAD_FAST                2 (event)
+             12 LOAD_METHOD              2 (type)
+             14 CALL_METHOD              0
+             16 LOAD_FAST                2 (event)
+             18 LOAD_ATTR                3 (Type)
+             20 LOAD_ATTR                4 (Enter)
+             22 COMPARE_OP               2 (==)
+             24 POP_JUMP_IF_FALSE       50
+             26 LOAD_FAST                1 (obj)
+             28 LOAD_METHOD              5 (isEnabled)
+             30 CALL_METHOD              0
+             32 POP_JUMP_IF_TRUE        50
+
+ 27          34 LOAD_GLOBAL              6 (QApplication)
+             36 LOAD_METHOD              7 (setOverrideCursor)
+             38 LOAD_GLOBAL              8 (Qt)
+             40 LOAD_ATTR                9 (CursorShape)
+             42 LOAD_ATTR               10 (ForbiddenCursor)
+             44 CALL_METHOD              1
+             46 POP_TOP
+             48 JUMP_FORWARD            24 (to 74)
+
+ 28     >>   50 LOAD_FAST                2 (event)
+             52 LOAD_METHOD              2 (type)
+             54 CALL_METHOD              0
+             56 LOAD_FAST                2 (event)
+             58 LOAD_ATTR                3 (Type)
+             60 LOAD_ATTR               11 (Leave)
+             62 COMPARE_OP               2 (==)
+             64 POP_JUMP_IF_FALSE       74
+
+ 29          66 LOAD_GLOBAL              6 (QApplication)
+             68 LOAD_METHOD             12 (restoreOverrideCursor)
+             70 CALL_METHOD              0
+             72 POP_TOP
+
+ 30     >>   74 LOAD_GLOBAL             13 (super)
+             76 CALL_FUNCTION            0
+             78 LOAD_METHOD             14 (eventFilter)
+             80 LOAD_FAST                1 (obj)
+             82 LOAD_FAST                2 (event)
+             84 CALL_METHOD              2
+             86 RETURN_VALUE

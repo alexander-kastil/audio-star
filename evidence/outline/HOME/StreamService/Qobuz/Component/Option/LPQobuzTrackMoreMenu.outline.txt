@@ -1,0 +1,102 @@
+# module HOME.StreamService.Qobuz.Component.Option.LPQobuzTrackMoreMenu
+
+[module] names: __doc__, PyQt6.QtCore, Qt, pyqtSignal, QCoreApplication, pyqtSlot, PyQt6.QtGui, QIcon, PyQt6.QtWidgets, QMenu, QDialog, LPGlobalUI, HOME.StreamService.Qobuz.Util, LPQobuzUtil, LPClientFramework.LPMSManager.Qobuz.LPQobuzManager, LPQobuzManager, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPPublicDefine, LPMSCommonOption, LPClientFramework.LPUtility, logger, Option_Add_To_Playlist, Option_View_Artist, Option_View_Album, QobuzSupportedCommonOption, LPQobuzTrackMoreMenu
+  str: '\n@Time ： 2025/7/24 18:21\n@Auth ： Chris\n@File ：LPQobuzTrackMoreMenu.py\n@Desc:\n'
+  str: 'Qt'
+  str: 'pyqtSignal'
+  str: 'QCoreApplication'
+  str: 'pyqtSlot'
+  str: 'QIcon'
+  str: 'QMenu'
+  str: 'QDialog'
+  str: 'LPQobuzUtil'
+  str: 'LPQobuzManager'
+  str: 'LPPlayListSource'
+  str: 'LPMSCommonOption'
+  str: 'logger'
+  str: 'LPQobuzTrackMoreMenu'
+
+def LPQobuzTrackMoreMenu()  line 28
+  names: __name__, __module__, __qualname__, pyqtSignal, noOptionSignal, object, removeFromPlaylistSignal, __init__, setupUI, buildActions, _onNoOption, showMenu, pyqtSlot, addToPlaylist, removeFromPlaylist, viewArtist, viewAlbum, _canArtistCallback, _addPlaylistCallback, _albumCallback, __classcell__
+    str: 'LPQobuzTrackMoreMenu'
+    str: 'LPQobuzTrackMoreMenu.__init__'
+    str: 'LPQobuzTrackMoreMenu.setupUI'
+    str: 'LPQobuzTrackMoreMenu.buildActions'
+    str: 'LPQobuzTrackMoreMenu._onNoOption'
+    str: 'LPQobuzTrackMoreMenu.showMenu'
+    str: 'LPQobuzTrackMoreMenu.addToPlaylist'
+    str: 'LPQobuzTrackMoreMenu.removeFromPlaylist'
+    str: 'LPQobuzTrackMoreMenu.viewArtist'
+    str: 'LPQobuzTrackMoreMenu.viewAlbum'
+    str: 'LPQobuzTrackMoreMenu._canArtistCallback'
+    str: 'LPQobuzTrackMoreMenu._addPlaylistCallback'
+    str: 'LPQobuzTrackMoreMenu._albumCallback'
+
+  def LPQobuzTrackMoreMenu.__init__(self, playItem, parentPlayItem, parent)  line 34
+    names: super, __init__, parent, LPPlayListSource, Qobuz, value, source, playItem, header, LPQobuzManager, instance, qobuz
+
+  def LPQobuzTrackMoreMenu.setupUI(self)  line 46
+    names: setWindowFlags, Qt, WindowType, Popup, FramelessWindowHint, NoDropShadowWindowHint, setAttribute, WidgetAttribute, WA_TranslucentBackground, noOptionSignal, connect, _onNoOption, setStyleSheet, LPGlobalUI, THEME_TABLE_HOVER_BACK_COLOR, name, THEME_TABLE_HIGHLIGHT_BACK_COLOR, THEME_DISABLE_COLOR
+      str: '\n            QMenu{\n                border-radius: 3px;\n                background-color: %s;\n                color: rgb(255, 255, 255);\n                font: 14px;\n                min-width: 150px;               \n            }\n            QMenu::item{\n                border-radius: 3px;\n           '
+
+  def LPQobuzTrackMoreMenu.buildActions(self, device)  line 98
+    names: deviceStreamServiceManager, streamServiceForSource, source, streamService, LPTrackMoreViewControllerCanViewArtist, header, playItem, _canArtistCallback, QCoreApplication, translate, LPMSCommonOption, Option_View_Artist, value, QIcon, LPGlobalUI, imagePath, addAction, viewArtistAction, triggered, connect, viewArtist, LPTrackMoreViewControllerCanViewAlbum, _albumCallback, Option_View_Album, viewAlbumAction, viewAlbum, LPTrackMoreViewControllerCanAddToPlaylist, Option_Add_To_Playlist, addToPlaylistAction, addToPlaylist, LPTrackMoreViewControllerCanRemoveFromPlaylist, qobuz, loginMgr, account, Option_Remove_From_Playlist, removeFromPlaylistAction, removeFromPlaylist
+      str: 'TrackMore'
+      str: 'lib/mymusic_artist.png'
+      str: 'lib/mymusic_album.png'
+      str: 'icon_playlist.png'
+      str: 'icon_remove.png'
+
+  def LPQobuzTrackMoreMenu._onNoOption(self)  line 143
+    names: logger, debug, QCoreApplication, translate, addAction
+      str: '_onNoOption'
+      str: 'TrackMore'
+      str: 'No More Options'
+
+  def LPQobuzTrackMoreMenu.showMenu(self, pos)  line 149
+    names: buildActions, LPGlobalUI, currentDevice, actions, noOptionSignal, emit, popup
+
+  def LPQobuzTrackMoreMenu.addToPlaylist(self)  line 158
+    names: streamService, LPTrackMoreViewControllerAddToPlaylist, header, playItem
+      str: 'LPQobuzTrackMoreMenu.addToPlaylist.<locals>._viewCallback'
+
+    def LPQobuzTrackMoreMenu.addToPlaylist._viewCallback(viewController)  line 160
+      names: isinstance, QDialog, exec
+
+  def LPQobuzTrackMoreMenu.removeFromPlaylist(self)  line 170
+    names: streamService, LPTrackMoreViewControllerRemoveFromPlaylist, header, playItem, parent
+      str: 'LPQobuzTrackMoreMenu.removeFromPlaylist.<locals>._viewCallback'
+
+    def LPQobuzTrackMoreMenu.removeFromPlaylist._viewCallback(viewController)  line 172
+      names: removeFromPlaylistSignal, emit, playItem
+
+  def LPQobuzTrackMoreMenu.viewArtist(self)  line 184
+    names: streamService, LPTrackMoreViewControllerViewArtist, header, playItem
+      str: 'LPQobuzTrackMoreMenu.viewArtist.<locals>._viewCallback'
+
+    def LPQobuzTrackMoreMenu.viewArtist._viewCallback(viewController)  line 186
+      names: type, LPGlobalUI, getTopWidget, navigationManager, pop, push, streamService, detailNavigationItemId
+        str: 'artist'
+
+  def LPQobuzTrackMoreMenu.viewAlbum(self)  line 194
+    names: streamService, LPTrackMoreViewControllerViewAlbum, header, playItem
+      str: 'LPQobuzTrackMoreMenu.viewAlbum.<locals>._viewCallback'
+
+    def LPQobuzTrackMoreMenu.viewAlbum._viewCallback(viewController)  line 196
+      names: type, LPGlobalUI, getTopWidget, navigationManager, pop, push, streamService, detailNavigationItemId
+        str: 'album'
+
+  def LPQobuzTrackMoreMenu._canArtistCallback(self, canView, item)  line 204
+    names: logger, debug, playItem, trackId
+      str: 'qobuz track --> '
+      str: ' can not view artist'
+
+  def LPQobuzTrackMoreMenu._addPlaylistCallback(self, canView, item)  line 208
+    names: logger, debug, playItem, trackId
+      str: 'qobuz track --> '
+      str: ' can not add to playlist'
+
+  def LPQobuzTrackMoreMenu._albumCallback(self, canView, item)  line 212
+    names: logger, debug, playItem, trackId
+      str: 'qobuz track --> '
+      str: ' can not view album'

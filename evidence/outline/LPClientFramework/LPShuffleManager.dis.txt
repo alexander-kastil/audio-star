@@ -1,0 +1,761 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/7/21 11:37\n@Auth ： Chris\n@File ：LPShuffleManager.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('QIcon',))
+              8 IMPORT_NAME              1 (PyQt6.QtGui)
+             10 IMPORT_FROM              2 (QIcon)
+             12 STORE_NAME               2 (QIcon)
+             14 POP_TOP
+
+ 10          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (None)
+             20 IMPORT_NAME              3 (LPGlobalUI)
+             22 STORE_NAME               3 (LPGlobalUI)
+
+ 11          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('LPUtility',))
+             28 IMPORT_NAME              4 (LPClientFramework)
+             30 IMPORT_FROM              5 (LPUtility)
+             32 STORE_NAME               5 (LPUtility)
+             34 POP_TOP
+
+ 12          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               5 (('LPButtonEventFilter',))
+             40 IMPORT_NAME              6 (LPClientFramework.LPEventFilter.ButtonEventFilter.LPButtonEventFilter)
+             42 IMPORT_FROM              7 (LPButtonEventFilter)
+             44 STORE_NAME               7 (LPButtonEventFilter)
+             46 POP_TOP
+
+ 13          48 LOAD_CONST               1 (0)
+             50 LOAD_CONST               6 (('LPLoopMode',))
+             52 IMPORT_NAME              8 (LPClientFramework.LPMediaInfo)
+             54 IMPORT_FROM              9 (LPLoopMode)
+             56 STORE_NAME               9 (LPLoopMode)
+             58 POP_TOP
+
+ 16          60 LOAD_BUILD_CLASS
+             62 LOAD_CONST               7 (<code object LPShuffleManager at 0x000001F3253CEB30, file "LPClientFramework\LPShuffleManager.py", line 16>)
+             64 LOAD_CONST               8 ('LPShuffleManager')
+             66 MAKE_FUNCTION            0
+             68 LOAD_CONST               8 ('LPShuffleManager')
+             70 CALL_FUNCTION            2
+             72 STORE_NAME              10 (LPShuffleManager)
+             74 LOAD_CONST               3 (None)
+             76 RETURN_VALUE
+
+=== LPShuffleManager ===
+ 16           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPShuffleManager')
+              6 STORE_NAME               2 (__qualname__)
+
+ 18           8 LOAD_NAME                3 (staticmethod)
+
+ 19          10 LOAD_CONST               1 (<code object setShuffle at 0x000001F3253A2DF0, file "LPClientFramework\LPShuffleManager.py", line 18>)
+             12 LOAD_CONST               2 ('LPShuffleManager.setShuffle')
+             14 MAKE_FUNCTION            0
+             16 CALL_FUNCTION            1
+             18 STORE_NAME               4 (setShuffle)
+
+ 40          20 LOAD_NAME                3 (staticmethod)
+
+ 41          22 LOAD_CONST               3 (<code object setNoShuffle at 0x000001F3253CE0E0, file "LPClientFramework\LPShuffleManager.py", line 40>)
+             24 LOAD_CONST               4 ('LPShuffleManager.setNoShuffle')
+             26 MAKE_FUNCTION            0
+             28 CALL_FUNCTION            1
+             30 STORE_NAME               5 (setNoShuffle)
+
+ 60          32 LOAD_NAME                3 (staticmethod)
+
+ 61          34 LOAD_CONST               5 (<code object updateLoopShuffleButton at 0x000001F3253CE2F0, file "LPClientFramework\LPShuffleManager.py", line 60>)
+             36 LOAD_CONST               6 ('LPShuffleManager.updateLoopShuffleButton')
+             38 MAKE_FUNCTION            0
+             40 CALL_FUNCTION            1
+             42 STORE_NAME               6 (updateLoopShuffleButton)
+
+125          44 LOAD_NAME                3 (staticmethod)
+
+126          46 LOAD_CONST               7 (<code object nextShuffleMode at 0x000001F3253CED40, file "LPClientFramework\LPShuffleManager.py", line 125>)
+             48 LOAD_CONST               8 ('LPShuffleManager.nextShuffleMode')
+             50 MAKE_FUNCTION            0
+             52 CALL_FUNCTION            1
+             54 STORE_NAME               7 (nextShuffleMode)
+
+147          56 LOAD_NAME                3 (staticmethod)
+
+148          58 LOAD_CONST               9 (<code object nextLoopMode at 0x000001F3253CEDF0, file "LPClientFramework\LPShuffleManager.py", line 147>)
+             60 LOAD_CONST              10 ('LPShuffleManager.nextLoopMode')
+             62 MAKE_FUNCTION            0
+             64 CALL_FUNCTION            1
+             66 STORE_NAME               8 (nextLoopMode)
+             68 LOAD_CONST              11 (None)
+             70 RETURN_VALUE
+
+=== LPShuffleManager.setShuffle ===
+ 20           0 LOAD_CLOSURE             0 (nextMode)
+              2 BUILD_TUPLE              1
+              4 LOAD_CONST               1 (<code object callback at 0x000001F3253A2B30, file "LPClientFramework\LPShuffleManager.py", line 20>)
+              6 LOAD_CONST               2 ('LPShuffleManager.setShuffle.<locals>.callback')
+              8 MAKE_FUNCTION            8 (closure)
+             10 STORE_FAST               0 (callback)
+
+ 26          12 LOAD_GLOBAL              0 (LPGlobalUI)
+             14 LOAD_ATTR                1 (currentDevice)
+             16 LOAD_ATTR                2 (mediaInfo)
+             18 LOAD_ATTR                3 (loopMode)
+             20 STORE_FAST               1 (currentMode)
+
+ 27          22 LOAD_GLOBAL              4 (LPLoopMode)
+             24 LOAD_ATTR                5 (shuffle)
+             26 STORE_DEREF              0 (nextMode)
+
+ 28          28 LOAD_FAST                1 (currentMode)
+             30 LOAD_GLOBAL              4 (LPLoopMode)
+             32 LOAD_ATTR                6 (singlerepeat)
+             34 COMPARE_OP               2 (==)
+             36 POP_JUMP_IF_FALSE       46
+
+ 29          38 LOAD_GLOBAL              4 (LPLoopMode)
+             40 LOAD_ATTR                7 (singlerepeatshuffle)
+             42 STORE_DEREF              0 (nextMode)
+             44 JUMP_FORWARD            42 (to 88)
+
+ 30     >>   46 LOAD_FAST                1 (currentMode)
+             48 LOAD_GLOBAL              4 (LPLoopMode)
+             50 LOAD_ATTR                8 (listrepeat)
+             52 COMPARE_OP               2 (==)
+             54 POP_JUMP_IF_FALSE       64
+
+ 31          56 LOAD_GLOBAL              4 (LPLoopMode)
+             58 LOAD_ATTR                9 (repeatshuffle)
+             60 STORE_DEREF              0 (nextMode)
+             62 JUMP_FORWARD            24 (to 88)
+
+ 32     >>   64 LOAD_FAST                1 (currentMode)
+             66 LOAD_GLOBAL              4 (LPLoopMode)
+             68 LOAD_ATTR                5 (shuffle)
+             70 LOAD_GLOBAL              4 (LPLoopMode)
+             72 LOAD_ATTR                9 (repeatshuffle)
+             74 LOAD_GLOBAL              4 (LPLoopMode)
+             76 LOAD_ATTR                7 (singlerepeatshuffle)
+             78 BUILD_TUPLE              3
+             80 CONTAINS_OP              0
+             82 POP_JUMP_IF_FALSE       88
+
+ 33          84 LOAD_CONST               0 (None)
+             86 RETURN_VALUE
+
+ 35     >>   88 LOAD_GLOBAL              0 (LPGlobalUI)
+             90 LOAD_ATTR                1 (currentDevice)
+             92 LOAD_METHOD             10 (updateMediaInfo)
+             94 LOAD_CONST               3 ('loopMode')
+             96 LOAD_GLOBAL             11 (int)
+             98 LOAD_DEREF               0 (nextMode)
+            100 CALL_FUNCTION            1
+            102 BUILD_MAP                1
+            104 CALL_METHOD              1
+            106 POP_TOP
+
+ 36         108 LOAD_GLOBAL              0 (LPGlobalUI)
+            110 LOAD_ATTR                1 (currentDevice)
+            112 LOAD_ATTR               12 (asyncUpnpPost)
+            114 LOAD_CONST               4 ('SetQueueLoopMode')
+            116 LOAD_CONST               5 ('LoopMode')
+            118 LOAD_GLOBAL             11 (int)
+            120 LOAD_DEREF               0 (nextMode)
+            122 CALL_FUNCTION            1
+            124 BUILD_MAP                1
+            126 LOAD_FAST                0 (callback)
+            128 LOAD_CONST               6 (('callbackMethod',))
+            130 CALL_FUNCTION_KW         3
+            132 POP_TOP
+            134 LOAD_CONST               0 (None)
+            136 RETURN_VALUE
+
+=== LPShuffleManager.setShuffle.callback ===
+ 21           0 LOAD_GLOBAL              0 (LPGlobalUI)
+              2 LOAD_ATTR                1 (currentDevice)
+              4 LOAD_METHOD              2 (updateMediaInfo)
+              6 LOAD_CONST               1 ('loopMode')
+              8 LOAD_GLOBAL              3 (int)
+             10 LOAD_DEREF               0 (nextMode)
+             12 CALL_FUNCTION            1
+             14 BUILD_MAP                1
+             16 CALL_METHOD              1
+             18 POP_TOP
+             20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+=== LPShuffleManager.setNoShuffle ===
+ 42           0 LOAD_CLOSURE             0 (nextMode)
+              2 BUILD_TUPLE              1
+              4 LOAD_CONST               1 (<code object callback at 0x000001F3253A2BE0, file "LPClientFramework\LPShuffleManager.py", line 42>)
+              6 LOAD_CONST               2 ('LPShuffleManager.setNoShuffle.<locals>.callback')
+              8 MAKE_FUNCTION            8 (closure)
+             10 STORE_FAST               0 (callback)
+
+ 48          12 LOAD_GLOBAL              0 (LPGlobalUI)
+             14 LOAD_ATTR                1 (currentDevice)
+             16 LOAD_ATTR                2 (mediaInfo)
+             18 LOAD_ATTR                3 (loopMode)
+             20 STORE_FAST               1 (currentMode)
+
+ 49          22 LOAD_GLOBAL              4 (LPLoopMode)
+             24 LOAD_ATTR                5 (default)
+             26 STORE_DEREF              0 (nextMode)
+
+ 50          28 LOAD_FAST                1 (currentMode)
+             30 LOAD_GLOBAL              4 (LPLoopMode)
+             32 LOAD_ATTR                6 (singlerepeatshuffle)
+             34 COMPARE_OP               2 (==)
+             36 POP_JUMP_IF_FALSE       46
+
+ 51          38 LOAD_GLOBAL              4 (LPLoopMode)
+             40 LOAD_ATTR                7 (singlerepeat)
+             42 STORE_DEREF              0 (nextMode)
+             44 JUMP_FORWARD            42 (to 88)
+
+ 52     >>   46 LOAD_FAST                1 (currentMode)
+             48 LOAD_GLOBAL              4 (LPLoopMode)
+             50 LOAD_ATTR                8 (repeatshuffle)
+             52 COMPARE_OP               2 (==)
+             54 POP_JUMP_IF_FALSE       64
+
+ 53          56 LOAD_GLOBAL              4 (LPLoopMode)
+             58 LOAD_ATTR                9 (listrepeat)
+             60 STORE_DEREF              0 (nextMode)
+             62 JUMP_FORWARD            24 (to 88)
+
+ 54     >>   64 LOAD_FAST                1 (currentMode)
+             66 LOAD_GLOBAL              4 (LPLoopMode)
+             68 LOAD_ATTR                5 (default)
+             70 LOAD_GLOBAL              4 (LPLoopMode)
+             72 LOAD_ATTR                7 (singlerepeat)
+             74 LOAD_GLOBAL              4 (LPLoopMode)
+             76 LOAD_ATTR                9 (listrepeat)
+             78 BUILD_TUPLE              3
+             80 CONTAINS_OP              0
+             82 POP_JUMP_IF_FALSE       88
+
+ 55          84 LOAD_CONST               0 (None)
+             86 RETURN_VALUE
+
+ 57     >>   88 LOAD_GLOBAL              0 (LPGlobalUI)
+             90 LOAD_ATTR                1 (currentDevice)
+             92 LOAD_METHOD             10 (updateMediaInfo)
+             94 LOAD_CONST               3 ('loopMode')
+             96 LOAD_GLOBAL             11 (int)
+             98 LOAD_DEREF               0 (nextMode)
+            100 CALL_FUNCTION            1
+            102 BUILD_MAP                1
+            104 CALL_METHOD              1
+            106 POP_TOP
+
+ 58         108 LOAD_GLOBAL              0 (LPGlobalUI)
+            110 LOAD_ATTR                1 (currentDevice)
+            112 LOAD_ATTR               12 (asyncUpnpPost)
+            114 LOAD_CONST               4 ('SetQueueLoopMode')
+            116 LOAD_CONST               5 ('LoopMode')
+            118 LOAD_GLOBAL             11 (int)
+            120 LOAD_DEREF               0 (nextMode)
+            122 CALL_FUNCTION            1
+            124 BUILD_MAP                1
+            126 LOAD_FAST                0 (callback)
+            128 LOAD_CONST               6 (('callbackMethod',))
+            130 CALL_FUNCTION_KW         3
+            132 POP_TOP
+            134 LOAD_CONST               0 (None)
+            136 RETURN_VALUE
+
+=== LPShuffleManager.setNoShuffle.callback ===
+ 43           0 LOAD_GLOBAL              0 (LPGlobalUI)
+              2 LOAD_ATTR                1 (currentDevice)
+              4 LOAD_METHOD              2 (updateMediaInfo)
+              6 LOAD_CONST               1 ('loopMode')
+              8 LOAD_GLOBAL              3 (int)
+             10 LOAD_DEREF               0 (nextMode)
+             12 CALL_FUNCTION            1
+             14 BUILD_MAP                1
+             16 CALL_METHOD              1
+             18 POP_TOP
+             20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+=== LPShuffleManager.updateLoopShuffleButton ===
+ 62           0 LOAD_CONST               1 ('miniBar/repeat.png')
+              2 STORE_FAST               3 (loopImage)
+
+ 63           4 LOAD_CONST               2 ('miniBar/shuffle.png')
+              6 STORE_FAST               4 (shuffleImage)
+
+ 64           8 LOAD_GLOBAL              0 (LPGlobalUI)
+             10 LOAD_ATTR                1 (THEME_LIGHT_COLOR)
+             12 STORE_FAST               5 (shuffleTint)
+
+ 65          14 LOAD_GLOBAL              0 (LPGlobalUI)
+             16 LOAD_ATTR                1 (THEME_LIGHT_COLOR)
+             18 STORE_FAST               6 (loopTint)
+
+ 67          20 LOAD_FAST                0 (device)
+             22 LOAD_CONST               0 (None)
+             24 IS_OP                    0
+             26 POP_JUMP_IF_FALSE      136
+
+ 68          28 LOAD_GLOBAL              2 (LPUtility)
+             30 LOAD_METHOD              3 (tintImage)
+             32 LOAD_GLOBAL              0 (LPGlobalUI)
+             34 LOAD_METHOD              4 (imagePath)
+             36 LOAD_FAST                3 (loopImage)
+             38 CALL_METHOD              1
+             40 LOAD_FAST                6 (loopTint)
+             42 CALL_METHOD              2
+             44 STORE_FAST               7 (tintImage)
+
+ 69          46 LOAD_GLOBAL              5 (LPButtonEventFilter)
+             48 LOAD_FAST                1 (loopButton)
+             50 LOAD_GLOBAL              6 (QIcon)
+             52 LOAD_FAST                7 (tintImage)
+             54 CALL_FUNCTION            1
+
+ 70          56 LOAD_GLOBAL              6 (QIcon)
+             58 LOAD_GLOBAL              0 (LPGlobalUI)
+             60 LOAD_METHOD              4 (imagePath)
+             62 LOAD_FAST                3 (loopImage)
+             64 CALL_METHOD              1
+             66 CALL_FUNCTION            1
+
+ 71          68 LOAD_GLOBAL              6 (QIcon)
+             70 LOAD_FAST                7 (tintImage)
+             72 CALL_FUNCTION            1
+             74 LOAD_CONST               3 ('image')
+
+ 69          76 CALL_FUNCTION            5
+             78 POP_TOP
+
+ 73          80 LOAD_GLOBAL              2 (LPUtility)
+             82 LOAD_METHOD              3 (tintImage)
+             84 LOAD_GLOBAL              0 (LPGlobalUI)
+             86 LOAD_METHOD              4 (imagePath)
+             88 LOAD_FAST                4 (shuffleImage)
+             90 CALL_METHOD              1
+             92 LOAD_FAST                5 (shuffleTint)
+             94 CALL_METHOD              2
+             96 STORE_FAST               7 (tintImage)
+
+ 74          98 LOAD_GLOBAL              5 (LPButtonEventFilter)
+            100 LOAD_FAST                2 (shuffleButton)
+            102 LOAD_GLOBAL              6 (QIcon)
+            104 LOAD_FAST                7 (tintImage)
+            106 CALL_FUNCTION            1
+
+ 75         108 LOAD_GLOBAL              6 (QIcon)
+            110 LOAD_GLOBAL              0 (LPGlobalUI)
+            112 LOAD_METHOD              4 (imagePath)
+            114 LOAD_FAST                4 (shuffleImage)
+            116 CALL_METHOD              1
+            118 CALL_FUNCTION            1
+
+ 76         120 LOAD_GLOBAL              6 (QIcon)
+            122 LOAD_FAST                7 (tintImage)
+            124 CALL_FUNCTION            1
+            126 LOAD_CONST               3 ('image')
+
+ 74         128 CALL_FUNCTION            5
+            130 POP_TOP
+
+ 78         132 LOAD_CONST               0 (None)
+            134 RETURN_VALUE
+
+ 80     >>  136 LOAD_FAST                0 (device)
+            138 LOAD_ATTR                7 (mediaInfo)
+            140 LOAD_ATTR                8 (loopMode)
+            142 STORE_FAST               8 (loopMode)
+
+ 82         144 LOAD_FAST                8 (loopMode)
+            146 LOAD_GLOBAL              9 (LPLoopMode)
+            148 LOAD_ATTR               10 (singlerepeat)
+            150 COMPARE_OP               2 (==)
+            152 POP_JUMP_IF_TRUE       164
+            154 LOAD_FAST                8 (loopMode)
+            156 LOAD_GLOBAL              9 (LPLoopMode)
+            158 LOAD_ATTR               11 (singlerepeatshuffle)
+            160 COMPARE_OP               2 (==)
+            162 POP_JUMP_IF_FALSE      168
+
+ 83     >>  164 LOAD_CONST               4 ('miniBar/singlerepeat.png')
+            166 STORE_FAST               3 (loopImage)
+
+ 85     >>  168 LOAD_FAST                8 (loopMode)
+            170 LOAD_GLOBAL              9 (LPLoopMode)
+            172 LOAD_ATTR               12 (listrepeat)
+            174 COMPARE_OP               2 (==)
+            176 POP_JUMP_IF_FALSE      192
+
+ 86         178 LOAD_GLOBAL              0 (LPGlobalUI)
+            180 LOAD_ATTR                1 (THEME_LIGHT_COLOR)
+            182 STORE_FAST               5 (shuffleTint)
+
+ 87         184 LOAD_GLOBAL              0 (LPGlobalUI)
+            186 LOAD_ATTR               13 (THEME_HIGH_COLOR)
+            188 STORE_FAST               6 (loopTint)
+            190 JUMP_FORWARD           130 (to 322)
+
+ 88     >>  192 LOAD_FAST                8 (loopMode)
+            194 LOAD_GLOBAL              9 (LPLoopMode)
+            196 LOAD_ATTR               10 (singlerepeat)
+            198 COMPARE_OP               2 (==)
+            200 POP_JUMP_IF_FALSE      216
+
+ 89         202 LOAD_GLOBAL              0 (LPGlobalUI)
+            204 LOAD_ATTR                1 (THEME_LIGHT_COLOR)
+            206 STORE_FAST               5 (shuffleTint)
+
+ 90         208 LOAD_GLOBAL              0 (LPGlobalUI)
+            210 LOAD_ATTR               13 (THEME_HIGH_COLOR)
+            212 STORE_FAST               6 (loopTint)
+            214 JUMP_FORWARD           106 (to 322)
+
+ 91     >>  216 LOAD_FAST                8 (loopMode)
+            218 LOAD_GLOBAL              9 (LPLoopMode)
+            220 LOAD_ATTR               14 (shuffle)
+            222 COMPARE_OP               2 (==)
+            224 POP_JUMP_IF_FALSE      240
+
+ 92         226 LOAD_GLOBAL              0 (LPGlobalUI)
+            228 LOAD_ATTR               13 (THEME_HIGH_COLOR)
+            230 STORE_FAST               5 (shuffleTint)
+
+ 93         232 LOAD_GLOBAL              0 (LPGlobalUI)
+            234 LOAD_ATTR                1 (THEME_LIGHT_COLOR)
+            236 STORE_FAST               6 (loopTint)
+            238 JUMP_FORWARD            82 (to 322)
+
+ 94     >>  240 LOAD_FAST                8 (loopMode)
+            242 LOAD_GLOBAL              9 (LPLoopMode)
+            244 LOAD_ATTR               15 (repeatshuffle)
+            246 COMPARE_OP               2 (==)
+            248 EXTENDED_ARG             1
+            250 POP_JUMP_IF_FALSE      264
+
+ 95         252 LOAD_GLOBAL              0 (LPGlobalUI)
+            254 LOAD_ATTR               13 (THEME_HIGH_COLOR)
+            256 DUP_TOP
+            258 STORE_FAST               6 (loopTint)
+            260 STORE_FAST               5 (shuffleTint)
+            262 JUMP_FORWARD            58 (to 322)
+
+ 96     >>  264 LOAD_FAST                8 (loopMode)
+            266 LOAD_GLOBAL              9 (LPLoopMode)
+            268 LOAD_ATTR               16 (default)
+            270 COMPARE_OP               2 (==)
+            272 EXTENDED_ARG             1
+            274 POP_JUMP_IF_FALSE      288
+
+ 97         276 LOAD_GLOBAL              0 (LPGlobalUI)
+            278 LOAD_ATTR                1 (THEME_LIGHT_COLOR)
+            280 DUP_TOP
+            282 STORE_FAST               6 (loopTint)
+            284 STORE_FAST               5 (shuffleTint)
+            286 JUMP_FORWARD            34 (to 322)
+
+ 98     >>  288 LOAD_FAST                8 (loopMode)
+            290 LOAD_GLOBAL              9 (LPLoopMode)
+            292 LOAD_ATTR               11 (singlerepeatshuffle)
+            294 COMPARE_OP               2 (==)
+            296 EXTENDED_ARG             1
+            298 POP_JUMP_IF_FALSE      312
+
+ 99         300 LOAD_GLOBAL              0 (LPGlobalUI)
+            302 LOAD_ATTR               13 (THEME_HIGH_COLOR)
+            304 DUP_TOP
+            306 STORE_FAST               6 (loopTint)
+            308 STORE_FAST               5 (shuffleTint)
+            310 JUMP_FORWARD            10 (to 322)
+
+101     >>  312 LOAD_GLOBAL              0 (LPGlobalUI)
+            314 LOAD_ATTR                1 (THEME_LIGHT_COLOR)
+            316 DUP_TOP
+            318 STORE_FAST               6 (loopTint)
+            320 STORE_FAST               5 (shuffleTint)
+
+103     >>  322 LOAD_GLOBAL              2 (LPUtility)
+            324 LOAD_METHOD              3 (tintImage)
+            326 LOAD_GLOBAL              0 (LPGlobalUI)
+            328 LOAD_METHOD              4 (imagePath)
+            330 LOAD_FAST                3 (loopImage)
+            332 CALL_METHOD              1
+            334 LOAD_FAST                6 (loopTint)
+            336 CALL_METHOD              2
+            338 STORE_FAST               7 (tintImage)
+
+105         340 LOAD_CONST               0 (None)
+            342 STORE_FAST               9 (hoverImage)
+
+106         344 LOAD_FAST                6 (loopTint)
+            346 LOAD_GLOBAL              0 (LPGlobalUI)
+            348 LOAD_ATTR               13 (THEME_HIGH_COLOR)
+            350 COMPARE_OP               2 (==)
+            352 EXTENDED_ARG             1
+            354 POP_JUMP_IF_FALSE      378
+
+107         356 LOAD_GLOBAL              2 (LPUtility)
+            358 LOAD_METHOD              3 (tintImage)
+            360 LOAD_GLOBAL              0 (LPGlobalUI)
+            362 LOAD_METHOD              4 (imagePath)
+            364 LOAD_FAST                3 (loopImage)
+            366 CALL_METHOD              1
+            368 LOAD_GLOBAL              0 (LPGlobalUI)
+            370 LOAD_ATTR               17 (THEME_HIGH_HIGH_COLOR)
+            372 CALL_METHOD              2
+            374 STORE_FAST               9 (hoverImage)
+            376 JUMP_FORWARD            10 (to 388)
+
+109     >>  378 LOAD_GLOBAL              0 (LPGlobalUI)
+            380 LOAD_METHOD              4 (imagePath)
+            382 LOAD_FAST                3 (loopImage)
+            384 CALL_METHOD              1
+            386 STORE_FAST               9 (hoverImage)
+
+111     >>  388 LOAD_GLOBAL              5 (LPButtonEventFilter)
+            390 LOAD_FAST                1 (loopButton)
+            392 LOAD_GLOBAL              6 (QIcon)
+            394 LOAD_FAST                7 (tintImage)
+            396 CALL_FUNCTION            1
+
+112         398 LOAD_GLOBAL              6 (QIcon)
+            400 LOAD_FAST                9 (hoverImage)
+            402 CALL_FUNCTION            1
+
+113         404 LOAD_GLOBAL              6 (QIcon)
+            406 LOAD_FAST                9 (hoverImage)
+            408 CALL_FUNCTION            1
+            410 LOAD_CONST               3 ('image')
+
+111         412 CALL_FUNCTION            5
+            414 POP_TOP
+
+115         416 LOAD_FAST                5 (shuffleTint)
+            418 LOAD_GLOBAL              0 (LPGlobalUI)
+            420 LOAD_ATTR               13 (THEME_HIGH_COLOR)
+            422 COMPARE_OP               2 (==)
+            424 EXTENDED_ARG             1
+            426 POP_JUMP_IF_FALSE      450
+
+116         428 LOAD_GLOBAL              2 (LPUtility)
+            430 LOAD_METHOD              3 (tintImage)
+            432 LOAD_GLOBAL              0 (LPGlobalUI)
+            434 LOAD_METHOD              4 (imagePath)
+            436 LOAD_FAST                4 (shuffleImage)
+            438 CALL_METHOD              1
+            440 LOAD_GLOBAL              0 (LPGlobalUI)
+            442 LOAD_ATTR               17 (THEME_HIGH_HIGH_COLOR)
+            444 CALL_METHOD              2
+            446 STORE_FAST               9 (hoverImage)
+            448 JUMP_FORWARD            10 (to 460)
+
+118     >>  450 LOAD_GLOBAL              0 (LPGlobalUI)
+            452 LOAD_METHOD              4 (imagePath)
+            454 LOAD_FAST                4 (shuffleImage)
+            456 CALL_METHOD              1
+            458 STORE_FAST               9 (hoverImage)
+
+120     >>  460 LOAD_GLOBAL              2 (LPUtility)
+            462 LOAD_METHOD              3 (tintImage)
+            464 LOAD_GLOBAL              0 (LPGlobalUI)
+            466 LOAD_METHOD              4 (imagePath)
+            468 LOAD_FAST                4 (shuffleImage)
+            470 CALL_METHOD              1
+            472 LOAD_FAST                5 (shuffleTint)
+            474 CALL_METHOD              2
+            476 STORE_FAST               7 (tintImage)
+
+121         478 LOAD_GLOBAL              5 (LPButtonEventFilter)
+            480 LOAD_FAST                2 (shuffleButton)
+            482 LOAD_GLOBAL              6 (QIcon)
+            484 LOAD_FAST                7 (tintImage)
+            486 CALL_FUNCTION            1
+
+122         488 LOAD_GLOBAL              6 (QIcon)
+            490 LOAD_FAST                9 (hoverImage)
+            492 CALL_FUNCTION            1
+
+123         494 LOAD_GLOBAL              6 (QIcon)
+            496 LOAD_FAST                9 (hoverImage)
+            498 CALL_FUNCTION            1
+            500 LOAD_CONST               3 ('image')
+
+121         502 CALL_FUNCTION            5
+            504 POP_TOP
+            506 LOAD_CONST               0 (None)
+            508 RETURN_VALUE
+
+=== LPShuffleManager.nextShuffleMode ===
+127           0 LOAD_GLOBAL              0 (LPLoopMode)
+              2 LOAD_ATTR                1 (default)
+              4 STORE_FAST               0 (nextMode)
+
+129           6 LOAD_GLOBAL              2 (LPGlobalUI)
+              8 LOAD_ATTR                3 (currentDevice)
+             10 LOAD_ATTR                4 (mediaInfo)
+             12 LOAD_ATTR                5 (loopMode)
+             14 STORE_FAST               1 (currentMode)
+
+130          16 LOAD_FAST                1 (currentMode)
+             18 LOAD_GLOBAL              0 (LPLoopMode)
+             20 LOAD_ATTR                6 (singlerepeat)
+             22 COMPARE_OP               2 (==)
+             24 POP_JUMP_IF_FALSE       34
+
+131          26 LOAD_GLOBAL              0 (LPLoopMode)
+             28 LOAD_ATTR                7 (singlerepeatshuffle)
+             30 STORE_FAST               0 (nextMode)
+             32 JUMP_FORWARD            96 (to 130)
+
+132     >>   34 LOAD_FAST                1 (currentMode)
+             36 LOAD_GLOBAL              0 (LPLoopMode)
+             38 LOAD_ATTR                8 (listrepeat)
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       52
+
+133          44 LOAD_GLOBAL              0 (LPLoopMode)
+             46 LOAD_ATTR                9 (repeatshuffle)
+             48 STORE_FAST               0 (nextMode)
+             50 JUMP_FORWARD            78 (to 130)
+
+134     >>   52 LOAD_FAST                1 (currentMode)
+             54 LOAD_GLOBAL              0 (LPLoopMode)
+             56 LOAD_ATTR               10 (shuffle)
+             58 COMPARE_OP               2 (==)
+             60 POP_JUMP_IF_FALSE       70
+
+135          62 LOAD_GLOBAL              0 (LPLoopMode)
+             64 LOAD_ATTR                1 (default)
+             66 STORE_FAST               0 (nextMode)
+             68 JUMP_FORWARD            60 (to 130)
+
+136     >>   70 LOAD_FAST                1 (currentMode)
+             72 LOAD_GLOBAL              0 (LPLoopMode)
+             74 LOAD_ATTR                9 (repeatshuffle)
+             76 COMPARE_OP               2 (==)
+             78 POP_JUMP_IF_FALSE       88
+
+137          80 LOAD_GLOBAL              0 (LPLoopMode)
+             82 LOAD_ATTR                8 (listrepeat)
+             84 STORE_FAST               0 (nextMode)
+             86 JUMP_FORWARD            42 (to 130)
+
+138     >>   88 LOAD_FAST                1 (currentMode)
+             90 LOAD_GLOBAL              0 (LPLoopMode)
+             92 LOAD_ATTR                1 (default)
+             94 COMPARE_OP               2 (==)
+             96 POP_JUMP_IF_FALSE      106
+
+139          98 LOAD_GLOBAL              0 (LPLoopMode)
+            100 LOAD_ATTR               10 (shuffle)
+            102 STORE_FAST               0 (nextMode)
+            104 JUMP_FORWARD            24 (to 130)
+
+140     >>  106 LOAD_FAST                1 (currentMode)
+            108 LOAD_GLOBAL              0 (LPLoopMode)
+            110 LOAD_ATTR                7 (singlerepeatshuffle)
+            112 COMPARE_OP               2 (==)
+            114 POP_JUMP_IF_FALSE      124
+
+141         116 LOAD_GLOBAL              0 (LPLoopMode)
+            118 LOAD_ATTR                6 (singlerepeat)
+            120 STORE_FAST               0 (nextMode)
+            122 JUMP_FORWARD             6 (to 130)
+
+143     >>  124 LOAD_GLOBAL              0 (LPLoopMode)
+            126 LOAD_ATTR               10 (shuffle)
+            128 STORE_FAST               0 (nextMode)
+
+145     >>  130 LOAD_FAST                0 (nextMode)
+            132 RETURN_VALUE
+
+=== LPShuffleManager.nextLoopMode ===
+149           0 LOAD_GLOBAL              0 (LPLoopMode)
+              2 LOAD_ATTR                1 (default)
+              4 STORE_FAST               0 (nextMode)
+
+151           6 LOAD_GLOBAL              2 (LPGlobalUI)
+              8 LOAD_ATTR                3 (currentDevice)
+             10 LOAD_ATTR                4 (mediaInfo)
+             12 LOAD_ATTR                5 (loopMode)
+             14 STORE_FAST               1 (currentMode)
+
+152          16 LOAD_FAST                1 (currentMode)
+             18 LOAD_GLOBAL              0 (LPLoopMode)
+             20 LOAD_ATTR                6 (singlerepeat)
+             22 COMPARE_OP               2 (==)
+             24 POP_JUMP_IF_FALSE       34
+
+153          26 LOAD_GLOBAL              0 (LPLoopMode)
+             28 LOAD_ATTR                1 (default)
+             30 STORE_FAST               0 (nextMode)
+             32 JUMP_FORWARD            96 (to 130)
+
+154     >>   34 LOAD_FAST                1 (currentMode)
+             36 LOAD_GLOBAL              0 (LPLoopMode)
+             38 LOAD_ATTR                7 (listrepeat)
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       52
+
+155          44 LOAD_GLOBAL              0 (LPLoopMode)
+             46 LOAD_ATTR                6 (singlerepeat)
+             48 STORE_FAST               0 (nextMode)
+             50 JUMP_FORWARD            78 (to 130)
+
+156     >>   52 LOAD_FAST                1 (currentMode)
+             54 LOAD_GLOBAL              0 (LPLoopMode)
+             56 LOAD_ATTR                8 (shuffle)
+             58 COMPARE_OP               2 (==)
+             60 POP_JUMP_IF_FALSE       70
+
+157          62 LOAD_GLOBAL              0 (LPLoopMode)
+             64 LOAD_ATTR                9 (repeatshuffle)
+             66 STORE_FAST               0 (nextMode)
+             68 JUMP_FORWARD            60 (to 130)
+
+158     >>   70 LOAD_FAST                1 (currentMode)
+             72 LOAD_GLOBAL              0 (LPLoopMode)
+             74 LOAD_ATTR                9 (repeatshuffle)
+             76 COMPARE_OP               2 (==)
+             78 POP_JUMP_IF_FALSE       88
+
+159          80 LOAD_GLOBAL              0 (LPLoopMode)
+             82 LOAD_ATTR               10 (singlerepeatshuffle)
+             84 STORE_FAST               0 (nextMode)
+             86 JUMP_FORWARD            42 (to 130)
+
+160     >>   88 LOAD_FAST                1 (currentMode)
+             90 LOAD_GLOBAL              0 (LPLoopMode)
+             92 LOAD_ATTR                1 (default)
+             94 COMPARE_OP               2 (==)
+             96 POP_JUMP_IF_FALSE      106
+
+161          98 LOAD_GLOBAL              0 (LPLoopMode)
+            100 LOAD_ATTR                7 (listrepeat)
+            102 STORE_FAST               0 (nextMode)
+            104 JUMP_FORWARD            24 (to 130)
+
+162     >>  106 LOAD_FAST                1 (currentMode)
+            108 LOAD_GLOBAL              0 (LPLoopMode)
+            110 LOAD_ATTR               10 (singlerepeatshuffle)
+            112 COMPARE_OP               2 (==)
+            114 POP_JUMP_IF_FALSE      124
+
+163         116 LOAD_GLOBAL              0 (LPLoopMode)
+            118 LOAD_ATTR                8 (shuffle)
+            120 STORE_FAST               0 (nextMode)
+            122 JUMP_FORWARD             6 (to 130)
+
+165     >>  124 LOAD_GLOBAL              0 (LPLoopMode)
+            126 LOAD_ATTR                8 (shuffle)
+            128 STORE_FAST               0 (nextMode)
+
+167     >>  130 LOAD_FAST                0 (nextMode)
+            132 RETURN_VALUE

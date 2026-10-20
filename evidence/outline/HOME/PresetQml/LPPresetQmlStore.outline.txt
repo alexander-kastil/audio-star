@@ -1,0 +1,195 @@
+# module HOME.PresetQml.LPPresetQmlStore
+
+[module] names: __doc__, threading, typing, Any, Dict, List, Optional, bs4, BeautifulSoup, PyQt6.QtCore, QAbstractListModel, QModelIndex, Qt, pyqtSignal, LPGlobalUI, LPClientFramework, LPStreamServiceManager, LPUtility, LPClientFramework.LPDeviceStreamServiceManager, DEVICE_ACCOUNT_UNKNOWN, LPClientFramework.LPPublicDefine, SOURCES_NO_LOGIN, LPClientFramework.LPUtility, logger, _PRESET_NO_LOGIN_SOURCES, str, bool, presetSourceNeedsDeviceAccount, presetSourceCanPlay, _sourceIconQrc, LPPresetListModel, object, LPPresetQmlStore
+  str: '\nPreset（预设快捷键）QML 版数据层。\n\n职责：\n- LPPresetListModel：QAbstractListModel，给 QML GridView 提供卡片数据。\n- LPPresetQmlStore：封装“解析设备 GetKeyMapping XML -> 构建模型条目 ->\n  异步下载封面落盘缓存 -> 回写 coverUrl”的完整流程，并维护页面状态机。\n\n与旧的 HOME/LPPresetViewController.py 完全解耦，仅复用 LPClientFramework 层的工具方法。\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'BeautifulSoup'
+  str: 'QAbstractListModel'
+  str: 'QModelIndex'
+  str: 'Qt'
+  str: 'pyqtSignal'
+  str: 'LPStreamServiceManager'
+  str: 'LPUtility'
+  str: 'DEVICE_ACCOUNT_UNKNOWN'
+  str: 'SOURCES_NO_LOGIN'
+  str: 'logger'
+  str: 'source'
+  str: 'return'
+  str: 'presetSourceNeedsDeviceAccount'
+  str: 'presetSourceCanPlay'
+  str: '_sourceIconQrc'
+  str: 'LPPresetListModel'
+  str: 'LPPresetQmlStore'
+
+def presetSourceNeedsDeviceAccount(source)  line 32
+  names: LPStreamServiceManager, supportContents, _PRESET_NO_LOGIN_SOURCES
+    str: '\n    判断某 preset 源是否需要依赖设备账号状态才能判定可播放。\n\n    无需登录的源与 Pandora 失效源（强制不可播）无需拉取账号。\n\n    :param source: KeyMapping 中的 Source 标识。\n    :return: 需要设备账号状态返回 True。\n    '
+    str: 'Pandora'
+    str: 'Pandora2'
+
+def presetSourceCanPlay(source, device)  line 48
+  names: LPStreamServiceManager, supportContents, _PRESET_NO_LOGIN_SOURCES, getattr, deviceAccountForSource, DEVICE_ACCOUNT_UNKNOWN
+    str: '\n    判断某 preset 源在当前设备上是否可直接播放（对齐 iOS preset 页规则）。\n\n    iOS 规则：源账号已登录（或该源无需登录）才可播放；Pandora 旧 preset\n    在支持列表存在 Pandora2 时视为失效，强制不可播放。\n\n    :param source: KeyMapping 中的 Source 标识。\n    :param device: 当前设备对象，用于读取该源的登录账号缓存。\n    :return: 可播放返回 True，否则返回 False。\n    '
+    str: 'Pandora'
+    str: 'Pandora2'
+    str: 'deviceStreamServiceManager'
+
+def _sourceIconQrc(source)  line 79
+  names: LPStreamServiceManager, supportContents, get, str, strip, startswith
+    str: '\n    根据来源解析为 preset 卡片来源图标的 qrc 路径。\n\n    直接取 supportContents()[source]["preset_icon"]，该字段已是完整 qrc 路径，\n    无需再做扩展名推断；字段为空时返回空字符串（卡片不显示来源图标）。\n\n    :param source: 设备返回的来源标识（如 Qobuz / Tidal / newTuneIn / AIRPLAY）。\n    :return: qrc 图标路径字符串；未命中或无对应图标时返回空字符串。\n    '
+    str: 'preset_icon'
+    str: ':/'
+    str: 'qrc'
+
+def LPPresetListModel()  line 104
+  names: __name__, __module__, __qualname__, __doc__, Qt, ItemDataRole, UserRole, IndexRole, DisplayNameRole, SourceIconRole, CoverUrlRole, IsEmptyRole, CanPlayRole, pyqtSignal, countChanged, int, str, coverUrlReady, __init__, property, List, Dict, Any, items, QModelIndex, rowCount, bytes, roleNames, DisplayRole, data, setItems, updateCoverUrl, bool, updateCanPlay, Optional, itemByIndex, __classcell__
+    str: 'LPPresetListModel'
+    str: '\n    Preset 卡片网格数据模型。\n\n    对外暴露的 role（QML 中以 role 名直接访问）：\n        index         -> int    预设序号（1 起）\n        displayName   -> str    处理后的展示名称（去掉 “_#~” 后缀）\n        sourceIcon    -> str    来源图标 qrc 路径，空字符串表示无图标\n        coverUrl      -> str    封面本地 file URL 或 qrc URL；为空表示未就绪\n        isEmpty       -> boo'
+    str: 'LPPresetListModel.__init__'
+    str: 'return'
+    str: 'LPPresetListModel.items'
+    str: 'parent'
+    str: 'return'
+    str: 'LPPresetListModel.rowCount'
+    str: 'LPPresetListModel.roleNames'
+    str: 'index'
+    str: 'role'
+    str: 'return'
+    str: 'LPPresetListModel.data'
+    str: 'items'
+    str: 'return'
+    str: 'LPPresetListModel.setItems'
+    str: 'index'
+    str: 'coverUrl'
+    str: 'return'
+    str: 'LPPresetListModel.updateCoverUrl'
+    str: 'index'
+    str: 'canPlay'
+    str: 'return'
+    str: 'LPPresetListModel.updateCanPlay'
+    str: 'index'
+    str: 'return'
+    str: 'LPPresetListModel.itemByIndex'
+
+  def LPPresetListModel.__init__(self, parent)  line 128
+    names: super, __init__, _items, coverUrlReady, connect, updateCoverUrl
+      str: '\n        初始化空模型，并把封面就绪信号连接到回写槽。\n\n        :param parent: 父级 QObject。\n        '
+
+  def LPPresetListModel.items(self)  line 139
+    names: _items
+      str: '\n        返回内部条目列表（控制器可读，便于删除等操作）。\n\n        :return: 条目字典列表的引用。\n        '
+
+  def LPPresetListModel.rowCount(self, parent)  line 148
+    names: isValid, len, _items
+      str: '\n        返回模型行数。\n\n        :param parent: 父索引（列表模型恒为无效索引）。\n        :return: 当条条目数量。\n        '
+
+  def LPPresetListModel.roleNames(self)  line 157
+    names: IndexRole, DisplayNameRole, SourceIconRole, CoverUrlRole, IsEmptyRole, CanPlayRole
+      str: '\n        返回 role 名映射，供 QML delegate 通过 model.<role> 访问。\n\n        :return: role 枚举到 role 名的字节串字典。\n        '
+
+  def LPPresetListModel.data(self, index, role)  line 172
+    names: isValid, row, len, _items, IndexRole, get, DisplayNameRole, SourceIconRole, CoverUrlRole, IsEmptyRole, CanPlayRole
+      str: '\n        返回指定索引、指定 role 的数据。\n\n        :param index: 模型索引。\n        :param role: 数据 role。\n        :return: 对应数据；越界或不匹配时返回 None。\n        '
+      str: 'index'
+      str: 'displayName'
+      str: 'sourceIcon'
+      str: 'coverUrl'
+      str: 'isEmpty'
+      str: 'canPlay'
+
+  def LPPresetListModel.setItems(self, items)  line 200
+    names: beginResetModel, list, _items, endResetModel, countChanged, emit
+      str: '\n        整体替换模型数据并通知视图。\n\n        :param items: 新条目字典列表。\n        :return: None。\n        '
+
+  def LPPresetListModel.updateCoverUrl(self, index, coverUrl)  line 212
+    names: enumerate, _items, get, index, dataChanged, emit, CoverUrlRole
+      str: '\n        单条更新某预设的封面 URL（异步下载完成后回写）。\n\n        :param index: 预设序号（1 起）。\n        :param coverUrl: 已落盘的本地 file URL。\n        :return: None。\n        '
+      str: 'index'
+      str: 'coverUrl'
+
+  def LPPresetListModel.updateCanPlay(self, index, canPlay)  line 228
+    names: enumerate, _items, get, index, dataChanged, emit, CanPlayRole
+      str: '\n        单条更新某预设的可播放状态（账号登录状态变化后刷新）。\n\n        :param index: 预设序号（1 起）。\n        :param canPlay: 是否可播放。\n        :return: None。\n        '
+      str: 'index'
+      str: 'canPlay'
+
+  def LPPresetListModel.itemByIndex(self, index)  line 244
+    names: _items, get
+      str: '\n        按预设序号查询条目。\n\n        :param index: 预设序号（1 起）。\n        :return: 命中的条目字典；不存在返回 None。\n        '
+      str: 'index'
+
+def LPPresetQmlStore()  line 257
+  names: __name__, __module__, __qualname__, __doc__, LPPresetListModel, __init__, model, Optional, str, int, List, Dict, Any, parseXmlAndBuildItems, staticmethod, _emptyItem, ensureCoverForItem
+    str: 'LPPresetQmlStore'
+    str: '\n    Preset 页面数据仓库（纯 Python 对象，不持有 Qt 信号）。\n\n    提供 XML 解析与封面异步下载编排，状态由控制器持有并对外暴露，\n    便于控制器统一管理生命周期。封面回写通过模型的 coverUrlReady 信号完成。\n    '
+    str: 'model'
+    str: 'LPPresetQmlStore.__init__'
+    str: 'return'
+    str: 'LPPresetQmlStore.model'
+    str: 'xmlStr'
+    str: 'presetNum'
+    str: 'return'
+    str: 'LPPresetQmlStore.parseXmlAndBuildItems'
+    str: 'keyIndex'
+    str: 'return'
+    str: 'LPPresetQmlStore._emptyItem'
+    str: 'item'
+    str: 'return'
+    str: 'LPPresetQmlStore.ensureCoverForItem'
+
+  def LPPresetQmlStore.__init__(self, model)  line 265
+    names: _model, xmlObj
+      str: '\n        绑定模型初始化仓库。\n\n        :param model: 已创建的 LPPresetListModel 实例。\n        '
+
+  def LPPresetQmlStore.model(self)  line 275
+    names: _model
+      str: '\n        返回绑定的模型。\n\n        :return: LPPresetListModel 实例。\n        '
+
+  def LPPresetQmlStore.parseXmlAndBuildItems(self, xmlStr, presetNum, device)  line 283
+    names: BeautifulSoup, xmlObj, Exception, logger, error, find, range, append, _emptyItem, text, strip, split, _sourceIconQrc, presetSourceCanPlay
+      str: '\n        解析 GetKeyMapping 返回的 XML 并构建模型条目（含空槽位补齐）。\n\n        :param xmlStr: 设备返回的 XML 字符串。\n        :param presetNum: 当前设备支持的预设数量。\n        :param device: 当前设备对象，用于计算每个 preset 是否可播放。\n        :return: 条目字典列表；解析失败时返回空列表。\n        '
+      str: 'xml'
+      str: '[PresetQml] parse XML failed: %s'
+      str: 'KeyList'
+      str: 'Key%d'
+      str: 'Name'
+      str: 'Source'
+      str: 'PicUrl'
+      str: '_#~'
+      str: 'index'
+      str: 'name'
+      str: 'displayName'
+      str: 'source'
+      str: 'picUrl'
+      str: 'sourceIcon'
+      str: 'coverUrl'
+      str: 'isEmpty'
+      str: 'canPlay'
+
+  def LPPresetQmlStore._emptyItem(keyIndex)  line 336
+      str: '\n        构造空槽位条目。\n\n        :param keyIndex: 预设序号。\n        :return: 空槽位字典。\n        '
+      str: 'index'
+      str: 'name'
+      str: 'displayName'
+      str: 'source'
+      str: 'picUrl'
+      str: 'sourceIcon'
+      str: 'coverUrl'
+      str: 'isEmpty'
+      str: 'canPlay'
+
+  def LPPresetQmlStore.ensureCoverForItem(self, item)  line 356
+    names: get, LPUtility, getCacheImageUrl, _model, updateCoverUrl, threading, Thread, start
+      str: '\n        确保某条目的封面已落盘并回写模型 coverUrl。\n\n        命中本地缓存时同步回写；未命中时起线程异步下载，完成后通过模型的\n        coverUrlReady 信号跨线程安全回写（Qt 自动 queued 到 GUI 线程）。\n\n        :param item: 单条预设字典。\n        :return: None。\n        '
+      str: 'picUrl'
+      str: 'index'
+      str: 'LPPresetQmlStore.ensureCoverForItem.<locals>._asyncFetch'
+      str: 'target'
+      str: 'daemon'
+
+    def LPPresetQmlStore.ensureCoverForItem._asyncFetch()  line 379
+      names: LPUtility, fetchUrlQPixmap, get, isNull, getCacheImageUrl, coverUrlReady, emit
+        str: 'image'

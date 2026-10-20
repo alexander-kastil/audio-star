@@ -1,0 +1,1722 @@
+# module HOME.StreamService.WiiMRadio.utils.LPWiiMRadioStore
+
+[module] names: __doc__, copy, json, time, weakref, typing, Any, Dict, List, Optional, Tuple, PyQt6.QtCore, QAbstractListModel, QCoreApplication, QModelIndex, QObject, QTimer, Qt, pyqtProperty, pyqtSignal, pyqtSlot, LPGlobalUI, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, WIIMRADIO_LOCAL_USER_ID, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioFavoriteStorage, ensureLoaded, _ensure_wiimradio_favorites_loaded, extractStationLocationFields, _extract_station_location_fields, normalizeFavoriteItem, _normalize_wiimradio_favorite_item, saveFavorites, _save_wiimradio_favorites, HOME.StreamService.WiiMRadio.utils, LPWiiMRadioDataProvider, WIIM_RADIO_CATEGORY_DEFINITIONS, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioRequestScheduler, LPWiiMRadioRequestScheduler, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioStationListModel, LPWiiMRadioStationListModel, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioThumbnailService, LPWiiMRadioThumbnailService, LPClientFramework.LPUtility, logger, str, bool, _is_popular_section_key, _extract_subcountry_code_from_query, _build_query_without_subcountry_code, _build_query_without_location_codes, _should_retry_popular_without_subcountry, LPWiiMRadioHomeSectionListModel, _LPWiiMRadioBaseState, LPWiiMRadioSeeAllState, LPWiiMRadioCategoryState, LPWiiMRadioHomeState, LPWiiMRadioStore
+  str: '\nWiiMRadio 统一数据状态管理。\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'Tuple'
+  str: 'QAbstractListModel'
+  str: 'QCoreApplication'
+  str: 'QModelIndex'
+  str: 'QObject'
+  str: 'QTimer'
+  str: 'Qt'
+  str: 'pyqtProperty'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'LPFavoriteCacheManager'
+  str: 'WIIMRADIO_LOCAL_USER_ID'
+  str: 'ensureLoaded'
+  str: 'extractStationLocationFields'
+  str: 'normalizeFavoriteItem'
+  str: 'saveFavorites'
+  str: 'LPWiiMRadioDataProvider'
+  str: 'WIIM_RADIO_CATEGORY_DEFINITIONS'
+  str: 'LPWiiMRadioRequestScheduler'
+  str: 'LPWiiMRadioStationListModel'
+  str: 'LPWiiMRadioThumbnailService'
+  str: 'logger'
+  str: 'sectionKey'
+  str: 'return'
+  str: '_is_popular_section_key'
+  str: 'query'
+  str: 'return'
+  str: '_extract_subcountry_code_from_query'
+  str: '_build_query_without_subcountry_code'
+  str: '_build_query_without_location_codes'
+  str: 'sectionKey'
+  str: 'result'
+  str: 'context'
+  str: 'return'
+  str: '_should_retry_popular_without_subcountry'
+  str: 'LPWiiMRadioHomeSectionListModel'
+  str: '_LPWiiMRadioBaseState'
+  str: 'LPWiiMRadioSeeAllState'
+  str: 'LPWiiMRadioCategoryState'
+  str: 'LPWiiMRadioHomeState'
+  str: 'LPWiiMRadioStore'
+
+def _is_popular_section_key(sectionKey)  line 35
+  names: str, strip
+    str: '\n    判断区块标识是否为 popular。\n\n    :param sectionKey: 区块标识。\n    :return: popular 区块返回 True。\n    '
+    str: 'popular'
+
+def _extract_subcountry_code_from_query(query)  line 45
+  names: isinstance, dict, str, get, strip
+    str: '\n    提取查询参数中的 subcountryCode。\n\n    :param query: 查询参数字典。\n    :return: 归一化后的 subcountryCode；不存在时为空字符串。\n    '
+    str: 'subcountryCode'
+
+def _build_query_without_subcountry_code(query)  line 57
+  names: isinstance, dict, copy, deepcopy
+    str: '\n    构造去掉 subcountryCode 的查询参数副本。\n\n    :param query: 原始查询参数字典。\n    :return: 去掉 subcountryCode 后的新查询参数字典。\n    '
+    str: 'subcountryCode'
+
+def _build_query_without_location_codes(query)  line 69
+  names: isinstance, dict, copy, deepcopy
+    str: '\n    构造去掉 countryCode 与 subcountryCode 的查询参数副本。\n\n    :param query: 原始查询参数字典。\n    :return: 去掉地区参数后的新查询参数字典。\n    '
+    str: 'countryCode'
+    str: 'subcountryCode'
+
+def _should_retry_popular_without_subcountry(sectionKey, result, context)  line 82
+  names: _is_popular_section_key, isinstance, dict, bool, get, _extract_subcountry_code_from_query, list, len
+    str: '\n    判断 popular 请求是否需要去掉 subcountryCode 再重试一次。\n\n    :param sectionKey: 区块标识。\n    :param result: 当前请求结果。\n    :param context: 当前请求上下文。\n    :return: 满足回退条件返回 True。\n    '
+    str: 'append'
+    str: 'popularFallbackRetried'
+    str: 'requestPayload'
+    str: 'success'
+    str: 'items'
+
+def LPWiiMRadioHomeSectionListModel()  line 113
+  names: __name__, __module__, __qualname__, int, Qt, ItemDataRole, UserRole, SECTION_KEY_ROLE, TITLE_ROLE, ITEMS_ROLE, IS_LOADING_ROLE, IS_CATEGORY_ROLE, Optional, QObject, __init__, QModelIndex, rowCount, DisplayRole, Any, data, Dict, bytes, roleNames, List, str, resetSections, updateSectionAt, itemsSnapshot, __classcell__
+    str: 'LPWiiMRadioHomeSectionListModel'
+    str: 'parent'
+    str: 'LPWiiMRadioHomeSectionListModel.__init__'
+    str: 'parent'
+    str: 'return'
+    str: 'LPWiiMRadioHomeSectionListModel.rowCount'
+    str: 'index'
+    str: 'role'
+    str: 'return'
+    str: 'LPWiiMRadioHomeSectionListModel.data'
+    str: 'return'
+    str: 'LPWiiMRadioHomeSectionListModel.roleNames'
+    str: 'sections'
+    str: 'return'
+    str: 'LPWiiMRadioHomeSectionListModel.resetSections'
+    str: 'row'
+    str: 'section'
+    str: 'return'
+    str: 'LPWiiMRadioHomeSectionListModel.updateSectionAt'
+    str: 'LPWiiMRadioHomeSectionListModel.itemsSnapshot'
+
+  def LPWiiMRadioHomeSectionListModel.__init__(self, parent)  line 120
+    names: super, __init__, _sections
+      str: '\n        初始化 Home 区块列表模型。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeSectionListModel.rowCount(self, parent)  line 130
+    names: isValid, len, _sections
+      str: '\n        返回当前区块数量。\n\n        :param parent: 父级索引。\n        :return: 区块数量。\n        '
+
+  def LPWiiMRadioHomeSectionListModel.data(self, index, role)  line 141
+    names: isValid, row, len, _sections, SECTION_KEY_ROLE, get, TITLE_ROLE, ITEMS_ROLE, IS_LOADING_ROLE, bool, IS_CATEGORY_ROLE
+      str: '\n        根据索引和角色返回区块数据。\n\n        :param index: 模型索引。\n        :param role: Qt 角色值。\n        :return: 对应角色的数据。\n        '
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'isLoading'
+      str: 'isCategory'
+
+  def LPWiiMRadioHomeSectionListModel.roleNames(self)  line 167
+    names: SECTION_KEY_ROLE, TITLE_ROLE, ITEMS_ROLE, IS_LOADING_ROLE, IS_CATEGORY_ROLE
+      str: '\n        返回 role 与字段名映射。\n\n        :param: 无。\n        :return: role 名称字典。\n        '
+
+  def LPWiiMRadioHomeSectionListModel.resetSections(self, sections)  line 182
+    names: beginResetModel, _sections, endResetModel
+      str: '\n        整体重置 Home 区块列表。\n\n        :param sections: 新的区块列表。\n        :return: None。\n        '
+      str: 'LPWiiMRadioHomeSectionListModel.resetSections.<locals>.<listcomp>'
+
+    def LPWiiMRadioHomeSectionListModel.resetSections.<listcomp>(.0)  line 189
+      names: isinstance, dict
+
+  def LPWiiMRadioHomeSectionListModel.updateSectionAt(self, row, section)  line 194
+    names: len, _sections, isinstance, dict, index, dataChanged, emit, SECTION_KEY_ROLE, TITLE_ROLE, ITEMS_ROLE, IS_LOADING_ROLE
+      str: '\n        更新指定行的区块数据，并只通知该行刷新。\n\n        :param row: 目标行号。\n        :param section: 新区块数据。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeSectionListModel.itemsSnapshot(self)  line 212
+    names: _sections
+      str: '\n        返回当前区块列表快照。\n\n        :param: 无。\n        :return: 区块列表浅拷贝。\n        '
+      str: 'LPWiiMRadioHomeSectionListModel.itemsSnapshot.<locals>.<listcomp>'
+
+    def LPWiiMRadioHomeSectionListModel.itemsSnapshot.<listcomp>(.0)  line 219
+      names: dict
+
+def _LPWiiMRadioBaseState()  line 223
+  names: __name__, __module__, __qualname__, pyqtSignal, lifecycleChanged, pageErrorChanged, str, Optional, QObject, __init__, property, cacheKey, int, activeRefCount, lastAccessMs, pyqtProperty, bool, hasPageError, pageErrorCode, pageErrorKind, pageErrorMessage, touch, activate, deactivate, canPrune, _clear_page_error, Dict, Any, _set_page_error_from_result, _safe_int, onActivated, onDeactivated, dispose, _now_ms, __classcell__
+    str: '_LPWiiMRadioBaseState'
+    str: 'cacheKey'
+    str: 'parent'
+    str: '_LPWiiMRadioBaseState.__init__'
+    str: 'return'
+    str: '_LPWiiMRadioBaseState.cacheKey'
+    str: '_LPWiiMRadioBaseState.activeRefCount'
+    str: '_LPWiiMRadioBaseState.lastAccessMs'
+    str: 'notify'
+    str: '_LPWiiMRadioBaseState.hasPageError'
+    str: '_LPWiiMRadioBaseState.pageErrorCode'
+    str: '_LPWiiMRadioBaseState.pageErrorKind'
+    str: '_LPWiiMRadioBaseState.pageErrorMessage'
+    str: '_LPWiiMRadioBaseState.touch'
+    str: '_LPWiiMRadioBaseState.activate'
+    str: '_LPWiiMRadioBaseState.deactivate'
+    str: 'ttlMs'
+    str: 'nowMs'
+    str: 'return'
+    str: '_LPWiiMRadioBaseState.canPrune'
+    str: '_LPWiiMRadioBaseState._clear_page_error'
+    str: 'result'
+    str: 'return'
+    str: '_LPWiiMRadioBaseState._set_page_error_from_result'
+    str: 'value'
+    str: 'default'
+    str: 'return'
+    str: '_LPWiiMRadioBaseState._safe_int'
+    str: '_LPWiiMRadioBaseState.onActivated'
+    str: '_LPWiiMRadioBaseState.onDeactivated'
+    str: '_LPWiiMRadioBaseState.dispose'
+    str: '_LPWiiMRadioBaseState._now_ms'
+
+  def _LPWiiMRadioBaseState.__init__(self, cacheKey, parent)  line 227
+    names: super, __init__, str, strip, _cache_key, _active_ref_count, _now_ms, _last_access_ms, _has_page_error, _page_error_code, _page_error_kind, _page_error_message
+      str: '\n        初始化状态基类。\n\n        :param cacheKey: 状态缓存唯一键。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def _LPWiiMRadioBaseState.cacheKey(self)  line 244
+    names: _cache_key
+      str: '\n        返回状态缓存键。\n\n        :param: 无。\n        :return: 缓存键字符串。\n        '
+
+  def _LPWiiMRadioBaseState.activeRefCount(self)  line 254
+    names: _active_ref_count
+      str: '\n        返回当前激活引用计数。\n\n        :param: 无。\n        :return: 激活引用计数。\n        '
+
+  def _LPWiiMRadioBaseState.lastAccessMs(self)  line 264
+    names: _last_access_ms
+      str: '\n        返回最后访问时间戳（毫秒）。\n\n        :param: 无。\n        :return: 毫秒时间戳。\n        '
+
+  def _LPWiiMRadioBaseState.hasPageError(self)  line 274
+    names: _has_page_error
+      str: '\n        返回当前状态是否需要显示页级错误。\n\n        :param: 无。\n        :return: 需要显示页级错误返回 True。\n        '
+
+  def _LPWiiMRadioBaseState.pageErrorCode(self)  line 284
+    names: _page_error_code
+      str: '\n        返回页级错误状态码。\n\n        :param: 无。\n        :return: HTTP 状态码或业务错误码。\n        '
+
+  def _LPWiiMRadioBaseState.pageErrorKind(self)  line 294
+    names: _page_error_kind
+      str: '\n        返回页级错误类型。\n\n        :param: 无。\n        :return: 稳定错误类型字符串。\n        '
+
+  def _LPWiiMRadioBaseState.pageErrorMessage(self)  line 304
+    names: _page_error_message
+      str: '\n        返回页级错误说明。\n\n        :param: 无。\n        :return: 错误说明文本。\n        '
+
+  def _LPWiiMRadioBaseState.touch(self)  line 314
+    names: _now_ms, _last_access_ms
+      str: '\n        更新最后访问时间。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def _LPWiiMRadioBaseState.activate(self)  line 323
+    names: _active_ref_count, touch, onActivated, lifecycleChanged, emit
+      str: '\n        增加激活引用计数并在首次激活时触发回调。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def _LPWiiMRadioBaseState.deactivate(self)  line 336
+    names: _active_ref_count, touch, onDeactivated, lifecycleChanged, emit
+      str: '\n        减少激活引用计数并在计数归零时触发回调。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def _LPWiiMRadioBaseState.canPrune(self, ttlMs, nowMs)  line 351
+    names: _active_ref_count, _now_ms, int, _last_access_ms
+      str: '\n        判断状态是否可被回收。\n\n        :param ttlMs: 回收 TTL（毫秒）。\n        :param nowMs: 当前时间戳（毫秒），为空时自动取当前时间。\n        :return: 可回收返回 True，否则返回 False。\n        '
+
+  def _LPWiiMRadioBaseState._clear_page_error(self)  line 364
+    names: _has_page_error, _page_error_code, _page_error_kind, _page_error_message, pageErrorChanged, emit
+      str: '\n        清除当前页级错误状态。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def _LPWiiMRadioBaseState._set_page_error_from_result(self, result)  line 384
+    names: isinstance, dict, str, get, strip, _safe_int, _has_page_error, _page_error_code, _page_error_kind, _page_error_message, pageErrorChanged, emit
+      str: '\n        根据接口失败结果更新页级错误状态。\n\n        :param result: 归一化后的失败结果。\n        :return: None。\n        '
+      str: 'errorKind'
+      str: 'unknown'
+      str: 'statusCode'
+      str: 'errorCode'
+      str: 'errorDesc'
+      str: 'error'
+
+  def _LPWiiMRadioBaseState._safe_int(self, value, default)  line 416
+    names: int, TypeError, ValueError
+      str: '\n        将输入值安全转换为整数。\n\n        :param value: 待转换的值。\n        :param default: 转换失败时返回的默认值。\n        :return: 整数结果。\n        '
+
+  def _LPWiiMRadioBaseState.onActivated(self)  line 429
+      str: '\n        激活回调，由子类按需覆盖。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def _LPWiiMRadioBaseState.onDeactivated(self)  line 438
+      str: '\n        失活回调，由子类按需覆盖。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def _LPWiiMRadioBaseState.dispose(self)  line 447
+      str: '\n        回收回调，由子类按需覆盖。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def _LPWiiMRadioBaseState._now_ms(self)  line 456
+    names: int, time
+      str: '\n        返回当前时间戳（毫秒）。\n\n        :param: 无。\n        :return: 毫秒时间戳。\n        '
+
+def LPWiiMRadioSeeAllState()  line 467
+  names: __name__, __module__, __qualname__, REMOTE_PAGE_SIZE, DEFAULT_LAYOUT_MODE, VALID_LAYOUT_MODES, pyqtSignal, metaChanged, displayItemsChanged, searchTextChanged, sortKeyChanged, layoutModeChanged, loadingStateChanged, paginationStateChanged, str, Dict, Any, Optional, QObject, __init__, pyqtProperty, pageTitle, sectionKey, List, sortOptions, LPWiiMRadioStationListModel, displayItems, searchText, sortKey, layoutMode, int, resultCount, bool, hasVisibleItems, isInitialLoading, isLoadingMore, canLoadMore, showEmptyState, setSearchText, triggerSearch, setSortKey, setLayoutMode, resetLayoutMode, toggleLayoutMode, loadNextPage, retryLoadPage, findItemByStationId, syncEntrySearchText, onActivated, onDeactivated, dispose, _apply_descriptor, _is_favorites_section, _sync_favorites_raw_items, _handle_store_favorite_revision_changed, _normalize_items, _normalize_sort_key, _normalize_layout_mode, _is_remote_mode, _apply_local_filters, _trigger_search, _reload_remote_data, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND, _request_remote_page, _make_weak_result_callback, _build_remote_payload, _handle_remote_result, _flush_deferred_remote_request, __classcell__
+    str: 'LPWiiMRadioSeeAllState'
+    str: 'list'
+    str: 'grid'
+    str: 'cacheKey'
+    str: 'sectionDescriptor'
+    str: 'parent'
+    str: 'LPWiiMRadioSeeAllState.__init__'
+    str: 'notify'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState.pageTitle'
+    str: 'LPWiiMRadioSeeAllState.sectionKey'
+    str: 'QVariantList'
+    str: 'constant'
+    str: 'LPWiiMRadioSeeAllState.sortOptions'
+    str: 'LPWiiMRadioSeeAllState.displayItems'
+    str: 'LPWiiMRadioSeeAllState.searchText'
+    str: 'LPWiiMRadioSeeAllState.sortKey'
+    str: 'LPWiiMRadioSeeAllState.layoutMode'
+    str: 'LPWiiMRadioSeeAllState.resultCount'
+    str: 'LPWiiMRadioSeeAllState.hasVisibleItems'
+    str: 'LPWiiMRadioSeeAllState.isInitialLoading'
+    str: 'LPWiiMRadioSeeAllState.isLoadingMore'
+    str: 'LPWiiMRadioSeeAllState.canLoadMore'
+    str: 'LPWiiMRadioSeeAllState.showEmptyState'
+    str: 'text'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState.setSearchText'
+    str: 'LPWiiMRadioSeeAllState.triggerSearch'
+    str: 'sortKey'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState.setSortKey'
+    str: 'layoutMode'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState.setLayoutMode'
+    str: 'LPWiiMRadioSeeAllState.resetLayoutMode'
+    str: 'LPWiiMRadioSeeAllState.toggleLayoutMode'
+    str: 'LPWiiMRadioSeeAllState.loadNextPage'
+    str: 'LPWiiMRadioSeeAllState.retryLoadPage'
+    str: 'stationId'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState.findItemByStationId'
+    str: 'searchText'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState.syncEntrySearchText'
+    str: 'LPWiiMRadioSeeAllState.onActivated'
+    str: 'LPWiiMRadioSeeAllState.onDeactivated'
+    str: 'LPWiiMRadioSeeAllState.dispose'
+    str: 'sectionDescriptor'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState._apply_descriptor'
+    str: 'LPWiiMRadioSeeAllState._is_favorites_section'
+    str: 'LPWiiMRadioSeeAllState._sync_favorites_raw_items'
+    str: 'LPWiiMRadioSeeAllState._handle_store_favorite_revision_changed'
+    str: 'rawItems'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState._normalize_items'
+    str: 'LPWiiMRadioSeeAllState._normalize_sort_key'
+    str: 'LPWiiMRadioSeeAllState._normalize_layout_mode'
+    str: 'LPWiiMRadioSeeAllState._is_remote_mode'
+    str: 'LPWiiMRadioSeeAllState._apply_local_filters'
+    str: 'LPWiiMRadioSeeAllState._trigger_search'
+    str: 'LPWiiMRadioSeeAllState._reload_remote_data'
+    str: 'pageNo'
+    str: 'append'
+    str: 'baseQueryOverride'
+    str: 'popularFallbackRetried'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState._request_remote_page'
+    str: 'LPWiiMRadioSeeAllState._make_weak_result_callback'
+    str: 'pageNo'
+    str: 'baseQueryOverride'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState._build_remote_payload'
+    str: 'result'
+    str: 'return'
+    str: 'LPWiiMRadioSeeAllState._handle_remote_result'
+    str: 'LPWiiMRadioSeeAllState._flush_deferred_remote_request'
+
+  def LPWiiMRadioSeeAllState.__init__(self, cacheKey, sectionDescriptor, parent)  line 480
+    names: super, __init__, _section_key, _page_title, _mode, _base_query, _raw_items, _entry_search_text, LPWiiMRadioStationListModel, _display_model, _search_text, _sort_key, DEFAULT_LAYOUT_MODE, _layout_mode, QCoreApplication, translate, _sort_options, _is_initial_loading, _is_loading_more, _has_loaded_once, _has_more, _next_page_no, _request_revision, _request_inflight, _deferred_remote_request, LPWiiMRadioStore, instance, _store, LPWiiMRadioDataProvider, _data_provider, favoriteRevisionChanged, connect, _handle_store_favorite_revision_changed, _apply_descriptor, _is_remote_mode, _reload_remote_data, _apply_local_filters
+      str: '\n        初始化 SeeAll 状态对象。\n\n        :param cacheKey: 状态缓存唯一键。\n        :param sectionDescriptor: 首页传入的展开页描述对象。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'local'
+      str: 'parent'
+      str: 'default'
+      str: 'WiiMRadio'
+      str: 'Default'
+      str: 'value'
+      str: 'title'
+      str: 'name_asc'
+      str: 'Name A-Z'
+      str: 'name_desc'
+      str: 'Name Z-A'
+
+  def LPWiiMRadioSeeAllState.pageTitle(self)  line 522
+    names: _page_title
+      str: '\n        返回页面标题。\n\n        :param: 无。\n        :return: 页面标题。\n        '
+
+  def LPWiiMRadioSeeAllState.sectionKey(self)  line 532
+    names: _section_key
+      str: '\n        返回当前区块标识。\n\n        :param: 无。\n        :return: sectionKey。\n        '
+
+  def LPWiiMRadioSeeAllState.sortOptions(self)  line 542
+    names: _sort_options
+      str: '\n        返回排序选项列表。\n\n        :param: 无。\n        :return: 排序选项列表。\n        '
+
+  def LPWiiMRadioSeeAllState.displayItems(self)  line 552
+    names: _display_model
+      str: '\n        返回当前展示列表模型。\n\n        :param: 无。\n        :return: 列表模型对象。\n        '
+
+  def LPWiiMRadioSeeAllState.searchText(self)  line 562
+    names: _search_text
+      str: '\n        返回搜索关键字。\n\n        :param: 无。\n        :return: 搜索文本。\n        '
+
+  def LPWiiMRadioSeeAllState.sortKey(self)  line 572
+    names: _sort_key
+      str: '\n        返回当前排序键。\n\n        :param: 无。\n        :return: 排序键。\n        '
+
+  def LPWiiMRadioSeeAllState.layoutMode(self)  line 582
+    names: _layout_mode
+      str: '\n        返回当前布局模式。\n\n        :param: 无。\n        :return: `list` 或 `grid`。\n        '
+
+  def LPWiiMRadioSeeAllState.resultCount(self)  line 592
+    names: _display_model, count
+      str: '\n        返回结果数量。\n\n        :param: 无。\n        :return: 当前列表条目数。\n        '
+
+  def LPWiiMRadioSeeAllState.hasVisibleItems(self)  line 602
+    names: _display_model, count
+      str: '\n        返回当前是否已有可见结果。\n\n        :param: 无。\n        :return: 模型中存在条目时返回 True。\n        '
+
+  def LPWiiMRadioSeeAllState.isInitialLoading(self)  line 612
+    names: _is_initial_loading
+      str: '\n        返回是否处于首屏加载状态。\n\n        :param: 无。\n        :return: 首屏加载中返回 True。\n        '
+
+  def LPWiiMRadioSeeAllState.isLoadingMore(self)  line 622
+    names: _is_loading_more
+      str: '\n        返回是否处于追加分页加载状态。\n\n        :param: 无。\n        :return: 追加加载中返回 True。\n        '
+
+  def LPWiiMRadioSeeAllState.canLoadMore(self)  line 632
+    names: _is_remote_mode, _has_more, _is_initial_loading, _is_loading_more, _display_model, isFull
+      str: '\n        返回是否可继续加载下一页。\n\n        :param: 无。\n        :return: 可继续加载返回 True。\n        '
+
+  def LPWiiMRadioSeeAllState.showEmptyState(self)  line 648
+    names: _has_loaded_once, _display_model, count, _is_initial_loading, _has_page_error
+      str: '\n        返回是否展示空态。\n\n        :param: 无。\n        :return: 应显示空态返回 True。\n        '
+
+  def LPWiiMRadioSeeAllState.setSearchText(self, text)  line 663
+    names: str, _search_text, searchTextChanged, emit, touch
+      str: '\n        设置搜索关键字，仅保存输入内容，等待回车后执行搜索。\n\n        :param text: 搜索文本。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.triggerSearch(self)  line 677
+    names: _trigger_search, touch
+      str: '\n        立即执行搜索。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.setSortKey(self, sortKey)  line 687
+    names: _normalize_sort_key, _sort_key, sortKeyChanged, emit, _is_remote_mode, _reload_remote_data, _apply_local_filters, touch
+      str: '\n        设置排序键并刷新结果。\n\n        :param sortKey: 目标排序键。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.setLayoutMode(self, layoutMode)  line 705
+    names: _normalize_layout_mode, _layout_mode, layoutModeChanged, emit, touch
+      str: '\n        设置当前布局模式。\n\n        :param layoutMode: 目标布局模式。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.resetLayoutMode(self)  line 719
+    names: setLayoutMode, DEFAULT_LAYOUT_MODE
+      str: '\n        重置布局模式为默认列表布局。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.toggleLayoutMode(self)  line 728
+    names: setLayoutMode, _layout_mode
+      str: '\n        在列表和网格布局间切换。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'list'
+      str: 'grid'
+
+  def LPWiiMRadioSeeAllState.loadNextPage(self)  line 737
+    names: canLoadMore, _is_loading_more, loadingStateChanged, emit, _request_remote_page, _next_page_no, LPWiiMRadioRequestScheduler, PRIORITY_PRELOAD, touch
+      str: '\n        在可翻页时加载下一页。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'append'
+      str: 'priority'
+
+  def LPWiiMRadioSeeAllState.retryLoadPage(self)  line 755
+    names: _is_remote_mode, _reload_remote_data, _clear_page_error, _apply_local_filters, touch
+      str: '\n        重试当前 SeeAll 页第一页数据请求。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.findItemByStationId(self, stationId)  line 769
+    names: touch, _display_model, findItemByStationId
+      str: '\n        根据 stationId 查找条目。\n\n        :param stationId: 电台唯一标识。\n        :return: 找到返回条目副本，否则返回 None。\n        '
+
+  def LPWiiMRadioSeeAllState.syncEntrySearchText(self, searchText)  line 779
+    names: str, _entry_search_text, _search_text, searchTextChanged, emit, _is_remote_mode, _reload_remote_data, _apply_local_filters
+      str: '\n        在重复进入同一状态时同步入口搜索词。\n\n        :param searchText: 入口携带的搜索词。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.onActivated(self)  line 799
+    names: _display_model, reconnect
+      str: '\n        状态激活时恢复模型信号连接。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.onDeactivated(self)  line 808
+    names: _display_model, cleanup
+      str: '\n        状态失活时断开模型信号连接。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState.dispose(self)  line 817
+    names: _store, favoriteRevisionChanged, disconnect, _handle_store_favorite_revision_changed, RuntimeError, TypeError, _display_model, cleanup, clear, _request_revision, _request_inflight, _deferred_remote_request
+      str: '\n        回收状态时释放模型数据与信号连接。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState._apply_descriptor(self, sectionDescriptor)  line 834
+    names: isinstance, dict, str, get, strip, _section_key, _page_title, lower, _mode, _is_popular_section_key, _build_query_without_location_codes, _base_query, copy, deepcopy, _is_favorites_section, _sync_favorites_raw_items, _normalize_items, _raw_items, _entry_search_text, _search_text, metaChanged, emit, searchTextChanged
+      str: '\n        应用入口描述对象。\n\n        :param sectionDescriptor: 展开页描述对象。\n        :return: None。\n        '
+      str: 'sectionKey'
+      str: 'title'
+      str: 'mode'
+      str: 'local'
+      str: 'baseQuery'
+      str: 'remote'
+      str: 'items'
+      str: 'searchText'
+
+  def LPWiiMRadioSeeAllState._is_favorites_section(self)  line 859
+    names: _section_key, LPWiiMRadioHomeState, FAVORITES_SECTION_KEY
+      str: '\n        判断当前 SeeAll 是否为 favorites 页面。\n\n        :param: 无。\n        :return: favorites 页面返回 True。\n        '
+
+  def LPWiiMRadioSeeAllState._sync_favorites_raw_items(self)  line 868
+    names: _normalize_items, _store, favoritesSnapshot, _raw_items
+      str: '\n        从 Store 同步最新 favorites 快照到本地原始列表。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState._handle_store_favorite_revision_changed(self)  line 877
+    names: _is_favorites_section, _sync_favorites_raw_items, _apply_local_filters, touch
+      str: '\n        处理 Store favorites 修订变化，保持 favorites SeeAll 实时同步。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState._normalize_items(self, rawItems)  line 890
+    names: isinstance, dict, str, get, strip, append, _extract_station_location_fields
+      str: '\n        将输入条目转换为统一结构。\n\n        :param rawItems: 原始条目列表。\n        :return: 归一化后的条目列表。\n        '
+      str: 'stationId'
+      str: 'stationID'
+      str: 'StationID'
+      str: 'name'
+      str: 'Name'
+      str: 'favicon'
+      str: 'Favicon'
+      str: 'streamUrl'
+      str: 'StreamUrl'
+      str: 'stationId'
+      str: 'name'
+      str: 'favicon'
+      str: 'streamUrl'
+
+  def LPWiiMRadioSeeAllState._normalize_sort_key(self, sortKey)  line 915
+    names: str, strip, _sort_options
+      str: '\n        归一化排序键。\n\n        :param sortKey: 原始排序键。\n        :return: 合法排序键。\n        '
+      str: 'default'
+      str: 'LPWiiMRadioSeeAllState._normalize_sort_key.<locals>.<setcomp>'
+
+    def LPWiiMRadioSeeAllState._normalize_sort_key.<setcomp>(.0)  line 923
+        str: 'value'
+
+  def LPWiiMRadioSeeAllState._normalize_layout_mode(self, layoutMode)  line 926
+    names: str, DEFAULT_LAYOUT_MODE, strip, lower, VALID_LAYOUT_MODES
+      str: '\n        归一化布局模式。\n\n        :param layoutMode: 原始布局模式。\n        :return: 合法布局模式。\n        '
+
+  def LPWiiMRadioSeeAllState._is_remote_mode(self)  line 936
+    names: _mode
+      str: '\n        判断是否远程分页模式。\n\n        :param: 无。\n        :return: 远程模式返回 True。\n        '
+      str: 'remote'
+
+  def LPWiiMRadioSeeAllState._apply_local_filters(self)  line 945
+    names: _clear_page_error, _search_text, strip, lower, _raw_items, get, append, dict, _sort_key, sort, _display_model, resetItems, _has_loaded_once, _has_more, displayItemsChanged, emit, paginationStateChanged
+      str: '\n        按本地模式应用搜索与排序过滤。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'name'
+      str: 'name_asc'
+      str: 'LPWiiMRadioSeeAllState._apply_local_filters.<locals>.<lambda>'
+      str: 'key'
+      str: 'name_desc'
+      str: 'key'
+      str: 'reverse'
+
+    def LPWiiMRadioSeeAllState._apply_local_filters.<lambda>(row)  line 961
+      names: get, lower
+        str: 'name'
+
+    def LPWiiMRadioSeeAllState._apply_local_filters.<lambda>(row)  line 963
+      names: get, lower
+        str: 'name'
+
+  def LPWiiMRadioSeeAllState._trigger_search(self)  line 971
+    names: _is_remote_mode, _reload_remote_data, _apply_local_filters
+      str: '\n        根据模式执行搜索。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioSeeAllState._reload_remote_data(self)  line 983
+    names: _request_revision, _clear_page_error, _display_model, clear, _has_loaded_once, _has_more, _next_page_no, _is_initial_loading, _is_loading_more, displayItemsChanged, emit, loadingStateChanged, paginationStateChanged, _request_remote_page, LPWiiMRadioRequestScheduler, PRIORITY_VISIBLE
+      str: '\n        重置并重新加载第一页远程数据。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'append'
+      str: 'priority'
+
+  def LPWiiMRadioSeeAllState._request_remote_page(self, pageNo, append, baseQueryOverride, popularFallbackRetried, priority)  line 1003
+    names: _request_inflight, int, bool, isinstance, dict, copy, deepcopy, str, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND, _deferred_remote_request, _build_remote_payload, _request_revision, _data_provider, fetchStations, _make_weak_result_callback
+      str: '\n        请求指定页码的远程数据。\n\n        :param pageNo: 页码。\n        :param append: 是否为追加模式。\n        :param baseQueryOverride: 可选的临时基础查询参数。\n        :param popularFallbackRetried: 是否已经执行过 popular 回退请求。\n        :param priority: 调度优先级。\n        :return: None。\n        '
+      str: 'pageNo'
+      str: 'append'
+      str: 'baseQueryOverride'
+      str: 'popularFallbackRetried'
+      str: 'priority'
+      str: 'baseQueryOverride'
+      str: 'revision'
+      str: 'append'
+      str: 'pageNo'
+      str: 'requestPayload'
+      str: 'popularFallbackRetried'
+      str: 'callback'
+      str: 'context'
+      str: 'priority'
+
+  def LPWiiMRadioSeeAllState._make_weak_result_callback(self)  line 1047
+    names: weakref, ref, Dict, str, Any
+      str: '\n        构造弱引用回调，避免线程回调强持有状态对象。\n\n        :param: 无。\n        :return: 回调函数。\n        '
+      str: 'result'
+      str: 'return'
+      str: 'LPWiiMRadioSeeAllState._make_weak_result_callback.<locals>._callback'
+
+    def LPWiiMRadioSeeAllState._make_weak_result_callback._callback(result)  line 1056
+      names: _handle_remote_result
+        str: '\n            处理远程请求回调。\n\n            :param result: 归一化分页结果。\n            :return: None。\n            '
+
+  def LPWiiMRadioSeeAllState._build_remote_payload(self, pageNo, baseQueryOverride)  line 1069
+    names: isinstance, dict, _base_query, copy, deepcopy, REMOTE_PAGE_SIZE, _search_text, strip, _sort_key
+      str: '\n        构建远程请求体。\n\n        :param pageNo: 页码。\n        :param baseQueryOverride: 可选的临时基础查询参数。\n        :return: 请求体字典。\n        '
+      str: 'pageNo'
+      str: 'pageSize'
+      str: 'name'
+      str: 'customName'
+      str: 'tags'
+      str: 'customTags'
+      str: 'name_asc'
+      str: 'orderByStr'
+      str: 'ASC'
+      str: 'sortStr'
+      str: 'name_desc'
+      str: 'DESC'
+
+  def LPWiiMRadioSeeAllState._handle_remote_result(self, result)  line 1094
+    names: isinstance, dict, get, int, bool, _request_inflight, _request_revision, logger, debug, _section_key, _flush_deferred_remote_request, _should_retry_popular_without_subcountry, _build_query_without_subcountry_code, _base_query, info, _request_remote_page, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND, str, _is_loading_more, _is_initial_loading, _display_model, count, _clear_page_error, appendItems, resetItems, _has_loaded_once, _has_more, _next_page_no, warning, clear, _set_page_error_from_result, displayItemsChanged, emit, loadingStateChanged, paginationStateChanged
+      str: '\n        处理远程请求结果。\n\n        :param result: 归一化分页结果。\n        :return: None。\n        '
+      str: 'context'
+      str: 'revision'
+      str: 'append'
+      str: 'pageNo'
+      str: '[WiiMRadio] ignore stale seeall response section='
+      str: ', revision='
+      str: 'requestPayload'
+      str: '[WiiMRadio] seeall popular empty with subcountryCode, retry country-only section='
+      str: 'append'
+      str: 'baseQueryOverride'
+      str: 'popularFallbackRetried'
+      str: 'priority'
+      str: 'success'
+      str: 'items'
+      str: 'hasMore'
+      str: 'error'
+      str: '[WiiMRadio] seeall load failed section='
+      str: ', error='
+      str: 'unknown'
+
+  def LPWiiMRadioSeeAllState._flush_deferred_remote_request(self)  line 1161
+    names: _deferred_remote_request, isinstance, dict, _request_remote_page, get, bool, str, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND
+      str: '\n        在当前远程请求结束后，补发最后一次被覆盖的请求。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'pageNo'
+      str: 'append'
+      str: 'baseQueryOverride'
+      str: 'popularFallbackRetried'
+      str: 'priority'
+      str: 'baseQueryOverride'
+      str: 'popularFallbackRetried'
+      str: 'priority'
+
+def LPWiiMRadioCategoryState()  line 1185
+  names: __name__, __module__, __qualname__, pyqtSignal, stationItemsChanged, searchTextChanged, layoutModeChanged, loadingStateChanged, paginationStateChanged, metaChanged, STATION_PAGE_SIZE, DEFAULT_LAYOUT_MODE, VALID_LAYOUT_MODES, str, Dict, Any, Optional, QObject, __init__, pyqtProperty, pageTitle, categoryKey, LPWiiMRadioStationListModel, stationItems, bool, hasVisibleItems, searchText, layoutMode, isStationLoading, isLoadingMore, canLoadMore, showStationEmptyState, setSearchText, triggerSearch, setLayoutMode, resetLayoutMode, toggleLayoutMode, loadNextPage, retryLoadPage, findItemByStationId, onActivated, onDeactivated, dispose, _apply_descriptor, _reload_stations, _begin_waiting_for_country_code, _handle_country_code_resolver_state_changed, _sync_country_code_into_base_query, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND, int, _request_station_page, _make_weak_station_callback, _build_station_query, _handle_station_result, _flush_deferred_station_request, _normalize_layout_mode, __classcell__
+    str: 'LPWiiMRadioCategoryState'
+    str: 'list'
+    str: 'grid'
+    str: 'cacheKey'
+    str: 'categoryDescriptor'
+    str: 'parent'
+    str: 'LPWiiMRadioCategoryState.__init__'
+    str: 'notify'
+    str: 'return'
+    str: 'LPWiiMRadioCategoryState.pageTitle'
+    str: 'LPWiiMRadioCategoryState.categoryKey'
+    str: 'LPWiiMRadioCategoryState.stationItems'
+    str: 'LPWiiMRadioCategoryState.hasVisibleItems'
+    str: 'LPWiiMRadioCategoryState.searchText'
+    str: 'LPWiiMRadioCategoryState.layoutMode'
+    str: 'LPWiiMRadioCategoryState.isStationLoading'
+    str: 'LPWiiMRadioCategoryState.isLoadingMore'
+    str: 'LPWiiMRadioCategoryState.canLoadMore'
+    str: 'LPWiiMRadioCategoryState.showStationEmptyState'
+    str: 'text'
+    str: 'return'
+    str: 'LPWiiMRadioCategoryState.setSearchText'
+    str: 'LPWiiMRadioCategoryState.triggerSearch'
+    str: 'layoutMode'
+    str: 'return'
+    str: 'LPWiiMRadioCategoryState.setLayoutMode'
+    str: 'LPWiiMRadioCategoryState.resetLayoutMode'
+    str: 'LPWiiMRadioCategoryState.toggleLayoutMode'
+    str: 'LPWiiMRadioCategoryState.loadNextPage'
+    str: 'LPWiiMRadioCategoryState.retryLoadPage'
+    str: 'stationId'
+    str: 'return'
+    str: 'LPWiiMRadioCategoryState.findItemByStationId'
+    str: 'LPWiiMRadioCategoryState.onActivated'
+    str: 'LPWiiMRadioCategoryState.onDeactivated'
+    str: 'LPWiiMRadioCategoryState.dispose'
+    str: 'categoryDescriptor'
+    str: 'return'
+    str: 'LPWiiMRadioCategoryState._apply_descriptor'
+    str: 'LPWiiMRadioCategoryState._reload_stations'
+    str: 'LPWiiMRadioCategoryState._begin_waiting_for_country_code'
+    str: 'LPWiiMRadioCategoryState._handle_country_code_resolver_state_changed'
+    str: 'LPWiiMRadioCategoryState._sync_country_code_into_base_query'
+    str: 'pageNo'
+    str: 'append'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioCategoryState._request_station_page'
+    str: 'LPWiiMRadioCategoryState._make_weak_station_callback'
+    str: 'pageNo'
+    str: 'return'
+    str: 'LPWiiMRadioCategoryState._build_station_query'
+    str: 'result'
+    str: 'return'
+    str: 'LPWiiMRadioCategoryState._handle_station_result'
+    str: 'LPWiiMRadioCategoryState._flush_deferred_station_request'
+    str: 'LPWiiMRadioCategoryState._normalize_layout_mode'
+
+  def LPWiiMRadioCategoryState.__init__(self, cacheKey, categoryDescriptor, parent)  line 1197
+    names: super, __init__, _category_key, _page_title, _base_query, _requires_country_code, LPWiiMRadioStationListModel, _station_model, _search_text, DEFAULT_LAYOUT_MODE, _layout_mode, _is_station_loading, _is_loading_more, _station_has_loaded_once, _has_more, _next_page_no, _request_revision, _is_waiting_for_country_code, _request_inflight, _deferred_station_request, LPGlobalUI, wiimRadioCountryCodeResolver, _country_code_resolver, stateChanged, connect, _handle_country_code_resolver_state_changed, LPWiiMRadioDataProvider, _data_provider, _apply_descriptor, _reload_stations
+      str: '\n        初始化分类详情状态对象。\n\n        :param cacheKey: 状态缓存唯一键。\n        :param categoryDescriptor: 分类详情描述对象。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+
+  def LPWiiMRadioCategoryState.pageTitle(self)  line 1229
+    names: _page_title
+      str: '\n        返回页面标题。\n\n        :param: 无。\n        :return: 页面标题。\n        '
+
+  def LPWiiMRadioCategoryState.categoryKey(self)  line 1239
+    names: _category_key
+      str: '\n        返回分类唯一标识。\n\n        :param: 无。\n        :return: categoryKey。\n        '
+
+  def LPWiiMRadioCategoryState.stationItems(self)  line 1249
+    names: _station_model
+      str: '\n        返回 stations 列表模型。\n\n        :param: 无。\n        :return: 列表模型对象。\n        '
+
+  def LPWiiMRadioCategoryState.hasVisibleItems(self)  line 1259
+    names: _station_model, count
+      str: '\n        返回当前是否已有可见 station 结果。\n\n        :param: 无。\n        :return: station 模型存在条目时返回 True。\n        '
+
+  def LPWiiMRadioCategoryState.searchText(self)  line 1269
+    names: _search_text
+      str: '\n        返回搜索文本。\n\n        :param: 无。\n        :return: 搜索文本。\n        '
+
+  def LPWiiMRadioCategoryState.layoutMode(self)  line 1279
+    names: _layout_mode
+      str: '\n        返回当前布局模式。\n\n        :param: 无。\n        :return: `list` 或 `grid`。\n        '
+
+  def LPWiiMRadioCategoryState.isStationLoading(self)  line 1289
+    names: _is_station_loading
+      str: '\n        返回是否处于首屏 loading。\n\n        :param: 无。\n        :return: 首屏 loading 中返回 True。\n        '
+
+  def LPWiiMRadioCategoryState.isLoadingMore(self)  line 1299
+    names: _is_loading_more
+      str: '\n        返回是否处于追加分页 loading。\n\n        :param: 无。\n        :return: 追加 loading 中返回 True。\n        '
+
+  def LPWiiMRadioCategoryState.canLoadMore(self)  line 1309
+    names: _has_more, _is_station_loading, _is_loading_more, _station_model, isFull
+      str: '\n        返回是否可继续加载下一页。\n\n        :param: 无。\n        :return: 可继续加载返回 True。\n        '
+
+  def LPWiiMRadioCategoryState.showStationEmptyState(self)  line 1324
+    names: _station_has_loaded_once, _is_station_loading, _station_model, count, _has_page_error
+      str: '\n        返回是否显示 stations 空态。\n\n        :param: 无。\n        :return: 应显示空态返回 True。\n        '
+
+  def LPWiiMRadioCategoryState.setSearchText(self, text)  line 1339
+    names: str, _search_text, searchTextChanged, emit, touch
+      str: '\n        设置搜索文本，仅保存输入内容，等待回车后执行搜索。\n\n        :param text: 搜索文本。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState.triggerSearch(self)  line 1353
+    names: _reload_stations, touch
+      str: '\n        立即执行搜索。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState.setLayoutMode(self, layoutMode)  line 1363
+    names: _normalize_layout_mode, _layout_mode, layoutModeChanged, emit, touch
+      str: '\n        设置当前布局模式。\n\n        :param layoutMode: 目标布局模式。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState.resetLayoutMode(self)  line 1377
+    names: setLayoutMode, DEFAULT_LAYOUT_MODE
+      str: '\n        重置布局模式为默认列表布局。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState.toggleLayoutMode(self)  line 1386
+    names: setLayoutMode, _layout_mode
+      str: '\n        在列表和网格布局间切换。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'list'
+      str: 'grid'
+
+  def LPWiiMRadioCategoryState.loadNextPage(self)  line 1395
+    names: canLoadMore, _is_loading_more, loadingStateChanged, emit, _request_station_page, _next_page_no, LPWiiMRadioRequestScheduler, PRIORITY_PRELOAD, touch
+      str: '\n        在可翻页时请求下一页。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'append'
+      str: 'priority'
+
+  def LPWiiMRadioCategoryState.retryLoadPage(self)  line 1413
+    names: _clear_page_error, _reload_stations, touch
+      str: '\n        重试当前分类详情页第一页 stations 请求。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState.findItemByStationId(self, stationId)  line 1424
+    names: touch, _station_model, findItemByStationId
+      str: '\n        根据 stationId 查找条目。\n\n        :param stationId: 电台唯一标识。\n        :return: 找到返回条目副本，否则返回 None。\n        '
+
+  def LPWiiMRadioCategoryState.onActivated(self)  line 1434
+    names: _station_model, reconnect
+      str: '\n        激活时恢复模型信号连接。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState.onDeactivated(self)  line 1443
+    names: _station_model, cleanup
+      str: '\n        失活时断开模型信号连接。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState.dispose(self)  line 1452
+    names: _station_model, cleanup, clear, _request_revision, _request_inflight, _deferred_station_request
+      str: '\n        回收状态时释放模型数据与回调有效性。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState._apply_descriptor(self, categoryDescriptor)  line 1465
+    names: isinstance, dict, str, get, strip, _category_key, _page_title, copy, deepcopy, _base_query, bool, _requires_country_code, _search_text, metaChanged, emit, searchTextChanged
+      str: '\n        应用分类入口描述对象。\n\n        :param categoryDescriptor: 分类详情描述对象。\n        :return: None。\n        '
+      str: 'categoryKey'
+      str: 'title'
+      str: 'baseQuery'
+      str: 'requiresCountryCode'
+      str: 'searchText'
+
+  def LPWiiMRadioCategoryState._reload_stations(self)  line 1482
+    names: _clear_page_error, _requires_country_code, _country_code_resolver, hasResolved, _begin_waiting_for_country_code, _sync_country_code_into_base_query, _request_revision, _is_waiting_for_country_code, _is_station_loading, _is_loading_more, _station_has_loaded_once, _has_more, _next_page_no, _station_model, clear, stationItemsChanged, emit, loadingStateChanged, paginationStateChanged, _request_station_page, LPWiiMRadioRequestScheduler, PRIORITY_VISIBLE
+      str: '\n        重置并加载第一页 stations。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'append'
+      str: 'priority'
+
+  def LPWiiMRadioCategoryState._begin_waiting_for_country_code(self)  line 1507
+    names: _request_revision, _is_waiting_for_country_code, _is_station_loading, _is_loading_more, _station_has_loaded_once, _has_more, _next_page_no, _station_model, clear, stationItemsChanged, emit, loadingStateChanged, paginationStateChanged, _country_code_resolver, ensureLoaded
+      str: '\n        进入等待全局 countryCode 的首屏 loading 状态。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState._handle_country_code_resolver_state_changed(self)  line 1527
+    names: _requires_country_code, _country_code_resolver, hasResolved, _is_waiting_for_country_code, _reload_stations
+      str: '\n        处理全局 countryCode 解析结果并恢复分类数据加载。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioCategoryState._sync_country_code_into_base_query(self)  line 1540
+    names: _requires_country_code, str, _country_code_resolver, countryCode, strip, upper, len, _base_query
+      str: '\n        将全局解析出的 countryCode 回填到分类基础查询参数。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'countryCode'
+
+  def LPWiiMRadioCategoryState._request_station_page(self, pageNo, append, priority)  line 1552
+    names: _request_inflight, int, bool, str, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND, _deferred_station_request, _build_station_query, _request_revision, _data_provider, fetchStations, _make_weak_station_callback
+      str: '\n        请求指定页码 stations 数据。\n\n        :param pageNo: 页码。\n        :param append: 是否追加模式。\n        :param priority: 调度优先级。\n        :return: None。\n        '
+      str: 'pageNo'
+      str: 'append'
+      str: 'priority'
+      str: 'revision'
+      str: 'append'
+      str: 'pageNo'
+      str: 'callback'
+      str: 'context'
+      str: 'priority'
+
+  def LPWiiMRadioCategoryState._make_weak_station_callback(self)  line 1584
+    names: weakref, ref, Dict, str, Any
+      str: '\n        构造弱引用回调。\n\n        :param: 无。\n        :return: 回调函数。\n        '
+      str: 'result'
+      str: 'return'
+      str: 'LPWiiMRadioCategoryState._make_weak_station_callback.<locals>._callback'
+
+    def LPWiiMRadioCategoryState._make_weak_station_callback._callback(result)  line 1593
+      names: _handle_station_result
+        str: '\n            处理 stations 请求回调。\n\n            :param result: 归一化分页结果。\n            :return: None。\n            '
+
+  def LPWiiMRadioCategoryState._build_station_query(self, pageNo)  line 1606
+    names: copy, deepcopy, _base_query, STATION_PAGE_SIZE, _search_text, strip
+      str: '\n        构建 stations 请求体。\n\n        :param pageNo: 页码。\n        :return: 请求体字典。\n        '
+      str: 'pageNo'
+      str: 'pageSize'
+      str: 'customName'
+      str: 'tags'
+      str: 'customTags'
+      str: 'name'
+
+  def LPWiiMRadioCategoryState._handle_station_result(self, result)  line 1622
+    names: isinstance, dict, get, int, bool, _request_inflight, _request_revision, logger, debug, _flush_deferred_station_request, str, _is_loading_more, _is_station_loading, _station_model, count, _clear_page_error, warning, _category_key, _has_more, clear, _set_page_error_from_result, _next_page_no, _station_has_loaded_once, stationItemsChanged, emit, loadingStateChanged, paginationStateChanged, appendItems, resetItems
+      str: '\n        处理 stations 请求结果。\n\n        :param result: 归一化分页结果。\n        :return: None。\n        '
+      str: 'context'
+      str: 'revision'
+      str: 'append'
+      str: 'pageNo'
+      str: '[WiiMRadio] ignore stale category response revision='
+      str: 'success'
+      str: 'items'
+      str: 'hasMore'
+      str: 'error'
+      str: '[WiiMRadio] category stations load failed category='
+      str: ', error='
+      str: 'empty'
+
+  def LPWiiMRadioCategoryState._flush_deferred_station_request(self)  line 1684
+    names: _deferred_station_request, isinstance, dict, _request_station_page, get, bool, str, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND
+      str: '\n        在当前 stations 请求结束后，补发最后一次被覆盖的请求。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'pageNo'
+      str: 'append'
+      str: 'priority'
+      str: 'priority'
+
+  def LPWiiMRadioCategoryState._normalize_layout_mode(self, layoutMode)  line 1704
+    names: str, DEFAULT_LAYOUT_MODE, strip, lower, VALID_LAYOUT_MODES
+      str: '\n        归一化布局模式。\n\n        :param layoutMode: 原始布局模式。\n        :return: 合法布局模式。\n        '
+
+def LPWiiMRadioHomeState()  line 1716
+  names: __name__, __module__, __qualname__, pyqtSignal, sectionDataChanged, searchTextChanged, searchStateChanged, isInitialLoadingChanged, favoriteRevisionChanged, FAVORITES_SECTION_KEY, CATEGORY_SECTION_KEY, SEARCH_SECTION_KEY, HOME_SEARCH_PAGE_SIZE, str, Optional, QObject, __init__, pyqtProperty, bool, isInitialLoading, sectionData, int, favoriteRevision, searchText, isSearchMode, isSearchLoading, showSearchEmptyState, setSearchText, triggerSearch, isFavorite, List, Dict, favoritesSnapshot, reloadFavoritesFromCache, Any, toggleFavoriteItem, toggleFavorite, buildSectionDescriptor, buildSearchResultDescriptor, buildCategoryDetailDescriptor, findStationItem, onDeactivated, dispose, pyqtSlot, updateHomeSectionVisibleRange, clearHomeSectionVisibleRange, _handle_thumbnail_ready, _update_thumbnail_path_for_items, _resolve_thumbnail_path_for_item, _initialize_remote_sections, _handle_country_code_resolver_state_changed, _activate_remote_sections, _current_country_code, _current_subcountry_code, _load_remote_sections, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND, _request_remote_section, _make_weak_section_callback, _handle_remote_section_result, _home_section_priority, _build_remote_section_specs, _build_global_search_base_query, _build_remote_query, _build_static_category_section, _build_static_section_item, _rebuild_section_data, _apply_section_data, _build_search_sections, _resolve_remote_section_items, _should_show_remote_section_loading, _trigger_search, _make_weak_global_search_callback, _handle_global_search_result, _normalize_search_items, _find_remote_section_spec, _remove_favorite, _commit_favorites_change, _load_favorites, _save_favorites, _normalize_favorite_item, _normalize_section_data_for_qml, _mutable_section_items, _refresh_visible_section_thumbnail_requests, _prune_inactive_section_visible_ranges, _schedule_section_visible_thumbnails, __classcell__
+    str: 'LPWiiMRadioHomeState'
+    str: 'favorites'
+    str: 'category'
+    str: 'homeSearch'
+    str: 'cacheKey'
+    str: 'parent'
+    str: 'LPWiiMRadioHomeState.__init__'
+    str: 'notify'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.isInitialLoading'
+    str: 'LPWiiMRadioHomeState.sectionData'
+    str: 'LPWiiMRadioHomeState.favoriteRevision'
+    str: 'LPWiiMRadioHomeState.searchText'
+    str: 'LPWiiMRadioHomeState.isSearchMode'
+    str: 'LPWiiMRadioHomeState.isSearchLoading'
+    str: 'LPWiiMRadioHomeState.showSearchEmptyState'
+    str: 'text'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.setSearchText'
+    str: 'LPWiiMRadioHomeState.triggerSearch'
+    str: 'stationId'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.isFavorite'
+    str: 'LPWiiMRadioHomeState.favoritesSnapshot'
+    str: 'LPWiiMRadioHomeState.reloadFavoritesFromCache'
+    str: 'itemData'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.toggleFavoriteItem'
+    str: 'sectionKey'
+    str: 'stationId'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.toggleFavorite'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.buildSectionDescriptor'
+    str: 'keyword'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.buildSearchResultDescriptor'
+    str: 'LPWiiMRadioHomeState.buildCategoryDetailDescriptor'
+    str: 'stationId'
+    str: 'preferredSectionKey'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.findStationItem'
+    str: 'LPWiiMRadioHomeState.onDeactivated'
+    str: 'LPWiiMRadioHomeState.dispose'
+    str: 'sectionKey'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState.updateHomeSectionVisibleRange'
+    str: 'LPWiiMRadioHomeState.clearHomeSectionVisibleRange'
+    str: 'faviconUrl'
+    str: 'thumbnailPath'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._handle_thumbnail_ready'
+    str: 'items'
+    str: 'faviconUrl'
+    str: 'thumbnailPath'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._update_thumbnail_path_for_items'
+    str: 'item'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._resolve_thumbnail_path_for_item'
+    str: 'LPWiiMRadioHomeState._initialize_remote_sections'
+    str: 'LPWiiMRadioHomeState._handle_country_code_resolver_state_changed'
+    str: 'LPWiiMRadioHomeState._activate_remote_sections'
+    str: 'LPWiiMRadioHomeState._current_country_code'
+    str: 'LPWiiMRadioHomeState._current_subcountry_code'
+    str: 'LPWiiMRadioHomeState._load_remote_sections'
+    str: 'sectionKey'
+    str: 'baseQuery'
+    str: 'popularFallbackRetried'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._request_remote_section'
+    str: 'sectionKey'
+    str: 'LPWiiMRadioHomeState._make_weak_section_callback'
+    str: 'sectionKey'
+    str: 'result'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._handle_remote_section_result'
+    str: 'LPWiiMRadioHomeState._home_section_priority'
+    str: 'countryCode'
+    str: 'subcountryCode'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._build_remote_section_specs'
+    str: 'LPWiiMRadioHomeState._build_global_search_base_query'
+    str: 'categories'
+    str: 'countryCode'
+    str: 'subcountryCode'
+    str: 'tags'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._build_remote_query'
+    str: 'LPWiiMRadioHomeState._build_static_category_section'
+    str: 'stationId'
+    str: 'name'
+    str: 'favicon'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._build_static_section_item'
+    str: 'LPWiiMRadioHomeState._rebuild_section_data'
+    str: 'sections'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._apply_section_data'
+    str: 'LPWiiMRadioHomeState._build_search_sections'
+    str: 'LPWiiMRadioHomeState._resolve_remote_section_items'
+    str: 'LPWiiMRadioHomeState._should_show_remote_section_loading'
+    str: 'LPWiiMRadioHomeState._trigger_search'
+    str: 'LPWiiMRadioHomeState._make_weak_global_search_callback'
+    str: 'result'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._handle_global_search_result'
+    str: 'items'
+    str: 'return'
+    str: 'LPWiiMRadioHomeState._normalize_search_items'
+    str: 'LPWiiMRadioHomeState._find_remote_section_spec'
+    str: 'LPWiiMRadioHomeState._remove_favorite'
+    str: 'LPWiiMRadioHomeState._commit_favorites_change'
+    str: 'LPWiiMRadioHomeState._load_favorites'
+    str: 'LPWiiMRadioHomeState._save_favorites'
+    str: 'LPWiiMRadioHomeState._normalize_favorite_item'
+    str: 'LPWiiMRadioHomeState._normalize_section_data_for_qml'
+    str: 'LPWiiMRadioHomeState._mutable_section_items'
+    str: 'LPWiiMRadioHomeState._refresh_visible_section_thumbnail_requests'
+    str: 'LPWiiMRadioHomeState._prune_inactive_section_visible_ranges'
+    str: 'LPWiiMRadioHomeState._schedule_section_visible_thumbnails'
+
+  def LPWiiMRadioHomeState.__init__(self, cacheKey, parent)  line 1728
+    names: super, __init__, _favorite_revision, _load_favorites, _favorites, _section_data, LPWiiMRadioHomeSectionListModel, _section_model, LPGlobalUI, wiimRadioCountryCodeResolver, _country_code_resolver, stateChanged, connect, _handle_country_code_resolver_state_changed, _remote_sections_initialized, _remote_section_specs, _remote_section_items, set, _loaded_remote_sections, _build_static_category_section, _category_section, _search_text, _search_results, _is_search_loading, _search_has_loaded_once, _search_request_revision, _is_initial_loading, LPWiiMRadioThumbnailService, instance, _thumbnail_service, thumbnailReady, _handle_thumbnail_ready, LPWiiMRadioDataProvider, _data_provider, QTimer, _thumbnail_rebuild_timer, setSingleShot, setInterval, timeout, _rebuild_section_data, _section_visible_ranges, _initialize_remote_sections
+      str: '\n        初始化 Home 状态对象。\n\n        :param cacheKey: 状态缓存唯一键。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+
+  def LPWiiMRadioHomeState.isInitialLoading(self)  line 1765
+    names: _is_initial_loading
+      str: '\n        返回首页是否处于首屏加载状态。\n\n        :param: 无。\n        :return: 首屏加载中返回 True。\n        '
+
+  def LPWiiMRadioHomeState.sectionData(self)  line 1775
+    names: _section_model
+      str: '\n        返回首页区块数据。\n\n        :param: 无。\n        :return: 区块模型对象。\n        '
+
+  def LPWiiMRadioHomeState.favoriteRevision(self)  line 1785
+    names: _favorite_revision
+      str: '\n        返回收藏修订号。\n\n        :param: 无。\n        :return: 收藏修订号。\n        '
+
+  def LPWiiMRadioHomeState.searchText(self)  line 1795
+    names: _search_text
+      str: '\n        返回搜索文本。\n\n        :param: 无。\n        :return: 搜索文本。\n        '
+
+  def LPWiiMRadioHomeState.isSearchMode(self)  line 1805
+    names: _is_search_loading, _search_has_loaded_once
+      str: '\n        返回是否处于搜索模式。\n\n        :param: 无。\n        :return: 首页内搜索请求处于加载或已加载状态时返回 True。\n        '
+
+  def LPWiiMRadioHomeState.isSearchLoading(self)  line 1815
+    names: _is_search_loading
+      str: '\n        返回是否处于搜索 loading。\n\n        :param: 无。\n        :return: 搜索 loading 中返回 True。\n        '
+
+  def LPWiiMRadioHomeState.showSearchEmptyState(self)  line 1825
+    names: isSearchMode, _search_has_loaded_once, _is_search_loading, _search_results
+      str: '\n        返回是否显示搜索空态。\n\n        :param: 无。\n        :return: 应显示空态返回 True。\n        '
+
+  def LPWiiMRadioHomeState.setSearchText(self, text)  line 1835
+    names: str, _search_text, _is_search_loading, _search_has_loaded_once, _search_results, searchTextChanged, emit, searchStateChanged, touch
+      str: '\n        设置首页搜索文本，仅保存输入内容，不在首页内触发搜索结果刷新。\n\n        :param text: 搜索文本。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState.triggerSearch(self)  line 1853
+    names: touch
+      str: '\n        保留旧入口兼容，不在首页内触发搜索。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState.isFavorite(self, stationId)  line 1862
+    names: str, strip, any, _favorites
+      str: '\n        判断电台是否已收藏。\n\n        :param stationId: 电台唯一标识。\n        :return: 已收藏返回 True。\n        '
+      str: 'LPWiiMRadioHomeState.isFavorite.<locals>.<genexpr>'
+
+    def LPWiiMRadioHomeState.isFavorite.<genexpr>(.0)  line 1870
+      names: get
+        str: 'stationId'
+
+  def LPWiiMRadioHomeState.favoritesSnapshot(self)  line 1872
+    names: _favorites
+      str: '\n        返回当前 favorites 快照。\n\n        :param: 无。\n        :return: favorites 条目副本列表。\n        '
+      str: 'LPWiiMRadioHomeState.favoritesSnapshot.<locals>.<listcomp>'
+
+    def LPWiiMRadioHomeState.favoritesSnapshot.<listcomp>(.0)  line 1879
+      names: dict
+
+  def LPWiiMRadioHomeState.reloadFavoritesFromCache(self)  line 1881
+    names: _ensure_wiimradio_favorites_loaded, _favorites, _favorite_revision, _rebuild_section_data, favoriteRevisionChanged, emit, touch
+      str: '\n        从统一缓存重新加载收藏列表并刷新状态，不写回缓存。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState.toggleFavoriteItem(self, itemData)  line 1897
+    names: _normalize_favorite_item, isFavorite, _remove_favorite, _favorites, insert, _commit_favorites_change
+      str: '\n        基于完整电台数据切换收藏状态。\n\n        :param itemData: 电台数据对象。\n        :return: favorites 发生变更时返回 True，否则返回 False。\n        '
+      str: 'stationId'
+
+  def LPWiiMRadioHomeState.toggleFavorite(self, sectionKey, stationId)  line 1921
+    names: str, strip, CATEGORY_SECTION_KEY, FAVORITES_SECTION_KEY, _remove_favorite, isFavorite, findStationItem, _favorites, insert, _commit_favorites_change
+      str: '\n        切换收藏状态并刷新区块数据。\n\n        :param sectionKey: 来源区块标识。\n        :param stationId: 电台唯一标识。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState.buildSectionDescriptor(self, sectionKey)  line 1948
+    names: str, strip, FAVORITES_SECTION_KEY, QCoreApplication, translate, list, _favorites, SEARCH_SECTION_KEY, buildSearchResultDescriptor, _find_remote_section_spec, get, _remote_section_items, _is_popular_section_key, copy, deepcopy, _build_query_without_location_codes
+      str: '\n        按 sectionKey 构建 SeeAll 描述对象。\n\n        :param sectionKey: 区块唯一标识。\n        :return: 描述对象，找不到返回 None。\n        '
+      str: 'WiiMRadio'
+      str: 'Favorites'
+      str: 'local'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'mode'
+      str: 'items'
+      str: 'baseQuery'
+      str: 'title'
+      str: 'remote'
+      str: 'baseQuery'
+
+  def LPWiiMRadioHomeState.buildSearchResultDescriptor(self, keyword)  line 1987
+    names: str, _search_text, strip, SEARCH_SECTION_KEY, QCoreApplication, translate, _build_global_search_base_query
+      str: '\n        构建搜索结果页描述对象，用于从首页 push 到独立搜索结果页。\n\n        :param keyword: 指定搜索词；为空时使用当前首页搜索文本。\n        :return: 搜索词有效时返回描述对象，否则返回 None。\n        '
+      str: 'WiiMRadio'
+      str: 'Search Results'
+      str: 'remote'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'mode'
+      str: 'items'
+      str: 'baseQuery'
+      str: 'searchText'
+
+  def LPWiiMRadioHomeState.buildCategoryDetailDescriptor(self, stationId)  line 2006
+    names: str, strip, next, WIIM_RADIO_CATEGORY_DEFINITIONS, bool, _country_code_resolver, hasResolved, ensureLoaded, _current_country_code, _build_remote_query
+      str: '\n        根据分类卡片 ID 构建分类详情描述对象。\n\n        :param stationId: 分类卡片 ID。\n        :return: 描述对象，找不到返回 None。\n        '
+      str: 'LPWiiMRadioHomeState.buildCategoryDetailDescriptor.<locals>.<genexpr>'
+      str: 'useCountryCode'
+      str: 'categoryKey'
+      str: 'name'
+      str: 'queryCategories'
+      str: 'categories'
+      str: 'countryCode'
+      str: 'stationId'
+      str: 'categoryKey'
+      str: 'title'
+      str: 'baseQuery'
+      str: 'requiresCountryCode'
+
+    def LPWiiMRadioHomeState.buildCategoryDetailDescriptor.<genexpr>(.0)  line 2014
+        str: 'stationId'
+
+  def LPWiiMRadioHomeState.findStationItem(self, stationId, preferredSectionKey)  line 2029
+    names: str, strip, _section_data, get, FAVORITES_SECTION_KEY, _normalize_favorite_item
+      str: '\n        在首页区块数据中查找电台条目。\n\n        :param stationId: 电台唯一标识。\n        :param preferredSectionKey: 优先匹配的区块标识。\n        :return: 找到返回条目副本，否则返回 None。\n        '
+      str: 'sectionKey'
+      str: 'items'
+      str: 'stationId'
+
+  def LPWiiMRadioHomeState.onDeactivated(self)  line 2057
+    names: _thumbnail_rebuild_timer, stop, _section_visible_ranges
+      str: '\n        失活时停止缩略图延迟刷新并清空可见区记录。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState.dispose(self)  line 2067
+    names: _thumbnail_rebuild_timer, stop, _section_visible_ranges, _thumbnail_service, thumbnailReady, disconnect, _handle_thumbnail_ready, RuntimeError, TypeError
+      str: '\n        回收 Home 状态（当前设计下不应触发）。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState.updateHomeSectionVisibleRange(self, sectionKey, firstIndex, lastIndex)  line 2081
+    names: str, strip, _mutable_section_items, _section_visible_ranges, pop, max, int, min, len, get, _schedule_section_visible_thumbnails, _rebuild_section_data
+      str: '\n        更新首页指定区块的可见范围，并按“可见区 + 预取窗口”调度缩略图。\n\n        :param sectionKey: 区块唯一标识。\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState.clearHomeSectionVisibleRange(self, sectionKey)  line 2112
+    names: str, strip, _section_visible_ranges, pop
+      str: '\n        清空首页指定区块的可见范围记录。\n\n        :param sectionKey: 区块唯一标识。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState._handle_thumbnail_ready(self, faviconUrl, thumbnailPath)  line 2125
+    names: str, strip, _update_thumbnail_path_for_items, _favorites, _search_results, _remote_section_items, values, _thumbnail_rebuild_timer, isActive, start
+      str: '\n        处理首页缩略图生成完成事件，并刷新命中的区块条目。\n\n        :param faviconUrl: 原始远程 favicon URL。\n        :param thumbnailPath: 本地缩略图 `file://` 路径。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState._update_thumbnail_path_for_items(self, items, faviconUrl, thumbnailPath)  line 2150
+    names: str, strip, isinstance, dict, get
+      str: '\n        批量为命中的条目写入本地缩略图路径。\n\n        :param items: 待更新的条目列表。\n        :param faviconUrl: 原始远程 favicon URL。\n        :param thumbnailPath: 本地缩略图 `file://` 路径。\n        :return: 至少有一项被更新时返回 True。\n        '
+      str: 'favicon'
+      str: 'Favicon'
+      str: 'faviconThumbPath'
+      str: 'FaviconThumbPath'
+
+  def LPWiiMRadioHomeState._resolve_thumbnail_path_for_item(self, item)  line 2181
+    names: isinstance, dict, str, get, strip, _thumbnail_service, thumbnailPath
+      str: '\n        解析单个条目的缩略图路径，并在可用时回写到原始条目。\n\n        :param item: 原始条目对象。\n        :return: 可立即使用的缩略图路径；不存在时返回空字符串。\n        '
+      str: 'faviconThumbPath'
+      str: 'FaviconThumbPath'
+      str: 'favicon'
+      str: 'Favicon'
+
+  def LPWiiMRadioHomeState._initialize_remote_sections(self)  line 2202
+    names: _country_code_resolver, hasResolved, _activate_remote_sections, ensureLoaded
+      str: '\n        按全局 countryCode 解析状态初始化首页远程区块。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState._handle_country_code_resolver_state_changed(self)  line 2214
+    names: _country_code_resolver, hasResolved, _activate_remote_sections
+      str: '\n        处理全局 countryCode 解析状态变化。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState._activate_remote_sections(self)  line 2225
+    names: _remote_sections_initialized, _build_remote_section_specs, _current_country_code, _current_subcountry_code, _remote_section_specs, _rebuild_section_data, _load_remote_sections
+      str: '\n        在 countryCode 就绪后创建区块配置并发起首页远程加载。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState._current_country_code(self)  line 2242
+    names: _country_code_resolver, hasResolved, str, countryCode, strip, upper, len
+      str: '\n        读取当前全局缓存的国家代码。\n\n        :param: 无。\n        :return: 两位国家代码；未解析或无效时为空字符串。\n        '
+
+  def LPWiiMRadioHomeState._current_subcountry_code(self)  line 2254
+    names: _country_code_resolver, hasResolved, str, subcountryCode, strip
+      str: '\n        读取当前全局缓存的子地区代码。\n\n        :param: 无。\n        :return: 子地区代码；未解析或无效时为空字符串。\n        '
+
+  def LPWiiMRadioHomeState._load_remote_sections(self)  line 2265
+    names: _remote_section_specs, str, get, _request_remote_section, _home_section_priority
+      str: '\n        异步加载首页远程区块。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'sectionKey'
+      str: 'baseQuery'
+      str: 'priority'
+
+  def LPWiiMRadioHomeState._request_remote_section(self, sectionKey, baseQuery, popularFallbackRetried, priority)  line 2280
+    names: str, strip, isinstance, dict, copy, deepcopy, _data_provider, fetchStations, _make_weak_section_callback
+      str: '\n        请求指定首页远程区块数据。\n\n        :param sectionKey: 区块标识。\n        :param baseQuery: 基础查询参数。\n        :param popularFallbackRetried: 是否已经执行过 popular 回退请求。\n        :param priority: 调度优先级。\n        :return: None。\n        '
+      str: 'sectionKey'
+      str: 'requestPayload'
+      str: 'popularFallbackRetried'
+      str: 'callback'
+      str: 'context'
+      str: 'priority'
+
+  def LPWiiMRadioHomeState._make_weak_section_callback(self, sectionKey)  line 2310
+    names: weakref, ref, str, strip, Dict, Any
+      str: '\n        构造弱引用区块回调。\n\n        :param sectionKey: 区块标识。\n        :return: 回调函数。\n        '
+      str: 'result'
+      str: 'return'
+      str: 'LPWiiMRadioHomeState._make_weak_section_callback.<locals>._callback'
+
+    def LPWiiMRadioHomeState._make_weak_section_callback._callback(result)  line 2320
+      names: _handle_remote_section_result
+        str: '\n            处理区块回调。\n\n            :param result: 归一化分页结果。\n            :return: None。\n            '
+
+  def LPWiiMRadioHomeState._handle_remote_section_result(self, sectionKey, result)  line 2333
+    names: str, strip, isinstance, dict, get, _should_retry_popular_without_subcountry, _build_query_without_subcountry_code, logger, info, _request_remote_section, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND, bool, list, _remote_section_items, pop, warning, _loaded_remote_sections, add, _is_initial_loading, isInitialLoadingChanged, emit, _rebuild_section_data
+      str: '\n        处理首页远程区块返回结果。\n\n        :param sectionKey: 区块标识。\n        :param result: 归一化分页结果。\n        :return: None。\n        '
+      str: 'context'
+      str: 'requestPayload'
+      str: '[WiiMRadio] home popular empty with subcountryCode, retry country-only section='
+      str: 'popularFallbackRetried'
+      str: 'priority'
+      str: 'items'
+      str: 'success'
+      str: 'error'
+      str: '[WiiMRadio] section load failed section='
+      str: ', error='
+      str: 'empty'
+
+  def LPWiiMRadioHomeState._home_section_priority(self, sectionKey)  line 2372
+    names: str, strip, LPWiiMRadioRequestScheduler, PRIORITY_VISIBLE, PRIORITY_BACKGROUND
+      str: '\n        返回首页远程区块的固定调度优先级。\n\n        :param sectionKey: 区块标识。\n        :return: 调度优先级字符串。\n        '
+      str: 'topMusic'
+      str: 'popular'
+
+  def LPWiiMRadioHomeState._build_remote_section_specs(self, countryCode, subcountryCode)  line 2384
+    names: QCoreApplication, translate, _build_remote_query
+      str: '\n        构建首页远程区块配置。\n\n        :param countryCode: 用于 popular 区块的国家代码。\n        :param subcountryCode: 用于 popular 区块的子地区代码。\n        :return: 区块配置列表。\n        '
+      str: 'popular'
+      str: 'WiiMRadio'
+      str: 'Popular in Your Area'
+      str: 'remote'
+      str: 'countryCode'
+      str: 'subcountryCode'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'mode'
+      str: 'baseQuery'
+      str: 'topMusic'
+      str: 'Top Music'
+      str: 'Music'
+      str: 'categories'
+      str: 'topNews'
+      str: 'Top News'
+      str: 'news'
+      str: 'topTalk'
+      str: 'Top Talk'
+      str: 'talk'
+      str: 'topSports'
+      str: 'Top Sports'
+      str: 'Sports'
+      str: 'sleepRadio'
+      str: 'Relax & Unwind Stations'
+      str: 'Relaxation Music'
+      str: 'tags'
+
+  def LPWiiMRadioHomeState._build_global_search_base_query(self)  line 2436
+    names: _build_remote_query
+      str: '\n        构建首页全局搜索基础查询参数。\n\n        :param: 无。\n        :return: 查询参数字典。\n        '
+      str: 'categories'
+      str: 'countryCode'
+
+  def LPWiiMRadioHomeState._build_remote_query(self, categories, countryCode, subcountryCode, tags)  line 2445
+    names: str, strip, lower, HOME_SEARCH_PAGE_SIZE
+      str: '\n        构建远程查询参数。\n\n        :param categories: 分类。\n        :param countryCode: 国家代码。\n        :param subcountryCode: 子地区代码。\n        :param tags: 电台标签\n        :return: 查询参数字典。\n        '
+      str: 'clickCount'
+      str: 'isDistinct'
+      str: 'stationId'
+      str: 'name'
+      str: 'customName'
+      str: 'language'
+      str: 'languageCodes'
+      str: 'country'
+      str: 'countryCode'
+      str: 'subcountry'
+      str: 'subcountryCode'
+      str: 'city'
+      str: 'radioId'
+      str: 'categories'
+      str: 'customTags'
+      str: 'tags'
+      str: 'pageNo'
+      str: 'pageSize'
+      str: 'orderByStr'
+      str: 'sortStr'
+
+  def LPWiiMRadioHomeState._build_static_category_section(self)  line 2483
+    names: CATEGORY_SECTION_KEY, QCoreApplication, translate, WIIM_RADIO_CATEGORY_DEFINITIONS
+      str: '\n        构建静态分类区块。\n\n        :param: 无。\n        :return: 分类区块字典。\n        '
+      str: 'WiiMRadio'
+      str: 'Categories'
+      str: 'LPWiiMRadioHomeState._build_static_category_section.<locals>.<listcomp>'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'isCategory'
+      str: 'items'
+
+    def LPWiiMRadioHomeState._build_static_category_section.<listcomp>(.0)  line 2494
+      names: _build_static_section_item
+        str: 'stationId'
+        str: 'name'
+        str: 'favicon'
+
+  def LPWiiMRadioHomeState._build_static_section_item(self, stationId, name, favicon)  line 2500
+      str: '\n        构建静态区块条目。\n\n        :param stationId: 条目 ID。\n        :param name: 标题。\n        :param favicon: 封面图路径。\n        :return: 条目字典。\n        '
+      str: 'qrc:/images/WiiMRadio/'
+      str: '.jpg'
+      str: 'stationId'
+      str: 'name'
+      str: 'favicon'
+
+  def LPWiiMRadioHomeState._rebuild_section_data(self)  line 2512
+    names: isSearchMode, _build_search_sections, _prune_inactive_section_visible_ranges, _apply_section_data, _normalize_section_data_for_qml, _favorites, append, FAVORITES_SECTION_KEY, QCoreApplication, translate, list, _remote_section_specs, _category_section, str, get, _resolve_remote_section_items, _should_show_remote_section_loading, _refresh_visible_section_thumbnail_requests
+      str: '\n        重新组装首页区块数据。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'WiiMRadio'
+      str: 'Favorites'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'sectionKey'
+      str: 'popular'
+      str: 'title'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'isLoading'
+
+  def LPWiiMRadioHomeState._apply_section_data(self, sections)  line 2574
+    names: _section_data, _section_model, resetSections, sectionDataChanged, emit, enumerate, len, updateSectionAt
+      str: '\n        将首页区块数据同步到稳定模型，尽量只更新命中的区块行。\n\n        :param sections: 新的区块列表。\n        :return: 区块结构发生变化时返回 True。\n        '
+      str: 'LPWiiMRadioHomeState._apply_section_data.<locals>.<listcomp>'
+
+    def LPWiiMRadioHomeState._apply_section_data.<listcomp>(.0)  line 2581
+      names: isinstance, dict
+
+    def LPWiiMRadioHomeState._apply_section_data.<listcomp>(.0)  line 2582
+      names: str, get
+        str: 'sectionKey'
+
+    def LPWiiMRadioHomeState._apply_section_data.<listcomp>(.0)  line 2583
+      names: str, get
+        str: 'sectionKey'
+
+  def LPWiiMRadioHomeState._build_search_sections(self)  line 2601
+    names: QCoreApplication, translate, _is_search_loading, list, _search_results, _search_has_loaded_once, SEARCH_SECTION_KEY
+      str: '\n        构建搜索模式下的区块列表。\n\n        :param: 无。\n        :return: 区块列表。\n        '
+      str: 'WiiMRadio'
+      str: 'Search Results'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+
+  def LPWiiMRadioHomeState._resolve_remote_section_items(self, sectionKey)  line 2614
+    names: str, strip, _loaded_remote_sections, list, _remote_section_items, get
+      str: '\n        返回远程区块真实条目。\n\n        :param sectionKey: 区块标识。\n        :return: 条目列表。\n        '
+
+  def LPWiiMRadioHomeState._should_show_remote_section_loading(self, sectionKey)  line 2626
+    names: str, strip, isSearchMode, _remote_sections_initialized, _loaded_remote_sections, _remote_section_items
+      str: '\n        判断指定远程区块当前是否需要显示局部骨架。\n\n        :param sectionKey: 区块标识。\n        :return: 需要显示局部骨架返回 True。\n        '
+
+  def LPWiiMRadioHomeState._trigger_search(self)  line 2642
+    names: _search_text, strip, _search_request_revision, _search_results, _is_search_loading, _search_has_loaded_once, _rebuild_section_data, searchStateChanged, emit, _data_provider, fetchGlobalSearchStations, _make_weak_global_search_callback, HOME_SEARCH_PAGE_SIZE
+      str: '\n        执行首页搜索或恢复默认首页。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'revision'
+      str: 'keyword'
+      str: 'callback'
+      str: 'context'
+      str: 'pageNo'
+      str: 'pageSize'
+
+  def LPWiiMRadioHomeState._make_weak_global_search_callback(self)  line 2674
+    names: weakref, ref, Dict, str, Any
+      str: '\n        构造弱引用全局搜索回调。\n\n        :param: 无。\n        :return: 回调函数。\n        '
+      str: 'result'
+      str: 'return'
+      str: 'LPWiiMRadioHomeState._make_weak_global_search_callback.<locals>._callback'
+
+    def LPWiiMRadioHomeState._make_weak_global_search_callback._callback(result)  line 2683
+      names: _handle_global_search_result
+        str: '\n            处理全局搜索回调。\n\n            :param result: 归一化分页结果。\n            :return: None。\n            '
+
+  def LPWiiMRadioHomeState._handle_global_search_result(self, result)  line 2696
+    names: isinstance, dict, get, int, str, _search_request_revision, _search_text, strip, logger, debug, bool, _is_search_loading, _search_has_loaded_once, _normalize_search_items, _search_results, warning, _rebuild_section_data, searchStateChanged, emit
+      str: '\n        处理全局搜索结果。\n\n        :param result: 归一化分页结果。\n        :return: None。\n        '
+      str: 'context'
+      str: 'revision'
+      str: 'keyword'
+      str: '[WiiMRadio] ignore stale home search response revision='
+      str: ', keyword='
+      str: 'success'
+      str: 'items'
+      str: 'error'
+      str: '[WiiMRadio] home search failed keyword='
+      str: ', error='
+      str: 'empty'
+
+  def LPWiiMRadioHomeState._normalize_search_items(self, items)  line 2722
+    names: _normalize_favorite_item, append
+      str: '\n        归一化搜索结果条目。\n\n        :param items: 原始搜索结果列表。\n        :return: 归一化条目列表。\n        '
+
+  def LPWiiMRadioHomeState._find_remote_section_spec(self, sectionKey)  line 2736
+    names: str, strip, _remote_section_specs, get
+      str: '\n        查找远程区块配置。\n\n        :param sectionKey: 区块标识。\n        :return: 配置字典，找不到返回 None。\n        '
+      str: 'sectionKey'
+
+  def LPWiiMRadioHomeState._remove_favorite(self, stationId)  line 2749
+    names: len, _favorites
+      str: '\n        从收藏中移除电台。\n\n        :param stationId: 电台唯一标识。\n        :return: 移除成功返回 True。\n        '
+      str: 'LPWiiMRadioHomeState._remove_favorite.<locals>.<listcomp>'
+
+    def LPWiiMRadioHomeState._remove_favorite.<listcomp>(.0)  line 2757
+      names: get
+        str: 'stationId'
+
+  def LPWiiMRadioHomeState._commit_favorites_change(self)  line 2760
+    names: _save_favorites, _favorite_revision, _rebuild_section_data, favoriteRevisionChanged, emit, touch
+      str: '\n        提交 favorites 变更并刷新首页状态。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState._load_favorites(self)  line 2773
+    names: _ensure_wiimradio_favorites_loaded
+      str: '\n        从统一缓存加载收藏列表，缓存缺失时自动从旧版备份迁移。\n\n        :param: 无。\n        :return: 收藏列表。\n        '
+
+  def LPWiiMRadioHomeState._save_favorites(self)  line 2782
+    names: _save_wiimradio_favorites, _favorites
+      str: '\n        持久化收藏列表到统一缓存。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState._normalize_favorite_item(self, item)  line 2791
+    names: _normalize_wiimradio_favorite_item
+      str: '\n        归一化收藏条目字段。\n\n        :param item: 原始条目对象。\n        :return: 归一化条目，非法输入返回 None。\n        '
+
+  def LPWiiMRadioHomeState._normalize_section_data_for_qml(self, sections)  line 2800
+    names: isinstance, dict, get, bool, _thumbnail_service, thumbnailPath, str, strip, _extract_station_location_fields, append
+      str: '\n        归一化区块数据为 QML 可消费结构。\n\n        :param sections: 原始区块列表。\n        :return: 归一化区块列表。\n        '
+      str: 'sectionKey'
+      str: 'title'
+      str: 'isLoading'
+      str: 'isCategory'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'isLoading'
+      str: 'isCategory'
+      str: 'items'
+      str: 'favicon'
+      str: 'Favicon'
+      str: 'faviconThumbPath'
+      str: 'stationId'
+      str: 'stationID'
+      str: 'StationID'
+      str: 'name'
+      str: 'Name'
+      str: 'streamUrl'
+      str: 'StreamUrl'
+      str: 'stationId'
+      str: 'name'
+      str: 'favicon'
+      str: 'faviconThumbPath'
+      str: 'streamUrl'
+
+  def LPWiiMRadioHomeState._mutable_section_items(self, sectionKey)  line 2843
+    names: str, strip, CATEGORY_SECTION_KEY, FAVORITES_SECTION_KEY, _favorites, SEARCH_SECTION_KEY, _search_results, _remote_section_items, get
+      str: '\n        返回首页指定区块对应的可变原始条目列表。\n\n        :param sectionKey: 区块标识。\n        :return: 原始条目列表。\n        '
+
+  def LPWiiMRadioHomeState._refresh_visible_section_thumbnail_requests(self)  line 2859
+    names: list, _section_visible_ranges, keys, _schedule_section_visible_thumbnails, _apply_section_data, _normalize_section_data_for_qml, _section_data
+      str: '\n        重新根据当前记录的可见区范围补齐首页缩略图调度。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioHomeState._prune_inactive_section_visible_ranges(self, sections)  line 2872
+    names: _section_visible_ranges, items
+      str: '\n        移除当前不在页面结构中的区块可见范围记录，避免隐藏区块继续参与缩略图调度。\n\n        :param sections: 当前页面区块列表。\n        :return: None。\n        '
+      str: 'LPWiiMRadioHomeState._prune_inactive_section_visible_ranges.<locals>.<setcomp>'
+      str: 'LPWiiMRadioHomeState._prune_inactive_section_visible_ranges.<locals>.<dictcomp>'
+
+    def LPWiiMRadioHomeState._prune_inactive_section_visible_ranges.<setcomp>(.0)  line 2879
+      names: isinstance, dict, str, get, strip
+        str: 'sectionKey'
+
+    def LPWiiMRadioHomeState._prune_inactive_section_visible_ranges.<dictcomp>(.0)  line 2884
+
+  def LPWiiMRadioHomeState._schedule_section_visible_thumbnails(self, sectionKey)  line 2890
+    names: str, strip, _section_visible_ranges, get, _mutable_section_items, max, LPWiiMRadioStationListModel, PRELOAD_BEFORE, min, len, PRELOAD_AFTER, range, isinstance, dict, LPWiiMRadioRequestScheduler, PRIORITY_VISIBLE, PRIORITY_PRELOAD, _thumbnail_service, ensureThumbnail
+      str: '\n        按首页指定区块的可见范围调度缩略图，并即时回填已存在的磁盘缓存路径。\n\n        :param sectionKey: 区块标识。\n        :return: 至少有一项立即命中本地缩略图并被回写时返回 True。\n        '
+      str: 'favicon'
+      str: 'Favicon'
+      str: 'faviconThumbPath'
+      str: 'priority'
+
+def LPWiiMRadioStore()  line 2933
+  names: __name__, __module__, __qualname__, PRUNE_INTERVAL_MS, SEE_ALL_TTL_MS, CATEGORY_TTL_MS, MAX_SEE_ALL_STATES, MAX_CATEGORY_STATES, HOME_CACHE_KEY, _instance, Optional, __annotations__, pyqtSignal, playingInfoChanged, favoriteRevisionChanged, QObject, __init__, pyqtProperty, str, playingStationId, playingState, int, favoriteRevision, setPlayingInfo, _emit_favorite_revision_changed, _handle_favorite_cache_changed, classmethod, instance, LPWiiMRadioHomeState, homeState, bool, isFavorite, List, Dict, favoritesSnapshot, Any, toggleFavoriteItem, activateHomeState, deactivateHomeState, Tuple, LPWiiMRadioSeeAllState, acquireSeeAllState, activateSeeAllState, deactivateSeeAllState, hasSeeAllState, hasCategoryState, LPWiiMRadioCategoryState, acquireCategoryState, activateCategoryState, deactivateCategoryState, pruneInactiveStates, _LPWiiMRadioBaseState, _prune_state_map, _remove_state, _build_see_all_key, _build_category_key, _signature_for_payload, _now_ms, __classcell__
+    str: 'LPWiiMRadioStore'
+    str: 'home'
+    str: '_instance'
+    str: 'parent'
+    str: 'LPWiiMRadioStore.__init__'
+    str: 'notify'
+    str: 'return'
+    str: 'LPWiiMRadioStore.playingStationId'
+    str: 'LPWiiMRadioStore.playingState'
+    str: 'LPWiiMRadioStore.favoriteRevision'
+    str: 'stationId'
+    str: 'playState'
+    str: 'return'
+    str: 'LPWiiMRadioStore.setPlayingInfo'
+    str: 'LPWiiMRadioStore._emit_favorite_revision_changed'
+    str: 'source'
+    str: 'userId'
+    str: 'return'
+    str: 'LPWiiMRadioStore._handle_favorite_cache_changed'
+    str: 'LPWiiMRadioStore.instance'
+    str: 'LPWiiMRadioStore.homeState'
+    str: 'stationId'
+    str: 'return'
+    str: 'LPWiiMRadioStore.isFavorite'
+    str: 'LPWiiMRadioStore.favoritesSnapshot'
+    str: 'itemData'
+    str: 'return'
+    str: 'LPWiiMRadioStore.toggleFavoriteItem'
+    str: 'LPWiiMRadioStore.activateHomeState'
+    str: 'LPWiiMRadioStore.deactivateHomeState'
+    str: 'sectionDescriptor'
+    str: 'return'
+    str: 'LPWiiMRadioStore.acquireSeeAllState'
+    str: 'cacheKey'
+    str: 'return'
+    str: 'LPWiiMRadioStore.activateSeeAllState'
+    str: 'LPWiiMRadioStore.deactivateSeeAllState'
+    str: 'key'
+    str: 'return'
+    str: 'LPWiiMRadioStore.hasSeeAllState'
+    str: 'LPWiiMRadioStore.hasCategoryState'
+    str: 'categoryDescriptor'
+    str: 'return'
+    str: 'LPWiiMRadioStore.acquireCategoryState'
+    str: 'LPWiiMRadioStore.activateCategoryState'
+    str: 'LPWiiMRadioStore.deactivateCategoryState'
+    str: 'LPWiiMRadioStore.pruneInactiveStates'
+    str: 'stateMap'
+    str: 'ttlMs'
+    str: 'maxCount'
+    str: 'nowMs'
+    str: 'tag'
+    str: 'return'
+    str: 'LPWiiMRadioStore._prune_state_map'
+    str: 'stateMap'
+    str: 'cacheKey'
+    str: 'tag'
+    str: 'return'
+    str: 'LPWiiMRadioStore._remove_state'
+    str: 'LPWiiMRadioStore._build_see_all_key'
+    str: 'LPWiiMRadioStore._build_category_key'
+    str: 'payload'
+    str: 'return'
+    str: 'LPWiiMRadioStore._signature_for_payload'
+    str: 'LPWiiMRadioStore._now_ms'
+
+  def LPWiiMRadioStore.__init__(self, parent)  line 2946
+    names: super, __init__, LPWiiMRadioHomeState, HOME_CACHE_KEY, _home_state, favoriteRevisionChanged, connect, _emit_favorite_revision_changed, LPFavoriteCacheManager, instance, _favorite_cache, favoriteIdsChanged, _handle_favorite_cache_changed, _see_all_states, _category_states, QTimer, _prune_timer, setInterval, PRUNE_INTERVAL_MS, timeout, pruneInactiveStates, start, _playing_station_id, _playing_state
+      str: '\n        初始化全局 Store。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+
+  def LPWiiMRadioStore.playingStationId(self)  line 2967
+    names: _playing_station_id
+      str: '\n        返回当前正在播放的 WiiMRadio 电台 ID。\n\n        :return: 电台 ID 字符串，未播放时为空字符串。\n        '
+
+  def LPWiiMRadioStore.playingState(self)  line 2976
+    names: _playing_state
+      str: '\n        返回当前 WiiMRadio 播放状态（如 "PLAYING" / "PAUSED_PLAYBACK"）。\n\n        :return: 播放状态字符串，未播放时为空字符串。\n        '
+
+  def LPWiiMRadioStore.favoriteRevision(self)  line 2985
+    names: _home_state, favoriteRevision
+      str: '\n        返回当前 favorites 修订号。\n\n        :return: favorites 修订号。\n        '
+
+  def LPWiiMRadioStore.setPlayingInfo(self, stationId, playState)  line 2994
+    names: str, _playing_station_id, _playing_state, playingInfoChanged, emit
+      str: '\n        更新当前播放电台 ID 与播放状态，变更时发射 playingInfoChanged 信号。\n\n        :param stationId: 正在播放的电台 ID，非 WiiMRadio 来源时传空字符串。\n        :param playState: 播放状态字符串。\n        :return: None。\n        '
+
+  def LPWiiMRadioStore._emit_favorite_revision_changed(self)  line 3010
+    names: favoriteRevisionChanged, emit
+      str: '\n        转发 HomeState 的 favorites 修订变化信号。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioStore._handle_favorite_cache_changed(self, source, userId)  line 3019
+    names: WIIMRADIO_LOCAL_USER_ID, _home_state, reloadFavoritesFromCache
+      str: '\n        处理统一缓存变化，仅在 WiiMRadio 本地收藏变化时刷新 Home 状态。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: None。\n        '
+      str: 'WiiMRadio'
+
+  def LPWiiMRadioStore.instance(cls)  line 3031
+    names: _instance
+      str: '\n        返回 Store 全局单例。\n\n        :param: 无。\n        :return: Store 单例对象。\n        '
+
+  def LPWiiMRadioStore.homeState(self)  line 3043
+    names: _home_state, touch
+      str: '\n        返回 Home 状态对象。\n\n        :param: 无。\n        :return: Home 状态对象。\n        '
+
+  def LPWiiMRadioStore.isFavorite(self, stationId)  line 3053
+    names: _home_state, isFavorite
+      str: '\n        判断指定电台是否已收藏。\n\n        :param stationId: 电台唯一标识。\n        :return: 已收藏返回 True。\n        '
+
+  def LPWiiMRadioStore.favoritesSnapshot(self)  line 3062
+    names: _home_state, touch, favoritesSnapshot
+      str: '\n        返回当前 favorites 快照。\n\n        :param: 无。\n        :return: favorites 条目副本列表。\n        '
+
+  def LPWiiMRadioStore.toggleFavoriteItem(self, itemData)  line 3072
+    names: _home_state, toggleFavoriteItem
+      str: '\n        基于完整电台数据切换 favorites 状态。\n\n        :param itemData: 电台数据对象。\n        :return: favorites 发生变更时返回 True，否则返回 False。\n        '
+
+  def LPWiiMRadioStore.activateHomeState(self)  line 3081
+    names: _home_state, activate
+      str: '\n        激活 Home 状态。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioStore.deactivateHomeState(self)  line 3090
+    names: _home_state, deactivate
+      str: '\n        失活 Home 状态。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioStore.acquireSeeAllState(self, sectionDescriptor)  line 3099
+    names: _build_see_all_key, _see_all_states, get, LPWiiMRadioSeeAllState, logger, debug, touch, str, LPWiiMRadioHomeState, SEARCH_SECTION_KEY, syncEntrySearchText
+      str: '\n        获取 SeeAll 状态对象（存在则复用，不存在则创建）。\n\n        :param sectionDescriptor: 展开页描述对象。\n        :return: `(cacheKey, state)`。\n        '
+      str: 'parent'
+      str: '[WiiMRadioStore] create seeall state key='
+      str: '[WiiMRadioStore] reuse seeall state key='
+      str: 'sectionKey'
+      str: 'searchText'
+
+  def LPWiiMRadioStore.activateSeeAllState(self, cacheKey)  line 3119
+    names: _see_all_states, get, str, activate
+      str: '\n        激活指定 SeeAll 状态。\n\n        :param cacheKey: 状态缓存键。\n        :return: None。\n        '
+
+  def LPWiiMRadioStore.deactivateSeeAllState(self, cacheKey)  line 3130
+    names: _see_all_states, get, str, deactivate
+      str: '\n        失活指定 SeeAll 状态。\n\n        :param cacheKey: 状态缓存键。\n        :return: None。\n        '
+
+  def LPWiiMRadioStore.hasSeeAllState(self, key)  line 3141
+    names: str, strip, _see_all_states
+      str: '\n        判断指定 key 的 SeeAll 状态是否仍在缓存中（未被 TTL 回收）。\n\n        :param key: 状态缓存键。\n        :return: 缓存中存在则返回 True，否则返回 False。\n        '
+
+  def LPWiiMRadioStore.hasCategoryState(self, key)  line 3150
+    names: str, strip, _category_states
+      str: '\n        判断指定 key 的 Category 状态是否仍在缓存中（未被 TTL 回收）。\n\n        :param key: 状态缓存键。\n        :return: 缓存中存在则返回 True，否则返回 False。\n        '
+
+  def LPWiiMRadioStore.acquireCategoryState(self, categoryDescriptor)  line 3159
+    names: _build_category_key, _category_states, get, LPWiiMRadioCategoryState, logger, debug, touch
+      str: '\n        获取 Category 状态对象（存在则复用，不存在则创建）。\n\n        :param categoryDescriptor: 分类详情描述对象。\n        :return: `(cacheKey, state)`。\n        '
+      str: 'parent'
+      str: '[WiiMRadioStore] create category state key='
+      str: '[WiiMRadioStore] reuse category state key='
+
+  def LPWiiMRadioStore.activateCategoryState(self, cacheKey)  line 3177
+    names: _category_states, get, str, activate
+      str: '\n        激活指定 Category 状态。\n\n        :param cacheKey: 状态缓存键。\n        :return: None。\n        '
+
+  def LPWiiMRadioStore.deactivateCategoryState(self, cacheKey)  line 3188
+    names: _category_states, get, str, deactivate
+      str: '\n        失活指定 Category 状态。\n\n        :param cacheKey: 状态缓存键。\n        :return: None。\n        '
+
+  def LPWiiMRadioStore.pruneInactiveStates(self)  line 3199
+    names: _now_ms, _prune_state_map, _see_all_states, SEE_ALL_TTL_MS, MAX_SEE_ALL_STATES, _category_states, CATEGORY_TTL_MS, MAX_CATEGORY_STATES
+      str: '\n        执行失活状态回收（TTL + LRU）。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'seeall'
+      str: 'stateMap'
+      str: 'ttlMs'
+      str: 'maxCount'
+      str: 'nowMs'
+      str: 'tag'
+      str: 'category'
+
+  def LPWiiMRadioStore._prune_state_map(self, stateMap, ttlMs, maxCount, nowMs, tag)  line 3222
+    names: items, _remove_state, len, sort
+      str: '\n        对指定状态字典执行 TTL + LRU 回收。\n\n        :param stateMap: 状态字典。\n        :param ttlMs: TTL（毫秒）。\n        :param maxCount: 最大状态数。\n        :param nowMs: 当前时间戳（毫秒）。\n        :param tag: 日志标签。\n        :return: None。\n        '
+      str: 'LPWiiMRadioStore._prune_state_map.<locals>.<listcomp>'
+      str: 'LPWiiMRadioStore._prune_state_map.<locals>.<lambda>'
+      str: 'key'
+
+    def LPWiiMRadioStore._prune_state_map.<listcomp>(.0)  line 3240
+      names: canPrune
+        str: 'nowMs'
+
+    def LPWiiMRadioStore._prune_state_map.<listcomp>(.0)  line 3247
+      names: activeRefCount, lastAccessMs
+
+    def LPWiiMRadioStore._prune_state_map.<lambda>(row)  line 3250
+
+  def LPWiiMRadioStore._remove_state(self, stateMap, cacheKey, tag)  line 3256
+    names: str, pop, logger, debug, dispose, deleteLater
+      str: '\n        从状态字典移除并销毁状态对象。\n\n        :param stateMap: 状态字典。\n        :param cacheKey: 缓存键。\n        :param tag: 日志标签。\n        :return: None。\n        '
+      str: '[WiiMRadioStore] prune '
+      str: ' state key='
+
+  def LPWiiMRadioStore._build_see_all_key(self, sectionDescriptor)  line 3273
+    names: isinstance, dict, str, get, strip, lower, _signature_for_payload
+      str: '\n        构建 SeeAll 状态缓存键。\n\n        :param sectionDescriptor: 展开页描述对象。\n        :return: 缓存键字符串。\n        '
+      str: 'sectionKey'
+      str: 'mode'
+      str: 'local'
+      str: 'baseQuery'
+      str: 'seeall::'
+      str: '::'
+
+  def LPWiiMRadioStore._build_category_key(self, categoryDescriptor)  line 3287
+    names: isinstance, dict, str, get, strip, _signature_for_payload
+      str: '\n        构建 Category 状态缓存键。\n\n        :param categoryDescriptor: 分类详情描述对象。\n        :return: 缓存键字符串。\n        '
+      str: 'categoryKey'
+      str: 'baseQuery'
+      str: 'category::'
+      str: '::'
+
+  def LPWiiMRadioStore._signature_for_payload(self, payload)  line 3300
+    names: isinstance, dict, list, json, dumps, TypeError, str
+      str: '\n        计算请求体稳定签名。\n\n        :param payload: 任意可序列化对象。\n        :return: 稳定签名字符串。\n        '
+      str: 'empty'
+      str: ','
+      str: ':'
+      str: 'ensure_ascii'
+      str: 'sort_keys'
+      str: 'separators'
+
+  def LPWiiMRadioStore._now_ms(self)  line 3314
+    names: int, time
+      str: '\n        返回当前时间戳（毫秒）。\n\n        :param: 无。\n        :return: 毫秒时间戳。\n        '

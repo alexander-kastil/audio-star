@@ -1,0 +1,1901 @@
+
+=== <module> ===
+ 16           0 LOAD_CONST               0 ('Gets genres for imported music based on Last.fm tags.\n\nUses a provided whitelist file to determine which tags are valid genres.\nThe included (default) genre list was originally produced by scraping Wikipedia\nand has been edited to remove some questionable entries.\nThe scraper script used is available here:\nhttps://gist.github.com/1241307\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 24           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (pylast)
+             10 STORE_NAME               1 (pylast)
+
+ 25          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (codecs)
+             18 STORE_NAME               2 (codecs)
+
+ 26          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (os)
+             26 STORE_NAME               3 (os)
+
+ 27          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (yaml)
+             34 STORE_NAME               4 (yaml)
+
+ 28          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              5 (traceback)
+             42 STORE_NAME               5 (traceback)
+
+ 30          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               3 (('plugins',))
+             48 IMPORT_NAME              6 (beets)
+             50 IMPORT_FROM              7 (plugins)
+             52 STORE_NAME               7 (plugins)
+             54 POP_TOP
+
+ 31          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               4 (('ui',))
+             60 IMPORT_NAME              6 (beets)
+             62 IMPORT_FROM              8 (ui)
+             64 STORE_NAME               8 (ui)
+             66 POP_TOP
+
+ 32          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               5 (('config',))
+             72 IMPORT_NAME              6 (beets)
+             74 IMPORT_FROM              9 (config)
+             76 STORE_NAME               9 (config)
+             78 POP_TOP
+
+ 33          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               6 (('normpath', 'plurality'))
+             84 IMPORT_NAME             10 (beets.util)
+             86 IMPORT_FROM             11 (normpath)
+             88 STORE_NAME              11 (normpath)
+             90 IMPORT_FROM             12 (plurality)
+             92 STORE_NAME              12 (plurality)
+             94 POP_TOP
+
+ 34          96 LOAD_CONST               1 (0)
+             98 LOAD_CONST               7 (('library',))
+            100 IMPORT_NAME              6 (beets)
+            102 IMPORT_FROM             13 (library)
+            104 STORE_NAME              13 (library)
+            106 POP_TOP
+
+ 37         108 LOAD_NAME                1 (pylast)
+            110 LOAD_ATTR               14 (LastFMNetwork)
+            112 LOAD_NAME                7 (plugins)
+            114 LOAD_ATTR               15 (LASTFM_KEY)
+            116 LOAD_CONST               8 (('api_key',))
+            118 CALL_FUNCTION_KW         1
+            120 STORE_NAME              16 (LASTFM)
+
+ 40         122 LOAD_NAME                1 (pylast)
+            124 LOAD_ATTR               17 (WSError)
+
+ 41         126 LOAD_NAME                1 (pylast)
+            128 LOAD_ATTR               18 (MalformedResponseError)
+
+ 42         130 LOAD_NAME                1 (pylast)
+            132 LOAD_ATTR               19 (NetworkError)
+
+ 39         134 BUILD_TUPLE              3
+            136 STORE_NAME              20 (PYLAST_EXCEPTIONS)
+
+ 46         138 LOAD_CONST               9 ('‐')
+            140 LOAD_CONST              10 ('-')
+
+ 45         142 BUILD_MAP                1
+            144 STORE_NAME              21 (REPLACE)
+
+ 50         146 LOAD_CONST              11 (<code object deduplicate at 0x000001F3253A2920, file "beetsplug\lastgenre\__init__.py", line 50>)
+            148 LOAD_CONST              12 ('deduplicate')
+            150 MAKE_FUNCTION            0
+            152 STORE_NAME              22 (deduplicate)
+
+ 59         154 LOAD_CONST              13 (<code object flatten_tree at 0x000001F3253A2B30, file "beetsplug\lastgenre\__init__.py", line 59>)
+            156 LOAD_CONST              14 ('flatten_tree')
+            158 MAKE_FUNCTION            0
+            160 STORE_NAME              23 (flatten_tree)
+
+ 76         162 LOAD_CONST              15 (<code object find_parents at 0x000001F3253A27C0, file "beetsplug\lastgenre\__init__.py", line 76>)
+            164 LOAD_CONST              16 ('find_parents')
+            166 MAKE_FUNCTION            0
+            168 STORE_NAME              24 (find_parents)
+
+ 91         170 LOAD_NAME                3 (os)
+            172 LOAD_ATTR               25 (path)
+            174 LOAD_METHOD             26 (join)
+            176 LOAD_NAME                3 (os)
+            178 LOAD_ATTR               25 (path)
+            180 LOAD_METHOD             27 (dirname)
+            182 LOAD_NAME               28 (__file__)
+            184 CALL_METHOD              1
+            186 LOAD_CONST              17 ('genres.txt')
+            188 CALL_METHOD              2
+            190 STORE_NAME              29 (WHITELIST)
+
+ 92         192 LOAD_NAME                3 (os)
+            194 LOAD_ATTR               25 (path)
+            196 LOAD_METHOD             26 (join)
+            198 LOAD_NAME                3 (os)
+            200 LOAD_ATTR               25 (path)
+            202 LOAD_METHOD             27 (dirname)
+            204 LOAD_NAME               28 (__file__)
+            206 CALL_METHOD              1
+            208 LOAD_CONST              18 ('genres-tree.yaml')
+            210 CALL_METHOD              2
+            212 STORE_NAME              30 (C14N_TREE)
+
+ 95         214 LOAD_BUILD_CLASS
+            216 LOAD_CONST              19 (<code object LastGenrePlugin at 0x000001F324E692F0, file "beetsplug\lastgenre\__init__.py", line 95>)
+            218 LOAD_CONST              20 ('LastGenrePlugin')
+            220 MAKE_FUNCTION            0
+            222 LOAD_CONST              20 ('LastGenrePlugin')
+            224 LOAD_NAME                7 (plugins)
+            226 LOAD_ATTR               31 (BeetsPlugin)
+            228 CALL_FUNCTION            3
+            230 STORE_NAME              32 (LastGenrePlugin)
+            232 LOAD_CONST               2 (None)
+            234 RETURN_VALUE
+
+=== deduplicate ===
+ 53           0 LOAD_GLOBAL              0 (set)
+              2 CALL_FUNCTION            0
+              4 STORE_DEREF              0 (seen)
+
+ 54           6 LOAD_CLOSURE             0 (seen)
+              8 BUILD_TUPLE              1
+             10 LOAD_CONST               1 (<code object <listcomp> at 0x000001F324E2DF50, file "beetsplug\lastgenre\__init__.py", line 54>)
+             12 LOAD_CONST               2 ('deduplicate.<locals>.<listcomp>')
+             14 MAKE_FUNCTION            8 (closure)
+             16 LOAD_FAST                0 (seq)
+             18 GET_ITER
+             20 CALL_FUNCTION            1
+             22 RETURN_VALUE
+
+=== deduplicate.<listcomp> ===
+ 54           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                26 (to 32)
+              6 STORE_FAST               1 (x)
+              8 LOAD_FAST                1 (x)
+             10 LOAD_DEREF               0 (seen)
+             12 CONTAINS_OP              1
+             14 POP_JUMP_IF_FALSE        4
+             16 LOAD_DEREF               0 (seen)
+             18 LOAD_METHOD              0 (add)
+             20 LOAD_FAST                1 (x)
+             22 CALL_METHOD              1
+             24 POP_JUMP_IF_TRUE         4
+             26 LOAD_FAST                1 (x)
+             28 LIST_APPEND              2
+             30 JUMP_ABSOLUTE            4
+        >>   32 RETURN_VALUE
+
+=== flatten_tree ===
+ 63           0 LOAD_FAST                1 (path)
+              2 POP_JUMP_IF_TRUE         8
+
+ 64           4 BUILD_LIST               0
+              6 STORE_FAST               1 (path)
+
+ 66     >>    8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                0 (elem)
+             12 LOAD_GLOBAL              1 (dict)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE       56
+
+ 67          18 LOAD_FAST                0 (elem)
+             20 LOAD_METHOD              2 (items)
+             22 CALL_METHOD              0
+             24 GET_ITER
+        >>   26 FOR_ITER                26 (to 54)
+             28 UNPACK_SEQUENCE          2
+             30 STORE_FAST               3 (k)
+             32 STORE_FAST               4 (v)
+
+ 68          34 LOAD_GLOBAL              3 (flatten_tree)
+             36 LOAD_FAST                4 (v)
+             38 LOAD_FAST                1 (path)
+             40 LOAD_FAST                3 (k)
+             42 BUILD_LIST               1
+             44 BINARY_ADD
+             46 LOAD_FAST                2 (branches)
+             48 CALL_FUNCTION            3
+             50 POP_TOP
+             52 JUMP_ABSOLUTE           26
+        >>   54 JUMP_FORWARD            54 (to 110)
+
+ 69     >>   56 LOAD_GLOBAL              0 (isinstance)
+             58 LOAD_FAST                0 (elem)
+             60 LOAD_GLOBAL              4 (list)
+             62 CALL_FUNCTION            2
+             64 POP_JUMP_IF_FALSE       90
+
+ 70          66 LOAD_FAST                0 (elem)
+             68 GET_ITER
+        >>   70 FOR_ITER                16 (to 88)
+             72 STORE_FAST               5 (sub)
+
+ 71          74 LOAD_GLOBAL              3 (flatten_tree)
+             76 LOAD_FAST                5 (sub)
+             78 LOAD_FAST                1 (path)
+             80 LOAD_FAST                2 (branches)
+             82 CALL_FUNCTION            3
+             84 POP_TOP
+             86 JUMP_ABSOLUTE           70
+        >>   88 JUMP_FORWARD            20 (to 110)
+
+ 73     >>   90 LOAD_FAST                2 (branches)
+             92 LOAD_METHOD              5 (append)
+             94 LOAD_FAST                1 (path)
+             96 LOAD_GLOBAL              6 (str)
+             98 LOAD_FAST                0 (elem)
+            100 CALL_FUNCTION            1
+            102 BUILD_LIST               1
+            104 BINARY_ADD
+            106 CALL_METHOD              1
+            108 POP_TOP
+        >>  110 LOAD_CONST               1 (None)
+            112 RETURN_VALUE
+
+=== find_parents ===
+ 80           0 LOAD_FAST                1 (branches)
+              2 GET_ITER
+        >>    4 FOR_ITER                72 (to 78)
+              6 STORE_FAST               2 (branch)
+
+ 81           8 SETUP_FINALLY           44 (to 54)
+
+ 82          10 LOAD_FAST                2 (branch)
+             12 LOAD_METHOD              0 (index)
+             14 LOAD_FAST                0 (candidate)
+             16 LOAD_METHOD              1 (lower)
+             18 CALL_METHOD              0
+             20 CALL_METHOD              1
+             22 STORE_FAST               3 (idx)
+
+ 83          24 LOAD_GLOBAL              2 (list)
+             26 LOAD_GLOBAL              3 (reversed)
+             28 LOAD_FAST                2 (branch)
+             30 LOAD_CONST               1 (None)
+             32 LOAD_FAST                3 (idx)
+             34 LOAD_CONST               2 (1)
+             36 BINARY_ADD
+             38 BUILD_SLICE              2
+             40 BINARY_SUBSCR
+             42 CALL_FUNCTION            1
+             44 CALL_FUNCTION            1
+             46 POP_BLOCK
+             48 ROT_TWO
+             50 POP_TOP
+             52 RETURN_VALUE
+
+ 84     >>   54 DUP_TOP
+             56 LOAD_GLOBAL              4 (ValueError)
+             58 JUMP_IF_NOT_EXC_MATCH    74
+             60 POP_TOP
+             62 POP_TOP
+             64 POP_TOP
+
+ 85          66 POP_EXCEPT
+             68 JUMP_ABSOLUTE            4
+             70 POP_EXCEPT
+             72 JUMP_ABSOLUTE            4
+        >>   74 RERAISE
+             76 JUMP_ABSOLUTE            4
+
+ 86     >>   78 LOAD_FAST                0 (candidate)
+             80 BUILD_LIST               1
+             82 RETURN_VALUE
+
+=== LastGenrePlugin ===
+ 95           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LastGenrePlugin')
+              6 STORE_NAME               2 (__qualname__)
+
+ 96           8 LOAD_CLOSURE             0 (__class__)
+             10 BUILD_TUPLE              1
+             12 LOAD_CONST               1 (<code object __init__ at 0x000001F3253A2DF0, file "beetsplug\lastgenre\__init__.py", line 96>)
+             14 LOAD_CONST               2 ('LastGenrePlugin.__init__')
+             16 MAKE_FUNCTION            8 (closure)
+             18 STORE_NAME               3 (__init__)
+
+115          20 LOAD_CONST               3 (<code object setup at 0x000001F3253A2190, file "beetsplug\lastgenre\__init__.py", line 115>)
+             22 LOAD_CONST               4 ('LastGenrePlugin.setup')
+             24 MAKE_FUNCTION            0
+             26 STORE_NAME               4 (setup)
+
+156          28 LOAD_NAME                5 (property)
+
+157          30 LOAD_CONST               5 (<code object sources at 0x000001F3253A2EA0, file "beetsplug\lastgenre\__init__.py", line 156>)
+             32 LOAD_CONST               6 ('LastGenrePlugin.sources')
+             34 MAKE_FUNCTION            0
+             36 CALL_FUNCTION            1
+             38 STORE_NAME               6 (sources)
+
+169          40 LOAD_CONST               7 (<code object _get_depth at 0x000001F3253A2C90, file "beetsplug\lastgenre\__init__.py", line 169>)
+             42 LOAD_CONST               8 ('LastGenrePlugin._get_depth')
+             44 MAKE_FUNCTION            0
+             46 STORE_NAME               7 (_get_depth)
+
+179          48 LOAD_CONST               9 (<code object _sort_by_depth at 0x000001F324E75870, file "beetsplug\lastgenre\__init__.py", line 179>)
+             50 LOAD_CONST              10 ('LastGenrePlugin._sort_by_depth')
+             52 MAKE_FUNCTION            0
+             54 STORE_NAME               8 (_sort_by_depth)
+
+188          56 LOAD_CONST              11 (<code object _resolve_genres at 0x000001F324E759D0, file "beetsplug\lastgenre\__init__.py", line 188>)
+             58 LOAD_CONST              12 ('LastGenrePlugin._resolve_genres')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME               9 (_resolve_genres)
+
+230          64 LOAD_CONST              13 (<code object _format_tag at 0x000001F324E75920, file "beetsplug\lastgenre\__init__.py", line 230>)
+             66 LOAD_CONST              14 ('LastGenrePlugin._format_tag')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME              10 (_format_tag)
+
+235          72 LOAD_CONST              15 (<code object fetch_genre at 0x000001F324E757C0, file "beetsplug\lastgenre\__init__.py", line 235>)
+             74 LOAD_CONST              16 ('LastGenrePlugin.fetch_genre')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME              11 (fetch_genre)
+
+242          80 LOAD_CONST              17 (<code object _is_allowed at 0x000001F324E75710, file "beetsplug\lastgenre\__init__.py", line 242>)
+             82 LOAD_CONST              18 ('LastGenrePlugin._is_allowed')
+             84 MAKE_FUNCTION            0
+             86 STORE_NAME              12 (_is_allowed)
+
+254          88 LOAD_CONST              19 (<code object _last_lookup at 0x000001F324E85450, file "beetsplug\lastgenre\__init__.py", line 254>)
+             90 LOAD_CONST              20 ('LastGenrePlugin._last_lookup')
+             92 MAKE_FUNCTION            0
+             94 STORE_NAME              13 (_last_lookup)
+
+281          96 LOAD_CONST              21 (<code object fetch_album_genre at 0x000001F324E69030, file "beetsplug\lastgenre\__init__.py", line 281>)
+             98 LOAD_CONST              22 ('LastGenrePlugin.fetch_album_genre')
+            100 MAKE_FUNCTION            0
+            102 STORE_NAME              14 (fetch_album_genre)
+
+288         104 LOAD_CONST              23 (<code object fetch_album_artist_genre at 0x000001F324E697C0, file "beetsplug\lastgenre\__init__.py", line 288>)
+            106 LOAD_CONST              24 ('LastGenrePlugin.fetch_album_artist_genre')
+            108 MAKE_FUNCTION            0
+            110 STORE_NAME              15 (fetch_album_artist_genre)
+
+295         112 LOAD_CONST              25 (<code object fetch_artist_genre at 0x000001F324E69B30, file "beetsplug\lastgenre\__init__.py", line 295>)
+            114 LOAD_CONST              26 ('LastGenrePlugin.fetch_artist_genre')
+            116 MAKE_FUNCTION            0
+            118 STORE_NAME              16 (fetch_artist_genre)
+
+302         120 LOAD_CONST              27 (<code object fetch_track_genre at 0x000001F324E690E0, file "beetsplug\lastgenre\__init__.py", line 302>)
+            122 LOAD_CONST              28 ('LastGenrePlugin.fetch_track_genre')
+            124 MAKE_FUNCTION            0
+            126 STORE_NAME              17 (fetch_track_genre)
+
+309         128 LOAD_CONST              29 (<code object _get_genre at 0x000001F324E69660, file "beetsplug\lastgenre\__init__.py", line 309>)
+            130 LOAD_CONST              30 ('LastGenrePlugin._get_genre')
+            132 MAKE_FUNCTION            0
+            134 STORE_NAME              18 (_get_genre)
+
+375         136 LOAD_CONST              31 (<code object commands at 0x000001F324E69710, file "beetsplug\lastgenre\__init__.py", line 375>)
+            138 LOAD_CONST              32 ('LastGenrePlugin.commands')
+            140 MAKE_FUNCTION            0
+            142 STORE_NAME              19 (commands)
+
+430         144 LOAD_CONST              33 (<code object imported at 0x000001F324E699D0, file "beetsplug\lastgenre\__init__.py", line 430>)
+            146 LOAD_CONST              34 ('LastGenrePlugin.imported')
+            148 MAKE_FUNCTION            0
+            150 STORE_NAME              20 (imported)
+
+453         152 LOAD_CONST              38 ((None,))
+            154 LOAD_CLOSURE             0 (__class__)
+            156 BUILD_TUPLE              1
+            158 LOAD_CONST              36 (<code object _tags_for at 0x000001F324E69920, file "beetsplug\lastgenre\__init__.py", line 453>)
+            160 LOAD_CONST              37 ('LastGenrePlugin._tags_for')
+            162 MAKE_FUNCTION            9 (defaults, closure)
+            164 STORE_NAME              21 (_tags_for)
+            166 LOAD_CLOSURE             0 (__class__)
+            168 DUP_TOP
+            170 STORE_NAME              22 (__classcell__)
+            172 RETURN_VALUE
+
+=== LastGenrePlugin.__init__ ===
+ 97           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 99          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                2 (config)
+             14 LOAD_METHOD              3 (add)
+
+100          16 LOAD_CONST               1 (True)
+
+101          18 LOAD_CONST               2 (10)
+
+102          20 LOAD_CONST               3 (1)
+
+103          22 LOAD_CONST               0 (None)
+
+104          24 LOAD_CONST               4 (False)
+
+105          26 LOAD_CONST               5 ('album')
+
+106          28 LOAD_CONST               1 (True)
+
+107          30 LOAD_CONST               1 (True)
+
+108          32 LOAD_CONST               6 (', ')
+
+109          34 LOAD_CONST               4 (False)
+
+110          36 LOAD_CONST               1 (True)
+
+ 99          38 LOAD_CONST               7 (('whitelist', 'min_weight', 'count', 'fallback', 'canonical', 'source', 'force', 'auto', 'separator', 'prefer_specific', 'title_case'))
+             40 BUILD_CONST_KEY_MAP     11
+             42 CALL_METHOD              1
+             44 POP_TOP
+
+113          46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              4 (setup)
+             50 CALL_METHOD              0
+             52 POP_TOP
+             54 LOAD_CONST               0 (None)
+             56 RETURN_VALUE
+
+=== LastGenrePlugin.setup ===
+118           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (config)
+              4 LOAD_CONST               1 ('auto')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_FALSE       20
+
+119          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (imported)
+             14 BUILD_LIST               1
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               2 (import_stages)
+
+121     >>   20 BUILD_MAP                0
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               3 (_genre_cache)
+
+124          26 LOAD_GLOBAL              4 (set)
+             28 CALL_FUNCTION            0
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               5 (whitelist)
+
+125          34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                0 (config)
+             38 LOAD_CONST               2 ('whitelist')
+             40 BINARY_SUBSCR
+             42 LOAD_METHOD              6 (get)
+             44 CALL_METHOD              0
+             46 STORE_FAST               1 (wl_filename)
+
+126          48 LOAD_FAST                1 (wl_filename)
+             50 LOAD_CONST               3 ((True, ''))
+             52 CONTAINS_OP              0
+             54 POP_JUMP_IF_FALSE       60
+
+127          56 LOAD_GLOBAL              7 (WHITELIST)
+             58 STORE_FAST               1 (wl_filename)
+
+128     >>   60 LOAD_FAST                1 (wl_filename)
+             62 POP_JUMP_IF_FALSE      168
+
+129          64 LOAD_GLOBAL              8 (normpath)
+             66 LOAD_FAST                1 (wl_filename)
+             68 CALL_FUNCTION            1
+             70 STORE_FAST               1 (wl_filename)
+
+130          72 LOAD_GLOBAL              9 (open)
+             74 LOAD_FAST                1 (wl_filename)
+             76 LOAD_CONST               4 ('rb')
+             78 CALL_FUNCTION            2
+             80 SETUP_WITH              70 (to 152)
+             82 STORE_FAST               2 (f)
+
+131          84 LOAD_FAST                2 (f)
+             86 GET_ITER
+        >>   88 FOR_ITER                48 (to 138)
+             90 STORE_FAST               3 (line)
+
+132          92 LOAD_FAST                3 (line)
+             94 LOAD_METHOD             10 (decode)
+             96 LOAD_CONST               5 ('utf-8')
+             98 CALL_METHOD              1
+            100 LOAD_METHOD             11 (strip)
+            102 CALL_METHOD              0
+            104 LOAD_METHOD             12 (lower)
+            106 CALL_METHOD              0
+            108 STORE_FAST               3 (line)
+
+133         110 LOAD_FAST                3 (line)
+            112 POP_JUMP_IF_FALSE       88
+            114 LOAD_FAST                3 (line)
+            116 LOAD_METHOD             13 (startswith)
+            118 LOAD_CONST               6 ('#')
+            120 CALL_METHOD              1
+            122 POP_JUMP_IF_TRUE        88
+
+134         124 LOAD_FAST                0 (self)
+            126 LOAD_ATTR                5 (whitelist)
+            128 LOAD_METHOD             14 (add)
+            130 LOAD_FAST                3 (line)
+            132 CALL_METHOD              1
+            134 POP_TOP
+            136 JUMP_ABSOLUTE           88
+        >>  138 POP_BLOCK
+            140 LOAD_CONST               7 (None)
+            142 DUP_TOP
+            144 DUP_TOP
+            146 CALL_FUNCTION            3
+            148 POP_TOP
+            150 JUMP_FORWARD            16 (to 168)
+        >>  152 WITH_EXCEPT_START
+            154 POP_JUMP_IF_TRUE       158
+            156 RERAISE
+        >>  158 POP_TOP
+            160 POP_TOP
+            162 POP_TOP
+            164 POP_EXCEPT
+            166 POP_TOP
+
+137     >>  168 BUILD_LIST               0
+            170 LOAD_FAST                0 (self)
+            172 STORE_ATTR              15 (c14n_branches)
+
+138         174 LOAD_FAST                0 (self)
+            176 LOAD_ATTR                0 (config)
+            178 LOAD_CONST               8 ('canonical')
+            180 BINARY_SUBSCR
+            182 LOAD_METHOD              6 (get)
+            184 CALL_METHOD              0
+            186 STORE_FAST               4 (c14n_filename)
+
+139         188 LOAD_FAST                4 (c14n_filename)
+            190 LOAD_CONST               9 (False)
+            192 IS_OP                    1
+            194 LOAD_FAST                0 (self)
+            196 STORE_ATTR              16 (canonicalize)
+
+142         198 LOAD_FAST                4 (c14n_filename)
+            200 LOAD_CONST               3 ((True, ''))
+            202 CONTAINS_OP              0
+            204 POP_JUMP_IF_FALSE      212
+
+143         206 LOAD_GLOBAL             17 (C14N_TREE)
+            208 STORE_FAST               4 (c14n_filename)
+            210 JUMP_FORWARD            24 (to 236)
+
+144     >>  212 LOAD_FAST                0 (self)
+            214 LOAD_ATTR               16 (canonicalize)
+            216 POP_JUMP_IF_TRUE       236
+            218 LOAD_FAST                0 (self)
+            220 LOAD_ATTR                0 (config)
+            222 LOAD_CONST              10 ('prefer_specific')
+            224 BINARY_SUBSCR
+            226 LOAD_METHOD              6 (get)
+            228 CALL_METHOD              0
+            230 POP_JUMP_IF_FALSE      236
+
+146         232 LOAD_GLOBAL             17 (C14N_TREE)
+            234 STORE_FAST               4 (c14n_filename)
+
+149     >>  236 LOAD_FAST                4 (c14n_filename)
+            238 EXTENDED_ARG             1
+            240 POP_JUMP_IF_FALSE      338
+
+150         242 LOAD_FAST                0 (self)
+            244 LOAD_ATTR               18 (_log)
+            246 LOAD_METHOD             19 (debug)
+            248 LOAD_CONST              11 ('Loading canonicalization tree {0}')
+            250 LOAD_FAST                4 (c14n_filename)
+            252 CALL_METHOD              2
+            254 POP_TOP
+
+151         256 LOAD_GLOBAL              8 (normpath)
+            258 LOAD_FAST                4 (c14n_filename)
+            260 CALL_FUNCTION            1
+            262 STORE_FAST               4 (c14n_filename)
+
+152         264 LOAD_GLOBAL             20 (codecs)
+            266 LOAD_ATTR                9 (open)
+            268 LOAD_FAST                4 (c14n_filename)
+            270 LOAD_CONST              12 ('r')
+            272 LOAD_CONST               5 ('utf-8')
+            274 LOAD_CONST              13 (('encoding',))
+            276 CALL_FUNCTION_KW         3
+            278 SETUP_WITH              26 (to 306)
+            280 STORE_FAST               2 (f)
+
+153         282 LOAD_GLOBAL             21 (yaml)
+            284 LOAD_METHOD             22 (safe_load)
+            286 LOAD_FAST                2 (f)
+            288 CALL_METHOD              1
+            290 STORE_FAST               5 (genres_tree)
+            292 POP_BLOCK
+            294 LOAD_CONST               7 (None)
+            296 DUP_TOP
+            298 DUP_TOP
+            300 CALL_FUNCTION            3
+            302 POP_TOP
+            304 JUMP_FORWARD            18 (to 324)
+        >>  306 WITH_EXCEPT_START
+            308 EXTENDED_ARG             1
+            310 POP_JUMP_IF_TRUE       314
+            312 RERAISE
+        >>  314 POP_TOP
+            316 POP_TOP
+            318 POP_TOP
+            320 POP_EXCEPT
+            322 POP_TOP
+
+154     >>  324 LOAD_GLOBAL             23 (flatten_tree)
+            326 LOAD_FAST                5 (genres_tree)
+            328 BUILD_LIST               0
+            330 LOAD_FAST                0 (self)
+            332 LOAD_ATTR               15 (c14n_branches)
+            334 CALL_FUNCTION            3
+            336 POP_TOP
+        >>  338 LOAD_CONST               7 (None)
+            340 RETURN_VALUE
+
+=== LastGenrePlugin.sources ===
+161           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (config)
+              4 LOAD_CONST               1 ('source')
+              6 BINARY_SUBSCR
+              8 LOAD_METHOD              1 (as_choice)
+             10 LOAD_CONST               2 (('track', 'album', 'artist'))
+             12 CALL_METHOD              1
+             14 STORE_FAST               1 (source)
+
+162          16 LOAD_FAST                1 (source)
+             18 LOAD_CONST               3 ('track')
+             20 COMPARE_OP               2 (==)
+             22 POP_JUMP_IF_FALSE       28
+
+163          24 LOAD_CONST               2 (('track', 'album', 'artist'))
+             26 RETURN_VALUE
+
+164     >>   28 LOAD_FAST                1 (source)
+             30 LOAD_CONST               4 ('album')
+             32 COMPARE_OP               2 (==)
+             34 POP_JUMP_IF_FALSE       40
+
+165          36 LOAD_CONST               5 (('album', 'artist'))
+             38 RETURN_VALUE
+
+166     >>   40 LOAD_FAST                1 (source)
+             42 LOAD_CONST               6 ('artist')
+             44 COMPARE_OP               2 (==)
+             46 POP_JUMP_IF_FALSE       52
+
+167          48 LOAD_CONST               7 (('artist',))
+             50 RETURN_VALUE
+        >>   52 LOAD_CONST               8 (None)
+             54 RETURN_VALUE
+
+=== LastGenrePlugin._get_depth ===
+172           0 LOAD_CONST               1 (None)
+              2 STORE_FAST               2 (depth)
+
+173           4 LOAD_GLOBAL              0 (enumerate)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                1 (c14n_branches)
+             10 CALL_FUNCTION            1
+             12 GET_ITER
+        >>   14 FOR_ITER                30 (to 46)
+             16 UNPACK_SEQUENCE          2
+             18 STORE_FAST               3 (key)
+             20 STORE_FAST               4 (value)
+
+174          22 LOAD_FAST                1 (tag)
+             24 LOAD_FAST                4 (value)
+             26 CONTAINS_OP              0
+             28 POP_JUMP_IF_FALSE       14
+
+175          30 LOAD_FAST                4 (value)
+             32 LOAD_METHOD              2 (index)
+             34 LOAD_FAST                1 (tag)
+             36 CALL_METHOD              1
+             38 STORE_FAST               2 (depth)
+
+176          40 POP_TOP
+             42 JUMP_ABSOLUTE           46
+             44 JUMP_ABSOLUTE           14
+
+177     >>   46 LOAD_FAST                2 (depth)
+             48 RETURN_VALUE
+
+=== LastGenrePlugin._sort_by_depth ===
+183           0 LOAD_CLOSURE             0 (self)
+              2 BUILD_TUPLE              1
+              4 LOAD_CONST               1 (<code object <listcomp> at 0x000001F3253A2BE0, file "beetsplug\lastgenre\__init__.py", line 183>)
+              6 LOAD_CONST               2 ('LastGenrePlugin._sort_by_depth.<locals>.<listcomp>')
+              8 MAKE_FUNCTION            8 (closure)
+             10 LOAD_FAST                1 (tags)
+             12 GET_ITER
+             14 CALL_FUNCTION            1
+             16 STORE_FAST               2 (depth_tag_pairs)
+
+184          18 LOAD_CONST               3 (<code object <listcomp> at 0x000001F3253A2F50, file "beetsplug\lastgenre\__init__.py", line 184>)
+             20 LOAD_CONST               2 ('LastGenrePlugin._sort_by_depth.<locals>.<listcomp>')
+             22 MAKE_FUNCTION            0
+             24 LOAD_FAST                2 (depth_tag_pairs)
+             26 GET_ITER
+             28 CALL_FUNCTION            1
+             30 STORE_FAST               2 (depth_tag_pairs)
+
+185          32 LOAD_FAST                2 (depth_tag_pairs)
+             34 LOAD_ATTR                0 (sort)
+             36 LOAD_CONST               4 (True)
+             38 LOAD_CONST               5 (('reverse',))
+             40 CALL_FUNCTION_KW         1
+             42 POP_TOP
+
+186          44 LOAD_CONST               6 (<code object <listcomp> at 0x000001F3253A2D40, file "beetsplug\lastgenre\__init__.py", line 186>)
+             46 LOAD_CONST               2 ('LastGenrePlugin._sort_by_depth.<locals>.<listcomp>')
+             48 MAKE_FUNCTION            0
+             50 LOAD_FAST                2 (depth_tag_pairs)
+             52 GET_ITER
+             54 CALL_FUNCTION            1
+             56 RETURN_VALUE
+
+=== LastGenrePlugin._sort_by_depth.<listcomp> ===
+183           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (t)
+              8 LOAD_DEREF               0 (self)
+             10 LOAD_METHOD              0 (_get_depth)
+             12 LOAD_FAST                1 (t)
+             14 CALL_METHOD              1
+             16 LOAD_FAST                1 (t)
+             18 BUILD_TUPLE              2
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE
+
+=== LastGenrePlugin._sort_by_depth.<listcomp> ===
+184           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                20 (to 26)
+              6 STORE_FAST               1 (e)
+              8 LOAD_FAST                1 (e)
+             10 LOAD_CONST               0 (0)
+             12 BINARY_SUBSCR
+             14 LOAD_CONST               1 (None)
+             16 IS_OP                    1
+             18 POP_JUMP_IF_FALSE        4
+             20 LOAD_FAST                1 (e)
+             22 LIST_APPEND              2
+             24 JUMP_ABSOLUTE            4
+        >>   26 RETURN_VALUE
+
+=== LastGenrePlugin._sort_by_depth.<listcomp> ===
+186           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (p)
+              8 LOAD_FAST                1 (p)
+             10 LOAD_CONST               0 (1)
+             12 BINARY_SUBSCR
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LastGenrePlugin._resolve_genres ===
+192           0 LOAD_FAST                1 (tags)
+              2 POP_JUMP_IF_TRUE         8
+
+193           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+195     >>    8 LOAD_DEREF               0 (self)
+             10 LOAD_ATTR                0 (config)
+             12 LOAD_CONST               2 ('count')
+             14 BINARY_SUBSCR
+             16 LOAD_METHOD              1 (get)
+             18 LOAD_GLOBAL              2 (int)
+             20 CALL_METHOD              1
+             22 STORE_FAST               2 (count)
+
+196          24 LOAD_DEREF               0 (self)
+             26 LOAD_ATTR                3 (canonicalize)
+             28 POP_JUMP_IF_FALSE      134
+
+198          30 BUILD_LIST               0
+             32 STORE_FAST               3 (tags_all)
+
+199          34 LOAD_FAST                1 (tags)
+             36 GET_ITER
+        >>   38 FOR_ITER                90 (to 130)
+             40 STORE_FAST               4 (tag)
+
+202          42 LOAD_DEREF               0 (self)
+             44 LOAD_ATTR                4 (whitelist)
+             46 POP_JUMP_IF_FALSE       76
+
+203          48 LOAD_CLOSURE             0 (self)
+             50 BUILD_TUPLE              1
+             52 LOAD_CONST               3 (<code object <listcomp> at 0x000001F324E75A80, file "beetsplug\lastgenre\__init__.py", line 203>)
+             54 LOAD_CONST               4 ('LastGenrePlugin._resolve_genres.<locals>.<listcomp>')
+             56 MAKE_FUNCTION            8 (closure)
+             58 LOAD_GLOBAL              5 (find_parents)
+             60 LOAD_FAST                4 (tag)
+             62 LOAD_DEREF               0 (self)
+             64 LOAD_ATTR                6 (c14n_branches)
+             66 CALL_FUNCTION            2
+             68 GET_ITER
+             70 CALL_FUNCTION            1
+             72 STORE_FAST               5 (parents)
+             74 JUMP_FORWARD            18 (to 94)
+
+206     >>   76 LOAD_GLOBAL              5 (find_parents)
+             78 LOAD_FAST                4 (tag)
+             80 LOAD_DEREF               0 (self)
+             82 LOAD_ATTR                6 (c14n_branches)
+             84 CALL_FUNCTION            2
+             86 LOAD_CONST               5 (-1)
+             88 BINARY_SUBSCR
+             90 BUILD_LIST               1
+             92 STORE_FAST               5 (parents)
+
+208     >>   94 LOAD_FAST                3 (tags_all)
+             96 LOAD_FAST                5 (parents)
+             98 INPLACE_ADD
+            100 STORE_FAST               3 (tags_all)
+
+211         102 LOAD_DEREF               0 (self)
+            104 LOAD_ATTR                0 (config)
+            106 LOAD_CONST               6 ('prefer_specific')
+            108 BINARY_SUBSCR
+            110 POP_JUMP_IF_TRUE        38
+
+212         112 LOAD_GLOBAL              7 (len)
+            114 LOAD_FAST                3 (tags_all)
+            116 CALL_FUNCTION            1
+            118 LOAD_FAST                2 (count)
+            120 COMPARE_OP               5 (>=)
+
+211         122 POP_JUMP_IF_FALSE       38
+
+213         124 POP_TOP
+            126 JUMP_ABSOLUTE          130
+            128 JUMP_ABSOLUTE           38
+
+214     >>  130 LOAD_FAST                3 (tags_all)
+            132 STORE_FAST               1 (tags)
+
+216     >>  134 LOAD_GLOBAL              8 (deduplicate)
+            136 LOAD_FAST                1 (tags)
+            138 CALL_FUNCTION            1
+            140 STORE_FAST               1 (tags)
+
+219         142 LOAD_DEREF               0 (self)
+            144 LOAD_ATTR                0 (config)
+            146 LOAD_CONST               6 ('prefer_specific')
+            148 BINARY_SUBSCR
+            150 POP_JUMP_IF_FALSE      162
+
+220         152 LOAD_DEREF               0 (self)
+            154 LOAD_METHOD              9 (_sort_by_depth)
+            156 LOAD_FAST                1 (tags)
+            158 CALL_METHOD              1
+            160 STORE_FAST               1 (tags)
+
+224     >>  162 LOAD_CLOSURE             0 (self)
+            164 BUILD_TUPLE              1
+            166 LOAD_CONST               7 (<code object <listcomp> at 0x000001F324E75BE0, file "beetsplug\lastgenre\__init__.py", line 224>)
+            168 LOAD_CONST               4 ('LastGenrePlugin._resolve_genres.<locals>.<listcomp>')
+            170 MAKE_FUNCTION            8 (closure)
+            172 LOAD_FAST                1 (tags)
+            174 GET_ITER
+            176 CALL_FUNCTION            1
+            178 STORE_FAST               1 (tags)
+
+226         180 LOAD_DEREF               0 (self)
+            182 LOAD_ATTR                0 (config)
+            184 LOAD_CONST               8 ('separator')
+            186 BINARY_SUBSCR
+            188 LOAD_METHOD             10 (as_str)
+            190 CALL_METHOD              0
+            192 LOAD_METHOD             11 (join)
+
+227         194 LOAD_FAST                1 (tags)
+            196 LOAD_CONST               1 (None)
+            198 LOAD_DEREF               0 (self)
+            200 LOAD_ATTR                0 (config)
+            202 LOAD_CONST               2 ('count')
+            204 BINARY_SUBSCR
+            206 LOAD_METHOD              1 (get)
+            208 LOAD_GLOBAL              2 (int)
+            210 CALL_METHOD              1
+            212 BUILD_SLICE              2
+            214 BINARY_SUBSCR
+
+226         216 CALL_METHOD              1
+            218 RETURN_VALUE
+
+=== LastGenrePlugin._resolve_genres.<listcomp> ===
+203           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (x)
+
+204           8 LOAD_DEREF               0 (self)
+             10 LOAD_METHOD              0 (_is_allowed)
+             12 LOAD_FAST                1 (x)
+             14 CALL_METHOD              1
+             16 POP_JUMP_IF_FALSE        4
+
+203          18 LOAD_FAST                1 (x)
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE
+
+=== LastGenrePlugin._resolve_genres.<listcomp> ===
+224           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                24 (to 30)
+              6 STORE_FAST               1 (x)
+              8 LOAD_DEREF               0 (self)
+             10 LOAD_METHOD              0 (_is_allowed)
+             12 LOAD_FAST                1 (x)
+             14 CALL_METHOD              1
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_DEREF               0 (self)
+             20 LOAD_METHOD              1 (_format_tag)
+             22 LOAD_FAST                1 (x)
+             24 CALL_METHOD              1
+             26 LIST_APPEND              2
+             28 JUMP_ABSOLUTE            4
+        >>   30 RETURN_VALUE
+
+=== LastGenrePlugin._format_tag ===
+231           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (config)
+              4 LOAD_CONST               1 ('title_case')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_FALSE       18
+
+232          10 LOAD_FAST                1 (tag)
+             12 LOAD_METHOD              1 (title)
+             14 CALL_METHOD              0
+             16 RETURN_VALUE
+
+233     >>   18 LOAD_FAST                1 (tag)
+             20 RETURN_VALUE
+
+=== LastGenrePlugin.fetch_genre ===
+239           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (config)
+              4 LOAD_CONST               1 ('min_weight')
+              6 BINARY_SUBSCR
+              8 LOAD_METHOD              1 (get)
+             10 LOAD_GLOBAL              2 (int)
+             12 CALL_METHOD              1
+             14 STORE_FAST               2 (min_weight)
+
+240          16 LOAD_FAST                0 (self)
+             18 LOAD_METHOD              3 (_resolve_genres)
+             20 LOAD_FAST                0 (self)
+             22 LOAD_METHOD              4 (_tags_for)
+             24 LOAD_FAST                1 (lastfm_obj)
+             26 LOAD_FAST                2 (min_weight)
+             28 CALL_METHOD              2
+             30 CALL_METHOD              1
+             32 RETURN_VALUE
+
+=== LastGenrePlugin._is_allowed ===
+246           0 LOAD_FAST                1 (genre)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+247           8 LOAD_CONST               2 (False)
+             10 RETURN_VALUE
+
+248     >>   12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                0 (whitelist)
+             16 POP_JUMP_IF_FALSE       28
+             18 LOAD_FAST                1 (genre)
+             20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                0 (whitelist)
+             24 CONTAINS_OP              0
+             26 POP_JUMP_IF_FALSE       32
+
+249     >>   28 LOAD_CONST               3 (True)
+             30 RETURN_VALUE
+
+250     >>   32 LOAD_CONST               2 (False)
+             34 RETURN_VALUE
+
+=== LastGenrePlugin._last_lookup ===
+263           0 LOAD_GLOBAL              0 (any)
+              2 LOAD_CONST               1 (<code object <genexpr> at 0x000001F324E75C90, file "beetsplug\lastgenre\__init__.py", line 263>)
+              4 LOAD_CONST               2 ('LastGenrePlugin._last_lookup.<locals>.<genexpr>')
+              6 MAKE_FUNCTION            0
+              8 LOAD_FAST                3 (args)
+             10 GET_ITER
+             12 CALL_FUNCTION            1
+             14 CALL_FUNCTION            1
+             16 POP_JUMP_IF_FALSE       22
+
+264          18 LOAD_CONST               3 (None)
+             20 RETURN_VALUE
+
+266     >>   22 LOAD_CONST               4 ('{}.{}')
+             24 LOAD_METHOD              1 (format)
+             26 LOAD_FAST                1 (entity)
+
+267          28 LOAD_CONST               5 ('-')
+             30 LOAD_METHOD              2 (join)
+             32 LOAD_CONST               6 (<code object <genexpr> at 0x000001F324E75B30, file "beetsplug\lastgenre\__init__.py", line 267>)
+             34 LOAD_CONST               2 ('LastGenrePlugin._last_lookup.<locals>.<genexpr>')
+             36 MAKE_FUNCTION            0
+             38 LOAD_FAST                3 (args)
+             40 GET_ITER
+             42 CALL_FUNCTION            1
+             44 CALL_METHOD              1
+
+266          46 CALL_METHOD              2
+             48 STORE_FAST               4 (key)
+
+268          50 LOAD_FAST                4 (key)
+             52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                3 (_genre_cache)
+             56 CONTAINS_OP              0
+             58 POP_JUMP_IF_FALSE       70
+
+269          60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                3 (_genre_cache)
+             64 LOAD_FAST                4 (key)
+             66 BINARY_SUBSCR
+             68 RETURN_VALUE
+
+271     >>   70 BUILD_LIST               0
+             72 STORE_FAST               5 (args_replaced)
+
+272          74 LOAD_FAST                3 (args)
+             76 GET_ITER
+        >>   78 FOR_ITER                44 (to 124)
+             80 STORE_FAST               6 (arg)
+
+273          82 LOAD_GLOBAL              4 (REPLACE)
+             84 LOAD_METHOD              5 (items)
+             86 CALL_METHOD              0
+             88 GET_ITER
+        >>   90 FOR_ITER                20 (to 112)
+             92 UNPACK_SEQUENCE          2
+             94 STORE_FAST               7 (k)
+             96 STORE_FAST               8 (v)
+
+274          98 LOAD_FAST                6 (arg)
+            100 LOAD_METHOD              6 (replace)
+            102 LOAD_FAST                7 (k)
+            104 LOAD_FAST                8 (v)
+            106 CALL_METHOD              2
+            108 STORE_FAST               6 (arg)
+            110 JUMP_ABSOLUTE           90
+
+275     >>  112 LOAD_FAST                5 (args_replaced)
+            114 LOAD_METHOD              7 (append)
+            116 LOAD_FAST                6 (arg)
+            118 CALL_METHOD              1
+            120 POP_TOP
+            122 JUMP_ABSOLUTE           78
+
+277     >>  124 LOAD_FAST                0 (self)
+            126 LOAD_METHOD              8 (fetch_genre)
+            128 LOAD_FAST                2 (method)
+            130 LOAD_FAST                5 (args_replaced)
+            132 CALL_FUNCTION_EX         0
+            134 CALL_METHOD              1
+            136 STORE_FAST               9 (genre)
+
+278         138 LOAD_FAST                9 (genre)
+            140 LOAD_FAST                0 (self)
+            142 LOAD_ATTR                3 (_genre_cache)
+            144 LOAD_FAST                4 (key)
+            146 STORE_SUBSCR
+
+279         148 LOAD_FAST                9 (genre)
+            150 RETURN_VALUE
+            152 LOAD_CONST               3 (None)
+            154 RETURN_VALUE
+
+=== LastGenrePlugin._last_lookup.<genexpr> ===
+263           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                12 (to 16)
+              4 STORE_FAST               1 (s)
+              6 LOAD_FAST                1 (s)
+              8 UNARY_NOT
+             10 YIELD_VALUE
+             12 POP_TOP
+             14 JUMP_ABSOLUTE            2
+        >>   16 LOAD_CONST               0 (None)
+             18 RETURN_VALUE
+
+=== LastGenrePlugin._last_lookup.<genexpr> ===
+267           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (a)
+              6 LOAD_GLOBAL              0 (str)
+              8 LOAD_FAST                1 (a)
+             10 CALL_FUNCTION            1
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== LastGenrePlugin.fetch_album_genre ===
+284           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_last_lookup)
+
+285           4 LOAD_CONST               1 ('album')
+              6 LOAD_GLOBAL              1 (LASTFM)
+              8 LOAD_ATTR                2 (get_album)
+             10 LOAD_FAST                1 (obj)
+             12 LOAD_ATTR                3 (albumartist)
+             14 LOAD_FAST                1 (obj)
+             16 LOAD_ATTR                4 (album)
+
+284          18 CALL_METHOD              4
+             20 RETURN_VALUE
+
+=== LastGenrePlugin.fetch_album_artist_genre ===
+291           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_last_lookup)
+
+292           4 LOAD_CONST               1 ('artist')
+              6 LOAD_GLOBAL              1 (LASTFM)
+              8 LOAD_ATTR                2 (get_artist)
+             10 LOAD_FAST                1 (obj)
+             12 LOAD_ATTR                3 (albumartist)
+
+291          14 CALL_METHOD              3
+             16 RETURN_VALUE
+
+=== LastGenrePlugin.fetch_artist_genre ===
+298           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_last_lookup)
+
+299           4 LOAD_CONST               1 ('artist')
+              6 LOAD_GLOBAL              1 (LASTFM)
+              8 LOAD_ATTR                2 (get_artist)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_ATTR                3 (artist)
+
+298          14 CALL_METHOD              3
+             16 RETURN_VALUE
+
+=== LastGenrePlugin.fetch_track_genre ===
+305           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_last_lookup)
+
+306           4 LOAD_CONST               1 ('track')
+              6 LOAD_GLOBAL              1 (LASTFM)
+              8 LOAD_ATTR                2 (get_track)
+             10 LOAD_FAST                1 (obj)
+             12 LOAD_ATTR                3 (artist)
+             14 LOAD_FAST                1 (obj)
+             16 LOAD_ATTR                4 (title)
+
+305          18 CALL_METHOD              4
+             20 RETURN_VALUE
+
+=== LastGenrePlugin._get_genre ===
+322           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (config)
+              4 LOAD_CONST               1 ('force')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_TRUE        32
+             10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_is_allowed)
+             14 LOAD_FAST                1 (obj)
+             16 LOAD_ATTR                2 (genre)
+             18 CALL_METHOD              1
+             20 POP_JUMP_IF_FALSE       32
+
+323          22 LOAD_FAST                1 (obj)
+             24 LOAD_ATTR                2 (genre)
+             26 LOAD_CONST               2 ('keep')
+             28 BUILD_TUPLE              2
+             30 RETURN_VALUE
+
+326     >>   32 LOAD_GLOBAL              3 (isinstance)
+             34 LOAD_FAST                1 (obj)
+             36 LOAD_GLOBAL              4 (library)
+             38 LOAD_ATTR                5 (Item)
+             40 CALL_FUNCTION            2
+             42 POP_JUMP_IF_FALSE       76
+
+327          44 LOAD_CONST               3 ('track')
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                6 (sources)
+             50 CONTAINS_OP              0
+             52 POP_JUMP_IF_FALSE       76
+
+328          54 LOAD_FAST                0 (self)
+             56 LOAD_METHOD              7 (fetch_track_genre)
+             58 LOAD_FAST                1 (obj)
+             60 CALL_METHOD              1
+             62 STORE_FAST               2 (result)
+
+329          64 LOAD_FAST                2 (result)
+             66 POP_JUMP_IF_FALSE       76
+
+330          68 LOAD_FAST                2 (result)
+             70 LOAD_CONST               3 ('track')
+             72 BUILD_TUPLE              2
+             74 RETURN_VALUE
+
+333     >>   76 LOAD_CONST               4 ('album')
+             78 LOAD_FAST                0 (self)
+             80 LOAD_ATTR                6 (sources)
+             82 CONTAINS_OP              0
+             84 POP_JUMP_IF_FALSE      108
+
+334          86 LOAD_FAST                0 (self)
+             88 LOAD_METHOD              8 (fetch_album_genre)
+             90 LOAD_FAST                1 (obj)
+             92 CALL_METHOD              1
+             94 STORE_FAST               2 (result)
+
+335          96 LOAD_FAST                2 (result)
+             98 POP_JUMP_IF_FALSE      108
+
+336         100 LOAD_FAST                2 (result)
+            102 LOAD_CONST               4 ('album')
+            104 BUILD_TUPLE              2
+            106 RETURN_VALUE
+
+339     >>  108 LOAD_CONST               5 ('artist')
+            110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR                6 (sources)
+            114 CONTAINS_OP              0
+            116 EXTENDED_ARG             1
+            118 POP_JUMP_IF_FALSE      280
+
+340         120 LOAD_CONST               6 (None)
+            122 STORE_FAST               2 (result)
+
+341         124 LOAD_GLOBAL              3 (isinstance)
+            126 LOAD_FAST                1 (obj)
+            128 LOAD_GLOBAL              4 (library)
+            130 LOAD_ATTR                5 (Item)
+            132 CALL_FUNCTION            2
+            134 POP_JUMP_IF_FALSE      148
+
+342         136 LOAD_FAST                0 (self)
+            138 LOAD_METHOD              9 (fetch_artist_genre)
+            140 LOAD_FAST                1 (obj)
+            142 CALL_METHOD              1
+            144 STORE_FAST               2 (result)
+            146 JUMP_FORWARD           118 (to 266)
+
+343     >>  148 LOAD_FAST                1 (obj)
+            150 LOAD_ATTR               10 (albumartist)
+            152 LOAD_GLOBAL              0 (config)
+            154 LOAD_CONST               7 ('va_name')
+            156 BINARY_SUBSCR
+            158 LOAD_METHOD             11 (as_str)
+            160 CALL_METHOD              0
+            162 COMPARE_OP               3 (!=)
+            164 POP_JUMP_IF_FALSE      178
+
+344         166 LOAD_FAST                0 (self)
+            168 LOAD_METHOD             12 (fetch_album_artist_genre)
+            170 LOAD_FAST                1 (obj)
+            172 CALL_METHOD              1
+            174 STORE_FAST               2 (result)
+            176 JUMP_FORWARD            88 (to 266)
+
+347     >>  178 BUILD_LIST               0
+            180 STORE_FAST               3 (item_genres)
+
+348         182 LOAD_FAST                1 (obj)
+            184 LOAD_METHOD             13 (items)
+            186 CALL_METHOD              0
+            188 GET_ITER
+        >>  190 FOR_ITER                56 (to 248)
+            192 STORE_FAST               4 (item)
+
+349         194 LOAD_CONST               6 (None)
+            196 STORE_FAST               5 (item_genre)
+
+350         198 LOAD_CONST               3 ('track')
+            200 LOAD_FAST                0 (self)
+            202 LOAD_ATTR                6 (sources)
+            204 CONTAINS_OP              0
+            206 POP_JUMP_IF_FALSE      218
+
+351         208 LOAD_FAST                0 (self)
+            210 LOAD_METHOD              7 (fetch_track_genre)
+            212 LOAD_FAST                4 (item)
+            214 CALL_METHOD              1
+            216 STORE_FAST               5 (item_genre)
+
+352     >>  218 LOAD_FAST                5 (item_genre)
+            220 POP_JUMP_IF_TRUE       232
+
+353         222 LOAD_FAST                0 (self)
+            224 LOAD_METHOD              9 (fetch_artist_genre)
+            226 LOAD_FAST                4 (item)
+            228 CALL_METHOD              1
+            230 STORE_FAST               5 (item_genre)
+
+354     >>  232 LOAD_FAST                5 (item_genre)
+            234 POP_JUMP_IF_FALSE      190
+
+355         236 LOAD_FAST                3 (item_genres)
+            238 LOAD_METHOD             14 (append)
+            240 LOAD_FAST                5 (item_genre)
+            242 CALL_METHOD              1
+            244 POP_TOP
+            246 JUMP_ABSOLUTE          190
+
+356     >>  248 LOAD_FAST                3 (item_genres)
+            250 EXTENDED_ARG             1
+            252 POP_JUMP_IF_FALSE      266
+
+357         254 LOAD_GLOBAL             15 (plurality)
+            256 LOAD_FAST                3 (item_genres)
+            258 CALL_FUNCTION            1
+            260 UNPACK_SEQUENCE          2
+            262 STORE_FAST               2 (result)
+            264 STORE_FAST               6 (_)
+
+359     >>  266 LOAD_FAST                2 (result)
+            268 EXTENDED_ARG             1
+            270 POP_JUMP_IF_FALSE      280
+
+360         272 LOAD_FAST                2 (result)
+            274 LOAD_CONST               5 ('artist')
+            276 BUILD_TUPLE              2
+            278 RETURN_VALUE
+
+363     >>  280 LOAD_FAST                1 (obj)
+            282 LOAD_ATTR                2 (genre)
+            284 EXTENDED_ARG             1
+            286 POP_JUMP_IF_FALSE      316
+
+364         288 LOAD_FAST                0 (self)
+            290 LOAD_METHOD             16 (_resolve_genres)
+            292 LOAD_FAST                1 (obj)
+            294 LOAD_ATTR                2 (genre)
+            296 BUILD_LIST               1
+            298 CALL_METHOD              1
+            300 STORE_FAST               2 (result)
+
+365         302 LOAD_FAST                2 (result)
+            304 EXTENDED_ARG             1
+            306 POP_JUMP_IF_FALSE      316
+
+366         308 LOAD_FAST                2 (result)
+            310 LOAD_CONST               8 ('original')
+            312 BUILD_TUPLE              2
+            314 RETURN_VALUE
+
+369     >>  316 LOAD_FAST                0 (self)
+            318 LOAD_ATTR                0 (config)
+            320 LOAD_CONST               9 ('fallback')
+            322 BINARY_SUBSCR
+            324 LOAD_METHOD             17 (get)
+            326 CALL_METHOD              0
+            328 STORE_FAST               7 (fallback)
+
+370         330 LOAD_FAST                7 (fallback)
+            332 EXTENDED_ARG             1
+            334 POP_JUMP_IF_FALSE      344
+
+371         336 LOAD_FAST                7 (fallback)
+            338 LOAD_CONST               9 ('fallback')
+            340 BUILD_TUPLE              2
+            342 RETURN_VALUE
+
+373     >>  344 LOAD_CONST              10 ((None, None))
+            346 RETURN_VALUE
+
+=== LastGenrePlugin.commands ===
+376           0 LOAD_GLOBAL              0 (ui)
+              2 LOAD_ATTR                1 (Subcommand)
+              4 LOAD_CONST               1 ('lastgenre')
+              6 LOAD_CONST               2 ('fetch genres')
+              8 LOAD_CONST               3 (('help',))
+             10 CALL_FUNCTION_KW         2
+             12 STORE_FAST               1 (lastgenre_cmd)
+
+377          14 LOAD_FAST                1 (lastgenre_cmd)
+             16 LOAD_ATTR                2 (parser)
+             18 LOAD_ATTR                3 (add_option)
+
+378          20 LOAD_CONST               4 ('-f')
+             22 LOAD_CONST               5 ('--force')
+             24 LOAD_CONST               6 ('force')
+
+379          26 LOAD_CONST               7 ('store_true')
+
+380          28 LOAD_CONST               8 ('re-download genre when already present')
+
+377          30 LOAD_CONST               9 (('dest', 'action', 'help'))
+             32 CALL_FUNCTION_KW         5
+             34 POP_TOP
+
+382          36 LOAD_FAST                1 (lastgenre_cmd)
+             38 LOAD_ATTR                2 (parser)
+             40 LOAD_ATTR                3 (add_option)
+
+383          42 LOAD_CONST              10 ('-s')
+             44 LOAD_CONST              11 ('--source')
+             46 LOAD_CONST              12 ('source')
+             48 LOAD_CONST              13 ('string')
+
+384          50 LOAD_CONST              14 ('genre source: artist, album, or track')
+
+382          52 LOAD_CONST              15 (('dest', 'type', 'help'))
+             54 CALL_FUNCTION_KW         5
+             56 POP_TOP
+
+386          58 LOAD_FAST                1 (lastgenre_cmd)
+             60 LOAD_ATTR                2 (parser)
+             62 LOAD_ATTR                3 (add_option)
+
+387          64 LOAD_CONST              16 ('-A')
+             66 LOAD_CONST              17 ('--items')
+             68 LOAD_CONST              18 ('store_false')
+             70 LOAD_CONST              19 ('album')
+
+388          72 LOAD_CONST              20 ('match items instead of albums')
+
+386          74 LOAD_CONST              21 (('action', 'dest', 'help'))
+             76 CALL_FUNCTION_KW         5
+             78 POP_TOP
+
+389          80 LOAD_FAST                1 (lastgenre_cmd)
+             82 LOAD_ATTR                2 (parser)
+             84 LOAD_ATTR                3 (add_option)
+
+390          86 LOAD_CONST              22 ('-a')
+             88 LOAD_CONST              23 ('--albums')
+             90 LOAD_CONST               7 ('store_true')
+             92 LOAD_CONST              19 ('album')
+
+391          94 LOAD_CONST              24 ('match albums instead of items')
+
+389          96 LOAD_CONST              21 (('action', 'dest', 'help'))
+             98 CALL_FUNCTION_KW         5
+            100 POP_TOP
+
+392         102 LOAD_FAST                1 (lastgenre_cmd)
+            104 LOAD_ATTR                2 (parser)
+            106 LOAD_ATTR                4 (set_defaults)
+            108 LOAD_CONST              25 (True)
+            110 LOAD_CONST              26 (('album',))
+            112 CALL_FUNCTION_KW         1
+            114 POP_TOP
+
+394         116 LOAD_CLOSURE             0 (self)
+            118 BUILD_TUPLE              1
+            120 LOAD_CONST              27 (<code object lastgenre_func at 0x000001F324E693A0, file "beetsplug\lastgenre\__init__.py", line 394>)
+            122 LOAD_CONST              28 ('LastGenrePlugin.commands.<locals>.lastgenre_func')
+            124 MAKE_FUNCTION            8 (closure)
+            126 STORE_FAST               2 (lastgenre_func)
+
+427         128 LOAD_FAST                2 (lastgenre_func)
+            130 LOAD_FAST                1 (lastgenre_cmd)
+            132 STORE_ATTR               5 (func)
+
+428         134 LOAD_FAST                1 (lastgenre_cmd)
+            136 BUILD_LIST               1
+            138 RETURN_VALUE
+
+=== LastGenrePlugin.commands.lastgenre_func ===
+395           0 LOAD_GLOBAL              0 (ui)
+              2 LOAD_METHOD              1 (should_write)
+              4 CALL_METHOD              0
+              6 STORE_FAST               3 (write)
+
+396           8 LOAD_DEREF               0 (self)
+             10 LOAD_ATTR                2 (config)
+             12 LOAD_METHOD              3 (set_args)
+             14 LOAD_FAST                1 (opts)
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+398          20 LOAD_FAST                1 (opts)
+             22 LOAD_ATTR                4 (album)
+             24 POP_JUMP_IF_FALSE      166
+
+400          26 LOAD_FAST                0 (lib)
+             28 LOAD_METHOD              5 (albums)
+             30 LOAD_GLOBAL              0 (ui)
+             32 LOAD_METHOD              6 (decargs)
+             34 LOAD_FAST                2 (args)
+             36 CALL_METHOD              1
+             38 CALL_METHOD              1
+             40 GET_ITER
+        >>   42 FOR_ITER               120 (to 164)
+             44 STORE_FAST               4 (album)
+
+401          46 LOAD_DEREF               0 (self)
+             48 LOAD_METHOD              7 (_get_genre)
+             50 LOAD_FAST                4 (album)
+             52 CALL_METHOD              1
+             54 UNPACK_SEQUENCE          2
+             56 LOAD_FAST                4 (album)
+             58 STORE_ATTR               8 (genre)
+             60 STORE_FAST               5 (src)
+
+402          62 LOAD_DEREF               0 (self)
+             64 LOAD_ATTR                9 (_log)
+             66 LOAD_METHOD             10 (info)
+             68 LOAD_CONST               1 ('genre for album {0} ({1}): {0.genre}')
+
+403          70 LOAD_FAST                4 (album)
+             72 LOAD_FAST                5 (src)
+
+402          74 CALL_METHOD              3
+             76 POP_TOP
+
+404          78 LOAD_FAST                4 (album)
+             80 LOAD_METHOD             11 (store)
+             82 CALL_METHOD              0
+             84 POP_TOP
+
+406          86 LOAD_FAST                4 (album)
+             88 LOAD_METHOD             12 (items)
+             90 CALL_METHOD              0
+             92 GET_ITER
+        >>   94 FOR_ITER                66 (to 162)
+             96 STORE_FAST               6 (item)
+
+409          98 LOAD_CONST               2 ('track')
+            100 LOAD_DEREF               0 (self)
+            102 LOAD_ATTR               13 (sources)
+            104 CONTAINS_OP              0
+            106 POP_JUMP_IF_FALSE      148
+
+410         108 LOAD_DEREF               0 (self)
+            110 LOAD_METHOD              7 (_get_genre)
+            112 LOAD_FAST                6 (item)
+            114 CALL_METHOD              1
+            116 UNPACK_SEQUENCE          2
+            118 LOAD_FAST                6 (item)
+            120 STORE_ATTR               8 (genre)
+            122 STORE_FAST               5 (src)
+
+411         124 LOAD_FAST                6 (item)
+            126 LOAD_METHOD             11 (store)
+            128 CALL_METHOD              0
+            130 POP_TOP
+
+412         132 LOAD_DEREF               0 (self)
+            134 LOAD_ATTR                9 (_log)
+            136 LOAD_METHOD             10 (info)
+
+413         138 LOAD_CONST               3 ('genre for track {0} ({1}): {0.genre}')
+
+414         140 LOAD_FAST                6 (item)
+            142 LOAD_FAST                5 (src)
+
+412         144 CALL_METHOD              3
+            146 POP_TOP
+
+416     >>  148 LOAD_FAST                3 (write)
+            150 POP_JUMP_IF_FALSE       94
+
+417         152 LOAD_FAST                6 (item)
+            154 LOAD_METHOD             14 (try_write)
+            156 CALL_METHOD              0
+            158 POP_TOP
+            160 JUMP_ABSOLUTE           94
+        >>  162 JUMP_ABSOLUTE           42
+        >>  164 JUMP_FORWARD            64 (to 230)
+
+421     >>  166 LOAD_FAST                0 (lib)
+            168 LOAD_METHOD             12 (items)
+            170 LOAD_GLOBAL              0 (ui)
+            172 LOAD_METHOD              6 (decargs)
+            174 LOAD_FAST                2 (args)
+            176 CALL_METHOD              1
+            178 CALL_METHOD              1
+            180 GET_ITER
+        >>  182 FOR_ITER                46 (to 230)
+            184 STORE_FAST               6 (item)
+
+422         186 LOAD_DEREF               0 (self)
+            188 LOAD_METHOD              7 (_get_genre)
+            190 LOAD_FAST                6 (item)
+            192 CALL_METHOD              1
+            194 UNPACK_SEQUENCE          2
+            196 LOAD_FAST                6 (item)
+            198 STORE_ATTR               8 (genre)
+            200 STORE_FAST               5 (src)
+
+423         202 LOAD_DEREF               0 (self)
+            204 LOAD_ATTR                9 (_log)
+            206 LOAD_METHOD             15 (debug)
+            208 LOAD_CONST               4 ('added last.fm item genre ({0}): {1}')
+
+424         210 LOAD_FAST                5 (src)
+            212 LOAD_FAST                6 (item)
+            214 LOAD_ATTR                8 (genre)
+
+423         216 CALL_METHOD              3
+            218 POP_TOP
+
+425         220 LOAD_FAST                6 (item)
+            222 LOAD_METHOD             11 (store)
+            224 CALL_METHOD              0
+            226 POP_TOP
+            228 JUMP_ABSOLUTE          182
+        >>  230 LOAD_CONST               0 (None)
+            232 RETURN_VALUE
+
+=== LastGenrePlugin.imported ===
+432           0 LOAD_FAST                2 (task)
+              2 LOAD_ATTR                0 (is_album)
+              4 POP_JUMP_IF_FALSE      122
+
+433           6 LOAD_FAST                2 (task)
+              8 LOAD_ATTR                1 (album)
+             10 STORE_FAST               3 (album)
+
+434          12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              2 (_get_genre)
+             16 LOAD_FAST                3 (album)
+             18 CALL_METHOD              1
+             20 UNPACK_SEQUENCE          2
+             22 LOAD_FAST                3 (album)
+             24 STORE_ATTR               3 (genre)
+             26 STORE_FAST               4 (src)
+
+435          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                4 (_log)
+             32 LOAD_METHOD              5 (debug)
+             34 LOAD_CONST               1 ('added last.fm album genre ({0}): {1}')
+
+436          36 LOAD_FAST                4 (src)
+             38 LOAD_FAST                3 (album)
+             40 LOAD_ATTR                3 (genre)
+
+435          42 CALL_METHOD              3
+             44 POP_TOP
+
+437          46 LOAD_FAST                3 (album)
+             48 LOAD_METHOD              6 (store)
+             50 CALL_METHOD              0
+             52 POP_TOP
+
+439          54 LOAD_CONST               2 ('track')
+             56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                7 (sources)
+             60 CONTAINS_OP              0
+             62 POP_JUMP_IF_FALSE      170
+
+440          64 LOAD_FAST                3 (album)
+             66 LOAD_METHOD              8 (items)
+             68 CALL_METHOD              0
+             70 GET_ITER
+        >>   72 FOR_ITER                46 (to 120)
+             74 STORE_FAST               5 (item)
+
+441          76 LOAD_FAST                0 (self)
+             78 LOAD_METHOD              2 (_get_genre)
+             80 LOAD_FAST                5 (item)
+             82 CALL_METHOD              1
+             84 UNPACK_SEQUENCE          2
+             86 LOAD_FAST                5 (item)
+             88 STORE_ATTR               3 (genre)
+             90 STORE_FAST               4 (src)
+
+442          92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR                4 (_log)
+             96 LOAD_METHOD              5 (debug)
+             98 LOAD_CONST               3 ('added last.fm item genre ({0}): {1}')
+
+443         100 LOAD_FAST                4 (src)
+            102 LOAD_FAST                5 (item)
+            104 LOAD_ATTR                3 (genre)
+
+442         106 CALL_METHOD              3
+            108 POP_TOP
+
+444         110 LOAD_FAST                5 (item)
+            112 LOAD_METHOD              6 (store)
+            114 CALL_METHOD              0
+            116 POP_TOP
+            118 JUMP_ABSOLUTE           72
+        >>  120 JUMP_FORWARD            48 (to 170)
+
+447     >>  122 LOAD_FAST                2 (task)
+            124 LOAD_ATTR                9 (item)
+            126 STORE_FAST               5 (item)
+
+448         128 LOAD_FAST                0 (self)
+            130 LOAD_METHOD              2 (_get_genre)
+            132 LOAD_FAST                5 (item)
+            134 CALL_METHOD              1
+            136 UNPACK_SEQUENCE          2
+            138 LOAD_FAST                5 (item)
+            140 STORE_ATTR               3 (genre)
+            142 STORE_FAST               4 (src)
+
+449         144 LOAD_FAST                0 (self)
+            146 LOAD_ATTR                4 (_log)
+            148 LOAD_METHOD              5 (debug)
+            150 LOAD_CONST               3 ('added last.fm item genre ({0}): {1}')
+
+450         152 LOAD_FAST                4 (src)
+            154 LOAD_FAST                5 (item)
+            156 LOAD_ATTR                3 (genre)
+
+449         158 CALL_METHOD              3
+            160 POP_TOP
+
+451         162 LOAD_FAST                5 (item)
+            164 LOAD_METHOD              6 (store)
+            166 CALL_METHOD              0
+            168 POP_TOP
+        >>  170 LOAD_CONST               4 (None)
+            172 RETURN_VALUE
+
+=== LastGenrePlugin._tags_for ===
+465           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (obj)
+              4 LOAD_GLOBAL              1 (pylast)
+              6 LOAD_ATTR                2 (Album)
+              8 CALL_FUNCTION            2
+             10 POP_JUMP_IF_FALSE       24
+
+466          12 LOAD_GLOBAL              3 (super)
+             14 LOAD_GLOBAL              1 (pylast)
+             16 LOAD_ATTR                2 (Album)
+             18 LOAD_FAST                1 (obj)
+             20 CALL_FUNCTION            2
+             22 STORE_FAST               1 (obj)
+
+468     >>   24 SETUP_FINALLY           12 (to 38)
+
+469          26 LOAD_FAST                1 (obj)
+             28 LOAD_METHOD              4 (get_top_tags)
+             30 CALL_METHOD              0
+             32 STORE_FAST               3 (res)
+             34 POP_BLOCK
+             36 JUMP_FORWARD           124 (to 162)
+
+470     >>   38 DUP_TOP
+             40 LOAD_GLOBAL              5 (PYLAST_EXCEPTIONS)
+             42 JUMP_IF_NOT_EXC_MATCH    90
+             44 POP_TOP
+             46 STORE_FAST               4 (exc)
+             48 POP_TOP
+             50 SETUP_FINALLY           30 (to 82)
+
+471          52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                6 (_log)
+             56 LOAD_METHOD              7 (debug)
+             58 LOAD_CONST               1 ('last.fm error: {0}')
+             60 LOAD_FAST                4 (exc)
+             62 CALL_METHOD              2
+             64 POP_TOP
+
+472          66 BUILD_LIST               0
+             68 POP_BLOCK
+             70 ROT_FOUR
+             72 POP_EXCEPT
+             74 LOAD_CONST               2 (None)
+             76 STORE_FAST               4 (exc)
+             78 DELETE_FAST              4 (exc)
+             80 RETURN_VALUE
+        >>   82 LOAD_CONST               2 (None)
+             84 STORE_FAST               4 (exc)
+             86 DELETE_FAST              4 (exc)
+             88 RERAISE
+
+473     >>   90 DUP_TOP
+             92 LOAD_GLOBAL              8 (Exception)
+             94 JUMP_IF_NOT_EXC_MATCH   160
+             96 POP_TOP
+             98 STORE_FAST               4 (exc)
+            100 POP_TOP
+            102 SETUP_FINALLY           48 (to 152)
+
+475         104 LOAD_FAST                0 (self)
+            106 LOAD_ATTR                6 (_log)
+            108 LOAD_METHOD              7 (debug)
+            110 LOAD_CONST               3 ('{}')
+            112 LOAD_GLOBAL              9 (traceback)
+            114 LOAD_METHOD             10 (format_exc)
+            116 CALL_METHOD              0
+            118 CALL_METHOD              2
+            120 POP_TOP
+
+476         122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR                6 (_log)
+            126 LOAD_METHOD             11 (error)
+            128 LOAD_CONST               4 ('error in pylast library: {0}')
+            130 LOAD_FAST                4 (exc)
+            132 CALL_METHOD              2
+            134 POP_TOP
+
+477         136 BUILD_LIST               0
+            138 POP_BLOCK
+            140 ROT_FOUR
+            142 POP_EXCEPT
+            144 LOAD_CONST               2 (None)
+            146 STORE_FAST               4 (exc)
+            148 DELETE_FAST              4 (exc)
+            150 RETURN_VALUE
+        >>  152 LOAD_CONST               2 (None)
+            154 STORE_FAST               4 (exc)
+            156 DELETE_FAST              4 (exc)
+            158 RERAISE
+        >>  160 RERAISE
+
+480     >>  162 LOAD_DEREF               0 (min_weight)
+            164 POP_JUMP_IF_FALSE      184
+
+481         166 LOAD_CLOSURE             0 (min_weight)
+            168 BUILD_TUPLE              1
+            170 LOAD_CONST               5 (<code object <listcomp> at 0x000001F324E69500, file "beetsplug\lastgenre\__init__.py", line 481>)
+            172 LOAD_CONST               6 ('LastGenrePlugin._tags_for.<locals>.<listcomp>')
+            174 MAKE_FUNCTION            8 (closure)
+            176 LOAD_FAST                3 (res)
+            178 GET_ITER
+            180 CALL_FUNCTION            1
+            182 STORE_FAST               3 (res)
+
+484     >>  184 LOAD_CONST               7 (<code object <listcomp> at 0x000001F324E69BE0, file "beetsplug\lastgenre\__init__.py", line 484>)
+            186 LOAD_CONST               6 ('LastGenrePlugin._tags_for.<locals>.<listcomp>')
+            188 MAKE_FUNCTION            0
+            190 LOAD_FAST                3 (res)
+            192 GET_ITER
+            194 CALL_FUNCTION            1
+            196 STORE_FAST               3 (res)
+
+486         198 LOAD_FAST                3 (res)
+            200 RETURN_VALUE
+
+=== LastGenrePlugin._tags_for.<listcomp> ===
+481           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                26 (to 32)
+              6 STORE_FAST               1 (el)
+              8 LOAD_GLOBAL              0 (int)
+             10 LOAD_FAST                1 (el)
+             12 LOAD_ATTR                1 (weight)
+             14 JUMP_IF_TRUE_OR_POP     18
+             16 LOAD_CONST               0 (0)
+        >>   18 CALL_FUNCTION            1
+             20 LOAD_DEREF               0 (min_weight)
+             22 COMPARE_OP               5 (>=)
+             24 POP_JUMP_IF_FALSE        4
+             26 LOAD_FAST                1 (el)
+             28 LIST_APPEND              2
+             30 JUMP_ABSOLUTE            4
+        >>   32 RETURN_VALUE
+
+=== LastGenrePlugin._tags_for.<listcomp> ===
+484           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (el)
+              8 LOAD_FAST                1 (el)
+             10 LOAD_ATTR                0 (item)
+             12 LOAD_METHOD              1 (get_name)
+             14 CALL_METHOD              0
+             16 LOAD_METHOD              2 (lower)
+             18 CALL_METHOD              0
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE

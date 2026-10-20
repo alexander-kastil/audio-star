@@ -1,0 +1,472 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nCrash 日志落盘工具。\n\n对应 Android lib-log 的 CrashHandler：捕获到未处理异常时，把异常堆栈 + 系统/应用环境信息\n写到独立的 crash 文件，并按保留天数滚动清理，供后续随日志包一起加密上传。\n\n设计要点：\n- 仅依赖标准库（platform/json/os/datetime/traceback/logging），不导入 LPUtility，\n  便于在无 PyQt6 环境下单元测试。\n- crash 目录、应用版本等由构造参数注入；正式使用时由调用方传入 cacheDir/"crash" 等。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 14           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+ 15          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (logging)
+             18 STORE_NAME               2 (logging)
+
+ 16          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (os)
+             26 STORE_NAME               3 (os)
+
+ 17          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (platform)
+             34 STORE_NAME               4 (platform)
+
+ 18          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              5 (traceback)
+             42 STORE_NAME               5 (traceback)
+
+ 19          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               3 (('datetime', 'timedelta'))
+             48 IMPORT_NAME              6 (datetime)
+             50 IMPORT_FROM              6 (datetime)
+             52 STORE_NAME               6 (datetime)
+             54 IMPORT_FROM              7 (timedelta)
+             56 STORE_NAME               7 (timedelta)
+             58 POP_TOP
+
+ 21          60 LOAD_NAME                2 (logging)
+             62 LOAD_METHOD              8 (getLogger)
+             64 LOAD_CONST               4 ('linkplay')
+             66 CALL_METHOD              1
+             68 STORE_NAME               9 (logger)
+
+ 24          70 LOAD_CONST               5 (7)
+             72 STORE_NAME              10 (CRASH_LOG_SAVE_DAYS)
+
+ 27          74 LOAD_BUILD_CLASS
+             76 LOAD_CONST               6 (<code object LPCrashDumper at 0x000001F324E76A80, file "LPClientFramework\util\LPCrashDumper.py", line 27>)
+             78 LOAD_CONST               7 ('LPCrashDumper')
+             80 MAKE_FUNCTION            0
+             82 LOAD_CONST               7 ('LPCrashDumper')
+             84 CALL_FUNCTION            2
+             86 STORE_NAME              11 (LPCrashDumper)
+             88 LOAD_CONST               2 (None)
+             90 RETURN_VALUE
+
+=== LPCrashDumper ===
+ 27           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPCrashDumper')
+              6 STORE_NAME               2 (__qualname__)
+
+ 28           8 LOAD_CONST               1 ('Crash 落盘器：把异常与运行环境写成 JSON 文件并滚动清理。')
+             10 STORE_NAME               3 (__doc__)
+
+ 30          12 LOAD_CONST              13 ((None, None, None))
+             14 LOAD_CONST               3 (<code object __init__ at 0x000001F324E76920, file "LPClientFramework\util\LPCrashDumper.py", line 30>)
+             16 LOAD_CONST               4 ('LPCrashDumper.__init__')
+             18 MAKE_FUNCTION            1 (defaults)
+             20 STORE_NAME               4 (__init__)
+
+ 46          22 LOAD_CONST               5 (<code object dump at 0x000001F324E76B30, file "LPClientFramework\util\LPCrashDumper.py", line 46>)
+             24 LOAD_CONST               6 ('LPCrashDumper.dump')
+             26 MAKE_FUNCTION            0
+             28 STORE_NAME               5 (dump)
+
+ 70          30 LOAD_CONST               7 (<code object _buildReport at 0x000001F324E765B0, file "LPClientFramework\util\LPCrashDumper.py", line 70>)
+             32 LOAD_CONST               8 ('LPCrashDumper._buildReport')
+             34 MAKE_FUNCTION            0
+             36 STORE_NAME               6 (_buildReport)
+
+ 98          38 LOAD_CONST               9 (<code object _collectEnvironment at 0x000001F324E76450, file "LPClientFramework\util\LPCrashDumper.py", line 98>)
+             40 LOAD_CONST              10 ('LPCrashDumper._collectEnvironment')
+             42 MAKE_FUNCTION            0
+             44 STORE_NAME               7 (_collectEnvironment)
+
+116          46 LOAD_CONST              11 (<code object _pruneOldFiles at 0x000001F324E76240, file "LPClientFramework\util\LPCrashDumper.py", line 116>)
+             48 LOAD_CONST              12 ('LPCrashDumper._pruneOldFiles')
+             50 MAKE_FUNCTION            0
+             52 STORE_NAME               8 (_pruneOldFiles)
+             54 LOAD_CONST               2 (None)
+             56 RETURN_VALUE
+
+=== LPCrashDumper.__init__ ===
+ 40           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (crashDir)
+              4 CALL_FUNCTION            1
+              6 LOAD_FAST                0 (self)
+              8 STORE_ATTR               1 (_crashDir)
+
+ 41          10 LOAD_FAST                2 (appVersion)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (_appVersion)
+
+ 42          16 LOAD_FAST                3 (bundleId)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               3 (_bundleId)
+
+ 43          22 LOAD_FAST                4 (extraEnvProvider)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               4 (_extraEnvProvider)
+
+ 44          28 LOAD_GLOBAL              5 (os)
+             30 LOAD_ATTR                6 (makedirs)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                1 (_crashDir)
+             36 LOAD_CONST               1 (True)
+             38 LOAD_CONST               2 (('exist_ok',))
+             40 CALL_FUNCTION_KW         2
+             42 POP_TOP
+             44 LOAD_CONST               3 (None)
+             46 RETURN_VALUE
+
+=== LPCrashDumper.dump ===
+ 57           0 SETUP_FINALLY          134 (to 136)
+
+ 58           2 LOAD_GLOBAL              0 (datetime)
+              4 LOAD_METHOD              1 (now)
+              6 CALL_METHOD              0
+              8 STORE_FAST               4 (now)
+
+ 59          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              2 (_buildReport)
+             14 LOAD_FAST                1 (excType)
+             16 LOAD_FAST                2 (excValue)
+             18 LOAD_FAST                3 (excTraceback)
+             20 LOAD_FAST                4 (now)
+             22 CALL_METHOD              4
+             24 STORE_FAST               5 (report)
+
+ 60          26 LOAD_CONST               1 ('crash_%s.json')
+             28 LOAD_FAST                4 (now)
+             30 LOAD_METHOD              3 (strftime)
+             32 LOAD_CONST               2 ('%Y%m%d_%H%M%S_%f')
+             34 CALL_METHOD              1
+             36 BINARY_MODULO
+             38 STORE_FAST               6 (fileName)
+
+ 61          40 LOAD_GLOBAL              4 (os)
+             42 LOAD_ATTR                5 (path)
+             44 LOAD_METHOD              6 (join)
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                7 (_crashDir)
+             50 LOAD_FAST                6 (fileName)
+             52 CALL_METHOD              2
+             54 STORE_FAST               7 (filePath)
+
+ 62          56 LOAD_GLOBAL              8 (open)
+             58 LOAD_FAST                7 (filePath)
+             60 LOAD_CONST               3 ('w')
+             62 LOAD_CONST               4 ('utf-8')
+             64 LOAD_CONST               5 (('encoding',))
+             66 CALL_FUNCTION_KW         3
+             68 SETUP_WITH              34 (to 104)
+             70 STORE_FAST               8 (f)
+
+ 63          72 LOAD_GLOBAL              9 (json)
+             74 LOAD_ATTR               10 (dump)
+             76 LOAD_FAST                5 (report)
+             78 LOAD_FAST                8 (f)
+             80 LOAD_CONST               6 (False)
+             82 LOAD_CONST               7 (2)
+             84 LOAD_CONST               8 (('ensure_ascii', 'indent'))
+             86 CALL_FUNCTION_KW         4
+             88 POP_TOP
+             90 POP_BLOCK
+             92 LOAD_CONST               9 (None)
+             94 DUP_TOP
+             96 DUP_TOP
+             98 CALL_FUNCTION            3
+            100 POP_TOP
+            102 JUMP_FORWARD            16 (to 120)
+        >>  104 WITH_EXCEPT_START
+            106 POP_JUMP_IF_TRUE       110
+            108 RERAISE
+        >>  110 POP_TOP
+            112 POP_TOP
+            114 POP_TOP
+            116 POP_EXCEPT
+            118 POP_TOP
+
+ 64     >>  120 LOAD_FAST                0 (self)
+            122 LOAD_METHOD             11 (_pruneOldFiles)
+            124 LOAD_FAST                4 (now)
+            126 CALL_METHOD              1
+            128 POP_TOP
+
+ 65         130 LOAD_FAST                7 (filePath)
+            132 POP_BLOCK
+            134 RETURN_VALUE
+
+ 66     >>  136 DUP_TOP
+            138 LOAD_GLOBAL             12 (Exception)
+            140 JUMP_IF_NOT_EXC_MATCH   186
+            142 POP_TOP
+            144 STORE_FAST               9 (e)
+            146 POP_TOP
+            148 SETUP_FINALLY           28 (to 178)
+
+ 67         150 LOAD_GLOBAL             13 (logger)
+            152 LOAD_METHOD             14 (error)
+            154 LOAD_CONST              10 ('[CrashDumper] dump failed: %s')
+            156 LOAD_FAST                9 (e)
+            158 BINARY_MODULO
+            160 CALL_METHOD              1
+            162 POP_TOP
+
+ 68         164 POP_BLOCK
+            166 POP_EXCEPT
+            168 LOAD_CONST               9 (None)
+            170 STORE_FAST               9 (e)
+            172 DELETE_FAST              9 (e)
+            174 LOAD_CONST               9 (None)
+            176 RETURN_VALUE
+        >>  178 LOAD_CONST               9 (None)
+            180 STORE_FAST               9 (e)
+            182 DELETE_FAST              9 (e)
+            184 RERAISE
+        >>  186 RERAISE
+            188 LOAD_CONST               9 (None)
+            190 RETURN_VALUE
+
+=== LPCrashDumper._buildReport ===
+ 83           0 LOAD_FAST                4 (now)
+              2 LOAD_METHOD              0 (strftime)
+              4 LOAD_CONST               1 ('%Y-%m-%d %H:%M:%S')
+              6 CALL_METHOD              1
+
+ 84           8 LOAD_GLOBAL              1 (getattr)
+             10 LOAD_FAST                1 (excType)
+             12 LOAD_CONST               2 ('__name__')
+             14 LOAD_GLOBAL              2 (str)
+             16 LOAD_FAST                1 (excType)
+             18 CALL_FUNCTION            1
+             20 CALL_FUNCTION            3
+
+ 85          22 LOAD_GLOBAL              2 (str)
+             24 LOAD_FAST                2 (excValue)
+             26 CALL_FUNCTION            1
+
+ 86          28 LOAD_CONST               3 ('')
+             30 LOAD_METHOD              3 (join)
+             32 LOAD_GLOBAL              4 (traceback)
+             34 LOAD_METHOD              5 (format_exception)
+             36 LOAD_FAST                1 (excType)
+             38 LOAD_FAST                2 (excValue)
+             40 LOAD_FAST                3 (excTraceback)
+             42 CALL_METHOD              3
+             44 CALL_METHOD              1
+
+ 87          46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              6 (_collectEnvironment)
+             50 CALL_METHOD              0
+
+ 82          52 LOAD_CONST               4 (('crashTime', 'exceptionType', 'exceptionValue', 'traceback', 'environment'))
+             54 BUILD_CONST_KEY_MAP      5
+             56 STORE_FAST               5 (report)
+
+ 89          58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                7 (_extraEnvProvider)
+             62 POP_JUMP_IF_FALSE      156
+
+ 90          64 SETUP_FINALLY           40 (to 106)
+
+ 91          66 LOAD_FAST                0 (self)
+             68 LOAD_METHOD              7 (_extraEnvProvider)
+             70 CALL_METHOD              0
+             72 JUMP_IF_TRUE_OR_POP     76
+             74 BUILD_MAP                0
+        >>   76 STORE_FAST               6 (extra)
+
+ 92          78 LOAD_GLOBAL              8 (isinstance)
+             80 LOAD_FAST                6 (extra)
+             82 LOAD_GLOBAL              9 (dict)
+             84 CALL_FUNCTION            2
+             86 POP_JUMP_IF_FALSE      102
+
+ 93          88 LOAD_FAST                5 (report)
+             90 LOAD_CONST               5 ('environment')
+             92 BINARY_SUBSCR
+             94 LOAD_METHOD             10 (update)
+             96 LOAD_FAST                6 (extra)
+             98 CALL_METHOD              1
+            100 POP_TOP
+        >>  102 POP_BLOCK
+            104 JUMP_FORWARD            50 (to 156)
+
+ 94     >>  106 DUP_TOP
+            108 LOAD_GLOBAL             11 (Exception)
+            110 JUMP_IF_NOT_EXC_MATCH   154
+            112 POP_TOP
+            114 STORE_FAST               7 (e)
+            116 POP_TOP
+            118 SETUP_FINALLY           26 (to 146)
+
+ 95         120 LOAD_GLOBAL             12 (logger)
+            122 LOAD_METHOD             13 (error)
+            124 LOAD_CONST               6 ('[CrashDumper] extraEnvProvider failed: %s')
+            126 LOAD_FAST                7 (e)
+            128 BINARY_MODULO
+            130 CALL_METHOD              1
+            132 POP_TOP
+            134 POP_BLOCK
+            136 POP_EXCEPT
+            138 LOAD_CONST               7 (None)
+            140 STORE_FAST               7 (e)
+            142 DELETE_FAST              7 (e)
+            144 JUMP_FORWARD            10 (to 156)
+        >>  146 LOAD_CONST               7 (None)
+            148 STORE_FAST               7 (e)
+            150 DELETE_FAST              7 (e)
+            152 RERAISE
+        >>  154 RERAISE
+
+ 96     >>  156 LOAD_FAST                5 (report)
+            158 RETURN_VALUE
+
+=== LPCrashDumper._collectEnvironment ===
+106           0 LOAD_GLOBAL              0 (platform)
+              2 LOAD_METHOD              0 (platform)
+              4 CALL_METHOD              0
+
+107           6 LOAD_GLOBAL              0 (platform)
+              8 LOAD_METHOD              1 (machine)
+             10 CALL_METHOD              0
+
+108          12 LOAD_GLOBAL              0 (platform)
+             14 LOAD_METHOD              2 (processor)
+             16 CALL_METHOD              0
+
+109          18 LOAD_GLOBAL              0 (platform)
+             20 LOAD_METHOD              3 (python_version)
+             22 CALL_METHOD              0
+
+110          24 LOAD_GLOBAL              0 (platform)
+             26 LOAD_METHOD              4 (system)
+             28 CALL_METHOD              0
+
+111          30 LOAD_GLOBAL              0 (platform)
+             32 LOAD_METHOD              5 (release)
+             34 CALL_METHOD              0
+
+112          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                6 (_appVersion)
+
+113          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                7 (_bundleId)
+
+105          44 LOAD_CONST               1 (('platform', 'machine', 'processor', 'pythonVersion', 'system', 'release', 'appVersion', 'bundleId'))
+             46 BUILD_CONST_KEY_MAP      8
+             48 RETURN_VALUE
+
+=== LPCrashDumper._pruneOldFiles ===
+123           0 LOAD_FAST                1 (now)
+              2 LOAD_GLOBAL              0 (timedelta)
+              4 LOAD_GLOBAL              1 (CRASH_LOG_SAVE_DAYS)
+              6 LOAD_CONST               1 (('days',))
+              8 CALL_FUNCTION_KW         1
+             10 BINARY_SUBTRACT
+             12 STORE_FAST               2 (cutoff)
+
+124          14 LOAD_FAST                2 (cutoff)
+             16 LOAD_METHOD              2 (timestamp)
+             18 CALL_METHOD              0
+             20 STORE_FAST               3 (cutoffSec)
+
+125          22 SETUP_FINALLY          110 (to 134)
+
+126          24 LOAD_GLOBAL              3 (os)
+             26 LOAD_METHOD              4 (listdir)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                5 (_crashDir)
+             32 CALL_METHOD              1
+             34 GET_ITER
+        >>   36 FOR_ITER                92 (to 130)
+             38 STORE_FAST               4 (name)
+
+127          40 LOAD_FAST                4 (name)
+             42 LOAD_METHOD              6 (startswith)
+             44 LOAD_CONST               2 ('crash_')
+             46 CALL_METHOD              1
+             48 POP_JUMP_IF_FALSE       36
+             50 LOAD_FAST                4 (name)
+             52 LOAD_METHOD              7 (endswith)
+             54 LOAD_CONST               3 ('.json')
+             56 CALL_METHOD              1
+             58 POP_JUMP_IF_TRUE        62
+
+128          60 JUMP_ABSOLUTE           36
+
+129     >>   62 LOAD_GLOBAL              3 (os)
+             64 LOAD_ATTR                8 (path)
+             66 LOAD_METHOD              9 (join)
+             68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                5 (_crashDir)
+             72 LOAD_FAST                4 (name)
+             74 CALL_METHOD              2
+             76 STORE_FAST               5 (full)
+
+130          78 SETUP_FINALLY           30 (to 110)
+
+131          80 LOAD_GLOBAL              3 (os)
+             82 LOAD_ATTR                8 (path)
+             84 LOAD_METHOD             10 (getmtime)
+             86 LOAD_FAST                5 (full)
+             88 CALL_METHOD              1
+             90 LOAD_FAST                3 (cutoffSec)
+             92 COMPARE_OP               0 (<)
+             94 POP_JUMP_IF_FALSE      106
+
+132          96 LOAD_GLOBAL              3 (os)
+             98 LOAD_METHOD             11 (remove)
+            100 LOAD_FAST                5 (full)
+            102 CALL_METHOD              1
+            104 POP_TOP
+        >>  106 POP_BLOCK
+            108 JUMP_ABSOLUTE           36
+
+133     >>  110 DUP_TOP
+            112 LOAD_GLOBAL             12 (Exception)
+            114 JUMP_IF_NOT_EXC_MATCH   126
+            116 POP_TOP
+            118 POP_TOP
+            120 POP_TOP
+
+134         122 POP_EXCEPT
+            124 JUMP_ABSOLUTE           36
+        >>  126 RERAISE
+            128 JUMP_ABSOLUTE           36
+        >>  130 POP_BLOCK
+            132 JUMP_FORWARD            50 (to 184)
+
+135     >>  134 DUP_TOP
+            136 LOAD_GLOBAL             12 (Exception)
+            138 JUMP_IF_NOT_EXC_MATCH   182
+            140 POP_TOP
+            142 STORE_FAST               6 (e)
+            144 POP_TOP
+            146 SETUP_FINALLY           26 (to 174)
+
+136         148 LOAD_GLOBAL             13 (logger)
+            150 LOAD_METHOD             14 (error)
+            152 LOAD_CONST               4 ('[CrashDumper] prune failed: %s')
+            154 LOAD_FAST                6 (e)
+            156 BINARY_MODULO
+            158 CALL_METHOD              1
+            160 POP_TOP
+            162 POP_BLOCK
+            164 POP_EXCEPT
+            166 LOAD_CONST               5 (None)
+            168 STORE_FAST               6 (e)
+            170 DELETE_FAST              6 (e)
+            172 JUMP_FORWARD            10 (to 184)
+        >>  174 LOAD_CONST               5 (None)
+            176 STORE_FAST               6 (e)
+            178 DELETE_FAST              6 (e)
+            180 RERAISE
+        >>  182 RERAISE
+        >>  184 LOAD_CONST               5 (None)
+            186 RETURN_VALUE

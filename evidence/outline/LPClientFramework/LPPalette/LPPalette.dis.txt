@@ -1,0 +1,3719 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\niOS Palette 算法 Python 移植实现。\n\n该模块按 iOS 端 iOSPalette 的核心流程实现：\n1. 图像缩放到 112x112（保持比例）\n2. RGB888 -> RGB555 量化并构建直方图\n3. Median-cut 颜色分箱（最多 16 色）\n4. 过滤黑/白/near-red 颜色\n5. 按目标色模型（vibrant/muted/dark 等）计算分值并选色\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 12           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('annotations',))
+              8 IMPORT_NAME              1 (__future__)
+             10 IMPORT_FROM              2 (annotations)
+             12 STORE_NAME               2 (annotations)
+             14 POP_TOP
+
+ 14          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (None)
+             20 IMPORT_NAME              3 (math)
+             22 STORE_NAME               3 (math)
+
+ 15          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('dataclass',))
+             28 IMPORT_NAME              4 (dataclasses)
+             30 IMPORT_FROM              5 (dataclass)
+             32 STORE_NAME               5 (dataclass)
+             34 POP_TOP
+
+ 16          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               5 (('IntFlag',))
+             40 IMPORT_NAME              6 (enum)
+             42 IMPORT_FROM              7 (IntFlag)
+             44 STORE_NAME               7 (IntFlag)
+             46 POP_TOP
+
+ 17          48 LOAD_CONST               1 (0)
+             50 LOAD_CONST               6 (('Dict', 'List', 'Optional', 'Sequence', 'Tuple', 'Union'))
+             52 IMPORT_NAME              8 (typing)
+             54 IMPORT_FROM              9 (Dict)
+             56 STORE_NAME               9 (Dict)
+             58 IMPORT_FROM             10 (List)
+             60 STORE_NAME              10 (List)
+             62 IMPORT_FROM             11 (Optional)
+             64 STORE_NAME              11 (Optional)
+             66 IMPORT_FROM             12 (Sequence)
+             68 STORE_NAME              12 (Sequence)
+             70 IMPORT_FROM             13 (Tuple)
+             72 STORE_NAME              13 (Tuple)
+             74 IMPORT_FROM             14 (Union)
+             76 STORE_NAME              14 (Union)
+             78 POP_TOP
+
+ 19          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               7 (('Image',))
+             84 IMPORT_NAME             15 (PIL)
+             86 IMPORT_FROM             16 (Image)
+             88 STORE_NAME              16 (Image)
+             90 POP_TOP
+
+ 22          92 LOAD_CONST               8 (16)
+             94 STORE_NAME              17 (MAX_COLOR_NUM)
+
+ 23          96 LOAD_CONST               9 (112)
+             98 STORE_NAME              18 (TARGET_IMAGE_SIZE)
+
+ 24         100 LOAD_CONST              10 (5)
+            102 STORE_NAME              19 (QUANTIZE_WORD_WIDTH)
+
+ 25         104 LOAD_CONST              11 (1)
+            106 LOAD_NAME               19 (QUANTIZE_WORD_WIDTH)
+            108 BINARY_LSHIFT
+            110 LOAD_CONST              11 (1)
+            112 BINARY_SUBTRACT
+            114 STORE_NAME              20 (QUANTIZE_WORD_MASK)
+
+ 26         116 LOAD_CONST              11 (1)
+            118 LOAD_NAME               19 (QUANTIZE_WORD_WIDTH)
+            120 LOAD_CONST              12 (3)
+            122 BINARY_MULTIPLY
+            124 BINARY_LSHIFT
+            126 STORE_NAME              21 (HIST_ARR_SIZE)
+
+ 29         128 LOAD_CONST              13 ('float')
+            130 LOAD_CONST              13 ('float')
+            132 LOAD_CONST              13 ('float')
+            134 LOAD_CONST              13 ('float')
+            136 LOAD_CONST              14 (('amount', 'low', 'high', 'return'))
+            138 BUILD_CONST_KEY_MAP      4
+            140 LOAD_CONST              15 (<code object constrain at 0x000001F3253A2920, file "LPClientFramework\LPPalette\LPPalette.py", line 29>)
+            142 LOAD_CONST              16 ('constrain')
+            144 MAKE_FUNCTION            4 (annotations)
+            146 STORE_NAME              22 (constrain)
+
+ 44         148 LOAD_CONST              13 ('float')
+            150 LOAD_CONST              13 ('float')
+            152 LOAD_CONST              13 ('float')
+            154 LOAD_CONST              17 (('a', 'b', 'return'))
+            156 BUILD_CONST_KEY_MAP      3
+            158 LOAD_CONST              18 (<code object truncatingRemainderDividing at 0x000001F3253A2F50, file "LPClientFramework\LPPalette\LPPalette.py", line 44>)
+            160 LOAD_CONST              19 ('truncatingRemainderDividing')
+            162 MAKE_FUNCTION            4 (annotations)
+            164 STORE_NAME              23 (truncatingRemainderDividing)
+
+ 71         166 LOAD_CONST              20 ('int')
+            168 LOAD_CONST              20 ('int')
+            170 LOAD_CONST              20 ('int')
+            172 LOAD_CONST              20 ('int')
+            174 LOAD_CONST              21 (('value', 'currentWidth', 'targetWidth', 'return'))
+            176 BUILD_CONST_KEY_MAP      4
+            178 LOAD_CONST              22 (<code object modifyWordWidthWithValue at 0x000001F3253A2BE0, file "LPClientFramework\LPPalette\LPPalette.py", line 71>)
+            180 LOAD_CONST              23 ('modifyWordWidthWithValue')
+            182 MAKE_FUNCTION            4 (annotations)
+            184 STORE_NAME              24 (modifyWordWidthWithValue)
+
+ 90         186 LOAD_CONST              20 ('int')
+            188 LOAD_CONST              20 ('int')
+            190 LOAD_CONST              24 (('color', 'return'))
+            192 BUILD_CONST_KEY_MAP      2
+            194 LOAD_CONST              25 (<code object quantizedRed at 0x000001F3253A2D40, file "LPClientFramework\LPPalette\LPPalette.py", line 90>)
+            196 LOAD_CONST              26 ('quantizedRed')
+            198 MAKE_FUNCTION            4 (annotations)
+            200 STORE_NAME              25 (quantizedRed)
+
+ 94         202 LOAD_CONST              20 ('int')
+            204 LOAD_CONST              20 ('int')
+            206 LOAD_CONST              24 (('color', 'return'))
+            208 BUILD_CONST_KEY_MAP      2
+            210 LOAD_CONST              27 (<code object quantizedGreen at 0x000001F3253A27C0, file "LPClientFramework\LPPalette\LPPalette.py", line 94>)
+            212 LOAD_CONST              28 ('quantizedGreen')
+            214 MAKE_FUNCTION            4 (annotations)
+            216 STORE_NAME              26 (quantizedGreen)
+
+ 98         218 LOAD_CONST              20 ('int')
+            220 LOAD_CONST              20 ('int')
+            222 LOAD_CONST              24 (('color', 'return'))
+            224 BUILD_CONST_KEY_MAP      2
+            226 LOAD_CONST              29 (<code object quantizedBlue at 0x000001F3253C4240, file "LPClientFramework\LPPalette\LPPalette.py", line 98>)
+            228 LOAD_CONST              30 ('quantizedBlue')
+            230 MAKE_FUNCTION            4 (annotations)
+            232 STORE_NAME              27 (quantizedBlue)
+
+102         234 LOAD_CONST              20 ('int')
+            236 LOAD_CONST              20 ('int')
+            238 LOAD_CONST              20 ('int')
+            240 LOAD_CONST              31 ('Tuple[float, float, float]')
+            242 LOAD_CONST              32 (('red', 'green', 'blue', 'return'))
+            244 BUILD_CONST_KEY_MAP      4
+            246 LOAD_CONST              33 (<code object rgb888ToHsl at 0x000001F3253C43A0, file "LPClientFramework\LPPalette\LPPalette.py", line 102>)
+            248 LOAD_CONST              34 ('rgb888ToHsl')
+            250 MAKE_FUNCTION            4 (annotations)
+            252 STORE_NAME              28 (rgb888ToHsl)
+
+148         254 LOAD_CONST              20 ('int')
+            256 LOAD_CONST              31 ('Tuple[float, float, float]')
+            258 LOAD_CONST              35 (('rgb555', 'return'))
+            260 BUILD_CONST_KEY_MAP      2
+            262 LOAD_CONST              36 (<code object rgb555ToHsl at 0x000001F3253C4D40, file "LPClientFramework\LPPalette\LPPalette.py", line 148>)
+            264 LOAD_CONST              37 ('rgb555ToHsl')
+            266 MAKE_FUNCTION            4 (annotations)
+            268 STORE_NAME              29 (rgb555ToHsl)
+
+164         270 LOAD_CONST              38 ('str')
+            272 LOAD_CONST              39 ('Optional[Tuple[int, int, int]]')
+            274 LOAD_CONST              40 (('hexColor', 'return'))
+            276 BUILD_CONST_KEY_MAP      2
+            278 LOAD_CONST              41 (<code object hexColorToRgb at 0x000001F3253C4450, file "LPClientFramework\LPPalette\LPPalette.py", line 164>)
+            280 LOAD_CONST              42 ('hexColorToRgb')
+            282 MAKE_FUNCTION            4 (annotations)
+            284 STORE_NAME              30 (hexColorToRgb)
+
+191         286 LOAD_BUILD_CLASS
+            288 LOAD_CONST              43 (<code object PaletteTargetMode at 0x000001F3253C45B0, file "LPClientFramework\LPPalette\LPPalette.py", line 191>)
+            290 LOAD_CONST              44 ('PaletteTargetMode')
+            292 MAKE_FUNCTION            0
+            294 LOAD_CONST              44 ('PaletteTargetMode')
+            296 LOAD_NAME                7 (IntFlag)
+            298 CALL_FUNCTION            3
+            300 STORE_NAME              31 (PaletteTargetMode)
+
+206         302 LOAD_NAME                5 (dataclass)
+
+207         304 LOAD_BUILD_CLASS
+            306 LOAD_CONST              45 (<code object PaletteColorModel at 0x000001F3253C47C0, file "LPClientFramework\LPPalette\LPPalette.py", line 206>)
+            308 LOAD_CONST              46 ('PaletteColorModel')
+            310 MAKE_FUNCTION            0
+            312 LOAD_CONST              46 ('PaletteColorModel')
+            314 CALL_FUNCTION            2
+            316 CALL_FUNCTION            1
+            318 STORE_NAME              32 (PaletteColorModel)
+
+220         320 LOAD_BUILD_CLASS
+            322 LOAD_CONST              47 (<code object PaletteSwatch at 0x000001F3253C4920, file "LPClientFramework\LPPalette\LPPalette.py", line 220>)
+            324 LOAD_CONST              48 ('PaletteSwatch')
+            326 MAKE_FUNCTION            0
+            328 LOAD_CONST              48 ('PaletteSwatch')
+            330 CALL_FUNCTION            2
+            332 STORE_NAME              33 (PaletteSwatch)
+
+238         334 LOAD_BUILD_CLASS
+            336 LOAD_CONST              49 (<code object PaletteTarget at 0x000001F324E69240, file "LPClientFramework\LPPalette\LPPalette.py", line 238>)
+            338 LOAD_CONST              50 ('PaletteTarget')
+            340 MAKE_FUNCTION            0
+            342 LOAD_CONST              50 ('PaletteTarget')
+            344 CALL_FUNCTION            2
+            346 STORE_NAME              34 (PaletteTarget)
+
+365         348 LOAD_BUILD_CLASS
+            350 LOAD_CONST              51 (<code object PFilter at 0x000001F324E695B0, file "LPClientFramework\LPPalette\LPPalette.py", line 365>)
+            352 LOAD_CONST              52 ('PFilter')
+            354 MAKE_FUNCTION            0
+            356 LOAD_CONST              52 ('PFilter')
+            358 CALL_FUNCTION            2
+            360 STORE_NAME              35 (PFilter)
+
+386         362 LOAD_BUILD_CLASS
+            364 LOAD_CONST              53 (<code object VBox at 0x000001F324E767C0, file "LPClientFramework\LPPalette\LPPalette.py", line 386>)
+            366 LOAD_CONST              54 ('VBox')
+            368 MAKE_FUNCTION            0
+            370 LOAD_CONST              54 ('VBox')
+            372 CALL_FUNCTION            2
+            374 STORE_NAME              36 (VBox)
+
+521         376 LOAD_BUILD_CLASS
+            378 LOAD_CONST              55 (<code object PriorityBoxArray at 0x000001F324E76A80, file "LPClientFramework\LPPalette\LPPalette.py", line 521>)
+            380 LOAD_CONST              56 ('PriorityBoxArray')
+            382 MAKE_FUNCTION            0
+            384 LOAD_CONST              56 ('PriorityBoxArray')
+            386 CALL_FUNCTION            2
+            388 STORE_NAME              37 (PriorityBoxArray)
+
+558         390 LOAD_BUILD_CLASS
+            392 LOAD_CONST              57 (<code object PaletteAnalyzer at 0x000001F3253CEEA0, file "LPClientFramework\LPPalette\LPPalette.py", line 558>)
+            394 LOAD_CONST              58 ('PaletteAnalyzer')
+            396 MAKE_FUNCTION            0
+            398 LOAD_CONST              58 ('PaletteAnalyzer')
+            400 CALL_FUNCTION            2
+            402 STORE_NAME              38 (PaletteAnalyzer)
+
+797         404 LOAD_CONST              59 ('Optional[Image.Image]')
+            406 LOAD_CONST              44 ('PaletteTargetMode')
+            408 LOAD_CONST              60 ('Tuple[Optional[PaletteColorModel], Optional[Dict[str, Union[PaletteColorModel, str]]], Optional[Exception]]')
+            410 LOAD_CONST              61 (('image', 'mode', 'return'))
+            412 BUILD_CONST_KEY_MAP      3
+            414 LOAD_CONST              62 (<code object getPaletteImageColorWithMode at 0x000001F3253CE9D0, file "LPClientFramework\LPPalette\LPPalette.py", line 797>)
+            416 LOAD_CONST              63 ('getPaletteImageColorWithMode')
+            418 MAKE_FUNCTION            4 (annotations)
+            420 STORE_NAME              39 (getPaletteImageColorWithMode)
+
+815         422 LOAD_CONST              59 ('Optional[Image.Image]')
+            424 LOAD_CONST              39 ('Optional[Tuple[int, int, int]]')
+            426 LOAD_CONST              64 (('image', 'return'))
+            428 BUILD_CONST_KEY_MAP      2
+            430 LOAD_CONST              65 (<code object extractThemeColorRgbFromImage at 0x000001F3253CE3A0, file "LPClientFramework\LPPalette\LPPalette.py", line 815>)
+            432 LOAD_CONST              66 ('extractThemeColorRgbFromImage')
+            434 MAKE_FUNCTION            4 (annotations)
+            436 STORE_NAME              40 (extractThemeColorRgbFromImage)
+            438 LOAD_CONST               3 (None)
+            440 RETURN_VALUE
+
+=== constrain ===
+ 41           0 LOAD_FAST                0 (amount)
+              2 LOAD_FAST                2 (high)
+              4 COMPARE_OP               4 (>)
+              6 POP_JUMP_IF_FALSE       12
+              8 LOAD_FAST                2 (high)
+             10 RETURN_VALUE
+        >>   12 LOAD_FAST                0 (amount)
+             14 LOAD_FAST                1 (low)
+             16 COMPARE_OP               0 (<)
+             18 POP_JUMP_IF_FALSE       24
+             20 LOAD_FAST                1 (low)
+             22 RETURN_VALUE
+        >>   24 LOAD_FAST                0 (amount)
+             26 RETURN_VALUE
+
+=== truncatingRemainderDividing ===
+ 58           0 LOAD_FAST                1 (b)
+              2 LOAD_CONST               1 (0)
+              4 COMPARE_OP               2 (==)
+              6 POP_JUMP_IF_FALSE       12
+
+ 59           8 LOAD_CONST               2 (0.0)
+             10 RETURN_VALUE
+
+ 61     >>   12 LOAD_GLOBAL              0 (int)
+             14 LOAD_FAST                0 (a)
+             16 LOAD_CONST               3 (1000000)
+             18 BINARY_MULTIPLY
+             20 CALL_FUNCTION            1
+             22 STORE_FAST               2 (intA)
+
+ 62          24 LOAD_GLOBAL              0 (int)
+             26 LOAD_FAST                1 (b)
+             28 LOAD_CONST               3 (1000000)
+             30 BINARY_MULTIPLY
+             32 CALL_FUNCTION            1
+             34 STORE_FAST               3 (intB)
+
+ 63          36 LOAD_FAST                3 (intB)
+             38 LOAD_CONST               1 (0)
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       48
+
+ 64          44 LOAD_CONST               2 (0.0)
+             46 RETURN_VALUE
+
+ 66     >>   48 LOAD_GLOBAL              1 (math)
+             50 LOAD_METHOD              2 (trunc)
+             52 LOAD_FAST                2 (intA)
+             54 LOAD_FAST                3 (intB)
+             56 BINARY_TRUE_DIVIDE
+             58 CALL_METHOD              1
+             60 STORE_FAST               4 (quotient)
+
+ 67          62 LOAD_FAST                2 (intA)
+             64 LOAD_FAST                4 (quotient)
+             66 LOAD_FAST                3 (intB)
+             68 BINARY_MULTIPLY
+             70 BINARY_SUBTRACT
+             72 STORE_FAST               5 (intC)
+
+ 68          74 LOAD_FAST                5 (intC)
+             76 LOAD_CONST               4 (1000000.0)
+             78 BINARY_TRUE_DIVIDE
+             80 RETURN_VALUE
+
+=== modifyWordWidthWithValue ===
+ 83           0 LOAD_FAST                2 (targetWidth)
+              2 LOAD_FAST                1 (currentWidth)
+              4 COMPARE_OP               4 (>)
+              6 POP_JUMP_IF_FALSE       38
+
+ 84           8 LOAD_FAST                0 (value)
+             10 LOAD_CONST               1 (1)
+             12 LOAD_FAST                2 (targetWidth)
+             14 BINARY_LSHIFT
+             16 LOAD_CONST               1 (1)
+             18 BINARY_SUBTRACT
+             20 BINARY_MULTIPLY
+             22 LOAD_CONST               1 (1)
+             24 LOAD_FAST                1 (currentWidth)
+             26 BINARY_LSHIFT
+             28 LOAD_CONST               1 (1)
+             30 BINARY_SUBTRACT
+             32 BINARY_FLOOR_DIVIDE
+             34 STORE_FAST               3 (newValue)
+             36 JUMP_FORWARD            12 (to 50)
+
+ 86     >>   38 LOAD_FAST                0 (value)
+             40 LOAD_FAST                1 (currentWidth)
+             42 LOAD_FAST                2 (targetWidth)
+             44 BINARY_SUBTRACT
+             46 BINARY_RSHIFT
+             48 STORE_FAST               3 (newValue)
+
+ 87     >>   50 LOAD_FAST                3 (newValue)
+             52 LOAD_CONST               1 (1)
+             54 LOAD_FAST                2 (targetWidth)
+             56 BINARY_LSHIFT
+             58 LOAD_CONST               1 (1)
+             60 BINARY_SUBTRACT
+             62 BINARY_AND
+             64 RETURN_VALUE
+
+=== quantizedRed ===
+ 91           0 LOAD_FAST                0 (color)
+              2 LOAD_GLOBAL              0 (QUANTIZE_WORD_WIDTH)
+              4 LOAD_GLOBAL              0 (QUANTIZE_WORD_WIDTH)
+              6 BINARY_ADD
+              8 BINARY_RSHIFT
+             10 LOAD_GLOBAL              1 (QUANTIZE_WORD_MASK)
+             12 BINARY_AND
+             14 RETURN_VALUE
+
+=== quantizedGreen ===
+ 95           0 LOAD_FAST                0 (color)
+              2 LOAD_GLOBAL              0 (QUANTIZE_WORD_WIDTH)
+              4 BINARY_RSHIFT
+              6 LOAD_GLOBAL              1 (QUANTIZE_WORD_MASK)
+              8 BINARY_AND
+             10 RETURN_VALUE
+
+=== quantizedBlue ===
+ 99           0 LOAD_FAST                0 (color)
+              2 LOAD_GLOBAL              0 (QUANTIZE_WORD_MASK)
+              4 BINARY_AND
+              6 RETURN_VALUE
+
+=== rgb888ToHsl ===
+114           0 LOAD_GLOBAL              0 (float)
+              2 LOAD_FAST                0 (red)
+              4 CALL_FUNCTION            1
+              6 LOAD_CONST               1 (255.0)
+              8 BINARY_TRUE_DIVIDE
+             10 STORE_FAST               3 (rf)
+
+115          12 LOAD_GLOBAL              0 (float)
+             14 LOAD_FAST                1 (green)
+             16 CALL_FUNCTION            1
+             18 LOAD_CONST               1 (255.0)
+             20 BINARY_TRUE_DIVIDE
+             22 STORE_FAST               4 (gf)
+
+116          24 LOAD_GLOBAL              0 (float)
+             26 LOAD_FAST                2 (blue)
+             28 CALL_FUNCTION            1
+             30 LOAD_CONST               1 (255.0)
+             32 BINARY_TRUE_DIVIDE
+             34 STORE_FAST               5 (bf)
+
+118          36 LOAD_GLOBAL              1 (max)
+             38 LOAD_FAST                3 (rf)
+             40 LOAD_FAST                4 (gf)
+             42 LOAD_FAST                5 (bf)
+             44 CALL_FUNCTION            3
+             46 STORE_FAST               6 (maxValue)
+
+119          48 LOAD_GLOBAL              2 (min)
+             50 LOAD_FAST                3 (rf)
+             52 LOAD_FAST                4 (gf)
+             54 LOAD_FAST                5 (bf)
+             56 CALL_FUNCTION            3
+             58 STORE_FAST               7 (minValue)
+
+120          60 LOAD_FAST                6 (maxValue)
+             62 LOAD_FAST                7 (minValue)
+             64 BINARY_SUBTRACT
+             66 STORE_FAST               8 (deltaMaxMin)
+
+122          68 LOAD_FAST                6 (maxValue)
+             70 LOAD_FAST                7 (minValue)
+             72 BINARY_ADD
+             74 LOAD_CONST               2 (2.0)
+             76 BINARY_TRUE_DIVIDE
+             78 STORE_FAST               9 (lightness)
+
+123          80 LOAD_CONST               3 (0.0)
+             82 STORE_FAST              10 (hue)
+
+124          84 LOAD_CONST               3 (0.0)
+             86 STORE_FAST              11 (saturation)
+
+126          88 LOAD_FAST                6 (maxValue)
+             90 LOAD_FAST                7 (minValue)
+             92 COMPARE_OP               3 (!=)
+             94 POP_JUMP_IF_FALSE      206
+
+127          96 LOAD_FAST                6 (maxValue)
+             98 LOAD_FAST                3 (rf)
+            100 COMPARE_OP               2 (==)
+            102 POP_JUMP_IF_FALSE      124
+
+128         104 LOAD_GLOBAL              3 (truncatingRemainderDividing)
+            106 LOAD_FAST                4 (gf)
+            108 LOAD_FAST                5 (bf)
+            110 BINARY_SUBTRACT
+            112 LOAD_FAST                8 (deltaMaxMin)
+            114 BINARY_TRUE_DIVIDE
+            116 LOAD_CONST               4 (6.0)
+            118 CALL_FUNCTION            2
+            120 STORE_FAST              10 (hue)
+            122 JUMP_FORWARD            42 (to 166)
+
+129     >>  124 LOAD_FAST                6 (maxValue)
+            126 LOAD_FAST                4 (gf)
+            128 COMPARE_OP               2 (==)
+            130 POP_JUMP_IF_FALSE      150
+
+130         132 LOAD_FAST                5 (bf)
+            134 LOAD_FAST                3 (rf)
+            136 BINARY_SUBTRACT
+            138 LOAD_FAST                8 (deltaMaxMin)
+            140 BINARY_TRUE_DIVIDE
+            142 LOAD_CONST               2 (2.0)
+            144 BINARY_ADD
+            146 STORE_FAST              10 (hue)
+            148 JUMP_FORWARD            16 (to 166)
+
+132     >>  150 LOAD_FAST                3 (rf)
+            152 LOAD_FAST                4 (gf)
+            154 BINARY_SUBTRACT
+            156 LOAD_FAST                8 (deltaMaxMin)
+            158 BINARY_TRUE_DIVIDE
+            160 LOAD_CONST               5 (4.0)
+            162 BINARY_ADD
+            164 STORE_FAST              10 (hue)
+
+134     >>  166 LOAD_CONST               6 (1.0)
+            168 LOAD_GLOBAL              4 (abs)
+            170 LOAD_CONST               2 (2.0)
+            172 LOAD_FAST                9 (lightness)
+            174 BINARY_MULTIPLY
+            176 LOAD_CONST               6 (1.0)
+            178 BINARY_SUBTRACT
+            180 CALL_FUNCTION            1
+            182 BINARY_SUBTRACT
+            184 STORE_FAST              12 (denominator)
+
+135         186 LOAD_FAST               12 (denominator)
+            188 LOAD_CONST               7 (0)
+            190 COMPARE_OP               3 (!=)
+            192 POP_JUMP_IF_FALSE      202
+            194 LOAD_FAST                8 (deltaMaxMin)
+            196 LOAD_FAST               12 (denominator)
+            198 BINARY_TRUE_DIVIDE
+            200 JUMP_FORWARD             2 (to 204)
+        >>  202 LOAD_CONST               3 (0.0)
+        >>  204 STORE_FAST              11 (saturation)
+
+137     >>  206 LOAD_GLOBAL              3 (truncatingRemainderDividing)
+            208 LOAD_FAST               10 (hue)
+            210 LOAD_CONST               8 (60.0)
+            212 BINARY_MULTIPLY
+            214 LOAD_CONST               9 (360.0)
+            216 CALL_FUNCTION            2
+            218 STORE_FAST              10 (hue)
+
+138         220 LOAD_FAST               10 (hue)
+            222 LOAD_CONST               3 (0.0)
+            224 COMPARE_OP               0 (<)
+            226 POP_JUMP_IF_FALSE      236
+
+139         228 LOAD_FAST               10 (hue)
+            230 LOAD_CONST               9 (360.0)
+            232 INPLACE_ADD
+            234 STORE_FAST              10 (hue)
+
+142     >>  236 LOAD_GLOBAL              5 (constrain)
+            238 LOAD_FAST               10 (hue)
+            240 LOAD_CONST               3 (0.0)
+            242 LOAD_CONST               9 (360.0)
+            244 CALL_FUNCTION            3
+
+143         246 LOAD_GLOBAL              5 (constrain)
+            248 LOAD_FAST               11 (saturation)
+            250 LOAD_CONST               3 (0.0)
+            252 LOAD_CONST               6 (1.0)
+            254 CALL_FUNCTION            3
+
+144         256 LOAD_GLOBAL              5 (constrain)
+            258 LOAD_FAST                9 (lightness)
+            260 LOAD_CONST               3 (0.0)
+            262 LOAD_CONST               6 (1.0)
+            264 CALL_FUNCTION            3
+
+141         266 BUILD_TUPLE              3
+            268 RETURN_VALUE
+
+=== rgb555ToHsl ===
+158           0 LOAD_GLOBAL              0 (modifyWordWidthWithValue)
+              2 LOAD_GLOBAL              1 (quantizedRed)
+              4 LOAD_FAST                0 (rgb555)
+              6 CALL_FUNCTION            1
+              8 LOAD_CONST               1 (5)
+             10 LOAD_CONST               2 (8)
+             12 CALL_FUNCTION            3
+             14 STORE_FAST               1 (red)
+
+159          16 LOAD_GLOBAL              0 (modifyWordWidthWithValue)
+             18 LOAD_GLOBAL              2 (quantizedGreen)
+             20 LOAD_FAST                0 (rgb555)
+             22 CALL_FUNCTION            1
+             24 LOAD_CONST               1 (5)
+             26 LOAD_CONST               2 (8)
+             28 CALL_FUNCTION            3
+             30 STORE_FAST               2 (green)
+
+160          32 LOAD_GLOBAL              0 (modifyWordWidthWithValue)
+             34 LOAD_GLOBAL              3 (quantizedBlue)
+             36 LOAD_FAST                0 (rgb555)
+             38 CALL_FUNCTION            1
+             40 LOAD_CONST               1 (5)
+             42 LOAD_CONST               2 (8)
+             44 CALL_FUNCTION            3
+             46 STORE_FAST               3 (blue)
+
+161          48 LOAD_GLOBAL              4 (rgb888ToHsl)
+             50 LOAD_FAST                1 (red)
+             52 LOAD_FAST                2 (green)
+             54 LOAD_FAST                3 (blue)
+             56 CALL_FUNCTION            3
+             58 RETURN_VALUE
+
+=== hexColorToRgb ===
+174           0 LOAD_FAST                0 (hexColor)
+              2 POP_JUMP_IF_TRUE         8
+
+175           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+176     >>    8 LOAD_FAST                0 (hexColor)
+             10 LOAD_METHOD              0 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              1 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               1 (colorString)
+
+177          20 LOAD_FAST                1 (colorString)
+             22 LOAD_METHOD              2 (startswith)
+             24 LOAD_CONST               2 ('#')
+             26 CALL_METHOD              1
+             28 POP_JUMP_IF_FALSE       42
+
+178          30 LOAD_FAST                1 (colorString)
+             32 LOAD_CONST               3 (1)
+             34 LOAD_CONST               1 (None)
+             36 BUILD_SLICE              2
+             38 BINARY_SUBSCR
+             40 STORE_FAST               1 (colorString)
+
+179     >>   42 LOAD_GLOBAL              3 (len)
+             44 LOAD_FAST                1 (colorString)
+             46 CALL_FUNCTION            1
+             48 LOAD_CONST               4 (6)
+             50 COMPARE_OP               3 (!=)
+             52 POP_JUMP_IF_FALSE       58
+
+180          54 LOAD_CONST               1 (None)
+             56 RETURN_VALUE
+
+181     >>   58 SETUP_FINALLY           54 (to 114)
+
+183          60 LOAD_GLOBAL              4 (int)
+             62 LOAD_FAST                1 (colorString)
+             64 LOAD_CONST               5 (0)
+             66 LOAD_CONST               6 (2)
+             68 BUILD_SLICE              2
+             70 BINARY_SUBSCR
+             72 LOAD_CONST               7 (16)
+             74 CALL_FUNCTION            2
+
+184          76 LOAD_GLOBAL              4 (int)
+             78 LOAD_FAST                1 (colorString)
+             80 LOAD_CONST               6 (2)
+             82 LOAD_CONST               8 (4)
+             84 BUILD_SLICE              2
+             86 BINARY_SUBSCR
+             88 LOAD_CONST               7 (16)
+             90 CALL_FUNCTION            2
+
+185          92 LOAD_GLOBAL              4 (int)
+             94 LOAD_FAST                1 (colorString)
+             96 LOAD_CONST               8 (4)
+             98 LOAD_CONST               4 (6)
+            100 BUILD_SLICE              2
+            102 BINARY_SUBSCR
+            104 LOAD_CONST               7 (16)
+            106 CALL_FUNCTION            2
+
+182         108 BUILD_TUPLE              3
+            110 POP_BLOCK
+            112 RETURN_VALUE
+
+187     >>  114 DUP_TOP
+            116 LOAD_GLOBAL              5 (ValueError)
+            118 JUMP_IF_NOT_EXC_MATCH   132
+            120 POP_TOP
+            122 POP_TOP
+            124 POP_TOP
+
+188         126 POP_EXCEPT
+            128 LOAD_CONST               1 (None)
+            130 RETURN_VALUE
+        >>  132 RERAISE
+            134 LOAD_CONST               1 (None)
+            136 RETURN_VALUE
+
+=== PaletteTargetMode ===
+191           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('PaletteTargetMode')
+              6 STORE_NAME               2 (__qualname__)
+
+192           8 LOAD_CONST               1 ('\n    目标色模式，保持 iOS 枚举位定义一致。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+196          12 LOAD_CONST               2 (0)
+             14 STORE_NAME               4 (DEFAULT_NON_MODE_PALETTE)
+
+197          16 LOAD_CONST               3 (1)
+             18 STORE_NAME               5 (VIBRANT_PALETTE)
+
+198          20 LOAD_CONST               4 (2)
+             22 STORE_NAME               6 (LIGHT_VIBRANT_PALETTE)
+
+199          24 LOAD_CONST               5 (4)
+             26 STORE_NAME               7 (DARK_VIBRANT_PALETTE)
+
+200          28 LOAD_CONST               6 (8)
+             30 STORE_NAME               8 (LIGHT_MUTED_PALETTE)
+
+201          32 LOAD_CONST               7 (16)
+             34 STORE_NAME               9 (MUTED_PALETTE)
+
+202          36 LOAD_CONST               8 (32)
+             38 STORE_NAME              10 (DARK_MUTED_PALETTE)
+
+203          40 LOAD_CONST               9 (64)
+             42 STORE_NAME              11 (ALL_MODE_PALETTE)
+             44 LOAD_CONST              10 (None)
+             46 RETURN_VALUE
+
+=== PaletteColorModel ===
+206           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('PaletteColorModel')
+              6 STORE_NAME               2 (__qualname__)
+              8 SETUP_ANNOTATIONS
+
+208          10 LOAD_CONST               1 ('\n    调色板颜色模型。\n\n    Args:\n        imageColorString: #RRGGBB 颜色字符串。\n        percentage: 颜色占比（0~1）。\n    ')
+             12 STORE_NAME               3 (__doc__)
+
+216          14 LOAD_CONST               2 ('str')
+             16 LOAD_NAME                4 (__annotations__)
+             18 LOAD_CONST               3 ('imageColorString')
+             20 STORE_SUBSCR
+
+217          22 LOAD_CONST               4 (0.0)
+             24 STORE_NAME               5 (percentage)
+             26 LOAD_CONST               5 ('float')
+             28 LOAD_NAME                4 (__annotations__)
+             30 LOAD_CONST               6 ('percentage')
+             32 STORE_SUBSCR
+             34 LOAD_CONST               7 (None)
+             36 RETURN_VALUE
+
+=== PaletteSwatch ===
+220           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('PaletteSwatch')
+              6 STORE_NAME               2 (__qualname__)
+
+221           8 LOAD_CONST               1 ('\n    单个候选颜色样本。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+225          12 LOAD_CONST               2 ('int')
+             14 LOAD_CONST               2 ('int')
+             16 LOAD_CONST               3 (('colorInt', 'population'))
+             18 BUILD_CONST_KEY_MAP      2
+             20 LOAD_CONST               4 (<code object __init__ at 0x000001F3253C4500, file "LPClientFramework\LPPalette\LPPalette.py", line 225>)
+             22 LOAD_CONST               5 ('PaletteSwatch.__init__')
+             24 MAKE_FUNCTION            4 (annotations)
+             26 STORE_NAME               4 (__init__)
+
+231          28 LOAD_CONST               6 ('Tuple[float, float, float]')
+             30 LOAD_CONST               7 (('return',))
+             32 BUILD_CONST_KEY_MAP      1
+             34 LOAD_CONST               8 (<code object getHsl at 0x000001F3253C49D0, file "LPClientFramework\LPPalette\LPPalette.py", line 231>)
+             36 LOAD_CONST               9 ('PaletteSwatch.getHsl')
+             38 MAKE_FUNCTION            4 (annotations)
+             40 STORE_NAME               5 (getHsl)
+
+234          42 LOAD_CONST              10 ('str')
+             44 LOAD_CONST               7 (('return',))
+             46 BUILD_CONST_KEY_MAP      1
+             48 LOAD_CONST              11 (<code object getColorString at 0x000001F3253C4660, file "LPClientFramework\LPPalette\LPPalette.py", line 234>)
+             50 LOAD_CONST              12 ('PaletteSwatch.getColorString')
+             52 MAKE_FUNCTION            4 (annotations)
+             54 STORE_NAME               6 (getColorString)
+             56 LOAD_CONST              13 (None)
+             58 RETURN_VALUE
+
+=== PaletteSwatch.__init__ ===
+226           0 LOAD_FAST                1 (colorInt)
+              2 LOAD_CONST               1 (16)
+              4 BINARY_RSHIFT
+              6 LOAD_CONST               2 (255)
+              8 BINARY_AND
+             10 LOAD_FAST                0 (self)
+             12 STORE_ATTR               0 (red)
+
+227          14 LOAD_FAST                1 (colorInt)
+             16 LOAD_CONST               3 (8)
+             18 BINARY_RSHIFT
+             20 LOAD_CONST               2 (255)
+             22 BINARY_AND
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               1 (green)
+
+228          28 LOAD_FAST                1 (colorInt)
+             30 LOAD_CONST               2 (255)
+             32 BINARY_AND
+             34 LOAD_FAST                0 (self)
+             36 STORE_ATTR               2 (blue)
+
+229          38 LOAD_FAST                2 (population)
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               3 (population)
+             44 LOAD_CONST               0 (None)
+             46 RETURN_VALUE
+
+=== PaletteSwatch.getHsl ===
+232           0 LOAD_GLOBAL              0 (rgb888ToHsl)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (red)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                2 (green)
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                3 (blue)
+             14 CALL_FUNCTION            3
+             16 RETURN_VALUE
+
+=== PaletteSwatch.getColorString ===
+235           0 LOAD_CONST               1 ('#')
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (red)
+              6 LOAD_CONST               2 ('02x')
+              8 FORMAT_VALUE             4 (with format)
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (green)
+             14 LOAD_CONST               2 ('02x')
+             16 FORMAT_VALUE             4 (with format)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                2 (blue)
+             22 LOAD_CONST               2 ('02x')
+             24 FORMAT_VALUE             4 (with format)
+             26 BUILD_STRING             4
+             28 RETURN_VALUE
+
+=== PaletteTarget ===
+238           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('PaletteTarget')
+              6 STORE_NAME               2 (__qualname__)
+
+239           8 LOAD_CONST               1 ('\n    目标色规则（亮度/饱和度区间 + 权重）定义。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+243          12 LOAD_CONST               2 (0.26)
+             14 STORE_NAME               4 (TARGET_DARK_LUMA)
+
+244          16 LOAD_CONST               3 (0.45)
+             18 STORE_NAME               5 (MAX_DARK_LUMA)
+
+246          20 LOAD_CONST               4 (0.55)
+             22 STORE_NAME               6 (MIN_LIGHT_LUMA)
+
+247          24 LOAD_CONST               5 (0.74)
+             26 STORE_NAME               7 (TARGET_LIGHT_LUMA)
+
+249          28 LOAD_CONST               6 (0.3)
+             30 STORE_NAME               8 (MIN_NORMAL_LUMA)
+
+250          32 LOAD_CONST               7 (0.5)
+             34 STORE_NAME               9 (TARGET_NORMAL_LUMA)
+
+251          36 LOAD_CONST               8 (0.7)
+             38 STORE_NAME              10 (MAX_NORMAL_LUMA)
+
+253          40 LOAD_CONST               6 (0.3)
+             42 STORE_NAME              11 (TARGET_MUTED_SATURATION)
+
+254          44 LOAD_CONST               9 (0.4)
+             46 STORE_NAME              12 (MAX_MUTED_SATURATION)
+
+256          48 LOAD_CONST              10 (1.0)
+             50 STORE_NAME              13 (TARGET_VIBRANT_SATURATION)
+
+257          52 LOAD_CONST              11 (0.35)
+             54 STORE_NAME              14 (MIN_VIBRANT_SATURATION)
+
+259          56 LOAD_CONST              12 (0.24)
+             58 STORE_NAME              15 (WEIGHT_SATURATION)
+
+260          60 LOAD_CONST              13 (0.52)
+             62 STORE_NAME              16 (WEIGHT_LUMA)
+
+261          64 LOAD_CONST              12 (0.24)
+             66 STORE_NAME              17 (WEIGHT_POPULATION)
+
+263          68 LOAD_CONST              14 ('PaletteTargetMode')
+             70 LOAD_CONST              15 (('mode',))
+             72 BUILD_CONST_KEY_MAP      1
+             74 LOAD_CONST              16 (<code object __init__ at 0x000001F3253C40E0, file "LPClientFramework\LPPalette\LPPalette.py", line 263>)
+             76 LOAD_CONST              17 ('PaletteTarget.__init__')
+             78 MAKE_FUNCTION            4 (annotations)
+             80 STORE_NAME              18 (__init__)
+
+274          82 LOAD_CONST              14 ('PaletteTargetMode')
+             84 LOAD_CONST              15 (('mode',))
+             86 BUILD_CONST_KEY_MAP      1
+             88 LOAD_CONST              18 (<code object configureLumaAndSaturationWithMode at 0x000001F3253C4190, file "LPClientFramework\LPPalette\LPPalette.py", line 274>)
+             90 LOAD_CONST              19 ('PaletteTarget.configureLumaAndSaturationWithMode')
+             92 MAKE_FUNCTION            4 (annotations)
+             94 STORE_NAME              19 (configureLumaAndSaturationWithMode)
+
+294          96 LOAD_CONST              20 (<code object setDefaultLightLuma at 0x000001F3253C4EA0, file "LPClientFramework\LPPalette\LPPalette.py", line 294>)
+             98 LOAD_CONST              21 ('PaletteTarget.setDefaultLightLuma')
+            100 MAKE_FUNCTION            0
+            102 STORE_NAME              20 (setDefaultLightLuma)
+
+298         104 LOAD_CONST              22 (<code object setDefaultNormalLuma at 0x000001F3253C4870, file "LPClientFramework\LPPalette\LPPalette.py", line 298>)
+            106 LOAD_CONST              23 ('PaletteTarget.setDefaultNormalLuma')
+            108 MAKE_FUNCTION            0
+            110 STORE_NAME              21 (setDefaultNormalLuma)
+
+303         112 LOAD_CONST              24 (<code object setDefaultDarkLuma at 0x000001F3253C4F50, file "LPClientFramework\LPPalette\LPPalette.py", line 303>)
+            114 LOAD_CONST              25 ('PaletteTarget.setDefaultDarkLuma')
+            116 MAKE_FUNCTION            0
+            118 STORE_NAME              22 (setDefaultDarkLuma)
+
+307         120 LOAD_CONST              26 (<code object setDefaultMutedSaturation at 0x000001F3253C4A80, file "LPClientFramework\LPPalette\LPPalette.py", line 307>)
+            122 LOAD_CONST              27 ('PaletteTarget.setDefaultMutedSaturation')
+            124 MAKE_FUNCTION            0
+            126 STORE_NAME              23 (setDefaultMutedSaturation)
+
+311         128 LOAD_CONST              28 (<code object setDefaultVibrantSaturation at 0x000001F3253C4BE0, file "LPClientFramework\LPPalette\LPPalette.py", line 311>)
+            130 LOAD_CONST              29 ('PaletteTarget.setDefaultVibrantSaturation')
+            132 MAKE_FUNCTION            0
+            134 STORE_NAME              24 (setDefaultVibrantSaturation)
+
+315         136 LOAD_CONST              30 (<code object normalizeWeights at 0x000001F3253C4030, file "LPClientFramework\LPPalette\LPPalette.py", line 315>)
+            138 LOAD_CONST              31 ('PaletteTarget.normalizeWeights')
+            140 MAKE_FUNCTION            0
+            142 STORE_NAME              25 (normalizeWeights)
+
+322         144 LOAD_CONST              32 ('str')
+            146 LOAD_CONST              33 (('return',))
+            148 BUILD_CONST_KEY_MAP      1
+            150 LOAD_CONST              34 (<code object getTargetKey at 0x000001F3253C4710, file "LPClientFramework\LPPalette\LPPalette.py", line 322>)
+            152 LOAD_CONST              35 ('PaletteTarget.getTargetKey')
+            154 MAKE_FUNCTION            4 (annotations)
+            156 STORE_NAME              26 (getTargetKey)
+
+325         158 LOAD_NAME               27 (staticmethod)
+
+326         160 LOAD_CONST              14 ('PaletteTargetMode')
+            162 LOAD_CONST              32 ('str')
+            164 LOAD_CONST              36 (('mode', 'return'))
+            166 BUILD_CONST_KEY_MAP      2
+            168 LOAD_CONST              37 (<code object getTargetModeKey at 0x000001F324E692F0, file "LPClientFramework\LPPalette\LPPalette.py", line 325>)
+            170 LOAD_CONST              38 ('PaletteTarget.getTargetModeKey')
+            172 MAKE_FUNCTION            4 (annotations)
+            174 CALL_FUNCTION            1
+            176 STORE_NAME              28 (getTargetModeKey)
+
+337         178 LOAD_CONST              39 ('float')
+            180 LOAD_CONST              33 (('return',))
+            182 BUILD_CONST_KEY_MAP      1
+            184 LOAD_CONST              40 (<code object getMinSaturation at 0x000001F324E699D0, file "LPClientFramework\LPPalette\LPPalette.py", line 337>)
+            186 LOAD_CONST              41 ('PaletteTarget.getMinSaturation')
+            188 MAKE_FUNCTION            4 (annotations)
+            190 STORE_NAME              29 (getMinSaturation)
+
+340         192 LOAD_CONST              39 ('float')
+            194 LOAD_CONST              33 (('return',))
+            196 BUILD_CONST_KEY_MAP      1
+            198 LOAD_CONST              42 (<code object getTargetSaturation at 0x000001F324E69F50, file "LPClientFramework\LPPalette\LPPalette.py", line 340>)
+            200 LOAD_CONST              43 ('PaletteTarget.getTargetSaturation')
+            202 MAKE_FUNCTION            4 (annotations)
+            204 STORE_NAME              30 (getTargetSaturation)
+
+343         206 LOAD_CONST              39 ('float')
+            208 LOAD_CONST              33 (('return',))
+            210 BUILD_CONST_KEY_MAP      1
+            212 LOAD_CONST              44 (<code object getMaxSaturation at 0x000001F324E69A80, file "LPClientFramework\LPPalette\LPPalette.py", line 343>)
+            214 LOAD_CONST              45 ('PaletteTarget.getMaxSaturation')
+            216 MAKE_FUNCTION            4 (annotations)
+            218 STORE_NAME              31 (getMaxSaturation)
+
+346         220 LOAD_CONST              39 ('float')
+            222 LOAD_CONST              33 (('return',))
+            224 BUILD_CONST_KEY_MAP      1
+            226 LOAD_CONST              46 (<code object getMinLuma at 0x000001F324E69920, file "LPClientFramework\LPPalette\LPPalette.py", line 346>)
+            228 LOAD_CONST              47 ('PaletteTarget.getMinLuma')
+            230 MAKE_FUNCTION            4 (annotations)
+            232 STORE_NAME              32 (getMinLuma)
+
+349         234 LOAD_CONST              39 ('float')
+            236 LOAD_CONST              33 (('return',))
+            238 BUILD_CONST_KEY_MAP      1
+            240 LOAD_CONST              48 (<code object getTargetLuma at 0x000001F324E69C90, file "LPClientFramework\LPPalette\LPPalette.py", line 349>)
+            242 LOAD_CONST              49 ('PaletteTarget.getTargetLuma')
+            244 MAKE_FUNCTION            4 (annotations)
+            246 STORE_NAME              33 (getTargetLuma)
+
+352         248 LOAD_CONST              39 ('float')
+            250 LOAD_CONST              33 (('return',))
+            252 BUILD_CONST_KEY_MAP      1
+            254 LOAD_CONST              50 (<code object getMaxLuma at 0x000001F324E69EA0, file "LPClientFramework\LPPalette\LPPalette.py", line 352>)
+            256 LOAD_CONST              51 ('PaletteTarget.getMaxLuma')
+            258 MAKE_FUNCTION            4 (annotations)
+            260 STORE_NAME              34 (getMaxLuma)
+
+355         262 LOAD_CONST              39 ('float')
+            264 LOAD_CONST              33 (('return',))
+            266 BUILD_CONST_KEY_MAP      1
+            268 LOAD_CONST              52 (<code object getSaturationWeight at 0x000001F324E69BE0, file "LPClientFramework\LPPalette\LPPalette.py", line 355>)
+            270 LOAD_CONST              53 ('PaletteTarget.getSaturationWeight')
+            272 MAKE_FUNCTION            4 (annotations)
+            274 STORE_NAME              35 (getSaturationWeight)
+
+358         276 LOAD_CONST              39 ('float')
+            278 LOAD_CONST              33 (('return',))
+            280 BUILD_CONST_KEY_MAP      1
+            282 LOAD_CONST              54 (<code object getLumaWeight at 0x000001F324E69030, file "LPClientFramework\LPPalette\LPPalette.py", line 358>)
+            284 LOAD_CONST              55 ('PaletteTarget.getLumaWeight')
+            286 MAKE_FUNCTION            4 (annotations)
+            288 STORE_NAME              36 (getLumaWeight)
+
+361         290 LOAD_CONST              39 ('float')
+            292 LOAD_CONST              33 (('return',))
+            294 BUILD_CONST_KEY_MAP      1
+            296 LOAD_CONST              56 (<code object getPopulationWeight at 0x000001F324E69190, file "LPClientFramework\LPPalette\LPPalette.py", line 361>)
+            298 LOAD_CONST              57 ('PaletteTarget.getPopulationWeight')
+            300 MAKE_FUNCTION            4 (annotations)
+            302 STORE_NAME              37 (getPopulationWeight)
+            304 LOAD_CONST              58 (None)
+            306 RETURN_VALUE
+
+=== PaletteTarget.__init__ ===
+264           0 LOAD_FAST                1 (mode)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (mode)
+
+265           6 BUILD_LIST               0
+              8 LOAD_CONST               1 ((0.0, 0.5, 1.0))
+             10 LIST_EXTEND              1
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               1 (saturationTargets)
+
+266          16 BUILD_LIST               0
+             18 LOAD_CONST               1 ((0.0, 0.5, 1.0))
+             20 LIST_EXTEND              1
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               2 (lightnessTargets)
+
+268          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                3 (WEIGHT_SATURATION)
+
+269          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                4 (WEIGHT_LUMA)
+
+270          34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                5 (WEIGHT_POPULATION)
+
+267          38 BUILD_LIST               3
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               6 (weights)
+
+272          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              7 (configureLumaAndSaturationWithMode)
+             48 LOAD_FAST                1 (mode)
+             50 CALL_METHOD              1
+             52 POP_TOP
+             54 LOAD_CONST               0 (None)
+             56 RETURN_VALUE
+
+=== PaletteTarget.configureLumaAndSaturationWithMode ===
+275           0 LOAD_FAST                1 (mode)
+              2 LOAD_GLOBAL              0 (PaletteTargetMode)
+              4 LOAD_ATTR                1 (LIGHT_VIBRANT_PALETTE)
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE       28
+
+276          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              2 (setDefaultLightLuma)
+             14 CALL_METHOD              0
+             16 POP_TOP
+
+277          18 LOAD_FAST                0 (self)
+             20 LOAD_METHOD              3 (setDefaultVibrantSaturation)
+             22 CALL_METHOD              0
+             24 POP_TOP
+             26 JUMP_FORWARD           138 (to 166)
+
+278     >>   28 LOAD_FAST                1 (mode)
+             30 LOAD_GLOBAL              0 (PaletteTargetMode)
+             32 LOAD_ATTR                4 (VIBRANT_PALETTE)
+             34 COMPARE_OP               2 (==)
+             36 POP_JUMP_IF_FALSE       56
+
+279          38 LOAD_FAST                0 (self)
+             40 LOAD_METHOD              5 (setDefaultNormalLuma)
+             42 CALL_METHOD              0
+             44 POP_TOP
+
+280          46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              3 (setDefaultVibrantSaturation)
+             50 CALL_METHOD              0
+             52 POP_TOP
+             54 JUMP_FORWARD           110 (to 166)
+
+281     >>   56 LOAD_FAST                1 (mode)
+             58 LOAD_GLOBAL              0 (PaletteTargetMode)
+             60 LOAD_ATTR                6 (DARK_VIBRANT_PALETTE)
+             62 COMPARE_OP               2 (==)
+             64 POP_JUMP_IF_FALSE       84
+
+282          66 LOAD_FAST                0 (self)
+             68 LOAD_METHOD              7 (setDefaultDarkLuma)
+             70 CALL_METHOD              0
+             72 POP_TOP
+
+283          74 LOAD_FAST                0 (self)
+             76 LOAD_METHOD              3 (setDefaultVibrantSaturation)
+             78 CALL_METHOD              0
+             80 POP_TOP
+             82 JUMP_FORWARD            82 (to 166)
+
+284     >>   84 LOAD_FAST                1 (mode)
+             86 LOAD_GLOBAL              0 (PaletteTargetMode)
+             88 LOAD_ATTR                8 (LIGHT_MUTED_PALETTE)
+             90 COMPARE_OP               2 (==)
+             92 POP_JUMP_IF_FALSE      112
+
+285          94 LOAD_FAST                0 (self)
+             96 LOAD_METHOD              2 (setDefaultLightLuma)
+             98 CALL_METHOD              0
+            100 POP_TOP
+
+286         102 LOAD_FAST                0 (self)
+            104 LOAD_METHOD              9 (setDefaultMutedSaturation)
+            106 CALL_METHOD              0
+            108 POP_TOP
+            110 JUMP_FORWARD            54 (to 166)
+
+287     >>  112 LOAD_FAST                1 (mode)
+            114 LOAD_GLOBAL              0 (PaletteTargetMode)
+            116 LOAD_ATTR               10 (MUTED_PALETTE)
+            118 COMPARE_OP               2 (==)
+            120 POP_JUMP_IF_FALSE      140
+
+288         122 LOAD_FAST                0 (self)
+            124 LOAD_METHOD              5 (setDefaultNormalLuma)
+            126 CALL_METHOD              0
+            128 POP_TOP
+
+289         130 LOAD_FAST                0 (self)
+            132 LOAD_METHOD              9 (setDefaultMutedSaturation)
+            134 CALL_METHOD              0
+            136 POP_TOP
+            138 JUMP_FORWARD            26 (to 166)
+
+290     >>  140 LOAD_FAST                1 (mode)
+            142 LOAD_GLOBAL              0 (PaletteTargetMode)
+            144 LOAD_ATTR               11 (DARK_MUTED_PALETTE)
+            146 COMPARE_OP               2 (==)
+            148 POP_JUMP_IF_FALSE      166
+
+291         150 LOAD_FAST                0 (self)
+            152 LOAD_METHOD              7 (setDefaultDarkLuma)
+            154 CALL_METHOD              0
+            156 POP_TOP
+
+292         158 LOAD_FAST                0 (self)
+            160 LOAD_METHOD              9 (setDefaultMutedSaturation)
+            162 CALL_METHOD              0
+            164 POP_TOP
+        >>  166 LOAD_CONST               0 (None)
+            168 RETURN_VALUE
+
+=== PaletteTarget.setDefaultLightLuma ===
+295           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (MIN_LIGHT_LUMA)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (lightnessTargets)
+              8 LOAD_CONST               1 (0)
+             10 STORE_SUBSCR
+
+296          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (TARGET_LIGHT_LUMA)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (lightnessTargets)
+             20 LOAD_CONST               2 (1)
+             22 STORE_SUBSCR
+             24 LOAD_CONST               0 (None)
+             26 RETURN_VALUE
+
+=== PaletteTarget.setDefaultNormalLuma ===
+299           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (MIN_NORMAL_LUMA)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (lightnessTargets)
+              8 LOAD_CONST               1 (0)
+             10 STORE_SUBSCR
+
+300          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (TARGET_NORMAL_LUMA)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (lightnessTargets)
+             20 LOAD_CONST               2 (1)
+             22 STORE_SUBSCR
+
+301          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                3 (MAX_NORMAL_LUMA)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                1 (lightnessTargets)
+             32 LOAD_CONST               3 (2)
+             34 STORE_SUBSCR
+             36 LOAD_CONST               0 (None)
+             38 RETURN_VALUE
+
+=== PaletteTarget.setDefaultDarkLuma ===
+304           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (TARGET_DARK_LUMA)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (lightnessTargets)
+              8 LOAD_CONST               1 (1)
+             10 STORE_SUBSCR
+
+305          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (MAX_DARK_LUMA)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (lightnessTargets)
+             20 LOAD_CONST               2 (2)
+             22 STORE_SUBSCR
+             24 LOAD_CONST               0 (None)
+             26 RETURN_VALUE
+
+=== PaletteTarget.setDefaultMutedSaturation ===
+308           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (TARGET_MUTED_SATURATION)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (saturationTargets)
+              8 LOAD_CONST               1 (1)
+             10 STORE_SUBSCR
+
+309          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (MAX_MUTED_SATURATION)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (saturationTargets)
+             20 LOAD_CONST               2 (2)
+             22 STORE_SUBSCR
+             24 LOAD_CONST               0 (None)
+             26 RETURN_VALUE
+
+=== PaletteTarget.setDefaultVibrantSaturation ===
+312           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (MIN_VIBRANT_SATURATION)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (saturationTargets)
+              8 LOAD_CONST               1 (0)
+             10 STORE_SUBSCR
+
+313          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (TARGET_VIBRANT_SATURATION)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (saturationTargets)
+             20 LOAD_CONST               2 (1)
+             22 STORE_SUBSCR
+             24 LOAD_CONST               0 (None)
+             26 RETURN_VALUE
+
+=== PaletteTarget.normalizeWeights ===
+316           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F3253C4C90, file "LPClientFramework\LPPalette\LPPalette.py", line 316>)
+              2 LOAD_CONST               2 ('PaletteTarget.normalizeWeights.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (weights)
+             10 GET_ITER
+             12 CALL_FUNCTION            1
+             14 STORE_FAST               1 (positiveWeights)
+
+317          16 LOAD_GLOBAL              1 (sum)
+             18 LOAD_FAST                1 (positiveWeights)
+             20 CALL_FUNCTION            1
+             22 STORE_DEREF              0 (weightSum)
+
+318          24 LOAD_DEREF               0 (weightSum)
+             26 LOAD_CONST               3 (0)
+             28 COMPARE_OP               2 (==)
+             30 POP_JUMP_IF_FALSE       36
+
+319          32 LOAD_CONST               0 (None)
+             34 RETURN_VALUE
+
+320     >>   36 LOAD_CLOSURE             0 (weightSum)
+             38 BUILD_TUPLE              1
+             40 LOAD_CONST               4 (<code object <listcomp> at 0x000001F3253C4DF0, file "LPClientFramework\LPPalette\LPPalette.py", line 320>)
+             42 LOAD_CONST               2 ('PaletteTarget.normalizeWeights.<locals>.<listcomp>')
+             44 MAKE_FUNCTION            8 (closure)
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                0 (weights)
+             50 GET_ITER
+             52 CALL_FUNCTION            1
+             54 LOAD_FAST                0 (self)
+             56 STORE_ATTR               0 (weights)
+             58 LOAD_CONST               0 (None)
+             60 RETURN_VALUE
+
+=== PaletteTarget.normalizeWeights.<listcomp> ===
+316           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                16 (to 22)
+              6 STORE_FAST               1 (w)
+              8 LOAD_FAST                1 (w)
+             10 LOAD_CONST               0 (0)
+             12 COMPARE_OP               4 (>)
+             14 POP_JUMP_IF_FALSE        4
+             16 LOAD_FAST                1 (w)
+             18 LIST_APPEND              2
+             20 JUMP_ABSOLUTE            4
+        >>   22 RETURN_VALUE
+
+=== PaletteTarget.normalizeWeights.<listcomp> ===
+320           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                24 (to 30)
+              6 STORE_FAST               1 (w)
+              8 LOAD_FAST                1 (w)
+             10 LOAD_CONST               0 (0)
+             12 COMPARE_OP               4 (>)
+             14 POP_JUMP_IF_FALSE       24
+             16 LOAD_FAST                1 (w)
+             18 LOAD_DEREF               0 (weightSum)
+             20 BINARY_TRUE_DIVIDE
+             22 JUMP_FORWARD             2 (to 26)
+        >>   24 LOAD_FAST                1 (w)
+        >>   26 LIST_APPEND              2
+             28 JUMP_ABSOLUTE            4
+        >>   30 RETURN_VALUE
+
+=== PaletteTarget.getTargetKey ===
+323           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (getTargetModeKey)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (mode)
+              8 CALL_METHOD              1
+             10 RETURN_VALUE
+
+=== PaletteTarget.getTargetModeKey ===
+328           0 LOAD_GLOBAL              0 (PaletteTargetMode)
+              2 LOAD_ATTR                1 (LIGHT_VIBRANT_PALETTE)
+              4 LOAD_CONST               1 ('light_vibrant')
+
+329           6 LOAD_GLOBAL              0 (PaletteTargetMode)
+              8 LOAD_ATTR                2 (VIBRANT_PALETTE)
+             10 LOAD_CONST               2 ('vibrant')
+
+330          12 LOAD_GLOBAL              0 (PaletteTargetMode)
+             14 LOAD_ATTR                3 (DARK_VIBRANT_PALETTE)
+             16 LOAD_CONST               3 ('dark_vibrant')
+
+331          18 LOAD_GLOBAL              0 (PaletteTargetMode)
+             20 LOAD_ATTR                4 (LIGHT_MUTED_PALETTE)
+             22 LOAD_CONST               4 ('light_muted')
+
+332          24 LOAD_GLOBAL              0 (PaletteTargetMode)
+             26 LOAD_ATTR                5 (MUTED_PALETTE)
+             28 LOAD_CONST               5 ('muted')
+
+333          30 LOAD_GLOBAL              0 (PaletteTargetMode)
+             32 LOAD_ATTR                6 (DARK_MUTED_PALETTE)
+             34 LOAD_CONST               6 ('dark_muted')
+
+327          36 BUILD_MAP                6
+             38 STORE_FAST               1 (mapping)
+
+335          40 LOAD_FAST                1 (mapping)
+             42 LOAD_METHOD              7 (get)
+             44 LOAD_FAST                0 (mode)
+             46 LOAD_CONST               7 ('')
+             48 CALL_METHOD              2
+             50 RETURN_VALUE
+
+=== PaletteTarget.getMinSaturation ===
+338           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (saturationTargets)
+              4 LOAD_CONST               1 (0)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PaletteTarget.getTargetSaturation ===
+341           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (saturationTargets)
+              4 LOAD_CONST               1 (1)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PaletteTarget.getMaxSaturation ===
+344           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (saturationTargets)
+              4 LOAD_CONST               1 (2)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PaletteTarget.getMinLuma ===
+347           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (lightnessTargets)
+              4 LOAD_CONST               1 (0)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PaletteTarget.getTargetLuma ===
+350           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (lightnessTargets)
+              4 LOAD_CONST               1 (1)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PaletteTarget.getMaxLuma ===
+353           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (lightnessTargets)
+              4 LOAD_CONST               1 (2)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PaletteTarget.getSaturationWeight ===
+356           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (weights)
+              4 LOAD_CONST               1 (0)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PaletteTarget.getLumaWeight ===
+359           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (weights)
+              4 LOAD_CONST               1 (1)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PaletteTarget.getPopulationWeight ===
+362           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (weights)
+              4 LOAD_CONST               1 (2)
+              6 BINARY_SUBSCR
+              8 RETURN_VALUE
+
+=== PFilter ===
+365           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('PFilter')
+              6 STORE_NAME               2 (__qualname__)
+
+366           8 LOAD_CONST               1 ('\n    iOS 同款过滤器：过滤黑/白/接近红线颜色。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+370          12 LOAD_CONST               2 (0.05)
+             14 STORE_NAME               4 (BLACK_MAX_LIGHTNESS)
+
+371          16 LOAD_CONST               3 (0.95)
+             18 STORE_NAME               5 (WHITE_MIN_LIGHTNESS)
+
+373          20 LOAD_CONST               4 ('Sequence[float]')
+             22 LOAD_CONST               5 ('bool')
+             24 LOAD_CONST               6 (('hsl', 'return'))
+             26 BUILD_CONST_KEY_MAP      2
+             28 LOAD_CONST               7 (<code object isAllowed at 0x000001F324E690E0, file "LPClientFramework\LPPalette\LPPalette.py", line 373>)
+             30 LOAD_CONST               8 ('PFilter.isAllowed')
+             32 MAKE_FUNCTION            4 (annotations)
+             34 STORE_NAME               6 (isAllowed)
+
+376          36 LOAD_CONST               4 ('Sequence[float]')
+             38 LOAD_CONST               5 ('bool')
+             40 LOAD_CONST               6 (('hsl', 'return'))
+             42 BUILD_CONST_KEY_MAP      2
+             44 LOAD_CONST               9 (<code object isBlack at 0x000001F324E693A0, file "LPClientFramework\LPPalette\LPPalette.py", line 376>)
+             46 LOAD_CONST              10 ('PFilter.isBlack')
+             48 MAKE_FUNCTION            4 (annotations)
+             50 STORE_NAME               7 (isBlack)
+
+379          52 LOAD_CONST               4 ('Sequence[float]')
+             54 LOAD_CONST               5 ('bool')
+             56 LOAD_CONST               6 (('hsl', 'return'))
+             58 BUILD_CONST_KEY_MAP      2
+             60 LOAD_CONST              11 (<code object isWhite at 0x000001F324E69450, file "LPClientFramework\LPPalette\LPPalette.py", line 379>)
+             62 LOAD_CONST              12 ('PFilter.isWhite')
+             64 MAKE_FUNCTION            4 (annotations)
+             66 STORE_NAME               8 (isWhite)
+
+382          68 LOAD_CONST               4 ('Sequence[float]')
+             70 LOAD_CONST               5 ('bool')
+             72 LOAD_CONST               6 (('hsl', 'return'))
+             74 BUILD_CONST_KEY_MAP      2
+             76 LOAD_CONST              13 (<code object isNearRedILine at 0x000001F324E69710, file "LPClientFramework\LPPalette\LPPalette.py", line 382>)
+             78 LOAD_CONST              14 ('PFilter.isNearRedILine')
+             80 MAKE_FUNCTION            4 (annotations)
+             82 STORE_NAME               9 (isNearRedILine)
+             84 LOAD_CONST              15 (None)
+             86 RETURN_VALUE
+
+=== PFilter.isAllowed ===
+374           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (isBlack)
+              4 LOAD_FAST                1 (hsl)
+              6 CALL_METHOD              1
+              8 UNARY_NOT
+             10 JUMP_IF_FALSE_OR_POP    34
+             12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              1 (isWhite)
+             16 LOAD_FAST                1 (hsl)
+             18 CALL_METHOD              1
+             20 UNARY_NOT
+             22 JUMP_IF_FALSE_OR_POP    34
+             24 LOAD_FAST                0 (self)
+             26 LOAD_METHOD              2 (isNearRedILine)
+             28 LOAD_FAST                1 (hsl)
+             30 CALL_METHOD              1
+             32 UNARY_NOT
+        >>   34 RETURN_VALUE
+
+=== PFilter.isBlack ===
+377           0 LOAD_FAST                1 (hsl)
+              2 LOAD_CONST               1 (2)
+              4 BINARY_SUBSCR
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (BLACK_MAX_LIGHTNESS)
+             10 COMPARE_OP               1 (<=)
+             12 RETURN_VALUE
+
+=== PFilter.isWhite ===
+380           0 LOAD_FAST                1 (hsl)
+              2 LOAD_CONST               1 (2)
+              4 BINARY_SUBSCR
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (WHITE_MIN_LIGHTNESS)
+             10 COMPARE_OP               5 (>=)
+             12 RETURN_VALUE
+
+=== PFilter.isNearRedILine ===
+383           0 LOAD_CONST               1 (10.0)
+              2 LOAD_FAST                1 (hsl)
+              4 LOAD_CONST               2 (0)
+              6 BINARY_SUBSCR
+              8 DUP_TOP
+             10 ROT_THREE
+             12 COMPARE_OP               1 (<=)
+             14 JUMP_IF_FALSE_OR_POP    22
+             16 LOAD_CONST               3 (37.0)
+             18 COMPARE_OP               1 (<=)
+             20 JUMP_FORWARD             4 (to 26)
+        >>   22 ROT_TWO
+             24 POP_TOP
+        >>   26 JUMP_IF_FALSE_OR_POP    38
+             28 LOAD_FAST                1 (hsl)
+             30 LOAD_CONST               4 (1)
+             32 BINARY_SUBSCR
+             34 LOAD_CONST               5 (0.82)
+             36 COMPARE_OP               1 (<=)
+        >>   38 RETURN_VALUE
+
+=== VBox ===
+386           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('VBox')
+              6 STORE_NAME               2 (__qualname__)
+
+387           8 LOAD_CONST               1 ('\n    Median-cut 算法中的颜色盒子。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+391          12 LOAD_CONST               2 (0)
+             14 STORE_NAME               4 (COMPONENT_RED)
+
+392          16 LOAD_CONST               3 (1)
+             18 STORE_NAME               5 (COMPONENT_GREEN)
+
+393          20 LOAD_CONST               4 (2)
+             22 STORE_NAME               6 (COMPONENT_BLUE)
+
+395          24 LOAD_CONST               5 ('int')
+             26 LOAD_CONST               5 ('int')
+             28 LOAD_CONST               6 ('List[int]')
+             30 LOAD_CONST               6 ('List[int]')
+             32 LOAD_CONST               7 (('lowerIndex', 'upperIndex', 'distinctColors', 'histArr'))
+             34 BUILD_CONST_KEY_MAP      4
+             36 LOAD_CONST               8 (<code object __init__ at 0x000001F324E69DF0, file "LPClientFramework\LPPalette\LPPalette.py", line 395>)
+             38 LOAD_CONST               9 ('VBox.__init__')
+             40 MAKE_FUNCTION            4 (annotations)
+             42 STORE_NAME               7 (__init__)
+
+409          44 LOAD_CONST               5 ('int')
+             46 LOAD_CONST              10 (('return',))
+             48 BUILD_CONST_KEY_MAP      1
+             50 LOAD_CONST              11 (<code object getVolume at 0x000001F324E69B30, file "LPClientFramework\LPPalette\LPPalette.py", line 409>)
+             52 LOAD_CONST              12 ('VBox.getVolume')
+             54 MAKE_FUNCTION            4 (annotations)
+             56 STORE_NAME               8 (getVolume)
+
+412          58 LOAD_CONST              13 ('bool')
+             60 LOAD_CONST              10 (('return',))
+             62 BUILD_CONST_KEY_MAP      1
+             64 LOAD_CONST              14 (<code object canSplit at 0x000001F324E697C0, file "LPClientFramework\LPPalette\LPPalette.py", line 412>)
+             66 LOAD_CONST              15 ('VBox.canSplit')
+             68 MAKE_FUNCTION            4 (annotations)
+             70 STORE_NAME               9 (canSplit)
+
+415          72 LOAD_CONST              16 ("Optional['VBox']")
+             74 LOAD_CONST              10 (('return',))
+             76 BUILD_CONST_KEY_MAP      1
+             78 LOAD_CONST              17 (<code object splitBox at 0x000001F324E69500, file "LPClientFramework\LPPalette\LPPalette.py", line 415>)
+             80 LOAD_CONST              18 ('VBox.splitBox')
+             82 MAKE_FUNCTION            4 (annotations)
+             84 STORE_NAME              10 (splitBox)
+
+424          86 LOAD_CONST              19 ('Optional[PaletteSwatch]')
+             88 LOAD_CONST              10 (('return',))
+             90 BUILD_CONST_KEY_MAP      1
+             92 LOAD_CONST              20 (<code object getAverageColor at 0x000001F324E76D40, file "LPClientFramework\LPPalette\LPPalette.py", line 424>)
+             94 LOAD_CONST              21 ('VBox.getAverageColor')
+             96 MAKE_FUNCTION            4 (annotations)
+             98 STORE_NAME              11 (getAverageColor)
+
+447         100 LOAD_CONST              22 (<code object fitBox at 0x000001F324E76DF0, file "LPClientFramework\LPPalette\LPPalette.py", line 447>)
+            102 LOAD_CONST              23 ('VBox.fitBox')
+            104 MAKE_FUNCTION            0
+            106 STORE_NAME              12 (fitBox)
+
+478         108 LOAD_CONST               5 ('int')
+            110 LOAD_CONST              10 (('return',))
+            112 BUILD_CONST_KEY_MAP      1
+            114 LOAD_CONST              24 (<code object findSplitPoint at 0x000001F324E762F0, file "LPClientFramework\LPPalette\LPPalette.py", line 478>)
+            116 LOAD_CONST              25 ('VBox.findSplitPoint')
+            118 MAKE_FUNCTION            4 (annotations)
+            120 STORE_NAME              13 (findSplitPoint)
+
+493         122 LOAD_CONST               5 ('int')
+            124 LOAD_CONST              10 (('return',))
+            126 BUILD_CONST_KEY_MAP      1
+            128 LOAD_CONST              26 (<code object getLongestColorDimension at 0x000001F324E76500, file "LPClientFramework\LPPalette\LPPalette.py", line 493>)
+            130 LOAD_CONST              27 ('VBox.getLongestColorDimension')
+            132 MAKE_FUNCTION            4 (annotations)
+            134 STORE_NAME              14 (getLongestColorDimension)
+
+504         136 LOAD_CONST               5 ('int')
+            138 LOAD_CONST               5 ('int')
+            140 LOAD_CONST               5 ('int')
+            142 LOAD_CONST              28 (('dimension', 'lower', 'upper'))
+            144 BUILD_CONST_KEY_MAP      3
+            146 LOAD_CONST              29 (<code object modifySignificantOctet at 0x000001F324E763A0, file "LPClientFramework\LPPalette\LPPalette.py", line 504>)
+            148 LOAD_CONST              30 ('VBox.modifySignificantOctet')
+            150 MAKE_FUNCTION            4 (annotations)
+            152 STORE_NAME              15 (modifySignificantOctet)
+
+516         154 LOAD_CONST              31 (<code object sortColorArray at 0x000001F324E76240, file "LPClientFramework\LPPalette\LPPalette.py", line 516>)
+            156 LOAD_CONST              32 ('VBox.sortColorArray')
+            158 MAKE_FUNCTION            0
+            160 STORE_NAME              16 (sortColorArray)
+            162 LOAD_CONST              33 (None)
+            164 RETURN_VALUE
+
+=== VBox.__init__ ===
+396           0 LOAD_FAST                1 (lowerIndex)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (lowerIndex)
+
+397           6 LOAD_FAST                2 (upperIndex)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (upperIndex)
+
+398          12 LOAD_FAST                3 (distinctColors)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (distinctColors)
+
+399          18 LOAD_FAST                4 (histArr)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (histArr)
+
+400          24 LOAD_CONST               1 (0)
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (population)
+
+401          30 LOAD_CONST               1 (0)
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               5 (minRed)
+
+402          36 LOAD_CONST               1 (0)
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               6 (maxRed)
+
+403          42 LOAD_CONST               1 (0)
+             44 LOAD_FAST                0 (self)
+             46 STORE_ATTR               7 (minGreen)
+
+404          48 LOAD_CONST               1 (0)
+             50 LOAD_FAST                0 (self)
+             52 STORE_ATTR               8 (maxGreen)
+
+405          54 LOAD_CONST               1 (0)
+             56 LOAD_FAST                0 (self)
+             58 STORE_ATTR               9 (minBlue)
+
+406          60 LOAD_CONST               1 (0)
+             62 LOAD_FAST                0 (self)
+             64 STORE_ATTR              10 (maxBlue)
+
+407          66 LOAD_FAST                0 (self)
+             68 LOAD_METHOD             11 (fitBox)
+             70 CALL_METHOD              0
+             72 POP_TOP
+             74 LOAD_CONST               0 (None)
+             76 RETURN_VALUE
+
+=== VBox.getVolume ===
+410           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (maxRed)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (minRed)
+              8 BINARY_SUBTRACT
+             10 LOAD_CONST               1 (1)
+             12 BINARY_ADD
+             14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (maxGreen)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (minGreen)
+             22 BINARY_SUBTRACT
+             24 LOAD_CONST               1 (1)
+             26 BINARY_ADD
+             28 BINARY_MULTIPLY
+             30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                4 (maxBlue)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                5 (minBlue)
+             38 BINARY_SUBTRACT
+             40 LOAD_CONST               1 (1)
+             42 BINARY_ADD
+             44 BINARY_MULTIPLY
+             46 RETURN_VALUE
+
+=== VBox.canSplit ===
+413           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (upperIndex)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (lowerIndex)
+              8 BINARY_SUBTRACT
+             10 LOAD_CONST               1 (0)
+             12 COMPARE_OP               4 (>)
+             14 RETURN_VALUE
+
+=== VBox.splitBox ===
+416           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (canSplit)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        12
+
+417           8 LOAD_CONST               0 (None)
+             10 RETURN_VALUE
+
+418     >>   12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              1 (findSplitPoint)
+             16 CALL_METHOD              0
+             18 STORE_FAST               1 (splitPoint)
+
+419          20 LOAD_GLOBAL              2 (VBox)
+             22 LOAD_FAST                1 (splitPoint)
+             24 LOAD_CONST               1 (1)
+             26 BINARY_ADD
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                3 (upperIndex)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                4 (distinctColors)
+             36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                5 (histArr)
+             40 CALL_FUNCTION            4
+             42 STORE_FAST               2 (newBox)
+
+420          44 LOAD_FAST                1 (splitPoint)
+             46 LOAD_FAST                0 (self)
+             48 STORE_ATTR               3 (upperIndex)
+
+421          50 LOAD_FAST                0 (self)
+             52 LOAD_METHOD              6 (fitBox)
+             54 CALL_METHOD              0
+             56 POP_TOP
+
+422          58 LOAD_FAST                2 (newBox)
+             60 RETURN_VALUE
+
+=== VBox.getAverageColor ===
+425           0 LOAD_CONST               1 (0)
+              2 STORE_FAST               1 (redSum)
+
+426           4 LOAD_CONST               1 (0)
+              6 STORE_FAST               2 (greenSum)
+
+427           8 LOAD_CONST               1 (0)
+             10 STORE_FAST               3 (blueSum)
+
+428          12 LOAD_CONST               1 (0)
+             14 STORE_FAST               4 (totalPopulation)
+
+430          16 LOAD_GLOBAL              0 (range)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                1 (lowerIndex)
+             22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                2 (upperIndex)
+             26 LOAD_CONST               2 (1)
+             28 BINARY_ADD
+             30 CALL_FUNCTION            2
+             32 GET_ITER
+        >>   34 FOR_ITER                80 (to 116)
+             36 STORE_FAST               5 (idx)
+
+431          38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                3 (distinctColors)
+             42 LOAD_FAST                5 (idx)
+             44 BINARY_SUBSCR
+             46 STORE_FAST               6 (color)
+
+432          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                4 (histArr)
+             52 LOAD_FAST                6 (color)
+             54 BINARY_SUBSCR
+             56 STORE_FAST               7 (colorPopulation)
+
+433          58 LOAD_FAST                4 (totalPopulation)
+             60 LOAD_FAST                7 (colorPopulation)
+             62 INPLACE_ADD
+             64 STORE_FAST               4 (totalPopulation)
+
+434          66 LOAD_FAST                1 (redSum)
+             68 LOAD_FAST                7 (colorPopulation)
+             70 LOAD_GLOBAL              5 (quantizedRed)
+             72 LOAD_FAST                6 (color)
+             74 CALL_FUNCTION            1
+             76 BINARY_MULTIPLY
+             78 INPLACE_ADD
+             80 STORE_FAST               1 (redSum)
+
+435          82 LOAD_FAST                2 (greenSum)
+             84 LOAD_FAST                7 (colorPopulation)
+             86 LOAD_GLOBAL              6 (quantizedGreen)
+             88 LOAD_FAST                6 (color)
+             90 CALL_FUNCTION            1
+             92 BINARY_MULTIPLY
+             94 INPLACE_ADD
+             96 STORE_FAST               2 (greenSum)
+
+436          98 LOAD_FAST                3 (blueSum)
+            100 LOAD_FAST                7 (colorPopulation)
+            102 LOAD_GLOBAL              7 (quantizedBlue)
+            104 LOAD_FAST                6 (color)
+            106 CALL_FUNCTION            1
+            108 BINARY_MULTIPLY
+            110 INPLACE_ADD
+            112 STORE_FAST               3 (blueSum)
+            114 JUMP_ABSOLUTE           34
+
+438     >>  116 LOAD_FAST                4 (totalPopulation)
+            118 LOAD_CONST               1 (0)
+            120 COMPARE_OP               1 (<=)
+            122 POP_JUMP_IF_FALSE      128
+
+439         124 LOAD_CONST               0 (None)
+            126 RETURN_VALUE
+
+441     >>  128 LOAD_GLOBAL              8 (modifyWordWidthWithValue)
+            130 LOAD_FAST                1 (redSum)
+            132 LOAD_FAST                4 (totalPopulation)
+            134 BINARY_FLOOR_DIVIDE
+            136 LOAD_GLOBAL              9 (QUANTIZE_WORD_WIDTH)
+            138 LOAD_CONST               3 (8)
+            140 CALL_FUNCTION            3
+            142 STORE_FAST               8 (redMean)
+
+442         144 LOAD_GLOBAL              8 (modifyWordWidthWithValue)
+            146 LOAD_FAST                2 (greenSum)
+            148 LOAD_FAST                4 (totalPopulation)
+            150 BINARY_FLOOR_DIVIDE
+            152 LOAD_GLOBAL              9 (QUANTIZE_WORD_WIDTH)
+            154 LOAD_CONST               3 (8)
+            156 CALL_FUNCTION            3
+            158 STORE_FAST               9 (greenMean)
+
+443         160 LOAD_GLOBAL              8 (modifyWordWidthWithValue)
+            162 LOAD_FAST                3 (blueSum)
+            164 LOAD_FAST                4 (totalPopulation)
+            166 BINARY_FLOOR_DIVIDE
+            168 LOAD_GLOBAL              9 (QUANTIZE_WORD_WIDTH)
+            170 LOAD_CONST               3 (8)
+            172 CALL_FUNCTION            3
+            174 STORE_FAST              10 (blueMean)
+
+444         176 LOAD_FAST                8 (redMean)
+            178 LOAD_CONST               4 (16)
+            180 BINARY_LSHIFT
+            182 LOAD_FAST                9 (greenMean)
+            184 LOAD_CONST               3 (8)
+            186 BINARY_LSHIFT
+            188 BINARY_OR
+            190 LOAD_FAST               10 (blueMean)
+            192 BINARY_OR
+            194 STORE_FAST              11 (rgb888Color)
+
+445         196 LOAD_GLOBAL             10 (PaletteSwatch)
+            198 LOAD_FAST               11 (rgb888Color)
+            200 LOAD_FAST                4 (totalPopulation)
+            202 CALL_FUNCTION            2
+            204 RETURN_VALUE
+
+=== VBox.fitBox ===
+448           0 LOAD_CONST               1 (32768)
+              2 STORE_FAST               1 (minRed)
+
+449           4 LOAD_CONST               1 (32768)
+              6 STORE_FAST               2 (minGreen)
+
+450           8 LOAD_CONST               1 (32768)
+             10 STORE_FAST               3 (minBlue)
+
+451          12 LOAD_CONST               2 (0)
+             14 STORE_FAST               4 (maxRed)
+
+452          16 LOAD_CONST               2 (0)
+             18 STORE_FAST               5 (maxGreen)
+
+453          20 LOAD_CONST               2 (0)
+             22 STORE_FAST               6 (maxBlue)
+
+454          24 LOAD_CONST               2 (0)
+             26 STORE_FAST               7 (count)
+
+456          28 LOAD_GLOBAL              0 (range)
+             30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                1 (lowerIndex)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                2 (upperIndex)
+             38 LOAD_CONST               3 (1)
+             40 BINARY_ADD
+             42 CALL_FUNCTION            2
+             44 GET_ITER
+        >>   46 FOR_ITER               112 (to 160)
+             48 STORE_FAST               8 (idx)
+
+457          50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                3 (distinctColors)
+             54 LOAD_FAST                8 (idx)
+             56 BINARY_SUBSCR
+             58 STORE_FAST               9 (color)
+
+458          60 LOAD_FAST                7 (count)
+             62 LOAD_FAST                0 (self)
+             64 LOAD_ATTR                4 (histArr)
+             66 LOAD_FAST                9 (color)
+             68 BINARY_SUBSCR
+             70 INPLACE_ADD
+             72 STORE_FAST               7 (count)
+
+459          74 LOAD_GLOBAL              5 (quantizedRed)
+             76 LOAD_FAST                9 (color)
+             78 CALL_FUNCTION            1
+             80 STORE_FAST              10 (red)
+
+460          82 LOAD_GLOBAL              6 (quantizedGreen)
+             84 LOAD_FAST                9 (color)
+             86 CALL_FUNCTION            1
+             88 STORE_FAST              11 (green)
+
+461          90 LOAD_GLOBAL              7 (quantizedBlue)
+             92 LOAD_FAST                9 (color)
+             94 CALL_FUNCTION            1
+             96 STORE_FAST              12 (blue)
+
+463          98 LOAD_GLOBAL              8 (max)
+            100 LOAD_FAST                4 (maxRed)
+            102 LOAD_FAST               10 (red)
+            104 CALL_FUNCTION            2
+            106 STORE_FAST               4 (maxRed)
+
+464         108 LOAD_GLOBAL              9 (min)
+            110 LOAD_FAST                1 (minRed)
+            112 LOAD_FAST               10 (red)
+            114 CALL_FUNCTION            2
+            116 STORE_FAST               1 (minRed)
+
+465         118 LOAD_GLOBAL              8 (max)
+            120 LOAD_FAST                5 (maxGreen)
+            122 LOAD_FAST               11 (green)
+            124 CALL_FUNCTION            2
+            126 STORE_FAST               5 (maxGreen)
+
+466         128 LOAD_GLOBAL              9 (min)
+            130 LOAD_FAST                2 (minGreen)
+            132 LOAD_FAST               11 (green)
+            134 CALL_FUNCTION            2
+            136 STORE_FAST               2 (minGreen)
+
+467         138 LOAD_GLOBAL              8 (max)
+            140 LOAD_FAST                6 (maxBlue)
+            142 LOAD_FAST               12 (blue)
+            144 CALL_FUNCTION            2
+            146 STORE_FAST               6 (maxBlue)
+
+468         148 LOAD_GLOBAL              9 (min)
+            150 LOAD_FAST                3 (minBlue)
+            152 LOAD_FAST               12 (blue)
+            154 CALL_FUNCTION            2
+            156 STORE_FAST               3 (minBlue)
+            158 JUMP_ABSOLUTE           46
+
+470     >>  160 LOAD_FAST                7 (count)
+            162 LOAD_FAST                0 (self)
+            164 STORE_ATTR              10 (population)
+
+471         166 LOAD_FAST                1 (minRed)
+            168 LOAD_FAST                0 (self)
+            170 STORE_ATTR              11 (minRed)
+
+472         172 LOAD_FAST                4 (maxRed)
+            174 LOAD_FAST                0 (self)
+            176 STORE_ATTR              12 (maxRed)
+
+473         178 LOAD_FAST                2 (minGreen)
+            180 LOAD_FAST                0 (self)
+            182 STORE_ATTR              13 (minGreen)
+
+474         184 LOAD_FAST                5 (maxGreen)
+            186 LOAD_FAST                0 (self)
+            188 STORE_ATTR              14 (maxGreen)
+
+475         190 LOAD_FAST                3 (minBlue)
+            192 LOAD_FAST                0 (self)
+            194 STORE_ATTR              15 (minBlue)
+
+476         196 LOAD_FAST                6 (maxBlue)
+            198 LOAD_FAST                0 (self)
+            200 STORE_ATTR              16 (maxBlue)
+            202 LOAD_CONST               0 (None)
+            204 RETURN_VALUE
+
+=== VBox.findSplitPoint ===
+479           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (getLongestColorDimension)
+              4 CALL_METHOD              0
+              6 STORE_FAST               1 (longestDimension)
+
+480           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (modifySignificantOctet)
+             12 LOAD_FAST                1 (longestDimension)
+             14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (lowerIndex)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (upperIndex)
+             22 CALL_METHOD              3
+             24 POP_TOP
+
+481          26 LOAD_FAST                0 (self)
+             28 LOAD_METHOD              4 (sortColorArray)
+             30 CALL_METHOD              0
+             32 POP_TOP
+
+482          34 LOAD_FAST                0 (self)
+             36 LOAD_METHOD              1 (modifySignificantOctet)
+             38 LOAD_FAST                1 (longestDimension)
+             40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                2 (lowerIndex)
+             44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                3 (upperIndex)
+             48 CALL_METHOD              3
+             50 POP_TOP
+
+484          52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                5 (population)
+             56 LOAD_CONST               1 (2)
+             58 BINARY_FLOOR_DIVIDE
+             60 STORE_FAST               2 (midPoint)
+
+485          62 LOAD_CONST               2 (0)
+             64 STORE_FAST               3 (count)
+
+486          66 LOAD_GLOBAL              6 (range)
+             68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                2 (lowerIndex)
+             72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR                3 (upperIndex)
+             76 LOAD_CONST               3 (1)
+             78 BINARY_ADD
+             80 CALL_FUNCTION            2
+             82 GET_ITER
+        >>   84 FOR_ITER                44 (to 130)
+             86 STORE_FAST               4 (idx)
+
+487          88 LOAD_FAST                0 (self)
+             90 LOAD_ATTR                7 (distinctColors)
+             92 LOAD_FAST                4 (idx)
+             94 BINARY_SUBSCR
+             96 STORE_FAST               5 (color)
+
+488          98 LOAD_FAST                3 (count)
+            100 LOAD_FAST                0 (self)
+            102 LOAD_ATTR                8 (histArr)
+            104 LOAD_FAST                5 (color)
+            106 BINARY_SUBSCR
+            108 INPLACE_ADD
+            110 STORE_FAST               3 (count)
+
+489         112 LOAD_FAST                3 (count)
+            114 LOAD_FAST                2 (midPoint)
+            116 COMPARE_OP               5 (>=)
+            118 POP_JUMP_IF_FALSE       84
+
+490         120 LOAD_FAST                4 (idx)
+            122 ROT_TWO
+            124 POP_TOP
+            126 RETURN_VALUE
+            128 JUMP_ABSOLUTE           84
+
+491     >>  130 LOAD_FAST                0 (self)
+            132 LOAD_ATTR                2 (lowerIndex)
+            134 RETURN_VALUE
+
+=== VBox.getLongestColorDimension ===
+494           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (maxRed)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (minRed)
+              8 BINARY_SUBTRACT
+             10 STORE_FAST               1 (redLength)
+
+495          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (maxGreen)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                3 (minGreen)
+             20 BINARY_SUBTRACT
+             22 STORE_FAST               2 (greenLength)
+
+496          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                4 (maxBlue)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                5 (minBlue)
+             32 BINARY_SUBTRACT
+             34 STORE_FAST               3 (blueLength)
+
+498          36 LOAD_FAST                1 (redLength)
+             38 LOAD_FAST                2 (greenLength)
+             40 COMPARE_OP               5 (>=)
+             42 POP_JUMP_IF_FALSE       58
+             44 LOAD_FAST                1 (redLength)
+             46 LOAD_FAST                3 (blueLength)
+             48 COMPARE_OP               5 (>=)
+             50 POP_JUMP_IF_FALSE       58
+
+499          52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                6 (COMPONENT_RED)
+             56 RETURN_VALUE
+
+500     >>   58 LOAD_FAST                2 (greenLength)
+             60 LOAD_FAST                1 (redLength)
+             62 COMPARE_OP               5 (>=)
+             64 POP_JUMP_IF_FALSE       80
+             66 LOAD_FAST                2 (greenLength)
+             68 LOAD_FAST                3 (blueLength)
+             70 COMPARE_OP               5 (>=)
+             72 POP_JUMP_IF_FALSE       80
+
+501          74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                7 (COMPONENT_GREEN)
+             78 RETURN_VALUE
+
+502     >>   80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                8 (COMPONENT_BLUE)
+             84 RETURN_VALUE
+
+=== VBox.modifySignificantOctet ===
+505           0 LOAD_FAST                1 (dimension)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (COMPONENT_RED)
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE       14
+
+506          10 LOAD_CONST               0 (None)
+             12 RETURN_VALUE
+
+508     >>   14 LOAD_GLOBAL              1 (range)
+             16 LOAD_FAST                2 (lower)
+             18 LOAD_FAST                3 (upper)
+             20 LOAD_CONST               1 (1)
+             22 BINARY_ADD
+             24 CALL_FUNCTION            2
+             26 GET_ITER
+        >>   28 FOR_ITER               108 (to 138)
+             30 STORE_FAST               4 (idx)
+
+509          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                2 (distinctColors)
+             36 LOAD_FAST                4 (idx)
+             38 BINARY_SUBSCR
+             40 STORE_FAST               5 (color)
+
+510          42 LOAD_FAST                1 (dimension)
+             44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                3 (COMPONENT_GREEN)
+             48 COMPARE_OP               2 (==)
+             50 POP_JUMP_IF_FALSE       90
+
+511          52 LOAD_GLOBAL              4 (quantizedGreen)
+             54 LOAD_FAST                5 (color)
+             56 CALL_FUNCTION            1
+             58 LOAD_GLOBAL              5 (QUANTIZE_WORD_WIDTH)
+             60 LOAD_GLOBAL              5 (QUANTIZE_WORD_WIDTH)
+             62 BINARY_ADD
+             64 BINARY_LSHIFT
+             66 LOAD_GLOBAL              6 (quantizedRed)
+             68 LOAD_FAST                5 (color)
+             70 CALL_FUNCTION            1
+             72 LOAD_GLOBAL              5 (QUANTIZE_WORD_WIDTH)
+             74 BINARY_LSHIFT
+             76 BINARY_OR
+             78 LOAD_GLOBAL              7 (quantizedBlue)
+             80 LOAD_FAST                5 (color)
+             82 CALL_FUNCTION            1
+             84 BINARY_OR
+             86 STORE_FAST               6 (newColor)
+             88 JUMP_FORWARD            36 (to 126)
+
+513     >>   90 LOAD_GLOBAL              7 (quantizedBlue)
+             92 LOAD_FAST                5 (color)
+             94 CALL_FUNCTION            1
+             96 LOAD_GLOBAL              5 (QUANTIZE_WORD_WIDTH)
+             98 LOAD_GLOBAL              5 (QUANTIZE_WORD_WIDTH)
+            100 BINARY_ADD
+            102 BINARY_LSHIFT
+            104 LOAD_GLOBAL              4 (quantizedGreen)
+            106 LOAD_FAST                5 (color)
+            108 CALL_FUNCTION            1
+            110 LOAD_GLOBAL              5 (QUANTIZE_WORD_WIDTH)
+            112 BINARY_LSHIFT
+            114 BINARY_OR
+            116 LOAD_GLOBAL              6 (quantizedRed)
+            118 LOAD_FAST                5 (color)
+            120 CALL_FUNCTION            1
+            122 BINARY_OR
+            124 STORE_FAST               6 (newColor)
+
+514     >>  126 LOAD_FAST                6 (newColor)
+            128 LOAD_FAST                0 (self)
+            130 LOAD_ATTR                2 (distinctColors)
+            132 LOAD_FAST                4 (idx)
+            134 STORE_SUBSCR
+            136 JUMP_ABSOLUTE           28
+        >>  138 LOAD_CONST               0 (None)
+            140 RETURN_VALUE
+
+=== VBox.sortColorArray ===
+517           0 LOAD_GLOBAL              0 (sorted)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (distinctColors)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                2 (lowerIndex)
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                3 (upperIndex)
+             14 LOAD_CONST               1 (1)
+             16 BINARY_ADD
+             18 BUILD_SLICE              2
+             20 BINARY_SUBSCR
+             22 CALL_FUNCTION            1
+             24 STORE_FAST               1 (sortedRange)
+
+518          26 LOAD_FAST                1 (sortedRange)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                1 (distinctColors)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                2 (lowerIndex)
+             36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                3 (upperIndex)
+             40 LOAD_CONST               1 (1)
+             42 BINARY_ADD
+             44 BUILD_SLICE              2
+             46 STORE_SUBSCR
+             48 LOAD_CONST               0 (None)
+             50 RETURN_VALUE
+
+=== PriorityBoxArray ===
+521           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('PriorityBoxArray')
+              6 STORE_NAME               2 (__qualname__)
+
+522           8 LOAD_CONST               1 ('\n    优先队列（按 VBox 体积降序）。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+526          12 LOAD_CONST               2 (<code object __init__ at 0x000001F324E765B0, file "LPClientFramework\LPPalette\LPPalette.py", line 526>)
+             14 LOAD_CONST               3 ('PriorityBoxArray.__init__')
+             16 MAKE_FUNCTION            0
+             18 STORE_NAME               4 (__init__)
+
+529          20 LOAD_CONST               4 ('Optional[VBox]')
+             22 LOAD_CONST               5 (('box',))
+             24 BUILD_CONST_KEY_MAP      1
+             26 LOAD_CONST               6 (<code object addVBox at 0x000001F324E76BE0, file "LPClientFramework\LPPalette\LPPalette.py", line 529>)
+             28 LOAD_CONST               7 ('PriorityBoxArray.addVBox')
+             30 MAKE_FUNCTION            4 (annotations)
+             32 STORE_NAME               5 (addVBox)
+
+546          34 LOAD_CONST               4 ('Optional[VBox]')
+             36 LOAD_CONST               8 (('return',))
+             38 BUILD_CONST_KEY_MAP      1
+             40 LOAD_CONST               9 (<code object poll at 0x000001F324E76B30, file "LPClientFramework\LPPalette\LPPalette.py", line 546>)
+             42 LOAD_CONST              10 ('PriorityBoxArray.poll')
+             44 MAKE_FUNCTION            4 (annotations)
+             46 STORE_NAME               6 (poll)
+
+551          48 LOAD_CONST              11 ('int')
+             50 LOAD_CONST               8 (('return',))
+             52 BUILD_CONST_KEY_MAP      1
+             54 LOAD_CONST              12 (<code object count at 0x000001F324E769D0, file "LPClientFramework\LPPalette\LPPalette.py", line 551>)
+             56 LOAD_CONST              13 ('PriorityBoxArray.count')
+             58 MAKE_FUNCTION            4 (annotations)
+             60 STORE_NAME               7 (count)
+
+554          62 LOAD_CONST              14 ('List[VBox]')
+             64 LOAD_CONST               8 (('return',))
+             66 BUILD_CONST_KEY_MAP      1
+             68 LOAD_CONST              15 (<code object getVBoxArray at 0x000001F324E76870, file "LPClientFramework\LPPalette\LPPalette.py", line 554>)
+             70 LOAD_CONST              16 ('PriorityBoxArray.getVBoxArray')
+             72 MAKE_FUNCTION            4 (annotations)
+             74 STORE_NAME               8 (getVBoxArray)
+             76 LOAD_CONST              17 (None)
+             78 RETURN_VALUE
+
+=== PriorityBoxArray.__init__ ===
+527           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (vboxArray)
+              6 LOAD_CONST               0 (None)
+              8 RETURN_VALUE
+
+=== PriorityBoxArray.addVBox ===
+530           0 LOAD_FAST                1 (box)
+              2 LOAD_CONST               0 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+531           8 LOAD_CONST               0 (None)
+             10 RETURN_VALUE
+
+532     >>   12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                0 (vboxArray)
+             16 POP_JUMP_IF_TRUE        34
+
+533          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                0 (vboxArray)
+             22 LOAD_METHOD              1 (append)
+             24 LOAD_FAST                1 (box)
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+534          30 LOAD_CONST               0 (None)
+             32 RETURN_VALUE
+
+536     >>   34 LOAD_GLOBAL              2 (enumerate)
+             36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                0 (vboxArray)
+             40 CALL_FUNCTION            1
+             42 GET_ITER
+        >>   44 FOR_ITER                70 (to 116)
+             46 UNPACK_SEQUENCE          2
+             48 STORE_FAST               2 (idx)
+             50 STORE_FAST               3 (nowBox)
+
+537          52 LOAD_FAST                1 (box)
+             54 LOAD_METHOD              3 (getVolume)
+             56 CALL_METHOD              0
+             58 LOAD_FAST                3 (nowBox)
+             60 LOAD_METHOD              3 (getVolume)
+             62 CALL_METHOD              0
+             64 COMPARE_OP               4 (>)
+             66 POP_JUMP_IF_FALSE       44
+
+538          68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                0 (vboxArray)
+             72 LOAD_METHOD              4 (insert)
+             74 LOAD_FAST                2 (idx)
+             76 LOAD_FAST                1 (box)
+             78 CALL_METHOD              2
+             80 POP_TOP
+
+539          82 LOAD_GLOBAL              5 (len)
+             84 LOAD_FAST                0 (self)
+             86 LOAD_ATTR                0 (vboxArray)
+             88 CALL_FUNCTION            1
+             90 LOAD_GLOBAL              6 (MAX_COLOR_NUM)
+             92 COMPARE_OP               4 (>)
+             94 POP_JUMP_IF_FALSE      108
+
+540          96 LOAD_FAST                0 (self)
+             98 LOAD_ATTR                0 (vboxArray)
+            100 LOAD_METHOD              7 (pop)
+            102 LOAD_GLOBAL              6 (MAX_COLOR_NUM)
+            104 CALL_METHOD              1
+            106 POP_TOP
+
+541     >>  108 POP_TOP
+            110 LOAD_CONST               0 (None)
+            112 RETURN_VALUE
+            114 JUMP_ABSOLUTE           44
+
+543     >>  116 LOAD_GLOBAL              5 (len)
+            118 LOAD_FAST                0 (self)
+            120 LOAD_ATTR                0 (vboxArray)
+            122 CALL_FUNCTION            1
+            124 LOAD_GLOBAL              6 (MAX_COLOR_NUM)
+            126 COMPARE_OP               0 (<)
+            128 POP_JUMP_IF_FALSE      142
+
+544         130 LOAD_FAST                0 (self)
+            132 LOAD_ATTR                0 (vboxArray)
+            134 LOAD_METHOD              1 (append)
+            136 LOAD_FAST                1 (box)
+            138 CALL_METHOD              1
+            140 POP_TOP
+        >>  142 LOAD_CONST               0 (None)
+            144 RETURN_VALUE
+
+=== PriorityBoxArray.poll ===
+547           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (vboxArray)
+              4 POP_JUMP_IF_TRUE        10
+
+548           6 LOAD_CONST               0 (None)
+              8 RETURN_VALUE
+
+549     >>   10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (vboxArray)
+             14 LOAD_METHOD              1 (pop)
+             16 LOAD_CONST               1 (0)
+             18 CALL_METHOD              1
+             20 RETURN_VALUE
+
+=== PriorityBoxArray.count ===
+552           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (vboxArray)
+              6 CALL_FUNCTION            1
+              8 RETURN_VALUE
+
+=== PriorityBoxArray.getVBoxArray ===
+555           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (vboxArray)
+              4 RETURN_VALUE
+
+=== PaletteAnalyzer ===
+558           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('PaletteAnalyzer')
+              6 STORE_NAME               2 (__qualname__)
+
+559           8 LOAD_CONST               1 ('\n    iOS Palette 算法主分析器（同步版本）。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+563          12 LOAD_CONST               2 ('Optional[Image.Image]')
+             14 LOAD_CONST               3 (('image',))
+             16 BUILD_CONST_KEY_MAP      1
+             18 LOAD_CONST               4 (<code object __init__ at 0x000001F324E76450, file "LPClientFramework\LPPalette\LPPalette.py", line 563>)
+             20 LOAD_CONST               5 ('PaletteAnalyzer.__init__')
+             22 MAKE_FUNCTION            4 (annotations)
+             24 STORE_NAME               4 (__init__)
+
+574          26 LOAD_CONST               6 ('PaletteTargetMode')
+             28 LOAD_CONST               7 ('Tuple[Optional[PaletteColorModel], Optional[Dict[str, Union[PaletteColorModel, str]]], Optional[Exception]]')
+             30 LOAD_CONST               8 (('mode', 'return'))
+             32 BUILD_CONST_KEY_MAP      2
+             34 LOAD_CONST               9 (<code object startToAnalyzeForTargetMode at 0x000001F324E76920, file "LPClientFramework\LPPalette\LPPalette.py", line 574>)
+             36 LOAD_CONST              10 ('PaletteAnalyzer.startToAnalyzeForTargetMode')
+             38 MAKE_FUNCTION            4 (annotations)
+             40 STORE_NAME               5 (startToAnalyzeForTargetMode)
+
+594          42 LOAD_CONST              11 (<code object startToAnalyzeImage at 0x000001F324E76C90, file "LPClientFramework\LPPalette\LPPalette.py", line 594>)
+             44 LOAD_CONST              12 ('PaletteAnalyzer.startToAnalyzeImage')
+             46 MAKE_FUNCTION            0
+             48 STORE_NAME               6 (startToAnalyzeImage)
+
+640          50 LOAD_CONST              13 (<code object clearHistArray at 0x000001F324E76F50, file "LPClientFramework\LPPalette\LPPalette.py", line 640>)
+             52 LOAD_CONST              14 ('PaletteAnalyzer.clearHistArray')
+             54 MAKE_FUNCTION            0
+             56 STORE_NAME               7 (clearHistArray)
+
+643          58 LOAD_CONST              15 ('Image.Image')
+             60 LOAD_CONST              16 ('List[Tuple[int, int, int, int]]')
+             62 LOAD_CONST              17 (('image', 'return'))
+             64 BUILD_CONST_KEY_MAP      2
+             66 LOAD_CONST              18 (<code object rawPixelDataFromImage at 0x000001F3253DA870, file "LPClientFramework\LPPalette\LPPalette.py", line 643>)
+             68 LOAD_CONST              19 ('PaletteAnalyzer.rawPixelDataFromImage')
+             70 MAKE_FUNCTION            4 (annotations)
+             72 STORE_NAME               8 (rawPixelDataFromImage)
+
+650          74 LOAD_CONST              15 ('Image.Image')
+             76 LOAD_CONST              15 ('Image.Image')
+             78 LOAD_CONST              17 (('image', 'return'))
+             80 BUILD_CONST_KEY_MAP      2
+             82 LOAD_CONST              20 (<code object scaleDownImage at 0x000001F3253DA5B0, file "LPClientFramework\LPPalette\LPPalette.py", line 650>)
+             84 LOAD_CONST              21 ('PaletteAnalyzer.scaleDownImage')
+             86 MAKE_FUNCTION            4 (annotations)
+             88 STORE_NAME               9 (scaleDownImage)
+
+668          90 LOAD_CONST              22 ('PriorityBoxArray')
+             92 LOAD_CONST              23 (('queue',))
+             94 BUILD_CONST_KEY_MAP      1
+             96 LOAD_CONST              24 (<code object splitBoxes at 0x000001F3253DAA80, file "LPClientFramework\LPPalette\LPPalette.py", line 668>)
+             98 LOAD_CONST              25 ('PaletteAnalyzer.splitBoxes')
+            100 MAKE_FUNCTION            4 (annotations)
+            102 STORE_NAME              10 (splitBoxes)
+
+677         104 LOAD_CONST              22 ('PriorityBoxArray')
+            106 LOAD_CONST              26 ('List[PaletteSwatch]')
+            108 LOAD_CONST              27 (('queue', 'return'))
+            110 BUILD_CONST_KEY_MAP      2
+            112 LOAD_CONST              28 (<code object generateAverageColors at 0x000001F3253DA2F0, file "LPClientFramework\LPPalette\LPPalette.py", line 677>)
+            114 LOAD_CONST              29 ('PaletteAnalyzer.generateAverageColors')
+            116 MAKE_FUNCTION            4 (annotations)
+            118 STORE_NAME              11 (generateAverageColors)
+
+685         120 LOAD_CONST              30 ('int')
+            122 LOAD_CONST              31 ('bool')
+            124 LOAD_CONST              32 (('color', 'return'))
+            126 BUILD_CONST_KEY_MAP      2
+            128 LOAD_CONST              33 (<code object shouldIgnoreColor at 0x000001F3253DA9D0, file "LPClientFramework\LPPalette\LPPalette.py", line 685>)
+            130 LOAD_CONST              34 ('PaletteAnalyzer.shouldIgnoreColor')
+            132 MAKE_FUNCTION            4 (annotations)
+            134 STORE_NAME              12 (shouldIgnoreColor)
+
+688         136 LOAD_CONST              35 ('Sequence[float]')
+            138 LOAD_CONST              31 ('bool')
+            140 LOAD_CONST              36 (('hsl', 'return'))
+            142 BUILD_CONST_KEY_MAP      2
+            144 LOAD_CONST              37 (<code object shouldIgnoreColorByHsl at 0x000001F3253DA920, file "LPClientFramework\LPPalette\LPPalette.py", line 688>)
+            146 LOAD_CONST              38 ('PaletteAnalyzer.shouldIgnoreColorByHsl')
+            148 MAKE_FUNCTION            4 (annotations)
+            150 STORE_NAME              13 (shouldIgnoreColorByHsl)
+
+694         152 LOAD_CONST              39 (<code object findMaxPopulation at 0x000001F3253DA7C0, file "LPClientFramework\LPPalette\LPPalette.py", line 694>)
+            154 LOAD_CONST              40 ('PaletteAnalyzer.findMaxPopulation')
+            156 MAKE_FUNCTION            0
+            158 STORE_NAME              14 (findMaxPopulation)
+
+700         160 LOAD_CONST               7 ('Tuple[Optional[PaletteColorModel], Optional[Dict[str, Union[PaletteColorModel, str]]], Optional[Exception]]')
+            162 LOAD_CONST              41 (('return',))
+            164 BUILD_CONST_KEY_MAP      1
+            166 LOAD_CONST              42 (<code object getSwatchForTarget at 0x000001F3253DA450, file "LPClientFramework\LPPalette\LPPalette.py", line 700>)
+            168 LOAD_CONST              43 ('PaletteAnalyzer.getSwatchForTarget')
+            170 MAKE_FUNCTION            4 (annotations)
+            172 STORE_NAME              15 (getSwatchForTarget)
+
+725         174 LOAD_CONST              44 ('PaletteTarget')
+            176 LOAD_CONST              45 ('Optional[PaletteSwatch]')
+            178 LOAD_CONST              46 (('target', 'return'))
+            180 BUILD_CONST_KEY_MAP      2
+            182 LOAD_CONST              47 (<code object getMaxScoredSwatchForTarget at 0x000001F3253DABE0, file "LPClientFramework\LPPalette\LPPalette.py", line 725>)
+            184 LOAD_CONST              48 ('PaletteAnalyzer.getMaxScoredSwatchForTarget')
+            186 MAKE_FUNCTION            4 (annotations)
+            188 STORE_NAME              16 (getMaxScoredSwatchForTarget)
+
+736         190 LOAD_CONST              49 ('PaletteSwatch')
+            192 LOAD_CONST              44 ('PaletteTarget')
+            194 LOAD_CONST              31 ('bool')
+            196 LOAD_CONST              50 (('swatch', 'target', 'return'))
+            198 BUILD_CONST_KEY_MAP      3
+            200 LOAD_CONST              51 (<code object shouldBeScoredForTarget at 0x000001F3253DA660, file "LPClientFramework\LPPalette\LPPalette.py", line 736>)
+            202 LOAD_CONST              52 ('PaletteAnalyzer.shouldBeScoredForTarget')
+            204 MAKE_FUNCTION            4 (annotations)
+            206 STORE_NAME              17 (shouldBeScoredForTarget)
+
+744         208 LOAD_CONST              44 ('PaletteTarget')
+            210 LOAD_CONST              49 ('PaletteSwatch')
+            212 LOAD_CONST              53 ('float')
+            214 LOAD_CONST              54 (('target', 'swatch', 'return'))
+            216 BUILD_CONST_KEY_MAP      3
+            218 LOAD_CONST              55 (<code object generateScoreForTarget at 0x000001F3253DA3A0, file "LPClientFramework\LPPalette\LPPalette.py", line 744>)
+            220 LOAD_CONST              56 ('PaletteAnalyzer.generateScoreForTarget')
+            222 MAKE_FUNCTION            4 (annotations)
+            224 STORE_NAME              18 (generateScoreForTarget)
+
+760         226 LOAD_CONST               6 ('PaletteTargetMode')
+            228 LOAD_CONST              57 (('mode',))
+            230 BUILD_CONST_KEY_MAP      1
+            232 LOAD_CONST              58 (<code object initTargetsWithMode at 0x000001F3253CED40, file "LPClientFramework\LPPalette\LPPalette.py", line 760>)
+            234 LOAD_CONST              59 ('PaletteAnalyzer.initTargetsWithMode')
+            236 MAKE_FUNCTION            4 (annotations)
+            238 STORE_NAME              19 (initTargetsWithMode)
+            240 LOAD_CONST              60 (None)
+            242 RETURN_VALUE
+
+=== PaletteAnalyzer.__init__ ===
+564           0 LOAD_FAST                1 (image)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (image)
+
+565           6 LOAD_CONST               1 (0)
+              8 BUILD_LIST               1
+             10 LOAD_GLOBAL              1 (HIST_ARR_SIZE)
+             12 BINARY_MULTIPLY
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (histArr)
+
+566          18 BUILD_LIST               0
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (distinctColors)
+
+567          24 BUILD_LIST               0
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (swatchArray)
+
+568          30 BUILD_LIST               0
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               5 (targetArray)
+
+569          36 LOAD_CONST               1 (0)
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               6 (maxPopulation)
+
+570          42 LOAD_CONST               1 (0)
+             44 LOAD_FAST                0 (self)
+             46 STORE_ATTR               7 (pixelCount)
+
+571          48 LOAD_CONST               2 (False)
+             50 LOAD_FAST                0 (self)
+             52 STORE_ATTR               8 (isNeedColorDic)
+
+572          54 LOAD_GLOBAL              9 (PFilter)
+             56 CALL_FUNCTION            0
+             58 BUILD_LIST               1
+             60 LOAD_FAST                0 (self)
+             62 STORE_ATTR              10 (filters)
+             64 LOAD_CONST               0 (None)
+             66 RETURN_VALUE
+
+=== PaletteAnalyzer.startToAnalyzeForTargetMode ===
+587           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (initTargetsWithMode)
+              4 LOAD_FAST                1 (mode)
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+588          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (image)
+             14 LOAD_CONST               1 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       34
+
+589          20 LOAD_CONST               1 (None)
+             22 LOAD_CONST               1 (None)
+             24 LOAD_GLOBAL              2 (ValueError)
+             26 LOAD_CONST               2 ('The image is null.')
+             28 CALL_FUNCTION            1
+             30 BUILD_TUPLE              3
+             32 RETURN_VALUE
+
+591     >>   34 LOAD_FAST                0 (self)
+             36 LOAD_METHOD              3 (startToAnalyzeImage)
+             38 CALL_METHOD              0
+             40 POP_TOP
+
+592          42 LOAD_FAST                0 (self)
+             44 LOAD_METHOD              4 (getSwatchForTarget)
+             46 CALL_METHOD              0
+             48 RETURN_VALUE
+
+=== PaletteAnalyzer.startToAnalyzeImage ===
+595           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (clearHistArray)
+              4 CALL_METHOD              0
+              6 POP_TOP
+
+596           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (rawPixelDataFromImage)
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (image)
+             16 CALL_METHOD              1
+             18 STORE_FAST               1 (rawPixels)
+
+597          20 LOAD_FAST                1 (rawPixels)
+             22 POP_JUMP_IF_TRUE        28
+
+598          24 LOAD_CONST               0 (None)
+             26 RETURN_VALUE
+
+600     >>   28 LOAD_FAST                1 (rawPixels)
+             30 GET_ITER
+        >>   32 FOR_ITER               134 (to 168)
+             34 UNPACK_SEQUENCE          4
+             36 STORE_FAST               2 (red)
+             38 STORE_FAST               3 (green)
+             40 STORE_FAST               4 (blue)
+             42 STORE_FAST               5 (alpha)
+
+603          44 LOAD_FAST                5 (alpha)
+             46 LOAD_CONST               1 (255)
+             48 COMPARE_OP               0 (<)
+             50 POP_JUMP_IF_FALSE       88
+
+604          52 LOAD_FAST                2 (red)
+             54 LOAD_FAST                5 (alpha)
+             56 BINARY_MULTIPLY
+             58 LOAD_CONST               1 (255)
+             60 BINARY_FLOOR_DIVIDE
+             62 STORE_FAST               2 (red)
+
+605          64 LOAD_FAST                3 (green)
+             66 LOAD_FAST                5 (alpha)
+             68 BINARY_MULTIPLY
+             70 LOAD_CONST               1 (255)
+             72 BINARY_FLOOR_DIVIDE
+             74 STORE_FAST               3 (green)
+
+606          76 LOAD_FAST                4 (blue)
+             78 LOAD_FAST                5 (alpha)
+             80 BINARY_MULTIPLY
+             82 LOAD_CONST               1 (255)
+             84 BINARY_FLOOR_DIVIDE
+             86 STORE_FAST               4 (blue)
+
+607     >>   88 LOAD_GLOBAL              3 (modifyWordWidthWithValue)
+             90 LOAD_FAST                2 (red)
+             92 LOAD_CONST               2 (8)
+             94 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+             96 CALL_FUNCTION            3
+             98 STORE_FAST               6 (red5)
+
+608         100 LOAD_GLOBAL              3 (modifyWordWidthWithValue)
+            102 LOAD_FAST                3 (green)
+            104 LOAD_CONST               2 (8)
+            106 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+            108 CALL_FUNCTION            3
+            110 STORE_FAST               7 (green5)
+
+609         112 LOAD_GLOBAL              3 (modifyWordWidthWithValue)
+            114 LOAD_FAST                4 (blue)
+            116 LOAD_CONST               2 (8)
+            118 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+            120 CALL_FUNCTION            3
+            122 STORE_FAST               8 (blue5)
+
+610         124 LOAD_FAST                6 (red5)
+            126 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+            128 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+            130 BINARY_ADD
+            132 BINARY_LSHIFT
+            134 LOAD_FAST                7 (green5)
+            136 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+            138 BINARY_LSHIFT
+            140 BINARY_OR
+            142 LOAD_FAST                8 (blue5)
+            144 BINARY_OR
+            146 STORE_FAST               9 (quantizedColor)
+
+611         148 LOAD_FAST                0 (self)
+            150 LOAD_ATTR                5 (histArr)
+            152 LOAD_FAST                9 (quantizedColor)
+            154 DUP_TOP_TWO
+            156 BINARY_SUBSCR
+            158 LOAD_CONST               3 (1)
+            160 INPLACE_ADD
+            162 ROT_THREE
+            164 STORE_SUBSCR
+            166 JUMP_ABSOLUTE           32
+
+613     >>  168 BUILD_LIST               0
+            170 LOAD_FAST                0 (self)
+            172 STORE_ATTR               6 (distinctColors)
+
+614         174 LOAD_GLOBAL              7 (range)
+            176 LOAD_GLOBAL              8 (HIST_ARR_SIZE)
+            178 CALL_FUNCTION            1
+            180 GET_ITER
+        >>  182 FOR_ITER                64 (to 248)
+            184 STORE_FAST              10 (color)
+
+615         186 LOAD_FAST                0 (self)
+            188 LOAD_ATTR                5 (histArr)
+            190 LOAD_FAST               10 (color)
+            192 BINARY_SUBSCR
+            194 LOAD_CONST               4 (0)
+            196 COMPARE_OP               4 (>)
+            198 POP_JUMP_IF_FALSE      220
+            200 LOAD_FAST                0 (self)
+            202 LOAD_METHOD              9 (shouldIgnoreColor)
+            204 LOAD_FAST               10 (color)
+            206 CALL_METHOD              1
+            208 POP_JUMP_IF_FALSE      220
+
+616         210 LOAD_CONST               4 (0)
+            212 LOAD_FAST                0 (self)
+            214 LOAD_ATTR                5 (histArr)
+            216 LOAD_FAST               10 (color)
+            218 STORE_SUBSCR
+
+617     >>  220 LOAD_FAST                0 (self)
+            222 LOAD_ATTR                5 (histArr)
+            224 LOAD_FAST               10 (color)
+            226 BINARY_SUBSCR
+            228 LOAD_CONST               4 (0)
+            230 COMPARE_OP               4 (>)
+            232 POP_JUMP_IF_FALSE      182
+
+618         234 LOAD_FAST                0 (self)
+            236 LOAD_ATTR                6 (distinctColors)
+            238 LOAD_METHOD             10 (append)
+            240 LOAD_FAST               10 (color)
+            242 CALL_METHOD              1
+            244 POP_TOP
+            246 JUMP_ABSOLUTE          182
+
+620     >>  248 LOAD_GLOBAL             11 (len)
+            250 LOAD_FAST                0 (self)
+            252 LOAD_ATTR                6 (distinctColors)
+            254 CALL_FUNCTION            1
+            256 STORE_FAST              11 (distinctColorCount)
+
+621         258 LOAD_FAST               11 (distinctColorCount)
+            260 LOAD_GLOBAL             12 (MAX_COLOR_NUM)
+            262 COMPARE_OP               1 (<=)
+            264 EXTENDED_ARG             1
+            266 POP_JUMP_IF_FALSE      388
+
+622         268 BUILD_LIST               0
+            270 STORE_FAST              12 (swatchs)
+
+623         272 LOAD_FAST                0 (self)
+            274 LOAD_ATTR                6 (distinctColors)
+            276 GET_ITER
+        >>  278 FOR_ITER               100 (to 380)
+            280 STORE_FAST              10 (color)
+
+624         282 LOAD_FAST                0 (self)
+            284 LOAD_ATTR                5 (histArr)
+            286 LOAD_FAST               10 (color)
+            288 BINARY_SUBSCR
+            290 STORE_FAST              13 (population)
+
+625         292 LOAD_GLOBAL              3 (modifyWordWidthWithValue)
+            294 LOAD_GLOBAL             13 (quantizedRed)
+            296 LOAD_FAST               10 (color)
+            298 CALL_FUNCTION            1
+            300 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+            302 LOAD_CONST               2 (8)
+            304 CALL_FUNCTION            3
+            306 STORE_FAST               2 (red)
+
+626         308 LOAD_GLOBAL              3 (modifyWordWidthWithValue)
+            310 LOAD_GLOBAL             14 (quantizedGreen)
+            312 LOAD_FAST               10 (color)
+            314 CALL_FUNCTION            1
+            316 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+            318 LOAD_CONST               2 (8)
+            320 CALL_FUNCTION            3
+            322 STORE_FAST               3 (green)
+
+627         324 LOAD_GLOBAL              3 (modifyWordWidthWithValue)
+            326 LOAD_GLOBAL             15 (quantizedBlue)
+            328 LOAD_FAST               10 (color)
+            330 CALL_FUNCTION            1
+            332 LOAD_GLOBAL              4 (QUANTIZE_WORD_WIDTH)
+            334 LOAD_CONST               2 (8)
+            336 CALL_FUNCTION            3
+            338 STORE_FAST               4 (blue)
+
+628         340 LOAD_FAST                2 (red)
+            342 LOAD_CONST               5 (16)
+            344 BINARY_LSHIFT
+            346 LOAD_FAST                3 (green)
+            348 LOAD_CONST               2 (8)
+            350 BINARY_LSHIFT
+            352 BINARY_OR
+            354 LOAD_FAST                4 (blue)
+            356 BINARY_OR
+            358 STORE_FAST              14 (rgb888Color)
+
+629         360 LOAD_FAST               12 (swatchs)
+            362 LOAD_METHOD             10 (append)
+            364 LOAD_GLOBAL             16 (PaletteSwatch)
+            366 LOAD_FAST               14 (rgb888Color)
+            368 LOAD_FAST               13 (population)
+            370 CALL_FUNCTION            2
+            372 CALL_METHOD              1
+            374 POP_TOP
+            376 EXTENDED_ARG             1
+            378 JUMP_ABSOLUTE          278
+
+630     >>  380 LOAD_FAST               12 (swatchs)
+            382 LOAD_FAST                0 (self)
+            384 STORE_ATTR              17 (swatchArray)
+            386 JUMP_FORWARD            60 (to 448)
+
+632     >>  388 LOAD_GLOBAL             18 (PriorityBoxArray)
+            390 CALL_FUNCTION            0
+            392 STORE_FAST              15 (priorityArray)
+
+633         394 LOAD_GLOBAL             19 (VBox)
+            396 LOAD_CONST               4 (0)
+            398 LOAD_FAST               11 (distinctColorCount)
+            400 LOAD_CONST               3 (1)
+            402 BINARY_SUBTRACT
+            404 LOAD_FAST                0 (self)
+            406 LOAD_ATTR                6 (distinctColors)
+            408 LOAD_FAST                0 (self)
+            410 LOAD_ATTR                5 (histArr)
+            412 CALL_FUNCTION            4
+            414 STORE_FAST              16 (colorVBox)
+
+634         416 LOAD_FAST               15 (priorityArray)
+            418 LOAD_METHOD             20 (addVBox)
+            420 LOAD_FAST               16 (colorVBox)
+            422 CALL_METHOD              1
+            424 POP_TOP
+
+635         426 LOAD_FAST                0 (self)
+            428 LOAD_METHOD             21 (splitBoxes)
+            430 LOAD_FAST               15 (priorityArray)
+            432 CALL_METHOD              1
+            434 POP_TOP
+
+636         436 LOAD_FAST                0 (self)
+            438 LOAD_METHOD             22 (generateAverageColors)
+            440 LOAD_FAST               15 (priorityArray)
+            442 CALL_METHOD              1
+            444 LOAD_FAST                0 (self)
+            446 STORE_ATTR              17 (swatchArray)
+
+638     >>  448 LOAD_FAST                0 (self)
+            450 LOAD_METHOD             23 (findMaxPopulation)
+            452 CALL_METHOD              0
+            454 POP_TOP
+            456 LOAD_CONST               0 (None)
+            458 RETURN_VALUE
+
+=== PaletteAnalyzer.clearHistArray ===
+641           0 LOAD_CONST               1 (0)
+              2 BUILD_LIST               1
+              4 LOAD_GLOBAL              0 (HIST_ARR_SIZE)
+              6 BINARY_MULTIPLY
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (histArr)
+             12 LOAD_CONST               0 (None)
+             14 RETURN_VALUE
+
+=== PaletteAnalyzer.rawPixelDataFromImage ===
+644           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (scaleDownImage)
+              4 LOAD_FAST                1 (image)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (scaledImage)
+
+645          10 LOAD_FAST                2 (scaledImage)
+             12 LOAD_METHOD              1 (convert)
+             14 LOAD_CONST               1 ('RGBA')
+             16 CALL_METHOD              1
+             18 STORE_FAST               3 (rgbaImage)
+
+646          20 LOAD_FAST                3 (rgbaImage)
+             22 LOAD_ATTR                2 (size)
+             24 UNPACK_SEQUENCE          2
+             26 STORE_FAST               4 (width)
+             28 STORE_FAST               5 (height)
+
+647          30 LOAD_FAST                4 (width)
+             32 LOAD_FAST                5 (height)
+             34 BINARY_MULTIPLY
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               3 (pixelCount)
+
+648          40 LOAD_GLOBAL              4 (list)
+             42 LOAD_FAST                3 (rgbaImage)
+             44 LOAD_METHOD              5 (getdata)
+             46 CALL_METHOD              0
+             48 CALL_FUNCTION            1
+             50 RETURN_VALUE
+
+=== PaletteAnalyzer.scaleDownImage ===
+651           0 LOAD_FAST                1 (image)
+              2 LOAD_ATTR                0 (size)
+              4 UNPACK_SEQUENCE          2
+              6 STORE_FAST               2 (width)
+              8 STORE_FAST               3 (height)
+
+652          10 LOAD_FAST                2 (width)
+             12 LOAD_CONST               1 (0)
+             14 COMPARE_OP               1 (<=)
+             16 POP_JUMP_IF_TRUE        26
+             18 LOAD_FAST                3 (height)
+             20 LOAD_CONST               1 (0)
+             22 COMPARE_OP               1 (<=)
+             24 POP_JUMP_IF_FALSE       30
+
+653     >>   26 LOAD_FAST                1 (image)
+             28 RETURN_VALUE
+
+655     >>   30 LOAD_GLOBAL              1 (TARGET_IMAGE_SIZE)
+             32 LOAD_GLOBAL              2 (float)
+             34 LOAD_FAST                2 (width)
+             36 CALL_FUNCTION            1
+             38 BINARY_TRUE_DIVIDE
+             40 STORE_FAST               4 (scaleX)
+
+656          42 LOAD_GLOBAL              1 (TARGET_IMAGE_SIZE)
+             44 LOAD_GLOBAL              2 (float)
+             46 LOAD_FAST                3 (height)
+             48 CALL_FUNCTION            1
+             50 BINARY_TRUE_DIVIDE
+             52 STORE_FAST               5 (scaleY)
+
+657          54 LOAD_GLOBAL              3 (min)
+             56 LOAD_FAST                4 (scaleX)
+             58 LOAD_FAST                5 (scaleY)
+             60 CALL_FUNCTION            2
+             62 STORE_FAST               6 (scale)
+
+659          64 LOAD_GLOBAL              4 (max)
+             66 LOAD_CONST               2 (1)
+             68 LOAD_GLOBAL              5 (int)
+             70 LOAD_GLOBAL              6 (round)
+             72 LOAD_FAST                2 (width)
+             74 LOAD_FAST                6 (scale)
+             76 BINARY_MULTIPLY
+             78 CALL_FUNCTION            1
+             80 CALL_FUNCTION            1
+             82 CALL_FUNCTION            2
+             84 STORE_FAST               7 (newWidth)
+
+660          86 LOAD_GLOBAL              4 (max)
+             88 LOAD_CONST               2 (1)
+             90 LOAD_GLOBAL              5 (int)
+             92 LOAD_GLOBAL              6 (round)
+             94 LOAD_FAST                3 (height)
+             96 LOAD_FAST                6 (scale)
+             98 BINARY_MULTIPLY
+            100 CALL_FUNCTION            1
+            102 CALL_FUNCTION            1
+            104 CALL_FUNCTION            2
+            106 STORE_FAST               8 (newHeight)
+
+662         108 LOAD_FAST                7 (newWidth)
+            110 LOAD_FAST                8 (newHeight)
+            112 BUILD_TUPLE              2
+            114 LOAD_FAST                2 (width)
+            116 LOAD_FAST                3 (height)
+            118 BUILD_TUPLE              2
+            120 COMPARE_OP               2 (==)
+            122 POP_JUMP_IF_FALSE      128
+
+663         124 LOAD_FAST                1 (image)
+            126 RETURN_VALUE
+
+665     >>  128 LOAD_GLOBAL              7 (hasattr)
+            130 LOAD_GLOBAL              8 (Image)
+            132 LOAD_CONST               3 ('Resampling')
+            134 CALL_FUNCTION            2
+            136 POP_JUMP_IF_FALSE      146
+            138 LOAD_GLOBAL              8 (Image)
+            140 LOAD_ATTR                9 (Resampling)
+            142 LOAD_ATTR               10 (BILINEAR)
+            144 JUMP_FORWARD             4 (to 150)
+        >>  146 LOAD_GLOBAL              8 (Image)
+            148 LOAD_ATTR               10 (BILINEAR)
+        >>  150 STORE_FAST               9 (resampleMode)
+
+666         152 LOAD_FAST                1 (image)
+            154 LOAD_METHOD             11 (resize)
+            156 LOAD_FAST                7 (newWidth)
+            158 LOAD_FAST                8 (newHeight)
+            160 BUILD_TUPLE              2
+            162 LOAD_FAST                9 (resampleMode)
+            164 CALL_METHOD              2
+            166 RETURN_VALUE
+
+=== PaletteAnalyzer.splitBoxes ===
+669     >>    0 LOAD_FAST                1 (queue)
+              2 LOAD_METHOD              0 (count)
+              4 CALL_METHOD              0
+              6 LOAD_GLOBAL              1 (MAX_COLOR_NUM)
+              8 COMPARE_OP               0 (<)
+             10 POP_JUMP_IF_FALSE       68
+
+670          12 LOAD_FAST                1 (queue)
+             14 LOAD_METHOD              2 (poll)
+             16 CALL_METHOD              0
+             18 STORE_FAST               2 (vbox)
+
+671          20 LOAD_FAST                2 (vbox)
+             22 LOAD_CONST               0 (None)
+             24 IS_OP                    1
+             26 POP_JUMP_IF_FALSE       62
+             28 LOAD_FAST                2 (vbox)
+             30 LOAD_METHOD              3 (canSplit)
+             32 CALL_METHOD              0
+             34 POP_JUMP_IF_FALSE       62
+
+672          36 LOAD_FAST                1 (queue)
+             38 LOAD_METHOD              4 (addVBox)
+             40 LOAD_FAST                2 (vbox)
+             42 LOAD_METHOD              5 (splitBox)
+             44 CALL_METHOD              0
+             46 CALL_METHOD              1
+             48 POP_TOP
+
+673          50 LOAD_FAST                1 (queue)
+             52 LOAD_METHOD              4 (addVBox)
+             54 LOAD_FAST                2 (vbox)
+             56 CALL_METHOD              1
+             58 POP_TOP
+             60 JUMP_ABSOLUTE            0
+
+675     >>   62 LOAD_CONST               0 (None)
+             64 RETURN_VALUE
+             66 JUMP_ABSOLUTE            0
+        >>   68 LOAD_CONST               0 (None)
+             70 RETURN_VALUE
+
+=== PaletteAnalyzer.generateAverageColors ===
+678           0 BUILD_LIST               0
+              2 STORE_FAST               2 (swatchs)
+
+679           4 LOAD_FAST                1 (queue)
+              6 LOAD_METHOD              0 (getVBoxArray)
+              8 CALL_METHOD              0
+             10 GET_ITER
+        >>   12 FOR_ITER                44 (to 58)
+             14 STORE_FAST               3 (vbox)
+
+680          16 LOAD_FAST                3 (vbox)
+             18 LOAD_METHOD              1 (getAverageColor)
+             20 CALL_METHOD              0
+             22 STORE_FAST               4 (swatch)
+
+681          24 LOAD_FAST                4 (swatch)
+             26 LOAD_CONST               0 (None)
+             28 IS_OP                    1
+             30 POP_JUMP_IF_FALSE       12
+             32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              2 (shouldIgnoreColorByHsl)
+             36 LOAD_FAST                4 (swatch)
+             38 LOAD_METHOD              3 (getHsl)
+             40 CALL_METHOD              0
+             42 CALL_METHOD              1
+             44 POP_JUMP_IF_TRUE        12
+
+682          46 LOAD_FAST                2 (swatchs)
+             48 LOAD_METHOD              4 (append)
+             50 LOAD_FAST                4 (swatch)
+             52 CALL_METHOD              1
+             54 POP_TOP
+             56 JUMP_ABSOLUTE           12
+
+683     >>   58 LOAD_FAST                2 (swatchs)
+             60 RETURN_VALUE
+
+=== PaletteAnalyzer.shouldIgnoreColor ===
+686           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (shouldIgnoreColorByHsl)
+              4 LOAD_GLOBAL              1 (rgb555ToHsl)
+              6 LOAD_FAST                1 (color)
+              8 CALL_FUNCTION            1
+             10 CALL_METHOD              1
+             12 RETURN_VALUE
+
+=== PaletteAnalyzer.shouldIgnoreColorByHsl ===
+689           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (filters)
+              4 GET_ITER
+        >>    6 FOR_ITER                20 (to 28)
+              8 STORE_FAST               2 (filterObj)
+
+690          10 LOAD_FAST                2 (filterObj)
+             12 LOAD_METHOD              1 (isAllowed)
+             14 LOAD_FAST                1 (hsl)
+             16 CALL_METHOD              1
+             18 POP_JUMP_IF_TRUE         6
+
+691          20 POP_TOP
+             22 LOAD_CONST               1 (True)
+             24 RETURN_VALUE
+             26 JUMP_ABSOLUTE            6
+
+692     >>   28 LOAD_CONST               2 (False)
+             30 RETURN_VALUE
+
+=== PaletteAnalyzer.findMaxPopulation ===
+695           0 LOAD_CONST               1 (0)
+              2 STORE_FAST               1 (maxPopulation)
+
+696           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                0 (swatchArray)
+              8 GET_ITER
+        >>   10 FOR_ITER                16 (to 28)
+             12 STORE_FAST               2 (swatch)
+
+697          14 LOAD_GLOBAL              1 (max)
+             16 LOAD_FAST                1 (maxPopulation)
+             18 LOAD_FAST                2 (swatch)
+             20 LOAD_ATTR                2 (population)
+             22 CALL_FUNCTION            2
+             24 STORE_FAST               1 (maxPopulation)
+             26 JUMP_ABSOLUTE           10
+
+698     >>   28 LOAD_FAST                1 (maxPopulation)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               3 (maxPopulation)
+             34 LOAD_CONST               0 (None)
+             36 RETURN_VALUE
+
+=== PaletteAnalyzer.getSwatchForTarget ===
+703           0 BUILD_MAP                0
+              2 STORE_FAST               1 (finalDic)
+
+704           4 LOAD_CONST               0 (None)
+              6 STORE_FAST               2 (recommendColorModel)
+
+706           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (targetArray)
+             12 GET_ITER
+        >>   14 FOR_ITER               134 (to 150)
+             16 STORE_FAST               3 (target)
+
+707          18 LOAD_FAST                3 (target)
+             20 LOAD_METHOD              1 (normalizeWeights)
+             22 CALL_METHOD              0
+             24 POP_TOP
+
+708          26 LOAD_FAST                0 (self)
+             28 LOAD_METHOD              2 (getMaxScoredSwatchForTarget)
+             30 LOAD_FAST                3 (target)
+             32 CALL_METHOD              1
+             34 STORE_FAST               4 (swatch)
+
+709          36 LOAD_FAST                3 (target)
+             38 LOAD_METHOD              3 (getTargetKey)
+             40 CALL_METHOD              0
+             42 STORE_FAST               5 (targetKey)
+
+710          44 LOAD_FAST                4 (swatch)
+             46 LOAD_CONST               0 (None)
+             48 IS_OP                    1
+             50 POP_JUMP_IF_FALSE      140
+
+711          52 LOAD_GLOBAL              4 (PaletteColorModel)
+
+712          54 LOAD_FAST                4 (swatch)
+             56 LOAD_METHOD              5 (getColorString)
+             58 CALL_METHOD              0
+
+713          60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                6 (pixelCount)
+             64 LOAD_CONST               1 (0)
+             66 COMPARE_OP               4 (>)
+             68 POP_JUMP_IF_FALSE       90
+             70 LOAD_GLOBAL              7 (float)
+             72 LOAD_FAST                4 (swatch)
+             74 LOAD_ATTR                8 (population)
+             76 CALL_FUNCTION            1
+             78 LOAD_GLOBAL              7 (float)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                6 (pixelCount)
+             84 CALL_FUNCTION            1
+             86 BINARY_TRUE_DIVIDE
+             88 JUMP_FORWARD             2 (to 92)
+        >>   90 LOAD_CONST               2 (0.0)
+
+711     >>   92 LOAD_CONST               3 (('imageColorString', 'percentage'))
+             94 CALL_FUNCTION_KW         2
+             96 STORE_FAST               6 (colorModel)
+
+715          98 LOAD_FAST                6 (colorModel)
+            100 LOAD_FAST                1 (finalDic)
+            102 LOAD_FAST                5 (targetKey)
+            104 STORE_SUBSCR
+
+716         106 LOAD_FAST                2 (recommendColorModel)
+            108 LOAD_CONST               0 (None)
+            110 IS_OP                    0
+            112 POP_JUMP_IF_FALSE      148
+
+717         114 LOAD_FAST                6 (colorModel)
+            116 STORE_FAST               2 (recommendColorModel)
+
+718         118 LOAD_FAST                0 (self)
+            120 LOAD_ATTR                9 (isNeedColorDic)
+            122 POP_JUMP_IF_TRUE       148
+
+719         124 LOAD_FAST                2 (recommendColorModel)
+            126 LOAD_CONST               0 (None)
+            128 LOAD_CONST               0 (None)
+            130 BUILD_TUPLE              3
+            132 ROT_TWO
+            134 POP_TOP
+            136 RETURN_VALUE
+            138 JUMP_ABSOLUTE           14
+
+721     >>  140 LOAD_CONST               4 ('unrecognized error')
+            142 LOAD_FAST                1 (finalDic)
+            144 LOAD_FAST                5 (targetKey)
+            146 STORE_SUBSCR
+        >>  148 JUMP_ABSOLUTE           14
+
+723     >>  150 LOAD_FAST                2 (recommendColorModel)
+            152 LOAD_FAST                1 (finalDic)
+            154 LOAD_CONST               0 (None)
+            156 BUILD_TUPLE              3
+            158 RETURN_VALUE
+
+=== PaletteAnalyzer.getMaxScoredSwatchForTarget ===
+726           0 LOAD_CONST               1 (0.0)
+              2 STORE_FAST               2 (maxScore)
+
+727           4 LOAD_CONST               0 (None)
+              6 STORE_FAST               3 (maxScoreSwatch)
+
+728           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (swatchArray)
+             12 GET_ITER
+        >>   14 FOR_ITER                52 (to 68)
+             16 STORE_FAST               4 (swatch)
+
+729          18 LOAD_FAST                0 (self)
+             20 LOAD_METHOD              1 (shouldBeScoredForTarget)
+             22 LOAD_FAST                4 (swatch)
+             24 LOAD_FAST                1 (target)
+             26 CALL_METHOD              2
+             28 POP_JUMP_IF_FALSE       14
+
+730          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              2 (generateScoreForTarget)
+             34 LOAD_FAST                1 (target)
+             36 LOAD_FAST                4 (swatch)
+             38 CALL_METHOD              2
+             40 STORE_FAST               5 (score)
+
+731          42 LOAD_FAST                3 (maxScoreSwatch)
+             44 LOAD_CONST               0 (None)
+             46 IS_OP                    0
+             48 POP_JUMP_IF_TRUE        58
+             50 LOAD_FAST                5 (score)
+             52 LOAD_FAST                2 (maxScore)
+             54 COMPARE_OP               4 (>)
+             56 POP_JUMP_IF_FALSE       14
+
+732     >>   58 LOAD_FAST                5 (score)
+             60 STORE_FAST               2 (maxScore)
+
+733          62 LOAD_FAST                4 (swatch)
+             64 STORE_FAST               3 (maxScoreSwatch)
+             66 JUMP_ABSOLUTE           14
+
+734     >>   68 LOAD_FAST                3 (maxScoreSwatch)
+             70 RETURN_VALUE
+
+=== PaletteAnalyzer.shouldBeScoredForTarget ===
+737           0 LOAD_FAST                1 (swatch)
+              2 LOAD_METHOD              0 (getHsl)
+              4 CALL_METHOD              0
+              6 UNPACK_SEQUENCE          3
+              8 STORE_FAST               3 (hue)
+             10 STORE_FAST               4 (saturation)
+             12 STORE_FAST               5 (lightness)
+
+738          14 LOAD_FAST                3 (hue)
+             16 STORE_FAST               6 (_)
+
+740          18 LOAD_FAST                2 (target)
+             20 LOAD_METHOD              1 (getMinSaturation)
+             22 CALL_METHOD              0
+             24 LOAD_FAST                4 (saturation)
+             26 DUP_TOP
+             28 ROT_THREE
+             30 COMPARE_OP               1 (<=)
+             32 JUMP_IF_FALSE_OR_POP    44
+             34 LOAD_FAST                2 (target)
+             36 LOAD_METHOD              2 (getMaxSaturation)
+             38 CALL_METHOD              0
+             40 COMPARE_OP               1 (<=)
+             42 JUMP_FORWARD             4 (to 48)
+        >>   44 ROT_TWO
+             46 POP_TOP
+        >>   48 JUMP_IF_FALSE_OR_POP    80
+
+741          50 LOAD_FAST                2 (target)
+             52 LOAD_METHOD              3 (getMinLuma)
+             54 CALL_METHOD              0
+             56 LOAD_FAST                5 (lightness)
+             58 DUP_TOP
+             60 ROT_THREE
+             62 COMPARE_OP               1 (<=)
+             64 JUMP_IF_FALSE_OR_POP    76
+             66 LOAD_FAST                2 (target)
+             68 LOAD_METHOD              4 (getMaxLuma)
+             70 CALL_METHOD              0
+             72 COMPARE_OP               1 (<=)
+             74 RETURN_VALUE
+        >>   76 ROT_TWO
+             78 POP_TOP
+
+739     >>   80 RETURN_VALUE
+
+=== PaletteAnalyzer.generateScoreForTarget ===
+745           0 LOAD_FAST                2 (swatch)
+              2 LOAD_METHOD              0 (getHsl)
+              4 CALL_METHOD              0
+              6 UNPACK_SEQUENCE          3
+              8 STORE_FAST               3 (_hue)
+             10 STORE_FAST               4 (saturation)
+             12 STORE_FAST               5 (lightness)
+
+747          14 LOAD_CONST               1 (0.0)
+             16 STORE_FAST               6 (saturationScore)
+
+748          18 LOAD_CONST               1 (0.0)
+             20 STORE_FAST               7 (luminanceScore)
+
+749          22 LOAD_CONST               1 (0.0)
+             24 STORE_FAST               8 (populationScore)
+
+751          26 LOAD_FAST                1 (target)
+             28 LOAD_METHOD              1 (getSaturationWeight)
+             30 CALL_METHOD              0
+             32 LOAD_CONST               2 (0)
+             34 COMPARE_OP               4 (>)
+             36 POP_JUMP_IF_FALSE       66
+
+752          38 LOAD_FAST                1 (target)
+             40 LOAD_METHOD              1 (getSaturationWeight)
+             42 CALL_METHOD              0
+             44 LOAD_CONST               3 (1.0)
+             46 LOAD_GLOBAL              2 (abs)
+             48 LOAD_FAST                4 (saturation)
+             50 LOAD_FAST                1 (target)
+             52 LOAD_METHOD              3 (getTargetSaturation)
+             54 CALL_METHOD              0
+             56 BINARY_SUBTRACT
+             58 CALL_FUNCTION            1
+             60 BINARY_SUBTRACT
+             62 BINARY_MULTIPLY
+             64 STORE_FAST               6 (saturationScore)
+
+753     >>   66 LOAD_FAST                1 (target)
+             68 LOAD_METHOD              4 (getLumaWeight)
+             70 CALL_METHOD              0
+             72 LOAD_CONST               2 (0)
+             74 COMPARE_OP               4 (>)
+             76 POP_JUMP_IF_FALSE      106
+
+754          78 LOAD_FAST                1 (target)
+             80 LOAD_METHOD              4 (getLumaWeight)
+             82 CALL_METHOD              0
+             84 LOAD_CONST               3 (1.0)
+             86 LOAD_GLOBAL              2 (abs)
+             88 LOAD_FAST                5 (lightness)
+             90 LOAD_FAST                1 (target)
+             92 LOAD_METHOD              5 (getTargetLuma)
+             94 CALL_METHOD              0
+             96 BINARY_SUBTRACT
+             98 CALL_FUNCTION            1
+            100 BINARY_SUBTRACT
+            102 BINARY_MULTIPLY
+            104 STORE_FAST               7 (luminanceScore)
+
+755     >>  106 LOAD_FAST                1 (target)
+            108 LOAD_METHOD              6 (getPopulationWeight)
+            110 CALL_METHOD              0
+            112 LOAD_CONST               2 (0)
+            114 COMPARE_OP               4 (>)
+            116 POP_JUMP_IF_FALSE      152
+            118 LOAD_FAST                0 (self)
+            120 LOAD_ATTR                7 (maxPopulation)
+            122 LOAD_CONST               2 (0)
+            124 COMPARE_OP               4 (>)
+            126 POP_JUMP_IF_FALSE      152
+
+756         128 LOAD_FAST                1 (target)
+            130 LOAD_METHOD              6 (getPopulationWeight)
+            132 CALL_METHOD              0
+            134 LOAD_FAST                2 (swatch)
+            136 LOAD_ATTR                8 (population)
+            138 LOAD_GLOBAL              9 (float)
+            140 LOAD_FAST                0 (self)
+            142 LOAD_ATTR                7 (maxPopulation)
+            144 CALL_FUNCTION            1
+            146 BINARY_TRUE_DIVIDE
+            148 BINARY_MULTIPLY
+            150 STORE_FAST               8 (populationScore)
+
+758     >>  152 LOAD_FAST                6 (saturationScore)
+            154 LOAD_FAST                7 (luminanceScore)
+            156 BINARY_ADD
+            158 LOAD_FAST                8 (populationScore)
+            160 BINARY_ADD
+            162 RETURN_VALUE
+
+=== PaletteAnalyzer.initTargetsWithMode ===
+761           0 BUILD_LIST               0
+              2 STORE_FAST               2 (targets)
+
+763           4 LOAD_GLOBAL              0 (int)
+              6 LOAD_FAST                1 (mode)
+              8 CALL_FUNCTION            1
+             10 STORE_FAST               3 (modeValue)
+
+765          12 LOAD_FAST                3 (modeValue)
+             14 LOAD_GLOBAL              0 (int)
+             16 LOAD_GLOBAL              1 (PaletteTargetMode)
+             18 LOAD_ATTR                2 (VIBRANT_PALETTE)
+             20 CALL_FUNCTION            1
+             22 COMPARE_OP               0 (<)
+
+764          24 POP_JUMP_IF_TRUE        50
+
+766          26 LOAD_FAST                3 (modeValue)
+             28 LOAD_GLOBAL              0 (int)
+             30 LOAD_GLOBAL              1 (PaletteTargetMode)
+             32 LOAD_ATTR                3 (ALL_MODE_PALETTE)
+             34 CALL_FUNCTION            1
+             36 COMPARE_OP               4 (>)
+
+764          38 POP_JUMP_IF_TRUE        50
+
+767          40 LOAD_FAST                1 (mode)
+             42 LOAD_GLOBAL              1 (PaletteTargetMode)
+             44 LOAD_ATTR                3 (ALL_MODE_PALETTE)
+             46 COMPARE_OP               2 (==)
+
+764          48 POP_JUMP_IF_FALSE      110
+
+769     >>   50 LOAD_FAST                2 (targets)
+             52 LOAD_METHOD              4 (extend)
+
+771          54 LOAD_GLOBAL              5 (PaletteTarget)
+             56 LOAD_GLOBAL              1 (PaletteTargetMode)
+             58 LOAD_ATTR                2 (VIBRANT_PALETTE)
+             60 CALL_FUNCTION            1
+
+772          62 LOAD_GLOBAL              5 (PaletteTarget)
+             64 LOAD_GLOBAL              1 (PaletteTargetMode)
+             66 LOAD_ATTR                6 (MUTED_PALETTE)
+             68 CALL_FUNCTION            1
+
+773          70 LOAD_GLOBAL              5 (PaletteTarget)
+             72 LOAD_GLOBAL              1 (PaletteTargetMode)
+             74 LOAD_ATTR                7 (LIGHT_VIBRANT_PALETTE)
+             76 CALL_FUNCTION            1
+
+774          78 LOAD_GLOBAL              5 (PaletteTarget)
+             80 LOAD_GLOBAL              1 (PaletteTargetMode)
+             82 LOAD_ATTR                8 (LIGHT_MUTED_PALETTE)
+             84 CALL_FUNCTION            1
+
+775          86 LOAD_GLOBAL              5 (PaletteTarget)
+             88 LOAD_GLOBAL              1 (PaletteTargetMode)
+             90 LOAD_ATTR                9 (DARK_VIBRANT_PALETTE)
+             92 CALL_FUNCTION            1
+
+776          94 LOAD_GLOBAL              5 (PaletteTarget)
+             96 LOAD_GLOBAL              1 (PaletteTargetMode)
+             98 LOAD_ATTR               10 (DARK_MUTED_PALETTE)
+            100 CALL_FUNCTION            1
+
+770         102 BUILD_LIST               6
+
+769         104 CALL_METHOD              1
+            106 POP_TOP
+            108 JUMP_FORWARD           158 (to 268)
+
+780     >>  110 LOAD_FAST                1 (mode)
+            112 LOAD_GLOBAL              1 (PaletteTargetMode)
+            114 LOAD_ATTR                2 (VIBRANT_PALETTE)
+            116 BINARY_AND
+            118 POP_JUMP_IF_FALSE      136
+
+781         120 LOAD_FAST                2 (targets)
+            122 LOAD_METHOD             11 (append)
+            124 LOAD_GLOBAL              5 (PaletteTarget)
+            126 LOAD_GLOBAL              1 (PaletteTargetMode)
+            128 LOAD_ATTR                2 (VIBRANT_PALETTE)
+            130 CALL_FUNCTION            1
+            132 CALL_METHOD              1
+            134 POP_TOP
+
+782     >>  136 LOAD_FAST                1 (mode)
+            138 LOAD_GLOBAL              1 (PaletteTargetMode)
+            140 LOAD_ATTR                7 (LIGHT_VIBRANT_PALETTE)
+            142 BINARY_AND
+            144 POP_JUMP_IF_FALSE      162
+
+783         146 LOAD_FAST                2 (targets)
+            148 LOAD_METHOD             11 (append)
+            150 LOAD_GLOBAL              5 (PaletteTarget)
+            152 LOAD_GLOBAL              1 (PaletteTargetMode)
+            154 LOAD_ATTR                7 (LIGHT_VIBRANT_PALETTE)
+            156 CALL_FUNCTION            1
+            158 CALL_METHOD              1
+            160 POP_TOP
+
+784     >>  162 LOAD_FAST                1 (mode)
+            164 LOAD_GLOBAL              1 (PaletteTargetMode)
+            166 LOAD_ATTR                9 (DARK_VIBRANT_PALETTE)
+            168 BINARY_AND
+            170 POP_JUMP_IF_FALSE      188
+
+785         172 LOAD_FAST                2 (targets)
+            174 LOAD_METHOD             11 (append)
+            176 LOAD_GLOBAL              5 (PaletteTarget)
+            178 LOAD_GLOBAL              1 (PaletteTargetMode)
+            180 LOAD_ATTR                9 (DARK_VIBRANT_PALETTE)
+            182 CALL_FUNCTION            1
+            184 CALL_METHOD              1
+            186 POP_TOP
+
+786     >>  188 LOAD_FAST                1 (mode)
+            190 LOAD_GLOBAL              1 (PaletteTargetMode)
+            192 LOAD_ATTR                8 (LIGHT_MUTED_PALETTE)
+            194 BINARY_AND
+            196 POP_JUMP_IF_FALSE      214
+
+787         198 LOAD_FAST                2 (targets)
+            200 LOAD_METHOD             11 (append)
+            202 LOAD_GLOBAL              5 (PaletteTarget)
+            204 LOAD_GLOBAL              1 (PaletteTargetMode)
+            206 LOAD_ATTR                8 (LIGHT_MUTED_PALETTE)
+            208 CALL_FUNCTION            1
+            210 CALL_METHOD              1
+            212 POP_TOP
+
+788     >>  214 LOAD_FAST                1 (mode)
+            216 LOAD_GLOBAL              1 (PaletteTargetMode)
+            218 LOAD_ATTR                6 (MUTED_PALETTE)
+            220 BINARY_AND
+            222 POP_JUMP_IF_FALSE      240
+
+789         224 LOAD_FAST                2 (targets)
+            226 LOAD_METHOD             11 (append)
+            228 LOAD_GLOBAL              5 (PaletteTarget)
+            230 LOAD_GLOBAL              1 (PaletteTargetMode)
+            232 LOAD_ATTR                6 (MUTED_PALETTE)
+            234 CALL_FUNCTION            1
+            236 CALL_METHOD              1
+            238 POP_TOP
+
+790     >>  240 LOAD_FAST                1 (mode)
+            242 LOAD_GLOBAL              1 (PaletteTargetMode)
+            244 LOAD_ATTR               10 (DARK_MUTED_PALETTE)
+            246 BINARY_AND
+            248 EXTENDED_ARG             1
+            250 POP_JUMP_IF_FALSE      268
+
+791         252 LOAD_FAST                2 (targets)
+            254 LOAD_METHOD             11 (append)
+            256 LOAD_GLOBAL              5 (PaletteTarget)
+            258 LOAD_GLOBAL              1 (PaletteTargetMode)
+            260 LOAD_ATTR               10 (DARK_MUTED_PALETTE)
+            262 CALL_FUNCTION            1
+            264 CALL_METHOD              1
+            266 POP_TOP
+
+793     >>  268 LOAD_FAST                2 (targets)
+            270 LOAD_FAST                0 (self)
+            272 STORE_ATTR              12 (targetArray)
+
+794         274 LOAD_GLOBAL              0 (int)
+            276 LOAD_GLOBAL              1 (PaletteTargetMode)
+            278 LOAD_ATTR                2 (VIBRANT_PALETTE)
+            280 CALL_FUNCTION            1
+            282 LOAD_FAST                3 (modeValue)
+            284 DUP_TOP
+            286 ROT_THREE
+            288 COMPARE_OP               1 (<=)
+            290 EXTENDED_ARG             1
+            292 JUMP_IF_FALSE_OR_POP   306
+            294 LOAD_GLOBAL              0 (int)
+            296 LOAD_GLOBAL              1 (PaletteTargetMode)
+            298 LOAD_ATTR                3 (ALL_MODE_PALETTE)
+            300 CALL_FUNCTION            1
+            302 COMPARE_OP               1 (<=)
+            304 JUMP_FORWARD             4 (to 310)
+        >>  306 ROT_TWO
+            308 POP_TOP
+        >>  310 LOAD_FAST                0 (self)
+            312 STORE_ATTR              13 (isNeedColorDic)
+            314 LOAD_CONST               0 (None)
+            316 RETURN_VALUE
+
+=== getPaletteImageColorWithMode ===
+811           0 LOAD_GLOBAL              0 (PaletteAnalyzer)
+              2 LOAD_FAST                0 (image)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               2 (analyzer)
+
+812           8 LOAD_FAST                2 (analyzer)
+             10 LOAD_METHOD              1 (startToAnalyzeForTargetMode)
+             12 LOAD_FAST                1 (mode)
+             14 CALL_METHOD              1
+             16 RETURN_VALUE
+
+=== extractThemeColorRgbFromImage ===
+828           0 LOAD_GLOBAL              0 (getPaletteImageColorWithMode)
+
+829           2 LOAD_FAST                0 (image)
+
+830           4 LOAD_GLOBAL              1 (PaletteTargetMode)
+              6 LOAD_ATTR                2 (ALL_MODE_PALETTE)
+
+828           8 CALL_FUNCTION            2
+             10 UNPACK_SEQUENCE          3
+             12 STORE_FAST               1 (_recommendColor)
+             14 STORE_FAST               2 (allModeColorDic)
+             16 STORE_FAST               3 (error)
+
+832          18 LOAD_FAST                3 (error)
+             20 LOAD_CONST               1 (None)
+             22 IS_OP                    1
+             24 POP_JUMP_IF_TRUE        30
+             26 LOAD_FAST                2 (allModeColorDic)
+             28 POP_JUMP_IF_TRUE        34
+
+833     >>   30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+835     >>   34 LOAD_CONST               2 (('vibrant', 'dark_vibrant', 'muted', 'dark_muted'))
+             36 STORE_FAST               4 (keyArr)
+
+836          38 LOAD_FAST                4 (keyArr)
+             40 GET_ITER
+        >>   42 FOR_ITER                38 (to 82)
+             44 STORE_FAST               5 (key)
+
+837          46 LOAD_FAST                2 (allModeColorDic)
+             48 LOAD_METHOD              3 (get)
+             50 LOAD_FAST                5 (key)
+             52 CALL_METHOD              1
+             54 STORE_FAST               6 (colorModel)
+
+838          56 LOAD_GLOBAL              4 (isinstance)
+             58 LOAD_FAST                6 (colorModel)
+             60 LOAD_GLOBAL              5 (PaletteColorModel)
+             62 CALL_FUNCTION            2
+             64 POP_JUMP_IF_FALSE       42
+
+839          66 LOAD_GLOBAL              6 (hexColorToRgb)
+             68 LOAD_FAST                6 (colorModel)
+             70 LOAD_ATTR                7 (imageColorString)
+             72 CALL_FUNCTION            1
+             74 ROT_TWO
+             76 POP_TOP
+             78 RETURN_VALUE
+             80 JUMP_ABSOLUTE           42
+
+840     >>   82 LOAD_CONST               1 (None)
+             84 RETURN_VALUE

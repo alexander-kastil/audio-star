@@ -1,0 +1,473 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nWiiMRadio 播放列表模型与 XML 生成器。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('escape',))
+              8 IMPORT_NAME              1 (html)
+             10 IMPORT_FROM              2 (escape)
+             12 STORE_NAME               2 (escape)
+             14 POP_TOP
+
+  8          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('LPPlayMusicList', 'LPPlayHeader', 'LPPlayItem', 'LPPlayListSource'))
+             20 IMPORT_NAME              3 (LPClientFramework.LPPlayList.LPPlayList)
+             22 IMPORT_FROM              4 (LPPlayMusicList)
+             24 STORE_NAME               4 (LPPlayMusicList)
+             26 IMPORT_FROM              5 (LPPlayHeader)
+             28 STORE_NAME               5 (LPPlayHeader)
+             30 IMPORT_FROM              6 (LPPlayItem)
+             32 STORE_NAME               6 (LPPlayItem)
+             34 IMPORT_FROM              7 (LPPlayListSource)
+             36 STORE_NAME               7 (LPPlayListSource)
+             38 POP_TOP
+
+ 11          40 LOAD_BUILD_CLASS
+             42 LOAD_CONST               4 (<code object LPWiiMRadioPlayList at 0x000001F324E69190, file "LPClientFramework\LPPlayList\LPWiiMRadioPlayList.py", line 11>)
+             44 LOAD_CONST               5 ('LPWiiMRadioPlayList')
+             46 MAKE_FUNCTION            0
+             48 LOAD_CONST               5 ('LPWiiMRadioPlayList')
+             50 LOAD_NAME                4 (LPPlayMusicList)
+             52 CALL_FUNCTION            3
+             54 STORE_NAME               8 (LPWiiMRadioPlayList)
+
+113          56 LOAD_BUILD_CLASS
+             58 LOAD_CONST               6 (<code object LPWiiMRadioPlayHeader at 0x000001F324E69BE0, file "LPClientFramework\LPPlayList\LPWiiMRadioPlayList.py", line 113>)
+             60 LOAD_CONST               7 ('LPWiiMRadioPlayHeader')
+             62 MAKE_FUNCTION            0
+             64 LOAD_CONST               7 ('LPWiiMRadioPlayHeader')
+             66 LOAD_NAME                5 (LPPlayHeader)
+             68 CALL_FUNCTION            3
+             70 STORE_NAME               9 (LPWiiMRadioPlayHeader)
+
+121          72 LOAD_BUILD_CLASS
+             74 LOAD_CONST               8 (<code object LPWiiMRadioPlayItem at 0x000001F324E690E0, file "LPClientFramework\LPPlayList\LPWiiMRadioPlayList.py", line 121>)
+             76 LOAD_CONST               9 ('LPWiiMRadioPlayItem')
+             78 MAKE_FUNCTION            0
+             80 LOAD_CONST               9 ('LPWiiMRadioPlayItem')
+             82 LOAD_NAME                6 (LPPlayItem)
+             84 CALL_FUNCTION            3
+             86 STORE_NAME              10 (LPWiiMRadioPlayItem)
+             88 LOAD_CONST              10 (None)
+             90 RETURN_VALUE
+
+=== LPWiiMRadioPlayList ===
+ 11           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPWiiMRadioPlayList')
+              6 STORE_NAME               2 (__qualname__)
+
+ 12           8 LOAD_CONST               1 ('WiiMRadio 播放列表，生成设备可识别的 XML 指令。')
+             10 STORE_NAME               3 (__doc__)
+
+ 14          12 LOAD_NAME                4 (str)
+             14 LOAD_CONST               2 (('return',))
+             16 BUILD_CONST_KEY_MAP      1
+             18 LOAD_CONST               3 (<code object generateXML at 0x000001F324E69A80, file "LPClientFramework\LPPlayList\LPWiiMRadioPlayList.py", line 14>)
+             20 LOAD_CONST               4 ('LPWiiMRadioPlayList.generateXML')
+             22 MAKE_FUNCTION            4 (annotations)
+             24 STORE_NAME               5 (generateXML)
+
+ 76          26 LOAD_NAME                6 (staticmethod)
+
+ 77          28 LOAD_CONST               5 ('LPWiiMRadioPlayItem')
+             30 LOAD_NAME                4 (str)
+             32 LOAD_CONST               6 (('item', 'return'))
+             34 BUILD_CONST_KEY_MAP      2
+             36 LOAD_CONST               7 (<code object _build_didl_metadata at 0x000001F324E69710, file "LPClientFramework\LPPlayList\LPWiiMRadioPlayList.py", line 76>)
+             38 LOAD_CONST               8 ('LPWiiMRadioPlayList._build_didl_metadata')
+             40 MAKE_FUNCTION            4 (annotations)
+             42 CALL_FUNCTION            1
+             44 STORE_NAME               7 (_build_didl_metadata)
+             46 LOAD_CONST               9 (None)
+             48 RETURN_VALUE
+
+=== LPWiiMRadioPlayList.generateXML ===
+ 42           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (header)
+              4 STORE_FAST               1 (header)
+
+ 43           6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                1 (list)
+             10 JUMP_IF_TRUE_OR_POP     14
+             12 BUILD_LIST               0
+        >>   14 STORE_FAST               2 (items)
+
+ 44          16 LOAD_GLOBAL              2 (len)
+             18 LOAD_FAST                2 (items)
+             20 CALL_FUNCTION            1
+             22 STORE_FAST               3 (track_count)
+
+ 46          24 LOAD_CONST               1 ('<?xml version="1.0"?><PlayList>')
+             26 STORE_FAST               4 (xml)
+
+ 47          28 LOAD_FAST                4 (xml)
+             30 LOAD_CONST               2 ('<ListName>%s</ListName>')
+             32 LOAD_GLOBAL              3 (escape)
+             34 LOAD_FAST                1 (header)
+             36 LOAD_ATTR                4 (headTitle)
+             38 JUMP_IF_TRUE_OR_POP     42
+             40 LOAD_CONST               3 ('')
+        >>   42 CALL_FUNCTION            1
+             44 BINARY_MODULO
+             46 INPLACE_ADD
+             48 STORE_FAST               4 (xml)
+
+ 48          50 LOAD_FAST                4 (xml)
+             52 LOAD_CONST               4 ('<ListInfo>')
+             54 INPLACE_ADD
+             56 STORE_FAST               4 (xml)
+
+ 49          58 LOAD_FAST                4 (xml)
+             60 LOAD_CONST               5 ('<Radio>1</Radio>')
+             62 INPLACE_ADD
+             64 STORE_FAST               4 (xml)
+
+ 50          66 LOAD_FAST                4 (xml)
+             68 LOAD_CONST               6 ('<ContentType>radio</ContentType>')
+             70 INPLACE_ADD
+             72 STORE_FAST               4 (xml)
+
+ 51          74 LOAD_FAST                4 (xml)
+             76 LOAD_CONST               7 ('<SourceName>%s</SourceName>')
+             78 LOAD_FAST                1 (header)
+             80 LOAD_ATTR                5 (mediaSource)
+             82 BINARY_MODULO
+             84 INPLACE_ADD
+             86 STORE_FAST               4 (xml)
+
+ 54          88 LOAD_FAST                4 (xml)
+             90 LOAD_CONST               8 ('<ShowName>%s</ShowName>')
+             92 LOAD_GLOBAL              3 (escape)
+             94 LOAD_FAST                1 (header)
+             96 LOAD_ATTR                4 (headTitle)
+             98 JUMP_IF_TRUE_OR_POP    102
+            100 LOAD_CONST               3 ('')
+        >>  102 CALL_FUNCTION            1
+            104 BINARY_MODULO
+            106 INPLACE_ADD
+            108 STORE_FAST               4 (xml)
+
+ 55         110 LOAD_FAST                4 (xml)
+            112 LOAD_CONST               9 ('<StreamId>%s</StreamId>')
+            114 LOAD_GLOBAL              3 (escape)
+            116 LOAD_GLOBAL              2 (len)
+            118 LOAD_FAST                2 (items)
+            120 CALL_FUNCTION            1
+            122 POP_JUMP_IF_FALSE      134
+            124 LOAD_FAST                2 (items)
+            126 LOAD_CONST              10 (0)
+            128 BINARY_SUBSCR
+            130 LOAD_ATTR                6 (trackId)
+            132 JUMP_FORWARD             6 (to 140)
+        >>  134 LOAD_CONST               3 ('')
+            136 JUMP_IF_TRUE_OR_POP    140
+            138 LOAD_CONST               3 ('')
+        >>  140 CALL_FUNCTION            1
+            142 BINARY_MODULO
+            144 INPLACE_ADD
+            146 STORE_FAST               4 (xml)
+
+ 56         148 LOAD_FAST                4 (xml)
+            150 LOAD_CONST              11 ('<StreamType>radio</StreamType>')
+            152 INPLACE_ADD
+            154 STORE_FAST               4 (xml)
+
+ 58         156 LOAD_FAST                4 (xml)
+            158 LOAD_CONST              12 ('<PicUrl>%s</PicUrl>')
+            160 LOAD_GLOBAL              3 (escape)
+            162 LOAD_FAST                1 (header)
+            164 LOAD_ATTR                7 (imageUrl)
+            166 JUMP_IF_TRUE_OR_POP    170
+            168 LOAD_CONST               3 ('')
+        >>  170 CALL_FUNCTION            1
+            172 BINARY_MODULO
+            174 INPLACE_ADD
+            176 STORE_FAST               4 (xml)
+
+ 59         178 LOAD_FAST                4 (xml)
+            180 LOAD_CONST              13 ('<TrackNumber>%d</TrackNumber>')
+            182 LOAD_FAST                3 (track_count)
+            184 BINARY_MODULO
+            186 INPLACE_ADD
+            188 STORE_FAST               4 (xml)
+
+ 60         190 LOAD_FAST                4 (xml)
+            192 LOAD_CONST              14 ('<SearchUrl></SearchUrl>')
+            194 INPLACE_ADD
+            196 STORE_FAST               4 (xml)
+
+ 61         198 LOAD_FAST                4 (xml)
+            200 LOAD_CONST              15 ('</ListInfo>')
+            202 INPLACE_ADD
+            204 STORE_FAST               4 (xml)
+
+ 62         206 LOAD_FAST                4 (xml)
+            208 LOAD_CONST              16 ('<Tracks>')
+            210 INPLACE_ADD
+            212 STORE_FAST               4 (xml)
+
+ 64         214 LOAD_GLOBAL              8 (enumerate)
+            216 LOAD_FAST                2 (items)
+            218 LOAD_CONST              17 (1)
+            220 LOAD_CONST              18 (('start',))
+            222 CALL_FUNCTION_KW         2
+            224 GET_ITER
+        >>  226 FOR_ITER               120 (to 348)
+            228 UNPACK_SEQUENCE          2
+            230 STORE_FAST               5 (idx)
+            232 STORE_FAST               6 (item)
+
+ 65         234 LOAD_FAST                0 (self)
+            236 LOAD_METHOD              9 (_build_didl_metadata)
+            238 LOAD_FAST                6 (item)
+            240 CALL_METHOD              1
+            242 STORE_FAST               7 (metadata)
+
+ 66         244 LOAD_FAST                4 (xml)
+            246 LOAD_CONST              19 ('<Track%d>')
+            248 LOAD_FAST                5 (idx)
+            250 BINARY_MODULO
+            252 INPLACE_ADD
+            254 STORE_FAST               4 (xml)
+
+ 67         256 LOAD_FAST                4 (xml)
+            258 LOAD_CONST              20 ('<URL>%s</URL>')
+            260 LOAD_GLOBAL              3 (escape)
+            262 LOAD_FAST                6 (item)
+            264 LOAD_ATTR               10 (trackUrl)
+            266 EXTENDED_ARG             1
+            268 JUMP_IF_TRUE_OR_POP    272
+            270 LOAD_CONST               3 ('')
+        >>  272 CALL_FUNCTION            1
+            274 BINARY_MODULO
+            276 INPLACE_ADD
+            278 STORE_FAST               4 (xml)
+
+ 68         280 LOAD_FAST                4 (xml)
+            282 LOAD_CONST              21 ('<Source>%s</Source>')
+            284 LOAD_FAST                1 (header)
+            286 LOAD_ATTR                5 (mediaSource)
+            288 BINARY_MODULO
+            290 INPLACE_ADD
+            292 STORE_FAST               4 (xml)
+
+ 69         294 LOAD_FAST                4 (xml)
+            296 LOAD_CONST              22 ('<Id>%s</Id>')
+            298 LOAD_GLOBAL              3 (escape)
+            300 LOAD_FAST                6 (item)
+            302 LOAD_ATTR                6 (trackId)
+            304 EXTENDED_ARG             1
+            306 JUMP_IF_TRUE_OR_POP    310
+            308 LOAD_CONST               3 ('')
+        >>  310 CALL_FUNCTION            1
+            312 BINARY_MODULO
+            314 INPLACE_ADD
+            316 STORE_FAST               4 (xml)
+
+ 70         318 LOAD_FAST                4 (xml)
+            320 LOAD_CONST              23 ('<Metadata>%s</Metadata>')
+            322 LOAD_GLOBAL              3 (escape)
+            324 LOAD_FAST                7 (metadata)
+            326 CALL_FUNCTION            1
+            328 BINARY_MODULO
+            330 INPLACE_ADD
+            332 STORE_FAST               4 (xml)
+
+ 71         334 LOAD_FAST                4 (xml)
+            336 LOAD_CONST              24 ('</Track%d>')
+            338 LOAD_FAST                5 (idx)
+            340 BINARY_MODULO
+            342 INPLACE_ADD
+            344 STORE_FAST               4 (xml)
+            346 JUMP_ABSOLUTE          226
+
+ 73     >>  348 LOAD_FAST                4 (xml)
+            350 LOAD_CONST              25 ('</Tracks></PlayList>')
+            352 INPLACE_ADD
+            354 STORE_FAST               4 (xml)
+
+ 74         356 LOAD_FAST                4 (xml)
+            358 RETURN_VALUE
+
+=== LPWiiMRadioPlayList._build_didl_metadata ===
+ 85           0 LOAD_CONST               1 ('<?xml version="1.0" encoding="UTF-8"?><DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:song="www.linkplay.com/song/" xmlns:custom="www.linkplay.com/custom/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><upnp:class>object.item.audioItem.musicTrack</upnp:class>')
+
+ 84           2 STORE_FAST               1 (meta)
+
+ 94           4 LOAD_GLOBAL              0 (escape)
+              6 LOAD_FAST                0 (item)
+              8 LOAD_ATTR                1 (trackId)
+             10 JUMP_IF_TRUE_OR_POP     14
+             12 LOAD_CONST               2 ('')
+        >>   14 CALL_FUNCTION            1
+             16 STORE_FAST               2 (item_id)
+
+ 95          18 LOAD_GLOBAL              0 (escape)
+             20 LOAD_GLOBAL              2 (getattr)
+             22 LOAD_FAST                0 (item)
+             24 LOAD_CONST               3 ('itemName')
+             26 LOAD_CONST               4 (None)
+             28 CALL_FUNCTION            3
+             30 JUMP_IF_TRUE_OR_POP     40
+             32 LOAD_FAST                0 (item)
+             34 LOAD_ATTR                3 (trackName)
+             36 JUMP_IF_TRUE_OR_POP     40
+             38 LOAD_CONST               2 ('')
+        >>   40 CALL_FUNCTION            1
+             42 STORE_FAST               3 (item_name)
+
+ 97          44 LOAD_FAST                1 (meta)
+             46 LOAD_CONST               5 ('<item id="%s" name="%s">')
+             48 LOAD_FAST                2 (item_id)
+             50 LOAD_FAST                3 (item_name)
+             52 BUILD_TUPLE              2
+             54 BINARY_MODULO
+             56 INPLACE_ADD
+             58 STORE_FAST               1 (meta)
+
+ 98          60 LOAD_FAST                1 (meta)
+             62 LOAD_CONST               6 ('<song:id>%s</song:id>')
+             64 LOAD_GLOBAL              0 (escape)
+             66 LOAD_FAST                0 (item)
+             68 LOAD_ATTR                1 (trackId)
+             70 JUMP_IF_TRUE_OR_POP     74
+             72 LOAD_CONST               2 ('')
+        >>   74 CALL_FUNCTION            1
+             76 BINARY_MODULO
+             78 INPLACE_ADD
+             80 STORE_FAST               1 (meta)
+
+ 99          82 LOAD_FAST                1 (meta)
+             84 LOAD_CONST               7 ('<song:albumid></song:albumid>')
+             86 INPLACE_ADD
+             88 STORE_FAST               1 (meta)
+
+100          90 LOAD_FAST                1 (meta)
+             92 LOAD_CONST               8 ('<song:singerid></song:singerid>')
+             94 INPLACE_ADD
+             96 STORE_FAST               1 (meta)
+
+101          98 LOAD_FAST                1 (meta)
+            100 LOAD_CONST               9 ('<dc:title>%s</dc:title>')
+            102 LOAD_GLOBAL              0 (escape)
+            104 LOAD_FAST                0 (item)
+            106 LOAD_ATTR                3 (trackName)
+            108 JUMP_IF_TRUE_OR_POP    112
+            110 LOAD_CONST               2 ('')
+        >>  112 CALL_FUNCTION            1
+            114 BINARY_MODULO
+            116 INPLACE_ADD
+            118 STORE_FAST               1 (meta)
+
+102         120 LOAD_FAST                1 (meta)
+            122 LOAD_CONST              10 ('<upnp:artist></upnp:artist>')
+            124 INPLACE_ADD
+            126 STORE_FAST               1 (meta)
+
+103         128 LOAD_FAST                1 (meta)
+            130 LOAD_CONST              11 ('<upnp:album></upnp:album>')
+            132 INPLACE_ADD
+            134 STORE_FAST               1 (meta)
+
+104         136 LOAD_FAST                1 (meta)
+
+105         138 LOAD_CONST              12 ('<res protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;" duration="0"></res>')
+
+104         140 INPLACE_ADD
+            142 STORE_FAST               1 (meta)
+
+108         144 LOAD_FAST                1 (meta)
+            146 LOAD_CONST              13 ('<upnp:albumArtURI>%s</upnp:albumArtURI>')
+            148 LOAD_GLOBAL              0 (escape)
+            150 LOAD_FAST                0 (item)
+            152 LOAD_ATTR                4 (trackImage)
+            154 JUMP_IF_TRUE_OR_POP    158
+            156 LOAD_CONST               2 ('')
+        >>  158 CALL_FUNCTION            1
+            160 BINARY_MODULO
+            162 INPLACE_ADD
+            164 STORE_FAST               1 (meta)
+
+109         166 LOAD_FAST                1 (meta)
+            168 LOAD_CONST              14 ('</item></DIDL-Lite>')
+            170 INPLACE_ADD
+            172 STORE_FAST               1 (meta)
+
+110         174 LOAD_FAST                1 (meta)
+            176 RETURN_VALUE
+
+=== LPWiiMRadioPlayHeader ===
+113           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPWiiMRadioPlayHeader')
+              6 STORE_NAME               2 (__qualname__)
+
+114           8 LOAD_CONST               1 ('WiiMRadio 播放列表头信息。')
+             10 STORE_NAME               3 (__doc__)
+
+116          12 LOAD_CLOSURE             0 (__class__)
+             14 BUILD_TUPLE              1
+             16 LOAD_CONST               2 (<code object __init__ at 0x000001F324E69EA0, file "LPClientFramework\LPPlayList\LPWiiMRadioPlayList.py", line 116>)
+             18 LOAD_CONST               3 ('LPWiiMRadioPlayHeader.__init__')
+             20 MAKE_FUNCTION            8 (closure)
+             22 STORE_NAME               4 (__init__)
+             24 LOAD_CLOSURE             0 (__class__)
+             26 DUP_TOP
+             28 STORE_NAME               5 (__classcell__)
+             30 RETURN_VALUE
+
+=== LPWiiMRadioPlayHeader.__init__ ===
+117           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+118          10 LOAD_GLOBAL              2 (LPPlayListSource)
+             12 LOAD_ATTR                3 (WiiMRadio)
+             14 LOAD_ATTR                4 (value)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               5 (mediaSource)
+             20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+=== LPWiiMRadioPlayItem ===
+121           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPWiiMRadioPlayItem')
+              6 STORE_NAME               2 (__qualname__)
+
+122           8 LOAD_CONST               1 ('WiiMRadio 单个电台播放条目。')
+             10 STORE_NAME               3 (__doc__)
+
+124          12 LOAD_CLOSURE             0 (__class__)
+             14 BUILD_TUPLE              1
+             16 LOAD_CONST               2 (<code object __init__ at 0x000001F324E69030, file "LPClientFramework\LPPlayList\LPWiiMRadioPlayList.py", line 124>)
+             18 LOAD_CONST               3 ('LPWiiMRadioPlayItem.__init__')
+             20 MAKE_FUNCTION            8 (closure)
+             22 STORE_NAME               4 (__init__)
+             24 LOAD_CLOSURE             0 (__class__)
+             26 DUP_TOP
+             28 STORE_NAME               5 (__classcell__)
+             30 RETURN_VALUE
+
+=== LPWiiMRadioPlayItem.__init__ ===
+125           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+126          10 LOAD_GLOBAL              2 (LPPlayListSource)
+             12 LOAD_ATTR                3 (WiiMRadio)
+             14 LOAD_ATTR                4 (value)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               5 (trackSource)
+
+128          20 LOAD_CONST               0 (None)
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               6 (itemName)
+             26 LOAD_CONST               0 (None)
+             28 RETURN_VALUE

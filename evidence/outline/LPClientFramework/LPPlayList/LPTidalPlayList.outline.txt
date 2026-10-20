@@ -1,0 +1,432 @@
+# module LPClientFramework.LPPlayList.LPTidalPlayList
+
+[module] names: __doc__, html, escape, typing, Any, Dict, Iterable, Optional, Tuple, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPAccount, LPHeaderType, LPPlayHeader, LPPlayItem, LPPlayListSource, LPPlayMusicList, TIDAL_DEFAULT_QUALITY, TIDAL_FALLBACK_QUALITY, TIDAL_QUALITY_LABELS, TIDAL_REPLAY_GAIN_LABELS, TIDAL_REPLAY_GAIN_XML_MAP, TIDAL_FAVORITE_TRACKS_ID, TIDAL_FAVORITE_TRACKS_TITLE, TIDAL_FAVORITE_TRACKS_SECTION_KEY, TIDAL_RECENTLY_NAVIGATION_SEE_ALL, frozenset, TIDAL_RECENTLY_SEE_ALL_SECTION_KEYS, TIDAL_RECENTLY_SEE_ALL_STREAM_TYPES, object, str, tidalQualityLabel, bool, list, tuple, int, tidalQualityOptions, tidalNormalizeQualityValue, tidalReplayGainLabel, tidalReplayGainValueForLabel, tidalNormalizeReplayGainValue, tidalReadLocalQualityValue, tidalSaveLocalQualityValue, tidalReadLocalReplayGainValue, tidalSaveLocalReplayGainValue, tidalSubscriptionExtra, tidalSubscriptionSupportsMax, tidalSubscriptionLabel, tidalRecentlySeeAllSectionKey, tidalRecentlyNavigationType, tidalPlayingContextForPlaylist, LPTidalAccount, LPTidalPlayHeader, LPTidalPlayItem, LPTidalPlayList
+  str: '\nTIDAL 播放列表和账号模型。\n'
+  str: 'escape'
+  str: 'Any'
+  str: 'Dict'
+  str: 'Iterable'
+  str: 'Optional'
+  str: 'Tuple'
+  str: 'LPUtility'
+  str: 'LPAccount'
+  str: 'LPHeaderType'
+  str: 'LPPlayHeader'
+  str: 'LPPlayItem'
+  str: 'LPPlayListSource'
+  str: 'LPPlayMusicList'
+  str: 'Low (96 kbps)'
+  str: 'Low (320 kbps)'
+  str: 'High'
+  str: 'Max'
+  str: 'Disabled'
+  str: 'Track Gain'
+  str: 'Album Gain'
+  str: '0'
+  str: 'enable'
+  str: 'type'
+  str: '1'
+  str: 'tidalFavoriteTracks'
+  str: 'TIDAL Favorite Tracks'
+  str: 'favoriteTracks'
+  str: 'see_all'
+  str: 'rising-new-tracks'
+  str: 'collection'
+  str: 'song'
+  str: 'quality'
+  str: 'return'
+  str: 'tidalQualityLabel'
+  str: 'maxSupported'
+  str: 'return'
+  str: 'tidalQualityOptions'
+  str: 'quality'
+  str: 'maxSupported'
+  str: 'return'
+  str: 'tidalNormalizeQualityValue'
+  str: 'value'
+  str: 'return'
+  str: 'tidalReplayGainLabel'
+  str: 'label'
+  str: 'return'
+  str: 'tidalReplayGainValueForLabel'
+  str: 'tidalNormalizeReplayGainValue'
+  str: 'userId'
+  str: 'maxSupported'
+  str: 'return'
+  str: 'tidalReadLocalQualityValue'
+  str: 'userId'
+  str: 'quality'
+  str: 'maxSupported'
+  str: 'return'
+  str: 'tidalSaveLocalQualityValue'
+  str: 'userId'
+  str: 'return'
+  str: 'tidalReadLocalReplayGainValue'
+  str: 'userId'
+  str: 'replayGain'
+  str: 'return'
+  str: 'tidalSaveLocalReplayGainValue'
+  str: 'subscription'
+  str: 'return'
+  str: 'tidalSubscriptionExtra'
+  str: 'tidalSubscriptionSupportsMax'
+  str: 'tidalSubscriptionLabel'
+  str: 'playList'
+  str: 'return'
+  str: 'tidalRecentlySeeAllSectionKey'
+  str: 'tidalRecentlyNavigationType'
+  str: 'playList'
+  str: 'playItem'
+  str: 'return'
+  str: 'tidalPlayingContextForPlaylist'
+  str: 'LPTidalAccount'
+  str: 'LPTidalPlayHeader'
+  str: 'LPTidalPlayItem'
+  str: 'LPTidalPlayList'
+
+def tidalQualityLabel(quality)  line 70
+  names: tidalNormalizeQualityValue, TIDAL_QUALITY_LABELS, get, TIDAL_FALLBACK_QUALITY
+    str: '\n    返回 TIDAL quality 数值对应的菜单文案。\n\n    :param quality: quality 原始值。\n    :return: 菜单展示文案。\n    '
+
+def tidalQualityOptions(maxSupported)  line 81
+  names: bool
+    str: '\n    返回当前账号可展示的 TIDAL quality 选项。\n\n    :param maxSupported: 是否支持 Max。\n    :return: quality 数值和文案列表。\n    '
+    str: 'tidalQualityOptions.<locals>.<listcomp>'
+
+  def tidalQualityOptions.<listcomp>(.0)  line 89
+    names: TIDAL_QUALITY_LABELS
+
+def tidalNormalizeQualityValue(quality, maxSupported)  line 92
+  names: int, str, strip, Exception, TIDAL_DEFAULT_QUALITY, TIDAL_QUALITY_LABELS, bool, TIDAL_FALLBACK_QUALITY
+    str: '\n    将 TIDAL quality 原始值归一化为可播放值。\n\n    :param quality: quality 原始值。\n    :param maxSupported: 是否支持 Max。\n    :return: 归一化后的 quality 数值。\n    '
+
+def tidalReplayGainLabel(value)  line 111
+  names: tidalNormalizeReplayGainValue, TIDAL_REPLAY_GAIN_LABELS, get
+    str: '\n    返回 TIDAL Replay Gain 数值对应的菜单文案。\n\n    :param value: Replay Gain 原始值。\n    :return: 菜单展示文案。\n    '
+
+def tidalReplayGainValueForLabel(label)  line 122
+  names: str, strip, TIDAL_REPLAY_GAIN_LABELS, items
+    str: '\n    将 TIDAL Replay Gain 菜单文案转换为数值。\n\n    :param label: 菜单展示文案。\n    :return: 对应的 Replay Gain 数值。\n    '
+
+def tidalNormalizeReplayGainValue(value)  line 136
+  names: int, str, strip, Exception, TIDAL_REPLAY_GAIN_LABELS
+    str: '\n    将 TIDAL Replay Gain 原始值归一化为受支持的枚举值。\n\n    :param value: Replay Gain 原始值。\n    :return: 归一化后的 Replay Gain 数值。\n    '
+
+def tidalReadLocalQualityValue(userId, maxSupported)  line 152
+  names: getattr, LPUtility, str, strip, tidalNormalizeQualityValue, beginGroup, LPPlayListSource, Tidal, value, endGroup, Exception
+    str: '\n    读取指定账号的本地 quality 数值。\n\n    :param userId: TIDAL 用户 ID。\n    :param maxSupported: 是否支持 Max。\n    :return: 归一化后的 quality 数值。\n    '
+    str: 'settings'
+    str: '/'
+    str: 'quality'
+
+def tidalSaveLocalQualityValue(userId, quality, maxSupported)  line 173
+  names: tidalNormalizeQualityValue, getattr, LPUtility, str, strip, beginGroup, LPPlayListSource, Tidal, value, setValue, int, endGroup, hasattr, sync, Exception
+    str: '\n    保存指定账号的本地 quality 数值。\n\n    :param userId: TIDAL 用户 ID。\n    :param quality: 待保存的 quality 数值。\n    :param maxSupported: 是否支持 Max。\n    :return: 实际保存的归一化后 quality 数值。\n    '
+    str: 'settings'
+    str: '/'
+    str: 'quality'
+    str: 'sync'
+
+def tidalReadLocalReplayGainValue(userId)  line 198
+  names: getattr, LPUtility, str, strip, beginGroup, LPPlayListSource, Tidal, value, endGroup, Exception, tidalNormalizeReplayGainValue
+    str: '\n    读取指定账号的本地 Replay Gain 数值。\n\n    :param userId: TIDAL 用户 ID。\n    :return: 归一化后的 Replay Gain 数值。\n    '
+    str: 'settings'
+    str: '/'
+    str: 'replayGain'
+
+def tidalSaveLocalReplayGainValue(userId, replayGain)  line 218
+  names: tidalNormalizeReplayGainValue, getattr, LPUtility, str, strip, beginGroup, LPPlayListSource, Tidal, value, setValue, int, endGroup, hasattr, sync, Exception
+    str: '\n    保存指定账号的本地 Replay Gain 数值。\n\n    :param userId: TIDAL 用户 ID。\n    :param replayGain: 待保存的 Replay Gain 数值。\n    :return: 实际保存的归一化后 Replay Gain 数值。\n    '
+    str: 'settings'
+    str: '/'
+    str: 'replayGain'
+    str: 'sync'
+
+def tidalSubscriptionExtra(subscription)  line 242
+  names: isinstance, dict, get
+    str: '\n    返回订阅信息中的 extra 字段。\n\n    :param subscription: 订阅信息。\n    :return: extra 字典。\n    '
+    str: 'extra'
+
+def tidalSubscriptionSupportsMax(subscription)  line 257
+  names: tidalSubscriptionExtra, str, get, strip, upper
+    str: '\n    判断订阅信息是否支持 TIDAL Max。\n\n    :param subscription: 订阅信息。\n    :return: 支持 Max 返回 True。\n    '
+    str: 'highestSoundQuality'
+    str: 'HI_RES'
+
+def tidalSubscriptionLabel(subscription)  line 269
+  names: tidalSubscriptionExtra, get, isinstance, str, strip, dict
+    str: '\n    返回 Android 同款 TIDAL 订阅展示文案。\n\n    :param subscription: 订阅信息。\n    :return: 订阅展示文案。\n    '
+    str: 'premiumAccess'
+    str: 'Free'
+    str: 'TIDAL Streaming Service'
+    str: '--'
+    str: 'title'
+
+def tidalRecentlySeeAllSectionKey(playList)  line 288
+  names: getattr, header, str, strip, lower, TIDAL_RECENTLY_SEE_ALL_STREAM_TYPES, TIDAL_RECENTLY_SEE_ALL_SECTION_KEYS, startswith, endswith
+    str: '\n    判断 TIDAL Recently 记录对应的曲目列表是否拥有 See All 页面。\n\n    只识别“首层曲目列表”身份：Home 的 Featured 各分类 Tracks、Rising Tracks 与\n    Collection 的 Tracks（收藏曲）。详情页身份（album/artist/playlist/mix/genre/mood）\n    由既有详情导航处理；artist Top Tracks SeeAll 与 genre/mood tracks 保持详情页行为。\n\n    :param playList: TIDAL 播放列表（对象或 None）。\n    '
+    str: 'header'
+    str: 'streamType'
+    str: 'headId'
+    str: 'streamId'
+    str: 'featured-'
+    str: '-tracks'
+
+def tidalRecentlyNavigationType(playList)  line 318
+  names: getattr, tidalRecentlySeeAllSectionKey, TIDAL_RECENTLY_NAVIGATION_SEE_ALL, header, int, TypeError, ValueError, len, str, strip, lower
+    str: '\n    从 TIDAL 播放列表推导 Recently Played 应打开的目标类型。\n\n    :param playList: TIDAL 播放列表（对象或 None）。\n    :return: "see_all"/"album"/"artist"/"artist_radio"/"playlist"/"mix"/"genre"/"mood"；\n        无法推导时返回 None。\n    '
+    str: 'header'
+    str: 'list'
+    str: 'index'
+    str: 'searchUrl'
+    str: 'streamId'
+    str: 'headId'
+    str: '/moods/'
+    str: 'mood'
+    str: '/genres/'
+    str: 'genre'
+    str: '/mixes/'
+    str: 'mix'
+    str: '/playlists/'
+    str: 'playlist'
+    str: '/artists/'
+    str: '/radio'
+    str: 'artist_radio'
+    str: 'artist'
+    str: 'streamType'
+    str: '/albums/'
+    str: 'album'
+    str: 'albumId'
+    str: 'artistId'
+
+def tidalPlayingContextForPlaylist(playList, playItem)  line 371
+  names: getattr, str, strip, lower
+    str: '\n    从 TIDAL 待下发队列解析可供 UI 高亮的播放来源。\n\n    :param playList: 待播放的 TIDAL 队列。\n    :param playItem: 当前起播曲目。\n    :return: 来源类型（track/album/playlist/mix）和来源 ID；无法推导时返回空字符串。\n    '
+    str: 'header'
+    str: 'searchUrl'
+    str: 'streamType'
+    str: 'streamId'
+    str: 'headId'
+    str: '/mixes/'
+    str: 'mix'
+    str: '/playlists/'
+    str: 'playlist'
+    str: '/albums/'
+    str: 'album'
+    str: 'song'
+    str: 'track'
+    str: 'trackId'
+
+def LPTidalAccount()  line 398
+  names: __name__, __module__, __qualname__, __doc__, __init__, __classcell__
+    str: 'LPTidalAccount'
+    str: 'TIDAL 账号对象，保存从设备返回的用户信息和访问令牌。'
+    str: 'LPTidalAccount.__init__'
+
+  def LPTidalAccount.__init__(self)  line 401
+    names: super, __init__, LPPlayListSource, Tidal, value, source, email, countryCode, sessionId, expiresIn, tokenUpdatedAt, tokenExpiresAt, subscription, credential, rawUserInfo, supportReplayGain, showAutoplay
+      str: '\n        初始化 TIDAL 账号对象。\n\n        :param: 无。\n        :return: None。\n        '
+
+def LPTidalPlayHeader()  line 423
+  names: __name__, __module__, __qualname__, __doc__, __init__, str, streamTypeForHeader, __classcell__
+    str: 'LPTidalPlayHeader'
+    str: 'TIDAL 播放列表头信息，保存设备队列推送所需的列表上下文。'
+    str: 'LPTidalPlayHeader.__init__'
+    str: 'return'
+    str: 'LPTidalPlayHeader.streamTypeForHeader'
+
+  def LPTidalPlayHeader.__init__(self)  line 426
+    names: super, __init__, LPPlayListSource, Tidal, value, mediaSource, contentType, userId, streamType, streamId, showName, requestQuality, recentlyIsUserPlaylist
+      str: '\n        初始化 TIDAL 播放头。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'songlist'
+      str: 'playlist'
+
+  def LPTidalPlayHeader.streamTypeForHeader(self)  line 445
+    names: streamType, str, headType, LPHeaderType, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_ARTIST, LP_HEADER_TYPE_STATION, LP_HEADER_TYPE_SONG, LP_HEADER_TYPE_PODCAST, LP_HEADER_TYPE_SHOW, LP_HEADER_TYPE_EPISODE
+      str: '\n        返回当前播放头对应的设备 StreamType。\n\n        :param: 无。\n        :return: StreamType 字符串。\n        '
+      str: 'album'
+      str: 'artist'
+      str: 'station'
+      str: 'song'
+      str: 'podcast'
+      str: 'show'
+      str: 'episode'
+      str: 'playlist'
+
+def LPTidalPlayItem()  line 471
+  names: __name__, __module__, __qualname__, __doc__, __init__, __classcell__
+    str: 'LPTidalPlayItem'
+    str: 'TIDAL 单曲播放条目，保存设备队列和 metadata 所需的曲目信息。'
+    str: 'LPTidalPlayItem.__init__'
+
+  def LPTidalPlayItem.__init__(self)  line 474
+    names: super, __init__, LPPlayListSource, Tidal, value, trackSource, searchUrl, startIndex, isExplicit, allowStreaming
+      str: '\n        初始化 TIDAL 播放条目。\n\n        :param: 无。\n        :return: None。\n        '
+
+def LPTidalPlayList()  line 489
+  names: __name__, __module__, __qualname__, __doc__, QUALITY_MAP, Optional, object, str, generateXML, generateBackupQueueXML, generateSetKeyMappingXML, getRequestQualityStr, int, _localQualityValue, _localReplayGainValue, Dict, _replayGainXmlState, bool, _supportsMaxQuality, LPTidalPlayHeader, _userId, LPTidalPlayItem, _buildMetadata, _durationValue, Iterable, extendFromItems
+    str: 'LPTidalPlayList'
+    str: 'TIDAL 播放列表，生成设备 CreateQueue 队列 XML。'
+    str: 'HIGH'
+    str: 'LOSSLESS'
+    str: 'HI_RES'
+    str: 'startPlayIndex'
+    str: 'return'
+    str: 'LPTidalPlayList.generateXML'
+    str: 'listName'
+    str: 'return'
+    str: 'LPTidalPlayList.generateBackupQueueXML'
+    str: 'name'
+    str: 'return'
+    str: 'LPTidalPlayList.generateSetKeyMappingXML'
+    str: 'return'
+    str: 'LPTidalPlayList.getRequestQualityStr'
+    str: 'LPTidalPlayList._localQualityValue'
+    str: 'LPTidalPlayList._localReplayGainValue'
+    str: 'LPTidalPlayList._replayGainXmlState'
+    str: 'LPTidalPlayList._supportsMaxQuality'
+    str: 'header'
+    str: 'return'
+    str: 'LPTidalPlayList._userId'
+    str: 'header'
+    str: 'item'
+    str: 'return'
+    str: 'LPTidalPlayList._buildMetadata'
+    str: 'duration'
+    str: 'return'
+    str: 'LPTidalPlayList._durationValue'
+    str: 'items'
+    str: 'return'
+    str: 'LPTidalPlayList.extendFromItems'
+
+  def LPTidalPlayList.generateXML(self, startPlayIndex)  line 498
+    names: isinstance, header, LPTidalPlayHeader, list, bool, str, searchUrl, strip, _userId, streamId, headId, trackId, startswith, showName, headTitle, requestQuality, getRequestQualityStr, escape, mediaSource, LPPlayListSource, Tidal, value, len, imageUrl, getPicUrl, streamTypeForHeader, contentType, _replayGainXmlState, get, enumerate, _buildMetadata, trackSource, trackUrl
+      str: '\n        生成 TIDAL 队列播放 XML。\n\n        :param startPlayIndex: 1-based 起播索引；为空时不指定。\n        :return: 可传给设备 CreateQueue 的 XML 字符串。\n        '
+      str: 'LPTidalPlayList.generateXML.<locals>.<listcomp>'
+      str: 'TIDAL SEARCH'
+      str: '<?xml version="1.0" ?><PlayList>'
+      str: '<ListName>%s</ListName>'
+      str: '<ListInfo>'
+      str: '<SourceName>%s</SourceName>'
+      str: '<SearchUrl>%s</SearchUrl>'
+      str: '<TrackNumber>%d</TrackNumber>'
+      str: '<UserId>%s</UserId>'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<StreamType>%s</StreamType>'
+      str: '<StreamId>%s</StreamId>'
+      str: '<ShowName>%s</ShowName>'
+      str: '<ContentType>%s</ContentType>'
+      str: 'songlist'
+      str: '<requestQuality>%s</requestQuality>'
+      str: 'enable'
+      str: '<EnableReplayGain>%s</EnableReplayGain>'
+      str: 'type'
+      str: '<ReplayGainType>%s</ReplayGainType>'
+      str: '<StartPlayIndex>%s</StartPlayIndex>'
+      str: '</ListInfo>'
+      str: '<Tracks>'
+      str: 'start'
+      str: '<Track%d>'
+      str: '<Source>%s</Source>'
+      str: '<Id>%s</Id>'
+      str: '<URL>%s</URL>'
+      str: '<Metadata>%s</Metadata>'
+      str: '</Track%d>'
+      str: '</Tracks></PlayList>'
+
+    def LPTidalPlayList.generateXML.<listcomp>(.0)  line 506
+      names: isinstance, LPTidalPlayItem
+
+    def LPTidalPlayList.generateXML.<listcomp>(.0)  line 537
+      names: str, trackUrl, strip, startswith
+        str: 'wiimu_search://'
+
+  def LPTidalPlayList.generateBackupQueueXML(self, listName)  line 556
+    names: isinstance, header, LPTidalPlayHeader, _userId, streamId, headId, showName, headTitle, requestQuality, getRequestQualityStr, escape, str, mediaSource, LPPlayListSource, Tidal, value, searchUrl, imageUrl, getPicUrl, streamTypeForHeader, contentType
+      str: '\n        生成 TIDAL preset BackUpQueue XML。\n\n        :param listName: preset 保存到设备的列表名。\n        :return: 可传给设备 BackUpQueue 的 XML 字符串。\n        '
+      str: '<?xml version="1.0"?><PlayList>'
+      str: '<ListName>%s</ListName>'
+      str: '<ListInfo>'
+      str: '<SourceName>%s</SourceName>'
+      str: '<SearchUrl>%s</SearchUrl>'
+      str: '<UserId>%s</UserId>'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<StreamType>%s</StreamType>'
+      str: '<StreamId>%s</StreamId>'
+      str: '<ShowName>%s</ShowName>'
+      str: '<ContentType>%s</ContentType>'
+      str: 'songlist'
+      str: '<requestQuality>%s</requestQuality>'
+      str: '</ListInfo>'
+      str: '</PlayList>'
+
+  def LPTidalPlayList.generateSetKeyMappingXML(self, name)  line 586
+    names: isinstance, header, LPTidalPlayHeader, escape, str, mediaSource, LPPlayListSource, Tidal, value, contentType, imageUrl, getPicUrl
+      str: '\n        生成 TIDAL preset KeyMapping 单项替换片段。\n\n        :param name: preset 名称。\n        :return: 可嵌入 KeyN 的 XML 片段。\n        '
+      str: '<Name>%s</Name>'
+      str: '<Source>%s</Source>'
+      str: '<ContentType>%s</ContentType>'
+      str: 'songlist'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<RoutineId>Empty</RoutineId>'
+      str: '<Loop>0</Loop>'
+      str: '<Shuffle>0</Shuffle>'
+
+  def LPTidalPlayList.getRequestQualityStr(self)  line 603
+    names: _localQualityValue, QUALITY_MAP, get
+      str: '\n        从本地设置读取 TIDAL 请求音质。\n\n        :param: 无。\n        :return: `HIGH`、`LOSSLESS`、`HI_RES` 或 `LOW`。\n        '
+      str: 'LOW'
+
+  def LPTidalPlayList._localQualityValue(self)  line 613
+    names: getattr, LPUtility, _userId, header, tidalNormalizeQualityValue, _supportsMaxQuality, beginGroup, LPPlayListSource, Tidal, value, endGroup, Exception
+      str: '\n        读取当前账号的本地 quality 数值。\n\n        :param: 无。\n        :return: quality 数值；缺省返回 3，不支持 Max 时回退 2。\n        '
+      str: 'settings'
+      str: '/'
+      str: 'quality'
+
+  def LPTidalPlayList._localReplayGainValue(self)  line 632
+    names: _userId, header, tidalReadLocalReplayGainValue
+      str: '\n        读取当前账号的本地 Replay Gain 数值。\n\n        :param: 无。\n        :return: 归一化后的 Replay Gain 数值。\n        '
+
+  def LPTidalPlayList._replayGainXmlState(self)  line 642
+    names: _localReplayGainValue, dict, TIDAL_REPLAY_GAIN_XML_MAP, get
+      str: '\n        返回当前账号对应的 Replay Gain XML 输出状态。\n\n        :param: 无。\n        :return: 包含 enable/type 的字典。\n        '
+
+  def LPTidalPlayList._supportsMaxQuality(self)  line 652
+    names: getattr, account, tidalSubscriptionSupportsMax, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, instance, accountState, get, Exception
+      str: '\n        判断当前播放账号是否支持 Max。\n\n        :param: 无。\n        :return: 支持 Max 返回 True。\n        '
+      str: 'subscription'
+      str: 'LPTidalStore'
+      str: 'subscriptionInfo'
+
+  def LPTidalPlayList._userId(self, header)  line 671
+    names: getattr, account, str
+      str: '\n        从播放列表账号或 header 中读取用户 ID。\n\n        :param header: 播放头。\n        :return: 用户 ID 字符串。\n        '
+      str: 'userId'
+
+  def LPTidalPlayList._buildMetadata(self, header, item)  line 684
+    names: escape, str, headId, streamId, trackId, artistId, albumId, _durationValue, trackDuration, trackUrl, searchUrl, trackName, trackArtist, albumName, trackImage
+      str: '\n        构建单曲 DIDL-Lite metadata。\n\n        :param header: 播放头。\n        :param item: 播放条目。\n        :return: 未嵌入前的 DIDL-Lite XML 字符串。\n        '
+      str: '<DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:song="www.linkplay.com/song/" xmlns:custom="www.linkplay.com/custom/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><upnp:class>object.item.audioItem.musicTrack</upnp:class><item '
+      str: '<song:id>%s</song:id>'
+      str: '<song:singerid>%s</song:singerid>'
+      str: '<song:albumid>%s</song:albumid>'
+      str: '<res protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;" duration="%d">%s</res>'
+      str: '<dc:title>%s</dc:title>'
+      str: '<upnp:artist>%s</upnp:artist>'
+      str: '<upnp:album>%s</upnp:album>'
+      str: '<upnp:albumArtURI>%s</upnp:albumArtURI>'
+      str: '</item></DIDL-Lite>'
+
+  def LPTidalPlayList._durationValue(self, duration)  line 715
+    names: int, float, str, strip, Exception
+      str: '\n        将曲目时长转换为整数秒。\n\n        :param duration: 原始时长。\n        :return: 整数时长。\n        '
+      str: '0'
+
+  def LPTidalPlayList.extendFromItems(self, items)  line 727
+    names: list, extend
+      str: '\n        批量追加 TIDAL 播放条目。\n\n        :param items: 播放条目序列。\n        :return: None。\n        '
+      str: 'LPTidalPlayList.extendFromItems.<locals>.<listcomp>'
+
+    def LPTidalPlayList.extendFromItems.<listcomp>(.0)  line 734
+      names: isinstance, LPTidalPlayItem

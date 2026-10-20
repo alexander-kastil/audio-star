@@ -1,0 +1,146 @@
+# module HOME.DeviceSetting.LPDeviceSettingApCastViewController
+
+[module] names: string, Template, PyQt6.QtCore, pyqtSignal, Qt, QEvent, QCoreApplication, PyQt6.QtWidgets, PyQt6, QtCore, QtGui, QtWidgets, PyQt6.QtGui, QStandardItemModel, QStandardItem, QAction, QColor, enum, IntEnum, threading, Thread, time, json, LPGlobalUI, HOME.LPSuperTableWidget, LPSuperTableWidgetDelegate, HOME.LPWaitingSpinner, LPWaitingSpinner, LPClientFramework.LPConfig.LPFontConfig, StackWidget_Title, LPClientFramework.LPUtility, logger, QWidget, LPDeviceSettingApCastViewController
+  str: 'Template'
+  str: 'pyqtSignal'
+  str: 'Qt'
+  str: 'QEvent'
+  str: 'QCoreApplication'
+  str: '*'
+  str: 'QtCore'
+  str: 'QtGui'
+  str: 'QtWidgets'
+  str: 'QStandardItemModel'
+  str: 'QStandardItem'
+  str: 'QAction'
+  str: 'QColor'
+  str: 'IntEnum'
+  str: 'Thread'
+  str: 'LPSuperTableWidgetDelegate'
+  str: 'LPWaitingSpinner'
+  str: 'StackWidget_Title'
+  str: 'logger'
+  str: 'LPDeviceSettingApCastViewController'
+
+def LPDeviceSettingApCastViewController()  line 19
+  names: __name__, __module__, __qualname__, pyqtSignal, updateTableSignal, object, showLoadingButtonSignal, __init__, setupUi, viewWillAppear, viewWillDisappear, tableClicked, connectAp, enterPassword, disconnectAp, getApList, _showLoadingButton, __classcell__
+    str: 'LPDeviceSettingApCastViewController'
+    str: 'LPDeviceSettingApCastViewController.__init__'
+    str: 'LPDeviceSettingApCastViewController.setupUi'
+    str: 'LPDeviceSettingApCastViewController.viewWillAppear'
+    str: 'LPDeviceSettingApCastViewController.viewWillDisappear'
+    str: 'LPDeviceSettingApCastViewController.tableClicked'
+    str: 'LPDeviceSettingApCastViewController.connectAp'
+    str: 'LPDeviceSettingApCastViewController.enterPassword'
+    str: 'LPDeviceSettingApCastViewController.disconnectAp'
+    str: 'LPDeviceSettingApCastViewController.getApList'
+    str: 'LPDeviceSettingApCastViewController._showLoadingButton'
+
+  def LPDeviceSettingApCastViewController.__init__(self, deviceId)  line 24
+    names: super, LPDeviceSettingApCastViewController, __init__, deviceId, loadingSpinner, apList, updateTableSignal, connect
+      str: 'LPDeviceSettingApCastViewController.__init__.<locals>._updateTableUI'
+
+    def LPDeviceSettingApCastViewController.__init__._updateTableUI()  line 33
+      names: enumerate, apList, get, append, len, tableWidget, setRowCount, range, QTableWidgetItem, setItem, setIcon, QtGui, QIcon, LPGlobalUI, imagePath, resizeRowsToContents
+        str: 'name'
+        str: 'selected'
+        str: 'checkmark.png'
+
+  def LPDeviceSettingApCastViewController.setupUi(self, ui)  line 57
+    names: getattr, super, callable, setupUi, LPGlobalUI, deviceManager, deviceForUUID, deviceId, supportDLNACast, titleLabel, setText, QCoreApplication, translate, name, apNoteLabel, productShowName, tableHeaderNoteLabel, LPSuperTableWidgetDelegate, tableWidget, hoverIndexChanged, connect, onHoverIndexChanged, leaveTableEvent, onLeaveTableEvent, setItemDelegate, horizontalHeader, resizeSection, setSectionResizeMode, QHeaderView, ResizeMode, Fixed, verticalScrollBar, setSingleStep, cellClicked, tableClicked, setStyleSheet, showLoadingButtonSignal, _showLoadingButton, Template, substitute, StackWidget_Title
+      str: 'setupUi'
+      str: 'ApCast'
+      str: '%s - DLNA Out'
+      str: 'Cast audio from %s to DLNA-enabled speakers.'
+      str: 'DLNA-enabled Speakers'
+      str: '%s - WiiM Cast'
+      str: 'Cast audio from %s to HomePod and other AirPlay or AirPlay 2 enabled speakers.'
+      str: 'Airplay-enabled Speakers'
+      str: '\n            QTableWidget::item {color: white}\nQTableWidget::item:selected{\nselection-color: white;\nbackground-color: transparent;\n}\nQTableWidget{selection-background-color: transparent; border: none;}\nQTableWidget::item:hover{background: transparent; color: white}\nQScrollBar {\n        border: 0px;\n'
+      str: '\n                       QLabel#titleLabel {\n                           font-size: ${stackWidgetTiteFontSize}pt;\n                       }\n               '
+      str: 'stackWidgetTiteFontSize'
+
+  def LPDeviceSettingApCastViewController.viewWillAppear(self)  line 143
+    names: getApList
+
+  def LPDeviceSettingApCastViewController.viewWillDisappear(self)  line 146
+
+  def LPDeviceSettingApCastViewController.tableClicked(self, row, column)  line 149
+    names: apList, disconnectAp, connectAp
+      str: 'selected'
+      str: 'id'
+
+  def LPDeviceSettingApCastViewController.connectAp(self, itemId, checkPass)  line 159
+    names: LPGlobalUI, showLoading, Thread, start
+      str: 'LPDeviceSettingApCastViewController.connectAp.<locals>._asyncUpdate'
+      str: 'target'
+      str: 'daemon'
+
+    def LPDeviceSettingApCastViewController.connectAp._asyncUpdate()  line 160
+      names: LPGlobalUI, deviceManager, deviceForUUID, deviceId, commonHttpGet, showLoading, get, json, loads, Exception, apList, updateTableSignal, emit
+        str: 'audio_cast:speaker_enable:%s'
+        str: 'status_code'
+        str: 'body'
+        str: 'code'
+        str: 'id'
+        str: 'selected'
+
+  def LPDeviceSettingApCastViewController.enterPassword(self, itemDict)  line 193
+    names: QInputDialog, getText, LPGlobalUI, mainWindow, QCoreApplication, translate, len, showLoading, Thread, start
+      str: 'ApCast'
+      str: 'Password'
+      str: 'Enter the password for %s'
+      str: 'name'
+      str: 'LPDeviceSettingApCastViewController.enterPassword.<locals>._asyncUpdate'
+      str: 'target'
+      str: 'daemon'
+
+    def LPDeviceSettingApCastViewController.enterPassword._asyncUpdate()  line 200
+      names: LPGlobalUI, deviceManager, deviceForUUID, deviceId, commonHttpGet, showLoading, get, json, loads, Exception, connectAp
+        str: 'audio_cast:speaker_set_password:%s:%s'
+        str: 'id'
+        str: 'status_code'
+        str: 'body'
+        str: 'code'
+        str: 'checkPass'
+
+  def LPDeviceSettingApCastViewController.disconnectAp(self, itemId)  line 225
+    names: LPGlobalUI, showLoading, Thread, start
+      str: 'LPDeviceSettingApCastViewController.disconnectAp.<locals>._asyncUpdate'
+      str: 'target'
+      str: 'daemon'
+
+    def LPDeviceSettingApCastViewController.disconnectAp._asyncUpdate()  line 226
+      names: LPGlobalUI, deviceManager, deviceForUUID, deviceId, commonHttpGet, showLoading, get, json, loads, Exception, apList, updateTableSignal, emit
+        str: 'audio_cast:speaker_disable:%s'
+        str: 'status_code'
+        str: 'body'
+        str: 'code'
+        str: 'id'
+        str: 'selected'
+
+  def LPDeviceSettingApCastViewController.getApList(self)  line 255
+    names: Thread, start
+      str: 'LPDeviceSettingApCastViewController.getApList.<locals>._asyncUpdate'
+      str: 'target'
+      str: 'daemon'
+
+    def LPDeviceSettingApCastViewController.getApList._asyncUpdate()  line 256
+      names: LPGlobalUI, deviceManager, deviceForUUID, deviceId, commonHttpGet, get, json, loads, Exception, apList, logger, debug, updateTableSignal, emit
+        str: 'audio_cast:get_speaker_list'
+        str: 'status_code'
+        str: 'body'
+        str: 'outputs'
+        str: 'audiocast list: %s'
+
+  def LPDeviceSettingApCastViewController._showLoadingButton(self, show)  line 281
+    names: loadingButton, setIcon, QtGui, QIcon, clicked, disconnect, Exception, loadingSpinner, LPWaitingSpinner, QColor, is_spinning, show, start, LPGlobalUI, imagePath, connect, startBlueToothDiscovery, stop
+      str: 'roundness'
+      str: 'fade'
+      str: 'radius'
+      str: 'lines'
+      str: 'line_length'
+      str: 'line_width'
+      str: 'speed'
+      str: 'color'
+      str: 'refresh_button.png'

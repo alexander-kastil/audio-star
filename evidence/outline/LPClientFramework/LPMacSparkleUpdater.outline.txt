@@ -1,0 +1,532 @@
+# module LPClientFramework.LPMacSparkleUpdater
+
+[module] names: __doc__, json, os, platform, sys, logging, threading, xml.etree.ElementTree, etree, ElementTree, ET, pathlib, Path, requests, getLogger, logger, _SparkleUpdaterDelegateClass, _ensureSparkleDelegateClasses, LPMacSparkleUpdater
+  str: '\nmacOS Sparkle 更新管理模块。\n\n该模块负责：\n1. 加载 Sparkle.framework；\n2. 初始化 Sparkle Updater Controller；\n3. 根据架构选择 appcast feed；\n4. 提供自动检查与手动检查更新入口。\n'
+  str: 'Path'
+  str: 'linkplay'
+  str: '_ensureSparkleDelegateClasses'
+  str: 'LPMacSparkleUpdater'
+
+def _ensureSparkleDelegateClasses()  line 27
+  names: _SparkleUpdaterDelegateClass, objc, Foundation, NSObject
+    str: '\n    创建并缓存 Sparkle 所需的 updater delegate / user driver delegate 类。\n\n    参数:\n        无\n    返回:\n        type: updater delegate 类\n    '
+    str: 'NSObject'
+    str: 'LPSparkleUpdaterDelegate'
+
+  def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate()  line 45
+    names: __name__, __module__, __qualname__, __doc__, initWithOwner_, updater_didFindValidUpdate_, updater_willDownloadUpdate_withRequest_, updater_didDownloadUpdate_, updater_failedToDownloadUpdate_error_, userDidCancelDownload_, updater_willInstallUpdate_, updater_willInstallUpdateOnQuit_immediateInstallationBlock_, updaterDidNotFindUpdate_, updater_didNotFindUpdateWithLatestAppcastItem_hostToLatestAppcastItemComparisonResult_background_, updaterDidNotFindUpdate_error_, updater_didFinishLoadingAppcast_, updater_didFinishUpdateCycleForUpdateCheck_error_
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate'
+      str: 'Sparkle updater delegate 桥接类。'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.initWithOwner_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didFindValidUpdate_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_willDownloadUpdate_withRequest_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didDownloadUpdate_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_failedToDownloadUpdate_error_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.userDidCancelDownload_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_willInstallUpdate_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_willInstallUpdateOnQuit_immediateInstallationBlock_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updaterDidNotFindUpdate_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didNotFindUpdateWithLatestAppcastItem_hostToLatestAppcastItemComparisonResult_background_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updaterDidNotFindUpdate_error_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didFinishLoadingAppcast_'
+      str: '_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didFinishUpdateCycleForUpdateCheck_error_'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.initWithOwner_(self, owner)  line 48
+      names: super, init, _owner
+        str: '\n            以 owner 对象初始化 delegate。\n\n            参数:\n                owner (LPMacSparkleUpdater): 当前 macOS Sparkle 更新器实例\n            返回:\n                object: 初始化后的 delegate 实例\n            '
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didFindValidUpdate_(self, updater, item)  line 63
+      names: getattr, callable, Exception, logger, info, type, __name__, _owner, _setLastCheckDetail, _currentAppVersion, notifyUpdateFound
+        str: '\n            Sparkle 发现可用更新时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                item (object): 可用更新对应的 appcast item\n            返回:\n                无\n            '
+        str: 'displayVersionString'
+        str: '[sparkle.delegate] didFindValidUpdate updater=%s version=%s'
+        str: 'found'
+        str: 'sparkle_delegate'
+        str: 'resultKind'
+        str: 'source'
+        str: 'latestVersion'
+        str: 'currentVersion'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_willDownloadUpdate_withRequest_(self, updater, item, request)  line 93
+      names: _owner, _extractDisplayVersionFromItem, logger, info, type, __name__, _setLastCheckDetail, _currentAppVersion, notifyDownloadLifecycle
+        str: '\n            Sparkle 即将开始下载更新包时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                item (object): 待下载更新对应的 appcast item\n                request (object): Sparkle 将用于下载的请求对象\n            返回:\n                无\n            '
+        str: '[sparkle.delegate] willDownloadUpdate updater=%s version=%s'
+        str: 'found'
+        str: 'sparkle_delegate_download_start'
+        str: 'resultKind'
+        str: 'source'
+        str: 'latestVersion'
+        str: 'currentVersion'
+        str: 'download_started'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didDownloadUpdate_(self, updater, item)  line 118
+      names: _owner, _extractDisplayVersionFromItem, logger, info, type, __name__, _setLastCheckDetail, _currentAppVersion, notifyDownloadLifecycle
+        str: '\n            Sparkle 成功下载更新包后触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                item (object): 已下载更新对应的 appcast item\n            返回:\n                无\n            '
+        str: '[sparkle.delegate] didDownloadUpdate updater=%s version=%s'
+        str: 'found'
+        str: 'sparkle_delegate_download_success'
+        str: 'resultKind'
+        str: 'source'
+        str: 'latestVersion'
+        str: 'currentVersion'
+        str: 'download_succeeded'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_failedToDownloadUpdate_error_(self, updater, item, error)  line 142
+      names: _owner, _extractDisplayVersionFromItem, str, _extractNSErrorCode, _classifyCheckError, logger, warning, type, __name__, _setLastCheckDetail, _currentAppVersion, notifyDownloadLifecycle
+        str: '\n            Sparkle 下载更新包失败时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                item (object): 下载失败更新对应的 appcast item\n                error (object): 下载失败错误对象\n            返回:\n                无\n            '
+        str: '[sparkle.delegate] failedToDownloadUpdate updater=%s version=%s error=%s code=%s category=%s'
+        str: 'error'
+        str: 'sparkle_delegate_download_failed'
+        str: 'resultKind'
+        str: 'source'
+        str: 'latestVersion'
+        str: 'currentVersion'
+        str: 'errorCategory'
+        str: 'errorCode'
+        str: 'errorMessage'
+        str: 'download_failed'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.userDidCancelDownload_(self, updater)  line 176
+      names: logger, info, type, __name__, _owner, _setLastCheckDetail, _currentAppVersion, notifyDownloadLifecycle
+        str: '\n            Sparkle 下载阶段被用户取消时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n            返回:\n                无\n            '
+        str: '[sparkle.delegate] userDidCancelDownload updater=%s'
+        str: 'error'
+        str: 'sparkle_delegate_download_cancelled'
+        str: 'user_cancelled'
+        str: 'user cancelled download'
+        str: 'resultKind'
+        str: 'source'
+        str: 'currentVersion'
+        str: 'errorCategory'
+        str: 'errorCode'
+        str: 'errorMessage'
+        str: 'download_cancelled'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_willInstallUpdate_(self, updater, item)  line 199
+      names: _owner, _extractDisplayVersionFromItem, logger, info, type, __name__, _setLastCheckDetail, _currentAppVersion, notifyInstallWillStart
+        str: '\n            Sparkle 即将安装更新时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                item (object): 即将安装的 appcast item\n            返回:\n                无\n            '
+        str: '[sparkle.delegate] willInstallUpdate updater=%s version=%s'
+        str: 'found'
+        str: 'sparkle_delegate_install'
+        str: 'resultKind'
+        str: 'source'
+        str: 'latestVersion'
+        str: 'currentVersion'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_willInstallUpdateOnQuit_immediateInstallationBlock_(self, updater, item, immediateInstallHandler)  line 223
+      names: _owner, _extractDisplayVersionFromItem, logger, info, type, __name__, _setLastCheckDetail, _currentAppVersion, notifyInstallWillStart
+        str: '\n            Sparkle 计划在退出时安装更新时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                item (object): 待安装更新对应的 appcast item\n                immediateInstallHandler (object): 立即安装回调句柄\n            返回:\n                bool: 返回 False 表示继续由 Sparkle 默认流程处理安装。\n           '
+        str: '[sparkle.delegate] willInstallUpdateOnQuit updater=%s version=%s'
+        str: 'found'
+        str: 'sparkle_delegate_install_on_quit'
+        str: 'resultKind'
+        str: 'source'
+        str: 'latestVersion'
+        str: 'currentVersion'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updaterDidNotFindUpdate_(self, updater)  line 249
+      names: logger, info, type, __name__, _owner, _setLastCheckDetail, _currentAppVersion, notifyNoUpdateFound
+        str: '\n            Sparkle 未发现可用更新时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n            返回:\n                无\n            '
+        str: '[sparkle.delegate] updaterDidNotFindUpdate updater=%s'
+        str: 'no_update'
+        str: 'sparkle_delegate'
+        str: 'resultKind'
+        str: 'source'
+        str: 'currentVersion'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didNotFindUpdateWithLatestAppcastItem_hostToLatestAppcastItemComparisonResult_background_(self, updater, appcastItem, comparisonResult, background)  line 269
+      names: getattr, callable, Exception, logger, info, type, __name__, _owner, _setLastCheckDetail, _currentAppVersion, notifyNoUpdateFound
+        str: '\n            Sparkle 以标准 no-update selector 返回“当前已是最新版本”时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                appcastItem (object): 最新 appcast item\n                comparisonResult (object): 本地版本与最新版本比较结果\n                background (bool): 是否后台检查\n            返回:\n'
+        str: 'displayVersionString'
+        str: '[sparkle.delegate] no update found updater=%s latest_version=%s comparison=%s background=%s'
+        str: 'no_update'
+        str: 'sparkle_delegate'
+        str: 'resultKind'
+        str: 'source'
+        str: 'latestVersion'
+        str: 'currentVersion'
+        str: 'compareResult'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updaterDidNotFindUpdate_error_(self, updater, error)  line 306
+      names: str, logger, info, type, __name__, _owner, _setLastCheckDetail, _currentAppVersion, warning, notifyNoUpdateFound
+        str: '\n            Sparkle 未发现可用更新且携带错误信息时触发。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                error (object): Sparkle 返回的错误对象\n            返回:\n                无\n            '
+        str: 'You’re up to date!'
+        str: "You're up to date!"
+        str: '[sparkle.delegate] no update found updater=%s detail=%s'
+        str: 'no_update'
+        str: 'sparkle_delegate'
+        str: 'resultKind'
+        str: 'source'
+        str: 'currentVersion'
+        str: 'errorMessage'
+        str: '[sparkle.delegate] update cycle finished with non-fatal no-update error updater=%s error=%s'
+        str: 'error'
+        str: 'updater_sdk'
+        str: 'resultKind'
+        str: 'source'
+        str: 'currentVersion'
+        str: 'errorCategory'
+        str: 'errorMessage'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didFinishLoadingAppcast_(self, updater, appcast)  line 344
+      names: logger, info, type, __name__
+        str: '\n            Sparkle 完成 appcast 加载时触发，仅用于调试。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                appcast (object): Sparkle appcast 对象\n            返回:\n                无\n            '
+        str: '[sparkle.delegate] didFinishLoadingAppcast updater=%s appcast=%s'
+
+    def _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didFinishUpdateCycleForUpdateCheck_error_(self, updater, updateCheck, error)  line 360
+      names: logger, info, type, __name__
+        str: '\n            Sparkle 完成一次更新周期时触发，仅用于调试收尾。\n\n            参数:\n                updater (object): Sparkle updater 对象\n                updateCheck (object): 本轮检查类型\n                error (object): 检查错误对象\n            返回:\n                无\n            '
+        str: '[sparkle.delegate] didFinishUpdateCycle updater=%s updateCheck=%s error=%s'
+
+def LPMacSparkleUpdater()  line 383
+  names: __name__, __module__, __qualname__, __doc__, __init__, _loadConfig, _sparkleConfig, _frameworkCandidates, _loadSparkleBundle, _initUpdaterController, resolveFeedURL, setTemporaryFeedURL, clearTemporaryFeedURL, applyCurrentFeedURL, initUpdater, isReady, ensureReady, startAutomaticChecks, triggerBackgroundCheck, isBackgroundCheckRunning, _runBackgroundAppcastProbe, _fetchLatestVersionFromAppcast, _currentAppVersion, _extractDisplayVersionFromItem, _extractNSErrorCode, _compareVersions, _safeInvokeResultCallback, _classifyCheckError, _setLastCheckDetail, getLastCheckDetail, setUpdateFoundCallback, setInstallWillStartCallback, setDownloadLifecycleCallback, notifyInstallWillStart, notifyDownloadLifecycle, notifyUpdateFound, notifyNoUpdateFound, checkForUpdatesManually
+    str: 'LPMacSparkleUpdater'
+    str: '封装 Sparkle 更新流程，提供初始化和触发检查更新能力。'
+    str: 'LPMacSparkleUpdater.__init__'
+    str: 'LPMacSparkleUpdater._loadConfig'
+    str: 'LPMacSparkleUpdater._sparkleConfig'
+    str: 'LPMacSparkleUpdater._frameworkCandidates'
+    str: 'LPMacSparkleUpdater._loadSparkleBundle'
+    str: 'LPMacSparkleUpdater._initUpdaterController'
+    str: 'LPMacSparkleUpdater.resolveFeedURL'
+    str: 'LPMacSparkleUpdater.setTemporaryFeedURL'
+    str: 'LPMacSparkleUpdater.clearTemporaryFeedURL'
+    str: 'LPMacSparkleUpdater.applyCurrentFeedURL'
+    str: 'LPMacSparkleUpdater.initUpdater'
+    str: 'LPMacSparkleUpdater.isReady'
+    str: 'LPMacSparkleUpdater.ensureReady'
+    str: 'LPMacSparkleUpdater.startAutomaticChecks'
+    str: 'LPMacSparkleUpdater.triggerBackgroundCheck'
+    str: 'LPMacSparkleUpdater.isBackgroundCheckRunning'
+    str: 'LPMacSparkleUpdater._runBackgroundAppcastProbe'
+    str: 'LPMacSparkleUpdater._fetchLatestVersionFromAppcast'
+    str: 'LPMacSparkleUpdater._currentAppVersion'
+    str: 'LPMacSparkleUpdater._extractDisplayVersionFromItem'
+    str: 'LPMacSparkleUpdater._extractNSErrorCode'
+    str: 'LPMacSparkleUpdater._compareVersions'
+    str: 'LPMacSparkleUpdater._safeInvokeResultCallback'
+    str: 'LPMacSparkleUpdater._classifyCheckError'
+    str: 'LPMacSparkleUpdater._setLastCheckDetail'
+    str: 'LPMacSparkleUpdater.getLastCheckDetail'
+    str: 'LPMacSparkleUpdater.setUpdateFoundCallback'
+    str: 'LPMacSparkleUpdater.setInstallWillStartCallback'
+    str: 'LPMacSparkleUpdater.setDownloadLifecycleCallback'
+    str: 'LPMacSparkleUpdater.notifyInstallWillStart'
+    str: 'LPMacSparkleUpdater.notifyDownloadLifecycle'
+    str: 'LPMacSparkleUpdater.notifyUpdateFound'
+    str: 'LPMacSparkleUpdater.notifyNoUpdateFound'
+    str: 'LPMacSparkleUpdater.checkForUpdatesManually'
+
+  def LPMacSparkleUpdater.__init__(self)  line 386
+    names: _objc, _updater_controller, _updater, _updater_delegate, _sparkle_loaded, _ready, _loadConfig, _config, _backgroundCheckThread, _onUpdateFoundCallback, _onNoUpdateFoundCallback, _onInstallWillStartCallback, _onDownloadLifecycleCallback, _result_bridge_enabled, _lastCheckDetail, _temporaryFeedURL
+      str: '\n        初始化 Sparkle 更新器状态。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPMacSparkleUpdater._loadConfig(self)  line 419
+    names: hasattr, sys, Path, _MEIPASS, __file__, resolve, parent, is_file, open, json, loads, read, Exception, logger, warning
+      str: '\n        读取应用配置文件。\n\n        参数:\n            无\n        返回:\n            dict: 解析后的配置字典；读取失败时返回空字典\n        '
+      str: '_MEIPASS'
+      str: 'data'
+      str: 'config.json'
+      str: 'HOME'
+      str: 'r'
+      str: 'utf-8'
+      str: 'ignore'
+      str: 'encoding'
+      str: 'errors'
+      str: '[sparkle] 加载配置失败: '
+
+  def LPMacSparkleUpdater._sparkleConfig(self)  line 451
+    names: _config, get
+      str: '\n        获取 Sparkle 配置段。\n\n        参数:\n            无\n        返回:\n            dict: sparkle 节点配置，不存在时返回空字典\n        '
+      str: 'sparkle'
+
+  def LPMacSparkleUpdater._frameworkCandidates(self)  line 462
+    names: os, environ, get, strip, append, Foundation, NSBundle, mainBundle, privateFrameworksPath, Exception, logger, warning, path, join
+      str: '\n        生成 Sparkle.framework 候选路径列表。\n\n        参数:\n            无\n        返回:\n            list[str]: 依次尝试加载的 framework 路径列表\n        '
+      str: 'SPARKLE_FRAMEWORK_PATH'
+      str: 'NSBundle'
+      str: '[sparkle] 读取 bundle 框架路径失败: '
+      str: 'Sparkle.framework'
+      str: '/Library/Frameworks/Sparkle.framework'
+
+  def LPMacSparkleUpdater._loadSparkleBundle(self)  line 496
+    names: _sparkle_loaded, objc, _objc, Exception, logger, warning, _frameworkCandidates, os, path, exists, loadBundle, globals, info
+      str: '\n        动态加载 Sparkle.framework。\n\n        参数:\n            无\n        返回:\n            bool: 成功加载返回 True，失败返回 False\n        '
+      str: '[sparkle] 导入 objc 失败: '
+      str: 'Sparkle'
+      str: 'bundle_path'
+      str: '[sparkle] framework 加载成功: '
+      str: '[sparkle] framework 加载失败: '
+      str: ', error: '
+      str: '[sparkle] 未找到可用的 Sparkle.framework'
+
+  def LPMacSparkleUpdater._initUpdaterController(self, controller_class, updater_delegate)  line 530
+    names: alloc, getattr, callable, Exception, logger, warning
+      str: '\n        兼容不同 Sparkle 版本初始化 Updater Controller。\n\n        参数:\n            controller_class (objc.objc_class): SPUStandardUpdaterController 类对象\n            updater_delegate (object | None): Sparkle updater delegate 对象。\n        返回:\n            object | None: 初始化成功返回 controller 实例，否则返回 None\n        '
+      str: 'initWithStartingUpdater_updaterDelegate_userDriverDelegate_'
+      str: 'initWithUpdaterDelegate_userDriverDelegate_'
+      str: 'init'
+      str: '[sparkle] 初始化方法失败 '
+      str: ': '
+
+  def LPMacSparkleUpdater.resolveFeedURL(self)  line 562
+    names: str, _temporaryFeedURL, strip, platform, machine, lower
+      str: '\n        返回当前有效的 macOS Sparkle feed URL。\n\n        参数:\n            无\n        返回:\n            str: 固定 feed URL\n        '
+      str: 'x86_64'
+      str: 'amd64'
+      str: 'https://assets.wiimhome.com/appexe/appcast-beta-mac-x86_64.xml'
+      str: 'https://assets.wiimhome.com/appexe/appcast-beta-mac-arm64.xml'
+
+  def LPMacSparkleUpdater.setTemporaryFeedURL(self, feedURL)  line 580
+    names: str, strip, _temporaryFeedURL
+      str: '\n        设置运行时临时 feed URL（仅当前进程有效）。\n\n        参数:\n            feedURL (str): 临时 feed 地址；为空字符串时表示清空。\n        返回:\n            无\n        '
+
+  def LPMacSparkleUpdater.clearTemporaryFeedURL(self)  line 591
+    names: _temporaryFeedURL
+      str: '\n        清空运行时临时 feed URL，恢复默认 stable feed 解析。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPMacSparkleUpdater.applyCurrentFeedURL(self)  line 602
+    names: str, resolveFeedURL, strip, _updater, getattr, callable, Foundation, NSURL, URLWithString_, logger, info, Exception, warning
+      str: '\n        将 resolveFeedURL 的当前结果应用到 Sparkle updater。\n\n        参数:\n            无\n        返回:\n            dict: 包含 ok/message/feed_url 的应用结果。\n        '
+      str: 'feed URL unavailable'
+      str: 'ok'
+      str: 'message'
+      str: 'feed_url'
+      str: 'sparkle updater unavailable'
+      str: 'setFeedURL_'
+      str: 'setFeedURL_ unsupported'
+      str: 'NSURL'
+      str: '[sparkle] 已应用 feed URL: %s'
+      str: 'ok'
+      str: '[sparkle] 应用 feed URL 失败: %s'
+
+  def LPMacSparkleUpdater.initUpdater(self)  line 651
+    names: platform, system, logger, info, _sparkleConfig, get, _loadSparkleBundle, _objc, lookUpClass, _ensureSparkleDelegateClasses, alloc, initWithOwner_, _updater_delegate, _initUpdaterController, _updater_controller, warning, getattr, callable, _updater, type, __name__, _result_bridge_enabled, applyCurrentFeedURL, bool, str, _ready, Exception
+      str: '\n        初始化 Sparkle Updater，并注入运行时 feed URL。\n\n        参数:\n            无\n        返回:\n            bool: 初始化成功返回 True，否则返回 False\n        '
+      str: 'Darwin'
+      str: '[sparkle] 非 macOS 平台，跳过初始化'
+      str: 'enabled'
+      str: '[sparkle] 配置关闭，跳过初始化'
+      str: 'SPUStandardUpdaterController'
+      str: '[sparkle] 初始化 SPUStandardUpdaterController 失败'
+      str: 'updater'
+      str: '[sparkle] 获取 updater 失败'
+      str: '[sparkle] updater ready controller=%s updater=%s result_bridge_enabled=%s'
+      str: 'setAutomaticallyChecksForUpdates_'
+      str: '[sparkle] automaticallyChecksForUpdates overridden to False'
+      str: 'ok'
+      str: '[sparkle] 初始化阶段设置 feed 失败: %s'
+      str: 'message'
+      str: 'unknown'
+      str: 'startUpdater'
+      str: '[sparkle] updater controller startUpdater invoked explicitly'
+      str: '[sparkle] updater controller does not support startUpdater'
+      str: '[sparkle] 初始化失败: '
+
+  def LPMacSparkleUpdater.isReady(self)  line 724
+    names: _ready
+      str: '\n        返回 Sparkle 当前是否可用。\n\n        参数:\n            无\n        返回:\n            bool: 可用返回 True，否则返回 False\n        '
+
+  def LPMacSparkleUpdater.ensureReady(self)  line 735
+    names: isReady, logger, info, _ready, initUpdater, warning
+      str: '\n        确保 Sparkle 更新器处于可用状态；若不可用则尝试重新初始化。\n\n        参数:\n            无\n        返回:\n            bool: 可用（或恢复成功）返回 True，否则返回 False。\n        '
+      str: '[sparkle] ensureReady: 更新器不可用，尝试重新初始化'
+      str: '[sparkle] ensureReady: 重新初始化成功'
+      str: '[sparkle] ensureReady: 重新初始化失败'
+
+  def LPMacSparkleUpdater.startAutomaticChecks(self)  line 755
+    names: isReady, logger, warning, _sparkleConfig, get, info, triggerBackgroundCheck
+      str: '\n        触发后台自动检查更新。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: '[sparkle] 未就绪，跳过自动检查'
+      str: 'auto_check'
+      str: '[sparkle] auto_check 已关闭'
+
+  def LPMacSparkleUpdater.triggerBackgroundCheck(self)  line 775
+    names: isReady, logger, warning, _backgroundCheckThread, is_alive, info, callable, _onUpdateFoundCallback, _onNoUpdateFoundCallback, threading, Thread, _runBackgroundAppcastProbe, start
+      str: '\n        统一触发后台检查更新。\n\n        参数:\n            无\n        返回:\n            bool: 成功触发返回 True，否则返回 False\n        '
+      str: '[sparkle] 未就绪，无法触发后台检查更新'
+      str: '[sparkle] 后台 appcast 检测仍在进行，跳过重复触发'
+      str: '[sparkle] background check invoking python appcast probe callback_registered(found=%s, not_found=%s)'
+      str: 'sparkle-appcast-probe'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+      str: '[sparkle] 已触发自动检查更新'
+
+  def LPMacSparkleUpdater.isBackgroundCheckRunning(self)  line 806
+    names: _backgroundCheckThread, is_alive
+      str: '\n        返回后台 appcast 检测线程是否仍在执行。\n\n        参数:\n            无\n        返回:\n            bool: 检测线程运行中返回 True，否则返回 False。\n        '
+
+  def LPMacSparkleUpdater._runBackgroundAppcastProbe(self)  line 817
+    names: resolveFeedURL, logger, warning, _setLastCheckDetail, _currentAppVersion, notifyNoUpdateFound, _fetchLatestVersionFromAppcast, _compareVersions, info, notifyUpdateFound, Exception, str, _classifyCheckError
+      str: '\n        在后台线程请求并解析 appcast，仅把结果通过 Python 回调回传给主窗口。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: '[sparkle] background probe skipped: feed URL unavailable'
+      str: 'error'
+      str: 'sparkle_probe'
+      str: 'feed_unreachable'
+      str: 'feed URL unavailable'
+      str: 'resultKind'
+      str: 'source'
+      str: 'currentVersion'
+      str: 'errorCategory'
+      str: 'errorMessage'
+      str: '[sparkle.probe] latest_version=%s current_version=%s compare=%s'
+      str: 'found'
+      str: 'resultKind'
+      str: 'source'
+      str: 'latestVersion'
+      str: 'currentVersion'
+      str: 'compareResult'
+      str: 'no_update'
+      str: '[sparkle.probe] background appcast probe failed: %s'
+
+  def LPMacSparkleUpdater._fetchLatestVersionFromAppcast(self, feed_url)  line 879
+    names: requests, get, raise_for_status, ET, fromstring, content, findall, findtext, strip, find, attrib, isinstance, str, _compareVersions, ValueError
+      str: '\n        从 appcast XML 中提取最新版本号。\n\n        参数:\n            feed_url (str): appcast 地址\n        返回:\n            str: 最新版本号\n        '
+      str: 'timeout'
+      str: 'sparkle'
+      str: 'http://www.andymatuschak.org/xml-namespaces/sparkle'
+      str: './/item'
+      str: 'sparkle:shortVersionString'
+      str: 'namespaces'
+      str: 'enclosure'
+      str: '{http://www.andymatuschak.org/xml-namespaces/sparkle}shortVersionString'
+      str: '{http://www.andymatuschak.org/xml-namespaces/sparkle}version'
+      str: 'no valid version found in appcast'
+
+  def LPMacSparkleUpdater._currentAppVersion(self)  line 921
+    names: LPClientFramework, LPUtility, str, getattr, Exception
+      str: '\n        获取当前应用版本号。\n\n        参数:\n            无\n        返回:\n            str: 当前应用版本号\n        '
+      str: 'LPUtility'
+      str: 'appVersion'
+
+  def LPMacSparkleUpdater._extractDisplayVersionFromItem(self, appcastItem)  line 937
+    names: getattr, callable, Exception, str, strip
+      str: '\n        从 Sparkle appcast item 中提取展示版本号。\n\n        参数:\n            appcastItem (object): Sparkle appcast item 对象。\n        返回:\n            str: 提取到的版本号字符串，提取失败时返回空字符串。\n        '
+      str: 'displayVersionString'
+
+  def LPMacSparkleUpdater._extractNSErrorCode(self, errorObject)  line 960
+    names: getattr, callable, str, Exception
+      str: '\n        提取 NSError 风格对象中的错误码。\n\n        参数:\n            errorObject (object): 可能包含 code 属性/方法的错误对象。\n        返回:\n            str: 解析后的错误码字符串，提取失败时返回空字符串。\n        '
+      str: 'code'
+
+  def LPMacSparkleUpdater._compareVersions(self, leftVersion, rightVersion)  line 981
+    names: max, len, extend
+      str: '\n        比较两个点分版本号的大小。\n\n        参数:\n            leftVersion (str): 左侧版本号\n            rightVersion (str): 右侧版本号\n        返回:\n            int: 左侧更大返回 1，相等返回 0，更小返回 -1\n        '
+      str: 'LPMacSparkleUpdater._compareVersions.<locals>._normalize'
+
+    def LPMacSparkleUpdater._compareVersions._normalize(version_text)  line 991
+      names: str, replace, split, strip, append, int, ValueError, join
+        str: '-'
+        str: '.'
+        str: 'LPMacSparkleUpdater._compareVersions.<locals>._normalize.<locals>.<genexpr>'
+
+      def LPMacSparkleUpdater._compareVersions._normalize.<genexpr>(.0)  line 1000
+        names: isdigit
+
+  def LPMacSparkleUpdater._safeInvokeResultCallback(self, callback, detail)  line 1016
+    names: callable, TypeError
+      str: '\n        兼容调用更新结果回调（支持 0 参数或 1 参数签名）。\n\n        参数:\n            callback (callable): 上层回调函数。\n            detail (dict): 本轮检查结果详情。\n        返回:\n            无\n        '
+
+  def LPMacSparkleUpdater._classifyCheckError(self, errorMessage)  line 1034
+    names: str, lower, any
+      str: '\n        将检查更新错误文本归类为统一错误类型。\n\n        参数:\n            errorMessage (str): 原始错误文本。\n        返回:\n            str: 统一错误分类。\n        '
+      str: 'unknown'
+      str: 'LPMacSparkleUpdater._classifyCheckError.<locals>.<genexpr>'
+      str: 'timeout'
+      str: 'timed out'
+      str: 'download_timeout'
+      str: 'dns'
+      str: 'socket'
+      str: 'connection'
+      str: 'ssl'
+      str: 'tls'
+      str: 'refused'
+      str: 'unreachable'
+      str: 'network'
+      str: 'http'
+      str: '404'
+      str: '403'
+      str: '500'
+      str: '503'
+      str: 'feed_unreachable'
+      str: 'xml'
+      str: 'parse'
+      str: 'malformed'
+      str: 'appcast'
+      str: 'feed_parse'
+
+    def LPMacSparkleUpdater._classifyCheckError.<genexpr>(.0)  line 1047
+
+    def LPMacSparkleUpdater._classifyCheckError.<genexpr>(.0)  line 1049
+
+    def LPMacSparkleUpdater._classifyCheckError.<genexpr>(.0)  line 1051
+
+    def LPMacSparkleUpdater._classifyCheckError.<genexpr>(.0)  line 1053
+
+  def LPMacSparkleUpdater._setLastCheckDetail(self, resultKind, source, latestVersion, currentVersion, compareResult, errorCategory, errorCode, errorMessage)  line 1057
+    names: str, _lastCheckDetail, dict
+      str: '\n        更新并返回最近一次检查结果详情。\n\n        参数:\n            resultKind (str): 结果类型，found/no_update/error。\n            source (str): 结果来源标识。\n            latestVersion (str | None): 最新版本号。\n            currentVersion (str | None): 当前版本号。\n            compareResult (int | None): 版本比较结果。\n            errorCategory '
+      str: 'unknown'
+      str: 'sparkle'
+      str: 'result_kind'
+      str: 'source'
+      str: 'latest_version'
+      str: 'current_version'
+      str: 'compare_result'
+      str: 'error_category'
+      str: 'error_code'
+      str: 'error_message'
+
+  def LPMacSparkleUpdater.getLastCheckDetail(self)  line 1096
+    names: dict, _lastCheckDetail
+      str: '\n        获取最近一次检查详情副本。\n\n        参数:\n            无\n        返回:\n            dict: 最近一次检查详情。\n        '
+
+  def LPMacSparkleUpdater.setUpdateFoundCallback(self, onUpdateFound, onNoUpdateFound)  line 1107
+    names: _onUpdateFoundCallback, _onNoUpdateFoundCallback, logger, info, callable, _result_bridge_enabled
+      str: '\n        设置后台更新检查结果回调。\n\n        参数:\n            onUpdateFound (callable | None): 发现可用更新时调用，无参数。\n            onNoUpdateFound (callable | None): 确认无可用更新时调用，无参数。\n        返回:\n            无\n        '
+      str: '[sparkle] update result callbacks registered found=%s not_found=%s result_bridge_enabled=%s'
+
+  def LPMacSparkleUpdater.setInstallWillStartCallback(self, onInstallWillStart)  line 1126
+    names: _onInstallWillStartCallback, logger, info, callable
+      str: '\n        设置安装即将开始回调。\n\n        参数:\n            onInstallWillStart (callable | None): 即将安装更新时回调。\n        返回:\n            无\n        '
+      str: '[sparkle] install-start callback registered enabled=%s'
+
+  def LPMacSparkleUpdater.setDownloadLifecycleCallback(self, onDownloadLifecycle)  line 1141
+    names: _onDownloadLifecycleCallback, logger, info, callable
+      str: '\n        设置下载生命周期回调。\n\n        参数:\n            onDownloadLifecycle (callable | None): 下载生命周期回调函数。\n        返回:\n            无\n        '
+      str: '[sparkle] download-lifecycle callback registered enabled=%s'
+
+  def LPMacSparkleUpdater.notifyInstallWillStart(self, detail)  line 1156
+    names: logger, info, isinstance, dict, getLastCheckDetail, callable, _onInstallWillStartCallback, _safeInvokeResultCallback, Exception, warning
+      str: '\n        通知上层 Sparkle 即将进入安装阶段。\n\n        参数:\n            detail (dict | None): 安装前事件详情。\n        返回:\n            无\n        '
+      str: '[sparkle] notifyInstallWillStart called'
+      str: '[sparkle] onInstallWillStartCallback failed: %s'
+
+  def LPMacSparkleUpdater.notifyDownloadLifecycle(self, lifecycleStage, detail)  line 1173
+    names: str, strip, isinstance, dict, getLastCheckDetail, logger, info, callable, _onDownloadLifecycleCallback, _safeInvokeResultCallback, Exception, warning
+      str: '\n        通知上层 Sparkle 下载生命周期事件。\n\n        参数:\n            lifecycleStage (str): 生命周期阶段，例如 download_started/download_succeeded。\n            detail (dict | None): 下载事件详情。\n        返回:\n            无\n        '
+      str: 'lifecycle_stage'
+      str: '[sparkle] notifyDownloadLifecycle stage=%s detail=%s'
+      str: '[sparkle] onDownloadLifecycleCallback failed: %s'
+
+  def LPMacSparkleUpdater.notifyUpdateFound(self, detail)  line 1198
+    names: logger, info, isinstance, dict, getLastCheckDetail, callable, _onUpdateFoundCallback, _safeInvokeResultCallback, Exception, warning
+      str: '\n        由外部（delegate 桥接或轮询）调用，通知发现可用更新。\n\n        参数:\n            detail (dict | None): 更新检查详情。\n        返回:\n            无\n        '
+      str: '[sparkle] notifyUpdateFound called'
+      str: '[sparkle] onUpdateFoundCallback failed: %s'
+
+  def LPMacSparkleUpdater.notifyNoUpdateFound(self, detail)  line 1215
+    names: logger, info, isinstance, dict, getLastCheckDetail, callable, _onNoUpdateFoundCallback, _safeInvokeResultCallback, Exception, warning
+      str: '\n        由外部（delegate 桥接或轮询）调用，通知本轮检查未发现更新。\n\n        参数:\n            detail (dict | None): 更新检查详情。\n        返回:\n            无\n        '
+      str: '[sparkle] notifyNoUpdateFound called'
+      str: '[sparkle] onNoUpdateFoundCallback failed: %s'
+
+  def LPMacSparkleUpdater.checkForUpdatesManually(self)  line 1232
+    names: isReady, logger, warning, _updater, _updater_controller, getattr, callable, info, Exception
+      str: '\n        手动触发检查更新。\n\n        参数:\n            无\n        返回:\n            bool: 成功触发返回 True，否则返回 False。\n        '
+      str: '[sparkle] 未就绪，无法手动检查更新'
+      str: 'checkForUpdates_'
+      str: '[sparkle] 已触发手动检查更新'
+      str: '[sparkle] 手动检查方法失败: '
+      str: '[sparkle] 当前对象不支持手动检查更新方法'

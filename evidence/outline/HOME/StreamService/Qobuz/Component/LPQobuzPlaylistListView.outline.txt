@@ -1,0 +1,98 @@
+# module HOME.StreamService.Qobuz.Component.LPQobuzPlaylistListView
+
+[module] names: __doc__, queue, time, threading, Thread, PyQt6.QtCore, QAbstractListModel, QModelIndex, Qt, QSize, QRectF, QRect, PyQt6.QtGui, QBrush, QPainterPath, QIcon, QPixmap, QFont, QFontMetrics, QPainter, PyQt6.QtWidgets, QStyledItemDelegate, QStyle, QToolTip, LPGlobalUI, HOME.StreamService.Qobuz.Util, LPQobuzUtil, LPClientFramework, LPUtility, LPClientFramework.LPConfig.LPFontConfig, ItemCard_Title, ItemCard_Subtitle, LPClientFramework.LPUtility, logger, LPQobuzPlaylistListModel, LPQobuzPlaylistDelegate
+  str: '\n@Time ： 2025/7/23 11:20\n@Auth ： Chris\n@File ：LPQobuzPlaylistListView.py\n@Desc:\n'
+  str: 'Thread'
+  str: 'QAbstractListModel'
+  str: 'QModelIndex'
+  str: 'Qt'
+  str: 'QSize'
+  str: 'QRectF'
+  str: 'QRect'
+  str: 'QBrush'
+  str: 'QPainterPath'
+  str: 'QIcon'
+  str: 'QPixmap'
+  str: 'QFont'
+  str: 'QFontMetrics'
+  str: 'QPainter'
+  str: 'QStyledItemDelegate'
+  str: 'QStyle'
+  str: 'QToolTip'
+  str: 'LPQobuzUtil'
+  str: 'LPUtility'
+  str: 'ItemCard_Title'
+  str: 'ItemCard_Subtitle'
+  str: 'logger'
+  str: 'LPQobuzPlaylistListModel'
+  str: 'LPQobuzPlaylistDelegate'
+
+def LPQobuzPlaylistListModel()  line 23
+  names: __name__, __module__, __qualname__, __init__, rowCount, QModelIndex, flags, Qt, ItemDataRole, DisplayRole, data, fetchPixmap, cleanup, addItemList, __classcell__
+    str: 'LPQobuzPlaylistListModel'
+    str: 'LPQobuzPlaylistListModel.__init__'
+    str: 'LPQobuzPlaylistListModel.rowCount'
+    str: 'index'
+    str: 'LPQobuzPlaylistListModel.flags'
+    str: 'LPQobuzPlaylistListModel.data'
+    str: 'LPQobuzPlaylistListModel.fetchPixmap'
+    str: 'LPQobuzPlaylistListModel.cleanup'
+    str: 'LPQobuzPlaylistListModel.addItemList'
+
+  def LPQobuzPlaylistListModel.__init__(self, playList, parent)  line 24
+    names: super, __init__, playList, list, _data, queue, Queue, coverImageQueue, fetchImageThread, imageUpdateRunning, destroyed, connect, cleanup
+
+  def LPQobuzPlaylistListModel.rowCount(self, parent)  line 37
+    names: len, _data
+
+  def LPQobuzPlaylistListModel.flags(self, index)  line 40
+    names: data, Qt, ItemDataRole, UserRole, super, flags, streamable, ItemFlag, ItemIsEnabled, ItemIsSelectable
+
+  def LPQobuzPlaylistListModel.data(self, index, role)  line 52
+    names: row, rowCount, _data, Qt, ItemDataRole, DisplayRole, trackImage, len, fetchPixmap, playlistImageList, UserRole
+      str: 'isBlurred'
+
+  def LPQobuzPlaylistListModel.fetchPixmap(self, index, imageUrl, isBlurred)  line 75
+    names: LPQobuzUtil, checkCachedBlurredPixmapWithUrl, LPUtility, checkCachedPixmapWithUrl, coverImageQueue, put, fetchImageThread, Thread, start
+      str: 'value'
+      str: 'index'
+      str: 'isBlurred'
+      str: 'LPQobuzPlaylistListModel.fetchPixmap.<locals>._fetchImageMethod'
+      str: 'target'
+      str: 'daemon'
+
+    def LPQobuzPlaylistListModel.fetchPixmap._fetchImageMethod()  line 85
+      names: imageUpdateRunning, coverImageQueue, empty, time, sleep, get, LPQobuzUtil, fetchUrlBlurredQPixmap, LPUtility, fetchUrlQPixmap, dataChanged, emit, task_done
+        str: 'value'
+        str: 'index'
+        str: 'isBlurred'
+        str: 'image'
+
+  def LPQobuzPlaylistListModel.cleanup(self)  line 111
+    names: logger, debug, fetchImageThread, imageUpdateRunning
+      str: 'cleanup ================'
+
+  def LPQobuzPlaylistListModel.addItemList(self, playList)  line 116
+    names: len, _data, list, beginInsertRows, QModelIndex, extend, endInsertRows
+
+def LPQobuzPlaylistDelegate()  line 127
+  names: __name__, __module__, __qualname__, __init__, sizeHint, paint, helpEvent, __classcell__
+    str: 'LPQobuzPlaylistDelegate'
+    str: 'LPQobuzPlaylistDelegate.__init__'
+    str: 'LPQobuzPlaylistDelegate.sizeHint'
+    str: 'LPQobuzPlaylistDelegate.paint'
+    str: 'LPQobuzPlaylistDelegate.helpEvent'
+
+  def LPQobuzPlaylistDelegate.__init__(self, parent)  line 129
+    names: super, __init__, listview
+
+  def LPQobuzPlaylistDelegate.sizeHint(self, option, index)  line 134
+    names: super, sizeHint, QSize
+
+  def LPQobuzPlaylistDelegate.paint(self, painter, option, index)  line 141
+    names: data, rect, styleObject, QBrush, setStyle, Qt, BrushStyle, SolidPattern, state, QStyle, StateFlag, State_Selected, setColor, LPGlobalUI, THEME_TABLE_HOVER_BACK_COLOR, State_MouseOver, THEME_ITEM_BACK_COLOR, QPainterPath, addRoundedRect, QRectF, fillPath, QRect, x, y, QIcon, trackImage, LPQobuzUtil, getCachedBlurredPixmapWithUrl, QPixmap, imagePath, playlistImageList, getMyPlaylistCustomCoverImage, addPixmap, paint, width, height, trackName, QFont, setPointSizeF, ItemCard_Title, setBold, setFont, setPen, THEME_DEFAULT_COLOR, QFontMetrics, elidedText, TextElideMode, ElideRight, setRenderHint, QPainter, RenderHint, TextAntialiasing, drawText, AlignmentFlag, AlignLeft, AlignVCenter, trackOwner, ItemCard_Subtitle, THEME_LIGHT_COLOR, lastCursorPos, contains, cursor, CursorShape, PointingHandCursor, lastCursorActionIndex, setCursor, ArrowCursor
+      str: 'playlist_l.png'
+      str: 'By '
+
+  def LPQobuzPlaylistDelegate.helpEvent(self, event, view, option, index)  line 233
+    names: type, Type, ToolTip, data, rect, trackName, QRect, x, y, width, pos, globalPos, contains, QToolTip, showText, super, helpEvent

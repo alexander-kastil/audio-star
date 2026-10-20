@@ -1,0 +1,56 @@
+# module HOME.StreamService.WiiMRadio.utils.LPWiiMRadioThumbnailService
+
+[module] names: __doc__, threading, typing, Optional, PyQt6.QtCore, QObject, pyqtSignal, LPClientFramework.LPImageService.LPGlobalImageScheduler, LPGlobalImageScheduler, LPClientFramework.LPImageService.LPGlobalQmlImageService, LPGlobalQmlImageService, LPClientFramework.LPImageService.LPImageProfiles, WIIMRADIO_FAVICON_PROFILE, LPWiiMRadioThumbnailService
+  str: '\nWiiMRadio favicon 缩略图服务 adapter。\n'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'LPGlobalImageScheduler'
+  str: 'LPGlobalQmlImageService'
+  str: 'WIIMRADIO_FAVICON_PROFILE'
+  str: 'LPWiiMRadioThumbnailService'
+
+def LPWiiMRadioThumbnailService()  line 17
+  names: __name__, __module__, __qualname__, pyqtSignal, str, thumbnailReady, CACHE_VERSION, THUMBNAIL_SIZE, CACHE_TTL_SECONDS, FAILURE_RETRY_SECONDS, _instance, Optional, __annotations__, threading, Lock, _instance_lock, QObject, __init__, classmethod, instance, LPGlobalImageScheduler, PRIORITY_PRELOAD, ensureThumbnail, thumbnailPath, _handleGlobalThumbnailReady, __classcell__
+    str: 'LPWiiMRadioThumbnailService'
+    str: 'v3'
+    str: '_instance'
+    str: 'parent'
+    str: 'LPWiiMRadioThumbnailService.__init__'
+    str: 'return'
+    str: 'LPWiiMRadioThumbnailService.instance'
+    str: 'url'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioThumbnailService.ensureThumbnail'
+    str: 'url'
+    str: 'return'
+    str: 'LPWiiMRadioThumbnailService.thumbnailPath'
+    str: 'url'
+    str: 'thumbnailPath'
+    str: 'profile'
+    str: 'return'
+    str: 'LPWiiMRadioThumbnailService._handleGlobalThumbnailReady'
+
+  def LPWiiMRadioThumbnailService.__init__(self, parent)  line 28
+    names: super, __init__, WIIMRADIO_FAVICON_PROFILE, _profile, LPGlobalQmlImageService, instance, _image_service, thumbnailReady, connect, _handleGlobalThumbnailReady
+      str: '\n        初始化 WiiMRadio 图片服务 adapter。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def LPWiiMRadioThumbnailService.instance(cls)  line 40
+    names: _instance_lock, _instance
+      str: '\n        返回 WiiMRadio 图片服务 adapter 单例。\n\n        :param: 无。\n        :return: adapter 单例。\n        '
+
+  def LPWiiMRadioThumbnailService.ensureThumbnail(self, url, priority)  line 53
+    names: _image_service, ensureThumbnail, _profile
+      str: '\n        确保 favicon 缩略图可用。\n\n        :param url: favicon URL。\n        :param priority: 调度优先级。\n        :return: 已缓存时返回本地 file URL；未就绪时返回空字符串。\n        '
+      str: 'wiimradio'
+      str: 'priority'
+      str: 'ownerKey'
+
+  def LPWiiMRadioThumbnailService.thumbnailPath(self, url)  line 72
+    names: _image_service, thumbnailPath, _profile
+      str: '\n        查询 favicon 当前已缓存的缩略图路径。\n\n        :param url: favicon URL。\n        :return: 本地 file URL；未命中时返回空字符串。\n        '
+
+  def LPWiiMRadioThumbnailService._handleGlobalThumbnailReady(self, url, thumbnailPath, profile)  line 81
+    names: str, strip, _profile, thumbnailReady, emit
+      str: '\n        将全局三参数 ready 信号转换为 WiiMRadio 旧双参数信号。\n\n        :param url: 原始图片 URL。\n        :param thumbnailPath: 本地 file URL。\n        :param profile: 图片 profile 名称。\n        :return: None。\n        '

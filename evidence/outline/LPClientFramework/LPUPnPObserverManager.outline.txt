@@ -1,0 +1,451 @@
+# module LPClientFramework.LPUPnPObserverManager
+
+[module] names: json, http.server, BaseHTTPRequestHandler, functools, partial, threading, platform, requests, datetime, time, urllib.parse, urlparse, wsgiref.handlers, format_date_time, mktime, bs4, BeautifulSoup, LPClientFramework, LPUtility, LPClientFramework.LPUtility, logger, LPThreadHTTPServer, SOAP_PARSER, object, LPBasicUPnPServiceParser, LPRenderControlParser, LPRenderTransportParser, LPPlayQueueParser, LPSimpleUPnPObserverHandler, LPUPnPObserverManager, __name__, run_server
+  str: 'BaseHTTPRequestHandler'
+  str: 'partial'
+  str: 'urlparse'
+  str: 'format_date_time'
+  str: 'mktime'
+  str: 'BeautifulSoup'
+  str: 'LPUtility'
+  str: 'logger'
+  str: 'LPThreadHTTPServer'
+  str: 'xml'
+  str: 'LPBasicUPnPServiceParser'
+  str: 'LPRenderControlParser'
+  str: 'LPRenderTransportParser'
+  str: 'LPPlayQueueParser'
+  str: 'LPSimpleUPnPObserverHandler'
+  str: 'LPUPnPObserverManager'
+  str: '__main__'
+
+def LPBasicUPnPServiceParser()  line 20
+  names: __name__, __module__, __qualname__, parse, classmethod, parserForService
+    str: 'LPBasicUPnPServiceParser'
+    str: 'LPBasicUPnPServiceParser.parse'
+    str: 'LPBasicUPnPServiceParser.parserForService'
+
+  def LPBasicUPnPServiceParser.parse(self, xml)  line 21
+    names: BeautifulSoup, SOAP_PARSER, observeAttributes, items, find, get, str, int, float, bool, logger, debug
+      str: 'type'
+      str: 'val'
+      str: '0'
+      str: 'name'
+      str: 'retDict recv -> '
+      str: ': '
+      str: 'message'
+
+  def LPBasicUPnPServiceParser.parserForService(cls, serviceName)  line 47
+    names: LPRenderControlParser, LPRenderTransportParser, LPPlayQueueParser
+      str: 'rendercontrol1'
+      str: 'rendertransport1'
+      str: 'PlayQueue1'
+
+def LPRenderControlParser()  line 59
+  names: __name__, __module__, __qualname__, __init__, parse, __classcell__
+    str: 'LPRenderControlParser'
+    str: 'LPRenderControlParser.__init__'
+    str: 'LPRenderControlParser.parse'
+
+  def LPRenderControlParser.__init__(self)  line 60
+    names: float, bool, observeAttributes, multiRoomMessageKey, commonEventMessageKey
+      str: 'volume'
+      str: 'name'
+      str: 'type'
+      str: 'mute'
+      str: 'fixedVolume'
+      str: 'name'
+      str: 'deviceName'
+      str: 'Volume'
+      str: 'Mute'
+      str: 'FixVolume'
+      str: 'DeviceName'
+      str: 'Slave'
+      str: 'commonevent'
+
+  def LPRenderControlParser.parse(self, xml)  line 70
+    names: super, parse, BeautifulSoup, SOAP_PARSER, find, multiRoomMessageKey, get, commonEventMessageKey, json, loads, Exception
+      str: 'action'
+      str: 'val'
+      str: 'action'
+      str: 'slaveId'
+      str: 'slaveAction'
+      str: 'category'
+      str: 'lpmrm'
+      str: 'body'
+
+def LPRenderTransportParser()  line 98
+  names: __name__, __module__, __qualname__, __init__, parse, __classcell__
+    str: 'LPRenderTransportParser'
+    str: 'LPRenderTransportParser.__init__'
+    str: 'LPRenderTransportParser.parse'
+
+  def LPRenderTransportParser.__init__(self)  line 99
+    names: int, observeAttributes, float, metaAttributes
+      str: 'name'
+      str: 'playState'
+      str: 'metaData'
+      str: 'playUri'
+      str: 'lastPlayIndex'
+      str: 'name'
+      str: 'type'
+      str: 'trackSource'
+      str: 'mediaType'
+      str: 'duration'
+      str: 'progress'
+      str: 'TransportState'
+      str: 'CurrentTrackMetaData'
+      str: 'CurrentTrackURI'
+      str: 'CurrentTrack'
+      str: 'TrackSource'
+      str: 'PlaybackStorageMedium'
+      str: 'CurrentTrackDuration'
+      str: 'A_ARG_TYPE_SeekTarget'
+      str: 'guiBehavior'
+      str: 'trackId'
+      str: 'customUUID'
+      str: 'trackName'
+      str: 'artistId'
+      str: 'artist'
+      str: 'albumId'
+      str: 'album'
+      str: 'artworkUri'
+      str: 'localArtworkUri'
+      str: 'quality'
+      str: 'actualQuality'
+      str: 'trackRateHz'
+      str: 'trackFormat'
+      str: 'trackBitrate'
+      str: 'ratingURI'
+      str: 'song:guibehavior'
+      str: 'song:id'
+      str: 'custom:uuid'
+      str: 'dc:title'
+      str: 'song:singerid'
+      str: 'upnp:artist'
+      str: 'song:albumid'
+      str: 'upnp:album'
+      str: 'upnp:albumArtURI'
+      str: 'upnp:localAlbumArtURI'
+      str: 'song:quality'
+      str: 'song:actualQuality'
+      str: 'song:rate_hz'
+      str: 'song:format_s'
+      str: 'song:bitrate'
+      str: 'upnp:ratingURI'
+
+  def LPRenderTransportParser.parse(self, xml)  line 131
+    names: super, parse, get, BeautifulSoup, SOAP_PARSER, find, metaAttributes, items, str, text, int, float, bool, findAll, isdigit, datetime, timedelta, seconds, split
+      str: 'metaData'
+      str: 'item'
+      str: 'type'
+      str: '0'
+      str: 'name'
+      str: 'res'
+      str: 'duration'
+      str: 'seconds'
+      str: '00:00:00'
+      str: '00:%02d:%02d'
+      str: '.'
+      str: 'progress'
+      str: 'id'
+      str: 'itemId'
+      str: 'itemName'
+
+def LPPlayQueueParser()  line 192
+  names: __name__, __module__, __qualname__, __init__, parse, __classcell__
+    str: 'LPPlayQueueParser'
+    str: 'LPPlayQueueParser.__init__'
+    str: 'LPPlayQueueParser.parse'
+
+  def LPPlayQueueParser.__init__(self)  line 193
+    names: int, observeAttributes
+      str: 'loopMode'
+      str: 'name'
+      str: 'type'
+      str: 'name'
+      str: 'queueName'
+      str: 'info'
+      str: 'LoopMode'
+      str: 'LoopMpde'
+      str: 'CurretPlayListName'
+      str: 'info'
+
+  def LPPlayQueueParser.parse(self, xml)  line 200
+    names: super, parse
+
+def LPSimpleUPnPObserverHandler()  line 204
+  names: __name__, __module__, __qualname__, __doc__, __init__, do_NOTIFY, send404, __classcell__
+    str: 'LPSimpleUPnPObserverHandler'
+    str: '接收设备 NOTIFY，并把 SID、SEQ 和 LastChange 交给订阅管理器。'
+    str: 'LPSimpleUPnPObserverHandler.__init__'
+    str: 'LPSimpleUPnPObserverHandler.do_NOTIFY'
+    str: 'LPSimpleUPnPObserverHandler.send404'
+
+  def LPSimpleUPnPObserverHandler.__init__(self, messageMethod, *args, **kwargs)  line 207
+    names: messageMethod, super, __init__
+      str: '保存通知回调并初始化 HTTP handler；参数为回调及 HTTP 参数，返回无。'
+
+  def LPSimpleUPnPObserverHandler.do_NOTIFY(self)  line 213
+    names: urlparse, path, send404, rfile, read, int, headers, get, BeautifulSoup, decode, SOAP_PARSER, find, messageMethod, text, mktime, datetime, now, timetuple, format_date_time, send_response, send_header, end_headers, wfile, write, Exception, logger, warning
+      str: '解析并分发设备通知；无参数，返回无。'
+      str: '/Event'
+      str: 'content-length'
+      str: 'utf-8'
+      str: 'LastChange'
+      str: 'SID'
+      str: 'SEQ'
+      str: 'Date'
+      str: 'Content-Length'
+      str: 'Accept-Ranges'
+      str: 'bytes'
+      str: 'Response error: %s'
+
+  def LPSimpleUPnPObserverHandler.send404(self)  line 247
+    names: send_response, mktime, datetime, now, timetuple, format_date_time, send_header, end_headers, wfile, write
+      str: '返回不支持的通知响应；无参数，返回无。'
+      str: 'Date'
+      str: 'Content-type'
+      str: 'application/json'
+
+def LPUPnPObserverManager()  line 259
+  names: __name__, __module__, __qualname__, __doc__, SERVICES, RENEW_RATIO, RETRY_INTERVAL, FIRST_NOTIFY_TIMEOUT, EARLY_NOTIFY_TTL, MAX_EARLY_NOTIFICATIONS, __init__, start, stop, addObserver, removeObserver, _newRecord, _removeRecord, _isCurrent, _launchSubscription, _performSubscription, _parseTimeout, _timeoutLoop, _maintainSubscriptions, unsubscribe, messageDistributeMethod, _takeEarlyNotifications, _logSequence, hasObserverForUUID
+    str: 'LPUPnPObserverManager'
+    str: '维护设备各服务的事件订阅、续期和通知分发。'
+    str: 'rendercontrol1'
+    str: 'PlayQueue1'
+    str: 'rendertransport1'
+    str: 'LPUPnPObserverManager.__init__'
+    str: 'LPUPnPObserverManager.start'
+    str: 'LPUPnPObserverManager.stop'
+    str: 'LPUPnPObserverManager.addObserver'
+    str: 'LPUPnPObserverManager.removeObserver'
+    str: 'LPUPnPObserverManager._newRecord'
+    str: 'LPUPnPObserverManager._removeRecord'
+    str: 'LPUPnPObserverManager._isCurrent'
+    str: 'LPUPnPObserverManager._launchSubscription'
+    str: 'LPUPnPObserverManager._performSubscription'
+    str: 'LPUPnPObserverManager._parseTimeout'
+    str: 'LPUPnPObserverManager._timeoutLoop'
+    str: 'LPUPnPObserverManager._maintainSubscriptions'
+    str: 'LPUPnPObserverManager.unsubscribe'
+    str: 'LPUPnPObserverManager.messageDistributeMethod'
+    str: 'LPUPnPObserverManager._takeEarlyNotifications'
+    str: 'LPUPnPObserverManager._logSequence'
+    str: 'LPUPnPObserverManager.hasObserverForUUID'
+
+  def LPUPnPObserverManager.__init__(self, notifyComeMethod)  line 269
+    names: httpServer, port, threading, RLock, observerDictLock, notifyLock, lifecycleLock, observerDict, serviceRecords, earlyNotifications, notifyComeMethod, serverThread, timeoutThread, serverSwitch, _generation, Event, _stopEvent
+      str: '初始化订阅状态；参数为业务通知回调，返回无。'
+
+  def LPUPnPObserverManager.start(self)  line 289
+    names: lifecycleLock, serverSwitch, partial, LPSimpleUPnPObserverHandler, messageDistributeMethod, LPThreadHTTPServer, port, Exception, logger, exception, _generation, threading, Event, _stopEvent, httpServer, server_address, Thread, serve_forever, serverThread, _timeoutLoop, timeoutThread, start, info
+      str: '同步绑定监听端口并启动通知及租约线程；无参数，返回是否成功。'
+      str: '[subscription] listener_bind_failed port=%s'
+      str: 'UPnPObserverServerThread'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+      str: 'UPnPObserverTimeoutThread'
+      str: 'target'
+      str: 'args'
+      str: 'name'
+      str: 'daemon'
+      str: '[subscription] listener_ready port=%s generation=%s'
+
+  def LPUPnPObserverManager.stop(self)  line 323
+    names: logger, info, lifecycleLock, observerDictLock, serverSwitch, _generation, _stopEvent, set, observerDict, clear, serviceRecords, earlyNotifications, httpServer, serverThread, timeoutThread, shutdown, server_close, Exception, warning, time, monotonic, threading, current_thread, join, max
+      str: '停止监听并使所有旧代次异步结果失效；无参数，返回无。'
+      str: 'Stop UPnP server'
+      str: 'UPnP server stop exception: %s'
+      str: 'timeout'
+
+  def LPUPnPObserverManager.addObserver(self, ip, port, uuid)  line 350
+    names: observerDictLock, serverSwitch, SERVICES, serviceRecords, get, _removeRecord, _newRecord, append, _launchSubscription
+      str: '确保设备三个服务各自存在订阅；参数为地址、端口和 UUID，返回无。'
+      str: 'ip'
+      str: 'port'
+      str: 'sid'
+      str: 'inFlight'
+      str: 'renew'
+
+  def LPUPnPObserverManager.removeObserver(self, ip)  line 370
+    names: observerDictLock, list, serviceRecords, items, _removeRecord
+      str: '删除指定 IP 的全部服务订阅；参数为 IP，返回无。'
+      str: 'ip'
+
+  def LPUPnPObserverManager._newRecord(self, ip, port, service, uuid)  line 378
+    names: _generation
+      str: '创建服务订阅记录；参数为地址、端口、服务和 UUID，返回字典。'
+      str: 'uuid'
+      str: 'service'
+      str: 'ip'
+      str: 'port'
+      str: 'sid'
+      str: 'timeout'
+      str: 'renewAt'
+      str: 'expireAt'
+      str: 'retryAt'
+      str: 'inFlight'
+      str: 'receivedNotify'
+      str: 'firstNotifyDeadline'
+      str: 'firstNotifyRetries'
+      str: 'lastSeq'
+      str: 'generation'
+
+  def LPUPnPObserverManager._removeRecord(self, record)  line 398
+    names: get, observerDict
+      str: '删除记录的 SID 路由；参数为订阅记录，返回无。'
+      str: 'sid'
+
+  def LPUPnPObserverManager._isCurrent(self, record, generation)  line 404
+    names: serverSwitch, _generation, serviceRecords, get
+      str: '判断异步结果是否仍属于当前运行代次；参数为记录和代次，返回布尔值。'
+      str: 'uuid'
+      str: 'service'
+      str: 'generation'
+
+  def LPUPnPObserverManager._launchSubscription(self, record, renew)  line 411
+    names: observerDictLock, _generation, _isCurrent, str, threading, Thread, _performSubscription, start
+      str: '以 single-flight 方式启动创建或续期；参数为记录及续期标记，返回无。'
+      str: 'inFlight'
+      str: 'uuid'
+      str: 'unknown'
+      str: 'UPnPSubscribe-%s-%s'
+      str: 'service'
+      str: 'target'
+      str: 'args'
+      str: 'name'
+      str: 'daemon'
+
+  def LPUPnPObserverManager._performSubscription(self, record, generation, renew)  line 427
+    names: observerDictLock, _isCurrent, platform, system, release, LPUtility, appVersion, fetchLocalIP, port, requests, request, status_code, RuntimeError, headers, get, _parseTimeout, ValueError, Exception, logger, warning, unsubscribe, time, monotonic, _removeRecord, RETRY_INTERVAL, update, RENEW_RATIO, FIRST_NOTIFY_TIMEOUT, observerDict, _takeEarlyNotifications, info, messageDistributeMethod
+      str: '执行一次创建或续期并提交结果；参数为记录、代次及续期标记，返回无。'
+      str: 'sid'
+      str: 'Second-1800'
+      str: '%s/%s UPnP/1.1 %s/%s'
+      str: 'LPUnittest'
+      str: 'TIMEOUT'
+      str: 'User-Agent'
+      str: 'SID'
+      str: 'upnp:event'
+      str: 'NT'
+      str: '<http://%s:%d/Event>'
+      str: 'CALLBACK'
+      str: 'SUBSCRIBE'
+      str: 'http://%s:%d/upnp/event/%s'
+      str: 'ip'
+      str: 'port'
+      str: 'service'
+      str: 'headers'
+      str: 'url'
+      str: 'timeout'
+      str: 'HTTP %s'
+      str: 'TIMEOUT'
+      str: 'missing SID'
+      str: 'renew returned a different SID'
+      str: '[subscription] request_failed uuid=%s service=%s sid=%s status=%s error=%s'
+      str: 'uuid'
+      str: 'inFlight'
+      str: 'expireAt'
+      str: 'firstNotifyRetries'
+      str: 'retryAt'
+      str: 'renewAt'
+      str: 'sid'
+      str: 'timeout'
+      str: 'renewAt'
+      str: 'expireAt'
+      str: 'retryAt'
+      str: 'inFlight'
+      str: 'receivedNotify'
+      str: 'firstNotifyDeadline'
+      str: 'lastSeq'
+      str: '[subscription] %s uuid=%s service=%s sid=%s timeout=%s'
+      str: 'renewed'
+      str: 'created'
+
+  def LPUPnPObserverManager._parseTimeout(self, rawTimeout)  line 518
+    names: strip, lower, startswith, int, ValueError
+      str: '解析设备返回的 TIMEOUT；参数为原始头，返回正整数秒数。'
+      str: 'second-infinite'
+      str: 'second-'
+      str: 'invalid TIMEOUT'
+
+  def LPUPnPObserverManager._timeoutLoop(self, stopEvent, generation)  line 529
+    names: wait, _maintainSubscriptions
+      str: '定期检查租约和首通知；参数为停止事件及代次，返回无。'
+
+  def LPUPnPObserverManager._maintainSubscriptions(self, generation)  line 534
+    names: time, monotonic, observerDictLock, _generation, serverSwitch, list, serviceRecords, values, logger, warning, _removeRecord, append, error, _launchSubscription
+      str: '调度到期续期、失败重试和一次首通知重订阅；参数为代次，返回无。'
+      str: 'inFlight'
+      str: 'retryAt'
+      str: 'sid'
+      str: 'receivedNotify'
+      str: 'firstNotifyDeadline'
+      str: 'firstNotifyRetries'
+      str: '[subscription] first_notify_missing uuid=%s service=%s sid=%s'
+      str: 'uuid'
+      str: 'service'
+      str: '[subscription] first_notify_still_missing uuid=%s service=%s sid=%s'
+      str: 'expireAt'
+      str: 'renewAt'
+
+  def LPUPnPObserverManager.unsubscribe(self, remoteIP, remotePort, service, sid)  line 576
+    names: requests, request, Exception, logger, warning
+      str: '尽力注销远端 SID；参数为地址、端口、服务和 SID，返回无。'
+      str: 'SID'
+      str: 'UNSUBSCRIBE'
+      str: 'http://%s:%d/upnp/event/%s'
+      str: 'headers'
+      str: 'url'
+      str: 'timeout'
+      str: 'Unsubscribe exception: %s'
+
+  def LPUPnPObserverManager.messageDistributeMethod(self, sid, message, seq)  line 587
+    names: observerDictLock, observerDict, get, time, monotonic, earlyNotifications, any, serviceRecords, values, len, MAX_EARLY_NOTIFICATIONS, append, logger, debug, error, notifyLock, _logSequence, LPBasicUPnPServiceParser, parserForService, parse, _isCurrent, notifyComeMethod
+      str: '按 SID 串行解析通知并记录 SEQ 诊断；参数为 SID、XML 和 SEQ，返回无。'
+      str: 'LPUPnPObserverManager.messageDistributeMethod.<locals>.<listcomp>'
+      str: 'LPUPnPObserverManager.messageDistributeMethod.<locals>.<genexpr>'
+      str: '[subscription] early_notify_cached sid=%s seq=%s'
+      str: '[subscription] unknown_sid sid=%s'
+      str: 'generation'
+      str: 'receivedNotify'
+      str: 'firstNotifyDeadline'
+      str: 'service'
+      str: 'uuid'
+
+    def LPUPnPObserverManager.messageDistributeMethod.<listcomp>(.0)  line 593
+      names: EARLY_NOTIFY_TTL
+
+    def LPUPnPObserverManager.messageDistributeMethod.<genexpr>(.0)  line 595
+        str: 'inFlight'
+        str: 'sid'
+
+  def LPUPnPObserverManager._takeEarlyNotifications(self, sid, now)  line 623
+    names: earlyNotifications, EARLY_NOTIFY_TTL, append
+      str: '取出指定 SID 的未过期提前通知；参数为 SID 和当前时间，返回通知列表。'
+
+  def LPUPnPObserverManager._logSequence(self, record, seq)  line 637
+    names: int, ValueError, TypeError, logger, warning
+      str: '记录每个 SID 的 SEQ 异常但不阻断通知；参数为记录和 SEQ，返回无。'
+      str: 'out of range'
+      str: '[subscription] notify_seq_invalid uuid=%s service=%s sid=%s seq=%s'
+      str: 'uuid'
+      str: 'service'
+      str: 'sid'
+      str: 'lastSeq'
+      str: 'duplicate'
+      str: 'gap'
+      str: 'reset_or_stale'
+      str: '[subscription] notify_seq_%s uuid=%s service=%s sid=%s previous=%s current=%s'
+
+  def LPUPnPObserverManager.hasObserverForUUID(self, uuid)  line 669
+    names: observerDictLock, time, monotonic, all, SERVICES
+      str: '检查设备三个服务是否都有未过期 SID；参数为 UUID，返回布尔值。'
+      str: 'LPUPnPObserverManager.hasObserverForUUID.<locals>.<genexpr>'
+
+    def LPUPnPObserverManager.hasObserverForUUID.<genexpr>(.0)  line 673
+      names: serviceRecords, get
+        str: 'sid'
+        str: 'expireAt'

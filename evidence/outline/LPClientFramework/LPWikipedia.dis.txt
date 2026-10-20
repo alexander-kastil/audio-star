@@ -1,0 +1,3042 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 ('\nWikipedia-API is easy to use wrapper for extracting information from Wikipedia.\n\nIt supports extracting texts, sections, links, categories, translations, etc\nfrom Wikipedia. Documentation provides code snippets for the most common use\ncases.\n')
+              2 STORE_NAME               0 (__doc__)
+
+  9           4 LOAD_CONST               1 ((0, 5, 8))
+              6 STORE_NAME               1 (__version__)
+
+ 10           8 LOAD_CONST               2 (0)
+             10 LOAD_CONST               3 (('defaultdict',))
+             12 IMPORT_NAME              2 (collections)
+             14 IMPORT_FROM              3 (defaultdict)
+             16 STORE_NAME               3 (defaultdict)
+             18 POP_TOP
+
+ 11          20 LOAD_CONST               2 (0)
+             22 LOAD_CONST               4 (('IntEnum',))
+             24 IMPORT_NAME              4 (enum)
+             26 IMPORT_FROM              5 (IntEnum)
+             28 STORE_NAME               5 (IntEnum)
+             30 POP_TOP
+
+ 12          32 LOAD_CONST               2 (0)
+             34 LOAD_CONST               5 (None)
+             36 IMPORT_NAME              6 (logging)
+             38 STORE_NAME               6 (logging)
+
+ 13          40 LOAD_CONST               2 (0)
+             42 LOAD_CONST               5 (None)
+             44 IMPORT_NAME              7 (re)
+             46 STORE_NAME               7 (re)
+
+ 14          48 LOAD_CONST               2 (0)
+             50 LOAD_CONST               6 (('Any', 'Dict', 'List', 'Optional', 'Union'))
+             52 IMPORT_NAME              8 (typing)
+             54 IMPORT_FROM              9 (Any)
+             56 STORE_NAME               9 (Any)
+             58 IMPORT_FROM             10 (Dict)
+             60 STORE_NAME              10 (Dict)
+             62 IMPORT_FROM             11 (List)
+             64 STORE_NAME              11 (List)
+             66 IMPORT_FROM             12 (Optional)
+             68 STORE_NAME              12 (Optional)
+             70 IMPORT_FROM             13 (Union)
+             72 STORE_NAME              13 (Union)
+             74 POP_TOP
+
+ 15          76 LOAD_CONST               2 (0)
+             78 LOAD_CONST               7 (('parse',))
+             80 IMPORT_NAME             14 (urllib)
+             82 IMPORT_FROM             15 (parse)
+             84 STORE_NAME              15 (parse)
+             86 POP_TOP
+
+ 17          88 LOAD_CONST               2 (0)
+             90 LOAD_CONST               5 (None)
+             92 IMPORT_NAME             16 (requests)
+             94 STORE_NAME              16 (requests)
+
+ 18          96 LOAD_CONST               2 (0)
+             98 LOAD_CONST               5 (None)
+            100 IMPORT_NAME             17 (requests_cache)
+            102 STORE_NAME              17 (requests_cache)
+
+ 20         104 LOAD_NAME                6 (logging)
+            106 LOAD_METHOD             18 (getLogger)
+            108 LOAD_NAME               19 (__name__)
+            110 CALL_METHOD              1
+            112 STORE_NAME              20 (log)
+
+ 24         114 LOAD_NAME               10 (Dict)
+            116 LOAD_NAME               21 (str)
+            118 LOAD_CONST               8 ('WikipediaPage')
+            120 BUILD_TUPLE              2
+            122 BINARY_SUBSCR
+            124 STORE_NAME              22 (PagesDict)
+
+ 27         126 LOAD_BUILD_CLASS
+            128 LOAD_CONST               9 (<code object ExtractFormat at 0x000001F3253DAA80, file "LPClientFramework\LPWikipedia.py", line 27>)
+            130 LOAD_CONST              10 ('ExtractFormat')
+            132 MAKE_FUNCTION            0
+            134 LOAD_CONST              10 ('ExtractFormat')
+            136 LOAD_NAME                5 (IntEnum)
+            138 CALL_FUNCTION            3
+            140 STORE_NAME              23 (ExtractFormat)
+
+ 49         142 LOAD_BUILD_CLASS
+            144 LOAD_CONST              11 (<code object Namespace at 0x000001F3253DA710, file "LPClientFramework\LPWikipedia.py", line 49>)
+            146 LOAD_CONST              12 ('Namespace')
+            148 MAKE_FUNCTION            0
+            150 LOAD_CONST              12 ('Namespace')
+            152 LOAD_NAME                5 (IntEnum)
+            154 CALL_FUNCTION            3
+            156 STORE_NAME              24 (Namespace)
+
+ 99         158 LOAD_NAME               13 (Union)
+            160 LOAD_NAME               24 (Namespace)
+            162 LOAD_NAME               25 (int)
+            164 BUILD_TUPLE              2
+            166 BINARY_SUBSCR
+            168 STORE_NAME              26 (WikiNamespace)
+
+102         170 LOAD_NAME               26 (WikiNamespace)
+            172 LOAD_NAME               25 (int)
+            174 LOAD_CONST              13 (('namespace', 'return'))
+            176 BUILD_CONST_KEY_MAP      2
+            178 LOAD_CONST              14 (<code object namespace2int at 0x000001F3253DA450, file "LPClientFramework\LPWikipedia.py", line 102>)
+            180 LOAD_CONST              15 ('namespace2int')
+            182 MAKE_FUNCTION            4 (annotations)
+            184 STORE_NAME              27 (namespace2int)
+
+111         186 LOAD_NAME               23 (ExtractFormat)
+            188 LOAD_ATTR               28 (WIKI)
+            190 LOAD_NAME                7 (re)
+            192 LOAD_METHOD             29 (compile)
+            194 LOAD_CONST              16 ('\\n\\n *(===*) (.*?) (===*) *\\n')
+            196 CALL_METHOD              1
+
+112         198 LOAD_NAME               23 (ExtractFormat)
+            200 LOAD_ATTR               30 (HTML)
+            202 LOAD_NAME                7 (re)
+            204 LOAD_METHOD             29 (compile)
+
+113         206 LOAD_CONST              17 ('\\n? *<h([1-9])[^>]*?>(<span[^>]*></span>)? *(<span[^>]*>)? *(<span[^>]*></span>)? *(.*?) *(</span>)?(<span>Edit</span>)?</h[1-9]>\n?')
+
+112         208 CALL_METHOD              1
+
+110         210 BUILD_MAP                2
+            212 STORE_NAME              31 (RE_SECTION)
+
+123         214 LOAD_BUILD_CLASS
+            216 LOAD_CONST              18 (<code object Wikipedia at 0x000001F3253CE920, file "LPClientFramework\LPWikipedia.py", line 123>)
+            218 LOAD_CONST              19 ('Wikipedia')
+            220 MAKE_FUNCTION            0
+            222 LOAD_CONST              19 ('Wikipedia')
+            224 CALL_FUNCTION            2
+            226 STORE_NAME              32 (Wikipedia)
+
+661         228 LOAD_BUILD_CLASS
+            230 LOAD_CONST              20 (<code object WikipediaPageSection at 0x000001F3253CDF50, file "LPClientFramework\LPWikipedia.py", line 661>)
+            232 LOAD_CONST              21 ('WikipediaPageSection')
+            234 MAKE_FUNCTION            0
+            236 LOAD_CONST              21 ('WikipediaPageSection')
+            238 CALL_FUNCTION            2
+            240 STORE_NAME              33 (WikipediaPageSection)
+
+755         242 LOAD_BUILD_CLASS
+            244 LOAD_CONST              22 (<code object WikipediaPage at 0x000001F3253D2030, file "LPClientFramework\LPWikipedia.py", line 755>)
+            246 LOAD_CONST               8 ('WikipediaPage')
+            248 MAKE_FUNCTION            0
+            250 LOAD_CONST               8 ('WikipediaPage')
+            252 CALL_FUNCTION            2
+            254 STORE_NAME              34 (WikipediaPage)
+            256 LOAD_CONST               5 (None)
+            258 RETURN_VALUE
+
+=== ExtractFormat ===
+ 27           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('ExtractFormat')
+              6 STORE_NAME               2 (__qualname__)
+
+ 28           8 LOAD_CONST               1 ('Represents extraction format.')
+             10 STORE_NAME               3 (__doc__)
+
+ 30          12 LOAD_CONST               2 (1)
+             14 STORE_NAME               4 (WIKI)
+
+ 37          16 LOAD_CONST               3 (2)
+             18 STORE_NAME               5 (HTML)
+
+ 38          20 LOAD_CONST               4 (None)
+             22 RETURN_VALUE
+
+=== Namespace ===
+ 49           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('Namespace')
+              6 STORE_NAME               2 (__qualname__)
+
+ 50           8 LOAD_CONST               1 ('\n    Represents namespace in Wikipedia\n\n    You can gen list of possible namespaces here:\n\n    * https://en.wikipedia.org/wiki/Wikipedia:Namespace\n    * https://en.wikipedia.org/wiki/Wikipedia:Namespace#Programming\n\n    Currently following namespaces are supported:\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+ 61          12 LOAD_CONST               2 (0)
+             14 STORE_NAME               4 (MAIN)
+
+ 62          16 LOAD_CONST               3 (1)
+             18 STORE_NAME               5 (TALK)
+
+ 63          20 LOAD_CONST               4 (2)
+             22 STORE_NAME               6 (USER)
+
+ 64          24 LOAD_CONST               5 (3)
+             26 STORE_NAME               7 (USER_TALK)
+
+ 65          28 LOAD_CONST               6 (4)
+             30 STORE_NAME               8 (WIKIPEDIA)
+
+ 66          32 LOAD_CONST               7 (5)
+             34 STORE_NAME               9 (WIKIPEDIA_TALK)
+
+ 67          36 LOAD_CONST               8 (6)
+             38 STORE_NAME              10 (FILE)
+
+ 68          40 LOAD_CONST               9 (7)
+             42 STORE_NAME              11 (FILE_TALK)
+
+ 69          44 LOAD_CONST              10 (8)
+             46 STORE_NAME              12 (MEDIAWIKI)
+
+ 70          48 LOAD_CONST              11 (9)
+             50 STORE_NAME              13 (MEDIAWIKI_TALK)
+
+ 71          52 LOAD_CONST              12 (10)
+             54 STORE_NAME              14 (TEMPLATE)
+
+ 72          56 LOAD_CONST              13 (11)
+             58 STORE_NAME              15 (TEMPLATE_TALK)
+
+ 73          60 LOAD_CONST              14 (12)
+             62 STORE_NAME              16 (HELP)
+
+ 74          64 LOAD_CONST              15 (13)
+             66 STORE_NAME              17 (HELP_TALK)
+
+ 75          68 LOAD_CONST              16 (14)
+             70 STORE_NAME              18 (CATEGORY)
+
+ 76          72 LOAD_CONST              17 (15)
+             74 STORE_NAME              19 (CATEGORY_TALK)
+
+ 77          76 LOAD_CONST              18 (100)
+             78 STORE_NAME              20 (PORTAL)
+
+ 78          80 LOAD_CONST              19 (101)
+             82 STORE_NAME              21 (PORTAL_TALK)
+
+ 79          84 LOAD_CONST              20 (102)
+             86 STORE_NAME              22 (PROJECT)
+
+ 80          88 LOAD_CONST              21 (103)
+             90 STORE_NAME              23 (PROJECT_TALK)
+
+ 81          92 LOAD_CONST              22 (104)
+             94 STORE_NAME              24 (REFERENCE)
+
+ 82          96 LOAD_CONST              23 (105)
+             98 STORE_NAME              25 (REFERENCE_TALK)
+
+ 83         100 LOAD_CONST              24 (108)
+            102 STORE_NAME              26 (BOOK)
+
+ 84         104 LOAD_CONST              25 (109)
+            106 STORE_NAME              27 (BOOK_TALK)
+
+ 85         108 LOAD_CONST              26 (118)
+            110 STORE_NAME              28 (DRAFT)
+
+ 86         112 LOAD_CONST              27 (119)
+            114 STORE_NAME              29 (DRAFT_TALK)
+
+ 87         116 LOAD_CONST              28 (446)
+            118 STORE_NAME              30 (EDUCATION_PROGRAM)
+
+ 88         120 LOAD_CONST              29 (447)
+            122 STORE_NAME              31 (EDUCATION_PROGRAM_TALK)
+
+ 89         124 LOAD_CONST              30 (710)
+            126 STORE_NAME              32 (TIMED_TEXT)
+
+ 90         128 LOAD_CONST              31 (711)
+            130 STORE_NAME              33 (TIMED_TEXT_TALK)
+
+ 91         132 LOAD_CONST              32 (828)
+            134 STORE_NAME              34 (MODULE)
+
+ 92         136 LOAD_CONST              33 (829)
+            138 STORE_NAME              35 (MODULE_TALK)
+
+ 93         140 LOAD_CONST              34 (2300)
+            142 STORE_NAME              36 (GADGET)
+
+ 94         144 LOAD_CONST              35 (2301)
+            146 STORE_NAME              37 (GADGET_TALK)
+
+ 95         148 LOAD_CONST              36 (2302)
+            150 STORE_NAME              38 (GADGET_DEFINITION)
+
+ 96         152 LOAD_CONST              37 (2303)
+            154 STORE_NAME              39 (GADGET_DEFINITION_TALK)
+            156 LOAD_CONST              38 (None)
+            158 RETURN_VALUE
+
+=== namespace2int ===
+104           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (namespace)
+              4 LOAD_GLOBAL              1 (Namespace)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       16
+
+105          10 LOAD_FAST                0 (namespace)
+             12 LOAD_ATTR                2 (value)
+             14 RETURN_VALUE
+
+107     >>   16 LOAD_FAST                0 (namespace)
+             18 RETURN_VALUE
+
+=== Wikipedia ===
+123           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('Wikipedia')
+              6 STORE_NAME               2 (__qualname__)
+
+124           8 LOAD_CONST               1 ('Wikipedia is wrapper for Wikipedia API.')
+             10 STORE_NAME               3 (__doc__)
+
+128          12 LOAD_CONST               2 ('en')
+
+129          14 LOAD_NAME                4 (ExtractFormat)
+             16 LOAD_ATTR                5 (WIKI)
+
+130          18 LOAD_CONST               3 (None)
+
+131          20 LOAD_CONST               3 (None)
+
+126          22 BUILD_TUPLE              4
+
+128          24 LOAD_NAME                6 (str)
+
+129          26 LOAD_NAME                4 (ExtractFormat)
+
+130          28 LOAD_NAME                7 (Optional)
+             30 LOAD_NAME                8 (Dict)
+             32 LOAD_NAME                6 (str)
+             34 LOAD_NAME                9 (Any)
+             36 BUILD_TUPLE              2
+             38 BINARY_SUBSCR
+             40 BINARY_SUBSCR
+
+131          42 LOAD_NAME                6 (str)
+
+133          44 LOAD_CONST               3 (None)
+
+126          46 LOAD_CONST               4 (('language', 'extract_format', 'headers', 'cachePath', 'return'))
+             48 BUILD_CONST_KEY_MAP      5
+             50 LOAD_CONST               5 (<code object __init__ at 0x000001F3253DA3A0, file "LPClientFramework\LPWikipedia.py", line 126>)
+             52 LOAD_CONST               6 ('Wikipedia.__init__')
+             54 MAKE_FUNCTION            5 (defaults, annotations)
+             56 STORE_NAME              10 (__init__)
+
+163          58 LOAD_CONST               3 (None)
+             60 LOAD_CONST               7 (('return',))
+             62 BUILD_CONST_KEY_MAP      1
+             64 LOAD_CONST               8 (<code object __del__ at 0x000001F3253DA5B0, file "LPClientFramework\LPWikipedia.py", line 163>)
+             66 LOAD_CONST               9 ('Wikipedia.__del__')
+             68 MAKE_FUNCTION            4 (annotations)
+             70 STORE_NAME              11 (__del__)
+
+170          72 LOAD_NAME               12 (Namespace)
+             74 LOAD_ATTR               13 (MAIN)
+
+171          76 LOAD_CONST              10 (False)
+
+167          78 BUILD_TUPLE              2
+
+169          80 LOAD_NAME                6 (str)
+
+170          82 LOAD_NAME               14 (WikiNamespace)
+
+171          84 LOAD_NAME               15 (bool)
+
+172          86 LOAD_CONST              11 ('WikipediaPage')
+
+167          88 LOAD_CONST              12 (('title', 'ns', 'unquote', 'return'))
+             90 BUILD_CONST_KEY_MAP      4
+             92 LOAD_CONST              13 (<code object page at 0x000001F3253DA9D0, file "LPClientFramework\LPWikipedia.py", line 167>)
+             94 LOAD_CONST              14 ('Wikipedia.page')
+             96 MAKE_FUNCTION            5 (defaults, annotations)
+             98 STORE_NAME              16 (page)
+
+206         100 LOAD_NAME               12 (Namespace)
+            102 LOAD_ATTR               13 (MAIN)
+            104 LOAD_CONST              10 (False)
+
+205         106 BUILD_TUPLE              2
+
+206         108 LOAD_NAME                6 (str)
+            110 LOAD_NAME               14 (WikiNamespace)
+            112 LOAD_NAME               15 (bool)
+
+207         114 LOAD_CONST              11 ('WikipediaPage')
+
+205         116 LOAD_CONST              12 (('title', 'ns', 'unquote', 'return'))
+            118 BUILD_CONST_KEY_MAP      4
+            120 LOAD_CONST              15 (<code object article at 0x000001F3253DABE0, file "LPClientFramework\LPWikipedia.py", line 205>)
+            122 LOAD_CONST              16 ('Wikipedia.article')
+            124 MAKE_FUNCTION            5 (defaults, annotations)
+            126 STORE_NAME              17 (article)
+
+224         128 LOAD_CONST              11 ('WikipediaPage')
+            130 LOAD_NAME                6 (str)
+            132 LOAD_CONST              17 (('page', 'return'))
+            134 BUILD_CONST_KEY_MAP      2
+            136 LOAD_CONST              18 (<code object extracts at 0x000001F3253DA7C0, file "LPClientFramework\LPWikipedia.py", line 224>)
+            138 LOAD_CONST              19 ('Wikipedia.extracts')
+            140 MAKE_FUNCTION            4 (annotations)
+            142 STORE_NAME              18 (extracts)
+
+275         144 LOAD_CONST              11 ('WikipediaPage')
+            146 LOAD_CONST              11 ('WikipediaPage')
+            148 LOAD_CONST              17 (('page', 'return'))
+            150 BUILD_CONST_KEY_MAP      2
+            152 LOAD_CONST              20 (<code object info at 0x000001F3253DA870, file "LPClientFramework\LPWikipedia.py", line 275>)
+            154 LOAD_CONST              21 ('Wikipedia.info')
+            156 MAKE_FUNCTION            4 (annotations)
+            158 STORE_NAME              19 (info)
+
+311         160 LOAD_CONST              11 ('WikipediaPage')
+            162 LOAD_NAME               20 (PagesDict)
+            164 LOAD_CONST              17 (('page', 'return'))
+            166 BUILD_CONST_KEY_MAP      2
+            168 LOAD_CONST              22 (<code object langlinks at 0x000001F3253A2DF0, file "LPClientFramework\LPWikipedia.py", line 311>)
+            170 LOAD_CONST              23 ('Wikipedia.langlinks')
+            172 MAKE_FUNCTION            4 (annotations)
+            174 STORE_NAME              21 (langlinks)
+
+346         176 LOAD_CONST              11 ('WikipediaPage')
+            178 LOAD_NAME               20 (PagesDict)
+            180 LOAD_CONST              17 (('page', 'return'))
+            182 BUILD_CONST_KEY_MAP      2
+            184 LOAD_CONST              24 (<code object links at 0x000001F3253A2190, file "LPClientFramework\LPWikipedia.py", line 346>)
+            186 LOAD_CONST              25 ('Wikipedia.links')
+            188 MAKE_FUNCTION            4 (annotations)
+            190 STORE_NAME              22 (links)
+
+386         192 LOAD_CONST              11 ('WikipediaPage')
+            194 LOAD_NAME               20 (PagesDict)
+            196 LOAD_CONST              17 (('page', 'return'))
+            198 BUILD_CONST_KEY_MAP      2
+            200 LOAD_CONST              26 (<code object backlinks at 0x000001F3253A2EA0, file "LPClientFramework\LPWikipedia.py", line 386>)
+            202 LOAD_CONST              27 ('Wikipedia.backlinks')
+            204 MAKE_FUNCTION            4 (annotations)
+            206 STORE_NAME              23 (backlinks)
+
+420         208 LOAD_CONST              11 ('WikipediaPage')
+            210 LOAD_NAME               20 (PagesDict)
+            212 LOAD_CONST              17 (('page', 'return'))
+            214 BUILD_CONST_KEY_MAP      2
+            216 LOAD_CONST              28 (<code object categories at 0x000001F3253A2D40, file "LPClientFramework\LPWikipedia.py", line 420>)
+            218 LOAD_CONST              29 ('Wikipedia.categories')
+            220 MAKE_FUNCTION            4 (annotations)
+            222 STORE_NAME              24 (categories)
+
+453         224 LOAD_CONST              11 ('WikipediaPage')
+            226 LOAD_NAME               20 (PagesDict)
+            228 LOAD_CONST              17 (('page', 'return'))
+            230 BUILD_CONST_KEY_MAP      2
+            232 LOAD_CONST              30 (<code object categorymembers at 0x000001F3253A27C0, file "LPClientFramework\LPWikipedia.py", line 453>)
+            234 LOAD_CONST              31 ('Wikipedia.categorymembers')
+            236 MAKE_FUNCTION            4 (annotations)
+            238 STORE_NAME              25 (categorymembers)
+
+487         240 LOAD_CONST              11 ('WikipediaPage')
+            242 LOAD_NAME                8 (Dict)
+            244 LOAD_NAME                6 (str)
+            246 LOAD_NAME                9 (Any)
+            248 BUILD_TUPLE              2
+            250 BINARY_SUBSCR
+            252 LOAD_CONST              32 (('page', 'params'))
+            254 BUILD_CONST_KEY_MAP      2
+            256 LOAD_CONST              33 (<code object _query at 0x000001F3253CE710, file "LPClientFramework\LPWikipedia.py", line 487>)
+            258 LOAD_CONST              34 ('Wikipedia._query')
+            260 MAKE_FUNCTION            4 (annotations)
+            262 STORE_NAME              26 (_query)
+
+499         264 LOAD_CONST              11 ('WikipediaPage')
+            266 LOAD_NAME                6 (str)
+            268 LOAD_CONST              17 (('page', 'return'))
+            270 BUILD_CONST_KEY_MAP      2
+            272 LOAD_CONST              35 (<code object _build_extracts at 0x000001F3253CE7C0, file "LPClientFramework\LPWikipedia.py", line 499>)
+            274 LOAD_CONST              36 ('Wikipedia._build_extracts')
+            276 MAKE_FUNCTION            4 (annotations)
+            278 STORE_NAME              27 (_build_extracts)
+
+544         280 LOAD_CONST              37 (<code object _create_section at 0x000001F3253CE030, file "LPClientFramework\LPWikipedia.py", line 544>)
+            282 LOAD_CONST              38 ('Wikipedia._create_section')
+            284 MAKE_FUNCTION            0
+            286 STORE_NAME              28 (_create_section)
+
+558         288 LOAD_CONST              11 ('WikipediaPage')
+            290 LOAD_CONST              11 ('WikipediaPage')
+            292 LOAD_CONST              17 (('page', 'return'))
+            294 BUILD_CONST_KEY_MAP      2
+            296 LOAD_CONST              39 (<code object _build_info at 0x000001F3253CEDF0, file "LPClientFramework\LPWikipedia.py", line 558>)
+            298 LOAD_CONST              40 ('Wikipedia._build_info')
+            300 MAKE_FUNCTION            4 (annotations)
+            302 STORE_NAME              29 (_build_info)
+
+566         304 LOAD_NAME               20 (PagesDict)
+            306 LOAD_CONST               7 (('return',))
+            308 BUILD_CONST_KEY_MAP      1
+            310 LOAD_CONST              41 (<code object _build_langlinks at 0x000001F3253CEB30, file "LPClientFramework\LPWikipedia.py", line 566>)
+            312 LOAD_CONST              42 ('Wikipedia._build_langlinks')
+            314 MAKE_FUNCTION            4 (annotations)
+            316 STORE_NAME              30 (_build_langlinks)
+
+584         318 LOAD_NAME               20 (PagesDict)
+            320 LOAD_CONST               7 (('return',))
+            322 BUILD_CONST_KEY_MAP      1
+            324 LOAD_CONST              43 (<code object _build_links at 0x000001F3253CE660, file "LPClientFramework\LPWikipedia.py", line 584>)
+            326 LOAD_CONST              44 ('Wikipedia._build_links')
+            328 MAKE_FUNCTION            4 (annotations)
+            330 STORE_NAME              31 (_build_links)
+
+600         332 LOAD_NAME               20 (PagesDict)
+            334 LOAD_CONST               7 (('return',))
+            336 BUILD_CONST_KEY_MAP      1
+            338 LOAD_CONST              45 (<code object _build_backlinks at 0x000001F3253CEC90, file "LPClientFramework\LPWikipedia.py", line 600>)
+            340 LOAD_CONST              46 ('Wikipedia._build_backlinks')
+            342 MAKE_FUNCTION            4 (annotations)
+            344 STORE_NAME              32 (_build_backlinks)
+
+616         346 LOAD_NAME               20 (PagesDict)
+            348 LOAD_CONST               7 (('return',))
+            350 BUILD_CONST_KEY_MAP      1
+            352 LOAD_CONST              47 (<code object _build_categories at 0x000001F3253CE0E0, file "LPClientFramework\LPWikipedia.py", line 616>)
+            354 LOAD_CONST              48 ('Wikipedia._build_categories')
+            356 MAKE_FUNCTION            4 (annotations)
+            358 STORE_NAME              33 (_build_categories)
+
+632         360 LOAD_NAME               20 (PagesDict)
+            362 LOAD_CONST               7 (('return',))
+            364 BUILD_CONST_KEY_MAP      1
+            366 LOAD_CONST              49 (<code object _build_categorymembers at 0x000001F3253CE2F0, file "LPClientFramework\LPWikipedia.py", line 632>)
+            368 LOAD_CONST              50 ('Wikipedia._build_categorymembers')
+            370 MAKE_FUNCTION            4 (annotations)
+            372 STORE_NAME              34 (_build_categorymembers)
+
+651         374 LOAD_NAME               35 (staticmethod)
+
+652         376 LOAD_CONST              11 ('WikipediaPage')
+            378 LOAD_CONST              51 (('page',))
+            380 BUILD_CONST_KEY_MAP      1
+            382 LOAD_CONST              52 (<code object _common_attributes at 0x000001F3253CED40, file "LPClientFramework\LPWikipedia.py", line 651>)
+            384 LOAD_CONST              53 ('Wikipedia._common_attributes')
+            386 MAKE_FUNCTION            4 (annotations)
+            388 CALL_FUNCTION            1
+            390 STORE_NAME              36 (_common_attributes)
+            392 LOAD_CONST               3 (None)
+            394 RETURN_VALUE
+
+=== Wikipedia.__init__ ===
+149           0 LOAD_FAST                5 (kwargs)
+              2 LOAD_METHOD              0 (setdefault)
+              4 LOAD_CONST               1 ('timeout')
+              6 LOAD_CONST               2 (10.0)
+              8 CALL_METHOD              2
+             10 POP_TOP
+
+151          12 LOAD_FAST                1 (language)
+             14 LOAD_METHOD              1 (strip)
+             16 CALL_METHOD              0
+             18 LOAD_METHOD              2 (lower)
+             20 CALL_METHOD              0
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               3 (language)
+
+152          26 LOAD_FAST                2 (extract_format)
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               4 (extract_format)
+
+153          32 LOAD_FAST                3 (headers)
+             34 LOAD_CONST               3 (None)
+             36 IS_OP                    0
+             38 POP_JUMP_IF_FALSE       46
+             40 LOAD_GLOBAL              5 (dict)
+             42 CALL_FUNCTION            0
+             44 JUMP_FORWARD             2 (to 48)
+        >>   46 LOAD_FAST                3 (headers)
+        >>   48 STORE_FAST               6 (default_headers)
+
+154          50 LOAD_FAST                6 (default_headers)
+             52 LOAD_METHOD              0 (setdefault)
+
+155          54 LOAD_CONST               4 ('User-Agent')
+
+156          56 LOAD_CONST               5 ('Wikipedia-API (https://github.com/martin-majlis/Wikipedia-API)')
+
+154          58 CALL_METHOD              2
+             60 POP_TOP
+
+159          62 LOAD_GLOBAL              6 (requests_cache)
+             64 LOAD_METHOD              7 (CachedSession)
+             66 LOAD_FAST                4 (cachePath)
+             68 CALL_METHOD              1
+             70 LOAD_FAST                0 (self)
+             72 STORE_ATTR               8 (_session)
+
+160          74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                8 (_session)
+             78 LOAD_ATTR                9 (headers)
+             80 LOAD_METHOD             10 (update)
+             82 LOAD_FAST                6 (default_headers)
+             84 CALL_METHOD              1
+             86 POP_TOP
+
+161          88 LOAD_FAST                5 (kwargs)
+             90 LOAD_FAST                0 (self)
+             92 STORE_ATTR              11 (_request_kwargs)
+             94 LOAD_CONST               3 (None)
+             96 RETURN_VALUE
+
+=== Wikipedia.__del__ ===
+165           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_session)
+              4 LOAD_METHOD              1 (close)
+              6 CALL_METHOD              0
+              8 POP_TOP
+             10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+=== Wikipedia.page ===
+200           0 LOAD_FAST                3 (unquote)
+              2 POP_JUMP_IF_FALSE       14
+
+201           4 LOAD_GLOBAL              0 (parse)
+              6 LOAD_METHOD              1 (unquote)
+              8 LOAD_FAST                1 (title)
+             10 CALL_METHOD              1
+             12 STORE_FAST               1 (title)
+
+203     >>   14 LOAD_GLOBAL              2 (WikipediaPage)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_FAST                1 (title)
+             20 LOAD_FAST                2 (ns)
+             22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                3 (language)
+             26 LOAD_CONST               1 (('title', 'ns', 'language'))
+             28 CALL_FUNCTION_KW         4
+             30 RETURN_VALUE
+
+=== Wikipedia.article ===
+218           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (page)
+
+219           4 LOAD_FAST                1 (title)
+
+220           6 LOAD_FAST                2 (ns)
+
+221           8 LOAD_FAST                3 (unquote)
+
+218          10 LOAD_CONST               1 (('title', 'ns', 'unquote'))
+             12 CALL_FUNCTION_KW         3
+             14 RETURN_VALUE
+
+=== Wikipedia.extracts ===
+250           0 LOAD_CONST               1 ('query')
+
+251           2 LOAD_CONST               2 ('extracts')
+
+252           4 LOAD_FAST                1 (page)
+              6 LOAD_ATTR                0 (title)
+
+249           8 LOAD_CONST               3 (('action', 'prop', 'titles'))
+             10 BUILD_CONST_KEY_MAP      3
+             12 STORE_FAST               3 (params)
+
+255          14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                1 (extract_format)
+             18 LOAD_GLOBAL              2 (ExtractFormat)
+             20 LOAD_ATTR                3 (HTML)
+             22 COMPARE_OP               2 (==)
+             24 POP_JUMP_IF_FALSE       28
+
+257          26 JUMP_FORWARD            28 (to 56)
+
+258     >>   28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                1 (extract_format)
+             32 LOAD_GLOBAL              2 (ExtractFormat)
+             34 LOAD_ATTR                4 (WIKI)
+             36 COMPARE_OP               2 (==)
+             38 POP_JUMP_IF_FALSE       56
+
+259          40 LOAD_CONST               4 (1)
+             42 LOAD_FAST                3 (params)
+             44 LOAD_CONST               5 ('explaintext')
+             46 STORE_SUBSCR
+
+260          48 LOAD_CONST               6 ('wiki')
+             50 LOAD_FAST                3 (params)
+             52 LOAD_CONST               7 ('exsectionformat')
+             54 STORE_SUBSCR
+
+262     >>   56 LOAD_FAST                2 (kwargs)
+             58 STORE_FAST               4 (used_params)
+
+263          60 LOAD_FAST                4 (used_params)
+             62 LOAD_METHOD              5 (update)
+             64 LOAD_FAST                3 (params)
+             66 CALL_METHOD              1
+             68 POP_TOP
+
+265          70 LOAD_FAST                0 (self)
+             72 LOAD_METHOD              6 (_query)
+             74 LOAD_FAST                1 (page)
+             76 LOAD_FAST                4 (used_params)
+             78 CALL_METHOD              2
+             80 STORE_FAST               5 (raw)
+
+266          82 LOAD_FAST                0 (self)
+             84 LOAD_METHOD              7 (_common_attributes)
+             86 LOAD_FAST                5 (raw)
+             88 LOAD_CONST               1 ('query')
+             90 BINARY_SUBSCR
+             92 LOAD_FAST                1 (page)
+             94 CALL_METHOD              2
+             96 POP_TOP
+
+267          98 LOAD_FAST                5 (raw)
+            100 LOAD_CONST               1 ('query')
+            102 BINARY_SUBSCR
+            104 LOAD_CONST               8 ('pages')
+            106 BINARY_SUBSCR
+            108 STORE_FAST               6 (pages)
+
+268         110 LOAD_FAST                6 (pages)
+            112 LOAD_METHOD              8 (items)
+            114 CALL_METHOD              0
+            116 GET_ITER
+            118 FOR_ITER                46 (to 166)
+            120 UNPACK_SEQUENCE          2
+            122 STORE_FAST               7 (k)
+            124 STORE_FAST               8 (v)
+
+269         126 LOAD_FAST                7 (k)
+            128 LOAD_CONST               9 ('-1')
+            130 COMPARE_OP               2 (==)
+            132 POP_JUMP_IF_FALSE      150
+
+270         134 LOAD_CONST              10 (-1)
+            136 LOAD_FAST                1 (page)
+            138 LOAD_ATTR                9 (_attributes)
+            140 LOAD_CONST              11 ('pageid')
+            142 STORE_SUBSCR
+
+271         144 POP_TOP
+            146 LOAD_CONST              12 ('')
+            148 RETURN_VALUE
+
+272     >>  150 LOAD_FAST                0 (self)
+            152 LOAD_METHOD             10 (_build_extracts)
+            154 LOAD_FAST                8 (v)
+            156 LOAD_FAST                1 (page)
+            158 CALL_METHOD              2
+            160 ROT_TWO
+            162 POP_TOP
+            164 RETURN_VALUE
+
+273     >>  166 LOAD_CONST              12 ('')
+            168 RETURN_VALUE
+
+=== Wikipedia.info ===
+281           0 LOAD_CONST               1 ('query')
+
+282           2 LOAD_CONST               2 ('info')
+
+283           4 LOAD_FAST                1 (page)
+              6 LOAD_ATTR                0 (title)
+
+284           8 LOAD_CONST               3 ('|')
+             10 LOAD_METHOD              1 (join)
+
+285          12 BUILD_LIST               0
+             14 LOAD_CONST               4 (('protection', 'talkid', 'watched', 'watchers', 'visitingwatchers', 'notificationtimestamp', 'subjectid', 'url', 'readable', 'preload', 'displaytitle'))
+             16 LIST_EXTEND              1
+
+284          18 CALL_METHOD              1
+
+280          20 LOAD_CONST               5 (('action', 'prop', 'titles', 'inprop'))
+             22 BUILD_CONST_KEY_MAP      4
+             24 STORE_FAST               2 (params)
+
+300          26 LOAD_FAST                0 (self)
+             28 LOAD_METHOD              2 (_query)
+             30 LOAD_FAST                1 (page)
+             32 LOAD_FAST                2 (params)
+             34 CALL_METHOD              2
+             36 STORE_FAST               3 (raw)
+
+301          38 LOAD_FAST                0 (self)
+             40 LOAD_METHOD              3 (_common_attributes)
+             42 LOAD_FAST                3 (raw)
+             44 LOAD_CONST               1 ('query')
+             46 BINARY_SUBSCR
+             48 LOAD_FAST                1 (page)
+             50 CALL_METHOD              2
+             52 POP_TOP
+
+302          54 LOAD_FAST                3 (raw)
+             56 LOAD_CONST               1 ('query')
+             58 BINARY_SUBSCR
+             60 LOAD_CONST               6 ('pages')
+             62 BINARY_SUBSCR
+             64 STORE_FAST               4 (pages)
+
+303          66 LOAD_FAST                4 (pages)
+             68 LOAD_METHOD              4 (items)
+             70 CALL_METHOD              0
+             72 GET_ITER
+             74 FOR_ITER                48 (to 124)
+             76 UNPACK_SEQUENCE          2
+             78 STORE_FAST               5 (k)
+             80 STORE_FAST               6 (v)
+
+304          82 LOAD_FAST                5 (k)
+             84 LOAD_CONST               7 ('-1')
+             86 COMPARE_OP               2 (==)
+             88 POP_JUMP_IF_FALSE      108
+
+305          90 LOAD_CONST               8 (-1)
+             92 LOAD_FAST                1 (page)
+             94 LOAD_ATTR                5 (_attributes)
+             96 LOAD_CONST               9 ('pageid')
+             98 STORE_SUBSCR
+
+306         100 LOAD_FAST                1 (page)
+            102 ROT_TWO
+            104 POP_TOP
+            106 RETURN_VALUE
+
+308     >>  108 LOAD_FAST                0 (self)
+            110 LOAD_METHOD              6 (_build_info)
+            112 LOAD_FAST                6 (v)
+            114 LOAD_FAST                1 (page)
+            116 CALL_METHOD              2
+            118 ROT_TWO
+            120 POP_TOP
+            122 RETURN_VALUE
+
+309     >>  124 LOAD_FAST                1 (page)
+            126 RETURN_VALUE
+
+=== Wikipedia.langlinks ===
+326           0 LOAD_CONST               1 ('query')
+
+327           2 LOAD_CONST               2 ('langlinks')
+
+328           4 LOAD_FAST                1 (page)
+              6 LOAD_ATTR                0 (title)
+
+329           8 LOAD_CONST               3 (500)
+
+330          10 LOAD_CONST               4 ('url')
+
+325          12 LOAD_CONST               5 (('action', 'prop', 'titles', 'lllimit', 'llprop'))
+             14 BUILD_CONST_KEY_MAP      5
+             16 STORE_FAST               3 (params)
+
+333          18 LOAD_FAST                2 (kwargs)
+             20 STORE_FAST               4 (used_params)
+
+334          22 LOAD_FAST                4 (used_params)
+             24 LOAD_METHOD              1 (update)
+             26 LOAD_FAST                3 (params)
+             28 CALL_METHOD              1
+             30 POP_TOP
+
+336          32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              2 (_query)
+             36 LOAD_FAST                1 (page)
+             38 LOAD_FAST                4 (used_params)
+             40 CALL_METHOD              2
+             42 STORE_FAST               5 (raw)
+
+337          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              3 (_common_attributes)
+             48 LOAD_FAST                5 (raw)
+             50 LOAD_CONST               1 ('query')
+             52 BINARY_SUBSCR
+             54 LOAD_FAST                1 (page)
+             56 CALL_METHOD              2
+             58 POP_TOP
+
+338          60 LOAD_FAST                5 (raw)
+             62 LOAD_CONST               1 ('query')
+             64 BINARY_SUBSCR
+             66 LOAD_CONST               6 ('pages')
+             68 BINARY_SUBSCR
+             70 STORE_FAST               6 (pages)
+
+339          72 LOAD_FAST                6 (pages)
+             74 LOAD_METHOD              4 (items)
+             76 CALL_METHOD              0
+             78 GET_ITER
+             80 FOR_ITER                48 (to 130)
+             82 UNPACK_SEQUENCE          2
+             84 STORE_FAST               7 (k)
+             86 STORE_FAST               8 (v)
+
+340          88 LOAD_FAST                7 (k)
+             90 LOAD_CONST               7 ('-1')
+             92 COMPARE_OP               2 (==)
+             94 POP_JUMP_IF_FALSE      114
+
+341          96 LOAD_CONST               8 (-1)
+             98 LOAD_FAST                1 (page)
+            100 LOAD_ATTR                5 (_attributes)
+            102 LOAD_CONST               9 ('pageid')
+            104 STORE_SUBSCR
+
+342         106 BUILD_MAP                0
+            108 ROT_TWO
+            110 POP_TOP
+            112 RETURN_VALUE
+
+343     >>  114 LOAD_FAST                0 (self)
+            116 LOAD_METHOD              6 (_build_langlinks)
+            118 LOAD_FAST                8 (v)
+            120 LOAD_FAST                1 (page)
+            122 CALL_METHOD              2
+            124 ROT_TWO
+            126 POP_TOP
+            128 RETURN_VALUE
+
+344     >>  130 BUILD_MAP                0
+            132 RETURN_VALUE
+
+=== Wikipedia.links ===
+361           0 LOAD_CONST               1 ('query')
+
+362           2 LOAD_CONST               2 ('links')
+
+363           4 LOAD_FAST                1 (page)
+              6 LOAD_ATTR                0 (title)
+
+364           8 LOAD_CONST               3 (500)
+
+360          10 LOAD_CONST               4 (('action', 'prop', 'titles', 'pllimit'))
+             12 BUILD_CONST_KEY_MAP      4
+             14 STORE_FAST               3 (params)
+
+367          16 LOAD_FAST                2 (kwargs)
+             18 STORE_FAST               4 (used_params)
+
+368          20 LOAD_FAST                4 (used_params)
+             22 LOAD_METHOD              1 (update)
+             24 LOAD_FAST                3 (params)
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+370          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              2 (_query)
+             34 LOAD_FAST                1 (page)
+             36 LOAD_FAST                4 (used_params)
+             38 CALL_METHOD              2
+             40 STORE_FAST               5 (raw)
+
+371          42 LOAD_FAST                0 (self)
+             44 LOAD_METHOD              3 (_common_attributes)
+             46 LOAD_FAST                5 (raw)
+             48 LOAD_CONST               1 ('query')
+             50 BINARY_SUBSCR
+             52 LOAD_FAST                1 (page)
+             54 CALL_METHOD              2
+             56 POP_TOP
+
+372          58 LOAD_FAST                5 (raw)
+             60 LOAD_CONST               1 ('query')
+             62 BINARY_SUBSCR
+             64 LOAD_CONST               5 ('pages')
+             66 BINARY_SUBSCR
+             68 STORE_FAST               6 (pages)
+
+373          70 LOAD_FAST                6 (pages)
+             72 LOAD_METHOD              4 (items)
+             74 CALL_METHOD              0
+             76 GET_ITER
+             78 FOR_ITER               118 (to 198)
+             80 UNPACK_SEQUENCE          2
+             82 STORE_FAST               7 (k)
+             84 STORE_FAST               8 (v)
+
+374          86 LOAD_FAST                7 (k)
+             88 LOAD_CONST               6 ('-1')
+             90 COMPARE_OP               2 (==)
+             92 POP_JUMP_IF_FALSE      112
+
+375          94 LOAD_CONST               7 (-1)
+             96 LOAD_FAST                1 (page)
+             98 LOAD_ATTR                5 (_attributes)
+            100 LOAD_CONST               8 ('pageid')
+            102 STORE_SUBSCR
+
+376         104 BUILD_MAP                0
+            106 ROT_TWO
+            108 POP_TOP
+            110 RETURN_VALUE
+
+378     >>  112 LOAD_CONST               9 ('continue')
+            114 LOAD_FAST                5 (raw)
+            116 CONTAINS_OP              0
+            118 POP_JUMP_IF_FALSE      182
+
+379         120 LOAD_FAST                5 (raw)
+            122 LOAD_CONST               9 ('continue')
+            124 BINARY_SUBSCR
+            126 LOAD_CONST              10 ('plcontinue')
+            128 BINARY_SUBSCR
+            130 LOAD_FAST                3 (params)
+            132 LOAD_CONST              10 ('plcontinue')
+            134 STORE_SUBSCR
+
+380         136 LOAD_FAST                0 (self)
+            138 LOAD_METHOD              2 (_query)
+            140 LOAD_FAST                1 (page)
+            142 LOAD_FAST                3 (params)
+            144 CALL_METHOD              2
+            146 STORE_FAST               5 (raw)
+
+381         148 LOAD_FAST                8 (v)
+            150 LOAD_CONST               2 ('links')
+            152 DUP_TOP_TWO
+            154 BINARY_SUBSCR
+            156 LOAD_FAST                5 (raw)
+            158 LOAD_CONST               1 ('query')
+            160 BINARY_SUBSCR
+            162 LOAD_CONST               5 ('pages')
+            164 BINARY_SUBSCR
+            166 LOAD_FAST                7 (k)
+            168 BINARY_SUBSCR
+            170 LOAD_CONST               2 ('links')
+            172 BINARY_SUBSCR
+            174 INPLACE_ADD
+            176 ROT_THREE
+            178 STORE_SUBSCR
+            180 JUMP_ABSOLUTE          112
+
+383     >>  182 LOAD_FAST                0 (self)
+            184 LOAD_METHOD              6 (_build_links)
+            186 LOAD_FAST                8 (v)
+            188 LOAD_FAST                1 (page)
+            190 CALL_METHOD              2
+            192 ROT_TWO
+            194 POP_TOP
+            196 RETURN_VALUE
+
+384     >>  198 BUILD_MAP                0
+            200 RETURN_VALUE
+
+=== Wikipedia.backlinks ===
+401           0 LOAD_CONST               1 ('query')
+
+402           2 LOAD_CONST               2 ('backlinks')
+
+403           4 LOAD_FAST                1 (page)
+              6 LOAD_ATTR                0 (title)
+
+404           8 LOAD_CONST               3 (500)
+
+400          10 LOAD_CONST               4 (('action', 'list', 'bltitle', 'bllimit'))
+             12 BUILD_CONST_KEY_MAP      4
+             14 STORE_FAST               3 (params)
+
+407          16 LOAD_FAST                2 (kwargs)
+             18 STORE_FAST               4 (used_params)
+
+408          20 LOAD_FAST                4 (used_params)
+             22 LOAD_METHOD              1 (update)
+             24 LOAD_FAST                3 (params)
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+410          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              2 (_query)
+             34 LOAD_FAST                1 (page)
+             36 LOAD_FAST                4 (used_params)
+             38 CALL_METHOD              2
+             40 STORE_FAST               5 (raw)
+
+412          42 LOAD_FAST                0 (self)
+             44 LOAD_METHOD              3 (_common_attributes)
+             46 LOAD_FAST                5 (raw)
+             48 LOAD_CONST               1 ('query')
+             50 BINARY_SUBSCR
+             52 LOAD_FAST                1 (page)
+             54 CALL_METHOD              2
+             56 POP_TOP
+
+413          58 LOAD_FAST                5 (raw)
+             60 LOAD_CONST               1 ('query')
+             62 BINARY_SUBSCR
+             64 STORE_FAST               6 (v)
+
+414     >>   66 LOAD_CONST               5 ('continue')
+             68 LOAD_FAST                5 (raw)
+             70 CONTAINS_OP              0
+             72 POP_JUMP_IF_FALSE      128
+
+415          74 LOAD_FAST                5 (raw)
+             76 LOAD_CONST               5 ('continue')
+             78 BINARY_SUBSCR
+             80 LOAD_CONST               6 ('blcontinue')
+             82 BINARY_SUBSCR
+             84 LOAD_FAST                3 (params)
+             86 LOAD_CONST               6 ('blcontinue')
+             88 STORE_SUBSCR
+
+416          90 LOAD_FAST                0 (self)
+             92 LOAD_METHOD              2 (_query)
+             94 LOAD_FAST                1 (page)
+             96 LOAD_FAST                3 (params)
+             98 CALL_METHOD              2
+            100 STORE_FAST               5 (raw)
+
+417         102 LOAD_FAST                6 (v)
+            104 LOAD_CONST               2 ('backlinks')
+            106 DUP_TOP_TWO
+            108 BINARY_SUBSCR
+            110 LOAD_FAST                5 (raw)
+            112 LOAD_CONST               1 ('query')
+            114 BINARY_SUBSCR
+            116 LOAD_CONST               2 ('backlinks')
+            118 BINARY_SUBSCR
+            120 INPLACE_ADD
+            122 ROT_THREE
+            124 STORE_SUBSCR
+            126 JUMP_ABSOLUTE           66
+
+418     >>  128 LOAD_FAST                0 (self)
+            130 LOAD_METHOD              4 (_build_backlinks)
+            132 LOAD_FAST                6 (v)
+            134 LOAD_FAST                1 (page)
+            136 CALL_METHOD              2
+            138 RETURN_VALUE
+
+=== Wikipedia.categories ===
+434           0 LOAD_CONST               1 ('query')
+
+435           2 LOAD_CONST               2 ('categories')
+
+436           4 LOAD_FAST                1 (page)
+              6 LOAD_ATTR                0 (title)
+
+437           8 LOAD_CONST               3 (500)
+
+433          10 LOAD_CONST               4 (('action', 'prop', 'titles', 'cllimit'))
+             12 BUILD_CONST_KEY_MAP      4
+             14 STORE_FAST               3 (params)
+
+440          16 LOAD_FAST                2 (kwargs)
+             18 STORE_FAST               4 (used_params)
+
+441          20 LOAD_FAST                4 (used_params)
+             22 LOAD_METHOD              1 (update)
+             24 LOAD_FAST                3 (params)
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+443          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              2 (_query)
+             34 LOAD_FAST                1 (page)
+             36 LOAD_FAST                4 (used_params)
+             38 CALL_METHOD              2
+             40 STORE_FAST               5 (raw)
+
+444          42 LOAD_FAST                0 (self)
+             44 LOAD_METHOD              3 (_common_attributes)
+             46 LOAD_FAST                5 (raw)
+             48 LOAD_CONST               1 ('query')
+             50 BINARY_SUBSCR
+             52 LOAD_FAST                1 (page)
+             54 CALL_METHOD              2
+             56 POP_TOP
+
+445          58 LOAD_FAST                5 (raw)
+             60 LOAD_CONST               1 ('query')
+             62 BINARY_SUBSCR
+             64 LOAD_CONST               5 ('pages')
+             66 BINARY_SUBSCR
+             68 STORE_FAST               6 (pages)
+
+446          70 LOAD_FAST                6 (pages)
+             72 LOAD_METHOD              4 (items)
+             74 CALL_METHOD              0
+             76 GET_ITER
+             78 FOR_ITER                48 (to 128)
+             80 UNPACK_SEQUENCE          2
+             82 STORE_FAST               7 (k)
+             84 STORE_FAST               8 (v)
+
+447          86 LOAD_FAST                7 (k)
+             88 LOAD_CONST               6 ('-1')
+             90 COMPARE_OP               2 (==)
+             92 POP_JUMP_IF_FALSE      112
+
+448          94 LOAD_CONST               7 (-1)
+             96 LOAD_FAST                1 (page)
+             98 LOAD_ATTR                5 (_attributes)
+            100 LOAD_CONST               8 ('pageid')
+            102 STORE_SUBSCR
+
+449         104 BUILD_MAP                0
+            106 ROT_TWO
+            108 POP_TOP
+            110 RETURN_VALUE
+
+450     >>  112 LOAD_FAST                0 (self)
+            114 LOAD_METHOD              6 (_build_categories)
+            116 LOAD_FAST                8 (v)
+            118 LOAD_FAST                1 (page)
+            120 CALL_METHOD              2
+            122 ROT_TWO
+            124 POP_TOP
+            126 RETURN_VALUE
+
+451     >>  128 BUILD_MAP                0
+            130 RETURN_VALUE
+
+=== Wikipedia.categorymembers ===
+467           0 LOAD_CONST               1 ('query')
+
+468           2 LOAD_CONST               2 ('categorymembers')
+
+469           4 LOAD_FAST                1 (page)
+              6 LOAD_ATTR                0 (title)
+
+470           8 LOAD_CONST               3 (500)
+
+466          10 LOAD_CONST               4 (('action', 'list', 'cmtitle', 'cmlimit'))
+             12 BUILD_CONST_KEY_MAP      4
+             14 STORE_FAST               3 (params)
+
+473          16 LOAD_FAST                2 (kwargs)
+             18 STORE_FAST               4 (used_params)
+
+474          20 LOAD_FAST                4 (used_params)
+             22 LOAD_METHOD              1 (update)
+             24 LOAD_FAST                3 (params)
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+476          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              2 (_query)
+             34 LOAD_FAST                1 (page)
+             36 LOAD_FAST                4 (used_params)
+             38 CALL_METHOD              2
+             40 STORE_FAST               5 (raw)
+
+478          42 LOAD_FAST                0 (self)
+             44 LOAD_METHOD              3 (_common_attributes)
+             46 LOAD_FAST                5 (raw)
+             48 LOAD_CONST               1 ('query')
+             50 BINARY_SUBSCR
+             52 LOAD_FAST                1 (page)
+             54 CALL_METHOD              2
+             56 POP_TOP
+
+479          58 LOAD_FAST                5 (raw)
+             60 LOAD_CONST               1 ('query')
+             62 BINARY_SUBSCR
+             64 STORE_FAST               6 (v)
+
+480     >>   66 LOAD_CONST               5 ('continue')
+             68 LOAD_FAST                5 (raw)
+             70 CONTAINS_OP              0
+             72 POP_JUMP_IF_FALSE      128
+
+481          74 LOAD_FAST                5 (raw)
+             76 LOAD_CONST               5 ('continue')
+             78 BINARY_SUBSCR
+             80 LOAD_CONST               6 ('cmcontinue')
+             82 BINARY_SUBSCR
+             84 LOAD_FAST                3 (params)
+             86 LOAD_CONST               6 ('cmcontinue')
+             88 STORE_SUBSCR
+
+482          90 LOAD_FAST                0 (self)
+             92 LOAD_METHOD              2 (_query)
+             94 LOAD_FAST                1 (page)
+             96 LOAD_FAST                3 (params)
+             98 CALL_METHOD              2
+            100 STORE_FAST               5 (raw)
+
+483         102 LOAD_FAST                6 (v)
+            104 LOAD_CONST               2 ('categorymembers')
+            106 DUP_TOP_TWO
+            108 BINARY_SUBSCR
+            110 LOAD_FAST                5 (raw)
+            112 LOAD_CONST               1 ('query')
+            114 BINARY_SUBSCR
+            116 LOAD_CONST               2 ('categorymembers')
+            118 BINARY_SUBSCR
+            120 INPLACE_ADD
+            122 ROT_THREE
+            124 STORE_SUBSCR
+            126 JUMP_ABSOLUTE           66
+
+485     >>  128 LOAD_FAST                0 (self)
+            130 LOAD_METHOD              4 (_build_categorymembers)
+            132 LOAD_FAST                6 (v)
+            134 LOAD_FAST                1 (page)
+            136 CALL_METHOD              2
+            138 RETURN_VALUE
+
+=== Wikipedia._query ===
+489           0 LOAD_CONST               1 ('https://')
+              2 LOAD_FAST                1 (page)
+              4 LOAD_ATTR                0 (language)
+              6 BINARY_ADD
+              8 LOAD_CONST               2 ('.wikipedia.org/w/api.php')
+             10 BINARY_ADD
+             12 STORE_FAST               3 (base_url)
+
+490          14 LOAD_GLOBAL              1 (log)
+             16 LOAD_METHOD              2 (info)
+
+491          18 LOAD_CONST               3 ('Request URL: %s')
+
+492          20 LOAD_FAST                3 (base_url)
+             22 LOAD_CONST               4 ('?')
+             24 BINARY_ADD
+             26 LOAD_CONST               5 ('&')
+             28 LOAD_METHOD              3 (join)
+             30 LOAD_CONST               6 (<code object <listcomp> at 0x000001F3253A2920, file "LPClientFramework\LPWikipedia.py", line 492>)
+             32 LOAD_CONST               7 ('Wikipedia._query.<locals>.<listcomp>')
+             34 MAKE_FUNCTION            0
+             36 LOAD_FAST                2 (params)
+             38 LOAD_METHOD              4 (items)
+             40 CALL_METHOD              0
+             42 GET_ITER
+             44 CALL_FUNCTION            1
+             46 CALL_METHOD              1
+             48 BINARY_ADD
+
+490          50 CALL_METHOD              2
+             52 POP_TOP
+
+494          54 LOAD_CONST               8 ('json')
+             56 LOAD_FAST                2 (params)
+             58 LOAD_CONST               9 ('format')
+             60 STORE_SUBSCR
+
+495          62 LOAD_CONST              10 (1)
+             64 LOAD_FAST                2 (params)
+             66 LOAD_CONST              11 ('redirects')
+             68 STORE_SUBSCR
+
+496          70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR                5 (_session)
+             74 LOAD_ATTR                6 (get)
+             76 LOAD_FAST                3 (base_url)
+             78 BUILD_TUPLE              1
+             80 LOAD_CONST              12 ('params')
+             82 LOAD_FAST                2 (params)
+             84 BUILD_MAP                1
+             86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                7 (_request_kwargs)
+             90 DICT_MERGE               1
+             92 CALL_FUNCTION_EX         1
+             94 STORE_FAST               4 (r)
+
+497          96 LOAD_FAST                4 (r)
+             98 LOAD_METHOD              8 (json)
+            100 CALL_METHOD              0
+            102 RETURN_VALUE
+
+=== Wikipedia._query.<listcomp> ===
+492           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                24 (to 30)
+              6 UNPACK_SEQUENCE          2
+              8 STORE_FAST               1 (k)
+             10 STORE_FAST               2 (v)
+             12 LOAD_FAST                1 (k)
+             14 LOAD_CONST               0 ('=')
+             16 BINARY_ADD
+             18 LOAD_GLOBAL              0 (str)
+             20 LOAD_FAST                2 (v)
+             22 CALL_FUNCTION            1
+             24 BINARY_ADD
+             26 LIST_APPEND              2
+             28 JUMP_ABSOLUTE            4
+        >>   30 RETURN_VALUE
+
+=== Wikipedia._build_extracts ===
+501           0 LOAD_CONST               1 ('')
+              2 LOAD_FAST                2 (page)
+              4 STORE_ATTR               0 (_summary)
+
+502           6 LOAD_GLOBAL              1 (defaultdict)
+              8 LOAD_GLOBAL              2 (list)
+             10 CALL_FUNCTION            1
+             12 LOAD_FAST                2 (page)
+             14 STORE_ATTR               3 (_section_mapping)
+
+504          16 LOAD_FAST                0 (self)
+             18 LOAD_METHOD              4 (_common_attributes)
+             20 LOAD_FAST                1 (extract)
+             22 LOAD_FAST                2 (page)
+             24 CALL_METHOD              2
+             26 POP_TOP
+
+506          28 LOAD_FAST                2 (page)
+             30 BUILD_LIST               1
+             32 STORE_FAST               3 (section_stack)
+
+507          34 LOAD_CONST               2 (None)
+             36 STORE_FAST               4 (section)
+
+508          38 LOAD_CONST               3 (0)
+             40 STORE_FAST               5 (prev_pos)
+
+510          42 LOAD_GLOBAL              5 (re)
+             44 LOAD_METHOD              6 (finditer)
+             46 LOAD_GLOBAL              7 (RE_SECTION)
+             48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                8 (extract_format)
+             52 BINARY_SUBSCR
+             54 LOAD_FAST                1 (extract)
+             56 LOAD_CONST               4 ('extract')
+             58 BINARY_SUBSCR
+             60 CALL_METHOD              2
+             62 GET_ITER
+        >>   64 FOR_ITER               250 (to 316)
+             66 STORE_FAST               6 (match)
+
+511          68 LOAD_GLOBAL              9 (len)
+             70 LOAD_FAST                2 (page)
+             72 LOAD_ATTR                3 (_section_mapping)
+             74 CALL_FUNCTION            1
+             76 LOAD_CONST               3 (0)
+             78 COMPARE_OP               2 (==)
+             80 POP_JUMP_IF_FALSE      110
+
+512          82 LOAD_FAST                1 (extract)
+             84 LOAD_CONST               4 ('extract')
+             86 BINARY_SUBSCR
+             88 LOAD_CONST               3 (0)
+             90 LOAD_FAST                6 (match)
+             92 LOAD_METHOD             10 (start)
+             94 CALL_METHOD              0
+             96 BUILD_SLICE              2
+             98 BINARY_SUBSCR
+            100 LOAD_METHOD             11 (strip)
+            102 CALL_METHOD              0
+            104 LOAD_FAST                2 (page)
+            106 STORE_ATTR               0 (_summary)
+            108 JUMP_FORWARD            34 (to 144)
+
+513     >>  110 LOAD_FAST                4 (section)
+            112 LOAD_CONST               2 (None)
+            114 IS_OP                    1
+            116 POP_JUMP_IF_FALSE      144
+
+514         118 LOAD_FAST                1 (extract)
+            120 LOAD_CONST               4 ('extract')
+            122 BINARY_SUBSCR
+            124 LOAD_FAST                5 (prev_pos)
+            126 LOAD_FAST                6 (match)
+            128 LOAD_METHOD             10 (start)
+            130 CALL_METHOD              0
+            132 BUILD_SLICE              2
+            134 BINARY_SUBSCR
+            136 LOAD_METHOD             11 (strip)
+            138 CALL_METHOD              0
+            140 LOAD_FAST                4 (section)
+            142 STORE_ATTR              12 (_text)
+
+516     >>  144 LOAD_FAST                0 (self)
+            146 LOAD_METHOD             13 (_create_section)
+            148 LOAD_FAST                6 (match)
+            150 CALL_METHOD              1
+            152 STORE_FAST               4 (section)
+
+517         154 LOAD_FAST                4 (section)
+            156 LOAD_ATTR               14 (level)
+            158 LOAD_CONST               5 (1)
+            160 BINARY_ADD
+            162 STORE_FAST               7 (sec_level)
+
+519         164 LOAD_FAST                7 (sec_level)
+            166 LOAD_GLOBAL              9 (len)
+            168 LOAD_FAST                3 (section_stack)
+            170 CALL_FUNCTION            1
+            172 COMPARE_OP               4 (>)
+            174 POP_JUMP_IF_FALSE      188
+
+520         176 LOAD_FAST                3 (section_stack)
+            178 LOAD_METHOD             15 (append)
+            180 LOAD_FAST                4 (section)
+            182 CALL_METHOD              1
+            184 POP_TOP
+            186 JUMP_FORWARD            76 (to 264)
+
+521     >>  188 LOAD_FAST                7 (sec_level)
+            190 LOAD_GLOBAL              9 (len)
+            192 LOAD_FAST                3 (section_stack)
+            194 CALL_FUNCTION            1
+            196 COMPARE_OP               2 (==)
+            198 POP_JUMP_IF_FALSE      220
+
+522         200 LOAD_FAST                3 (section_stack)
+            202 LOAD_METHOD             16 (pop)
+            204 CALL_METHOD              0
+            206 POP_TOP
+
+523         208 LOAD_FAST                3 (section_stack)
+            210 LOAD_METHOD             15 (append)
+            212 LOAD_FAST                4 (section)
+            214 CALL_METHOD              1
+            216 POP_TOP
+            218 JUMP_FORWARD            44 (to 264)
+
+525     >>  220 LOAD_GLOBAL             17 (range)
+            222 LOAD_GLOBAL              9 (len)
+            224 LOAD_FAST                3 (section_stack)
+            226 CALL_FUNCTION            1
+            228 LOAD_FAST                7 (sec_level)
+            230 BINARY_SUBTRACT
+            232 LOAD_CONST               5 (1)
+            234 BINARY_ADD
+            236 CALL_FUNCTION            1
+            238 GET_ITER
+        >>  240 FOR_ITER                12 (to 254)
+            242 STORE_FAST               8 (_)
+
+526         244 LOAD_FAST                3 (section_stack)
+            246 LOAD_METHOD             16 (pop)
+            248 CALL_METHOD              0
+            250 POP_TOP
+            252 JUMP_ABSOLUTE          240
+
+527     >>  254 LOAD_FAST                3 (section_stack)
+            256 LOAD_METHOD             15 (append)
+            258 LOAD_FAST                4 (section)
+            260 CALL_METHOD              1
+            262 POP_TOP
+
+529     >>  264 LOAD_FAST                3 (section_stack)
+            266 LOAD_GLOBAL              9 (len)
+            268 LOAD_FAST                3 (section_stack)
+            270 CALL_FUNCTION            1
+            272 LOAD_CONST               6 (2)
+            274 BINARY_SUBTRACT
+            276 BINARY_SUBSCR
+            278 LOAD_ATTR               18 (_section)
+            280 LOAD_METHOD             15 (append)
+            282 LOAD_FAST                4 (section)
+            284 CALL_METHOD              1
+            286 POP_TOP
+
+532         288 LOAD_FAST                6 (match)
+            290 LOAD_METHOD             19 (end)
+            292 CALL_METHOD              0
+            294 STORE_FAST               5 (prev_pos)
+
+533         296 LOAD_FAST                2 (page)
+            298 LOAD_ATTR                3 (_section_mapping)
+            300 LOAD_FAST                4 (section)
+            302 LOAD_ATTR               20 (title)
+            304 BINARY_SUBSCR
+            306 LOAD_METHOD             15 (append)
+            308 LOAD_FAST                4 (section)
+            310 CALL_METHOD              1
+            312 POP_TOP
+            314 JUMP_ABSOLUTE           64
+
+536     >>  316 LOAD_FAST                2 (page)
+            318 LOAD_ATTR                0 (_summary)
+            320 LOAD_CONST               1 ('')
+            322 COMPARE_OP               2 (==)
+            324 EXTENDED_ARG             1
+            326 POP_JUMP_IF_FALSE      342
+
+537         328 LOAD_FAST                1 (extract)
+            330 LOAD_CONST               4 ('extract')
+            332 BINARY_SUBSCR
+            334 LOAD_METHOD             11 (strip)
+            336 CALL_METHOD              0
+            338 LOAD_FAST                2 (page)
+            340 STORE_ATTR               0 (_summary)
+
+539     >>  342 LOAD_FAST                5 (prev_pos)
+            344 LOAD_CONST               3 (0)
+            346 COMPARE_OP               4 (>)
+            348 EXTENDED_ARG             1
+            350 POP_JUMP_IF_FALSE      380
+            352 LOAD_FAST                4 (section)
+            354 LOAD_CONST               2 (None)
+            356 IS_OP                    1
+            358 EXTENDED_ARG             1
+            360 POP_JUMP_IF_FALSE      380
+
+540         362 LOAD_FAST                1 (extract)
+            364 LOAD_CONST               4 ('extract')
+            366 BINARY_SUBSCR
+            368 LOAD_FAST                5 (prev_pos)
+            370 LOAD_CONST               2 (None)
+            372 BUILD_SLICE              2
+            374 BINARY_SUBSCR
+            376 LOAD_FAST                4 (section)
+            378 STORE_ATTR              12 (_text)
+
+542     >>  380 LOAD_FAST                2 (page)
+            382 LOAD_ATTR                0 (_summary)
+            384 RETURN_VALUE
+
+=== Wikipedia._create_section ===
+546           0 LOAD_CONST               1 ('')
+              2 STORE_FAST               2 (sec_title)
+
+547           4 LOAD_CONST               2 (2)
+              6 STORE_FAST               3 (sec_level)
+
+548           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (extract_format)
+             12 LOAD_GLOBAL              1 (ExtractFormat)
+             14 LOAD_ATTR                2 (WIKI)
+             16 COMPARE_OP               2 (==)
+             18 POP_JUMP_IF_FALSE       50
+
+549          20 LOAD_FAST                1 (match)
+             22 LOAD_METHOD              3 (group)
+             24 LOAD_CONST               2 (2)
+             26 CALL_METHOD              1
+             28 LOAD_METHOD              4 (strip)
+             30 CALL_METHOD              0
+             32 STORE_FAST               2 (sec_title)
+
+550          34 LOAD_GLOBAL              5 (len)
+             36 LOAD_FAST                1 (match)
+             38 LOAD_METHOD              3 (group)
+             40 LOAD_CONST               3 (1)
+             42 CALL_METHOD              1
+             44 CALL_FUNCTION            1
+             46 STORE_FAST               3 (sec_level)
+             48 JUMP_FORWARD            44 (to 94)
+
+551     >>   50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                0 (extract_format)
+             54 LOAD_GLOBAL              1 (ExtractFormat)
+             56 LOAD_ATTR                6 (HTML)
+             58 COMPARE_OP               2 (==)
+             60 POP_JUMP_IF_FALSE       94
+
+552          62 LOAD_FAST                1 (match)
+             64 LOAD_METHOD              3 (group)
+             66 LOAD_CONST               4 (5)
+             68 CALL_METHOD              1
+             70 LOAD_METHOD              4 (strip)
+             72 CALL_METHOD              0
+             74 STORE_FAST               2 (sec_title)
+
+553          76 LOAD_GLOBAL              7 (int)
+             78 LOAD_FAST                1 (match)
+             80 LOAD_METHOD              3 (group)
+             82 LOAD_CONST               3 (1)
+             84 CALL_METHOD              1
+             86 LOAD_METHOD              4 (strip)
+             88 CALL_METHOD              0
+             90 CALL_FUNCTION            1
+             92 STORE_FAST               3 (sec_level)
+
+555     >>   94 LOAD_GLOBAL              8 (WikipediaPageSection)
+             96 LOAD_FAST                0 (self)
+             98 LOAD_FAST                2 (sec_title)
+            100 LOAD_FAST                3 (sec_level)
+            102 LOAD_CONST               3 (1)
+            104 BINARY_SUBTRACT
+            106 CALL_FUNCTION            3
+            108 STORE_FAST               4 (section)
+
+556         110 LOAD_FAST                4 (section)
+            112 RETURN_VALUE
+
+=== Wikipedia._build_info ===
+560           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_common_attributes)
+              4 LOAD_FAST                1 (extract)
+              6 LOAD_FAST                2 (page)
+              8 CALL_METHOD              2
+             10 POP_TOP
+
+561          12 LOAD_FAST                1 (extract)
+             14 LOAD_METHOD              1 (items)
+             16 CALL_METHOD              0
+             18 GET_ITER
+        >>   20 FOR_ITER                18 (to 40)
+             22 UNPACK_SEQUENCE          2
+             24 STORE_FAST               3 (k)
+             26 STORE_FAST               4 (v)
+
+562          28 LOAD_FAST                4 (v)
+             30 LOAD_FAST                2 (page)
+             32 LOAD_ATTR                2 (_attributes)
+             34 LOAD_FAST                3 (k)
+             36 STORE_SUBSCR
+             38 JUMP_ABSOLUTE           20
+
+564     >>   40 LOAD_FAST                2 (page)
+             42 RETURN_VALUE
+
+=== Wikipedia._build_langlinks ===
+568           0 BUILD_MAP                0
+              2 LOAD_FAST                2 (page)
+              4 STORE_ATTR               0 (_langlinks)
+
+570           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (_common_attributes)
+             10 LOAD_FAST                1 (extract)
+             12 LOAD_FAST                2 (page)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+572          18 LOAD_FAST                1 (extract)
+             20 LOAD_METHOD              2 (get)
+             22 LOAD_CONST               1 ('langlinks')
+             24 BUILD_LIST               0
+             26 CALL_METHOD              2
+             28 GET_ITER
+        >>   30 FOR_ITER                48 (to 80)
+             32 STORE_FAST               3 (langlink)
+
+573          34 LOAD_GLOBAL              3 (WikipediaPage)
+
+574          36 LOAD_FAST                0 (self)
+
+575          38 LOAD_FAST                3 (langlink)
+             40 LOAD_CONST               2 ('*')
+             42 BINARY_SUBSCR
+
+576          44 LOAD_GLOBAL              4 (Namespace)
+             46 LOAD_ATTR                5 (MAIN)
+
+577          48 LOAD_FAST                3 (langlink)
+             50 LOAD_CONST               3 ('lang')
+             52 BINARY_SUBSCR
+
+578          54 LOAD_FAST                3 (langlink)
+             56 LOAD_CONST               4 ('url')
+             58 BINARY_SUBSCR
+
+573          60 LOAD_CONST               5 (('wiki', 'title', 'ns', 'language', 'url'))
+             62 CALL_FUNCTION_KW         5
+             64 STORE_FAST               4 (p)
+
+580          66 LOAD_FAST                4 (p)
+             68 LOAD_FAST                2 (page)
+             70 LOAD_ATTR                0 (_langlinks)
+             72 LOAD_FAST                4 (p)
+             74 LOAD_ATTR                6 (language)
+             76 STORE_SUBSCR
+             78 JUMP_ABSOLUTE           30
+
+582     >>   80 LOAD_FAST                2 (page)
+             82 LOAD_ATTR                0 (_langlinks)
+             84 RETURN_VALUE
+
+=== Wikipedia._build_links ===
+586           0 BUILD_MAP                0
+              2 LOAD_FAST                2 (page)
+              4 STORE_ATTR               0 (_links)
+
+588           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (_common_attributes)
+             10 LOAD_FAST                1 (extract)
+             12 LOAD_FAST                2 (page)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+590          18 LOAD_FAST                1 (extract)
+             20 LOAD_METHOD              2 (get)
+             22 LOAD_CONST               1 ('links')
+             24 BUILD_LIST               0
+             26 CALL_METHOD              2
+             28 GET_ITER
+        >>   30 FOR_ITER                44 (to 76)
+             32 STORE_FAST               3 (link)
+
+591          34 LOAD_GLOBAL              3 (WikipediaPage)
+
+592          36 LOAD_FAST                0 (self)
+
+593          38 LOAD_FAST                3 (link)
+             40 LOAD_CONST               2 ('title')
+             42 BINARY_SUBSCR
+
+594          44 LOAD_GLOBAL              4 (int)
+             46 LOAD_FAST                3 (link)
+             48 LOAD_CONST               3 ('ns')
+             50 BINARY_SUBSCR
+             52 CALL_FUNCTION            1
+
+595          54 LOAD_FAST                2 (page)
+             56 LOAD_ATTR                5 (language)
+
+591          58 LOAD_CONST               4 (('wiki', 'title', 'ns', 'language'))
+             60 CALL_FUNCTION_KW         4
+             62 LOAD_FAST                2 (page)
+             64 LOAD_ATTR                0 (_links)
+             66 LOAD_FAST                3 (link)
+             68 LOAD_CONST               2 ('title')
+             70 BINARY_SUBSCR
+             72 STORE_SUBSCR
+             74 JUMP_ABSOLUTE           30
+
+598     >>   76 LOAD_FAST                2 (page)
+             78 LOAD_ATTR                0 (_links)
+             80 RETURN_VALUE
+
+=== Wikipedia._build_backlinks ===
+602           0 BUILD_MAP                0
+              2 LOAD_FAST                2 (page)
+              4 STORE_ATTR               0 (_backlinks)
+
+604           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (_common_attributes)
+             10 LOAD_FAST                1 (extract)
+             12 LOAD_FAST                2 (page)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+606          18 LOAD_FAST                1 (extract)
+             20 LOAD_METHOD              2 (get)
+             22 LOAD_CONST               1 ('backlinks')
+             24 BUILD_LIST               0
+             26 CALL_METHOD              2
+             28 GET_ITER
+        >>   30 FOR_ITER                44 (to 76)
+             32 STORE_FAST               3 (backlink)
+
+607          34 LOAD_GLOBAL              3 (WikipediaPage)
+
+608          36 LOAD_FAST                0 (self)
+
+609          38 LOAD_FAST                3 (backlink)
+             40 LOAD_CONST               2 ('title')
+             42 BINARY_SUBSCR
+
+610          44 LOAD_GLOBAL              4 (int)
+             46 LOAD_FAST                3 (backlink)
+             48 LOAD_CONST               3 ('ns')
+             50 BINARY_SUBSCR
+             52 CALL_FUNCTION            1
+
+611          54 LOAD_FAST                2 (page)
+             56 LOAD_ATTR                5 (language)
+
+607          58 LOAD_CONST               4 (('wiki', 'title', 'ns', 'language'))
+             60 CALL_FUNCTION_KW         4
+             62 LOAD_FAST                2 (page)
+             64 LOAD_ATTR                0 (_backlinks)
+             66 LOAD_FAST                3 (backlink)
+             68 LOAD_CONST               2 ('title')
+             70 BINARY_SUBSCR
+             72 STORE_SUBSCR
+             74 JUMP_ABSOLUTE           30
+
+614     >>   76 LOAD_FAST                2 (page)
+             78 LOAD_ATTR                0 (_backlinks)
+             80 RETURN_VALUE
+
+=== Wikipedia._build_categories ===
+618           0 BUILD_MAP                0
+              2 LOAD_FAST                2 (page)
+              4 STORE_ATTR               0 (_categories)
+
+620           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (_common_attributes)
+             10 LOAD_FAST                1 (extract)
+             12 LOAD_FAST                2 (page)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+622          18 LOAD_FAST                1 (extract)
+             20 LOAD_METHOD              2 (get)
+             22 LOAD_CONST               1 ('categories')
+             24 BUILD_LIST               0
+             26 CALL_METHOD              2
+             28 GET_ITER
+        >>   30 FOR_ITER                44 (to 76)
+             32 STORE_FAST               3 (category)
+
+623          34 LOAD_GLOBAL              3 (WikipediaPage)
+
+624          36 LOAD_FAST                0 (self)
+
+625          38 LOAD_FAST                3 (category)
+             40 LOAD_CONST               2 ('title')
+             42 BINARY_SUBSCR
+
+626          44 LOAD_GLOBAL              4 (int)
+             46 LOAD_FAST                3 (category)
+             48 LOAD_CONST               3 ('ns')
+             50 BINARY_SUBSCR
+             52 CALL_FUNCTION            1
+
+627          54 LOAD_FAST                2 (page)
+             56 LOAD_ATTR                5 (language)
+
+623          58 LOAD_CONST               4 (('wiki', 'title', 'ns', 'language'))
+             60 CALL_FUNCTION_KW         4
+             62 LOAD_FAST                2 (page)
+             64 LOAD_ATTR                0 (_categories)
+             66 LOAD_FAST                3 (category)
+             68 LOAD_CONST               2 ('title')
+             70 BINARY_SUBSCR
+             72 STORE_SUBSCR
+             74 JUMP_ABSOLUTE           30
+
+630     >>   76 LOAD_FAST                2 (page)
+             78 LOAD_ATTR                0 (_categories)
+             80 RETURN_VALUE
+
+=== Wikipedia._build_categorymembers ===
+634           0 BUILD_MAP                0
+              2 LOAD_FAST                2 (page)
+              4 STORE_ATTR               0 (_categorymembers)
+
+636           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (_common_attributes)
+             10 LOAD_FAST                1 (extract)
+             12 LOAD_FAST                2 (page)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+638          18 LOAD_FAST                1 (extract)
+             20 LOAD_METHOD              2 (get)
+             22 LOAD_CONST               1 ('categorymembers')
+             24 BUILD_LIST               0
+             26 CALL_METHOD              2
+             28 GET_ITER
+        >>   30 FOR_ITER                58 (to 90)
+             32 STORE_FAST               3 (member)
+
+639          34 LOAD_GLOBAL              3 (WikipediaPage)
+
+640          36 LOAD_FAST                0 (self)
+
+641          38 LOAD_FAST                3 (member)
+             40 LOAD_CONST               2 ('title')
+             42 BINARY_SUBSCR
+
+642          44 LOAD_GLOBAL              4 (int)
+             46 LOAD_FAST                3 (member)
+             48 LOAD_CONST               3 ('ns')
+             50 BINARY_SUBSCR
+             52 CALL_FUNCTION            1
+
+643          54 LOAD_FAST                2 (page)
+             56 LOAD_ATTR                5 (language)
+
+639          58 LOAD_CONST               4 (('wiki', 'title', 'ns', 'language'))
+             60 CALL_FUNCTION_KW         4
+             62 STORE_FAST               4 (p)
+
+645          64 LOAD_FAST                3 (member)
+             66 LOAD_CONST               5 ('pageid')
+             68 BINARY_SUBSCR
+             70 LOAD_FAST                4 (p)
+             72 STORE_ATTR               6 (pageid)
+
+647          74 LOAD_FAST                4 (p)
+             76 LOAD_FAST                2 (page)
+             78 LOAD_ATTR                0 (_categorymembers)
+             80 LOAD_FAST                3 (member)
+             82 LOAD_CONST               2 ('title')
+             84 BINARY_SUBSCR
+             86 STORE_SUBSCR
+             88 JUMP_ABSOLUTE           30
+
+649     >>   90 LOAD_FAST                2 (page)
+             92 LOAD_ATTR                0 (_categorymembers)
+             94 RETURN_VALUE
+
+=== Wikipedia._common_attributes ===
+654           0 BUILD_LIST               0
+              2 LOAD_CONST               1 (('title', 'pageid', 'ns', 'redirects'))
+              4 LIST_EXTEND              1
+              6 STORE_FAST               2 (common_attributes)
+
+656           8 LOAD_FAST                2 (common_attributes)
+             10 GET_ITER
+        >>   12 FOR_ITER                26 (to 40)
+             14 STORE_FAST               3 (attr)
+
+657          16 LOAD_FAST                3 (attr)
+             18 LOAD_FAST                0 (extract)
+             20 CONTAINS_OP              0
+             22 POP_JUMP_IF_FALSE       12
+
+658          24 LOAD_FAST                0 (extract)
+             26 LOAD_FAST                3 (attr)
+             28 BINARY_SUBSCR
+             30 LOAD_FAST                1 (page)
+             32 LOAD_ATTR                0 (_attributes)
+             34 LOAD_FAST                3 (attr)
+             36 STORE_SUBSCR
+             38 JUMP_ABSOLUTE           12
+        >>   40 LOAD_CONST               2 (None)
+             42 RETURN_VALUE
+
+=== WikipediaPageSection ===
+661           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('WikipediaPageSection')
+              6 STORE_NAME               2 (__qualname__)
+
+662           8 LOAD_CONST               1 ('WikipediaPageSection represents section in the page.')
+             10 STORE_NAME               3 (__doc__)
+
+664          12 LOAD_CONST              26 ((0, ''))
+
+665          14 LOAD_NAME                4 (Wikipedia)
+             16 LOAD_NAME                5 (str)
+             18 LOAD_NAME                6 (int)
+             20 LOAD_NAME                5 (str)
+
+666          22 LOAD_CONST               4 (None)
+
+664          24 LOAD_CONST               5 (('wiki', 'title', 'level', 'text', 'return'))
+             26 BUILD_CONST_KEY_MAP      5
+             28 LOAD_CONST               6 (<code object __init__ at 0x000001F3253CEF50, file "LPClientFramework\LPWikipedia.py", line 664>)
+             30 LOAD_CONST               7 ('WikipediaPageSection.__init__')
+             32 MAKE_FUNCTION            5 (defaults, annotations)
+             34 STORE_NAME               7 (__init__)
+
+674          36 LOAD_NAME                8 (property)
+
+675          38 LOAD_NAME                5 (str)
+             40 LOAD_CONST               8 (('return',))
+             42 BUILD_CONST_KEY_MAP      1
+             44 LOAD_CONST               9 (<code object title at 0x000001F3253CE5B0, file "LPClientFramework\LPWikipedia.py", line 674>)
+             46 LOAD_CONST              10 ('WikipediaPageSection.title')
+             48 MAKE_FUNCTION            4 (annotations)
+             50 CALL_FUNCTION            1
+             52 STORE_NAME               9 (title)
+
+683          54 LOAD_NAME                8 (property)
+
+684          56 LOAD_NAME                6 (int)
+             58 LOAD_CONST               8 (('return',))
+             60 BUILD_CONST_KEY_MAP      1
+             62 LOAD_CONST              11 (<code object level at 0x000001F3253CE240, file "LPClientFramework\LPWikipedia.py", line 683>)
+             64 LOAD_CONST              12 ('WikipediaPageSection.level')
+             66 MAKE_FUNCTION            4 (annotations)
+             68 CALL_FUNCTION            1
+             70 STORE_NAME              10 (level)
+
+692          72 LOAD_NAME                8 (property)
+
+693          74 LOAD_NAME                5 (str)
+             76 LOAD_CONST               8 (('return',))
+             78 BUILD_CONST_KEY_MAP      1
+             80 LOAD_CONST              13 (<code object text at 0x000001F3253CE870, file "LPClientFramework\LPWikipedia.py", line 692>)
+             82 LOAD_CONST              14 ('WikipediaPageSection.text')
+             84 MAKE_FUNCTION            4 (annotations)
+             86 CALL_FUNCTION            1
+             88 STORE_NAME              11 (text)
+
+701          90 LOAD_NAME                8 (property)
+
+702          92 LOAD_NAME               12 (List)
+             94 LOAD_CONST               0 ('WikipediaPageSection')
+             96 BINARY_SUBSCR
+             98 LOAD_CONST               8 (('return',))
+            100 BUILD_CONST_KEY_MAP      1
+            102 LOAD_CONST              15 (<code object sections at 0x000001F3253CE450, file "LPClientFramework\LPWikipedia.py", line 701>)
+            104 LOAD_CONST              16 ('WikipediaPageSection.sections')
+            106 MAKE_FUNCTION            4 (annotations)
+            108 CALL_FUNCTION            1
+            110 STORE_NAME              13 (sections)
+
+710         112 LOAD_NAME                5 (str)
+            114 LOAD_NAME               14 (Optional)
+            116 LOAD_CONST               0 ('WikipediaPageSection')
+            118 BINARY_SUBSCR
+            120 LOAD_CONST              17 (('title', 'return'))
+            122 BUILD_CONST_KEY_MAP      2
+            124 LOAD_CONST              18 (<code object section_by_title at 0x000001F3253CEEA0, file "LPClientFramework\LPWikipedia.py", line 710>)
+            126 LOAD_CONST              19 ('WikipediaPageSection.section_by_title')
+            128 MAKE_FUNCTION            4 (annotations)
+            130 STORE_NAME              15 (section_by_title)
+
+722         132 LOAD_CONST              27 ((1,))
+            134 LOAD_NAME                6 (int)
+            136 LOAD_NAME                5 (str)
+            138 LOAD_CONST              21 (('level', 'return'))
+            140 BUILD_CONST_KEY_MAP      2
+            142 LOAD_CONST              22 (<code object full_text at 0x000001F3253CDC90, file "LPClientFramework\LPWikipedia.py", line 722>)
+            144 LOAD_CONST              23 ('WikipediaPageSection.full_text')
+            146 MAKE_FUNCTION            5 (defaults, annotations)
+            148 STORE_NAME              16 (full_text)
+
+745         150 LOAD_CONST              24 (<code object __repr__ at 0x000001F3253CDD40, file "LPClientFramework\LPWikipedia.py", line 745>)
+            152 LOAD_CONST              25 ('WikipediaPageSection.__repr__')
+            154 MAKE_FUNCTION            0
+            156 STORE_NAME              17 (__repr__)
+            158 LOAD_CONST               4 (None)
+            160 RETURN_VALUE
+
+=== WikipediaPageSection.__init__ ===
+668           0 LOAD_FAST                1 (wiki)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (wiki)
+
+669           6 LOAD_FAST                2 (title)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_title)
+
+670          12 LOAD_FAST                3 (level)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_level)
+
+671          18 LOAD_FAST                4 (text)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (_text)
+
+672          24 BUILD_LIST               0
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (_section)
+             30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+=== WikipediaPageSection.title ===
+681           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_title)
+              4 RETURN_VALUE
+
+=== WikipediaPageSection.level ===
+690           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_level)
+              4 RETURN_VALUE
+
+=== WikipediaPageSection.text ===
+699           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_text)
+              4 RETURN_VALUE
+
+=== WikipediaPageSection.sections ===
+708           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_section)
+              4 RETURN_VALUE
+
+=== WikipediaPageSection.section_by_title ===
+717           0 LOAD_CLOSURE             0 (title)
+              2 BUILD_TUPLE              1
+              4 LOAD_CONST               1 (<code object <listcomp> at 0x000001F3253CE9D0, file "LPClientFramework\LPWikipedia.py", line 717>)
+              6 LOAD_CONST               2 ('WikipediaPageSection.section_by_title.<locals>.<listcomp>')
+              8 MAKE_FUNCTION            8 (closure)
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_section)
+             14 GET_ITER
+             16 CALL_FUNCTION            1
+             18 STORE_FAST               2 (sections)
+
+718          20 LOAD_FAST                2 (sections)
+             22 POP_JUMP_IF_FALSE       32
+
+719          24 LOAD_FAST                2 (sections)
+             26 LOAD_CONST               3 (-1)
+             28 BINARY_SUBSCR
+             30 RETURN_VALUE
+
+720     >>   32 LOAD_CONST               4 (None)
+             34 RETURN_VALUE
+
+=== WikipediaPageSection.section_by_title.<listcomp> ===
+717           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (s)
+              8 LOAD_FAST                1 (s)
+             10 LOAD_ATTR                0 (title)
+             12 LOAD_DEREF               0 (title)
+             14 COMPARE_OP               2 (==)
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_FAST                1 (s)
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE
+
+=== WikipediaPageSection.full_text ===
+729           0 LOAD_CONST               1 ('')
+              2 STORE_FAST               2 (res)
+
+730           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                0 (wiki)
+              8 LOAD_ATTR                1 (extract_format)
+             10 LOAD_GLOBAL              2 (ExtractFormat)
+             12 LOAD_ATTR                3 (WIKI)
+             14 COMPARE_OP               2 (==)
+             16 POP_JUMP_IF_FALSE       30
+
+731          18 LOAD_FAST                2 (res)
+             20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                4 (title)
+             24 INPLACE_ADD
+             26 STORE_FAST               2 (res)
+             28 JUMP_FORWARD            54 (to 84)
+
+732     >>   30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                0 (wiki)
+             34 LOAD_ATTR                1 (extract_format)
+             36 LOAD_GLOBAL              2 (ExtractFormat)
+             38 LOAD_ATTR                5 (HTML)
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       76
+
+733          44 LOAD_FAST                2 (res)
+             46 LOAD_CONST               2 ('<h')
+             48 LOAD_FAST                1 (level)
+             50 FORMAT_VALUE             0
+             52 LOAD_CONST               3 ('>')
+             54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                4 (title)
+             58 FORMAT_VALUE             0
+             60 LOAD_CONST               4 ('</h')
+             62 LOAD_FAST                1 (level)
+             64 FORMAT_VALUE             0
+             66 LOAD_CONST               3 ('>')
+             68 BUILD_STRING             7
+             70 INPLACE_ADD
+             72 STORE_FAST               2 (res)
+             74 JUMP_FORWARD             8 (to 84)
+
+735     >>   76 LOAD_GLOBAL              6 (NotImplementedError)
+             78 LOAD_CONST               5 ('Unknown ExtractFormat type')
+             80 CALL_FUNCTION            1
+             82 RAISE_VARARGS            1
+
+737     >>   84 LOAD_FAST                2 (res)
+             86 LOAD_CONST               6 ('\n')
+             88 INPLACE_ADD
+             90 STORE_FAST               2 (res)
+
+738          92 LOAD_FAST                2 (res)
+             94 LOAD_FAST                0 (self)
+             96 LOAD_ATTR                7 (_text)
+             98 INPLACE_ADD
+            100 STORE_FAST               2 (res)
+
+739         102 LOAD_GLOBAL              8 (len)
+            104 LOAD_FAST                0 (self)
+            106 LOAD_ATTR                7 (_text)
+            108 CALL_FUNCTION            1
+            110 LOAD_CONST               7 (0)
+            112 COMPARE_OP               4 (>)
+            114 POP_JUMP_IF_FALSE      124
+
+740         116 LOAD_FAST                2 (res)
+            118 LOAD_CONST               8 ('\n\n')
+            120 INPLACE_ADD
+            122 STORE_FAST               2 (res)
+
+741     >>  124 LOAD_FAST                0 (self)
+            126 LOAD_ATTR                9 (sections)
+            128 GET_ITER
+        >>  130 FOR_ITER                22 (to 154)
+            132 STORE_FAST               3 (sec)
+
+742         134 LOAD_FAST                2 (res)
+            136 LOAD_FAST                3 (sec)
+            138 LOAD_METHOD             10 (full_text)
+            140 LOAD_FAST                1 (level)
+            142 LOAD_CONST               9 (1)
+            144 BINARY_ADD
+            146 CALL_METHOD              1
+            148 INPLACE_ADD
+            150 STORE_FAST               2 (res)
+            152 JUMP_ABSOLUTE          130
+
+743     >>  154 LOAD_FAST                2 (res)
+            156 RETURN_VALUE
+
+=== WikipediaPageSection.__repr__ ===
+746           0 LOAD_CONST               1 ('Section: {} ({}):\n{}\nSubsections ({}):\n{}')
+              2 LOAD_METHOD              0 (format)
+
+747           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (_title)
+
+748           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                2 (_level)
+
+749          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                3 (_text)
+
+750          16 LOAD_GLOBAL              4 (len)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                5 (_section)
+             22 CALL_FUNCTION            1
+
+751          24 LOAD_CONST               2 ('\n')
+             26 LOAD_METHOD              6 (join)
+             28 LOAD_GLOBAL              7 (map)
+             30 LOAD_GLOBAL              8 (repr)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                5 (_section)
+             36 CALL_FUNCTION            2
+             38 CALL_METHOD              1
+
+746          40 CALL_METHOD              5
+             42 RETURN_VALUE
+
+=== WikipediaPage ===
+ 755           0 LOAD_NAME                0 (__name__)
+               2 STORE_NAME               1 (__module__)
+               4 LOAD_CONST               0 ('WikipediaPage')
+               6 STORE_NAME               2 (__qualname__)
+
+ 756           8 LOAD_CONST               1 ('\n    Represents Wikipedia page.\n\n    Except properties mentioned as part of documentation, there are also\n    these properties available:\n\n    * `fullurl` - full URL of the page\n    * `canonicalurl` - canonical URL of the page\n    * `pageid` - id of the current page\n    * `displaytitle` - title of the page to display\n    * `talkid` - id of the page with discussion\n\n    ')
+              10 STORE_NAME               3 (__doc__)
+
+ 771          12 BUILD_LIST               0
+
+ 772          14 BUILD_LIST               0
+              16 LOAD_CONST               2 (('info', 'extracts', 'langlinks'))
+              18 LIST_EXTEND              1
+
+ 773          20 BUILD_LIST               0
+              22 LOAD_CONST               2 (('info', 'extracts', 'langlinks'))
+              24 LIST_EXTEND              1
+
+ 774          26 BUILD_LIST               0
+              28 LOAD_CONST               2 (('info', 'extracts', 'langlinks'))
+              30 LIST_EXTEND              1
+
+ 775          32 LOAD_CONST               3 ('info')
+              34 BUILD_LIST               1
+
+ 776          36 LOAD_CONST               3 ('info')
+              38 BUILD_LIST               1
+
+ 777          40 LOAD_CONST               3 ('info')
+              42 BUILD_LIST               1
+
+ 778          44 LOAD_CONST               3 ('info')
+              46 BUILD_LIST               1
+
+ 779          48 LOAD_CONST               3 ('info')
+              50 BUILD_LIST               1
+
+ 780          52 LOAD_CONST               3 ('info')
+              54 BUILD_LIST               1
+
+ 781          56 LOAD_CONST               3 ('info')
+              58 BUILD_LIST               1
+
+ 782          60 LOAD_CONST               3 ('info')
+              62 BUILD_LIST               1
+
+ 783          64 LOAD_CONST               3 ('info')
+              66 BUILD_LIST               1
+
+ 784          68 LOAD_CONST               3 ('info')
+              70 BUILD_LIST               1
+
+ 785          72 LOAD_CONST               3 ('info')
+              74 BUILD_LIST               1
+
+ 786          76 LOAD_CONST               3 ('info')
+              78 BUILD_LIST               1
+
+ 787          80 LOAD_CONST               3 ('info')
+              82 BUILD_LIST               1
+
+ 788          84 LOAD_CONST               3 ('info')
+              86 BUILD_LIST               1
+
+ 789          88 LOAD_CONST               3 ('info')
+              90 BUILD_LIST               1
+
+ 790          92 LOAD_CONST               3 ('info')
+              94 BUILD_LIST               1
+
+ 791          96 LOAD_CONST               3 ('info')
+              98 BUILD_LIST               1
+
+ 792         100 LOAD_CONST               3 ('info')
+             102 BUILD_LIST               1
+
+ 793         104 LOAD_CONST               3 ('info')
+             106 BUILD_LIST               1
+
+ 770         108 LOAD_CONST               4 (('language', 'pageid', 'ns', 'title', 'contentmodel', 'pagelanguage', 'pagelanguagehtmlcode', 'pagelanguagedir', 'touched', 'lastrevid', 'length', 'protection', 'restrictiontypes', 'watchers', 'visitingwatchers', 'notificationtimestamp', 'talkid', 'fullurl', 'editurl', 'canonicalurl', 'readable', 'preload', 'displaytitle'))
+             110 BUILD_CONST_KEY_MAP     23
+             112 STORE_NAME               4 (ATTRIBUTES_MAPPING)
+
+ 800         114 LOAD_NAME                5 (Namespace)
+             116 LOAD_ATTR                6 (MAIN)
+
+ 801         118 LOAD_CONST               5 ('en')
+
+ 802         120 LOAD_CONST               6 (None)
+
+ 796         122 BUILD_TUPLE              3
+
+ 798         124 LOAD_NAME                7 (Wikipedia)
+
+ 799         126 LOAD_NAME                8 (str)
+
+ 800         128 LOAD_NAME                9 (WikiNamespace)
+
+ 801         130 LOAD_NAME                8 (str)
+
+ 802         132 LOAD_NAME               10 (Optional)
+             134 LOAD_NAME                8 (str)
+             136 BINARY_SUBSCR
+
+ 803         138 LOAD_CONST               6 (None)
+
+ 796         140 LOAD_CONST               7 (('wiki', 'title', 'ns', 'language', 'url', 'return'))
+             142 BUILD_CONST_KEY_MAP      6
+             144 LOAD_CONST               8 (<code object __init__ at 0x000001F3253CDEA0, file "LPClientFramework\LPWikipedia.py", line 796>)
+             146 LOAD_CONST               9 ('WikipediaPage.__init__')
+             148 MAKE_FUNCTION            5 (defaults, annotations)
+             150 STORE_NAME              11 (__init__)
+
+ 833         152 LOAD_CONST              10 (<code object __getattr__ at 0x000001F324E76C90, file "LPClientFramework\LPWikipedia.py", line 833>)
+             154 LOAD_CONST              11 ('WikipediaPage.__getattr__')
+             156 MAKE_FUNCTION            0
+             158 STORE_NAME              12 (__getattr__)
+
+ 845         160 LOAD_NAME               13 (property)
+
+ 846         162 LOAD_NAME                8 (str)
+             164 LOAD_CONST              12 (('return',))
+             166 BUILD_CONST_KEY_MAP      1
+             168 LOAD_CONST              13 (<code object language at 0x000001F324E76F50, file "LPClientFramework\LPWikipedia.py", line 845>)
+             170 LOAD_CONST              14 ('WikipediaPage.language')
+             172 MAKE_FUNCTION            4 (annotations)
+             174 CALL_FUNCTION            1
+             176 STORE_NAME              14 (language)
+
+ 854         178 LOAD_NAME               13 (property)
+
+ 855         180 LOAD_NAME                8 (str)
+             182 LOAD_CONST              12 (('return',))
+             184 BUILD_CONST_KEY_MAP      1
+             186 LOAD_CONST              15 (<code object title at 0x000001F324E769D0, file "LPClientFramework\LPWikipedia.py", line 854>)
+             188 LOAD_CONST              16 ('WikipediaPage.title')
+             190 MAKE_FUNCTION            4 (annotations)
+             192 CALL_FUNCTION            1
+             194 STORE_NAME              15 (title)
+
+ 863         196 LOAD_NAME               13 (property)
+
+ 864         198 LOAD_NAME               16 (int)
+             200 LOAD_CONST              12 (('return',))
+             202 BUILD_CONST_KEY_MAP      1
+             204 LOAD_CONST              17 (<code object namespace at 0x000001F324E76B30, file "LPClientFramework\LPWikipedia.py", line 863>)
+             206 LOAD_CONST              18 ('WikipediaPage.namespace')
+             208 MAKE_FUNCTION            4 (annotations)
+             210 CALL_FUNCTION            1
+             212 STORE_NAME              17 (namespace)
+
+ 872         214 LOAD_NAME               18 (bool)
+             216 LOAD_CONST              12 (('return',))
+             218 BUILD_CONST_KEY_MAP      1
+             220 LOAD_CONST              19 (<code object exists at 0x000001F324E76A80, file "LPClientFramework\LPWikipedia.py", line 872>)
+             222 LOAD_CONST              20 ('WikipediaPage.exists')
+             224 MAKE_FUNCTION            4 (annotations)
+             226 STORE_NAME              19 (exists)
+
+ 880         228 LOAD_NAME               13 (property)
+
+ 881         230 LOAD_NAME                8 (str)
+             232 LOAD_CONST              12 (('return',))
+             234 BUILD_CONST_KEY_MAP      1
+             236 LOAD_CONST              21 (<code object summary at 0x000001F324E76920, file "LPClientFramework\LPWikipedia.py", line 880>)
+             238 LOAD_CONST              22 ('WikipediaPage.summary')
+             240 MAKE_FUNCTION            4 (annotations)
+             242 CALL_FUNCTION            1
+             244 STORE_NAME              20 (summary)
+
+ 891         246 LOAD_NAME               13 (property)
+
+ 892         248 LOAD_NAME               21 (List)
+             250 LOAD_NAME               22 (WikipediaPageSection)
+             252 BINARY_SUBSCR
+             254 LOAD_CONST              12 (('return',))
+             256 BUILD_CONST_KEY_MAP      1
+             258 LOAD_CONST              23 (<code object sections at 0x000001F324E76870, file "LPClientFramework\LPWikipedia.py", line 891>)
+             260 LOAD_CONST              24 ('WikipediaPage.sections')
+             262 MAKE_FUNCTION            4 (annotations)
+             264 CALL_FUNCTION            1
+             266 STORE_NAME              23 (sections)
+
+ 904         268 LOAD_NAME                8 (str)
+
+ 905         270 LOAD_NAME               10 (Optional)
+             272 LOAD_NAME               22 (WikipediaPageSection)
+             274 BINARY_SUBSCR
+
+ 902         276 LOAD_CONST              25 (('title', 'return'))
+             278 BUILD_CONST_KEY_MAP      2
+             280 LOAD_CONST              26 (<code object section_by_title at 0x000001F324E76500, file "LPClientFramework\LPWikipedia.py", line 902>)
+             282 LOAD_CONST              27 ('WikipediaPage.section_by_title')
+             284 MAKE_FUNCTION            4 (annotations)
+             286 STORE_NAME              24 (section_by_title)
+
+ 921         288 LOAD_NAME                8 (str)
+
+ 922         290 LOAD_NAME               21 (List)
+             292 LOAD_NAME               22 (WikipediaPageSection)
+             294 BINARY_SUBSCR
+
+ 919         296 LOAD_CONST              25 (('title', 'return'))
+             298 BUILD_CONST_KEY_MAP      2
+             300 LOAD_CONST              28 (<code object sections_by_title at 0x000001F324E762F0, file "LPClientFramework\LPWikipedia.py", line 919>)
+             302 LOAD_CONST              29 ('WikipediaPage.sections_by_title')
+             304 MAKE_FUNCTION            4 (annotations)
+             306 STORE_NAME              25 (sections_by_title)
+
+ 936         308 LOAD_NAME               13 (property)
+
+ 937         310 LOAD_NAME                8 (str)
+             312 LOAD_CONST              12 (('return',))
+             314 BUILD_CONST_KEY_MAP      1
+             316 LOAD_CONST              30 (<code object text at 0x000001F324E763A0, file "LPClientFramework\LPWikipedia.py", line 936>)
+             318 LOAD_CONST              31 ('WikipediaPage.text')
+             320 MAKE_FUNCTION            4 (annotations)
+             322 CALL_FUNCTION            1
+             324 STORE_NAME              26 (text)
+
+ 950         326 LOAD_NAME               13 (property)
+
+ 951         328 LOAD_NAME               27 (PagesDict)
+             330 LOAD_CONST              12 (('return',))
+             332 BUILD_CONST_KEY_MAP      1
+             334 LOAD_CONST              32 (<code object langlinks at 0x000001F324E76450, file "LPClientFramework\LPWikipedia.py", line 950>)
+             336 LOAD_CONST              33 ('WikipediaPage.langlinks')
+             338 MAKE_FUNCTION            4 (annotations)
+             340 CALL_FUNCTION            1
+             342 STORE_NAME              28 (langlinks)
+
+ 966         344 LOAD_NAME               13 (property)
+
+ 967         346 LOAD_NAME               27 (PagesDict)
+             348 LOAD_CONST              12 (('return',))
+             350 BUILD_CONST_KEY_MAP      1
+             352 LOAD_CONST              34 (<code object links at 0x000001F324E76240, file "LPClientFramework\LPWikipedia.py", line 966>)
+             354 LOAD_CONST              35 ('WikipediaPage.links')
+             356 MAKE_FUNCTION            4 (annotations)
+             358 CALL_FUNCTION            1
+             360 STORE_NAME              29 (links)
+
+ 982         362 LOAD_NAME               13 (property)
+
+ 983         364 LOAD_NAME               27 (PagesDict)
+             366 LOAD_CONST              12 (('return',))
+             368 BUILD_CONST_KEY_MAP      1
+             370 LOAD_CONST              36 (<code object backlinks at 0x000001F324E76190, file "LPClientFramework\LPWikipedia.py", line 982>)
+             372 LOAD_CONST              37 ('WikipediaPage.backlinks')
+             374 MAKE_FUNCTION            4 (annotations)
+             376 CALL_FUNCTION            1
+             378 STORE_NAME              30 (backlinks)
+
+ 998         380 LOAD_NAME               13 (property)
+
+ 999         382 LOAD_NAME               27 (PagesDict)
+             384 LOAD_CONST              12 (('return',))
+             386 BUILD_CONST_KEY_MAP      1
+             388 LOAD_CONST              38 (<code object categories at 0x000001F324E765B0, file "LPClientFramework\LPWikipedia.py", line 998>)
+             390 LOAD_CONST              39 ('WikipediaPage.categories')
+             392 MAKE_FUNCTION            4 (annotations)
+             394 CALL_FUNCTION            1
+             396 STORE_NAME              31 (categories)
+
+1014         398 LOAD_NAME               13 (property)
+
+1015         400 LOAD_NAME               27 (PagesDict)
+             402 LOAD_CONST              12 (('return',))
+             404 BUILD_CONST_KEY_MAP      1
+             406 LOAD_CONST              40 (<code object categorymembers at 0x000001F324E76BE0, file "LPClientFramework\LPWikipedia.py", line 1014>)
+             408 LOAD_CONST              41 ('WikipediaPage.categorymembers')
+             410 MAKE_FUNCTION            4 (annotations)
+             412 CALL_FUNCTION            1
+             414 STORE_NAME              32 (categorymembers)
+
+1030         416 LOAD_CONST               0 ('WikipediaPage')
+             418 LOAD_CONST              12 (('return',))
+             420 BUILD_CONST_KEY_MAP      1
+             422 LOAD_CONST              42 (<code object _fetch at 0x000001F324E767C0, file "LPClientFramework\LPWikipedia.py", line 1030>)
+             424 LOAD_CONST              43 ('WikipediaPage._fetch')
+             426 MAKE_FUNCTION            4 (annotations)
+             428 STORE_NAME              33 (_fetch)
+
+1036         430 LOAD_CONST              44 (<code object __repr__ at 0x000001F324E76DF0, file "LPClientFramework\LPWikipedia.py", line 1036>)
+             432 LOAD_CONST              45 ('WikipediaPage.__repr__')
+             434 MAKE_FUNCTION            0
+             436 STORE_NAME              34 (__repr__)
+             438 LOAD_CONST               6 (None)
+             440 RETURN_VALUE
+
+=== WikipediaPage.__init__ ===
+804           0 LOAD_FAST                1 (wiki)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (wiki)
+
+805           6 LOAD_CONST               1 ('')
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_summary)
+
+806          12 BUILD_LIST               0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_section)
+
+807          18 BUILD_MAP                0
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (_section_mapping)
+
+808          24 BUILD_MAP                0
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (_langlinks)
+
+809          30 BUILD_MAP                0
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               5 (_links)
+
+810          36 BUILD_MAP                0
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               6 (_backlinks)
+
+811          42 BUILD_MAP                0
+             44 LOAD_FAST                0 (self)
+             46 STORE_ATTR               7 (_categories)
+
+812          48 BUILD_MAP                0
+             50 LOAD_FAST                0 (self)
+             52 STORE_ATTR               8 (_categorymembers)
+
+815          54 LOAD_CONST               2 (False)
+
+816          56 LOAD_CONST               2 (False)
+
+817          58 LOAD_CONST               2 (False)
+
+818          60 LOAD_CONST               2 (False)
+
+819          62 LOAD_CONST               2 (False)
+
+820          64 LOAD_CONST               2 (False)
+
+821          66 LOAD_CONST               2 (False)
+
+814          68 LOAD_CONST               3 (('extracts', 'info', 'langlinks', 'links', 'backlinks', 'categories', 'categorymembers'))
+             70 BUILD_CONST_KEY_MAP      7
+             72 LOAD_FAST                0 (self)
+             74 STORE_ATTR               9 (_called)
+
+825          76 LOAD_FAST                2 (title)
+
+826          78 LOAD_GLOBAL             10 (namespace2int)
+             80 LOAD_FAST                3 (ns)
+             82 CALL_FUNCTION            1
+
+827          84 LOAD_FAST                4 (language)
+
+824          86 LOAD_CONST               4 (('title', 'ns', 'language'))
+             88 BUILD_CONST_KEY_MAP      3
+             90 LOAD_FAST                0 (self)
+             92 STORE_ATTR              11 (_attributes)
+
+830          94 LOAD_FAST                5 (url)
+             96 LOAD_CONST               0 (None)
+             98 IS_OP                    1
+            100 POP_JUMP_IF_FALSE      112
+
+831         102 LOAD_FAST                5 (url)
+            104 LOAD_FAST                0 (self)
+            106 LOAD_ATTR               11 (_attributes)
+            108 LOAD_CONST               5 ('fullurl')
+            110 STORE_SUBSCR
+        >>  112 LOAD_CONST               0 (None)
+            114 RETURN_VALUE
+
+=== WikipediaPage.__getattr__ ===
+834           0 LOAD_FAST                1 (name)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (ATTRIBUTES_MAPPING)
+              6 CONTAINS_OP              1
+              8 POP_JUMP_IF_FALSE       20
+
+835          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (__getattribute__)
+             14 LOAD_FAST                1 (name)
+             16 CALL_METHOD              1
+             18 RETURN_VALUE
+
+837     >>   20 LOAD_FAST                1 (name)
+             22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                2 (_attributes)
+             26 CONTAINS_OP              0
+             28 POP_JUMP_IF_FALSE       40
+
+838          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                2 (_attributes)
+             34 LOAD_FAST                1 (name)
+             36 BINARY_SUBSCR
+             38 RETURN_VALUE
+
+840     >>   40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                0 (ATTRIBUTES_MAPPING)
+             44 LOAD_FAST                1 (name)
+             46 BINARY_SUBSCR
+             48 GET_ITER
+        >>   50 FOR_ITER                38 (to 90)
+             52 STORE_FAST               2 (call)
+
+841          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                3 (_called)
+             58 LOAD_FAST                2 (call)
+             60 BINARY_SUBSCR
+             62 POP_JUMP_IF_TRUE        50
+
+842          64 LOAD_FAST                0 (self)
+             66 LOAD_METHOD              4 (_fetch)
+             68 LOAD_FAST                2 (call)
+             70 CALL_METHOD              1
+             72 POP_TOP
+
+843          74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                2 (_attributes)
+             78 LOAD_FAST                1 (name)
+             80 BINARY_SUBSCR
+             82 ROT_TWO
+             84 POP_TOP
+             86 RETURN_VALUE
+             88 JUMP_ABSOLUTE           50
+        >>   90 LOAD_CONST               0 (None)
+             92 RETURN_VALUE
+
+=== WikipediaPage.language ===
+852           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_attributes)
+              6 LOAD_CONST               1 ('language')
+              8 BINARY_SUBSCR
+             10 CALL_FUNCTION            1
+             12 RETURN_VALUE
+
+=== WikipediaPage.title ===
+861           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_attributes)
+              6 LOAD_CONST               1 ('title')
+              8 BINARY_SUBSCR
+             10 CALL_FUNCTION            1
+             12 RETURN_VALUE
+
+=== WikipediaPage.namespace ===
+870           0 LOAD_GLOBAL              0 (int)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_attributes)
+              6 LOAD_CONST               1 ('ns')
+              8 BINARY_SUBSCR
+             10 CALL_FUNCTION            1
+             12 RETURN_VALUE
+
+=== WikipediaPage.exists ===
+878           0 LOAD_GLOBAL              0 (bool)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (pageid)
+              6 LOAD_CONST               1 (-1)
+              8 COMPARE_OP               3 (!=)
+             10 CALL_FUNCTION            1
+             12 RETURN_VALUE
+
+=== WikipediaPage.summary ===
+887           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_called)
+              4 LOAD_CONST               1 ('extracts')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_TRUE        20
+
+888          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_fetch)
+             14 LOAD_CONST               1 ('extracts')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+889     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_summary)
+             24 RETURN_VALUE
+
+=== WikipediaPage.sections ===
+898           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_called)
+              4 LOAD_CONST               1 ('extracts')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_TRUE        20
+
+899          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_fetch)
+             14 LOAD_CONST               1 ('extracts')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+900     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_section)
+             24 RETURN_VALUE
+
+=== WikipediaPage.section_by_title ===
+912           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_called)
+              4 LOAD_CONST               1 ('extracts')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_TRUE        20
+
+913          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_fetch)
+             14 LOAD_CONST               1 ('extracts')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+914     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_section_mapping)
+             24 LOAD_METHOD              3 (get)
+             26 LOAD_FAST                1 (title)
+             28 CALL_METHOD              1
+             30 STORE_FAST               2 (sections)
+
+915          32 LOAD_FAST                2 (sections)
+             34 POP_JUMP_IF_FALSE       44
+
+916          36 LOAD_FAST                2 (sections)
+             38 LOAD_CONST               2 (-1)
+             40 BINARY_SUBSCR
+             42 RETURN_VALUE
+
+917     >>   44 LOAD_CONST               3 (None)
+             46 RETURN_VALUE
+
+=== WikipediaPage.sections_by_title ===
+929           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_called)
+              4 LOAD_CONST               1 ('extracts')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_TRUE        20
+
+930          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_fetch)
+             14 LOAD_CONST               1 ('extracts')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+931     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_section_mapping)
+             24 LOAD_METHOD              3 (get)
+             26 LOAD_FAST                1 (title)
+             28 CALL_METHOD              1
+             30 STORE_FAST               2 (sections)
+
+932          32 LOAD_FAST                2 (sections)
+             34 LOAD_CONST               2 (None)
+             36 IS_OP                    0
+             38 POP_JUMP_IF_FALSE       44
+
+933          40 BUILD_LIST               0
+             42 RETURN_VALUE
+
+934     >>   44 LOAD_FAST                2 (sections)
+             46 RETURN_VALUE
+
+=== WikipediaPage.text ===
+943           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (summary)
+              4 STORE_FAST               1 (txt)
+
+944           6 LOAD_GLOBAL              1 (len)
+              8 LOAD_FAST                1 (txt)
+             10 CALL_FUNCTION            1
+             12 LOAD_CONST               1 (0)
+             14 COMPARE_OP               4 (>)
+             16 POP_JUMP_IF_FALSE       26
+
+945          18 LOAD_FAST                1 (txt)
+             20 LOAD_CONST               2 ('\n\n')
+             22 INPLACE_ADD
+             24 STORE_FAST               1 (txt)
+
+946     >>   26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                2 (sections)
+             30 GET_ITER
+        >>   32 FOR_ITER                20 (to 54)
+             34 STORE_FAST               2 (sec)
+
+947          36 LOAD_FAST                1 (txt)
+             38 LOAD_FAST                2 (sec)
+             40 LOAD_ATTR                3 (full_text)
+             42 LOAD_CONST               3 (2)
+             44 LOAD_CONST               4 (('level',))
+             46 CALL_FUNCTION_KW         1
+             48 INPLACE_ADD
+             50 STORE_FAST               1 (txt)
+             52 JUMP_ABSOLUTE           32
+
+948     >>   54 LOAD_FAST                1 (txt)
+             56 LOAD_METHOD              4 (strip)
+             58 CALL_METHOD              0
+             60 RETURN_VALUE
+
+=== WikipediaPage.langlinks ===
+962           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_called)
+              4 LOAD_CONST               1 ('langlinks')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_TRUE        20
+
+963          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_fetch)
+             14 LOAD_CONST               1 ('langlinks')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+964     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_langlinks)
+             24 RETURN_VALUE
+
+=== WikipediaPage.links ===
+978           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_called)
+              4 LOAD_CONST               1 ('links')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_TRUE        20
+
+979          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_fetch)
+             14 LOAD_CONST               1 ('links')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+980     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_links)
+             24 RETURN_VALUE
+
+=== WikipediaPage.backlinks ===
+994           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_called)
+              4 LOAD_CONST               1 ('backlinks')
+              6 BINARY_SUBSCR
+              8 POP_JUMP_IF_TRUE        20
+
+995          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_fetch)
+             14 LOAD_CONST               1 ('backlinks')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+996     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_backlinks)
+             24 RETURN_VALUE
+
+=== WikipediaPage.categories ===
+1010           0 LOAD_FAST                0 (self)
+               2 LOAD_ATTR                0 (_called)
+               4 LOAD_CONST               1 ('categories')
+               6 BINARY_SUBSCR
+               8 POP_JUMP_IF_TRUE        20
+
+1011          10 LOAD_FAST                0 (self)
+              12 LOAD_METHOD              1 (_fetch)
+              14 LOAD_CONST               1 ('categories')
+              16 CALL_METHOD              1
+              18 POP_TOP
+
+1012     >>   20 LOAD_FAST                0 (self)
+              22 LOAD_ATTR                2 (_categories)
+              24 RETURN_VALUE
+
+=== WikipediaPage.categorymembers ===
+1026           0 LOAD_FAST                0 (self)
+               2 LOAD_ATTR                0 (_called)
+               4 LOAD_CONST               1 ('categorymembers')
+               6 BINARY_SUBSCR
+               8 POP_JUMP_IF_TRUE        20
+
+1027          10 LOAD_FAST                0 (self)
+              12 LOAD_METHOD              1 (_fetch)
+              14 LOAD_CONST               1 ('categorymembers')
+              16 CALL_METHOD              1
+              18 POP_TOP
+
+1028     >>   20 LOAD_FAST                0 (self)
+              22 LOAD_ATTR                2 (_categorymembers)
+              24 RETURN_VALUE
+
+=== WikipediaPage._fetch ===
+1032           0 LOAD_GLOBAL              0 (getattr)
+               2 LOAD_FAST                0 (self)
+               4 LOAD_ATTR                1 (wiki)
+               6 LOAD_FAST                1 (call)
+               8 CALL_FUNCTION            2
+              10 LOAD_FAST                0 (self)
+              12 CALL_FUNCTION            1
+              14 POP_TOP
+
+1033          16 LOAD_CONST               1 (True)
+              18 LOAD_FAST                0 (self)
+              20 LOAD_ATTR                2 (_called)
+              22 LOAD_FAST                1 (call)
+              24 STORE_SUBSCR
+
+1034          26 LOAD_FAST                0 (self)
+              28 RETURN_VALUE
+
+=== WikipediaPage.__repr__ ===
+1037           0 LOAD_GLOBAL              0 (any)
+               2 LOAD_FAST                0 (self)
+               4 LOAD_ATTR                1 (_called)
+               6 LOAD_METHOD              2 (values)
+               8 CALL_METHOD              0
+              10 CALL_FUNCTION            1
+              12 POP_JUMP_IF_FALSE       42
+
+1038          14 LOAD_FAST                0 (self)
+              16 LOAD_ATTR                3 (title)
+              18 FORMAT_VALUE             0
+              20 LOAD_CONST               1 (' (id: ')
+              22 LOAD_FAST                0 (self)
+              24 LOAD_ATTR                4 (pageid)
+              26 FORMAT_VALUE             0
+              28 LOAD_CONST               2 (', ns: ')
+              30 LOAD_FAST                0 (self)
+              32 LOAD_ATTR                5 (ns)
+              34 FORMAT_VALUE             0
+              36 LOAD_CONST               3 (')')
+              38 BUILD_STRING             6
+              40 RETURN_VALUE
+
+1039     >>   42 LOAD_FAST                0 (self)
+              44 LOAD_ATTR                3 (title)
+              46 FORMAT_VALUE             0
+              48 LOAD_CONST               4 (' (id: ??, ns: ')
+              50 LOAD_FAST                0 (self)
+              52 LOAD_ATTR                5 (ns)
+              54 FORMAT_VALUE             0
+              56 LOAD_CONST               3 (')')
+              58 BUILD_STRING             4
+              60 RETURN_VALUE

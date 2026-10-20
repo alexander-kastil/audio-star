@@ -1,0 +1,62 @@
+# module LPClientFramework.LPFeedback.LPFeedbackApiClient
+
+[module] names: __doc__, json, LPClientFramework.LPEventTrack, LPAuthenticatedRequestClient, LPClientFramework.LPFeedback.LPFeedbackConfig, FRESHDESK_API_HOST, LPFeedbackApiClient
+  str: 'Freshdesk 工单创建和日志地址回填客户端。'
+  str: 'LPAuthenticatedRequestClient'
+  str: 'FRESHDESK_API_HOST'
+  str: 'LPFeedbackApiClient'
+
+def LPFeedbackApiClient()  line 10
+  names: __name__, __module__, __qualname__, __doc__, __init__, createTicket, updateTicket
+    str: 'LPFeedbackApiClient'
+    str: '封装 PC Feedback 所需的 Freshdesk POST 与 PUT 调用。'
+    str: 'LPFeedbackApiClient.__init__'
+    str: 'Other'
+    str: 'LPFeedbackApiClient.createTicket'
+    str: 'LPFeedbackApiClient.updateTicket'
+    str: 'Other'
+    str: 'Other'
+
+  def LPFeedbackApiClient.__init__(self, appId, accessKey, secretKey, httpClient)  line 13
+    names: LPAuthenticatedRequestClient, FRESHDESK_API_HOST, _httpClient
+      str: '初始化 Freshdesk 鉴权客户端。\n\n        参数:\n            appId (str): PC Feedback 应用 ID。\n            accessKey (str): Freshdesk 应用访问密钥。\n            secretKey (str): Freshdesk 应用私钥。\n            httpClient (LPAuthenticatedRequestClient|None): 可注入的 HTTP 客户端。\n        返回:\n            无。\n        '
+      str: 'api_host'
+      str: 'app_id'
+      str: 'access_key'
+      str: 'secret_key'
+      str: 'timeout'
+
+  def LPFeedbackApiClient.createTicket(self, request, subtype)  line 32
+    names: email, subject, description, appUuid, _httpClient, post, isinstance, dict, str, json, loads, TypeError, ValueError, get, strip, RuntimeError
+      str: '创建 Freshdesk 工单并返回工单 ID。\n\n        参数:\n            request (LPFeedbackRequest): 用户反馈请求。\n            subtype (str): 固定的反馈子类型。\n        返回:\n            str: Freshdesk 工单 ID。\n        异常:\n            RuntimeError: 响应未包含工单 ID 时抛出。\n        '
+      str: 'Problem'
+      str: 'cf_useremail'
+      str: 'cf_appid'
+      str: 'cf_subtype'
+      str: 'email'
+      str: 'subject'
+      str: 'description'
+      str: 'priority'
+      str: 'status'
+      str: 'name'
+      str: 'type'
+      str: 'custom_fields'
+      str: '/tickets'
+      str: 'body'
+      str: 'id'
+      str: 'Feedback ticket response does not contain id.'
+
+  def LPFeedbackApiClient.updateTicket(self, request, ticketId, confirmationId, downloadUrl, subtype)  line 72
+    names: email, appUuid, _httpClient, put
+      str: '向已有工单回填日志下载地址与确认 ID。\n\n        参数:\n            request (LPFeedbackRequest): 原始反馈请求。\n            ticketId (str): Freshdesk 工单 ID。\n            confirmationId (str): 上传确认 ID。\n            downloadUrl (str): S3 日志 ZIP 下载地址。\n            subtype (str): 固定的反馈子类型。\n        返回:\n            None。\n        '
+      str: 'Problem'
+      str: 'cf_useremail'
+      str: 'cf_log'
+      str: 'cf_confirmationid'
+      str: 'cf_appid'
+      str: 'cf_subtype'
+      str: 'priority'
+      str: 'status'
+      str: 'type'
+      str: 'custom_fields'
+      str: '/tickets/%s'

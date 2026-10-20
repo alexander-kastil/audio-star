@@ -1,0 +1,192 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/12/3 17:15\n@Auth ： Chris\n@File ：LPDeviceFileCache.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+  9          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (threading)
+             18 STORE_NAME               2 (threading)
+
+ 10          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               3 (('Enum',))
+             24 IMPORT_NAME              3 (enum)
+             26 IMPORT_FROM              4 (Enum)
+             28 STORE_NAME               4 (Enum)
+             30 POP_TOP
+
+ 12          32 LOAD_CONST               1 (0)
+             34 LOAD_CONST               4 (('FileCache',))
+             36 IMPORT_NAME              5 (LPClientFramework.LPCache.LPFileCache)
+             38 IMPORT_FROM              6 (FileCache)
+             40 STORE_NAME               6 (FileCache)
+             42 POP_TOP
+
+ 13          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               5 (('logger',))
+             48 IMPORT_NAME              7 (LPClientFramework.LPUtility)
+             50 IMPORT_FROM              8 (logger)
+             52 STORE_NAME               8 (logger)
+             54 POP_TOP
+
+ 16          56 LOAD_BUILD_CLASS
+             58 LOAD_CONST               6 (<code object LPDeviceFileCache at 0x000001F324E693A0, file "LPClientFramework\LPCache\LPDeviceFileCache.py", line 16>)
+             60 LOAD_CONST               7 ('LPDeviceFileCache')
+             62 MAKE_FUNCTION            0
+             64 LOAD_CONST               7 ('LPDeviceFileCache')
+             66 LOAD_NAME                6 (FileCache)
+             68 CALL_FUNCTION            3
+             70 STORE_NAME               9 (LPDeviceFileCache)
+             72 LOAD_CONST               2 (None)
+             74 RETURN_VALUE
+
+=== LPDeviceFileCache ===
+ 16           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPDeviceFileCache')
+              6 STORE_NAME               2 (__qualname__)
+
+ 18           8 LOAD_CONST               1 (<code object _getFilePath at 0x000001F324E69710, file "LPClientFramework\LPCache\LPDeviceFileCache.py", line 18>)
+             10 LOAD_CONST               2 ('LPDeviceFileCache._getFilePath')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (_getFilePath)
+
+ 22          16 LOAD_NAME                4 (Enum)
+             18 LOAD_CONST               3 (('type',))
+             20 BUILD_CONST_KEY_MAP      1
+             22 LOAD_CONST               4 (<code object readCache at 0x000001F324E692F0, file "LPClientFramework\LPCache\LPDeviceFileCache.py", line 22>)
+             24 LOAD_CONST               5 ('LPDeviceFileCache.readCache')
+             26 MAKE_FUNCTION            4 (annotations)
+             28 STORE_NAME               5 (readCache)
+             30 LOAD_CONST               6 (None)
+             32 RETURN_VALUE
+
+=== LPDeviceFileCache._getFilePath ===
+ 19           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (cacheDir)
+              4 LOAD_FAST                1 (type)
+              6 LOAD_ATTR                1 (value)
+              8 FORMAT_VALUE             0
+             10 LOAD_CONST               1 ('CacheV2.')
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (fileType)
+             16 FORMAT_VALUE             0
+             18 BUILD_STRING             3
+             20 BINARY_TRUE_DIVIDE
+             22 RETURN_VALUE
+
+=== LPDeviceFileCache.readCache ===
+ 23           0 LOAD_DEREF               1 (self)
+              2 LOAD_METHOD              0 (_getLock)
+              4 LOAD_DEREF               2 (type)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (lock)
+
+ 24          10 LOAD_DEREF               1 (self)
+             12 LOAD_METHOD              1 (_getFilePath)
+             14 LOAD_DEREF               2 (type)
+             16 CALL_METHOD              1
+             18 STORE_DEREF              0 (path)
+
+ 26          20 LOAD_CLOSURE             0 (path)
+             22 LOAD_CLOSURE             1 (self)
+             24 LOAD_CLOSURE             2 (type)
+             26 BUILD_TUPLE              3
+             28 LOAD_CONST               1 (<code object _read at 0x000001F324E69450, file "LPClientFramework\LPCache\LPDeviceFileCache.py", line 26>)
+             30 LOAD_CONST               2 ('LPDeviceFileCache.readCache.<locals>._read')
+             32 MAKE_FUNCTION            8 (closure)
+             34 STORE_FAST               3 (_read)
+
+ 36          36 LOAD_FAST                2 (lock)
+             38 SETUP_WITH              22 (to 62)
+             40 POP_TOP
+
+ 37          42 LOAD_FAST                3 (_read)
+             44 CALL_FUNCTION            0
+             46 POP_BLOCK
+             48 ROT_TWO
+             50 LOAD_CONST               0 (None)
+             52 DUP_TOP
+             54 DUP_TOP
+             56 CALL_FUNCTION            3
+             58 POP_TOP
+             60 RETURN_VALUE
+        >>   62 WITH_EXCEPT_START
+             64 POP_JUMP_IF_TRUE        68
+             66 RERAISE
+        >>   68 POP_TOP
+             70 POP_TOP
+             72 POP_TOP
+             74 POP_EXCEPT
+             76 POP_TOP
+             78 LOAD_CONST               0 (None)
+             80 RETURN_VALUE
+
+=== LPDeviceFileCache.readCache._read ===
+ 27           0 LOAD_DEREF               0 (path)
+              2 LOAD_METHOD              0 (exists)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        26
+
+ 28           8 LOAD_DEREF               1 (self)
+             10 LOAD_METHOD              1 (writeCache)
+             12 LOAD_DEREF               2 (type)
+             14 LOAD_DEREF               2 (type)
+             16 LOAD_ATTR                2 (value)
+             18 BUILD_MAP                0
+             20 BUILD_MAP                1
+             22 CALL_METHOD              2
+             24 POP_TOP
+
+ 30     >>   26 LOAD_DEREF               1 (self)
+             28 LOAD_ATTR                3 (fileType)
+             30 LOAD_CONST               1 ('json')
+             32 COMPARE_OP               2 (==)
+             34 POP_JUMP_IF_FALSE       94
+
+ 31          36 LOAD_GLOBAL              4 (open)
+             38 LOAD_DEREF               0 (path)
+             40 LOAD_CONST               2 ('r')
+             42 LOAD_CONST               3 ('utf-8')
+             44 LOAD_CONST               4 (('encoding',))
+             46 CALL_FUNCTION_KW         3
+             48 SETUP_WITH              26 (to 76)
+             50 STORE_FAST               0 (f)
+
+ 32          52 LOAD_GLOBAL              5 (json)
+             54 LOAD_METHOD              6 (load)
+             56 LOAD_FAST                0 (f)
+             58 CALL_METHOD              1
+             60 POP_BLOCK
+             62 ROT_TWO
+             64 LOAD_CONST               0 (None)
+             66 DUP_TOP
+             68 DUP_TOP
+             70 CALL_FUNCTION            3
+             72 POP_TOP
+             74 RETURN_VALUE
+        >>   76 WITH_EXCEPT_START
+             78 POP_JUMP_IF_TRUE        82
+             80 RERAISE
+        >>   82 POP_TOP
+             84 POP_TOP
+             86 POP_TOP
+             88 POP_EXCEPT
+             90 POP_TOP
+             92 JUMP_FORWARD            16 (to 110)
+
+ 34     >>   94 LOAD_GLOBAL              7 (ValueError)
+             96 LOAD_CONST               5 ('readCache unsupported fileType: ')
+             98 LOAD_DEREF               1 (self)
+            100 LOAD_ATTR                3 (fileType)
+            102 FORMAT_VALUE             0
+            104 BUILD_STRING             2
+            106 CALL_FUNCTION            1
+            108 RAISE_VARARGS            1
+        >>  110 LOAD_CONST               0 (None)
+            112 RETURN_VALUE

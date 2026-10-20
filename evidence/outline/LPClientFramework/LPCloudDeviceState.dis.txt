@@ -1,0 +1,270 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n云端设备状态查询模块。\n\n封装 queryDeviceStateV2 接口（对齐 iOS LPOOBECaseManager.requestCloudInfo）：\n- 地址: https://cloud-api-us.linkplay.com/v1/rest/api/queryDeviceStateV2\n- 鉴权: 请求需携带 accessKey/timestamp/nonce/sign/appId 签名头（与 iOS\n  LPCloudRequest、PC LPAuthenticatedRequestClient 同一算法）；不带签名头的\n  裸 POST 会被网关以 403（identity policy explicit deny）拒绝。\n- 请求体: {"deviceUid": <24 位 hex 短 UUID>}（即 UPnP USN UUID 经\n  「前四段去横线 + 末段前 4 位」变换后的结果，与 PC 端 SSDP 设备记录键同格式）\n- 响应: {"result": <云端设备状态>}（顶层即 result；iOS 代码中的 status/response\n  外层结构是其客户端回调时自行包装的，服务端原始响应没有该外层），\n  result 含 networkInfo(wlanSsid/wlanBssid/wlanRssi/wlan0/eth0)、iotVersion、\n  source、otaStatus、connectStatus 等字段。\n仅用于设备发现诊断埋点，失败/超时时按降级处理返回 None，不抛异常。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 18           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (hashlib)
+             10 STORE_NAME               1 (hashlib)
+
+ 19          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (random)
+             18 STORE_NAME               2 (random)
+
+ 20          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (string)
+             26 STORE_NAME               3 (string)
+
+ 21          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (time)
+             34 STORE_NAME               4 (time)
+
+ 23          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              5 (requests)
+             42 STORE_NAME               5 (requests)
+
+ 25          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               3 (('logger',))
+             48 IMPORT_NAME              6 (LPClientFramework.LPUtility)
+             50 IMPORT_FROM              7 (logger)
+             52 STORE_NAME               7 (logger)
+             54 POP_TOP
+
+ 28          56 LOAD_CONST               4 ('https://cloud-api-us.linkplay.com/v1/rest/api/queryDeviceStateV2')
+             58 STORE_NAME               8 (QUERY_DEVICE_STATE_V2_URL)
+
+ 32          60 LOAD_CONST               5 ('<redacted>')
+             62 STORE_NAME               9 (_CLOUD_APP_ID)
+
+ 33          64 LOAD_CONST               6 ('<redacted>')
+             66 STORE_NAME              10 (_CLOUD_ACCESS_KEY)
+
+ 34          68 LOAD_CONST               7 ('<redacted>')
+             70 STORE_NAME              11 (_CLOUD_SECRET_KEY)
+
+ 37          72 LOAD_CONST               8 (<code object _signedHeaders at 0x000001F324E89F50, file "LPClientFramework\LPCloudDeviceState.py", line 37>)
+             74 LOAD_CONST               9 ('_signedHeaders')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME              12 (_signedHeaders)
+
+ 67          80 LOAD_CONST              13 ((5,))
+             82 LOAD_CONST              11 (<code object queryDeviceStateV2 at 0x000001F3253A4A80, file "LPClientFramework\LPCloudDeviceState.py", line 67>)
+             84 LOAD_CONST              12 ('queryDeviceStateV2')
+             86 MAKE_FUNCTION            1 (defaults)
+             88 STORE_NAME              13 (queryDeviceStateV2)
+             90 LOAD_CONST               2 (None)
+             92 RETURN_VALUE
+
+=== _signedHeaders ===
+ 49           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_GLOBAL              1 (int)
+              4 LOAD_GLOBAL              2 (time)
+              6 LOAD_METHOD              2 (time)
+              8 CALL_METHOD              0
+             10 LOAD_CONST               1 (1000)
+             12 BINARY_MULTIPLY
+             14 CALL_FUNCTION            1
+             16 CALL_FUNCTION            1
+             18 STORE_FAST               0 (timestamp)
+
+ 50          20 LOAD_CONST               2 ('')
+             22 LOAD_METHOD              3 (join)
+             24 LOAD_GLOBAL              4 (random)
+             26 LOAD_ATTR                5 (choices)
+             28 LOAD_GLOBAL              6 (string)
+             30 LOAD_ATTR                7 (ascii_letters)
+             32 LOAD_GLOBAL              6 (string)
+             34 LOAD_ATTR                8 (digits)
+             36 BINARY_ADD
+             38 LOAD_CONST               3 (16)
+             40 LOAD_CONST               4 (('k',))
+             42 CALL_FUNCTION_KW         2
+             44 CALL_METHOD              1
+             46 STORE_FAST               1 (nonce)
+
+ 51          48 LOAD_GLOBAL              9 (hashlib)
+             50 LOAD_METHOD             10 (sha256)
+
+ 52          52 LOAD_GLOBAL             11 (_CLOUD_ACCESS_KEY)
+             54 LOAD_GLOBAL             12 (_CLOUD_APP_ID)
+             56 BINARY_ADD
+             58 LOAD_METHOD             13 (encode)
+             60 LOAD_CONST               5 ('utf-8')
+             62 CALL_METHOD              1
+
+ 51          64 CALL_METHOD              1
+             66 LOAD_METHOD             14 (hexdigest)
+             68 CALL_METHOD              0
+             70 STORE_FAST               2 (hashedAppId)
+
+ 53          72 LOAD_CONST               6 ('accessKey=%s&appId=%s&nonce=%s&timestamp=%s&secretKey=%s')
+
+ 54          74 LOAD_GLOBAL             11 (_CLOUD_ACCESS_KEY)
+             76 LOAD_FAST                2 (hashedAppId)
+             78 LOAD_FAST                1 (nonce)
+             80 LOAD_FAST                0 (timestamp)
+             82 LOAD_GLOBAL             15 (_CLOUD_SECRET_KEY)
+
+ 53          84 BUILD_TUPLE              5
+             86 BINARY_MODULO
+             88 STORE_FAST               3 (plain)
+
+ 55          90 LOAD_GLOBAL              9 (hashlib)
+             92 LOAD_METHOD             10 (sha256)
+
+ 56          94 LOAD_GLOBAL             15 (_CLOUD_SECRET_KEY)
+             96 LOAD_FAST                3 (plain)
+             98 BINARY_ADD
+            100 LOAD_METHOD             13 (encode)
+            102 LOAD_CONST               5 ('utf-8')
+            104 CALL_METHOD              1
+
+ 55         106 CALL_METHOD              1
+            108 LOAD_METHOD             14 (hexdigest)
+            110 CALL_METHOD              0
+            112 LOAD_METHOD             16 (upper)
+            114 CALL_METHOD              0
+            116 STORE_FAST               4 (sign)
+
+ 58         118 LOAD_CONST               7 ('application/json')
+
+ 59         120 LOAD_GLOBAL             11 (_CLOUD_ACCESS_KEY)
+
+ 60         122 LOAD_FAST                0 (timestamp)
+
+ 61         124 LOAD_FAST                1 (nonce)
+
+ 62         126 LOAD_FAST                4 (sign)
+
+ 63         128 LOAD_FAST                2 (hashedAppId)
+
+ 57         130 LOAD_CONST               8 (('Content-Type', 'accessKey', 'timestamp', 'nonce', 'sign', 'appId'))
+            132 BUILD_CONST_KEY_MAP      6
+            134 RETURN_VALUE
+
+=== queryDeviceStateV2 ===
+ 78           0 LOAD_FAST                0 (deviceUid)
+              2 POP_JUMP_IF_TRUE         8
+
+ 79           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+ 81     >>    8 SETUP_FINALLY          134 (to 144)
+
+ 82          10 LOAD_GLOBAL              0 (requests)
+             12 LOAD_ATTR                1 (post)
+
+ 83          14 LOAD_GLOBAL              2 (QUERY_DEVICE_STATE_V2_URL)
+
+ 84          16 LOAD_CONST               2 ('deviceUid')
+             18 LOAD_FAST                0 (deviceUid)
+             20 BUILD_MAP                1
+
+ 85          22 LOAD_GLOBAL              3 (_signedHeaders)
+             24 CALL_FUNCTION            0
+
+ 86          26 LOAD_FAST                1 (timeout)
+
+ 82          28 LOAD_CONST               3 (('json', 'headers', 'timeout'))
+             30 CALL_FUNCTION_KW         4
+             32 STORE_FAST               2 (response)
+
+ 88          34 LOAD_FAST                2 (response)
+             36 LOAD_ATTR                4 (ok)
+             38 POP_JUMP_IF_TRUE        78
+
+ 89          40 LOAD_GLOBAL              5 (logger)
+             42 LOAD_METHOD              6 (warning)
+             44 LOAD_CONST               4 ('[cloudDeviceState] queryDeviceStateV2 http %d for %s')
+             46 LOAD_FAST                2 (response)
+             48 LOAD_ATTR                7 (status_code)
+             50 LOAD_FAST                0 (deviceUid)
+             52 LOAD_CONST               1 (None)
+             54 LOAD_CONST               5 (4)
+             56 BUILD_SLICE              2
+             58 BINARY_SUBSCR
+             60 LOAD_CONST               6 ('***')
+             62 BINARY_ADD
+             64 BUILD_TUPLE              2
+             66 BINARY_MODULO
+             68 CALL_METHOD              1
+             70 POP_TOP
+
+ 90          72 POP_BLOCK
+             74 LOAD_CONST               1 (None)
+             76 RETURN_VALUE
+
+ 92     >>   78 LOAD_FAST                2 (response)
+             80 LOAD_METHOD              8 (json)
+             82 CALL_METHOD              0
+             84 STORE_FAST               3 (data)
+
+ 93          86 LOAD_FAST                3 (data)
+             88 LOAD_METHOD              9 (get)
+             90 LOAD_CONST               7 ('result')
+             92 CALL_METHOD              1
+             94 STORE_FAST               4 (result)
+
+ 94          96 LOAD_GLOBAL             10 (isinstance)
+             98 LOAD_FAST                4 (result)
+            100 LOAD_GLOBAL             11 (dict)
+            102 CALL_FUNCTION            2
+            104 POP_JUMP_IF_FALSE      112
+
+ 95         106 LOAD_FAST                4 (result)
+            108 POP_BLOCK
+            110 RETURN_VALUE
+
+ 97     >>  112 LOAD_GLOBAL              5 (logger)
+            114 LOAD_METHOD              6 (warning)
+            116 LOAD_CONST               8 ('[cloudDeviceState] queryDeviceStateV2 empty result for %s')
+            118 LOAD_FAST                0 (deviceUid)
+            120 LOAD_CONST               1 (None)
+            122 LOAD_CONST               5 (4)
+            124 BUILD_SLICE              2
+            126 BINARY_SUBSCR
+            128 LOAD_CONST               6 ('***')
+            130 BINARY_ADD
+            132 BINARY_MODULO
+            134 CALL_METHOD              1
+            136 POP_TOP
+
+ 98         138 POP_BLOCK
+            140 LOAD_CONST               1 (None)
+            142 RETURN_VALUE
+
+ 99     >>  144 DUP_TOP
+            146 LOAD_GLOBAL             12 (Exception)
+            148 JUMP_IF_NOT_EXC_MATCH   194
+            150 POP_TOP
+            152 STORE_FAST               5 (e)
+            154 POP_TOP
+            156 SETUP_FINALLY           28 (to 186)
+
+100         158 LOAD_GLOBAL              5 (logger)
+            160 LOAD_METHOD              6 (warning)
+            162 LOAD_CONST               9 ('[cloudDeviceState] queryDeviceStateV2 exception: %s')
+            164 LOAD_FAST                5 (e)
+            166 BINARY_MODULO
+            168 CALL_METHOD              1
+            170 POP_TOP
+
+101         172 POP_BLOCK
+            174 POP_EXCEPT
+            176 LOAD_CONST               1 (None)
+            178 STORE_FAST               5 (e)
+            180 DELETE_FAST              5 (e)
+            182 LOAD_CONST               1 (None)
+            184 RETURN_VALUE
+        >>  186 LOAD_CONST               1 (None)
+            188 STORE_FAST               5 (e)
+            190 DELETE_FAST              5 (e)
+            192 RERAISE
+        >>  194 RERAISE
+            196 LOAD_CONST               1 (None)
+            198 RETURN_VALUE

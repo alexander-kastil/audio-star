@@ -1,0 +1,296 @@
+# module LPClientFramework.LPFavoriteSyncCoordinator
+
+[module] names: __doc__, threading, time, typing, Dict, List, Optional, Tuple, LPGlobalUI, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, WIIMRADIO_LOCAL_USER_ID, LPClientFramework.LPUtility, addNotificationObserver, deRegisterDeviceInfoChanged, logger, registerDeviceInfoChanged, removeNotificationObserver, LPFavoriteSyncCoordinator
+  str: '\n收藏缓存生命周期同步器。\n'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'Tuple'
+  str: 'LPFavoriteCacheManager'
+  str: 'WIIMRADIO_LOCAL_USER_ID'
+  str: 'addNotificationObserver'
+  str: 'deRegisterDeviceInfoChanged'
+  str: 'logger'
+  str: 'registerDeviceInfoChanged'
+  str: 'removeNotificationObserver'
+  str: 'LPFavoriteSyncCoordinator'
+
+def LPFavoriteSyncCoordinator()  line 21
+  names: __name__, __module__, __qualname__, __doc__, _instance, FAVORITE_SOURCES, SYNC_TTL_SECONDS, PERIODIC_SYNC_INTERVAL_SECONDS, RETRY_DELAYS, classmethod, instance, __init__, str, Dict, _stateFor, start, stop, _startPeriodicSync, _stopPeriodicSync, _periodicLoop, _periodicSyncTick, bool, requestSync, _prepareSingletons, clearUser, float, _scheduleRetry, _cancelRetry, _cancelAllRetries, object, syncNowForDevice, _onAccountChangedForSource, _onDeviceChanged, deviceInfoUpdate, staticmethod, _userIdFromNotify, _currentUserIdForSource, _syncSource, _syncWiiMRadioLocal, List, _fetchTidalIds, _fetchQobuzIds
+    str: 'LPFavoriteSyncCoordinator'
+    str: '收藏缓存生命周期同步器：监听设备/账号事件并按 (source, userId) 调度拉取与清理。'
+    str: 'Tidal'
+    str: 'Qobuz'
+    str: 'WiiMRadio'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator.instance'
+    str: 'LPFavoriteSyncCoordinator.__init__'
+    str: 'source'
+    str: 'userId'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator._stateFor'
+    str: 'LPFavoriteSyncCoordinator.start'
+    str: 'LPFavoriteSyncCoordinator.stop'
+    str: 'LPFavoriteSyncCoordinator._startPeriodicSync'
+    str: 'LPFavoriteSyncCoordinator._stopPeriodicSync'
+    str: 'LPFavoriteSyncCoordinator._periodicLoop'
+    str: 'LPFavoriteSyncCoordinator._periodicSyncTick'
+    str: 'source'
+    str: 'userId'
+    str: 'force'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator.requestSync'
+    str: 'LPFavoriteSyncCoordinator._prepareSingletons'
+    str: 'LPFavoriteSyncCoordinator.clearUser'
+    str: 'source'
+    str: 'userId'
+    str: 'delay'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator._scheduleRetry'
+    str: 'LPFavoriteSyncCoordinator._cancelRetry'
+    str: 'LPFavoriteSyncCoordinator._cancelAllRetries'
+    str: 'device'
+    str: 'force'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator.syncNowForDevice'
+    str: 'params'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator._onAccountChangedForSource'
+    str: 'LPFavoriteSyncCoordinator._onDeviceChanged'
+    str: 'device'
+    str: 'infoType'
+    str: 'detail'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator.deviceInfoUpdate'
+    str: 'notify'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator._userIdFromNotify'
+    str: 'source'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator._currentUserIdForSource'
+    str: 'LPFavoriteSyncCoordinator._syncSource'
+    str: 'LPFavoriteSyncCoordinator._syncWiiMRadioLocal'
+    str: 'userId'
+    str: 'return'
+    str: 'LPFavoriteSyncCoordinator._fetchTidalIds'
+    str: 'LPFavoriteSyncCoordinator._fetchQobuzIds'
+
+  def LPFavoriteSyncCoordinator.instance(cls)  line 35
+    names: _instance
+      str: '\n        返回全局单例。\n\n        :return: 全局同步器实例。\n        '
+
+  def LPFavoriteSyncCoordinator.__init__(self)  line 46
+    names: _started, _sync_states, threading, RLock, _states_lock, _retry_timers, _periodic_stop, _periodic_thread, FAVORITE_SOURCES, _fetch_locks
+      str: '初始化同步器内部状态。'
+      str: 'LPFavoriteSyncCoordinator.__init__.<locals>.<dictcomp>'
+
+    def LPFavoriteSyncCoordinator.__init__.<dictcomp>(.0)  line 58
+      names: threading, Lock
+
+  def LPFavoriteSyncCoordinator._stateFor(self, source, userId)  line 62
+    names: _states_lock, _sync_states, get, threading, RLock
+      str: '\n        返回指定账号的同步状态字典，不存在时创建。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: 同步状态字典。\n        '
+      str: 'idle'
+      str: 'status'
+      str: 'lastSyncAt'
+      str: 'retryCount'
+      str: 'nextRetryAt'
+      str: 'lock'
+
+  def LPFavoriteSyncCoordinator.start(self)  line 84
+    names: _started, addNotificationObserver, _onAccountChangedForSource, _onDeviceChanged, registerDeviceInfoChanged, _prepareSingletons, getattr, LPGlobalUI, syncNowForDevice, _startPeriodicSync
+      str: '\n        注册设备/账号事件监听；若已有当前设备，立即为有账号的音源发起同步。\n\n        :return: None。\n        '
+      str: 'accountChangedForSource'
+      str: 'DeviceChanged'
+      str: 'currentDevice'
+      str: 'force'
+
+  def LPFavoriteSyncCoordinator.stop(self)  line 102
+    names: _started, _stopPeriodicSync, removeNotificationObserver, _onAccountChangedForSource, _onDeviceChanged, deRegisterDeviceInfoChanged, _cancelAllRetries
+      str: '\n        反注册事件监听。\n\n        :return: None。\n        '
+      str: 'accountChangedForSource'
+      str: 'DeviceChanged'
+
+  def LPFavoriteSyncCoordinator._startPeriodicSync(self)  line 117
+    names: _periodic_thread, is_alive, threading, Event, _periodic_stop, Thread, _periodicLoop, start
+      str: '\n        启动每小时一次的周期刷新守护线程。\n\n        :return: None。\n        '
+      str: 'favoriteSyncPeriodic'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+
+  def LPFavoriteSyncCoordinator._stopPeriodicSync(self)  line 134
+    names: _periodic_stop, set, _periodic_thread, is_alive, join
+      str: '\n        停止周期刷新线程并等待其退出。\n\n        :return: None。\n        '
+      str: 'timeout'
+
+  def LPFavoriteSyncCoordinator._periodicLoop(self)  line 149
+    names: _periodic_stop, wait, PERIODIC_SYNC_INTERVAL_SECONDS, _started, _periodicSyncTick, Exception, logger, warning
+      str: '\n        周期刷新线程主体：每间隔唤醒一次并执行非强制同步。\n\n        :return: None。\n        '
+      str: '[FavoriteSync] periodic sync failed: %s'
+
+  def LPFavoriteSyncCoordinator._periodicSyncTick(self)  line 164
+    names: _started, getattr, LPGlobalUI, syncNowForDevice
+      str: '\n        执行一次周期刷新：按当前设备账号枚举，force=False 由 TTL 决定是否拉取。\n\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'force'
+
+  def LPFavoriteSyncCoordinator.requestSync(self, source, userId, force)  line 177
+    names: _prepareSingletons, _stateFor, time, SYNC_TTL_SECONDS, LPFavoriteCacheManager, instance, markSyncing, threading, Thread, _syncSource, start
+      str: '\n        请求指定账号同步一次收藏数据。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param force: True 忽略 TTL 与退避，立即拉取。\n        :return: None。\n        '
+      str: 'lock'
+      str: 'status'
+      str: 'syncing'
+      str: 'synced'
+      str: 'lastSyncAt'
+      str: 'failed'
+      str: 'nextRetryAt'
+      str: 'favoriteSync_%s_%s'
+      str: 'target'
+      str: 'args'
+      str: 'name'
+      str: 'daemon'
+
+  def LPFavoriteSyncCoordinator._prepareSingletons(self)  line 209
+    names: threading, current_thread, main_thread, LPFavoriteCacheManager, instance, LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager, LPTidalLoginManager, LPClientFramework.LPMSManager.Qobuz.LPQobuzManager, LPQobuzManager, Exception, logger, warning
+      str: '\n        在主线程预创建收藏相关 QObject 单例，避免后台线程创建跨线程对象。\n\n        :return: None。\n        '
+      str: 'LPTidalLoginManager'
+      str: 'LPQobuzManager'
+      str: '[FavoriteSync] prepare singletons failed: %s'
+
+  def LPFavoriteSyncCoordinator.clearUser(self, source, userId)  line 227
+    names: LPFavoriteCacheManager, instance, clearUser, _cancelRetry, _states_lock, _sync_states, pop
+      str: '\n        清空指定账号缓存与同步状态。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: None。\n        '
+
+  def LPFavoriteSyncCoordinator._scheduleRetry(self, source, userId, delay)  line 242
+    names: _states_lock, _retry_timers, get, cancel, threading, Timer, daemon, start
+      str: '\n        为指定账号安排一次失败后的自动重试。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param delay: 延迟秒数。\n        :return: None。\n        '
+      str: 'return'
+      str: 'LPFavoriteSyncCoordinator._scheduleRetry.<locals>._fire'
+
+    def LPFavoriteSyncCoordinator._scheduleRetry._fire()  line 253
+      names: _states_lock, _retry_timers, pop, _started, requestSync
+        str: '定时触发时移除自身并请求非强制同步。'
+        str: 'force'
+
+  def LPFavoriteSyncCoordinator._cancelRetry(self, source, userId)  line 270
+    names: _states_lock, _retry_timers, pop, cancel
+      str: '\n        取消指定账号的待执行重试定时器。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: None。\n        '
+
+  def LPFavoriteSyncCoordinator._cancelAllRetries(self)  line 284
+    names: _states_lock, list, _retry_timers, values, clear, cancel
+      str: '\n        取消全部待执行的重试定时器。\n\n        :return: None。\n        '
+
+  def LPFavoriteSyncCoordinator.syncNowForDevice(self, device, force)  line 296
+    names: getattr, FAVORITE_SOURCES, requestSync, WIIMRADIO_LOCAL_USER_ID, accountForSource, str, strip
+      str: '\n        按设备 capability 与账号状态枚举需要同步的音源。\n\n        :param device: 当前设备对象。\n        :param force: True 强制拉取，False 走 TTL/退避判断。\n        :return: None。\n        '
+      str: 'deviceStreamServiceManager'
+      str: 'streamServiceCapability'
+      str: 'WiiMRadio'
+      str: 'force'
+      str: 'userId'
+
+  def LPFavoriteSyncCoordinator._onAccountChangedForSource(self, params)  line 321
+    names: get, str, strip, FAVORITE_SOURCES, lower, _userIdFromNotify, _currentUserIdForSource, requestSync, clearUser
+      str: '\n        处理音源账号变化通知。\n\n        :param params: 通知参数，含 notify 字典。\n        :return: None。\n        '
+      str: 'notify'
+      str: 'source'
+      str: 'WiiMRadio'
+      str: 'eventType'
+      str: 'accountchange'
+      str: 'force'
+      str: 'logout'
+
+  def LPFavoriteSyncCoordinator._onDeviceChanged(self, params)  line 340
+    names: syncNowForDevice, get
+      str: '\n        处理设备切换通知。\n\n        :param params: 通知参数，含 device。\n        :return: None。\n        '
+      str: 'device'
+      str: 'force'
+
+  def LPFavoriteSyncCoordinator.deviceInfoUpdate(self, device, infoType, detail)  line 349
+    names: getattr, LPGlobalUI, str, get, FAVORITE_SOURCES, accountForSource, strip, requestSync
+      str: '\n        处理账号注册完成回调：当前设备账号就绪时立即同步收藏数据。\n\n        :param device: 上报账号的设备对象。\n        :param infoType: 更新类型，仅处理 accountRegister。\n        :param detail: 更新详情字典。\n        :return: None。\n        '
+      str: 'accountRegister'
+      str: 'currentDevice'
+      str: 'uuid'
+      str: 'source'
+      str: 'deviceStreamServiceManager'
+      str: 'userId'
+      str: 'force'
+
+  def LPFavoriteSyncCoordinator._userIdFromNotify(notify)  line 376
+    names: isinstance, get, dict, str, strip
+      str: '\n        从账号通知中提取 userId。\n\n        :param notify: 账号通知字典。\n        :return: userId；未找到返回空字符串。\n        '
+      str: 'payload'
+      str: 'userId'
+      str: 'user'
+      str: 'userinfo'
+
+  def LPFavoriteSyncCoordinator._currentUserIdForSource(self, source)  line 397
+    names: getattr, LPGlobalUI, accountForSource, str, strip
+      str: '\n        从当前设备读取指定音源的账号 ID。\n\n        :param source: 音源标识。\n        :return: userId；无当前设备或账号时返回空字符串。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'userId'
+
+  def LPFavoriteSyncCoordinator._syncSource(self, source, userId)  line 413
+    names: _stateFor, _fetch_locks, time, _fetchTidalIds, _fetchQobuzIds, LPFavoriteCacheManager, instance, applyServerSnapshot, _syncWiiMRadioLocal, _cancelRetry, logger, debug, Exception, warning, markFailed, min, len, RETRY_DELAYS, _scheduleRetry
+      str: '\n        后台执行一次收藏拉取并写缓存，结束后更新同步状态。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :return: None。\n        '
+      str: 'Tidal'
+      str: 'Qobuz'
+      str: 'Tidal'
+      str: 'snapshotAt'
+      str: 'WiiMRadio'
+      str: 'lock'
+      str: 'synced'
+      str: 'status'
+      str: 'lastSyncAt'
+      str: 'retryCount'
+      str: 'nextRetryAt'
+      str: '[FavoriteSync] synced source=%s userId=%s'
+      str: '[FavoriteSync] sync failed source=%s userId=%s error=%s'
+      str: 'failed'
+
+  def LPFavoriteSyncCoordinator._syncWiiMRadioLocal(self)  line 457
+    names: HOME.StreamService.WiiMRadio.utils.LPWiiMRadioFavoriteStorage, ensureLoaded
+      str: '\n        把 WiiMRadio 本地收藏同步到统一缓存，含旧文件迁移/恢复。\n\n        :return: None。\n        '
+      str: 'ensureLoaded'
+
+  def LPFavoriteSyncCoordinator._fetchTidalIds(self, userId)  line 467
+    names: getattr, LPGlobalUI, RuntimeError, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager, LPTidalLoginManager, _instance, instance, str, accountState, get, strip, syncAccountFromDevice, ensureFreshToken, _provider, refreshFavoriteIds, isinstance, dict, bool, normalizeFavoriteIds
+      str: '\n        拉取 TIDAL 收藏 ID 并归一化。\n\n        :param userId: TIDAL 账号 ID。\n        :return: 归一化后的收藏 ID 字典。\n        :raises RuntimeError: 无设备、无 token 或请求失败时。\n        '
+      str: 'currentDevice'
+      str: 'no current device for tidal favorite sync'
+      str: 'LPTidalStore'
+      str: 'LPTidalLoginManager'
+      str: 'tidal login manager not prepared on main thread'
+      str: 'token'
+      str: 'fetchIfMissing'
+      str: 'force'
+      str: 'skipCache'
+      str: 'success'
+      str: 'tidal favorite ids request failed'
+      str: 'data'
+
+  def LPFavoriteSyncCoordinator._fetchQobuzIds(self, userId)  line 494
+    names: getattr, LPGlobalUI, RuntimeError, LPClientFramework.LPMSManager.Qobuz.LPQobuzManager, LPQobuzManager, _instance, instance, deviceStreamServiceManager, accountForSource, str, strip, account, setAccount, token, fetchFavoriteIds, isinstance, dict, logger, warning, LPFavoriteCacheManager, snapshot, get, list, debug, sorted, keys
+      str: '\n        拉取 Qobuz 收藏 ID。\n\n        :param userId: Qobuz 账号 ID。\n        :return: Qobuz 收藏 ID 字典。\n        :raises RuntimeError: 无设备、账号缺失或请求失败时。\n        '
+      str: 'currentDevice'
+      str: 'no current device for qobuz favorite sync'
+      str: 'LPQobuzManager'
+      str: 'qobuz manager not prepared on main thread'
+      str: 'Qobuz'
+      str: 'userId'
+      str: 'qobuz account missing for favorite sync'
+      str: 'loginMgr'
+      str: 'qobuz login manager missing for favorite sync'
+      str: 'tokenProvider'
+      str: 'requestMgr'
+      str: 'requester'
+      str: 'client'
+      str: 'token'
+      str: 'qobuz request manager missing for favorite sync'
+      str: '[FavoriteSync] qobuz favorite ids response not dict: %r'
+      str: 'qobuz favorite ids request failed'
+      str: 'playlists'
+      str: '[FavoriteSync] qobuz favorite ids keys=%s'

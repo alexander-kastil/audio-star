@@ -1,0 +1,766 @@
+# module LPClientFramework.LPStreamServiceManager
+
+[module] names: json, typing, Type, importlib, import_module, traceback, LPGlobalUI, LPClientFramework, LPPublicDefine, LPUtility, LPClientFramework.LPFavoriteCacheManager, WIIMRADIO_LOCAL_USER_ID, LPClientFramework.LPMusicLibrary.LPRecentlyManager, LPRecentlyManager, LPClientFramework.LPPlayList.LPPlayList, LPPlayHeader, LPPlayItem, LPPlayListSource, LPAccount, LPHeaderType, LPClientFramework.LPUtility, logger, streamServiceDict, supportContents, object, LPStreamService, registerStreamService, allDict, key, valueDict, get, moduleName, className, m, getattr, c, streamServiceForSource, MEDIATYPE_LOCALLIST, _USB_MEDIA_TYPE, frozenset, _USB_TRACK_SOURCES, sourceInfoForMedia, bool, isDeviceUsbTrackSource, dict, recentlyDidSelect, recentlyOpensDetail, playRecently, _recentlyStreamServiceForDetail, recentlyCanPreset, recentlyResourceUnavailable, str, _streamServiceForFavorite, _currentUserIdForSource, _SUPPORTED_FAVORITE_TYPES, _isDeviceAccountPending, favoriteStatus, canFavorite, recentlyFavoriteTarget, recentlyFavoriteItemData, favoriteState, favoriteStateNeedsResync, requestFavoriteResync, setFavorite, recentlyPlayListFromDetail, isCurrentPlayItem
+  str: 'Type'
+  str: 'import_module'
+  str: 'LPPublicDefine'
+  str: 'LPUtility'
+  str: 'WIIMRADIO_LOCAL_USER_ID'
+  str: 'LPRecentlyManager'
+  str: 'LPPlayHeader'
+  str: 'LPPlayItem'
+  str: 'LPPlayListSource'
+  str: 'LPAccount'
+  str: 'LPHeaderType'
+  str: 'logger'
+  str: 'supportContents'
+  str: 'LPStreamService'
+  str: 'service'
+  str: 'registerStreamService'
+  str: 'module'
+  str: 'class'
+  str: 'return'
+  str: 'streamServiceForSource'
+  str: 'UPnPServer'
+  str: 'USBDiskQueue'
+  str: 'sourceInfoForMedia'
+  str: 'isDeviceUsbTrackSource'
+  str: 'detailDict'
+  str: 'recentlyDidSelect'
+  str: 'recentlyOpensDetail'
+  str: 'playRecently'
+  str: '_recentlyStreamServiceForDetail'
+  str: 'detailDict'
+  str: 'return'
+  str: 'recentlyCanPreset'
+  str: 'recentlyResourceUnavailable'
+  str: 'source'
+  str: '_streamServiceForFavorite'
+  str: 'source'
+  str: 'return'
+  str: '_currentUserIdForSource'
+  str: 'artist'
+  str: 'station'
+  str: 'playlist'
+  str: 'album'
+  str: 'track'
+  str: '_isDeviceAccountPending'
+  str: 'source'
+  str: 'itemType'
+  str: 'itemId'
+  str: 'return'
+  str: 'favoriteStatus'
+  str: 'canFavorite'
+  str: 'recentlyFavoriteTarget'
+  str: 'recentlyFavoriteItemData'
+  str: 'source'
+  str: 'itemType'
+  str: 'itemId'
+  str: 'favoriteState'
+  str: 'favoriteStateNeedsResync'
+  str: 'requestFavoriteResync'
+  str: 'source'
+  str: 'itemType'
+  str: 'itemId'
+  str: 'desiredFavorite'
+  str: 'return'
+  str: 'setFavorite'
+  str: 'recentlyPlayListFromDetail'
+  str: 'isCurrentPlayItem'
+
+def supportContents()  line 15
+  names: LPUtility, appLocalDataPath, exists, open, json, load, items, isinstance, dict, Exception, logger, warning
+    str: '返回全局音源配置表（含图片路径），作为各场景取图的兜底层。\n\n    字段约定（图片类字段统一存 qrc 路径，可直接交给 QPixmap/QIcon/QML Image）：\n\n    - ``preset_icon``    Preset 卡片左下角来源图标\n    - ``little_icon``    minibar / 设备卡片小 logo\n    - ``play_icon``      播放页顶部 logo\n    - ``browse_icon``    Music Services 侧边栏图标\n    - ``mini_cover``     已废弃，保留字段但恒为空；默认封'
+    str: 'ALEXA'
+    str: 'Alexa'
+    str: ':/images/preset_icon/alexa.png'
+    str: ':/images/playview/alexa.png'
+    str: 'content'
+    str: 'title'
+    str: 'preset_icon'
+    str: 'little_icon'
+    str: 'play_icon'
+    str: 'browse_icon'
+    str: 'mini_cover'
+    str: 'playview_cover'
+    str: 'Prime'
+    str: 'Amazon Music'
+    str: ':/images/preset_icon/amazonmusic.svg'
+    str: ':/images/mini_ms/amazonmusic_mini.svg'
+    str: ':/images/playview_ms/amazonmusic_play.svg'
+    str: ':/images/playview/amazonmusic.png'
+    str: 'newTuneIn'
+    str: 'TuneIn'
+    str: ':/images/preset_icon/tunein.svg'
+    str: ':/images/mini_ms/tunein_mini.svg'
+    str: ':/images/playview_ms/tunein_play.svg'
+    str: ':/images/playview/tunein.png'
+    str: 'Deezer'
+    str: ':/images/preset_icon/deezer.svg'
+    str: ':/images/playview/deezer.png'
+    str: 'Deezer2'
+    str: ':/images/mini_ms/deezer2_mini.svg'
+    str: ':/images/playview_ms/deezer2_play.svg'
+    str: 'vTuner'
+    str: ':/images/preset_icon/vtuner.png'
+    str: ':/images/mini_ms/vtuner_mini.png'
+    str: ':/images/playview_ms/vtuner_play.png'
+    str: ':/images/playview/vtuner.png'
+    str: 'iHeartRadio'
+    str: ':/images/preset_icon/iheartradio.svg'
+    str: ':/images/mini_ms/iheartradio_mini.svg'
+    str: ':/images/playview_ms/iheartradio_play.svg'
+    str: ':/images/playview/iheartradio.png'
+    str: 'Tidal'
+    str: ':/images/preset_icon/tidal.svg'
+    str: ':/images/mini_ms/tidal_mini.svg'
+    str: ':/images/playview_ms/tidal_play.svg'
+    str: ':/images/playview/tidal.png'
+    str: 'Qobuz'
+    str: ':/images/preset_icon/qobuz.svg'
+    str: ':/images/mini_ms/qobuz_mini.svg'
+    str: ':/images/playview_ms/qobuz_play.svg'
+    str: ':/images/playview/qobuz.png'
+    str: 'Napster'
+    str: ':/images/preset_icon/napster.svg'
+    str: ':/images/mini_ms/napster_mini.svg'
+    str: ':/images/playview_ms/napster_play.svg'
+    str: ':/images/playview/napster.png'
+    str: 'SoundMachine'
+    str: ':/images/preset_icon/soundmachine.svg'
+    str: ':/images/mini_ms/soundmachine_mini.svg'
+    str: ':/images/playview_ms/soundmachine_play.svg'
+    str: ':/images/playview/soundmachine.png'
+    str: 'CalmRadio'
+    str: ':/images/preset_icon/calmradio.png'
+    str: ':/images/mini_ms/calmradio_mini.svg'
+    str: ':/images/playview_ms/calmradio_play.png'
+    str: ':/images/playview/calmradio.png'
+    str: 'SPOTIFY'
+    str: 'Spotify'
+    str: ':/images/preset_icon/spotify.svg'
+    str: ':/images/mini_ms/spotify_mini.svg'
+    str: ':/images/playview_ms/spotify_play.svg'
+    str: ':/images/playview/spotify.png'
+    str: 'SoundCloud'
+    str: ':/images/preset_icon/soundcloud.svg'
+    str: ':/images/mini_ms/soundcloud_mini.svg'
+    str: ':/images/playview_ms/soundcloud_play.svg'
+    str: 'UPnPServer'
+    str: 'DLNA'
+    str: ':/images/mini_ms/nas_mini.svg'
+    str: ':/images/playview_ms/dlna_play.svg'
+    str: ':/images/playview/dlna.png'
+    str: 'SONGLIST-LOCAL'
+    str: 'USB'
+    str: ':/images/preset_icon/USB.svg'
+    str: ':/images/playview_ms/USB.svg'
+    str: 'Your PC'
+    str: ':/images/preset_icon/dlna.svg'
+    str: ':/images/mini_ms/dlna_mini.svg'
+    str: 'LPClientFramework.LPStreamServiceDir.LPPCRemoteLocalStreamService'
+    str: 'LPPCRemoteLocalStreamService'
+    str: 'content'
+    str: 'title'
+    str: 'preset_icon'
+    str: 'little_icon'
+    str: 'play_icon'
+    str: 'browse_icon'
+    str: 'mini_cover'
+    str: 'playview_cover'
+    str: 'module'
+    str: 'class'
+    str: 'Airplay'
+    str: ':/images/mini_ms/airplay_mini.svg'
+    str: ':/images/playview_ms/airplay_play.svg'
+    str: 'CustomRadio'
+    str: 'Open Network Stream'
+    str: ':/images/preset_icon/linkplayradio.svg'
+    str: ':/images/mini_ms/linkplayradio_mini.png'
+    str: ':/images/playview_ms/linkplayradio_play.svg'
+    str: ':/images/playview/linkplayradio.png'
+    str: 'Roon'
+    str: 'Roon Ready'
+    str: ':/images/preset_icon/roon.svg'
+    str: ':/images/mini_ms/roon_mini.svg'
+    str: ':/images/playview_ms/roon_play.svg'
+    str: ':/images/playview/roon.png'
+    str: 'RadioParadise'
+    str: 'Radio Paradise'
+    str: ':/images/preset_icon/radioparadise.svg'
+    str: ':/images/mini_ms/radioparadise_mini.svg'
+    str: ':/images/playview_ms/radioparadise_play.svg'
+    str: ':/images/playview/radioparadise.png'
+    str: 'WiiMRadio'
+    str: 'WiiM Radio'
+    str: ':/images/preset_icon/wiimradio.svg'
+    str: ':/images/mini_ms/WiiMRadio.svg'
+    str: ':/images/playview_ms/WiiMRadio.svg'
+    str: ':/images/playview/muzo_browse_wiim_radio.png'
+    str: 'SleepSound'
+    str: 'Sleep Sound'
+    str: ':/images/preset_icon/sleepsound.png'
+    str: ':/images/playview/sleepsound.png'
+    str: 'SleepRadio'
+    str: 'Sleep Radio'
+    str: ':/images/preset_icon/sleepradio.png'
+    str: ':/images/playview/sleepradio.png'
+    str: 'HotMix'
+    str: ':/images/preset_icon/hotmix.png'
+    str: ':/images/mini_ms/hotmix_mini.png'
+    str: ':/images/playview_ms/hotmix_play.png'
+    str: 'Plex'
+    str: ':/images/preset_icon/plex.svg'
+    str: ':/images/mini_ms/plex_mini.svg'
+    str: ':/images/playview_ms/plex_play.svg'
+    str: 'YouTubeMusic'
+    str: ':/images/preset_icon/youtubemusic.svg'
+    str: ':/images/mini_ms/youtubemusic_mini.svg'
+    str: ':/images/playview_ms/youtubemusic_play.svg'
+    str: 'Soundtrack'
+    str: ':/images/preset_icon/Soundtrack.svg'
+    str: ':/images/mini_ms/Soundtrack_mini.svg'
+    str: ':/images/playview_ms/Soundtrack_play.svg'
+    str: 'Pandora'
+    str: ':/images/preset_icon/Pandora.svg'
+    str: ':/images/mini_ms/Pandora_mini.svg'
+    str: ':/images/playview_ms/Pandora_play.svg'
+    str: 'TIDAL_CONNECT'
+    str: 'TIDAL CONNECT'
+    str: ':/images/preset_icon/TIDAL_CONNECT.svg'
+    str: ':/images/mini_ms/TIDAL_CONNECT_mini.svg'
+    str: ':/images/playview_ms/TIDAL_CONNECT_play.svg'
+    str: 'CAST'
+    str: 'Google Cast'
+    str: ':/images/preset_icon/CAST.svg'
+    str: ':/images/mini_ms/CAST_mini.svg'
+    str: ':/images/playview_ms/CAST_play.svg'
+    str: 'KKBOX'
+    str: ':/images/preset_icon/KKBOX.svg'
+    str: ':/images/mini_ms/kkbox_mini.png'
+    str: ':/images/playview_ms/kkbox_play.png'
+    str: 'Linkplay Radio'
+    str: 'BBC Radio'
+    str: ':/images/preset_icon/bbc.svg'
+    str: ':/images/mini_ms/bbc_mini.svg'
+    str: ':/images/playview_ms/bbcradio_play.png'
+    str: 'iHeart'
+    str: 'Samba'
+    str: 'SMB'
+    str: ':/images/preset_icon/Samba_player.svg'
+    str: ':/images/mini_ms/Samba_player.svg'
+    str: ':/images/playview_ms/Samba_player.svg'
+    str: 'KUGOUHiFi'
+    str: 'KUGOU HiFi'
+    str: ':/images/preset_icon/kugou.svg'
+    str: ':/images/mini_ms/kugou.svg'
+    str: ':/images/playview_ms/kugou.svg'
+    str: 'RemoteLocal'
+    str: 'Local Music'
+    str: 'ALEXA'
+    str: 'Prime'
+    str: 'newTuneIn'
+    str: 'Deezer'
+    str: 'Deezer2'
+    str: 'vTuner'
+    str: 'iHeartRadio'
+    str: 'Tidal'
+    str: 'Qobuz'
+    str: 'Napster'
+    str: 'SoundMachine'
+    str: 'CalmRadio'
+    str: 'SPOTIFY'
+    str: 'SoundCloud'
+    str: 'UPnPServer'
+    str: 'SONGLIST-LOCAL'
+    str: 'PC_RemoteLocal'
+    str: 'AIRPLAY'
+    str: 'CustomRadio'
+    str: 'Roon'
+    str: 'RadioParadise2'
+    str: 'WiiMRadio'
+    str: 'SleepSound'
+    str: 'SleepRadio'
+    str: 'HotMix'
+    str: 'Plex'
+    str: 'YouTubeMusic'
+    str: 'Soundtrack'
+    str: 'Pandora2'
+    str: 'TIDAL_CONNECT'
+    str: 'CAST'
+    str: 'KKBOX'
+    str: 'Linkplay Radio'
+    str: 'iHeart'
+    str: 'Pandora'
+    str: 'RadioParadise'
+    str: 'Samba'
+    str: 'KUGOUHiFi'
+    str: 'RemoteLocal'
+    str: 'LPSupportedStreamServiceConfig.json'
+    str: 'r'
+    str: 'utf-8'
+    str: 'encoding'
+    str: 'mini_cover'
+    str: 'browse_icon'
+    str: 'preset_icon'
+    str: 'play_icon'
+    str: 'playview_cover'
+    str: 'little_icon'
+    str: 'supportContents.<locals>.<dictcomp>'
+    str: '[stream service] load support contents config failed: '
+
+  def supportContents.<dictcomp>(.0)  line 451
+
+def LPStreamService()  line 468
+  names: __name__, __module__, __qualname__, _prefixedDetailNavigationId, __init__, detailNavigationItemId, Type, LPPlayHeader, LPPlayItem, LPTrackMoreViewControllerCanViewArtist, LPTrackMoreViewControllerCanViewAlbum, LPTrackMoreViewControllerCanAddToPlaylist, LPTrackMoreViewControllerViewArtist, LPTrackMoreViewControllerViewAlbum, LPTrackMoreViewControllerAddToPlaylist, bool, _detailNavigationReady, _viewArtistIdForPlayItem, _viewAlbumIdForPlayHeaderItem, _canViewDetailArtist, _canViewDetailAlbum, _openArtistDetail, _openAlbumDetail, _viewDetailArtist, _viewDetailAlbum, _matchesCurrentTrackId, isCurrentPlayItem, _currentQueuePlayItem, _buildCurrentPlayItem, currentPlayItem, currentPlayHeader, parseQueuePlayItem, registerAccount, getAccount, logoutAccount, loginAccount, streamGuiBehavior, guiCan, isCurrentPlayChannel, accountChanged, updateMediaInfoWithItem, _isSearchTrackPlayback, _deviceSupportsPreset, _recentlyPresetBlockedBySearchTrack, dict, _recentlyCanPresetForDetail, LPTrackMoreCanPreset, recentlyCanPreset, recentlyResourceUnavailable, str, canFavorite, favoriteState, setFavorite, favoriteStateNeedsResync, recentlyFavoriteTarget, recentlyFavoriteItemData, recentlyPlayListFromDetail, backupXml, replaceItemXml, recentlyDidSelect, recentlyOpensDetail, playRecently
+    str: 'LPStreamService'
+    str: 'LPStreamService.__init__'
+    str: 'LPStreamService.detailNavigationItemId'
+    str: 'playHeader'
+    str: 'playItem'
+    str: 'LPStreamService.LPTrackMoreViewControllerCanViewArtist'
+    str: 'playHeader'
+    str: 'playItem'
+    str: 'artistItem'
+    str: 'LPStreamService.LPTrackMoreViewControllerCanViewAlbum'
+    str: 'LPStreamService.LPTrackMoreViewControllerCanAddToPlaylist'
+    str: 'LPStreamService.LPTrackMoreViewControllerViewArtist'
+    str: 'playHeader'
+    str: 'playItem'
+    str: 'albumItem'
+    str: 'LPStreamService.LPTrackMoreViewControllerViewAlbum'
+    str: 'LPStreamService.LPTrackMoreViewControllerAddToPlaylist'
+    str: 'return'
+    str: 'LPStreamService._detailNavigationReady'
+    str: 'LPStreamService._viewArtistIdForPlayItem'
+    str: 'LPStreamService._viewAlbumIdForPlayHeaderItem'
+    str: 'LPStreamService._canViewDetailArtist'
+    str: 'LPStreamService._canViewDetailAlbum'
+    str: 'LPStreamService._openArtistDetail'
+    str: 'LPStreamService._openAlbumDetail'
+    str: 'LPStreamService._viewDetailArtist'
+    str: 'LPStreamService._viewDetailAlbum'
+    str: 'LPStreamService._matchesCurrentTrackId'
+    str: 'LPStreamService.isCurrentPlayItem'
+    str: 'LPStreamService._currentQueuePlayItem'
+    str: 'LPStreamService._buildCurrentPlayItem'
+    str: 'LPStreamService.currentPlayItem'
+    str: 'LPStreamService.currentPlayHeader'
+    str: 'LPStreamService.parseQueuePlayItem'
+    str: 'LPStreamService.registerAccount'
+    str: 'LPStreamService.getAccount'
+    str: 'LPStreamService.logoutAccount'
+    str: 'LPStreamService.loginAccount'
+    str: 'LPStreamService.streamGuiBehavior'
+    str: 'LPStreamService.guiCan'
+    str: 'LPStreamService.isCurrentPlayChannel'
+    str: 'LPStreamService.accountChanged'
+    str: 'LPStreamService.updateMediaInfoWithItem'
+    str: 'LPStreamService._isSearchTrackPlayback'
+    str: 'LPStreamService._deviceSupportsPreset'
+    str: 'LPStreamService._recentlyPresetBlockedBySearchTrack'
+    str: 'detailDict'
+    str: 'return'
+    str: 'LPStreamService._recentlyCanPresetForDetail'
+    str: 'LPStreamService.LPTrackMoreCanPreset'
+    str: 'LPStreamService.recentlyCanPreset'
+    str: 'LPStreamService.recentlyResourceUnavailable'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPStreamService.canFavorite'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'LPStreamService.favoriteState'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: 'return'
+    str: 'LPStreamService.setFavorite'
+    str: 'LPStreamService.favoriteStateNeedsResync'
+    str: 'detailDict'
+    str: 'LPStreamService.recentlyFavoriteTarget'
+    str: 'LPStreamService.recentlyFavoriteItemData'
+    str: 'LPStreamService.recentlyPlayListFromDetail'
+    str: 'LPStreamService.backupXml'
+    str: 'LPStreamService.replaceItemXml'
+    str: 'LPStreamService.recentlyDidSelect'
+    str: 'LPStreamService.recentlyOpensDetail'
+    str: 'LPStreamService.playRecently'
+
+  def LPStreamService.__init__(self, source)  line 473
+    names: source, account
+
+  def LPStreamService.detailNavigationItemId(self, itemType)  line 477
+    names: str, strip, lower, _prefixedDetailNavigationId, source
+      str: '生成详情页导航 id。\n\n        默认返回 My Library 可识别的通用 id；开启音源前缀的音源\n        按 ``<source>_<itemType>_detail`` 生成，供 Music Services 侧边栏匹配。\n\n        :param itemType: 详情类型（"artist" / "album"）。\n        :return: 导航 id。\n        '
+      str: 'detail'
+      str: '_'
+      str: '_detail'
+
+  def LPStreamService.LPTrackMoreViewControllerCanViewArtist(self, playHeader, playItem, immediately, callback)  line 494
+
+  def LPStreamService.LPTrackMoreViewControllerCanViewAlbum(self, playHeader, playItem, artistItem, immediately, callback)  line 501
+
+  def LPStreamService.LPTrackMoreViewControllerCanAddToPlaylist(self, playHeader, playItem, artistItem, immediately, callback)  line 505
+
+  def LPStreamService.LPTrackMoreViewControllerViewArtist(self, playHeader, playItem, artistItem, callback)  line 511
+
+  def LPStreamService.LPTrackMoreViewControllerViewAlbum(self, playHeader, playItem, albumItem, callback)  line 515
+
+  def LPStreamService.LPTrackMoreViewControllerAddToPlaylist(self, playHeader, playItem, albumItem, callback)  line 518
+
+  def LPStreamService._detailNavigationReady(self, device)  line 526
+      str: '\n        判断当前上下文是否具备进入详情页的条件。\n\n        :param device: 待检查设备；为空时使用当前设备。\n        :return: 默认不支持详情跳转，子类按账号/token 就绪情况覆写。\n        '
+
+  def LPStreamService._viewArtistIdForPlayItem(self, playItem)  line 536
+    names: str, getattr, strip
+      str: '返回播放项可跳转的艺人 ID；默认无。'
+      str: 'artistId'
+
+  def LPStreamService._viewAlbumIdForPlayHeaderItem(self, playHeader, playItem)  line 540
+    names: getattr, str, strip
+      str: '返回播放头/播放项可跳转的专辑 ID；专辑头部场景优先使用头部 ID。'
+      str: 'isAlbum'
+      str: 'trackId'
+      str: 'albumId'
+
+  def LPStreamService._canViewDetailArtist(self, playHeader, playItem, immediately, callback)  line 546
+    names: bool, _viewArtistIdForPlayItem, _detailNavigationReady
+      str: '通用 View Artist 能力模板：详情就绪且存在艺人 ID。'
+
+  def LPStreamService._canViewDetailAlbum(self, playHeader, playItem, artistItem, immediately, callback)  line 554
+    names: bool, _viewAlbumIdForPlayHeaderItem, _detailNavigationReady
+      str: '通用 View Album 能力模板：详情就绪且存在专辑 ID。'
+
+  def LPStreamService._openArtistDetail(self, playHeader, playItem, artistId, callback)  line 562
+      str: '子类打开艺人详情页；默认回调空控制器。'
+
+  def LPStreamService._openAlbumDetail(self, playHeader, playItem, albumId, callback)  line 568
+      str: '子类打开专辑详情页；默认回调空控制器。'
+
+  def LPStreamService._viewDetailArtist(self, playHeader, playItem, artistItem, callback)  line 574
+    names: _detailNavigationReady, _viewArtistIdForPlayItem, getattr, _openArtistDetail
+      str: '通用 View Artist 模板：就绪校验 -> ID 校验 -> 头部场景拦截 -> 打开详情。'
+      str: 'isArtist'
+
+  def LPStreamService._viewDetailAlbum(self, playHeader, playItem, albumItem, callback)  line 585
+    names: _detailNavigationReady, _viewAlbumIdForPlayHeaderItem, getattr, _openAlbumDetail
+      str: '通用 View Album 模板：就绪校验 -> ID 校验 -> 头部场景拦截 -> 打开详情。'
+      str: 'isAlbum'
+
+  def LPStreamService._matchesCurrentTrackId(self, device, playItem)  line 596
+    names: getattr, str, strip, bool
+      str: '判断播放项与设备当前曲目 ID 是否一致。'
+      str: 'mediaInfo'
+      str: 'trackId'
+
+  def LPStreamService.isCurrentPlayItem(self, device, playItem)  line 604
+    names: _matchesCurrentTrackId
+
+  def LPStreamService._currentQueuePlayItem(self, device)  line 607
+    names: getattr, len, isCurrentPlayItem
+      str: '从当前设备队列查找正在播放的条目：先信任队列索引，再退化为全量匹配。'
+      str: 'queueManager'
+      str: 'playList'
+      str: 'list'
+      str: 'index'
+
+  def LPStreamService._buildCurrentPlayItem(self, device, sourcePlayItem)  line 625
+    names: getattr, LPPlayItem, trackSource, trackName, trackId, trackUrl, trackImage, trackArtist, artistId, trackDuration, albumName, albumId
+      str: '构造当前播放项：队列项字段优先，设备 mediaInfo 兜底；子类可覆写补齐扩展字段。'
+      str: 'mediaInfo'
+      str: 'trackSource'
+      str: 'trackName'
+      str: 'trackId'
+      str: 'trackUrl'
+      str: 'trackImage'
+      str: 'trackArtist'
+      str: 'artistId'
+      str: 'trackDuration'
+      str: 'albumName'
+      str: 'albumId'
+      str: 'artworkUri'
+      str: 'artist'
+      str: 'album'
+
+  def LPStreamService.currentPlayItem(self, device)  line 653
+    names: getattr, _currentQueuePlayItem, _buildCurrentPlayItem
+      str: '音箱当前播放的playItem对象\n        :returns: sub LPPlayItem\n        '
+      str: 'mediaInfo'
+
+  def LPStreamService.currentPlayHeader(self, device)  line 662
+    names: queueManager, playList, LPPlayHeader, mediaInfo, trackSource, mediaSource, headTitle, header, searchUrl, mediaType, LPHeaderType, LP_HEADER_TYPE_STATION, headType
+      str: 'CurrentQueue'
+      str: 'STATION-NETWORK'
+
+  def LPStreamService.parseQueuePlayItem(self, trackItemXML)  line 680
+
+  def LPStreamService.registerAccount(self, userinfo)  line 683
+    names: LPAccount, source, get, userName, userId, expressIn, token, showName, account, logger, debug
+      str: 'userName'
+      str: 'userId'
+      str: 'expressIn'
+      str: 'token'
+      str: 'showName'
+      str: '[LPStreamService] registerAccount: %s'
+
+  def LPStreamService.getAccount(self)  line 696
+    names: account
+
+  def LPStreamService.logoutAccount(self)  line 699
+    names: account
+
+  def LPStreamService.loginAccount(self, username, password, finishedMethod)  line 702
+
+  def LPStreamService.streamGuiBehavior(self, device)  line 705
+
+  def LPStreamService.guiCan(self, device, key)  line 708
+    names: source, LPPlayListSource, Soundtrack, value
+      str: 'seek'
+
+  def LPStreamService.isCurrentPlayChannel(self, device, channelItem)  line 714
+
+  def LPStreamService.accountChanged(self, device, notify)  line 717
+
+  def LPStreamService.updateMediaInfoWithItem(self, device, item, header)  line 720
+    names: getattr, source, LPPlayListSource, WiiMRadio, value, headTitle, trackId, LPPublicDefine, MEDIATYPE_NETLIST, mediaType, trackImage, trackName, trackArtist, mediaInfo, volume, loopMode, setMediaInfo
+      str: 'itemName'
+      str: 'TRANSITIONING'
+      str: '{"prev": {"enabled": true},"loop": {"enabled": true}, "shuffle": {"enabled": true}, "seek": {"enabled": true}}'
+      str: '00:00:00'
+      str: 'trackId'
+      str: 'mediaType'
+      str: 'playState'
+      str: 'artworkUri'
+      str: 'trackName'
+      str: 'artist'
+      str: 'guiBehavior'
+      str: 'duration'
+      str: 'progress'
+      str: 'trackSource'
+      str: 'volume'
+      str: 'loopMode'
+
+  def LPStreamService._isSearchTrackPlayback(self, device)  line 748
+    names: getattr, str
+      str: '判断设备当前播放是否属于禁止预设的搜索单曲上下文。'
+      str: 'mediaInfo'
+      str: 'playOrigin'
+      str: 'playOriginTrackId'
+      str: 'trackId'
+      str: 'search_track'
+
+  def LPStreamService._deviceSupportsPreset(self, device)  line 756
+    names: int, getattr
+      str: '判断设备是否支持物理 preset 位。'
+      str: 'presetNum'
+
+  def LPStreamService._recentlyPresetBlockedBySearchTrack(self, playList)  line 760
+    names: getattr, str
+      str: '判断 Recently 还原出的播放列表是否属于禁止预设的搜索单曲上下文。'
+      str: 'header'
+      str: 'playOrigin'
+      str: 'search_track'
+
+  def LPStreamService._recentlyCanPresetForDetail(self, detailDict, searchTrackSensitive, requireHeader)  line 765
+    names: getattr, LPGlobalUI, _deviceSupportsPreset, _playListFromRecentlyDetail, _recentlyPresetBlockedBySearchTrack
+      str: '\n        通用 Recently preset 判定模板。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :param searchTrackSensitive: 是否按搜索单曲上下文拦截。\n        :param requireHeader: 是否要求播放列表头存在。\n        :return: 可保存 preset 返回 True。\n        '
+      str: 'currentDevice'
+      str: 'header'
+
+  def LPStreamService.LPTrackMoreCanPreset(self, device)  line 786
+      str: '判断 minibar 当前播放菜单是否展示 preset。\n\n        :param device: 当前播放设备。\n        :returns: 默认不支持 preset。\n        '
+
+  def LPStreamService.recentlyCanPreset(self, detailDict)  line 795
+      str: '\n        判断 Recently 卡片条目是否支持保存为 preset。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: 支持保存 preset 返回 True；默认不支持。\n        '
+
+  def LPStreamService.recentlyResourceUnavailable(self, detailDict)  line 805
+      str: '\n        判断 Recently 快照引用的资源是否已全部不可用。\n\n        :param detailDict: Recently 条目中的 detail 字典。\n        :return: 已确认资源全部不可用时返回 True；其余情况返回 False。\n        '
+
+  def LPStreamService.canFavorite(self, itemType, itemId)  line 816
+      str: '\n        判断该音源是否支持收藏指定条目（含账号就绪）。\n\n        :param itemType: 条目类型，如 track/album/artist/playlist。\n        :param itemId: 条目 ID。\n        :return: 支持收藏返回 True；默认不支持。\n        '
+
+  def LPStreamService.favoriteState(self, itemType, itemId)  line 827
+      str: '\n        查询指定条目当前收藏状态。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 已收藏返回 True，未收藏返回 False，状态未知返回 None。\n        '
+
+  def LPStreamService.setFavorite(self, itemType, itemId, desiredFavorite, callback, itemData)  line 838
+    names: bool
+      str: '\n        异步设置收藏状态，服务负责乐观更新与失败回滚。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param desiredFavorite: 目标收藏状态。\n        :param callback: 结果回调，参数为结果字典；默认不支持。\n        :param itemData: 加入收藏时携带的完整条目对象；无远端元数据的音源使用。\n        :return: None。\n        '
+      str: 'unsupported'
+      str: 'success'
+      str: 'error'
+      str: 'itemType'
+      str: 'itemId'
+      str: 'desiredFavorite'
+
+  def LPStreamService.favoriteStateNeedsResync(self, itemType, itemId)  line 859
+      str: '\n        判断指定条目的收藏结论是否需要与服务端做一次定向校正。\n\n        默认不支持；实现方需确保仅在“本地展示结论可能已过期”时返回 True，\n        避免菜单每次打开都触发网络请求。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 需要校正返回 True。\n        '
+
+  def LPStreamService.recentlyFavoriteTarget(self, detailDict)  line 873
+      str: '\n        返回 Recently 条目加入收藏所需的类型与 ID。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: ``(itemType, itemId)`` 元组；无法推导时返回 None。\n        '
+
+  def LPStreamService.recentlyFavoriteItemData(self, detailDict)  line 883
+      str: '\n        返回 Recently 条目加入收藏所需的完整条目数据。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: 完整条目字典；无数据时返回 None。\n        '
+
+  def LPStreamService.recentlyPlayListFromDetail(self, detailDict)  line 893
+      str: '\n        从 Recently detail 还原可用的播放列表对象。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: 还原成功的播放列表对象；无法还原时返回 None。\n        '
+
+  def LPStreamService.backupXml(self, playList, listName, **kwargs)  line 903
+
+  def LPStreamService.replaceItemXml(self, playList, name)  line 906
+
+  def LPStreamService.recentlyDidSelect(self, detailDict, baseController)  line 910
+    names: logger, debug, source
+      str: '\n        处理 Recently Played 点击。\n\n        Args:\n            detailDict: recently 记录中的 detail 字典。\n            baseController: 预留给需要跳转 UI 的音源使用。\n\n        Returns:\n            是否已处理该点击。\n        '
+      str: '[StreamService] recentlyDidSelect not implemented, source=%s'
+
+  def LPStreamService.recentlyOpensDetail(self, detailDict)  line 924
+      str: '\n        判断 Recently Played 条目点击后是否应该进入详情页。\n\n        Args:\n            detailDict: recently 记录中的 detail 字典。\n\n        Returns:\n            进入详情页返回 True，否则返回 False。\n        '
+
+  def LPStreamService.playRecently(self, detailDict, baseController)  line 936
+    names: logger, debug, source
+      str: '\n        处理 Recently Played 播放按钮点击：尽量直接恢复播放而非进入详情。\n\n        Args:\n            detailDict: recently 记录中的 detail 字典。\n            baseController: 预留给需要跳转 UI 的音源使用。\n\n        Returns:\n            已成功发起直接播放返回 True；不支持直接播放返回 False。\n        '
+      str: '[StreamService] playRecently not implemented, source=%s'
+
+def registerStreamService(source, service)  line 951
+  names: logger, debug, streamServiceDict
+    str: '[StreamService] register: %s'
+
+def streamServiceForSource(source)  line 971
+  names: streamServiceDict, get
+
+def sourceInfoForMedia(mediaType, trackSource)  line 986
+  names: supportContents, _USB_MEDIA_TYPE, _USB_TRACK_SOURCES, get
+    str: '按设备回传的媒体类型与来源解析音源配置，供各 UI 场景统一取图。\n\n    解析顺序与历史行为保持一致（先 mediaType 再 trackSource），并补充 SONGLIST-LOCAL 的\n    trackSource 细分：该 mediaType 下只有 UPnPServer / USBDiskQueue 归为 USB 存储，\n    其余 trackSource 仍回退到 DLNA 语义，避免把所有 SONGLIST-LOCAL 场景都误判成 U 盘。\n\n    :param mediaType: 设备回传的 mediaType（如 SONGLIST-LOCAL / SONG'
+
+def isDeviceUsbTrackSource(trackSource)  line 1010
+  names: _USB_TRACK_SOURCES
+    str: '判断 trackSource 是否属于设备自身 U 盘存储（SONGLIST-LOCAL 的 UPnPServer / USBDiskQueue）。\n\n    设备播放自身 U 盘时，固件以设备视角把封面/资源 host 回带为 127.0.0.1，调用方需据此把地址\n    替换为设备 IP 才能加载；判定集合与 sourceInfoForMedia 的 U 盘细分保持一致，避免误伤普通 DLNA。\n\n    :param trackSource: 设备回传的 trackSource（如 UPnPServer / Tidal）。\n    :return: 属于设备自身 U 盘存储时返回 Tr'
+
+def recentlyDidSelect(detailDict, baseController)  line 1021
+  names: LPRecentlyManager, instance, sourceFromDetail, logger, debug, LPGlobalUI, currentDevice, deviceStreamServiceManager, streamServiceForSource, bool, recentlyDidSelect, Exception, error, traceback, format_exc
+    str: '\n    分发 Recently Played 点击。\n\n    Args:\n        detailDict: recently 记录中的 detail 字典。\n        baseController: 预留 UI 控制器参数。\n\n    Returns:\n        对应音源是否成功接收处理。\n    '
+    str: '[StreamService] recentlyDidSelect ignore because source is empty'
+    str: '[StreamService] recentlyDidSelect ignore because service is empty, source=%s'
+    str: '[StreamService] recentlyDidSelect failed source=%s error=%s'
+
+def recentlyOpensDetail(detailDict)  line 1056
+  names: LPRecentlyManager, instance, sourceFromDetail, LPGlobalUI, currentDevice, deviceStreamServiceManager, streamServiceForSource, bool, recentlyOpensDetail, Exception, logger, error
+    str: '\n    判断 Recently Played 条目点击后是否会打开详情页。\n\n    Args:\n        detailDict: recently 记录中的 detail 字典。\n\n    Returns:\n        若对应音源会打开详情页则返回 True。\n    '
+    str: '[StreamService] recentlyOpensDetail failed source=%s error=%s'
+
+def playRecently(detailDict, baseController)  line 1082
+  names: LPRecentlyManager, instance, sourceFromDetail, logger, debug, LPGlobalUI, currentDevice, deviceStreamServiceManager, streamServiceForSource, bool, playRecently, Exception, error, traceback, format_exc
+    str: '\n    分发 Recently Played 播放按钮点击，优先直接恢复播放。\n\n    Args:\n        detailDict: recently 记录中的 detail 字典。\n        baseController: 预留 UI 控制器参数。\n\n    Returns:\n        对应音源是否成功发起直接播放。\n    '
+    str: '[StreamService] playRecently ignore because source is empty'
+    str: '[StreamService] playRecently ignore because service is empty, source=%s'
+    str: '[StreamService] playRecently failed source=%s error=%s'
+
+def _recentlyStreamServiceForDetail(detailDict)  line 1117
+  names: LPRecentlyManager, instance, sourceFromDetail, logger, debug, _streamServiceForFavorite
+    str: '\n    按 Recently detail 的音源查找对应的流服务实例。\n\n    Args:\n        detailDict: recently 记录中的 detail 字典。\n\n    Returns:\n        对应的流服务实例；找不到时返回 None。\n    '
+    str: '[StreamService] recently dispatch ignore because source is empty'
+    str: '[StreamService] recently dispatch ignore because service is empty, source=%s'
+
+def recentlyCanPreset(detailDict)  line 1137
+  names: _recentlyStreamServiceForDetail, bool, recentlyCanPreset, Exception, logger, error, source, traceback, format_exc
+    str: '\n    分发 Recently 卡片是否支持保存 preset 的判断。\n\n    Args:\n        detailDict: recently 记录中的 detail 字典。\n\n    Returns:\n        对应音源支持保存 preset 时返回 True。\n    '
+    str: '[StreamService] recentlyCanPreset failed source=%s error=%s'
+
+def recentlyResourceUnavailable(detailDict)  line 1158
+  names: _recentlyStreamServiceForDetail, bool, recentlyResourceUnavailable, Exception, logger, error, source, traceback, format_exc
+    str: '\n    分发 Recently 条目资源是否已全部不可用的判断。\n\n    :param detailDict: Recently 条目中的 detail 字典。\n    :return: 对应音源确认资源全部不可用时返回 True。\n    '
+    str: '[StreamService] recentlyResourceUnavailable failed source=%s error=%s'
+
+def _streamServiceForFavorite(source)  line 1180
+  names: getattr, LPGlobalUI, deviceStreamServiceManager, streamServiceForSource
+    str: '\n    按音源查找收藏能力对应的流服务实例。\n\n    Args:\n        source: 音源标识。\n\n    Returns:\n        对应的流服务实例；找不到时返回 None。\n    '
+    str: 'currentDevice'
+
+def _currentUserIdForSource(source)  line 1198
+  names: getattr, LPGlobalUI, WIIMRADIO_LOCAL_USER_ID, accountForSource, str, strip
+    str: '\n    从当前设备读取指定音源的账号 ID。\n\n    Args:\n        source: 音源标识。\n\n    Returns:\n        userId；无当前设备或账号时返回空字符串。\n    '
+    str: 'currentDevice'
+    str: 'WiiMRadio'
+    str: 'deviceStreamServiceManager'
+    str: 'userId'
+
+def _isDeviceAccountPending(source)  line 1224
+  names: getattr, LPGlobalUI, callable, LPClientFramework.LPDeviceStreamServiceManager, DEVICE_ACCOUNT_UNKNOWN, Exception, logger, debug
+    str: '\n    判断指定音源是否处于“设备账号未知（GetUserInfo 在途）”状态。\n\n    只有设备从未上报过该音源账号时才视为在途；已确认未登录（None）属于终态，\n    不能按加载中展示，否则未登录设备会永久停留在转圈。\n    判定依赖 manager 提供的 deviceAccountForSource；缺失时保守返回 False。\n\n    Args:\n        source: 音源标识。\n\n    Returns:\n        账号未知返回 True。\n    '
+    str: 'currentDevice'
+    str: 'deviceStreamServiceManager'
+    str: 'deviceAccountForSource'
+    str: 'DEVICE_ACCOUNT_UNKNOWN'
+    str: '[StreamService] deviceAccountForSource failed source=%s error=%s'
+
+def favoriteStatus(source, itemType, itemId)  line 1256
+  names: str, strip, lower, _SUPPORTED_FAVORITE_TYPES, _streamServiceForFavorite, _currentUserIdForSource, _isDeviceAccountPending, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, status, LPClientFramework.LPFavoriteSyncCoordinator, LPFavoriteSyncCoordinator, requestSync, Exception, logger, warning, error
+    str: '\n    返回 Recently 收藏菜单状态。\n\n    Args:\n        source: 音源标识。\n        itemType: 条目类型。\n        itemId: 条目 ID。\n\n    Returns:\n        unsupported/missing/syncing/synced/stale/failed/account_pending 之一。\n        其中 account_pending 只表示“设备账号未知、结论待补齐”，调用方应按加载中展示\n        并等账号上报后重算；unsupported 表示终态不可收藏（类型不支持、无对应服'
+    str: 'unsupported'
+    str: 'account_pending'
+    str: 'LPFavoriteCacheManager'
+    str: 'missing'
+    str: 'failed'
+    str: 'LPFavoriteSyncCoordinator'
+    str: 'force'
+    str: '[StreamService] favoriteStatus sync trigger failed source=%s error=%s'
+    str: 'missing'
+    str: 'syncing'
+    str: '[StreamService] favoriteStatus failed source=%s error=%s'
+    str: 'failed'
+
+def canFavorite(source, itemType, itemId)  line 1301
+  names: _streamServiceForFavorite, bool, canFavorite, Exception, logger, error, traceback, format_exc
+    str: '\n    分发收藏能力判断。\n\n    Args:\n        source: 音源标识。\n        itemType: 条目类型。\n        itemId: 条目 ID。\n\n    Returns:\n        对应音源支持收藏时返回 True。\n    '
+    str: '[StreamService] canFavorite failed source=%s error=%s'
+
+def recentlyFavoriteTarget(detailDict)  line 1324
+  names: _recentlyStreamServiceForDetail, recentlyFavoriteTarget, Exception, logger, error, source, traceback, format_exc
+    str: '\n    分发 Recently 条目加入收藏所需的类型与 ID 推导。\n\n    Args:\n        detailDict: recently 记录中的 detail 字典。\n\n    Returns:\n        ``(itemType, itemId)`` 元组；无法推导时返回 None。\n    '
+    str: '[StreamService] recentlyFavoriteTarget failed source=%s error=%s'
+
+def recentlyFavoriteItemData(detailDict)  line 1345
+  names: _recentlyStreamServiceForDetail, recentlyFavoriteItemData, Exception, logger, error, source, traceback, format_exc
+    str: '\n    分发 Recently 条目加入收藏所需的完整条目数据。\n\n    Args:\n        detailDict: recently 记录中的 detail 字典。\n\n    Returns:\n        完整条目字典；无数据时返回 None。\n    '
+    str: '[StreamService] recentlyFavoriteItemData failed source=%s error=%s'
+
+def favoriteState(source, itemType, itemId)  line 1366
+  names: _streamServiceForFavorite, _currentUserIdForSource, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, isFavorite, Exception, logger, error, traceback, format_exc
+    str: '\n    分发指定条目当前收藏状态的查询。\n\n    Args:\n        source: 音源标识。\n        itemType: 条目类型。\n        itemId: 条目 ID。\n\n    Returns:\n        已收藏返回 True；未收藏返回 False；状态不可用时返回 None。\n    '
+    str: 'LPFavoriteCacheManager'
+    str: '[StreamService] favoriteState failed source=%s error=%s'
+
+def favoriteStateNeedsResync(source, itemType, itemId)  line 1394
+  names: _streamServiceForFavorite, bool, favoriteStateNeedsResync, str, Exception, logger, error
+    str: '\n    分发“收藏结论是否需要与服务端校正”的判断。\n\n    Args:\n        source: 音源标识。\n        itemType: 条目类型。\n        itemId: 条目 ID。\n\n    Returns:\n        需要校正返回 True。\n    '
+    str: '[StreamService] favoriteStateNeedsResync failed source=%s error=%s'
+
+def requestFavoriteResync(source, itemType, itemId)  line 1416
+  names: favoriteStateNeedsResync, _currentUserIdForSource, LPClientFramework.LPFavoriteSyncCoordinator, LPFavoriteSyncCoordinator, instance, requestSync, Exception, logger, warning, debug
+    str: '\n    收藏结论与本地缓存不一致时，触发一次定向收藏同步。\n\n    调用方（如 Recently 菜单）应在返回 True 时按“加载中”展示，避免呈现可能过期的\n    Add/Remove 结论；同步完成后下一次打开菜单即为服务端真值。\n\n    Args:\n        source: 音源标识。\n        itemType: 条目类型。\n        itemId: 条目 ID。\n\n    Returns:\n        已触发同步返回 True。\n    '
+    str: 'LPFavoriteSyncCoordinator'
+    str: 'force'
+    str: '[StreamService] favorite resync failed source=%s error=%s'
+    str: '[StreamService] favorite resync triggered source=%s type=%s itemId=%s'
+
+def setFavorite(source, itemType, itemId, desiredFavorite, callback, itemData)  line 1447
+  names: _streamServiceForFavorite, bool, setFavorite, Exception, logger, error, traceback, format_exc
+    str: '\n    分发指定条目收藏状态的变更。\n\n    Args:\n        source: 音源标识。\n        itemType: 条目类型。\n        itemId: 条目 ID。\n        desiredFavorite: 目标收藏状态。\n        callback: 可选结果回调，参数为结果字典。\n        itemData: 加入收藏时携带的完整条目对象。\n\n    Returns:\n        None。\n    '
+    str: 'unsupported'
+    str: 'success'
+    str: 'error'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: '[StreamService] setFavorite failed source=%s error=%s'
+    str: 'dispatch_failed'
+
+def recentlyPlayListFromDetail(detailDict)  line 1488
+  names: _recentlyStreamServiceForDetail, recentlyPlayListFromDetail, Exception, logger, error, source, traceback, format_exc
+    str: '\n    分发 Recently detail 播放列表还原。\n\n    Args:\n        detailDict: recently 记录中的 detail 字典。\n\n    Returns:\n        还原成功的播放列表对象；失败时返回 None。\n    '
+    str: '[StreamService] recentlyPlayListFromDetail failed source=%s error=%s'
+
+def isCurrentPlayItem(device, playItem)  line 1509
+  names: streamServiceForSource, mediaInfo, trackSource, currentPlayItem, LPStreamService, trackId

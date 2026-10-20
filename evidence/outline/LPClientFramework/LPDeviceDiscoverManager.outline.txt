@@ -1,0 +1,324 @@
+# module LPClientFramework.LPDeviceDiscoverManager
+
+[module] names: collections, OrderedDict, os, re, json, enum, Enum, socket, struct, threading, time, datetime, zeroconf, ServiceBrowser, ServiceListener, Zeroconf, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPCache.LPDeviceFileCache, LPDeviceFileCache, LPClientFramework.LPCache.LPFileCache, FileCache, LPClientFramework.LPDevice, LPDevice, LPClientFramework.LPDeviceManager.LPDeviceNodeManager, LPDeviceNodeManager, LPClientFramework.LPDiscoveryTelemetry, LPDiscoveryTelemetry, LPClientFramework.LPMediaServer, LPMediaServer, LPClientFramework.LPUPnPObserverManager, LPUPnPObserverManager, LPClientFramework.LPUtility, logger, MCAST_IP, MCAST_PORT, CacheType, LPDeviceDiscoverManager
+  str: 'OrderedDict'
+  str: 'Enum'
+  str: '*'
+  str: 'datetime'
+  str: 'ServiceBrowser'
+  str: 'ServiceListener'
+  str: 'Zeroconf'
+  str: 'LPUtility'
+  str: 'LPDeviceFileCache'
+  str: 'FileCache'
+  str: 'LPDevice'
+  str: 'LPDeviceNodeManager'
+  str: 'LPDiscoveryTelemetry'
+  str: 'LPMediaServer'
+  str: 'LPUPnPObserverManager'
+  str: 'logger'
+  str: '239.255.255.250'
+  str: 'CacheType'
+  str: 'LPDeviceDiscoverManager'
+
+def CacheType()  line 31
+  names: __name__, __module__, __qualname__, Device, MediaServer
+    str: 'CacheType'
+    str: 'device'
+    str: 'mediaServer'
+
+def LPDeviceDiscoverManager()  line 36
+  names: __name__, __module__, __qualname__, __init__, property, deviceList, mediaServerList, deviceForUUID, removeDevice, startSearch, mediaServerCome, deviceCome, upnpNotifyCome, Zeroconf, str, update_service, remove_service, add_service, monitorInternet, onNetworkChanged, _restartDiscoveryOnNetworkChanged, removeAll, closeSocket, onlineCachedDevice, stopOnlineCache, stopSSDP, stopmDNS, stop, onlineCachedMediaServer, getCacheRow, updateCacheData, CacheType, Device, cacheDevice, list, getCachedDevices
+    str: 'LPDeviceDiscoverManager'
+    str: 'ssdp:wiimudevice'
+    str: 'LPDeviceDiscoverManager.__init__'
+    str: 'LPDeviceDiscoverManager.deviceList'
+    str: 'LPDeviceDiscoverManager.mediaServerList'
+    str: 'LPDeviceDiscoverManager.deviceForUUID'
+    str: 'LPDeviceDiscoverManager.removeDevice'
+    str: 'LPDeviceDiscoverManager.startSearch'
+    str: 'ssdp'
+    str: 'LPDeviceDiscoverManager.mediaServerCome'
+    str: 'LPDeviceDiscoverManager.deviceCome'
+    str: 'LPDeviceDiscoverManager.upnpNotifyCome'
+    str: 'zc'
+    str: 'type_'
+    str: 'name'
+    str: 'return'
+    str: 'LPDeviceDiscoverManager.update_service'
+    str: 'LPDeviceDiscoverManager.remove_service'
+    str: 'LPDeviceDiscoverManager.add_service'
+    str: 'LPDeviceDiscoverManager.monitorInternet'
+    str: 'LPDeviceDiscoverManager.onNetworkChanged'
+    str: 'LPDeviceDiscoverManager._restartDiscoveryOnNetworkChanged'
+    str: 'LPDeviceDiscoverManager.removeAll'
+    str: 'LPDeviceDiscoverManager.closeSocket'
+    str: 'LPDeviceDiscoverManager.onlineCachedDevice'
+    str: 'LPDeviceDiscoverManager.stopOnlineCache'
+    str: 'LPDeviceDiscoverManager.stopSSDP'
+    str: 'LPDeviceDiscoverManager.stopmDNS'
+    str: 'LPDeviceDiscoverManager.stop'
+    str: 'LPDeviceDiscoverManager.onlineCachedMediaServer'
+    str: 'LPDeviceDiscoverManager.getCacheRow'
+    str: 'LPDeviceDiscoverManager.updateCacheData'
+    str: 'LPDeviceDiscoverManager.cacheDevice'
+    str: 'return'
+    str: 'LPDeviceDiscoverManager.getCachedDevices'
+    str: 'ssdp:wiimudevice'
+    str: 'ssdp'
+    str: 'ssdp'
+
+  def LPDeviceDiscoverManager.__init__(self, addMethod, rmvMethod, mediaServerAddMethod, mediaServerRmvMethod, removeAllMethod, searchKey)  line 37
+    names: searchKey, threading, RLock, deviceListLock, OrderedDict, deviceRecordList, mediaServerRecordList, searchThread, msearchSocket, notifySocket, dealWithResponseThread, dealWithNotifyThread, checkThread, addMethod, rmvMethod, mediaServerAddMethod, mediaServerRmvMethod, internetConnection, LPUtility, fetchNetworkInfo, get, currentGW, internetMonitorThread, searchingSwitch, fastSearchingSwitch, LPUPnPObserverManager, upnpNotifyCome, upnpObserverManager, start, LPDeviceFileCache, cacheDir, fileCache, LPDiscoveryTelemetry, telemetry, onlineRunning, removeAllMethod, Lock, networkSwitchLock, LPDeviceNodeManager, instance, deviceNodeMgr
+      str: '通过SSDP发现设备\n        addMethod: 设备发现回调\n        rmvMethod: 设备丢失回调，超时100s\n        searchKey: SSDP search key\n        '
+      str: 'gateway'
+
+  def LPDeviceDiscoverManager.deviceList(self)  line 90
+    names: deviceListLock, list, deviceRecordList, statusDict, isWiiMSub, append
+      str: 'device'
+
+  def LPDeviceDiscoverManager.mediaServerList(self)  line 105
+    names: deviceListLock, list, mediaServerRecordList, append
+      str: 'device'
+
+  def LPDeviceDiscoverManager.deviceForUUID(self, uuid)  line 116
+    names: deviceListLock, list, deviceRecordList, statusDict, uuid
+      str: 'device'
+
+  def LPDeviceDiscoverManager.removeDevice(self, uuid)  line 130
+    names: deviceListLock, deviceRecordList, get, pop, upnpObserverManager, removeObserver, rmvMethod, telemetry, onDeviceRemoved
+      str: 'ip'
+      str: 'device'
+
+  def LPDeviceDiscoverManager.startSearch(self)  line 165
+    names: onlineCachedDevice, onlineCachedMediaServer, searchingSwitch, deviceListLock, OrderedDict, deviceRecordList, mediaServerRecordList, socket, AF_INET, SOCK_DGRAM, IPPROTO_UDP, msearchSocket, setsockopt, SOL_SOCKET, SO_REUSEADDR, SO_REUSEPORT, Exception, IPPROTO_IP, IP_MULTICAST_TTL, struct, pack, inet_aton, MCAST_IP, INADDR_ANY, IP_ADD_MEMBERSHIP, logger, error, notifySocket, bind, MCAST_PORT, ServiceBrowser, Zeroconf, browser, fastSearchingSwitch, threading, Timer, setDaemon, start, Thread, monitorInternet, internetMonitorThread, searchThread, dealWithResponseThread, dealWithNotifyThread, checkThread
+      str: 'LPDeviceDiscoverManager.startSearch.<locals>.ssdpThreadMethod'
+      str: 'LPDeviceDiscoverManager.startSearch.<locals>.notifyThreadMethod'
+      str: 'LPDeviceDiscoverManager.startSearch.<locals>.ssdpCheckThreadMethod'
+      str: 'LPDeviceDiscoverManager.startSearch.<locals>.dealWithSSDPResponse'
+      str: 'LPDeviceDiscoverManager.startSearch.<locals>.sendMSearch'
+      str: '4sl'
+      str: 'membership bind any exception: %s'
+      str: '0.0.0.0'
+      str: 'membership bind mcast_ip exception: %s'
+      str: 'membership exception: %s'
+      str: '_linkplay._tcp.local.'
+      str: 'LPDeviceDiscoverManager.startSearch.<locals>._stopFastSearching'
+      str: 'InternetMonitorThread'
+      str: 'target'
+      str: 'name'
+      str: 'SearchThread'
+      str: 'DealWithResponseThread'
+      str: 'DealWithNotifyThread'
+      str: 'CheckThread'
+
+    def LPDeviceDiscoverManager.startSearch.ssdpThreadMethod()  line 173
+      names: searchingSwitch, msearchSocket, recv, timeout, OSError, errno, logger, error
+        str: 'Socket error: '
+
+    def LPDeviceDiscoverManager.startSearch.notifyThreadMethod()  line 190
+      names: searchingSwitch, notifySocket, recv, timeout, OSError, errno, logger, error
+        str: 'Socket error: '
+
+    def LPDeviceDiscoverManager.startSearch.ssdpCheckThreadMethod()  line 206
+      names: searchingSwitch, time, sleep, deviceListLock, list, deviceRecordList, datetime, now, seconds
+        str: 'date'
+
+    def LPDeviceDiscoverManager.startSearch.dealWithSSDPResponse(response)  line 254
+      names: decode, re, search, group, split, int, S, M, len, replace, deviceCome, logger, debug, strip, mediaServerCome
+        str: 'LOCATION'
+        str: '(?<=%s: http://).*?(?=/)'
+        str: 'Location'
+        str: ':'
+        str: '(?<=USN: uuid:).*?(?=:)'
+        str: 'ST:.*?$'
+        str: 'NT:.*?$'
+        str: 'NTS:.*?$'
+        str: 'ssdp:alive'
+        str: 'MediaRenderer'
+        str: '-'
+        str: 'ContentDirectory'
+        str: 'MediaServer'
+        str: '(?<=%s: ).*?$'
+        str: 'Invalid media server, ignore: %s'
+
+    def LPDeviceDiscoverManager.startSearch.sendMSearch()  line 308
+      names: searchingSwitch, msearchSocket, sendto, searchKey, encode, MCAST_IP, MCAST_PORT, Exception, logger, error, datetime, now, fastSearchingSwitch, time, sleep
+        str: 'M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: "ssdp:discover"\r\nMX: 3\r\nST: %s\r\nUSER-AGENT: mac/1.0 UPnP/1.1 upnpx/1.0\r\n\r\n'
+        str: 'urn:schemas-upnp-org:service:ContentDirectory:1'
+        str: 'urn:schemas-upnp-org:device:MediaServer:1'
+        str: '%s m-search exception: %s'
+
+    def LPDeviceDiscoverManager.startSearch._stopFastSearching()  line 380
+      names: fastSearchingSwitch
+
+  def LPDeviceDiscoverManager.mediaServerCome(self, uuid, ip, port, desURL, serviceType)  line 406
+    names: LPUtility, fetchNetworkInfo, logger, debug, get, isIPInGateway, mediaServerRecordList, LPMediaServer, datetime, now, deviceListLock, start
+      str: '[mediaServerCome] no active physical LAN, ignore media server: %s'
+      str: 'gateway'
+      str: 'netmask'
+      str: 'uuid'
+      str: 'date'
+      str: 'ip'
+      str: 'device'
+      str: 'LPDeviceDiscoverManager.mediaServerCome.<locals>._mediaServerInitFinish'
+      str: 'date'
+
+    def LPDeviceDiscoverManager.mediaServerCome._mediaServerInitFinish(success)  line 423
+      names: mediaServerAddMethod, LPUtility, fetchNetworkInfo, cacheDevice, get, CacheType, MediaServer, logger, info, mediaServerRecordList, debug, deviceListLock
+        str: 'gateway'
+        str: 'mediaServerCome from %s: %s'
+        str: 'Invalid media server, ignore: %s'
+        str: 'Invalid media server, ignore uuid: %s'
+
+  def LPDeviceDiscoverManager.deviceCome(self, uuid, ip, port, serviceType)  line 449
+    names: LPUtility, fetchNetworkInfo, logger, debug, get, isIPInGateway, telemetry, onDeviceSeen, deviceListLock, deviceRecordList, info, datetime, now, ip, upnpPort, upnpObserverManager, removeObserver, hasObserverForUUID, addObserver, LPDevice, init, error, pop, onDeviceRemoved, cacheDevice, onDeviceAdded, callable, addMethod, deviceNodeMgr, deviceOnline
+      str: '[deviceCome] no active physical LAN, ignore device: %s'
+      str: 'gateway'
+      str: 'cache'
+      str: 'netmask'
+      str: '[deviceCome] gateway '
+      str: ' , Device '
+      str: ' not current network, netmask -> '
+      str: 'deviceCome from %s: %s'
+      str: 'date'
+      str: 'device'
+      str: 'deviceCome update from %s: %s->%s, %d->%d'
+      str: 'deviceCome re-subscribe for %s (IP/port unchanged but observer missing, serviceType=%s)'
+      str: 'uuid'
+      str: 'date'
+      str: 'ip'
+      str: 'device'
+      str: 'gateway'
+      str: 'Device %s init failed from %s'
+
+  def LPDeviceDiscoverManager.upnpNotifyCome(self, uuid, message)  line 529
+    names: deviceRecordList, get, logger, debug, repr, json, loads, Exception, error, updateInfo, dealSlaveAction, dealLPMRM, mediaInfoInterceptor, updateMediaInfo
+      str: 'upnpNotifyCome recv -> '
+      str: 'device'
+      str: 'info'
+      str: 'slaveAction'
+      str: 'lpmrm'
+      str: '[upnpNotifyCome] exception: '
+
+  def LPDeviceDiscoverManager.update_service(self, zc, type_, name)  line 557
+    names: get_service_info, logger, error, properties, get, addresses, port, len, decode, split, replace, inet_ntoa, info
+      str: 'update_server info is none: %s'
+      str: 'update_server Invalid device: %s'
+      str: 'utf-8'
+      str: '-'
+      str: 'Invalid device: %s'
+      str: 'mdns device updated: %s, %s:%d, %s'
+      str: 'Ignore mdns device update message'
+
+  def LPDeviceDiscoverManager.remove_service(self, zc, type_, name)  line 582
+    names: logger, info, get_service_info, error, properties, get
+      str: 'mdns device removed: %s'
+      str: 'Found no device to remove: %s, %s'
+      str: 'Found no device to remove: %s'
+
+  def LPDeviceDiscoverManager.add_service(self, zc, type_, name)  line 602
+    names: get_service_info, properties, logger, error, get, addresses, port, len, decode, split, replace, inet_ntoa, info, deviceCome
+      str: 'Invalid device, info nil: %s, %s'
+      str: 'Invalid device: %s'
+      str: 'utf-8'
+      str: '-'
+      str: 'mdns device add: %s, %s:%d, %s'
+      str: 'mdns'
+      str: 'serviceType'
+
+  def LPDeviceDiscoverManager.monitorInternet(self)  line 628
+    names: LPUtility, fetchNetworkInfo, get, currentGW, LPGlobalUI, signalBus, Network_Changed_Signal, emit, logger, debug, telemetry, onNetworkChanged, onGatewayPoll, pingGoogle, internetConnection, info, fetchNetworkType, currentSSID, onInternetPoll, time, sleep
+      str: 'gateway'
+      str: 'send Network_Changed_Signal'
+      str: 'Internet status: %s'
+      str: 'Network: %s, info: %s, SSID: %s'
+      str: 'Internet status change: %s'
+
+  def LPDeviceDiscoverManager.onNetworkChanged(self, oldGW, newGW)  line 674
+    names: logger, debug, LPGlobalUI, currentDevice, removeAll, removeAllMethod, deviceNodeMgr, clearRawDevices, clearNameGroup, threading, Thread, _restartDiscoveryOnNetworkChanged, setDaemon, start
+      str: '[device manager] onNetworkChanged'
+      str: 'emitProjection'
+      str: 'target'
+
+  def LPDeviceDiscoverManager._restartDiscoveryOnNetworkChanged(self)  line 692
+    names: networkSwitchLock, stop, onlineRunning, upnpObserverManager, start, startSearch
+
+  def LPDeviceDiscoverManager.removeAll(self)  line 700
+    names: deviceRecordList, clear, mediaServerRecordList, telemetry, onAllDevicesRemoved
+
+  def LPDeviceDiscoverManager.closeSocket(self, sock)  line 707
+    names: shutdown, SHUT_RDWR, OSError, close
+
+  def LPDeviceDiscoverManager.onlineCachedDevice(self)  line 717
+    names: threading, Thread, setDaemon, start
+      str: 'LPDeviceDiscoverManager.onlineCachedDevice.<locals>._target'
+      str: 'target'
+
+    def LPDeviceDiscoverManager.onlineCachedDevice._target()  line 718
+      names: LPUtility, fetchNetworkInfo, getCachedDevices, get, onlineRunning, list, keys, logger, debug, str, deviceCome
+        str: 'gateway'
+        str: 'ip'
+        str: 'port'
+        str: 'name'
+        str: 'cached device name:-->'
+        str: ' ip: '
+        str: ' port: '
+        str: ' try online...'
+        str: 'cache'
+
+  def LPDeviceDiscoverManager.stopOnlineCache(self)  line 739
+    names: onlineRunning
+
+  def LPDeviceDiscoverManager.stopSSDP(self)  line 742
+    names: searchingSwitch, msearchSocket, close, notifySocket
+
+  def LPDeviceDiscoverManager.stopmDNS(self)  line 752
+    names: browser, cancel
+
+  def LPDeviceDiscoverManager.stop(self)  line 757
+    names: logger, debug, stopOnlineCache, stopSSDP, upnpObserverManager, stop, stopmDNS
+      str: '[device manager] stop'
+
+  def LPDeviceDiscoverManager.onlineCachedMediaServer(self)  line 766
+    names: threading, Thread, setDaemon, start
+      str: 'LPDeviceDiscoverManager.onlineCachedMediaServer.<locals>._target'
+      str: 'target'
+
+    def LPDeviceDiscoverManager.onlineCachedMediaServer._target()  line 767
+      names: LPUtility, fetchNetworkInfo, getCachedDevices, get, CacheType, MediaServer, onlineRunning, list, keys, logger, debug, str, mediaServerCome
+        str: 'gateway'
+        str: 'ip'
+        str: 'port'
+        str: 'friendlyName'
+        str: 'desURL'
+        str: 'cached MediaServer friendlyName:-->'
+        str: ' ip: '
+        str: ' port: '
+        str: ' try online...'
+        str: 'cache'
+
+  def LPDeviceDiscoverManager.getCacheRow(self, deviceObj, type)  line 790
+    names: CacheType, Device, ip, upnpPort, name, productName, datetime, now, strftime, MediaServer, descURL, friendlyName, modelName, ValueError
+      str: '%Y-%m-%d %H:%M:%S'
+      str: 'ip'
+      str: 'port'
+      str: 'name'
+      str: 'productName'
+      str: 'lastUpdate'
+      str: 'ip'
+      str: 'port'
+      str: 'desURL'
+      str: 'friendlyName'
+      str: 'modelName'
+      str: 'lastUpdate'
+      str: 'cacheData unsupported type: '
+
+  def LPDeviceDiscoverManager.updateCacheData(self, type, oldData, gateway, uuid, row)  line 815
+    names: value, keys, append
+
+  def LPDeviceDiscoverManager.cacheDevice(self, gateway, deviceObj, type)  line 835
+    names: getCacheRow, uuid, fileCache, updateCache, updateCacheData
+
+  def LPDeviceDiscoverManager.getCachedDevices(self, gateway, type)  line 842
+    names: fileCache, readCache, value

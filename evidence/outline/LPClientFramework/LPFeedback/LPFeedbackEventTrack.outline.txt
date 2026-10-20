@@ -1,0 +1,120 @@
+# module LPClientFramework.LPFeedback.LPFeedbackEventTrack
+
+[module] names: __doc__, threading, typing, Any, Dict, Optional, _MAX_PARAM_TEXT_LENGTH, LPFeedbackErrorCode, LPFeedbackEventTrack
+  str: 'Feedback 埋点上报辅助类。\n\n错误码对齐《App exception埋点》文档的 Feedback ErrorCode (3000~3999) 区间，\n事件名与参数格式则遵循本仓库 ``LPClientFramework.LPEventTrack``（GA4\nMeasurement Protocol）既有约定：事件名用 snake_case，错误码作为参数值承载，\n参数全部收敛为扁平标量（bool 转 int、None 转空串、列表转逗号串）。\n\n## 已实施事件\n\n| 事件名                   | 触发时机                              '
+  str: 'Any'
+  str: 'Dict'
+  str: 'Optional'
+  str: 'LPFeedbackErrorCode'
+  str: 'LPFeedbackEventTrack'
+
+def LPFeedbackErrorCode()  line 37
+  names: __name__, __module__, __qualname__, __doc__, UPLOAD_API, UPLOAD_S3, COMPLETE, CREATE_TICKET, UPDATE_TICKET, LOG_DIRECTORY, PACK_LOGS
+    str: 'LPFeedbackErrorCode'
+    str: 'Feedback 埋点错误码常量，取值对齐文档 Feedback ErrorCode (3000~3999)。'
+
+def LPFeedbackEventTrack()  line 56
+  names: __name__, __module__, __qualname__, __doc__, EXCEPTION_EVENT, COMPLETE_EVENT, LOG_COLLECT_EVENT, NON_HTTP_SUB_ERROR_CODE, LOG_DIRECTORY_SUB_ERROR_CODE, LPFeedbackErrorCode, UPLOAD_API, UPLOAD_S3, CREATE_TICKET, UPDATE_TICKET, NETWORK_ERROR_CODES, threading, RLock, _lock, classmethod, Any, _sanitizeValue, Optional, Dict, str, _sanitizeParams, _log, _eventCountryCode, BaseException, int, subErrorCodeFrom, exception, bool, complete, logCollect
+    str: 'LPFeedbackEventTrack'
+    str: '轻量级 Feedback 埋点辅助类。全部类方法，无 Qt 依赖，线程安全。'
+    str: 'feedback_exception'
+    str: 'feedback_complete'
+    str: 'feedback_log_collect'
+    str: 'value'
+    str: 'return'
+    str: 'LPFeedbackEventTrack._sanitizeValue'
+    str: 'params'
+    str: 'return'
+    str: 'LPFeedbackEventTrack._sanitizeParams'
+    str: 'eventName'
+    str: 'params'
+    str: 'return'
+    str: 'LPFeedbackEventTrack._log'
+    str: 'return'
+    str: 'LPFeedbackEventTrack._eventCountryCode'
+    str: 'error'
+    str: 'return'
+    str: 'LPFeedbackEventTrack.subErrorCodeFrom'
+    str: 'errorCode'
+    str: 'error'
+    str: 'errorDescription'
+    str: 'confirmId'
+    str: 'subErrorCode'
+    str: 'extra'
+    str: 'return'
+    str: 'LPFeedbackEventTrack.exception'
+    str: 'result'
+    str: 'confirmId'
+    str: 'retryCount'
+    str: 'count3001'
+    str: 'count3002'
+    str: 'durationMs'
+    str: 'attachmentCount'
+    str: 'extra'
+    str: 'return'
+    str: 'LPFeedbackEventTrack.complete'
+    str: 'deviceTotal'
+    str: 'deviceSuccess'
+    str: 'collectDurationMs'
+    str: 'logDirOk'
+    str: 'extra'
+    str: 'return'
+    str: 'LPFeedbackEventTrack.logCollect'
+
+  def LPFeedbackEventTrack._sanitizeValue(cls, value)  line 82
+    names: isinstance, bool, int, float, str, len, _MAX_PARAM_TEXT_LENGTH
+      str: '把单个参数值收敛为 Firebase 可接受的扁平标量。\n\n        参数:\n            value (Any): 原始参数值。\n        返回:\n            Any: int / float / str 标量；bool 转 int、None 转空串、其他转截断后的字符串。\n        '
+
+  def LPFeedbackEventTrack._sanitizeParams(cls, params)  line 102
+    names: isinstance, dict, items, _sanitizeValue, str
+      str: '把事件参数字典整体收敛为扁平标量。\n\n        参数:\n            params (dict|None): 原始事件参数。\n        返回:\n            dict: 逐项收敛后的参数；空值与非字典入参返回空字典。\n        '
+
+  def LPFeedbackEventTrack._log(cls, eventName, params)  line 120
+    names: LPGlobalUI, _lock, eventTrack, logEvent, _sanitizeParams, Exception
+      str: '向全局事件通道上报一条事件，任何异常都静默吞掉。\n\n        参数:\n            eventName (str): 事件名。\n            params (dict|None): 事件参数。\n        返回:\n            None。\n        '
+
+  def LPFeedbackEventTrack._eventCountryCode(cls)  line 142
+    names: LPClientFramework.LPUtility, eventCountryCode, Exception
+      str: '读取埋点统一使用的设备系统地区码。\n\n        延迟导入 LPUtility，保持本模块导入期无 Qt 依赖；取值失败一律回落\n        "ZZ"，埋点取地区不能影响反馈提交主链路。\n\n        参数:\n            无。\n        返回:\n            str: 两位大写地区码；无法获取时返回 "ZZ"。\n        '
+      str: 'eventCountryCode'
+      str: 'ZZ'
+
+  def LPFeedbackEventTrack.subErrorCodeFrom(cls, error)  line 161
+    names: getattr, NON_HTTP_SUB_ERROR_CODE, int, TypeError, ValueError
+      str: '从异常中提取下层 HTTP 状态码作为 sub_error_code。\n\n        HTTP 失败返回真实状态码；网络超时、连接失败、JSON 解析错等非 HTTP\n        失败统一返回 ``NON_HTTP_SUB_ERROR_CODE``（0）。\n\n        参数:\n            error (BaseException): 捕获到的异常。\n        返回:\n            int: HTTP 状态码；无法获取时返回 0。\n        '
+      str: 'response'
+      str: 'status_code'
+
+  def LPFeedbackEventTrack.exception(cls, errorCode, error, errorDescription, confirmId, subErrorCode, **extra)  line 184
+    names: subErrorCodeFrom, NON_HTTP_SUB_ERROR_CODE, NETWORK_ERROR_CODES, _eventCountryCode, update, _log, EXCEPTION_EVENT
+      str: '上报一条反馈链路异常（3001/3002/3004/3005/3006/3007）。\n\n        参数:\n            errorCode (int): 文档定义的 Feedback 错误码。\n            error (BaseException|None): 触发失败的异常，用于提取 HTTP 状态码。\n            errorDescription (str): 错误描述文本。\n            confirmId (str): 本次提交的确认号。\n            subErrorCode (int|None): 显式指定的子错误码；缺省'
+      str: 'unexpected'
+      str: 'error_code'
+      str: 'exception_type'
+      str: 'sub_error_code'
+      str: 'error_description'
+      str: 'confirm_id'
+      str: 'country_code'
+
+  def LPFeedbackEventTrack.complete(cls, result, confirmId, retryCount, count3001, count3002, durationMs, attachmentCount, **extra)  line 222
+    names: LPFeedbackErrorCode, COMPLETE, int, bool, max, update, _log, COMPLETE_EVENT
+      str: '上报一次提交会话的终态统计（3003），每次提交仅 1 条。\n\n        参数:\n            result (bool): 管道真实结果，True 表示成功。\n            confirmId (str): 本次提交的确认号。\n            retryCount (int): 全流程累计失败尝试次数。\n            count3001 (int): 本次会话 3001 实际发生次数。\n            count3002 (int): 本次会话 3002 实际发生次数。\n            durationMs (int): 从提交开始'
+      str: 'statistics'
+      str: 'error_code'
+      str: 'exception_type'
+      str: 'result'
+      str: 'confirm_id'
+      str: 'retry_count'
+      str: 'count_3001'
+      str: 'count_3002'
+      str: 'duration_ms'
+      str: 'attachment_count'
+
+  def LPFeedbackEventTrack.logCollect(cls, deviceTotal, deviceSuccess, collectDurationMs, logDirOk, **extra)  line 262
+    names: max, int, bool, update, _log, LOG_COLLECT_EVENT
+      str: '上报设备端固件日志收集结果。\n\n        :param deviceTotal: 本次参与收集的设备任务数。\n        :param deviceSuccess: 成功收集到日志的设备数。\n        :param collectDurationMs: 收集耗时（毫秒）。\n        :param logDirOk: 日志目录是否可用。\n        :param extra: 追加的扁平参数。\n        :return: None。\n        '
+      str: 'device_total'
+      str: 'device_success'
+      str: 'device_failed'
+      str: 'collect_duration_ms'
+      str: 'log_dir_ok'

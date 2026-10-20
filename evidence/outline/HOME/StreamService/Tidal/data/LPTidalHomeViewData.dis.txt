@@ -1,0 +1,138 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL 首页视图数据整理工具。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Any', 'Dict', 'List', 'Tuple'))
+              8 IMPORT_NAME              1 (typing)
+             10 IMPORT_FROM              2 (Any)
+             12 STORE_NAME               2 (Any)
+             14 IMPORT_FROM              3 (Dict)
+             16 STORE_NAME               3 (Dict)
+             18 IMPORT_FROM              4 (List)
+             20 STORE_NAME               4 (List)
+             22 IMPORT_FROM              5 (Tuple)
+             24 STORE_NAME               5 (Tuple)
+             26 POP_TOP
+
+  9          28 LOAD_NAME                2 (Any)
+             30 LOAD_NAME                5 (Tuple)
+             32 LOAD_NAME                4 (List)
+             34 LOAD_NAME                3 (Dict)
+             36 LOAD_NAME                6 (str)
+             38 LOAD_NAME                2 (Any)
+             40 BUILD_TUPLE              2
+             42 BINARY_SUBSCR
+             44 BINARY_SUBSCR
+             46 LOAD_NAME                4 (List)
+             48 LOAD_NAME                3 (Dict)
+             50 LOAD_NAME                6 (str)
+             52 LOAD_NAME                2 (Any)
+             54 BUILD_TUPLE              2
+             56 BINARY_SUBSCR
+             58 BINARY_SUBSCR
+             60 BUILD_TUPLE              2
+             62 BINARY_SUBSCR
+             64 LOAD_CONST               3 (('sectionsPayload', 'return'))
+             66 BUILD_CONST_KEY_MAP      2
+             68 LOAD_CONST               4 (<code object splitHomeSectionsForView at 0x000001F3253AE9D0, file "StreamService\Tidal\data\LPTidalHomeViewData.py", line 9>)
+             70 LOAD_CONST               5 ('splitHomeSectionsForView')
+             72 MAKE_FUNCTION            4 (annotations)
+             74 STORE_NAME               7 (splitHomeSectionsForView)
+             76 LOAD_CONST               6 (None)
+             78 RETURN_VALUE
+
+=== splitHomeSectionsForView ===
+ 16           0 BUILD_LIST               0
+              2 STORE_FAST               1 (featured_categories)
+
+ 17           4 BUILD_LIST               0
+              6 STORE_FAST               2 (visible_sections)
+
+ 18           8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                0 (sectionsPayload)
+             12 LOAD_GLOBAL              1 (list)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE       22
+             18 LOAD_FAST                0 (sectionsPayload)
+             20 JUMP_FORWARD             2 (to 24)
+        >>   22 BUILD_LIST               0
+        >>   24 GET_ITER
+        >>   26 FOR_ITER               116 (to 144)
+             28 STORE_FAST               3 (section)
+
+ 19          30 LOAD_GLOBAL              0 (isinstance)
+             32 LOAD_FAST                3 (section)
+             34 LOAD_GLOBAL              2 (dict)
+             36 CALL_FUNCTION            2
+             38 POP_JUMP_IF_TRUE        42
+
+ 20          40 JUMP_ABSOLUTE           26
+
+ 21     >>   42 LOAD_GLOBAL              3 (str)
+             44 LOAD_FAST                3 (section)
+             46 LOAD_METHOD              4 (get)
+             48 LOAD_CONST               1 ('sectionKey')
+             50 LOAD_CONST               2 ('')
+             52 CALL_METHOD              2
+             54 JUMP_IF_TRUE_OR_POP     58
+             56 LOAD_CONST               2 ('')
+        >>   58 CALL_FUNCTION            1
+             60 STORE_FAST               4 (section_key)
+
+ 22          62 LOAD_FAST                3 (section)
+             64 LOAD_METHOD              4 (get)
+             66 LOAD_CONST               3 ('items')
+             68 BUILD_LIST               0
+             70 CALL_METHOD              2
+             72 STORE_FAST               5 (items)
+
+ 23          74 LOAD_GLOBAL              0 (isinstance)
+             76 LOAD_FAST                5 (items)
+             78 LOAD_GLOBAL              1 (list)
+             80 CALL_FUNCTION            2
+             82 POP_JUMP_IF_FALSE       88
+             84 LOAD_FAST                5 (items)
+             86 JUMP_FORWARD             2 (to 90)
+        >>   88 BUILD_LIST               0
+        >>   90 STORE_FAST               6 (normalized_items)
+
+ 24          92 LOAD_FAST                4 (section_key)
+             94 LOAD_CONST               4 ('featured')
+             96 COMPARE_OP               2 (==)
+             98 POP_JUMP_IF_FALSE      106
+
+ 25         100 LOAD_FAST                6 (normalized_items)
+            102 STORE_FAST               1 (featured_categories)
+
+ 26         104 JUMP_ABSOLUTE           26
+
+ 27     >>  106 LOAD_FAST                4 (section_key)
+            108 LOAD_CONST               5 ('featured-new-videos')
+            110 COMPARE_OP               2 (==)
+            112 POP_JUMP_IF_FALSE      116
+
+ 28         114 JUMP_ABSOLUTE           26
+
+ 29     >>  116 LOAD_GLOBAL              2 (dict)
+            118 LOAD_FAST                3 (section)
+            120 CALL_FUNCTION            1
+            122 STORE_FAST               7 (copied_section)
+
+ 30         124 LOAD_FAST                6 (normalized_items)
+            126 LOAD_FAST                7 (copied_section)
+            128 LOAD_CONST               3 ('items')
+            130 STORE_SUBSCR
+
+ 31         132 LOAD_FAST                2 (visible_sections)
+            134 LOAD_METHOD              5 (append)
+            136 LOAD_FAST                7 (copied_section)
+            138 CALL_METHOD              1
+            140 POP_TOP
+            142 JUMP_ABSOLUTE           26
+
+ 32     >>  144 LOAD_FAST                1 (featured_categories)
+            146 LOAD_FAST                2 (visible_sections)
+            148 BUILD_TUPLE              2
+            150 RETURN_VALUE

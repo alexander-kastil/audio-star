@@ -1,0 +1,98 @@
+# module LPClientFramework.LPMediaInfo
+
+[module] names: enum, IntEnum, urllib.parse, urlparse, time, LPClientFramework, LPUtility, LPPublicDefine, LPLoopMode, object, LPMediaInfo
+  str: 'IntEnum'
+  str: 'urlparse'
+  str: 'LPUtility'
+  str: 'LPPublicDefine'
+  str: 'LPLoopMode'
+  str: 'LPMediaInfo'
+
+def LPLoopMode()  line 8
+  names: __name__, __module__, __qualname__, listrepeat, singlerepeat, shuffle, repeatshuffle, default, singlerepeatshuffle
+    str: 'LPLoopMode'
+
+def LPMediaInfo()  line 17
+  names: __name__, __module__, __qualname__, __doc__, __init__, _update, staticmethod, _is_artwork_uri, _resolvedArtworkUri, _fixArtworkUriHost, _loadArtwork, _recordArtworkRetry, _clearArtworkRetry, _maybeRetryArtwork, reInit, set
+    str: 'LPMediaInfo'
+    str: '维护设备当前媒体信息和播放能力状态。'
+    str: 'LPMediaInfo.__init__'
+    str: 'LPMediaInfo._update'
+    str: 'LPMediaInfo._is_artwork_uri'
+    str: 'LPMediaInfo._resolvedArtworkUri'
+    str: 'LPMediaInfo._fixArtworkUriHost'
+    str: 'LPMediaInfo._loadArtwork'
+    str: 'LPMediaInfo._recordArtworkRetry'
+    str: 'LPMediaInfo._clearArtworkRetry'
+    str: 'LPMediaInfo._maybeRetryArtwork'
+    str: 'LPMediaInfo.reInit'
+    str: 'LPMediaInfo.set'
+
+  def LPMediaInfo.__init__(self, ip)  line 20
+    names: reInit, ip
+      str: '初始化媒体信息对象。\n\n        :param ip: 当前设备 IP。\n        :returns: None。\n        '
+
+  def LPMediaInfo._update(self, newInfo)  line 29
+    names: artworkUri, localArtworkUri, volumeInitialized, items, hasattr, setattr, LPPublicDefine, MEDIATYPE_STATION, mediaType, playState, duration, progress, _resolvedArtworkUri, _is_artwork_uri, _loadArtwork, artworkImage, _clearArtworkRetry, _maybeRetryArtwork, get, lastMessage
+      str: '增量更新设备媒体信息。\n\n        :param newInfo: 本次设备通知携带的媒体字段。\n        :returns: None。\n        '
+      str: 'volume'
+      str: 'ratingURI'
+      str: 'unknown'
+      str: 'STOPPED'
+      str: '00:00:00'
+      str: 'trackName'
+      str: 'artworkUri'
+      str: 'AIRPLAY'
+      str: 'message'
+
+  def LPMediaInfo._is_artwork_uri(artworkUri)  line 75
+    names: str, strip, startswith
+      str: '判断封面地址是否是可直接请求的网络地址（http/https/smb）。\n\n        :param artworkUri: 封面资源地址。\n        :returns: 命中 http、https 或 smb:// 时返回 True。\n        '
+      str: 'http://'
+      str: 'https://'
+      str: 'smb://'
+
+  def LPMediaInfo._resolvedArtworkUri(self)  line 85
+    names: str, localArtworkUri, strip, startswith, _fixArtworkUriHost, artworkUri
+      str: '解析本次实际使用的封面地址，与 iOS MediaInfo 的选择顺序保持一致。\n\n        优先用固件回带的 ``upnp:localAlbumArtURI``（设备自身 U 盘场景下指向设备 IP，可直接访问）；\n        缺失时回退到 ``upnp:albumArtURI``，并修正指向本机的 127.0.0.1 地址。\n\n        :param: 无。\n        :returns: 可直接请求的封面地址；均无有效值时返回空字符串。\n        '
+      str: 'http'
+
+  def LPMediaInfo._fixArtworkUriHost(self, artworkUri)  line 100
+    names: urlparse, hostname, ip, port, _replace, geturl, getattr, LPUtility, debug
+      str: '把指向 127.0.0.1 的封面地址换回设备 IP。\n\n        设备播自身 U 盘时，固件回带的封面 host 是 127.0.0.1（设备视角的自身地址），\n        PC 直接请求会打到本机而失败（对齐 iOS MediaInfo.m 的同样处理）。\n\n        :param artworkUri: 原始封面地址。\n        :returns: 修正后的封面地址；无需修正时原样返回。\n        '
+      str: '127.0.0.1'
+      str: '%s:%d'
+      str: 'netloc'
+      str: 'logger'
+      str: '[MediaInfo] fix artwork host: %s -> %s'
+
+  def LPMediaInfo._loadArtwork(self, artworkUri)  line 127
+    names: urlparse, netloc, trackSource, LPUtility, getCachedPixmapWithUrl, isNull, fetchUrlQPixmap, ip, get, artworkImage, _clearArtworkRetry, status_code, _recordArtworkRetry
+      str: '按 trackSource 分支尝试加载封面，成功后更新封面并清除补拉状态，失败后记录补拉状态。\n\n        :param artworkUri: 封面资源地址。\n        :returns: None。\n        '
+      str: 'WiiMRadio'
+      str: 'image'
+      str: 'Plex'
+      str: 'forceFetch'
+      str: 'privateDevice'
+      str: 'forceFetch'
+      str: 'response'
+
+  def LPMediaInfo._recordArtworkRetry(self, artworkUri)  line 162
+    names: _artworkRetryUri, _artworkRetryCount, time, _artworkRetryFailedTime
+      str: '记录封面加载失败状态，供后续通知自动补拉。\n\n        :param artworkUri: 失败的封面资源地址。\n        :returns: None。\n        '
+
+  def LPMediaInfo._clearArtworkRetry(self)  line 173
+    names: _artworkRetryUri, _artworkRetryFailedTime, _artworkRetryCount
+      str: '清除封面补拉状态。\n\n        :param: 无。\n        :returns: None。\n        '
+
+  def LPMediaInfo._maybeRetryArtwork(self, artworkUri)  line 183
+    names: _artworkRetryUri, _is_artwork_uri, _clearArtworkRetry, time, _artworkRetryFailedTime, _artworkRetryCount, _loadArtwork
+      str: '封面加载失败达到重试间隔后自动补拉一次，最多自动补拉 2 次。\n\n        :param artworkUri: 当前封面资源地址。\n        :returns: None。\n        '
+
+  def LPMediaInfo.reInit(self)  line 203
+    names: volume, volumeInitialized, mute, playState, loopMode, customUUID, trackName, trackId, playUri, artist, artistId, albumId, album, artworkUri, localArtworkUri, artworkImage, mediaType, trackSource, duration, progress, quality, actualQuality, trackRateHz, trackFormat, trackBitrate, lastMessage, guiBehavior, itemId, itemName, playOrigin, playOriginTrackId, playSection, _artworkRetryUri, _artworkRetryFailedTime, _artworkRetryCount
+      str: '重置媒体信息到默认值。\n\n        :param: 无。\n        :returns: None。\n        '
+
+  def LPMediaInfo.set(self, info)  line 260
+    names: reInit, _update
+      str: '用新的媒体信息覆盖当前状态。\n\n        :param info: 媒体信息字典。\n        :returns: None。\n        '

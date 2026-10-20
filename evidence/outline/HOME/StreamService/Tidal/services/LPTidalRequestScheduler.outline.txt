@@ -1,0 +1,142 @@
+# module HOME.StreamService.Tidal.services.LPTidalRequestScheduler
+
+[module] names: __doc__, queue, threading, logging, time, dataclasses, dataclass, field, itertools, count, typing, Any, Callable, Dict, List, Optional, PyQt6.QtCore, QObject, pyqtSignal, pyqtSlot, getLogger, logger, LPTidalRequest, _ScheduledJob, LPTidalRequestScheduler
+  str: '\nTIDAL 异步请求调度器。\n'
+  str: 'dataclass'
+  str: 'field'
+  str: 'count'
+  str: 'Any'
+  str: 'Callable'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'linkplay'
+  str: 'LPTidalRequest'
+  str: '_ScheduledJob'
+  str: 'LPTidalRequestScheduler'
+
+def LPTidalRequest()  line 19
+  names: __name__, __module__, __qualname__, __doc__, str, __annotations__, Callable, Any, callback, Optional, tag
+    str: 'LPTidalRequest'
+    str: 'TIDAL 调度请求对象。'
+    str: 'key'
+    str: 'task'
+    str: 'callback'
+    str: 'tag'
+
+def _ScheduledJob()  line 29
+  names: __name__, __module__, __qualname__, __doc__, LPTidalRequest, __annotations__, int, generation, started, bool, field, list, callbacks, List, Callable, Any, time, monotonic, enqueuedAt, float
+    str: '_ScheduledJob'
+    str: '内部排队任务对象。'
+    str: 'request'
+    str: 'priority'
+    str: 'generation'
+    str: 'started'
+    str: 'default_factory'
+    str: 'callbacks'
+    str: 'enqueuedAt'
+
+def LPTidalRequestScheduler()  line 41
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, str, object, _deliveryReady, _STOP_JOB_KEY, MAIN_THREAD_WARN_MS, Optional, QObject, int, __init__, property, bool, isShutdown, _start_workers, float, shutdown, LPTidalRequest, enqueue, cancelByTag, setConcurrency, _ScheduledJob, _enqueue_locked, _worker_loop, pyqtSlot, _dispatchDelivery, __classcell__
+    str: 'LPTidalRequestScheduler'
+    str: '优先级异步请求调度器，支持入队、取消和并发控制。'
+    str: '__tidal_scheduler_stop__'
+    str: 'parent'
+    str: 'maxWorkers'
+    str: 'LPTidalRequestScheduler.__init__'
+    str: 'return'
+    str: 'LPTidalRequestScheduler.isShutdown'
+    str: 'LPTidalRequestScheduler._start_workers'
+    str: 'wait'
+    str: 'timeout'
+    str: 'return'
+    str: 'LPTidalRequestScheduler.shutdown'
+    str: 'request'
+    str: 'priority'
+    str: 'return'
+    str: 'LPTidalRequestScheduler.enqueue'
+    str: 'tag'
+    str: 'return'
+    str: 'LPTidalRequestScheduler.cancelByTag'
+    str: 'maxWorkers'
+    str: 'return'
+    str: 'LPTidalRequestScheduler.setConcurrency'
+    str: 'job'
+    str: 'return'
+    str: 'LPTidalRequestScheduler._enqueue_locked'
+    str: 'LPTidalRequestScheduler._worker_loop'
+    str: 'jobKey'
+    str: 'payloadBundle'
+    str: 'return'
+    str: 'LPTidalRequestScheduler._dispatchDelivery'
+
+  def LPTidalRequestScheduler.__init__(self, parent, maxWorkers)  line 48
+    names: super, __init__, threading, RLock, _lock, queue, PriorityQueue, _queue, _jobs, _tag_map, count, _sequence, _workers, max, int, _max_workers, _active_jobs, _closed, _deliveryReady, connect, _dispatchDelivery, _start_workers
+      str: '\n        初始化调度器。\n\n        :param parent: 父级 QObject。\n        :param maxWorkers: 工作线程数量。\n        :return: None。\n        '
+
+  def LPTidalRequestScheduler.isShutdown(self)  line 69
+    names: _closed
+      str: '\n        返回调度器是否已经关闭。\n\n        :return: 已关闭返回 True。\n        '
+
+  def LPTidalRequestScheduler._start_workers(self)  line 78
+    names: _closed, range, _max_workers, threading, Thread, _worker_loop, start, _workers, append
+      str: '\n        启动工作线程。\n\n        :return: None。\n        '
+      str: 'TidalScheduler-'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+
+  def LPTidalRequestScheduler.shutdown(self, wait, timeout)  line 91
+    names: _lock, _closed, _jobs, clear, _tag_map, list, _workers, _queue, put, next, _sequence, _STOP_JOB_KEY, threading, current_thread, max, float, join
+      str: '\n        关闭调度器并通知后台线程退出。\n\n        :param wait: 是否等待线程退出。\n        :param timeout: 每个线程最多等待秒数。\n        :return: None。\n        '
+
+  def LPTidalRequestScheduler.enqueue(self, request, priority)  line 121
+    names: isinstance, LPTidalRequest, str, key, strip, _lock, _closed, _jobs, get, _ScheduledJob, int, callback, callbacks, append, tag, _tag_map, setdefault, set, add, _enqueue_locked, priority, started, generation
+      str: '\n        入队一个请求。\n\n        :param request: TIDAL 请求对象。\n        :param priority: 优先级，数值越小越先执行。\n        :return: None。\n        '
+      str: 'request'
+      str: 'priority'
+
+  def LPTidalRequestScheduler.cancelByTag(self, tag)  line 155
+    names: str, strip, _lock, _closed, _tag_map, pop, set, _jobs, get, started, generation
+      str: '\n        取消指定 tag 下尚未开始的任务。\n\n        :param tag: 任务标签。\n        :return: None。\n        '
+
+  def LPTidalRequestScheduler.setConcurrency(self, maxWorkers)  line 176
+    names: max, int, _closed, _max_workers, _start_workers
+      str: '\n        设置并发数。\n\n        :param maxWorkers: 目标并发数。\n        :return: None。\n        '
+
+  def LPTidalRequestScheduler._enqueue_locked(self, job)  line 192
+    names: _queue, put, priority, next, _sequence, request, key, generation
+      str: '\n        在持锁状态下将任务压入优先队列。\n\n        :param job: 待入队任务。\n        :return: None。\n        '
+
+  def LPTidalRequestScheduler._worker_loop(self)  line 201
+    names: _queue, get, _STOP_JOB_KEY, task_done, _lock, _closed, _jobs, started, generation, priority, int, _active_jobs, len, time, monotonic, enqueuedAt, qsize, request, task, Exception, logger, warning, max, pop, list, callbacks, tag, _tag_map, discard, _deliveryReady, emit
+      str: '\n        后台工作线程主循环。\n\n        :return: None。\n        '
+      str: '[TidalScheduler] job='
+      str: ' failed: '
+      str: 'workerFinishedAt'
+      str: 'queueWaitMs'
+      str: 'workerElapsedMs'
+      str: 'queueDepthAtStart'
+      str: 'pendingAtStart'
+      str: 'pendingAtFinish'
+      str: 'activeAtStart'
+      str: 'activeAtFinish'
+
+  def LPTidalRequestScheduler._dispatchDelivery(self, jobKey, payloadBundle)  line 273
+    names: _closed, isinstance, tuple, len, list, dict, time, monotonic, float, get, int, max, callable, Exception, logger, warning, append, MAIN_THREAD_WARN_MS, debug, str
+      str: '\n        在主线程派发调度结果。\n\n        :param jobKey: 任务唯一键。\n        :param payloadBundle: `(callbacks, payload, metrics)` 元组。\n        :return: None。\n        '
+      str: 'workerFinishedAt'
+      str: '[TidalScheduler] delivery failed job='
+      str: ', error='
+      str: 'default'
+      str: '[TidalScheduler][Perf] job=%s queue_wait_ms=%s worker_ms=%s delivery_wait_ms=%s callback_ms=%s callback_max_ms=%s callback_count=%s queue_depth=%s pending_start=%s pending_finish=%s active_start=%s active_finish=%s'
+      str: 'queueWaitMs'
+      str: 'workerElapsedMs'
+      str: 'queueDepthAtStart'
+      str: 'pendingAtStart'
+      str: 'pendingAtFinish'
+      str: 'activeAtStart'
+      str: 'activeAtFinish'

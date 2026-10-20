@@ -1,0 +1,1262 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('Feedback 日志和图片的 Android 兼容加密 ZIP 打包器。')
+              2 STORE_NAME               0 (__doc__)
+
+  4           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (logging)
+             10 STORE_NAME               1 (logging)
+
+  5          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (shutil)
+             18 STORE_NAME               2 (shutil)
+
+  6          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (tempfile)
+             26 STORE_NAME               3 (tempfile)
+
+  7          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (time)
+             34 STORE_NAME               4 (time)
+
+  8          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              5 (zipfile)
+             42 STORE_NAME               5 (zipfile)
+
+  9          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               3 (('Path',))
+             48 IMPORT_NAME              6 (pathlib)
+             50 IMPORT_FROM              7 (Path)
+             52 STORE_NAME               7 (Path)
+             54 POP_TOP
+
+ 11          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               4 (('AES',))
+             60 IMPORT_NAME              8 (Crypto.Cipher)
+             62 IMPORT_FROM              9 (AES)
+             64 STORE_NAME               9 (AES)
+             66 POP_TOP
+
+ 12          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               5 (('Image', 'ImageOps'))
+             72 IMPORT_NAME             10 (PIL)
+             74 IMPORT_FROM             11 (Image)
+             76 STORE_NAME              11 (Image)
+             78 IMPORT_FROM             12 (ImageOps)
+             80 STORE_NAME              12 (ImageOps)
+             82 POP_TOP
+
+ 15          84 LOAD_NAME                1 (logging)
+             86 LOAD_METHOD             13 (getLogger)
+             88 LOAD_CONST               6 ('linkplay')
+             90 CALL_METHOD              1
+             92 STORE_NAME              14 (logger)
+
+ 18          94 LOAD_BUILD_CLASS
+             96 LOAD_CONST               7 (<code object LPFeedbackWorkDirectoryError at 0x000001F3253C4C90, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 18>)
+             98 LOAD_CONST               8 ('LPFeedbackWorkDirectoryError')
+            100 MAKE_FUNCTION            0
+            102 LOAD_CONST               8 ('LPFeedbackWorkDirectoryError')
+            104 LOAD_NAME               15 (RuntimeError)
+            106 CALL_FUNCTION            3
+            108 STORE_NAME              16 (LPFeedbackWorkDirectoryError)
+
+ 26         110 LOAD_BUILD_CLASS
+            112 LOAD_CONST               9 (<code object LPFeedbackLogPackager at 0x000001F3253DA9D0, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 26>)
+            114 LOAD_CONST              10 ('LPFeedbackLogPackager')
+            116 MAKE_FUNCTION            0
+            118 LOAD_CONST              10 ('LPFeedbackLogPackager')
+            120 CALL_FUNCTION            2
+            122 STORE_NAME              17 (LPFeedbackLogPackager)
+            124 LOAD_CONST               2 (None)
+            126 RETURN_VALUE
+
+=== LPFeedbackWorkDirectoryError ===
+ 18           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeedbackWorkDirectoryError')
+              6 STORE_NAME               2 (__qualname__)
+
+ 19           8 LOAD_CONST               1 ('打包用工作/暂存目录创建失败，对应埋点错误码 3006。\n\n    单独定义异常类型，使编排器能把它与打包/加密失败（3007）区分开，\n    从而各自上报文档规定的错误码。\n    ')
+             10 STORE_NAME               3 (__doc__)
+             12 LOAD_CONST               2 (None)
+             14 RETURN_VALUE
+
+=== LPFeedbackLogPackager ===
+ 26           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeedbackLogPackager')
+              6 STORE_NAME               2 (__qualname__)
+
+ 27           8 LOAD_CONST               1 ('将应用日志和用户图片复制、加密并压缩为单个反馈 ZIP。')
+             10 STORE_NAME               3 (__doc__)
+
+ 29          12 LOAD_CONST               2 (5)
+             14 STORE_NAME               4 (MAX_ATTACHMENT_COUNT)
+
+ 30          16 LOAD_CONST               3 (604800)
+             18 STORE_NAME               5 (MAX_LOG_AGE_SECONDS)
+
+ 31          20 LOAD_CONST               4 (20)
+             22 STORE_NAME               6 (MAX_LOG_FILE_COUNT)
+
+ 32          24 LOAD_CONST               5 (20971520)
+             26 STORE_NAME               7 (MAX_TOTAL_LOG_SIZE)
+
+ 33          28 LOAD_CONST               6 ('AES')
+             30 STORE_NAME               8 (_AES_DIR)
+
+ 35          32 LOAD_CONST               7 (<code object __init__ at 0x000001F3253C4F50, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 35>)
+             34 LOAD_CONST               8 ('LPFeedbackLogPackager.__init__')
+             36 MAKE_FUNCTION            0
+             38 STORE_NAME               9 (__init__)
+
+ 51          40 LOAD_CONST              28 ((None,))
+             42 LOAD_CONST              10 (<code object createArchive at 0x000001F3253C4A80, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 51>)
+             44 LOAD_CONST              11 ('LPFeedbackLogPackager.createArchive')
+             46 MAKE_FUNCTION            1 (defaults)
+             48 STORE_NAME              10 (createArchive)
+
+ 83          50 LOAD_CONST              12 (<code object cleanup at 0x000001F3253C4500, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 83>)
+             52 LOAD_CONST              13 ('LPFeedbackLogPackager.cleanup')
+             54 MAKE_FUNCTION            0
+             56 STORE_NAME              11 (cleanup)
+
+ 94          58 LOAD_CONST              29 ((None,))
+             60 LOAD_CONST              14 (<code object _copyLogs at 0x000001F3253C4920, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 94>)
+             62 LOAD_CONST              15 ('LPFeedbackLogPackager._copyLogs')
+             64 MAKE_FUNCTION            1 (defaults)
+             66 STORE_NAME              12 (_copyLogs)
+
+161          68 LOAD_CONST              16 (<code object _findLogCandidates at 0x000001F3253C43A0, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 161>)
+             70 LOAD_CONST              17 ('LPFeedbackLogPackager._findLogCandidates')
+             72 MAKE_FUNCTION            0
+             74 STORE_NAME              13 (_findLogCandidates)
+
+197          76 LOAD_CONST              18 (<code object _copyLogFile at 0x000001F3253C4240, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 197>)
+             78 LOAD_CONST              19 ('LPFeedbackLogPackager._copyLogFile')
+             80 MAKE_FUNCTION            0
+             82 STORE_NAME              14 (_copyLogFile)
+
+220          84 LOAD_CONST              20 (<code object _copyAttachments at 0x000001F3253DA920, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 220>)
+             86 LOAD_CONST              21 ('LPFeedbackLogPackager._copyAttachments')
+             88 MAKE_FUNCTION            0
+             90 STORE_NAME              15 (_copyAttachments)
+
+247          92 LOAD_CONST              22 (<code object _encryptTree at 0x000001F3253DAA80, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 247>)
+             94 LOAD_CONST              23 ('LPFeedbackLogPackager._encryptTree')
+             96 MAKE_FUNCTION            0
+             98 STORE_NAME              16 (_encryptTree)
+
+276         100 LOAD_CONST              24 (<code object _encryptBytes at 0x000001F3253DA2F0, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 276>)
+            102 LOAD_CONST              25 ('LPFeedbackLogPackager._encryptBytes')
+            104 MAKE_FUNCTION            0
+            106 STORE_NAME              17 (_encryptBytes)
+
+288         108 LOAD_CONST              26 (<code object _createZip at 0x000001F3253DA3A0, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 288>)
+            110 LOAD_CONST              27 ('LPFeedbackLogPackager._createZip')
+            112 MAKE_FUNCTION            0
+            114 STORE_NAME              18 (_createZip)
+            116 LOAD_CONST               9 (None)
+            118 RETURN_VALUE
+
+=== LPFeedbackLogPackager.__init__ ===
+ 46           0 LOAD_GLOBAL              0 (Path)
+              2 LOAD_FAST                1 (workDirectory)
+              4 CALL_FUNCTION            1
+              6 LOAD_FAST                0 (self)
+              8 STORE_ATTR               1 (_workDirectory)
+
+ 47          10 LOAD_GLOBAL              2 (str)
+             12 LOAD_FAST                2 (aesKey)
+             14 CALL_FUNCTION            1
+             16 LOAD_METHOD              3 (encode)
+             18 LOAD_CONST               1 ('utf-8')
+             20 CALL_METHOD              1
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               4 (_aesKey)
+
+ 48          26 LOAD_GLOBAL              5 (len)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                4 (_aesKey)
+             32 CALL_FUNCTION            1
+             34 LOAD_GLOBAL              6 (AES)
+             36 LOAD_ATTR                7 (block_size)
+             38 COMPARE_OP               3 (!=)
+             40 POP_JUMP_IF_FALSE       50
+
+ 49          42 LOAD_GLOBAL              8 (ValueError)
+             44 LOAD_CONST               2 ('Feedback AES key must contain 16 bytes.')
+             46 CALL_FUNCTION            1
+             48 RAISE_VARARGS            1
+        >>   50 LOAD_CONST               3 (None)
+             52 RETURN_VALUE
+
+=== LPFeedbackLogPackager.createArchive ===
+ 67           0 SETUP_FINALLY           68 (to 70)
+
+ 68           2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_workDirectory)
+              6 LOAD_ATTR                1 (mkdir)
+              8 LOAD_CONST               1 (True)
+             10 LOAD_CONST               1 (True)
+             12 LOAD_CONST               2 (('parents', 'exist_ok'))
+             14 CALL_FUNCTION_KW         2
+             16 POP_TOP
+
+ 69          18 LOAD_GLOBAL              2 (Path)
+             20 LOAD_GLOBAL              3 (tempfile)
+             22 LOAD_ATTR                4 (mkdtemp)
+             24 LOAD_GLOBAL              5 (str)
+             26 LOAD_FAST                1 (submissionId)
+             28 CALL_FUNCTION            1
+             30 LOAD_CONST               3 ('-')
+             32 BINARY_ADD
+             34 LOAD_GLOBAL              5 (str)
+             36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                0 (_workDirectory)
+             40 CALL_FUNCTION            1
+             42 LOAD_CONST               4 (('prefix', 'dir'))
+             44 CALL_FUNCTION_KW         2
+             46 CALL_FUNCTION            1
+             48 STORE_FAST               5 (workPath)
+
+ 70          50 LOAD_FAST                5 (workPath)
+             52 LOAD_CONST               5 ('payload')
+             54 BINARY_TRUE_DIVIDE
+             56 STORE_FAST               6 (stagingPath)
+
+ 71          58 LOAD_FAST                6 (stagingPath)
+             60 LOAD_METHOD              1 (mkdir)
+             62 CALL_METHOD              0
+             64 POP_TOP
+             66 POP_BLOCK
+             68 JUMP_FORWARD            50 (to 120)
+
+ 72     >>   70 DUP_TOP
+             72 LOAD_GLOBAL              6 (OSError)
+             74 JUMP_IF_NOT_EXC_MATCH   118
+             76 POP_TOP
+             78 STORE_FAST               7 (error)
+             80 POP_TOP
+             82 SETUP_FINALLY           26 (to 110)
+
+ 73          84 LOAD_GLOBAL              7 (LPFeedbackWorkDirectoryError)
+
+ 74          86 LOAD_CONST               6 ('failed to create feedback work directory: %s')
+             88 LOAD_FAST                7 (error)
+             90 BINARY_MODULO
+
+ 73          92 CALL_FUNCTION            1
+
+ 75          94 LOAD_FAST                7 (error)
+
+ 73          96 RAISE_VARARGS            2
+             98 POP_BLOCK
+            100 POP_EXCEPT
+            102 LOAD_CONST               7 (None)
+            104 STORE_FAST               7 (error)
+            106 DELETE_FAST              7 (error)
+            108 JUMP_FORWARD            10 (to 120)
+        >>  110 LOAD_CONST               7 (None)
+            112 STORE_FAST               7 (error)
+            114 DELETE_FAST              7 (error)
+            116 RERAISE
+        >>  118 RERAISE
+
+ 76     >>  120 LOAD_FAST                0 (self)
+            122 LOAD_METHOD              8 (_copyLogs)
+            124 LOAD_FAST                2 (logDirectory)
+            126 LOAD_FAST                6 (stagingPath)
+            128 LOAD_FAST                4 (firmwareDirectory)
+            130 CALL_METHOD              3
+            132 POP_TOP
+
+ 77         134 LOAD_FAST                0 (self)
+            136 LOAD_METHOD              9 (_copyAttachments)
+            138 LOAD_FAST                3 (attachmentPaths)
+            140 LOAD_FAST                6 (stagingPath)
+            142 LOAD_CONST               8 ('Picture')
+            144 BINARY_TRUE_DIVIDE
+            146 CALL_METHOD              2
+            148 POP_TOP
+
+ 78         150 LOAD_FAST                0 (self)
+            152 LOAD_METHOD             10 (_encryptTree)
+            154 LOAD_FAST                6 (stagingPath)
+            156 CALL_METHOD              1
+            158 POP_TOP
+
+ 79         160 LOAD_FAST                5 (workPath)
+            162 LOAD_CONST               9 ('feedback.zip')
+            164 BINARY_TRUE_DIVIDE
+            166 STORE_FAST               8 (archivePath)
+
+ 80         168 LOAD_FAST                0 (self)
+            170 LOAD_METHOD             11 (_createZip)
+            172 LOAD_FAST                6 (stagingPath)
+            174 LOAD_FAST                8 (archivePath)
+            176 CALL_METHOD              2
+            178 POP_TOP
+
+ 81         180 LOAD_FAST                8 (archivePath)
+            182 LOAD_FAST                5 (workPath)
+            184 BUILD_TUPLE              2
+            186 RETURN_VALUE
+
+=== LPFeedbackLogPackager.cleanup ===
+ 91           0 LOAD_FAST                1 (workPath)
+              2 POP_JUMP_IF_FALSE       22
+
+ 92           4 LOAD_GLOBAL              0 (shutil)
+              6 LOAD_ATTR                1 (rmtree)
+              8 LOAD_GLOBAL              2 (str)
+             10 LOAD_FAST                1 (workPath)
+             12 CALL_FUNCTION            1
+             14 LOAD_CONST               1 (True)
+             16 LOAD_CONST               2 (('ignore_errors',))
+             18 CALL_FUNCTION_KW         2
+             20 POP_TOP
+        >>   22 LOAD_CONST               3 (None)
+             24 RETURN_VALUE
+
+=== LPFeedbackLogPackager._copyLogs ===
+107           0 LOAD_GLOBAL              0 (Path)
+              2 LOAD_FAST                1 (logDirectory)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               4 (sourcePath)
+
+108           8 LOAD_FAST                4 (sourcePath)
+             10 LOAD_METHOD              1 (is_dir)
+             12 CALL_METHOD              0
+             14 POP_JUMP_IF_TRUE        20
+
+109          16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+110     >>   20 LOAD_FAST                2 (stagingRoot)
+             22 LOAD_CONST               2 ('App')
+             24 BINARY_TRUE_DIVIDE
+             26 STORE_FAST               5 (targetDirectory)
+
+111          28 LOAD_FAST                5 (targetDirectory)
+             30 LOAD_ATTR                2 (mkdir)
+             32 LOAD_CONST               3 (True)
+             34 LOAD_CONST               3 (True)
+             36 LOAD_CONST               4 (('parents', 'exist_ok'))
+             38 CALL_FUNCTION_KW         2
+             40 POP_TOP
+
+113          42 LOAD_GLOBAL              3 (time)
+             44 LOAD_METHOD              3 (time)
+             46 CALL_METHOD              0
+             48 STORE_FAST               6 (collectedAt)
+
+114          50 LOAD_FAST                6 (collectedAt)
+             52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                4 (MAX_LOG_AGE_SECONDS)
+             56 BINARY_SUBTRACT
+             58 STORE_FAST               7 (cutoffTime)
+
+115          60 LOAD_FAST                0 (self)
+             62 LOAD_METHOD              5 (_findLogCandidates)
+             64 LOAD_FAST                4 (sourcePath)
+             66 LOAD_FAST                7 (cutoffTime)
+             68 CALL_METHOD              2
+             70 STORE_FAST               8 (candidates)
+
+116          72 LOAD_CONST               5 (0)
+             74 STORE_FAST               9 (copiedCount)
+
+117          76 LOAD_CONST               5 (0)
+             78 STORE_FAST              10 (copiedSize)
+
+118          80 LOAD_FAST                8 (candidates)
+             82 GET_ITER
+        >>   84 FOR_ITER               230 (to 316)
+             86 STORE_FAST              11 (candidatePath)
+
+119          88 LOAD_FAST                9 (copiedCount)
+             90 LOAD_FAST                0 (self)
+             92 LOAD_ATTR                6 (MAX_LOG_FILE_COUNT)
+             94 COMPARE_OP               5 (>=)
+             96 POP_JUMP_IF_FALSE      104
+
+120          98 POP_TOP
+            100 EXTENDED_ARG             1
+            102 JUMP_ABSOLUTE          316
+
+121     >>  104 SETUP_FINALLY           32 (to 138)
+
+122         106 LOAD_FAST               11 (candidatePath)
+            108 LOAD_METHOD              7 (is_symlink)
+            110 CALL_METHOD              0
+            112 POP_JUMP_IF_TRUE       122
+            114 LOAD_FAST               11 (candidatePath)
+            116 LOAD_METHOD              8 (is_file)
+            118 CALL_METHOD              0
+            120 POP_JUMP_IF_TRUE       126
+
+123     >>  122 POP_BLOCK
+            124 JUMP_ABSOLUTE           84
+
+124     >>  126 LOAD_FAST               11 (candidatePath)
+            128 LOAD_METHOD              9 (stat)
+            130 CALL_METHOD              0
+            132 STORE_FAST              12 (candidateStat)
+            134 POP_BLOCK
+            136 JUMP_FORWARD            62 (to 200)
+
+125     >>  138 DUP_TOP
+            140 LOAD_GLOBAL             10 (OSError)
+            142 JUMP_IF_NOT_EXC_MATCH   198
+            144 POP_TOP
+            146 STORE_FAST              13 (error)
+            148 POP_TOP
+            150 SETUP_FINALLY           38 (to 190)
+
+126         152 LOAD_GLOBAL             11 (logger)
+            154 LOAD_METHOD             12 (warning)
+            156 LOAD_CONST               6 ('[Feedback] inspect log file failed path=%s error=%s')
+            158 LOAD_FAST               11 (candidatePath)
+            160 LOAD_FAST               13 (error)
+            162 CALL_METHOD              3
+            164 POP_TOP
+
+127         166 POP_BLOCK
+            168 POP_EXCEPT
+            170 LOAD_CONST               1 (None)
+            172 STORE_FAST              13 (error)
+            174 DELETE_FAST             13 (error)
+            176 JUMP_ABSOLUTE           84
+            178 POP_BLOCK
+            180 POP_EXCEPT
+            182 LOAD_CONST               1 (None)
+            184 STORE_FAST              13 (error)
+            186 DELETE_FAST             13 (error)
+            188 JUMP_FORWARD            10 (to 200)
+        >>  190 LOAD_CONST               1 (None)
+            192 STORE_FAST              13 (error)
+            194 DELETE_FAST             13 (error)
+            196 RERAISE
+        >>  198 RERAISE
+
+128     >>  200 LOAD_FAST               12 (candidateStat)
+            202 LOAD_ATTR               13 (st_mtime)
+            204 LOAD_FAST                7 (cutoffTime)
+            206 COMPARE_OP               0 (<)
+            208 POP_JUMP_IF_FALSE      212
+
+129         210 JUMP_ABSOLUTE           84
+
+131     >>  212 LOAD_GLOBAL             14 (max)
+            214 LOAD_FAST               12 (candidateStat)
+            216 LOAD_ATTR               15 (st_size)
+            218 LOAD_CONST               5 (0)
+            220 CALL_FUNCTION            2
+            222 STORE_FAST              14 (candidateSize)
+
+132         224 LOAD_FAST                9 (copiedCount)
+            226 LOAD_CONST               5 (0)
+            228 COMPARE_OP               2 (==)
+            230 JUMP_IF_FALSE_OR_POP   240
+            232 LOAD_FAST               14 (candidateSize)
+            234 LOAD_FAST                0 (self)
+            236 LOAD_ATTR               16 (MAX_TOTAL_LOG_SIZE)
+            238 COMPARE_OP               4 (>)
+        >>  240 STORE_FAST              15 (oversizedNewestLog)
+
+133         242 LOAD_FAST               15 (oversizedNewestLog)
+            244 EXTENDED_ARG             1
+            246 POP_JUMP_IF_TRUE       270
+            248 LOAD_FAST               10 (copiedSize)
+            250 LOAD_FAST               14 (candidateSize)
+            252 BINARY_ADD
+            254 LOAD_FAST                0 (self)
+            256 LOAD_ATTR               16 (MAX_TOTAL_LOG_SIZE)
+            258 COMPARE_OP               4 (>)
+            260 EXTENDED_ARG             1
+            262 POP_JUMP_IF_FALSE      270
+
+134         264 POP_TOP
+            266 EXTENDED_ARG             1
+            268 JUMP_ABSOLUTE          316
+
+135     >>  270 LOAD_FAST                0 (self)
+            272 LOAD_METHOD             17 (_copyLogFile)
+            274 LOAD_FAST               11 (candidatePath)
+            276 LOAD_FAST                4 (sourcePath)
+            278 LOAD_FAST                5 (targetDirectory)
+            280 CALL_METHOD              3
+            282 EXTENDED_ARG             1
+            284 POP_JUMP_IF_TRUE       288
+
+136         286 JUMP_ABSOLUTE           84
+
+138     >>  288 LOAD_FAST                9 (copiedCount)
+            290 LOAD_CONST               7 (1)
+            292 INPLACE_ADD
+            294 STORE_FAST               9 (copiedCount)
+
+139         296 LOAD_FAST               10 (copiedSize)
+            298 LOAD_FAST               14 (candidateSize)
+            300 INPLACE_ADD
+            302 STORE_FAST              10 (copiedSize)
+
+140         304 LOAD_FAST               15 (oversizedNewestLog)
+            306 POP_JUMP_IF_FALSE       84
+
+141         308 POP_TOP
+            310 EXTENDED_ARG             1
+            312 JUMP_ABSOLUTE          316
+            314 JUMP_ABSOLUTE           84
+
+144     >>  316 LOAD_FAST                3 (firmwareDirectory)
+            318 LOAD_CONST               1 (None)
+            320 IS_OP                    0
+            322 EXTENDED_ARG             1
+            324 POP_JUMP_IF_FALSE      336
+
+145         326 LOAD_FAST                4 (sourcePath)
+            328 LOAD_CONST               8 ('firmware')
+            330 BINARY_TRUE_DIVIDE
+            332 STORE_FAST              16 (firmwareSource)
+            334 JUMP_FORWARD             8 (to 344)
+
+147     >>  336 LOAD_GLOBAL              0 (Path)
+            338 LOAD_FAST                3 (firmwareDirectory)
+            340 CALL_FUNCTION            1
+            342 STORE_FAST              16 (firmwareSource)
+
+148     >>  344 LOAD_FAST               16 (firmwareSource)
+            346 LOAD_METHOD              1 (is_dir)
+            348 CALL_METHOD              0
+            350 EXTENDED_ARG             2
+            352 POP_JUMP_IF_FALSE      528
+
+149         354 LOAD_FAST                2 (stagingRoot)
+            356 LOAD_CONST               8 ('firmware')
+            358 BINARY_TRUE_DIVIDE
+            360 STORE_FAST              17 (firmwareTarget)
+
+150         362 LOAD_FAST               17 (firmwareTarget)
+            364 LOAD_ATTR                2 (mkdir)
+            366 LOAD_CONST               3 (True)
+            368 LOAD_CONST               3 (True)
+            370 LOAD_CONST               4 (('parents', 'exist_ok'))
+            372 CALL_FUNCTION_KW         2
+            374 POP_TOP
+
+151         376 LOAD_GLOBAL             18 (sorted)
+            378 LOAD_FAST               16 (firmwareSource)
+            380 LOAD_METHOD             19 (rglob)
+            382 LOAD_CONST               9 ('*')
+            384 CALL_METHOD              1
+            386 CALL_FUNCTION            1
+            388 GET_ITER
+        >>  390 FOR_ITER               136 (to 528)
+            392 STORE_FAST              18 (fwPath)
+
+152         394 LOAD_FAST               18 (fwPath)
+            396 LOAD_METHOD              8 (is_file)
+            398 CALL_METHOD              0
+            400 EXTENDED_ARG             1
+            402 POP_JUMP_IF_FALSE      390
+            404 LOAD_FAST               18 (fwPath)
+            406 LOAD_METHOD              7 (is_symlink)
+            408 CALL_METHOD              0
+            410 EXTENDED_ARG             1
+            412 POP_JUMP_IF_TRUE       390
+
+153         414 LOAD_FAST               18 (fwPath)
+            416 LOAD_METHOD             20 (relative_to)
+            418 LOAD_FAST               16 (firmwareSource)
+            420 CALL_METHOD              1
+            422 STORE_FAST              19 (relativePath)
+
+154         424 LOAD_FAST               17 (firmwareTarget)
+            426 LOAD_FAST               19 (relativePath)
+            428 BINARY_TRUE_DIVIDE
+            430 STORE_FAST              20 (fwTarget)
+
+155         432 LOAD_FAST               20 (fwTarget)
+            434 LOAD_ATTR               21 (parent)
+            436 LOAD_ATTR                2 (mkdir)
+            438 LOAD_CONST               3 (True)
+            440 LOAD_CONST               3 (True)
+            442 LOAD_CONST               4 (('parents', 'exist_ok'))
+            444 CALL_FUNCTION_KW         2
+            446 POP_TOP
+
+156         448 SETUP_FINALLY           16 (to 466)
+
+157         450 LOAD_GLOBAL             22 (shutil)
+            452 LOAD_METHOD             23 (copy2)
+            454 LOAD_FAST               18 (fwPath)
+            456 LOAD_FAST               20 (fwTarget)
+            458 CALL_METHOD              2
+            460 POP_TOP
+            462 POP_BLOCK
+            464 JUMP_FORWARD            58 (to 524)
+
+158     >>  466 DUP_TOP
+            468 LOAD_GLOBAL             10 (OSError)
+            470 LOAD_GLOBAL             22 (shutil)
+            472 LOAD_ATTR               24 (Error)
+            474 BUILD_TUPLE              2
+            476 EXTENDED_ARG             2
+            478 JUMP_IF_NOT_EXC_MATCH   522
+            480 POP_TOP
+            482 STORE_FAST              13 (error)
+            484 POP_TOP
+            486 SETUP_FINALLY           26 (to 514)
+
+159         488 LOAD_GLOBAL             11 (logger)
+            490 LOAD_METHOD             12 (warning)
+            492 LOAD_CONST              10 ('[Feedback] copy firmware failed path=%s error=%s')
+            494 LOAD_FAST               18 (fwPath)
+            496 LOAD_FAST               13 (error)
+            498 CALL_METHOD              3
+            500 POP_TOP
+            502 POP_BLOCK
+            504 POP_EXCEPT
+            506 LOAD_CONST               1 (None)
+            508 STORE_FAST              13 (error)
+            510 DELETE_FAST             13 (error)
+            512 JUMP_FORWARD            10 (to 524)
+        >>  514 LOAD_CONST               1 (None)
+            516 STORE_FAST              13 (error)
+            518 DELETE_FAST             13 (error)
+            520 RERAISE
+        >>  522 RERAISE
+        >>  524 EXTENDED_ARG             1
+            526 JUMP_ABSOLUTE          390
+        >>  528 LOAD_CONST               1 (None)
+            530 RETURN_VALUE
+
+=== LPFeedbackLogPackager._findLogCandidates ===
+170           0 BUILD_LIST               0
+              2 STORE_FAST               3 (candidates)
+
+171           4 SETUP_FINALLY          184 (to 190)
+
+172           6 LOAD_FAST                1 (sourceDirectory)
+              8 LOAD_METHOD              0 (rglob)
+             10 LOAD_CONST               1 ('*')
+             12 CALL_METHOD              1
+             14 GET_ITER
+        >>   16 FOR_ITER               168 (to 186)
+             18 STORE_FAST               4 (candidatePath)
+
+173          20 SETUP_FINALLY           56 (to 78)
+
+174          22 LOAD_FAST                4 (candidatePath)
+             24 LOAD_METHOD              1 (is_symlink)
+             26 CALL_METHOD              0
+             28 POP_JUMP_IF_TRUE        38
+             30 LOAD_FAST                4 (candidatePath)
+             32 LOAD_METHOD              2 (is_file)
+             34 CALL_METHOD              0
+             36 POP_JUMP_IF_TRUE        42
+
+175     >>   38 POP_BLOCK
+             40 JUMP_ABSOLUTE           16
+
+177     >>   42 LOAD_GLOBAL              3 (any)
+             44 LOAD_CONST               2 (<code object <genexpr> at 0x000001F3253C4DF0, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 177>)
+             46 LOAD_CONST               3 ('LPFeedbackLogPackager._findLogCandidates.<locals>.<genexpr>')
+             48 MAKE_FUNCTION            0
+             50 LOAD_FAST                4 (candidatePath)
+             52 LOAD_ATTR                4 (parents)
+             54 GET_ITER
+             56 CALL_FUNCTION            1
+             58 CALL_FUNCTION            1
+             60 POP_JUMP_IF_FALSE       66
+
+178          62 POP_BLOCK
+             64 JUMP_ABSOLUTE           16
+
+179     >>   66 LOAD_FAST                4 (candidatePath)
+             68 LOAD_METHOD              5 (stat)
+             70 CALL_METHOD              0
+             72 STORE_FAST               5 (candidateStat)
+             74 POP_BLOCK
+             76 JUMP_FORWARD            62 (to 140)
+
+180     >>   78 DUP_TOP
+             80 LOAD_GLOBAL              6 (OSError)
+             82 JUMP_IF_NOT_EXC_MATCH   138
+             84 POP_TOP
+             86 STORE_FAST               6 (error)
+             88 POP_TOP
+             90 SETUP_FINALLY           38 (to 130)
+
+181          92 LOAD_GLOBAL              7 (logger)
+             94 LOAD_METHOD              8 (warning)
+
+182          96 LOAD_CONST               4 ('[Feedback] inspect log candidate failed path=%s error=%s')
+
+183          98 LOAD_FAST                4 (candidatePath)
+
+184         100 LOAD_FAST                6 (error)
+
+181         102 CALL_METHOD              3
+            104 POP_TOP
+
+186         106 POP_BLOCK
+            108 POP_EXCEPT
+            110 LOAD_CONST               5 (None)
+            112 STORE_FAST               6 (error)
+            114 DELETE_FAST              6 (error)
+            116 JUMP_ABSOLUTE           16
+            118 POP_BLOCK
+            120 POP_EXCEPT
+            122 LOAD_CONST               5 (None)
+            124 STORE_FAST               6 (error)
+            126 DELETE_FAST              6 (error)
+            128 JUMP_FORWARD            10 (to 140)
+        >>  130 LOAD_CONST               5 (None)
+            132 STORE_FAST               6 (error)
+            134 DELETE_FAST              6 (error)
+            136 RERAISE
+        >>  138 RERAISE
+
+187     >>  140 LOAD_FAST                5 (candidateStat)
+            142 LOAD_ATTR                9 (st_mtime)
+            144 LOAD_FAST                2 (cutoffTime)
+            146 COMPARE_OP               0 (<)
+            148 POP_JUMP_IF_FALSE      152
+
+188         150 JUMP_ABSOLUTE           16
+
+189     >>  152 LOAD_FAST                4 (candidatePath)
+            154 LOAD_METHOD             10 (relative_to)
+            156 LOAD_FAST                1 (sourceDirectory)
+            158 CALL_METHOD              1
+            160 LOAD_METHOD             11 (as_posix)
+            162 CALL_METHOD              0
+            164 STORE_FAST               7 (relativePath)
+
+190         166 LOAD_FAST                3 (candidates)
+            168 LOAD_METHOD             12 (append)
+            170 LOAD_FAST                4 (candidatePath)
+            172 LOAD_FAST                5 (candidateStat)
+            174 LOAD_ATTR                9 (st_mtime)
+            176 LOAD_FAST                7 (relativePath)
+            178 BUILD_TUPLE              3
+            180 CALL_METHOD              1
+            182 POP_TOP
+            184 JUMP_ABSOLUTE           16
+        >>  186 POP_BLOCK
+            188 JUMP_FORWARD            50 (to 240)
+
+191     >>  190 DUP_TOP
+            192 LOAD_GLOBAL              6 (OSError)
+            194 JUMP_IF_NOT_EXC_MATCH   238
+            196 POP_TOP
+            198 STORE_FAST               6 (error)
+            200 POP_TOP
+            202 SETUP_FINALLY           26 (to 230)
+
+192         204 LOAD_GLOBAL              7 (logger)
+            206 LOAD_METHOD              8 (warning)
+            208 LOAD_CONST               6 ('[Feedback] scan log directory failed path=%s error=%s')
+            210 LOAD_FAST                1 (sourceDirectory)
+            212 LOAD_FAST                6 (error)
+            214 CALL_METHOD              3
+            216 POP_TOP
+            218 POP_BLOCK
+            220 POP_EXCEPT
+            222 LOAD_CONST               5 (None)
+            224 STORE_FAST               6 (error)
+            226 DELETE_FAST              6 (error)
+            228 JUMP_FORWARD            10 (to 240)
+        >>  230 LOAD_CONST               5 (None)
+            232 STORE_FAST               6 (error)
+            234 DELETE_FAST              6 (error)
+            236 RERAISE
+        >>  238 RERAISE
+
+194     >>  240 LOAD_FAST                3 (candidates)
+            242 LOAD_ATTR               13 (sort)
+            244 LOAD_CONST               7 (<code object <lambda> at 0x000001F3253C4030, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 194>)
+            246 LOAD_CONST               8 ('LPFeedbackLogPackager._findLogCandidates.<locals>.<lambda>')
+            248 MAKE_FUNCTION            0
+            250 LOAD_CONST               9 (('key',))
+            252 CALL_FUNCTION_KW         1
+            254 POP_TOP
+
+195         256 LOAD_CONST              10 (<code object <listcomp> at 0x000001F3253C4BE0, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 195>)
+            258 LOAD_CONST              11 ('LPFeedbackLogPackager._findLogCandidates.<locals>.<listcomp>')
+            260 MAKE_FUNCTION            0
+            262 LOAD_FAST                3 (candidates)
+            264 GET_ITER
+            266 CALL_FUNCTION            1
+            268 RETURN_VALUE
+
+=== LPFeedbackLogPackager._findLogCandidates.<genexpr> ===
+177           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                20 (to 24)
+              4 STORE_FAST               1 (parent)
+              6 LOAD_CONST               0 ('firmware')
+              8 LOAD_FAST                1 (parent)
+             10 LOAD_ATTR                0 (name)
+             12 LOAD_METHOD              1 (lower)
+             14 CALL_METHOD              0
+             16 CONTAINS_OP              0
+             18 YIELD_VALUE
+             20 POP_TOP
+             22 JUMP_ABSOLUTE            2
+        >>   24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+=== LPFeedbackLogPackager._findLogCandidates.<lambda> ===
+194           0 LOAD_FAST                0 (candidate)
+              2 LOAD_CONST               1 (1)
+              4 BINARY_SUBSCR
+              6 UNARY_NEGATIVE
+              8 LOAD_FAST                0 (candidate)
+             10 LOAD_CONST               2 (2)
+             12 BINARY_SUBSCR
+             14 BUILD_TUPLE              2
+             16 RETURN_VALUE
+
+=== LPFeedbackLogPackager._findLogCandidates.<listcomp> ===
+195           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (candidate)
+              8 LOAD_FAST                1 (candidate)
+             10 LOAD_CONST               0 (0)
+             12 BINARY_SUBSCR
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPFeedbackLogPackager._copyLogFile ===
+207           0 LOAD_FAST                3 (targetDirectory)
+              2 LOAD_FAST                1 (sourcePath)
+              4 LOAD_METHOD              0 (relative_to)
+              6 LOAD_FAST                2 (sourceDirectory)
+              8 CALL_METHOD              1
+             10 BINARY_TRUE_DIVIDE
+             12 STORE_FAST               4 (targetPath)
+
+208          14 SETUP_FINALLY           34 (to 50)
+
+209          16 LOAD_FAST                4 (targetPath)
+             18 LOAD_ATTR                1 (parent)
+             20 LOAD_ATTR                2 (mkdir)
+             22 LOAD_CONST               1 (True)
+             24 LOAD_CONST               1 (True)
+             26 LOAD_CONST               2 (('parents', 'exist_ok'))
+             28 CALL_FUNCTION_KW         2
+             30 POP_TOP
+
+210          32 LOAD_GLOBAL              3 (shutil)
+             34 LOAD_METHOD              4 (copy2)
+             36 LOAD_FAST                1 (sourcePath)
+             38 LOAD_FAST                4 (targetPath)
+             40 CALL_METHOD              2
+             42 POP_TOP
+
+211          44 POP_BLOCK
+             46 LOAD_CONST               1 (True)
+             48 RETURN_VALUE
+
+212     >>   50 DUP_TOP
+             52 LOAD_GLOBAL              5 (OSError)
+             54 LOAD_GLOBAL              3 (shutil)
+             56 LOAD_ATTR                6 (Error)
+             58 BUILD_TUPLE              2
+             60 JUMP_IF_NOT_EXC_MATCH   142
+             62 POP_TOP
+             64 STORE_FAST               5 (error)
+             66 POP_TOP
+             68 SETUP_FINALLY           64 (to 134)
+
+213          70 SETUP_FINALLY           16 (to 88)
+
+214          72 LOAD_FAST                4 (targetPath)
+             74 LOAD_ATTR                7 (unlink)
+             76 LOAD_CONST               1 (True)
+             78 LOAD_CONST               3 (('missing_ok',))
+             80 CALL_FUNCTION_KW         1
+             82 POP_TOP
+             84 POP_BLOCK
+             86 JUMP_FORWARD            18 (to 106)
+
+215     >>   88 DUP_TOP
+             90 LOAD_GLOBAL              5 (OSError)
+             92 JUMP_IF_NOT_EXC_MATCH   104
+             94 POP_TOP
+             96 POP_TOP
+             98 POP_TOP
+
+216         100 POP_EXCEPT
+            102 JUMP_FORWARD             2 (to 106)
+        >>  104 RERAISE
+
+217     >>  106 LOAD_GLOBAL              8 (logger)
+            108 LOAD_METHOD              9 (warning)
+            110 LOAD_CONST               4 ('[Feedback] copy log file failed path=%s error=%s')
+            112 LOAD_FAST                1 (sourcePath)
+            114 LOAD_FAST                5 (error)
+            116 CALL_METHOD              3
+            118 POP_TOP
+
+218         120 POP_BLOCK
+            122 POP_EXCEPT
+            124 LOAD_CONST               5 (None)
+            126 STORE_FAST               5 (error)
+            128 DELETE_FAST              5 (error)
+            130 LOAD_CONST               6 (False)
+            132 RETURN_VALUE
+        >>  134 LOAD_CONST               5 (None)
+            136 STORE_FAST               5 (error)
+            138 DELETE_FAST              5 (error)
+            140 RERAISE
+        >>  142 RERAISE
+            144 LOAD_CONST               5 (None)
+            146 RETURN_VALUE
+
+=== LPFeedbackLogPackager._copyAttachments ===
+231           0 LOAD_FAST                2 (targetDirectory)
+              2 LOAD_ATTR                0 (mkdir)
+              4 LOAD_CONST               1 (True)
+              6 LOAD_CONST               1 (True)
+              8 LOAD_CONST               2 (('parents', 'exist_ok'))
+             10 CALL_FUNCTION_KW         2
+             12 POP_TOP
+
+232          14 LOAD_GLOBAL              1 (enumerate)
+             16 LOAD_FAST                1 (attachmentPaths)
+             18 JUMP_IF_TRUE_OR_POP     22
+             20 BUILD_LIST               0
+        >>   22 LOAD_CONST               3 (None)
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (MAX_ATTACHMENT_COUNT)
+             28 BUILD_SLICE              2
+             30 BINARY_SUBSCR
+             32 LOAD_CONST               4 (1)
+             34 LOAD_CONST               5 (('start',))
+             36 CALL_FUNCTION_KW         2
+             38 GET_ITER
+        >>   40 FOR_ITER               188 (to 230)
+             42 UNPACK_SEQUENCE          2
+             44 STORE_FAST               3 (index)
+             46 STORE_FAST               4 (rawPath)
+
+233          48 LOAD_GLOBAL              3 (Path)
+             50 LOAD_FAST                4 (rawPath)
+             52 CALL_FUNCTION            1
+             54 STORE_FAST               5 (sourcePath)
+
+234          56 LOAD_FAST                5 (sourcePath)
+             58 LOAD_METHOD              4 (is_file)
+             60 CALL_METHOD              0
+             62 POP_JUMP_IF_TRUE        66
+
+235          64 JUMP_ABSOLUTE           40
+
+236     >>   66 SETUP_FINALLY          110 (to 178)
+
+237          68 LOAD_GLOBAL              5 (Image)
+             70 LOAD_METHOD              6 (open)
+             72 LOAD_FAST                5 (sourcePath)
+             74 CALL_METHOD              1
+             76 SETUP_WITH              80 (to 158)
+             78 STORE_FAST               6 (sourceImage)
+
+238          80 LOAD_GLOBAL              7 (ImageOps)
+             82 LOAD_METHOD              8 (exif_transpose)
+             84 LOAD_FAST                6 (sourceImage)
+             86 CALL_METHOD              1
+             88 STORE_FAST               7 (normalizedImage)
+
+239          90 LOAD_FAST                7 (normalizedImage)
+             92 LOAD_METHOD              9 (thumbnail)
+             94 LOAD_CONST               6 ((1000, 1000))
+             96 CALL_METHOD              1
+             98 POP_TOP
+
+240         100 LOAD_FAST                7 (normalizedImage)
+            102 LOAD_ATTR               10 (mode)
+            104 LOAD_CONST               7 (('RGB', 'L'))
+            106 CONTAINS_OP              1
+            108 POP_JUMP_IF_FALSE      120
+
+241         110 LOAD_FAST                7 (normalizedImage)
+            112 LOAD_METHOD             11 (convert)
+            114 LOAD_CONST               8 ('RGB')
+            116 CALL_METHOD              1
+            118 STORE_FAST               7 (normalizedImage)
+
+242     >>  120 LOAD_FAST                7 (normalizedImage)
+            122 LOAD_ATTR               12 (save)
+            124 LOAD_FAST                2 (targetDirectory)
+            126 LOAD_CONST               9 ('image-%02d.jpg')
+            128 LOAD_FAST                3 (index)
+            130 BINARY_MODULO
+            132 BINARY_TRUE_DIVIDE
+            134 LOAD_CONST              10 ('JPEG')
+            136 LOAD_CONST              11 (100)
+            138 LOAD_CONST              12 (('quality',))
+            140 CALL_FUNCTION_KW         3
+            142 POP_TOP
+            144 POP_BLOCK
+            146 LOAD_CONST               3 (None)
+            148 DUP_TOP
+            150 DUP_TOP
+            152 CALL_FUNCTION            3
+            154 POP_TOP
+            156 JUMP_FORWARD            16 (to 174)
+        >>  158 WITH_EXCEPT_START
+            160 POP_JUMP_IF_TRUE       164
+            162 RERAISE
+        >>  164 POP_TOP
+            166 POP_TOP
+            168 POP_TOP
+            170 POP_EXCEPT
+            172 POP_TOP
+        >>  174 POP_BLOCK
+            176 JUMP_ABSOLUTE           40
+
+243     >>  178 DUP_TOP
+            180 LOAD_GLOBAL             13 (Exception)
+            182 JUMP_IF_NOT_EXC_MATCH   226
+            184 POP_TOP
+            186 STORE_FAST               8 (error)
+            188 POP_TOP
+            190 SETUP_FINALLY           26 (to 218)
+
+245         192 LOAD_GLOBAL             14 (logger)
+            194 LOAD_METHOD             15 (warning)
+            196 LOAD_CONST              13 ('[Feedback] compress attachment failed path=%s error=%s')
+            198 LOAD_FAST                5 (sourcePath)
+            200 LOAD_FAST                8 (error)
+            202 CALL_METHOD              3
+            204 POP_TOP
+            206 POP_BLOCK
+            208 POP_EXCEPT
+            210 LOAD_CONST               3 (None)
+            212 STORE_FAST               8 (error)
+            214 DELETE_FAST              8 (error)
+            216 JUMP_ABSOLUTE           40
+        >>  218 LOAD_CONST               3 (None)
+            220 STORE_FAST               8 (error)
+            222 DELETE_FAST              8 (error)
+            224 RERAISE
+        >>  226 RERAISE
+            228 JUMP_ABSOLUTE           40
+        >>  230 LOAD_CONST               3 (None)
+            232 RETURN_VALUE
+
+=== LPFeedbackLogPackager._encryptTree ===
+258           0 LOAD_GLOBAL              0 (sorted)
+              2 LOAD_GLOBAL              1 (Path)
+              4 LOAD_FAST                1 (rootDirectory)
+              6 CALL_FUNCTION            1
+              8 LOAD_METHOD              2 (rglob)
+             10 LOAD_CONST               1 ('*')
+             12 CALL_METHOD              1
+             14 LOAD_CONST               2 (True)
+             16 LOAD_CONST               3 (('reverse',))
+             18 CALL_FUNCTION_KW         2
+             20 GET_ITER
+        >>   22 FOR_ITER               132 (to 156)
+             24 STORE_FAST               2 (path)
+
+259          26 LOAD_FAST                2 (path)
+             28 LOAD_METHOD              3 (is_file)
+             30 CALL_METHOD              0
+             32 POP_JUMP_IF_TRUE        36
+
+260          34 JUMP_ABSOLUTE           22
+
+262     >>   36 LOAD_GLOBAL              4 (any)
+             38 LOAD_CONST               4 (<code object <genexpr> at 0x000001F3253DA5B0, file "LPClientFramework\LPFeedback\LPFeedbackLogPackager.py", line 262>)
+             40 LOAD_CONST               5 ('LPFeedbackLogPackager._encryptTree.<locals>.<genexpr>')
+             42 MAKE_FUNCTION            0
+             44 LOAD_FAST                2 (path)
+             46 LOAD_ATTR                5 (parents)
+             48 GET_ITER
+             50 CALL_FUNCTION            1
+             52 CALL_FUNCTION            1
+             54 POP_JUMP_IF_FALSE       58
+
+263          56 JUMP_ABSOLUTE           22
+
+265     >>   58 LOAD_FAST                2 (path)
+             60 LOAD_ATTR                6 (suffix)
+             62 LOAD_METHOD              7 (lower)
+             64 CALL_METHOD              0
+             66 LOAD_CONST               6 ('.log')
+             68 COMPARE_OP               3 (!=)
+             70 POP_JUMP_IF_FALSE       74
+
+266          72 JUMP_ABSOLUTE           22
+
+268     >>   74 LOAD_FAST                2 (path)
+             76 LOAD_ATTR                8 (parent)
+             78 LOAD_ATTR                9 (name)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR               10 (_AES_DIR)
+             84 COMPARE_OP               2 (==)
+             86 POP_JUMP_IF_FALSE       90
+
+269          88 JUMP_ABSOLUTE           22
+
+270     >>   90 LOAD_FAST                2 (path)
+             92 LOAD_ATTR                8 (parent)
+             94 LOAD_FAST                0 (self)
+             96 LOAD_ATTR               10 (_AES_DIR)
+             98 BINARY_TRUE_DIVIDE
+            100 STORE_FAST               3 (aesDirectory)
+
+271         102 LOAD_FAST                3 (aesDirectory)
+            104 LOAD_ATTR               11 (mkdir)
+            106 LOAD_CONST               2 (True)
+            108 LOAD_CONST               2 (True)
+            110 LOAD_CONST               7 (('parents', 'exist_ok'))
+            112 CALL_FUNCTION_KW         2
+            114 POP_TOP
+
+272         116 LOAD_FAST                3 (aesDirectory)
+            118 LOAD_FAST                2 (path)
+            120 LOAD_ATTR                9 (name)
+            122 BINARY_TRUE_DIVIDE
+            124 STORE_FAST               4 (encryptedPath)
+
+273         126 LOAD_FAST                4 (encryptedPath)
+            128 LOAD_METHOD             12 (write_bytes)
+            130 LOAD_FAST                0 (self)
+            132 LOAD_METHOD             13 (_encryptBytes)
+            134 LOAD_FAST                2 (path)
+            136 LOAD_METHOD             14 (read_bytes)
+            138 CALL_METHOD              0
+            140 CALL_METHOD              1
+            142 CALL_METHOD              1
+            144 POP_TOP
+
+274         146 LOAD_FAST                2 (path)
+            148 LOAD_METHOD             15 (unlink)
+            150 CALL_METHOD              0
+            152 POP_TOP
+            154 JUMP_ABSOLUTE           22
+        >>  156 LOAD_CONST               8 (None)
+            158 RETURN_VALUE
+
+=== LPFeedbackLogPackager._encryptTree.<genexpr> ===
+262           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                20 (to 24)
+              4 STORE_FAST               1 (parent)
+              6 LOAD_CONST               0 ('firmware')
+              8 LOAD_FAST                1 (parent)
+             10 LOAD_ATTR                0 (name)
+             12 LOAD_METHOD              1 (lower)
+             14 CALL_METHOD              0
+             16 CONTAINS_OP              0
+             18 YIELD_VALUE
+             20 POP_TOP
+             22 JUMP_ABSOLUTE            2
+        >>   24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+=== LPFeedbackLogPackager._encryptBytes ===
+284           0 LOAD_GLOBAL              0 (AES)
+              2 LOAD_ATTR                1 (block_size)
+              4 LOAD_GLOBAL              2 (len)
+              6 LOAD_FAST                1 (sourceBytes)
+              8 CALL_FUNCTION            1
+             10 LOAD_GLOBAL              0 (AES)
+             12 LOAD_ATTR                1 (block_size)
+             14 BINARY_MODULO
+             16 BINARY_SUBTRACT
+             18 STORE_FAST               2 (paddingLength)
+
+285          20 LOAD_FAST                1 (sourceBytes)
+             22 LOAD_GLOBAL              3 (bytes)
+             24 LOAD_FAST                2 (paddingLength)
+             26 BUILD_LIST               1
+             28 CALL_FUNCTION            1
+             30 LOAD_FAST                2 (paddingLength)
+             32 BINARY_MULTIPLY
+             34 BINARY_ADD
+             36 STORE_FAST               3 (paddedBytes)
+
+286          38 LOAD_GLOBAL              0 (AES)
+             40 LOAD_METHOD              4 (new)
+             42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                5 (_aesKey)
+             46 LOAD_GLOBAL              0 (AES)
+             48 LOAD_ATTR                6 (MODE_ECB)
+             50 CALL_METHOD              2
+             52 LOAD_METHOD              7 (encrypt)
+             54 LOAD_FAST                3 (paddedBytes)
+             56 CALL_METHOD              1
+             58 RETURN_VALUE
+
+=== LPFeedbackLogPackager._createZip ===
+297           0 LOAD_GLOBAL              0 (zipfile)
+              2 LOAD_ATTR                1 (ZipFile)
+              4 LOAD_FAST                2 (archivePath)
+              6 LOAD_CONST               1 ('w')
+              8 LOAD_GLOBAL              0 (zipfile)
+             10 LOAD_ATTR                2 (ZIP_DEFLATED)
+             12 LOAD_CONST               2 (('compression',))
+             14 CALL_FUNCTION_KW         3
+             16 SETUP_WITH              70 (to 88)
+             18 STORE_FAST               3 (archiveFile)
+
+298          20 LOAD_GLOBAL              3 (sorted)
+             22 LOAD_GLOBAL              4 (Path)
+             24 LOAD_FAST                1 (sourceDirectory)
+             26 CALL_FUNCTION            1
+             28 LOAD_METHOD              5 (rglob)
+             30 LOAD_CONST               3 ('*')
+             32 CALL_METHOD              1
+             34 CALL_FUNCTION            1
+             36 GET_ITER
+        >>   38 FOR_ITER                34 (to 74)
+             40 STORE_FAST               4 (path)
+
+299          42 LOAD_FAST                4 (path)
+             44 LOAD_METHOD              6 (is_file)
+             46 CALL_METHOD              0
+             48 POP_JUMP_IF_FALSE       38
+
+300          50 LOAD_FAST                3 (archiveFile)
+             52 LOAD_METHOD              7 (write)
+             54 LOAD_FAST                4 (path)
+             56 LOAD_FAST                4 (path)
+             58 LOAD_METHOD              8 (relative_to)
+             60 LOAD_FAST                1 (sourceDirectory)
+             62 CALL_METHOD              1
+             64 LOAD_METHOD              9 (as_posix)
+             66 CALL_METHOD              0
+             68 CALL_METHOD              2
+             70 POP_TOP
+             72 JUMP_ABSOLUTE           38
+        >>   74 POP_BLOCK
+             76 LOAD_CONST               4 (None)
+             78 DUP_TOP
+             80 DUP_TOP
+             82 CALL_FUNCTION            3
+             84 POP_TOP
+             86 JUMP_FORWARD            16 (to 104)
+        >>   88 WITH_EXCEPT_START
+             90 POP_JUMP_IF_TRUE        94
+             92 RERAISE
+        >>   94 POP_TOP
+             96 POP_TOP
+             98 POP_TOP
+            100 POP_EXCEPT
+            102 POP_TOP
+        >>  104 LOAD_CONST               4 (None)
+            106 RETURN_VALUE

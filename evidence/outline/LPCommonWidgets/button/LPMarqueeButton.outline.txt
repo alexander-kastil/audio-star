@@ -1,0 +1,68 @@
+# module LPCommonWidgets.button.LPMarqueeButton
+
+[module] names: __doc__, PyQt6.QtCore, Qt, QTimer, PyQt6.QtGui, QFontMetrics, QPainter, PyQt6.QtWidgets, QPushButton, QSizePolicy, QStyle, QStyleOptionButton, LPMarqueeButton
+  str: '\n@Time ： 2026/5/22\n@Auth ： Codex\n@File ：LPMarqueeButton.py\n@Desc: 按钮文本横幅滚动控件。\n'
+  str: 'Qt'
+  str: 'QTimer'
+  str: 'QFontMetrics'
+  str: 'QPainter'
+  str: 'QPushButton'
+  str: 'QSizePolicy'
+  str: 'QStyle'
+  str: 'QStyleOptionButton'
+  str: 'LPMarqueeButton'
+
+def LPMarqueeButton()  line 13
+  names: __name__, __module__, __qualname__, __doc__, __init__, setText, text, resizeEvent, hideEvent, showEvent, paintEvent, _advanceScroll, _shouldScroll, _updateScrollState, __classcell__
+    str: 'LPMarqueeButton'
+    str: '横幅滚动按钮，负责在文本超出可视宽度时循环显示完整文本。'
+    str: 'LPMarqueeButton.__init__'
+    str: 'LPMarqueeButton.setText'
+    str: 'LPMarqueeButton.text'
+    str: 'LPMarqueeButton.resizeEvent'
+    str: 'LPMarqueeButton.hideEvent'
+    str: 'LPMarqueeButton.showEvent'
+    str: 'LPMarqueeButton.paintEvent'
+    str: 'LPMarqueeButton._advanceScroll'
+    str: 'LPMarqueeButton._shouldScroll'
+    str: 'LPMarqueeButton._updateScrollState'
+
+  def LPMarqueeButton.__init__(self, parent)  line 16
+    names: super, __init__, _fullText, _scrollOffset, _scrollGap, _scrollStep, QTimer, _timer, setInterval, timeout, connect, _advanceScroll, setSizePolicy, QSizePolicy, Policy, Expanding, Fixed
+      str: '初始化横幅滚动按钮。\n\n        :param parent: 父级 QWidget。\n        :return: None。\n        '
+
+  def LPMarqueeButton.setText(self, text)  line 32
+    names: str, _fullText, _scrollOffset, setToolTip, _updateScrollState, update
+      str: '设置按钮完整文本，并根据宽度决定是否启动滚动。\n\n        :param text: 需要显示的完整文本。\n        :return: None。\n        '
+
+  def LPMarqueeButton.text(self)  line 44
+    names: _fullText
+      str: '返回按钮完整文本。\n\n        :return: 完整文本字符串。\n        '
+
+  def LPMarqueeButton.resizeEvent(self, event)  line 51
+    names: super, resizeEvent, _scrollOffset, _updateScrollState
+      str: '处理按钮尺寸变化并重新计算滚动状态。\n\n        :param event: Qt 尺寸变化事件。\n        :return: None。\n        '
+
+  def LPMarqueeButton.hideEvent(self, event)  line 61
+    names: _timer, stop, super, hideEvent
+      str: '隐藏按钮时停止滚动定时器。\n\n        :param event: Qt 隐藏事件。\n        :return: None。\n        '
+
+  def LPMarqueeButton.showEvent(self, event)  line 70
+    names: super, showEvent, _updateScrollState
+      str: '显示按钮时恢复必要的滚动状态。\n\n        :param event: Qt 显示事件。\n        :return: None。\n        '
+
+  def LPMarqueeButton.paintEvent(self, event)  line 79
+    names: _shouldScroll, super, paintEvent, QStyleOptionButton, initStyleOption, text, QPainter, style, drawControl, QStyle, ControlElement, CE_PushButton, setClipRect, contentsRect, setFont, font, setPen, palette, color, foregroundRole, adjusted, QFontMetrics, horizontalAdvance, _fullText, x, _scrollOffset, _scrollGap, int, Qt, AlignmentFlag, AlignLeft, AlignVCenter, drawText, y, height
+      str: '绘制按钮文本，超宽时绘制横向循环滚动文本。\n\n        :param event: Qt 绘制事件。\n        :return: None。\n        '
+
+  def LPMarqueeButton._advanceScroll(self)  line 106
+    names: _shouldScroll, _scrollOffset, _updateScrollState, QFontMetrics, font, horizontalAdvance, _fullText, _scrollStep, _scrollGap, update
+      str: '推进滚动位置。\n\n        :return: None。\n        '
+
+  def LPMarqueeButton._shouldScroll(self)  line 122
+    names: _fullText, QFontMetrics, font, horizontalAdvance, max, contentsRect, width
+      str: '判断当前完整文本是否超出按钮可视宽度。\n\n        :return: 文本超宽时返回 True，否则返回 False。\n        '
+
+  def LPMarqueeButton._updateScrollState(self)  line 132
+    names: _shouldScroll, super, setText, isVisible, _timer, isActive, start, stop, _fullText
+      str: '根据文本宽度启动或停止滚动定时器。\n\n        :return: None。\n        '

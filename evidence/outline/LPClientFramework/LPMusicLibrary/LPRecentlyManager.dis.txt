@@ -1,0 +1,1506 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nRecently Played 的对外管理器。\n\n负责把播放成功后的上下文整理成 ``detail`` 快照并落库，同时提供读取、删除、音源推导等能力。\n页面层、音源 StreamService、WiiMHome 主窗口都通过 ``LPRecentlyManager.instance()`` 访问 Recently 数据。\n\n主写入路径：``addRecentlyPlayedWithMusicList(playList, showDict)``\n- 从 playList 中提取 header / account / 当前播放项\n- 通过 LPRecentlyPlayListCodec 序列化成 detail\n- 经 LPMusicLibraryDBManager 写入 SQLite，并裁剪到上限\n- 写入成功后发送 ``RecentlyPlayedChangedNotify`` 通知页面刷新\n\ntrackId 落库规则：队列型上下文（Collection/Playlist/Album/Artist/Station）按所属列表 id 记录，\n同一列表内播放不同曲目只保留一条；单曲（Song）按真实曲目 id 记录。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 18           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (threading)
+             10 STORE_NAME               1 (threading)
+
+ 19          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (uuid)
+             18 STORE_NAME               2 (uuid)
+
+ 21          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               3 (('LPMusicLibraryDBManager', 'RECENTLY_DIRECTORY_NAME', 'RECENTLY_DIRECTORY_TYPE'))
+             24 IMPORT_NAME              3 (LPClientFramework.LPMusicLibrary.LPMusicLibraryDBManager)
+             26 IMPORT_FROM              4 (LPMusicLibraryDBManager)
+             28 STORE_NAME               4 (LPMusicLibraryDBManager)
+             30 IMPORT_FROM              5 (RECENTLY_DIRECTORY_NAME)
+             32 STORE_NAME               5 (RECENTLY_DIRECTORY_NAME)
+             34 IMPORT_FROM              6 (RECENTLY_DIRECTORY_TYPE)
+             36 STORE_NAME               6 (RECENTLY_DIRECTORY_TYPE)
+             38 POP_TOP
+
+ 26          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               4 (('LPRecentlyPlayListCodec',))
+             44 IMPORT_NAME              7 (LPClientFramework.LPMusicLibrary.LPRecentlyPlayListCodec)
+             46 IMPORT_FROM              8 (LPRecentlyPlayListCodec)
+             48 STORE_NAME               8 (LPRecentlyPlayListCodec)
+             50 POP_TOP
+
+ 27          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               5 (('LPAccount', 'LPPlayListSource', 'headerTypeEnum', 'headerTypeValue', 'LPHeaderType'))
+             56 IMPORT_NAME              9 (LPClientFramework.LPPlayList.LPPlayList)
+             58 IMPORT_FROM             10 (LPAccount)
+             60 STORE_NAME              10 (LPAccount)
+             62 IMPORT_FROM             11 (LPPlayListSource)
+             64 STORE_NAME              11 (LPPlayListSource)
+             66 IMPORT_FROM             12 (headerTypeEnum)
+             68 STORE_NAME              12 (headerTypeEnum)
+             70 IMPORT_FROM             13 (headerTypeValue)
+             72 STORE_NAME              13 (headerTypeValue)
+             74 IMPORT_FROM             14 (LPHeaderType)
+             76 STORE_NAME              14 (LPHeaderType)
+             78 POP_TOP
+
+ 34          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               6 (('SOURCES_NO_LOGIN',))
+             84 IMPORT_NAME             15 (LPClientFramework.LPPublicDefine)
+             86 IMPORT_FROM             16 (SOURCES_NO_LOGIN)
+             88 STORE_NAME              16 (SOURCES_NO_LOGIN)
+             90 POP_TOP
+
+ 35          92 LOAD_CONST               1 (0)
+             94 LOAD_CONST               7 (('logger', 'postNotification'))
+             96 IMPORT_NAME             17 (LPClientFramework.LPUtility)
+             98 IMPORT_FROM             18 (logger)
+            100 STORE_NAME              18 (logger)
+            102 IMPORT_FROM             19 (postNotification)
+            104 STORE_NAME              19 (postNotification)
+            106 POP_TOP
+
+ 39         108 LOAD_CONST               8 ('RecentlyPlayedChangedNotify')
+            110 STORE_NAME              20 (RECENTLY_PLAYED_CHANGED_NOTIFY)
+
+ 42         112 LOAD_CONST               9 (200)
+            114 STORE_NAME              21 (RECENTLY_DEFAULT_LIMIT)
+
+ 45         116 LOAD_BUILD_CLASS
+            118 LOAD_CONST              10 (<code object LPRecentlyManager at 0x000001F324E69920, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 45>)
+            120 LOAD_CONST              11 ('LPRecentlyManager')
+            122 MAKE_FUNCTION            0
+            124 LOAD_CONST              11 ('LPRecentlyManager')
+            126 LOAD_NAME               22 (object)
+            128 CALL_FUNCTION            3
+            130 STORE_NAME              23 (LPRecentlyManager)
+            132 LOAD_CONST               2 (None)
+            134 RETURN_VALUE
+
+=== LPRecentlyManager ===
+ 45           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPRecentlyManager')
+              6 STORE_NAME               2 (__qualname__)
+
+ 46           8 LOAD_CONST               1 ('Recently Played 单例管理器。')
+             10 STORE_NAME               3 (__doc__)
+
+ 48          12 LOAD_CONST               2 (None)
+             14 STORE_NAME               4 (_instance)
+
+ 49          16 LOAD_NAME                5 (threading)
+             18 LOAD_METHOD              6 (Lock)
+             20 CALL_METHOD              0
+             22 STORE_NAME               7 (_instanceLock)
+
+ 51          24 LOAD_NAME                8 (frozenset)
+             26 BUILD_SET                0
+             28 LOAD_CONST               3 (frozenset({0, 1, 2, 3, 4}))
+             30 SET_UPDATE               1
+             32 CALL_FUNCTION            1
+             34 STORE_NAME               9 (_QUEUE_DEDUP_TYPE_VALUES)
+
+ 53          36 LOAD_CONST               4 (<code object __init__ at 0x000001F3253C4450, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 53>)
+             38 LOAD_CONST               5 ('LPRecentlyManager.__init__')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME              10 (__init__)
+
+ 60          44 LOAD_NAME               11 (classmethod)
+
+ 61          46 LOAD_CONST               6 (<code object instance at 0x000001F3253C45B0, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 60>)
+             48 LOAD_CONST               7 ('LPRecentlyManager.instance')
+             50 MAKE_FUNCTION            0
+             52 CALL_FUNCTION            1
+             54 STORE_NAME              12 (instance)
+
+ 72          56 LOAD_CONST               8 (<code object _accountIdentifier at 0x000001F3253C4240, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 72>)
+             58 LOAD_CONST               9 ('LPRecentlyManager._accountIdentifier')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME              13 (_accountIdentifier)
+
+ 84          64 LOAD_CONST              10 (<code object _accountDict at 0x000001F3253C49D0, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 84>)
+             66 LOAD_CONST              11 ('LPRecentlyManager._accountDict')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME              14 (_accountDict)
+
+ 97          72 LOAD_CONST              12 (<code object _typeValueFromHeader at 0x000001F3253C40E0, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 97>)
+             74 LOAD_CONST              13 ('LPRecentlyManager._typeValueFromHeader')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME              15 (_typeValueFromHeader)
+
+112          80 LOAD_CONST              42 ((None, None, None))
+             82 LOAD_CONST              14 (<code object addRecentlyPlayedWithAccount at 0x000001F3253C4EA0, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 112>)
+             84 LOAD_CONST              15 ('LPRecentlyManager.addRecentlyPlayedWithAccount')
+             86 MAKE_FUNCTION            1 (defaults)
+             88 STORE_NAME              16 (addRecentlyPlayedWithAccount)
+
+147          90 LOAD_CONST              43 ((None,))
+             92 LOAD_CONST              16 (<code object addRecentlyPlayedWithMusicList at 0x000001F3253C4870, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 147>)
+             94 LOAD_CONST              17 ('LPRecentlyManager.addRecentlyPlayedWithMusicList')
+             96 MAKE_FUNCTION            1 (defaults)
+             98 STORE_NAME              17 (addRecentlyPlayedWithMusicList)
+
+194         100 LOAD_CONST              18 (<code object _writeRecentlyItem at 0x000001F3253C4F50, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 194>)
+            102 LOAD_CONST              19 ('LPRecentlyManager._writeRecentlyItem')
+            104 MAKE_FUNCTION            0
+            106 STORE_NAME              18 (_writeRecentlyItem)
+
+254         108 LOAD_NAME               19 (RECENTLY_DEFAULT_LIMIT)
+            110 BUILD_TUPLE              1
+            112 LOAD_CONST              20 (<code object getRecentlyRawList at 0x000001F3253C4190, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 254>)
+            114 LOAD_CONST              21 ('LPRecentlyManager.getRecentlyRawList')
+            116 MAKE_FUNCTION            1 (defaults)
+            118 STORE_NAME              20 (getRecentlyRawList)
+
+266         120 LOAD_CONST              22 (<code object deleteRecentlyItems at 0x000001F3253C4C90, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 266>)
+            122 LOAD_CONST              23 ('LPRecentlyManager.deleteRecentlyItems')
+            124 MAKE_FUNCTION            0
+            126 STORE_NAME              21 (deleteRecentlyItems)
+
+282         128 LOAD_CONST              24 (<code object sourceFromDetail at 0x000001F3253C4DF0, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 282>)
+            130 LOAD_CONST              25 ('LPRecentlyManager.sourceFromDetail')
+            132 MAKE_FUNCTION            0
+            134 STORE_NAME              22 (sourceFromDetail)
+
+327         136 LOAD_CONST              26 (<code object sourceNeedsDeviceAccount at 0x000001F3253C4030, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 327>)
+            138 LOAD_CONST              27 ('LPRecentlyManager.sourceNeedsDeviceAccount')
+            140 MAKE_FUNCTION            0
+            142 STORE_NAME              23 (sourceNeedsDeviceAccount)
+
+339         144 LOAD_CONST              44 ((None,))
+            146 LOAD_CONST              28 (<code object isAccountMismatch at 0x000001F3253C4710, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 339>)
+            148 LOAD_CONST              29 ('LPRecentlyManager.isAccountMismatch')
+            150 MAKE_FUNCTION            1 (defaults)
+            152 STORE_NAME              24 (isAccountMismatch)
+
+382         154 LOAD_CONST              30 (<code object _recordAccountInfo at 0x000001F324E69C90, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 382>)
+            156 LOAD_CONST              31 ('LPRecentlyManager._recordAccountInfo')
+            158 MAKE_FUNCTION            0
+            160 STORE_NAME              25 (_recordAccountInfo)
+
+403         162 LOAD_CONST              32 (<code object _recordAccountIdentities at 0x000001F324E69EA0, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 403>)
+            164 LOAD_CONST              33 ('LPRecentlyManager._recordAccountIdentities')
+            166 MAKE_FUNCTION            0
+            168 STORE_NAME              26 (_recordAccountIdentities)
+
+424         170 LOAD_NAME               27 (staticmethod)
+
+425         172 LOAD_CONST              34 (<code object _deviceAccountIdentities at 0x000001F324E692F0, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 424>)
+            174 LOAD_CONST              35 ('LPRecentlyManager._deviceAccountIdentities')
+            176 MAKE_FUNCTION            0
+            178 CALL_FUNCTION            1
+            180 STORE_NAME              28 (_deviceAccountIdentities)
+
+453         182 LOAD_CONST              36 (<code object recordAccountName at 0x000001F324E69190, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 453>)
+            184 LOAD_CONST              37 ('LPRecentlyManager.recordAccountName')
+            186 MAKE_FUNCTION            0
+            188 STORE_NAME              29 (recordAccountName)
+
+468         190 LOAD_CONST              38 (<code object showOpenMore at 0x000001F324E69240, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 468>)
+            192 LOAD_CONST              39 ('LPRecentlyManager.showOpenMore')
+            194 MAKE_FUNCTION            0
+            196 STORE_NAME              30 (showOpenMore)
+
+474         198 LOAD_CONST              40 (<code object canNavigate at 0x000001F324E69A80, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 474>)
+            200 LOAD_CONST              41 ('LPRecentlyManager.canNavigate')
+            202 MAKE_FUNCTION            0
+            204 STORE_NAME              31 (canNavigate)
+            206 LOAD_CONST               2 (None)
+            208 RETURN_VALUE
+
+=== LPRecentlyManager.__init__ ===
+ 54           0 LOAD_GLOBAL              0 (LPMusicLibraryDBManager)
+              2 LOAD_METHOD              1 (instance)
+              4 CALL_METHOD              0
+              6 LOAD_FAST                0 (self)
+              8 STORE_ATTR               2 (_db)
+
+ 55          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                2 (_db)
+             14 LOAD_METHOD              3 (ensureDirectory)
+
+ 56          16 LOAD_GLOBAL              4 (RECENTLY_DIRECTORY_NAME)
+             18 LOAD_GLOBAL              5 (RECENTLY_DIRECTORY_TYPE)
+
+ 55          20 CALL_METHOD              2
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               6 (_directoryId)
+
+ 58          26 LOAD_GLOBAL              7 (threading)
+             28 LOAD_METHOD              8 (Lock)
+             30 CALL_METHOD              0
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               9 (_writeLock)
+             36 LOAD_CONST               0 (None)
+             38 RETURN_VALUE
+
+=== LPRecentlyManager.instance ===
+ 62           0 LOAD_FAST                0 (cls)
+              2 LOAD_ATTR                0 (_instance)
+              4 LOAD_CONST               0 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       66
+
+ 63          10 LOAD_FAST                0 (cls)
+             12 LOAD_ATTR                1 (_instanceLock)
+             14 SETUP_WITH              34 (to 50)
+             16 POP_TOP
+
+ 64          18 LOAD_FAST                0 (cls)
+             20 LOAD_ATTR                0 (_instance)
+             22 LOAD_CONST               0 (None)
+             24 IS_OP                    0
+             26 POP_JUMP_IF_FALSE       36
+
+ 65          28 LOAD_FAST                0 (cls)
+             30 CALL_FUNCTION            0
+             32 LOAD_FAST                0 (cls)
+             34 STORE_ATTR               0 (_instance)
+        >>   36 POP_BLOCK
+             38 LOAD_CONST               0 (None)
+             40 DUP_TOP
+             42 DUP_TOP
+             44 CALL_FUNCTION            3
+             46 POP_TOP
+             48 JUMP_FORWARD            16 (to 66)
+        >>   50 WITH_EXCEPT_START
+             52 POP_JUMP_IF_TRUE        56
+             54 RERAISE
+        >>   56 POP_TOP
+             58 POP_TOP
+             60 POP_TOP
+             62 POP_EXCEPT
+             64 POP_TOP
+
+ 66     >>   66 LOAD_FAST                0 (cls)
+             68 LOAD_ATTR                0 (_instance)
+             70 RETURN_VALUE
+
+=== LPRecentlyManager._accountIdentifier ===
+ 74           0 LOAD_FAST                1 (account)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+ 75           8 LOAD_CONST               2 ('anonymous')
+             10 RETURN_VALUE
+
+ 76     >>   12 LOAD_GLOBAL              0 (getattr)
+             14 LOAD_FAST                1 (account)
+             16 LOAD_CONST               3 ('userId')
+             18 LOAD_CONST               1 (None)
+             20 CALL_FUNCTION            3
+             22 JUMP_IF_TRUE_OR_POP     34
+             24 LOAD_GLOBAL              0 (getattr)
+             26 LOAD_FAST                1 (account)
+             28 LOAD_CONST               4 ('anonUserId')
+             30 LOAD_CONST               1 (None)
+             32 CALL_FUNCTION            3
+        >>   34 STORE_FAST               2 (accountId)
+
+ 77          36 LOAD_FAST                2 (accountId)
+             38 POP_JUMP_IF_FALSE       48
+
+ 78          40 LOAD_GLOBAL              1 (str)
+             42 LOAD_FAST                2 (accountId)
+             44 CALL_FUNCTION            1
+             46 RETURN_VALUE
+
+ 79     >>   48 LOAD_GLOBAL              0 (getattr)
+             50 LOAD_FAST                1 (account)
+             52 LOAD_CONST               5 ('userName')
+             54 LOAD_CONST               1 (None)
+             56 CALL_FUNCTION            3
+             58 STORE_FAST               3 (userName)
+
+ 80          60 LOAD_FAST                3 (userName)
+             62 POP_JUMP_IF_FALSE       72
+
+ 81          64 LOAD_GLOBAL              1 (str)
+             66 LOAD_FAST                3 (userName)
+             68 CALL_FUNCTION            1
+             70 RETURN_VALUE
+
+ 82     >>   72 LOAD_CONST               2 ('anonymous')
+             74 RETURN_VALUE
+
+=== LPRecentlyManager._accountDict ===
+ 86           0 LOAD_FAST                1 (account)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       14
+
+ 87           8 LOAD_GLOBAL              0 (LPAccount)
+             10 CALL_FUNCTION            0
+             12 STORE_FAST               1 (account)
+
+ 89     >>   14 LOAD_FAST                0 (self)
+             16 LOAD_METHOD              1 (_accountIdentifier)
+             18 LOAD_FAST                1 (account)
+             20 CALL_METHOD              1
+
+ 90          22 LOAD_GLOBAL              2 (getattr)
+             24 LOAD_FAST                1 (account)
+             26 LOAD_CONST               2 ('source')
+             28 LOAD_CONST               1 (None)
+             30 CALL_FUNCTION            3
+             32 JUMP_IF_TRUE_OR_POP     36
+             34 LOAD_FAST                2 (source)
+
+ 91     >>   36 LOAD_GLOBAL              2 (getattr)
+             38 LOAD_FAST                1 (account)
+             40 LOAD_CONST               3 ('userId')
+             42 LOAD_CONST               1 (None)
+             44 CALL_FUNCTION            3
+
+ 92          46 LOAD_GLOBAL              2 (getattr)
+             48 LOAD_FAST                1 (account)
+             50 LOAD_CONST               4 ('userName')
+             52 LOAD_CONST               1 (None)
+             54 CALL_FUNCTION            3
+
+ 93          56 LOAD_GLOBAL              2 (getattr)
+             58 LOAD_FAST                1 (account)
+             60 LOAD_CONST               5 ('token')
+             62 LOAD_CONST               1 (None)
+             64 CALL_FUNCTION            3
+
+ 94          66 LOAD_GLOBAL              2 (getattr)
+             68 LOAD_FAST                1 (account)
+             70 LOAD_CONST               6 ('refreshToken')
+             72 LOAD_CONST               1 (None)
+             74 CALL_FUNCTION            3
+
+ 88          76 LOAD_CONST               7 (('accountId', 'source', 'userId', 'userName', 'token', 'refreshToken'))
+             78 BUILD_CONST_KEY_MAP      6
+             80 RETURN_VALUE
+
+=== LPRecentlyManager._typeValueFromHeader ===
+ 99           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_FAST                1 (header)
+              4 LOAD_CONST               1 ('headType')
+              6 LOAD_GLOBAL              1 (LPHeaderType)
+              8 LOAD_ATTR                2 (LP_HEADER_TYPE_COLLECTION)
+             10 CALL_FUNCTION            3
+             12 STORE_FAST               2 (headType)
+
+100          14 LOAD_GLOBAL              3 (headerTypeEnum)
+             16 LOAD_FAST                2 (headType)
+             18 CALL_FUNCTION            1
+             20 STORE_FAST               3 (enumValue)
+
+101          22 SETUP_FINALLY           58 (to 82)
+
+102          24 LOAD_GLOBAL              4 (isinstance)
+             26 LOAD_FAST                3 (enumValue)
+             28 LOAD_GLOBAL              1 (LPHeaderType)
+             30 CALL_FUNCTION            2
+             32 POP_JUMP_IF_FALSE       72
+
+104          34 LOAD_FAST                3 (enumValue)
+             36 LOAD_ATTR                5 (value)
+             38 STORE_FAST               4 (scalar)
+
+105          40 LOAD_GLOBAL              4 (isinstance)
+             42 LOAD_FAST                4 (scalar)
+             44 LOAD_GLOBAL              6 (tuple)
+             46 CALL_FUNCTION            2
+             48 POP_JUMP_IF_FALSE       62
+             50 LOAD_FAST                4 (scalar)
+             52 POP_JUMP_IF_FALSE       62
+
+106          54 LOAD_FAST                4 (scalar)
+             56 LOAD_CONST               2 (0)
+             58 BINARY_SUBSCR
+             60 STORE_FAST               4 (scalar)
+
+107     >>   62 LOAD_GLOBAL              7 (int)
+             64 LOAD_FAST                4 (scalar)
+             66 CALL_FUNCTION            1
+             68 POP_BLOCK
+             70 RETURN_VALUE
+
+108     >>   72 LOAD_GLOBAL              7 (int)
+             74 LOAD_FAST                3 (enumValue)
+             76 CALL_FUNCTION            1
+             78 POP_BLOCK
+             80 RETURN_VALUE
+
+109     >>   82 DUP_TOP
+             84 LOAD_GLOBAL              8 (TypeError)
+             86 LOAD_GLOBAL              9 (ValueError)
+             88 BUILD_TUPLE              2
+             90 JUMP_IF_NOT_EXC_MATCH   104
+             92 POP_TOP
+             94 POP_TOP
+             96 POP_TOP
+
+110          98 POP_EXCEPT
+            100 LOAD_CONST               2 (0)
+            102 RETURN_VALUE
+        >>  104 RERAISE
+            106 LOAD_CONST               3 (None)
+            108 RETURN_VALUE
+
+=== LPRecentlyManager.addRecentlyPlayedWithAccount ===
+126           0 LOAD_FAST                1 (header)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        16
+              8 LOAD_FAST                2 (playItem)
+             10 LOAD_CONST               1 (None)
+             12 IS_OP                    0
+             14 POP_JUMP_IF_FALSE       20
+
+127     >>   16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+130     >>   20 LOAD_GLOBAL              0 (str)
+             22 LOAD_GLOBAL              1 (getattr)
+             24 LOAD_FAST                1 (header)
+             26 LOAD_CONST               2 ('playOrigin')
+             28 LOAD_CONST               3 ('')
+             30 CALL_FUNCTION            3
+             32 JUMP_IF_TRUE_OR_POP     36
+             34 LOAD_CONST               3 ('')
+        >>   36 CALL_FUNCTION            1
+             38 LOAD_CONST               4 ('search_track')
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       58
+
+131          44 LOAD_GLOBAL              2 (logger)
+             46 LOAD_METHOD              3 (debug)
+             48 LOAD_CONST               5 ('[RecentlyManager] addRecentlyPlayedWithAccount ignore because playOrigin is search_track')
+             50 CALL_METHOD              1
+             52 POP_TOP
+
+132          54 LOAD_CONST               1 (None)
+             56 RETURN_VALUE
+
+134     >>   58 LOAD_FAST                4 (source)
+             60 JUMP_IF_TRUE_OR_POP     84
+             62 LOAD_GLOBAL              1 (getattr)
+             64 LOAD_FAST                1 (header)
+             66 LOAD_CONST               6 ('mediaSource')
+             68 LOAD_CONST               1 (None)
+             70 CALL_FUNCTION            3
+             72 JUMP_IF_TRUE_OR_POP     84
+             74 LOAD_GLOBAL              1 (getattr)
+             76 LOAD_FAST                2 (playItem)
+             78 LOAD_CONST               7 ('trackSource')
+             80 LOAD_CONST               1 (None)
+             82 CALL_FUNCTION            3
+        >>   84 STORE_FAST               6 (resolvedSource)
+
+135          86 LOAD_FAST                0 (self)
+             88 LOAD_METHOD              4 (_accountDict)
+             90 LOAD_FAST                5 (account)
+             92 LOAD_FAST                6 (resolvedSource)
+             94 CALL_METHOD              2
+             96 STORE_FAST               7 (accountDict)
+
+137          98 LOAD_FAST                3 (showDict)
+            100 POP_JUMP_IF_FALSE      110
+            102 LOAD_GLOBAL              5 (dict)
+            104 LOAD_FAST                3 (showDict)
+            106 CALL_FUNCTION            1
+            108 JUMP_FORWARD             2 (to 112)
+        >>  110 BUILD_MAP                0
+        >>  112 STORE_FAST               3 (showDict)
+
+139         114 LOAD_GLOBAL              6 (LPRecentlyPlayListCodec)
+            116 LOAD_METHOD              7 (_objectToDict)
+            118 LOAD_FAST                1 (header)
+            120 CALL_METHOD              1
+
+140         122 LOAD_GLOBAL              6 (LPRecentlyPlayListCodec)
+            124 LOAD_METHOD              7 (_objectToDict)
+            126 LOAD_FAST                2 (playItem)
+            128 CALL_METHOD              1
+
+141         130 LOAD_FAST                3 (showDict)
+
+142         132 LOAD_FAST                7 (accountDict)
+
+138         134 LOAD_CONST               8 (('header', 'item', 'show', 'account'))
+            136 BUILD_CONST_KEY_MAP      4
+            138 STORE_FAST               8 (detail)
+
+145         140 LOAD_FAST                0 (self)
+            142 LOAD_METHOD              8 (_writeRecentlyItem)
+            144 LOAD_FAST                8 (detail)
+            146 LOAD_FAST                1 (header)
+            148 LOAD_FAST                2 (playItem)
+            150 LOAD_FAST                3 (showDict)
+            152 LOAD_FAST                7 (accountDict)
+            154 LOAD_FAST                6 (resolvedSource)
+            156 CALL_METHOD              6
+            158 RETURN_VALUE
+
+=== LPRecentlyManager.addRecentlyPlayedWithMusicList ===
+160           0 LOAD_FAST                1 (playList)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+161           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+163     >>   12 LOAD_GLOBAL              0 (getattr)
+             14 LOAD_FAST                1 (playList)
+             16 LOAD_CONST               2 ('header')
+             18 LOAD_CONST               1 (None)
+             20 CALL_FUNCTION            3
+             22 STORE_FAST               3 (header)
+
+164          24 LOAD_FAST                3 (header)
+             26 LOAD_CONST               1 (None)
+             28 IS_OP                    0
+             30 POP_JUMP_IF_FALSE       46
+
+165          32 LOAD_GLOBAL              1 (logger)
+             34 LOAD_METHOD              2 (debug)
+             36 LOAD_CONST               3 ('[RecentlyManager] addRecentlyPlayedWithMusicList ignore because header is empty')
+             38 CALL_METHOD              1
+             40 POP_TOP
+
+166          42 LOAD_CONST               1 (None)
+             44 RETURN_VALUE
+
+169     >>   46 LOAD_GLOBAL              3 (str)
+             48 LOAD_GLOBAL              0 (getattr)
+             50 LOAD_FAST                3 (header)
+             52 LOAD_CONST               4 ('playOrigin')
+             54 LOAD_CONST               5 ('')
+             56 CALL_FUNCTION            3
+             58 JUMP_IF_TRUE_OR_POP     62
+             60 LOAD_CONST               5 ('')
+        >>   62 CALL_FUNCTION            1
+             64 LOAD_CONST               6 ('search_track')
+             66 COMPARE_OP               2 (==)
+             68 POP_JUMP_IF_FALSE       84
+
+170          70 LOAD_GLOBAL              1 (logger)
+             72 LOAD_METHOD              2 (debug)
+             74 LOAD_CONST               7 ('[RecentlyManager] addRecentlyPlayedWithMusicList ignore because playOrigin is search_track')
+             76 CALL_METHOD              1
+             78 POP_TOP
+
+171          80 LOAD_CONST               1 (None)
+             82 RETURN_VALUE
+
+173     >>   84 LOAD_GLOBAL              0 (getattr)
+             86 LOAD_FAST                1 (playList)
+             88 LOAD_CONST               8 ('list')
+             90 LOAD_CONST               1 (None)
+             92 CALL_FUNCTION            3
+             94 JUMP_IF_TRUE_OR_POP     98
+             96 BUILD_LIST               0
+        >>   98 STORE_FAST               4 (itemList)
+
+174         100 LOAD_FAST                4 (itemList)
+            102 POP_JUMP_IF_TRUE       118
+
+175         104 LOAD_GLOBAL              1 (logger)
+            106 LOAD_METHOD              2 (debug)
+            108 LOAD_CONST               9 ('[RecentlyManager] addRecentlyPlayedWithMusicList ignore because list is empty')
+            110 CALL_METHOD              1
+            112 POP_TOP
+
+176         114 LOAD_CONST               1 (None)
+            116 RETURN_VALUE
+
+178     >>  118 LOAD_GLOBAL              4 (LPRecentlyPlayListCodec)
+            120 LOAD_METHOD              5 (currentItemFromPlayList)
+            122 LOAD_FAST                1 (playList)
+            124 CALL_METHOD              1
+            126 STORE_FAST               5 (currentIndex)
+
+179         128 LOAD_FAST                5 (currentIndex)
+            130 LOAD_CONST               1 (None)
+            132 IS_OP                    1
+            134 POP_JUMP_IF_FALSE      140
+            136 LOAD_FAST                5 (currentIndex)
+            138 JUMP_FORWARD             6 (to 146)
+        >>  140 LOAD_FAST                4 (itemList)
+            142 LOAD_CONST              10 (0)
+            144 BINARY_SUBSCR
+        >>  146 STORE_FAST               6 (currentItem)
+
+182         148 LOAD_GLOBAL              0 (getattr)
+            150 LOAD_FAST                3 (header)
+            152 LOAD_CONST              11 ('mediaSource')
+            154 LOAD_CONST               1 (None)
+            156 CALL_FUNCTION            3
+            158 JUMP_IF_TRUE_OR_POP    190
+
+183         160 LOAD_GLOBAL              0 (getattr)
+            162 LOAD_FAST                6 (currentItem)
+            164 LOAD_CONST              12 ('trackSource')
+            166 LOAD_CONST               1 (None)
+            168 CALL_FUNCTION            3
+
+182         170 JUMP_IF_TRUE_OR_POP    190
+
+184         172 LOAD_GLOBAL              0 (getattr)
+            174 LOAD_GLOBAL              0 (getattr)
+            176 LOAD_FAST                1 (playList)
+            178 LOAD_CONST              13 ('account')
+            180 LOAD_CONST               1 (None)
+            182 CALL_FUNCTION            3
+            184 LOAD_CONST              14 ('source')
+            186 LOAD_CONST               1 (None)
+            188 CALL_FUNCTION            3
+
+181     >>  190 STORE_FAST               7 (source)
+
+187         192 LOAD_FAST                0 (self)
+            194 LOAD_METHOD              6 (_accountDict)
+            196 LOAD_GLOBAL              0 (getattr)
+            198 LOAD_FAST                1 (playList)
+            200 LOAD_CONST              13 ('account')
+            202 LOAD_CONST               1 (None)
+            204 CALL_FUNCTION            3
+            206 LOAD_FAST                7 (source)
+            208 CALL_METHOD              2
+            210 STORE_FAST               8 (accountDict)
+
+188         212 LOAD_FAST                2 (showDict)
+            214 POP_JUMP_IF_FALSE      224
+            216 LOAD_GLOBAL              7 (dict)
+            218 LOAD_FAST                2 (showDict)
+            220 CALL_FUNCTION            1
+            222 JUMP_FORWARD             2 (to 226)
+        >>  224 BUILD_MAP                0
+        >>  226 STORE_FAST               2 (showDict)
+
+190         228 LOAD_GLOBAL              4 (LPRecentlyPlayListCodec)
+            230 LOAD_METHOD              8 (playListToDetail)
+            232 LOAD_FAST                1 (playList)
+            234 LOAD_FAST                2 (showDict)
+            236 CALL_METHOD              2
+            238 STORE_FAST               9 (detail)
+
+192         240 LOAD_FAST                0 (self)
+            242 LOAD_METHOD              9 (_writeRecentlyItem)
+            244 LOAD_FAST                9 (detail)
+            246 LOAD_FAST                3 (header)
+            248 LOAD_FAST                6 (currentItem)
+            250 LOAD_FAST                2 (showDict)
+            252 LOAD_FAST                8 (accountDict)
+            254 LOAD_FAST                7 (source)
+            256 CALL_METHOD              6
+            258 RETURN_VALUE
+
+=== LPRecentlyManager._writeRecentlyItem ===
+197           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_typeValueFromHeader)
+              4 LOAD_FAST                2 (header)
+              6 CALL_METHOD              1
+              8 STORE_FAST               7 (typeValue)
+
+198          10 LOAD_GLOBAL              1 (getattr)
+             12 LOAD_FAST                2 (header)
+             14 LOAD_CONST               1 ('headId')
+             16 LOAD_CONST               2 (None)
+             18 CALL_FUNCTION            3
+             20 STORE_FAST               8 (headId)
+
+200          22 LOAD_FAST                7 (typeValue)
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (_QUEUE_DEDUP_TYPE_VALUES)
+             28 CONTAINS_OP              0
+             30 POP_JUMP_IF_FALSE       46
+             32 LOAD_FAST                8 (headId)
+             34 POP_JUMP_IF_FALSE       46
+
+203          36 LOAD_GLOBAL              3 (str)
+             38 LOAD_FAST                8 (headId)
+             40 CALL_FUNCTION            1
+             42 STORE_FAST               9 (trackId)
+             44 JUMP_FORWARD            42 (to 88)
+
+205     >>   46 LOAD_GLOBAL              1 (getattr)
+             48 LOAD_FAST                3 (currentItem)
+             50 LOAD_CONST               3 ('trackId')
+             52 LOAD_CONST               2 (None)
+             54 CALL_FUNCTION            3
+             56 JUMP_IF_TRUE_OR_POP     60
+             58 LOAD_FAST                8 (headId)
+        >>   60 STORE_FAST               9 (trackId)
+
+206          62 LOAD_FAST                9 (trackId)
+             64 POP_JUMP_IF_TRUE        80
+
+208          66 LOAD_GLOBAL              3 (str)
+             68 LOAD_GLOBAL              4 (uuid)
+             70 LOAD_METHOD              5 (uuid4)
+             72 CALL_METHOD              0
+             74 CALL_FUNCTION            1
+             76 STORE_FAST               9 (trackId)
+             78 JUMP_FORWARD             8 (to 88)
+
+210     >>   80 LOAD_GLOBAL              3 (str)
+             82 LOAD_FAST                9 (trackId)
+             84 CALL_FUNCTION            1
+             86 STORE_FAST               9 (trackId)
+
+215     >>   88 LOAD_GLOBAL              1 (getattr)
+             90 LOAD_FAST                2 (header)
+             92 LOAD_CONST               4 ('imageUrl')
+             94 LOAD_CONST               2 (None)
+             96 CALL_FUNCTION            3
+             98 STORE_FAST              10 (headerImageUrl)
+
+216         100 LOAD_FAST                7 (typeValue)
+            102 LOAD_GLOBAL              6 (headerTypeValue)
+            104 LOAD_GLOBAL              7 (LPHeaderType)
+            106 LOAD_ATTR                8 (LP_HEADER_TYPE_COLLECTION)
+            108 CALL_FUNCTION            1
+            110 COMPARE_OP               2 (==)
+            112 STORE_FAST              11 (isCollectionContext)
+
+217         114 LOAD_FAST               11 (isCollectionContext)
+            116 POP_JUMP_IF_FALSE      122
+            118 LOAD_FAST               10 (headerImageUrl)
+            120 JUMP_FORWARD            14 (to 136)
+
+218     >>  122 LOAD_FAST               10 (headerImageUrl)
+            124 JUMP_IF_TRUE_OR_POP    136
+            126 LOAD_GLOBAL              1 (getattr)
+            128 LOAD_FAST                3 (currentItem)
+            130 LOAD_CONST               5 ('trackImage')
+            132 LOAD_CONST               2 (None)
+            134 CALL_FUNCTION            3
+
+217     >>  136 STORE_FAST              12 (recentlyTrackImage)
+
+222         138 LOAD_CONST               6 ('%s_%s_%s')
+            140 LOAD_FAST                0 (self)
+            142 LOAD_ATTR                9 (_directoryId)
+            144 LOAD_FAST                5 (accountDict)
+            146 LOAD_METHOD             10 (get)
+            148 LOAD_CONST               7 ('accountId')
+            150 CALL_METHOD              1
+            152 LOAD_FAST                9 (trackId)
+            154 BUILD_TUPLE              3
+            156 BINARY_MODULO
+
+223         158 LOAD_FAST                0 (self)
+            160 LOAD_ATTR                9 (_directoryId)
+
+224         162 LOAD_FAST                5 (accountDict)
+            164 LOAD_METHOD             10 (get)
+            166 LOAD_CONST               7 ('accountId')
+            168 CALL_METHOD              1
+
+225         170 LOAD_FAST                6 (source)
+
+226         172 LOAD_GLOBAL              1 (getattr)
+            174 LOAD_FAST                2 (header)
+            176 LOAD_CONST               8 ('headTitle')
+            178 LOAD_CONST               2 (None)
+            180 CALL_FUNCTION            3
+            182 JUMP_IF_TRUE_OR_POP    194
+            184 LOAD_GLOBAL              1 (getattr)
+            186 LOAD_FAST                3 (currentItem)
+            188 LOAD_CONST               9 ('trackName')
+            190 LOAD_CONST               2 (None)
+            192 CALL_FUNCTION            3
+
+227     >>  194 LOAD_FAST                9 (trackId)
+
+228         196 LOAD_FAST               12 (recentlyTrackImage)
+
+229         198 LOAD_GLOBAL              1 (getattr)
+            200 LOAD_FAST                3 (currentItem)
+            202 LOAD_CONST              10 ('trackArtist')
+            204 LOAD_CONST               2 (None)
+            206 CALL_FUNCTION            3
+
+230         208 LOAD_FAST                7 (typeValue)
+
+231         210 LOAD_GLOBAL             11 (bool)
+            212 LOAD_FAST                4 (showDict)
+            214 LOAD_METHOD             10 (get)
+            216 LOAD_CONST              11 ('openMore')
+            218 LOAD_CONST              12 (False)
+            220 CALL_METHOD              2
+            222 CALL_FUNCTION            1
+
+232         224 LOAD_GLOBAL             11 (bool)
+            226 LOAD_FAST                4 (showDict)
+            228 LOAD_METHOD             10 (get)
+            230 LOAD_CONST              13 ('canNavigate')
+            232 LOAD_CONST              12 (False)
+            234 CALL_METHOD              2
+            236 CALL_FUNCTION            1
+
+233         238 LOAD_GLOBAL             11 (bool)
+            240 LOAD_FAST                4 (showDict)
+            242 LOAD_METHOD             10 (get)
+            244 LOAD_CONST              14 ('checkDuplicate')
+            246 LOAD_CONST              15 (True)
+            248 CALL_METHOD              2
+            250 CALL_FUNCTION            1
+
+234         252 LOAD_FAST                1 (detail)
+
+221         254 LOAD_CONST              16 (('itemId', 'directoryId', 'accountId', 'source', 'trackName', 'trackId', 'trackImage', 'trackArtist', 'typeValue', 'openMore', 'canNavigate', 'checkDuplicate', 'detail'))
+            256 BUILD_CONST_KEY_MAP     13
+            258 STORE_FAST              13 (itemDict)
+
+237         260 LOAD_FAST                0 (self)
+            262 LOAD_ATTR               12 (_writeLock)
+            264 SETUP_WITH              48 (to 314)
+            266 POP_TOP
+
+238         268 LOAD_FAST                0 (self)
+            270 LOAD_ATTR               13 (_db)
+            272 LOAD_METHOD             14 (upsertAccount)
+            274 LOAD_FAST                5 (accountDict)
+            276 CALL_METHOD              1
+            278 POP_TOP
+
+239         280 LOAD_FAST                0 (self)
+            282 LOAD_ATTR               13 (_db)
+            284 LOAD_METHOD             15 (addRecentlyItem)
+
+240         286 LOAD_FAST                0 (self)
+            288 LOAD_ATTR                9 (_directoryId)
+
+241         290 LOAD_GLOBAL             16 (RECENTLY_DIRECTORY_NAME)
+
+242         292 LOAD_GLOBAL             17 (RECENTLY_DIRECTORY_TYPE)
+
+243         294 LOAD_FAST               13 (itemDict)
+
+239         296 CALL_METHOD              4
+            298 STORE_FAST              14 (itemId)
+            300 POP_BLOCK
+            302 LOAD_CONST               2 (None)
+            304 DUP_TOP
+            306 DUP_TOP
+            308 CALL_FUNCTION            3
+            310 POP_TOP
+            312 JUMP_FORWARD            18 (to 332)
+        >>  314 WITH_EXCEPT_START
+            316 EXTENDED_ARG             1
+            318 POP_JUMP_IF_TRUE       322
+            320 RERAISE
+        >>  322 POP_TOP
+            324 POP_TOP
+            326 POP_TOP
+            328 POP_EXCEPT
+            330 POP_TOP
+
+246     >>  332 LOAD_FAST               14 (itemId)
+            334 EXTENDED_ARG             1
+            336 POP_JUMP_IF_FALSE      348
+
+247         338 LOAD_GLOBAL             18 (postNotification)
+            340 LOAD_GLOBAL             19 (RECENTLY_PLAYED_CHANGED_NOTIFY)
+            342 LOAD_CONST               2 (None)
+            344 CALL_FUNCTION            2
+            346 POP_TOP
+
+248     >>  348 LOAD_FAST               14 (itemId)
+            350 RETURN_VALUE
+
+=== LPRecentlyManager.getRecentlyRawList ===
+264           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_db)
+              4 LOAD_METHOD              1 (getRecentlyItems)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                2 (_directoryId)
+             10 LOAD_FAST                1 (limit)
+             12 CALL_METHOD              2
+             14 RETURN_VALUE
+
+=== LPRecentlyManager.deleteRecentlyItems ===
+273           0 LOAD_FAST                1 (itemIds)
+              2 POP_JUMP_IF_TRUE         8
+
+274           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+275     >>    8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (_db)
+             12 LOAD_METHOD              1 (deleteRecentlyItems)
+             14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (_directoryId)
+             18 LOAD_FAST                1 (itemIds)
+             20 CALL_METHOD              2
+             22 POP_TOP
+
+276          24 LOAD_GLOBAL              3 (postNotification)
+             26 LOAD_GLOBAL              4 (RECENTLY_PLAYED_CHANGED_NOTIFY)
+             28 LOAD_CONST               1 (None)
+             30 CALL_FUNCTION            2
+             32 POP_TOP
+             34 LOAD_CONST               1 (None)
+             36 RETURN_VALUE
+
+=== LPRecentlyManager.sourceFromDetail ===
+292           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (detailDict)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+293          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+295     >>   14 LOAD_FAST                1 (detailDict)
+             16 LOAD_METHOD              2 (get)
+             18 LOAD_CONST               2 ('playList')
+             20 CALL_METHOD              1
+             22 STORE_FAST               2 (playListDict)
+
+296          24 LOAD_GLOBAL              0 (isinstance)
+             26 LOAD_FAST                2 (playListDict)
+             28 LOAD_GLOBAL              1 (dict)
+             30 CALL_FUNCTION            2
+             32 POP_JUMP_IF_FALSE      110
+
+297          34 LOAD_FAST                2 (playListDict)
+             36 LOAD_METHOD              2 (get)
+             38 LOAD_CONST               3 ('header')
+             40 CALL_METHOD              1
+             42 STORE_FAST               3 (headerDict)
+
+298          44 LOAD_GLOBAL              0 (isinstance)
+             46 LOAD_FAST                3 (headerDict)
+             48 LOAD_GLOBAL              1 (dict)
+             50 CALL_FUNCTION            2
+             52 POP_JUMP_IF_FALSE       72
+
+299          54 LOAD_FAST                3 (headerDict)
+             56 LOAD_METHOD              2 (get)
+             58 LOAD_CONST               4 ('mediaSource')
+             60 CALL_METHOD              1
+             62 STORE_FAST               4 (source)
+
+300          64 LOAD_FAST                4 (source)
+             66 POP_JUMP_IF_FALSE       72
+
+301          68 LOAD_FAST                4 (source)
+             70 RETURN_VALUE
+
+302     >>   72 LOAD_FAST                2 (playListDict)
+             74 LOAD_METHOD              2 (get)
+             76 LOAD_CONST               5 ('account')
+             78 CALL_METHOD              1
+             80 STORE_FAST               5 (accountDict)
+
+303          82 LOAD_GLOBAL              0 (isinstance)
+             84 LOAD_FAST                5 (accountDict)
+             86 LOAD_GLOBAL              1 (dict)
+             88 CALL_FUNCTION            2
+             90 POP_JUMP_IF_FALSE      110
+
+304          92 LOAD_FAST                5 (accountDict)
+             94 LOAD_METHOD              2 (get)
+             96 LOAD_CONST               6 ('source')
+             98 CALL_METHOD              1
+            100 STORE_FAST               4 (source)
+
+305         102 LOAD_FAST                4 (source)
+            104 POP_JUMP_IF_FALSE      110
+
+306         106 LOAD_FAST                4 (source)
+            108 RETURN_VALUE
+
+309     >>  110 LOAD_FAST                1 (detailDict)
+            112 LOAD_METHOD              2 (get)
+            114 LOAD_CONST               3 ('header')
+            116 CALL_METHOD              1
+            118 STORE_FAST               3 (headerDict)
+
+310         120 LOAD_GLOBAL              0 (isinstance)
+            122 LOAD_FAST                3 (headerDict)
+            124 LOAD_GLOBAL              1 (dict)
+            126 CALL_FUNCTION            2
+            128 POP_JUMP_IF_FALSE      148
+
+311         130 LOAD_FAST                3 (headerDict)
+            132 LOAD_METHOD              2 (get)
+            134 LOAD_CONST               4 ('mediaSource')
+            136 CALL_METHOD              1
+            138 STORE_FAST               4 (source)
+
+312         140 LOAD_FAST                4 (source)
+            142 POP_JUMP_IF_FALSE      148
+
+313         144 LOAD_FAST                4 (source)
+            146 RETURN_VALUE
+
+315     >>  148 LOAD_FAST                1 (detailDict)
+            150 LOAD_METHOD              2 (get)
+            152 LOAD_CONST               5 ('account')
+            154 CALL_METHOD              1
+            156 STORE_FAST               5 (accountDict)
+
+316         158 LOAD_GLOBAL              0 (isinstance)
+            160 LOAD_FAST                5 (accountDict)
+            162 LOAD_GLOBAL              1 (dict)
+            164 CALL_FUNCTION            2
+            166 POP_JUMP_IF_FALSE      186
+
+317         168 LOAD_FAST                5 (accountDict)
+            170 LOAD_METHOD              2 (get)
+            172 LOAD_CONST               6 ('source')
+            174 CALL_METHOD              1
+            176 STORE_FAST               4 (source)
+
+318         178 LOAD_FAST                4 (source)
+            180 POP_JUMP_IF_FALSE      186
+
+319         182 LOAD_FAST                4 (source)
+            184 RETURN_VALUE
+
+321     >>  186 LOAD_CONST               1 (None)
+            188 RETURN_VALUE
+
+=== LPRecentlyManager.sourceNeedsDeviceAccount ===
+337           0 LOAD_GLOBAL              0 (bool)
+              2 LOAD_FAST                1 (source)
+              4 CALL_FUNCTION            1
+              6 JUMP_IF_FALSE_OR_POP    14
+              8 LOAD_FAST                1 (source)
+             10 LOAD_GLOBAL              1 (SOURCES_NO_LOGIN)
+             12 CONTAINS_OP              1
+        >>   14 RETURN_VALUE
+
+=== LPRecentlyManager.isAccountMismatch ===
+356           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (rawItem)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+357          10 LOAD_CONST               1 (False)
+             12 RETURN_VALUE
+
+358     >>   14 LOAD_FAST                1 (rawItem)
+             16 LOAD_METHOD              2 (get)
+             18 LOAD_CONST               2 ('source')
+             20 CALL_METHOD              1
+             22 JUMP_IF_TRUE_OR_POP     42
+             24 LOAD_FAST                0 (self)
+             26 LOAD_METHOD              3 (sourceFromDetail)
+             28 LOAD_FAST                1 (rawItem)
+             30 LOAD_METHOD              2 (get)
+             32 LOAD_CONST               3 ('detail')
+             34 CALL_METHOD              1
+             36 JUMP_IF_TRUE_OR_POP     40
+             38 BUILD_MAP                0
+        >>   40 CALL_METHOD              1
+        >>   42 STORE_FAST               3 (source)
+
+359          44 LOAD_FAST                3 (source)
+             46 POP_JUMP_IF_FALSE       56
+             48 LOAD_FAST                3 (source)
+             50 LOAD_GLOBAL              4 (SOURCES_NO_LOGIN)
+             52 CONTAINS_OP              0
+             54 POP_JUMP_IF_FALSE       60
+
+360     >>   56 LOAD_CONST               1 (False)
+             58 RETURN_VALUE
+
+361     >>   60 LOAD_FAST                2 (device)
+             62 LOAD_CONST               4 (None)
+             64 IS_OP                    0
+             66 POP_JUMP_IF_FALSE       72
+
+362          68 LOAD_CONST               1 (False)
+             70 RETURN_VALUE
+
+363     >>   72 LOAD_GLOBAL              5 (getattr)
+             74 LOAD_FAST                2 (device)
+             76 LOAD_CONST               5 ('deviceStreamServiceManager')
+             78 LOAD_CONST               4 (None)
+             80 CALL_FUNCTION            3
+             82 STORE_FAST               4 (account_manager)
+
+364          84 LOAD_FAST                4 (account_manager)
+             86 LOAD_CONST               4 (None)
+             88 IS_OP                    0
+             90 POP_JUMP_IF_FALSE       96
+
+365          92 LOAD_CONST               1 (False)
+             94 RETURN_VALUE
+
+366     >>   96 LOAD_CONST               6 (0)
+             98 LOAD_CONST               7 (('DEVICE_ACCOUNT_UNKNOWN',))
+            100 IMPORT_NAME              6 (LPClientFramework.LPDeviceStreamServiceManager)
+            102 IMPORT_FROM              7 (DEVICE_ACCOUNT_UNKNOWN)
+            104 STORE_FAST               5 (DEVICE_ACCOUNT_UNKNOWN)
+            106 POP_TOP
+
+367         108 LOAD_FAST                4 (account_manager)
+            110 LOAD_METHOD              8 (deviceAccountForSource)
+            112 LOAD_FAST                3 (source)
+            114 CALL_METHOD              1
+            116 STORE_FAST               6 (device_account)
+
+368         118 LOAD_FAST                6 (device_account)
+            120 LOAD_FAST                5 (DEVICE_ACCOUNT_UNKNOWN)
+            122 IS_OP                    0
+            124 POP_JUMP_IF_FALSE      130
+
+371         126 LOAD_CONST               1 (False)
+            128 RETURN_VALUE
+
+372     >>  130 LOAD_FAST                6 (device_account)
+            132 POP_JUMP_IF_TRUE       138
+
+374         134 LOAD_CONST               8 (True)
+            136 RETURN_VALUE
+
+375     >>  138 LOAD_FAST                0 (self)
+            140 LOAD_METHOD              9 (_recordAccountIdentities)
+            142 LOAD_FAST                1 (rawItem)
+            144 CALL_METHOD              1
+            146 STORE_FAST               7 (record_identities)
+
+376         148 LOAD_FAST                7 (record_identities)
+            150 POP_JUMP_IF_TRUE       156
+
+378         152 LOAD_CONST               8 (True)
+            154 RETURN_VALUE
+
+379     >>  156 LOAD_FAST                0 (self)
+            158 LOAD_METHOD             10 (_deviceAccountIdentities)
+            160 LOAD_FAST                6 (device_account)
+            162 CALL_METHOD              1
+            164 STORE_FAST               8 (device_identities)
+
+380         166 LOAD_FAST                7 (record_identities)
+            168 LOAD_FAST                8 (device_identities)
+            170 BINARY_AND
+            172 UNARY_NOT
+            174 RETURN_VALUE
+
+=== LPRecentlyManager._recordAccountInfo ===
+392           0 LOAD_FAST                1 (rawItem)
+              2 LOAD_METHOD              0 (get)
+              4 LOAD_CONST               1 ('detail')
+              6 CALL_METHOD              1
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 BUILD_MAP                0
+        >>   12 STORE_FAST               2 (detail)
+
+393          14 LOAD_GLOBAL              1 (isinstance)
+             16 LOAD_FAST                2 (detail)
+             18 LOAD_GLOBAL              2 (dict)
+             20 CALL_FUNCTION            2
+             22 POP_JUMP_IF_TRUE        28
+
+394          24 BUILD_MAP                0
+             26 STORE_FAST               2 (detail)
+
+395     >>   28 LOAD_FAST                2 (detail)
+             30 LOAD_METHOD              0 (get)
+             32 LOAD_CONST               2 ('playList')
+             34 CALL_METHOD              1
+             36 STORE_FAST               3 (playList)
+
+396          38 LOAD_GLOBAL              1 (isinstance)
+             40 LOAD_FAST                3 (playList)
+             42 LOAD_GLOBAL              2 (dict)
+             44 CALL_FUNCTION            2
+             46 POP_JUMP_IF_FALSE       72
+             48 LOAD_GLOBAL              1 (isinstance)
+             50 LOAD_FAST                3 (playList)
+             52 LOAD_METHOD              0 (get)
+             54 LOAD_CONST               3 ('account')
+             56 CALL_METHOD              1
+             58 LOAD_GLOBAL              2 (dict)
+             60 CALL_FUNCTION            2
+             62 POP_JUMP_IF_FALSE       72
+
+397          64 LOAD_FAST                3 (playList)
+             66 LOAD_CONST               3 ('account')
+             68 BINARY_SUBSCR
+             70 RETURN_VALUE
+
+398     >>   72 LOAD_FAST                2 (detail)
+             74 LOAD_METHOD              0 (get)
+             76 LOAD_CONST               3 ('account')
+             78 CALL_METHOD              1
+             80 STORE_FAST               4 (account)
+
+399          82 LOAD_GLOBAL              1 (isinstance)
+             84 LOAD_FAST                4 (account)
+             86 LOAD_GLOBAL              2 (dict)
+             88 CALL_FUNCTION            2
+             90 POP_JUMP_IF_FALSE       96
+
+400          92 LOAD_FAST                4 (account)
+             94 RETURN_VALUE
+
+401     >>   96 BUILD_MAP                0
+             98 RETURN_VALUE
+
+=== LPRecentlyManager._recordAccountIdentities ===
+413           0 LOAD_GLOBAL              0 (set)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               2 (identities)
+
+414           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (_recordAccountInfo)
+             10 LOAD_FAST                1 (rawItem)
+             12 CALL_METHOD              1
+             14 STORE_FAST               3 (account)
+
+415          16 LOAD_CONST               1 (('accountId', 'userId', 'anonUserId', 'userName', 'email', 'loginName'))
+             18 GET_ITER
+        >>   20 FOR_ITER                40 (to 62)
+             22 STORE_FAST               4 (key)
+
+416          24 LOAD_FAST                3 (account)
+             26 LOAD_METHOD              2 (get)
+             28 LOAD_FAST                4 (key)
+             30 CALL_METHOD              1
+             32 STORE_FAST               5 (value)
+
+417          34 LOAD_FAST                5 (value)
+             36 POP_JUMP_IF_FALSE       20
+
+418          38 LOAD_FAST                2 (identities)
+             40 LOAD_METHOD              3 (add)
+             42 LOAD_GLOBAL              4 (str)
+             44 LOAD_FAST                5 (value)
+             46 CALL_FUNCTION            1
+             48 LOAD_METHOD              5 (strip)
+             50 CALL_METHOD              0
+             52 LOAD_METHOD              6 (lower)
+             54 CALL_METHOD              0
+             56 CALL_METHOD              1
+             58 POP_TOP
+             60 JUMP_ABSOLUTE           20
+
+419     >>   62 LOAD_FAST                1 (rawItem)
+             64 LOAD_METHOD              2 (get)
+             66 LOAD_CONST               2 ('accountId')
+             68 CALL_METHOD              1
+             70 STORE_FAST               6 (rawAccountId)
+
+420          72 LOAD_FAST                6 (rawAccountId)
+             74 POP_JUMP_IF_FALSE       98
+
+421          76 LOAD_FAST                2 (identities)
+             78 LOAD_METHOD              3 (add)
+             80 LOAD_GLOBAL              4 (str)
+             82 LOAD_FAST                6 (rawAccountId)
+             84 CALL_FUNCTION            1
+             86 LOAD_METHOD              5 (strip)
+             88 CALL_METHOD              0
+             90 LOAD_METHOD              6 (lower)
+             92 CALL_METHOD              0
+             94 CALL_METHOD              1
+             96 POP_TOP
+
+422     >>   98 LOAD_FAST                2 (identities)
+            100 RETURN_VALUE
+
+=== LPRecentlyManager._deviceAccountIdentities ===
+435           0 LOAD_GLOBAL              0 (set)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               1 (identities)
+
+436           6 LOAD_FAST                0 (userinfo)
+              8 BUILD_LIST               1
+             10 STORE_FAST               2 (candidates)
+
+437          12 LOAD_GLOBAL              1 (isinstance)
+             14 LOAD_FAST                0 (userinfo)
+             16 LOAD_GLOBAL              2 (dict)
+             18 CALL_FUNCTION            2
+             20 POP_JUMP_IF_FALSE       32
+             22 LOAD_FAST                0 (userinfo)
+             24 LOAD_METHOD              3 (get)
+             26 LOAD_CONST               1 ('user')
+             28 CALL_METHOD              1
+             30 JUMP_FORWARD             2 (to 34)
+        >>   32 LOAD_CONST               2 (None)
+        >>   34 STORE_FAST               3 (nested)
+
+438          36 LOAD_GLOBAL              1 (isinstance)
+             38 LOAD_FAST                3 (nested)
+             40 LOAD_GLOBAL              2 (dict)
+             42 CALL_FUNCTION            2
+             44 POP_JUMP_IF_FALSE       56
+
+439          46 LOAD_FAST                2 (candidates)
+             48 LOAD_METHOD              4 (append)
+             50 LOAD_FAST                3 (nested)
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+440     >>   56 BUILD_SET                0
+             58 LOAD_CONST               3 (frozenset({'loginname', 'uid', 'username', 'email', 'contactemail', 'userid', 'anonuserid'}))
+             60 SET_UPDATE               1
+             62 STORE_FAST               4 (identity_keys)
+
+444          64 LOAD_FAST                2 (candidates)
+             66 GET_ITER
+        >>   68 FOR_ITER               108 (to 178)
+             70 STORE_FAST               5 (item)
+
+445          72 LOAD_GLOBAL              1 (isinstance)
+             74 LOAD_FAST                5 (item)
+             76 LOAD_GLOBAL              2 (dict)
+             78 CALL_FUNCTION            2
+             80 POP_JUMP_IF_TRUE        84
+
+446          82 JUMP_ABSOLUTE           68
+
+447     >>   84 LOAD_FAST                5 (item)
+             86 LOAD_METHOD              5 (items)
+             88 CALL_METHOD              0
+             90 GET_ITER
+        >>   92 FOR_ITER                82 (to 176)
+             94 UNPACK_SEQUENCE          2
+             96 STORE_FAST               6 (key)
+             98 STORE_FAST               7 (value)
+
+448         100 LOAD_CONST               4 ('')
+            102 LOAD_METHOD              6 (join)
+            104 LOAD_CONST               5 (<code object <genexpr> at 0x000001F324E69030, file "LPClientFramework\LPMusicLibrary\LPRecentlyManager.py", line 448>)
+            106 LOAD_CONST               6 ('LPRecentlyManager._deviceAccountIdentities.<locals>.<genexpr>')
+            108 MAKE_FUNCTION            0
+            110 LOAD_GLOBAL              7 (str)
+            112 LOAD_FAST                6 (key)
+            114 CALL_FUNCTION            1
+            116 LOAD_METHOD              8 (lower)
+            118 CALL_METHOD              0
+            120 GET_ITER
+            122 CALL_FUNCTION            1
+            124 CALL_METHOD              1
+            126 STORE_FAST               8 (normalized_key)
+
+449         128 LOAD_FAST                8 (normalized_key)
+            130 LOAD_FAST                4 (identity_keys)
+            132 CONTAINS_OP              0
+            134 POP_JUMP_IF_FALSE       92
+            136 LOAD_GLOBAL              7 (str)
+            138 LOAD_FAST                7 (value)
+            140 JUMP_IF_TRUE_OR_POP    144
+            142 LOAD_CONST               4 ('')
+        >>  144 CALL_FUNCTION            1
+            146 LOAD_METHOD              9 (strip)
+            148 CALL_METHOD              0
+            150 POP_JUMP_IF_FALSE       92
+
+450         152 LOAD_FAST                1 (identities)
+            154 LOAD_METHOD             10 (add)
+            156 LOAD_GLOBAL              7 (str)
+            158 LOAD_FAST                7 (value)
+            160 CALL_FUNCTION            1
+            162 LOAD_METHOD              9 (strip)
+            164 CALL_METHOD              0
+            166 LOAD_METHOD              8 (lower)
+            168 CALL_METHOD              0
+            170 CALL_METHOD              1
+            172 POP_TOP
+            174 JUMP_ABSOLUTE           92
+        >>  176 JUMP_ABSOLUTE           68
+
+451     >>  178 LOAD_FAST                1 (identities)
+            180 RETURN_VALUE
+
+=== LPRecentlyManager._deviceAccountIdentities.<genexpr> ===
+448           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                18 (to 22)
+              4 STORE_FAST               1 (ch)
+              6 LOAD_FAST                1 (ch)
+              8 LOAD_METHOD              0 (isalnum)
+             10 CALL_METHOD              0
+             12 POP_JUMP_IF_FALSE        2
+             14 LOAD_FAST                1 (ch)
+             16 YIELD_VALUE
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            2
+        >>   22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPRecentlyManager.recordAccountName ===
+463           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_recordAccountInfo)
+              4 LOAD_FAST                1 (rawItem)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (account)
+
+464          10 LOAD_FAST                2 (account)
+             12 POP_JUMP_IF_FALSE       52
+
+465          14 LOAD_GLOBAL              1 (str)
+             16 LOAD_FAST                2 (account)
+             18 LOAD_METHOD              2 (get)
+             20 LOAD_CONST               1 ('userName')
+             22 CALL_METHOD              1
+             24 JUMP_IF_TRUE_OR_POP     48
+             26 LOAD_FAST                2 (account)
+             28 LOAD_METHOD              2 (get)
+             30 LOAD_CONST               2 ('userId')
+             32 CALL_METHOD              1
+             34 JUMP_IF_TRUE_OR_POP     48
+             36 LOAD_FAST                2 (account)
+             38 LOAD_METHOD              2 (get)
+             40 LOAD_CONST               3 ('accountId')
+             42 CALL_METHOD              1
+             44 JUMP_IF_TRUE_OR_POP     48
+             46 LOAD_CONST               4 ('')
+        >>   48 CALL_FUNCTION            1
+             50 RETURN_VALUE
+
+466     >>   52 LOAD_GLOBAL              1 (str)
+             54 LOAD_FAST                1 (rawItem)
+             56 LOAD_METHOD              2 (get)
+             58 LOAD_CONST               3 ('accountId')
+             60 CALL_METHOD              1
+             62 JUMP_IF_TRUE_OR_POP     66
+             64 LOAD_CONST               4 ('')
+        >>   66 CALL_FUNCTION            1
+             68 RETURN_VALUE
+
+=== LPRecentlyManager.showOpenMore ===
+470           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (rawItem)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+471          10 LOAD_CONST               1 (False)
+             12 RETURN_VALUE
+
+472     >>   14 LOAD_GLOBAL              2 (bool)
+             16 LOAD_FAST                1 (rawItem)
+             18 LOAD_METHOD              3 (get)
+             20 LOAD_CONST               2 ('openMore')
+             22 CALL_METHOD              1
+             24 CALL_FUNCTION            1
+             26 RETURN_VALUE
+
+=== LPRecentlyManager.canNavigate ===
+476           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (rawItem)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+477          10 LOAD_CONST               1 (False)
+             12 RETURN_VALUE
+
+478     >>   14 LOAD_GLOBAL              2 (bool)
+             16 LOAD_FAST                1 (rawItem)
+             18 LOAD_METHOD              3 (get)
+             20 LOAD_CONST               2 ('canNavigate')
+             22 CALL_METHOD              1
+             24 CALL_FUNCTION            1
+             26 RETURN_VALUE

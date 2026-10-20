@@ -1,0 +1,222 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/7/25 19:21\n@Auth ： Chris\n@File ：LPTokenProvider.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (threading)
+             10 STORE_NAME               1 (threading)
+
+ 11          12 LOAD_BUILD_CLASS
+             14 LOAD_CONST               3 (<code object LPTokenProvider at 0x000001F3253C4240, file "LPClientFramework\LPNetworkClient\LPTokenProvider.py", line 11>)
+             16 LOAD_CONST               4 ('LPTokenProvider')
+             18 MAKE_FUNCTION            0
+             20 LOAD_CONST               4 ('LPTokenProvider')
+             22 CALL_FUNCTION            2
+             24 STORE_NAME               2 (LPTokenProvider)
+             26 LOAD_CONST               2 (None)
+             28 RETURN_VALUE
+
+=== LPTokenProvider ===
+ 11           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTokenProvider')
+              6 STORE_NAME               2 (__qualname__)
+
+ 12           8 LOAD_CONST               1 (<code object __init__ at 0x000001F3253A2B30, file "LPClientFramework\LPNetworkClient\LPTokenProvider.py", line 12>)
+             10 LOAD_CONST               2 ('LPTokenProvider.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+
+ 18          16 LOAD_CONST               3 (<code object setAccount at 0x000001F3253A2EA0, file "LPClientFramework\LPNetworkClient\LPTokenProvider.py", line 18>)
+             18 LOAD_CONST               4 ('LPTokenProvider.setAccount')
+             20 MAKE_FUNCTION            0
+             22 STORE_NAME               4 (setAccount)
+
+ 21          24 LOAD_CONST               5 (<code object getToken at 0x000001F3253A2920, file "LPClientFramework\LPNetworkClient\LPTokenProvider.py", line 21>)
+             26 LOAD_CONST               6 ('LPTokenProvider.getToken')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               5 (getToken)
+
+ 26          32 LOAD_CONST               7 (<code object replaceToken at 0x000001F3253C4450, file "LPClientFramework\LPNetworkClient\LPTokenProvider.py", line 26>)
+             34 LOAD_CONST               8 ('LPTokenProvider.replaceToken')
+             36 MAKE_FUNCTION            0
+             38 STORE_NAME               6 (replaceToken)
+
+ 30          40 LOAD_CONST               9 (<code object refreshToken at 0x000001F3253C4D40, file "LPClientFramework\LPNetworkClient\LPTokenProvider.py", line 30>)
+             42 LOAD_CONST              10 ('LPTokenProvider.refreshToken')
+             44 MAKE_FUNCTION            0
+             46 STORE_NAME               7 (refreshToken)
+             48 LOAD_CONST              11 (None)
+             50 RETURN_VALUE
+
+=== LPTokenProvider.__init__ ===
+ 13           0 LOAD_CONST               0 (None)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_account)
+
+ 15           6 LOAD_CONST               1 (False)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_refreshing)
+
+ 16          12 LOAD_GLOBAL              2 (threading)
+             14 LOAD_METHOD              3 (Condition)
+             16 CALL_METHOD              0
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               4 (_refreshCond)
+             22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPTokenProvider.setAccount ===
+ 19           0 LOAD_FAST                1 (account)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_account)
+              6 LOAD_CONST               0 (None)
+              8 RETURN_VALUE
+
+=== LPTokenProvider.getToken ===
+ 22           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_account)
+              4 POP_JUMP_IF_FALSE       14
+
+ 23           6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (_account)
+             10 LOAD_ATTR                1 (token)
+             12 RETURN_VALUE
+
+ 24     >>   14 LOAD_CONST               0 (None)
+             16 RETURN_VALUE
+
+=== LPTokenProvider.replaceToken ===
+ 27           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_account)
+              4 POP_JUMP_IF_FALSE       14
+
+ 28           6 LOAD_FAST                1 (newToken)
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (_account)
+             12 STORE_ATTR               1 (token)
+        >>   14 LOAD_CONST               0 (None)
+             16 RETURN_VALUE
+
+=== LPTokenProvider.refreshToken ===
+ 31           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_refreshCond)
+              4 SETUP_WITH              62 (to 68)
+              6 POP_TOP
+
+ 32           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_refreshing)
+             12 POP_JUMP_IF_FALSE       48
+
+ 34     >>   14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                1 (_refreshing)
+             18 POP_JUMP_IF_FALSE       32
+
+ 35          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                0 (_refreshCond)
+             24 LOAD_METHOD              2 (wait)
+             26 CALL_METHOD              0
+             28 POP_TOP
+             30 JUMP_ABSOLUTE           14
+
+ 36     >>   32 POP_BLOCK
+             34 LOAD_CONST               0 (None)
+             36 DUP_TOP
+             38 DUP_TOP
+             40 CALL_FUNCTION            3
+             42 POP_TOP
+             44 LOAD_CONST               1 (True)
+             46 RETURN_VALUE
+
+ 39     >>   48 LOAD_CONST               1 (True)
+             50 LOAD_FAST                0 (self)
+             52 STORE_ATTR               1 (_refreshing)
+             54 POP_BLOCK
+             56 LOAD_CONST               0 (None)
+             58 DUP_TOP
+             60 DUP_TOP
+             62 CALL_FUNCTION            3
+             64 POP_TOP
+             66 JUMP_FORWARD            16 (to 84)
+        >>   68 WITH_EXCEPT_START
+             70 POP_JUMP_IF_TRUE        74
+             72 RERAISE
+        >>   74 POP_TOP
+             76 POP_TOP
+             78 POP_TOP
+             80 POP_EXCEPT
+             82 POP_TOP
+
+ 41     >>   84 SETUP_FINALLY           64 (to 150)
+
+ 42          86 LOAD_FAST                1 (refreshFunc)
+             88 CALL_FUNCTION            0
+             90 POP_TOP
+             92 POP_BLOCK
+
+ 44          94 LOAD_FAST                0 (self)
+             96 LOAD_ATTR                0 (_refreshCond)
+             98 SETUP_WITH              32 (to 132)
+            100 POP_TOP
+
+ 45         102 LOAD_CONST               2 (False)
+            104 LOAD_FAST                0 (self)
+            106 STORE_ATTR               1 (_refreshing)
+
+ 46         108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR                0 (_refreshCond)
+            112 LOAD_METHOD              3 (notify_all)
+            114 CALL_METHOD              0
+            116 POP_TOP
+            118 POP_BLOCK
+            120 LOAD_CONST               0 (None)
+            122 DUP_TOP
+            124 DUP_TOP
+            126 CALL_FUNCTION            3
+            128 POP_TOP
+            130 JUMP_ABSOLUTE          206
+        >>  132 WITH_EXCEPT_START
+            134 POP_JUMP_IF_TRUE       138
+            136 RERAISE
+        >>  138 POP_TOP
+            140 POP_TOP
+            142 POP_TOP
+            144 POP_EXCEPT
+            146 POP_TOP
+            148 JUMP_FORWARD            56 (to 206)
+
+ 44     >>  150 LOAD_FAST                0 (self)
+            152 LOAD_ATTR                0 (_refreshCond)
+            154 SETUP_WITH              32 (to 188)
+            156 POP_TOP
+
+ 45         158 LOAD_CONST               2 (False)
+            160 LOAD_FAST                0 (self)
+            162 STORE_ATTR               1 (_refreshing)
+
+ 46         164 LOAD_FAST                0 (self)
+            166 LOAD_ATTR                0 (_refreshCond)
+            168 LOAD_METHOD              3 (notify_all)
+            170 CALL_METHOD              0
+            172 POP_TOP
+            174 POP_BLOCK
+            176 LOAD_CONST               0 (None)
+            178 DUP_TOP
+            180 DUP_TOP
+            182 CALL_FUNCTION            3
+            184 POP_TOP
+            186 JUMP_FORWARD            16 (to 204)
+        >>  188 WITH_EXCEPT_START
+            190 POP_JUMP_IF_TRUE       194
+            192 RERAISE
+        >>  194 POP_TOP
+            196 POP_TOP
+            198 POP_TOP
+            200 POP_EXCEPT
+            202 POP_TOP
+        >>  204 RERAISE
+
+ 48     >>  206 LOAD_CONST               1 (True)
+            208 RETURN_VALUE

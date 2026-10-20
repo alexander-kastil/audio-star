@@ -1,0 +1,109 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/8/20 14:30\n@Auth ： Chris\n@File ：widget_utils.py\n@Desc:\n    通用控件操作辅助函数。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  9           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('QFont',))
+              8 IMPORT_NAME              1 (PyQt6.QtGui)
+             10 IMPORT_FROM              2 (QFont)
+             12 STORE_NAME               2 (QFont)
+             14 POP_TOP
+
+ 12          16 LOAD_CONST               3 (<code object replaceWidgetInPlace at 0x000001F3253B0450, file "LPCommonWidgets\widget_utils.py", line 12>)
+             18 LOAD_CONST               4 ('replaceWidgetInPlace')
+             20 MAKE_FUNCTION            0
+             22 STORE_NAME               3 (replaceWidgetInPlace)
+             24 LOAD_CONST               5 (None)
+             26 RETURN_VALUE
+
+=== replaceWidgetInPlace ===
+ 23           0 LOAD_FAST                0 (old_widget)
+              2 LOAD_METHOD              0 (parent)
+              4 CALL_METHOD              0
+              6 STORE_FAST               2 (parent)
+
+ 24           8 LOAD_FAST                2 (parent)
+             10 LOAD_CONST               1 (None)
+             12 IS_OP                    0
+             14 POP_JUMP_IF_FALSE       20
+
+ 25          16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+ 26     >>   20 LOAD_FAST                2 (parent)
+             22 LOAD_METHOD              1 (layout)
+             24 CALL_METHOD              0
+             26 STORE_FAST               3 (layout)
+
+ 27          28 LOAD_FAST                3 (layout)
+             30 LOAD_CONST               1 (None)
+             32 IS_OP                    0
+             34 POP_JUMP_IF_FALSE       40
+
+ 28          36 LOAD_CONST               1 (None)
+             38 RETURN_VALUE
+
+ 29     >>   40 LOAD_FAST                3 (layout)
+             42 LOAD_METHOD              2 (indexOf)
+             44 LOAD_FAST                0 (old_widget)
+             46 CALL_METHOD              1
+             48 STORE_FAST               4 (index)
+
+ 30          50 LOAD_FAST                4 (index)
+             52 LOAD_CONST               2 (0)
+             54 COMPARE_OP               0 (<)
+             56 POP_JUMP_IF_FALSE       62
+
+ 31          58 LOAD_CONST               1 (None)
+             60 RETURN_VALUE
+
+ 33     >>   62 LOAD_GLOBAL              3 (QFont)
+             64 LOAD_FAST                0 (old_widget)
+             66 LOAD_METHOD              4 (font)
+             68 CALL_METHOD              0
+             70 CALL_FUNCTION            1
+             72 STORE_FAST               5 (font)
+
+ 34          74 LOAD_FAST                0 (old_widget)
+             76 LOAD_METHOD              5 (styleSheet)
+             78 CALL_METHOD              0
+             80 STORE_FAST               6 (style_sheet)
+
+ 35          82 LOAD_FAST                0 (old_widget)
+             84 LOAD_METHOD              6 (setParent)
+             86 LOAD_CONST               1 (None)
+             88 CALL_METHOD              1
+             90 POP_TOP
+
+ 36          92 LOAD_FAST                0 (old_widget)
+             94 LOAD_METHOD              7 (deleteLater)
+             96 CALL_METHOD              0
+             98 POP_TOP
+
+ 38         100 LOAD_FAST                1 (new_widget_class)
+            102 LOAD_FAST                2 (parent)
+            104 CALL_FUNCTION            1
+            106 STORE_FAST               7 (new_widget)
+
+ 39         108 LOAD_FAST                7 (new_widget)
+            110 LOAD_METHOD              8 (setFont)
+            112 LOAD_FAST                5 (font)
+            114 CALL_METHOD              1
+            116 POP_TOP
+
+ 40         118 LOAD_FAST                7 (new_widget)
+            120 LOAD_METHOD              9 (setStyleSheet)
+            122 LOAD_FAST                6 (style_sheet)
+            124 CALL_METHOD              1
+            126 POP_TOP
+
+ 41         128 LOAD_FAST                3 (layout)
+            130 LOAD_METHOD             10 (insertWidget)
+            132 LOAD_FAST                4 (index)
+            134 LOAD_FAST                7 (new_widget)
+            136 CALL_METHOD              2
+            138 POP_TOP
+
+ 42         140 LOAD_FAST                7 (new_widget)
+            142 RETURN_VALUE

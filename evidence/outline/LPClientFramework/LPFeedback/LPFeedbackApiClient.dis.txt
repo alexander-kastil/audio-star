@@ -1,0 +1,262 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('Freshdesk 工单创建和日志地址回填客户端。')
+              2 STORE_NAME               0 (__doc__)
+
+  4           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+  6          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('LPAuthenticatedRequestClient',))
+             16 IMPORT_NAME              2 (LPClientFramework.LPEventTrack)
+             18 IMPORT_FROM              3 (LPAuthenticatedRequestClient)
+             20 STORE_NAME               3 (LPAuthenticatedRequestClient)
+             22 POP_TOP
+
+  7          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('FRESHDESK_API_HOST',))
+             28 IMPORT_NAME              4 (LPClientFramework.LPFeedback.LPFeedbackConfig)
+             30 IMPORT_FROM              5 (FRESHDESK_API_HOST)
+             32 STORE_NAME               5 (FRESHDESK_API_HOST)
+             34 POP_TOP
+
+ 10          36 LOAD_BUILD_CLASS
+             38 LOAD_CONST               5 (<code object LPFeedbackApiClient at 0x000001F3253C4660, file "LPClientFramework\LPFeedback\LPFeedbackApiClient.py", line 10>)
+             40 LOAD_CONST               6 ('LPFeedbackApiClient')
+             42 MAKE_FUNCTION            0
+             44 LOAD_CONST               6 ('LPFeedbackApiClient')
+             46 CALL_FUNCTION            2
+             48 STORE_NAME               6 (LPFeedbackApiClient)
+             50 LOAD_CONST               2 (None)
+             52 RETURN_VALUE
+
+=== LPFeedbackApiClient ===
+ 10           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeedbackApiClient')
+              6 STORE_NAME               2 (__qualname__)
+
+ 11           8 LOAD_CONST               1 ('封装 PC Feedback 所需的 Freshdesk POST 与 PUT 调用。')
+             10 STORE_NAME               3 (__doc__)
+
+ 13          12 LOAD_CONST              10 ((None,))
+             14 LOAD_CONST               3 (<code object __init__ at 0x000001F3253C4B30, file "LPClientFramework\LPFeedback\LPFeedbackApiClient.py", line 13>)
+             16 LOAD_CONST               4 ('LPFeedbackApiClient.__init__')
+             18 MAKE_FUNCTION            1 (defaults)
+             20 STORE_NAME               4 (__init__)
+
+ 32          22 LOAD_CONST              11 (('Other',))
+             24 LOAD_CONST               6 (<code object createTicket at 0x000001F3253C4190, file "LPClientFramework\LPFeedback\LPFeedbackApiClient.py", line 32>)
+             26 LOAD_CONST               7 ('LPFeedbackApiClient.createTicket')
+             28 MAKE_FUNCTION            1 (defaults)
+             30 STORE_NAME               5 (createTicket)
+
+ 72          32 LOAD_CONST              12 (('Other',))
+             34 LOAD_CONST               8 (<code object updateTicket at 0x000001F3253C47C0, file "LPClientFramework\LPFeedback\LPFeedbackApiClient.py", line 72>)
+             36 LOAD_CONST               9 ('LPFeedbackApiClient.updateTicket')
+             38 MAKE_FUNCTION            1 (defaults)
+             40 STORE_NAME               6 (updateTicket)
+             42 LOAD_CONST               2 (None)
+             44 RETURN_VALUE
+
+=== LPFeedbackApiClient.__init__ ===
+ 24           0 LOAD_FAST                4 (httpClient)
+              2 JUMP_IF_TRUE_OR_POP     20
+              4 LOAD_GLOBAL              0 (LPAuthenticatedRequestClient)
+
+ 25           6 LOAD_GLOBAL              1 (FRESHDESK_API_HOST)
+
+ 26           8 LOAD_FAST                1 (appId)
+
+ 27          10 LOAD_FAST                2 (accessKey)
+
+ 28          12 LOAD_FAST                3 (secretKey)
+
+ 29          14 LOAD_CONST               1 (15)
+
+ 24          16 LOAD_CONST               2 (('api_host', 'app_id', 'access_key', 'secret_key', 'timeout'))
+             18 CALL_FUNCTION_KW         5
+        >>   20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               2 (_httpClient)
+             24 LOAD_CONST               3 (None)
+             26 RETURN_VALUE
+
+=== LPFeedbackApiClient.createTicket ===
+ 44           0 LOAD_FAST                1 (request)
+              2 LOAD_ATTR                0 (email)
+
+ 45           4 LOAD_FAST                1 (request)
+              6 LOAD_ATTR                1 (subject)
+
+ 46           8 LOAD_FAST                1 (request)
+             10 LOAD_ATTR                2 (description)
+
+ 47          12 LOAD_CONST               1 (1)
+
+ 48          14 LOAD_CONST               2 (2)
+
+ 49          16 LOAD_CONST               3 ('')
+
+ 50          18 LOAD_CONST               4 ('Problem')
+
+ 52          20 LOAD_FAST                1 (request)
+             22 LOAD_ATTR                0 (email)
+
+ 53          24 LOAD_FAST                1 (request)
+             26 LOAD_ATTR                3 (appUuid)
+
+ 54          28 LOAD_FAST                2 (subtype)
+
+ 51          30 LOAD_CONST               5 (('cf_useremail', 'cf_appid', 'cf_subtype'))
+             32 BUILD_CONST_KEY_MAP      3
+
+ 43          34 LOAD_CONST               6 (('email', 'subject', 'description', 'priority', 'status', 'name', 'type', 'custom_fields'))
+             36 BUILD_CONST_KEY_MAP      8
+             38 STORE_FAST               3 (payload)
+
+ 57          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                4 (_httpClient)
+             44 LOAD_METHOD              5 (post)
+             46 LOAD_CONST               7 ('/tickets')
+             48 LOAD_FAST                3 (payload)
+             50 CALL_METHOD              2
+             52 UNPACK_SEQUENCE          2
+             54 STORE_FAST               4 (responseData)
+             56 STORE_FAST               5 (_)
+
+ 58          58 LOAD_FAST                4 (responseData)
+             60 JUMP_IF_TRUE_OR_POP     64
+             62 BUILD_MAP                0
+        >>   64 STORE_FAST               6 (ticketData)
+
+ 59          66 LOAD_GLOBAL              6 (isinstance)
+             68 LOAD_FAST                6 (ticketData)
+             70 LOAD_GLOBAL              7 (dict)
+             72 CALL_FUNCTION            2
+             74 POP_JUMP_IF_FALSE      162
+             76 LOAD_CONST               8 ('body')
+             78 LOAD_FAST                6 (ticketData)
+             80 CONTAINS_OP              0
+             82 POP_JUMP_IF_FALSE      162
+
+ 60          84 LOAD_FAST                6 (ticketData)
+             86 LOAD_CONST               8 ('body')
+             88 BINARY_SUBSCR
+             90 STORE_FAST               7 (body)
+
+ 61          92 LOAD_GLOBAL              6 (isinstance)
+             94 LOAD_FAST                7 (body)
+             96 LOAD_GLOBAL              8 (str)
+             98 CALL_FUNCTION            2
+            100 POP_JUMP_IF_FALSE      144
+
+ 62         102 SETUP_FINALLY           14 (to 118)
+
+ 63         104 LOAD_GLOBAL              9 (json)
+            106 LOAD_METHOD             10 (loads)
+            108 LOAD_FAST                7 (body)
+            110 CALL_METHOD              1
+            112 STORE_FAST               7 (body)
+            114 POP_BLOCK
+            116 JUMP_FORWARD            26 (to 144)
+
+ 64     >>  118 DUP_TOP
+            120 LOAD_GLOBAL             11 (TypeError)
+            122 LOAD_GLOBAL             12 (ValueError)
+            124 BUILD_TUPLE              2
+            126 JUMP_IF_NOT_EXC_MATCH   142
+            128 POP_TOP
+            130 POP_TOP
+            132 POP_TOP
+
+ 65         134 BUILD_MAP                0
+            136 STORE_FAST               7 (body)
+            138 POP_EXCEPT
+            140 JUMP_FORWARD             2 (to 144)
+        >>  142 RERAISE
+
+ 66     >>  144 LOAD_GLOBAL              6 (isinstance)
+            146 LOAD_FAST                7 (body)
+            148 LOAD_GLOBAL              7 (dict)
+            150 CALL_FUNCTION            2
+            152 POP_JUMP_IF_FALSE      158
+            154 LOAD_FAST                7 (body)
+            156 JUMP_FORWARD             2 (to 160)
+        >>  158 BUILD_MAP                0
+        >>  160 STORE_FAST               6 (ticketData)
+
+ 67     >>  162 LOAD_GLOBAL              6 (isinstance)
+            164 LOAD_FAST                6 (ticketData)
+            166 LOAD_GLOBAL              7 (dict)
+            168 CALL_FUNCTION            2
+            170 POP_JUMP_IF_FALSE      182
+            172 LOAD_FAST                6 (ticketData)
+            174 LOAD_METHOD             13 (get)
+            176 LOAD_CONST               9 ('id')
+            178 CALL_METHOD              1
+            180 JUMP_FORWARD             2 (to 184)
+        >>  182 LOAD_CONST              10 (None)
+        >>  184 STORE_FAST               8 (ticketId)
+
+ 68         186 LOAD_FAST                8 (ticketId)
+            188 LOAD_CONST              10 (None)
+            190 IS_OP                    0
+            192 POP_JUMP_IF_TRUE       210
+            194 LOAD_GLOBAL              8 (str)
+            196 LOAD_FAST                8 (ticketId)
+            198 CALL_FUNCTION            1
+            200 LOAD_METHOD             14 (strip)
+            202 CALL_METHOD              0
+            204 LOAD_CONST               3 ('')
+            206 COMPARE_OP               2 (==)
+            208 POP_JUMP_IF_FALSE      218
+
+ 69     >>  210 LOAD_GLOBAL             15 (RuntimeError)
+            212 LOAD_CONST              11 ('Feedback ticket response does not contain id.')
+            214 CALL_FUNCTION            1
+            216 RAISE_VARARGS            1
+
+ 70     >>  218 LOAD_GLOBAL              8 (str)
+            220 LOAD_FAST                8 (ticketId)
+            222 CALL_FUNCTION            1
+            224 RETURN_VALUE
+
+=== LPFeedbackApiClient.updateTicket ===
+ 85           0 LOAD_CONST               1 (1)
+
+ 86           2 LOAD_CONST               2 (2)
+
+ 87           4 LOAD_CONST               3 ('Problem')
+
+ 89           6 LOAD_FAST                1 (request)
+              8 LOAD_ATTR                0 (email)
+
+ 90          10 LOAD_FAST                4 (downloadUrl)
+
+ 91          12 LOAD_FAST                3 (confirmationId)
+
+ 92          14 LOAD_FAST                1 (request)
+             16 LOAD_ATTR                1 (appUuid)
+
+ 93          18 LOAD_FAST                5 (subtype)
+
+ 88          20 LOAD_CONST               4 (('cf_useremail', 'cf_log', 'cf_confirmationid', 'cf_appid', 'cf_subtype'))
+             22 BUILD_CONST_KEY_MAP      5
+
+ 84          24 LOAD_CONST               5 (('priority', 'status', 'type', 'custom_fields'))
+             26 BUILD_CONST_KEY_MAP      4
+             28 STORE_FAST               6 (payload)
+
+ 96          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                2 (_httpClient)
+             34 LOAD_METHOD              3 (put)
+             36 LOAD_CONST               6 ('/tickets/%s')
+             38 LOAD_FAST                2 (ticketId)
+             40 BINARY_MODULO
+             42 LOAD_FAST                6 (payload)
+             44 CALL_METHOD              2
+             46 POP_TOP
+             48 LOAD_CONST               7 (None)
+             50 RETURN_VALUE

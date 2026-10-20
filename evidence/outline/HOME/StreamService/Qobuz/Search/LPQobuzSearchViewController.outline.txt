@@ -1,0 +1,246 @@
+# module HOME.StreamService.Qobuz.Search.LPQobuzSearchViewController
+
+[module] names: __doc__, queue, re, threading, time, string, Template, PyQt6.QtCore, Qt, QCoreApplication, pyqtSignal, QAbstractTableModel, QRect, QSortFilterProxyModel, QTimer, pyqtSlot, PyQt6.QtGui, QMovie, QIcon, QPixmap, PyQt6.QtWidgets, QButtonGroup, QSizePolicy, QPushButton, QStyle, LPGlobalUI, HOME.LPSuperTableView, LPSuperTableDelegate, HOME.StreamService.Qobuz.LPQobuzBaseViewController, LPQobuzBaseViewController, HOME.StreamService.Qobuz.Search.LPQobuzSearchAllContentViewController, LPQobuzSearchAllContentViewController, HOME.StreamService.Qobuz.Search.LPQobuzSearchBaseViewController, LPQobuzSearchBaseViewController, HOME.StreamService.Qobuz.Search.LPQobuzSearchListContentViewController, LPQobuzSearchListContentViewController, HOME.StreamService.Qobuz.Search.LPQobuzSearchTableContentViewController, LPQobuzSearchTableContentViewController, HOME.StreamService.Qobuz.Search.UI.LPQobuzSearchAllContentWidget_ui, Ui_searchAllContentWidget, HOME.StreamService.Qobuz.Search.UI.LPQobuzSearchListContentWidget_ui, Ui_searchListContentWidget, HOME.StreamService.Qobuz.Search.UI.LPQobuzSearchTableContentWidget_ui, Ui_searchTableContentWidget, LPClientFramework, LPUtility, LPClientFramework.LPConfig, LPUIPath, LPClientFramework.LPConfig.LPFontConfig, Qobuz_Tab_Title, Qobuz_Sub_Title, DEFAULT, LPClientFramework.LPNetworkClient.LPNetworkClient, LPRequestCommonResult, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPHeaderType, LPClientFramework.LPUtility, logger, LPSearchFilterProxyModel, LPQobuzSearchTableModel, LPQobuzSearchTableDelegate, LPQobuzSearchViewController
+  str: '\n@Time ： 2025/6/24 15:50\n@Auth ： Chris\n@File ：LPQobuzSearchViewController.py\n@Desc:\n'
+  str: 'Template'
+  str: 'Qt'
+  str: 'QCoreApplication'
+  str: 'pyqtSignal'
+  str: 'QAbstractTableModel'
+  str: 'QRect'
+  str: 'QSortFilterProxyModel'
+  str: 'QTimer'
+  str: 'pyqtSlot'
+  str: 'QMovie'
+  str: 'QIcon'
+  str: 'QPixmap'
+  str: 'QButtonGroup'
+  str: 'QSizePolicy'
+  str: 'QPushButton'
+  str: 'QStyle'
+  str: 'LPSuperTableDelegate'
+  str: 'LPQobuzBaseViewController'
+  str: 'LPQobuzSearchAllContentViewController'
+  str: 'LPQobuzSearchBaseViewController'
+  str: 'LPQobuzSearchListContentViewController'
+  str: 'LPQobuzSearchTableContentViewController'
+  str: 'Ui_searchAllContentWidget'
+  str: 'Ui_searchListContentWidget'
+  str: 'Ui_searchTableContentWidget'
+  str: 'LPUtility'
+  str: 'LPUIPath'
+  str: 'Qobuz_Tab_Title'
+  str: 'Qobuz_Sub_Title'
+  str: 'DEFAULT'
+  str: 'LPRequestCommonResult'
+  str: 'LPPlayListSource'
+  str: 'LPHeaderType'
+  str: 'logger'
+  str: 'LPSearchFilterProxyModel'
+  str: 'LPQobuzSearchTableModel'
+  str: 'LPQobuzSearchTableDelegate'
+  str: 'LPQobuzSearchViewController'
+
+def LPSearchFilterProxyModel()  line 38
+  names: __name__, __module__, __qualname__, __init__, setFilterPattern, filterAcceptsRow, __classcell__
+    str: 'LPSearchFilterProxyModel'
+    str: 'LPSearchFilterProxyModel.__init__'
+    str: 'LPSearchFilterProxyModel.setFilterPattern'
+    str: 'LPSearchFilterProxyModel.filterAcceptsRow'
+
+  def LPSearchFilterProxyModel.__init__(self)  line 39
+    names: super, __init__, type
+
+  def LPSearchFilterProxyModel.setFilterPattern(self, type)  line 43
+    names: type, invalidateFilter
+
+  def LPSearchFilterProxyModel.filterAcceptsRow(self, source_row, source_parent)  line 47
+    names: type, sourceModel, index, data, Qt, ItemDataRole, UserRole, getType
+
+def LPQobuzSearchTableModel()  line 57
+  names: __name__, __module__, __qualname__, pyqtSignal, object, updateFavoriteSignal, __init__, rowCount, columnCount, Qt, ItemDataRole, DisplayRole, data, getImage, getName, getType, __classcell__
+    str: 'LPQobuzSearchTableModel'
+    str: 'LPQobuzSearchTableModel.__init__'
+    str: 'LPQobuzSearchTableModel.rowCount'
+    str: 'LPQobuzSearchTableModel.columnCount'
+    str: 'LPQobuzSearchTableModel.data'
+    str: 'LPQobuzSearchTableModel.getImage'
+    str: 'LPQobuzSearchTableModel.getName'
+    str: 'LPQobuzSearchTableModel.getType'
+
+  def LPQobuzSearchTableModel.__init__(self, itemList, parent)  line 59
+    names: super, __init__, itemList, queue, Queue, trackImageQueue, fetchImageThread
+
+  def LPQobuzSearchTableModel.rowCount(self, parent)  line 65
+    names: len, itemList
+
+  def LPQobuzSearchTableModel.columnCount(self, parent)  line 68
+    names: rowCount
+
+  def LPQobuzSearchTableModel.data(self, index, role)  line 71
+    names: row, column, rowCount, columnCount, Qt, ItemDataRole, DisplayRole, itemList, getImage, len, LPUtility, getCachedPixmapWithUrl, trackImageQueue, put, fetchImageThread, threading, Thread, start, LPGlobalUI, currentDevice, deviceStreamServiceManager, isCurrentPlayItem, LPPlayListSource, Qobuz, value, getName, getType, append, isArtist, parentalWarning, hires, UserRole
+      str: 'LPQobuzSearchTableModel.data.<locals>._fetchImageMethod'
+      str: 'value'
+      str: 'index'
+      str: 'target'
+      str: 'daemon'
+      str: 'Chris Anna'
+      str: 'LPQobuzSearchTableModel.data.<locals>._formatSeconds'
+
+    def LPQobuzSearchTableModel.data._fetchImageMethod()  line 89
+      names: trackImageQueue, empty, time, sleep, get, LPUtility, fetchUrlQPixmap, dataChanged, emit, task_done
+        str: 'value'
+        str: 'index'
+        str: 'image'
+
+    def LPQobuzSearchTableModel.data._formatSeconds(seconds)  line 126
+        str: '%d:%02d:%02d'
+        str: '%02d:%02d'
+
+  def LPQobuzSearchTableModel.getImage(self, playItem)  line 149
+    names: isAlbum, albumImage, isArtist, artistImage
+
+  def LPQobuzSearchTableModel.getName(self, playItem)  line 155
+    names: isAlbum, albumName, isArtist, artistName
+
+  def LPQobuzSearchTableModel.getType(self, playItem)  line 161
+    names: isAlbum, isArtist, isPlaylist
+      str: 'Albums'
+      str: 'Artists'
+      str: 'Playlists'
+      str: 'Tracks'
+
+def LPQobuzSearchTableDelegate()  line 172
+  names: __name__, __module__, __qualname__, __init__, paint, update_view, cleanup_table_view, __classcell__
+    str: 'LPQobuzSearchTableDelegate'
+    str: 'LPQobuzSearchTableDelegate.__init__'
+    str: 'LPQobuzSearchTableDelegate.paint'
+    str: 'LPQobuzSearchTableDelegate.update_view'
+    str: 'LPQobuzSearchTableDelegate.cleanup_table_view'
+
+  def LPQobuzSearchTableDelegate.__init__(self, parent)  line 173
+    names: super, __init__, table_view, QMovie, LPGlobalUI, imagePath, play_movie, start, frameChanged, connect, update_view
+      str: 'dark_playing.gif'
+
+  def LPQobuzSearchTableDelegate.paint(self, painter, option, index)  line 186
+    names: super, paint, data, setPen, LPGlobalUI, THEME_HIGH_HIGH_COLOR, state, QStyle, StateFlag, State_Selected, THEME_DEFAULT_COLOR, State_MouseOver, THEME_DISABLE_COLOR, rect, column, isArtist, QIcon, LPUtility, getCachedPixmapWithUrl, QPixmap, imagePath, roundCornerImage, addPixmap, x, y, QRect, width, height, drawText, Qt, AlignmentFlag, AlignLeft, AlignVCenter, join, isAlbum
+      str: 'miniBar/trackDefault.png'
+      str: 'qobuz/e_warning.png'
+      str: ' · '
+      str: 'qobuz/hi-res.png'
+      str: 'nav_next.png'
+      str: 'more.png'
+
+  def LPQobuzSearchTableDelegate.update_view(self)  line 341
+    names: table_view, viewport, update
+
+  def LPQobuzSearchTableDelegate.cleanup_table_view(self)  line 345
+    names: play_movie, stop
+
+def LPQobuzSearchViewController()  line 349
+  names: __name__, __module__, __qualname__, pyqtSignal, updateContentSignal, __init__, setupUi, onEnter, onLeave, updateUI, searchFieldChanged, _doSearch, LPRequestCommonResult, searchCallback, updateContent, onQueryButtonGroupClicked, _updatePlaylistCategoryUI, QPushButton, onCategoryButtonClicked, resetAllViewState, onFieldClearActionTriggered, clearContent, __classcell__
+    str: 'LPQobuzSearchViewController'
+    str: 'LPQobuzSearchViewController.__init__'
+    str: 'LPQobuzSearchViewController.setupUi'
+    str: 'LPQobuzSearchViewController.onEnter'
+    str: 'LPQobuzSearchViewController.onLeave'
+    str: 'LPQobuzSearchViewController.updateUI'
+    str: 'LPQobuzSearchViewController.searchFieldChanged'
+    str: 'LPQobuzSearchViewController._doSearch'
+    str: 'result'
+    str: 'LPQobuzSearchViewController.searchCallback'
+    str: 'LPQobuzSearchViewController.updateContent'
+    str: 'LPQobuzSearchViewController.onQueryButtonGroupClicked'
+    str: 'LPQobuzSearchViewController._updatePlaylistCategoryUI'
+    str: 'typeButton'
+    str: 'LPQobuzSearchViewController.onCategoryButtonClicked'
+    str: 'LPQobuzSearchViewController.resetAllViewState'
+    str: 'LPQobuzSearchViewController.onFieldClearActionTriggered'
+    str: 'LPQobuzSearchViewController.clearContent'
+
+  def LPQobuzSearchViewController.__init__(self, parent)  line 353
+    names: super, __init__, parent, offset, limit, summaryDict, tagList, LPHeaderType, LP_HEADER_TYPE_ARTIST, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_SONG, LP_HEADER_TYPE_PLAYLIST, tagBinding, currentTag, currentView, contentViewIndexMap, searchFieldClearAction, triggered, connect, onFieldClearActionTriggered, QTimer, refreshTimer, setSingleShot, timeout, _doSearch, updateContentSignal, updateContent
+      str: 'Top'
+      str: 'Artists'
+      str: 'Albums'
+      str: 'Tracks'
+      str: 'Playlists'
+      str: 'Top'
+      str: 'tag'
+      str: 'headType'
+      str: 'Artists'
+      str: 'Albums'
+      str: 'Tracks'
+      str: 'Playlists'
+
+  def LPQobuzSearchViewController.setupUi(self, ui)  line 388
+    names: getattr, super, callable, setupUi, parent, searchField, textChanged, connect, searchFieldChanged, QButtonGroup, queryButtonGroup, setExclusive, _updatePlaylistCategoryUI, buttonClicked, onCategoryButtonClicked, tagBinding, get, LPHeaderType, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_ARTIST, LP_HEADER_TYPE_PLAYLIST, LPGlobalUI, loadUI, LPUIPath, QobuzSearchListContentUI, Ui_searchListContentWidget, LPQobuzSearchListContentViewController, LP_HEADER_TYPE_SONG, QobuzSearchTableContentUI, Ui_searchTableContentWidget, LPQobuzSearchTableContentViewController, QobuzSearchAllContentUI, Ui_searchAllContentWidget, LPQobuzSearchAllContentViewController, contentStackedWidget, addWidget, contentViewIndexMap, tagList, currentView, findChildren, QPushButton, re, match, objectName, setProperty, Template, setStyleSheet, substitute, DEFAULT, Qobuz_Sub_Title, Qobuz_Tab_Title, THEME_FONT_COLOR_UI, name, THEME_DISABLE_COLOR, THEME_BUTTON_BACK_COLOR_UI
+      str: 'setupUi'
+      str: 'headType'
+      str: 'index'
+      str: 'view'
+      str: 'tag'
+      str: 'view'
+      str: '.*CategoryButton'
+      str: 'group'
+      str: 'category_button_group'
+      str: '\n                QWidget {\n                    border: none;\n                    background-color: transparent;\n                }\n                QFrame {\n                    color: $fontColor;\n                }\n                QFrame#splitFrame{\n                    background-color: rgb(30, 30, 30)'
+      str: 'defaultFontSize'
+      str: 'subTitleFontSize'
+      str: 'tabTitleFontSize'
+      str: 'fontColor'
+      str: 'subFontColor'
+      str: 'checkedFontColor'
+
+  def LPQobuzSearchViewController.onEnter(self)  line 498
+    names: logger, debug, updateUI, LPGlobalUI, currentDevice
+      str: 'Qobuz LPQobuzSearchViewController onEnter...'
+
+  def LPQobuzSearchViewController.onLeave(self)  line 502
+    names: logger, debug
+      str: 'Qobuz LPQobuzSearchViewController onLeave...'
+
+  def LPQobuzSearchViewController.updateUI(self, device)  line 508
+    names: contentStackedWidget, setCurrentIndex, noteLabel, setText, QCoreApplication, translate, subLabel, parent, searchField, text, strip, _doSearch
+      str: 'qobuz search'
+      str: 'Find Your Favorite Music'
+      str: 'Easily search for songs, playlists, artists and albums'
+
+  def LPQobuzSearchViewController.searchFieldChanged(self, text)  line 518
+    names: logger, debug, parent, searchFieldClearAction, setVisible, len, searchField, text, strip, refreshTimer, start, clearContent
+      str: '\n        搜索时拉的都是all data, 下拉时才拉对应的\n        '
+      str: '[LPQobuzSearchViewController] searchFieldChanged text='
+
+  def LPQobuzSearchViewController._doSearch(self)  line 540
+    names: parent, searchField, text, strip, resetAllViewState, qobuz, requestMgr, fetchSearchData, fetch, searchCallback, showLoadingOverlaySignal, emit
+
+  def LPQobuzSearchViewController.searchCallback(self, result)  line 551
+    names: is_success, hideLoadingOverlaySignal, emit, data, summaryDict, updateContentSignal
+
+  def LPQobuzSearchViewController.updateContent(self)  line 560
+    names: contentViewIndexMap, get, currentTag, currentView, initViewSignal, emit, summaryDict, contentStackedWidget, setCurrentIndex
+      str: 'view'
+      str: 'index'
+
+  def LPQobuzSearchViewController.onQueryButtonGroupClicked(self)  line 570
+
+  def LPQobuzSearchViewController._updatePlaylistCategoryUI(self)  line 574
+    names: tagList, QPushButton, setCheckable, setObjectName, tag, setSizePolicy, QSizePolicy, Policy, Maximum, Fixed, setCursor, Qt, CursorShape, PointingHandCursor, queryButtonGroup, addButton, buttonFrame, layout, addWidget, buttons, setChecked
+      str: 'CategoryButton'
+
+  def LPQobuzSearchViewController.onCategoryButtonClicked(self, typeButton)  line 593
+    names: parent, searchField, text, strip, tag, currentTag, contentViewIndexMap, contentStackedWidget, setCurrentIndex, currentView, firstShow, summaryDict, initViewSignal, emit
+      str: 'index'
+      str: 'view'
+
+  def LPQobuzSearchViewController.resetAllViewState(self)  line 618
+    names: contentViewIndexMap, items, hasattr, listView, verticalScrollBar, setValue, tableView, firstShow
+      str: 'view'
+      str: 'listView'
+      str: 'tableView'
+
+  def LPQobuzSearchViewController.onFieldClearActionTriggered(self)  line 629
+    names: parent, searchField, clear, clearContent
+
+  def LPQobuzSearchViewController.clearContent(self)  line 635
+    names: summaryDict, contentStackedWidget, setCurrentIndex

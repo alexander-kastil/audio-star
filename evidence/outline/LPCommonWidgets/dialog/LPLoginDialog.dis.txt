@@ -1,0 +1,982 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/1/6 16:43\n@Auth ： Chris\n@File ：LPLoginDialog.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Template',))
+              8 IMPORT_NAME              1 (string)
+             10 IMPORT_FROM              2 (Template)
+             12 STORE_NAME               2 (Template)
+             14 POP_TOP
+
+ 10          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('Qt', 'QCoreApplication', 'pyqtSignal', 'pyqtSlot', 'QSize'))
+             20 IMPORT_NAME              3 (PyQt6.QtCore)
+             22 IMPORT_FROM              4 (Qt)
+             24 STORE_NAME               4 (Qt)
+             26 IMPORT_FROM              5 (QCoreApplication)
+             28 STORE_NAME               5 (QCoreApplication)
+             30 IMPORT_FROM              6 (pyqtSignal)
+             32 STORE_NAME               6 (pyqtSignal)
+             34 IMPORT_FROM              7 (pyqtSlot)
+             36 STORE_NAME               7 (pyqtSlot)
+             38 IMPORT_FROM              8 (QSize)
+             40 STORE_NAME               8 (QSize)
+             42 POP_TOP
+
+ 11          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               4 (('QPainterPath', 'QRegion', 'QPixmap', 'QIcon', 'QAction'))
+             48 IMPORT_NAME              9 (PyQt6.QtGui)
+             50 IMPORT_FROM             10 (QPainterPath)
+             52 STORE_NAME              10 (QPainterPath)
+             54 IMPORT_FROM             11 (QRegion)
+             56 STORE_NAME              11 (QRegion)
+             58 IMPORT_FROM             12 (QPixmap)
+             60 STORE_NAME              12 (QPixmap)
+             62 IMPORT_FROM             13 (QIcon)
+             64 STORE_NAME              13 (QIcon)
+             66 IMPORT_FROM             14 (QAction)
+             68 STORE_NAME              14 (QAction)
+             70 POP_TOP
+
+ 12          72 LOAD_CONST               1 (0)
+             74 LOAD_CONST               5 (('QDialog', 'QLineEdit', 'QToolButton', 'QWidgetAction'))
+             76 IMPORT_NAME             15 (PyQt6.QtWidgets)
+             78 IMPORT_FROM             16 (QDialog)
+             80 STORE_NAME              16 (QDialog)
+             82 IMPORT_FROM             17 (QLineEdit)
+             84 STORE_NAME              17 (QLineEdit)
+             86 IMPORT_FROM             18 (QToolButton)
+             88 STORE_NAME              18 (QToolButton)
+             90 IMPORT_FROM             19 (QWidgetAction)
+             92 STORE_NAME              19 (QWidgetAction)
+             94 POP_TOP
+
+ 14          96 LOAD_CONST               1 (0)
+             98 LOAD_CONST               6 (None)
+            100 IMPORT_NAME             20 (LPGlobalUI)
+            102 STORE_NAME              20 (LPGlobalUI)
+
+ 15         104 LOAD_CONST               1 (0)
+            106 LOAD_CONST               7 (('LPUtility',))
+            108 IMPORT_NAME             21 (LPClientFramework)
+            110 IMPORT_FROM             22 (LPUtility)
+            112 STORE_NAME              22 (LPUtility)
+            114 POP_TOP
+
+ 16         116 LOAD_CONST               1 (0)
+            118 LOAD_CONST               8 (('SiderBar_Subtitle',))
+            120 IMPORT_NAME             23 (LPClientFramework.LPConfig.LPFontConfig)
+            122 IMPORT_FROM             24 (SiderBar_Subtitle)
+            124 STORE_NAME              24 (SiderBar_Subtitle)
+            126 POP_TOP
+
+ 17         128 LOAD_CONST               1 (0)
+            130 LOAD_CONST               9 (('logger',))
+            132 IMPORT_NAME             25 (LPClientFramework.LPUtility)
+            134 IMPORT_FROM             26 (logger)
+            136 STORE_NAME              26 (logger)
+            138 POP_TOP
+
+ 18         140 LOAD_CONST               1 (0)
+            142 LOAD_CONST              10 (('AESCipher',))
+            144 IMPORT_NAME             27 (LPClientFramework.util.aes)
+            146 IMPORT_FROM             28 (AESCipher)
+            148 STORE_NAME              28 (AESCipher)
+            150 POP_TOP
+
+ 21         152 LOAD_BUILD_CLASS
+            154 LOAD_CONST              11 (<code object LPLoginDialog at 0x000001F324E75EA0, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 21>)
+            156 LOAD_CONST              12 ('LPLoginDialog')
+            158 MAKE_FUNCTION            0
+            160 LOAD_CONST              12 ('LPLoginDialog')
+            162 LOAD_NAME               16 (QDialog)
+            164 CALL_FUNCTION            3
+            166 STORE_NAME              29 (LPLoginDialog)
+            168 LOAD_CONST               6 (None)
+            170 RETURN_VALUE
+
+=== LPLoginDialog ===
+ 21           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPLoginDialog')
+              6 STORE_NAME               2 (__qualname__)
+
+ 24           8 LOAD_NAME                3 (pyqtSignal)
+             10 LOAD_NAME                4 (str)
+             12 LOAD_NAME                4 (str)
+             14 LOAD_NAME                5 (bool)
+             16 CALL_FUNCTION            3
+             18 STORE_NAME               6 (loginSignal)
+
+ 25          20 LOAD_NAME                3 (pyqtSignal)
+             22 CALL_FUNCTION            0
+             24 STORE_NAME               7 (loginSuccessSignal)
+
+ 26          26 LOAD_NAME                3 (pyqtSignal)
+             28 CALL_FUNCTION            0
+             30 STORE_NAME               8 (loginFailSignal)
+
+ 28          32 LOAD_CLOSURE             0 (__class__)
+             34 BUILD_TUPLE              1
+             36 LOAD_CONST               1 (<code object __init__ at 0x000001F3253B0240, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 28>)
+             38 LOAD_CONST               2 ('LPLoginDialog.__init__')
+             40 MAKE_FUNCTION            8 (closure)
+             42 STORE_NAME               9 (__init__)
+
+ 39          44 LOAD_CLOSURE             0 (__class__)
+             46 BUILD_TUPLE              1
+             48 LOAD_CONST               3 (<code object setupUi at 0x000001F324E7B3A0, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 39>)
+             50 LOAD_CONST               4 ('LPLoginDialog.setupUi')
+             52 MAKE_FUNCTION            8 (closure)
+             54 STORE_NAME              10 (setupUi)
+
+159          56 LOAD_CONST               5 (<code object handleLogin at 0x000001F324E893A0, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 159>)
+             58 LOAD_CONST               6 ('LPLoginDialog.handleLogin')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME              11 (handleLogin)
+
+170          64 LOAD_NAME               12 (pyqtSlot)
+             66 LOAD_NAME                5 (bool)
+             68 CALL_FUNCTION            1
+
+171          70 LOAD_CONST               7 (<code object toggle_password_visibility at 0x000001F324E89F50, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 170>)
+             72 LOAD_CONST               8 ('LPLoginDialog.toggle_password_visibility')
+             74 MAKE_FUNCTION            0
+             76 CALL_FUNCTION            1
+             78 STORE_NAME              13 (toggle_password_visibility)
+
+181          80 LOAD_CONST               9 (<code object autofill at 0x000001F324E89EA0, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 181>)
+             82 LOAD_CONST              10 ('LPLoginDialog.autofill')
+             84 MAKE_FUNCTION            0
+             86 STORE_NAME              14 (autofill)
+
+191          88 LOAD_CLOSURE             0 (__class__)
+             90 BUILD_TUPLE              1
+             92 LOAD_CONST              11 (<code object exec at 0x000001F324E2D190, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 191>)
+             94 LOAD_CONST              12 ('LPLoginDialog.exec')
+             96 MAKE_FUNCTION            8 (closure)
+             98 STORE_NAME              15 (exec)
+
+202         100 LOAD_NAME               12 (pyqtSlot)
+            102 CALL_FUNCTION            0
+
+203         104 LOAD_CONST              13 (<code object loginSuccess at 0x000001F324E2DF50, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 202>)
+            106 LOAD_CONST              14 ('LPLoginDialog.loginSuccess')
+            108 MAKE_FUNCTION            0
+            110 CALL_FUNCTION            1
+            112 STORE_NAME              16 (loginSuccess)
+
+209         114 LOAD_NAME               12 (pyqtSlot)
+            116 CALL_FUNCTION            0
+
+210         118 LOAD_CONST              15 (<code object loginFail at 0x000001F324E85450, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 209>)
+            120 LOAD_CONST              16 ('LPLoginDialog.loginFail')
+            122 MAKE_FUNCTION            0
+            124 CALL_FUNCTION            1
+            126 STORE_NAME              17 (loginFail)
+
+216         128 LOAD_NAME               12 (pyqtSlot)
+            130 LOAD_NAME                4 (str)
+            132 LOAD_NAME                4 (str)
+            134 LOAD_NAME                5 (bool)
+            136 CALL_FUNCTION            3
+
+217         138 LOAD_CONST              17 (<code object validateLogin at 0x000001F324E75870, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 216>)
+            140 LOAD_CONST              18 ('LPLoginDialog.validateLogin')
+            142 MAKE_FUNCTION            0
+            144 CALL_FUNCTION            1
+            146 STORE_NAME              18 (validateLogin)
+            148 LOAD_CLOSURE             0 (__class__)
+            150 DUP_TOP
+            152 STORE_NAME              19 (__classcell__)
+            154 RETURN_VALUE
+
+=== LPLoginDialog.__init__ ===
+ 29           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                3 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 31          12 LOAD_FAST                1 (source)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (source)
+
+ 32          18 LOAD_FAST                3 (parent)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (parent)
+
+ 33          24 LOAD_FAST                2 (picUrl)
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (picUrl)
+
+ 35          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                5 (loginSuccessSignal)
+             34 LOAD_METHOD              6 (connect)
+             36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                7 (loginSuccess)
+             40 CALL_METHOD              1
+             42 POP_TOP
+
+ 36          44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                8 (loginFailSignal)
+             48 LOAD_METHOD              6 (connect)
+             50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                9 (loginFail)
+             54 CALL_METHOD              1
+             56 POP_TOP
+
+ 37          58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR               10 (loginSignal)
+             62 LOAD_METHOD              6 (connect)
+             64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR               11 (validateLogin)
+             68 CALL_METHOD              1
+             70 POP_TOP
+             72 LOAD_CONST               0 (None)
+             74 RETURN_VALUE
+
+=== LPLoginDialog.setupUi ===
+ 40           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (super)
+              4 CALL_FUNCTION            0
+              6 LOAD_CONST               1 ('setupUi')
+              8 LOAD_CONST               0 (None)
+             10 CALL_FUNCTION            3
+             12 STORE_FAST               2 (superSetup)
+
+ 41          14 LOAD_GLOBAL              2 (callable)
+             16 LOAD_FAST                2 (superSetup)
+             18 CALL_FUNCTION            1
+             20 POP_JUMP_IF_FALSE       34
+
+ 42          22 LOAD_GLOBAL              1 (super)
+             24 CALL_FUNCTION            0
+             26 LOAD_METHOD              3 (setupUi)
+             28 LOAD_FAST                1 (ui)
+             30 CALL_METHOD              1
+             32 POP_TOP
+
+ 44     >>   34 LOAD_FAST                0 (self)
+             36 LOAD_METHOD              4 (setWindowFlags)
+             38 LOAD_GLOBAL              5 (Qt)
+             40 LOAD_ATTR                6 (WindowType)
+             42 LOAD_ATTR                7 (Dialog)
+             44 LOAD_GLOBAL              5 (Qt)
+             46 LOAD_ATTR                6 (WindowType)
+             48 LOAD_ATTR                8 (FramelessWindowHint)
+             50 BINARY_OR
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+ 45          56 LOAD_FAST                0 (self)
+             58 LOAD_METHOD              9 (setAttribute)
+             60 LOAD_GLOBAL              5 (Qt)
+             62 LOAD_ATTR               10 (WidgetAttribute)
+             64 LOAD_ATTR               11 (WA_TranslucentBackground)
+             66 CALL_METHOD              1
+             68 POP_TOP
+
+ 48          70 LOAD_GLOBAL             12 (QPixmap)
+             72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR               13 (picUrl)
+             76 CALL_FUNCTION            1
+             78 STORE_FAST               3 (pixmap)
+
+ 49          80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR               14 (imageLabel)
+             84 LOAD_METHOD             15 (height)
+             86 CALL_METHOD              0
+             88 STORE_FAST               4 (fixed_height)
+
+ 50          90 LOAD_FAST                3 (pixmap)
+             92 LOAD_METHOD             16 (scaledToHeight)
+             94 LOAD_FAST                4 (fixed_height)
+             96 LOAD_GLOBAL              5 (Qt)
+             98 LOAD_ATTR               17 (TransformationMode)
+            100 LOAD_ATTR               18 (SmoothTransformation)
+            102 CALL_METHOD              2
+            104 STORE_FAST               5 (scaledPix)
+
+ 51         106 LOAD_FAST                0 (self)
+            108 LOAD_ATTR               14 (imageLabel)
+            110 LOAD_METHOD             19 (setPixmap)
+            112 LOAD_FAST                5 (scaledPix)
+            114 CALL_METHOD              1
+            116 POP_TOP
+
+ 52         118 LOAD_FAST                0 (self)
+            120 LOAD_ATTR               14 (imageLabel)
+            122 LOAD_METHOD             20 (setScaledContents)
+            124 LOAD_CONST               2 (False)
+            126 CALL_METHOD              1
+            128 POP_TOP
+
+ 55         130 LOAD_GLOBAL             21 (QCoreApplication)
+            132 LOAD_METHOD             22 (translate)
+            134 LOAD_CONST               3 ('Login')
+            136 LOAD_CONST               4 ('Email/Username')
+            138 CALL_METHOD              2
+            140 STORE_FAST               6 (accountLabelText)
+
+ 56         142 LOAD_GLOBAL             21 (QCoreApplication)
+            144 LOAD_METHOD             22 (translate)
+            146 LOAD_CONST               3 ('Login')
+            148 LOAD_CONST               5 ('Enter your username')
+            150 CALL_METHOD              2
+            152 STORE_FAST               7 (accountInputHint)
+
+ 57         154 LOAD_GLOBAL             21 (QCoreApplication)
+            156 LOAD_METHOD             22 (translate)
+            158 LOAD_CONST               3 ('Login')
+            160 LOAD_CONST               6 ('Password')
+            162 CALL_METHOD              2
+            164 STORE_FAST               8 (passwordLabelText)
+
+ 58         166 LOAD_GLOBAL             21 (QCoreApplication)
+            168 LOAD_METHOD             22 (translate)
+            170 LOAD_CONST               3 ('Login')
+            172 LOAD_CONST               7 ('Enter your password')
+            174 CALL_METHOD              2
+            176 STORE_FAST               9 (passwordInputHint)
+
+ 61         178 LOAD_FAST                0 (self)
+            180 LOAD_ATTR               23 (accountLabel)
+            182 LOAD_METHOD             24 (setText)
+            184 LOAD_FAST                6 (accountLabelText)
+            186 CALL_METHOD              1
+            188 POP_TOP
+
+ 62         190 LOAD_FAST                0 (self)
+            192 LOAD_ATTR               25 (accountInput)
+            194 LOAD_METHOD             26 (setPlaceholderText)
+            196 LOAD_FAST                7 (accountInputHint)
+            198 CALL_METHOD              1
+            200 POP_TOP
+
+ 65         202 LOAD_FAST                0 (self)
+            204 LOAD_ATTR               27 (passwordLabel)
+            206 LOAD_METHOD             24 (setText)
+            208 LOAD_FAST                8 (passwordLabelText)
+            210 CALL_METHOD              1
+            212 POP_TOP
+
+ 66         214 LOAD_FAST                0 (self)
+            216 LOAD_ATTR               28 (passwordInput)
+            218 LOAD_METHOD             29 (setEchoMode)
+            220 LOAD_GLOBAL             30 (QLineEdit)
+            222 LOAD_ATTR               31 (EchoMode)
+            224 LOAD_ATTR               32 (Password)
+            226 CALL_METHOD              1
+            228 POP_TOP
+
+ 67         230 LOAD_FAST                0 (self)
+            232 LOAD_ATTR               28 (passwordInput)
+            234 LOAD_METHOD             26 (setPlaceholderText)
+            236 LOAD_FAST                9 (passwordInputHint)
+            238 CALL_METHOD              1
+            240 POP_TOP
+
+ 70         242 LOAD_GLOBAL             21 (QCoreApplication)
+            244 LOAD_METHOD             22 (translate)
+            246 LOAD_CONST               3 ('Login')
+            248 LOAD_CONST               3 ('Login')
+            250 CALL_METHOD              2
+            252 STORE_FAST              10 (loginButtonText)
+
+ 71         254 LOAD_FAST                0 (self)
+            256 LOAD_ATTR               33 (loginButton)
+            258 LOAD_METHOD             24 (setText)
+            260 LOAD_FAST               10 (loginButtonText)
+            262 CALL_METHOD              1
+            264 POP_TOP
+
+ 72         266 LOAD_GLOBAL             21 (QCoreApplication)
+            268 LOAD_METHOD             22 (translate)
+            270 LOAD_CONST               3 ('Login')
+            272 LOAD_CONST               8 ('Cancel')
+            274 CALL_METHOD              2
+            276 STORE_FAST              11 (cancelButtonText)
+
+ 73         278 LOAD_FAST                0 (self)
+            280 LOAD_ATTR               34 (cancelButton)
+            282 LOAD_METHOD             24 (setText)
+            284 LOAD_FAST               11 (cancelButtonText)
+            286 CALL_METHOD              1
+            288 POP_TOP
+
+ 74         290 LOAD_FAST                0 (self)
+            292 LOAD_ATTR               34 (cancelButton)
+            294 LOAD_ATTR               35 (clicked)
+            296 LOAD_METHOD             36 (connect)
+            298 LOAD_FAST                0 (self)
+            300 LOAD_ATTR               37 (reject)
+            302 CALL_METHOD              1
+            304 POP_TOP
+
+ 75         306 LOAD_FAST                0 (self)
+            308 LOAD_ATTR               33 (loginButton)
+            310 LOAD_ATTR               35 (clicked)
+            312 LOAD_METHOD             36 (connect)
+            314 LOAD_FAST                0 (self)
+            316 LOAD_ATTR               38 (handleLogin)
+            318 CALL_METHOD              1
+            320 POP_TOP
+
+ 78         322 LOAD_GLOBAL             21 (QCoreApplication)
+            324 LOAD_METHOD             22 (translate)
+            326 LOAD_CONST               3 ('Login')
+            328 LOAD_CONST               9 ('Remember me')
+            330 CALL_METHOD              2
+            332 STORE_FAST              12 (rememberText)
+
+ 79         334 LOAD_FAST                0 (self)
+            336 LOAD_ATTR               39 (remembermeCheckBox)
+            338 LOAD_METHOD             24 (setText)
+            340 LOAD_FAST               12 (rememberText)
+            342 CALL_METHOD              1
+            344 POP_TOP
+
+ 82         346 LOAD_GLOBAL             40 (LPUtility)
+            348 LOAD_METHOD             41 (tintImage)
+            350 LOAD_GLOBAL             42 (LPGlobalUI)
+            352 LOAD_METHOD             43 (imagePath)
+            354 LOAD_CONST              10 ('eye_open.png')
+            356 CALL_METHOD              1
+            358 LOAD_GLOBAL             42 (LPGlobalUI)
+            360 LOAD_ATTR               44 (THEME_BACKGROUND_COLOR)
+            362 CALL_METHOD              2
+            364 LOAD_FAST                0 (self)
+            366 STORE_ATTR              45 (eye_open_img)
+
+ 83         368 LOAD_GLOBAL             40 (LPUtility)
+            370 LOAD_METHOD             41 (tintImage)
+            372 LOAD_GLOBAL             42 (LPGlobalUI)
+            374 LOAD_METHOD             43 (imagePath)
+            376 LOAD_CONST              11 ('eye_close.png')
+            378 CALL_METHOD              1
+            380 LOAD_GLOBAL             42 (LPGlobalUI)
+            382 LOAD_ATTR               44 (THEME_BACKGROUND_COLOR)
+            384 CALL_METHOD              2
+            386 LOAD_FAST                0 (self)
+            388 STORE_ATTR              46 (eye_close_img)
+
+ 86         390 LOAD_GLOBAL             47 (QToolButton)
+            392 LOAD_FAST                0 (self)
+            394 LOAD_ATTR               28 (passwordInput)
+            396 CALL_FUNCTION            1
+            398 LOAD_FAST                0 (self)
+            400 STORE_ATTR              48 (toggle_button)
+
+ 87         402 LOAD_FAST                0 (self)
+            404 LOAD_ATTR               48 (toggle_button)
+            406 LOAD_METHOD             49 (setIcon)
+            408 LOAD_GLOBAL             50 (QIcon)
+            410 LOAD_FAST                0 (self)
+            412 LOAD_ATTR               46 (eye_close_img)
+            414 CALL_FUNCTION            1
+            416 CALL_METHOD              1
+            418 POP_TOP
+
+ 88         420 LOAD_FAST                0 (self)
+            422 LOAD_ATTR               48 (toggle_button)
+            424 LOAD_METHOD             51 (setIconSize)
+            426 LOAD_GLOBAL             52 (QSize)
+            428 LOAD_CONST              12 (22)
+            430 LOAD_CONST              12 (22)
+            432 CALL_FUNCTION            2
+            434 CALL_METHOD              1
+            436 POP_TOP
+
+ 89         438 LOAD_FAST                0 (self)
+            440 LOAD_ATTR               48 (toggle_button)
+            442 LOAD_METHOD             53 (setCheckable)
+            444 LOAD_CONST              13 (True)
+            446 CALL_METHOD              1
+            448 POP_TOP
+
+ 90         450 LOAD_GLOBAL             54 (QWidgetAction)
+            452 LOAD_FAST                0 (self)
+            454 LOAD_ATTR               28 (passwordInput)
+            456 CALL_FUNCTION            1
+            458 STORE_FAST              13 (widgetAction)
+
+ 91         460 LOAD_FAST               13 (widgetAction)
+            462 LOAD_METHOD             55 (setDefaultWidget)
+            464 LOAD_FAST                0 (self)
+            466 LOAD_ATTR               48 (toggle_button)
+            468 CALL_METHOD              1
+            470 POP_TOP
+
+ 92         472 LOAD_FAST                0 (self)
+            474 LOAD_ATTR               48 (toggle_button)
+            476 LOAD_METHOD             56 (setCursor)
+            478 LOAD_GLOBAL              5 (Qt)
+            480 LOAD_ATTR               57 (CursorShape)
+            482 LOAD_ATTR               58 (PointingHandCursor)
+            484 CALL_METHOD              1
+            486 POP_TOP
+
+ 93         488 LOAD_FAST                0 (self)
+            490 LOAD_ATTR               48 (toggle_button)
+            492 LOAD_METHOD             59 (setStyleSheet)
+            494 LOAD_CONST              14 ('QToolButton { border: none; padding: 0px; }')
+            496 CALL_METHOD              1
+            498 POP_TOP
+
+ 94         500 LOAD_FAST                0 (self)
+            502 LOAD_ATTR               48 (toggle_button)
+            504 LOAD_ATTR               35 (clicked)
+            506 LOAD_METHOD             36 (connect)
+            508 LOAD_FAST                0 (self)
+            510 LOAD_ATTR               60 (toggle_password_visibility)
+            512 CALL_METHOD              1
+            514 POP_TOP
+
+ 95         516 LOAD_FAST                0 (self)
+            518 LOAD_ATTR               28 (passwordInput)
+            520 LOAD_METHOD             61 (addAction)
+            522 LOAD_FAST               13 (widgetAction)
+            524 LOAD_GLOBAL             30 (QLineEdit)
+            526 LOAD_ATTR               62 (ActionPosition)
+            528 LOAD_ATTR               63 (TrailingPosition)
+            530 CALL_METHOD              2
+            532 POP_TOP
+
+ 98         534 LOAD_GLOBAL             64 (Template)
+            536 LOAD_CONST              15 ('                \n                QDialog{\n                    color: $fontColor;\n                }\n                QFrame{\n                    border:none;\n                    background-color: transparent;\n                }\n                QFrame#mainFrame{\n                    border-radius: 20px;\n                    background-color: $dialogBg;\n                }\n                QLabel {\n                    color: $fontColor;\n                }\n                QLabel#accountLabel, #passwordLabel{\n                    margin-left: 20px;\n                }\n                QPushButton#loginButton {\n                    border: 0;\n                    border-radius: 17px;\n                    color: $fontColor;\n                    background-color: $buttonBg;\n                }\n                \n                QPushButton#loginButton:hover {\n                    background-color: $buttonHoverBg;\n                }\n                QPushButton#loginButton:disabled {\n                    background-color: $buttonHoverBg;\n                }\n                \n                QPushButton#cancelButton {\n                    border: 0;\n                    border-radius: 17px;\n                    background-color: #2E2E2E;\n                    color: $fontColor;\n                }\n                QPushButton#cancelButton:hover {\n                    background-color: #3E3E3E;\n                }\n                QLineEdit {\n                    border: 0;\n                    border-radius: 8px;\n                    padding-left: 16px;\n                    padding-right: 16px;\n                }\n                QCheckBox {\n                    color: $fontColor;\n                    margin-left: 20px;\n                    font-size: ${checkBoxFontSize}pt;\n                }\n                ')
+            538 CALL_FUNCTION            1
+            540 STORE_FAST              14 (qssTemplate)
+
+152         542 LOAD_FAST                0 (self)
+            544 LOAD_METHOD             59 (setStyleSheet)
+            546 LOAD_FAST               14 (qssTemplate)
+            548 LOAD_ATTR               65 (substitute)
+            550 LOAD_GLOBAL             42 (LPGlobalUI)
+            552 LOAD_ATTR               66 (THEME_FONT_COLOR_UI)
+            554 LOAD_METHOD             67 (name)
+            556 CALL_METHOD              0
+
+153         558 LOAD_GLOBAL             42 (LPGlobalUI)
+            560 LOAD_ATTR               68 (THEME_DIALOG_BACK_COLOR_UI)
+            562 LOAD_METHOD             67 (name)
+            564 CALL_METHOD              0
+
+154         566 LOAD_GLOBAL             42 (LPGlobalUI)
+            568 LOAD_ATTR               69 (THEME_BUTTON_BACK_COLOR_UI)
+            570 LOAD_METHOD             67 (name)
+            572 CALL_METHOD              0
+
+155         574 LOAD_GLOBAL             42 (LPGlobalUI)
+            576 LOAD_ATTR               70 (QSS_THEME_BUTTON_BACK_PRESS_COLOR)
+
+156         578 LOAD_GLOBAL             71 (SiderBar_Subtitle)
+            580 FORMAT_VALUE             0
+
+152         582 LOAD_CONST              16 (('fontColor', 'dialogBg', 'buttonBg', 'buttonHoverBg', 'checkBoxFontSize'))
+            584 CALL_FUNCTION_KW         5
+            586 CALL_METHOD              1
+            588 POP_TOP
+            590 LOAD_CONST               0 (None)
+            592 RETURN_VALUE
+
+=== LPLoginDialog.handleLogin ===
+160           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (loginButton)
+              4 LOAD_METHOD              1 (setEnabled)
+              6 LOAD_CONST               1 (False)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+161          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (accountInput)
+             16 LOAD_METHOD              3 (text)
+             18 CALL_METHOD              0
+             20 STORE_FAST               1 (username)
+
+162          22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                4 (passwordInput)
+             26 LOAD_METHOD              3 (text)
+             28 CALL_METHOD              0
+             30 STORE_FAST               2 (password)
+
+163          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                5 (remembermeCheckBox)
+             36 LOAD_METHOD              6 (isChecked)
+             38 CALL_METHOD              0
+             40 STORE_FAST               3 (remember_me)
+
+164          42 LOAD_FAST                3 (remember_me)
+             44 POP_JUMP_IF_FALSE       64
+
+165          46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                7 (loginSignal)
+             50 LOAD_METHOD              8 (emit)
+             52 LOAD_FAST                1 (username)
+             54 LOAD_FAST                2 (password)
+             56 LOAD_CONST               2 (True)
+             58 CALL_METHOD              3
+             60 POP_TOP
+             62 JUMP_FORWARD            16 (to 80)
+
+167     >>   64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                7 (loginSignal)
+             68 LOAD_METHOD              8 (emit)
+             70 LOAD_FAST                1 (username)
+             72 LOAD_FAST                2 (password)
+             74 LOAD_CONST               1 (False)
+             76 CALL_METHOD              3
+             78 POP_TOP
+        >>   80 LOAD_CONST               0 (None)
+             82 RETURN_VALUE
+
+=== LPLoginDialog.toggle_password_visibility ===
+173           0 LOAD_FAST                1 (checked)
+              2 POP_JUMP_IF_FALSE       40
+
+174           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                0 (passwordInput)
+              8 LOAD_METHOD              1 (setEchoMode)
+             10 LOAD_GLOBAL              2 (QLineEdit)
+             12 LOAD_ATTR                3 (EchoMode)
+             14 LOAD_ATTR                4 (Normal)
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+175          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                5 (toggle_button)
+             24 LOAD_METHOD              6 (setIcon)
+             26 LOAD_GLOBAL              7 (QIcon)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                8 (eye_open_img)
+             32 CALL_FUNCTION            1
+             34 CALL_METHOD              1
+             36 POP_TOP
+             38 JUMP_FORWARD            34 (to 74)
+
+177     >>   40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                0 (passwordInput)
+             44 LOAD_METHOD              1 (setEchoMode)
+             46 LOAD_GLOBAL              2 (QLineEdit)
+             48 LOAD_ATTR                3 (EchoMode)
+             50 LOAD_ATTR                9 (Password)
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+178          56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                5 (toggle_button)
+             60 LOAD_METHOD              6 (setIcon)
+             62 LOAD_GLOBAL              7 (QIcon)
+             64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR               10 (eye_close_img)
+             68 CALL_FUNCTION            1
+             70 CALL_METHOD              1
+             72 POP_TOP
+        >>   74 LOAD_CONST               1 (None)
+             76 RETURN_VALUE
+
+=== LPLoginDialog.autofill ===
+182           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (accountInput)
+              4 LOAD_METHOD              1 (setText)
+              6 LOAD_FAST                1 (username)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+183          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (passwordInput)
+             16 LOAD_METHOD              1 (setText)
+             18 LOAD_FAST                2 (password)
+             20 CALL_METHOD              1
+             22 POP_TOP
+
+185          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                3 (remembermeCheckBox)
+             28 LOAD_METHOD              4 (setChecked)
+             30 LOAD_CONST               1 (True)
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+187          36 LOAD_FAST                0 (self)
+             38 LOAD_METHOD              5 (toggle_password_visibility)
+             40 LOAD_CONST               2 (False)
+             42 CALL_METHOD              1
+             44 POP_TOP
+             46 LOAD_CONST               0 (None)
+             48 RETURN_VALUE
+
+=== LPLoginDialog.exec ===
+192           0 LOAD_GLOBAL              0 (LPUtility)
+              2 LOAD_METHOD              1 (loadAccountForSource)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                2 (source)
+              8 CALL_METHOD              1
+             10 STORE_FAST               1 (data)
+
+193          12 LOAD_FAST                1 (data)
+             14 POP_JUMP_IF_FALSE       44
+
+194          16 LOAD_FAST                1 (data)
+             18 LOAD_CONST               1 ('username')
+             20 BINARY_SUBSCR
+             22 STORE_FAST               2 (username)
+
+195          24 LOAD_FAST                1 (data)
+             26 LOAD_CONST               2 ('password')
+             28 BINARY_SUBSCR
+             30 STORE_FAST               3 (password)
+
+196          32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              3 (autofill)
+             36 LOAD_FAST                2 (username)
+             38 LOAD_FAST                3 (password)
+             40 CALL_METHOD              2
+             42 POP_TOP
+
+199     >>   44 LOAD_GLOBAL              4 (super)
+             46 CALL_FUNCTION            0
+             48 LOAD_METHOD              5 (exec)
+             50 CALL_METHOD              0
+             52 POP_TOP
+             54 LOAD_CONST               0 (None)
+             56 RETURN_VALUE
+
+=== LPLoginDialog.loginSuccess ===
+204           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (accept)
+              4 CALL_METHOD              0
+              6 POP_TOP
+
+205           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (parent)
+             12 LOAD_ATTR                2 (updateAccountSignal)
+             14 LOAD_METHOD              3 (emit)
+             16 CALL_METHOD              0
+             18 POP_TOP
+
+206          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                1 (parent)
+             24 LOAD_ATTR                4 (updateLoginButtonSignal)
+             26 LOAD_METHOD              3 (emit)
+             28 CALL_METHOD              0
+             30 POP_TOP
+
+207          32 LOAD_GLOBAL              5 (logger)
+             34 LOAD_METHOD              6 (debug)
+             36 LOAD_CONST               1 ('login success')
+             38 CALL_METHOD              1
+             40 POP_TOP
+             42 LOAD_CONST               0 (None)
+             44 RETURN_VALUE
+
+=== LPLoginDialog.loginFail ===
+211           0 LOAD_GLOBAL              0 (QCoreApplication)
+              2 LOAD_METHOD              1 (translate)
+              4 LOAD_CONST               1 ('Login')
+              6 LOAD_CONST               2 ('login failed! Please check username or password again!')
+              8 CALL_METHOD              2
+             10 STORE_FAST               1 (showtText)
+
+212          12 LOAD_GLOBAL              2 (LPGlobalUI)
+             14 LOAD_ATTR                3 (toast)
+             16 LOAD_METHOD              4 (showToast)
+             18 LOAD_FAST                1 (showtText)
+             20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                5 (parent)
+             24 CALL_METHOD              2
+             26 POP_TOP
+
+213          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                6 (passwordInput)
+             32 LOAD_METHOD              7 (clear)
+             34 CALL_METHOD              0
+             36 POP_TOP
+
+214          38 LOAD_GLOBAL              8 (logger)
+             40 LOAD_METHOD              9 (debug)
+             42 LOAD_CONST               3 ('login fail')
+             44 CALL_METHOD              1
+             46 POP_TOP
+             48 LOAD_CONST               0 (None)
+             50 RETURN_VALUE
+
+=== LPLoginDialog.validateLogin ===
+218           0 LOAD_CLOSURE             0 (isRemember)
+              2 LOAD_CLOSURE             1 (password)
+              4 LOAD_CLOSURE             2 (self)
+              6 LOAD_CLOSURE             3 (username)
+              8 BUILD_TUPLE              4
+             10 LOAD_CONST               1 (<code object finishMethod at 0x000001F324E75BE0, file "LPCommonWidgets\dialog\LPLoginDialog.py", line 218>)
+             12 LOAD_CONST               2 ('LPLoginDialog.validateLogin.<locals>.finishMethod')
+             14 MAKE_FUNCTION            8 (closure)
+             16 STORE_FAST               4 (finishMethod)
+
+235          18 LOAD_DEREF               3 (username)
+             20 LOAD_METHOD              0 (strip)
+             22 CALL_METHOD              0
+             24 STORE_DEREF              3 (username)
+
+236          26 LOAD_DEREF               3 (username)
+             28 POP_JUMP_IF_TRUE        74
+
+237          30 LOAD_GLOBAL              1 (QCoreApplication)
+             32 LOAD_METHOD              2 (translate)
+             34 LOAD_CONST               3 ('Login')
+             36 LOAD_CONST               4 ("The username can't be empty")
+             38 CALL_METHOD              2
+             40 STORE_FAST               5 (showtText)
+
+238          42 LOAD_GLOBAL              3 (LPGlobalUI)
+             44 LOAD_ATTR                4 (toast)
+             46 LOAD_METHOD              5 (showToast)
+             48 LOAD_FAST                5 (showtText)
+             50 LOAD_DEREF               2 (self)
+             52 LOAD_ATTR                6 (parent)
+             54 CALL_METHOD              2
+             56 POP_TOP
+
+239          58 LOAD_DEREF               2 (self)
+             60 LOAD_ATTR                7 (loginButton)
+             62 LOAD_METHOD              8 (setEnabled)
+             64 LOAD_CONST               5 (True)
+             66 CALL_METHOD              1
+             68 POP_TOP
+
+240          70 LOAD_CONST               0 (None)
+             72 RETURN_VALUE
+
+242     >>   74 LOAD_DEREF               1 (password)
+             76 POP_JUMP_IF_TRUE       122
+
+243          78 LOAD_GLOBAL              1 (QCoreApplication)
+             80 LOAD_METHOD              2 (translate)
+             82 LOAD_CONST               3 ('Login')
+             84 LOAD_CONST               6 ("The password can't be empty")
+             86 CALL_METHOD              2
+             88 STORE_FAST               5 (showtText)
+
+244          90 LOAD_GLOBAL              3 (LPGlobalUI)
+             92 LOAD_ATTR                4 (toast)
+             94 LOAD_METHOD              5 (showToast)
+             96 LOAD_FAST                5 (showtText)
+             98 LOAD_DEREF               2 (self)
+            100 LOAD_ATTR                6 (parent)
+            102 CALL_METHOD              2
+            104 POP_TOP
+
+245         106 LOAD_DEREF               2 (self)
+            108 LOAD_ATTR                7 (loginButton)
+            110 LOAD_METHOD              8 (setEnabled)
+            112 LOAD_CONST               5 (True)
+            114 CALL_METHOD              1
+            116 POP_TOP
+
+246         118 LOAD_CONST               0 (None)
+            120 RETURN_VALUE
+
+248     >>  122 LOAD_GLOBAL              3 (LPGlobalUI)
+            124 LOAD_ATTR                9 (currentDevice)
+            126 LOAD_ATTR               10 (uuid)
+            128 LOAD_CONST               0 (None)
+            130 LOAD_CONST               7 (16)
+            132 BUILD_SLICE              2
+            134 BINARY_SUBSCR
+            136 STORE_FAST               6 (key)
+
+249         138 LOAD_GLOBAL             11 (AESCipher)
+            140 LOAD_METHOD             12 (encrypt)
+            142 LOAD_FAST                6 (key)
+            144 LOAD_DEREF               1 (password)
+            146 CALL_METHOD              2
+            148 STORE_FAST               7 (encryptedPwd)
+
+251         150 LOAD_GLOBAL              3 (LPGlobalUI)
+            152 LOAD_ATTR                9 (currentDevice)
+            154 LOAD_ATTR               13 (deviceStreamServiceManager)
+            156 LOAD_METHOD             14 (loginAccountForSource)
+            158 LOAD_DEREF               2 (self)
+            160 LOAD_ATTR               15 (source)
+            162 LOAD_DEREF               3 (username)
+            164 LOAD_FAST                7 (encryptedPwd)
+            166 LOAD_FAST                4 (finishMethod)
+            168 CALL_METHOD              4
+            170 POP_TOP
+            172 LOAD_CONST               0 (None)
+            174 RETURN_VALUE
+
+=== LPLoginDialog.validateLogin.finishMethod ===
+219           0 LOAD_DEREF               2 (self)
+              2 LOAD_ATTR                0 (loginButton)
+              4 LOAD_METHOD              1 (setEnabled)
+              6 LOAD_CONST               1 (True)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+221          12 LOAD_FAST                0 (account)
+             14 POP_JUMP_IF_FALSE      114
+             16 LOAD_FAST                0 (account)
+             18 LOAD_ATTR                2 (userId)
+             20 POP_JUMP_IF_FALSE      114
+
+222          22 LOAD_DEREF               2 (self)
+             24 LOAD_ATTR                3 (loginSuccessSignal)
+             26 LOAD_METHOD              4 (emit)
+             28 CALL_METHOD              0
+             30 POP_TOP
+
+224          32 LOAD_DEREF               0 (isRemember)
+             34 POP_JUMP_IF_FALSE       84
+
+225          36 LOAD_GLOBAL              5 (LPUtility)
+             38 LOAD_METHOD              6 (rememberForSource)
+             40 LOAD_GLOBAL              7 (LPGlobalUI)
+             42 LOAD_ATTR                8 (currentDevice)
+             44 LOAD_ATTR                9 (uuid)
+             46 LOAD_CONST               0 (None)
+             48 LOAD_CONST               2 (16)
+             50 BUILD_SLICE              2
+             52 BINARY_SUBSCR
+             54 LOAD_DEREF               3 (username)
+             56 LOAD_DEREF               1 (password)
+             58 LOAD_DEREF               2 (self)
+             60 LOAD_ATTR               10 (source)
+             62 CALL_METHOD              4
+             64 POP_TOP
+
+226          66 LOAD_GLOBAL             11 (logger)
+             68 LOAD_METHOD             12 (debug)
+             70 LOAD_DEREF               2 (self)
+             72 LOAD_ATTR               10 (source)
+             74 LOAD_CONST               3 (' remember password')
+             76 BINARY_ADD
+             78 CALL_METHOD              1
+             80 POP_TOP
+             82 JUMP_ABSOLUTE          124
+
+228     >>   84 LOAD_GLOBAL              5 (LPUtility)
+             86 LOAD_METHOD             13 (clearRememberForSource)
+             88 LOAD_DEREF               2 (self)
+             90 LOAD_ATTR               10 (source)
+             92 CALL_METHOD              1
+             94 POP_TOP
+
+229          96 LOAD_GLOBAL             11 (logger)
+             98 LOAD_METHOD             12 (debug)
+            100 LOAD_DEREF               2 (self)
+            102 LOAD_ATTR               10 (source)
+            104 LOAD_CONST               4 (' clear remember password')
+            106 BINARY_ADD
+            108 CALL_METHOD              1
+            110 POP_TOP
+            112 JUMP_FORWARD            10 (to 124)
+
+232     >>  114 LOAD_DEREF               2 (self)
+            116 LOAD_ATTR               14 (loginFailSignal)
+            118 LOAD_METHOD              4 (emit)
+            120 CALL_METHOD              0
+            122 POP_TOP
+        >>  124 LOAD_CONST               0 (None)
+            126 RETURN_VALUE

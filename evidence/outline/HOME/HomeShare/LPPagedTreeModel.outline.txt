@@ -1,0 +1,148 @@
+# module HOME.HomeShare.LPPagedTreeModel
+
+[module] names: __doc__, functools, partial, PyQt6.QtCore, QAbstractItemModel, QModelIndex, Qt, QCoreApplication, pyqtSignal, QTimer, LPClientFramework.CacheLog, logger, Model_Column, LPHomeShareTreeNode, LPPagedTreeModel
+  str: '\n@Time ： 2026/1/4 15:31\n@Auth ： Chris\n@File ：LPPagedTreeModel.py\n@Desc:\n'
+  str: 'partial'
+  str: 'QAbstractItemModel'
+  str: 'QModelIndex'
+  str: 'Qt'
+  str: 'QCoreApplication'
+  str: 'pyqtSignal'
+  str: 'QTimer'
+  str: 'logger'
+  str: 'LPHomeShareTreeNode'
+  str: 'LPPagedTreeModel'
+
+def LPHomeShareTreeNode()  line 16
+  names: __name__, __module__, __qualname__, __init__, reset, childCount, row
+    str: 'LPHomeShareTreeNode'
+    str: 'LPHomeShareTreeNode.__init__'
+    str: 'LPHomeShareTreeNode.reset'
+    str: 'LPHomeShareTreeNode.childCount'
+    str: 'LPHomeShareTreeNode.row'
+
+  def LPHomeShareTreeNode.__init__(self, directoryObj, displayText, parent)  line 17
+    names: directory, displayText, parent, offset, requestOffset, pageSize, loadedChildren, totalChildren, loading, threshold, lastViewedRow, artist, album, genre, duration, children
+
+  def LPHomeShareTreeNode.reset(self)  line 39
+    names: children, clear, offset, requestOffset, loadedChildren, totalChildren, loading, lastViewedRow
+
+  def LPHomeShareTreeNode.childCount(self)  line 48
+    names: len, children
+      str: '\n        返回已加载的子节点数量\n        '
+
+  def LPHomeShareTreeNode.row(self)  line 54
+    names: parent, children, index, ValueError
+      str: '\n        返回自己在父节点 children 中的行号\n        '
+
+def LPPagedTreeModel()  line 65
+  names: __name__, __module__, __qualname__, pyqtSignal, object, insertSignal, __init__, QModelIndex, columnCount, rowCount, nodeFromIndex, indexFromNode, Qt, ItemDataRole, DisplayRole, data, headerData, invisibleRootItem, index, parent, flags, hasChildren, fetchMore, insertCallback, removeFromRootNodeByIP, appendRootNode, appendChildren, browse, resetModel, __classcell__
+    str: 'LPPagedTreeModel'
+    str: 'LPPagedTreeModel.__init__'
+    str: 'LPPagedTreeModel.columnCount'
+    str: 'LPPagedTreeModel.rowCount'
+    str: 'LPPagedTreeModel.nodeFromIndex'
+    str: 'LPPagedTreeModel.indexFromNode'
+    str: 'LPPagedTreeModel.data'
+    str: 'LPPagedTreeModel.headerData'
+    str: 'LPPagedTreeModel.invisibleRootItem'
+    str: 'LPPagedTreeModel.index'
+    str: 'LPPagedTreeModel.parent'
+    str: 'LPPagedTreeModel.flags'
+    str: 'LPPagedTreeModel.hasChildren'
+    str: 'parentIndex'
+    str: 'LPPagedTreeModel.fetchMore'
+    str: 'LPPagedTreeModel.insertCallback'
+    str: 'LPPagedTreeModel.removeFromRootNodeByIP'
+    str: 'LPPagedTreeModel.appendRootNode'
+    str: 'LPPagedTreeModel.appendChildren'
+    str: 'index'
+    str: 'LPPagedTreeModel.browse'
+    str: 'LPPagedTreeModel.resetModel'
+
+  def LPPagedTreeModel.__init__(self)  line 67
+    names: super, __init__, LPHomeShareTreeNode, _rootNode, insertSignal, connect, appendChildren, a
+
+  def LPPagedTreeModel.columnCount(self, parent)  line 74
+    names: Model_Column
+
+  def LPPagedTreeModel.rowCount(self, parent)  line 77
+    names: isValid, _rootNode, internalPointer, logger, debug, loadedChildren, len, children
+      str: 'node.loadedChildren: '
+
+  def LPPagedTreeModel.nodeFromIndex(self, index)  line 82
+    names: isValid, internalPointer, _rootNode
+
+  def LPPagedTreeModel.indexFromNode(self, node, column)  line 87
+    names: parent, QModelIndex, children, index, createIndex
+
+  def LPPagedTreeModel.data(self, index, role)  line 95
+    names: isValid, row, internalPointer, Qt, ItemDataRole, DisplayRole, parent, max, getattr, lastViewedRow, totalChildren, requestOffset, loading, loadedChildren, threshold, QTimer, singleShot, column, displayText, directory, title, artist, album
+      str: 'lastViewedRow'
+      str: 'LPPagedTreeModel.data.<locals>.<lambda>'
+
+    def LPPagedTreeModel.data.<lambda>()  line 115
+      names: fetchMore, parent
+
+  def LPPagedTreeModel.headerData(self, section, orientation, role)  line 128
+    names: Qt, ItemDataRole, DisplayRole, Orientation, Horizontal, QCoreApplication, translate, len
+      str: 'HomeShare'
+      str: 'Title'
+      str: 'Artist'
+      str: 'Album'
+
+  def LPPagedTreeModel.invisibleRootItem(self)  line 139
+    names: _rootNode
+
+  def LPPagedTreeModel.index(self, row, column, parent)  line 142
+    names: hasIndex, QModelIndex, isValid, _rootNode, internalPointer, len, children, createIndex
+
+  def LPPagedTreeModel.parent(self, index)  line 151
+    names: isValid, QModelIndex, internalPointer, parent, _rootNode, children, index, createIndex
+
+  def LPPagedTreeModel.flags(self, index)  line 162
+    names: isValid, Qt, ItemFlag, NoItemFlags, ItemIsEnabled, ItemIsSelectable
+
+  def LPPagedTreeModel.hasChildren(self, parentIndex)  line 167
+    names: isValid, internalPointer, len, children, directory, isContainer
+
+  def LPPagedTreeModel.fetchMore(self, parentIndex)  line 192
+    names: isValid, _rootNode, internalPointer, loading, totalChildren, requestOffset, partial, insertCallback, directory, loadNextPage, pageSize
+      str: 'callback'
+
+  def LPPagedTreeModel.insertCallback(self, parentIndex, parentNode, response, subItems)  line 207
+    names: isinstance, dict, loading, get, int, totalChildren, requestOffset, logger, debug, directory, title, displayText, loadedChildren, insertSignal, emit
+      str: 'error'
+      str: 'returned'
+      str: '0'
+      str: 'total'
+      str: '[insertCallback] node:'
+      str: ' total:'
+      str: ' returned:'
+      str: ' requestOffset:'
+      str: ' loaded:'
+
+  def LPPagedTreeModel.removeFromRootNodeByIP(self, ip)  line 228
+    names: enumerate, _rootNode, children, directory, ip, beginRemoveRows, QModelIndex, pop, endRemoveRows
+
+  def LPPagedTreeModel.appendRootNode(self, node)  line 238
+    names: len, _rootNode, children, beginInsertRows, QModelIndex, append, loadedChildren, endInsertRows, logger, debug, directory, title, displayText
+      str: '[appendRootNode] node:'
+      str: ' row:'
+
+  def LPPagedTreeModel.appendChildren(self, parentIndex, parentNode, directoryObjs)  line 248
+    names: loading, len, children, logger, debug, loadedChildren, beginInsertRows, LPHomeShareTreeNode, append, directory, title, displayText, endInsertRows
+      str: 'firstRow:'
+      str: ', lastRow:'
+      str: ', rowcount: '
+      str: 'parent'
+      str: '[appendChildren] node:'
+      str: ' firstRow:'
+      str: ', loaded:'
+
+  def LPPagedTreeModel.browse(self, index, cb)  line 270
+    names: isValid, _rootNode, internalPointer, loading, totalChildren, requestOffset, directory, loadNextPage, pageSize
+      str: 'callback'
+
+  def LPPagedTreeModel.resetModel(self)  line 285
+    names: beginResetModel, _rootNode, reset, endResetModel

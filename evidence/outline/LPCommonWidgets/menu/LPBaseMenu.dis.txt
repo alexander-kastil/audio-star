@@ -1,0 +1,925 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2024/11/21 18:58\n@Auth ： Chris\n@File ：LPBaseMenu.py\n@Desc: 基础的圆角menu。自带QMenu有阴影和边框，设置圆角无效，需设置属性去掉阴影和边框才行。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (sys)
+             10 STORE_NAME               1 (sys)
+
+ 10          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('Qt', 'QSize', 'pyqtSlot', 'QPoint', 'QRect'))
+             16 IMPORT_NAME              2 (PyQt6.QtCore)
+             18 IMPORT_FROM              3 (Qt)
+             20 STORE_NAME               3 (Qt)
+             22 IMPORT_FROM              4 (QSize)
+             24 STORE_NAME               4 (QSize)
+             26 IMPORT_FROM              5 (pyqtSlot)
+             28 STORE_NAME               5 (pyqtSlot)
+             30 IMPORT_FROM              6 (QPoint)
+             32 STORE_NAME               6 (QPoint)
+             34 IMPORT_FROM              7 (QRect)
+             36 STORE_NAME               7 (QRect)
+             38 POP_TOP
+
+ 11          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               4 (('QIcon', 'QColor', 'QPixmap'))
+             44 IMPORT_NAME              8 (PyQt6.QtGui)
+             46 IMPORT_FROM              9 (QIcon)
+             48 STORE_NAME               9 (QIcon)
+             50 IMPORT_FROM             10 (QColor)
+             52 STORE_NAME              10 (QColor)
+             54 IMPORT_FROM             11 (QPixmap)
+             56 STORE_NAME              11 (QPixmap)
+             58 POP_TOP
+
+ 12          60 LOAD_CONST               1 (0)
+             62 LOAD_CONST               5 (('QMenu', 'QHBoxLayout', 'QGraphicsDropShadowEffect', 'QListWidgetItem', 'QApplication', 'QWidgetAction', 'QSizePolicy'))
+             64 IMPORT_NAME             12 (PyQt6.QtWidgets)
+             66 IMPORT_FROM             13 (QMenu)
+             68 STORE_NAME              13 (QMenu)
+             70 IMPORT_FROM             14 (QHBoxLayout)
+             72 STORE_NAME              14 (QHBoxLayout)
+             74 IMPORT_FROM             15 (QGraphicsDropShadowEffect)
+             76 STORE_NAME              15 (QGraphicsDropShadowEffect)
+             78 IMPORT_FROM             16 (QListWidgetItem)
+             80 STORE_NAME              16 (QListWidgetItem)
+             82 IMPORT_FROM             17 (QApplication)
+             84 STORE_NAME              17 (QApplication)
+             86 IMPORT_FROM             18 (QWidgetAction)
+             88 STORE_NAME              18 (QWidgetAction)
+             90 IMPORT_FROM             19 (QSizePolicy)
+             92 STORE_NAME              19 (QSizePolicy)
+             94 POP_TOP
+
+ 15          96 LOAD_CONST               1 (0)
+             98 LOAD_CONST               2 (None)
+            100 IMPORT_NAME             20 (LPGlobalUI)
+            102 STORE_NAME              20 (LPGlobalUI)
+
+ 16         104 LOAD_CONST               1 (0)
+            106 LOAD_CONST               6 (('logger',))
+            108 IMPORT_NAME             21 (LPClientFramework.CacheLog)
+            110 IMPORT_FROM             22 (logger)
+            112 STORE_NAME              22 (logger)
+            114 POP_TOP
+
+ 17         116 LOAD_CONST               1 (0)
+            118 LOAD_CONST               7 (('BaseActionListWidget',))
+            120 IMPORT_NAME             23 (LPCommonWidgets.menu.LPBaseActionListWidget)
+            122 IMPORT_FROM             24 (BaseActionListWidget)
+            124 STORE_NAME              24 (BaseActionListWidget)
+            126 POP_TOP
+
+ 20         128 LOAD_BUILD_CLASS
+            130 LOAD_CONST               8 (<code object BaseMenu at 0x000001F3253A2920, file "LPCommonWidgets\menu\LPBaseMenu.py", line 20>)
+            132 LOAD_CONST               9 ('BaseMenu')
+            134 MAKE_FUNCTION            0
+            136 LOAD_CONST               9 ('BaseMenu')
+            138 LOAD_NAME               13 (QMenu)
+            140 CALL_FUNCTION            3
+            142 STORE_NAME              25 (BaseMenu)
+
+225         144 LOAD_NAME               26 (__name__)
+            146 LOAD_CONST              10 ('__main__')
+            148 COMPARE_OP               2 (==)
+            150 POP_JUMP_IF_FALSE      188
+
+226         152 LOAD_NAME               17 (QApplication)
+            154 BUILD_LIST               0
+            156 CALL_FUNCTION            1
+            158 STORE_NAME              27 (app)
+
+228         160 LOAD_NAME               25 (BaseMenu)
+            162 CALL_FUNCTION            0
+            164 STORE_NAME              28 (menu)
+
+230         166 LOAD_NAME               28 (menu)
+            168 LOAD_METHOD             29 (show)
+            170 CALL_METHOD              0
+            172 POP_TOP
+
+232         174 LOAD_NAME                1 (sys)
+            176 LOAD_METHOD             30 (exit)
+            178 LOAD_NAME               27 (app)
+            180 LOAD_METHOD             31 (exec)
+            182 CALL_METHOD              0
+            184 CALL_METHOD              1
+            186 POP_TOP
+        >>  188 LOAD_CONST               2 (None)
+            190 RETURN_VALUE
+
+=== BaseMenu ===
+ 20           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('BaseMenu')
+              6 STORE_NAME               2 (__qualname__)
+
+ 22           8 LOAD_CONST              42 ((None,))
+             10 LOAD_CLOSURE             0 (__class__)
+             12 BUILD_TUPLE              1
+             14 LOAD_CONST               2 (<code object __init__ at 0x000001F324E7B3A0, file "LPCommonWidgets\menu\LPBaseMenu.py", line 22>)
+             16 LOAD_CONST               3 ('BaseMenu.__init__')
+             18 MAKE_FUNCTION            9 (defaults, closure)
+             20 STORE_NAME               3 (__init__)
+
+ 38          22 LOAD_CONST               4 (<code object _init_widgets at 0x000001F324E75BE0, file "LPCommonWidgets\menu\LPBaseMenu.py", line 38>)
+             24 LOAD_CONST               5 ('BaseMenu._init_widgets')
+             26 MAKE_FUNCTION            0
+             28 STORE_NAME               4 (_init_widgets)
+
+ 68          30 LOAD_CONST               6 (<code object _on_item_clicked at 0x000001F324E759D0, file "LPCommonWidgets\menu\LPBaseMenu.py", line 68>)
+             32 LOAD_CONST               7 ('BaseMenu._on_item_clicked')
+             34 MAKE_FUNCTION            0
+             36 STORE_NAME               5 (_on_item_clicked)
+
+ 79          38 LOAD_CONST               8 (30)
+             40 LOAD_CONST               9 ((0, 8))
+             42 LOAD_NAME                6 (QColor)
+             44 LOAD_CONST              10 (0)
+             46 LOAD_CONST              10 (0)
+             48 LOAD_CONST              10 (0)
+             50 LOAD_CONST               8 (30)
+             52 CALL_FUNCTION            4
+             54 BUILD_TUPLE              3
+             56 LOAD_CONST              11 (<code object _set_shadow_effect at 0x000001F324E757C0, file "LPCommonWidgets\menu\LPBaseMenu.py", line 79>)
+             58 LOAD_CONST              12 ('BaseMenu._set_shadow_effect')
+             60 MAKE_FUNCTION            1 (defaults)
+             62 STORE_NAME               7 (_set_shadow_effect)
+
+ 90          64 LOAD_CONST              13 (<code object _adjust_size at 0x000001F324E75870, file "LPCommonWidgets\menu\LPBaseMenu.py", line 90>)
+             66 LOAD_CONST              14 ('BaseMenu._adjust_size')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME               8 (_adjust_size)
+
+ 96          72 LOAD_CONST              15 (<code object _adjust_item_size at 0x000001F324E75710, file "LPCommonWidgets\menu\LPBaseMenu.py", line 96>)
+             74 LOAD_CONST              16 ('BaseMenu._adjust_item_size')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME               9 (_adjust_item_size)
+
+106          80 LOAD_CONST              17 (<code object _create_icon at 0x000001F324E75B30, file "LPCommonWidgets\menu\LPBaseMenu.py", line 106>)
+             82 LOAD_CONST              18 ('BaseMenu._create_icon')
+             84 MAKE_FUNCTION            0
+             86 STORE_NAME              10 (_create_icon)
+
+110          88 LOAD_CONST              43 ((None,))
+             90 LOAD_CLOSURE             0 (__class__)
+             92 BUILD_TUPLE              1
+             94 LOAD_CONST              19 (<code object _create_action_item at 0x000001F324E75A80, file "LPCommonWidgets\menu\LPBaseMenu.py", line 110>)
+             96 LOAD_CONST              20 ('BaseMenu._create_action_item')
+             98 MAKE_FUNCTION            9 (defaults, closure)
+            100 STORE_NAME              11 (_create_action_item)
+
+130         102 LOAD_NAME               12 (pyqtSlot)
+            104 CALL_FUNCTION            0
+
+131         106 LOAD_CONST              21 (<code object _on_action_changed at 0x000001F324E75C90, file "LPCommonWidgets\menu\LPBaseMenu.py", line 130>)
+            108 LOAD_CONST              22 ('BaseMenu._on_action_changed')
+            110 MAKE_FUNCTION            0
+            112 CALL_FUNCTION            1
+            114 STORE_NAME              13 (_on_action_changed)
+
+138         116 LOAD_CONST              23 (<code object _remove_item at 0x000001F324E75920, file "LPCommonWidgets\menu\LPBaseMenu.py", line 138>)
+            118 LOAD_CONST              24 ('BaseMenu._remove_item')
+            120 MAKE_FUNCTION            0
+            122 STORE_NAME              14 (_remove_item)
+
+148         124 LOAD_CONST              44 ((False,))
+            126 LOAD_CONST              26 (<code object _hide_menu at 0x000001F3253A2BE0, file "LPCommonWidgets\menu\LPBaseMenu.py", line 148>)
+            128 LOAD_CONST              27 ('BaseMenu._hide_menu')
+            130 MAKE_FUNCTION            1 (defaults)
+            132 STORE_NAME              15 (_hide_menu)
+
+153         134 LOAD_CONST              28 (<code object mousePressEvent at 0x000001F3253A2F50, file "LPCommonWidgets\menu\LPBaseMenu.py", line 153>)
+            136 LOAD_CONST              29 ('BaseMenu.mousePressEvent')
+            138 MAKE_FUNCTION            0
+            140 STORE_NAME              16 (mousePressEvent)
+
+160         142 LOAD_CONST              30 (<code object add_action at 0x000001F3253A2D40, file "LPCommonWidgets\menu\LPBaseMenu.py", line 160>)
+            144 LOAD_CONST              31 ('BaseMenu.add_action')
+            146 MAKE_FUNCTION            0
+            148 STORE_NAME              17 (add_action)
+
+165         150 LOAD_CONST              32 (<code object insert_action at 0x000001F3253A2EA0, file "LPCommonWidgets\menu\LPBaseMenu.py", line 165>)
+            152 LOAD_CONST              33 ('BaseMenu.insert_action')
+            154 MAKE_FUNCTION            0
+            156 STORE_NAME              18 (insert_action)
+
+179         158 LOAD_CLOSURE             0 (__class__)
+            160 BUILD_TUPLE              1
+            162 LOAD_CONST              34 (<code object remove_action at 0x000001F3253A2A80, file "LPCommonWidgets\menu\LPBaseMenu.py", line 179>)
+            164 LOAD_CONST              35 ('BaseMenu.remove_action')
+            166 MAKE_FUNCTION            8 (closure)
+            168 STORE_NAME              19 (remove_action)
+
+197         170 LOAD_CONST              36 (<code object add_actions at 0x000001F3253A2B30, file "LPCommonWidgets\menu\LPBaseMenu.py", line 197>)
+            172 LOAD_CONST              37 ('BaseMenu.add_actions')
+            174 MAKE_FUNCTION            0
+            176 STORE_NAME              20 (add_actions)
+
+202         178 LOAD_CONST              38 (<code object clear at 0x000001F3253A2C90, file "LPCommonWidgets\menu\LPBaseMenu.py", line 202>)
+            180 LOAD_CONST              39 ('BaseMenu.clear')
+            182 MAKE_FUNCTION            0
+            184 STORE_NAME              21 (clear)
+
+206         186 LOAD_CONST              40 (<code object exec_ at 0x000001F3253A2190, file "LPCommonWidgets\menu\LPBaseMenu.py", line 206>)
+            188 LOAD_CONST              41 ('BaseMenu.exec_')
+            190 MAKE_FUNCTION            0
+            192 STORE_NAME              22 (exec_)
+            194 LOAD_CLOSURE             0 (__class__)
+            196 DUP_TOP
+            198 STORE_NAME              23 (__classcell__)
+            200 RETURN_VALUE
+
+=== BaseMenu.__init__ ===
+ 23           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 26          12 LOAD_FAST                1 (parent)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (parent)
+
+ 28          18 BUILD_LIST               0
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (_actions)
+
+ 30          24 LOAD_CONST               1 (28)
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (item_height)
+
+ 32          30 LOAD_GLOBAL              5 (QHBoxLayout)
+             32 LOAD_FAST                0 (self)
+             34 CALL_FUNCTION            1
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               6 (h_BoxLayout)
+
+ 34          40 LOAD_GLOBAL              7 (BaseActionListWidget)
+             42 LOAD_FAST                0 (self)
+             44 CALL_FUNCTION            1
+             46 LOAD_FAST                0 (self)
+             48 STORE_ATTR               8 (view)
+
+ 36          50 LOAD_FAST                0 (self)
+             52 LOAD_METHOD              9 (_init_widgets)
+             54 CALL_METHOD              0
+             56 POP_TOP
+             58 LOAD_CONST               0 (None)
+             60 RETURN_VALUE
+
+=== BaseMenu._init_widgets ===
+ 40           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (setWindowFlags)
+              4 LOAD_GLOBAL              1 (Qt)
+              6 LOAD_ATTR                2 (WindowType)
+              8 LOAD_ATTR                3 (Popup)
+             10 LOAD_GLOBAL              1 (Qt)
+             12 LOAD_ATTR                2 (WindowType)
+             14 LOAD_ATTR                4 (FramelessWindowHint)
+             16 BINARY_OR
+             18 LOAD_GLOBAL              1 (Qt)
+             20 LOAD_ATTR                2 (WindowType)
+             22 LOAD_ATTR                5 (NoDropShadowWindowHint)
+             24 BINARY_OR
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+ 41          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              6 (setAttribute)
+             34 LOAD_GLOBAL              1 (Qt)
+             36 LOAD_ATTR                7 (WidgetAttribute)
+             38 LOAD_ATTR                8 (WA_TranslucentBackground)
+             40 CALL_METHOD              1
+             42 POP_TOP
+
+ 43          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              9 (setStyleSheet)
+             48 LOAD_CONST               1 ('\n            QMenu {\n                background-color: transparent;\n                border: none;\n            }\n        ')
+             50 CALL_METHOD              1
+             52 POP_TOP
+
+ 51          54 LOAD_FAST                0 (self)
+             56 LOAD_METHOD             10 (setMouseTracking)
+             58 LOAD_CONST               2 (True)
+             60 CALL_METHOD              1
+             62 POP_TOP
+
+ 56          64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR               11 (h_BoxLayout)
+             68 LOAD_METHOD             12 (addWidget)
+             70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR               13 (view)
+             74 LOAD_CONST               3 (1)
+             76 LOAD_GLOBAL              1 (Qt)
+             78 LOAD_ATTR               14 (AlignmentFlag)
+             80 LOAD_ATTR               15 (AlignCenter)
+             82 CALL_METHOD              3
+             84 POP_TOP
+
+ 62          86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR               11 (h_BoxLayout)
+             90 LOAD_METHOD             16 (setContentsMargins)
+             92 LOAD_CONST               4 (0)
+             94 LOAD_CONST               4 (0)
+             96 LOAD_CONST               4 (0)
+             98 LOAD_CONST               4 (0)
+            100 CALL_METHOD              4
+            102 POP_TOP
+
+ 64         104 LOAD_FAST                0 (self)
+            106 LOAD_ATTR               13 (view)
+            108 LOAD_ATTR               17 (itemClicked)
+            110 LOAD_METHOD             18 (connect)
+            112 LOAD_FAST                0 (self)
+            114 LOAD_ATTR               19 (_on_item_clicked)
+            116 CALL_METHOD              1
+            118 POP_TOP
+            120 LOAD_CONST               0 (None)
+            122 RETURN_VALUE
+
+=== BaseMenu._on_item_clicked ===
+ 69           0 LOAD_FAST                1 (item)
+              2 LOAD_METHOD              0 (data)
+              4 LOAD_GLOBAL              1 (Qt)
+              6 LOAD_ATTR                2 (ItemDataRole)
+              8 LOAD_ATTR                3 (UserRole)
+             10 CALL_METHOD              1
+             12 STORE_FAST               2 (action)
+
+ 70          14 LOAD_FAST                2 (action)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                4 (_actions)
+             20 CONTAINS_OP              1
+             22 POP_JUMP_IF_FALSE       46
+
+ 71          24 LOAD_GLOBAL              5 (logger)
+             26 LOAD_METHOD              6 (error)
+             28 LOAD_FAST                2 (action)
+             30 LOAD_METHOD              7 (text)
+             32 CALL_METHOD              0
+             34 LOAD_CONST               1 (' not in action list!')
+             36 BINARY_ADD
+             38 CALL_METHOD              1
+             40 POP_TOP
+
+ 72          42 LOAD_CONST               0 (None)
+             44 RETURN_VALUE
+
+ 74     >>   46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              8 (_hide_menu)
+             50 LOAD_CONST               2 (False)
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+ 76          56 LOAD_GLOBAL              5 (logger)
+             58 LOAD_METHOD              9 (debug)
+             60 LOAD_FAST                2 (action)
+             62 LOAD_METHOD              7 (text)
+             64 CALL_METHOD              0
+             66 LOAD_CONST               3 (' trigger!')
+             68 BINARY_ADD
+             70 CALL_METHOD              1
+             72 POP_TOP
+
+ 77          74 LOAD_FAST                2 (action)
+             76 LOAD_METHOD             10 (trigger)
+             78 CALL_METHOD              0
+             80 POP_TOP
+             82 LOAD_CONST               0 (None)
+             84 RETURN_VALUE
+
+=== BaseMenu._set_shadow_effect ===
+ 81           0 LOAD_GLOBAL              0 (QGraphicsDropShadowEffect)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (view)
+              6 CALL_FUNCTION            1
+              8 STORE_FAST               4 (shadow_effect)
+
+ 83          10 LOAD_FAST                4 (shadow_effect)
+             12 LOAD_METHOD              2 (setBlurRadius)
+             14 LOAD_FAST                1 (blur_radius)
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+ 84          20 LOAD_FAST                4 (shadow_effect)
+             22 LOAD_ATTR                3 (setOffset)
+             24 LOAD_FAST                2 (offset)
+             26 CALL_FUNCTION_EX         0
+             28 POP_TOP
+
+ 85          30 LOAD_FAST                4 (shadow_effect)
+             32 LOAD_METHOD              4 (setColor)
+             34 LOAD_FAST                3 (color)
+             36 CALL_METHOD              1
+             38 POP_TOP
+
+ 87          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                1 (view)
+             44 LOAD_METHOD              5 (setGraphicsEffect)
+             46 LOAD_CONST               1 (None)
+             48 CALL_METHOD              1
+             50 POP_TOP
+
+ 88          52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                1 (view)
+             56 LOAD_METHOD              5 (setGraphicsEffect)
+             58 LOAD_FAST                4 (shadow_effect)
+             60 CALL_METHOD              1
+             62 POP_TOP
+             64 LOAD_CONST               1 (None)
+             66 RETURN_VALUE
+
+=== BaseMenu._adjust_size ===
+ 91           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (layout)
+              4 CALL_METHOD              0
+              6 LOAD_METHOD              1 (contentsMargins)
+              8 CALL_METHOD              0
+             10 STORE_FAST               1 (m)
+
+ 92          12 LOAD_FAST                1 (m)
+             14 LOAD_METHOD              2 (left)
+             16 CALL_METHOD              0
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (view)
+             22 LOAD_METHOD              4 (width)
+             24 CALL_METHOD              0
+             26 BINARY_ADD
+             28 LOAD_FAST                1 (m)
+             30 LOAD_METHOD              5 (right)
+             32 CALL_METHOD              0
+             34 BINARY_ADD
+             36 STORE_FAST               2 (w)
+
+ 93          38 LOAD_FAST                1 (m)
+             40 LOAD_METHOD              6 (top)
+             42 CALL_METHOD              0
+             44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                3 (view)
+             48 LOAD_METHOD              7 (height)
+             50 CALL_METHOD              0
+             52 BINARY_ADD
+             54 LOAD_FAST                1 (m)
+             56 LOAD_METHOD              8 (bottom)
+             58 CALL_METHOD              0
+             60 BINARY_ADD
+             62 STORE_FAST               3 (h)
+
+ 94          64 LOAD_FAST                0 (self)
+             66 LOAD_METHOD              9 (setFixedSize)
+             68 LOAD_FAST                2 (w)
+             70 LOAD_FAST                3 (h)
+             72 CALL_METHOD              2
+             74 POP_TOP
+             76 LOAD_CONST               0 (None)
+             78 RETURN_VALUE
+
+=== BaseMenu._adjust_item_size ===
+ 98           0 LOAD_FAST                1 (item)
+              2 LOAD_METHOD              0 (setText)
+              4 LOAD_CONST               1 (' ')
+              6 LOAD_FAST                2 (action)
+              8 LOAD_METHOD              1 (text)
+             10 CALL_METHOD              0
+             12 BINARY_ADD
+             14 CALL_METHOD              1
+             16 POP_TOP
+
+ 99          18 LOAD_CONST               2 (4)
+             20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (view)
+             24 LOAD_METHOD              3 (fontMetrics)
+             26 CALL_METHOD              0
+             28 LOAD_METHOD              4 (horizontalAdvance)
+             30 LOAD_CONST               1 (' ')
+             32 CALL_METHOD              1
+             34 BINARY_SUBTRACT
+             36 STORE_FAST               3 (space)
+
+101          38 LOAD_CONST               3 (60)
+             40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                2 (view)
+             44 LOAD_METHOD              3 (fontMetrics)
+             46 CALL_METHOD              0
+             48 LOAD_METHOD              4 (horizontalAdvance)
+             50 LOAD_FAST                1 (item)
+             52 LOAD_METHOD              1 (text)
+             54 CALL_METHOD              0
+             56 CALL_METHOD              1
+             58 BINARY_ADD
+             60 LOAD_FAST                3 (space)
+             62 BINARY_ADD
+             64 STORE_FAST               4 (width)
+
+103          66 LOAD_FAST                1 (item)
+             68 LOAD_METHOD              5 (setSizeHint)
+             70 LOAD_GLOBAL              6 (QSize)
+             72 LOAD_FAST                4 (width)
+             74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                7 (item_height)
+             78 CALL_FUNCTION            2
+             80 CALL_METHOD              1
+             82 POP_TOP
+
+104          84 LOAD_FAST                4 (width)
+             86 RETURN_VALUE
+
+=== BaseMenu._create_icon ===
+107           0 LOAD_GLOBAL              0 (QIcon)
+              2 LOAD_FAST                1 (action)
+              4 LOAD_METHOD              1 (icon)
+              6 CALL_METHOD              0
+              8 CALL_FUNCTION            1
+             10 STORE_FAST               2 (icon)
+
+108          12 LOAD_FAST                2 (icon)
+             14 RETURN_VALUE
+
+=== BaseMenu._create_action_item ===
+111           0 LOAD_FAST                2 (before)
+              2 POP_JUMP_IF_TRUE        30
+
+112           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                0 (_actions)
+              8 LOAD_METHOD              1 (append)
+             10 LOAD_FAST                1 (action)
+             12 CALL_METHOD              1
+             14 POP_TOP
+
+113          16 LOAD_GLOBAL              2 (super)
+             18 CALL_FUNCTION            0
+             20 LOAD_METHOD              3 (addAction)
+             22 LOAD_FAST                1 (action)
+             24 CALL_METHOD              1
+             26 POP_TOP
+             28 JUMP_FORWARD            48 (to 78)
+
+114     >>   30 LOAD_FAST                2 (before)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                0 (_actions)
+             36 CONTAINS_OP              0
+             38 POP_JUMP_IF_FALSE       68
+
+115          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                0 (_actions)
+             44 LOAD_METHOD              4 (index)
+             46 LOAD_FAST                2 (before)
+             48 CALL_METHOD              1
+             50 STORE_FAST               3 (index)
+
+116          52 LOAD_GLOBAL              2 (super)
+             54 CALL_FUNCTION            0
+             56 LOAD_METHOD              5 (insertAction)
+             58 LOAD_FAST                2 (before)
+             60 LOAD_FAST                1 (action)
+             62 CALL_METHOD              2
+             64 POP_TOP
+             66 JUMP_FORWARD            10 (to 78)
+
+118     >>   68 LOAD_GLOBAL              6 (logger)
+             70 LOAD_METHOD              7 (error)
+             72 LOAD_CONST               1 ('before not in action list')
+             74 CALL_METHOD              1
+             76 POP_TOP
+
+121     >>   78 LOAD_GLOBAL              8 (QListWidgetItem)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_METHOD              9 (_create_icon)
+             84 LOAD_FAST                1 (action)
+             86 CALL_METHOD              1
+             88 LOAD_FAST                1 (action)
+             90 LOAD_METHOD             10 (text)
+             92 CALL_METHOD              0
+             94 CALL_FUNCTION            2
+             96 STORE_FAST               4 (item)
+
+122          98 LOAD_FAST                0 (self)
+            100 LOAD_METHOD             11 (_adjust_item_size)
+            102 LOAD_FAST                4 (item)
+            104 LOAD_FAST                1 (action)
+            106 CALL_METHOD              2
+            108 POP_TOP
+
+124         110 LOAD_FAST                4 (item)
+            112 LOAD_METHOD             12 (setData)
+            114 LOAD_GLOBAL             13 (Qt)
+            116 LOAD_ATTR               14 (ItemDataRole)
+            118 LOAD_ATTR               15 (UserRole)
+            120 LOAD_FAST                1 (action)
+            122 CALL_METHOD              2
+            124 POP_TOP
+
+125         126 LOAD_FAST                1 (action)
+            128 LOAD_METHOD             16 (setProperty)
+            130 LOAD_CONST               2 ('item')
+            132 LOAD_FAST                4 (item)
+            134 CALL_METHOD              2
+            136 POP_TOP
+
+126         138 LOAD_FAST                1 (action)
+            140 LOAD_ATTR               17 (changed)
+            142 LOAD_METHOD             18 (connect)
+            144 LOAD_FAST                0 (self)
+            146 LOAD_ATTR               19 (_on_action_changed)
+            148 CALL_METHOD              1
+            150 POP_TOP
+
+128         152 LOAD_FAST                4 (item)
+            154 RETURN_VALUE
+
+=== BaseMenu._on_action_changed ===
+133           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (view)
+              4 LOAD_METHOD              1 (adjust_size)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+134          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              2 (_adjust_size)
+             14 CALL_METHOD              0
+             16 POP_TOP
+             18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== BaseMenu._remove_item ===
+139           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (view)
+              4 LOAD_METHOD              1 (take_item)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (view)
+             10 LOAD_METHOD              2 (row)
+             12 LOAD_FAST                1 (item)
+             14 CALL_METHOD              1
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+140          20 LOAD_FAST                1 (item)
+             22 LOAD_METHOD              3 (setData)
+             24 LOAD_GLOBAL              4 (Qt)
+             26 LOAD_ATTR                5 (ItemDataRole)
+             28 LOAD_ATTR                6 (UserRole)
+             30 LOAD_CONST               0 (None)
+             32 CALL_METHOD              2
+             34 POP_TOP
+
+143          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                0 (view)
+             40 LOAD_METHOD              7 (itemWidget)
+             42 LOAD_FAST                1 (item)
+             44 CALL_METHOD              1
+             46 STORE_FAST               2 (widget)
+
+144          48 LOAD_FAST                2 (widget)
+             50 POP_JUMP_IF_FALSE       60
+
+145          52 LOAD_FAST                2 (widget)
+             54 LOAD_METHOD              8 (deleteLater)
+             56 CALL_METHOD              0
+             58 POP_TOP
+        >>   60 LOAD_CONST               0 (None)
+             62 RETURN_VALUE
+
+=== BaseMenu._hide_menu ===
+149           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (view)
+              4 LOAD_METHOD              1 (clearSelection)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+151          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              2 (close)
+             14 CALL_METHOD              0
+             16 POP_TOP
+             18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== BaseMenu.mousePressEvent ===
+154           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (childAt)
+              4 LOAD_FAST                1 (event)
+              6 LOAD_METHOD              1 (pos)
+              8 CALL_METHOD              0
+             10 CALL_METHOD              1
+             12 STORE_FAST               2 (widget)
+
+155          14 LOAD_FAST                2 (widget)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                2 (view)
+             20 IS_OP                    1
+             22 POP_JUMP_IF_FALSE       46
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (view)
+             28 LOAD_METHOD              3 (isAncestorOf)
+             30 LOAD_FAST                2 (widget)
+             32 CALL_METHOD              1
+             34 POP_JUMP_IF_TRUE        46
+
+156          36 LOAD_FAST                0 (self)
+             38 LOAD_METHOD              4 (_hide_menu)
+             40 LOAD_CONST               1 (True)
+             42 CALL_METHOD              1
+             44 POP_TOP
+        >>   46 LOAD_CONST               0 (None)
+             48 RETURN_VALUE
+
+=== BaseMenu.add_action ===
+161           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_create_action_item)
+              4 LOAD_FAST                1 (action)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (item)
+
+162          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (view)
+             14 LOAD_METHOD              2 (add_item)
+             16 LOAD_FAST                2 (item)
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+163          22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              3 (_adjust_size)
+             26 CALL_METHOD              0
+             28 POP_TOP
+             30 LOAD_CONST               0 (None)
+             32 RETURN_VALUE
+
+=== BaseMenu.insert_action ===
+166           0 LOAD_FAST                2 (before)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_actions)
+              6 CONTAINS_OP              1
+              8 POP_JUMP_IF_FALSE       14
+
+167          10 LOAD_CONST               0 (None)
+             12 RETURN_VALUE
+
+169     >>   14 LOAD_FAST                2 (before)
+             16 LOAD_METHOD              1 (property)
+             18 LOAD_CONST               1 ('item')
+             20 CALL_METHOD              1
+             22 STORE_FAST               3 (before_item)
+
+170          24 LOAD_FAST                3 (before_item)
+             26 POP_JUMP_IF_TRUE        32
+
+171          28 LOAD_CONST               0 (None)
+             30 RETURN_VALUE
+
+173     >>   32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                2 (view)
+             36 LOAD_METHOD              3 (row)
+             38 LOAD_FAST                3 (before_item)
+             40 CALL_METHOD              1
+             42 STORE_FAST               4 (index)
+
+174          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              4 (_create_action_item)
+             48 LOAD_FAST                1 (action)
+             50 CALL_METHOD              1
+             52 STORE_FAST               5 (item)
+
+175          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                2 (view)
+             58 LOAD_METHOD              5 (insert_item)
+             60 LOAD_FAST                4 (index)
+             62 LOAD_FAST                5 (item)
+             64 CALL_METHOD              2
+             66 POP_TOP
+
+176          68 LOAD_FAST                0 (self)
+             70 LOAD_METHOD              6 (_adjust_size)
+             72 CALL_METHOD              0
+             74 POP_TOP
+             76 LOAD_CONST               0 (None)
+             78 RETURN_VALUE
+
+=== BaseMenu.remove_action ===
+180           0 LOAD_FAST                1 (action)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_actions)
+              6 CONTAINS_OP              1
+              8 POP_JUMP_IF_FALSE       14
+
+181          10 LOAD_CONST               0 (None)
+             12 RETURN_VALUE
+
+183     >>   14 LOAD_FAST                1 (action)
+             16 LOAD_METHOD              1 (property)
+             18 LOAD_CONST               1 ('item')
+             20 CALL_METHOD              1
+             22 STORE_FAST               2 (item)
+
+184          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                0 (_actions)
+             28 LOAD_METHOD              2 (remove)
+             30 LOAD_FAST                1 (action)
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+185          36 LOAD_FAST                1 (action)
+             38 LOAD_METHOD              3 (setProperty)
+             40 LOAD_CONST               1 ('item')
+             42 LOAD_CONST               0 (None)
+             44 CALL_METHOD              2
+             46 POP_TOP
+
+187          48 LOAD_FAST                2 (item)
+             50 POP_JUMP_IF_TRUE        56
+
+188          52 LOAD_CONST               0 (None)
+             54 RETURN_VALUE
+
+191     >>   56 LOAD_FAST                0 (self)
+             58 LOAD_METHOD              4 (_remove_item)
+             60 LOAD_FAST                2 (item)
+             62 CALL_METHOD              1
+             64 POP_TOP
+
+194          66 LOAD_GLOBAL              5 (super)
+             68 CALL_FUNCTION            0
+             70 LOAD_METHOD              6 (removeAction)
+             72 LOAD_FAST                1 (action)
+             74 CALL_METHOD              1
+             76 POP_TOP
+             78 LOAD_CONST               0 (None)
+             80 RETURN_VALUE
+
+=== BaseMenu.add_actions ===
+198           0 LOAD_FAST                1 (actions)
+              2 GET_ITER
+        >>    4 FOR_ITER                14 (to 20)
+              6 STORE_FAST               2 (action)
+
+199           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              0 (add_action)
+             12 LOAD_FAST                2 (action)
+             14 CALL_METHOD              1
+             16 POP_TOP
+             18 JUMP_ABSOLUTE            4
+        >>   20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+=== BaseMenu.clear ===
+203           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_actions)
+              4 GET_ITER
+        >>    6 FOR_ITER                14 (to 22)
+              8 STORE_FAST               1 (_a)
+
+204          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (removeAction)
+             14 LOAD_FAST                1 (_a)
+             16 CALL_METHOD              1
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            6
+        >>   22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== BaseMenu.exec_ ===
+215           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (sizeHint)
+              4 CALL_METHOD              0
+              6 STORE_FAST               2 (menu_size)
+
+216           8 LOAD_GLOBAL              1 (logger)
+             10 LOAD_METHOD              2 (debug)
+             12 LOAD_CONST               1 ('mouse_pos === x %d y %d')
+             14 LOAD_FAST                1 (mouse_pos)
+             16 LOAD_METHOD              3 (x)
+             18 CALL_METHOD              0
+             20 LOAD_FAST                1 (mouse_pos)
+             22 LOAD_METHOD              4 (y)
+             24 CALL_METHOD              0
+             26 BUILD_TUPLE              2
+             28 BINARY_MODULO
+             30 CALL_METHOD              1
+             32 POP_TOP
+
+217          34 LOAD_GLOBAL              1 (logger)
+             36 LOAD_METHOD              2 (debug)
+             38 LOAD_CONST               2 ('menu_size === width %d height %d')
+             40 LOAD_FAST                2 (menu_size)
+             42 LOAD_METHOD              5 (width)
+             44 CALL_METHOD              0
+             46 LOAD_FAST                2 (menu_size)
+             48 LOAD_METHOD              6 (height)
+             50 CALL_METHOD              0
+             52 BUILD_TUPLE              2
+             54 BINARY_MODULO
+             56 CALL_METHOD              1
+             58 POP_TOP
+
+219          60 LOAD_FAST                1 (mouse_pos)
+             62 STORE_FAST               3 (adjusted_pos)
+
+221          64 LOAD_FAST                0 (self)
+             66 LOAD_METHOD              7 (exec)
+             68 LOAD_FAST                3 (adjusted_pos)
+             70 CALL_METHOD              1
+             72 POP_TOP
+             74 LOAD_CONST               0 (None)
+             76 RETURN_VALUE

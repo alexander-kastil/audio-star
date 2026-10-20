@@ -1,0 +1,39 @@
+# module LPCommonWidgets.Label.LPElideLabel
+
+[module] names: __doc__, PyQt6.QtCore, QSize, Qt, PyQt6.QtWidgets, QLabel, QSizePolicy, PyQt6.QtGui, QFontMetrics, LPElideLabel
+  str: '\n@Time ： 2025/6/23 13:38\n@Auth ： Chris\n@File ：LPElideLabel.py\n@Desc:\n'
+  str: 'QSize'
+  str: 'Qt'
+  str: 'QLabel'
+  str: 'QSizePolicy'
+  str: 'QFontMetrics'
+  str: 'LPElideLabel'
+
+def LPElideLabel()  line 12
+  names: __name__, __module__, __qualname__, __doc__, __init__, str, setText, minimumSizeHint, resizeEvent, _updateElidedText, __classcell__
+    str: 'LPElideLabel'
+    str: '支持尾部省略号的自适应标签：宽度不足时按当前宽度省略文本并保留完整悬停提示。'
+    str: 'LPElideLabel.__init__'
+    str: 'text'
+    str: 'LPElideLabel.setText'
+    str: 'LPElideLabel.minimumSizeHint'
+    str: 'LPElideLabel.resizeEvent'
+    str: 'LPElideLabel._updateElidedText'
+
+  def LPElideLabel.__init__(self, parent)  line 15
+    names: super, __init__, full_text, setSizePolicy, QSizePolicy, Policy, Expanding, Fixed, setAlignment, Qt, AlignmentFlag, AlignLeft, AlignVCenter
+
+  def LPElideLabel.setText(self, text)  line 21
+    names: full_text, setToolTip, _updateElidedText
+      str: '\n        保存完整文本并按当前宽度刷新省略显示。\n\n        参数:\n            text (str): 完整展示文本。\n        返回:\n            无\n        '
+
+  def LPElideLabel.minimumSizeHint(self)  line 34
+    names: super, minimumSizeHint, QSize, height
+      str: '\n        重写最小尺寸提示：宽度固定为 0，避免完整文本把布局最小宽度撑大，\n        保证窗口回缩时控件可以收缩并重新触发省略。\n\n        返回:\n            QSize: 宽度为 0 的最小尺寸提示。\n        '
+
+  def LPElideLabel.resizeEvent(self, event)  line 45
+    names: super, resizeEvent, _updateElidedText
+
+  def LPElideLabel._updateElidedText(self)  line 49
+    names: QFontMetrics, font, elidedText, full_text, Qt, TextElideMode, ElideRight, width, super, setText
+      str: '\n        按控件当前宽度对完整文本做尾部省略并刷新显示。\n\n        参数:\n            无\n        返回:\n            无\n        '

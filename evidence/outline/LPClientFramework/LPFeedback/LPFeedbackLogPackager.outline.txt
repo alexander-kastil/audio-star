@@ -1,0 +1,133 @@
+# module LPClientFramework.LPFeedback.LPFeedbackLogPackager
+
+[module] names: __doc__, logging, shutil, tempfile, time, zipfile, pathlib, Path, Crypto.Cipher, AES, PIL, Image, ImageOps, getLogger, logger, RuntimeError, LPFeedbackWorkDirectoryError, LPFeedbackLogPackager
+  str: 'Feedback 日志和图片的 Android 兼容加密 ZIP 打包器。'
+  str: 'Path'
+  str: 'AES'
+  str: 'Image'
+  str: 'ImageOps'
+  str: 'linkplay'
+  str: 'LPFeedbackWorkDirectoryError'
+  str: 'LPFeedbackLogPackager'
+
+def LPFeedbackWorkDirectoryError()  line 18
+  names: __name__, __module__, __qualname__, __doc__
+    str: 'LPFeedbackWorkDirectoryError'
+    str: '打包用工作/暂存目录创建失败，对应埋点错误码 3006。\n\n    单独定义异常类型，使编排器能把它与打包/加密失败（3007）区分开，\n    从而各自上报文档规定的错误码。\n    '
+
+def LPFeedbackLogPackager()  line 26
+  names: __name__, __module__, __qualname__, __doc__, MAX_ATTACHMENT_COUNT, MAX_LOG_AGE_SECONDS, MAX_LOG_FILE_COUNT, MAX_TOTAL_LOG_SIZE, _AES_DIR, __init__, createArchive, cleanup, _copyLogs, _findLogCandidates, _copyLogFile, _copyAttachments, _encryptTree, _encryptBytes, _createZip
+    str: 'LPFeedbackLogPackager'
+    str: '将应用日志和用户图片复制、加密并压缩为单个反馈 ZIP。'
+    str: 'AES'
+    str: 'LPFeedbackLogPackager.__init__'
+    str: 'LPFeedbackLogPackager.createArchive'
+    str: 'LPFeedbackLogPackager.cleanup'
+    str: 'LPFeedbackLogPackager._copyLogs'
+    str: 'LPFeedbackLogPackager._findLogCandidates'
+    str: 'LPFeedbackLogPackager._copyLogFile'
+    str: 'LPFeedbackLogPackager._copyAttachments'
+    str: 'LPFeedbackLogPackager._encryptTree'
+    str: 'LPFeedbackLogPackager._encryptBytes'
+    str: 'LPFeedbackLogPackager._createZip'
+
+  def LPFeedbackLogPackager.__init__(self, workDirectory, aesKey)  line 35
+    names: Path, _workDirectory, str, encode, _aesKey, len, AES, block_size, ValueError
+      str: '初始化打包器。\n\n        参数:\n            workDirectory (str|Path): 临时工作目录根路径。\n            aesKey (str): Android 兼容的 16 字节 AES 密钥。\n        返回:\n            无。\n        异常:\n            ValueError: AES 密钥长度不是 16 字节时抛出。\n        '
+      str: 'utf-8'
+      str: 'Feedback AES key must contain 16 bytes.'
+
+  def LPFeedbackLogPackager.createArchive(self, submissionId, logDirectory, attachmentPaths, firmwareDirectory)  line 51
+    names: _workDirectory, mkdir, Path, tempfile, mkdtemp, str, OSError, LPFeedbackWorkDirectoryError, _copyLogs, _copyAttachments, _encryptTree, _createZip
+      str: '创建一次提交对应的加密 ZIP 包。\n\n        暂存目录结构对齐安卓 LogsBaseDir：日志入 App/、图片入 Picture/、固件入 firmware/。\n        服务端按 ZIP entry 路径前缀（App/Crash → AES，其他 .log → RC4，非 .log 原样）路由解密。\n\n        参数:\n            submissionId (str): 当前提交唯一标识。\n            logDirectory (str|Path): 应用日志目录。\n            attachmentPaths (list[str]'
+      str: 'parents'
+      str: 'exist_ok'
+      str: '-'
+      str: 'prefix'
+      str: 'dir'
+      str: 'payload'
+      str: 'failed to create feedback work directory: %s'
+      str: 'Picture'
+      str: 'feedback.zip'
+
+  def LPFeedbackLogPackager.cleanup(self, workPath)  line 83
+    names: shutil, rmtree, str
+      str: '删除一次提交产生的临时目录。\n\n        参数:\n            workPath (str|Path|None): 待清理的工作目录。\n        返回:\n            None。\n        '
+      str: 'ignore_errors'
+
+  def LPFeedbackLogPackager._copyLogs(self, logDirectory, stagingRoot, firmwareDirectory)  line 94
+    names: Path, is_dir, mkdir, time, MAX_LOG_AGE_SECONDS, _findLogCandidates, MAX_LOG_FILE_COUNT, is_symlink, is_file, stat, OSError, logger, warning, st_mtime, max, st_size, MAX_TOTAL_LOG_SIZE, _copyLogFile, sorted, rglob, relative_to, parent, shutil, copy2, Error
+      str: '按时间、数量和容量策略复制应用日志到暂存目录的 App/ 分类下。\n\n        firmwareDirectory 下的固件日志原样复制到暂存根的 firmware/ 下\n        （保持明文，不加密），与安卓 LogsFirmwareDir 及服务端路由一致。\n\n        参数:\n            logDirectory (str|Path): 源日志目录。\n            stagingRoot (Path): ZIP 暂存根目录（日志会写入其 App/ 子目录）。\n            firmwareDirectory (str|Path|None)'
+      str: 'App'
+      str: 'parents'
+      str: 'exist_ok'
+      str: '[Feedback] inspect log file failed path=%s error=%s'
+      str: 'firmware'
+      str: '*'
+      str: '[Feedback] copy firmware failed path=%s error=%s'
+
+  def LPFeedbackLogPackager._findLogCandidates(self, sourceDirectory, cutoffTime)  line 161
+    names: rglob, is_symlink, is_file, any, parents, stat, OSError, logger, warning, st_mtime, relative_to, as_posix, append, sort
+      str: '查找时间窗口内的普通日志文件并按新到旧排序。\n\n        参数:\n            sourceDirectory (Path): 日志根目录。\n            cutoffTime (float): 允许收集的最早修改时间戳。\n        返回:\n            list[Path]: 按修改时间降序、相对路径升序排列的候选文件。\n        '
+      str: '*'
+      str: 'LPFeedbackLogPackager._findLogCandidates.<locals>.<genexpr>'
+      str: '[Feedback] inspect log candidate failed path=%s error=%s'
+      str: '[Feedback] scan log directory failed path=%s error=%s'
+      str: 'LPFeedbackLogPackager._findLogCandidates.<locals>.<lambda>'
+      str: 'key'
+      str: 'LPFeedbackLogPackager._findLogCandidates.<locals>.<listcomp>'
+
+    def LPFeedbackLogPackager._findLogCandidates.<genexpr>(.0)  line 177
+      names: name, lower
+        str: 'firmware'
+
+    def LPFeedbackLogPackager._findLogCandidates.<lambda>(candidate)  line 194
+
+    def LPFeedbackLogPackager._findLogCandidates.<listcomp>(.0)  line 195
+
+  def LPFeedbackLogPackager._copyLogFile(self, sourcePath, sourceDirectory, targetDirectory)  line 197
+    names: relative_to, parent, mkdir, shutil, copy2, OSError, Error, unlink, logger, warning
+      str: '复制单个日志并在失败时清理不完整目标文件。\n\n        参数:\n            sourcePath (Path): 待复制日志文件。\n            sourceDirectory (Path): 日志根目录。\n            targetDirectory (Path): ZIP 暂存日志目录。\n        返回:\n            bool: 复制成功时返回 True，否则返回 False。\n        '
+      str: 'parents'
+      str: 'exist_ok'
+      str: 'missing_ok'
+      str: '[Feedback] copy log file failed path=%s error=%s'
+
+  def LPFeedbackLogPackager._copyAttachments(self, attachmentPaths, targetDirectory)  line 220
+    names: mkdir, enumerate, MAX_ATTACHMENT_COUNT, Path, is_file, Image, open, ImageOps, exif_transpose, thumbnail, mode, convert, save, Exception, logger, warning
+      str: '将最多五张图片压缩为 JPEG 并写入 Picture 目录（不加密，保持明文）。\n\n        与安卓一致：图片以明文存入 ZIP，服务端对非 .log 文件原样保存不解密。\n\n        参数:\n            attachmentPaths (list[str]): UI 侧已选择的图片路径。\n            targetDirectory (Path): ZIP 暂存目录中的 Picture 路径。\n        返回:\n            None。\n        '
+      str: 'parents'
+      str: 'exist_ok'
+      str: 'start'
+      str: 'RGB'
+      str: 'L'
+      str: 'RGB'
+      str: 'image-%02d.jpg'
+      str: 'JPEG'
+      str: 'quality'
+      str: '[Feedback] compress attachment failed path=%s error=%s'
+
+  def LPFeedbackLogPackager._encryptTree(self, rootDirectory)  line 247
+    names: sorted, Path, rglob, is_file, any, parents, suffix, lower, parent, name, _AES_DIR, mkdir, write_bytes, _encryptBytes, read_bytes, unlink
+      str: '递归加密 .log 文件，保留原始文件名，密文写入同级 AES/ 子目录。\n\n        对齐安卓 StatisticsAESHelper：仅加密 .log 文件，密文落到父目录下的 AES/\n        子目录并保留原文件名；非 .log 文件（如图片）与 firmware 目录保持明文。\n\n        参数:\n            rootDirectory (Path): 待处理目录根路径。\n        返回:\n            None。\n        '
+      str: '*'
+      str: 'reverse'
+      str: 'LPFeedbackLogPackager._encryptTree.<locals>.<genexpr>'
+      str: '.log'
+      str: 'parents'
+      str: 'exist_ok'
+
+    def LPFeedbackLogPackager._encryptTree.<genexpr>(.0)  line 262
+      names: name, lower
+        str: 'firmware'
+
+  def LPFeedbackLogPackager._encryptBytes(self, sourceBytes)  line 276
+    names: AES, block_size, len, bytes, new, _aesKey, MODE_ECB, encrypt
+      str: "按 Android Cipher.getInstance('AES') 的 ECB/PKCS7 语义加密字节。\n\n        参数:\n            sourceBytes (bytes): 待加密的原始文件内容。\n        返回:\n            bytes: AES-128-ECB PKCS7 密文。\n        "
+
+  def LPFeedbackLogPackager._createZip(self, sourceDirectory, archivePath)  line 288
+    names: zipfile, ZipFile, ZIP_DEFLATED, sorted, Path, rglob, is_file, write, relative_to, as_posix
+      str: '将加密后的暂存目录写为 ZIP 文件。\n\n        参数:\n            sourceDirectory (Path): ZIP 内容根目录。\n            archivePath (Path): 输出 ZIP 文件路径。\n        返回:\n            None。\n        '
+      str: 'w'
+      str: 'compression'
+      str: '*'

@@ -1,0 +1,75 @@
+# module HOME.SideBar.LPSideBarListView
+
+[module] names: __doc__, PyQt6.QtCore, Qt, QAbstractListModel, QSize, QRectF, QRect, QEvent, PyQt6.QtGui, QPainter, QBrush, QColor, QPainterPath, QIcon, QPixmap, QFont, QLinearGradient, PyQt6.QtWidgets, QStyledItemDelegate, QStyle, LPGlobalUI, LPClientFramework.LPConfig.LPFontConfig, Sub_Text, paintSideBarSelectedBackground, LPSideBarListModel, LPSideBarListDelegate
+  str: '\n@Time ： 2025/12/29 13:26\n@Auth ： Chris\n@File ：LPSideBarListView.py\n@Desc:\n'
+  str: 'Qt'
+  str: 'QAbstractListModel'
+  str: 'QSize'
+  str: 'QRectF'
+  str: 'QRect'
+  str: 'QEvent'
+  str: 'QPainter'
+  str: 'QBrush'
+  str: 'QColor'
+  str: 'QPainterPath'
+  str: 'QIcon'
+  str: 'QPixmap'
+  str: 'QFont'
+  str: 'QLinearGradient'
+  str: 'QStyledItemDelegate'
+  str: 'QStyle'
+  str: 'Sub_Text'
+  str: 'paintSideBarSelectedBackground'
+  str: 'LPSideBarListModel'
+  str: 'LPSideBarListDelegate'
+
+def paintSideBarSelectedBackground(painter, cellRect)  line 17
+  names: setRenderHint, QPainter, RenderHint, Antialiasing, QPainterPath, addRoundedRect, QRectF, QColor, LPGlobalUI, THEME_ACCENT_COLOR, setAlpha, QLinearGradient, left, top, right, setColorAt, fillPath, QBrush, save, setClipPath, fillRect, QRect, x, y, height, restore
+    str: '\n    绘制侧边栏条目的选中高亮背景。\n\n    参数:\n        painter: 当前条目绘制使用的 QPainter。\n        cellRect: 当前条目的绘制区域。\n    返回值:\n        None。\n    '
+
+def LPSideBarListModel()  line 47
+  names: __name__, __module__, __qualname__, __init__, rowCount, Qt, ItemDataRole, DisplayRole, data, __classcell__
+    str: 'LPSideBarListModel'
+    str: 'LPSideBarListModel.__init__'
+    str: 'LPSideBarListModel.rowCount'
+    str: 'LPSideBarListModel.data'
+
+  def LPSideBarListModel.__init__(self, data, parent)  line 49
+    names: super, __init__, _data
+      str: '\n        初始化普通侧边栏列表模型。\n\n        参数:\n            data: 侧边栏条目数据列表。\n            parent: Qt 父对象。\n        返回值:\n            None。\n        '
+
+  def LPSideBarListModel.rowCount(self, parent)  line 63
+    names: len, _data
+      str: '\n        获取侧边栏条目数量。\n\n        参数:\n            parent: Qt 模型父索引。\n        返回值:\n            int: 当前数据条目数量。\n        '
+
+  def LPSideBarListModel.data(self, index, role)  line 75
+    names: row, rowCount, _data, Qt, ItemDataRole, DisplayRole
+      str: '\n        获取指定索引和角色的数据。\n\n        参数:\n            index: Qt 模型索引。\n            role: Qt 数据角色。\n        返回值:\n            object: 当前条目数据；无效时返回 None。\n        '
+
+def LPSideBarListDelegate()  line 96
+  names: __name__, __module__, __qualname__, __init__, eventFilter, sizeHint, paint, __classcell__
+    str: 'LPSideBarListDelegate'
+    str: 'LPSideBarListDelegate.__init__'
+    str: 'LPSideBarListDelegate.eventFilter'
+    str: 'LPSideBarListDelegate.sizeHint'
+    str: 'LPSideBarListDelegate.paint'
+
+  def LPSideBarListDelegate.__init__(self, parent)  line 100
+    names: super, __init__, listview, setMouseTracking, viewport, installEventFilter
+      str: '\n        初始化普通侧边栏列表条目绘制代理。\n\n        参数:\n            parent: 代理绑定的列表视图。\n        返回值:\n            None。\n        '
+
+  def LPSideBarListDelegate.eventFilter(self, watched, event)  line 115
+    names: QEvent, Type, MouseButtonPress, MouseButtonRelease, MouseButtonDblClick, listview, viewport, type, hasattr, position, toPoint, pos, indexAt, isValid, super, eventFilter
+      str: '\n        拦截普通侧边栏列表空白区域点击，保持当前选中项不被取消。\n\n        参数:\n            watched: 被监听的 Qt 对象。\n            event: 当前 Qt 事件。\n        返回值:\n            bool: 事件是否已被消费。\n        '
+      str: 'position'
+
+  def LPSideBarListDelegate.sizeHint(self, option, index)  line 139
+    names: QSize, rect, width
+      str: '\n        返回普通侧边栏条目的固定尺寸。\n\n        参数:\n            option: Qt 绘制选项。\n            index: Qt 模型索引。\n        返回值:\n            QSize: 条目建议尺寸。\n        '
+
+  def LPSideBarListDelegate.paint(self, painter, option, index)  line 152
+    names: data, rect, setRenderHint, QPainter, RenderHint, TextAntialiasing, QBrush, setStyle, Qt, BrushStyle, SolidPattern, QPixmap, startswith, LPGlobalUI, imagePath, state, QStyle, StateFlag, State_Selected, setColor, QColor, THEME_DEFAULT_COLOR, State_MouseOver, THEME_LIGHT_COLOR_UI, Antialiasing, QPainterPath, addRoundedRect, QRectF, fillPath, paintSideBarSelectedBackground, height, QRect, x, y, QIcon, addPixmap, paint, width, QFont, setPointSizeF, Sub_Text, setFont, setPen, drawText, AlignmentFlag, AlignLeft, AlignVCenter
+      str: '\n        绘制普通侧边栏条目内容和状态背景。\n\n        参数:\n            painter: Qt 绘制器。\n            option: Qt 条目绘制选项。\n            index: Qt 模型索引。\n        返回值:\n            None。\n        '
+      str: 'icon'
+      str: ':/'
+      str: 'title'

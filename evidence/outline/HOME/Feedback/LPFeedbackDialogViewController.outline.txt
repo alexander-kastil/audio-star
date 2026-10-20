@@ -1,0 +1,337 @@
+# module HOME.Feedback.LPFeedbackDialogViewController
+
+[module] names: __doc__, os, platform, PyQt6.QtCore, QEvent, QPoint, Qt, QTimer, QUrl, pyqtProperty, pyqtSignal, pyqtSlot, PyQt6.QtQml, QQmlContext, PyQt6.QtQuickWidgets, QQuickWidget, PyQt6.QtWidgets, QApplication, QFileDialog, QWidget, LPGlobalUI, LPClientFramework.LPConfig.LPFontConfig, Main_Text, LPClientFramework.LPFeedback.LPFeedbackDraftStore, LPFeedbackDraftStore, LPClientFramework.LPFeedback.LPFeedbackManager, LPFeedbackManager, LPClientFramework.LPFeedback.LPFeedbackModels, LPFeedbackRequest, LPClientFramework.LPFeedback.LPFeedbackPreferences, LPFeedbackPreferences, LPClientFramework.LPUtility, appVersion, cacheDir, logDir, pcUUID, settings, logger, LPFeedbackDialogViewController
+  str: '\n@Time ： 2026/07/09\n@Auth ： feedback\n@File ：LPFeedbackDialogViewController.py\n@Desc: 用户反馈弹窗的 Python 控制器。\n\n职责：\n- 作为 QQuickWidget 宿主，加载并显示 LPFeedbackDialog.qml。\n- 跟随主窗口几何变化同步弹窗覆盖层位置。\n- 收集 QML 表单（主题/邮箱/描述/附件），创建工单后启动一次后台日志上传。\n- 通过 pyqtProperty/pyqtSignal 把提交状态（忙/错误/关闭）回传 QML。\n'
+  str: 'QEvent'
+  str: 'QPoint'
+  str: 'Qt'
+  str: 'QTimer'
+  str: 'QUrl'
+  str: 'pyqtProperty'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'QQmlContext'
+  str: 'QQuickWidget'
+  str: 'QApplication'
+  str: 'QFileDialog'
+  str: 'QWidget'
+  str: 'Main_Text'
+  str: 'LPFeedbackDraftStore'
+  str: 'LPFeedbackManager'
+  str: 'LPFeedbackRequest'
+  str: 'LPFeedbackPreferences'
+  str: 'appVersion'
+  str: 'cacheDir'
+  str: 'logDir'
+  str: 'pcUUID'
+  str: 'settings'
+  str: 'logger'
+  str: 'LPFeedbackDialogViewController'
+
+def LPFeedbackDialogViewController()  line 42
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, feedbackBusyChanged, savedEmailChanged, feedbackCloseRequested, attachmentCountChanged, attachmentPreviewUrlsChanged, _DIALOG_CARD_WIDTH, _MAX_ATTACHMENT_COUNT, classmethod, createForHostWindow, __init__, setupUi, _applyThemeContext, _attachHostWindow, _syncToHostGeometry, eventFilter, _onApplicationStateChanged, _bindRootSignals, _onRootHeightChanged, _onRootVisibleChanged, _setRootProperty, openDialog, closeDialog, pyqtProperty, bool, feedbackBusy, str, savedEmail, int, attachmentCount, attachmentPreviewUrls, _setBusy, _showToast, _setAttachmentCount, _setAttachmentPaths, _attachmentPathKey, _deduplicateImageAttachmentPaths, _isImageAttachmentPath, pyqtSlot, chooseAttachment, removeAttachmentAt, submitFeedback, saveDraft, _flushDraftSave, flushDraft, discardDraft, _persistDraft, _persistDraftCore, restoreDraft, _collectOsVersion, _collectDeviceName, _collectDeviceNames, _provideDeviceList, _onSubmissionCompleted, _onSubmissionFailure, _onUploadFailure, __classcell__
+    str: 'LPFeedbackDialogViewController'
+    str: '用户反馈弹窗控制器。\n\n    以覆盖整个宿主窗口的 QWidget 作为内嵌全屏遮罩层（宿主主窗口的子组件），\n    内嵌 QQuickWidget 渲染全屏半透明遮罩 + 居中的反馈卡片；卡片圆角由 QML 原生处理。\n    通过 setContextProperty("controller", self) 把自身暴露给 QML，QML 调用槽方法提交反馈。\n    '
+    str: 'LPFeedbackDialogViewController.createForHostWindow'
+    str: 'LPFeedbackDialogViewController.__init__'
+    str: 'LPFeedbackDialogViewController.setupUi'
+    str: 'LPFeedbackDialogViewController._applyThemeContext'
+    str: 'LPFeedbackDialogViewController._attachHostWindow'
+    str: 'LPFeedbackDialogViewController._syncToHostGeometry'
+    str: 'LPFeedbackDialogViewController.eventFilter'
+    str: 'LPFeedbackDialogViewController._onApplicationStateChanged'
+    str: 'LPFeedbackDialogViewController._bindRootSignals'
+    str: 'LPFeedbackDialogViewController._onRootHeightChanged'
+    str: 'LPFeedbackDialogViewController._onRootVisibleChanged'
+    str: 'LPFeedbackDialogViewController._setRootProperty'
+    str: 'LPFeedbackDialogViewController.openDialog'
+    str: 'LPFeedbackDialogViewController.closeDialog'
+    str: 'notify'
+    str: 'LPFeedbackDialogViewController.feedbackBusy'
+    str: 'LPFeedbackDialogViewController.savedEmail'
+    str: 'LPFeedbackDialogViewController.attachmentCount'
+    str: 'QStringList'
+    str: 'LPFeedbackDialogViewController.attachmentPreviewUrls'
+    str: 'LPFeedbackDialogViewController._setBusy'
+    str: 'LPFeedbackDialogViewController._showToast'
+    str: 'LPFeedbackDialogViewController._setAttachmentCount'
+    str: 'LPFeedbackDialogViewController._setAttachmentPaths'
+    str: 'LPFeedbackDialogViewController._attachmentPathKey'
+    str: 'LPFeedbackDialogViewController._deduplicateImageAttachmentPaths'
+    str: 'LPFeedbackDialogViewController._isImageAttachmentPath'
+    str: 'LPFeedbackDialogViewController.chooseAttachment'
+    str: 'LPFeedbackDialogViewController.removeAttachmentAt'
+    str: 'LPFeedbackDialogViewController.submitFeedback'
+    str: 'LPFeedbackDialogViewController.saveDraft'
+    str: 'LPFeedbackDialogViewController._flushDraftSave'
+    str: 'LPFeedbackDialogViewController.flushDraft'
+    str: 'LPFeedbackDialogViewController.discardDraft'
+    str: 'LPFeedbackDialogViewController._persistDraft'
+    str: 'LPFeedbackDialogViewController._persistDraftCore'
+    str: 'QVariant'
+    str: 'result'
+    str: 'LPFeedbackDialogViewController.restoreDraft'
+    str: 'LPFeedbackDialogViewController._collectOsVersion'
+    str: 'LPFeedbackDialogViewController._collectDeviceName'
+    str: 'LPFeedbackDialogViewController._collectDeviceNames'
+    str: 'LPFeedbackDialogViewController._provideDeviceList'
+    str: 'LPFeedbackDialogViewController._onSubmissionCompleted'
+    str: 'LPFeedbackDialogViewController._onSubmissionFailure'
+    str: 'LPFeedbackDialogViewController._onUploadFailure'
+
+  def LPFeedbackDialogViewController.createForHostWindow(cls, parent)  line 61
+    names: setupUi
+      str: '工厂方法：创建控制器并完成 UI 初始化。\n\n        参数:\n            parent (QWidget|None): 宿主主窗口，用于几何同步与事件过滤。\n        返回:\n            LPFeedbackDialogViewController: 已初始化（已 setupUi）的控制器实例。\n        '
+      str: 'parent'
+
+  def LPFeedbackDialogViewController.__init__(self, parent)  line 74
+    names: super, __init__, setObjectName, setAttribute, Qt, WidgetAttribute, WA_StyledBackground, WA_TranslucentBackground, setWindowFlags, WindowType, FramelessWindowHint, Tool, platform, system, WA_MacAlwaysShowToolWindow, _feedbackBusy, LPFeedbackPreferences, settings, _feedbackPreferences, loadEmail, _savedEmail, _pendingEmail, _attachmentCount, _attachmentPaths, LPFeedbackDraftStore, cacheDir, _draftStore, QTimer, _draftSaveTimer, setSingleShot, setInterval, timeout, connect, _flushDraftSave, _pendingDraftText, _dialogQuickWidget, _dialogRootObject, _rootVisibleSignalBound, _rootHeightSignalBound, _hostWindow, _pendingHostWindow, _syncingFromHostGeometry, LPFeedbackManager, _provideDeviceList, _feedbackManager, submissionCompleted, _onSubmissionCompleted, submissionFailed, _onSubmissionFailure, uploadFailed, _onUploadFailure, QApplication, instance, applicationStateChanged, _onApplicationStateChanged
+      str: '初始化覆盖整个宿主窗口的内嵌弹窗（全屏遮罩 + 居中卡片）。\n\n        参数:\n            parent (QWidget|None): 宿主主窗口，弹窗作为其子组件覆盖显示。\n        '
+      str: 'feedbackDialogWindow'
+      str: 'Darwin'
+      str: 'feedback_draft_attachments'
+      str: 'parent'
+      str: 'deviceListProvider'
+
+  def LPFeedbackDialogViewController.setupUi(self)  line 135
+    names: QQuickWidget, setResizeMode, ResizeMode, SizeRootObjectToView, setAttribute, Qt, WidgetAttribute, WA_StyledBackground, WA_TranslucentBackground, setClearColor, GlobalColor, transparent, rootContext, setContextProperty, _applyThemeContext, setSource, QUrl, LPGlobalUI, qmlPath, status, Status, Ready, logger, error, errors, toString, debug, statusChanged, connect, _dialogQuickWidget, _bindRootSignals, _attachHostWindow, _pendingHostWindow, hide
+      str: '创建 QQuickWidget 并加载反馈弹窗 QML，注入 controller 与主题色 token。'
+      str: 'controller'
+      str: 'Feedback/LPFeedbackDialog.qml'
+      str: 'FeedbackDialog QML load failed! status: %s'
+      str: 'FeedbackDialog QML err: %s'
+      str: 'FeedbackDialog QML loaded successfully!'
+      str: 'LPFeedbackDialogViewController.setupUi.<locals>.<lambda>'
+
+    def LPFeedbackDialogViewController.setupUi.<lambda>(_status)  line 159
+      names: _bindRootSignals
+
+  def LPFeedbackDialogViewController._applyThemeContext(self, ctx)  line 166
+    names: setContextProperty, LPGlobalUI, THEME_DIALOG_BACK_COLOR_UI, THEME_BUTTON_BACK_COLOR_UI, THEME_DEFAULT_COLOR, THEME_LIGHT_COLOR_UI, float, Main_Text
+      str: '把全局主题色 token 注入 QML 上下文。\n\n        参数:\n            ctx (QQmlContext): QQuickWidget 的根上下文。\n        '
+      str: 'themeDialogBackColor'
+      str: 'themeButtonBackColor'
+      str: 'themeDefaultTextColor'
+      str: 'themeLightTextColor'
+      str: 'feedbackMainTextPointSize'
+
+  def LPFeedbackDialogViewController._attachHostWindow(self, hostWindow)  line 182
+    names: _hostWindow, removeEventFilter, installEventFilter, _syncToHostGeometry
+      str: '绑定宿主窗口，安装事件过滤器以同步几何与生命周期。\n\n        参数:\n            hostWindow (QWidget|None): 宿主主窗口。\n        '
+
+  def LPFeedbackDialogViewController._syncToHostGeometry(self)  line 198
+    names: _hostWindow, _syncingFromHostGeometry, mapToGlobal, QPoint, setGeometry, x, y, width, height, _dialogRootObject, max, int, setProperty, _dialogQuickWidget, rect
+      str: '同步内嵌弹窗（全屏遮罩层）几何到宿主窗口，并刷新卡片最大高度。'
+      str: 'maxDialogHeight'
+
+  def LPFeedbackDialogViewController.eventFilter(self, watched, event)  line 222
+    names: _hostWindow, type, QEvent, Type, Resize, Move, Show, _syncToHostGeometry, Hide, Close, closeDialog, hide, WindowStateChange, isMinimized, super, eventFilter
+      str: '监听宿主窗口事件，同步弹窗几何与生命周期。\n\n        参数:\n            watched (QObject): 被监听对象。\n            event (QEvent): 事件。\n        返回:\n            bool: 是否拦截事件；其余交由父类处理。\n        '
+
+  def LPFeedbackDialogViewController._onApplicationStateChanged(self, state)  line 243
+    names: Qt, ApplicationState, ApplicationActive, _dialogRootObject, bool, property, _syncToHostGeometry, _hostWindow, raise_, update, isVisible, show, _dialogQuickWidget
+      str: '前后台切换回前台后，若弹窗仍打开则恢复显示并刷新层级与重绘。\n\n        参数:\n            state (Qt.ApplicationState): 应用状态。\n        '
+      str: 'visible'
+
+  def LPFeedbackDialogViewController._bindRootSignals(self)  line 271
+    names: _dialogQuickWidget, status, QQuickWidget, Status, Ready, rootObject, _dialogRootObject, _rootVisibleSignalBound, getattr, connect, _onRootVisibleChanged, _rootHeightSignalBound, _onRootHeightChanged
+      str: 'QML 加载完成后绑定根对象 visibleChanged 信号，驱动 QWidget 显隐。'
+      str: 'visibleChanged'
+      str: 'dialogCardHeightChanged'
+
+  def LPFeedbackDialogViewController._onRootHeightChanged(self)  line 291
+    names: _syncToHostGeometry
+      str: 'QML 卡片高度变化时，重新居中内嵌弹窗。\n\n        参数:\n            无。\n        返回:\n            None。\n        '
+
+  def LPFeedbackDialogViewController._onRootVisibleChanged(self)  line 301
+    names: _dialogRootObject, bool, property, _syncToHostGeometry, isVisible, show, raise_, hide
+      str: 'QML 根 visible 变化时同步 QWidget 覆盖层的显隐。'
+      str: 'visible'
+
+  def LPFeedbackDialogViewController._setRootProperty(self, key, value)  line 314
+    names: _dialogRootObject, setProperty
+      str: '安全地设置 QML 根对象属性。\n\n        参数:\n            key (str): 属性名。\n            value (object): 属性值。\n        '
+
+  def LPFeedbackDialogViewController.openDialog(self)  line 329
+    names: _syncToHostGeometry, _dialogRootObject, _setRootProperty, isVisible, show, raise_
+      str: '打开反馈弹窗：几何同步后显示内嵌全屏遮罩 + 居中卡片。'
+      str: 'visible'
+
+  def LPFeedbackDialogViewController.closeDialog(self)  line 340
+    names: _setRootProperty
+      str: '关闭反馈弹窗，隐藏全屏遮罩 + 卡片。'
+      str: 'visible'
+
+  def LPFeedbackDialogViewController.feedbackBusy(self)  line 347
+    names: _feedbackBusy
+      str: 'bool: 提交是否进行中（True 时 QML 禁用按钮并显示 loading）。'
+
+  def LPFeedbackDialogViewController.savedEmail(self)  line 352
+    names: _savedEmail
+      str: 'str: 上一次成功提交 Feedback 时使用的邮箱。'
+
+  def LPFeedbackDialogViewController.attachmentCount(self)  line 357
+    names: _attachmentCount
+      str: 'int: 已选附件数量（供 QML 在附件按钮上显示角标）。'
+
+  def LPFeedbackDialogViewController.attachmentPreviewUrls(self)  line 362
+    names: _attachmentPaths
+      str: 'list[str]: 已选图片附件的本地 file URL 列表，供 QML 横向预览。'
+      str: 'LPFeedbackDialogViewController.attachmentPreviewUrls.<locals>.<listcomp>'
+
+    def LPFeedbackDialogViewController.attachmentPreviewUrls.<listcomp>(.0)  line 365
+      names: QUrl, fromLocalFile, toString
+
+  def LPFeedbackDialogViewController._setBusy(self, busy)  line 370
+    names: _feedbackBusy, feedbackBusyChanged, emit
+      str: '更新提交忙状态并发信号。\n\n        参数:\n            busy (bool): 是否忙。\n        '
+
+  def LPFeedbackDialogViewController._showToast(self, message)  line 381
+    names: LPGlobalUI, toast, showToast, tr
+      str: '通过应用通用 Toast 显示非邮箱校验错误。\n\n        参数:\n            message (str): 要显示的错误提示文本。\n        返回:\n            None。\n        '
+      str: 'timeout'
+
+  def LPFeedbackDialogViewController._setAttachmentCount(self, count)  line 391
+    names: _attachmentCount, attachmentCountChanged, emit
+      str: '更新附件计数并发信号。\n\n        参数:\n            count (int): 附件数量。\n        '
+
+  def LPFeedbackDialogViewController._setAttachmentPaths(self, paths)  line 402
+    names: list, _attachmentPaths, _setAttachmentCount, len, attachmentPreviewUrlsChanged, emit
+      str: '更新图片附件路径列表，并同步计数与预览 URL 变更信号。\n\n        参数:\n            paths (list[str]): 已通过图片类型校验的本地文件路径列表。\n        返回:\n            None\n        '
+
+  def LPFeedbackDialogViewController._attachmentPathKey(self, path)  line 414
+    names: os, path, normcase, realpath
+      str: '生成图片附件去重使用的归一化路径 key。\n\n        参数:\n            path (str): 本地图片文件路径。\n        返回:\n            str: 归一化后的真实路径 key，用于判断是否为同一张图片。\n        '
+
+  def LPFeedbackDialogViewController._deduplicateImageAttachmentPaths(self, paths)  line 424
+    names: set, _attachmentPathKey, add, append
+      str: '按本地真实路径对图片附件去重，并保留首次出现的顺序。\n\n        参数:\n            paths (list[str]): 待去重的图片附件路径列表。\n        返回:\n            list[str]: 去重后的图片附件路径列表。\n        '
+
+  def LPFeedbackDialogViewController._isImageAttachmentPath(self, path)  line 442
+    names: str, lower, endswith
+      str: '判断文件路径是否属于反馈弹窗允许上传的图片格式。\n\n        参数:\n            path (str): 本地文件路径。\n        返回:\n            bool: True 表示允许作为图片附件上传，否则 False。\n        '
+      str: '.png'
+      str: '.jpg'
+      str: '.jpeg'
+      str: '.bmp'
+      str: '.gif'
+      str: '.webp'
+
+  def LPFeedbackDialogViewController.chooseAttachment(self)  line 456
+    names: _MAX_ATTACHMENT_COUNT, len, _attachmentPaths, _showToast, QFileDialog, getOpenFileNames, tr, _draftStore, copyAttachment, append, _deduplicateImageAttachmentPaths, _setAttachmentPaths, _persistDraft, logger, info
+      str: '打开文件选择器，让用户选择一个或多个图片附件。\n\n        已选满上限（5 张）时直接 Toast 提示并返回，不再打开文件选择器；\n        否则选择的图片路径累加到 self._attachmentPaths，并同步附件计数和预览列表到 QML。\n\n        参数:\n            无。\n        返回:\n            None。\n        '
+      str: 'Maximum 5 images allowed.'
+      str: 'Select Images'
+      str: 'Images (*.png *.jpg *.jpeg *.bmp *.gif *.webp)'
+      str: 'LPFeedbackDialogViewController.chooseAttachment.<locals>.<listcomp>'
+      str: 'Please select image files only.'
+      str: 'Only the first 5 images can be attached.'
+      str: '[Feedback] attachment selected: count=%d'
+
+    def LPFeedbackDialogViewController.chooseAttachment.<listcomp>(.0)  line 480
+      names: _isImageAttachmentPath
+
+  def LPFeedbackDialogViewController.removeAttachmentAt(self, index)  line 499
+    names: len, _attachmentPaths, list, pop, _setAttachmentPaths, _draftStore, removeAttachment, _persistDraft, logger, info
+      str: '按索引移除一个已选图片附件。\n\n        参数:\n            index (int): QML 图片预览列表中的附件索引。\n        '
+      str: '[Feedback] attachment removed: index=%d path=%s'
+
+  def LPFeedbackDialogViewController.submitFeedback(self, subject, email, description)  line 516
+    names: strip, _showToast, _setBusy, LPGlobalUI, currentDevice, str, getattr, LPFeedbackRequest, list, _attachmentPaths, appVersion, platform, system, pcUUID, logDir, _collectOsVersion, _collectDeviceName, _collectDeviceNames, email, _pendingEmail, _feedbackManager, submit
+      str: '提交用户反馈：创建工单后启动一次后台日志上传。\n\n        参数:\n            subject (str): 反馈主题。\n            email (str): 用户邮箱。\n            description (str): 问题描述。\n        返回:\n            None。\n        '
+      str: 'Please enter a description.'
+      str: 'uuid'
+      str: 'unknow'
+      str: 'FeedbackDebug'
+      str: 'name'
+      str: 'subject'
+      str: 'email'
+      str: 'description'
+      str: 'attachmentPaths'
+      str: 'appVersion'
+      str: 'platformName'
+      str: 'appUuid'
+      str: 'deviceUuid'
+      str: 'logDirectory'
+      str: 'feedbackType'
+      str: 'osVersion'
+      str: 'deviceName'
+      str: 'currentDeviceName'
+      str: 'deviceList'
+
+  def LPFeedbackDialogViewController.saveDraft(self, subject, email, description)  line 558
+    names: _pendingDraftText, _draftSaveTimer, start
+      str: '暂存 QML 最新草稿文本并重启防抖定时器，避免每次按键都落盘。\n\n        参数:\n            subject (str): 反馈主题。\n            email (str): 用户邮箱。\n            description (str): 问题描述。\n        返回:\n            None。\n        '
+
+  def LPFeedbackDialogViewController._flushDraftSave(self)  line 572
+    names: _pendingDraftText, _persistDraftCore
+      str: '防抖定时器到点：把暂存的最新草稿文本与附件一起写入存储。\n\n        参数:\n            无。\n        返回:\n            None。\n        '
+
+  def LPFeedbackDialogViewController.flushDraft(self)  line 585
+    names: _pendingDraftText, _persistDraftCore, _draftSaveTimer, stop
+      str: '关闭弹窗前强制写入最新草稿（防抖定时器尚未触发时兜底）。\n\n        参数:\n            无。\n        返回:\n            None。\n        '
+
+  def LPFeedbackDialogViewController.discardDraft(self)  line 599
+    names: _draftSaveTimer, stop, _pendingDraftText, _draftStore, clear, _setAttachmentPaths, logger, info
+      str: '用户手动关闭弹窗时丢弃填写未提交的内容。\n\n        用于 QML 右上角 close 按钮：停止防抖写盘、丢弃待写草稿、清空磁盘草稿\n        （含附件图片副本），并清空已选附件列表。下次打开弹窗回到默认预填邮箱的空表单。\n\n        参数:\n            无。\n        返回:\n            None。\n        '
+      str: '[Feedback] draft discarded by manual close'
+
+  def LPFeedbackDialogViewController._persistDraft(self)  line 617
+    names: _pendingDraftText, _persistDraftCore
+      str: '附件变化后立即写盘最新草稿（文本取最近一次暂存值，未暂存视为空）。\n\n        参数:\n            无。\n        返回:\n            None。\n        '
+
+  def LPFeedbackDialogViewController._persistDraftCore(self, subject, email, description)  line 628
+    names: bool, strip, _savedEmail, _attachmentPaths, _draftStore, clear, save, list
+      str: '把草稿文本与附件写入存储；仅剩预填邮箱等无实际内容时清除草稿。\n\n        参数:\n            subject (str): 反馈主题。\n            email (str): 用户邮箱。\n            description (str): 问题描述。\n        返回:\n            None。\n        '
+
+  def LPFeedbackDialogViewController.restoreDraft(self)  line 645
+    names: _draftStore, load, _setAttachmentPaths, get
+      str: '恢复草稿：恢复附件副本到控制器并返回文本字典给 QML 回填；无草稿返回 None。\n\n        附件恢复时校验副本文件仍存在，已丢失的副本自动跳过。\n\n        参数:\n            无。\n        返回:\n            dict|None: 含 subject/email/description 的字典；无有效草稿时返回 None。\n        '
+      str: 'LPFeedbackDialogViewController.restoreDraft.<locals>.<listcomp>'
+      str: 'attachmentPaths'
+      str: 'subject'
+      str: 'email'
+      str: 'description'
+      str: 'subject'
+      str: 'email'
+      str: 'description'
+
+    def LPFeedbackDialogViewController.restoreDraft.<listcomp>(.0)  line 660
+      names: os, path, isfile
+
+  def LPFeedbackDialogViewController._collectOsVersion(self)  line 668
+    names: platform, release, version, Exception
+      str: '收集操作系统版本字符串，供 emailMetadata.message.OSVersion 使用。\n\n        参数:\n            无。\n        返回:\n            str: 系统版本（如 macOS 15.1 返回 "15.1.0"，Windows 返回 "10.0.22631"）。\n        '
+
+  def LPFeedbackDialogViewController._collectDeviceName(self)  line 684
+    names: platform, system, node, strip, Exception
+      str: '收集本机品牌+型号字符串，对应安卓 Build.BRAND + " " + Build.MODEL。\n\n        参数:\n            无。\n        返回:\n            str: "Darwin <主机名>" 形式的本机标识。\n        '
+      str: '%s %s'
+
+  def LPFeedbackDialogViewController._collectDeviceNames(self)  line 699
+    names: getattr, LPGlobalUI, deviceList, str, append, Exception, logger, warning
+      str: '收集当前在线的 WiiM 设备 (名称, UUID) 列表，供 emailMetadata.message.DeviceList 使用。\n\n        参数:\n            无。\n        返回:\n            list[tuple]: 元素为 (设备名, 设备UUID) 的列表，与安卓 DeviceItem 的 name/uuid 对齐。\n        '
+      str: 'deviceManager'
+      str: 'name'
+      str: 'uuid'
+      str: '[Feedback] collect device list failed: %s'
+
+  def LPFeedbackDialogViewController._provideDeviceList(self)  line 724
+    names: getattr, LPGlobalUI, list, deviceList, Exception, logger, warning
+      str: '提供当前在线设备列表供固件日志收集使用。\n\n        参数:\n            无。\n        返回:\n            list: LPDevice 列表；获取失败时返回空列表。\n        '
+      str: 'deviceManager'
+      str: '[Feedback] provide device list failed: %s'
+
+  def LPFeedbackDialogViewController._onSubmissionCompleted(self)  line 741
+    names: _pendingEmail, _feedbackPreferences, saveEmail, _savedEmail, savedEmailChanged, emit, Exception, logger, warning, _draftSaveTimer, stop, _pendingDraftText, _draftStore, clear, _setBusy, _setAttachmentPaths, _showToast, feedbackCloseRequested
+      str: '反馈提交和日志上传全部成功后清理表单并关闭弹窗。\n\n        参数:\n            无。\n        返回:\n            None。\n        '
+      str: '[Feedback] save email preference failed: %s'
+      str: 'Feedback submitted successfully.'
+
+  def LPFeedbackDialogViewController._onSubmissionFailure(self, message)  line 769
+    names: _pendingEmail, _setBusy, _showToast
+      str: '工单创建失败后清除忙状态并显示通用 Toast。\n\n        参数:\n            message (str): 错误提示文本。\n        返回:\n            None。\n        '
+
+  def LPFeedbackDialogViewController._onUploadFailure(self, message)  line 782
+    names: _setBusy, _showToast
+      str: '工单创建后上传失败时通过全局 Toast 提示用户。\n\n        参数:\n            message (str): 要显示的通用错误提示文本。\n        返回:\n            None。\n        '

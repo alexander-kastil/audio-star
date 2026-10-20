@@ -1,0 +1,443 @@
+
+=== <module> ===
+ 15           0 LOAD_CONST               0 ('If the title is empty, try to extract track and title from the\nfilename.\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 19           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('plugins',))
+              8 IMPORT_NAME              1 (beets)
+             10 IMPORT_FROM              2 (plugins)
+             12 STORE_NAME               2 (plugins)
+             14 POP_TOP
+
+ 20          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('displayable_path',))
+             20 IMPORT_NAME              3 (beets.util)
+             22 IMPORT_FROM              4 (displayable_path)
+             24 STORE_NAME               4 (displayable_path)
+             26 POP_TOP
+
+ 21          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               4 (None)
+             32 IMPORT_NAME              5 (os)
+             34 STORE_NAME               5 (os)
+
+ 22          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               4 (None)
+             40 IMPORT_NAME              6 (re)
+             42 STORE_NAME               6 (re)
+
+ 26          44 BUILD_LIST               0
+             46 LOAD_CONST               5 (('^(?P<artist>.+)[\\-_](?P<title>.+)[\\-_](?P<tag>.*)$', '^(?P<track>\\d+)[\\s.\\-_]+(?P<artist>.+)[\\-_](?P<title>.+)[\\-_](?P<tag>.*)$', '^(?P<artist>.+)[\\-_](?P<title>.+)$', '^(?P<track>\\d+)[\\s.\\-_]+(?P<artist>.+)[\\-_](?P<title>.+)$', '^(?P<title>.+)$', '^(?P<track>\\d+)[\\s.\\-_]+(?P<title>.+)$', '^(?P<track>\\d+)\\s+(?P<title>.+)$', '^(?P<title>.+) by (?P<artist>.+)$', '^(?P<track>\\d+).*$'))
+             48 LIST_EXTEND              1
+             50 STORE_NAME               7 (PATTERNS)
+
+ 41          52 LOAD_CONST               6 ('^$')
+
+ 40          54 BUILD_LIST               1
+             56 STORE_NAME               8 (BAD_TITLE_PATTERNS)
+
+ 45          58 LOAD_CONST               7 (<code object equal at 0x000001F3253DD3A0, file "beetsplug\fromfilename.py", line 45>)
+             60 LOAD_CONST               8 ('equal')
+             62 MAKE_FUNCTION            0
+             64 STORE_NAME               9 (equal)
+
+ 51          66 LOAD_CONST               9 (<code object equal_fields at 0x000001F3253B0240, file "beetsplug\fromfilename.py", line 51>)
+             68 LOAD_CONST              10 ('equal_fields')
+             70 MAKE_FUNCTION            0
+             72 STORE_NAME              10 (equal_fields)
+
+ 59          74 LOAD_CONST              11 (<code object all_matches at 0x000001F324DE50E0, file "beetsplug\fromfilename.py", line 59>)
+             76 LOAD_CONST              12 ('all_matches')
+             78 MAKE_FUNCTION            0
+             80 STORE_NAME              11 (all_matches)
+
+ 78          82 LOAD_CONST              13 (<code object bad_title at 0x000001F3253B4920, file "beetsplug\fromfilename.py", line 78>)
+             84 LOAD_CONST              14 ('bad_title')
+             86 MAKE_FUNCTION            0
+             88 STORE_NAME              12 (bad_title)
+
+ 88          90 LOAD_CONST              15 (<code object apply_matches at 0x000001F3253B4870, file "beetsplug\fromfilename.py", line 88>)
+             92 LOAD_CONST              16 ('apply_matches')
+             94 MAKE_FUNCTION            0
+             96 STORE_NAME              13 (apply_matches)
+
+131          98 LOAD_BUILD_CLASS
+            100 LOAD_CONST              17 (<code object FromFilenamePlugin at 0x000001F324E7B5B0, file "beetsplug\fromfilename.py", line 131>)
+            102 LOAD_CONST              18 ('FromFilenamePlugin')
+            104 MAKE_FUNCTION            0
+            106 LOAD_CONST              18 ('FromFilenamePlugin')
+            108 LOAD_NAME                2 (plugins)
+            110 LOAD_ATTR               14 (BeetsPlugin)
+            112 CALL_FUNCTION            3
+            114 STORE_NAME              15 (FromFilenamePlugin)
+
+137         116 LOAD_CONST              19 (<code object filename_task at 0x000001F324E89EA0, file "beetsplug\fromfilename.py", line 137>)
+            118 LOAD_CONST              20 ('filename_task')
+            120 MAKE_FUNCTION            0
+            122 STORE_NAME              16 (filename_task)
+            124 LOAD_CONST               4 (None)
+            126 RETURN_VALUE
+
+=== equal ===
+ 48           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_GLOBAL              1 (set)
+              4 LOAD_FAST                0 (seq)
+              6 CALL_FUNCTION            1
+              8 CALL_FUNCTION            1
+             10 LOAD_CONST               1 (1)
+             12 COMPARE_OP               1 (<=)
+             14 RETURN_VALUE
+
+=== equal_fields ===
+ 56           0 LOAD_GLOBAL              0 (equal)
+              2 LOAD_CLOSURE             0 (field)
+              4 BUILD_TUPLE              1
+              6 LOAD_CONST               1 (<code object <genexpr> at 0x000001F3253B0450, file "beetsplug\fromfilename.py", line 56>)
+              8 LOAD_CONST               2 ('equal_fields.<locals>.<genexpr>')
+             10 MAKE_FUNCTION            8 (closure)
+             12 LOAD_FAST                0 (matchdict)
+             14 LOAD_METHOD              1 (values)
+             16 CALL_METHOD              0
+             18 GET_ITER
+             20 CALL_FUNCTION            1
+             22 CALL_FUNCTION            1
+             24 RETURN_VALUE
+
+=== equal_fields.<genexpr> ===
+ 56           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (m)
+              6 LOAD_FAST                1 (m)
+              8 LOAD_DEREF               0 (field)
+             10 BINARY_SUBSCR
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== all_matches ===
+ 65           0 BUILD_MAP                0
+              2 STORE_FAST               2 (matches)
+
+ 66           4 LOAD_FAST                0 (names)
+              6 LOAD_METHOD              0 (items)
+              8 CALL_METHOD              0
+             10 GET_ITER
+        >>   12 FOR_ITER                56 (to 70)
+             14 UNPACK_SEQUENCE          2
+             16 STORE_FAST               3 (item)
+             18 STORE_FAST               4 (name)
+
+ 67          20 LOAD_GLOBAL              1 (re)
+             22 LOAD_METHOD              2 (match)
+             24 LOAD_FAST                1 (pattern)
+             26 LOAD_FAST                4 (name)
+             28 LOAD_GLOBAL              1 (re)
+             30 LOAD_ATTR                3 (IGNORECASE)
+             32 CALL_METHOD              3
+             34 STORE_FAST               5 (m)
+
+ 68          36 LOAD_FAST                5 (m)
+             38 POP_JUMP_IF_FALSE       62
+             40 LOAD_FAST                5 (m)
+             42 LOAD_METHOD              4 (groupdict)
+             44 CALL_METHOD              0
+             46 POP_JUMP_IF_FALSE       62
+
+ 72          48 LOAD_FAST                5 (m)
+             50 LOAD_METHOD              4 (groupdict)
+             52 CALL_METHOD              0
+             54 LOAD_FAST                2 (matches)
+             56 LOAD_FAST                3 (item)
+             58 STORE_SUBSCR
+             60 JUMP_ABSOLUTE           12
+
+ 74     >>   62 POP_TOP
+             64 LOAD_CONST               1 (None)
+             66 RETURN_VALUE
+             68 JUMP_ABSOLUTE           12
+
+ 75     >>   70 LOAD_FAST                2 (matches)
+             72 RETURN_VALUE
+
+=== bad_title ===
+ 82           0 LOAD_GLOBAL              0 (BAD_TITLE_PATTERNS)
+              2 GET_ITER
+        >>    4 FOR_ITER                26 (to 32)
+              6 STORE_FAST               1 (pat)
+
+ 83           8 LOAD_GLOBAL              1 (re)
+             10 LOAD_METHOD              2 (match)
+             12 LOAD_FAST                1 (pat)
+             14 LOAD_FAST                0 (title)
+             16 LOAD_GLOBAL              1 (re)
+             18 LOAD_ATTR                3 (IGNORECASE)
+             20 CALL_METHOD              3
+             22 POP_JUMP_IF_FALSE        4
+
+ 84          24 POP_TOP
+             26 LOAD_CONST               1 (True)
+             28 RETURN_VALUE
+             30 JUMP_ABSOLUTE            4
+
+ 85     >>   32 LOAD_CONST               2 (False)
+             34 RETURN_VALUE
+
+=== apply_matches ===
+ 92           0 LOAD_GLOBAL              0 (list)
+              2 LOAD_FAST                0 (d)
+              4 LOAD_METHOD              1 (values)
+              6 CALL_METHOD              0
+              8 CALL_FUNCTION            1
+             10 LOAD_CONST               1 (0)
+             12 BINARY_SUBSCR
+             14 STORE_FAST               1 (some_map)
+
+ 93          16 LOAD_FAST                1 (some_map)
+             18 LOAD_METHOD              2 (keys)
+             20 CALL_METHOD              0
+             22 STORE_FAST               2 (keys)
+
+ 96          24 LOAD_CONST               2 ('tag')
+             26 LOAD_FAST                2 (keys)
+             28 CONTAINS_OP              0
+             30 POP_JUMP_IF_FALSE       46
+             32 LOAD_GLOBAL              3 (equal_fields)
+             34 LOAD_FAST                0 (d)
+             36 LOAD_CONST               2 ('tag')
+             38 CALL_FUNCTION            2
+             40 POP_JUMP_IF_TRUE        46
+
+ 97          42 LOAD_CONST               3 (None)
+             44 RETURN_VALUE
+
+102     >>   46 LOAD_CONST               4 ('artist')
+             48 LOAD_FAST                2 (keys)
+             50 CONTAINS_OP              0
+             52 POP_JUMP_IF_FALSE      130
+
+103          54 LOAD_GLOBAL              3 (equal_fields)
+             56 LOAD_FAST                0 (d)
+             58 LOAD_CONST               4 ('artist')
+             60 CALL_FUNCTION            2
+             62 POP_JUMP_IF_FALSE       78
+
+104          64 LOAD_FAST                1 (some_map)
+             66 LOAD_CONST               4 ('artist')
+             68 BINARY_SUBSCR
+             70 STORE_FAST               3 (artist)
+
+105          72 LOAD_CONST               5 ('title')
+             74 STORE_FAST               4 (title_field)
+             76 JUMP_FORWARD            28 (to 106)
+
+106     >>   78 LOAD_GLOBAL              3 (equal_fields)
+             80 LOAD_FAST                0 (d)
+             82 LOAD_CONST               5 ('title')
+             84 CALL_FUNCTION            2
+             86 POP_JUMP_IF_FALSE      102
+
+107          88 LOAD_FAST                1 (some_map)
+             90 LOAD_CONST               5 ('title')
+             92 BINARY_SUBSCR
+             94 STORE_FAST               3 (artist)
+
+108          96 LOAD_CONST               4 ('artist')
+             98 STORE_FAST               4 (title_field)
+            100 JUMP_FORWARD             4 (to 106)
+
+111     >>  102 LOAD_CONST               3 (None)
+            104 RETURN_VALUE
+
+113     >>  106 LOAD_FAST                0 (d)
+            108 GET_ITER
+        >>  110 FOR_ITER                16 (to 128)
+            112 STORE_FAST               5 (item)
+
+114         114 LOAD_FAST                5 (item)
+            116 LOAD_ATTR                4 (artist)
+            118 POP_JUMP_IF_TRUE       110
+
+115         120 LOAD_FAST                3 (artist)
+            122 LOAD_FAST                5 (item)
+            124 STORE_ATTR               4 (artist)
+            126 JUMP_ABSOLUTE          110
+        >>  128 JUMP_FORWARD             4 (to 134)
+
+119     >>  130 LOAD_CONST               5 ('title')
+            132 STORE_FAST               4 (title_field)
+
+122     >>  134 LOAD_FAST                0 (d)
+            136 GET_ITER
+        >>  138 FOR_ITER                72 (to 212)
+            140 STORE_FAST               5 (item)
+
+123         142 LOAD_GLOBAL              5 (bad_title)
+            144 LOAD_FAST                5 (item)
+            146 LOAD_ATTR                6 (title)
+            148 CALL_FUNCTION            1
+            150 POP_JUMP_IF_FALSE      170
+
+124         152 LOAD_GLOBAL              7 (str)
+            154 LOAD_FAST                0 (d)
+            156 LOAD_FAST                5 (item)
+            158 BINARY_SUBSCR
+            160 LOAD_FAST                4 (title_field)
+            162 BINARY_SUBSCR
+            164 CALL_FUNCTION            1
+            166 LOAD_FAST                5 (item)
+            168 STORE_ATTR               6 (title)
+
+125     >>  170 LOAD_CONST               6 ('track')
+            172 LOAD_FAST                0 (d)
+            174 LOAD_FAST                5 (item)
+            176 BINARY_SUBSCR
+            178 CONTAINS_OP              0
+            180 POP_JUMP_IF_FALSE      138
+            182 LOAD_FAST                5 (item)
+            184 LOAD_ATTR                8 (track)
+            186 LOAD_CONST               1 (0)
+            188 COMPARE_OP               2 (==)
+            190 POP_JUMP_IF_FALSE      138
+
+126         192 LOAD_GLOBAL              9 (int)
+            194 LOAD_FAST                0 (d)
+            196 LOAD_FAST                5 (item)
+            198 BINARY_SUBSCR
+            200 LOAD_CONST               6 ('track')
+            202 BINARY_SUBSCR
+            204 CALL_FUNCTION            1
+            206 LOAD_FAST                5 (item)
+            208 STORE_ATTR               8 (track)
+            210 JUMP_ABSOLUTE          138
+        >>  212 LOAD_CONST               3 (None)
+            214 RETURN_VALUE
+
+=== FromFilenamePlugin ===
+131           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('FromFilenamePlugin')
+              6 STORE_NAME               2 (__qualname__)
+
+132           8 LOAD_CLOSURE             0 (__class__)
+             10 BUILD_TUPLE              1
+             12 LOAD_CONST               1 (<code object __init__ at 0x000001F324E7B3A0, file "beetsplug\fromfilename.py", line 132>)
+             14 LOAD_CONST               2 ('FromFilenamePlugin.__init__')
+             16 MAKE_FUNCTION            8 (closure)
+             18 STORE_NAME               3 (__init__)
+             20 LOAD_CLOSURE             0 (__class__)
+             22 DUP_TOP
+             24 STORE_NAME               4 (__classcell__)
+             26 RETURN_VALUE
+
+=== FromFilenamePlugin.__init__ ===
+133           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+134          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              2 (register_listener)
+             14 LOAD_CONST               1 ('import_task_start')
+             16 LOAD_GLOBAL              3 (filename_task)
+             18 CALL_METHOD              2
+             20 POP_TOP
+             22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== filename_task ===
+145           0 LOAD_FAST                0 (task)
+              2 LOAD_ATTR                0 (is_album)
+              4 POP_JUMP_IF_FALSE       12
+              6 LOAD_FAST                0 (task)
+              8 LOAD_ATTR                1 (items)
+             10 JUMP_FORWARD             6 (to 18)
+        >>   12 LOAD_FAST                0 (task)
+             14 LOAD_ATTR                2 (item)
+             16 BUILD_LIST               1
+        >>   18 STORE_FAST               2 (items)
+
+148          20 LOAD_GLOBAL              3 (sum)
+             22 LOAD_CONST               1 (<code object <genexpr> at 0x000001F324E7B500, file "beetsplug\fromfilename.py", line 148>)
+             24 LOAD_CONST               2 ('filename_task.<locals>.<genexpr>')
+             26 MAKE_FUNCTION            0
+             28 LOAD_FAST                2 (items)
+             30 GET_ITER
+             32 CALL_FUNCTION            1
+             34 CALL_FUNCTION            1
+             36 STORE_FAST               3 (missing_titles)
+
+150          38 LOAD_FAST                3 (missing_titles)
+             40 POP_JUMP_IF_FALSE      130
+
+152          42 BUILD_MAP                0
+             44 STORE_FAST               4 (names)
+
+153          46 LOAD_FAST                2 (items)
+             48 GET_ITER
+        >>   50 FOR_ITER                46 (to 98)
+             52 STORE_FAST               5 (item)
+
+154          54 LOAD_GLOBAL              4 (displayable_path)
+             56 LOAD_FAST                5 (item)
+             58 LOAD_ATTR                5 (path)
+             60 CALL_FUNCTION            1
+             62 STORE_FAST               6 (path)
+
+155          64 LOAD_GLOBAL              6 (os)
+             66 LOAD_ATTR                5 (path)
+             68 LOAD_METHOD              7 (splitext)
+             70 LOAD_GLOBAL              6 (os)
+             72 LOAD_ATTR                5 (path)
+             74 LOAD_METHOD              8 (basename)
+             76 LOAD_FAST                6 (path)
+             78 CALL_METHOD              1
+             80 CALL_METHOD              1
+             82 UNPACK_SEQUENCE          2
+             84 STORE_FAST               7 (name)
+             86 STORE_FAST               8 (_)
+
+156          88 LOAD_FAST                7 (name)
+             90 LOAD_FAST                4 (names)
+             92 LOAD_FAST                5 (item)
+             94 STORE_SUBSCR
+             96 JUMP_ABSOLUTE           50
+
+159     >>   98 LOAD_GLOBAL              9 (PATTERNS)
+            100 GET_ITER
+        >>  102 FOR_ITER                26 (to 130)
+            104 STORE_FAST               9 (pattern)
+
+160         106 LOAD_GLOBAL             10 (all_matches)
+            108 LOAD_FAST                4 (names)
+            110 LOAD_FAST                9 (pattern)
+            112 CALL_FUNCTION            2
+            114 STORE_FAST              10 (d)
+
+161         116 LOAD_FAST               10 (d)
+            118 POP_JUMP_IF_FALSE      102
+
+162         120 LOAD_GLOBAL             11 (apply_matches)
+            122 LOAD_FAST               10 (d)
+            124 CALL_FUNCTION            1
+            126 POP_TOP
+            128 JUMP_ABSOLUTE          102
+        >>  130 LOAD_CONST               3 (None)
+            132 RETURN_VALUE
+
+=== filename_task.<genexpr> ===
+148           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                16 (to 20)
+              4 STORE_FAST               1 (i)
+              6 LOAD_GLOBAL              0 (bad_title)
+              8 LOAD_FAST                1 (i)
+             10 LOAD_ATTR                1 (title)
+             12 CALL_FUNCTION            1
+             14 YIELD_VALUE
+             16 POP_TOP
+             18 JUMP_ABSOLUTE            2
+        >>   20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE

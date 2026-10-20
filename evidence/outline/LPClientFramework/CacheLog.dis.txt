@@ -1,0 +1,153 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (None)
+              4 IMPORT_NAME              0 (time)
+              6 STORE_NAME               0 (time)
+
+  2           8 LOAD_CONST               0 (0)
+             10 LOAD_CONST               2 (('datetime',))
+             12 IMPORT_NAME              1 (datetime)
+             14 IMPORT_FROM              1 (datetime)
+             16 STORE_NAME               1 (datetime)
+             18 POP_TOP
+
+  3          20 LOAD_CONST               0 (0)
+             22 LOAD_CONST               1 (None)
+             24 IMPORT_NAME              2 (os)
+             26 STORE_NAME               2 (os)
+
+  4          28 LOAD_CONST               0 (0)
+             30 LOAD_CONST               1 (None)
+             32 IMPORT_NAME              3 (logging)
+             34 STORE_NAME               3 (logging)
+
+  6          36 LOAD_NAME                3 (logging)
+             38 LOAD_METHOD              4 (getLogger)
+             40 LOAD_CONST               3 ('linkplay')
+             42 CALL_METHOD              1
+             44 STORE_NAME               5 (logger)
+
+  7          46 LOAD_CONST               1 (None)
+             48 STORE_NAME               6 (fileHandler)
+
+  8          50 LOAD_CONST               1 (None)
+             52 STORE_NAME               7 (streamHandler)
+
+ 10          54 LOAD_CONST               9 ((False,))
+             56 LOAD_CONST               5 (<code object startCacheLog at 0x000001F324DE50E0, file "LPClientFramework\CacheLog.py", line 10>)
+             58 LOAD_CONST               6 ('startCacheLog')
+             60 MAKE_FUNCTION            1 (defaults)
+             62 STORE_NAME               8 (startCacheLog)
+
+ 29          64 LOAD_CONST               7 (<code object stopCacheLog at 0x000001F324E76DF0, file "LPClientFramework\CacheLog.py", line 29>)
+             66 LOAD_CONST               8 ('stopCacheLog')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME               9 (stopCacheLog)
+             72 LOAD_CONST               1 (None)
+             74 RETURN_VALUE
+
+=== startCacheLog ===
+ 11           0 LOAD_GLOBAL              0 (time)
+              2 LOAD_METHOD              0 (time)
+              4 CALL_METHOD              0
+              6 STORE_FAST               2 (ts)
+
+ 12           8 LOAD_GLOBAL              1 (datetime)
+             10 LOAD_METHOD              2 (fromtimestamp)
+             12 LOAD_FAST                2 (ts)
+             14 CALL_METHOD              1
+             16 LOAD_METHOD              3 (strftime)
+             18 LOAD_CONST               1 ('%m%d%H%M%S')
+             20 CALL_METHOD              1
+             22 STORE_FAST               3 (st)
+
+ 13          24 LOAD_FAST                0 (path)
+             26 LOAD_CONST               2 ('%s.log')
+             28 LOAD_FAST                3 (st)
+             30 BINARY_MODULO
+             32 BINARY_TRUE_DIVIDE
+             34 STORE_FAST               4 (logFilePath)
+
+ 15          36 LOAD_GLOBAL              4 (logging)
+             38 LOAD_METHOD              5 (getLogger)
+             40 LOAD_CONST               3 ('linkplay')
+             42 CALL_METHOD              1
+             44 STORE_FAST               5 (logger)
+
+ 16          46 LOAD_GLOBAL              4 (logging)
+             48 LOAD_METHOD              6 (Formatter)
+             50 LOAD_CONST               4 ('%(asctime)s [%(threadName)s] [%(levelname)-5.5s] [%(filename)s]%(message)s')
+             52 CALL_METHOD              1
+             54 STORE_FAST               6 (formatter)
+
+ 18          56 LOAD_GLOBAL              4 (logging)
+             58 LOAD_METHOD              7 (StreamHandler)
+             60 CALL_METHOD              0
+             62 STORE_FAST               7 (streamHandler)
+
+ 19          64 LOAD_FAST                7 (streamHandler)
+             66 LOAD_METHOD              8 (setFormatter)
+             68 LOAD_FAST                6 (formatter)
+             70 CALL_METHOD              1
+             72 POP_TOP
+
+ 21          74 LOAD_FAST                5 (logger)
+             76 LOAD_METHOD              9 (setLevel)
+             78 LOAD_GLOBAL              4 (logging)
+             80 LOAD_ATTR               10 (DEBUG)
+             82 CALL_METHOD              1
+             84 POP_TOP
+
+ 22          86 LOAD_FAST                1 (cache)
+             88 POP_JUMP_IF_FALSE      128
+
+ 23          90 LOAD_GLOBAL              4 (logging)
+             92 LOAD_ATTR               11 (FileHandler)
+             94 LOAD_GLOBAL             12 (str)
+             96 LOAD_FAST                4 (logFilePath)
+             98 CALL_FUNCTION            1
+            100 LOAD_CONST               5 ('w')
+            102 LOAD_CONST               6 (('mode',))
+            104 CALL_FUNCTION_KW         2
+            106 STORE_FAST               8 (fileHandler)
+
+ 24         108 LOAD_FAST                8 (fileHandler)
+            110 LOAD_METHOD              8 (setFormatter)
+            112 LOAD_FAST                6 (formatter)
+            114 CALL_METHOD              1
+            116 POP_TOP
+
+ 25         118 LOAD_FAST                5 (logger)
+            120 LOAD_METHOD             13 (addHandler)
+            122 LOAD_FAST                8 (fileHandler)
+            124 CALL_METHOD              1
+            126 POP_TOP
+
+ 27     >>  128 LOAD_FAST                5 (logger)
+            130 LOAD_METHOD             13 (addHandler)
+            132 LOAD_FAST                7 (streamHandler)
+            134 CALL_METHOD              1
+            136 POP_TOP
+            138 LOAD_CONST               0 (None)
+            140 RETURN_VALUE
+
+=== stopCacheLog ===
+ 30           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_ATTR                1 (handlers)
+              4 GET_ITER
+        >>    6 FOR_ITER                14 (to 22)
+              8 STORE_FAST               0 (handler)
+
+ 31          10 LOAD_GLOBAL              0 (logger)
+             12 LOAD_METHOD              2 (removeHandler)
+             14 LOAD_FAST                0 (handler)
+             16 CALL_METHOD              1
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            6
+
+ 32     >>   22 BUILD_LIST               0
+             24 LOAD_GLOBAL              0 (logger)
+             26 STORE_ATTR               1 (handlers)
+             28 LOAD_CONST               0 (None)
+             30 RETURN_VALUE

@@ -1,0 +1,269 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('搜索页 More 菜单控制器。\n\n将从 WiiMHome.py 中拆分出的 _showMoreMenu 代码迁移至此，\n负责搜索页 moreButton 弹出的 More 菜单（手动 IP 发现 / 发送日志）。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('QCoreApplication', 'QObject', 'Qt', 'QPoint'))
+              8 IMPORT_NAME              1 (PyQt6.QtCore)
+             10 IMPORT_FROM              2 (QCoreApplication)
+             12 STORE_NAME               2 (QCoreApplication)
+             14 IMPORT_FROM              3 (QObject)
+             16 STORE_NAME               3 (QObject)
+             18 IMPORT_FROM              4 (Qt)
+             20 STORE_NAME               4 (Qt)
+             22 IMPORT_FROM              5 (QPoint)
+             24 STORE_NAME               5 (QPoint)
+             26 POP_TOP
+
+  9          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('QAction',))
+             32 IMPORT_NAME              6 (PyQt6.QtGui)
+             34 IMPORT_FROM              7 (QAction)
+             36 STORE_NAME               7 (QAction)
+             38 POP_TOP
+
+ 10          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               4 (('QMenu',))
+             44 IMPORT_NAME              8 (PyQt6.QtWidgets)
+             46 IMPORT_FROM              9 (QMenu)
+             48 STORE_NAME               9 (QMenu)
+             50 POP_TOP
+
+ 12          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               5 (None)
+             56 IMPORT_NAME             10 (LPGlobalUI)
+             58 STORE_NAME              10 (LPGlobalUI)
+
+ 13          60 LOAD_CONST               1 (0)
+             62 LOAD_CONST               6 (('LPUtility',))
+             64 IMPORT_NAME             11 (LPClientFramework)
+             66 IMPORT_FROM             12 (LPUtility)
+             68 STORE_NAME              12 (LPUtility)
+             70 POP_TOP
+
+ 14          72 LOAD_CONST               1 (0)
+             74 LOAD_CONST               7 (('getFontFamily',))
+             76 IMPORT_NAME             13 (LPClientFramework.LPConfig.LPFontConfig)
+             78 IMPORT_FROM             14 (getFontFamily)
+             80 STORE_NAME              14 (getFontFamily)
+             82 POP_TOP
+
+ 17          84 LOAD_BUILD_CLASS
+             86 LOAD_CONST               8 (<code object LPSearchMoreMenuController at 0x000001F3253AE660, file "Menu\LPSearchMoreMenuController.py", line 17>)
+             88 LOAD_CONST               9 ('LPSearchMoreMenuController')
+             90 MAKE_FUNCTION            0
+             92 LOAD_CONST               9 ('LPSearchMoreMenuController')
+             94 LOAD_NAME                3 (QObject)
+             96 CALL_FUNCTION            3
+             98 STORE_NAME              15 (LPSearchMoreMenuController)
+            100 LOAD_CONST               5 (None)
+            102 RETURN_VALUE
+
+=== LPSearchMoreMenuController ===
+ 17           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPSearchMoreMenuController')
+              6 STORE_NAME               2 (__qualname__)
+
+ 18           8 LOAD_CONST               1 ('管理搜索页 moreButton 弹出的 More 菜单。')
+             10 STORE_NAME               3 (__doc__)
+
+ 20          12 LOAD_CLOSURE             0 (__class__)
+             14 BUILD_TUPLE              1
+             16 LOAD_CONST               2 (<code object __init__ at 0x000001F3253AE0E0, file "Menu\LPSearchMoreMenuController.py", line 20>)
+             18 LOAD_CONST               3 ('LPSearchMoreMenuController.__init__')
+             20 MAKE_FUNCTION            8 (closure)
+             22 STORE_NAME               4 (__init__)
+
+ 35          24 LOAD_CONST               4 (<code object showMoreMenu at 0x000001F3253AEBE0, file "Menu\LPSearchMoreMenuController.py", line 35>)
+             26 LOAD_CONST               5 ('LPSearchMoreMenuController.showMoreMenu')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               5 (showMoreMenu)
+             32 LOAD_CLOSURE             0 (__class__)
+             34 DUP_TOP
+             36 STORE_NAME               6 (__classcell__)
+             38 RETURN_VALUE
+
+=== LPSearchMoreMenuController.__init__ ===
+ 30           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 31          10 LOAD_FAST                1 (owner)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (owner)
+
+ 32          16 LOAD_FAST                2 (onOpenIPDiscover)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               3 (_onOpenIPDiscover)
+
+ 33          22 LOAD_FAST                3 (anchorButton)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               4 (anchorButton)
+             28 LOAD_CONST               1 (None)
+             30 RETURN_VALUE
+
+=== LPSearchMoreMenuController.showMoreMenu ===
+ 44           0 LOAD_GLOBAL              0 (QMenu)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               1 (moreMenu)
+
+ 45           6 LOAD_FAST                1 (moreMenu)
+              8 LOAD_METHOD              1 (setWindowFlags)
+
+ 46          10 LOAD_GLOBAL              2 (Qt)
+             12 LOAD_ATTR                3 (WindowType)
+             14 LOAD_ATTR                4 (Popup)
+             16 LOAD_GLOBAL              2 (Qt)
+             18 LOAD_ATTR                3 (WindowType)
+             20 LOAD_ATTR                5 (FramelessWindowHint)
+             22 BINARY_OR
+             24 LOAD_GLOBAL              2 (Qt)
+             26 LOAD_ATTR                3 (WindowType)
+             28 LOAD_ATTR                6 (NoDropShadowWindowHint)
+             30 BINARY_OR
+
+ 45          32 CALL_METHOD              1
+             34 POP_TOP
+
+ 47          36 LOAD_FAST                1 (moreMenu)
+             38 LOAD_METHOD              7 (setAttribute)
+             40 LOAD_GLOBAL              2 (Qt)
+             42 LOAD_ATTR                8 (WidgetAttribute)
+             44 LOAD_ATTR                9 (WA_TranslucentBackground)
+             46 CALL_METHOD              1
+             48 POP_TOP
+
+ 48          50 LOAD_GLOBAL             10 (getFontFamily)
+             52 CALL_FUNCTION            0
+             54 STORE_FAST               2 (font_family)
+
+ 49          56 LOAD_FAST                2 (font_family)
+             58 POP_JUMP_IF_FALSE       72
+             60 LOAD_CONST               1 ('font-family: "')
+             62 LOAD_FAST                2 (font_family)
+             64 FORMAT_VALUE             0
+             66 LOAD_CONST               2 ('";')
+             68 BUILD_STRING             3
+             70 JUMP_FORWARD             2 (to 74)
+        >>   72 LOAD_CONST               3 ('')
+        >>   74 STORE_FAST               3 (font_family_rule)
+
+ 50          76 LOAD_FAST                1 (moreMenu)
+             78 LOAD_METHOD             11 (setStyleSheet)
+             80 LOAD_CONST               4 ('\n            QMenu{\n                border-radius: 3px;\n                background-color: %s;\n                color: rgb(255, 255, 255);\n                %s\n                font-size: 14px;\n            }\n            QMenu::item{\n                border-radius: 2px;\n                height: 30px;\n                color: rgb(255, 255, 255);\n                margin-left: 4px;\n                margin-right: 4px;\n                margin-top: 4px;\n                margin-bottom: 4px;\n                padding-left: 6px;\n                padding-right: 6px;\n\n            }\n            QMenu::item:selected{\n                background-color: %s;\n                color: rgb(255, 255, 255);\n            }\n\n            QMenu::item:hover {\n                background-color: %s;\n            }\n\n            QMenu::item:disabled{\n                color: %s;\n            }\n            ')
+
+ 83          82 LOAD_GLOBAL             12 (LPGlobalUI)
+             84 LOAD_ATTR               13 (THEME_TABLE_HOVER_BACK_COLOR)
+             86 LOAD_METHOD             14 (name)
+             88 CALL_METHOD              0
+
+ 84          90 LOAD_FAST                3 (font_family_rule)
+
+ 85          92 LOAD_GLOBAL             12 (LPGlobalUI)
+             94 LOAD_ATTR               15 (THEME_TABLE_HIGHLIGHT_BACK_COLOR)
+             96 LOAD_METHOD             14 (name)
+             98 CALL_METHOD              0
+
+ 86         100 LOAD_GLOBAL             12 (LPGlobalUI)
+            102 LOAD_ATTR               15 (THEME_TABLE_HIGHLIGHT_BACK_COLOR)
+            104 LOAD_METHOD             14 (name)
+            106 CALL_METHOD              0
+
+ 87         108 LOAD_GLOBAL             12 (LPGlobalUI)
+            110 LOAD_ATTR               16 (THEME_DISABLE_COLOR)
+            112 LOAD_METHOD             14 (name)
+            114 CALL_METHOD              0
+
+ 82         116 BUILD_TUPLE              5
+
+ 50         118 BINARY_MODULO
+            120 CALL_METHOD              1
+            122 POP_TOP
+
+ 88         124 LOAD_GLOBAL             17 (QCoreApplication)
+            126 LOAD_METHOD             18 (translate)
+            128 LOAD_CONST               5 ('MoreMenu')
+            130 LOAD_CONST               6 ('Manually discovering devices via IP')
+            132 CALL_METHOD              2
+            134 STORE_FAST               4 (ipDiscoverMenuText)
+
+ 89         136 LOAD_GLOBAL             19 (QAction)
+            138 LOAD_FAST                4 (ipDiscoverMenuText)
+            140 CALL_FUNCTION            1
+            142 STORE_FAST               5 (ipDiscoverAction)
+
+ 90         144 LOAD_FAST                5 (ipDiscoverAction)
+            146 LOAD_ATTR               20 (triggered)
+            148 LOAD_METHOD             21 (connect)
+            150 LOAD_FAST                0 (self)
+            152 LOAD_ATTR               22 (_onOpenIPDiscover)
+            154 CALL_METHOD              1
+            156 POP_TOP
+
+ 92         158 LOAD_GLOBAL             17 (QCoreApplication)
+            160 LOAD_METHOD             18 (translate)
+            162 LOAD_CONST               5 ('MoreMenu')
+            164 LOAD_CONST               7 ('Send logs to WiiM Support')
+            166 CALL_METHOD              2
+            168 STORE_FAST               6 (sendLogMenuText)
+
+ 93         170 LOAD_GLOBAL             19 (QAction)
+            172 LOAD_FAST                6 (sendLogMenuText)
+            174 CALL_FUNCTION            1
+            176 STORE_FAST               7 (sendLogAction)
+
+ 94         178 LOAD_FAST                7 (sendLogAction)
+            180 LOAD_ATTR               20 (triggered)
+            182 LOAD_METHOD             21 (connect)
+            184 LOAD_CONST               8 (<code object <lambda> at 0x000001F3253AE5B0, file "Menu\LPSearchMoreMenuController.py", line 94>)
+            186 LOAD_CONST               9 ('LPSearchMoreMenuController.showMoreMenu.<locals>.<lambda>')
+            188 MAKE_FUNCTION            0
+            190 CALL_METHOD              1
+            192 POP_TOP
+
+ 96         194 LOAD_FAST                1 (moreMenu)
+            196 LOAD_METHOD             23 (addAction)
+            198 LOAD_FAST                5 (ipDiscoverAction)
+            200 CALL_METHOD              1
+            202 POP_TOP
+
+ 97         204 LOAD_FAST                1 (moreMenu)
+            206 LOAD_METHOD             23 (addAction)
+            208 LOAD_FAST                7 (sendLogAction)
+            210 CALL_METHOD              1
+            212 POP_TOP
+
+ 99         214 LOAD_FAST                0 (self)
+            216 LOAD_ATTR               24 (anchorButton)
+            218 LOAD_METHOD             25 (mapToGlobal)
+            220 LOAD_GLOBAL             26 (QPoint)
+            222 LOAD_CONST              10 (0)
+            224 LOAD_FAST                0 (self)
+            226 LOAD_ATTR               24 (anchorButton)
+            228 LOAD_METHOD             27 (height)
+            230 CALL_METHOD              0
+            232 LOAD_CONST              11 (5)
+            234 BINARY_ADD
+            236 CALL_FUNCTION            2
+            238 CALL_METHOD              1
+            240 STORE_FAST               8 (pos)
+
+100         242 LOAD_FAST                1 (moreMenu)
+            244 LOAD_METHOD             28 (exec)
+            246 LOAD_FAST                8 (pos)
+            248 CALL_METHOD              1
+            250 POP_TOP
+            252 LOAD_CONST              12 (None)
+            254 RETURN_VALUE
+
+=== LPSearchMoreMenuController.showMoreMenu.<lambda> ===
+ 94           0 LOAD_GLOBAL              0 (LPUtility)
+              2 LOAD_METHOD              1 (openFileInSystem)
+              4 LOAD_GLOBAL              0 (LPUtility)
+              6 LOAD_ATTR                2 (logDir)
+              8 CALL_METHOD              1
+             10 RETURN_VALUE

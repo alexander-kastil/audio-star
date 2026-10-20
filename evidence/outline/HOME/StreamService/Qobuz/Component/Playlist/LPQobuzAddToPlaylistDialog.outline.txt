@@ -1,0 +1,207 @@
+# module HOME.StreamService.Qobuz.Component.Playlist.LPQobuzAddToPlaylistDialog
+
+[module] names: __doc__, re, threading, time, string, Template, PyQt6.QtCore, Qt, pyqtSignal, QSize, QRectF, QRect, QSortFilterProxyModel, QModelIndex, QCoreApplication, pyqtSlot, PyQt6.QtGui, QIcon, QBrush, QPainterPath, QPixmap, QFont, QFontMetrics, QPainter, PyQt6.QtWidgets, QDialog, QButtonGroup, QStyledItemDelegate, QStyle, QToolTip, LPGlobalUI, HOME.StreamService.Qobuz.Component.LPQobuzListView, LPQobuzListModel, HOME.StreamService.Qobuz.Util, LPQobuzUtil, LPClientFramework.LPConfig.LPFontConfig, ItemCard_Title, ItemCard_Subtitle, Qobuz_Sub_Title, LPClientFramework.LPMSManager.Qobuz.LPQobuzManager, LPQobuzManager, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPClientFramework.LPUtility, logger, LPQobuzPersonalPlaylistDelegate, LPFilterProxyModel, LPQobuzAddToPlaylistDialog
+  str: '\n@Time ： 2025/7/31 14:51\n@Auth ： Chris\n@File ：LPQobuzAddToPlaylistDialog.py\n@Desc:\n'
+  str: 'Template'
+  str: 'Qt'
+  str: 'pyqtSignal'
+  str: 'QSize'
+  str: 'QRectF'
+  str: 'QRect'
+  str: 'QSortFilterProxyModel'
+  str: 'QModelIndex'
+  str: 'QCoreApplication'
+  str: 'pyqtSlot'
+  str: 'QIcon'
+  str: 'QBrush'
+  str: 'QPainterPath'
+  str: 'QPixmap'
+  str: 'QFont'
+  str: 'QFontMetrics'
+  str: 'QPainter'
+  str: 'QDialog'
+  str: 'QButtonGroup'
+  str: 'QStyledItemDelegate'
+  str: 'QStyle'
+  str: 'QToolTip'
+  str: 'LPQobuzListModel'
+  str: 'LPQobuzUtil'
+  str: 'ItemCard_Title'
+  str: 'ItemCard_Subtitle'
+  str: 'Qobuz_Sub_Title'
+  str: 'LPQobuzManager'
+  str: 'LPHeaderType'
+  str: 'logger'
+  str: 'LPQobuzPersonalPlaylistDelegate'
+  str: 'LPFilterProxyModel'
+  str: 'LPQobuzAddToPlaylistDialog'
+
+def LPQobuzPersonalPlaylistDelegate()  line 27
+  names: __name__, __module__, __qualname__, __init__, sizeHint, paint, helpEvent, __classcell__
+    str: 'LPQobuzPersonalPlaylistDelegate'
+    str: 'LPQobuzPersonalPlaylistDelegate.__init__'
+    str: 'LPQobuzPersonalPlaylistDelegate.sizeHint'
+    str: 'LPQobuzPersonalPlaylistDelegate.paint'
+    str: 'LPQobuzPersonalPlaylistDelegate.helpEvent'
+
+  def LPQobuzPersonalPlaylistDelegate.__init__(self, parent)  line 29
+    names: super, __init__, listview
+
+  def LPQobuzPersonalPlaylistDelegate.sizeHint(self, option, index)  line 34
+    names: super, sizeHint, QSize
+
+  def LPQobuzPersonalPlaylistDelegate.paint(self, painter, option, index)  line 40
+    names: data, rect, styleObject, QBrush, setStyle, Qt, BrushStyle, SolidPattern, state, QStyle, StateFlag, State_Selected, setColor, LPGlobalUI, THEME_TABLE_HOVER_BACK_COLOR, State_MouseOver, THEME_ITEM_BACK_COLOR, QPainterPath, addRoundedRect, QRectF, fillPath, QRect, x, y, QIcon, trackImage, LPQobuzUtil, getCachedBlurredPixmapWithUrl, QPixmap, imagePath, playlistImageList, getMyPlaylistCustomCoverImage, addPixmap, paint, width, height, trackName, QFont, setPointSizeF, ItemCard_Title, setBold, setFont, setPen, THEME_DEFAULT_COLOR, QFontMetrics, elidedText, TextElideMode, ElideRight, setRenderHint, QPainter, RenderHint, TextAntialiasing, drawText, AlignmentFlag, AlignLeft, AlignVCenter, tracksCount, QCoreApplication, translate, append, trackDuration, formatAlbumDuration, join, ItemCard_Subtitle, THEME_DISABLE_COLOR
+      str: 'miniBar/trackDefault.png'
+      str: 'qobuz add playlists'
+      str: 'tracks'
+      str: ' · '
+
+  def LPQobuzPersonalPlaylistDelegate.helpEvent(self, event, view, option, index)  line 135
+    names: type, Type, ToolTip, data, rect, trackName, QRect, x, y, width, pos, globalPos, contains, QToolTip, showText, super, helpEvent
+
+def LPFilterProxyModel()  line 156
+  names: __name__, __module__, __qualname__, __init__, QModelIndex, flags, setFilterPattern, filterAcceptsRow, __classcell__
+    str: 'LPFilterProxyModel'
+    str: 'LPFilterProxyModel.__init__'
+    str: 'index'
+    str: 'LPFilterProxyModel.flags'
+    str: 'LPFilterProxyModel.setFilterPattern'
+    str: 'LPFilterProxyModel.filterAcceptsRow'
+
+  def LPFilterProxyModel.__init__(self)  line 157
+    names: super, __init__, pattern
+
+  def LPFilterProxyModel.flags(self, index)  line 161
+    names: sourceModel, flags, mapToSource
+
+  def LPFilterProxyModel.setFilterPattern(self, pattern)  line 164
+    names: pattern, invalidateFilter
+
+  def LPFilterProxyModel.filterAcceptsRow(self, source_row, source_parent)  line 168
+    names: sourceModel, index, data, Qt, ItemDataRole, UserRole, pattern, re, compile, IGNORECASE, trackName, bool, search, error
+
+def LPQobuzAddToPlaylistDialog()  line 188
+  names: __name__, __module__, __qualname__, pyqtSignal, checkLastUpdateSignal, updateFavoriteSignal, requestFinishedSignal, closeDialogSignal, __init__, setupUi, searchFieldChanged, updateEmptyState, onButtonGroupClicked, getAllPlaylists, onSectionDataChanged, pyqtSlot, _updateFavorite, checkMore, requestFinished, loadDataFromCache, getPersonalPlaylist, checkCache, onItemClicked, onPrivacyToggled, onCreateButtonClicked, playlistNameChanged, __classcell__
+    str: 'LPQobuzAddToPlaylistDialog'
+    str: 'LPQobuzAddToPlaylistDialog.__init__'
+    str: 'LPQobuzAddToPlaylistDialog.setupUi'
+    str: 'LPQobuzAddToPlaylistDialog.searchFieldChanged'
+    str: 'LPQobuzAddToPlaylistDialog.updateEmptyState'
+    str: 'LPQobuzAddToPlaylistDialog.onButtonGroupClicked'
+    str: 'LPQobuzAddToPlaylistDialog.getAllPlaylists'
+    str: 'LPQobuzAddToPlaylistDialog.onSectionDataChanged'
+    str: 'LPQobuzAddToPlaylistDialog._updateFavorite'
+    str: 'LPQobuzAddToPlaylistDialog.checkMore'
+    str: 'LPQobuzAddToPlaylistDialog.requestFinished'
+    str: 'LPQobuzAddToPlaylistDialog.loadDataFromCache'
+    str: 'LPQobuzAddToPlaylistDialog.getPersonalPlaylist'
+    str: 'LPQobuzAddToPlaylistDialog.checkCache'
+    str: 'LPQobuzAddToPlaylistDialog.onItemClicked'
+    str: 'LPQobuzAddToPlaylistDialog.onPrivacyToggled'
+    str: 'LPQobuzAddToPlaylistDialog.onCreateButtonClicked'
+    str: 'LPQobuzAddToPlaylistDialog.playlistNameChanged'
+
+  def LPQobuzAddToPlaylistDialog.__init__(self, trackItem, parent)  line 195
+    names: super, __init__, parent, trackItem, searchText, LPFilterProxyModel, proxy, QButtonGroup, tabButtonGroup, updateFavoriteSignal, connect, _updateFavorite, requestFinishedSignal, requestFinished, closeDialogSignal, close, offset, limit, total, LPQobuzManager, instance, qobuz, libCacheMgr, libCacheChangedSignal, onSectionDataChanged
+
+  def LPQobuzAddToPlaylistDialog.setupUi(self, ui)  line 222
+    names: getattr, super, callable, setupUi, setWindowFlags, Qt, WindowType, Dialog, FramelessWindowHint, setAttribute, WidgetAttribute, WA_TranslucentBackground, addPlaylistButton, setCheckable, createPlaylistButton, tabButtonGroup, addButton, setExclusive, buttonClicked, connect, onButtonGroupClicked, closeButton, setIcon, QIcon, LPGlobalUI, imagePath, clicked, reject, cancelButton_1, listView, setupUI, setSpacing, onItemClicked, searchField, textChanged, searchFieldChanged, privacyLabel, setText, QCoreApplication, translate, setToolTip, colCheckBox, createButton, setEnabled, playlistNameLineEdit, playlistNameChanged, cancelButton, playlistDescEdit, setStyleSheet, onCreateButtonClicked, privacyToggle, toggled, onPrivacyToggled, Template, substitute, THEME_FONT_COLOR_UI, name, THEME_DIALOG_BACK_COLOR_UI, THEME_BUTTON_BACK_COLOR_UI, THEME_ITEM_BACK_COLOR, Qobuz_Sub_Title, click
+      str: 'setupUi'
+      str: 'dialog_close.png'
+      str: 'qobuz add playlists'
+      str: 'Make private'
+      str: 'Other users will not be able to see or listen to this playlist'
+      str: 'Collaborative playlist'
+      str: 'Other users may modify and listen to this playlist'
+      str: '\n                LPTextEdit {\n                    background-color: rgb(31, 31, 31); \n                    color: white;\n                    padding: 5px; \n                    border-radius: 5px;\n                    qproperty-placeholderColor: rgba(255, 255, 255, 89);\n                }\n        '
+      str: '\n                LPLineEdit {\n                    background-color: rgb(31, 31, 31); \n                    color: white; \n                    padding: 5px; \n                    border-radius: 5px; \n                    qproperty-placeholderColor: rgba(255, 255, 255, 89);\n                }\n            '
+      str: 'fontColor'
+      str: 'dialogBg'
+      str: 'buttonBg'
+      str: 'buttonDisabledBg'
+      str: 'checkedFontColor'
+      str: 'subTitleFontSize'
+
+  def LPQobuzAddToPlaylistDialog.searchFieldChanged(self, text)  line 367
+    names: logger, debug, proxy, setFilterPattern, strip, updateEmptyState
+      str: '[qobuz add playlists] searchFieldChanged text='
+
+  def LPQobuzAddToPlaylistDialog.updateEmptyState(self)  line 372
+    names: proxy, rowCount, emptyLabel, setText, QCoreApplication, translate, playlistStackedWidget, setCurrentIndex
+      str: 'qobuz add playlists'
+      str: 'No playlists found'
+
+  def LPQobuzAddToPlaylistDialog.onButtonGroupClicked(self, button)  line 391
+    names: addPlaylistButton, getAllPlaylists, qobuz, libCacheMgr, checkUpdate, stackedWidget, setCurrentIndex
+      str: 'My Playlists'
+
+  def LPQobuzAddToPlaylistDialog.getAllPlaylists(self)  line 401
+    names: qobuz, currentAccount, dataBinding, logger, debug, loadDataFromCache
+      str: 'My Playlists'
+      str: 'playList'
+      str: '[getAllPlaylists] data from cache'
+
+  def LPQobuzAddToPlaylistDialog.onSectionDataChanged(self, account, sectionKey)  line 408
+    names: userId, qobuz, currentAccount, logger, debug, getAllPlaylists
+      str: 'My Playlists'
+      str: 'onSectionDataChanged=='
+
+  def LPQobuzAddToPlaylistDialog._updateFavorite(self)  line 417
+    names: qobuz, requestMgr, fetchMyPlaylistData, fetch, offset, limit
+      str: 'LPQobuzAddToPlaylistDialog._updateFavorite.<locals>.callback'
+      str: 'useCache'
+
+    def LPQobuzAddToPlaylistDialog._updateFavorite.callback(result)  line 419
+      names: data, header, total, offset, playList, list, extend, limit, checkMore, updateFavoriteSignal, emit, int, time, qobuz, pklCache, save, LPQobuzLibCachePath, MyPlaylist, value, requestFinishedSignal
+
+  def LPQobuzAddToPlaylistDialog.checkMore(self)  line 444
+    names: offset, total
+
+  def LPQobuzAddToPlaylistDialog.requestFinished(self)  line 449
+    names: getAllPlaylists
+
+  def LPQobuzAddToPlaylistDialog.loadDataFromCache(self, cacheData)  line 453
+    names: getPersonalPlaylist, playList, LPQobuzListModel, listView, proxy, setSourceModel, setModel, LPQobuzPersonalPlaylistDelegate, setItemDelegate
+
+  def LPQobuzAddToPlaylistDialog.getPersonalPlaylist(self, data)  line 469
+    names: list, logger, debug, qobuz, loginMgr, account, str, ownerId, userId, append, len, header, total
+      str: 'getPersonalPlaylist empty list'
+
+  def LPQobuzAddToPlaylistDialog.checkCache(self, pklCachePath, lastUpdateTimeKey)  line 485
+    names: qobuz, lastUpdateTimeCondition, lastUpdateTime, logger, debug, wait, pklCache, tryLoad, value, time, get
+      str: '[add to playlist checkCache] Waiting for self.qobuz.lastUpdateTime...'
+
+  def LPQobuzAddToPlaylistDialog.onItemClicked(self, index)  line 502
+    names: data, logger, debug, trackId, trackItem, qobuz, requestMgr, fetchAddTracksData, fetch
+      str: 'LPQobuzAddToPlaylistDialog.onItemClicked.<locals>.callback'
+      str: '[getAllPlaylists] onItemClicked playlist.id='
+      str: ', track.id='
+
+    def LPQobuzAddToPlaylistDialog.onItemClicked.callback(success)  line 507
+      names: LPGlobalUI, toast, showToast, QCoreApplication, translate, mainWindow, closeDialogSignal, emit
+        str: 'qobuz add playlists'
+        str: 'Add to playlist Ok'
+        str: 'Add to playlist failed'
+
+  def LPQobuzAddToPlaylistDialog.onPrivacyToggled(self, checked)  line 522
+    names: colCheckBox, setVisible
+
+  def LPQobuzAddToPlaylistDialog.onCreateButtonClicked(self)  line 529
+    names: playlistNameLineEdit, text, strip, playlistDescEdit, toPlainText, privacyToggle, isChecked, colCheckBox, qobuz, requestMgr, fetchPlaylistCreateData, fetch, LPHeaderType, LP_HEADER_TYPE_SONG, trackItem, trackId
+      str: 'LPQobuzAddToPlaylistDialog.onCreateButtonClicked.<locals>.callback'
+      str: 'name'
+      str: 'headType'
+      str: 'trackId'
+      str: 'desc'
+      str: 'isPublic'
+      str: 'isCollaborative'
+
+    def LPQobuzAddToPlaylistDialog.onCreateButtonClicked.callback(result)  line 542
+      names: data, LPGlobalUI, toast, showToast, QCoreApplication, translate, mainWindow, closeDialogSignal, emit
+        str: 'qobuz add playlists'
+        str: 'Create playlist Ok'
+        str: 'Create playlist failed'
+
+  def LPQobuzAddToPlaylistDialog.playlistNameChanged(self, text)  line 558
+    names: strip, createButton, setEnabled

@@ -1,0 +1,92 @@
+# module LPClientFramework.util.LPUriHandler
+
+[module] names: __doc__, enum, platform, sys, time, _time, urllib.parse, urllib, PyQt6.QtCore, QTimer, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPUtility, logger, Enum, LPUriType, str, bool, isSupportedUri, handlerUri, handleOAuthCallback, dict, _firstQueryValue, _sourceFromOAuthService, activeWindow, _doActiveWindow
+  str: '\n@Time ： 2025/8/5 10:23\n@Auth ： Chris\n@File ：LPUriHandler.py\n@Desc:\n'
+  str: 'QTimer'
+  str: 'LPUtility'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'LPUriType'
+  str: 'uri'
+  str: 'return'
+  str: 'isSupportedUri'
+  str: 'uri'
+  str: 'handlerUri'
+  str: 'handleOAuthCallback'
+  str: 'query'
+  str: 'key'
+  str: 'return'
+  str: '_firstQueryValue'
+  str: 'service'
+  str: 'return'
+  str: '_sourceFromOAuthService'
+  str: 'activeWindow'
+  str: '_doActiveWindow'
+
+def LPUriType()  line 22
+  names: __name__, __module__, __qualname__, __doc__, LP_Uri_Active_Window, LP_Uri_ShowApp_Window, LP_Uri_OAuth_Callback, LP_Uri_Wiim_OAuth_Callback
+    str: 'LPUriType'
+    str: 'WiiM Home 支持处理的 URI 类型。'
+    str: 'wiim://active'
+    str: 'wiim://showApp'
+    str: 'com.linkplay.wiimhome://callback'
+    str: 'wiim://callback'
+
+def isSupportedUri(uri)  line 31
+  names: str, startswith
+    str: '\n    判断 URI 是否属于 WiiM Home 可处理的 deep link。\n\n    :param uri: 外部传入的 URI。\n    :return: 支持处理返回 True。\n    '
+    str: 'wiim'
+    str: 'com.linkplay.wiimhome://'
+
+def handlerUri(uri)  line 42
+  names: logger, debug, startswith, LPUriType, LP_Uri_OAuth_Callback, value, LP_Uri_Wiim_OAuth_Callback, handleOAuthCallback, LP_Uri_Active_Window, activeWindow, LP_Uri_ShowApp_Window, LPGlobalUI, mainWindow, showApp
+    str: '\n    分发 WiiM Home deep link。\n\n    :param uri: 外部传入的 URI。\n    :return: None。\n    '
+    str: '[LPUriHandler]....'
+    str: '[LPUriHandler] showApp'
+
+def handleOAuthCallback(uri)  line 59
+  names: urllib, parse, urlparse, str, scheme, netloc, parse_qs, query, _firstQueryValue, lower, _sourceFromOAuthService, logger, warning, debug, LPUtility, postNotification, LPGlobalUI, currentDevice
+    str: '\n    处理远端 auth.wiimhome.com 返回的 OAuth callback deep link。\n\n    :param uri: 形如 com.linkplay.wiimhome://callback?... 的 URI。\n    :return: None。\n    '
+    str: 'com.linkplay.wiimhome'
+    str: 'wiim'
+    str: 'callback'
+    str: 'category'
+    str: 'oauth'
+    str: 'service'
+    str: '[LPUriHandler] ignore OAuth callback because service unsupported: %s'
+    str: 'code'
+    str: '[LPUriHandler] ignore OAuth callback because code missing service=%s'
+    str: 'exchange_code'
+    str: 'source'
+    str: 'state'
+    str: '[LPUriHandler] OAuth callback service=%s state=%s'
+    str: 'OAuthCodeChanged'
+    str: 'device'
+    str: 'notify'
+
+def _firstQueryValue(query, key)  line 92
+  names: get, str
+    str: '\n    从 parse_qs 结果读取第一个字符串值。\n\n    :param query: query 参数字典。\n    :param key: 字段名。\n    :return: 字符串值，缺失时返回空字符串。\n    '
+
+def _sourceFromOAuthService(service)  line 106
+  names: LPPlayListSource, Tidal, value, Qobuz
+    str: '\n    将 auth.wiimhome.com 的 service 名转换为内部音源名。\n\n    :param service: 回调 service 参数。\n    :return: LPPlayListSource 字符串值；不支持时返回空字符串。\n    '
+    str: 'tidal'
+    str: 'qobuz'
+
+def activeWindow()  line 120
+  names: QTimer, singleShot, _doActiveWindow
+    str: '\n    激活 WiiM Home 主窗口。\n\n    :return: None。\n    '
+
+def _doActiveWindow()  line 132
+  names: logger, debug, LPGlobalUI, mainWindow, platform, system, win32gui, win32con, win32process, win32api, ctypes, GetForegroundWindow, GetWindowThreadProcessId, GetCurrentThreadId, windll, user32, AttachThreadInput, int, winId, GetWindowPlacement, SW_SHOWMINIMIZED, ShowWindow, SW_RESTORE, SW_SHOWMAXIMIZED, SW_SHOWNORMAL, SetForegroundWindow, AppKit, NSApp, activateIgnoringOtherApps_, showNormal, raise_, activateWindow
+    str: '\n    实际执行 Windows 窗口激活操作。\n\n    :return: None。\n    '
+    str: '[LPUriHandler] active window'
+    str: '[LPUriHandler] active window --> no mainWindow'
+    str: 'Windows'
+    str: '[LPUriHandler] active window --> Windows'
+    str: 'windows active end'
+    str: 'Darwin'
+    str: '[LPUriHandler] active window --> mac'
+    str: 'NSApp'
+    str: '[LPUriHandler] active window --> else'

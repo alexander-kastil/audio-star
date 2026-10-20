@@ -1,0 +1,133 @@
+# module HOME.DeviceSetting.LPDeviceSettingHardwareViewController
+
+[module] names: json, re, string, Template, PyQt6.QtWidgets, PyQt6, QtCore, QtGui, QtWidgets, PyQt6.QtCore, pyqtSignal, QObject, QCoreApplication, PyQt6.sip, isdeleted, threading, Thread, time, LPGlobalUI, LPClientFramework.LPConfig.LPFontConfig, DeviceSettings_Subtitle, LPClientFramework.LPEventFilter.ButtonEventFilter.LPButtonEventFilter, LPButtonEventFilter, QWidget, LPDeviceSettingHardwareViewController
+  str: 'Template'
+  str: '*'
+  str: 'QtCore'
+  str: 'QtGui'
+  str: 'QtWidgets'
+  str: 'pyqtSignal'
+  str: 'QObject'
+  str: 'QCoreApplication'
+  str: 'isdeleted'
+  str: 'Thread'
+  str: 'DeviceSettings_Subtitle'
+  str: 'LPButtonEventFilter'
+  str: 'LPDeviceSettingHardwareViewController'
+
+def LPDeviceSettingHardwareViewController()  line 17
+  names: __name__, __module__, __qualname__, pyqtSignal, updateHardwareSignal, __init__, setupUi, requestData, _rebootButtonClicked, _updateHardwareSlot, __classcell__
+    str: 'LPDeviceSettingHardwareViewController'
+    str: 'LPDeviceSettingHardwareViewController.__init__'
+    str: 'LPDeviceSettingHardwareViewController.setupUi'
+    str: 'LPDeviceSettingHardwareViewController.requestData'
+    str: 'LPDeviceSettingHardwareViewController._rebootButtonClicked'
+    str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot'
+
+  def LPDeviceSettingHardwareViewController.__init__(self, deviceId, showLoadingButtonSignal)  line 20
+    names: super, LPDeviceSettingHardwareViewController, __init__, deviceId, showLoadingButtonSignal, statusLight, volumeIndicator, touchControls, overrideVolumeButtons
+
+  def LPDeviceSettingHardwareViewController.setupUi(self, ui)  line 32
+    names: getattr, super, callable, setupUi, updateHardwareSignal, connect, _updateHardwareSlot, emit, findChildren, QLabel, re, match, objectName, setProperty, Template, setStyleSheet, substitute, DeviceSettings_Subtitle
+      str: 'setupUi'
+      str: '.*_subtitle'
+      str: 'group'
+      str: 'subtitle_group'
+      str: '\n                QLabel[group="subtitle_group"] {\n                    font-size: ${deviceSettingsSubtitleFontSize}pt;\n                }\n        '
+      str: 'deviceSettingsSubtitleFontSize'
+
+  def LPDeviceSettingHardwareViewController.requestData(self)  line 52
+    names: Thread, start
+      str: 'LPDeviceSettingHardwareViewController.requestData.<locals>._asyncUpdate'
+      str: 'target'
+      str: 'daemon'
+
+    def LPDeviceSettingHardwareViewController.requestData._asyncUpdate()  line 53
+      names: LPGlobalUI, deviceManager, deviceForUUID, deviceId, isdeleted, showLoadingButtonSignal, emit, deviceSetting, supportStatusLight, commonHttpGet, get, statusLight, updateHardwareSignal, supportVolumeIndicator, volumeIndicator, supportTouchControl, touchControls, supportOverrideVolume, json, loads, overrideVolumeButtons
+        str: 'LED_SWITCH_GET'
+        str: 'status_code'
+        str: 'body'
+        str: '0'
+        str: '1'
+        str: 'VOL_LED_SWITCH_GET'
+        str: 'Button_Enable_GET'
+        str: 'Reload_Button_GET'
+        str: 'unknown command'
+
+  def LPDeviceSettingHardwareViewController._rebootButtonClicked(self)  line 110
+    names: QMessageBox, LPGlobalUI, mainWindow, setWindowFlags, windowFlags, QtCore, Qt, WindowType, FramelessWindowHint, setText, QCoreApplication, translate, setStandardButtons, StandardButton, Yes, No, exec, deviceManager, deviceForUUID, deviceId, showLoading, showLoadingButtonSignal, emit, Thread, start
+      str: 'DeviceSetting'
+      str: 'Are you sure you want to reboot your device now?'
+      str: 'LPDeviceSettingHardwareViewController._rebootButtonClicked.<locals>._rebootAsyncMethod'
+      str: 'target'
+      str: 'daemon'
+
+    def LPDeviceSettingHardwareViewController._rebootButtonClicked._rebootAsyncMethod()  line 123
+      names: commonHttpGet, showLoadingButtonSignal, emit, time, sleep, LPGlobalUI, deviceManager, removeDevice, deviceId, showLoading, navigationManager, pop, getTopWidget
+        str: 'StartRebootTime:1'
+
+  def LPDeviceSettingHardwareViewController._updateHardwareSlot(self)  line 138
+    names: LPGlobalUI, deviceManager, deviceForUUID, deviceId, deviceSetting, supportStatusLight, statusLightFrame, show, hide, statusLightToggle, setChecked, statusLight, clicked, disconnect, Exception, connect, supportVolumeIndicator, volumeIndicatorFrame, volumeIndicatorToggle, volumeIndicator, supportTouchControl, touchControlFrame, touchControlToggle, touchControls, overrideVolumeButtons, get, supportOverrideVolume, overrideVolumeFrame, overrideButtonToggle, overrideButtonNoteButton, setStyleSheet, THEME_DISABLE_COLOR, name, LPButtonEventFilter, QtGui, QIcon, imagePath, QCoreApplication, translate, rebootButton, THEME_BUTTON_BACK_COLOR, THEME_BUTTON_HOVER_BACK_COLOR, setCursor, QtCore, Qt, CursorShape, PointingHandCursor, _rebootButtonClicked
+      str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot.<locals>._statusLightToggleClicked'
+      str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot.<locals>._volumeIndicatorToggleClicked'
+      str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot.<locals>._touchControlToggleClicked'
+      str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot.<locals>._overrideButtonToggleClicked'
+      str: 'buttons'
+      str: 'index'
+      str: 'VolumeUp'
+      str: 'value'
+      str: 'next'
+      str: 'QToolTip{color: %s}'
+      str: 'info.png'
+      str: 'bigger'
+      str: 'DeviceSetting'
+      str: 'Override volume +/- buttons with Next/Prev to control playback'
+      str: 'tipStr'
+      str: '\n        QPushButton {\n        color: white;\n        border-radius : 13;\n        border : 0px;\n        background-color: %s\n        }\n\n        QPushButton:hover {\n        color: white;\n        border-radius : 13;\n        border : 0px;\n        background-color: %s\n        }        '
+
+    def LPDeviceSettingHardwareViewController._updateHardwareSlot._statusLightToggleClicked(state)  line 142
+      names: statusLight, LPGlobalUI, deviceManager, deviceForUUID, deviceId, showLoadingButtonSignal, emit, Thread, start
+        str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot.<locals>._statusLightToggleClicked.<locals>.<lambda>'
+        str: 'target'
+        str: 'daemon'
+
+      def LPDeviceSettingHardwareViewController._updateHardwareSlot._statusLightToggleClicked.<lambda>()  line 150
+        names: commonHttpGet, statusLight, showLoadingButtonSignal, emit
+          str: 'LED_SWITCH_SET:%d'
+
+    def LPDeviceSettingHardwareViewController._updateHardwareSlot._volumeIndicatorToggleClicked(state)  line 166
+      names: volumeIndicator, LPGlobalUI, deviceManager, deviceForUUID, deviceId, showLoadingButtonSignal, emit, Thread, start
+        str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot.<locals>._volumeIndicatorToggleClicked.<locals>.<lambda>'
+        str: 'target'
+        str: 'daemon'
+
+      def LPDeviceSettingHardwareViewController._updateHardwareSlot._volumeIndicatorToggleClicked.<lambda>()  line 174
+        names: commonHttpGet, volumeIndicator, showLoadingButtonSignal, emit
+          str: 'VOL_LED_SWITCH_SET:%d'
+
+    def LPDeviceSettingHardwareViewController._updateHardwareSlot._touchControlToggleClicked(state)  line 191
+      names: touchControls, LPGlobalUI, deviceManager, deviceForUUID, deviceId, showLoadingButtonSignal, emit, Thread, start
+        str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot.<locals>._touchControlToggleClicked.<locals>.<lambda>'
+        str: 'target'
+        str: 'daemon'
+
+      def LPDeviceSettingHardwareViewController._updateHardwareSlot._touchControlToggleClicked.<lambda>()  line 199
+        names: commonHttpGet, touchControls, showLoadingButtonSignal, emit
+          str: 'Button_Enable_SET:%d'
+
+    def LPDeviceSettingHardwareViewController._updateHardwareSlot._overrideButtonToggleClicked(state)  line 215
+      names: overrideVolumeButtons, get, LPGlobalUI, deviceManager, deviceForUUID, deviceId, showLoadingButtonSignal, emit, Thread, start
+        str: 'buttons'
+        str: 'index'
+        str: 'VolumeUp'
+        str: 'next'
+        str: 'value'
+        str: 'VolumeDown'
+        str: 'prev'
+        str: 'LPDeviceSettingHardwareViewController._updateHardwareSlot.<locals>._overrideButtonToggleClicked.<locals>.<lambda>'
+        str: 'target'
+        str: 'daemon'
+
+      def LPDeviceSettingHardwareViewController._updateHardwareSlot._overrideButtonToggleClicked.<lambda>()  line 236
+        names: commonHttpGet, json, dumps, overrideVolumeButtons, showLoadingButtonSignal, emit
+          str: 'Reload_Button_UPDATE:%s'

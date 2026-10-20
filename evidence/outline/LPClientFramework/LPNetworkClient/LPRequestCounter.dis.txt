@@ -1,0 +1,167 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/8/8 14:37\n@Auth ： Chris\n@File ：LPRequestCounter.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  9           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (threading)
+             10 STORE_NAME               1 (threading)
+
+ 11          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('pyqtSignal', 'QObject'))
+             16 IMPORT_NAME              2 (PyQt6.QtCore)
+             18 IMPORT_FROM              3 (pyqtSignal)
+             20 STORE_NAME               3 (pyqtSignal)
+             22 IMPORT_FROM              4 (QObject)
+             24 STORE_NAME               4 (QObject)
+             26 POP_TOP
+
+ 14          28 LOAD_BUILD_CLASS
+             30 LOAD_CONST               4 (<code object LPRequestCounter at 0x000001F3253A2DF0, file "LPClientFramework\LPNetworkClient\LPRequestCounter.py", line 14>)
+             32 LOAD_CONST               5 ('LPRequestCounter')
+             34 MAKE_FUNCTION            0
+             36 LOAD_CONST               5 ('LPRequestCounter')
+             38 LOAD_NAME                4 (QObject)
+             40 CALL_FUNCTION            3
+             42 STORE_NAME               5 (LPRequestCounter)
+             44 LOAD_CONST               2 (None)
+             46 RETURN_VALUE
+
+=== LPRequestCounter ===
+ 14           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPRequestCounter')
+              6 STORE_NAME               2 (__qualname__)
+
+ 15           8 LOAD_NAME                3 (pyqtSignal)
+             10 CALL_FUNCTION            0
+             12 STORE_NAME               4 (pageErrorSignal)
+
+ 17          14 LOAD_CONST               8 ((None,))
+             16 LOAD_CLOSURE             0 (__class__)
+             18 BUILD_TUPLE              1
+             20 LOAD_CONST               2 (<code object __init__ at 0x000001F3253A2190, file "LPClientFramework\LPNetworkClient\LPRequestCounter.py", line 17>)
+             22 LOAD_CONST               3 ('LPRequestCounter.__init__')
+             24 MAKE_FUNCTION            9 (defaults, closure)
+             26 STORE_NAME               5 (__init__)
+
+ 25          28 LOAD_CONST               4 (<code object start at 0x000001F3253A2F50, file "LPClientFramework\LPNetworkClient\LPRequestCounter.py", line 25>)
+             30 LOAD_CONST               5 ('LPRequestCounter.start')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               6 (start)
+
+ 30          36 LOAD_CONST               6 (<code object requestFinished at 0x000001F3253A27C0, file "LPClientFramework\LPNetworkClient\LPRequestCounter.py", line 30>)
+             38 LOAD_CONST               7 ('LPRequestCounter.requestFinished')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               7 (requestFinished)
+             44 LOAD_CLOSURE             0 (__class__)
+             46 DUP_TOP
+             48 STORE_NAME               8 (__classcell__)
+             50 RETURN_VALUE
+
+=== LPRequestCounter.__init__ ===
+ 18           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 19          12 LOAD_FAST                1 (parent)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (parent)
+
+ 20          18 LOAD_CONST               1 (0)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (_pending_count)
+
+ 21          24 LOAD_CONST               1 (0)
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (_failed_count)
+
+ 22          30 LOAD_GLOBAL              5 (threading)
+             32 LOAD_METHOD              6 (Lock)
+             34 CALL_METHOD              0
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               7 (_lock)
+             40 LOAD_CONST               0 (None)
+             42 RETURN_VALUE
+
+=== LPRequestCounter.start ===
+ 26           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              28 (to 34)
+              6 POP_TOP
+
+ 27           8 LOAD_FAST                1 (request_count)
+             10 LOAD_FAST                0 (self)
+             12 STORE_ATTR               1 (_pending_count)
+
+ 28          14 LOAD_CONST               1 (0)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               2 (_failed_count)
+             20 POP_BLOCK
+             22 LOAD_CONST               0 (None)
+             24 DUP_TOP
+             26 DUP_TOP
+             28 CALL_FUNCTION            3
+             30 POP_TOP
+             32 JUMP_FORWARD            16 (to 50)
+        >>   34 WITH_EXCEPT_START
+             36 POP_JUMP_IF_TRUE        40
+             38 RERAISE
+        >>   40 POP_TOP
+             42 POP_TOP
+             44 POP_TOP
+             46 POP_EXCEPT
+             48 POP_TOP
+        >>   50 LOAD_CONST               0 (None)
+             52 RETURN_VALUE
+
+=== LPRequestCounter.requestFinished ===
+ 31           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              56 (to 62)
+              6 POP_TOP
+
+ 32           8 LOAD_FAST                1 (success)
+             10 POP_JUMP_IF_TRUE        48
+
+ 33          12 LOAD_FAST                0 (self)
+             14 DUP_TOP
+             16 LOAD_ATTR                1 (_failed_count)
+             18 LOAD_CONST               1 (1)
+             20 INPLACE_ADD
+             22 ROT_TWO
+             24 STORE_ATTR               1 (_failed_count)
+
+ 34          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                1 (_failed_count)
+             30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                2 (_pending_count)
+             34 COMPARE_OP               2 (==)
+             36 POP_JUMP_IF_FALSE       48
+
+ 35          38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                3 (pageErrorSignal)
+             42 LOAD_METHOD              4 (emit)
+             44 CALL_METHOD              0
+             46 POP_TOP
+        >>   48 POP_BLOCK
+             50 LOAD_CONST               0 (None)
+             52 DUP_TOP
+             54 DUP_TOP
+             56 CALL_FUNCTION            3
+             58 POP_TOP
+             60 JUMP_FORWARD            16 (to 78)
+        >>   62 WITH_EXCEPT_START
+             64 POP_JUMP_IF_TRUE        68
+             66 RERAISE
+        >>   68 POP_TOP
+             70 POP_TOP
+             72 POP_TOP
+             74 POP_EXCEPT
+             76 POP_TOP
+        >>   78 LOAD_CONST               0 (None)
+             80 RETURN_VALUE

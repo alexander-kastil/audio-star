@@ -1,0 +1,41 @@
+# module LPClientFramework.LPMusicDatabase
+
+[module] names: __doc__, sqlite3, pathlib, Path, LPClientFramework, LPUtility, DATABASE_DIR_NAME, DATABASE_FILE_NAME, BUSY_TIMEOUT_MS, JOURNAL_MODE, databasePath, connect, _beetsWrapperModule, beetsWriteBlockedReason
+  str: '本地音乐主库（SQLite）的共享访问契约。\n\nPhase 0 起 Recently 与 beets 共用同一个主库文件 ``{userDataDir}/beets/musiclibrary.db``；\n本模块是主库路径、连接参数与 busy_timeout 的唯一来源，避免各业务模块各自拼接路径\n或重复设置 PRAGMA。\n\n职责边界：\n- 提供 :func:`databasePath` / :func:`connect` 与 ``BUSY_TIMEOUT_MS`` / ``JOURNAL_MODE`` 常量；\n- 提供 beets 写门禁状态的**只读**查询，自身不持有冻结状态（冻结唯一'
+  str: 'Path'
+  str: 'LPUtility'
+  str: 'beets'
+  str: 'musiclibrary.db'
+  str: 'wal'
+  str: 'databasePath'
+  str: 'connect'
+  str: '_beetsWrapperModule'
+  str: 'beetsWriteBlockedReason'
+
+def databasePath()  line 33
+  names: Path, LPUtility, userDataDir, DATABASE_DIR_NAME, DATABASE_FILE_NAME, resolve
+    str: '返回本地音乐主库文件路径。\n\n    参数:\n        无。\n    返回:\n        Path: ``{userDataDir}/beets/musiclibrary.db`` 的绝对路径。\n    '
+
+def connect(path, readonly)  line 44
+  names: Path, databasePath, sqlite3, connect, as_posix, Row, row_factory, execute, BUSY_TIMEOUT_MS, parent, mkdir, str, fetchone, lower, JOURNAL_MODE
+    str: '创建主库 sqlite3 连接并统一设置 PRAGMA。\n\n    参数:\n        path (str | Path | None): 目标库路径，未传时使用 :func:`databasePath`。\n        readonly (bool): 为 True 时以只读 URI 打开，不创建目录与文件。\n    返回:\n        sqlite3.Connection: 已设置 ``busy_timeout`` / ``journal_mode`` / ``row_factory`` 的连接。\n    '
+    str: 'file:%s?mode=ro'
+    str: 'uri'
+    str: 'check_same_thread'
+    str: 'PRAGMA busy_timeout=%d;'
+    str: 'parents'
+    str: 'exist_ok'
+    str: 'check_same_thread'
+    str: 'PRAGMA journal_mode;'
+    str: 'PRAGMA journal_mode=%s;'
+
+def _beetsWrapperModule()  line 80
+  names: LPClientFramework.LPBeetsWrapper, LPBeetsWrapper, Exception
+    str: '惰性取得 LPBeetsWrapper 模块。\n\n    参数:\n        无。\n    返回:\n        module | None: 已加载或可导入时返回模块，导入失败时返回 None。\n    '
+
+def beetsWriteBlockedReason()  line 95
+  names: _beetsWrapperModule, getattr, callable, isDBBusy
+    str: '只读查询 beets 写是否被阻塞。\n\n    参数:\n        无。\n    返回:\n        str | None: beets 侧存在独占写任务时返回原因描述，未阻塞时返回 None。\n    '
+    str: 'activeStagedMergeSession'
+    str: 'staged beets import in progress'
+    str: 'beets exclusive write in progress'

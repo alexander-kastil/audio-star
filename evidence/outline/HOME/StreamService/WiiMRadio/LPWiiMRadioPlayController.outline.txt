@@ -1,0 +1,262 @@
+# module HOME.StreamService.WiiMRadio.LPWiiMRadioPlayController
+
+[module] names: __doc__, pathlib, Path, typing, Any, Dict, Optional, Tuple, LPGlobalUI, PyQt6.QtCore, QCoreApplication, Qt, QUrl, pyqtSlot, PyQt6.QtQml, QQmlContext, LPClientFramework.LPConfig.LPFontConfig, ItemCard_Subtitle, ItemCard_Title, Main_Text, getFontFamily, Small_Title, StackWidget_Title, Sub_Text, Sub_Title, LPClientFramework.LPDataModel.UpnpDataModel.LPUpnpAsyncDataModel, LPUpnpAsyncDataModel, LPClientFramework.LPMusicLibrary, LPRecentlyManager, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPPlayListSource, LPClientFramework.LPPublicDefine, MEDIATYPE_RADIO, LPClientFramework.LPPlayList.LPWiiMRadioPlayList, LPWiiMRadioPlayHeader, LPWiiMRadioPlayItem, LPWiiMRadioPlayList, LPClientFramework.LPUtility, logger, LPWiiMRadioPlayController
+  str: '\nWiiMRadio 播放逻辑 Mixin。\n\n用法：让 WiiMRadio 的各页控制器（Home / SeeAll / CategoryDetail）继承此类，\n即可直接调用 playStation(stationItem) 触发电台播放，无需重复实现 XML 构建与\nUPnP 指令发送逻辑。\n\nstationItem 格式（由 LPWiiMRadioDataProvider 归一化后的字典）：\n    {\n        "stationId": str,   # 电台唯一 ID\n        "name":      str,   # 电台名称\n        "favicon": '
+  str: 'Path'
+  str: 'Any'
+  str: 'Dict'
+  str: 'Optional'
+  str: 'Tuple'
+  str: 'QCoreApplication'
+  str: 'Qt'
+  str: 'QUrl'
+  str: 'pyqtSlot'
+  str: 'QQmlContext'
+  str: 'ItemCard_Subtitle'
+  str: 'ItemCard_Title'
+  str: 'Main_Text'
+  str: 'getFontFamily'
+  str: 'Small_Title'
+  str: 'StackWidget_Title'
+  str: 'Sub_Text'
+  str: 'Sub_Title'
+  str: 'LPUpnpAsyncDataModel'
+  str: 'LPRecentlyManager'
+  str: 'LPHeaderType'
+  str: 'LPPlayListSource'
+  str: 'MEDIATYPE_RADIO'
+  str: 'LPWiiMRadioPlayHeader'
+  str: 'LPWiiMRadioPlayItem'
+  str: 'LPWiiMRadioPlayList'
+  str: 'logger'
+  str: 'LPWiiMRadioPlayController'
+
+def LPWiiMRadioPlayController()  line 46
+  names: __name__, __module__, __qualname__, __doc__, LPPlayListSource, WiiMRadio, value, _source, str, __annotations__, _upnp_model, Optional, LPUpnpAsyncDataModel, Dict, Any, playStation, playOrToggleStation, bool, isCurrentDeviceSupportWiiMRadio, showUnsupportedToast, guardWiiMRadioSupported, pyqtSlot, setCardCursorHovered, setHoverCursorState, setHoverCursorShape, clearHoverCursorStates, _ensureHoverCursorStateStore, Qt, CursorShape, _normalizeCursorShape, _syncQuickCursorFromHoverStates, _setQuickCursorShape, QQmlContext, _applySharedQmlContext, _clearSharedQmlContext, QUrl, _resolveWiiMRadioQmlUrl, _get_upnp_model, _syncPlayingInfoFromCurrentDevice, _syncPlayingInfoFromDevice, _isCurrentStationPlayingSource, _setCurrentStationPlaybackState, LPWiiMRadioPlayList, _build_playlist
+    str: 'LPWiiMRadioPlayController'
+    str: '\n    WiiMRadio 播放逻辑 Mixin。\n\n    继承此类的控制器需保证在第一次调用 playStation 前已完成 QWidget 初始化，\n    因为 _upnp_model 延迟创建，无需在 __init__ 中手动调用 super().__init__()。\n    '
+    str: '_source'
+    str: '_upnp_model'
+    str: 'stationItem'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController.playStation'
+    str: 'LPWiiMRadioPlayController.playOrToggleStation'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController.isCurrentDeviceSupportWiiMRadio'
+    str: 'LPWiiMRadioPlayController.showUnsupportedToast'
+    str: 'LPWiiMRadioPlayController.guardWiiMRadioSupported'
+    str: 'hovered'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController.setCardCursorHovered'
+    str: 'sourceKey'
+    str: 'hovered'
+    str: 'cursorName'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController.setHoverCursorState'
+    str: 'cursorName'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController.setHoverCursorShape'
+    str: 'LPWiiMRadioPlayController.clearHoverCursorStates'
+    str: 'LPWiiMRadioPlayController._ensureHoverCursorStateStore'
+    str: 'LPWiiMRadioPlayController._normalizeCursorShape'
+    str: 'LPWiiMRadioPlayController._syncQuickCursorFromHoverStates'
+    str: 'cursorShape'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController._setQuickCursorShape'
+    str: 'ctx'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController._applySharedQmlContext'
+    str: 'LPWiiMRadioPlayController._clearSharedQmlContext'
+    str: 'qrcPath'
+    str: 'fileName'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController._resolveWiiMRadioQmlUrl'
+    str: 'LPWiiMRadioPlayController._get_upnp_model'
+    str: 'LPWiiMRadioPlayController._syncPlayingInfoFromCurrentDevice'
+    str: 'device'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController._syncPlayingInfoFromDevice'
+    str: 'device'
+    str: 'stationId'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController._isCurrentStationPlayingSource'
+    str: 'device'
+    str: 'stationId'
+    str: 'playState'
+    str: 'command'
+    str: 'return'
+    str: 'LPWiiMRadioPlayController._setCurrentStationPlaybackState'
+    str: 'LPWiiMRadioPlayController._build_playlist'
+
+  def LPWiiMRadioPlayController.playStation(self, stationItem)  line 61
+    names: guardWiiMRadioSupported, LPGlobalUI, currentDevice, logger, error, isinstance, dict, get, warning, _build_playlist, generateXML, list, deviceStreamServiceManager, updateMediaInfoForSource, _source, header, guardMediaInfoRollback, _get_upnp_model, palyWithSearchUrl
+      str: '\n        播放指定电台。\n\n        立即更新设备媒体信息以高亮当前项，随后向设备发送 CreateQueue 指令。\n\n        :param stationItem: 归一化后的电台数据字典。\n        :return: None。\n        '
+      str: '[WiiMRadio] playStation failed: no current device'
+      str: '[WiiMRadio] playStation failed: invalid stationItem'
+      str: 'name'
+      str: 'streamUrl'
+      str: '[WiiMRadio] playStation: missing streamUrl, station='
+      str: 'LPWiiMRadioPlayController.playStation.<locals>._on_play_result'
+
+    def LPWiiMRadioPlayController.playStation._on_play_result(response, *args)  line 95
+      names: logger, debug, LPRecentlyManager, instance, addRecentlyPlayedWithMusicList
+        str: '[WiiMRadio] play success: '
+        str: 'openMore'
+        str: 'canNavigate'
+        str: '[WiiMRadio] play failed: '
+
+  def LPWiiMRadioPlayController.playOrToggleStation(self, stationItem)  line 107
+    names: guardWiiMRadioSupported, isinstance, dict, logger, error, str, get, strip, LPGlobalUI, currentDevice, _isCurrentStationPlayingSource, getattr, mediaInfo, _setCurrentStationPlaybackState, playStation
+      str: '\n        播放或切换指定电台的播放状态。\n\n        当前设备正在播放同一 WiiMRadio 电台时发送 Pause；同一电台暂停时发送 Play；\n        其他情况按新电台处理并重新创建播放队列。\n\n        :param stationItem: 归一化后的电台数据字典。\n        :return: None。\n        '
+      str: '[WiiMRadio] playOrToggleStation failed: invalid stationItem'
+      str: 'stationId'
+      str: 'playState'
+      str: 'PLAYING'
+      str: 'PAUSED_PLAYBACK'
+      str: 'Pause'
+      str: 'TRANSITIONING'
+      str: 'Play'
+
+  def LPWiiMRadioPlayController.isCurrentDeviceSupportWiiMRadio(self)  line 137
+    names: LPGlobalUI, currentDevice, deviceStreamServiceManager, streamServiceCapability, _source, keys
+      str: '\n        判断当前连接设备是否声明支持 WiiMRadio 音源。\n\n        :param: 无。\n        :return: 支持返回 True，否则返回 False。\n        '
+
+  def LPWiiMRadioPlayController.showUnsupportedToast(self)  line 151
+    names: QCoreApplication, translate, LPGlobalUI, toast, showToast, mainWindow
+      str: '\n        显示 WiiMRadio 不支持的国际化提示。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'WiiMRadio'
+      str: "Current device doesn't support WiiM Radio. \nPlease upgrade the firmware to get support."
+
+  def LPWiiMRadioPlayController.guardWiiMRadioSupported(self)  line 164
+    names: isCurrentDeviceSupportWiiMRadio, logger, debug, showUnsupportedToast
+      str: '\n        校验当前设备是否支持 WiiMRadio，不支持时弹出提示。\n\n        :param: 无。\n        :return: 支持返回 True，否则返回 False。\n        '
+      str: "[WiiMRadio] current device doesn't support WiiMRadio"
+
+  def LPWiiMRadioPlayController.setCardCursorHovered(self, hovered)  line 178
+    names: setHoverCursorState
+      str: '\n        宿主侧显式同步卡片悬浮光标，兼容 QQuickWidget 下 QML 光标不生效的场景。\n\n        :param hovered: True 表示当前有卡片处于悬浮态。\n        :return: None。\n        '
+      str: 'card'
+      str: 'pointinghand'
+
+  def LPWiiMRadioPlayController.setHoverCursorState(self, sourceKey, hovered, cursorName)  line 188
+    names: str, strip, lower, _ensureHoverCursorStateStore, _hover_cursor_state_seq, _normalizeCursorShape, _hover_cursor_states, pop, _syncQuickCursorFromHoverStates
+      str: '\n        按来源维护悬浮光标状态，避免多个热点切换时互相覆盖宿主光标。\n\n        :param sourceKey: 悬浮来源唯一键。\n        :param hovered: 当前来源是否处于悬浮态。\n        :param cursorName: 光标名称，支持 arrow / pointinghand / ibeam / forbidden。\n        :return: None。\n        '
+
+  def LPWiiMRadioPlayController.setHoverCursorShape(self, cursorName)  line 213
+    names: str, strip, lower, setHoverCursorState
+      str: '\n        兼容旧调用：使用单一 legacy 来源同步宿主光标。\n\n        :param cursorName: 光标名称，支持 arrow / pointinghand / ibeam / forbidden。\n        :return: None。\n        '
+      str: '__legacy__'
+      str: 'arrow'
+      str: 'default'
+
+  def LPWiiMRadioPlayController.clearHoverCursorStates(self)  line 224
+    names: _ensureHoverCursorStateStore, _hover_cursor_states, clear, _setQuickCursorShape, Qt, CursorShape, ArrowCursor
+      str: '\n        清空当前页面记录的全部悬浮光标来源，并恢复默认箭头。\n\n        :return: None。\n        '
+
+  def LPWiiMRadioPlayController._ensureHoverCursorStateStore(self)  line 239
+    names: hasattr, _hover_cursor_states, _hover_cursor_state_seq
+      str: '\n        延迟初始化悬浮光标状态存储。\n\n        :return: None。\n        '
+      str: '_hover_cursor_states'
+      str: '_hover_cursor_state_seq'
+
+  def LPWiiMRadioPlayController._normalizeCursorShape(self, cursorName)  line 250
+    names: str, strip, lower, Qt, CursorShape, ArrowCursor, PointingHandCursor, IBeamCursor, ForbiddenCursor, get
+      str: '\n        将字符串光标名称归一化为 Qt 光标形态。\n\n        :param cursorName: 光标名称。\n        :return: Qt 光标枚举值。\n        '
+      str: 'arrow'
+      str: 'default'
+      str: 'pointinghand'
+      str: 'pointing_hand'
+      str: 'hand'
+      str: 'ibeam'
+      str: 'i_beam'
+      str: 'text'
+      str: 'forbidden'
+      str: 'notallowed'
+      str: 'not_allowed'
+      str: 'disabled'
+
+  def LPWiiMRadioPlayController._syncQuickCursorFromHoverStates(self)  line 274
+    names: _ensureHoverCursorStateStore, _hover_cursor_states, _setQuickCursorShape, Qt, CursorShape, ArrowCursor, max, values
+      str: '\n        根据当前激活的悬浮来源集合选择最终宿主光标。\n\n        :return: None。\n        '
+      str: 'LPWiiMRadioPlayController._syncQuickCursorFromHoverStates.<locals>.<lambda>'
+      str: 'key'
+
+    def LPWiiMRadioPlayController._syncQuickCursorFromHoverStates.<lambda>(item)  line 284
+
+  def LPWiiMRadioPlayController._setQuickCursorShape(self, cursorShape)  line 287
+    names: getattr, cursor, shape, setCursor
+      str: '\n        设置 QQuickWidget 宿主光标，避免重复设置相同光标。\n\n        :param cursorShape: 目标 Qt 光标形态。\n        :return: None。\n        '
+      str: 'quickWidget'
+
+  def LPWiiMRadioPlayController._applySharedQmlContext(self, ctx)  line 301
+    names: setContextProperty, LPGlobalUI, THEME_BACKGROUND_COLOR, name, _store, getFontFamily, THEME_DEFAULT_COLOR, THEME_DISABLE_COLOR, THEME_HIGH_HIGH_COLOR, float, StackWidget_Title, Sub_Title, ItemCard_Title, ItemCard_Subtitle, Main_Text, Sub_Text, Small_Title
+      str: '\n        向 WiiMRadio QML 注入统一的全局颜色与字体 token。\n\n        :param ctx: 待写入的 QML 上下文对象。\n        :return: None。\n        '
+      str: 'wiimRadioBgColor'
+      str: 'wiimRadioPlayingState'
+      str: 'wiimRadioFontFamily'
+      str: 'wiimRadioThemeDefaultColor'
+      str: 'wiimRadioThemeDisableColor'
+      str: 'wiimRadioThemeHighlightColor'
+      str: 'wiimRadioPageTitlePointSize'
+      str: 'wiimRadioSectionTitlePointSize'
+      str: 'wiimRadioCategoryTitlePointSize'
+      str: 'wiimRadioItemCardTitlePointSize'
+      str: 'wiimRadioItemCardSubtitlePointSize'
+      str: 'wiimRadioMainTextPointSize'
+      str: 'wiimRadioSubTextPointSize'
+      str: 'wiimRadioSmallTitlePointSize'
+
+  def LPWiiMRadioPlayController._clearSharedQmlContext(self, ctx)  line 323
+    names: setContextProperty
+      str: '\n        清理 WiiMRadio QML 的全局上下文属性。\n\n        :param ctx: 待清理的 QML 上下文对象。\n        :return: None。\n        '
+      str: 'wiimRadioBgColor'
+      str: 'wiimRadioPlayingState'
+      str: 'wiimRadioFontFamily'
+      str: 'wiimRadioThemeDefaultColor'
+      str: 'wiimRadioThemeDisableColor'
+      str: 'wiimRadioThemeHighlightColor'
+      str: 'wiimRadioPageTitlePointSize'
+      str: 'wiimRadioSectionTitlePointSize'
+      str: 'wiimRadioCategoryTitlePointSize'
+      str: 'wiimRadioItemCardTitlePointSize'
+      str: 'wiimRadioItemCardSubtitlePointSize'
+      str: 'wiimRadioMainTextPointSize'
+      str: 'wiimRadioSubTextPointSize'
+      str: 'wiimRadioSmallTitlePointSize'
+
+  def LPWiiMRadioPlayController._resolveWiiMRadioQmlUrl(self, qrcPath, fileName)  line 345
+    names: Path, __file__, resolve, parents, exists, QUrl, fromLocalFile, str
+      str: '\n        优先返回仓库内本地 QML 文件，缺失时回退到 qrc 资源。\n\n        开发态直接加载磁盘文件，可避免 `resources/app_rc.py` 未重编译时继续使用旧的 QML。\n\n        :param qrcPath: qrc 资源路径。\n        :param fileName: WiiMRadio QML 文件名。\n        :return: 可直接传给 QQuickWidget 的 QUrl。\n        '
+      str: 'resources'
+      str: 'qml'
+      str: 'WiiMRadio'
+
+  def LPWiiMRadioPlayController._get_upnp_model(self)  line 360
+    names: _upnp_model, LPUpnpAsyncDataModel
+      str: '\n        延迟初始化并返回 UPnP 异步数据模型。\n\n        :return: LPUpnpAsyncDataModel 实例。\n        '
+
+  def LPWiiMRadioPlayController._syncPlayingInfoFromCurrentDevice(self)  line 370
+    names: _syncPlayingInfoFromDevice, LPGlobalUI, currentDevice
+      str: '\n        从当前设备的媒体信息同步 WiiMRadio 播放态到 Store。\n\n        无当前设备或当前音源不是 WiiMRadio 时，会清空 Store 中的播放态。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def LPWiiMRadioPlayController._syncPlayingInfoFromDevice(self, device)  line 381
+    names: _store, setPlayingInfo, getattr, trackSource, _source, trackId, playState
+      str: '\n        从指定设备的媒体信息同步 WiiMRadio 播放态到 Store。\n\n        :param device: 需要读取媒体信息的设备对象；为空时清空播放态。\n        :return: None。\n        '
+      str: 'mediaInfo'
+
+  def LPWiiMRadioPlayController._isCurrentStationPlayingSource(self, device, stationId)  line 399
+    names: getattr, trackSource, _source, str, trackId
+      str: '\n        判断当前设备媒体信息是否指向同一个 WiiMRadio 电台。\n\n        :param device: 当前设备对象。\n        :param stationId: 待比较的电台 ID。\n        :return: 当前音源和电台 ID 均匹配时返回 True。\n        '
+      str: 'mediaInfo'
+
+  def LPWiiMRadioPlayController._setCurrentStationPlaybackState(self, device, stationId, playState, command)  line 414
+    names: mediaInfo, playState, _store, setPlayingInfo, asyncUpnpPost
+      str: '\n        本地同步当前电台播放状态并向设备发送播放控制命令。\n\n        :param device: 当前设备对象。\n        :param stationId: 当前电台 ID。\n        :param playState: 本地要同步的播放状态。\n        :param command: 发送给设备的 UPnP 命令，通常为 Pause 或 Play。\n        :return: None。\n        '
+
+  def LPWiiMRadioPlayController._build_playlist(self, stationItem)  line 428
+    names: LPWiiMRadioPlayHeader, get, headTitle, imageUrl, MEDIATYPE_RADIO, mediaType, LPHeaderType, LP_HEADER_TYPE_STATION, headType, LPWiiMRadioPlayItem, trackId, trackName, itemName, trackImage, trackUrl, LPWiiMRadioPlayList, header, list
+      str: '\n        根据电台数据构建 LPWiiMRadioPlayList 对象。\n\n        :param stationItem: 归一化后的电台数据字典。\n        :return: 填充完毕的 LPWiiMRadioPlayList 实例。\n        '
+      str: 'name'
+      str: 'favicon'
+      str: 'stationId'
+      str: 'streamUrl'

@@ -1,0 +1,544 @@
+# module LPClientFramework.util.LPNetworkUtility
+
+[module] names: __doc__, ctypes, ipaddress, locale, logging, os, plistlib, platform, re, socket, subprocess, time, wintypes, psutil, getLogger, logger, system, CREATE_NO_WINDOW, _SUBPROCESS_CREATE_NO_WINDOW, _SUBPROCESS_TIMEOUT, _MAX_UID_DEREF_HOPS, AF_INET, ERROR_BUFFER_OVERFLOW, ERROR_NO_DATA, GAA_FLAG_SKIP_ANYCAST, GAA_FLAG_SKIP_MULTICAST, GAA_FLAG_SKIP_DNS_SERVER, GAA_FLAG_INCLUDE_GATEWAYS, _MAX_ADAPTERS_BUFFER_RETRY, IF_TYPE_ETHERNET_CSMACD, IF_TYPE_IEEE80211, IF_OPER_STATUS_UP, IP_ADAPTER_NO_MULTICAST, WLAN_CLIENT_VERSION, WLAN_INTERFACE_STATE_CONNECTED, WLAN_INTF_OPCODE_CURRENT_CONNECTION, WINDOWS_ERROR_INVALID_PARAMETER, Structure, SOCKADDR_IN, SOCKET_ADDRESS, IP_ADAPTER_UNICAST_ADDRESS, ULONG, DWORD, POINTER, c_int, c_ubyte, _fields_, IP_ADAPTER_GATEWAY_ADDRESS, IP_ADAPTER_ADDRESSES, c_char_p, c_void_p, LPWSTR, c_uint64, WLAN_INTERFACE_GUID, WLAN_INTERFACE_INFO, WLAN_INTERFACE_INFO_LIST, DOT11_SSID, WLAN_ASSOCIATION_ATTRIBUTES, WLAN_SECURITY_ATTRIBUTES, WLAN_CONNECTION_ATTRIBUTES, LPWindowsNetworkInfoReader, _windowsSelectedAdapter, _wlanapiCache, _loadWlanApi, LPWindowsWlanReader, _windowsNetshWlanInterfaces, _emptyNetworkInfo, _windowsWlanInfo, _wifiInterfaceName, _ssidFromScutilCache, _ssidFromCoreWLAN, _fetchNetworkInfoCache, _FETCH_NETWORK_INFO_CACHE_TTL, _currentSSIDCache, _SSID_CACHE_TTL, _currentBSSIDCache, _WINDOWS_WLAN_CACHE_TTL, LPNetworkUtility
+  str: '网络工具模块：集中承载网络信息读取、SSID/BSSID 获取与连通性探测。\n\n本模块由 `LPClientFramework/LPUtility.py` 拆分而来，职责包括：\n\n- 物理局域网信息（网关 / 接口名 / 子网掩码 / 本机 IP）读取；\n- 网络接口类型判定（wifi / eth）；\n- 当前 Wi-Fi 的 SSID、BSSID 读取（Windows 走 WLAN API，macOS 多方案 fallback）；\n- 设备发现诊断用的 ICMP / TCP 连通性探测；\n- 对外网连通性判断。\n\n约束：\n\n- 只依赖标准库与 psutil，不导入 `LPUtility` /'
+  str: 'wintypes'
+  str: 'linkplay'
+  str: 'Windows'
+  str: 'SOCKADDR_IN'
+  str: 'SOCKET_ADDRESS'
+  str: 'IP_ADAPTER_UNICAST_ADDRESS'
+  str: 'Length'
+  str: 'Flags'
+  str: 'Next'
+  str: 'Address'
+  str: 'PrefixOrigin'
+  str: 'SuffixOrigin'
+  str: 'DadState'
+  str: 'ValidLifetime'
+  str: 'PreferredLifetime'
+  str: 'LeaseLifetime'
+  str: 'OnLinkPrefixLength'
+  str: 'IP_ADAPTER_GATEWAY_ADDRESS'
+  str: 'Reserved'
+  str: 'IP_ADAPTER_ADDRESSES'
+  str: 'IfIndex'
+  str: 'AdapterName'
+  str: 'FirstUnicastAddress'
+  str: 'FirstAnycastAddress'
+  str: 'FirstMulticastAddress'
+  str: 'FirstDnsServerAddress'
+  str: 'DnsSuffix'
+  str: 'Description'
+  str: 'FriendlyName'
+  str: 'PhysicalAddress'
+  str: 'PhysicalAddressLength'
+  str: 'Mtu'
+  str: 'IfType'
+  str: 'OperStatus'
+  str: 'Ipv6IfIndex'
+  str: 'ZoneIndices'
+  str: 'FirstPrefix'
+  str: 'TransmitLinkSpeed'
+  str: 'ReceiveLinkSpeed'
+  str: 'FirstWinsServerAddress'
+  str: 'FirstGatewayAddress'
+  str: 'WLAN_INTERFACE_GUID'
+  str: 'WLAN_INTERFACE_INFO'
+  str: 'WLAN_INTERFACE_INFO_LIST'
+  str: 'DOT11_SSID'
+  str: 'WLAN_ASSOCIATION_ATTRIBUTES'
+  str: 'WLAN_SECURITY_ATTRIBUTES'
+  str: 'WLAN_CONNECTION_ATTRIBUTES'
+  str: 'LPWindowsNetworkInfoReader'
+  str: 'interface'
+  str: 'ifType'
+  str: 'loaded'
+  str: 'dll'
+  str: '_loadWlanApi'
+  str: 'LPWindowsWlanReader'
+  str: '_windowsNetshWlanInterfaces'
+  str: '_emptyNetworkInfo'
+  str: '_windowsWlanInfo'
+  str: '_wifiInterfaceName'
+  str: '_ssidFromScutilCache'
+  str: '_ssidFromCoreWLAN'
+  str: 'data'
+  str: 'timestamp'
+  str: 'LPNetworkUtility'
+
+def SOCKADDR_IN()  line 83
+  names: __name__, __module__, __qualname__, wintypes, USHORT, ctypes, c_ubyte, _fields_
+    str: 'SOCKADDR_IN'
+    str: 'sin_family'
+    str: 'sin_port'
+    str: 'sin_addr'
+    str: 'sin_zero'
+
+def SOCKET_ADDRESS()  line 93
+  names: __name__, __module__, __qualname__, ctypes, c_void_p, c_int, _fields_
+    str: 'SOCKET_ADDRESS'
+    str: 'lpSockaddr'
+    str: 'iSockaddrLength'
+
+def IP_ADAPTER_UNICAST_ADDRESS()  line 101
+  names: __name__, __module__, __qualname__
+    str: 'IP_ADAPTER_UNICAST_ADDRESS'
+
+def IP_ADAPTER_GATEWAY_ADDRESS()  line 121
+  names: __name__, __module__, __qualname__
+    str: 'IP_ADAPTER_GATEWAY_ADDRESS'
+
+def IP_ADAPTER_ADDRESSES()  line 134
+  names: __name__, __module__, __qualname__
+    str: 'IP_ADAPTER_ADDRESSES'
+
+def WLAN_INTERFACE_GUID()  line 167
+  names: __name__, __module__, __qualname__, wintypes, DWORD, WORD, ctypes, c_ubyte, _fields_
+    str: 'WLAN_INTERFACE_GUID'
+    str: 'Data1'
+    str: 'Data2'
+    str: 'Data3'
+    str: 'Data4'
+
+def WLAN_INTERFACE_INFO()  line 177
+  names: __name__, __module__, __qualname__, WLAN_INTERFACE_GUID, wintypes, WCHAR, DWORD, _fields_
+    str: 'WLAN_INTERFACE_INFO'
+    str: 'InterfaceGuid'
+    str: 'strInterfaceDescription'
+    str: 'isState'
+
+def WLAN_INTERFACE_INFO_LIST()  line 186
+  names: __name__, __module__, __qualname__, wintypes, DWORD, WLAN_INTERFACE_INFO, _fields_
+    str: 'WLAN_INTERFACE_INFO_LIST'
+    str: 'dwNumberOfItems'
+    str: 'dwIndex'
+    str: 'InterfaceInfo'
+
+def DOT11_SSID()  line 195
+  names: __name__, __module__, __qualname__, wintypes, ULONG, ctypes, c_ubyte, _fields_
+    str: 'DOT11_SSID'
+    str: 'uSSIDLength'
+    str: 'ucSSID'
+
+def WLAN_ASSOCIATION_ATTRIBUTES()  line 203
+  names: __name__, __module__, __qualname__, DOT11_SSID, wintypes, DWORD, ctypes, c_ubyte, ULONG, _fields_
+    str: 'WLAN_ASSOCIATION_ATTRIBUTES'
+    str: 'dot11Ssid'
+    str: 'dot11BssType'
+    str: 'dot11Bssid'
+    str: 'dot11PhyType'
+    str: 'uDot11PhyIndex'
+    str: 'wlanSignalQuality'
+    str: 'ulRxRate'
+    str: 'ulTxRate'
+
+def WLAN_SECURITY_ATTRIBUTES()  line 217
+  names: __name__, __module__, __qualname__, wintypes, BOOL, DWORD, _fields_
+    str: 'WLAN_SECURITY_ATTRIBUTES'
+    str: 'bSecurityEnabled'
+    str: 'bOneXEnabled'
+    str: 'dot11AuthAlgorithm'
+    str: 'dot11CipherAlgorithm'
+
+def WLAN_CONNECTION_ATTRIBUTES()  line 227
+  names: __name__, __module__, __qualname__, wintypes, DWORD, WCHAR, WLAN_ASSOCIATION_ATTRIBUTES, WLAN_SECURITY_ATTRIBUTES, _fields_
+    str: 'WLAN_CONNECTION_ATTRIBUTES'
+    str: 'isState'
+    str: 'wlanConnectionMode'
+    str: 'strProfileName'
+    str: 'wlanAssociationAttributes'
+    str: 'wlanSecurityAttributes'
+
+def LPWindowsNetworkInfoReader()  line 238
+  names: __name__, __module__, __qualname__, __doc__, staticmethod, _ipv4FromSocketAddress, classmethod, _firstIPv4Unicast, _firstIPv4Gateway, _prefixToNetmask, fetch
+    str: 'LPWindowsNetworkInfoReader'
+    str: '通过 GetAdaptersAddresses 读取物理局域网配置（VPN 场景下不落到虚拟网卡）。'
+    str: 'LPWindowsNetworkInfoReader._ipv4FromSocketAddress'
+    str: 'LPWindowsNetworkInfoReader._firstIPv4Unicast'
+    str: 'LPWindowsNetworkInfoReader._firstIPv4Gateway'
+    str: 'LPWindowsNetworkInfoReader._prefixToNetmask'
+    str: 'LPWindowsNetworkInfoReader.fetch'
+
+  def LPWindowsNetworkInfoReader._ipv4FromSocketAddress(address)  line 241
+    names: lpSockaddr, iSockaddrLength, ctypes, sizeof, SOCKADDR_IN, cast, POINTER, contents, sin_family, AF_INET, socket, inet_ntoa, bytes, sin_addr
+      str: '把 Windows 原生 socket 地址转换为 IPv4 字符串。\n\n        参数:\n            address (SOCKET_ADDRESS): Windows 原生 socket 地址。\n        返回:\n            str | None: 有效的 IPv4 地址；地址无效时返回 None。\n        '
+
+  def LPWindowsNetworkInfoReader._firstIPv4Unicast(cls, adapter)  line 257
+    names: FirstUnicastAddress, contents, _ipv4FromSocketAddress, Address, int, OnLinkPrefixLength, Next
+      str: '读取适配器的首个可用 IPv4 单播地址。\n\n        参数:\n            adapter (IP_ADAPTER_ADDRESSES): Windows 网络适配器。\n        返回:\n            tuple[str, int] | None: 本机 IP 与前缀长度；不存在时返回 None。\n        '
+      str: '0.0.0.0'
+
+  def LPWindowsNetworkInfoReader._firstIPv4Gateway(cls, adapter)  line 275
+    names: FirstGatewayAddress, contents, _ipv4FromSocketAddress, Address, Next
+      str: '读取适配器的首个有效 IPv4 网关。\n\n        参数:\n            adapter (IP_ADAPTER_ADDRESSES): Windows 网络适配器。\n        返回:\n            str | None: IPv4 网关；不存在时返回 None。\n        '
+      str: '0.0.0.0'
+
+  def LPWindowsNetworkInfoReader._prefixToNetmask(prefixLength)  line 293
+    names: socket, inet_ntoa, to_bytes
+      str: '把 IPv4 前缀长度转换为点分十进制子网掩码。\n\n        参数:\n            prefixLength (int): 0 到 32 的 IPv4 前缀长度。\n        返回:\n            str: 点分十进制子网掩码。\n        '
+      str: 'big'
+
+  def LPWindowsNetworkInfoReader.fetch(cls)  line 305
+    names: ctypes, windll, iphlpapi, GetAdaptersAddresses, wintypes, ULONG, c_void_p, POINTER, IP_ADAPTER_ADDRESSES, argtypes, restype, GAA_FLAG_SKIP_ANYCAST, GAA_FLAG_SKIP_MULTICAST, GAA_FLAG_SKIP_DNS_SERVER, GAA_FLAG_INCLUDE_GATEWAYS, range, _MAX_ADAPTERS_BUFFER_RETRY, create_string_buffer, value, cast, AF_INET, byref, ERROR_BUFFER_OVERFLOW, logger, warning, WinError, ERROR_NO_DATA, _windowsSelectedAdapter, contents, _firstIPv4Unicast, _firstIPv4Gateway, OperStatus, IF_OPER_STATUS_UP, IfType, IF_TYPE_ETHERNET_CSMACD, IF_TYPE_IEEE80211, Flags, IP_ADAPTER_NO_MULTICAST, append, FriendlyName, Description, _prefixToNetmask, int, IfIndex, Next, sort, dict, pop
+      str: '通过 Windows IP Helper API 获取物理局域网信息。\n\n        参数:\n            无。\n        返回:\n            dict | None: 同一物理网卡的网络信息；没有合适网卡时返回 None。\n        '
+      str: '[win] GetAdaptersAddresses buffer overflow retry exhausted'
+      str: 'interface'
+      str: 'ifType'
+      str: 'gateway'
+      str: 'interface'
+      str: 'netmask'
+      str: 'localIP'
+      str: 'ifIndex'
+      str: 'ifType'
+      str: 'LPWindowsNetworkInfoReader.fetch.<locals>.<lambda>'
+      str: 'key'
+      str: 'ifIndex'
+
+    def LPWindowsNetworkInfoReader.fetch.<lambda>(item)  line 382
+      names: IF_TYPE_IEEE80211
+        str: 'ifType'
+        str: 'ifIndex'
+
+def _loadWlanApi()  line 402
+  names: _wlanapiCache, platform, system, ctypes, WinDLL, wintypes, DWORD, c_void_p, POINTER, HANDLE, WlanOpenHandle, argtypes, restype, WlanCloseHandle, WLAN_INTERFACE_INFO_LIST, WlanEnumInterfaces, WLAN_INTERFACE_GUID, c_int, WlanQueryInterface, WlanFreeMemory, Exception, logger, warning
+    str: '惰性加载 wlanapi.dll 并声明所用函数签名。\n\n    仅在 Windows 上可用；不引入第三方依赖（wlanapi.dll 为系统自带组件），\n    也不参与 PyInstaller 静态分析，因此无需修改打包配置。\n\n    加载结果先写入局部变量、最后一次性发布到缓存：早期实现先置 loaded=True 再赋值 dll，\n    并发调用（主线程与设备发现监控线程都会读 SSID）会在该窗口期拿到 loaded 为真但\n    dll 为 None 的结果，从而误判 WLAN API 不可用并回退慢速 netsh。\n\n    参数:\n        无。\n    返回:\n'
+    str: 'loaded'
+    str: 'dll'
+    str: 'Windows'
+    str: 'wlanapi.dll'
+    str: '[win] wlanapi unavailable: %s'
+
+def LPWindowsWlanReader()  line 465
+  names: __name__, __module__, __qualname__, __doc__, staticmethod, _decodeSsid, _formatBssid, classmethod, fetch, _queryConnection
+    str: 'LPWindowsWlanReader'
+    str: '通过 WLAN API 读取当前无线连接信息（不依赖系统语言与子进程）。'
+    str: 'LPWindowsWlanReader._decodeSsid'
+    str: 'LPWindowsWlanReader._formatBssid'
+    str: 'LPWindowsWlanReader.fetch'
+    str: 'LPWindowsWlanReader._queryConnection'
+
+  def LPWindowsWlanReader._decodeSsid(rawBytes)  line 468
+    names: decode, UnicodeDecodeError, locale, getpreferredencoding, LookupError
+      str: '把 802.11 SSID 原始字节解码为字符串。\n\n        SSID 字节按 UTF-8 解释（Windows 与主流路由器写入口径一致）；\n        非法 UTF-8 时依次回退到系统首选编码和替换式解码，保证不抛异常。\n\n        参数:\n            rawBytes (bytes): SSID 原始字节。\n        返回:\n            str | None: 解码后的 SSID；字节为空时返回 None。\n        '
+      str: 'utf-8'
+      str: 'replace'
+      str: 'errors'
+
+  def LPWindowsWlanReader._formatBssid(rawBytes)  line 491
+    names: len, any, join
+      str: '把 6 字节 BSSID 格式化为 aa:bb:cc:dd:ee:ff 形式。\n\n        参数:\n            rawBytes (bytes): 6 字节 BSSID。\n        返回:\n            str | None: 格式化后的 BSSID；长度不足或全零时返回 None。\n        '
+      str: ':'
+      str: 'LPWindowsWlanReader._formatBssid.<locals>.<genexpr>'
+
+    def LPWindowsWlanReader._formatBssid.<genexpr>(.0)  line 502
+        str: '%02x'
+
+  def LPWindowsWlanReader.fetch(cls, log)  line 504
+    names: _loadWlanApi, wintypes, HANDLE, DWORD, WlanOpenHandle, WLAN_CLIENT_VERSION, ctypes, byref, WINDOWS_ERROR_INVALID_PARAMETER, logger, warning, POINTER, WLAN_INTERFACE_INFO_LIST, WlanEnumInterfaces, WlanCloseHandle, int, contents, dwNumberOfItems, addressof, InterfaceInfo, sizeof, WLAN_INTERFACE_INFO, range, from_address, isState, WLAN_INTERFACE_STATE_CONNECTED, _queryConnection, debug, strInterfaceDescription, WlanFreeMemory
+      str: '读取当前已连接无线接口的 SSID 与 BSSID。\n\n        参数:\n            log (bool): 是否输出调试日志。\n        返回:\n            dict | None: {"ssid": str | None, "bssid": str | None}；\n                WLAN API 不可用或无线服务未启动时返回 None。\n        '
+      str: '[win] WlanOpenHandle failed: %s'
+      str: '[win] WlanEnumInterfaces failed: %s'
+      str: '[network] WLAN API %s: %s'
+
+  def LPWindowsWlanReader._queryConnection(cls, wlanapi, handle, interface)  line 559
+    names: wintypes, DWORD, ctypes, c_void_p, WlanQueryInterface, byref, InterfaceGuid, WLAN_INTF_OPCODE_CURRENT_CONNECTION, logger, warning, cast, POINTER, WLAN_CONNECTION_ATTRIBUTES, contents, wlanAssociationAttributes, int, dot11Ssid, uSSIDLength, bytes, bytearray, ucSSID, dot11Bssid, _decodeSsid, _formatBssid, WlanFreeMemory
+      str: '查询单个无线接口的当前连接属性。\n\n        参数:\n            wlanapi (ctypes.WinDLL): 已加载的 wlanapi 句柄。\n            handle (wintypes.HANDLE): WlanOpenHandle 返回的客户端句柄。\n            interface (WLAN_INTERFACE_INFO): 待查询的无线接口。\n        返回:\n            dict | None: {"ssid": str | None, "bssid": str | None}；查询失败时返回 None。\n     '
+      str: '[win] WlanQueryInterface failed: %s'
+      str: 'ssid'
+      str: 'bssid'
+
+def _windowsNetshWlanInterfaces(log)  line 594
+  names: platform, system, subprocess, check_output, _SUBPROCESS_CREATE_NO_WINDOW, _SUBPROCESS_TIMEOUT, Exception, logger, warning, locale, getpreferredencoding, decode, UnicodeDecodeError, LookupError, debug, splitlines, partition, strip
+    str: '执行 netsh wlan show interfaces 并解析 SSID 与 BSSID（WLAN API 的兜底路径）。\n\n    显式按 UTF-8 解码：中文 Windows 下 netsh 输出 UTF-8 字节，而\n    subprocess 的 text=True 会按系统 ANSI 代码页（如 cp936）解码，遇到中文标题\n    直接抛 UnicodeDecodeError 导致 SSID 取不到。同时用首个冒号切分，\n    避免 SSID 本身包含冒号时被截断。\n\n    参数:\n        log (bool): 是否输出调试日志。\n    返回:\n     '
+    str: 'Windows'
+    str: 'netsh wlan show interfaces'
+    str: 'shell'
+    str: 'creationflags'
+    str: 'timeout'
+    str: 'netsh wlan show interfaces exception: %s'
+    str: 'utf-8'
+    str: 'replace'
+    str: 'errors'
+    str: '[network] netsh wlan show interfaces: %s'
+    str: ':'
+    str: 'SSID'
+    str: 'AP BSSID'
+    str: 'BSSID'
+
+def _emptyNetworkInfo()  line 641
+    str: '构造网络不可用时的固定结构返回值。\n\n    参数:\n        无。\n    返回:\n        dict: 包含固定网络信息字段的空值字典。\n    '
+    str: '0.0.0.0'
+    str: 'gateway'
+    str: 'interface'
+    str: 'netmask'
+    str: 'localIP'
+
+def _windowsWlanInfo(log)  line 657
+  names: LPWindowsWlanReader, fetch, get, _windowsNetshWlanInterfaces
+    str: '获取 Windows 当前无线连接信息（WLAN API 优先，netsh 兜底）。\n\n    参数:\n        log (bool): 是否输出调试日志。\n    返回:\n        tuple[str | None, str | None]: (SSID, BSSID)；未连接或读取失败时均为 None。\n    '
+    str: 'ssid'
+    str: 'bssid'
+
+def _wifiInterfaceName()  line 672
+  names: SystemConfiguration, SCDynamicStoreCreate, SCDynamicStoreCopyValue, SCDynamicStoreCopyKeyList, get, startswith, Exception
+    str: '获取 macOS 当前活动的 Wi-Fi 接口名（如 en1）。\n\n    参数:\n        无。\n    返回:\n        str | None: 接口名；找不到时返回 None。\n    '
+    str: 'SCDynamicStoreCreate'
+    str: 'SCDynamicStoreCopyValue'
+    str: 'SCDynamicStoreCopyKeyList'
+    str: 'getWifiInterface'
+    str: 'State:/Network/Global/IPv4'
+    str: 'PrimaryInterface'
+    str: 'State:/Network/Interface/.*/AirPort'
+    str: '_wifiInterfaceName.<locals>.<listcomp>'
+    str: 'awdl'
+    str: 'llw'
+    str: 'utun'
+    str: 'bridge'
+    str: 'anpi'
+
+  def _wifiInterfaceName.<listcomp>(.0)  line 689
+    names: split
+      str: '/'
+
+def _ssidFromScutilCache(iface, log)  line 701
+  names: subprocess, run, encode, stdout, decode, re, search, bytes, fromhex, sub, group, plistlib, loads, isinstance, dict, zip, get, logger, debug, str, Exception, warning
+    str: '方案1: 解析 scutil 中 AirPort State 的 CachedScanRecord 获取 SSID。\n\n    该缓存记录由系统在关联网络时写入，内容未经 TCC 脱敏，可直接读到 SSID 明文，\n    耗时约几毫秒，是 macOS 26 上无需任何权限的最快方案。\n\n    参数:\n        iface (str): Wi-Fi 接口名，如 en1。\n        log (bool): 是否打印调试日志。\n    返回:\n        str | None: 当前 SSID；获取失败时返回 None。\n    '
+    str: 'scutil'
+    str: 'get State:/Network/Interface/%s/AirPort\nd.show\nquit\n'
+    str: 'input'
+    str: 'capture_output'
+    str: 'timeout'
+    str: 'CachedScanRecord : <data> 0x([0-9a-fA-F\\s]+)'
+    str: '\\s+'
+    str: '$objects'
+    str: '_ssidFromScutilCache.<locals>._deref'
+    str: '$top'
+    str: 'root'
+    str: 'NS.keys'
+    str: '_ssidFromScutilCache.<locals>.<listcomp>'
+    str: 'NS.objects'
+    str: 'SSID_STR'
+    str: 'SSID'
+    str: 'replace'
+    str: 'errors'
+    str: '[network] ssid from scutil cache: %s'
+    str: 'currentSSID scutil cache exception: %s'
+
+  def _ssidFromScutilCache._deref(value)  line 725
+    names: isinstance, plistlib, UID, data, dict, set, keys, _MAX_UID_DEREF_HOPS, logger, warning
+      str: '将 NSKeyedArchiver 的引用（plistlib.UID）解析为实际对象。\n\n            参数:\n                value: plistlib 反序列化得到的引用或原始对象。\n            返回:\n                解析后的实际对象；解引用跳数超出 _MAX_UID_DEREF_HOPS 时返回 None。\n            '
+      str: '$UID'
+      str: 'currentSSID scutil cache: $UID deref exceeded %d hops'
+
+  def _ssidFromScutilCache.<listcomp>(.0)  line 749
+
+  def _ssidFromScutilCache.<listcomp>(.0)  line 750
+
+def _ssidFromCoreWLAN(log)  line 763
+  names: CoreWLAN, CWWiFiClient, sharedWiFiClient, interface, ssid, logger, debug, Exception, warning
+    str: '方案3: 通过 CoreWLAN 框架获取 SSID（需要 app 获得"定位服务"权限）。\n\n    未授权时系统返回 None，此方案仅在已装 pyobjc 且用户已授权时可用。\n\n    参数:\n        log (bool): 是否打印调试日志。\n    返回:\n        str | None: 当前 SSID；无权限或失败时返回 None。\n    '
+    str: '[network] ssid from CoreWLAN: %s'
+    str: 'currentSSID CoreWLAN exception: %s'
+
+def LPNetworkUtility()  line 804
+  names: __name__, __module__, __qualname__, __doc__, staticmethod, _emptyNetworkInfo, getMacosGateway, classmethod, fetchNetworkInfo, fetchNetworkType, _currentSSIDWindows, _currentBSSIDWindows, _currentSSIDDarwin, currentSSID, currentBSSID, ssidToHexString, invalidateNetworkCaches, fetchLocalIP, isIPInGateway, icmpPingHost, tcpProbeHost, pingGoogle
+    str: 'LPNetworkUtility'
+    str: '网络工具门面类：`LPUtility` 的同名转发方法最终调用这里的方法。'
+    str: 'LPNetworkUtility._emptyNetworkInfo'
+    str: 'LPNetworkUtility.getMacosGateway'
+    str: 'LPNetworkUtility.fetchNetworkInfo'
+    str: 'LPNetworkUtility.fetchNetworkType'
+    str: 'LPNetworkUtility._currentSSIDWindows'
+    str: 'LPNetworkUtility._currentBSSIDWindows'
+    str: 'LPNetworkUtility._currentSSIDDarwin'
+    str: 'LPNetworkUtility.currentSSID'
+    str: 'LPNetworkUtility.currentBSSID'
+    str: 'LPNetworkUtility.ssidToHexString'
+    str: 'LPNetworkUtility.invalidateNetworkCaches'
+    str: 'LPNetworkUtility.fetchLocalIP'
+    str: 'LPNetworkUtility.isIPInGateway'
+    str: 'LPNetworkUtility.icmpPingHost'
+    str: 'LPNetworkUtility.tcpProbeHost'
+    str: 'LPNetworkUtility.pingGoogle'
+
+  def LPNetworkUtility._emptyNetworkInfo()  line 807
+    names: _emptyNetworkInfo
+      str: '构造网络不可用时的固定结构返回值。\n\n        参数:\n            无。\n        返回:\n            dict: 包含固定网络信息字段的空值字典。\n        '
+
+  def LPNetworkUtility.getMacosGateway()  line 818
+    names: SystemConfiguration, SCDynamicStoreCreate, SCDynamicStoreCopyValue, get, Exception
+      str: '读取 macOS 的 IPv4 默认网关。\n\n        参数:\n            无。\n        返回:\n            str | None: 网关 IP；读取失败时返回 None。\n        '
+      str: 'SCDynamicStoreCreate'
+      str: 'SCDynamicStoreCopyValue'
+      str: 'getMacosGateway'
+      str: 'State:/Network/Global/IPv4'
+      str: 'Router'
+
+  def LPNetworkUtility.fetchNetworkInfo(cls, log)  line 835
+    names: time, _fetchNetworkInfoCache, _FETCH_NETWORK_INFO_CACHE_TTL, platform, system, LPWindowsNetworkInfoReader, fetch, logger, debug, warning, _emptyNetworkInfo, Exception, _windowsSelectedAdapter, LPNetworkUtility, fetchLocalIP, psutil, net_if_addrs, items, address, netmask, getMacosGateway, subprocess, run, _SUBPROCESS_TIMEOUT, stdout, split, strip, CalledProcessError, TimeoutExpired
+      str: '获取当前网络信息（网关 IP、接口名、子网掩码、本机 IP）。\n\n        结果带有短暂缓存（3 秒），避免在设备发现高频回调中反复查询系统网络配置。\n\n        参数:\n            log (bool): 是否打印调试日志。\n        返回:\n            dict: 包含 gateway / interface / netmask / localIP 的字典；\n                获取失败时返回固定字段的空值字典。\n        '
+      str: 'data'
+      str: 'timestamp'
+      str: 'Windows'
+      str: '[network] fetchNetworkInfo IP Helper API: %s'
+      str: '[win] no active physical LAN adapter with IPv4 gateway'
+      str: '[win] fetchNetworkInfo IP Helper API exception: %s'
+      str: 'interface'
+      str: 'ifType'
+      str: 'getDefaultGateway localIP is None'
+      str: 'Darwin'
+      str: 'getDefaultGateway exception: %s'
+      str: 'Linux'
+      str: 'ip'
+      str: 'route'
+      str: 'show'
+      str: 'default'
+      str: 'capture_output'
+      str: 'text'
+      str: 'timeout'
+      str: '[network] fetchNetworkInfo: %s'
+      str: 'default'
+      str: 'gateway'
+      str: 'interface'
+      str: 'netmask'
+      str: 'localIP'
+
+  def LPNetworkUtility.fetchNetworkType(cls, log)  line 918
+    names: LPNetworkUtility, fetchNetworkInfo, get, platform, system, _windowsSelectedAdapter, IF_TYPE_IEEE80211, psutil, net_if_stats, items, isup, lower, any, Exception, subprocess, run, _SUBPROCESS_TIMEOUT, logger, debug, stdout, split, warning, os, path, exists, open, read, FileNotFoundError, join, strip
+      str: '判断当前默认接口的网络类型。\n\n        参数:\n            log (bool): 是否打印调试日志。\n        返回:\n            str | None: "wifi" / "eth"；无法判定时返回 None。\n        '
+      str: 'gateway'
+      str: 'interface'
+      str: 'Windows'
+      str: 'ifType'
+      str: 'wifi'
+      str: 'eth'
+      str: 'LPNetworkUtility.fetchNetworkType.<locals>.<genexpr>'
+      str: 'wi-fi'
+      str: 'wireless'
+      str: 'wlan'
+      str: 'Darwin'
+      str: 'networksetup'
+      str: '-listallnetworkservices'
+      str: 'capture_output'
+      str: 'text'
+      str: 'timeout'
+      str: '[network] fetchNetworkType: %s'
+      str: '-getinfo'
+      str: 'ethernet'
+      str: 'wi-fi'
+      str: 'fetchNetworkType exception: %s'
+      str: 'Linux'
+      str: '/proc/net/wireless'
+      str: 'r'
+      str: '[network] fetchNetworkType /proc/net/wireless: %s'
+      str: '/sys/class/net'
+      str: 'type'
+      str: '[network] fetchNetworkType /sys/class/net: %s'
+      str: '1'
+
+    def LPNetworkUtility.fetchNetworkType.<genexpr>(.0)  line 949
+
+  def LPNetworkUtility._currentSSIDWindows(cls, log)  line 1006
+    names: time, _currentSSIDCache, _WINDOWS_WLAN_CACHE_TTL, _windowsWlanInfo
+      str: '获取 Windows 当前 Wi-Fi SSID，并带短缓存。\n\n        参数:\n            log (bool): 是否输出调试日志。\n        返回:\n            str | None: 当前 Wi-Fi SSID；读取失败时返回 None。\n        '
+      str: 'data'
+      str: 'timestamp'
+
+  def LPNetworkUtility._currentBSSIDWindows(cls, log)  line 1026
+    names: time, _currentBSSIDCache, _WINDOWS_WLAN_CACHE_TTL, _windowsWlanInfo
+      str: '获取 Windows 当前 Wi-Fi BSSID，并带短缓存。\n\n        参数:\n            log (bool): 是否输出调试日志。\n        返回:\n            str | None: 当前 BSSID（aa:bb:cc:dd:ee:ff）；读取失败时返回 None。\n        '
+      str: 'data'
+      str: 'timestamp'
+
+  def LPNetworkUtility._currentSSIDDarwin(cls, log)  line 1046
+    names: time, _currentSSIDCache, _SSID_CACHE_TTL, _wifiInterfaceName, logger, warning, _ssidFromScutilCache, _ssidFromCoreWLAN
+      str: '获取 macOS 当前 Wi-Fi SSID（多方案按优先级 fallback）。\n\n        参数:\n            log (bool): 是否打印调试日志。\n        返回:\n            str | None: 当前 Wi-Fi SSID；全部方案失败时返回 None。\n        '
+      str: 'data'
+      str: 'timestamp'
+      str: 'currentSSID found no wifi interface'
+
+  def LPNetworkUtility.currentSSID(cls, currentInterfaceIsWifi, log)  line 1071
+    names: fetchNetworkType, platform, system, _currentSSIDWindows, _currentSSIDDarwin, subprocess, run, _SUBPROCESS_TIMEOUT, logger, debug, stdout, strip, len, Exception, warning
+      str: '获取当前 Wi-Fi 的 SSID。\n\n        参数:\n            currentInterfaceIsWifi (bool): True 则只有当当前 interface 为 wifi 时才返回信息；\n                否则只要 interface 里有 wifi 就返回。\n            log (bool): 是否输出调试日志。\n        返回:\n            str | None: 当前 Wi-Fi SSID；未连接或获取失败时返回 None。\n        '
+      str: 'wifi'
+      str: 'Windows'
+      str: 'Darwin'
+      str: 'Linux'
+      str: 'iwgetid'
+      str: '-r'
+      str: 'capture_output'
+      str: 'text'
+      str: 'timeout'
+      str: '[network] currentSSID: %s'
+      str: 'currentSSID exception: %s'
+
+  def LPNetworkUtility.currentBSSID(cls, currentInterfaceIsWifi, log)  line 1109
+    names: fetchNetworkType, platform, system, _currentBSSIDWindows, os, path, exists, logger, warning, subprocess, run, _SUBPROCESS_TIMEOUT, debug, stdout, split, strip, Exception
+      str: '获取当前 Wi-Fi 热点的 BSSID（埋点诊断用的同网比较依据）。\n\n        参数:\n            currentInterfaceIsWifi (bool): True 时仅当前接口为 Wi-Fi 才返回。\n            log (bool): 是否输出调试日志。\n        返回:\n            str | None: BSSID 字符串（如 aa:bb:cc:dd:ee:ff）；获取失败返回 None。\n        '
+      str: 'wifi'
+      str: 'Windows'
+      str: 'Darwin'
+      str: '/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+      str: 'currentBSSID found no airport'
+      str: '-I'
+      str: 'capture_output'
+      str: 'text'
+      str: 'timeout'
+      str: '[network] currentBSSID: %s'
+      str: 'BSSID:'
+      str: ':'
+      str: 'currentBSSID exception: %s'
+
+  def LPNetworkUtility.ssidToHexString(ssid)  line 1149
+    names: encode, hex, upper, Exception
+      str: '把 SSID 明文转换为 UTF-8 字节的大写十六进制串。\n\n        与 iOS str2HexStr 口径一致，用于和云端设备上报的 hex SSID 比较。\n\n        参数:\n            ssid (str): SSID 明文。\n        返回:\n            str: 大写 hex 字符串；入参为空时返回空串。\n        '
+      str: 'utf-8'
+
+  def LPNetworkUtility.invalidateNetworkCaches(cls)  line 1167
+    names: _fetchNetworkInfoCache, _currentSSIDCache, _currentBSSIDCache
+      str: '使网络信息与 SSID/BSSID 缓存立即失效，强制下次调用读取最新系统状态。\n\n        网络切换瞬间旧网关/旧 SSID 仍可能留在缓存中（网关缓存 3 秒、\n        Windows SSID/BSSID 缓存 5 秒、macOS SSID 缓存 30 秒），调用后设备搜索页等场景\n        才能取到新网络数据。\n\n        参数:\n            无。\n        返回:\n            None。\n        '
+      str: 'data'
+      str: 'timestamp'
+
+  def LPNetworkUtility.fetchLocalIP()  line 1187
+    names: platform, system, LPNetworkUtility, fetchNetworkInfo, get, socket, AF_INET, SOCK_DGRAM, connect, getsockname, Exception
+      str: '获取当前物理局域网的本机 IPv4 地址。\n\n        参数:\n            无。\n        返回:\n            str: 本机 IPv4 地址；获取失败时返回 "0.0.0.0"。\n        '
+      str: 'Windows'
+      str: 'localIP'
+      str: '0.0.0.0'
+      str: '8.8.8.8'
+
+  def LPNetworkUtility.isIPInGateway(ipStr, gatewayStr, netmaskStr)  line 1207
+    names: ipaddress, IPv4Network, IPv4Address, Exception
+      str: '判断 IP 是否与网关处于同一网段。\n\n        参数:\n            ipStr (str): 待判断的 IP 地址，例如 "192.168.68.35"。\n            gatewayStr (str): 网关 IP，例如 "192.168.68.1"。\n            netmaskStr (str): 子网掩码，例如 "255.255.255.0"。\n        返回:\n            bool: 同网段返回 True；参数非法或不同网段返回 False。\n        '
+      str: '/'
+      str: 'strict'
+
+  def LPNetworkUtility.icmpPingHost(ip, timeout)  line 1225
+    names: platform, system, str, subprocess, run, _SUBPROCESS_CREATE_NO_WINDOW, returncode, Exception, logger, debug
+      str: '对指定主机做一次 ICMP Ping 探测（设备发现诊断的 ping_ok 判定位）。\n\n        参数:\n            ip (str): 目标 IPv4 地址。\n            timeout (int): 超时秒数。\n        返回:\n            bool: 收到回包返回 True；超时或异常返回 False。\n        '
+      str: 'Windows'
+      str: 'ping'
+      str: '-n'
+      str: '1'
+      str: '-w'
+      str: '-c'
+      str: '-t'
+      str: 'capture_output'
+      str: 'text'
+      str: 'timeout'
+      str: 'creationflags'
+      str: 'icmpPingHost %s exception: %s'
+
+  def LPNetworkUtility.tcpProbeHost(ip, port, timeout)  line 1251
+    names: socket, create_connection, close, Exception, logger, debug
+      str: '对指定主机端口做 TCP 连通探测（设备发现诊断的 tcp443_ok 判定位）。\n\n        参数:\n            ip (str): 目标 IPv4 地址。\n            port (int): 目标端口，默认 443。\n            timeout (int): 连接超时秒数。\n        返回:\n            bool: 连接成功返回 True；超时或异常返回 False。\n        '
+      str: 'timeout'
+      str: 'tcpProbeHost %s:%d exception: %s'
+
+  def LPNetworkUtility.pingGoogle()  line 1273
+    names: socket, create_connection, OSError
+      str: '探测外网连通性（向 8.8.8.8:53 发起一次 TCP 连接）。\n\n        超时只作用于本次连接的套接字：早期实现用 socket.setdefaulttimeout(3) 设置\n        进程级默认超时，会让随后新建的所有 socket（如 LPTLSTool.tlsCmd 的套接字）\n        被动继承 3 秒，且失败分支直接 return 永不还原；旧实现也只在成功分支 close，\n        失败时泄漏套接字。\n\n        参数:\n            无。\n        返回:\n            bool: 连接成功返回 True；无外网'
+      str: '8.8.8.8'
+      str: 'timeout'

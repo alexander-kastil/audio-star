@@ -1,0 +1,48 @@
+# module LPClientFramework.LPDeviceManager.LPGroupEditState
+
+[module] names: __doc__, normalize_uuid, uuid_from_group_item, normalized_uuid_list, normalized_group_member_uuids, device_matches_group, uuid_sets_equal, is_group_edit_no_change
+  str: '设备分组编辑状态判断工具。'
+  str: 'normalize_uuid'
+  str: 'uuid_from_group_item'
+  str: 'normalized_uuid_list'
+  str: 'normalized_group_member_uuids'
+  str: 'device_matches_group'
+  str: 'uuid_sets_equal'
+  str: 'is_group_edit_no_change'
+
+def normalize_uuid(value)  line 5
+  names: str, strip, lower, startswith, replace
+    str: '规范化设备 uuid。\n\n    Args:\n        value (object): 原始 uuid，可能带 `uuid:` 前缀，也可能大小写不一致。\n\n    Returns:\n        str: 去掉前缀和连字符后的小写 uuid；无效输入返回空字符串。\n    '
+    str: 'uuid:'
+    str: '-'
+
+def uuid_from_group_item(item)  line 25
+  names: isinstance, dict, normalize_uuid, get, getattr
+    str: '从组成员条目里取出规范化 uuid。\n\n    Args:\n        item (object): 组成员条目，支持 dict 或带 uuid 属性的对象。\n\n    Returns:\n        str: 规范化后的 uuid；无法取得时返回空字符串。\n    '
+    str: 'uuid'
+
+def normalized_uuid_list(values)  line 42
+  names: set, list, normalize_uuid, append, add
+    str: '生成去重后的规范化 uuid 列表。\n\n    Args:\n        values (iterable): uuid 字符串或对象数组。\n\n    Returns:\n        list[str]: 按首次出现顺序保留的规范化 uuid 列表。\n    '
+
+def normalized_group_member_uuids(group)  line 63
+  names: set, getattr, normalize_uuid, append, add, list, uuid_from_group_item
+    str: '返回组对象里的规范化成员 uuid。\n\n    Args:\n        group (object): 分组对象，包含 masterDevice 和 slaveList。\n\n    Returns:\n        list[str]: master 在前、slave 去重后的成员 uuid 列表。\n    '
+    str: 'masterDevice'
+    str: 'uuid'
+    str: 'slaveList'
+
+def device_matches_group(group, device)  line 90
+  names: normalize_uuid, getattr, set, normalized_group_member_uuids
+    str: '判断设备是否属于指定组。\n\n    Args:\n        group (object): 分组对象。\n        device (object): 设备对象。\n\n    Returns:\n        bool: 设备 uuid 与组 master 或任一 slave uuid 匹配时返回 True。\n    '
+    str: 'uuid'
+
+def uuid_sets_equal(left, right)  line 107
+  names: set, normalized_uuid_list
+    str: '比较两个 uuid 列表是否表示同一组成员。\n\n    Args:\n        left (iterable): 左侧 uuid 列表。\n        right (iterable): 右侧 uuid 列表。\n\n    Returns:\n        bool: 去重规范化后的 uuid 集合一致时返回 True。\n    '
+
+def is_group_edit_no_change(current_named_group, current_edit_device, current_member_uuids, selected_uuid_list, selected_group_id)  line 121
+  names: str, strip, lower, getattr, normalized_uuid_list, normalize_uuid, normalized_group_member_uuids, bool, uuid_sets_equal
+    str: '判断本次编辑分组提交是否没有任何变化。\n\n    Args:\n        current_named_group (object): 当前 active named group，没有时为 None。\n        current_edit_device (object): 当前编辑入口设备。\n        current_member_uuids (iterable): 当前实时组成员 uuid。\n        selected_uuid_list (iterable): 弹窗提交的选中成员 uuid。\n        selected_group_id (str): 弹窗提交的选中'
+    str: 'groupId'
+    str: 'uuid'

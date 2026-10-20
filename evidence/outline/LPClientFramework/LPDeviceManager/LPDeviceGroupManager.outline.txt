@@ -1,0 +1,387 @@
+# module LPClientFramework.LPDeviceManager.LPDeviceGroupManager
+
+[module] names: __doc__, copy, json, time, threading, RLock, LPClientFramework.LPDeviceManager.LPGroup, LPGroupObject, LPGroupType, LPGroupType_User, LPGroupType_Temp, LPClientFramework.LPDeviceManager.LPGroupEditState, device_matches_group, LPClientFramework.LPUtility, logger, _diagnose_group_summary, _diagnose_group_list, _normalized_group_type_from_data, object, LPDeviceGroupObject, LPDeviceGroupManager
+  str: '\n@Time ： 2026/3/19 15:33\n@Auth ： Chris\n@File ：LPDeviceGroupManager.py\n@Desc: Device Group manager singleton\n'
+  str: 'RLock'
+  str: 'LPGroupObject'
+  str: 'LPGroupType'
+  str: 'LPGroupType_User'
+  str: 'LPGroupType_Temp'
+  str: 'device_matches_group'
+  str: 'logger'
+  str: '_diagnose_group_summary'
+  str: '_diagnose_group_list'
+  str: '_normalized_group_type_from_data'
+  str: 'LPDeviceGroupObject'
+  str: 'LPDeviceGroupManager'
+
+def _diagnose_group_summary(group)  line 23
+  names: isinstance, dict, list, get, getattr, append, bool, len
+    str: '生成命名组诊断摘要。\n\n    Args:\n        group (object): LPGroupObject 或命名组字典。\n\n    Returns:\n        dict: 仅包含排查 active/member 所需字段的摘要。\n    '
+    str: 'slavelist'
+    str: 'active'
+    str: 'group_id'
+    str: 'group_name'
+    str: 'group_type'
+    str: 'slaveList'
+    str: 'masterDevice'
+    str: 'groupId'
+    str: 'groupName'
+    str: 'createGroupType'
+    str: 'uuid'
+    str: 'group_id'
+    str: 'group_name'
+    str: 'group_type'
+    str: 'active'
+    str: 'master_uuid'
+    str: 'slave_count'
+    str: 'slave_uuids'
+
+def _diagnose_group_list(groups)  line 65
+  names: list
+    str: '生成命名组数组诊断摘要。\n\n    Args:\n        groups (list): 命名组对象或字典数组。\n\n    Returns:\n        list: 摘要数组。\n    '
+    str: '_diagnose_group_list.<locals>.<listcomp>'
+
+  def _diagnose_group_list.<listcomp>(.0)  line 74
+    names: _diagnose_group_summary
+
+def _normalized_group_type_from_data(data, fallback)  line 77
+  names: LPGroupType, normalize, Default, isinstance, dict, get
+    str: '从命名组数据中提取并归一化 group_type。\n\n    Args:\n        data (dict): 命名组数据。\n        fallback (int): 缺少 group_type 时采用的默认值。\n\n    Returns:\n        int: 归一化后的 group_type。\n    '
+    str: 'group_type'
+
+def LPDeviceGroupObject()  line 95
+  names: __name__, __module__, __qualname__, __doc__, __init__, deviceAddGroupObj, convertGroupToDictionaryArray, covertGroupObjToDictionary, confirmGroupChanges, currentDeviceGroups, currentRawGroupInfo, currentRawGroupList, _rawInfoFromGroupList, _syncRawEditInfoList, _findRawEditGroupIndex, updateGroupList, getTempGroup, deviceUpdateGroupObj
+    str: 'LPDeviceGroupObject'
+    str: '单台设备的命名组缓存桶，维护业务组对象和设备原始 group payload。'
+    str: 'LPDeviceGroupObject.__init__'
+    str: 'LPDeviceGroupObject.deviceAddGroupObj'
+    str: 'LPDeviceGroupObject.convertGroupToDictionaryArray'
+    str: 'LPDeviceGroupObject.covertGroupObjToDictionary'
+    str: 'LPDeviceGroupObject.confirmGroupChanges'
+    str: 'LPDeviceGroupObject.currentDeviceGroups'
+    str: 'LPDeviceGroupObject.currentRawGroupInfo'
+    str: 'LPDeviceGroupObject.currentRawGroupList'
+    str: 'LPDeviceGroupObject._rawInfoFromGroupList'
+    str: 'LPDeviceGroupObject._syncRawEditInfoList'
+    str: 'LPDeviceGroupObject._findRawEditGroupIndex'
+    str: 'LPDeviceGroupObject.updateGroupList'
+    str: 'LPDeviceGroupObject.getTempGroup'
+    str: 'LPDeviceGroupObject.deviceUpdateGroupObj'
+
+  def LPDeviceGroupObject.__init__(self, device_id)  line 98
+    names: groupList, editGroupList, rawGroupInfo, rawEditGroupInfo, rawGroupList, rawEditGroupList, RLock, _lock
+
+  def LPDeviceGroupObject.deviceAddGroupObj(self, groupObj, isFirst)  line 108
+    names: _lock, editGroupList, insert, rawEditGroupList, covertGroupObjToDictionary, append, _syncRawEditInfoList
+
+  def LPDeviceGroupObject.convertGroupToDictionaryArray(self)  line 118
+    names: _lock, rawEditGroupList, copy, deepcopy, editGroupList
+      str: 'LPDeviceGroupObject.convertGroupToDictionaryArray.<locals>.<listcomp>'
+
+    def LPDeviceGroupObject.convertGroupToDictionaryArray.<listcomp>(.0)  line 122
+      names: copy
+
+    def LPDeviceGroupObject.convertGroupToDictionaryArray.<listcomp>(.0)  line 123
+      names: covertGroupObjToDictionary
+
+  def LPDeviceGroupObject.covertGroupObjToDictionary(self, group, baseGroup)  line 125
+    names: isinstance, dict, copy, deepcopy, groupName, getattr, groupId, LPGroupType, normalize, Default, updateTime, int, channel, list, get, str, lower, slaveList, update, append
+      str: '把命名组对象转换为设备保存接口使用的字典。\n\n        Args:\n            group (LPGroupObject): 需要序列化的命名组对象。\n            baseGroup (dict): 设备返回的原始 group 字典，用于保留未知字段。\n\n        Returns:\n            dict: 可下发给设备的命名组字典。\n        '
+      str: 'group_name'
+      str: 'groupFullName'
+      str: 'fullName'
+      str: 'group_id'
+      str: 'createGroupType'
+      str: 'group_type'
+      str: 'update_time'
+      str: 'channel'
+      str: 'slavelist'
+      str: 'uuid'
+      str: 'name'
+      str: 'name'
+      str: 'uuid'
+      str: 'ip'
+      str: 'ipv4'
+
+  def LPDeviceGroupObject.confirmGroupChanges(self, success)  line 170
+    names: _lock, logger, debug, _diagnose_group_list, groupList, editGroupList, copy, deepcopy, rawEditGroupList, rawGroupList, rawEditGroupInfo, rawGroupInfo
+      str: '[group-diagnose][debug][LPDeviceGroupObject.confirmGroupChanges] success=%s beforeGroupList=%s beforeEditGroupList=%s'
+      str: 'LPDeviceGroupObject.confirmGroupChanges.<locals>.<listcomp>'
+      str: '[group-diagnose][debug][LPDeviceGroupObject.confirmGroupChanges.after] success=%s groupList=%s editGroupList=%s'
+
+    def LPDeviceGroupObject.confirmGroupChanges.<listcomp>(.0)  line 180
+      names: copy
+
+    def LPDeviceGroupObject.confirmGroupChanges.<listcomp>(.0)  line 184
+      names: copy
+
+  def LPDeviceGroupObject.currentDeviceGroups(self)  line 194
+    names: _lock, groupList
+      str: 'LPDeviceGroupObject.currentDeviceGroups.<locals>.<listcomp>'
+
+    def LPDeviceGroupObject.currentDeviceGroups.<listcomp>(.0)  line 196
+      names: copy
+
+  def LPDeviceGroupObject.currentRawGroupInfo(self)  line 198
+    names: _lock, copy, deepcopy, rawGroupInfo
+      str: '返回当前确认态的设备原始 group 信息。\n\n        Args:\n            无。\n\n        Returns:\n            dict: 设备 getnamegrouplist 返回信息的深拷贝。\n        '
+
+  def LPDeviceGroupObject.currentRawGroupList(self)  line 210
+    names: _lock, copy, deepcopy, rawGroupList
+      str: '返回当前确认态的设备原始 grouplist。\n\n        Args:\n            无。\n\n        Returns:\n            list: 原始 grouplist 深拷贝。\n        '
+
+  def LPDeviceGroupObject._rawInfoFromGroupList(self, groupList)  line 222
+    names: list
+      str: '用业务组对象生成兜底 raw group 信息。\n\n        Args:\n            groupList (list): 业务组对象数组。\n\n        Returns:\n            dict: 包含 grouplist 的设备保存结构。\n        '
+      str: 'grouplist'
+      str: 'LPDeviceGroupObject._rawInfoFromGroupList.<locals>.<listcomp>'
+
+    def LPDeviceGroupObject._rawInfoFromGroupList.<listcomp>(.0)  line 231
+      names: covertGroupObjToDictionary
+
+  def LPDeviceGroupObject._syncRawEditInfoList(self)  line 233
+    names: isinstance, rawEditGroupInfo, dict, copy, deepcopy, rawEditGroupList
+      str: '把编辑态 raw group 列表同步回 rawEditGroupInfo。\n\n        Args:\n            无。\n\n        Returns:\n            None。\n        '
+      str: 'grouplist'
+
+  def LPDeviceGroupObject._findRawEditGroupIndex(self, groupId)  line 246
+    names: str, enumerate, rawEditGroupList, isinstance, dict, get
+      str: '按 group_id 查找编辑态 raw group 下标。\n\n        Args:\n            groupId (str): 目标 group_id。\n\n        Returns:\n            int: 命中时返回下标，未命中返回 -1。\n        '
+      str: 'group_id'
+
+  def LPDeviceGroupObject.updateGroupList(self, groupList, rawGroupInfo)  line 263
+    names: _lock, logger, debug, _diagnose_group_list, groupList, editGroupList, isinstance, dict, copy, deepcopy, _rawInfoFromGroupList, list, get, rawEditGroupInfo, rawGroupInfo, rawEditGroupList, rawGroupList
+      str: '[group-diagnose][debug][LPDeviceGroupObject.updateGroupList] oldGroupList=%s newGroupList=%s'
+      str: 'LPDeviceGroupObject.updateGroupList.<locals>.<listcomp>'
+      str: 'grouplist'
+
+    def LPDeviceGroupObject.updateGroupList.<listcomp>(.0)  line 271
+      names: copy
+
+    def LPDeviceGroupObject.updateGroupList.<listcomp>(.0)  line 272
+      names: copy
+
+  def LPDeviceGroupObject.getTempGroup(self)  line 283
+    names: _lock, groupList, createGroupType, LPGroupType_Temp, copy
+
+  def LPDeviceGroupObject.deviceUpdateGroupObj(self, groupObj)  line 290
+    names: _lock, enumerate, editGroupList, groupId, _findRawEditGroupIndex, rawEditGroupList, covertGroupObjToDictionary, insert, _syncRawEditInfoList
+
+def LPDeviceGroupManager()  line 305
+  names: __name__, __module__, __qualname__, __doc__, _instance, RLock, _instanceLock, __new__, __init__, classmethod, instance, makeGroupWithDevice, _bucket, addGroup, _allDeviceBuckets, _rebuildAllGroups, saveGroupList, fetchDeviceGroupsFromDevice, refreshDeviceGroups, ensureDeviceGroupsFetched, readyGroupWithDevice, updateGroupActive, updateGroupListWithGroupInfo, createGroupObjectWithDict, updateDeviceGroupTitles, getActiveGroupWithDevice, sortGroupList, getDeviceGroupWithDeviceId, updateGroupObject, _groupFullNameFromData, updateGroup, clearNameGroup, __classcell__
+    str: 'LPDeviceGroupManager'
+    str: '设备命名组管理器，负责拉取、缓存、保存和查询设备命名组。'
+    str: 'LPDeviceGroupManager.__new__'
+    str: 'LPDeviceGroupManager.__init__'
+    str: 'LPDeviceGroupManager.instance'
+    str: 'LPDeviceGroupManager.makeGroupWithDevice'
+    str: 'LPDeviceGroupManager._bucket'
+    str: 'LPDeviceGroupManager.addGroup'
+    str: 'LPDeviceGroupManager._allDeviceBuckets'
+    str: 'LPDeviceGroupManager._rebuildAllGroups'
+    str: 'LPDeviceGroupManager.saveGroupList'
+    str: 'LPDeviceGroupManager.fetchDeviceGroupsFromDevice'
+    str: 'LPDeviceGroupManager.refreshDeviceGroups'
+    str: 'LPDeviceGroupManager.ensureDeviceGroupsFetched'
+    str: 'LPDeviceGroupManager.readyGroupWithDevice'
+    str: 'LPDeviceGroupManager.updateGroupActive'
+    str: 'LPDeviceGroupManager.updateGroupListWithGroupInfo'
+    str: 'LPDeviceGroupManager.createGroupObjectWithDict'
+    str: 'LPDeviceGroupManager.updateDeviceGroupTitles'
+    str: 'LPDeviceGroupManager.getActiveGroupWithDevice'
+    str: 'LPDeviceGroupManager.sortGroupList'
+    str: 'LPDeviceGroupManager.getDeviceGroupWithDeviceId'
+    str: 'LPDeviceGroupManager.updateGroupObject'
+    str: 'LPDeviceGroupManager._groupFullNameFromData'
+    str: 'LPDeviceGroupManager.updateGroup'
+    str: 'LPDeviceGroupManager.clearNameGroup'
+
+  def LPDeviceGroupManager.__new__(cls, *args, **kwargs)  line 311
+    names: _instance, _instanceLock, super, __new__
+
+  def LPDeviceGroupManager.__init__(self)  line 318
+    names: getattr, RLock, _groupsListLock, _groupsArrayLock, groupListDict, allDevicesGroups, _initialized
+      str: '_initialized'
+
+  def LPDeviceGroupManager.instance(cls)  line 327
+
+  def LPDeviceGroupManager.makeGroupWithDevice(self, device)  line 331
+    names: supportNamedGroup, logger, debug, getattr, refreshDeviceGroups
+      str: '[group-diagnose][debug][makeGroupWithDevice.skip] reason=notSupportNamedGroup device=%s uuid=%s'
+      str: 'name'
+      str: 'uuid'
+      str: '[group-diagnose][debug][makeGroupWithDevice.enter] device=%s uuid=%s'
+      str: '[group-diagnose][debug][makeGroupWithDevice.exit] device=%s uuid=%s changed=%s'
+
+  def LPDeviceGroupManager._bucket(self, deviceId, create)  line 356
+    names: _groupsListLock, groupListDict, get, LPDeviceGroupObject
+
+  def LPDeviceGroupManager.addGroup(self, groupObj)  line 367
+    names: _bucket, masterDevice, uuid, logger, debug, _diagnose_group_summary, _diagnose_group_list, currentDeviceGroups, deviceAddGroupObj, convertGroupToDictionaryArray, bool, saveGroupList, confirmGroupChanges, _rebuildAllGroups
+      str: 'create'
+      str: '[group-diagnose][debug][deviceGroupManager.addGroup.enter] group=%s currentBucketGroups=%s'
+      str: 'isFirst'
+      str: '[group-diagnose][debug][deviceGroupManager.addGroup.exit] success=%s savedGroupList=%s bucketGroups=%s'
+
+  def LPDeviceGroupManager._allDeviceBuckets(self)  line 392
+    names: _groupsListLock, list, groupListDict, values
+
+  def LPDeviceGroupManager._rebuildAllGroups(self)  line 396
+    names: _allDeviceBuckets, extend, currentDeviceGroups, _groupsArrayLock, allDevicesGroups
+
+  def LPDeviceGroupManager.saveGroupList(self, masterDevice, groupList)  line 404
+    names: logger, debug, getattr, _diagnose_group_list, saveNameGroupList, get
+      str: 'grouplist'
+      str: '[group-diagnose][saveGroupList] device=%s uuid=%s payload=%s summary=%s'
+      str: 'name'
+      str: 'uuid'
+      str: 'payload'
+      str: '[group-diagnose][saveGroupList.response] device=%s uuid=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'
+
+  def LPDeviceGroupManager.fetchDeviceGroupsFromDevice(self, device)  line 426
+    names: supportNamedGroup, getNameGroupList, logger, debug, getattr, get, json, loads, Exception, warning, name, updateGroupListWithGroupInfo
+      str: '同步从设备拉取命名组列表并刷新本地缓存。\n\n        Args:\n            device (object): 目标主设备。\n\n        Returns:\n            tuple: 第一个值表示是否成功从设备获取并写入缓存，第二个值表示缓存内容是否变化。\n        '
+      str: '[group-diagnose][refreshDeviceGroups.getnamegrouplist] device=%s uuid=%s status=%s body=%s'
+      str: 'name'
+      str: 'uuid'
+      str: 'status_code'
+      str: 'body'
+      str: '{}'
+      str: '[refreshDeviceGroups] parse getnamegrouplist failed for '
+      str: ': '
+
+  def LPDeviceGroupManager.refreshDeviceGroups(self, device)  line 457
+    names: fetchDeviceGroupsFromDevice
+      str: '同步刷新设备命名组缓存，并保持历史返回语义为是否发生变化。\n\n        Args:\n            device (object): 目标主设备。\n\n        Returns:\n            bool: 设备命名组缓存有变化时返回 True，否则返回 False。\n        '
+
+  def LPDeviceGroupManager.ensureDeviceGroupsFetched(self, device)  line 471
+    names: fetchDeviceGroupsFromDevice
+      str: '确保已从设备实时拉取一次命名组列表。\n\n        Args:\n            device (object): 目标主设备。\n\n        Returns:\n            bool: 成功从设备获取并写入本地缓存时返回 True。\n        '
+
+  def LPDeviceGroupManager.readyGroupWithDevice(self, device)  line 483
+    names: getattr, refreshDeviceGroups
+      str: 'supportNamedGroup'
+
+  def LPDeviceGroupManager.updateGroupActive(self, groupId, deviceId)  line 488
+    names: _bucket, logger, debug, currentDeviceGroups, _diagnose_group_list, bool, groupId, active, append, currentRawGroupInfo, isinstance, dict, updateGroupList, _rebuildAllGroups
+      str: 'create'
+      str: '[group-diagnose][updateGroupActive] deviceId=%s groupId=%s bucketMissing=True'
+      str: '[group-diagnose][updateGroupActive] deviceId=%s targetGroupId=%s changed=%s previous=%s updated=%s'
+      str: 'current_group_id'
+
+  def LPDeviceGroupManager.updateGroupListWithGroupInfo(self, groupInfo, device)  line 529
+    names: isinstance, dict, uuid, _bucket, list, get, logger, debug, getattr, _diagnose_group_list, _normalized_group_type_from_data, LPGroupType, Default, Exception, LPGroupType_Temp, append, currentDeviceGroups, len, groupName, groupFullName, _groupFullNameFromData, slaveList, masterDevice, str, int, time, updateTime, channel, normalize, createGroupType, bool, groupId, active, createGroupObjectWithDict, LPGroupType_User, set, keys, currentRawGroupInfo, updateGroupList, _rebuildAllGroups
+      str: 'create'
+      str: 'grouplist'
+      str: '[group-diagnose][updateGroupListWithGroupInfo.enter] device=%s uuid=%s current_group_id=%s rawGroups=%s'
+      str: 'name'
+      str: 'current_group_id'
+      str: 'LPDeviceGroupManager.updateGroupListWithGroupInfo.<locals>.<dictcomp>'
+      str: 'slavelist'
+      str: 'group_id'
+      str: 'group_name'
+      str: 'fullName'
+      str: 'full_name'
+      str: 'groupFullName'
+      str: 'LPDeviceGroupManager.updateGroupListWithGroupInfo.<locals>.<listcomp>'
+      str: 'channel'
+      str: 'group_type'
+      str: 'LPDeviceGroupManager.updateGroupListWithGroupInfo.<locals>.<setcomp>'
+      str: '[group-diagnose][updateGroupListWithGroupInfo.exit] device=%s uuid=%s current_group_id=%s changed=%s previous=%s updated=%s'
+
+    def LPDeviceGroupManager.updateGroupListWithGroupInfo.<dictcomp>(.0)  line 565
+      names: groupId
+
+    def LPDeviceGroupManager.updateGroupListWithGroupInfo.<listcomp>(.0)  line 587
+      names: dict
+
+    def LPDeviceGroupManager.updateGroupListWithGroupInfo.<setcomp>(.0)  line 601
+      names: groupId
+
+  def LPDeviceGroupManager.createGroupObjectWithDict(self, data, groupType, device)  line 637
+    names: LPGroupObject, get, _groupFullNameFromData, bool, str, int, time, _normalized_group_type_from_data
+      str: '根据设备接口字典创建命名组对象。\n\n        Args:\n            data (dict): 设备接口返回或本地构造的命名组数据。\n            groupType (int): 默认组类型。\n            device (object): 组主设备。\n\n        Returns:\n            LPGroupObject: 解析后的命名组对象。\n        '
+      str: 'group_name'
+      str: 'group_id'
+      str: 'LPDeviceGroupManager.createGroupObjectWithDict.<locals>.<listcomp>'
+      str: 'slavelist'
+      str: 'active'
+      str: 'channel'
+      str: 'groupName'
+      str: 'groupFullName'
+      str: 'masterDevice'
+      str: 'groupId'
+      str: 'slaveList'
+      str: 'active'
+      str: 'updateTime'
+      str: 'channel'
+      str: 'createGroupType'
+
+    def LPDeviceGroupManager.createGroupObjectWithDict.<listcomp>(.0)  line 653
+
+  def LPDeviceGroupManager.updateDeviceGroupTitles(self, rawDeviceMap)  line 661
+    names: _groupsListLock, list, groupListDict, items, get, currentDeviceGroups, active, createGroupType, LPGroupType_Temp, groupName, groupInfo, groupTitle
+
+  def LPDeviceGroupManager.getActiveGroupWithDevice(self, device)  line 678
+    names: _groupsArrayLock, allDevicesGroups, active, device_matches_group, copy
+
+  def LPDeviceGroupManager.sortGroupList(self)  line 691
+    names: _groupsArrayLock, allDevicesGroups, sorted
+      str: 'LPDeviceGroupManager.sortGroupList.<locals>.<listcomp>'
+      str: 'LPDeviceGroupManager.sortGroupList.<locals>.<lambda>'
+      str: 'key'
+
+    def LPDeviceGroupManager.sortGroupList.<listcomp>(.0)  line 693
+      names: createGroupType, LPGroupType_User, copy
+
+    def LPDeviceGroupManager.sortGroupList.<lambda>(group)  line 694
+      names: groupName, lower
+
+  def LPDeviceGroupManager.getDeviceGroupWithDeviceId(self, deviceId)  line 696
+    names: _bucket
+      str: 'create'
+
+  def LPDeviceGroupManager.updateGroupObject(self, currentObj, bodyDict)  line 699
+    names: get, groupName, groupFullName, getattr, _groupFullNameFromData, masterDevice, slaveList, str, int, time, updateTime
+      str: '用编辑请求字典更新已有命名组对象。\n\n        Args:\n            currentObj (LPGroupObject): 待更新的命名组对象。\n            bodyDict (dict): 编辑请求数据。\n\n        Returns:\n            None。\n        '
+      str: 'group_name'
+      str: 'fullName'
+      str: 'full_name'
+      str: 'groupFullName'
+      str: 'LPDeviceGroupManager.updateGroupObject.<locals>.<listcomp>'
+      str: 'slavelist'
+
+    def LPDeviceGroupManager.updateGroupObject.<listcomp>(.0)  line 719
+      names: dict
+
+  def LPDeviceGroupManager._groupFullNameFromData(self, data, device)  line 722
+    names: isinstance, dict, get, getattr, len, list, int
+      str: '从命名组数据中解析或恢复 UI 展示完整组名。\n\n        Args:\n            data (dict): 命名组数据。\n            device (object): 组主设备。\n\n        Returns:\n            str: 完整组名；无法恢复时返回 group_name。\n        '
+      str: 'fullName'
+      str: 'full_name'
+      str: 'group_name'
+      str: '...'
+      str: 'name'
+      str: 'slavelist'
+      str: ' +'
+
+  def LPDeviceGroupManager.updateGroup(self, groupObj)  line 749
+    names: _bucket, masterDevice, uuid, logger, debug, _diagnose_group_summary, _diagnose_group_list, currentDeviceGroups, deviceUpdateGroupObj, convertGroupToDictionaryArray, bool, saveGroupList, confirmGroupChanges, _rebuildAllGroups
+      str: 'create'
+      str: '[group-diagnose][updateGroup] group=%s'
+      str: '[group-diagnose][debug][deviceGroupManager.updateGroup.enter] group=%s currentBucketGroups=%s'
+      str: '[group-diagnose][debug][deviceGroupManager.updateGroup.exit] success=%s savedGroupList=%s bucketGroups=%s'
+
+  def LPDeviceGroupManager.clearNameGroup(self)  line 776
+    names: _groupsListLock, len, groupListDict, clear, _groupsArrayLock, allDevicesGroups, getattr, groupTitle, logger, debug
+      str: 'LPDeviceGroupManager.clearNameGroup.<locals>.<listcomp>'
+      str: 'masterDevice'
+      str: 'groupInfo'
+      str: 'groupTitle'
+      str: '[name group] clear cache buckets=%s groups=%s clearedTitles=%s'
+
+    def LPDeviceGroupManager.clearNameGroup.<listcomp>(.0)  line 782
+      names: copy

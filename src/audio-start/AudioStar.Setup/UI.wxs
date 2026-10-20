@@ -1,0 +1,63 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Fragment>
+    <WixVariable Id="WixUIDialogBmp" Value="Assets\dialog.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="Assets\banner.bmp" />
+
+    <!-- First screen of a fresh install: the comic scene, bubble and card are painted into start.bmp (460 x 290 units, drawn at twice the 96 dpi size so it stays sharp at 150 percent) -->
+    <Binary Id="StartDlgBmp" SourceFile="Assets\start.bmp" />
+
+    <!-- Finish and cancelled screens: same comic woman on cream; Strings.en-us.wxl points ExitDialogBitmap and UserExitBitmap here, FatalError keeps dialog.bmp -->
+    <Binary Id="ExitDlgBmp" SourceFile="Assets\exit.bmp" />
+
+    <UI Id="AudioStarUI">
+      <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+      <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+      <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+
+      <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+      <Property Id="ARPNOMODIFY" Value="1" />
+
+      <UIRef Id="WixUI_Common" />
+
+      <DialogRef Id="WelcomeDlg" />
+      <DialogRef Id="VerifyReadyDlg" />
+      <DialogRef Id="ProgressDlg" />
+      <DialogRef Id="ExitDialog" />
+      <DialogRef Id="FatalError" />
+      <DialogRef Id="UserExit" />
+      <DialogRef Id="ErrorDlg" />
+      <DialogRef Id="FilesInUse" />
+      <DialogRef Id="MsiRMFilesInUse" />
+      <DialogRef Id="PrepareDlg" />
+
+      <Dialog Id="StartDlg" Width="460" Height="326" Title="!(loc.WelcomeDlg_Title)" TrackDiskSpace="yes">
+        <Control Id="Picture" Type="Bitmap" X="0" Y="0" Width="460" Height="290" TabSkip="yes" Text="StartDlgBmp" />
+        <Control Id="BottomLine" Type="Line" X="0" Y="290" Width="460" Height="0" />
+        <Control Id="AutostartCheckBox" Type="CheckBox" X="15" Y="300" Width="230" Height="18" Property="AUTOSTART" CheckBoxValue="1" Text="Start Audio Star with Windows" />
+        <Control Id="Cancel" Type="PushButton" X="304" Y="299" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+          <Publish Event="SpawnDialog" Value="CancelDlg" />
+        </Control>
+        <Control Id="Install" Type="PushButton" X="370" Y="299" Width="80" Height="17" Default="yes" ElevationShield="yes" Text="!(loc.VerifyReadyDlgInstall)">
+          <Publish Event="EndDialog" Value="Return" Order="1" Condition="OutOfDiskSpace &lt;&gt; 1" />
+          <Publish Event="SpawnDialog" Value="OutOfRbDiskDlg" Order="2" Condition="OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND (PROMPTROLLBACKCOST=&quot;P&quot; OR NOT PROMPTROLLBACKCOST)" />
+          <Publish Event="EndDialog" Value="Return" Order="3" Condition="OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST=&quot;D&quot;" />
+          <Publish Event="EnableRollback" Value="False" Order="4" Condition="OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST=&quot;D&quot;" />
+          <Publish Event="SpawnDialog" Value="OutOfDiskDlg" Order="5" Condition="(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST=&quot;F&quot;)" />
+        </Control>
+      </Dialog>
+
+      <!-- StartDlg replaces WelcomeDlg for a fresh install; WelcomeDlg stays for patches -->
+      <InstallUISequence>
+        <Show Dialog="StartDlg" Before="ProgressDlg" Condition="NOT Installed" />
+        <Show Dialog="override WelcomeDlg" Before="ProgressDlg" Condition="Installed AND PATCH" />
+      </InstallUISequence>
+
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Condition="Installed AND PATCH" />
+
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2" Condition="Installed AND PATCH" />
+
+      <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999" />
+
+    </UI>
+  </Fragment>
+</Wix>

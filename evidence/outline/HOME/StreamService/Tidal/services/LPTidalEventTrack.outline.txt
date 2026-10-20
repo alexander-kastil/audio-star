@@ -1,0 +1,121 @@
+# module HOME.StreamService.Tidal.services.LPTidalEventTrack
+
+[module] names: __doc__, hashlib, threading, time, typing, Any, Dict, List, Optional, LPTidalEventTrack
+  str: '\nTIDAL 埋点事件辅助类。\n\n线程安全，无 Qt 依赖。\n使用方式：直接 import 并调用类方法，无需实例化。\n\n## 当前已实施的事件\n\n| 事件名          | 触发条件                                      |\n|-----------------|-----------------------------------------------|\n| tidal_login     | 登录成功或失败（注意数据脱敏）                |\n| tidal_api_error | 非 2xx / 非 304 的 API 响应  '
+  str: 'Any'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'LPTidalEventTrack'
+
+def LPTidalEventTrack()  line 33
+  names: __name__, __module__, __qualname__, __doc__, _timers, Dict, str, float, __annotations__, threading, RLock, _lock, _PREFIX, _SOURCE, classmethod, _desensitize_uuid, _eventCountryCode, Optional, Any, _log, _classify, bool, login_event, int, api_error, playback_event
+    str: 'LPTidalEventTrack'
+    str: '轻量级 TIDAL 埋点辅助类。全部类方法，无 Qt 依赖，线程安全。'
+    str: '_timers'
+    str: 'tidal_'
+    str: 'tidal'
+    str: 'device_uuid'
+    str: 'return'
+    str: 'LPTidalEventTrack._desensitize_uuid'
+    str: 'return'
+    str: 'LPTidalEventTrack._eventCountryCode'
+    str: 'event_suffix'
+    str: 'params'
+    str: 'return'
+    str: 'LPTidalEventTrack._log'
+    str: 'status_code'
+    str: 'return'
+    str: 'LPTidalEventTrack._classify'
+    str: 'success'
+    str: 'method'
+    str: 'error_code'
+    str: 'error_message'
+    str: 'duration_ms'
+    str: 'device_uuid'
+    str: 'account_country_code'
+    str: 'subscription_type'
+    str: 'return'
+    str: 'LPTidalEventTrack.login_event'
+    str: 'endpoint'
+    str: 'method'
+    str: 'status_code'
+    str: 'elapsed_ms'
+    str: 'retry_count'
+    str: 'account_country_code'
+    str: 'error'
+    str: 'return'
+    str: 'LPTidalEventTrack.api_error'
+    str: 'status'
+    str: 'source'
+    str: 'content_type'
+    str: 'error_reason'
+    str: 'device_uuid'
+    str: 'firmware_version'
+    str: 'duration_ms'
+    str: 'return'
+    str: 'LPTidalEventTrack.playback_event'
+
+  def LPTidalEventTrack._desensitize_uuid(cls, device_uuid)  line 43
+    names: str
+      str: '对 device_uuid 脱敏：取前 8 位截断。'
+
+  def LPTidalEventTrack._eventCountryCode(cls)  line 50
+    names: LPClientFramework.LPUtility, eventCountryCode, Exception
+      str: '\n        读取埋点统一使用的设备系统地区码。\n\n        延迟导入 LPUtility，保持本模块导入期无 Qt 依赖；取值失败一律回落\n        "ZZ"，埋点取地区不能影响业务主链路。\n\n        参数:\n            无。\n        返回:\n            str: 两位大写地区码；无法获取时返回 "ZZ"。\n        '
+      str: 'eventCountryCode'
+      str: 'ZZ'
+
+  def LPTidalEventTrack._log(cls, event_suffix, params)  line 69
+    names: _PREFIX, isinstance, dict, LPGlobalUI, eventTrack, logEvent, Exception
+
+  def LPTidalEventTrack._classify(cls, status_code)  line 81
+    names: int, TypeError, ValueError
+      str: 'auth'
+      str: 'region'
+      str: 'rate_limit'
+      str: 'not_found'
+      str: 'server'
+      str: 'network'
+      str: 'client_error'
+      str: 'unknown'
+
+  def LPTidalEventTrack.login_event(cls, success, method, error_code, error_message, duration_ms, device_uuid, account_country_code, subscription_type)  line 105
+    names: _desensitize_uuid, _eventCountryCode, int, _log
+      str: '记录登录事件，成功或失败都上报。device_uuid 已脱敏。\n\n        "country_code" 为设备系统地区码（LPUtility.eventCountryCode）；\n        TIDAL 账号地区码单独放在 "tidal_account_country_code"，两者语义不同。\n        '
+      str: 'success'
+      str: 'method'
+      str: 'error_code'
+      str: 'error_message'
+      str: 'device_uuid'
+      str: 'tidal_account_country_code'
+      str: 'country_code'
+      str: 'subscription_type'
+      str: 'duration_ms'
+      str: 'login'
+
+  def LPTidalEventTrack.api_error(cls, endpoint, method, status_code, elapsed_ms, retry_count, account_country_code, error)  line 138
+    names: _log, str, int, _classify, _eventCountryCode
+      str: '记录 TIDAL API 错误事件。\n\n        "country_code" 为设备系统地区码（LPUtility.eventCountryCode）；\n        TIDAL 账号地区码单独放在 "tidal_account_country_code"，两者语义不同。\n        '
+      str: 'api_error'
+      str: 'endpoint'
+      str: 'method'
+      str: 'status_code'
+      str: 'error_type'
+      str: 'elapsed_ms'
+      str: 'retry_count'
+      str: 'tidal_account_country_code'
+      str: 'country_code'
+
+  def LPTidalEventTrack.playback_event(cls, status, source, content_type, error_reason, device_uuid, firmware_version, duration_ms)  line 167
+    names: _SOURCE, str, _desensitize_uuid, int, _log
+      str: '通用播放事件（成功/失败）。当前仅 _SOURCE="tidal" 时由 TIDAL 代码调用。'
+      str: 'source'
+      str: 'caller_source'
+      str: 'status'
+      str: 'content_type'
+      str: 'error_reason'
+      str: 'device_uuid'
+      str: 'firmware_version'
+      str: 'duration_ms'
+      str: 'playback'

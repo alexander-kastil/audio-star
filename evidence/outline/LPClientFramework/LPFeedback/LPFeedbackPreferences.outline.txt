@@ -1,0 +1,27 @@
+# module LPClientFramework.LPFeedback.LPFeedbackPreferences
+
+[module] names: __doc__, LPFeedbackPreferences
+  str: 'Feedback 用户偏好的本地持久化封装。'
+  str: 'LPFeedbackPreferences'
+
+def LPFeedbackPreferences()  line 5
+  names: __name__, __module__, __qualname__, __doc__, _EMAIL_KEY, __init__, loadEmail, saveEmail
+    str: 'LPFeedbackPreferences'
+    str: '使用应用设置存储 Feedback 表单中需要跨会话保留的字段。'
+    str: 'feedback/email'
+    str: 'LPFeedbackPreferences.__init__'
+    str: 'LPFeedbackPreferences.loadEmail'
+    str: 'LPFeedbackPreferences.saveEmail'
+
+  def LPFeedbackPreferences.__init__(self, settingsStore)  line 10
+    names: _settingsStore
+      str: '初始化 Feedback 偏好存储。\n\n        参数:\n            settingsStore (QSettings): 应用级设置存储对象。\n        返回:\n            无。\n        '
+
+  def LPFeedbackPreferences.loadEmail(self)  line 20
+    names: _settingsStore, value, _EMAIL_KEY, str, strip
+      str: '读取上一次成功提交 Feedback 时保存的邮箱。\n\n        参数:\n            无。\n        返回:\n            str: 已保存并去除首尾空白的邮箱；不存在时返回空字符串。\n        '
+
+  def LPFeedbackPreferences.saveEmail(self, email)  line 31
+    names: str, strip, loadEmail, _settingsStore, setValue, _EMAIL_KEY, getattr, callable
+      str: '保存一次成功提交 Feedback 所使用的邮箱。\n\n        参数:\n            email (str): 待保存的用户邮箱。\n        返回:\n            str: 实际保存并去除首尾空白的邮箱；空值不会覆盖已有邮箱。\n        '
+      str: 'sync'

@@ -1,0 +1,83 @@
+# module HOME.PlayView.LPPlayViewTrackLabel
+
+[module] names: __doc__, PyQt6.QtCore, QEvent, QSize, Qt, QTimer, PyQt6.QtGui, QFontMetrics, QPainter, PyQt6.QtWidgets, QLabel, QSizePolicy, LPPlayViewTrackLabel
+  str: 'PlayView 曲目标题滚动标签。'
+  str: 'QEvent'
+  str: 'QSize'
+  str: 'Qt'
+  str: 'QTimer'
+  str: 'QFontMetrics'
+  str: 'QPainter'
+  str: 'QLabel'
+  str: 'QSizePolicy'
+  str: 'LPPlayViewTrackLabel'
+
+def LPPlayViewTrackLabel()  line 9
+  names: __name__, __module__, __qualname__, __doc__, SCROLL_GAP, SCROLL_STEP, SCROLL_INTERVAL_MS, HOLD_INTERVAL_MS, __init__, setText, text, minimumSizeHint, resizeEvent, changeEvent, hideEvent, showEvent, paintEvent, _advanceScroll, _shouldScroll, _resetScrollPosition, _updateScrollState, __classcell__
+    str: 'LPPlayViewTrackLabel'
+    str: '在曲目标题超出可视宽度时从右向左循环滚动。'
+    str: 'LPPlayViewTrackLabel.__init__'
+    str: 'LPPlayViewTrackLabel.setText'
+    str: 'LPPlayViewTrackLabel.text'
+    str: 'LPPlayViewTrackLabel.minimumSizeHint'
+    str: 'LPPlayViewTrackLabel.resizeEvent'
+    str: 'LPPlayViewTrackLabel.changeEvent'
+    str: 'LPPlayViewTrackLabel.hideEvent'
+    str: 'LPPlayViewTrackLabel.showEvent'
+    str: 'LPPlayViewTrackLabel.paintEvent'
+    str: 'LPPlayViewTrackLabel._advanceScroll'
+    str: 'LPPlayViewTrackLabel._shouldScroll'
+    str: 'LPPlayViewTrackLabel._resetScrollPosition'
+    str: 'LPPlayViewTrackLabel._updateScrollState'
+
+  def LPPlayViewTrackLabel.__init__(self, parent)  line 17
+    names: super, __init__, full_text, _scrollOffset, _holdingAtStart, QTimer, _timer, timeout, connect, _advanceScroll, setAlignment, Qt, AlignmentFlag, AlignCenter, setMinimumWidth, setSizePolicy, QSizePolicy, Policy, Preferred, Fixed
+      str: '初始化曲目标题标签。\n\n        :param parent: 父级 QWidget。\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel.setText(self, text)  line 33
+    names: str, full_text, _resetScrollPosition, setToolTip, super, setText, _updateScrollState, updateGeometry, update
+      str: '设置完整标题，并从标题开头重新判断滚动状态。\n\n        :param text: 曲目标题文本。\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel.text(self)  line 47
+    names: full_text
+      str: '返回未裁剪的完整曲目标题。\n\n        :return: 完整曲目标题字符串。\n        '
+
+  def LPPlayViewTrackLabel.minimumSizeHint(self)  line 54
+    names: super, minimumSizeHint, QSize, height
+      str: '允许布局压缩标题宽度，同时保留标签建议高度。\n\n        :return: 宽度为零的最小建议尺寸。\n        '
+
+  def LPPlayViewTrackLabel.resizeEvent(self, event)  line 62
+    names: super, resizeEvent, _resetScrollPosition, _updateScrollState
+      str: '尺寸变化后从标题开头重新计算是否需要滚动。\n\n        :param event: Qt 尺寸变化事件。\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel.changeEvent(self, event)  line 72
+    names: super, changeEvent, type, QEvent, Type, FontChange, _resetScrollPosition, _updateScrollState, updateGeometry
+      str: '字体变化后重新计算标题宽度和滚动状态。\n\n        :param event: Qt 属性变化事件。\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel.hideEvent(self, event)  line 84
+    names: _timer, stop, super, hideEvent
+      str: '标签隐藏时停止滚动，避免不可见页面持续刷新。\n\n        :param event: Qt 隐藏事件。\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel.showEvent(self, event)  line 93
+    names: super, showEvent, _resetScrollPosition, _updateScrollState
+      str: '标签显示时从标题开头恢复必要的滚动。\n\n        :param event: Qt 显示事件。\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel.paintEvent(self, event)  line 103
+    names: _shouldScroll, super, paintEvent, QPainter, setClipRect, contentsRect, setFont, font, setPen, palette, color, foregroundRole, QFontMetrics, horizontalAdvance, full_text, x, _scrollOffset, SCROLL_GAP, int, Qt, AlignmentFlag, AlignLeft, AlignVCenter, drawText, y, height
+      str: '短标题居中绘制，超宽标题从左边界向左循环绘制。\n\n        :param event: Qt 绘制事件。\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel._advanceScroll(self)  line 126
+    names: _shouldScroll, _resetScrollPosition, _updateScrollState, _holdingAtStart, _timer, setInterval, SCROLL_INTERVAL_MS, QFontMetrics, font, horizontalAdvance, full_text, _scrollOffset, SCROLL_STEP, SCROLL_GAP, HOLD_INTERVAL_MS, update
+      str: '结束开头停留或推进一帧滚动位置。\n\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel._shouldScroll(self)  line 148
+    names: full_text, QFontMetrics, font, horizontalAdvance, max, contentsRect, width
+      str: '判断完整标题是否超出当前可视宽度。\n\n        :return: 标题超宽时返回 True，否则返回 False。\n        '
+
+  def LPPlayViewTrackLabel._resetScrollPosition(self)  line 158
+    names: _scrollOffset, _holdingAtStart
+      str: '将滚动位置恢复到标题开头并进入停留状态。\n\n        :return: None。\n        '
+
+  def LPPlayViewTrackLabel._updateScrollState(self)  line 166
+    names: _shouldScroll, isVisible, _holdingAtStart, _timer, start, HOLD_INTERVAL_MS, isActive, SCROLL_INTERVAL_MS, stop
+      str: '根据标题宽度启动或停止滚动定时器。\n\n        :return: None。\n        '

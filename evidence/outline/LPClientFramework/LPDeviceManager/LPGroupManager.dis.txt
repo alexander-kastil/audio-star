@@ -1,0 +1,3170 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/3/17 15:44\n@Auth ： Chris\n@File ：LPGroupManager.py\n@Desc: Group manager singleton\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (enum)
+             10 STORE_NAME               1 (enum)
+
+  9          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (json)
+             18 STORE_NAME               2 (json)
+
+ 10          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (threading)
+             26 STORE_NAME               3 (threading)
+
+ 11          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (time)
+             34 STORE_NAME               4 (time)
+
+ 12          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              5 (uuid)
+             42 STORE_NAME               5 (uuid)
+
+ 13          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               3 (('RLock',))
+             48 IMPORT_NAME              3 (threading)
+             50 IMPORT_FROM              6 (RLock)
+             52 STORE_NAME               6 (RLock)
+             54 POP_TOP
+
+ 15          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               4 (('QObject', 'pyqtSlot'))
+             60 IMPORT_NAME              7 (PyQt6.QtCore)
+             62 IMPORT_FROM              8 (QObject)
+             64 STORE_NAME               8 (QObject)
+             66 IMPORT_FROM              9 (pyqtSlot)
+             68 STORE_NAME               9 (pyqtSlot)
+             70 POP_TOP
+
+ 17          72 LOAD_CONST               1 (0)
+             74 LOAD_CONST               2 (None)
+             76 IMPORT_NAME             10 (LPGlobalUI)
+             78 STORE_NAME              10 (LPGlobalUI)
+
+ 18          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               5 (('LPPublicDefine', 'LPUtility'))
+             84 IMPORT_NAME             11 (LPClientFramework)
+             86 IMPORT_FROM             12 (LPPublicDefine)
+             88 STORE_NAME              12 (LPPublicDefine)
+             90 IMPORT_FROM             13 (LPUtility)
+             92 STORE_NAME              13 (LPUtility)
+             94 POP_TOP
+
+ 19          96 LOAD_CONST               1 (0)
+             98 LOAD_CONST               6 (('LPDeviceGroupManager',))
+            100 IMPORT_NAME             14 (LPClientFramework.LPDeviceManager.LPDeviceGroupManager)
+            102 IMPORT_FROM             15 (LPDeviceGroupManager)
+            104 STORE_NAME              15 (LPDeviceGroupManager)
+            106 POP_TOP
+
+ 20         108 LOAD_CONST               1 (0)
+            110 LOAD_CONST               7 (('LPDeviceNodeManager',))
+            112 IMPORT_NAME             16 (LPClientFramework.LPDeviceManager.LPDeviceNodeManager)
+            114 IMPORT_FROM             17 (LPDeviceNodeManager)
+            116 STORE_NAME              17 (LPDeviceNodeManager)
+            118 POP_TOP
+
+ 21         120 LOAD_CONST               1 (0)
+            122 LOAD_CONST               8 (('LPGroupObject', 'LPGroupType_Temp'))
+            124 IMPORT_NAME             18 (LPClientFramework.LPDeviceManager.LPGroup)
+            126 IMPORT_FROM             19 (LPGroupObject)
+            128 STORE_NAME              19 (LPGroupObject)
+            130 IMPORT_FROM             20 (LPGroupType_Temp)
+            132 STORE_NAME              20 (LPGroupType_Temp)
+            134 POP_TOP
+
+ 22         136 LOAD_CONST               1 (0)
+            138 LOAD_CONST               9 (('logger',))
+            140 IMPORT_NAME             21 (LPClientFramework.LPUtility)
+            142 IMPORT_FROM             22 (logger)
+            144 STORE_NAME              22 (logger)
+            146 POP_TOP
+
+ 24         148 LOAD_NAME               12 (LPPublicDefine)
+            150 LOAD_ATTR               23 (MEDIATYPE_LINEIN)
+
+ 25         152 LOAD_NAME               12 (LPPublicDefine)
+            154 LOAD_ATTR               24 (MEDIATYPE_BLUETOOTH)
+
+ 26         156 LOAD_NAME               12 (LPPublicDefine)
+            158 LOAD_ATTR               25 (MEDIATYPE_EXTERNAL_USB)
+
+ 27         160 LOAD_NAME               12 (LPPublicDefine)
+            162 LOAD_ATTR               26 (MEDIATYPE_USB_DAC)
+
+ 28         164 LOAD_NAME               12 (LPPublicDefine)
+            166 LOAD_ATTR               27 (MEDIATYPE_EXTERNAL_TF)
+
+ 29         168 LOAD_NAME               12 (LPPublicDefine)
+            170 LOAD_ATTR               28 (MEDIATYPE_OPTICAL)
+
+ 30         172 LOAD_NAME               12 (LPPublicDefine)
+            174 LOAD_ATTR               29 (MEDIATYPE_OPTICAL2)
+
+ 31         176 LOAD_NAME               12 (LPPublicDefine)
+            178 LOAD_ATTR               30 (MEDIATYPE_AIRPLAY)
+
+ 32         180 LOAD_NAME               12 (LPPublicDefine)
+            182 LOAD_ATTR               31 (MEDIATYPE_CO_AXIAL)
+
+ 33         184 LOAD_NAME               12 (LPPublicDefine)
+            186 LOAD_ATTR               32 (MEDIATYPE_CO_AXIAL2)
+
+ 34         188 LOAD_NAME               12 (LPPublicDefine)
+            190 LOAD_ATTR               33 (MEDIATYPE_HDMI)
+
+ 35         192 LOAD_NAME               12 (LPPublicDefine)
+            194 LOAD_ATTR               34 (MEDIATYPE_PHONO)
+
+ 24         196 BUILD_LIST              12
+            198 STORE_NAME              35 (UnsupportedChangeMusicMediaType)
+
+ 39         200 LOAD_CONST              10 (<code object _diagnose_device_summary at 0x000001F324E692F0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 39>)
+            202 LOAD_CONST              11 ('_diagnose_device_summary')
+            204 MAKE_FUNCTION            0
+            206 STORE_NAME              36 (_diagnose_device_summary)
+
+ 69         208 LOAD_CONST              12 (<code object _diagnose_group_summary at 0x000001F324E693A0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 69>)
+            210 LOAD_CONST              13 ('_diagnose_group_summary')
+            212 MAKE_FUNCTION            0
+            214 STORE_NAME              37 (_diagnose_group_summary)
+
+ 98         216 LOAD_BUILD_CLASS
+            218 LOAD_CONST              14 (<code object LPNewGroupEditType at 0x000001F324E69190, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 98>)
+            220 LOAD_CONST              15 ('LPNewGroupEditType')
+            222 MAKE_FUNCTION            0
+            224 LOAD_CONST              15 ('LPNewGroupEditType')
+            226 LOAD_NAME                1 (enum)
+            228 LOAD_ATTR               38 (Enum)
+            230 CALL_FUNCTION            3
+            232 STORE_NAME              39 (LPNewGroupEditType)
+
+106         234 LOAD_BUILD_CLASS
+            236 LOAD_CONST              16 (<code object LPGroupManager at 0x000001F324E76870, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 106>)
+            238 LOAD_CONST              17 ('LPGroupManager')
+            240 MAKE_FUNCTION            0
+            242 LOAD_CONST              17 ('LPGroupManager')
+            244 CALL_FUNCTION            2
+            246 STORE_NAME              40 (LPGroupManager)
+            248 LOAD_CONST               2 (None)
+            250 RETURN_VALUE
+
+=== _diagnose_device_summary ===
+ 48           0 LOAD_FAST                0 (device)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+ 49           8 BUILD_MAP                0
+             10 RETURN_VALUE
+
+ 50     >>   12 LOAD_GLOBAL              0 (getattr)
+             14 LOAD_FAST                0 (device)
+             16 LOAD_CONST               2 ('groupInfo')
+             18 LOAD_CONST               1 (None)
+             20 CALL_FUNCTION            3
+             22 STORE_FAST               1 (groupInfo)
+
+ 51          24 BUILD_LIST               0
+             26 STORE_FAST               2 (slaveUuids)
+
+ 52          28 LOAD_GLOBAL              1 (list)
+             30 LOAD_GLOBAL              0 (getattr)
+             32 LOAD_FAST                1 (groupInfo)
+             34 LOAD_CONST               3 ('slaveList')
+             36 BUILD_LIST               0
+             38 CALL_FUNCTION            3
+             40 JUMP_IF_TRUE_OR_POP     44
+             42 BUILD_LIST               0
+        >>   44 CALL_FUNCTION            1
+             46 GET_ITER
+        >>   48 FOR_ITER                64 (to 114)
+             50 STORE_FAST               3 (item)
+
+ 53          52 LOAD_GLOBAL              2 (isinstance)
+             54 LOAD_FAST                3 (item)
+             56 LOAD_GLOBAL              3 (dict)
+             58 CALL_FUNCTION            2
+             60 POP_JUMP_IF_FALSE       76
+
+ 54          62 LOAD_FAST                3 (item)
+             64 LOAD_METHOD              4 (get)
+             66 LOAD_CONST               4 ('uuid')
+             68 LOAD_CONST               5 ('')
+             70 CALL_METHOD              2
+             72 STORE_FAST               4 (uuidValue)
+             74 JUMP_FORWARD            12 (to 88)
+
+ 56     >>   76 LOAD_GLOBAL              0 (getattr)
+             78 LOAD_FAST                3 (item)
+             80 LOAD_CONST               4 ('uuid')
+             82 LOAD_CONST               5 ('')
+             84 CALL_FUNCTION            3
+             86 STORE_FAST               4 (uuidValue)
+
+ 57     >>   88 LOAD_GLOBAL              5 (LPUtility)
+             90 LOAD_METHOD              6 (pureUUID)
+             92 LOAD_FAST                4 (uuidValue)
+             94 CALL_METHOD              1
+             96 STORE_FAST               5 (normalized)
+
+ 58          98 LOAD_FAST                5 (normalized)
+            100 POP_JUMP_IF_FALSE       48
+
+ 59         102 LOAD_FAST                2 (slaveUuids)
+            104 LOAD_METHOD              7 (append)
+            106 LOAD_FAST                5 (normalized)
+            108 CALL_METHOD              1
+            110 POP_TOP
+            112 JUMP_ABSOLUTE           48
+
+ 61     >>  114 LOAD_GLOBAL              0 (getattr)
+            116 LOAD_FAST                0 (device)
+            118 LOAD_CONST               6 ('name')
+            120 LOAD_CONST               5 ('')
+            122 CALL_FUNCTION            3
+
+ 62         124 LOAD_GLOBAL              5 (LPUtility)
+            126 LOAD_METHOD              6 (pureUUID)
+            128 LOAD_GLOBAL              0 (getattr)
+            130 LOAD_FAST                0 (device)
+            132 LOAD_CONST               4 ('uuid')
+            134 LOAD_CONST               5 ('')
+            136 CALL_FUNCTION            3
+            138 CALL_METHOD              1
+
+ 63         140 LOAD_FAST                1 (groupInfo)
+            142 LOAD_CONST               1 (None)
+            144 IS_OP                    1
+            146 POP_JUMP_IF_FALSE      160
+            148 LOAD_GLOBAL              0 (getattr)
+            150 LOAD_FAST                1 (groupInfo)
+            152 LOAD_CONST               7 ('roomState')
+            154 LOAD_CONST               5 ('')
+            156 CALL_FUNCTION            3
+            158 JUMP_FORWARD             2 (to 162)
+        >>  160 LOAD_CONST               5 ('')
+
+ 64     >>  162 LOAD_FAST                1 (groupInfo)
+            164 LOAD_CONST               1 (None)
+            166 IS_OP                    1
+            168 POP_JUMP_IF_FALSE      188
+            170 LOAD_GLOBAL              5 (LPUtility)
+            172 LOAD_METHOD              6 (pureUUID)
+            174 LOAD_GLOBAL              0 (getattr)
+            176 LOAD_FAST                1 (groupInfo)
+            178 LOAD_CONST               8 ('masterID')
+            180 LOAD_CONST               5 ('')
+            182 CALL_FUNCTION            3
+            184 CALL_METHOD              1
+            186 JUMP_FORWARD             2 (to 190)
+        >>  188 LOAD_CONST               5 ('')
+
+ 65     >>  190 LOAD_FAST                2 (slaveUuids)
+
+ 60         192 LOAD_CONST               9 (('name', 'uuid', 'roomState', 'masterID', 'slaveUuids'))
+            194 BUILD_CONST_KEY_MAP      5
+            196 RETURN_VALUE
+
+=== _diagnose_group_summary ===
+ 78           0 LOAD_FAST                0 (group)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+ 79           8 BUILD_MAP                0
+             10 RETURN_VALUE
+
+ 80     >>   12 BUILD_LIST               0
+             14 STORE_FAST               1 (slaveUuids)
+
+ 81          16 LOAD_GLOBAL              0 (list)
+             18 LOAD_GLOBAL              1 (getattr)
+             20 LOAD_FAST                0 (group)
+             22 LOAD_CONST               2 ('slaveList')
+             24 BUILD_LIST               0
+             26 CALL_FUNCTION            3
+             28 JUMP_IF_TRUE_OR_POP     32
+             30 BUILD_LIST               0
+        >>   32 CALL_FUNCTION            1
+             34 GET_ITER
+        >>   36 FOR_ITER                64 (to 102)
+             38 STORE_FAST               2 (item)
+
+ 82          40 LOAD_GLOBAL              2 (isinstance)
+             42 LOAD_FAST                2 (item)
+             44 LOAD_GLOBAL              3 (dict)
+             46 CALL_FUNCTION            2
+             48 POP_JUMP_IF_FALSE       64
+
+ 83          50 LOAD_FAST                2 (item)
+             52 LOAD_METHOD              4 (get)
+             54 LOAD_CONST               3 ('uuid')
+             56 LOAD_CONST               4 ('')
+             58 CALL_METHOD              2
+             60 STORE_FAST               3 (uuidValue)
+             62 JUMP_FORWARD            12 (to 76)
+
+ 85     >>   64 LOAD_GLOBAL              1 (getattr)
+             66 LOAD_FAST                2 (item)
+             68 LOAD_CONST               3 ('uuid')
+             70 LOAD_CONST               4 ('')
+             72 CALL_FUNCTION            3
+             74 STORE_FAST               3 (uuidValue)
+
+ 86     >>   76 LOAD_GLOBAL              5 (LPUtility)
+             78 LOAD_METHOD              6 (pureUUID)
+             80 LOAD_FAST                3 (uuidValue)
+             82 CALL_METHOD              1
+             84 STORE_FAST               4 (normalized)
+
+ 87          86 LOAD_FAST                4 (normalized)
+             88 POP_JUMP_IF_FALSE       36
+
+ 88          90 LOAD_FAST                1 (slaveUuids)
+             92 LOAD_METHOD              7 (append)
+             94 LOAD_FAST                4 (normalized)
+             96 CALL_METHOD              1
+             98 POP_TOP
+            100 JUMP_ABSOLUTE           36
+
+ 90     >>  102 LOAD_GLOBAL              1 (getattr)
+            104 LOAD_FAST                0 (group)
+            106 LOAD_CONST               5 ('groupId')
+            108 LOAD_CONST               4 ('')
+            110 CALL_FUNCTION            3
+
+ 91         112 LOAD_GLOBAL              1 (getattr)
+            114 LOAD_FAST                0 (group)
+            116 LOAD_CONST               6 ('groupName')
+            118 LOAD_CONST               4 ('')
+            120 CALL_FUNCTION            3
+
+ 92         122 LOAD_GLOBAL              8 (bool)
+            124 LOAD_GLOBAL              1 (getattr)
+            126 LOAD_FAST                0 (group)
+            128 LOAD_CONST               7 ('active')
+            130 LOAD_CONST               8 (False)
+            132 CALL_FUNCTION            3
+            134 CALL_FUNCTION            1
+
+ 93         136 LOAD_GLOBAL              9 (_diagnose_device_summary)
+            138 LOAD_GLOBAL              1 (getattr)
+            140 LOAD_FAST                0 (group)
+            142 LOAD_CONST               9 ('masterDevice')
+            144 LOAD_CONST               1 (None)
+            146 CALL_FUNCTION            3
+            148 CALL_FUNCTION            1
+
+ 94         150 LOAD_FAST                1 (slaveUuids)
+
+ 89         152 LOAD_CONST              10 (('groupId', 'groupName', 'active', 'master', 'slaveUuids'))
+            154 BUILD_CONST_KEY_MAP      5
+            156 RETURN_VALUE
+
+=== LPNewGroupEditType ===
+ 98           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPNewGroupEditType')
+              6 STORE_NAME               2 (__qualname__)
+
+ 99           8 LOAD_CONST               1 (0)
+             10 STORE_NAME               3 (NoChange)
+
+100          12 LOAD_CONST               2 (1)
+             14 STORE_NAME               4 (SendFailed)
+
+101          16 LOAD_CONST               3 (2)
+             18 STORE_NAME               5 (CheckSuccess)
+
+102          20 LOAD_CONST               4 (3)
+             22 STORE_NAME               6 (CheckFailed)
+             24 LOAD_CONST               5 (None)
+             26 RETURN_VALUE
+
+=== LPGroupManager ===
+106           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPGroupManager')
+              6 STORE_NAME               2 (__qualname__)
+
+107           8 LOAD_CONST               1 (None)
+             10 STORE_NAME               3 (_instance)
+
+108          12 LOAD_NAME                4 (RLock)
+             14 CALL_FUNCTION            0
+             16 STORE_NAME               5 (_instanceLock)
+
+110          18 LOAD_CLOSURE             0 (__class__)
+             20 BUILD_TUPLE              1
+             22 LOAD_CONST               2 (<code object __new__ at 0x000001F324E690E0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 110>)
+             24 LOAD_CONST               3 ('LPGroupManager.__new__')
+             26 MAKE_FUNCTION            8 (closure)
+             28 STORE_NAME               6 (__new__)
+
+117          30 LOAD_CONST               4 (<code object __init__ at 0x000001F324E69500, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 117>)
+             32 LOAD_CONST               5 ('LPGroupManager.__init__')
+             34 MAKE_FUNCTION            0
+             36 STORE_NAME               7 (__init__)
+
+124          38 LOAD_NAME                8 (classmethod)
+
+125          40 LOAD_CONST               6 (<code object instance at 0x000001F324E69710, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 124>)
+             42 LOAD_CONST               7 ('LPGroupManager.instance')
+             44 MAKE_FUNCTION            0
+             46 CALL_FUNCTION            1
+             48 STORE_NAME               9 (instance)
+
+128          50 LOAD_CONST               8 (<code object result at 0x000001F324E695B0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 128>)
+             52 LOAD_CONST               9 ('LPGroupManager.result')
+             54 MAKE_FUNCTION            0
+             56 STORE_NAME              10 (result)
+
+135          58 LOAD_CONST              10 (<code object getActiveGroupWithDevice at 0x000001F324E69450, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 135>)
+             60 LOAD_CONST              11 ('LPGroupManager.getActiveGroupWithDevice')
+             62 MAKE_FUNCTION            0
+             64 STORE_NAME              11 (getActiveGroupWithDevice)
+
+139          66 LOAD_CONST              12 (<code object supportNewGroup at 0x000001F324E69240, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 139>)
+             68 LOAD_CONST              13 ('LPGroupManager.supportNewGroup')
+             70 MAKE_FUNCTION            0
+             72 STORE_NAME              12 (supportNewGroup)
+
+159          74 LOAD_CONST              14 (<code object _groupWithGroupId at 0x000001F3253C4EA0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 159>)
+             76 LOAD_CONST              15 ('LPGroupManager._groupWithGroupId')
+             78 MAKE_FUNCTION            0
+             80 STORE_NAME              13 (_groupWithGroupId)
+
+182          82 LOAD_CONST              16 (<code object editGroupResult at 0x000001F3253C4240, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 182>)
+             84 LOAD_CONST              17 ('LPGroupManager.editGroupResult')
+             86 MAKE_FUNCTION            0
+             88 STORE_NAME              14 (editGroupResult)
+
+269          90 LOAD_CONST              18 (<code object formattedNameWithRoomName at 0x000001F3253C4710, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 269>)
+             92 LOAD_CONST              19 ('LPGroupManager.formattedNameWithRoomName')
+             94 MAKE_FUNCTION            0
+             96 STORE_NAME              15 (formattedNameWithRoomName)
+
+284          98 LOAD_CONST              20 (<code object fullNameWithRoomName at 0x000001F3253C40E0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 284>)
+            100 LOAD_CONST              21 ('LPGroupManager.fullNameWithRoomName')
+            102 MAKE_FUNCTION            0
+            104 STORE_NAME              16 (fullNameWithRoomName)
+
+299         106 LOAD_CONST              22 (<code object operateGroup at 0x000001F3253C43A0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 299>)
+            108 LOAD_CONST              23 ('LPGroupManager.operateGroup')
+            110 MAKE_FUNCTION            0
+            112 STORE_NAME              17 (operateGroup)
+
+339         114 LOAD_CONST              24 (<code object addGroup at 0x000001F3253C4F50, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 339>)
+            116 LOAD_CONST              25 ('LPGroupManager.addGroup')
+            118 MAKE_FUNCTION            0
+            120 STORE_NAME              18 (addGroup)
+
+363         122 LOAD_CONST              26 (<code object editGroup at 0x000001F3253C49D0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 363>)
+            124 LOAD_CONST              27 ('LPGroupManager.editGroup')
+            126 MAKE_FUNCTION            0
+            128 STORE_NAME              19 (editGroup)
+
+392         130 LOAD_CONST              28 (<code object changeGroupActiveStatus at 0x000001F3253C4450, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 392>)
+            132 LOAD_CONST              29 ('LPGroupManager.changeGroupActiveStatus')
+            134 MAKE_FUNCTION            0
+            136 STORE_NAME              20 (changeGroupActiveStatus)
+
+402         138 LOAD_CONST              30 (<code object checkDeviceMultiResult at 0x000001F3253C4D40, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 402>)
+            140 LOAD_CONST              31 ('LPGroupManager.checkDeviceMultiResult')
+            142 MAKE_FUNCTION            0
+            144 STORE_NAME              21 (checkDeviceMultiResult)
+
+461         146 LOAD_CONST              32 (<code object _onlineExpectedSlaveList at 0x000001F3253C45B0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 461>)
+            148 LOAD_CONST              33 ('LPGroupManager._onlineExpectedSlaveList')
+            150 MAKE_FUNCTION            0
+            152 STORE_NAME              22 (_onlineExpectedSlaveList)
+
+487         154 LOAD_CONST              34 (<code object _uuidListsMatch at 0x000001F3253C4C90, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 487>)
+            156 LOAD_CONST              35 ('LPGroupManager._uuidListsMatch')
+            158 MAKE_FUNCTION            0
+            160 STORE_NAME              23 (_uuidListsMatch)
+
+514         162 LOAD_CONST              36 (<code object _matchCurrentSlaveState at 0x000001F3253C4BE0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 514>)
+            164 LOAD_CONST              37 ('LPGroupManager._matchCurrentSlaveState')
+            166 MAKE_FUNCTION            0
+            168 STORE_NAME              24 (_matchCurrentSlaveState)
+
+547         170 LOAD_CONST              38 (<code object getSlaveList at 0x000001F3253DA920, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 547>)
+            172 LOAD_CONST              39 ('LPGroupManager.getSlaveList')
+            174 MAKE_FUNCTION            0
+            176 STORE_NAME              25 (getSlaveList)
+
+595         178 LOAD_CONST              40 (<code object switchCurrentGroup at 0x000001F3253DAA80, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 595>)
+            180 LOAD_CONST              41 ('LPGroupManager.switchCurrentGroup')
+            182 MAKE_FUNCTION            0
+            184 STORE_NAME              26 (switchCurrentGroup)
+
+657         186 LOAD_CONST              57 ((True,))
+            188 LOAD_CONST              43 (<code object ungroup at 0x000001F3253DA5B0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 657>)
+            190 LOAD_CONST              44 ('LPGroupManager.ungroup')
+            192 MAKE_FUNCTION            1 (defaults)
+            194 STORE_NAME              27 (ungroup)
+
+686         196 LOAD_CONST              45 (<code object _dealSingleSelectedDevice at 0x000001F3253DA9D0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 686>)
+            198 LOAD_CONST              46 ('LPGroupManager._dealSingleSelectedDevice')
+            200 MAKE_FUNCTION            0
+            202 STORE_NAME              28 (_dealSingleSelectedDevice)
+
+769         204 LOAD_CONST              47 (<code object checkIfNoChanges at 0x000001F3253DABE0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 769>)
+            206 LOAD_CONST              48 ('LPGroupManager.checkIfNoChanges')
+            208 MAKE_FUNCTION            0
+            210 STORE_NAME              29 (checkIfNoChanges)
+
+776         212 LOAD_CONST              49 (<code object canChangeMusic at 0x000001F3253DA870, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 776>)
+            214 LOAD_CONST              50 ('LPGroupManager.canChangeMusic')
+            216 MAKE_FUNCTION            0
+            218 STORE_NAME              30 (canChangeMusic)
+
+789         220 LOAD_CONST              58 ((None,))
+            222 LOAD_CONST              51 (<code object changeMusicFromDevice at 0x000001F3253DA7C0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 789>)
+            224 LOAD_CONST              52 ('LPGroupManager.changeMusicFromDevice')
+            226 MAKE_FUNCTION            1 (defaults)
+            228 STORE_NAME              31 (changeMusicFromDevice)
+
+795         230 LOAD_CONST              53 (<code object _transferMusic at 0x000001F324E769D0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 795>)
+            232 LOAD_CONST              54 ('LPGroupManager._transferMusic')
+            234 MAKE_FUNCTION            0
+            236 STORE_NAME              32 (_transferMusic)
+
+818         238 LOAD_CONST              55 (<code object sortGroupList at 0x000001F324E76B30, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 818>)
+            240 LOAD_CONST              56 ('LPGroupManager.sortGroupList')
+            242 MAKE_FUNCTION            0
+            244 STORE_NAME              33 (sortGroupList)
+            246 LOAD_CLOSURE             0 (__class__)
+            248 DUP_TOP
+            250 STORE_NAME              34 (__classcell__)
+            252 RETURN_VALUE
+
+=== LPGroupManager.__new__ ===
+111           0 LOAD_FAST                0 (cls)
+              2 LOAD_ATTR                0 (_instance)
+              4 LOAD_CONST               0 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       72
+
+112          10 LOAD_FAST                0 (cls)
+             12 LOAD_ATTR                1 (_instanceLock)
+             14 SETUP_WITH              40 (to 56)
+             16 POP_TOP
+
+113          18 LOAD_FAST                0 (cls)
+             20 LOAD_ATTR                0 (_instance)
+             22 LOAD_CONST               0 (None)
+             24 IS_OP                    0
+             26 POP_JUMP_IF_FALSE       42
+
+114          28 LOAD_GLOBAL              2 (super)
+             30 CALL_FUNCTION            0
+             32 LOAD_METHOD              3 (__new__)
+             34 LOAD_FAST                0 (cls)
+             36 CALL_METHOD              1
+             38 LOAD_FAST                0 (cls)
+             40 STORE_ATTR               0 (_instance)
+        >>   42 POP_BLOCK
+             44 LOAD_CONST               0 (None)
+             46 DUP_TOP
+             48 DUP_TOP
+             50 CALL_FUNCTION            3
+             52 POP_TOP
+             54 JUMP_FORWARD            16 (to 72)
+        >>   56 WITH_EXCEPT_START
+             58 POP_JUMP_IF_TRUE        62
+             60 RERAISE
+        >>   62 POP_TOP
+             64 POP_TOP
+             66 POP_TOP
+             68 POP_EXCEPT
+             70 POP_TOP
+
+115     >>   72 LOAD_FAST                0 (cls)
+             74 LOAD_ATTR                0 (_instance)
+             76 RETURN_VALUE
+
+=== LPGroupManager.__init__ ===
+118           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_CONST               1 ('_initialized')
+              6 LOAD_CONST               2 (False)
+              8 CALL_FUNCTION            3
+             10 POP_JUMP_IF_FALSE       16
+
+119          12 LOAD_CONST               0 (None)
+             14 RETURN_VALUE
+
+120     >>   16 LOAD_GLOBAL              1 (LPDeviceNodeManager)
+             18 LOAD_METHOD              2 (instance)
+             20 CALL_METHOD              0
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               3 (nodeMgr)
+
+121          26 LOAD_GLOBAL              4 (LPDeviceGroupManager)
+             28 LOAD_METHOD              2 (instance)
+             30 CALL_METHOD              0
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               5 (deviceGroupManager)
+
+122          36 LOAD_CONST               3 (True)
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               6 (_initialized)
+             42 LOAD_CONST               0 (None)
+             44 RETURN_VALUE
+
+=== LPGroupManager.instance ===
+126           0 LOAD_FAST                0 (cls)
+              2 CALL_FUNCTION            0
+              4 RETURN_VALUE
+
+=== LPGroupManager.result ===
+130           0 LOAD_FAST                1 (editType)
+
+131           2 LOAD_FAST                2 (group)
+
+132           4 LOAD_CONST               1 ('')
+
+129           6 LOAD_CONST               2 (('editType', 'newObj', 'firstDevice'))
+              8 BUILD_CONST_KEY_MAP      3
+             10 RETURN_VALUE
+
+=== LPGroupManager.getActiveGroupWithDevice ===
+136           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (deviceGroupManager)
+              4 LOAD_METHOD              1 (getActiveGroupWithDevice)
+              6 LOAD_FAST                1 (device)
+              8 CALL_METHOD              1
+             10 RETURN_VALUE
+
+=== LPGroupManager.supportNewGroup ===
+141           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+
+142           4 LOAD_CONST               1 ('[group-diagnose][debug][supportNewGroup] target=%s selectGroup=%s selected=%s targetSupport=%s selectedSupport=%s')
+
+143           6 LOAD_GLOBAL              2 (_diagnose_device_summary)
+              8 LOAD_FAST                1 (targetDevice)
+             10 CALL_FUNCTION            1
+
+144          12 LOAD_FAST                2 (selectGroup)
+
+145          14 LOAD_CONST               2 (<code object <listcomp> at 0x000001F324E69920, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 145>)
+             16 LOAD_CONST               3 ('LPGroupManager.supportNewGroup.<locals>.<listcomp>')
+             18 MAKE_FUNCTION            0
+             20 LOAD_GLOBAL              3 (list)
+             22 LOAD_FAST                3 (selectDevicesList)
+             24 JUMP_IF_TRUE_OR_POP     28
+             26 BUILD_LIST               0
+        >>   28 CALL_FUNCTION            1
+             30 GET_ITER
+             32 CALL_FUNCTION            1
+
+146          34 LOAD_FAST                1 (targetDevice)
+             36 LOAD_CONST               0 (None)
+             38 IS_OP                    1
+             40 POP_JUMP_IF_FALSE       54
+             42 LOAD_GLOBAL              4 (getattr)
+             44 LOAD_FAST                1 (targetDevice)
+             46 LOAD_CONST               4 ('supportNewGroup')
+             48 LOAD_CONST               0 (None)
+             50 CALL_FUNCTION            3
+             52 JUMP_FORWARD             2 (to 56)
+        >>   54 LOAD_CONST               0 (None)
+
+147     >>   56 LOAD_CONST               5 (<code object <listcomp> at 0x000001F324E69870, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 147>)
+             58 LOAD_CONST               3 ('LPGroupManager.supportNewGroup.<locals>.<listcomp>')
+             60 MAKE_FUNCTION            0
+
+152          62 LOAD_GLOBAL              3 (list)
+             64 LOAD_FAST                3 (selectDevicesList)
+             66 JUMP_IF_TRUE_OR_POP     70
+             68 BUILD_LIST               0
+        >>   70 CALL_FUNCTION            1
+
+147          72 GET_ITER
+             74 CALL_FUNCTION            1
+
+141          76 CALL_METHOD              6
+             78 POP_TOP
+
+155          80 LOAD_FAST                3 (selectDevicesList)
+             82 POP_JUMP_IF_FALSE      102
+
+156          84 LOAD_GLOBAL              5 (all)
+             86 LOAD_CONST               6 (<code object <genexpr> at 0x000001F324E697C0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 156>)
+             88 LOAD_CONST               7 ('LPGroupManager.supportNewGroup.<locals>.<genexpr>')
+             90 MAKE_FUNCTION            0
+             92 LOAD_FAST                3 (selectDevicesList)
+             94 GET_ITER
+             96 CALL_FUNCTION            1
+             98 CALL_FUNCTION            1
+            100 RETURN_VALUE
+
+157     >>  102 LOAD_FAST                1 (targetDevice)
+            104 LOAD_ATTR                6 (supportNewGroup)
+            106 RETURN_VALUE
+
+=== LPGroupManager.supportNewGroup.<listcomp> ===
+145           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (device)
+              8 LOAD_GLOBAL              0 (_diagnose_device_summary)
+             10 LOAD_FAST                1 (device)
+             12 CALL_FUNCTION            1
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPGroupManager.supportNewGroup.<listcomp> ===
+147           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                26 (to 32)
+
+152           6 STORE_FAST               1 (device)
+
+149           8 LOAD_GLOBAL              0 (_diagnose_device_summary)
+             10 LOAD_FAST                1 (device)
+             12 CALL_FUNCTION            1
+
+150          14 LOAD_GLOBAL              1 (getattr)
+             16 LOAD_FAST                1 (device)
+             18 LOAD_CONST               0 ('supportNewGroup')
+             20 LOAD_CONST               1 (None)
+             22 CALL_FUNCTION            3
+
+148          24 LOAD_CONST               2 (('device', 'supportNewGroup'))
+             26 BUILD_CONST_KEY_MAP      2
+             28 LIST_APPEND              2
+             30 JUMP_ABSOLUTE            4
+        >>   32 RETURN_VALUE
+
+=== LPGroupManager.supportNewGroup.<genexpr> ===
+156           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                12 (to 16)
+              4 STORE_FAST               1 (device)
+              6 LOAD_FAST                1 (device)
+              8 LOAD_ATTR                0 (supportNewGroup)
+             10 YIELD_VALUE
+             12 POP_TOP
+             14 JUMP_ABSOLUTE            2
+        >>   16 LOAD_CONST               0 (None)
+             18 RETURN_VALUE
+
+=== LPGroupManager._groupWithGroupId ===
+160           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (groupId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 STORE_FAST               2 (target)
+
+161          12 LOAD_FAST                2 (target)
+             14 POP_JUMP_IF_TRUE        30
+
+163          16 LOAD_GLOBAL              1 (logger)
+             18 LOAD_METHOD              2 (debug)
+             20 LOAD_CONST               2 ('[group-diagnose][debug][groupWithGroupId.skip] reason=empty')
+             22 CALL_METHOD              1
+             24 POP_TOP
+
+164          26 LOAD_CONST               0 (None)
+             28 RETURN_VALUE
+
+165     >>   30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                3 (deviceGroupManager)
+             34 LOAD_METHOD              4 (sortGroupList)
+             36 CALL_METHOD              0
+             38 GET_ITER
+        >>   40 FOR_ITER                54 (to 96)
+             42 STORE_FAST               3 (group)
+
+166          44 LOAD_GLOBAL              0 (str)
+             46 LOAD_GLOBAL              5 (getattr)
+             48 LOAD_FAST                3 (group)
+             50 LOAD_CONST               3 ('groupId')
+             52 LOAD_CONST               1 ('')
+             54 CALL_FUNCTION            3
+             56 JUMP_IF_TRUE_OR_POP     60
+             58 LOAD_CONST               1 ('')
+        >>   60 CALL_FUNCTION            1
+             62 LOAD_FAST                2 (target)
+             64 COMPARE_OP               2 (==)
+             66 POP_JUMP_IF_FALSE       40
+
+168          68 LOAD_GLOBAL              1 (logger)
+             70 LOAD_METHOD              2 (debug)
+
+169          72 LOAD_CONST               4 ('[group-diagnose][debug][groupWithGroupId.hit] groupId=%s group=%s')
+
+170          74 LOAD_FAST                1 (groupId)
+
+171          76 LOAD_GLOBAL              6 (_diagnose_group_summary)
+             78 LOAD_FAST                3 (group)
+             80 CALL_FUNCTION            1
+
+168          82 CALL_METHOD              3
+             84 POP_TOP
+
+173          86 LOAD_FAST                3 (group)
+             88 ROT_TWO
+             90 POP_TOP
+             92 RETURN_VALUE
+             94 JUMP_ABSOLUTE           40
+
+175     >>   96 LOAD_GLOBAL              1 (logger)
+             98 LOAD_METHOD              2 (debug)
+
+176         100 LOAD_CONST               5 ('[group-diagnose][debug][groupWithGroupId.miss] groupId=%s candidates=%s')
+
+177         102 LOAD_FAST                1 (groupId)
+
+178         104 LOAD_CONST               6 (<code object <listcomp> at 0x000001F3253C4190, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 178>)
+            106 LOAD_CONST               7 ('LPGroupManager._groupWithGroupId.<locals>.<listcomp>')
+            108 MAKE_FUNCTION            0
+            110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR                3 (deviceGroupManager)
+            114 LOAD_METHOD              4 (sortGroupList)
+            116 CALL_METHOD              0
+            118 GET_ITER
+            120 CALL_FUNCTION            1
+
+175         122 CALL_METHOD              3
+            124 POP_TOP
+
+180         126 LOAD_CONST               0 (None)
+            128 RETURN_VALUE
+
+=== LPGroupManager._groupWithGroupId.<listcomp> ===
+178           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (group)
+              8 LOAD_GLOBAL              0 (_diagnose_group_summary)
+             10 LOAD_FAST                1 (group)
+             12 CALL_FUNCTION            1
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPGroupManager.editGroupResult ===
+183           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+
+184           4 LOAD_CONST               1 ('[group-diagnose][editGroupResult.enter] currentNamedGroup=%s currentEditDevice=%s selectedDevices=%s selectGroupId=%s')
+
+185           6 LOAD_GLOBAL              2 (_diagnose_group_summary)
+              8 LOAD_FAST                1 (currentNamedGroup)
+             10 CALL_FUNCTION            1
+
+186          12 LOAD_GLOBAL              3 (_diagnose_device_summary)
+             14 LOAD_FAST                2 (currentEditDevice)
+             16 CALL_FUNCTION            1
+
+187          18 LOAD_CONST               2 (<code object <listcomp> at 0x000001F3253C4660, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 187>)
+             20 LOAD_CONST               3 ('LPGroupManager.editGroupResult.<locals>.<listcomp>')
+             22 MAKE_FUNCTION            0
+             24 LOAD_GLOBAL              4 (list)
+             26 LOAD_FAST                3 (selectedDevices)
+             28 JUMP_IF_TRUE_OR_POP     32
+             30 BUILD_LIST               0
+        >>   32 CALL_FUNCTION            1
+             34 GET_ITER
+             36 CALL_FUNCTION            1
+
+188          38 LOAD_FAST                4 (selectGroupId)
+
+183          40 CALL_METHOD              5
+             42 POP_TOP
+
+195          44 LOAD_FAST                3 (selectedDevices)
+             46 POP_JUMP_IF_TRUE       130
+
+196          48 LOAD_FAST                1 (currentNamedGroup)
+             50 POP_JUMP_IF_FALSE      106
+
+197          52 LOAD_GLOBAL              0 (logger)
+             54 LOAD_METHOD              1 (debug)
+             56 LOAD_CONST               4 ('[group manager] groupActiveToNO=%s')
+             58 LOAD_GLOBAL              5 (getattr)
+             60 LOAD_FAST                2 (currentEditDevice)
+             62 LOAD_CONST               5 ('name')
+             64 LOAD_CONST               6 ('')
+             66 CALL_FUNCTION            3
+             68 CALL_METHOD              2
+             70 POP_TOP
+
+198          72 LOAD_CONST               7 (False)
+             74 LOAD_FAST                1 (currentNamedGroup)
+             76 STORE_ATTR               6 (active)
+
+199          78 LOAD_GLOBAL              0 (logger)
+             80 LOAD_METHOD              1 (debug)
+
+200          82 LOAD_CONST               8 ('[group-diagnose][editGroupResult.branch] branch=deactivateNamedGroup group=%s')
+
+201          84 LOAD_GLOBAL              2 (_diagnose_group_summary)
+             86 LOAD_FAST                1 (currentNamedGroup)
+             88 CALL_FUNCTION            1
+
+199          90 CALL_METHOD              2
+             92 POP_TOP
+
+203          94 LOAD_FAST                0 (self)
+             96 LOAD_METHOD              7 (changeGroupActiveStatus)
+             98 LOAD_FAST                1 (currentNamedGroup)
+            100 LOAD_CONST               7 (False)
+            102 CALL_METHOD              2
+            104 RETURN_VALUE
+
+204     >>  106 LOAD_GLOBAL              0 (logger)
+            108 LOAD_METHOD              1 (debug)
+            110 LOAD_CONST               9 ('[group-diagnose][editGroupResult.branch] branch=noSelectedNoCurrentGroup')
+            112 CALL_METHOD              1
+            114 POP_TOP
+
+205         116 LOAD_FAST                0 (self)
+            118 LOAD_METHOD              8 (result)
+            120 LOAD_GLOBAL              9 (LPNewGroupEditType)
+            122 LOAD_ATTR               10 (NoChange)
+            124 LOAD_FAST                1 (currentNamedGroup)
+            126 CALL_METHOD              2
+            128 RETURN_VALUE
+
+207     >>  130 LOAD_FAST                3 (selectedDevices)
+            132 LOAD_CONST              10 (0)
+            134 BINARY_SUBSCR
+            136 STORE_FAST               5 (firstDevice)
+
+212         138 LOAD_FAST                4 (selectGroupId)
+            140 EXTENDED_ARG             1
+            142 POP_JUMP_IF_FALSE      286
+
+213         144 LOAD_FAST                0 (self)
+            146 LOAD_METHOD             11 (_groupWithGroupId)
+            148 LOAD_FAST                4 (selectGroupId)
+            150 CALL_METHOD              1
+            152 STORE_FAST               6 (targetGroup)
+
+214         154 LOAD_FAST                6 (targetGroup)
+            156 LOAD_CONST               0 (None)
+            158 IS_OP                    1
+            160 EXTENDED_ARG             1
+            162 POP_JUMP_IF_FALSE      286
+
+215         164 LOAD_GLOBAL              0 (logger)
+            166 LOAD_METHOD              1 (debug)
+
+216         168 LOAD_CONST              11 ('[group-diagnose][editGroupResult.branch] branch=switchNamedGroup targetGroup=%s firstDevice=%s')
+
+217         170 LOAD_GLOBAL              2 (_diagnose_group_summary)
+            172 LOAD_FAST                6 (targetGroup)
+            174 CALL_FUNCTION            1
+
+218         176 LOAD_GLOBAL              3 (_diagnose_device_summary)
+            178 LOAD_FAST                5 (firstDevice)
+            180 CALL_FUNCTION            1
+
+215         182 CALL_METHOD              3
+            184 POP_TOP
+
+220         186 LOAD_CONST              12 (True)
+            188 LOAD_FAST                6 (targetGroup)
+            190 STORE_ATTR               6 (active)
+
+221         192 LOAD_GLOBAL              5 (getattr)
+            194 LOAD_FAST                5 (firstDevice)
+            196 LOAD_ATTR               12 (groupInfo)
+            198 LOAD_CONST              13 ('roomState')
+            200 LOAD_CONST               6 ('')
+            202 CALL_FUNCTION            3
+            204 LOAD_CONST              14 ('slave')
+            206 COMPARE_OP               2 (==)
+            208 EXTENDED_ARG             1
+            210 POP_JUMP_IF_FALSE      274
+
+222         212 LOAD_FAST                0 (self)
+            214 LOAD_ATTR               13 (nodeMgr)
+            216 LOAD_METHOD             14 (findRawDeviceByUuid)
+            218 LOAD_GLOBAL              5 (getattr)
+            220 LOAD_FAST                5 (firstDevice)
+            222 LOAD_ATTR               12 (groupInfo)
+            224 LOAD_CONST              15 ('masterID')
+            226 LOAD_CONST               6 ('')
+            228 CALL_FUNCTION            3
+            230 CALL_METHOD              1
+            232 STORE_FAST               7 (oldMaster)
+
+224         234 LOAD_GLOBAL              0 (logger)
+            236 LOAD_METHOD              1 (debug)
+
+225         238 LOAD_CONST              16 ('[group-diagnose][debug][editGroupResult.switchNamedGroup.oldMaster] firstDevice=%s oldMaster=%s')
+
+226         240 LOAD_GLOBAL              3 (_diagnose_device_summary)
+            242 LOAD_FAST                5 (firstDevice)
+            244 CALL_FUNCTION            1
+
+227         246 LOAD_GLOBAL              3 (_diagnose_device_summary)
+            248 LOAD_FAST                7 (oldMaster)
+            250 CALL_FUNCTION            1
+
+224         252 CALL_METHOD              3
+            254 POP_TOP
+
+229         256 LOAD_FAST                7 (oldMaster)
+            258 LOAD_CONST               0 (None)
+            260 IS_OP                    1
+            262 EXTENDED_ARG             1
+            264 POP_JUMP_IF_FALSE      274
+
+230         266 BUILD_LIST               0
+            268 LOAD_FAST                7 (oldMaster)
+            270 LOAD_ATTR               12 (groupInfo)
+            272 STORE_ATTR              15 (slaveList)
+
+231     >>  274 LOAD_FAST                0 (self)
+            276 LOAD_METHOD              7 (changeGroupActiveStatus)
+            278 LOAD_FAST                6 (targetGroup)
+            280 LOAD_CONST              12 (True)
+            282 CALL_METHOD              2
+            284 RETURN_VALUE
+
+233     >>  286 LOAD_GLOBAL             16 (len)
+            288 LOAD_FAST                3 (selectedDevices)
+            290 CALL_FUNCTION            1
+            292 LOAD_CONST              17 (1)
+            294 COMPARE_OP               2 (==)
+            296 EXTENDED_ARG             1
+            298 POP_JUMP_IF_FALSE      330
+
+234         300 LOAD_GLOBAL              0 (logger)
+            302 LOAD_METHOD              1 (debug)
+
+235         304 LOAD_CONST              18 ('[group-diagnose][editGroupResult.branch] branch=singleSelected firstDevice=%s')
+
+236         306 LOAD_GLOBAL              3 (_diagnose_device_summary)
+            308 LOAD_FAST                5 (firstDevice)
+            310 CALL_FUNCTION            1
+
+234         312 CALL_METHOD              2
+            314 POP_TOP
+
+238         316 LOAD_FAST                0 (self)
+            318 LOAD_METHOD             17 (_dealSingleSelectedDevice)
+            320 LOAD_FAST                1 (currentNamedGroup)
+            322 LOAD_FAST                2 (currentEditDevice)
+            324 LOAD_FAST                5 (firstDevice)
+            326 CALL_METHOD              3
+            328 RETURN_VALUE
+
+240     >>  330 LOAD_FAST                0 (self)
+            332 LOAD_METHOD             18 (checkIfNoChanges)
+            334 LOAD_FAST                3 (selectedDevices)
+            336 CALL_METHOD              1
+            338 EXTENDED_ARG             1
+            340 POP_JUMP_IF_FALSE      356
+
+241         342 LOAD_FAST                0 (self)
+            344 LOAD_METHOD              8 (result)
+            346 LOAD_GLOBAL              9 (LPNewGroupEditType)
+            348 LOAD_ATTR               10 (NoChange)
+            350 LOAD_FAST                1 (currentNamedGroup)
+            352 CALL_METHOD              2
+            354 RETURN_VALUE
+
+243     >>  356 LOAD_FAST                3 (selectedDevices)
+            358 LOAD_CONST              17 (1)
+            360 LOAD_CONST               0 (None)
+            362 BUILD_SLICE              2
+            364 BINARY_SUBSCR
+            366 STORE_FAST               8 (slaveDeviceList)
+
+244         368 LOAD_FAST                0 (self)
+            370 LOAD_METHOD             19 (formattedNameWithRoomName)
+            372 LOAD_FAST                5 (firstDevice)
+            374 LOAD_ATTR               20 (name)
+            376 LOAD_GLOBAL             16 (len)
+            378 LOAD_FAST                8 (slaveDeviceList)
+            380 CALL_FUNCTION            1
+            382 CALL_METHOD              2
+            384 STORE_FAST               9 (roomName)
+
+245         386 LOAD_FAST                0 (self)
+            388 LOAD_METHOD             21 (fullNameWithRoomName)
+            390 LOAD_FAST                5 (firstDevice)
+            392 LOAD_ATTR               20 (name)
+            394 LOAD_GLOBAL             16 (len)
+            396 LOAD_FAST                8 (slaveDeviceList)
+            398 CALL_FUNCTION            1
+            400 CALL_METHOD              2
+            402 STORE_FAST              10 (fullRoomName)
+
+247         404 LOAD_GLOBAL             22 (str)
+            406 LOAD_GLOBAL             23 (uuid)
+            408 LOAD_METHOD             24 (uuid4)
+            410 CALL_METHOD              0
+            412 CALL_FUNCTION            1
+            414 LOAD_METHOD             25 (upper)
+            416 CALL_METHOD              0
+
+248         418 LOAD_FAST                9 (roomName)
+
+249         420 LOAD_FAST               10 (fullRoomName)
+
+250         422 LOAD_CONST              19 (<code object <listcomp> at 0x000001F3253C4870, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 250>)
+            424 LOAD_CONST               3 ('LPGroupManager.editGroupResult.<locals>.<listcomp>')
+            426 MAKE_FUNCTION            0
+            428 LOAD_FAST                8 (slaveDeviceList)
+            430 GET_ITER
+            432 CALL_FUNCTION            1
+
+246         434 LOAD_CONST              20 (('group_id', 'group_name', 'fullName', 'slavelist'))
+            436 BUILD_CONST_KEY_MAP      4
+            438 STORE_FAST              11 (bodyDict)
+
+252         440 LOAD_GLOBAL              0 (logger)
+            442 LOAD_METHOD              1 (debug)
+
+253         444 LOAD_CONST              21 ('[group-diagnose][editGroupResult.branch] branch=createTempGroup master=%s payload=%s')
+
+254         446 LOAD_GLOBAL              3 (_diagnose_device_summary)
+            448 LOAD_FAST                5 (firstDevice)
+            450 CALL_FUNCTION            1
+
+255         452 LOAD_FAST               11 (bodyDict)
+
+252         454 CALL_METHOD              3
+            456 POP_TOP
+
+267         458 LOAD_FAST                0 (self)
+            460 LOAD_METHOD             26 (operateGroup)
+            462 LOAD_FAST                1 (currentNamedGroup)
+            464 LOAD_FAST                5 (firstDevice)
+            466 LOAD_FAST               11 (bodyDict)
+            468 CALL_METHOD              3
+            470 RETURN_VALUE
+
+=== LPGroupManager.editGroupResult.<listcomp> ===
+187           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (device)
+              8 LOAD_GLOBAL              0 (_diagnose_device_summary)
+             10 LOAD_FAST                1 (device)
+             12 CALL_FUNCTION            1
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPGroupManager.editGroupResult.<listcomp> ===
+250           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                26 (to 32)
+              6 STORE_FAST               1 (slave)
+              8 LOAD_FAST                1 (slave)
+             10 LOAD_ATTR                0 (ip)
+             12 LOAD_FAST                1 (slave)
+             14 LOAD_ATTR                1 (name)
+             16 JUMP_IF_TRUE_OR_POP     20
+             18 LOAD_CONST               0 ('')
+        >>   20 LOAD_FAST                1 (slave)
+             22 LOAD_ATTR                2 (uuid)
+             24 LOAD_CONST               1 (('ip', 'name', 'uuid'))
+             26 BUILD_CONST_KEY_MAP      3
+             28 LIST_APPEND              2
+             30 JUMP_ABSOLUTE            4
+        >>   32 RETURN_VALUE
+
+=== LPGroupManager.formattedNameWithRoomName ===
+270           0 LOAD_FAST                1 (roomName)
+              2 JUMP_IF_TRUE_OR_POP      6
+              4 LOAD_CONST               1 ('')
+        >>    6 STORE_FAST               1 (roomName)
+
+271           8 LOAD_FAST                2 (slaveCount)
+             10 LOAD_CONST               2 (0)
+             12 COMPARE_OP               1 (<=)
+             14 POP_JUMP_IF_FALSE       28
+
+272          16 LOAD_FAST                1 (roomName)
+             18 LOAD_CONST               0 (None)
+             20 LOAD_CONST               3 (31)
+             22 BUILD_SLICE              2
+             24 BINARY_SUBSCR
+             26 RETURN_VALUE
+
+274     >>   28 LOAD_CONST               4 (' +')
+             30 LOAD_GLOBAL              0 (int)
+             32 LOAD_FAST                2 (slaveCount)
+             34 CALL_FUNCTION            1
+             36 FORMAT_VALUE             0
+             38 BUILD_STRING             2
+             40 STORE_FAST               3 (formattedCount)
+
+275          42 LOAD_CONST               3 (31)
+             44 STORE_FAST               4 (max_length)
+
+276          46 LOAD_FAST                4 (max_length)
+             48 LOAD_GLOBAL              1 (len)
+             50 LOAD_FAST                3 (formattedCount)
+             52 CALL_FUNCTION            1
+             54 BINARY_SUBTRACT
+             56 STORE_FAST               5 (max_room_name_length)
+
+277          58 LOAD_FAST                1 (roomName)
+             60 STORE_FAST               6 (adjusted)
+
+278          62 LOAD_GLOBAL              1 (len)
+             64 LOAD_FAST                6 (adjusted)
+             66 CALL_FUNCTION            1
+             68 LOAD_FAST                5 (max_room_name_length)
+             70 COMPARE_OP               4 (>)
+             72 POP_JUMP_IF_FALSE      110
+
+279          74 LOAD_FAST                5 (max_room_name_length)
+             76 LOAD_CONST               5 (3)
+             78 BINARY_SUBTRACT
+             80 STORE_FAST               7 (truncate_length)
+
+280          82 LOAD_FAST                7 (truncate_length)
+             84 LOAD_CONST               2 (0)
+             86 COMPARE_OP               4 (>)
+             88 POP_JUMP_IF_FALSE      106
+             90 LOAD_FAST                6 (adjusted)
+             92 LOAD_CONST               0 (None)
+             94 LOAD_FAST                7 (truncate_length)
+             96 BUILD_SLICE              2
+             98 BINARY_SUBSCR
+            100 LOAD_CONST               6 ('...')
+            102 BINARY_ADD
+            104 JUMP_FORWARD             2 (to 108)
+        >>  106 LOAD_CONST               6 ('...')
+        >>  108 STORE_FAST               6 (adjusted)
+
+281     >>  110 LOAD_FAST                6 (adjusted)
+            112 LOAD_FAST                3 (formattedCount)
+            114 BINARY_ADD
+            116 STORE_FAST               8 (name)
+
+282         118 LOAD_FAST                8 (name)
+            120 LOAD_CONST               0 (None)
+            122 LOAD_FAST                4 (max_length)
+            124 BUILD_SLICE              2
+            126 BINARY_SUBSCR
+            128 RETURN_VALUE
+
+=== LPGroupManager.fullNameWithRoomName ===
+294           0 LOAD_FAST                1 (roomName)
+              2 JUMP_IF_TRUE_OR_POP      6
+              4 LOAD_CONST               1 ('')
+        >>    6 STORE_FAST               1 (roomName)
+
+295           8 LOAD_FAST                2 (slaveCount)
+             10 LOAD_CONST               2 (0)
+             12 COMPARE_OP               1 (<=)
+             14 POP_JUMP_IF_FALSE       20
+
+296          16 LOAD_FAST                1 (roomName)
+             18 RETURN_VALUE
+
+297     >>   20 LOAD_FAST                1 (roomName)
+             22 FORMAT_VALUE             0
+             24 LOAD_CONST               3 (' +')
+             26 LOAD_GLOBAL              0 (int)
+             28 LOAD_FAST                2 (slaveCount)
+             30 CALL_FUNCTION            1
+             32 FORMAT_VALUE             0
+             34 BUILD_STRING             3
+             36 RETURN_VALUE
+
+=== LPGroupManager.operateGroup ===
+300           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (deviceGroupManager)
+              4 LOAD_METHOD              1 (ensureDeviceGroupsFetched)
+              6 LOAD_FAST                2 (masterDevice)
+              8 CALL_METHOD              1
+             10 POP_JUMP_IF_TRUE        50
+
+301          12 LOAD_GLOBAL              2 (logger)
+             14 LOAD_METHOD              3 (debug)
+
+302          16 LOAD_CONST               1 ('[group-diagnose][debug][operateGroup.fail] reason=refreshDeviceGroupsFailed currentEditGroup=%s master=%s body=%s')
+
+303          18 LOAD_GLOBAL              4 (_diagnose_group_summary)
+             20 LOAD_FAST                1 (currentEditGroup)
+             22 CALL_FUNCTION            1
+
+304          24 LOAD_GLOBAL              5 (_diagnose_device_summary)
+             26 LOAD_FAST                2 (masterDevice)
+             28 CALL_FUNCTION            1
+
+305          30 LOAD_FAST                3 (bodyDict)
+
+301          32 CALL_METHOD              4
+             34 POP_TOP
+
+307          36 LOAD_FAST                0 (self)
+             38 LOAD_METHOD              6 (result)
+             40 LOAD_GLOBAL              7 (LPNewGroupEditType)
+             42 LOAD_ATTR                8 (SendFailed)
+             44 LOAD_FAST                1 (currentEditGroup)
+             46 CALL_METHOD              2
+             48 RETURN_VALUE
+
+309     >>   50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                0 (deviceGroupManager)
+             54 LOAD_METHOD              9 (getDeviceGroupWithDeviceId)
+             56 LOAD_FAST                2 (masterDevice)
+             58 LOAD_ATTR               10 (uuid)
+             60 CALL_METHOD              1
+             62 STORE_FAST               4 (deviceGroupObj)
+
+310          64 LOAD_FAST                4 (deviceGroupObj)
+             66 POP_JUMP_IF_FALSE       76
+             68 LOAD_FAST                4 (deviceGroupObj)
+             70 LOAD_METHOD             11 (getTempGroup)
+             72 CALL_METHOD              0
+             74 JUMP_FORWARD             2 (to 78)
+        >>   76 LOAD_CONST               0 (None)
+        >>   78 STORE_FAST               5 (tempObj)
+
+312          80 LOAD_GLOBAL              2 (logger)
+             82 LOAD_METHOD              3 (debug)
+
+313          84 LOAD_CONST               2 ('[group-diagnose][debug][operateGroup.enter] currentEditGroup=%s master=%s hasDeviceGroupObj=%s tempObj=%s body=%s')
+
+314          86 LOAD_GLOBAL              4 (_diagnose_group_summary)
+             88 LOAD_FAST                1 (currentEditGroup)
+             90 CALL_FUNCTION            1
+
+315          92 LOAD_GLOBAL              5 (_diagnose_device_summary)
+             94 LOAD_FAST                2 (masterDevice)
+             96 CALL_FUNCTION            1
+
+316          98 LOAD_FAST                4 (deviceGroupObj)
+            100 LOAD_CONST               0 (None)
+            102 IS_OP                    1
+
+317         104 LOAD_GLOBAL              4 (_diagnose_group_summary)
+            106 LOAD_FAST                5 (tempObj)
+            108 CALL_FUNCTION            1
+
+318         110 LOAD_FAST                3 (bodyDict)
+
+312         112 CALL_METHOD              6
+            114 POP_TOP
+
+321         116 LOAD_FAST                5 (tempObj)
+            118 POP_JUMP_IF_FALSE      168
+
+322         120 LOAD_FAST                5 (tempObj)
+            122 LOAD_METHOD             12 (copy)
+            124 CALL_METHOD              0
+            126 STORE_FAST               6 (newObj)
+
+323         128 LOAD_FAST                0 (self)
+            130 LOAD_ATTR                0 (deviceGroupManager)
+            132 LOAD_METHOD             13 (updateGroupObject)
+            134 LOAD_FAST                6 (newObj)
+            136 LOAD_FAST                3 (bodyDict)
+            138 CALL_METHOD              2
+            140 POP_TOP
+
+325         142 LOAD_GLOBAL              2 (logger)
+            144 LOAD_METHOD              3 (debug)
+
+326         146 LOAD_CONST               3 ('[group-diagnose][debug][operateGroup.branch] branch=editTempGroup newObj=%s')
+
+327         148 LOAD_GLOBAL              4 (_diagnose_group_summary)
+            150 LOAD_FAST                6 (newObj)
+            152 CALL_FUNCTION            1
+
+325         154 CALL_METHOD              2
+            156 POP_TOP
+
+329         158 LOAD_FAST                0 (self)
+            160 LOAD_METHOD             14 (editGroup)
+            162 LOAD_FAST                6 (newObj)
+            164 CALL_METHOD              1
+            166 RETURN_VALUE
+
+331     >>  168 LOAD_FAST                0 (self)
+            170 LOAD_ATTR                0 (deviceGroupManager)
+            172 LOAD_METHOD             15 (createGroupObjectWithDict)
+            174 LOAD_FAST                3 (bodyDict)
+            176 LOAD_GLOBAL             16 (LPGroupType_Temp)
+            178 LOAD_FAST                2 (masterDevice)
+            180 CALL_METHOD              3
+            182 STORE_FAST               6 (newObj)
+
+333         184 LOAD_GLOBAL              2 (logger)
+            186 LOAD_METHOD              3 (debug)
+
+334         188 LOAD_CONST               4 ('[group-diagnose][debug][operateGroup.branch] branch=addTempGroup newObj=%s')
+
+335         190 LOAD_GLOBAL              4 (_diagnose_group_summary)
+            192 LOAD_FAST                6 (newObj)
+            194 CALL_FUNCTION            1
+
+333         196 CALL_METHOD              2
+            198 POP_TOP
+
+337         200 LOAD_FAST                0 (self)
+            202 LOAD_METHOD             17 (addGroup)
+            204 LOAD_FAST                6 (newObj)
+            206 CALL_METHOD              1
+            208 RETURN_VALUE
+
+=== LPGroupManager.addGroup ===
+340           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+              4 LOAD_CONST               1 ('[group manager addGroup] groupName=%s slaveList=%s')
+              6 LOAD_FAST                1 (groupObj)
+              8 LOAD_ATTR                2 (groupName)
+             10 LOAD_FAST                1 (groupObj)
+             12 LOAD_ATTR                3 (slaveList)
+             14 CALL_METHOD              3
+             16 POP_TOP
+
+342          18 LOAD_GLOBAL              0 (logger)
+             20 LOAD_METHOD              1 (debug)
+
+343          22 LOAD_CONST               2 ('[group-diagnose][debug][addGroup.enter] group=%s')
+
+344          24 LOAD_GLOBAL              4 (_diagnose_group_summary)
+             26 LOAD_FAST                1 (groupObj)
+             28 CALL_FUNCTION            1
+
+342          30 CALL_METHOD              2
+             32 POP_TOP
+
+346          34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                5 (deviceGroupManager)
+             38 LOAD_METHOD              6 (addGroup)
+             40 LOAD_FAST                1 (groupObj)
+             42 CALL_METHOD              1
+             44 POP_JUMP_IF_TRUE        76
+
+348          46 LOAD_GLOBAL              0 (logger)
+             48 LOAD_METHOD              1 (debug)
+
+349          50 LOAD_CONST               3 ('[group-diagnose][debug][addGroup.fail] reason=addGroupSendFailed group=%s')
+
+350          52 LOAD_GLOBAL              4 (_diagnose_group_summary)
+             54 LOAD_FAST                1 (groupObj)
+             56 CALL_FUNCTION            1
+
+348          58 CALL_METHOD              2
+             60 POP_TOP
+
+352          62 LOAD_FAST                0 (self)
+             64 LOAD_METHOD              7 (result)
+             66 LOAD_GLOBAL              8 (LPNewGroupEditType)
+             68 LOAD_ATTR                9 (SendFailed)
+             70 LOAD_FAST                1 (groupObj)
+             72 CALL_METHOD              2
+             74 RETURN_VALUE
+
+353     >>   76 LOAD_CONST               4 (True)
+             78 LOAD_FAST                1 (groupObj)
+             80 STORE_ATTR              10 (active)
+
+354          82 LOAD_FAST                0 (self)
+             84 LOAD_METHOD             11 (changeGroupActiveStatus)
+             86 LOAD_FAST                1 (groupObj)
+             88 LOAD_CONST               4 (True)
+             90 CALL_METHOD              2
+             92 STORE_FAST               2 (result)
+
+356          94 LOAD_GLOBAL              0 (logger)
+             96 LOAD_METHOD              1 (debug)
+
+357          98 LOAD_CONST               5 ('[group-diagnose][debug][addGroup.result] group=%s result=%s')
+
+358         100 LOAD_GLOBAL              4 (_diagnose_group_summary)
+            102 LOAD_FAST                1 (groupObj)
+            104 CALL_FUNCTION            1
+
+359         106 LOAD_FAST                2 (result)
+
+356         108 CALL_METHOD              3
+            110 POP_TOP
+
+361         112 LOAD_FAST                2 (result)
+            114 RETURN_VALUE
+
+=== LPGroupManager.editGroup ===
+364           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+              4 LOAD_CONST               1 ('[editGroup] updateGroup groupName=')
+              6 LOAD_FAST                1 (groupObj)
+              8 LOAD_ATTR                2 (groupName)
+             10 FORMAT_VALUE             0
+             12 BUILD_STRING             2
+             14 CALL_METHOD              1
+             16 POP_TOP
+
+365          18 LOAD_GLOBAL              3 (bool)
+             20 LOAD_FAST                1 (groupObj)
+             22 LOAD_ATTR                4 (active)
+             24 CALL_FUNCTION            1
+             26 UNARY_NOT
+             28 STORE_FAST               2 (need_active)
+
+367          30 LOAD_GLOBAL              0 (logger)
+             32 LOAD_METHOD              1 (debug)
+
+368          34 LOAD_CONST               2 ('[group-diagnose][debug][editGroup.enter] group=%s needActive=%s')
+
+369          36 LOAD_GLOBAL              5 (_diagnose_group_summary)
+             38 LOAD_FAST                1 (groupObj)
+             40 CALL_FUNCTION            1
+
+370          42 LOAD_FAST                2 (need_active)
+
+367          44 CALL_METHOD              3
+             46 POP_TOP
+
+372          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                6 (deviceGroupManager)
+             52 LOAD_METHOD              7 (updateGroup)
+             54 LOAD_FAST                1 (groupObj)
+             56 CALL_METHOD              1
+             58 STORE_FAST               3 (success)
+
+373          60 LOAD_CONST               3 (True)
+             62 LOAD_FAST                1 (groupObj)
+             64 STORE_ATTR               4 (active)
+
+374          66 LOAD_FAST                3 (success)
+             68 POP_JUMP_IF_TRUE       100
+
+376          70 LOAD_GLOBAL              0 (logger)
+             72 LOAD_METHOD              1 (debug)
+
+377          74 LOAD_CONST               4 ('[group-diagnose][debug][editGroup.fail] reason=updateGroupSendFailed group=%s')
+
+378          76 LOAD_GLOBAL              5 (_diagnose_group_summary)
+             78 LOAD_FAST                1 (groupObj)
+             80 CALL_FUNCTION            1
+
+376          82 CALL_METHOD              2
+             84 POP_TOP
+
+380          86 LOAD_FAST                0 (self)
+             88 LOAD_METHOD              8 (result)
+             90 LOAD_GLOBAL              9 (LPNewGroupEditType)
+             92 LOAD_ATTR               10 (SendFailed)
+             94 LOAD_FAST                1 (groupObj)
+             96 CALL_METHOD              2
+             98 RETURN_VALUE
+
+381     >>  100 LOAD_FAST                2 (need_active)
+            102 POP_JUMP_IF_FALSE      116
+
+382         104 LOAD_FAST                0 (self)
+            106 LOAD_METHOD             11 (changeGroupActiveStatus)
+            108 LOAD_FAST                1 (groupObj)
+            110 LOAD_CONST               3 (True)
+            112 CALL_METHOD              2
+            114 RETURN_VALUE
+
+383     >>  116 LOAD_FAST                0 (self)
+            118 LOAD_METHOD             12 (switchCurrentGroup)
+            120 LOAD_FAST                1 (groupObj)
+            122 LOAD_CONST               3 (True)
+            124 CALL_METHOD              2
+            126 POP_JUMP_IF_TRUE       158
+
+385         128 LOAD_GLOBAL              0 (logger)
+            130 LOAD_METHOD              1 (debug)
+
+386         132 LOAD_CONST               5 ('[group-diagnose][debug][editGroup.fail] reason=switchCurrentGroupFailed group=%s')
+
+387         134 LOAD_GLOBAL              5 (_diagnose_group_summary)
+            136 LOAD_FAST                1 (groupObj)
+            138 CALL_FUNCTION            1
+
+385         140 CALL_METHOD              2
+            142 POP_TOP
+
+389         144 LOAD_FAST                0 (self)
+            146 LOAD_METHOD              8 (result)
+            148 LOAD_GLOBAL              9 (LPNewGroupEditType)
+            150 LOAD_ATTR               10 (SendFailed)
+            152 LOAD_FAST                1 (groupObj)
+            154 CALL_METHOD              2
+            156 RETURN_VALUE
+
+390     >>  158 LOAD_FAST                0 (self)
+            160 LOAD_METHOD             13 (checkDeviceMultiResult)
+            162 LOAD_FAST                1 (groupObj)
+            164 LOAD_CONST               3 (True)
+            166 CALL_METHOD              2
+            168 RETURN_VALUE
+
+=== LPGroupManager.changeGroupActiveStatus ===
+393           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+
+394           4 LOAD_CONST               1 ('[group-diagnose][changeGroupActiveStatus.enter] group=%s active=%s')
+
+395           6 LOAD_GLOBAL              2 (_diagnose_group_summary)
+              8 LOAD_FAST                1 (groupObj)
+             10 CALL_FUNCTION            1
+
+396          12 LOAD_FAST                2 (active)
+
+393          14 CALL_METHOD              3
+             16 POP_TOP
+
+398          18 LOAD_FAST                0 (self)
+             20 LOAD_METHOD              3 (switchCurrentGroup)
+             22 LOAD_FAST                1 (groupObj)
+             24 LOAD_FAST                2 (active)
+             26 CALL_METHOD              2
+             28 POP_JUMP_IF_TRUE        44
+
+399          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              4 (result)
+             34 LOAD_GLOBAL              5 (LPNewGroupEditType)
+             36 LOAD_ATTR                6 (SendFailed)
+             38 LOAD_FAST                1 (groupObj)
+             40 CALL_METHOD              2
+             42 RETURN_VALUE
+
+400     >>   44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              7 (checkDeviceMultiResult)
+             48 LOAD_FAST                1 (groupObj)
+             50 LOAD_FAST                2 (active)
+             52 CALL_METHOD              2
+             54 RETURN_VALUE
+
+=== LPGroupManager.checkDeviceMultiResult ===
+404           0 LOAD_FAST                1 (groupObj)
+              2 LOAD_ATTR                0 (masterDevice)
+              4 STORE_FAST               3 (device)
+
+405           6 LOAD_FAST                3 (device)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_FALSE       28
+
+406          14 LOAD_FAST                0 (self)
+             16 LOAD_METHOD              1 (result)
+             18 LOAD_GLOBAL              2 (LPNewGroupEditType)
+             20 LOAD_ATTR                3 (CheckFailed)
+             22 LOAD_FAST                1 (groupObj)
+             24 CALL_METHOD              2
+             26 RETURN_VALUE
+
+408     >>   28 LOAD_GLOBAL              4 (logger)
+             30 LOAD_METHOD              5 (debug)
+
+409          32 LOAD_CONST               2 ('[checkDeviceMultiResult]masterDevice=%s slaveList=%s active=%s')
+
+410          34 LOAD_GLOBAL              6 (getattr)
+             36 LOAD_FAST                3 (device)
+             38 LOAD_CONST               3 ('name')
+             40 LOAD_CONST               4 ('')
+             42 CALL_FUNCTION            3
+
+411          44 LOAD_GLOBAL              6 (getattr)
+             46 LOAD_FAST                1 (groupObj)
+             48 LOAD_CONST               5 ('slaveList')
+             50 BUILD_LIST               0
+             52 CALL_FUNCTION            3
+
+412          54 LOAD_FAST                2 (active)
+
+408          56 CALL_METHOD              4
+             58 POP_TOP
+
+414          60 LOAD_GLOBAL              4 (logger)
+             62 LOAD_METHOD              5 (debug)
+
+415          64 LOAD_CONST               6 ('[group-diagnose][checkDeviceMultiResult.enter] device=%s group=%s active=%s expectedOnline=%s')
+
+416          66 LOAD_GLOBAL              7 (_diagnose_device_summary)
+             68 LOAD_FAST                3 (device)
+             70 CALL_FUNCTION            1
+
+417          72 LOAD_GLOBAL              8 (_diagnose_group_summary)
+             74 LOAD_FAST                1 (groupObj)
+             76 CALL_FUNCTION            1
+
+418          78 LOAD_FAST                2 (active)
+
+419          80 LOAD_FAST                2 (active)
+             82 POP_JUMP_IF_FALSE       94
+             84 LOAD_FAST                0 (self)
+             86 LOAD_METHOD              9 (_onlineExpectedSlaveList)
+             88 LOAD_FAST                1 (groupObj)
+             90 CALL_METHOD              1
+             92 JUMP_FORWARD             2 (to 96)
+        >>   94 BUILD_LIST               0
+
+414     >>   96 CALL_METHOD              5
+             98 POP_TOP
+
+422         100 LOAD_GLOBAL             10 (time)
+            102 LOAD_METHOD             11 (monotonic)
+            104 CALL_METHOD              0
+            106 LOAD_CONST               7 (16.0)
+            108 BINARY_ADD
+            110 STORE_FAST               4 (deadline)
+
+423         112 LOAD_CONST               8 (0)
+            114 STORE_FAST               5 (attempt)
+
+424     >>  116 LOAD_GLOBAL             10 (time)
+            118 LOAD_METHOD             11 (monotonic)
+            120 CALL_METHOD              0
+            122 LOAD_FAST                4 (deadline)
+            124 COMPARE_OP               0 (<)
+            126 POP_JUMP_IF_FALSE      228
+
+425         128 LOAD_FAST                5 (attempt)
+            130 LOAD_CONST               9 (1)
+            132 INPLACE_ADD
+            134 STORE_FAST               5 (attempt)
+
+426         136 LOAD_FAST                0 (self)
+            138 LOAD_METHOD             12 (_matchCurrentSlaveState)
+            140 LOAD_FAST                3 (device)
+            142 LOAD_FAST                1 (groupObj)
+            144 LOAD_FAST                2 (active)
+            146 CALL_METHOD              3
+            148 STORE_FAST               6 (matched)
+
+428         150 LOAD_GLOBAL              4 (logger)
+            152 LOAD_METHOD              5 (debug)
+
+429         154 LOAD_CONST              10 ('[group-diagnose][debug][checkDeviceMultiResult.attempt] attempt=%s matched=%s device=%s group=%s active=%s')
+
+430         156 LOAD_FAST                5 (attempt)
+
+431         158 LOAD_FAST                6 (matched)
+
+432         160 LOAD_GLOBAL              7 (_diagnose_device_summary)
+            162 LOAD_FAST                3 (device)
+            164 CALL_FUNCTION            1
+
+433         166 LOAD_GLOBAL              8 (_diagnose_group_summary)
+            168 LOAD_FAST                1 (groupObj)
+            170 CALL_FUNCTION            1
+
+434         172 LOAD_FAST                2 (active)
+
+428         174 CALL_METHOD              6
+            176 POP_TOP
+
+436         178 LOAD_FAST                6 (matched)
+            180 POP_JUMP_IF_FALSE      216
+
+437         182 LOAD_GLOBAL              4 (logger)
+            184 LOAD_METHOD              5 (debug)
+
+438         186 LOAD_CONST              11 ('[group-diagnose][checkDeviceMultiResult.match] attempt=%s device=%s active=%s')
+
+439         188 LOAD_FAST                5 (attempt)
+
+440         190 LOAD_GLOBAL              7 (_diagnose_device_summary)
+            192 LOAD_FAST                3 (device)
+            194 CALL_FUNCTION            1
+
+441         196 LOAD_FAST                2 (active)
+
+437         198 CALL_METHOD              4
+            200 POP_TOP
+
+443         202 LOAD_FAST                0 (self)
+            204 LOAD_METHOD              1 (result)
+            206 LOAD_GLOBAL              2 (LPNewGroupEditType)
+            208 LOAD_ATTR               13 (CheckSuccess)
+            210 LOAD_FAST                1 (groupObj)
+            212 CALL_METHOD              2
+            214 RETURN_VALUE
+
+444     >>  216 LOAD_GLOBAL             10 (time)
+            218 LOAD_METHOD             14 (sleep)
+            220 LOAD_CONST               9 (1)
+            222 CALL_METHOD              1
+            224 POP_TOP
+            226 JUMP_ABSOLUTE          116
+
+446     >>  228 LOAD_GLOBAL              4 (logger)
+            230 LOAD_METHOD              5 (debug)
+            232 LOAD_CONST              12 ('[checkDeviceMultiResult]masterDevice=')
+            234 LOAD_FAST                3 (device)
+            236 LOAD_ATTR               15 (name)
+            238 FORMAT_VALUE             0
+            240 LOAD_CONST              13 (' matchCurrentSlaveState time out!')
+            242 BUILD_STRING             3
+            244 CALL_METHOD              1
+            246 POP_TOP
+
+448         248 LOAD_GLOBAL              4 (logger)
+            250 LOAD_METHOD              5 (debug)
+
+449         252 LOAD_CONST              14 ('[group-diagnose][debug][checkDeviceMultiResult.timeout] device=%s group=%s active=%s')
+
+450         254 LOAD_GLOBAL              7 (_diagnose_device_summary)
+            256 LOAD_FAST                3 (device)
+            258 CALL_FUNCTION            1
+
+451         260 LOAD_GLOBAL              8 (_diagnose_group_summary)
+            262 LOAD_FAST                1 (groupObj)
+            264 CALL_FUNCTION            1
+
+452         266 LOAD_FAST                2 (active)
+
+448         268 CALL_METHOD              4
+            270 POP_TOP
+
+455         272 LOAD_FAST                0 (self)
+            274 LOAD_METHOD             16 (getSlaveList)
+            276 LOAD_FAST                1 (groupObj)
+            278 LOAD_FAST                2 (active)
+            280 CALL_METHOD              2
+            282 EXTENDED_ARG             1
+            284 POP_JUMP_IF_FALSE      300
+
+456         286 LOAD_FAST                0 (self)
+            288 LOAD_METHOD              1 (result)
+            290 LOAD_GLOBAL              2 (LPNewGroupEditType)
+            292 LOAD_ATTR               13 (CheckSuccess)
+            294 LOAD_FAST                1 (groupObj)
+            296 CALL_METHOD              2
+            298 RETURN_VALUE
+
+459     >>  300 LOAD_FAST                0 (self)
+            302 LOAD_METHOD              1 (result)
+            304 LOAD_GLOBAL              2 (LPNewGroupEditType)
+            306 LOAD_ATTR                3 (CheckFailed)
+            308 LOAD_FAST                1 (groupObj)
+            310 CALL_METHOD              2
+            312 RETURN_VALUE
+
+=== LPGroupManager._onlineExpectedSlaveList ===
+471           0 BUILD_LIST               0
+              2 STORE_FAST               2 (expected)
+
+472           4 LOAD_GLOBAL              0 (set)
+              6 CALL_FUNCTION            0
+              8 STORE_FAST               3 (seen)
+
+473          10 LOAD_GLOBAL              1 (list)
+             12 LOAD_GLOBAL              2 (getattr)
+             14 LOAD_FAST                1 (groupObj)
+             16 LOAD_CONST               1 ('slaveList')
+             18 BUILD_LIST               0
+             20 CALL_FUNCTION            3
+             22 JUMP_IF_TRUE_OR_POP     26
+             24 BUILD_LIST               0
+        >>   26 CALL_FUNCTION            1
+             28 GET_ITER
+        >>   30 FOR_ITER               112 (to 144)
+             32 STORE_FAST               4 (item)
+
+474          34 LOAD_GLOBAL              3 (LPUtility)
+             36 LOAD_METHOD              4 (pureUUID)
+             38 LOAD_FAST                4 (item)
+             40 LOAD_METHOD              5 (get)
+             42 LOAD_CONST               2 ('uuid')
+             44 LOAD_CONST               3 ('')
+             46 CALL_METHOD              2
+             48 CALL_METHOD              1
+             50 STORE_FAST               5 (memberUuid)
+
+475          52 LOAD_FAST                5 (memberUuid)
+             54 POP_JUMP_IF_FALSE       30
+             56 LOAD_FAST                5 (memberUuid)
+             58 LOAD_FAST                3 (seen)
+             60 CONTAINS_OP              0
+             62 POP_JUMP_IF_FALSE       66
+
+476          64 JUMP_ABSOLUTE           30
+
+477     >>   66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR                6 (nodeMgr)
+             70 LOAD_METHOD              7 (findRawDeviceByUuid)
+             72 LOAD_FAST                5 (memberUuid)
+             74 CALL_METHOD              1
+             76 LOAD_CONST               4 (None)
+             78 IS_OP                    0
+             80 POP_JUMP_IF_FALSE       84
+
+478          82 JUMP_ABSOLUTE           30
+
+480     >>   84 LOAD_FAST                3 (seen)
+             86 LOAD_METHOD              8 (add)
+             88 LOAD_FAST                5 (memberUuid)
+             90 CALL_METHOD              1
+             92 POP_TOP
+
+481          94 LOAD_GLOBAL              9 (isinstance)
+             96 LOAD_FAST                4 (item)
+             98 LOAD_GLOBAL             10 (dict)
+            100 CALL_FUNCTION            2
+            102 POP_JUMP_IF_FALSE      120
+
+482         104 LOAD_FAST                2 (expected)
+            106 LOAD_METHOD             11 (append)
+            108 LOAD_GLOBAL             10 (dict)
+            110 LOAD_FAST                4 (item)
+            112 CALL_FUNCTION            1
+            114 CALL_METHOD              1
+            116 POP_TOP
+            118 JUMP_ABSOLUTE           30
+
+484     >>  120 LOAD_FAST                2 (expected)
+            122 LOAD_METHOD             11 (append)
+            124 LOAD_CONST               2 ('uuid')
+            126 LOAD_FAST                4 (item)
+            128 LOAD_METHOD              5 (get)
+            130 LOAD_CONST               2 ('uuid')
+            132 LOAD_CONST               3 ('')
+            134 CALL_METHOD              2
+            136 BUILD_MAP                1
+            138 CALL_METHOD              1
+            140 POP_TOP
+            142 JUMP_ABSOLUTE           30
+
+485     >>  144 LOAD_FAST                2 (expected)
+            146 RETURN_VALUE
+
+=== LPGroupManager._uuidListsMatch ===
+498           0 LOAD_GLOBAL              0 (sorted)
+              2 LOAD_CONST               1 (<code object <genexpr> at 0x000001F3253C4920, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 498>)
+              4 LOAD_CONST               2 ('LPGroupManager._uuidListsMatch.<locals>.<genexpr>')
+              6 MAKE_FUNCTION            0
+
+500           8 LOAD_FAST                1 (currentArray)
+             10 JUMP_IF_TRUE_OR_POP     14
+             12 BUILD_LIST               0
+
+498     >>   14 GET_ITER
+             16 CALL_FUNCTION            1
+             18 CALL_FUNCTION            1
+             20 STORE_FAST               3 (currentList)
+
+503          22 LOAD_GLOBAL              0 (sorted)
+             24 LOAD_CONST               3 (<code object <genexpr> at 0x000001F3253C4DF0, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 503>)
+             26 LOAD_CONST               2 ('LPGroupManager._uuidListsMatch.<locals>.<genexpr>')
+             28 MAKE_FUNCTION            0
+
+505          30 LOAD_FAST                2 (expectedArray)
+             32 JUMP_IF_TRUE_OR_POP     36
+             34 BUILD_LIST               0
+
+503     >>   36 GET_ITER
+             38 CALL_FUNCTION            1
+             40 CALL_FUNCTION            1
+             42 STORE_FAST               4 (expectedList)
+
+508          44 LOAD_FAST                3 (currentList)
+             46 POP_JUMP_IF_FALSE       52
+             48 LOAD_FAST                4 (expectedList)
+             50 POP_JUMP_IF_TRUE        86
+
+509     >>   52 LOAD_GLOBAL              1 (logger)
+             54 LOAD_METHOD              2 (debug)
+             56 LOAD_CONST               4 ('[_uuidArrayEqual] not currentList or not expectedList: length lhs = ')
+             58 LOAD_GLOBAL              3 (len)
+             60 LOAD_FAST                3 (currentList)
+             62 CALL_FUNCTION            1
+             64 FORMAT_VALUE             0
+             66 LOAD_CONST               5 (' rhs=')
+             68 LOAD_GLOBAL              3 (len)
+             70 LOAD_FAST                4 (expectedList)
+             72 CALL_FUNCTION            1
+             74 FORMAT_VALUE             0
+             76 BUILD_STRING             4
+             78 CALL_METHOD              1
+             80 POP_TOP
+
+510          82 LOAD_CONST               6 (False)
+             84 RETURN_VALUE
+
+511     >>   86 LOAD_GLOBAL              1 (logger)
+             88 LOAD_METHOD              2 (debug)
+             90 LOAD_CONST               7 ('[group manager] current uuids=%s expected uuids=%s')
+             92 LOAD_FAST                3 (currentList)
+             94 LOAD_FAST                4 (expectedList)
+             96 CALL_METHOD              3
+             98 POP_TOP
+
+512         100 LOAD_FAST                3 (currentList)
+            102 LOAD_FAST                4 (expectedList)
+            104 COMPARE_OP               2 (==)
+            106 RETURN_VALUE
+
+=== LPGroupManager._uuidListsMatch.<genexpr> ===
+498           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                46 (to 50)
+
+500           4 STORE_FAST               1 (item)
+
+501           6 LOAD_GLOBAL              0 (LPUtility)
+              8 LOAD_METHOD              1 (pureUUID)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_CONST               0 ('uuid')
+             16 LOAD_CONST               1 ('')
+             18 CALL_METHOD              2
+             20 CALL_METHOD              1
+             22 POP_JUMP_IF_FALSE        2
+
+499          24 LOAD_GLOBAL              0 (LPUtility)
+             26 LOAD_METHOD              1 (pureUUID)
+             28 LOAD_FAST                1 (item)
+             30 LOAD_METHOD              2 (get)
+             32 LOAD_CONST               0 ('uuid')
+             34 LOAD_CONST               1 ('')
+             36 CALL_METHOD              2
+             38 LOAD_METHOD              3 (lower)
+             40 CALL_METHOD              0
+             42 CALL_METHOD              1
+             44 YIELD_VALUE
+             46 POP_TOP
+             48 JUMP_ABSOLUTE            2
+        >>   50 LOAD_CONST               2 (None)
+             52 RETURN_VALUE
+
+=== LPGroupManager._uuidListsMatch.<genexpr> ===
+503           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                46 (to 50)
+
+505           4 STORE_FAST               1 (item)
+
+506           6 LOAD_GLOBAL              0 (LPUtility)
+              8 LOAD_METHOD              1 (pureUUID)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_CONST               0 ('uuid')
+             16 LOAD_CONST               1 ('')
+             18 CALL_METHOD              2
+             20 CALL_METHOD              1
+             22 POP_JUMP_IF_FALSE        2
+
+504          24 LOAD_GLOBAL              0 (LPUtility)
+             26 LOAD_METHOD              1 (pureUUID)
+             28 LOAD_FAST                1 (item)
+             30 LOAD_METHOD              2 (get)
+             32 LOAD_CONST               0 ('uuid')
+             34 LOAD_CONST               1 ('')
+             36 CALL_METHOD              2
+             38 CALL_METHOD              1
+             40 LOAD_METHOD              3 (lower)
+             42 CALL_METHOD              0
+             44 YIELD_VALUE
+             46 POP_TOP
+             48 JUMP_ABSOLUTE            2
+        >>   50 LOAD_CONST               2 (None)
+             52 RETURN_VALUE
+
+=== LPGroupManager._matchCurrentSlaveState ===
+515           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+              4 LOAD_CONST               1 ('[_matchCurrentSlaveState] device=')
+              6 LOAD_FAST                1 (device)
+              8 LOAD_ATTR                2 (name)
+             10 FORMAT_VALUE             0
+             12 LOAD_CONST               2 (' enter')
+             14 BUILD_STRING             3
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+516          20 SETUP_FINALLY           12 (to 34)
+
+517          22 LOAD_FAST                1 (device)
+             24 LOAD_METHOD              3 (refreshMultiroomState)
+             26 CALL_METHOD              0
+             28 POP_TOP
+             30 POP_BLOCK
+             32 JUMP_FORWARD            60 (to 94)
+
+518     >>   34 DUP_TOP
+             36 LOAD_GLOBAL              4 (Exception)
+             38 JUMP_IF_NOT_EXC_MATCH    92
+             40 POP_TOP
+             42 STORE_FAST               4 (error)
+             44 POP_TOP
+             46 SETUP_FINALLY           36 (to 84)
+
+519          48 LOAD_GLOBAL              0 (logger)
+             50 LOAD_METHOD              5 (warning)
+             52 LOAD_CONST               3 ('[_matchCurrentSlaveState] refreshMultiroomState during edit failed for ')
+             54 LOAD_FAST                1 (device)
+             56 LOAD_ATTR                2 (name)
+             58 FORMAT_VALUE             0
+             60 LOAD_CONST               4 (': ')
+             62 LOAD_FAST                4 (error)
+             64 FORMAT_VALUE             0
+             66 BUILD_STRING             4
+             68 CALL_METHOD              1
+             70 POP_TOP
+             72 POP_BLOCK
+             74 POP_EXCEPT
+             76 LOAD_CONST               0 (None)
+             78 STORE_FAST               4 (error)
+             80 DELETE_FAST              4 (error)
+             82 JUMP_FORWARD            10 (to 94)
+        >>   84 LOAD_CONST               0 (None)
+             86 STORE_FAST               4 (error)
+             88 DELETE_FAST              4 (error)
+             90 RERAISE
+        >>   92 RERAISE
+
+521     >>   94 LOAD_GLOBAL              6 (getattr)
+             96 LOAD_FAST                1 (device)
+             98 LOAD_ATTR                7 (groupInfo)
+            100 LOAD_CONST               5 ('slaveList')
+            102 BUILD_LIST               0
+            104 CALL_FUNCTION            3
+            106 JUMP_IF_TRUE_OR_POP    110
+            108 BUILD_LIST               0
+        >>  110 STORE_FAST               5 (current)
+
+522         112 LOAD_FAST                3 (active)
+            114 POP_JUMP_IF_TRUE       172
+
+523         116 LOAD_GLOBAL              8 (len)
+            118 LOAD_FAST                5 (current)
+            120 CALL_FUNCTION            1
+            122 LOAD_CONST               6 (0)
+            124 COMPARE_OP               2 (==)
+            126 STORE_FAST               6 (matched)
+
+524         128 LOAD_GLOBAL              0 (logger)
+            130 LOAD_METHOD              1 (debug)
+
+525         132 LOAD_CONST               7 ('[group-diagnose][_matchCurrentSlaveState] device=%s active=%s currentSlaveUuids=%s matched=%s')
+
+526         134 LOAD_GLOBAL              9 (_diagnose_device_summary)
+            136 LOAD_FAST                1 (device)
+            138 CALL_FUNCTION            1
+
+527         140 LOAD_FAST                3 (active)
+
+528         142 LOAD_CONST               8 (<code object <listcomp> at 0x000001F3253C4030, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 528>)
+            144 LOAD_CONST               9 ('LPGroupManager._matchCurrentSlaveState.<locals>.<listcomp>')
+            146 MAKE_FUNCTION            0
+
+530         148 LOAD_GLOBAL             10 (list)
+            150 LOAD_FAST                5 (current)
+            152 JUMP_IF_TRUE_OR_POP    156
+            154 BUILD_LIST               0
+        >>  156 CALL_FUNCTION            1
+
+528         158 GET_ITER
+            160 CALL_FUNCTION            1
+
+532         162 LOAD_FAST                6 (matched)
+
+524         164 CALL_METHOD              5
+            166 POP_TOP
+
+534         168 LOAD_FAST                6 (matched)
+            170 RETURN_VALUE
+
+535     >>  172 LOAD_FAST                0 (self)
+            174 LOAD_METHOD             11 (_onlineExpectedSlaveList)
+            176 LOAD_FAST                2 (groupObj)
+            178 CALL_METHOD              1
+            180 STORE_FAST               7 (expected)
+
+536         182 LOAD_FAST                0 (self)
+            184 LOAD_METHOD             12 (_uuidListsMatch)
+            186 LOAD_FAST                5 (current)
+            188 LOAD_FAST                7 (expected)
+            190 CALL_METHOD              2
+            192 STORE_FAST               6 (matched)
+
+537         194 LOAD_GLOBAL              0 (logger)
+            196 LOAD_METHOD              1 (debug)
+
+538         198 LOAD_CONST              10 ('[group-diagnose][_matchCurrentSlaveState] device=%s active=%s current=%s expected=%s matched=%s')
+
+539         200 LOAD_GLOBAL              9 (_diagnose_device_summary)
+            202 LOAD_FAST                1 (device)
+            204 CALL_FUNCTION            1
+
+540         206 LOAD_FAST                3 (active)
+
+541         208 LOAD_FAST                5 (current)
+
+542         210 LOAD_FAST                7 (expected)
+
+543         212 LOAD_FAST                6 (matched)
+
+537         214 CALL_METHOD              6
+            216 POP_TOP
+
+545         218 LOAD_FAST                6 (matched)
+            220 RETURN_VALUE
+
+=== LPGroupManager._matchCurrentSlaveState.<listcomp> ===
+528           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                44 (to 50)
+
+530           6 STORE_FAST               1 (item)
+
+529           8 LOAD_GLOBAL              0 (LPUtility)
+             10 LOAD_METHOD              1 (pureUUID)
+             12 LOAD_GLOBAL              2 (isinstance)
+             14 LOAD_FAST                1 (item)
+             16 LOAD_GLOBAL              3 (dict)
+             18 CALL_FUNCTION            2
+             20 POP_JUMP_IF_FALSE       34
+             22 LOAD_FAST                1 (item)
+             24 LOAD_METHOD              4 (get)
+             26 LOAD_CONST               0 ('uuid')
+             28 LOAD_CONST               1 ('')
+             30 CALL_METHOD              2
+             32 JUMP_FORWARD            10 (to 44)
+        >>   34 LOAD_GLOBAL              5 (getattr)
+             36 LOAD_FAST                1 (item)
+             38 LOAD_CONST               0 ('uuid')
+             40 LOAD_CONST               1 ('')
+             42 CALL_FUNCTION            3
+        >>   44 CALL_METHOD              1
+             46 LIST_APPEND              2
+             48 JUMP_ABSOLUTE            4
+        >>   50 RETURN_VALUE
+
+=== LPGroupManager.getSlaveList ===
+549           0 LOAD_FAST                1 (groupObj)
+              2 LOAD_ATTR                0 (masterDevice)
+              4 STORE_FAST               3 (device)
+
+550           6 LOAD_FAST                3 (device)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_FALSE       36
+
+552          14 LOAD_GLOBAL              1 (logger)
+             16 LOAD_METHOD              2 (debug)
+
+553          18 LOAD_CONST               2 ('[group-diagnose][debug][groupManager.getSlaveList.skip] reason=noMaster group=%s active=%s')
+
+554          20 LOAD_GLOBAL              3 (_diagnose_group_summary)
+             22 LOAD_FAST                1 (groupObj)
+             24 CALL_FUNCTION            1
+
+555          26 LOAD_FAST                2 (active)
+
+552          28 CALL_METHOD              3
+             30 POP_TOP
+
+557          32 LOAD_CONST               3 (False)
+             34 RETURN_VALUE
+
+559     >>   36 LOAD_FAST                3 (device)
+             38 LOAD_METHOD              4 (getSlaveList)
+             40 CALL_METHOD              0
+             42 STORE_FAST               4 (response)
+
+560          44 LOAD_GLOBAL              1 (logger)
+             46 LOAD_METHOD              2 (debug)
+
+561          48 LOAD_CONST               4 ('[group-diagnose][groupManager.getSlaveList] device=%s active=%s status=%s body=%s')
+
+562          50 LOAD_GLOBAL              5 (_diagnose_device_summary)
+             52 LOAD_FAST                3 (device)
+             54 CALL_FUNCTION            1
+
+563          56 LOAD_FAST                2 (active)
+
+564          58 LOAD_FAST                4 (response)
+             60 LOAD_METHOD              6 (get)
+             62 LOAD_CONST               5 ('status_code')
+             64 LOAD_CONST               6 (0)
+             66 CALL_METHOD              2
+
+565          68 LOAD_FAST                4 (response)
+             70 LOAD_METHOD              6 (get)
+             72 LOAD_CONST               7 ('body')
+             74 LOAD_CONST               8 ('')
+             76 CALL_METHOD              2
+
+560          78 CALL_METHOD              5
+             80 POP_TOP
+
+567          82 LOAD_FAST                4 (response)
+             84 LOAD_METHOD              6 (get)
+             86 LOAD_CONST               5 ('status_code')
+             88 LOAD_CONST               6 (0)
+             90 CALL_METHOD              2
+             92 LOAD_CONST               9 (200)
+             94 COMPARE_OP               3 (!=)
+             96 POP_JUMP_IF_TRUE       110
+             98 LOAD_FAST                4 (response)
+            100 LOAD_METHOD              6 (get)
+            102 LOAD_CONST               7 ('body')
+            104 LOAD_CONST               8 ('')
+            106 CALL_METHOD              2
+            108 POP_JUMP_IF_TRUE       114
+
+568     >>  110 LOAD_CONST               3 (False)
+            112 RETURN_VALUE
+
+570     >>  114 SETUP_FINALLY           26 (to 142)
+
+571         116 LOAD_GLOBAL              7 (json)
+            118 LOAD_METHOD              8 (loads)
+            120 LOAD_FAST                4 (response)
+            122 LOAD_METHOD              6 (get)
+            124 LOAD_CONST               7 ('body')
+            126 LOAD_CONST               8 ('')
+            128 CALL_METHOD              2
+            130 JUMP_IF_TRUE_OR_POP    134
+            132 LOAD_CONST              10 ('{}')
+        >>  134 CALL_METHOD              1
+            136 STORE_FAST               5 (slaveJson)
+            138 POP_BLOCK
+            140 JUMP_FORWARD            60 (to 202)
+
+572     >>  142 DUP_TOP
+            144 LOAD_GLOBAL              9 (Exception)
+            146 JUMP_IF_NOT_EXC_MATCH   200
+            148 POP_TOP
+            150 STORE_FAST               6 (error)
+            152 POP_TOP
+            154 SETUP_FINALLY           36 (to 192)
+
+573         156 LOAD_GLOBAL              1 (logger)
+            158 LOAD_METHOD             10 (warning)
+            160 LOAD_CONST              11 ('[device dashboard] parse getSlaveList failed for %s: %s')
+            162 LOAD_GLOBAL             11 (getattr)
+            164 LOAD_FAST                3 (device)
+            166 LOAD_CONST              12 ('name')
+            168 LOAD_CONST               8 ('')
+            170 CALL_FUNCTION            3
+            172 LOAD_FAST                6 (error)
+            174 CALL_METHOD              3
+            176 POP_TOP
+
+574         178 POP_BLOCK
+            180 POP_EXCEPT
+            182 LOAD_CONST               1 (None)
+            184 STORE_FAST               6 (error)
+            186 DELETE_FAST              6 (error)
+            188 LOAD_CONST               3 (False)
+            190 RETURN_VALUE
+        >>  192 LOAD_CONST               1 (None)
+            194 STORE_FAST               6 (error)
+            196 DELETE_FAST              6 (error)
+            198 RERAISE
+        >>  200 RERAISE
+
+576     >>  202 LOAD_FAST                5 (slaveJson)
+            204 LOAD_METHOD              6 (get)
+            206 LOAD_CONST              13 ('slave_list')
+            208 BUILD_LIST               0
+            210 CALL_METHOD              2
+            212 JUMP_IF_TRUE_OR_POP    216
+            214 BUILD_LIST               0
+        >>  216 STORE_FAST               7 (slaveData)
+
+577         218 LOAD_FAST                2 (active)
+            220 POP_JUMP_IF_TRUE       226
+            222 BUILD_LIST               0
+            224 JUMP_FORWARD             8 (to 234)
+        >>  226 LOAD_FAST                0 (self)
+            228 LOAD_METHOD             12 (_onlineExpectedSlaveList)
+            230 LOAD_FAST                1 (groupObj)
+            232 CALL_METHOD              1
+        >>  234 STORE_FAST               8 (expected)
+
+578         236 LOAD_FAST                0 (self)
+            238 LOAD_METHOD             13 (_uuidListsMatch)
+            240 LOAD_FAST                7 (slaveData)
+            242 LOAD_FAST                8 (expected)
+            244 CALL_METHOD              2
+            246 STORE_FAST               9 (matched)
+
+580         248 LOAD_GLOBAL              1 (logger)
+            250 LOAD_METHOD              2 (debug)
+
+581         252 LOAD_CONST              14 ('[group-diagnose][debug][groupManager.getSlaveList.compare] device=%s active=%s current=%s expected=%s matched=%s')
+
+582         254 LOAD_GLOBAL              5 (_diagnose_device_summary)
+            256 LOAD_FAST                3 (device)
+            258 CALL_FUNCTION            1
+
+583         260 LOAD_FAST                2 (active)
+
+584         262 LOAD_FAST                7 (slaveData)
+
+585         264 LOAD_FAST                8 (expected)
+
+586         266 LOAD_FAST                9 (matched)
+
+580         268 CALL_METHOD              6
+            270 POP_TOP
+
+588         272 LOAD_FAST                9 (matched)
+            274 EXTENDED_ARG             1
+            276 POP_JUMP_IF_TRUE       282
+
+589         278 LOAD_CONST               3 (False)
+            280 RETURN_VALUE
+
+591     >>  282 LOAD_GLOBAL             14 (list)
+            284 LOAD_FAST                7 (slaveData)
+            286 CALL_FUNCTION            1
+            288 LOAD_FAST                3 (device)
+            290 LOAD_ATTR               15 (groupInfo)
+            292 STORE_ATTR              16 (slaveList)
+
+592         294 LOAD_CONST              15 (True)
+            296 RETURN_VALUE
+
+=== LPGroupManager.switchCurrentGroup ===
+597           0 LOAD_FAST                1 (groupObj)
+              2 LOAD_ATTR                0 (masterDevice)
+              4 STORE_FAST               3 (device)
+
+598           6 LOAD_FAST                3 (device)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_FALSE       36
+
+600          14 LOAD_GLOBAL              1 (logger)
+             16 LOAD_METHOD              2 (debug)
+
+601          18 LOAD_CONST               2 ('[group-diagnose][debug][switchCurrentGroup.skip] reason=noMaster group=%s active=%s')
+
+602          20 LOAD_GLOBAL              3 (_diagnose_group_summary)
+             22 LOAD_FAST                1 (groupObj)
+             24 CALL_FUNCTION            1
+
+603          26 LOAD_FAST                2 (active)
+
+600          28 CALL_METHOD              3
+             30 POP_TOP
+
+605          32 LOAD_CONST               3 (False)
+             34 RETURN_VALUE
+
+607     >>   36 LOAD_CONST               4 ('group_id')
+             38 LOAD_FAST                2 (active)
+             40 POP_JUMP_IF_FALSE       48
+             42 LOAD_FAST                1 (groupObj)
+             44 LOAD_ATTR                4 (groupId)
+             46 JUMP_FORWARD             2 (to 50)
+        >>   48 LOAD_CONST               5 ('-1')
+        >>   50 BUILD_MAP                1
+             52 STORE_FAST               4 (payload)
+
+609          54 LOAD_FAST                2 (active)
+             56 POP_JUMP_IF_FALSE      178
+
+610          58 BUILD_LIST               0
+             60 STORE_FAST               5 (slaveList)
+
+611          62 LOAD_FAST                1 (groupObj)
+             64 LOAD_ATTR                5 (slaveList)
+             66 JUMP_IF_TRUE_OR_POP     70
+             68 BUILD_LIST               0
+        >>   70 GET_ITER
+        >>   72 FOR_ITER                64 (to 138)
+             74 STORE_FAST               6 (slaveDict)
+
+612          76 LOAD_FAST                6 (slaveDict)
+             78 LOAD_METHOD              6 (get)
+             80 LOAD_CONST               6 ('uuid')
+             82 LOAD_CONST               7 ('')
+             84 CALL_METHOD              2
+             86 STORE_FAST               7 (slaveUuid)
+
+613          88 LOAD_FAST                7 (slaveUuid)
+             90 POP_JUMP_IF_TRUE        94
+
+614          92 JUMP_ABSOLUTE           72
+
+616     >>   94 LOAD_FAST                6 (slaveDict)
+             96 LOAD_METHOD              6 (get)
+             98 LOAD_CONST               8 ('ip')
+            100 LOAD_CONST               7 ('')
+            102 CALL_METHOD              2
+            104 STORE_FAST               8 (slaveIP)
+
+617         106 LOAD_CONST               6 ('uuid')
+            108 LOAD_FAST                7 (slaveUuid)
+            110 BUILD_MAP                1
+            112 STORE_FAST               9 (entry)
+
+618         114 LOAD_FAST                8 (slaveIP)
+            116 POP_JUMP_IF_FALSE      126
+
+619         118 LOAD_FAST                8 (slaveIP)
+            120 LOAD_FAST                9 (entry)
+            122 LOAD_CONST               9 ('ipv4')
+            124 STORE_SUBSCR
+
+620     >>  126 LOAD_FAST                5 (slaveList)
+            128 LOAD_METHOD              7 (append)
+            130 LOAD_FAST                9 (entry)
+            132 CALL_METHOD              1
+            134 POP_TOP
+            136 JUMP_ABSOLUTE           72
+
+622     >>  138 LOAD_FAST                1 (groupObj)
+            140 LOAD_ATTR                4 (groupId)
+
+623         142 LOAD_FAST                1 (groupObj)
+            144 LOAD_ATTR                8 (groupName)
+            146 JUMP_IF_TRUE_OR_POP    150
+            148 LOAD_CONST               7 ('')
+
+624     >>  150 LOAD_GLOBAL              9 (getattr)
+            152 LOAD_FAST                1 (groupObj)
+            154 LOAD_CONST              10 ('groupFullName')
+            156 LOAD_CONST               7 ('')
+            158 CALL_FUNCTION            3
+            160 JUMP_IF_TRUE_OR_POP    170
+            162 LOAD_FAST                1 (groupObj)
+            164 LOAD_ATTR                8 (groupName)
+            166 JUMP_IF_TRUE_OR_POP    170
+            168 LOAD_CONST               7 ('')
+
+625     >>  170 LOAD_FAST                5 (slaveList)
+
+621         172 LOAD_CONST              11 (('group_id', 'group_name', 'fullName', 'slavelist'))
+            174 BUILD_CONST_KEY_MAP      4
+            176 STORE_FAST               4 (payload)
+
+629     >>  178 LOAD_GLOBAL              1 (logger)
+            180 LOAD_METHOD              2 (debug)
+
+630         182 LOAD_CONST              12 ('[group-diagnose][debug][switchCurrentGroup.send] device=%s active=%s group=%s payload=%s')
+
+631         184 LOAD_GLOBAL             10 (_diagnose_device_summary)
+            186 LOAD_FAST                3 (device)
+            188 CALL_FUNCTION            1
+
+632         190 LOAD_FAST                2 (active)
+
+633         192 LOAD_GLOBAL              3 (_diagnose_group_summary)
+            194 LOAD_FAST                1 (groupObj)
+            196 CALL_FUNCTION            1
+
+634         198 LOAD_FAST                4 (payload)
+
+629         200 CALL_METHOD              5
+            202 POP_TOP
+
+637         204 LOAD_FAST                3 (device)
+            206 LOAD_METHOD             11 (setCurrentNameGroup)
+            208 LOAD_FAST                4 (payload)
+            210 CALL_METHOD              1
+            212 STORE_FAST              10 (response)
+
+638         214 LOAD_FAST               10 (response)
+            216 LOAD_METHOD              6 (get)
+            218 LOAD_CONST              13 ('status_code')
+            220 LOAD_CONST              14 (0)
+            222 CALL_METHOD              2
+            224 LOAD_CONST              15 (200)
+            226 COMPARE_OP               2 (==)
+            228 STORE_FAST              11 (success)
+
+639         230 LOAD_GLOBAL              1 (logger)
+            232 LOAD_METHOD              2 (debug)
+
+640         234 LOAD_CONST              16 ('[group-diagnose][switchCurrentGroup] device=%s active=%s payload=%s status=%s body=%s success=%s')
+
+641         236 LOAD_GLOBAL             10 (_diagnose_device_summary)
+            238 LOAD_FAST                3 (device)
+            240 CALL_FUNCTION            1
+
+642         242 LOAD_FAST                2 (active)
+
+643         244 LOAD_FAST                4 (payload)
+
+644         246 LOAD_FAST               10 (response)
+            248 LOAD_METHOD              6 (get)
+            250 LOAD_CONST              13 ('status_code')
+            252 LOAD_CONST              14 (0)
+            254 CALL_METHOD              2
+
+645         256 LOAD_FAST               10 (response)
+            258 LOAD_METHOD              6 (get)
+            260 LOAD_CONST              17 ('body')
+            262 LOAD_CONST               7 ('')
+            264 CALL_METHOD              2
+
+646         266 LOAD_FAST               11 (success)
+
+639         268 CALL_METHOD              7
+            270 POP_TOP
+
+648         272 LOAD_FAST               11 (success)
+            274 EXTENDED_ARG             1
+            276 POP_JUMP_IF_FALSE      278
+
+655     >>  278 LOAD_FAST               11 (success)
+            280 RETURN_VALUE
+
+=== LPGroupManager.ungroup ===
+658           0 LOAD_FAST                1 (masterDevice)
+              2 LOAD_CONST               0 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       24
+
+660           8 LOAD_GLOBAL              0 (logger)
+             10 LOAD_METHOD              1 (debug)
+             12 LOAD_CONST               1 ('[group-diagnose][debug][ungroup.skip] reason=noMaster retry=%s')
+             14 LOAD_FAST                2 (retry)
+             16 CALL_METHOD              2
+             18 POP_TOP
+
+661          20 LOAD_CONST               2 (False)
+             22 RETURN_VALUE
+
+664     >>   24 LOAD_GLOBAL              0 (logger)
+             26 LOAD_METHOD              1 (debug)
+
+665          28 LOAD_CONST               3 ('[group-diagnose][debug][ungroup.send] master=%s retry=%s')
+
+666          30 LOAD_GLOBAL              2 (_diagnose_device_summary)
+             32 LOAD_FAST                1 (masterDevice)
+             34 CALL_FUNCTION            1
+
+667          36 LOAD_FAST                2 (retry)
+
+664          38 CALL_METHOD              3
+             40 POP_TOP
+
+669          42 LOAD_FAST                1 (masterDevice)
+             44 LOAD_METHOD              3 (ungroup)
+             46 CALL_METHOD              0
+             48 STORE_FAST               3 (response)
+
+670          50 LOAD_FAST                3 (response)
+             52 LOAD_METHOD              4 (get)
+             54 LOAD_CONST               4 ('status_code')
+             56 LOAD_CONST               5 (0)
+             58 CALL_METHOD              2
+             60 LOAD_CONST               6 (200)
+             62 COMPARE_OP               2 (==)
+             64 STORE_FAST               4 (success)
+
+671          66 LOAD_GLOBAL              0 (logger)
+             68 LOAD_METHOD              1 (debug)
+
+672          70 LOAD_CONST               7 ('[group-diagnose][ungroup] master=%s retry=%s status=%s body=%s success=%s')
+
+673          72 LOAD_GLOBAL              2 (_diagnose_device_summary)
+             74 LOAD_FAST                1 (masterDevice)
+             76 CALL_FUNCTION            1
+
+674          78 LOAD_FAST                2 (retry)
+
+675          80 LOAD_FAST                3 (response)
+             82 LOAD_METHOD              4 (get)
+             84 LOAD_CONST               4 ('status_code')
+             86 LOAD_CONST               5 (0)
+             88 CALL_METHOD              2
+
+676          90 LOAD_FAST                3 (response)
+             92 LOAD_METHOD              4 (get)
+             94 LOAD_CONST               8 ('body')
+             96 LOAD_CONST               9 ('')
+             98 CALL_METHOD              2
+
+677         100 LOAD_FAST                4 (success)
+
+671         102 CALL_METHOD              6
+            104 POP_TOP
+
+679         106 LOAD_FAST                4 (success)
+            108 POP_JUMP_IF_FALSE      114
+
+680         110 LOAD_CONST              10 (True)
+            112 RETURN_VALUE
+
+681     >>  114 LOAD_FAST                2 (retry)
+            116 POP_JUMP_IF_FALSE      132
+
+682         118 LOAD_FAST                0 (self)
+            120 LOAD_ATTR                3 (ungroup)
+            122 LOAD_FAST                1 (masterDevice)
+            124 LOAD_CONST               2 (False)
+            126 LOAD_CONST              11 (('retry',))
+            128 CALL_FUNCTION_KW         2
+            130 RETURN_VALUE
+
+683     >>  132 LOAD_CONST               2 (False)
+            134 RETURN_VALUE
+
+=== LPGroupManager._dealSingleSelectedDevice ===
+703           0 LOAD_FAST                3 (singleDevice)
+              2 LOAD_ATTR                0 (groupInfo)
+              4 STORE_FAST               4 (groupInfo)
+
+704           6 LOAD_FAST                4 (groupInfo)
+              8 LOAD_ATTR                1 (roomState)
+             10 STORE_FAST               5 (roomState)
+
+705          12 LOAD_FAST                4 (groupInfo)
+             14 LOAD_ATTR                2 (slaveList)
+             16 STORE_FAST               6 (slaveList)
+
+706          18 LOAD_FAST                6 (slaveList)
+             20 JUMP_IF_TRUE_OR_POP     28
+             22 LOAD_FAST                5 (roomState)
+             24 LOAD_CONST               1 ('slave')
+             26 COMPARE_OP               2 (==)
+        >>   28 STORE_FAST               7 (isGroupedDevice)
+
+707          30 LOAD_GLOBAL              3 (logger)
+             32 LOAD_METHOD              4 (debug)
+
+708          34 LOAD_CONST               2 ('[group-diagnose][_dealSingleSelectedDevice.enter] currentEditGroup=%s currentEditDevice=%s singleDevice=%s isGroupedDevice=%s')
+
+709          36 LOAD_GLOBAL              5 (_diagnose_group_summary)
+             38 LOAD_FAST                1 (currentEditGroup)
+             40 CALL_FUNCTION            1
+
+710          42 LOAD_GLOBAL              6 (_diagnose_device_summary)
+             44 LOAD_FAST                2 (currentEditDevice)
+             46 CALL_FUNCTION            1
+
+711          48 LOAD_GLOBAL              6 (_diagnose_device_summary)
+             50 LOAD_FAST                3 (singleDevice)
+             52 CALL_FUNCTION            1
+
+712          54 LOAD_GLOBAL              7 (bool)
+             56 LOAD_FAST                7 (isGroupedDevice)
+             58 CALL_FUNCTION            1
+
+707          60 CALL_METHOD              5
+             62 POP_TOP
+
+715          64 LOAD_FAST                7 (isGroupedDevice)
+             66 EXTENDED_ARG             1
+             68 POP_JUMP_IF_FALSE      316
+
+716          70 LOAD_GLOBAL              3 (logger)
+             72 LOAD_METHOD              4 (debug)
+             74 LOAD_CONST               3 ('[_dealSingleSelectedDevice device: ')
+             76 LOAD_FAST                3 (singleDevice)
+             78 LOAD_ATTR                8 (name)
+             80 FORMAT_VALUE             0
+             82 LOAD_CONST               4 (' isGroupedDevice, roomState: ')
+             84 LOAD_FAST                5 (roomState)
+             86 FORMAT_VALUE             0
+             88 LOAD_CONST               5 ('], slaveList length: ')
+             90 LOAD_GLOBAL              9 (len)
+             92 LOAD_FAST                6 (slaveList)
+             94 CALL_FUNCTION            1
+             96 FORMAT_VALUE             0
+             98 BUILD_STRING             6
+            100 CALL_METHOD              1
+            102 POP_TOP
+
+717         104 LOAD_FAST                3 (singleDevice)
+            106 STORE_FAST               8 (masterDevice)
+
+718         108 LOAD_FAST                5 (roomState)
+            110 LOAD_CONST               1 ('slave')
+            112 COMPARE_OP               2 (==)
+            114 POP_JUMP_IF_FALSE      156
+
+719         116 LOAD_FAST                0 (self)
+            118 LOAD_ATTR               10 (nodeMgr)
+            120 LOAD_METHOD             11 (findRawDeviceByUuid)
+            122 LOAD_FAST                4 (groupInfo)
+            124 LOAD_ATTR               12 (masterID)
+            126 CALL_METHOD              1
+            128 STORE_FAST               8 (masterDevice)
+
+721         130 LOAD_GLOBAL              3 (logger)
+            132 LOAD_METHOD              4 (debug)
+
+722         134 LOAD_CONST               6 ('[group-diagnose][debug][_dealSingleSelectedDevice.resolveMaster] singleDevice=%s masterID=%s masterDevice=%s')
+
+723         136 LOAD_GLOBAL              6 (_diagnose_device_summary)
+            138 LOAD_FAST                3 (singleDevice)
+            140 CALL_FUNCTION            1
+
+724         142 LOAD_FAST                4 (groupInfo)
+            144 LOAD_ATTR               12 (masterID)
+
+725         146 LOAD_GLOBAL              6 (_diagnose_device_summary)
+            148 LOAD_FAST                8 (masterDevice)
+            150 CALL_FUNCTION            1
+
+721         152 CALL_METHOD              4
+            154 POP_TOP
+
+728     >>  156 LOAD_FAST                8 (masterDevice)
+            158 LOAD_CONST               7 (None)
+            160 IS_OP                    0
+            162 POP_JUMP_IF_FALSE      200
+
+730         164 LOAD_GLOBAL              3 (logger)
+            166 LOAD_METHOD              4 (debug)
+
+731         168 LOAD_CONST               8 ('[group-diagnose][debug][_dealSingleSelectedDevice.fail] reason=masterMissing singleDevice=%s currentEditGroup=%s')
+
+732         170 LOAD_GLOBAL              6 (_diagnose_device_summary)
+            172 LOAD_FAST                3 (singleDevice)
+            174 CALL_FUNCTION            1
+
+733         176 LOAD_GLOBAL              5 (_diagnose_group_summary)
+            178 LOAD_FAST                1 (currentEditGroup)
+            180 CALL_FUNCTION            1
+
+730         182 CALL_METHOD              3
+            184 POP_TOP
+
+735         186 LOAD_FAST                0 (self)
+            188 LOAD_METHOD             13 (result)
+            190 LOAD_GLOBAL             14 (LPNewGroupEditType)
+            192 LOAD_ATTR               15 (SendFailed)
+            194 LOAD_FAST                1 (currentEditGroup)
+            196 CALL_METHOD              2
+            198 RETURN_VALUE
+
+736     >>  200 LOAD_FAST                0 (self)
+            202 LOAD_ATTR               16 (ungroup)
+            204 LOAD_FAST                8 (masterDevice)
+            206 LOAD_CONST               9 (True)
+            208 LOAD_CONST              10 (('retry',))
+            210 CALL_FUNCTION_KW         2
+            212 POP_JUMP_IF_TRUE       250
+
+738         214 LOAD_GLOBAL              3 (logger)
+            216 LOAD_METHOD              4 (debug)
+
+739         218 LOAD_CONST              11 ('[group-diagnose][debug][_dealSingleSelectedDevice.fail] reason=ungroupSendFailed master=%s singleDevice=%s')
+
+740         220 LOAD_GLOBAL              6 (_diagnose_device_summary)
+            222 LOAD_FAST                8 (masterDevice)
+            224 CALL_FUNCTION            1
+
+741         226 LOAD_GLOBAL              6 (_diagnose_device_summary)
+            228 LOAD_FAST                3 (singleDevice)
+            230 CALL_FUNCTION            1
+
+738         232 CALL_METHOD              3
+            234 POP_TOP
+
+743         236 LOAD_FAST                0 (self)
+            238 LOAD_METHOD             13 (result)
+            240 LOAD_GLOBAL             14 (LPNewGroupEditType)
+            242 LOAD_ATTR               15 (SendFailed)
+            244 LOAD_FAST                1 (currentEditGroup)
+            246 CALL_METHOD              2
+            248 RETURN_VALUE
+
+745     >>  250 LOAD_FAST                0 (self)
+            252 LOAD_ATTR               17 (deviceGroupManager)
+            254 LOAD_METHOD             18 (createGroupObjectWithDict)
+
+747         256 LOAD_CONST              12 ('')
+
+748         258 LOAD_FAST                8 (masterDevice)
+            260 LOAD_ATTR                8 (name)
+            262 EXTENDED_ARG             1
+            264 JUMP_IF_TRUE_OR_POP    268
+            266 LOAD_CONST              12 ('')
+
+749     >>  268 BUILD_LIST               0
+
+746         270 LOAD_CONST              13 (('group_id', 'group_name', 'slavelist'))
+            272 BUILD_CONST_KEY_MAP      3
+
+751         274 LOAD_GLOBAL             19 (LPGroupType_Temp)
+
+752         276 LOAD_FAST                8 (masterDevice)
+
+745         278 CALL_METHOD              3
+            280 STORE_FAST               9 (emptyGroup)
+
+755         282 LOAD_GLOBAL              3 (logger)
+            284 LOAD_METHOD              4 (debug)
+
+756         286 LOAD_CONST              14 ('[group-diagnose][debug][_dealSingleSelectedDevice.checkEmptyGroup] master=%s emptyGroup=%s')
+
+757         288 LOAD_GLOBAL              6 (_diagnose_device_summary)
+            290 LOAD_FAST                8 (masterDevice)
+            292 CALL_FUNCTION            1
+
+758         294 LOAD_GLOBAL              5 (_diagnose_group_summary)
+            296 LOAD_FAST                9 (emptyGroup)
+            298 CALL_FUNCTION            1
+
+755         300 CALL_METHOD              3
+            302 POP_TOP
+
+760         304 LOAD_FAST                0 (self)
+            306 LOAD_METHOD             20 (checkDeviceMultiResult)
+            308 LOAD_FAST                9 (emptyGroup)
+            310 LOAD_CONST              15 (False)
+            312 CALL_METHOD              2
+            314 RETURN_VALUE
+
+763     >>  316 LOAD_GLOBAL              3 (logger)
+            318 LOAD_METHOD              4 (debug)
+
+764         320 LOAD_CONST               3 ('[_dealSingleSelectedDevice device: ')
+            322 LOAD_FAST                3 (singleDevice)
+            324 LOAD_ATTR                8 (name)
+            326 FORMAT_VALUE             0
+            328 LOAD_CONST              16 (' is not GroupedDevice')
+            330 BUILD_STRING             3
+
+763         332 CALL_METHOD              1
+            334 POP_TOP
+
+765         336 LOAD_FAST                2 (currentEditDevice)
+            338 LOAD_ATTR               21 (uuid)
+            340 LOAD_FAST                3 (singleDevice)
+            342 LOAD_ATTR               21 (uuid)
+            344 COMPARE_OP               2 (==)
+            346 EXTENDED_ARG             1
+            348 POP_JUMP_IF_FALSE      364
+
+766         350 LOAD_FAST                0 (self)
+            352 LOAD_METHOD             13 (result)
+            354 LOAD_GLOBAL             14 (LPNewGroupEditType)
+            356 LOAD_ATTR               22 (NoChange)
+            358 LOAD_FAST                1 (currentEditGroup)
+            360 CALL_METHOD              2
+            362 RETURN_VALUE
+
+767     >>  364 LOAD_FAST                0 (self)
+            366 LOAD_METHOD             13 (result)
+            368 LOAD_GLOBAL             14 (LPNewGroupEditType)
+            370 LOAD_ATTR               23 (CheckSuccess)
+            372 LOAD_FAST                1 (currentEditGroup)
+            374 CALL_METHOD              2
+            376 RETURN_VALUE
+
+=== LPGroupManager.checkIfNoChanges ===
+773           0 LOAD_CONST               1 (False)
+              2 RETURN_VALUE
+
+=== LPGroupManager.canChangeMusic ===
+777           0 LOAD_FAST                1 (currentEditDevice)
+              2 LOAD_CONST               0 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        16
+              8 LOAD_FAST                2 (firstDevice)
+             10 LOAD_CONST               0 (None)
+             12 IS_OP                    0
+             14 POP_JUMP_IF_FALSE       20
+
+778     >>   16 LOAD_CONST               1 (False)
+             18 RETURN_VALUE
+
+779     >>   20 LOAD_FAST                1 (currentEditDevice)
+             22 LOAD_ATTR                0 (uuid)
+             24 LOAD_FAST                2 (firstDevice)
+             26 LOAD_ATTR                0 (uuid)
+             28 COMPARE_OP               2 (==)
+             30 POP_JUMP_IF_FALSE       36
+
+780          32 LOAD_CONST               1 (False)
+             34 RETURN_VALUE
+
+781     >>   36 LOAD_GLOBAL              1 (LPUtility)
+             38 LOAD_METHOD              2 (checkHasMusicSelected)
+             40 LOAD_FAST                1 (currentEditDevice)
+             42 CALL_METHOD              1
+             44 POP_JUMP_IF_TRUE        50
+
+782          46 LOAD_CONST               1 (False)
+             48 RETURN_VALUE
+
+784     >>   50 LOAD_FAST                1 (currentEditDevice)
+             52 LOAD_ATTR                3 (mediaInfo)
+             54 LOAD_ATTR                4 (mediaType)
+             56 STORE_FAST               3 (mediaType)
+
+786          58 LOAD_FAST                3 (mediaType)
+             60 LOAD_GLOBAL              5 (UnsupportedChangeMusicMediaType)
+             62 CONTAINS_OP              1
+             64 RETURN_VALUE
+
+=== LPGroupManager.changeMusicFromDevice ===
+790           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_transferMusic)
+              4 LOAD_FAST                1 (fromDevice)
+              6 LOAD_FAST                2 (toDevice)
+              8 CALL_METHOD              2
+             10 STORE_FAST               4 (success)
+
+791          12 LOAD_GLOBAL              1 (callable)
+             14 LOAD_FAST                3 (block)
+             16 CALL_FUNCTION            1
+             18 POP_JUMP_IF_FALSE       28
+
+792          20 LOAD_FAST                3 (block)
+             22 LOAD_FAST                4 (success)
+             24 CALL_FUNCTION            1
+             26 POP_TOP
+
+793     >>   28 LOAD_FAST                4 (success)
+             30 RETURN_VALUE
+
+=== LPGroupManager._transferMusic ===
+796           0 LOAD_FAST                1 (fromDevice)
+              2 POP_JUMP_IF_FALSE        8
+              4 LOAD_FAST                2 (toDevice)
+              6 POP_JUMP_IF_TRUE        12
+
+797     >>    8 LOAD_CONST               1 (False)
+             10 RETURN_VALUE
+
+798     >>   12 SETUP_FINALLY          124 (to 138)
+
+799          14 LOAD_FAST                1 (fromDevice)
+             16 LOAD_METHOD              0 (upnpPost)
+             18 LOAD_CONST               2 ('BrowseQueue')
+             20 LOAD_CONST               3 ('QueueName')
+             22 LOAD_CONST               4 ('CurrentQueue')
+             24 BUILD_MAP                1
+             26 CALL_METHOD              2
+             28 STORE_FAST               3 (response)
+
+800          30 LOAD_FAST                3 (response)
+             32 POP_JUMP_IF_FALSE       46
+             34 LOAD_FAST                3 (response)
+             36 LOAD_METHOD              1 (get)
+             38 LOAD_CONST               5 ('musicList')
+             40 LOAD_CONST               0 (None)
+             42 CALL_METHOD              2
+             44 JUMP_FORWARD             2 (to 48)
+        >>   46 LOAD_CONST               0 (None)
+        >>   48 STORE_FAST               4 (play_list)
+
+801          50 LOAD_FAST                4 (play_list)
+             52 LOAD_CONST               0 (None)
+             54 IS_OP                    0
+             56 POP_JUMP_IF_TRUE        70
+             58 LOAD_GLOBAL              2 (getattr)
+             60 LOAD_FAST                4 (play_list)
+             62 LOAD_CONST               6 ('list')
+             64 LOAD_CONST               0 (None)
+             66 CALL_FUNCTION            3
+             68 POP_JUMP_IF_TRUE        76
+
+802     >>   70 POP_BLOCK
+             72 LOAD_CONST               1 (False)
+             74 RETURN_VALUE
+
+804     >>   76 LOAD_GLOBAL              3 (threading)
+             78 LOAD_METHOD              4 (Event)
+             80 CALL_METHOD              0
+             82 STORE_DEREF              0 (event)
+
+805          84 LOAD_CONST               7 ('ok')
+             86 LOAD_CONST               1 (False)
+             88 BUILD_MAP                1
+             90 STORE_DEREF              1 (result)
+
+807          92 LOAD_CLOSURE             0 (event)
+             94 LOAD_CLOSURE             1 (result)
+             96 BUILD_TUPLE              2
+             98 LOAD_CONST               8 (<code object _finish at 0x000001F324E76F50, file "LPClientFramework\LPDeviceManager\LPGroupManager.py", line 807>)
+            100 LOAD_CONST               9 ('LPGroupManager._transferMusic.<locals>._finish')
+            102 MAKE_FUNCTION            8 (closure)
+            104 STORE_FAST               5 (_finish)
+
+811         106 LOAD_FAST                2 (toDevice)
+            108 LOAD_METHOD              5 (fastPlay)
+            110 LOAD_FAST                4 (play_list)
+            112 LOAD_FAST                5 (_finish)
+            114 CALL_METHOD              2
+            116 POP_TOP
+
+812         118 LOAD_DEREF               0 (event)
+            120 LOAD_METHOD              6 (wait)
+            122 LOAD_CONST              10 (20)
+            124 CALL_METHOD              1
+            126 POP_TOP
+
+813         128 LOAD_DEREF               1 (result)
+            130 LOAD_CONST               7 ('ok')
+            132 BINARY_SUBSCR
+            134 POP_BLOCK
+            136 RETURN_VALUE
+
+814     >>  138 DUP_TOP
+            140 LOAD_GLOBAL              7 (Exception)
+            142 JUMP_IF_NOT_EXC_MATCH   202
+            144 POP_TOP
+            146 STORE_FAST               6 (e)
+            148 POP_TOP
+            150 SETUP_FINALLY           42 (to 194)
+
+815         152 LOAD_GLOBAL              8 (logger)
+            154 LOAD_METHOD              9 (warning)
+            156 LOAD_CONST              11 ('[group manager] transfer music failed fromDevice: ')
+            158 LOAD_FAST                1 (fromDevice)
+            160 FORMAT_VALUE             0
+            162 LOAD_CONST              12 (',  toDevice: ')
+            164 LOAD_FAST                2 (toDevice)
+            166 FORMAT_VALUE             0
+            168 LOAD_CONST              13 (', error: ')
+            170 LOAD_FAST                6 (e)
+            172 FORMAT_VALUE             0
+            174 BUILD_STRING             6
+            176 CALL_METHOD              1
+            178 POP_TOP
+
+816         180 POP_BLOCK
+            182 POP_EXCEPT
+            184 LOAD_CONST               0 (None)
+            186 STORE_FAST               6 (e)
+            188 DELETE_FAST              6 (e)
+            190 LOAD_CONST               1 (False)
+            192 RETURN_VALUE
+        >>  194 LOAD_CONST               0 (None)
+            196 STORE_FAST               6 (e)
+            198 DELETE_FAST              6 (e)
+            200 RERAISE
+        >>  202 RERAISE
+            204 LOAD_CONST               0 (None)
+            206 RETURN_VALUE
+
+=== LPGroupManager._transferMusic._finish ===
+808           0 LOAD_GLOBAL              0 (bool)
+              2 LOAD_FAST                0 (success)
+              4 CALL_FUNCTION            1
+              6 LOAD_DEREF               1 (result)
+              8 LOAD_CONST               1 ('ok')
+             10 STORE_SUBSCR
+
+809          12 LOAD_DEREF               0 (event)
+             14 LOAD_METHOD              1 (set)
+             16 CALL_METHOD              0
+             18 POP_TOP
+             20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+=== LPGroupManager.sortGroupList ===
+819           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (deviceGroupManager)
+              4 LOAD_METHOD              1 (sortGroupList)
+              6 CALL_METHOD              0
+              8 RETURN_VALUE

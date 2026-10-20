@@ -1,0 +1,296 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('系统托盘菜单控制器。\n\n将从 WiiMHome.py 中拆分出的托盘菜单代码迁移至此，\n负责托盘图标创建（含平台差异）、托盘上下文菜单（打开应用 / 退出）\n以及退出流程中的托盘图标清理。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  9           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (platform)
+             10 STORE_NAME               1 (platform)
+
+ 11          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('QCoreApplication', 'QObject'))
+             16 IMPORT_NAME              2 (PyQt6.QtCore)
+             18 IMPORT_FROM              3 (QCoreApplication)
+             20 STORE_NAME               3 (QCoreApplication)
+             22 IMPORT_FROM              4 (QObject)
+             24 STORE_NAME               4 (QObject)
+             26 POP_TOP
+
+ 12          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               4 (('QAction', 'QIcon'))
+             32 IMPORT_NAME              5 (PyQt6.QtGui)
+             34 IMPORT_FROM              6 (QAction)
+             36 STORE_NAME               6 (QAction)
+             38 IMPORT_FROM              7 (QIcon)
+             40 STORE_NAME               7 (QIcon)
+             42 POP_TOP
+
+ 13          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               5 (('QMenu', 'QSystemTrayIcon'))
+             48 IMPORT_NAME              8 (PyQt6.QtWidgets)
+             50 IMPORT_FROM              9 (QMenu)
+             52 STORE_NAME               9 (QMenu)
+             54 IMPORT_FROM             10 (QSystemTrayIcon)
+             56 STORE_NAME              10 (QSystemTrayIcon)
+             58 POP_TOP
+
+ 15          60 LOAD_CONST               1 (0)
+             62 LOAD_CONST               2 (None)
+             64 IMPORT_NAME             11 (LPGlobalUI)
+             66 STORE_NAME              11 (LPGlobalUI)
+
+ 18          68 LOAD_BUILD_CLASS
+             70 LOAD_CONST               6 (<code object LPTrayMenuController at 0x000001F3253AE7C0, file "Menu\LPTrayMenuController.py", line 18>)
+             72 LOAD_CONST               7 ('LPTrayMenuController')
+             74 MAKE_FUNCTION            0
+             76 LOAD_CONST               7 ('LPTrayMenuController')
+             78 LOAD_NAME                4 (QObject)
+             80 CALL_FUNCTION            3
+             82 STORE_NAME              12 (LPTrayMenuController)
+             84 LOAD_CONST               2 (None)
+             86 RETURN_VALUE
+
+=== LPTrayMenuController ===
+ 18           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTrayMenuController')
+              6 STORE_NAME               2 (__qualname__)
+
+ 19           8 LOAD_CONST               1 ('管理系统托盘图标与托盘上下文菜单。')
+             10 STORE_NAME               3 (__doc__)
+
+ 21          12 LOAD_CLOSURE             0 (__class__)
+             14 BUILD_TUPLE              1
+             16 LOAD_CONST               2 (<code object __init__ at 0x000001F324E60DF0, file "Menu\LPTrayMenuController.py", line 21>)
+             18 LOAD_CONST               3 ('LPTrayMenuController.__init__')
+             20 MAKE_FUNCTION            8 (closure)
+             22 STORE_NAME               4 (__init__)
+
+ 37          24 LOAD_CONST               4 (<code object setupTrayMenu at 0x000001F3253AE710, file "Menu\LPTrayMenuController.py", line 37>)
+             26 LOAD_CONST               5 ('LPTrayMenuController.setupTrayMenu')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               5 (setupTrayMenu)
+
+ 85          32 LOAD_CONST               6 (<code object hideTrayIcon at 0x000001F3253AE870, file "Menu\LPTrayMenuController.py", line 85>)
+             34 LOAD_CONST               7 ('LPTrayMenuController.hideTrayIcon')
+             36 MAKE_FUNCTION            0
+             38 STORE_NAME               6 (hideTrayIcon)
+             40 LOAD_CLOSURE             0 (__class__)
+             42 DUP_TOP
+             44 STORE_NAME               7 (__classcell__)
+             46 RETURN_VALUE
+
+=== LPTrayMenuController.__init__ ===
+ 31           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 32          10 LOAD_FAST                1 (owner)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (owner)
+
+ 33          16 LOAD_FAST                2 (onShow)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               3 (_onShow)
+
+ 34          22 LOAD_FAST                3 (onQuit)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               4 (_onQuit)
+
+ 35          28 LOAD_CONST               1 (None)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               5 (trayIcon)
+             34 LOAD_CONST               1 (None)
+             36 RETURN_VALUE
+
+=== LPTrayMenuController.setupTrayMenu ===
+ 46           0 LOAD_GLOBAL              0 (QSystemTrayIcon)
+              2 LOAD_DEREF               0 (self)
+              4 LOAD_ATTR                1 (owner)
+              6 CALL_FUNCTION            1
+              8 LOAD_DEREF               0 (self)
+             10 STORE_ATTR               2 (trayIcon)
+
+ 47          12 LOAD_GLOBAL              3 (platform)
+             14 LOAD_METHOD              4 (system)
+             16 CALL_METHOD              0
+             18 LOAD_CONST               1 ('Darwin')
+             20 COMPARE_OP               2 (==)
+             22 POP_JUMP_IF_FALSE       54
+
+ 48          24 LOAD_GLOBAL              5 (LPGlobalUI)
+             26 LOAD_METHOD              6 (imagePath)
+             28 LOAD_CONST               2 ('tray_ico.png')
+             30 CALL_METHOD              1
+             32 STORE_FAST               1 (path)
+
+ 49          34 LOAD_GLOBAL              7 (QIcon)
+             36 LOAD_FAST                1 (path)
+             38 CALL_FUNCTION            1
+             40 STORE_FAST               2 (icon)
+
+ 50          42 LOAD_FAST                2 (icon)
+             44 LOAD_METHOD              8 (setIsMask)
+             46 LOAD_CONST               3 (True)
+             48 CALL_METHOD              1
+             50 POP_TOP
+             52 JUMP_FORWARD            18 (to 72)
+
+ 52     >>   54 LOAD_GLOBAL              5 (LPGlobalUI)
+             56 LOAD_METHOD              6 (imagePath)
+             58 LOAD_CONST               4 ('app.ico')
+             60 CALL_METHOD              1
+             62 STORE_FAST               1 (path)
+
+ 53          64 LOAD_GLOBAL              7 (QIcon)
+             66 LOAD_FAST                1 (path)
+             68 CALL_FUNCTION            1
+             70 STORE_FAST               2 (icon)
+
+ 55     >>   72 LOAD_DEREF               0 (self)
+             74 LOAD_ATTR                2 (trayIcon)
+             76 LOAD_METHOD              9 (setIcon)
+             78 LOAD_FAST                2 (icon)
+             80 CALL_METHOD              1
+             82 POP_TOP
+
+ 58          84 LOAD_GLOBAL             10 (QMenu)
+             86 CALL_FUNCTION            0
+             88 STORE_FAST               3 (tray_menu)
+
+ 60          90 LOAD_GLOBAL             11 (QCoreApplication)
+             92 LOAD_METHOD             12 (translate)
+             94 LOAD_CONST               5 ('MainWindow')
+             96 LOAD_CONST               6 ('Open WiiM')
+             98 CALL_METHOD              2
+            100 STORE_FAST               4 (showText)
+
+ 61         102 LOAD_GLOBAL             13 (QAction)
+            104 LOAD_FAST                4 (showText)
+            106 LOAD_FAST                3 (tray_menu)
+            108 CALL_FUNCTION            2
+            110 STORE_FAST               5 (showAction)
+
+ 62         112 LOAD_GLOBAL             11 (QCoreApplication)
+            114 LOAD_METHOD             12 (translate)
+            116 LOAD_CONST               5 ('MainWindow')
+            118 LOAD_CONST               7 ('Quit')
+            120 CALL_METHOD              2
+            122 STORE_FAST               6 (quitText)
+
+ 63         124 LOAD_GLOBAL             13 (QAction)
+            126 LOAD_FAST                6 (quitText)
+            128 LOAD_FAST                3 (tray_menu)
+            130 CALL_FUNCTION            2
+            132 STORE_FAST               7 (quitAction)
+
+ 65         134 LOAD_FAST                5 (showAction)
+            136 LOAD_ATTR               14 (triggered)
+            138 LOAD_METHOD             15 (connect)
+            140 LOAD_DEREF               0 (self)
+            142 LOAD_ATTR               16 (_onShow)
+            144 CALL_METHOD              1
+            146 POP_TOP
+
+ 66         148 LOAD_FAST                7 (quitAction)
+            150 LOAD_ATTR               14 (triggered)
+            152 LOAD_METHOD             15 (connect)
+            154 LOAD_DEREF               0 (self)
+            156 LOAD_ATTR               17 (_onQuit)
+            158 CALL_METHOD              1
+            160 POP_TOP
+
+ 68         162 LOAD_FAST                3 (tray_menu)
+            164 LOAD_METHOD             18 (addAction)
+            166 LOAD_FAST                5 (showAction)
+            168 CALL_METHOD              1
+            170 POP_TOP
+
+ 69         172 LOAD_FAST                3 (tray_menu)
+            174 LOAD_METHOD             19 (addSeparator)
+            176 CALL_METHOD              0
+            178 POP_TOP
+
+ 70         180 LOAD_FAST                3 (tray_menu)
+            182 LOAD_METHOD             18 (addAction)
+            184 LOAD_FAST                7 (quitAction)
+            186 CALL_METHOD              1
+            188 POP_TOP
+
+ 72         190 LOAD_DEREF               0 (self)
+            192 LOAD_ATTR                2 (trayIcon)
+            194 LOAD_METHOD             20 (setContextMenu)
+            196 LOAD_FAST                3 (tray_menu)
+            198 CALL_METHOD              1
+            200 POP_TOP
+
+ 74         202 LOAD_CLOSURE             0 (self)
+            204 BUILD_TUPLE              1
+            206 LOAD_CONST               8 (<code object onTrayActivated at 0x000001F3253AE9D0, file "Menu\LPTrayMenuController.py", line 74>)
+            208 LOAD_CONST               9 ('LPTrayMenuController.setupTrayMenu.<locals>.onTrayActivated')
+            210 MAKE_FUNCTION            8 (closure)
+            212 STORE_FAST               8 (onTrayActivated)
+
+ 82         214 LOAD_DEREF               0 (self)
+            216 LOAD_ATTR                2 (trayIcon)
+            218 LOAD_ATTR               21 (activated)
+            220 LOAD_METHOD             15 (connect)
+            222 LOAD_FAST                8 (onTrayActivated)
+            224 CALL_METHOD              1
+            226 POP_TOP
+
+ 83         228 LOAD_DEREF               0 (self)
+            230 LOAD_ATTR                2 (trayIcon)
+            232 LOAD_METHOD             22 (show)
+            234 CALL_METHOD              0
+            236 POP_TOP
+            238 LOAD_CONST              10 (None)
+            240 RETURN_VALUE
+
+=== LPTrayMenuController.setupTrayMenu.onTrayActivated ===
+ 78           0 LOAD_GLOBAL              0 (platform)
+              2 LOAD_METHOD              1 (system)
+              4 CALL_METHOD              0
+              6 LOAD_CONST               1 ('Windows')
+              8 COMPARE_OP               2 (==)
+             10 POP_JUMP_IF_FALSE       32
+
+ 79          12 LOAD_FAST                0 (reason)
+             14 LOAD_GLOBAL              2 (QSystemTrayIcon)
+             16 LOAD_ATTR                3 (ActivationReason)
+             18 LOAD_ATTR                4 (Trigger)
+             20 COMPARE_OP               2 (==)
+             22 POP_JUMP_IF_FALSE       32
+
+ 80          24 LOAD_DEREF               0 (self)
+             26 LOAD_METHOD              5 (_onShow)
+             28 CALL_METHOD              0
+             30 POP_TOP
+        >>   32 LOAD_CONST               2 (None)
+             34 RETURN_VALUE
+
+=== LPTrayMenuController.hideTrayIcon ===
+ 94           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (trayIcon)
+              4 POP_JUMP_IF_FALSE       32
+
+ 95           6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (trayIcon)
+             10 LOAD_METHOD              1 (hide)
+             12 CALL_METHOD              0
+             14 POP_TOP
+
+ 96          16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                0 (trayIcon)
+             20 LOAD_METHOD              2 (deleteLater)
+             22 CALL_METHOD              0
+             24 POP_TOP
+
+ 97          26 LOAD_CONST               1 (None)
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               0 (trayIcon)
+        >>   32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE

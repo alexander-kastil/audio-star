@@ -1,0 +1,75 @@
+<UserControl x:Class="AudioStar.Desktop.Views.RadioView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:AudioStar.Desktop.Views"
+             xmlns:vm="clr-namespace:AudioStar.Desktop.ViewModels">
+    <UserControl.Resources>
+        <DataTemplate x:Key="StationCard" DataType="{x:Type vm:StationRow}">
+            <Border Style="{StaticResource Card}" Width="176" Margin="0,0,12,12" Padding="10">
+                <StackPanel>
+                    <views:CoverArt Source="{Binding LogoUri}" Width="154" Height="154" />
+                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}" />
+                    <TextBlock Text="{Binding Details}" Style="{StaticResource Subtle}" FontSize="11" MinHeight="15" />
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                        <Button Style="{StaticResource IconButton}" Content="&#xE768;" ToolTip="Play on the current speaker"
+                                Command="{Binding DataContext.PlayCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                        <Button Style="{StaticResource IconButton}" Content="{Binding FavoriteGlyph}" ToolTip="{Binding FavoriteToolTip}"
+                                Command="{Binding DataContext.ToggleFavoriteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="WrapItems">
+            <WrapPanel />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="{StaticResource PageMarginRoomy}">
+            <TextBlock Text="Radio" Style="{StaticResource PageTitle}" />
+            <Grid Margin="0,10,0,0">
+            <TextBox x:Name="RadioSearchBox"
+                     Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}"
+                     AutomationProperties.Name="Search radio stations"
+                     ToolTip="Search radio stations by name">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
+            <TextBlock Text="Search stations, then press Enter" Margin="11,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource Subtle}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=RadioSearchBox}" Value="">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            </Grid>
+            <ProgressBar IsIndeterminate="True" Height="3" Margin="0,10,0,0" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}" />
+
+            <StackPanel Visibility="{Binding IsSearching, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Text="Search Results" Style="{StaticResource SectionTitle}" />
+                <ItemsControl ItemsSource="{Binding Results}" ItemTemplate="{StaticResource StationCard}" ItemsPanel="{StaticResource WrapItems}" />
+                <StackPanel Visibility="{Binding NoResults, Converter={StaticResource BoolToVisibility}}" HorizontalAlignment="Center" Margin="0,40,0,0">
+                    <TextBlock Text="No stations found" FontSize="16" HorizontalAlignment="Center" />
+                    <TextBlock Text="Try a different search keyword." Style="{StaticResource Subtle}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+
+            <ItemsControl ItemsSource="{Binding Sections}" Visibility="{Binding IsSearching, Converter={StaticResource InverseBoolToVisibility}}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:StationSection}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}" Style="{StaticResource SectionTitle}" />
+                            <ItemsControl ItemsSource="{Binding Stations}" ItemTemplate="{StaticResource StationCard}" ItemsPanel="{StaticResource WrapItems}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

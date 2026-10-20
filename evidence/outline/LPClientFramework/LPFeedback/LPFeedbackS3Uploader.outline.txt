@@ -1,0 +1,47 @@
+# module LPClientFramework.LPFeedback.LPFeedbackS3Uploader
+
+[module] names: __doc__, urllib.parse, quote, requests, LPClientFramework.LPFeedback.LPSigV4Signer, LPSigV4Signer, LPFeedbackS3Uploader
+  str: '使用 STS 临时凭证上传 Feedback ZIP 到 S3。'
+  str: 'quote'
+  str: 'LPSigV4Signer'
+  str: 'LPFeedbackS3Uploader'
+
+def LPFeedbackS3Uploader()  line 11
+  names: __name__, __module__, __qualname__, __doc__, __init__, upload
+    str: 'LPFeedbackS3Uploader'
+    str: '对单个 ZIP 执行签名后的 S3 PUT，不含重试与队列逻辑。'
+    str: 'LPFeedbackS3Uploader.__init__'
+    str: 'LPFeedbackS3Uploader.upload'
+
+  def LPFeedbackS3Uploader.__init__(self, session)  line 14
+    names: requests, Session, _session
+      str: '初始化 S3 上传器。\n\n        参数:\n            session (requests.Session|None): 可注入的 requests 会话。\n        返回:\n            无。\n        '
+
+  def LPFeedbackS3Uploader.upload(self, archivePath, credential, metadata)  line 24
+    names: open, read, join, fileKey, split, bucketName, bucketRegion, items, str, LPSigV4Signer, sign, accessKey, secretKey, sessionToken, _session, put, raise_for_status
+      str: '上传 ZIP 文件并在服务端错误时抛出异常。\n\n        参数:\n            archivePath (str|Path): 本地 ZIP 文件路径。\n            credential (LPFeedbackStsCredential): STS 临时凭证。\n            metadata (dict|None): 可选的 S3 用户元数据。\n        返回:\n            None。\n        '
+      str: 'rb'
+      str: '/'
+      str: 'LPFeedbackS3Uploader.upload.<locals>.<genexpr>'
+      str: 'https://%s.s3.%s.amazonaws.com/%s'
+      str: 'Content-Type'
+      str: 'application/zip'
+      str: 'x-amz-meta-'
+      str: 'PUT'
+      str: 's3'
+      str: 'method'
+      str: 'url'
+      str: 'body'
+      str: 'accessKey'
+      str: 'secretKey'
+      str: 'region'
+      str: 'service'
+      str: 'sessionToken'
+      str: 'extraHeaders'
+      str: 'data'
+      str: 'headers'
+      str: 'timeout'
+
+    def LPFeedbackS3Uploader.upload.<genexpr>(.0)  line 36
+      names: quote
+        str: 'safe'

@@ -1,0 +1,386 @@
+# module LPClientFramework.LPDiscoveryTelemetry
+
+[module] names: __doc__, hashlib, ipaddress, threading, time, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPCloudDeviceState, queryDeviceStateV2, LPClientFramework.LPEventTrack, LPEventsType, LPClientFramework.UPnPTool, upnpPost, LPClientFramework.LPUtility, logger, START_SETTLE_SECONDS, CHANGE_SETTLE_SECONDS, QUIET_SECONDS, FORCE_REPORT_SECONDS, DIAG_TIMEOUT_SECONDS, CLOUD_QUERY_TIMEOUT_SECONDS, GW_RECENT_WINDOW_SECONDS, deviceIdHash, _CONTEXT_EXPOSE_KEYS, _FIREBASE_VALUE_LIMIT, LPDiscoveryTelemetry
+  str: '\n设备发现埋点引擎。\n\n按 docs/plans/2026-08-18-network-discovery-telemetry-merged.md 实施：\n- network_context_snapshot：网络上下文归因时间线，只在状态变化瞬间发送（状态去重）。\n- device_discovery_report：启动 / 网络变更后的发现结果收敛上报\n  （静止收敛 + 强制上限，SSDP/mDNS 分协议计数）。\n- device_discovery_failure：离线设备未上线诊断（云端 queryDeviceStateV2 +\n  本地 SOAP/TCP443/ICMP/mDNS'
+  str: 'LPUtility'
+  str: 'queryDeviceStateV2'
+  str: 'LPEventsType'
+  str: 'upnpPost'
+  str: 'logger'
+  str: 'deviceIdHash'
+  str: 'internet_ok'
+  str: 'gateway_status'
+  str: 'gateway_class'
+  str: 'if_type'
+  str: 'local_ip_valid'
+  str: 'ssid_present'
+  str: 'network_info_raw_ok'
+  str: 'ssid'
+  str: 'bssid'
+  str: 'ip'
+  str: 'gateway'
+  str: 'LPDiscoveryTelemetry'
+
+def deviceIdHash(uuidStr)  line 52
+  names: hashlib, sha1, encode, hexdigest
+    str: '\n    计算设备 UUID 的截断哈希（脱敏口径，与后端约定一致）。\n\n    参数:\n        uuidStr (str): 设备 UUID（24 位 hex 短 UUID）。\n    返回:\n        str: sha1(uuid) 前 8 位十六进制；入参为空时返回空串。\n    '
+    str: 'utf-8'
+
+def LPDiscoveryTelemetry()  line 76
+  names: __name__, __module__, __qualname__, __doc__, __init__, _classifyGateway, buildNetworkContext, _snapshotStateKey, _FIREBASE_VALUE_LIMIT, _joinList, _cleanContextForEvent, _flattenDeviceFields, snapshot, appStart, _appStartWorker, onNetworkChanged, _startSettleCycle, _settleLoop, _onlineUuids, _report, onInternetPoll, onGatewayPoll, onDeviceSeen, onDeviceAdded, onDeviceRemoved, onAllDevicesRemoved, _checkOfflineDevices, _checkOfflineDevicesInner, _isValidIPv4, _probeHttp, _diagnoseDevice, _normalizeBssid
+    str: 'LPDiscoveryTelemetry'
+    str: '设备发现埋点引擎：持有会话级状态，接收发现管理器的钩子调用并产出统一事件。'
+    str: 'LPDiscoveryTelemetry.__init__'
+    str: 'LPDiscoveryTelemetry._classifyGateway'
+    str: 'LPDiscoveryTelemetry.buildNetworkContext'
+    str: 'LPDiscoveryTelemetry._snapshotStateKey'
+    str: 'LPDiscoveryTelemetry._joinList'
+    str: 'LPDiscoveryTelemetry._cleanContextForEvent'
+    str: 'LPDiscoveryTelemetry._flattenDeviceFields'
+    str: 'LPDiscoveryTelemetry.snapshot'
+    str: 'LPDiscoveryTelemetry.appStart'
+    str: 'LPDiscoveryTelemetry._appStartWorker'
+    str: 'LPDiscoveryTelemetry.onNetworkChanged'
+    str: 'LPDiscoveryTelemetry._startSettleCycle'
+    str: 'LPDiscoveryTelemetry._settleLoop'
+    str: 'LPDiscoveryTelemetry._onlineUuids'
+    str: 'LPDiscoveryTelemetry._report'
+    str: 'LPDiscoveryTelemetry.onInternetPoll'
+    str: 'LPDiscoveryTelemetry.onGatewayPoll'
+    str: 'LPDiscoveryTelemetry.onDeviceSeen'
+    str: 'LPDiscoveryTelemetry.onDeviceAdded'
+    str: 'LPDiscoveryTelemetry.onDeviceRemoved'
+    str: 'LPDiscoveryTelemetry.onAllDevicesRemoved'
+    str: 'LPDiscoveryTelemetry._checkOfflineDevices'
+    str: 'LPDiscoveryTelemetry._checkOfflineDevicesInner'
+    str: 'LPDiscoveryTelemetry._isValidIPv4'
+    str: 'LPDiscoveryTelemetry._probeHttp'
+    str: 'LPDiscoveryTelemetry._diagnoseDevice'
+    str: 'LPDiscoveryTelemetry._normalizeBssid'
+
+  def LPDiscoveryTelemetry.__init__(self, deviceManager)  line 79
+    names: deviceManager, threading, RLock, _lock, _lastSnapshotState, _lastGwRaw, _lastInternetOk, _lastGwChangeTs, _sequence, _phaseStartTs, _lastSetChangeTs, Event, _settleStopEvent, _settleThread, set, _reportedKeys, _deviceSources, _cumulativeUuids, _pendingRemovals, _diagnosedHashes, _diagBusy, _appStartDone
+      str: '\n        初始化埋点引擎。\n\n        参数:\n            deviceManager (LPDeviceDiscoverManager): 设备发现管理器实例，\n                用于读取在线设备、历史缓存与网关。\n        返回:\n            无。\n        '
+
+  def LPDiscoveryTelemetry._classifyGateway(self, gateway)  line 113
+    names: ipaddress, IPv4Address, Exception, ip_network, is_global
+      str: '\n        对网关地址做网段分类。\n\n        参数:\n            gateway (str): 网关 IPv4 地址字符串。\n        返回:\n            str: rfc1918_192 / rfc1918_10 / rfc1918_172 / public / empty / other。\n        '
+      str: 'empty'
+      str: 'other'
+      str: '192.168.0.0/16'
+      str: 'rfc1918_192'
+      str: '10.0.0.0/8'
+      str: 'rfc1918_10'
+      str: '172.16.0.0/12'
+      str: 'rfc1918_172'
+      str: 'public'
+
+  def LPDiscoveryTelemetry.buildNetworkContext(self, reason)  line 138
+    names: LPUtility, fetchNetworkInfo, get, ssidToHexString, currentSSID, currentBSSID, time, _lastGwChangeTs, GW_RECENT_WINDOW_SECONDS, fetchNetworkType, _lock, _lastInternetOk, pingGoogle, bool, _classifyGateway, all
+      str: '\n        采集并组装网络上下文快照字段（含 reason）。\n\n        参数:\n            reason (str): 触发原因（app_start / network_change / internet_change /\n                gw_change / report_pending）。\n        返回:\n            dict: network_context_snapshot 事件字段（不含 session_id，由事件通道注入；\n            含平铺于顶层的明文网络字段，对齐 iOS 展示口径）。\n      '
+      str: 'gateway'
+      str: 'localIP'
+      str: 'valid'
+      str: 'empty'
+      str: 'recently_changed'
+      str: 'wifi'
+      str: 'eth'
+      str: 'none'
+      str: '0.0.0.0'
+      str: 'LPDiscoveryTelemetry.buildNetworkContext.<locals>.<genexpr>'
+      str: 'gateway'
+      str: 'interface'
+      str: 'netmask'
+      str: 'localIP'
+      str: 'reason'
+      str: 'internet_ok'
+      str: 'gateway_status'
+      str: 'gateway_class'
+      str: 'if_type'
+      str: 'local_ip_valid'
+      str: 'ssid_present'
+      str: 'network_info_raw_ok'
+      str: 'ssid'
+      str: 'bssid'
+      str: 'ip'
+      str: 'gateway'
+
+    def LPDiscoveryTelemetry.buildNetworkContext.<genexpr>(.0)  line 176
+      names: get
+
+  def LPDiscoveryTelemetry._snapshotStateKey(self, context)  line 183
+    names: tuple
+      str: '\n        提取快照的状态元组（不含 reason），用于“只在变化瞬间发送”去重。\n\n        参数:\n            context (dict): buildNetworkContext 产出的快照字段。\n        返回:\n            tuple: 去除 reason 后的有序字段元组。\n        '
+      str: 'internet_ok'
+      str: 'gateway_status'
+      str: 'gateway_class'
+      str: 'if_type'
+      str: 'local_ip_valid'
+      str: 'ssid_present'
+      str: 'network_info_raw_ok'
+      str: 'LPDiscoveryTelemetry._snapshotStateKey.<locals>.<genexpr>'
+
+    def LPDiscoveryTelemetry._snapshotStateKey.<genexpr>(.0)  line 194
+      names: get
+
+  def LPDiscoveryTelemetry._joinList(self, items, limit)  line 196
+    names: join, sorted, len, max
+      str: "\n        把设备 UUID 列表转成逗号连接字符串，超长则按上限截断（含截断标记）。\n\n        参数:\n            items (list[str]): 设备 UUID 列表。\n            limit (int): 结果字符串长度上限（含截断标记）。\n        返回:\n            str: 逗号连接的字符串；截断时以 '...' 结尾，数量信息由事件内\n            独立的计数字段承担（device_count / device_num）。\n        "
+      str: ','
+      str: 'LPDiscoveryTelemetry._joinList.<locals>.<genexpr>'
+      str: '...'
+
+    def LPDiscoveryTelemetry._joinList.<genexpr>(.0)  line 207
+      names: str
+
+  def LPDiscoveryTelemetry._cleanContextForEvent(self, context)  line 212
+    names: _CONTEXT_EXPOSE_KEYS, get, isinstance, bool, int
+      str: '\n        网络上下文平铺进事件参数：按白名单取键，bool 转 int、None 转空串。\n\n        参数:\n            context (dict): buildNetworkContext 产出的上下文字段。\n        返回:\n            dict: 仅含 _CONTEXT_EXPOSE_KEYS 平铺键的 dict，值全部为标量。\n        '
+
+  def LPDiscoveryTelemetry._flattenDeviceFields(self, deviceInfo)  line 231
+    names: isinstance, dict, get, _isValidIPv4
+      str: '\n        把云端设备状态整树拆成诊断用平铺标量字段（丢弃大对象，避免嵌套）。\n\n        参数:\n            deviceInfo (dict): 云端 queryDeviceStateV2 返回的设备状态 dict。\n        返回:\n            dict: 平铺后的标量字段，键为 dev_ 前缀；缺省/异常取空串。\n        '
+      str: 'networkInfo'
+      str: 'LPDiscoveryTelemetry._flattenDeviceFields.<locals>._plain'
+      str: 'wlan0'
+      str: 'eth0'
+      str: 'connectStatus'
+      str: 'source'
+      str: 'iotVersion'
+      str: 'otaStatus'
+      str: 'wlanRssi'
+      str: 'dev_connect_status'
+      str: 'dev_source'
+      str: 'dev_iot_version'
+      str: 'dev_ota_status'
+      str: 'dev_wlan_rssi'
+      str: 'dev_ip'
+
+    def LPDiscoveryTelemetry._flattenDeviceFields._plain(value)  line 241
+      names: str
+
+  def LPDiscoveryTelemetry.snapshot(self, reason)  line 257
+    names: buildNetworkContext, _snapshotStateKey, _lock, _lastSnapshotState, dict, items, isinstance, bool, int, LPGlobalUI, eventTrack, logEvent, LPEventsType, NETWORK_CONTEXT_SNAPSHOT, value, logger, info
+      str: '\n        拍一条网络上下文快照：状态变化时独立发送事件，并返回字段供内嵌。\n\n        app_start / network_change 为会话锚点，无条件独立发送；\n        其余原因只在状态相对上次发送发生变化时独立发送（变化瞬间语义）。\n\n        参数:\n            reason (str): 触发原因。\n        返回:\n            dict: 快照字段（无论是否独立发送都返回，供 report / 诊断内嵌）。\n        '
+      str: 'app_start'
+      str: 'network_change'
+      str: '[discovery-telemetry] snapshot sent, reason=%s, state=%s'
+
+  def LPDiscoveryTelemetry.appStart(self)  line 290
+    names: _lock, _appStartDone, threading, Thread, _appStartWorker, start
+      str: '\n        App 启动触发：后台拍首条 context（app_start）并启动收敛定时器（phase=app_start）。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'DiscoveryTelemetryAppStart'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+
+  def LPDiscoveryTelemetry._appStartWorker(self)  line 306
+    names: snapshot, _startSettleCycle, START_SETTLE_SECONDS, Exception, logger, warning
+      str: 'appStart 的后台执行体：拍快照并启动 app_start 收敛周期。'
+      str: 'app_start'
+      str: '[discovery-telemetry] appStart exception: %s'
+
+  def LPDiscoveryTelemetry.onNetworkChanged(self, oldGW, newGW)  line 314
+    names: _lock, _sequence, snapshot, _startSettleCycle, CHANGE_SETTLE_SECONDS, logger, info, Exception, warning
+      str: '\n        网络变更触发（Network_Changed_Signal 发出处调用）：sequence 递增，\n        重拍 context（network_change）并以最后一次变更重新起收敛定时器。\n\n        参数:\n            oldGW (str): 变更前网关。\n            newGW (str): 变更后网关。\n        返回:\n            无。\n        '
+      str: 'network_change'
+      str: '[discovery-telemetry] network change %s -> %s, sequence=%d'
+      str: '[discovery-telemetry] onNetworkChanged exception: %s'
+
+  def LPDiscoveryTelemetry._startSettleCycle(self, phase, baseDelay)  line 335
+    names: time, _lock, _phaseStartTs, _lastSetChangeTs, _settleThread, is_alive, _settleStopEvent, set, threading, Event, _sequence, Thread, _settleLoop, start
+      str: '\n        启动（或重启）一个收敛周期：取消旧定时器，记录周期起点与静止起点。\n\n        参数:\n            phase (str): app_start / network_change。\n            baseDelay (int): 收敛基准延时秒数。\n        返回:\n            无。\n        '
+      str: 'DiscoveryTelemetrySettle'
+      str: 'target'
+      str: 'args'
+      str: 'name'
+      str: 'daemon'
+
+  def LPDiscoveryTelemetry._settleLoop(self, phase, sequence, baseDelay, phaseStart, stopEvent)  line 363
+    names: is_set, time, sleep, _lock, _lastSetChangeTs, QUIET_SECONDS, _report, _checkOfflineDevices, FORCE_REPORT_SECONDS, Exception, logger, warning
+      str: '\n        收敛监测循环：静止满足基准延时后上报 settled=true；\n        超过强制上限上报 settled=false；随后检查离线设备触发诊断。\n\n        参数:\n            phase (str): app_start / network_change。\n            sequence (int): 当前周期序号。\n            baseDelay (int): 收敛基准延时秒数。\n            phaseStart (float): 周期起点时间戳。\n            stopEvent (threadin'
+      str: 'settled'
+      str: '[discovery-telemetry] settleLoop exception: %s'
+
+  def LPDiscoveryTelemetry._onlineUuids(self)  line 397
+    names: set, deviceManager, deviceList, Exception
+      str: '\n        读取当前在线设备 UUID 集合（按 UUID 去重，复用发现管理器的可见设备口径）。\n\n        参数:\n            无。\n        返回:\n            set[str]: 在线设备 UUID 集合。\n        '
+      str: 'LPDiscoveryTelemetry._onlineUuids.<locals>.<genexpr>'
+
+    def LPDiscoveryTelemetry._onlineUuids.<genexpr>(.0)  line 407
+      names: uuid
+
+  def LPDiscoveryTelemetry._report(self, phase, sequence, settled)  line 411
+    names: _lock, _reportedKeys, add, int, time, _phaseStartTs, _onlineUuids, _deviceSources, get, set, len, _cumulativeUuids, snapshot, _joinList, sorted, LPUtility, eventCountryCode, update, _cleanContextForEvent, LPGlobalUI, eventTrack, logEvent, LPEventsType, DEVICE_DISCOVERY_REPORT, value, logger, info, Exception, warning
+      str: '\n        组装并发送 device_discovery_report（打点前补拍 report_pending 上下文内嵌）。\n\n        参数:\n            phase (str): app_start / network_change。\n            sequence (int): 会话内网络变更序号。\n            settled (bool): 是否静止收敛后上报（强制到期为 False）。\n        返回:\n            无。\n        '
+      str: 'ssdp'
+      str: 'mdns'
+      str: 'report_pending'
+      str: 'phase'
+      str: 'sequence'
+      str: 'found_any'
+      str: 'device_count'
+      str: 'device_count_cumulative'
+      str: 'ssdp_count'
+      str: 'mdns_count'
+      str: 'device_id_hashes'
+      str: 'elapsed_ms'
+      str: 'settled'
+      str: 'country_code'
+      str: '[discovery-telemetry] report sent, phase=%s seq=%d settled=%s count=%d'
+      str: '[discovery-telemetry] report exception: %s'
+
+  def LPDiscoveryTelemetry.onInternetPoll(self, internetOk)  line 469
+    names: _lock, _lastInternetOk, threading, Thread, snapshot, start, Exception, logger, warning
+      str: '\n        公网连通状态轮询结果：状态翻转时拍 context（internet_change）。\n\n        参数:\n            internetOk (bool): 本次 pingGoogle 探测结果。\n        返回:\n            无。\n        '
+      str: 'internet_change'
+      str: 'DiscoveryTelemetryInternetSnap'
+      str: 'target'
+      str: 'args'
+      str: 'name'
+      str: 'daemon'
+      str: '[discovery-telemetry] onInternetPoll exception: %s'
+
+  def LPDiscoveryTelemetry.onGatewayPoll(self, gatewayRaw, signalEmitted)  line 488
+    names: _lock, _lastGwRaw, time, _lastGwChangeTs, threading, Thread, snapshot, start, Exception, logger, warning
+      str: '\n        网关值轮询结果：记录原值；未发 Network_Changed_Signal 的变化（如网关变空）拍 context（gw_change）。\n        首次观测（无历史值）视为初始化，不算变化，避免与 app_start 锚点重复。\n\n        参数:\n            gatewayRaw (str | None): 本轮 fetchNetworkInfo 读到的网关原值。\n            signalEmitted (bool): 本轮是否已发出 Network_Changed_Signal。\n        返回:\n            无。'
+      str: 'gw_change'
+      str: 'DiscoveryTelemetryGwSnap'
+      str: 'target'
+      str: 'args'
+      str: 'name'
+      str: 'daemon'
+      str: '[discovery-telemetry] onGatewayPoll exception: %s'
+
+  def LPDiscoveryTelemetry.onDeviceSeen(self, uuid, serviceType)  line 514
+    names: _lock, _deviceSources, setdefault, set, add, _pendingRemovals, pop, Exception, logger, warning
+      str: '\n        设备被发现层看到（deviceCome 入口）：记录会话内协议来源（ssdp/mdns/cache）。\n\n        参数:\n            uuid (str): 设备 UUID（记录键，24 位 hex）。\n            serviceType (str): 发现来源（ssdp / mdns / cache）。\n        返回:\n            无。\n        '
+      str: '[discovery-telemetry] onDeviceSeen exception: %s'
+
+  def LPDiscoveryTelemetry.onDeviceAdded(self, uuid)  line 533
+    names: _lock, time, _lastSetChangeTs, _cumulativeUuids, add, _pendingRemovals, pop, Exception, logger, warning
+      str: '\n        设备加入在线集合：刷新集合静止时间戳并累计会话去重设备数。\n\n        参数:\n            uuid (str): 设备 UUID。\n        返回:\n            无。\n        '
+      str: '[discovery-telemetry] onDeviceAdded exception: %s'
+
+  def LPDiscoveryTelemetry.onDeviceRemoved(self, uuid)  line 552
+    names: _lock, time, _lastSetChangeTs, _pendingRemovals, Exception, logger, warning
+      str: '\n        设备从在线集合移除：刷新静止时间戳并登记掉线待诊断。\n\n        参数:\n            uuid (str): 设备 UUID。\n        返回:\n            无。\n        '
+      str: '[discovery-telemetry] onDeviceRemoved exception: %s'
+
+  def LPDiscoveryTelemetry.onAllDevicesRemoved(self)  line 570
+    names: _lock, time, _lastSetChangeTs, Exception, logger, warning
+      str: '\n        在线集合整体清空（网络变更 removeAll）：仅刷新静止时间戳，等待新一轮收敛。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: '[discovery-telemetry] onAllDevicesRemoved exception: %s'
+
+  def LPDiscoveryTelemetry._checkOfflineDevices(self)  line 587
+    names: _lock, _diagBusy, threading, Thread, start, Exception, logger, warning
+      str: '\n        收敛上报后检查离线设备：历史缓存（当前网关）减去在线集合的差集，\n        串行发起诊断（每 session+device 最多 1 条，防诊断风暴）。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'LPDiscoveryTelemetry._checkOfflineDevices.<locals>._worker'
+      str: 'DiscoveryTelemetryDiag'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+      str: '[discovery-telemetry] checkOfflineDevices exception: %s'
+
+    def LPDiscoveryTelemetry._checkOfflineDevices._worker()  line 603
+      names: _checkOfflineDevicesInner, _lock, _diagBusy
+
+  def LPDiscoveryTelemetry._checkOfflineDevicesInner(self)  line 616
+    names: LPUtility, fetchNetworkInfo, get, _onlineUuids, deviceManager, getCachedDevices, items, _lock, deviceIdHash, _diagnosedHashes, _diagnoseDevice, time, _pendingRemovals, pop, Exception, logger, warning
+      str: '离线设备诊断的串行执行体：逐台调用 _diagnoseDevice。'
+      str: 'gateway'
+      str: 'LPDiscoveryTelemetry._checkOfflineDevicesInner.<locals>.<listcomp>'
+      str: '[discovery-telemetry] checkOfflineDevicesInner exception: %s'
+
+    def LPDiscoveryTelemetry._checkOfflineDevicesInner.<listcomp>(.0)  line 636
+      names: QUIET_SECONDS
+
+  def LPDiscoveryTelemetry._isValidIPv4(self, ipStr)  line 647
+    names: ipaddress, IPv4Address, Exception
+      str: '\n        判断字符串是否为合法的非空 IPv4 地址（对齐 iOS ipIsValid 语义，排除 0.0.0.0）。\n\n        参数:\n            ipStr (str): 待判断的地址字符串。\n        返回:\n            bool: 合法返回 True。\n        '
+      str: '0.0.0.0'
+
+  def LPDiscoveryTelemetry._probeHttp(self, ip)  line 664
+    names: upnpPost, bool, get, int, Exception, logger, warning
+      str: '\n        本地 SOAP GetControlDeviceInfo 探测（复用 UPnPTool 同款调用）。\n\n        参数:\n            ip (str): 设备 IP。\n        返回:\n            dict: httpcode 对象 {"result": 0/1, "errorcode": int}。\n        '
+      str: 'result'
+      str: 'errorcode'
+      str: 'http://%s:59152/upnp/control/rendercontrol1'
+      str: 'RenderingControl:1'
+      str: 'GetControlDeviceInfo'
+      str: 'InstanceID'
+      str: '0'
+      str: 'Status'
+      str: 'timeout'
+      str: 'status_code'
+      str: '[discovery-telemetry] probeHttp exception: %s'
+
+  def LPDiscoveryTelemetry._diagnoseDevice(self, uuid, cachedRow)  line 690
+    names: deviceIdHash, time, queryDeviceStateV2, CLOUD_QUERY_TIMEOUT_SECONDS, isinstance, dict, get, int, TypeError, ValueError, _lock, _diagnosedHashes, add, logger, info, _isValidIPv4, append, threading, Thread, start, DIAG_TIMEOUT_SECONDS, join, max, _onlineUuids, _deviceSources, set, bool, str, LPUtility, ssidToHexString, currentSSID, upper, currentBSSID, _normalizeBssid, snapshot, _joinList, sorted, len, update, _cleanContextForEvent, _flattenDeviceFields, LPGlobalUI, eventTrack, logEvent, LPEventsType, DEVICE_DISCOVERY_FAILURE, value, Exception, warning
+      str: '\n        单台离线设备诊断：云端状态 + 本地并行探测，组装 casecode 与同网判定后上报。\n\n        参数:\n            uuid (str): 设备短 UUID（24 位 hex，直接作为云端 deviceUid）。\n            cachedRow (dict): 本地历史缓存行（含 ip / port / name）。\n        返回:\n            无。\n        '
+      str: 'timeout'
+      str: 'networkInfo'
+      str: 'otaStatus'
+      str: '[discovery-telemetry] skip diagnosis, device in OTA: %s'
+      str: 'wlan0'
+      str: 'eth0'
+      str: 'ip'
+      str: 'result'
+      str: 'errorcode'
+      str: 'http'
+      str: 'tcp'
+      str: 'ping'
+      str: 'LPDiscoveryTelemetry._diagnoseDevice.<locals>.<lambda>'
+      str: 'target'
+      str: 'daemon'
+      str: 'ssdp'
+      str: 'mdns'
+      str: 'http'
+      str: 'result'
+      str: 'tcp'
+      str: 'ping'
+      str: 'connectStatus'
+      str: 'online'
+      str: 'LPDiscoveryTelemetry._diagnoseDevice.<locals>.<genexpr>'
+      str: 'iotVersion'
+      str: 'source'
+      str: 'IoT'
+      str: '2.0.1'
+      str: 'wlanSsid'
+      str: 'wlanBssid'
+      str: 'report_pending'
+      str: 'errorcode'
+      str: 'device_id_hash'
+      str: 'casecode'
+      str: 'httpcode_result'
+      str: 'httpcode_errorcode'
+      str: 'samessid'
+      str: 'samebssid'
+      str: 'device_list'
+      str: 'device_num'
+      str: '[discovery-telemetry] failure sent, device=%s casecode=%s elapsed=%.1fs'
+      str: '[discovery-telemetry] diagnoseDevice %s exception: %s'
+
+    def LPDiscoveryTelemetry._diagnoseDevice.<lambda>()  line 735
+      names: update, _probeHttp
+        str: 'http'
+
+    def LPDiscoveryTelemetry._diagnoseDevice.<lambda>()  line 737
+      names: update, LPUtility, tcpProbeHost
+        str: 'tcp'
+
+    def LPDiscoveryTelemetry._diagnoseDevice.<lambda>()  line 739
+      names: update, LPUtility, icmpPingHost
+        str: 'ping'
+
+    def LPDiscoveryTelemetry._diagnoseDevice.<genexpr>(.0)  line 760
+        str: '1'
+        str: '0'
+
+  def LPDiscoveryTelemetry._normalizeBssid(self, bssid)  line 811
+    names: join, lower
+      str: '\n        归一化 BSSID：小写并去掉非十六进制分隔符（对齐 iOS compareBSSIDs 语义）。\n\n        参数:\n            bssid (str): BSSID 字符串（带或不带冒号分隔）。\n        返回:\n            str: 归一化后的纯 hex 小写串。\n        '
+      str: 'LPDiscoveryTelemetry._normalizeBssid.<locals>.<genexpr>'
+
+    def LPDiscoveryTelemetry._normalizeBssid.<genexpr>(.0)  line 820
+        str: '0123456789abcdef'

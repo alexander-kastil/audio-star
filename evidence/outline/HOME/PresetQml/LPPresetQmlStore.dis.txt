@@ -1,0 +1,1253 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nPreset（预设快捷键）QML 版数据层。\n\n职责：\n- LPPresetListModel：QAbstractListModel，给 QML GridView 提供卡片数据。\n- LPPresetQmlStore：封装“解析设备 GetKeyMapping XML -> 构建模型条目 ->\n  异步下载封面落盘缓存 -> 回写 coverUrl”的完整流程，并维护页面状态机。\n\n与旧的 HOME/LPPresetViewController.py 完全解耦，仅复用 LPClientFramework 层的工具方法。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 13           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (threading)
+             10 STORE_NAME               1 (threading)
+
+ 14          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('Any', 'Dict', 'List', 'Optional'))
+             16 IMPORT_NAME              2 (typing)
+             18 IMPORT_FROM              3 (Any)
+             20 STORE_NAME               3 (Any)
+             22 IMPORT_FROM              4 (Dict)
+             24 STORE_NAME               4 (Dict)
+             26 IMPORT_FROM              5 (List)
+             28 STORE_NAME               5 (List)
+             30 IMPORT_FROM              6 (Optional)
+             32 STORE_NAME               6 (Optional)
+             34 POP_TOP
+
+ 16          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               4 (('BeautifulSoup',))
+             40 IMPORT_NAME              7 (bs4)
+             42 IMPORT_FROM              8 (BeautifulSoup)
+             44 STORE_NAME               8 (BeautifulSoup)
+             46 POP_TOP
+
+ 17          48 LOAD_CONST               1 (0)
+             50 LOAD_CONST               5 (('QAbstractListModel', 'QModelIndex', 'Qt', 'pyqtSignal'))
+             52 IMPORT_NAME              9 (PyQt6.QtCore)
+             54 IMPORT_FROM             10 (QAbstractListModel)
+             56 STORE_NAME              10 (QAbstractListModel)
+             58 IMPORT_FROM             11 (QModelIndex)
+             60 STORE_NAME              11 (QModelIndex)
+             62 IMPORT_FROM             12 (Qt)
+             64 STORE_NAME              12 (Qt)
+             66 IMPORT_FROM             13 (pyqtSignal)
+             68 STORE_NAME              13 (pyqtSignal)
+             70 POP_TOP
+
+ 19          72 LOAD_CONST               1 (0)
+             74 LOAD_CONST               2 (None)
+             76 IMPORT_NAME             14 (LPGlobalUI)
+             78 STORE_NAME              14 (LPGlobalUI)
+
+ 20          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               6 (('LPStreamServiceManager', 'LPUtility'))
+             84 IMPORT_NAME             15 (LPClientFramework)
+             86 IMPORT_FROM             16 (LPStreamServiceManager)
+             88 STORE_NAME              16 (LPStreamServiceManager)
+             90 IMPORT_FROM             17 (LPUtility)
+             92 STORE_NAME              17 (LPUtility)
+             94 POP_TOP
+
+ 21          96 LOAD_CONST               1 (0)
+             98 LOAD_CONST               7 (('DEVICE_ACCOUNT_UNKNOWN',))
+            100 IMPORT_NAME             18 (LPClientFramework.LPDeviceStreamServiceManager)
+            102 IMPORT_FROM             19 (DEVICE_ACCOUNT_UNKNOWN)
+            104 STORE_NAME              19 (DEVICE_ACCOUNT_UNKNOWN)
+            106 POP_TOP
+
+ 22         108 LOAD_CONST               1 (0)
+            110 LOAD_CONST               8 (('SOURCES_NO_LOGIN',))
+            112 IMPORT_NAME             20 (LPClientFramework.LPPublicDefine)
+            114 IMPORT_FROM             21 (SOURCES_NO_LOGIN)
+            116 STORE_NAME              21 (SOURCES_NO_LOGIN)
+            118 POP_TOP
+
+ 23         120 LOAD_CONST               1 (0)
+            122 LOAD_CONST               9 (('logger',))
+            124 IMPORT_NAME             22 (LPClientFramework.LPUtility)
+            126 IMPORT_FROM             23 (logger)
+            128 STORE_NAME              23 (logger)
+            130 POP_TOP
+
+ 29         132 LOAD_NAME               21 (SOURCES_NO_LOGIN)
+            134 STORE_NAME              24 (_PRESET_NO_LOGIN_SOURCES)
+
+ 32         136 LOAD_NAME                6 (Optional)
+            138 LOAD_NAME               25 (str)
+            140 BINARY_SUBSCR
+            142 LOAD_NAME               26 (bool)
+            144 LOAD_CONST              10 (('source', 'return'))
+            146 BUILD_CONST_KEY_MAP      2
+            148 LOAD_CONST              11 (<code object presetSourceNeedsDeviceAccount at 0x000001F3253AE240, file "PresetQml\LPPresetQmlStore.py", line 32>)
+            150 LOAD_CONST              12 ('presetSourceNeedsDeviceAccount')
+            152 MAKE_FUNCTION            4 (annotations)
+            154 STORE_NAME              27 (presetSourceNeedsDeviceAccount)
+
+ 48         156 LOAD_NAME                6 (Optional)
+            158 LOAD_NAME               25 (str)
+            160 BINARY_SUBSCR
+            162 LOAD_NAME               26 (bool)
+            164 LOAD_CONST              10 (('source', 'return'))
+            166 BUILD_CONST_KEY_MAP      2
+            168 LOAD_CONST              13 (<code object presetSourceCanPlay at 0x000001F3253AEEA0, file "PresetQml\LPPresetQmlStore.py", line 48>)
+            170 LOAD_CONST              14 ('presetSourceCanPlay')
+            172 MAKE_FUNCTION            4 (annotations)
+            174 STORE_NAME              28 (presetSourceCanPlay)
+
+ 79         176 LOAD_NAME                6 (Optional)
+            178 LOAD_NAME               25 (str)
+            180 BINARY_SUBSCR
+            182 LOAD_NAME               25 (str)
+            184 LOAD_CONST              10 (('source', 'return'))
+            186 BUILD_CONST_KEY_MAP      2
+            188 LOAD_CONST              15 (<code object _sourceIconQrc at 0x000001F3253AE710, file "PresetQml\LPPresetQmlStore.py", line 79>)
+            190 LOAD_CONST              16 ('_sourceIconQrc')
+            192 MAKE_FUNCTION            4 (annotations)
+            194 STORE_NAME              29 (_sourceIconQrc)
+
+104         196 LOAD_BUILD_CLASS
+            198 LOAD_CONST              17 (<code object LPPresetListModel at 0x000001F3253AEBE0, file "PresetQml\LPPresetQmlStore.py", line 104>)
+            200 LOAD_CONST              18 ('LPPresetListModel')
+            202 MAKE_FUNCTION            0
+            204 LOAD_CONST              18 ('LPPresetListModel')
+            206 LOAD_NAME               10 (QAbstractListModel)
+            208 CALL_FUNCTION            3
+            210 STORE_NAME              30 (LPPresetListModel)
+
+257         212 LOAD_BUILD_CLASS
+            214 LOAD_CONST              19 (<code object LPPresetQmlStore at 0x000001F3253C4710, file "PresetQml\LPPresetQmlStore.py", line 257>)
+            216 LOAD_CONST              20 ('LPPresetQmlStore')
+            218 MAKE_FUNCTION            0
+            220 LOAD_CONST              20 ('LPPresetQmlStore')
+            222 LOAD_NAME               31 (object)
+            224 CALL_FUNCTION            3
+            226 STORE_NAME              32 (LPPresetQmlStore)
+            228 LOAD_CONST               2 (None)
+            230 RETURN_VALUE
+
+=== presetSourceNeedsDeviceAccount ===
+ 41           0 LOAD_FAST                0 (source)
+              2 POP_JUMP_IF_TRUE         8
+
+ 42           4 LOAD_CONST               1 (False)
+              6 RETURN_VALUE
+
+ 43     >>    8 LOAD_FAST                0 (source)
+             10 LOAD_CONST               2 ('Pandora')
+             12 COMPARE_OP               2 (==)
+             14 POP_JUMP_IF_FALSE       32
+             16 LOAD_CONST               3 ('Pandora2')
+             18 LOAD_GLOBAL              0 (LPStreamServiceManager)
+             20 LOAD_METHOD              1 (supportContents)
+             22 CALL_METHOD              0
+             24 CONTAINS_OP              0
+             26 POP_JUMP_IF_FALSE       32
+
+ 44          28 LOAD_CONST               1 (False)
+             30 RETURN_VALUE
+
+ 45     >>   32 LOAD_FAST                0 (source)
+             34 LOAD_GLOBAL              2 (_PRESET_NO_LOGIN_SOURCES)
+             36 CONTAINS_OP              1
+             38 RETURN_VALUE
+
+=== presetSourceCanPlay ===
+ 59           0 LOAD_FAST                0 (source)
+              2 POP_JUMP_IF_TRUE         8
+
+ 60           4 LOAD_CONST               1 (False)
+              6 RETURN_VALUE
+
+ 62     >>    8 LOAD_FAST                0 (source)
+             10 LOAD_CONST               2 ('Pandora')
+             12 COMPARE_OP               2 (==)
+             14 POP_JUMP_IF_FALSE       32
+             16 LOAD_CONST               3 ('Pandora2')
+             18 LOAD_GLOBAL              0 (LPStreamServiceManager)
+             20 LOAD_METHOD              1 (supportContents)
+             22 CALL_METHOD              0
+             24 CONTAINS_OP              0
+             26 POP_JUMP_IF_FALSE       32
+
+ 63          28 LOAD_CONST               1 (False)
+             30 RETURN_VALUE
+
+ 64     >>   32 LOAD_FAST                0 (source)
+             34 LOAD_GLOBAL              2 (_PRESET_NO_LOGIN_SOURCES)
+             36 CONTAINS_OP              0
+             38 POP_JUMP_IF_FALSE       44
+
+ 65          40 LOAD_CONST               4 (True)
+             42 RETURN_VALUE
+
+ 68     >>   44 LOAD_GLOBAL              3 (getattr)
+             46 LOAD_FAST                1 (device)
+             48 LOAD_CONST               5 ('deviceStreamServiceManager')
+             50 LOAD_CONST               6 (None)
+             52 CALL_FUNCTION            3
+             54 STORE_FAST               2 (account_manager)
+
+ 69          56 LOAD_FAST                2 (account_manager)
+             58 LOAD_CONST               6 (None)
+             60 IS_OP                    0
+             62 POP_JUMP_IF_FALSE       68
+
+ 70          64 LOAD_CONST               1 (False)
+             66 RETURN_VALUE
+
+ 71     >>   68 LOAD_FAST                2 (account_manager)
+             70 LOAD_METHOD              4 (deviceAccountForSource)
+             72 LOAD_FAST                0 (source)
+             74 CALL_METHOD              1
+             76 STORE_FAST               3 (account)
+
+ 72          78 LOAD_FAST                3 (account)
+             80 LOAD_GLOBAL              5 (DEVICE_ACCOUNT_UNKNOWN)
+             82 IS_OP                    0
+             84 POP_JUMP_IF_FALSE       90
+
+ 75          86 LOAD_CONST               4 (True)
+             88 RETURN_VALUE
+
+ 76     >>   90 LOAD_FAST                3 (account)
+             92 LOAD_CONST               6 (None)
+             94 IS_OP                    1
+             96 RETURN_VALUE
+
+=== _sourceIconQrc ===
+ 89           0 LOAD_FAST                0 (source)
+              2 POP_JUMP_IF_TRUE         8
+
+ 90           4 LOAD_CONST               1 ('')
+              6 RETURN_VALUE
+
+ 91     >>    8 LOAD_GLOBAL              0 (LPStreamServiceManager)
+             10 LOAD_METHOD              1 (supportContents)
+             12 CALL_METHOD              0
+             14 STORE_FAST               1 (supportContents)
+
+ 92          16 LOAD_FAST                1 (supportContents)
+             18 LOAD_METHOD              2 (get)
+             20 LOAD_FAST                0 (source)
+             22 CALL_METHOD              1
+             24 STORE_FAST               2 (infoDict)
+
+ 93          26 LOAD_FAST                2 (infoDict)
+             28 POP_JUMP_IF_TRUE        34
+
+ 94          30 LOAD_CONST               1 ('')
+             32 RETURN_VALUE
+
+ 95     >>   34 LOAD_GLOBAL              3 (str)
+             36 LOAD_FAST                2 (infoDict)
+             38 LOAD_METHOD              2 (get)
+             40 LOAD_CONST               2 ('preset_icon')
+             42 LOAD_CONST               1 ('')
+             44 CALL_METHOD              2
+             46 JUMP_IF_TRUE_OR_POP     50
+             48 LOAD_CONST               1 ('')
+        >>   50 CALL_FUNCTION            1
+             52 LOAD_METHOD              4 (strip)
+             54 CALL_METHOD              0
+             56 STORE_FAST               3 (iconPath)
+
+ 96          58 LOAD_FAST                3 (iconPath)
+             60 POP_JUMP_IF_TRUE        66
+
+ 97          62 LOAD_CONST               1 ('')
+             64 RETURN_VALUE
+
+ 99     >>   66 LOAD_FAST                3 (iconPath)
+             68 LOAD_METHOD              5 (startswith)
+             70 LOAD_CONST               3 (':/')
+             72 CALL_METHOD              1
+             74 POP_JUMP_IF_FALSE       84
+
+100          76 LOAD_CONST               4 ('qrc')
+             78 LOAD_FAST                3 (iconPath)
+             80 BINARY_ADD
+             82 RETURN_VALUE
+
+101     >>   84 LOAD_FAST                3 (iconPath)
+             86 RETURN_VALUE
+
+=== LPPresetListModel ===
+104           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPPresetListModel')
+              6 STORE_NAME               2 (__qualname__)
+
+105           8 LOAD_CONST               1 ('\n    Preset 卡片网格数据模型。\n\n    对外暴露的 role（QML 中以 role 名直接访问）：\n        index         -> int    预设序号（1 起）\n        displayName   -> str    处理后的展示名称（去掉 “_#~” 后缀）\n        sourceIcon    -> str    来源图标 qrc 路径，空字符串表示无图标\n        coverUrl      -> str    封面本地 file URL 或 qrc URL；为空表示未就绪\n        isEmpty       -> bool   是否为空槽位\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+116          12 LOAD_NAME                4 (Qt)
+             14 LOAD_ATTR                5 (ItemDataRole)
+             16 LOAD_ATTR                6 (UserRole)
+             18 LOAD_CONST               2 (1)
+             20 BINARY_ADD
+             22 STORE_NAME               7 (IndexRole)
+
+117          24 LOAD_NAME                4 (Qt)
+             26 LOAD_ATTR                5 (ItemDataRole)
+             28 LOAD_ATTR                6 (UserRole)
+             30 LOAD_CONST               3 (2)
+             32 BINARY_ADD
+             34 STORE_NAME               8 (DisplayNameRole)
+
+118          36 LOAD_NAME                4 (Qt)
+             38 LOAD_ATTR                5 (ItemDataRole)
+             40 LOAD_ATTR                6 (UserRole)
+             42 LOAD_CONST               4 (3)
+             44 BINARY_ADD
+             46 STORE_NAME               9 (SourceIconRole)
+
+119          48 LOAD_NAME                4 (Qt)
+             50 LOAD_ATTR                5 (ItemDataRole)
+             52 LOAD_ATTR                6 (UserRole)
+             54 LOAD_CONST               5 (4)
+             56 BINARY_ADD
+             58 STORE_NAME              10 (CoverUrlRole)
+
+120          60 LOAD_NAME                4 (Qt)
+             62 LOAD_ATTR                5 (ItemDataRole)
+             64 LOAD_ATTR                6 (UserRole)
+             66 LOAD_CONST               6 (5)
+             68 BINARY_ADD
+             70 STORE_NAME              11 (IsEmptyRole)
+
+121          72 LOAD_NAME                4 (Qt)
+             74 LOAD_ATTR                5 (ItemDataRole)
+             76 LOAD_ATTR                6 (UserRole)
+             78 LOAD_CONST               7 (6)
+             80 BINARY_ADD
+             82 STORE_NAME              12 (CanPlayRole)
+
+122          84 LOAD_NAME               13 (pyqtSignal)
+             86 CALL_FUNCTION            0
+             88 STORE_NAME              14 (countChanged)
+
+126          90 LOAD_NAME               13 (pyqtSignal)
+             92 LOAD_NAME               15 (int)
+             94 LOAD_NAME               16 (str)
+             96 CALL_FUNCTION            2
+             98 STORE_NAME              17 (coverUrlReady)
+
+128         100 LOAD_CONST              34 ((None,))
+            102 LOAD_CLOSURE             0 (__class__)
+            104 BUILD_TUPLE              1
+            106 LOAD_CONST               9 (<code object __init__ at 0x000001F3253AE030, file "PresetQml\LPPresetQmlStore.py", line 128>)
+            108 LOAD_CONST              10 ('LPPresetListModel.__init__')
+            110 MAKE_FUNCTION            9 (defaults, closure)
+            112 STORE_NAME              18 (__init__)
+
+139         114 LOAD_NAME               19 (property)
+
+140         116 LOAD_NAME               20 (List)
+            118 LOAD_NAME               21 (Dict)
+            120 LOAD_NAME               16 (str)
+            122 LOAD_NAME               22 (Any)
+            124 BUILD_TUPLE              2
+            126 BINARY_SUBSCR
+            128 BINARY_SUBSCR
+            130 LOAD_CONST              11 (('return',))
+            132 BUILD_CONST_KEY_MAP      1
+            134 LOAD_CONST              12 (<code object items at 0x000001F3253AE660, file "PresetQml\LPPresetQmlStore.py", line 139>)
+            136 LOAD_CONST              13 ('LPPresetListModel.items')
+            138 MAKE_FUNCTION            4 (annotations)
+            140 CALL_FUNCTION            1
+            142 STORE_NAME              23 (items)
+
+148         144 LOAD_NAME               24 (QModelIndex)
+            146 CALL_FUNCTION            0
+            148 BUILD_TUPLE              1
+            150 LOAD_NAME               24 (QModelIndex)
+            152 LOAD_NAME               15 (int)
+            154 LOAD_CONST              14 (('parent', 'return'))
+            156 BUILD_CONST_KEY_MAP      2
+            158 LOAD_CONST              15 (<code object rowCount at 0x000001F3253AE5B0, file "PresetQml\LPPresetQmlStore.py", line 148>)
+            160 LOAD_CONST              16 ('LPPresetListModel.rowCount')
+            162 MAKE_FUNCTION            5 (defaults, annotations)
+            164 STORE_NAME              25 (rowCount)
+
+157         166 LOAD_NAME               21 (Dict)
+            168 LOAD_NAME               15 (int)
+            170 LOAD_NAME               26 (bytes)
+            172 BUILD_TUPLE              2
+            174 BINARY_SUBSCR
+            176 LOAD_CONST              11 (('return',))
+            178 BUILD_CONST_KEY_MAP      1
+            180 LOAD_CONST              17 (<code object roleNames at 0x000001F3253AEB30, file "PresetQml\LPPresetQmlStore.py", line 157>)
+            182 LOAD_CONST              18 ('LPPresetListModel.roleNames')
+            184 MAKE_FUNCTION            4 (annotations)
+            186 STORE_NAME              27 (roleNames)
+
+172         188 LOAD_NAME                4 (Qt)
+            190 LOAD_ATTR                5 (ItemDataRole)
+            192 LOAD_ATTR               28 (DisplayRole)
+            194 BUILD_TUPLE              1
+            196 LOAD_NAME               24 (QModelIndex)
+            198 LOAD_NAME               15 (int)
+            200 LOAD_NAME               22 (Any)
+            202 LOAD_CONST              19 (('index', 'role', 'return'))
+            204 BUILD_CONST_KEY_MAP      3
+            206 LOAD_CONST              20 (<code object data at 0x000001F3253AE450, file "PresetQml\LPPresetQmlStore.py", line 172>)
+            208 LOAD_CONST              21 ('LPPresetListModel.data')
+            210 MAKE_FUNCTION            5 (defaults, annotations)
+            212 STORE_NAME              29 (data)
+
+200         214 LOAD_NAME               20 (List)
+            216 LOAD_NAME               21 (Dict)
+            218 LOAD_NAME               16 (str)
+            220 LOAD_NAME               22 (Any)
+            222 BUILD_TUPLE              2
+            224 BINARY_SUBSCR
+            226 BINARY_SUBSCR
+            228 LOAD_CONST               8 (None)
+            230 LOAD_CONST              22 (('items', 'return'))
+            232 BUILD_CONST_KEY_MAP      2
+            234 LOAD_CONST              23 (<code object setItems at 0x000001F3253AEDF0, file "PresetQml\LPPresetQmlStore.py", line 200>)
+            236 LOAD_CONST              24 ('LPPresetListModel.setItems')
+            238 MAKE_FUNCTION            4 (annotations)
+            240 STORE_NAME              30 (setItems)
+
+212         242 LOAD_NAME               15 (int)
+            244 LOAD_NAME               16 (str)
+            246 LOAD_CONST               8 (None)
+            248 LOAD_CONST              25 (('index', 'coverUrl', 'return'))
+            250 BUILD_CONST_KEY_MAP      3
+            252 LOAD_CONST              26 (<code object updateCoverUrl at 0x000001F3253AE920, file "PresetQml\LPPresetQmlStore.py", line 212>)
+            254 LOAD_CONST              27 ('LPPresetListModel.updateCoverUrl')
+            256 MAKE_FUNCTION            4 (annotations)
+            258 STORE_NAME              31 (updateCoverUrl)
+
+228         260 LOAD_NAME               15 (int)
+            262 LOAD_NAME               32 (bool)
+            264 LOAD_CONST               8 (None)
+            266 LOAD_CONST              28 (('index', 'canPlay', 'return'))
+            268 BUILD_CONST_KEY_MAP      3
+            270 LOAD_CONST              29 (<code object updateCanPlay at 0x000001F3253AE9D0, file "PresetQml\LPPresetQmlStore.py", line 228>)
+            272 LOAD_CONST              30 ('LPPresetListModel.updateCanPlay')
+            274 MAKE_FUNCTION            4 (annotations)
+            276 STORE_NAME              33 (updateCanPlay)
+
+244         278 LOAD_NAME               15 (int)
+            280 LOAD_NAME               34 (Optional)
+            282 LOAD_NAME               21 (Dict)
+            284 LOAD_NAME               16 (str)
+            286 LOAD_NAME               22 (Any)
+            288 BUILD_TUPLE              2
+            290 BINARY_SUBSCR
+            292 BINARY_SUBSCR
+            294 LOAD_CONST              31 (('index', 'return'))
+            296 BUILD_CONST_KEY_MAP      2
+            298 LOAD_CONST              32 (<code object itemByIndex at 0x000001F3253AEC90, file "PresetQml\LPPresetQmlStore.py", line 244>)
+            300 LOAD_CONST              33 ('LPPresetListModel.itemByIndex')
+            302 MAKE_FUNCTION            4 (annotations)
+            304 STORE_NAME              35 (itemByIndex)
+            306 LOAD_CLOSURE             0 (__class__)
+            308 DUP_TOP
+            310 STORE_NAME              36 (__classcell__)
+            312 RETURN_VALUE
+
+=== LPPresetListModel.__init__ ===
+134           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+135          12 BUILD_LIST               0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_items)
+
+137          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (coverUrlReady)
+             22 LOAD_METHOD              4 (connect)
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                5 (updateCoverUrl)
+             28 CALL_METHOD              1
+             30 POP_TOP
+             32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+=== LPPresetListModel.items ===
+146           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_items)
+              4 RETURN_VALUE
+
+=== LPPresetListModel.rowCount ===
+155           0 LOAD_FAST                1 (parent)
+              2 LOAD_METHOD              0 (isValid)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_FALSE       12
+              8 LOAD_CONST               1 (0)
+             10 RETURN_VALUE
+        >>   12 LOAD_GLOBAL              1 (len)
+             14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (_items)
+             18 CALL_FUNCTION            1
+             20 RETURN_VALUE
+
+=== LPPresetListModel.roleNames ===
+164           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (IndexRole)
+              4 LOAD_CONST               1 (b'index')
+
+165           6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                1 (DisplayNameRole)
+             10 LOAD_CONST               2 (b'displayName')
+
+166          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (SourceIconRole)
+             16 LOAD_CONST               3 (b'sourceIcon')
+
+167          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (CoverUrlRole)
+             22 LOAD_CONST               4 (b'coverUrl')
+
+168          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                4 (IsEmptyRole)
+             28 LOAD_CONST               5 (b'isEmpty')
+
+169          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                5 (CanPlayRole)
+             34 LOAD_CONST               6 (b'canPlay')
+
+163          36 BUILD_MAP                6
+             38 RETURN_VALUE
+
+=== LPPresetListModel.data ===
+180           0 LOAD_FAST                1 (index)
+              2 LOAD_METHOD              0 (isValid)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        12
+
+181           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+182     >>   12 LOAD_FAST                1 (index)
+             14 LOAD_METHOD              1 (row)
+             16 CALL_METHOD              0
+             18 STORE_FAST               3 (row)
+
+183          20 LOAD_FAST                3 (row)
+             22 LOAD_CONST               2 (0)
+             24 COMPARE_OP               0 (<)
+             26 POP_JUMP_IF_TRUE        42
+             28 LOAD_FAST                3 (row)
+             30 LOAD_GLOBAL              2 (len)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_items)
+             36 CALL_FUNCTION            1
+             38 COMPARE_OP               5 (>=)
+             40 POP_JUMP_IF_FALSE       46
+
+184     >>   42 LOAD_CONST               1 (None)
+             44 RETURN_VALUE
+
+185     >>   46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                3 (_items)
+             50 LOAD_FAST                3 (row)
+             52 BINARY_SUBSCR
+             54 STORE_FAST               4 (item)
+
+186          56 LOAD_FAST                2 (role)
+             58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                4 (IndexRole)
+             62 COMPARE_OP               2 (==)
+             64 POP_JUMP_IF_FALSE       78
+
+187          66 LOAD_FAST                4 (item)
+             68 LOAD_METHOD              5 (get)
+             70 LOAD_CONST               3 ('index')
+             72 LOAD_CONST               2 (0)
+             74 CALL_METHOD              2
+             76 RETURN_VALUE
+
+188     >>   78 LOAD_FAST                2 (role)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                6 (DisplayNameRole)
+             84 COMPARE_OP               2 (==)
+             86 POP_JUMP_IF_FALSE      100
+
+189          88 LOAD_FAST                4 (item)
+             90 LOAD_METHOD              5 (get)
+             92 LOAD_CONST               4 ('displayName')
+             94 LOAD_CONST               5 ('')
+             96 CALL_METHOD              2
+             98 RETURN_VALUE
+
+190     >>  100 LOAD_FAST                2 (role)
+            102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                7 (SourceIconRole)
+            106 COMPARE_OP               2 (==)
+            108 POP_JUMP_IF_FALSE      122
+
+191         110 LOAD_FAST                4 (item)
+            112 LOAD_METHOD              5 (get)
+            114 LOAD_CONST               6 ('sourceIcon')
+            116 LOAD_CONST               5 ('')
+            118 CALL_METHOD              2
+            120 RETURN_VALUE
+
+192     >>  122 LOAD_FAST                2 (role)
+            124 LOAD_FAST                0 (self)
+            126 LOAD_ATTR                8 (CoverUrlRole)
+            128 COMPARE_OP               2 (==)
+            130 POP_JUMP_IF_FALSE      144
+
+193         132 LOAD_FAST                4 (item)
+            134 LOAD_METHOD              5 (get)
+            136 LOAD_CONST               7 ('coverUrl')
+            138 LOAD_CONST               5 ('')
+            140 CALL_METHOD              2
+            142 RETURN_VALUE
+
+194     >>  144 LOAD_FAST                2 (role)
+            146 LOAD_FAST                0 (self)
+            148 LOAD_ATTR                9 (IsEmptyRole)
+            150 COMPARE_OP               2 (==)
+            152 POP_JUMP_IF_FALSE      166
+
+195         154 LOAD_FAST                4 (item)
+            156 LOAD_METHOD              5 (get)
+            158 LOAD_CONST               8 ('isEmpty')
+            160 LOAD_CONST               9 (True)
+            162 CALL_METHOD              2
+            164 RETURN_VALUE
+
+196     >>  166 LOAD_FAST                2 (role)
+            168 LOAD_FAST                0 (self)
+            170 LOAD_ATTR               10 (CanPlayRole)
+            172 COMPARE_OP               2 (==)
+            174 POP_JUMP_IF_FALSE      188
+
+197         176 LOAD_FAST                4 (item)
+            178 LOAD_METHOD              5 (get)
+            180 LOAD_CONST              10 ('canPlay')
+            182 LOAD_CONST              11 (False)
+            184 CALL_METHOD              2
+            186 RETURN_VALUE
+
+198     >>  188 LOAD_CONST               1 (None)
+            190 RETURN_VALUE
+
+=== LPPresetListModel.setItems ===
+207           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (beginResetModel)
+              4 CALL_METHOD              0
+              6 POP_TOP
+
+208           8 LOAD_GLOBAL              1 (list)
+             10 LOAD_FAST                1 (items)
+             12 JUMP_IF_TRUE_OR_POP     16
+             14 BUILD_LIST               0
+        >>   16 CALL_FUNCTION            1
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               2 (_items)
+
+209          22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              3 (endResetModel)
+             26 CALL_METHOD              0
+             28 POP_TOP
+
+210          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                4 (countChanged)
+             34 LOAD_METHOD              5 (emit)
+             36 CALL_METHOD              0
+             38 POP_TOP
+             40 LOAD_CONST               1 (None)
+             42 RETURN_VALUE
+
+=== LPPresetListModel.updateCoverUrl ===
+220           0 LOAD_GLOBAL              0 (enumerate)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_items)
+              6 CALL_FUNCTION            1
+              8 GET_ITER
+        >>   10 FOR_ITER                80 (to 92)
+             12 UNPACK_SEQUENCE          2
+             14 STORE_FAST               3 (row)
+             16 STORE_FAST               4 (item)
+
+221          18 LOAD_FAST                4 (item)
+             20 LOAD_METHOD              2 (get)
+             22 LOAD_CONST               1 ('index')
+             24 CALL_METHOD              1
+             26 LOAD_FAST                1 (index)
+             28 COMPARE_OP               2 (==)
+             30 POP_JUMP_IF_FALSE       10
+
+222          32 LOAD_FAST                4 (item)
+             34 LOAD_METHOD              2 (get)
+             36 LOAD_CONST               2 ('coverUrl')
+             38 CALL_METHOD              1
+             40 LOAD_FAST                2 (coverUrl)
+             42 COMPARE_OP               3 (!=)
+             44 POP_JUMP_IF_FALSE       84
+
+223          46 LOAD_FAST                2 (coverUrl)
+             48 LOAD_FAST                4 (item)
+             50 LOAD_CONST               2 ('coverUrl')
+             52 STORE_SUBSCR
+
+224          54 LOAD_FAST                0 (self)
+             56 LOAD_METHOD              3 (index)
+             58 LOAD_FAST                3 (row)
+             60 CALL_METHOD              1
+             62 STORE_FAST               5 (idx)
+
+225          64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                4 (dataChanged)
+             68 LOAD_METHOD              5 (emit)
+             70 LOAD_FAST                5 (idx)
+             72 LOAD_FAST                5 (idx)
+             74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                6 (CoverUrlRole)
+             78 BUILD_LIST               1
+             80 CALL_METHOD              3
+             82 POP_TOP
+
+226     >>   84 POP_TOP
+             86 LOAD_CONST               3 (None)
+             88 RETURN_VALUE
+             90 JUMP_ABSOLUTE           10
+        >>   92 LOAD_CONST               3 (None)
+             94 RETURN_VALUE
+
+=== LPPresetListModel.updateCanPlay ===
+236           0 LOAD_GLOBAL              0 (enumerate)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_items)
+              6 CALL_FUNCTION            1
+              8 GET_ITER
+        >>   10 FOR_ITER                80 (to 92)
+             12 UNPACK_SEQUENCE          2
+             14 STORE_FAST               3 (row)
+             16 STORE_FAST               4 (item)
+
+237          18 LOAD_FAST                4 (item)
+             20 LOAD_METHOD              2 (get)
+             22 LOAD_CONST               1 ('index')
+             24 CALL_METHOD              1
+             26 LOAD_FAST                1 (index)
+             28 COMPARE_OP               2 (==)
+             30 POP_JUMP_IF_FALSE       10
+
+238          32 LOAD_FAST                4 (item)
+             34 LOAD_METHOD              2 (get)
+             36 LOAD_CONST               2 ('canPlay')
+             38 CALL_METHOD              1
+             40 LOAD_FAST                2 (canPlay)
+             42 COMPARE_OP               3 (!=)
+             44 POP_JUMP_IF_FALSE       84
+
+239          46 LOAD_FAST                2 (canPlay)
+             48 LOAD_FAST                4 (item)
+             50 LOAD_CONST               2 ('canPlay')
+             52 STORE_SUBSCR
+
+240          54 LOAD_FAST                0 (self)
+             56 LOAD_METHOD              3 (index)
+             58 LOAD_FAST                3 (row)
+             60 CALL_METHOD              1
+             62 STORE_FAST               5 (idx)
+
+241          64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                4 (dataChanged)
+             68 LOAD_METHOD              5 (emit)
+             70 LOAD_FAST                5 (idx)
+             72 LOAD_FAST                5 (idx)
+             74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                6 (CanPlayRole)
+             78 BUILD_LIST               1
+             80 CALL_METHOD              3
+             82 POP_TOP
+
+242     >>   84 POP_TOP
+             86 LOAD_CONST               3 (None)
+             88 RETURN_VALUE
+             90 JUMP_ABSOLUTE           10
+        >>   92 LOAD_CONST               3 (None)
+             94 RETURN_VALUE
+
+=== LPPresetListModel.itemByIndex ===
+251           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_items)
+              4 GET_ITER
+        >>    6 FOR_ITER                26 (to 34)
+              8 STORE_FAST               2 (item)
+
+252          10 LOAD_FAST                2 (item)
+             12 LOAD_METHOD              1 (get)
+             14 LOAD_CONST               1 ('index')
+             16 CALL_METHOD              1
+             18 LOAD_FAST                1 (index)
+             20 COMPARE_OP               2 (==)
+             22 POP_JUMP_IF_FALSE        6
+
+253          24 LOAD_FAST                2 (item)
+             26 ROT_TWO
+             28 POP_TOP
+             30 RETURN_VALUE
+             32 JUMP_ABSOLUTE            6
+
+254     >>   34 LOAD_CONST               2 (None)
+             36 RETURN_VALUE
+
+=== LPPresetQmlStore ===
+257           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPPresetQmlStore')
+              6 STORE_NAME               2 (__qualname__)
+
+258           8 LOAD_CONST               1 ('\n    Preset 页面数据仓库（纯 Python 对象，不持有 Qt 信号）。\n\n    提供 XML 解析与封面异步下载编排，状态由控制器持有并对外暴露，\n    便于控制器统一管理生命周期。封面回写通过模型的 coverUrlReady 信号完成。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+265          12 LOAD_NAME                4 (LPPresetListModel)
+             14 LOAD_CONST               2 (('model',))
+             16 BUILD_CONST_KEY_MAP      1
+             18 LOAD_CONST               3 (<code object __init__ at 0x000001F3253C45B0, file "PresetQml\LPPresetQmlStore.py", line 265>)
+             20 LOAD_CONST               4 ('LPPresetQmlStore.__init__')
+             22 MAKE_FUNCTION            4 (annotations)
+             24 STORE_NAME               5 (__init__)
+
+275          26 LOAD_NAME                4 (LPPresetListModel)
+             28 LOAD_CONST               5 (('return',))
+             30 BUILD_CONST_KEY_MAP      1
+             32 LOAD_CONST               6 (<code object model at 0x000001F3253C4EA0, file "PresetQml\LPPresetQmlStore.py", line 275>)
+             34 LOAD_CONST               7 ('LPPresetQmlStore.model')
+             36 MAKE_FUNCTION            4 (annotations)
+             38 STORE_NAME               6 (model)
+
+283          40 LOAD_CONST              18 ((None,))
+             42 LOAD_NAME                7 (Optional)
+             44 LOAD_NAME                8 (str)
+             46 BINARY_SUBSCR
+             48 LOAD_NAME                9 (int)
+
+284          50 LOAD_NAME               10 (List)
+             52 LOAD_NAME               11 (Dict)
+             54 LOAD_NAME                8 (str)
+             56 LOAD_NAME               12 (Any)
+             58 BUILD_TUPLE              2
+             60 BINARY_SUBSCR
+             62 BINARY_SUBSCR
+
+283          64 LOAD_CONST               9 (('xmlStr', 'presetNum', 'return'))
+             66 BUILD_CONST_KEY_MAP      3
+             68 LOAD_CONST              10 (<code object parseXmlAndBuildItems at 0x000001F3253C4D40, file "PresetQml\LPPresetQmlStore.py", line 283>)
+             70 LOAD_CONST              11 ('LPPresetQmlStore.parseXmlAndBuildItems')
+             72 MAKE_FUNCTION            5 (defaults, annotations)
+             74 STORE_NAME              13 (parseXmlAndBuildItems)
+
+336          76 LOAD_NAME               14 (staticmethod)
+
+337          78 LOAD_NAME                9 (int)
+             80 LOAD_NAME               11 (Dict)
+             82 LOAD_NAME                8 (str)
+             84 LOAD_NAME               12 (Any)
+             86 BUILD_TUPLE              2
+             88 BINARY_SUBSCR
+             90 LOAD_CONST              12 (('keyIndex', 'return'))
+             92 BUILD_CONST_KEY_MAP      2
+             94 LOAD_CONST              13 (<code object _emptyItem at 0x000001F3253C4A80, file "PresetQml\LPPresetQmlStore.py", line 336>)
+             96 LOAD_CONST              14 ('LPPresetQmlStore._emptyItem')
+             98 MAKE_FUNCTION            4 (annotations)
+            100 CALL_FUNCTION            1
+            102 STORE_NAME              15 (_emptyItem)
+
+356         104 LOAD_NAME               11 (Dict)
+            106 LOAD_NAME                8 (str)
+            108 LOAD_NAME               12 (Any)
+            110 BUILD_TUPLE              2
+            112 BINARY_SUBSCR
+            114 LOAD_CONST               8 (None)
+            116 LOAD_CONST              15 (('item', 'return'))
+            118 BUILD_CONST_KEY_MAP      2
+            120 LOAD_CONST              16 (<code object ensureCoverForItem at 0x000001F3253C4190, file "PresetQml\LPPresetQmlStore.py", line 356>)
+            122 LOAD_CONST              17 ('LPPresetQmlStore.ensureCoverForItem')
+            124 MAKE_FUNCTION            4 (annotations)
+            126 STORE_NAME              16 (ensureCoverForItem)
+            128 LOAD_CONST               8 (None)
+            130 RETURN_VALUE
+
+=== LPPresetQmlStore.__init__ ===
+271           0 LOAD_FAST                1 (model)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_model)
+
+273           6 LOAD_CONST               1 (None)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (xmlObj)
+             12 LOAD_CONST               1 (None)
+             14 RETURN_VALUE
+
+=== LPPresetQmlStore.model ===
+281           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_model)
+              4 RETURN_VALUE
+
+=== LPPresetQmlStore.parseXmlAndBuildItems ===
+293           0 LOAD_FAST                1 (xmlStr)
+              2 POP_JUMP_IF_TRUE         8
+
+294           4 BUILD_LIST               0
+              6 RETURN_VALUE
+
+295     >>    8 SETUP_FINALLY           16 (to 26)
+
+296          10 LOAD_GLOBAL              0 (BeautifulSoup)
+             12 LOAD_FAST                1 (xmlStr)
+             14 LOAD_CONST               1 ('xml')
+             16 CALL_FUNCTION            2
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               1 (xmlObj)
+             22 POP_BLOCK
+             24 JUMP_FORWARD            60 (to 86)
+
+297     >>   26 DUP_TOP
+             28 LOAD_GLOBAL              2 (Exception)
+             30 JUMP_IF_NOT_EXC_MATCH    84
+             32 POP_TOP
+             34 STORE_FAST               4 (exc)
+             36 POP_TOP
+             38 SETUP_FINALLY           36 (to 76)
+
+298          40 LOAD_GLOBAL              3 (logger)
+             42 LOAD_METHOD              4 (error)
+             44 LOAD_CONST               2 ('[PresetQml] parse XML failed: %s')
+             46 LOAD_FAST                4 (exc)
+             48 BINARY_MODULO
+             50 CALL_METHOD              1
+             52 POP_TOP
+
+299          54 LOAD_CONST               3 (None)
+             56 LOAD_FAST                0 (self)
+             58 STORE_ATTR               1 (xmlObj)
+
+300          60 BUILD_LIST               0
+             62 POP_BLOCK
+             64 ROT_FOUR
+             66 POP_EXCEPT
+             68 LOAD_CONST               3 (None)
+             70 STORE_FAST               4 (exc)
+             72 DELETE_FAST              4 (exc)
+             74 RETURN_VALUE
+        >>   76 LOAD_CONST               3 (None)
+             78 STORE_FAST               4 (exc)
+             80 DELETE_FAST              4 (exc)
+             82 RERAISE
+        >>   84 RERAISE
+
+302     >>   86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                1 (xmlObj)
+             90 LOAD_METHOD              5 (find)
+             92 LOAD_CONST               4 ('KeyList')
+             94 BUILD_LIST               0
+             96 CALL_METHOD              2
+             98 JUMP_IF_TRUE_OR_POP    102
+            100 BUILD_LIST               0
+        >>  102 STORE_FAST               5 (keyList)
+
+303         104 BUILD_LIST               0
+            106 STORE_FAST               6 (items)
+
+306         108 LOAD_GLOBAL              6 (range)
+            110 LOAD_CONST               5 (1)
+            112 LOAD_FAST                2 (presetNum)
+            114 LOAD_CONST               5 (1)
+            116 BINARY_ADD
+            118 CALL_FUNCTION            2
+            120 GET_ITER
+        >>  122 FOR_ITER               232 (to 356)
+            124 STORE_FAST               7 (keyIndex)
+
+307         126 LOAD_FAST                5 (keyList)
+            128 LOAD_METHOD              5 (find)
+            130 LOAD_CONST               6 ('Key%d')
+            132 LOAD_FAST                7 (keyIndex)
+            134 BINARY_MODULO
+            136 CALL_METHOD              1
+            138 STORE_FAST               8 (keyItem)
+
+308         140 LOAD_FAST                8 (keyItem)
+            142 POP_JUMP_IF_TRUE       162
+
+309         144 LOAD_FAST                6 (items)
+            146 LOAD_METHOD              7 (append)
+            148 LOAD_FAST                0 (self)
+            150 LOAD_METHOD              8 (_emptyItem)
+            152 LOAD_FAST                7 (keyIndex)
+            154 CALL_METHOD              1
+            156 CALL_METHOD              1
+            158 POP_TOP
+
+310         160 JUMP_ABSOLUTE          122
+
+312     >>  162 LOAD_FAST                8 (keyItem)
+            164 LOAD_METHOD              5 (find)
+            166 LOAD_CONST               7 ('Name')
+            168 LOAD_CONST               3 (None)
+            170 CALL_METHOD              2
+            172 STORE_FAST               9 (nameTag)
+
+313         174 LOAD_FAST                9 (nameTag)
+            176 LOAD_CONST               3 (None)
+            178 IS_OP                    0
+            180 POP_JUMP_IF_TRUE       196
+            182 LOAD_FAST                9 (nameTag)
+            184 LOAD_ATTR                9 (text)
+            186 JUMP_IF_TRUE_OR_POP    190
+            188 LOAD_CONST               8 ('')
+        >>  190 LOAD_METHOD             10 (strip)
+            192 CALL_METHOD              0
+            194 POP_JUMP_IF_TRUE       214
+
+314     >>  196 LOAD_FAST                6 (items)
+            198 LOAD_METHOD              7 (append)
+            200 LOAD_FAST                0 (self)
+            202 LOAD_METHOD              8 (_emptyItem)
+            204 LOAD_FAST                7 (keyIndex)
+            206 CALL_METHOD              1
+            208 CALL_METHOD              1
+            210 POP_TOP
+
+315         212 JUMP_ABSOLUTE          122
+
+317     >>  214 LOAD_FAST                9 (nameTag)
+            216 LOAD_ATTR                9 (text)
+            218 LOAD_METHOD             10 (strip)
+            220 CALL_METHOD              0
+            222 STORE_FAST              10 (name)
+
+318         224 LOAD_FAST                8 (keyItem)
+            226 LOAD_METHOD              5 (find)
+            228 LOAD_CONST               9 ('Source')
+            230 LOAD_CONST               3 (None)
+            232 CALL_METHOD              2
+            234 STORE_FAST              11 (sourceTag)
+
+319         236 LOAD_FAST                8 (keyItem)
+            238 LOAD_METHOD              5 (find)
+            240 LOAD_CONST              10 ('PicUrl')
+            242 LOAD_CONST               3 (None)
+            244 CALL_METHOD              2
+            246 STORE_FAST              12 (picTag)
+
+320         248 LOAD_FAST               11 (sourceTag)
+            250 EXTENDED_ARG             1
+            252 POP_JUMP_IF_FALSE      272
+            254 LOAD_FAST               11 (sourceTag)
+            256 LOAD_ATTR                9 (text)
+            258 EXTENDED_ARG             1
+            260 POP_JUMP_IF_FALSE      272
+            262 LOAD_FAST               11 (sourceTag)
+            264 LOAD_ATTR                9 (text)
+            266 LOAD_METHOD             10 (strip)
+            268 CALL_METHOD              0
+            270 JUMP_FORWARD             2 (to 274)
+        >>  272 LOAD_CONST               8 ('')
+        >>  274 STORE_FAST              13 (source)
+
+321         276 LOAD_FAST               12 (picTag)
+            278 EXTENDED_ARG             1
+            280 POP_JUMP_IF_FALSE      300
+            282 LOAD_FAST               12 (picTag)
+            284 LOAD_ATTR                9 (text)
+            286 EXTENDED_ARG             1
+            288 POP_JUMP_IF_FALSE      300
+            290 LOAD_FAST               12 (picTag)
+            292 LOAD_ATTR                9 (text)
+            294 LOAD_METHOD             10 (strip)
+            296 CALL_METHOD              0
+            298 JUMP_FORWARD             2 (to 302)
+        >>  300 LOAD_CONST               8 ('')
+        >>  302 STORE_FAST              14 (picUrl)
+
+323         304 LOAD_FAST                6 (items)
+            306 LOAD_METHOD              7 (append)
+
+324         308 LOAD_FAST                7 (keyIndex)
+
+325         310 LOAD_FAST               10 (name)
+
+326         312 LOAD_FAST               10 (name)
+            314 LOAD_METHOD             11 (split)
+            316 LOAD_CONST              11 ('_#~')
+            318 CALL_METHOD              1
+            320 LOAD_CONST              12 (0)
+            322 BINARY_SUBSCR
+
+327         324 LOAD_FAST               13 (source)
+
+328         326 LOAD_FAST               14 (picUrl)
+
+329         328 LOAD_GLOBAL             12 (_sourceIconQrc)
+            330 LOAD_FAST               13 (source)
+            332 CALL_FUNCTION            1
+
+330         334 LOAD_CONST               8 ('')
+
+331         336 LOAD_CONST              13 (False)
+
+332         338 LOAD_GLOBAL             13 (presetSourceCanPlay)
+            340 LOAD_FAST               13 (source)
+            342 LOAD_FAST                3 (device)
+            344 CALL_FUNCTION            2
+
+323         346 LOAD_CONST              14 (('index', 'name', 'displayName', 'source', 'picUrl', 'sourceIcon', 'coverUrl', 'isEmpty', 'canPlay'))
+            348 BUILD_CONST_KEY_MAP      9
+            350 CALL_METHOD              1
+            352 POP_TOP
+            354 JUMP_ABSOLUTE          122
+
+334     >>  356 LOAD_FAST                6 (items)
+            358 RETURN_VALUE
+
+=== LPPresetQmlStore._emptyItem ===
+345           0 LOAD_FAST                0 (keyIndex)
+
+346           2 LOAD_CONST               1 (None)
+
+347           4 LOAD_CONST               2 ('')
+
+348           6 LOAD_CONST               2 ('')
+
+349           8 LOAD_CONST               2 ('')
+
+350          10 LOAD_CONST               2 ('')
+
+351          12 LOAD_CONST               2 ('')
+
+352          14 LOAD_CONST               3 (True)
+
+353          16 LOAD_CONST               4 (False)
+
+344          18 LOAD_CONST               5 (('index', 'name', 'displayName', 'source', 'picUrl', 'sourceIcon', 'coverUrl', 'isEmpty', 'canPlay'))
+             20 BUILD_CONST_KEY_MAP      9
+             22 RETURN_VALUE
+
+=== LPPresetQmlStore.ensureCoverForItem ===
+366           0 LOAD_FAST                1 (item)
+              2 LOAD_METHOD              0 (get)
+              4 LOAD_CONST               1 ('picUrl')
+              6 CALL_METHOD              1
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 LOAD_CONST               2 ('')
+        >>   12 STORE_DEREF              2 (picUrl)
+
+367          14 LOAD_DEREF               2 (picUrl)
+             16 POP_JUMP_IF_TRUE        22
+
+368          18 LOAD_CONST               3 (None)
+             20 RETURN_VALUE
+
+370     >>   22 LOAD_GLOBAL              1 (LPUtility)
+             24 LOAD_METHOD              2 (getCacheImageUrl)
+             26 LOAD_DEREF               2 (picUrl)
+             28 CALL_METHOD              1
+             30 STORE_FAST               2 (cachedUrl)
+
+371          32 LOAD_FAST                2 (cachedUrl)
+             34 POP_JUMP_IF_FALSE       62
+
+372          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                3 (_model)
+             40 LOAD_METHOD              4 (updateCoverUrl)
+             42 LOAD_FAST                1 (item)
+             44 LOAD_METHOD              0 (get)
+             46 LOAD_CONST               4 ('index')
+             48 LOAD_CONST               5 (0)
+             50 CALL_METHOD              2
+             52 LOAD_FAST                2 (cachedUrl)
+             54 CALL_METHOD              2
+             56 POP_TOP
+
+373          58 LOAD_CONST               3 (None)
+             60 RETURN_VALUE
+
+376     >>   62 LOAD_FAST                1 (item)
+             64 LOAD_METHOD              0 (get)
+             66 LOAD_CONST               4 ('index')
+             68 LOAD_CONST               5 (0)
+             70 CALL_METHOD              2
+             72 STORE_DEREF              0 (index)
+
+377          74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                3 (_model)
+             78 STORE_DEREF              1 (model)
+
+379          80 LOAD_CLOSURE             0 (index)
+             82 LOAD_CLOSURE             1 (model)
+             84 LOAD_CLOSURE             2 (picUrl)
+             86 BUILD_TUPLE              3
+             88 LOAD_CONST               6 (<code object _asyncFetch at 0x000001F3253C4870, file "PresetQml\LPPresetQmlStore.py", line 379>)
+             90 LOAD_CONST               7 ('LPPresetQmlStore.ensureCoverForItem.<locals>._asyncFetch')
+             92 MAKE_FUNCTION            8 (closure)
+             94 STORE_FAST               3 (_asyncFetch)
+
+389          96 LOAD_GLOBAL              5 (threading)
+             98 LOAD_ATTR                6 (Thread)
+            100 LOAD_FAST                3 (_asyncFetch)
+            102 LOAD_CONST               8 (True)
+            104 LOAD_CONST               9 (('target', 'daemon'))
+            106 CALL_FUNCTION_KW         2
+            108 STORE_FAST               4 (fetchThread)
+
+390         110 LOAD_FAST                4 (fetchThread)
+            112 LOAD_METHOD              7 (start)
+            114 CALL_METHOD              0
+            116 POP_TOP
+            118 LOAD_CONST               3 (None)
+            120 RETURN_VALUE
+
+=== LPPresetQmlStore.ensureCoverForItem._asyncFetch ===
+380           0 LOAD_GLOBAL              0 (LPUtility)
+              2 LOAD_METHOD              1 (fetchUrlQPixmap)
+              4 LOAD_DEREF               2 (picUrl)
+              6 CALL_METHOD              1
+              8 STORE_FAST               0 (respDict)
+
+381          10 LOAD_FAST                0 (respDict)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_CONST               1 ('image')
+             16 LOAD_CONST               0 (None)
+             18 CALL_METHOD              2
+             20 STORE_FAST               1 (pixmap)
+
+382          22 LOAD_FAST                1 (pixmap)
+             24 LOAD_CONST               0 (None)
+             26 IS_OP                    1
+             28 POP_JUMP_IF_FALSE       66
+             30 LOAD_FAST                1 (pixmap)
+             32 LOAD_METHOD              3 (isNull)
+             34 CALL_METHOD              0
+             36 POP_JUMP_IF_TRUE        66
+
+384          38 LOAD_GLOBAL              0 (LPUtility)
+             40 LOAD_METHOD              4 (getCacheImageUrl)
+             42 LOAD_DEREF               2 (picUrl)
+             44 CALL_METHOD              1
+             46 STORE_FAST               2 (localUrl)
+
+385          48 LOAD_FAST                2 (localUrl)
+             50 POP_JUMP_IF_FALSE       66
+
+387          52 LOAD_DEREF               1 (model)
+             54 LOAD_ATTR                5 (coverUrlReady)
+             56 LOAD_METHOD              6 (emit)
+             58 LOAD_DEREF               0 (index)
+             60 LOAD_FAST                2 (localUrl)
+             62 CALL_METHOD              2
+             64 POP_TOP
+        >>   66 LOAD_CONST               0 (None)
+             68 RETURN_VALUE

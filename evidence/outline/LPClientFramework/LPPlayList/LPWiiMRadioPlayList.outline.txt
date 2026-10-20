@@ -1,0 +1,83 @@
+# module LPClientFramework.LPPlayList.LPWiiMRadioPlayList
+
+[module] names: __doc__, html, escape, LPClientFramework.LPPlayList.LPPlayList, LPPlayMusicList, LPPlayHeader, LPPlayItem, LPPlayListSource, LPWiiMRadioPlayList, LPWiiMRadioPlayHeader, LPWiiMRadioPlayItem
+  str: '\nWiiMRadio 播放列表模型与 XML 生成器。\n'
+  str: 'escape'
+  str: 'LPPlayMusicList'
+  str: 'LPPlayHeader'
+  str: 'LPPlayItem'
+  str: 'LPPlayListSource'
+  str: 'LPWiiMRadioPlayList'
+  str: 'LPWiiMRadioPlayHeader'
+  str: 'LPWiiMRadioPlayItem'
+
+def LPWiiMRadioPlayList()  line 11
+  names: __name__, __module__, __qualname__, __doc__, str, generateXML, staticmethod, _build_didl_metadata
+    str: 'LPWiiMRadioPlayList'
+    str: 'WiiMRadio 播放列表，生成设备可识别的 XML 指令。'
+    str: 'return'
+    str: 'LPWiiMRadioPlayList.generateXML'
+    str: 'LPWiiMRadioPlayItem'
+    str: 'item'
+    str: 'return'
+    str: 'LPWiiMRadioPlayList._build_didl_metadata'
+
+  def LPWiiMRadioPlayList.generateXML(self)  line 14
+    names: header, list, len, escape, headTitle, mediaSource, trackId, imageUrl, enumerate, _build_didl_metadata, trackUrl
+      str: '\n        生成 WiiMRadio 单电台播放 XML。\n\n        XML 格式（Track Metadata 内容需 HTML-encode 后嵌入）：\n            <?xml version="1.0"?>\n            <PlayList>\n                <ListName>电台名</ListName>\n                <ListInfo>\n                    <Radio>1</Radio>\n                    <ContentType>radio</ContentType>'
+      str: '<?xml version="1.0"?><PlayList>'
+      str: '<ListName>%s</ListName>'
+      str: '<ListInfo>'
+      str: '<Radio>1</Radio>'
+      str: '<ContentType>radio</ContentType>'
+      str: '<SourceName>%s</SourceName>'
+      str: '<ShowName>%s</ShowName>'
+      str: '<StreamId>%s</StreamId>'
+      str: '<StreamType>radio</StreamType>'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<TrackNumber>%d</TrackNumber>'
+      str: '<SearchUrl></SearchUrl>'
+      str: '</ListInfo>'
+      str: '<Tracks>'
+      str: 'start'
+      str: '<Track%d>'
+      str: '<URL>%s</URL>'
+      str: '<Source>%s</Source>'
+      str: '<Id>%s</Id>'
+      str: '<Metadata>%s</Metadata>'
+      str: '</Track%d>'
+      str: '</Tracks></PlayList>'
+
+  def LPWiiMRadioPlayList._build_didl_metadata(item)  line 76
+    names: escape, trackId, getattr, trackName, trackImage
+      str: '\n        构建单个 Track 的 DIDL-Lite Metadata 字符串（未 encode，由调用方 escape）。\n\n        :param item: WiiMRadio 播放条目。\n        :return: DIDL-Lite XML 字符串。\n        '
+      str: '<?xml version="1.0" encoding="UTF-8"?><DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:song="www.linkplay.com/song/" xmlns:custom="www.linkplay.com/custom/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><upnp:class>object.item.a'
+      str: 'itemName'
+      str: '<item id="%s" name="%s">'
+      str: '<song:id>%s</song:id>'
+      str: '<song:albumid></song:albumid>'
+      str: '<song:singerid></song:singerid>'
+      str: '<dc:title>%s</dc:title>'
+      str: '<upnp:artist></upnp:artist>'
+      str: '<upnp:album></upnp:album>'
+      str: '<res protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;" duration="0"></res>'
+      str: '<upnp:albumArtURI>%s</upnp:albumArtURI>'
+      str: '</item></DIDL-Lite>'
+
+def LPWiiMRadioPlayHeader()  line 113
+  names: __name__, __module__, __qualname__, __doc__, __init__, __classcell__
+    str: 'LPWiiMRadioPlayHeader'
+    str: 'WiiMRadio 播放列表头信息。'
+    str: 'LPWiiMRadioPlayHeader.__init__'
+
+  def LPWiiMRadioPlayHeader.__init__(self)  line 116
+    names: super, __init__, LPPlayListSource, WiiMRadio, value, mediaSource
+
+def LPWiiMRadioPlayItem()  line 121
+  names: __name__, __module__, __qualname__, __doc__, __init__, __classcell__
+    str: 'LPWiiMRadioPlayItem'
+    str: 'WiiMRadio 单个电台播放条目。'
+    str: 'LPWiiMRadioPlayItem.__init__'
+
+  def LPWiiMRadioPlayItem.__init__(self)  line 124
+    names: super, __init__, LPPlayListSource, WiiMRadio, value, trackSource, itemName

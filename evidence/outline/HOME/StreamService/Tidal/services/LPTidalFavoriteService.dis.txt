@@ -1,0 +1,950 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL 收藏写操作服务。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Any', 'Callable', 'Dict', 'Optional'))
+              8 IMPORT_NAME              1 (typing)
+             10 IMPORT_FROM              2 (Any)
+             12 STORE_NAME               2 (Any)
+             14 IMPORT_FROM              3 (Callable)
+             16 STORE_NAME               3 (Callable)
+             18 IMPORT_FROM              4 (Dict)
+             20 STORE_NAME               4 (Dict)
+             22 IMPORT_FROM              5 (Optional)
+             24 STORE_NAME               5 (Optional)
+             26 POP_TOP
+
+  8          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('QCoreApplication', 'QObject'))
+             32 IMPORT_NAME              6 (PyQt6.QtCore)
+             34 IMPORT_FROM              7 (QCoreApplication)
+             36 STORE_NAME               7 (QCoreApplication)
+             38 IMPORT_FROM              8 (QObject)
+             40 STORE_NAME               8 (QObject)
+             42 POP_TOP
+
+ 10          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               4 (None)
+             48 IMPORT_NAME              9 (LPGlobalUI)
+             50 STORE_NAME               9 (LPGlobalUI)
+
+ 11          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               5 (('LPTidalRequest', 'LPTidalRequestScheduler'))
+             56 IMPORT_NAME             10 (HOME.StreamService.Tidal.services.LPTidalRequestScheduler)
+             58 IMPORT_FROM             11 (LPTidalRequest)
+             60 STORE_NAME              11 (LPTidalRequest)
+             62 IMPORT_FROM             12 (LPTidalRequestScheduler)
+             64 STORE_NAME              12 (LPTidalRequestScheduler)
+             66 POP_TOP
+
+ 12          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               6 (('LPTidalStore',))
+             72 IMPORT_NAME             13 (HOME.StreamService.Tidal.state.LPTidalStore)
+             74 IMPORT_FROM             14 (LPTidalStore)
+             76 STORE_NAME              14 (LPTidalStore)
+             78 POP_TOP
+
+ 13          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               7 (('LPFavoriteCacheManager',))
+             84 IMPORT_NAME             15 (LPClientFramework.LPFavoriteCacheManager)
+             86 IMPORT_FROM             16 (LPFavoriteCacheManager)
+             88 STORE_NAME              16 (LPFavoriteCacheManager)
+             90 POP_TOP
+
+ 14          92 LOAD_CONST               1 (0)
+             94 LOAD_CONST               8 (('LPTidalFavoriteManager',))
+             96 IMPORT_NAME             17 (LPClientFramework.LPMSManager.Tidal.LPTidalFavoriteManager)
+             98 IMPORT_FROM             18 (LPTidalFavoriteManager)
+            100 STORE_NAME              18 (LPTidalFavoriteManager)
+            102 POP_TOP
+
+ 15         104 LOAD_CONST               1 (0)
+            106 LOAD_CONST               9 (('logger',))
+            108 IMPORT_NAME             19 (LPClientFramework.LPUtility)
+            110 IMPORT_FROM             20 (logger)
+            112 STORE_NAME              20 (logger)
+            114 POP_TOP
+
+ 19         116 LOAD_CONST              10 (60.0)
+            118 STORE_NAME              21 (FAVORITE_PENDING_TIMEOUT_SECONDS)
+
+ 22         120 LOAD_NAME               22 (object)
+            122 LOAD_CONST               4 (None)
+            124 LOAD_CONST              11 (('result', 'return'))
+            126 BUILD_CONST_KEY_MAP      2
+            128 LOAD_CONST              12 (<code object toastFavoriteResult at 0x000001F3253C49D0, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 22>)
+            130 LOAD_CONST              13 ('toastFavoriteResult')
+            132 MAKE_FUNCTION            4 (annotations)
+            134 STORE_NAME              23 (toastFavoriteResult)
+
+ 51         136 LOAD_BUILD_CLASS
+            138 LOAD_CONST              14 (<code object LPTidalFavoriteService at 0x000001F3253C4450, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 51>)
+            140 LOAD_CONST              15 ('LPTidalFavoriteService')
+            142 MAKE_FUNCTION            0
+            144 LOAD_CONST              15 ('LPTidalFavoriteService')
+            146 LOAD_NAME                8 (QObject)
+            148 CALL_FUNCTION            3
+            150 STORE_NAME              24 (LPTidalFavoriteService)
+            152 LOAD_CONST               4 (None)
+            154 RETURN_VALUE
+
+=== toastFavoriteResult ===
+ 31           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (result)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+ 32          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+ 33     >>   14 LOAD_GLOBAL              2 (bool)
+             16 LOAD_FAST                0 (result)
+             18 LOAD_METHOD              3 (get)
+             20 LOAD_CONST               2 ('success')
+             22 CALL_METHOD              1
+             24 CALL_FUNCTION            1
+             26 STORE_FAST               1 (success)
+
+ 34          28 LOAD_GLOBAL              2 (bool)
+             30 LOAD_FAST                0 (result)
+             32 LOAD_METHOD              3 (get)
+             34 LOAD_CONST               3 ('desiredFavorite')
+             36 LOAD_CONST               4 (False)
+             38 CALL_METHOD              2
+             40 CALL_FUNCTION            1
+             42 STORE_FAST               2 (desired_favorite)
+
+ 35          44 LOAD_FAST                1 (success)
+             46 POP_JUMP_IF_FALSE       70
+
+ 36          48 LOAD_GLOBAL              4 (QCoreApplication)
+             50 LOAD_METHOD              5 (translate)
+
+ 37          52 LOAD_CONST               5 ('Qobuz Favorite')
+
+ 38          54 LOAD_FAST                2 (desired_favorite)
+             56 POP_JUMP_IF_FALSE       62
+             58 LOAD_CONST               6 ('Added to Favorites')
+             60 JUMP_FORWARD             2 (to 64)
+        >>   62 LOAD_CONST               7 ('Removed From Favorites')
+
+ 36     >>   64 CALL_METHOD              2
+             66 STORE_FAST               3 (message)
+             68 JUMP_FORWARD            20 (to 90)
+
+ 41     >>   70 LOAD_GLOBAL              4 (QCoreApplication)
+             72 LOAD_METHOD              5 (translate)
+
+ 42          74 LOAD_CONST               5 ('Qobuz Favorite')
+
+ 43          76 LOAD_FAST                2 (desired_favorite)
+             78 POP_JUMP_IF_FALSE       84
+             80 LOAD_CONST               8 ('Add Failed')
+             82 JUMP_FORWARD             2 (to 86)
+        >>   84 LOAD_CONST               9 ('Remove Failed')
+
+ 41     >>   86 CALL_METHOD              2
+             88 STORE_FAST               3 (message)
+
+ 45     >>   90 LOAD_GLOBAL              6 (getattr)
+             92 LOAD_GLOBAL              7 (LPGlobalUI)
+             94 LOAD_CONST              10 ('toast')
+             96 LOAD_CONST               1 (None)
+             98 CALL_FUNCTION            3
+            100 STORE_FAST               4 (toast)
+
+ 46         102 LOAD_FAST                4 (toast)
+            104 LOAD_CONST               1 (None)
+            106 IS_OP                    0
+            108 POP_JUMP_IF_FALSE      114
+
+ 47         110 LOAD_CONST               1 (None)
+            112 RETURN_VALUE
+
+ 48     >>  114 LOAD_FAST                4 (toast)
+            116 LOAD_METHOD              8 (showToast)
+            118 LOAD_FAST                3 (message)
+            120 LOAD_GLOBAL              6 (getattr)
+            122 LOAD_GLOBAL              7 (LPGlobalUI)
+            124 LOAD_CONST              11 ('mainWindow')
+            126 LOAD_CONST               1 (None)
+            128 CALL_FUNCTION            3
+            130 CALL_METHOD              2
+            132 POP_TOP
+            134 LOAD_CONST               1 (None)
+            136 RETURN_VALUE
+
+=== LPTidalFavoriteService ===
+ 51           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalFavoriteService')
+              6 STORE_NAME               2 (__qualname__)
+
+ 52           8 LOAD_CONST               1 ('TIDAL 收藏写操作唯一编排者，负责乐观更新、常驻调度、提交与失败回滚。\n\n    该服务是进程级单例，调度器不随 TIDAL 页面销毁而关闭：页面只负责发起与展示，\n    已确认的收藏结果一定写入通用缓存与 Store，避免页面离场丢弃回调导致状态长期不一致。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+ 58          12 LOAD_CONST               2 (None)
+             14 STORE_NAME               4 (_instance)
+
+ 60          16 LOAD_NAME                5 (classmethod)
+
+ 61          18 LOAD_CONST               3 (<code object instance at 0x000001F3253C4DF0, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 60>)
+             20 LOAD_CONST               4 ('LPTidalFavoriteService.instance')
+             22 MAKE_FUNCTION            0
+             24 CALL_FUNCTION            1
+             26 STORE_NAME               6 (instance)
+
+ 71          28 LOAD_CONST              20 ((None,))
+             30 LOAD_NAME                7 (Optional)
+             32 LOAD_NAME                8 (QObject)
+             34 BINARY_SUBSCR
+             36 LOAD_CONST               5 (('parent',))
+             38 BUILD_CONST_KEY_MAP      1
+             40 LOAD_CLOSURE             0 (__class__)
+             42 BUILD_TUPLE              1
+             44 LOAD_CONST               6 (<code object __init__ at 0x000001F3253C4EA0, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 71>)
+             46 LOAD_CONST               7 ('LPTidalFavoriteService.__init__')
+             48 MAKE_FUNCTION           13 (defaults, annotations, closure)
+             50 STORE_NAME               9 (__init__)
+
+ 82          52 LOAD_CONST              21 ((None,))
+
+ 84          54 LOAD_NAME               10 (str)
+
+ 85          56 LOAD_NAME               10 (str)
+
+ 86          58 LOAD_NAME               11 (bool)
+
+ 87          60 LOAD_NAME                7 (Optional)
+             62 LOAD_NAME               12 (Callable)
+             64 LOAD_NAME               13 (Dict)
+             66 LOAD_NAME               10 (str)
+             68 LOAD_NAME               14 (Any)
+             70 BUILD_TUPLE              2
+             72 BINARY_SUBSCR
+             74 BUILD_LIST               1
+             76 LOAD_CONST               2 (None)
+             78 BUILD_TUPLE              2
+             80 BINARY_SUBSCR
+             82 BINARY_SUBSCR
+
+ 88          84 LOAD_CONST               2 (None)
+
+ 82          86 LOAD_CONST               8 (('itemType', 'itemId', 'desiredFavorite', 'callback', 'return'))
+             88 BUILD_CONST_KEY_MAP      5
+             90 LOAD_CONST               9 (<code object setFavorite at 0x000001F3253C4870, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 82>)
+             92 LOAD_CONST              10 ('LPTidalFavoriteService.setFavorite')
+             94 MAKE_FUNCTION            5 (defaults, annotations)
+             96 STORE_NAME              15 (setFavorite)
+
+155          98 LOAD_NAME               16 (int)
+            100 LOAD_CONST              11 (('return',))
+            102 BUILD_CONST_KEY_MAP      1
+            104 LOAD_CONST              12 (<code object sweepStaleOperations at 0x000001F3253C40E0, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 155>)
+            106 LOAD_CONST              13 ('LPTidalFavoriteService.sweepStaleOperations')
+            108 MAKE_FUNCTION            4 (annotations)
+            110 STORE_NAME              17 (sweepStaleOperations)
+
+184         112 LOAD_NAME                7 (Optional)
+            114 LOAD_NAME               12 (Callable)
+            116 LOAD_NAME               13 (Dict)
+            118 LOAD_NAME               10 (str)
+            120 LOAD_NAME               14 (Any)
+            122 BUILD_TUPLE              2
+            124 BINARY_SUBSCR
+            126 BUILD_LIST               1
+            128 LOAD_CONST               2 (None)
+            130 BUILD_TUPLE              2
+            132 BINARY_SUBSCR
+            134 BINARY_SUBSCR
+            136 LOAD_NAME               13 (Dict)
+            138 LOAD_NAME               10 (str)
+            140 LOAD_NAME               14 (Any)
+            142 BUILD_TUPLE              2
+            144 BINARY_SUBSCR
+            146 LOAD_CONST               2 (None)
+            148 LOAD_CONST              14 (('callback', 'result', 'return'))
+            150 BUILD_CONST_KEY_MAP      3
+            152 LOAD_CONST              15 (<code object _notifyCallback at 0x000001F3253C43A0, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 184>)
+            154 LOAD_CONST              16 ('LPTidalFavoriteService._notifyCallback')
+            156 MAKE_FUNCTION            4 (annotations)
+            158 STORE_NAME              18 (_notifyCallback)
+
+201         160 LOAD_NAME               10 (str)
+
+202         162 LOAD_NAME               10 (str)
+
+203         164 LOAD_NAME               10 (str)
+
+204         166 LOAD_NAME               11 (bool)
+
+205         168 LOAD_NAME               16 (int)
+
+206         170 LOAD_NAME               19 (object)
+
+207         172 LOAD_NAME               11 (bool)
+
+208         174 LOAD_NAME                7 (Optional)
+            176 LOAD_NAME               12 (Callable)
+            178 LOAD_NAME               13 (Dict)
+            180 LOAD_NAME               10 (str)
+            182 LOAD_NAME               14 (Any)
+            184 BUILD_TUPLE              2
+            186 BINARY_SUBSCR
+            188 BUILD_LIST               1
+            190 LOAD_CONST               2 (None)
+            192 BUILD_TUPLE              2
+            194 BINARY_SUBSCR
+            196 BINARY_SUBSCR
+
+209         198 LOAD_NAME               19 (object)
+
+210         200 LOAD_CONST               2 (None)
+
+199         202 LOAD_CONST              17 (('requestedUserId', 'itemType', 'itemId', 'wasFavorite', 'operationId', 'previousFavoriteIds', 'desiredFavorite', 'callback', 'result', 'return'))
+            204 BUILD_CONST_KEY_MAP     10
+            206 LOAD_CONST              18 (<code object _handleResult at 0x000001F3253C4D40, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 199>)
+            208 LOAD_CONST              19 ('LPTidalFavoriteService._handleResult')
+            210 MAKE_FUNCTION            4 (annotations)
+            212 STORE_NAME              20 (_handleResult)
+            214 LOAD_CLOSURE             0 (__class__)
+            216 DUP_TOP
+            218 STORE_NAME              21 (__classcell__)
+            220 RETURN_VALUE
+
+=== LPTidalFavoriteService.instance ===
+ 67           0 LOAD_FAST                0 (cls)
+              2 LOAD_ATTR                0 (_instance)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       18
+
+ 68          10 LOAD_FAST                0 (cls)
+             12 CALL_FUNCTION            0
+             14 LOAD_FAST                0 (cls)
+             16 STORE_ATTR               0 (_instance)
+
+ 69     >>   18 LOAD_FAST                0 (cls)
+             20 LOAD_ATTR                0 (_instance)
+             22 RETURN_VALUE
+
+=== LPTidalFavoriteService.__init__ ===
+ 78           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 79          12 LOAD_GLOBAL              2 (LPTidalFavoriteManager)
+             14 LOAD_FAST                0 (self)
+             16 CALL_FUNCTION            1
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               3 (_manager)
+
+ 80          22 LOAD_GLOBAL              4 (LPTidalRequestScheduler)
+             24 LOAD_FAST                0 (self)
+             26 CALL_FUNCTION            1
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               5 (_scheduler)
+             32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+=== LPTidalFavoriteService.setFavorite ===
+102           0 LOAD_GLOBAL              0 (LPTidalStore)
+              2 LOAD_METHOD              1 (instance)
+              4 CALL_METHOD              0
+              6 STORE_FAST               5 (store)
+
+103           8 LOAD_FAST                5 (store)
+             10 LOAD_ATTR                2 (accountState)
+             12 STORE_FAST               6 (account)
+
+104          14 LOAD_GLOBAL              3 (str)
+             16 LOAD_FAST                6 (account)
+             18 LOAD_METHOD              4 (get)
+             20 LOAD_CONST               1 ('userId')
+             22 LOAD_CONST               2 ('')
+             24 CALL_METHOD              2
+             26 JUMP_IF_TRUE_OR_POP     30
+             28 LOAD_CONST               2 ('')
+        >>   30 CALL_FUNCTION            1
+             32 LOAD_METHOD              5 (strip)
+             34 CALL_METHOD              0
+             36 STORE_DEREF              7 (userId)
+
+105          38 LOAD_GLOBAL              3 (str)
+             40 LOAD_FAST                1 (itemType)
+             42 JUMP_IF_TRUE_OR_POP     46
+             44 LOAD_CONST               2 ('')
+        >>   46 CALL_FUNCTION            1
+             48 LOAD_METHOD              5 (strip)
+             50 CALL_METHOD              0
+             52 LOAD_METHOD              6 (lower)
+             54 CALL_METHOD              0
+             56 STORE_DEREF              3 (normalized_type)
+
+106          58 LOAD_GLOBAL              3 (str)
+             60 LOAD_FAST                2 (itemId)
+             62 JUMP_IF_TRUE_OR_POP     66
+             64 LOAD_CONST               2 ('')
+        >>   66 CALL_FUNCTION            1
+             68 LOAD_METHOD              5 (strip)
+             70 CALL_METHOD              0
+             72 STORE_DEREF              2 (normalized_id)
+
+108          74 LOAD_DEREF               3 (normalized_type)
+
+109          76 LOAD_DEREF               2 (normalized_id)
+
+110          78 LOAD_GLOBAL              7 (bool)
+             80 LOAD_DEREF               1 (desiredFavorite)
+             82 CALL_FUNCTION            1
+
+107          84 LOAD_CONST               3 (('itemType', 'itemId', 'desiredFavorite'))
+             86 BUILD_CONST_KEY_MAP      3
+             88 STORE_FAST               7 (result_prefix)
+
+112          90 LOAD_DEREF               7 (userId)
+             92 POP_JUMP_IF_TRUE       126
+
+114          94 LOAD_DEREF               6 (self)
+             96 LOAD_METHOD              8 (_notifyCallback)
+             98 LOAD_DEREF               0 (callback)
+            100 BUILD_MAP                0
+            102 LOAD_FAST                7 (result_prefix)
+            104 DICT_UPDATE              1
+            106 LOAD_CONST               4 (False)
+            108 LOAD_CONST               5 ('not_logged_in')
+            110 LOAD_CONST               4 (False)
+            112 LOAD_CONST               6 (('success', 'error', 'wasFavorite'))
+            114 BUILD_CONST_KEY_MAP      3
+            116 DICT_UPDATE              1
+            118 CALL_METHOD              2
+            120 POP_TOP
+
+115         122 LOAD_CONST               7 (None)
+            124 RETURN_VALUE
+
+116     >>  126 LOAD_DEREF               3 (normalized_type)
+            128 POP_JUMP_IF_FALSE      134
+            130 LOAD_DEREF               2 (normalized_id)
+            132 POP_JUMP_IF_TRUE       166
+
+117     >>  134 LOAD_DEREF               6 (self)
+            136 LOAD_METHOD              8 (_notifyCallback)
+            138 LOAD_DEREF               0 (callback)
+            140 BUILD_MAP                0
+            142 LOAD_FAST                7 (result_prefix)
+            144 DICT_UPDATE              1
+            146 LOAD_CONST               4 (False)
+            148 LOAD_CONST               8 ('invalid_target')
+            150 LOAD_CONST               4 (False)
+            152 LOAD_CONST               6 (('success', 'error', 'wasFavorite'))
+            154 BUILD_CONST_KEY_MAP      3
+            156 DICT_UPDATE              1
+            158 CALL_METHOD              2
+            160 POP_TOP
+
+118         162 LOAD_CONST               7 (None)
+            164 RETURN_VALUE
+
+120     >>  166 LOAD_FAST                5 (store)
+            168 LOAD_ATTR                9 (favoriteState)
+            170 STORE_FAST               8 (favorite_state)
+
+121         172 LOAD_FAST                8 (favorite_state)
+            174 LOAD_METHOD             10 (isFavorite)
+            176 LOAD_DEREF               3 (normalized_type)
+            178 LOAD_DEREF               2 (normalized_id)
+            180 CALL_METHOD              2
+            182 STORE_DEREF              8 (was_favorite)
+
+122         184 LOAD_FAST                8 (favorite_state)
+            186 LOAD_ATTR               11 (favoriteIds)
+            188 STORE_DEREF              5 (previous_favorite_ids)
+
+123         190 LOAD_FAST                8 (favorite_state)
+            192 LOAD_METHOD             12 (beginOperation)
+            194 LOAD_DEREF               7 (userId)
+            196 LOAD_DEREF               3 (normalized_type)
+            198 LOAD_DEREF               2 (normalized_id)
+            200 LOAD_GLOBAL              7 (bool)
+            202 LOAD_DEREF               1 (desiredFavorite)
+            204 CALL_FUNCTION            1
+            206 CALL_METHOD              4
+            208 STORE_DEREF              4 (operation_id)
+
+124         210 LOAD_DEREF               4 (operation_id)
+            212 LOAD_CONST               9 (0)
+            214 COMPARE_OP               1 (<=)
+            216 POP_JUMP_IF_FALSE      250
+
+125         218 LOAD_DEREF               6 (self)
+            220 LOAD_METHOD              8 (_notifyCallback)
+            222 LOAD_DEREF               0 (callback)
+            224 BUILD_MAP                0
+            226 LOAD_FAST                7 (result_prefix)
+            228 DICT_UPDATE              1
+            230 LOAD_CONST               4 (False)
+            232 LOAD_CONST              10 ('operation_rejected')
+            234 LOAD_DEREF               8 (was_favorite)
+            236 LOAD_CONST               6 (('success', 'error', 'wasFavorite'))
+            238 BUILD_CONST_KEY_MAP      3
+            240 DICT_UPDATE              1
+            242 CALL_METHOD              2
+            244 POP_TOP
+
+126         246 LOAD_CONST               7 (None)
+            248 RETURN_VALUE
+
+127     >>  250 LOAD_FAST                8 (favorite_state)
+            252 LOAD_METHOD             13 (setItemFavorite)
+            254 LOAD_DEREF               3 (normalized_type)
+            256 LOAD_DEREF               2 (normalized_id)
+            258 LOAD_GLOBAL              7 (bool)
+            260 LOAD_DEREF               1 (desiredFavorite)
+            262 CALL_FUNCTION            1
+            264 CALL_METHOD              3
+            266 POP_TOP
+
+129         268 LOAD_GLOBAL             14 (LPTidalRequest)
+
+132         270 LOAD_CONST              11 ('tidal_favorite_%s_%s_%s::%s')
+            272 LOAD_DEREF               7 (userId)
+            274 LOAD_DEREF               3 (normalized_type)
+            276 LOAD_DEREF               2 (normalized_id)
+            278 LOAD_DEREF               4 (operation_id)
+            280 BUILD_TUPLE              4
+            282 BINARY_MODULO
+
+133         284 LOAD_CONST              12 ('tidal_favorite')
+
+134         286 LOAD_CLOSURE             1 (desiredFavorite)
+            288 LOAD_CLOSURE             2 (normalized_id)
+            290 LOAD_CLOSURE             3 (normalized_type)
+            292 LOAD_CLOSURE             5 (previous_favorite_ids)
+            294 LOAD_CLOSURE             6 (self)
+            296 LOAD_CLOSURE             7 (userId)
+            298 BUILD_TUPLE              6
+            300 LOAD_CONST              13 (<code object <lambda> at 0x000001F3253C4030, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 134>)
+            302 LOAD_CONST              14 ('LPTidalFavoriteService.setFavorite.<locals>.<lambda>')
+            304 MAKE_FUNCTION            8 (closure)
+
+141         306 LOAD_CLOSURE             0 (callback)
+            308 LOAD_CLOSURE             1 (desiredFavorite)
+            310 LOAD_CLOSURE             2 (normalized_id)
+            312 LOAD_CLOSURE             3 (normalized_type)
+            314 LOAD_CLOSURE             4 (operation_id)
+            316 LOAD_CLOSURE             5 (previous_favorite_ids)
+            318 LOAD_CLOSURE             6 (self)
+            320 LOAD_CLOSURE             7 (userId)
+            322 LOAD_CLOSURE             8 (was_favorite)
+            324 BUILD_TUPLE              9
+            326 LOAD_CONST              15 (<code object <lambda> at 0x000001F3253C4F50, file "StreamService\Tidal\services\LPTidalFavoriteService.py", line 141>)
+            328 LOAD_CONST              14 ('LPTidalFavoriteService.setFavorite.<locals>.<lambda>')
+            330 MAKE_FUNCTION            8 (closure)
+
+129         332 LOAD_CONST              16 (('key', 'tag', 'task', 'callback'))
+            334 CALL_FUNCTION_KW         4
+            336 STORE_FAST               9 (request)
+
+153         338 LOAD_DEREF               6 (self)
+            340 LOAD_ATTR               15 (_scheduler)
+            342 LOAD_ATTR               16 (enqueue)
+            344 LOAD_FAST                9 (request)
+            346 LOAD_CONST               9 (0)
+            348 LOAD_CONST              17 (('priority',))
+            350 CALL_FUNCTION_KW         2
+            352 POP_TOP
+            354 LOAD_CONST               7 (None)
+            356 RETURN_VALUE
+
+=== LPTidalFavoriteService.setFavorite.<lambda> ===
+134           0 LOAD_DEREF               4 (self)
+              2 LOAD_ATTR                0 (_manager)
+              4 LOAD_ATTR                1 (requestSetFavorite)
+
+135           6 LOAD_DEREF               5 (userId)
+
+136           8 LOAD_DEREF               2 (normalized_type)
+
+137          10 LOAD_DEREF               1 (normalized_id)
+
+138          12 LOAD_GLOBAL              2 (bool)
+             14 LOAD_DEREF               0 (desiredFavorite)
+             16 CALL_FUNCTION            1
+
+139          18 LOAD_DEREF               3 (previous_favorite_ids)
+
+134          20 LOAD_CONST               1 (('previousFavoriteIds',))
+             22 CALL_FUNCTION_KW         5
+             24 RETURN_VALUE
+
+=== LPTidalFavoriteService.setFavorite.<lambda> ===
+141           0 LOAD_DEREF               6 (self)
+              2 LOAD_METHOD              0 (_handleResult)
+
+142           4 LOAD_DEREF               7 (userId)
+
+143           6 LOAD_DEREF               3 (normalized_type)
+
+144           8 LOAD_DEREF               2 (normalized_id)
+
+145          10 LOAD_DEREF               8 (was_favorite)
+
+146          12 LOAD_DEREF               4 (operation_id)
+
+147          14 LOAD_DEREF               5 (previous_favorite_ids)
+
+148          16 LOAD_GLOBAL              1 (bool)
+             18 LOAD_DEREF               1 (desiredFavorite)
+             20 CALL_FUNCTION            1
+
+149          22 LOAD_DEREF               0 (callback)
+
+150          24 LOAD_FAST                0 (result)
+
+141          26 CALL_METHOD              9
+             28 RETURN_VALUE
+
+=== LPTidalFavoriteService.sweepStaleOperations ===
+164           0 LOAD_GLOBAL              0 (LPTidalStore)
+              2 LOAD_METHOD              1 (instance)
+              4 CALL_METHOD              0
+              6 STORE_FAST               1 (store)
+
+165           8 LOAD_FAST                1 (store)
+             10 LOAD_ATTR                2 (favoriteState)
+             12 STORE_FAST               2 (favorite_state)
+
+166          14 LOAD_FAST                2 (favorite_state)
+             16 LOAD_METHOD              3 (sweepStaleOperations)
+             18 LOAD_GLOBAL              4 (FAVORITE_PENDING_TIMEOUT_SECONDS)
+             20 CALL_METHOD              1
+             22 STORE_FAST               3 (removed)
+
+167          24 LOAD_FAST                3 (removed)
+             26 LOAD_CONST               1 (0)
+             28 COMPARE_OP               1 (<=)
+             30 POP_JUMP_IF_FALSE       36
+
+168          32 LOAD_CONST               1 (0)
+             34 RETURN_VALUE
+
+169     >>   36 LOAD_GLOBAL              5 (str)
+             38 LOAD_FAST                1 (store)
+             40 LOAD_ATTR                6 (accountState)
+             42 LOAD_METHOD              7 (get)
+             44 LOAD_CONST               2 ('userId')
+             46 LOAD_CONST               3 ('')
+             48 CALL_METHOD              2
+             50 JUMP_IF_TRUE_OR_POP     54
+             52 LOAD_CONST               3 ('')
+        >>   54 CALL_FUNCTION            1
+             56 LOAD_METHOD              8 (strip)
+             58 CALL_METHOD              0
+             60 STORE_FAST               4 (userId)
+
+170          62 LOAD_FAST                4 (userId)
+             64 POP_JUMP_IF_FALSE       96
+
+171          66 LOAD_GLOBAL              9 (LPFavoriteCacheManager)
+             68 LOAD_METHOD              1 (instance)
+             70 CALL_METHOD              0
+             72 LOAD_METHOD             10 (snapshot)
+             74 LOAD_CONST               4 ('Tidal')
+             76 LOAD_FAST                4 (userId)
+             78 CALL_METHOD              2
+             80 STORE_FAST               5 (snapshot)
+
+172          82 LOAD_FAST                5 (snapshot)
+             84 POP_JUMP_IF_FALSE       96
+
+174          86 LOAD_FAST                2 (favorite_state)
+             88 LOAD_METHOD             11 (setFavoriteIds)
+             90 LOAD_FAST                5 (snapshot)
+             92 CALL_METHOD              1
+             94 POP_TOP
+
+175     >>   96 LOAD_FAST                1 (store)
+             98 LOAD_METHOD             12 (syncFavoriteFlagsFromState)
+            100 CALL_METHOD              0
+            102 POP_TOP
+
+176         104 LOAD_FAST                1 (store)
+            106 LOAD_METHOD             13 (notifyCollectionChanged)
+            108 LOAD_CONST               5 ('all')
+            110 CALL_METHOD              1
+            112 POP_TOP
+
+177         114 LOAD_GLOBAL             14 (logger)
+            116 LOAD_METHOD             15 (warning)
+
+178         118 LOAD_CONST               6 ('[TIDAL] sweep stale favorite operations removed=%s userId=%s')
+
+179         120 LOAD_FAST                3 (removed)
+
+180         122 LOAD_FAST                4 (userId)
+
+177         124 CALL_METHOD              3
+            126 POP_TOP
+
+182         128 LOAD_FAST                3 (removed)
+            130 RETURN_VALUE
+
+=== LPTidalFavoriteService._notifyCallback ===
+192           0 LOAD_FAST                1 (callback)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+193           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+194     >>   12 SETUP_FINALLY           12 (to 26)
+
+195          14 LOAD_FAST                1 (callback)
+             16 LOAD_FAST                2 (result)
+             18 CALL_FUNCTION            1
+             20 POP_TOP
+             22 POP_BLOCK
+             24 JUMP_FORWARD            48 (to 74)
+
+196     >>   26 DUP_TOP
+             28 LOAD_GLOBAL              0 (Exception)
+             30 JUMP_IF_NOT_EXC_MATCH    72
+             32 POP_TOP
+             34 STORE_FAST               3 (exc)
+             36 POP_TOP
+             38 SETUP_FINALLY           24 (to 64)
+
+197          40 LOAD_GLOBAL              1 (logger)
+             42 LOAD_METHOD              2 (warning)
+             44 LOAD_CONST               2 ('[TIDAL] favorite callback failed: %s')
+             46 LOAD_FAST                3 (exc)
+             48 CALL_METHOD              2
+             50 POP_TOP
+             52 POP_BLOCK
+             54 POP_EXCEPT
+             56 LOAD_CONST               1 (None)
+             58 STORE_FAST               3 (exc)
+             60 DELETE_FAST              3 (exc)
+             62 JUMP_FORWARD            10 (to 74)
+        >>   64 LOAD_CONST               1 (None)
+             66 STORE_FAST               3 (exc)
+             68 DELETE_FAST              3 (exc)
+             70 RERAISE
+        >>   72 RERAISE
+        >>   74 LOAD_CONST               1 (None)
+             76 RETURN_VALUE
+
+=== LPTidalFavoriteService._handleResult ===
+225           0 LOAD_GLOBAL              0 (LPTidalStore)
+              2 LOAD_METHOD              1 (instance)
+              4 CALL_METHOD              0
+              6 STORE_FAST              10 (store)
+
+226           8 LOAD_GLOBAL              2 (str)
+             10 LOAD_FAST               10 (store)
+             12 LOAD_ATTR                3 (accountState)
+             14 LOAD_METHOD              4 (get)
+             16 LOAD_CONST               1 ('userId')
+             18 LOAD_CONST               2 ('')
+             20 CALL_METHOD              2
+             22 JUMP_IF_TRUE_OR_POP     26
+             24 LOAD_CONST               2 ('')
+        >>   26 CALL_FUNCTION            1
+             28 LOAD_METHOD              5 (strip)
+             30 CALL_METHOD              0
+             32 LOAD_GLOBAL              2 (str)
+             34 LOAD_FAST                1 (requestedUserId)
+             36 JUMP_IF_TRUE_OR_POP     40
+             38 LOAD_CONST               2 ('')
+        >>   40 CALL_FUNCTION            1
+             42 LOAD_METHOD              5 (strip)
+             44 CALL_METHOD              0
+             46 COMPARE_OP               3 (!=)
+             48 POP_JUMP_IF_FALSE       68
+
+227          50 LOAD_GLOBAL              6 (logger)
+             52 LOAD_METHOD              7 (debug)
+             54 LOAD_CONST               3 ('[TIDAL] skip stale favorite result userId=%s')
+             56 LOAD_FAST                1 (requestedUserId)
+             58 BINARY_MODULO
+             60 CALL_METHOD              1
+             62 POP_TOP
+
+228          64 LOAD_CONST               4 (None)
+             66 RETURN_VALUE
+
+229     >>   68 LOAD_FAST               10 (store)
+             70 LOAD_ATTR                8 (favoriteState)
+             72 STORE_FAST              11 (favorite_state)
+
+230          74 LOAD_FAST               11 (favorite_state)
+             76 LOAD_METHOD              9 (isLatestOperation)
+             78 LOAD_FAST                1 (requestedUserId)
+             80 LOAD_FAST                2 (itemType)
+             82 LOAD_FAST                3 (itemId)
+             84 LOAD_FAST                5 (operationId)
+             86 CALL_METHOD              4
+             88 POP_JUMP_IF_TRUE       104
+
+231          90 LOAD_GLOBAL              6 (logger)
+             92 LOAD_METHOD              7 (debug)
+             94 LOAD_CONST               5 ('[TIDAL] skip stale favorite operation')
+             96 CALL_METHOD              1
+             98 POP_TOP
+
+232         100 LOAD_CONST               4 (None)
+            102 RETURN_VALUE
+
+234     >>  104 LOAD_GLOBAL             10 (isinstance)
+            106 LOAD_FAST                9 (result)
+            108 LOAD_GLOBAL             11 (dict)
+            110 CALL_FUNCTION            2
+            112 JUMP_IF_FALSE_OR_POP   126
+            114 LOAD_GLOBAL             12 (bool)
+            116 LOAD_FAST                9 (result)
+            118 LOAD_METHOD              4 (get)
+            120 LOAD_CONST               6 ('success')
+            122 CALL_METHOD              1
+            124 CALL_FUNCTION            1
+        >>  126 STORE_FAST              12 (success)
+
+235         128 LOAD_FAST               12 (success)
+            130 POP_JUMP_IF_FALSE      200
+
+236         132 LOAD_FAST                0 (self)
+            134 LOAD_ATTR               13 (_manager)
+            136 LOAD_METHOD             14 (applyFavoriteIds)
+            138 LOAD_FAST                9 (result)
+            140 LOAD_METHOD              4 (get)
+            142 LOAD_CONST               7 ('favoriteIds')
+            144 BUILD_MAP                0
+            146 CALL_METHOD              2
+            148 JUMP_IF_TRUE_OR_POP    152
+            150 BUILD_MAP                0
+        >>  152 CALL_METHOD              1
+            154 POP_TOP
+
+237         156 LOAD_FAST               11 (favorite_state)
+            158 LOAD_METHOD             15 (finishOperation)
+            160 LOAD_FAST                1 (requestedUserId)
+            162 LOAD_FAST                2 (itemType)
+            164 LOAD_FAST                3 (itemId)
+            166 LOAD_FAST                5 (operationId)
+            168 CALL_METHOD              4
+            170 POP_TOP
+
+238         172 LOAD_FAST                7 (desiredFavorite)
+            174 POP_JUMP_IF_TRUE       188
+
+239         176 LOAD_FAST               10 (store)
+            178 LOAD_METHOD             16 (removeFavoriteFromCollectionSeeAll)
+            180 LOAD_FAST                2 (itemType)
+            182 LOAD_FAST                3 (itemId)
+            184 CALL_METHOD              2
+            186 POP_TOP
+
+240     >>  188 LOAD_FAST               10 (store)
+            190 LOAD_METHOD             17 (notifyCollectionChanged)
+            192 LOAD_CONST               8 ('all')
+            194 CALL_METHOD              1
+            196 POP_TOP
+            198 JUMP_FORWARD            44 (to 244)
+
+242     >>  200 LOAD_FAST               11 (favorite_state)
+            202 LOAD_METHOD             15 (finishOperation)
+            204 LOAD_FAST                1 (requestedUserId)
+            206 LOAD_FAST                2 (itemType)
+            208 LOAD_FAST                3 (itemId)
+            210 LOAD_FAST                5 (operationId)
+            212 CALL_METHOD              4
+            214 POP_TOP
+
+243         216 LOAD_FAST               11 (favorite_state)
+            218 LOAD_METHOD             18 (setFavoriteIds)
+            220 LOAD_FAST                6 (previousFavoriteIds)
+            222 JUMP_IF_TRUE_OR_POP    226
+            224 BUILD_MAP                0
+        >>  226 CALL_METHOD              1
+            228 POP_TOP
+
+244         230 LOAD_FAST               11 (favorite_state)
+            232 LOAD_METHOD             19 (setItemFavorite)
+            234 LOAD_FAST                2 (itemType)
+            236 LOAD_FAST                3 (itemId)
+            238 LOAD_FAST                4 (wasFavorite)
+            240 CALL_METHOD              3
+            242 POP_TOP
+
+247     >>  244 SETUP_FINALLY           12 (to 258)
+
+248         246 LOAD_FAST                0 (self)
+            248 LOAD_METHOD             20 (sweepStaleOperations)
+            250 CALL_METHOD              0
+            252 POP_TOP
+            254 POP_BLOCK
+            256 JUMP_FORWARD            50 (to 308)
+
+249     >>  258 DUP_TOP
+            260 LOAD_GLOBAL             21 (Exception)
+            262 EXTENDED_ARG             1
+            264 JUMP_IF_NOT_EXC_MATCH   306
+            266 POP_TOP
+            268 STORE_FAST              13 (exc)
+            270 POP_TOP
+            272 SETUP_FINALLY           24 (to 298)
+
+250         274 LOAD_GLOBAL              6 (logger)
+            276 LOAD_METHOD             22 (warning)
+            278 LOAD_CONST               9 ('[TIDAL] sweep stale favorite operations failed: %s')
+            280 LOAD_FAST               13 (exc)
+            282 CALL_METHOD              2
+            284 POP_TOP
+            286 POP_BLOCK
+            288 POP_EXCEPT
+            290 LOAD_CONST               4 (None)
+            292 STORE_FAST              13 (exc)
+            294 DELETE_FAST             13 (exc)
+            296 JUMP_FORWARD            10 (to 308)
+        >>  298 LOAD_CONST               4 (None)
+            300 STORE_FAST              13 (exc)
+            302 DELETE_FAST             13 (exc)
+            304 RERAISE
+        >>  306 RERAISE
+
+252     >>  308 LOAD_FAST                0 (self)
+            310 LOAD_METHOD             23 (_notifyCallback)
+
+253         312 LOAD_FAST                8 (callback)
+
+255         314 LOAD_FAST               12 (success)
+
+256         316 LOAD_FAST               12 (success)
+            318 EXTENDED_ARG             1
+            320 POP_JUMP_IF_FALSE      326
+            322 LOAD_CONST               4 (None)
+            324 JUMP_FORWARD             2 (to 328)
+        >>  326 LOAD_CONST              10 ('request_failed')
+
+257     >>  328 LOAD_FAST                2 (itemType)
+
+258         330 LOAD_FAST                3 (itemId)
+
+259         332 LOAD_FAST                7 (desiredFavorite)
+
+260         334 LOAD_FAST                4 (wasFavorite)
+
+254         336 LOAD_CONST              11 (('success', 'error', 'itemType', 'itemId', 'desiredFavorite', 'wasFavorite'))
+            338 BUILD_CONST_KEY_MAP      6
+
+252         340 CALL_METHOD              2
+            342 POP_TOP
+            344 LOAD_CONST               4 (None)
+            346 RETURN_VALUE

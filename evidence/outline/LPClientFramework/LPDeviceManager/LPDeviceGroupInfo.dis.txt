@@ -1,0 +1,129 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/3/11 10:14\n@Auth ： Chris\n@File ：LPDeviceGroupInfo.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  9           4 LOAD_BUILD_CLASS
+              6 LOAD_CONST               1 (<code object LPDeviceGroupInfo at 0x000001F324E69C90, file "LPClientFramework\LPDeviceManager\LPDeviceGroupInfo.py", line 9>)
+              8 LOAD_CONST               2 ('LPDeviceGroupInfo')
+             10 MAKE_FUNCTION            0
+             12 LOAD_CONST               2 ('LPDeviceGroupInfo')
+             14 CALL_FUNCTION            2
+             16 STORE_NAME               1 (LPDeviceGroupInfo)
+             18 LOAD_CONST               3 (None)
+             20 RETURN_VALUE
+
+=== LPDeviceGroupInfo ===
+  9           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPDeviceGroupInfo')
+              6 STORE_NAME               2 (__qualname__)
+
+ 10           8 LOAD_CONST               1 (<code object __init__ at 0x000001F324E69A80, file "LPClientFramework\LPDeviceManager\LPDeviceGroupInfo.py", line 10>)
+             10 LOAD_CONST               2 ('LPDeviceGroupInfo.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+
+ 14          16 LOAD_CONST               3 (<code object _update at 0x000001F324E69EA0, file "LPClientFramework\LPDeviceManager\LPDeviceGroupInfo.py", line 14>)
+             18 LOAD_CONST               4 ('LPDeviceGroupInfo._update')
+             20 MAKE_FUNCTION            0
+             22 STORE_NAME               4 (_update)
+
+ 19          24 LOAD_CONST               5 (<code object reInit at 0x000001F324E69DF0, file "LPClientFramework\LPDeviceManager\LPDeviceGroupInfo.py", line 19>)
+             26 LOAD_CONST               6 ('LPDeviceGroupInfo.reInit')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               5 (reInit)
+
+ 29          32 LOAD_NAME                6 (property)
+
+ 30          34 LOAD_CONST               7 (<code object isMaster at 0x000001F324E692F0, file "LPClientFramework\LPDeviceManager\LPDeviceGroupInfo.py", line 29>)
+             36 LOAD_CONST               8 ('LPDeviceGroupInfo.isMaster')
+             38 MAKE_FUNCTION            0
+             40 CALL_FUNCTION            1
+             42 STORE_NAME               7 (isMaster)
+             44 LOAD_CONST               9 (None)
+             46 RETURN_VALUE
+
+=== LPDeviceGroupInfo.__init__ ===
+ 11           0 LOAD_FAST                1 (device)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (device)
+
+ 12           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (reInit)
+             10 CALL_METHOD              0
+             12 POP_TOP
+             14 LOAD_CONST               0 (None)
+             16 RETURN_VALUE
+
+=== LPDeviceGroupInfo._update ===
+ 15           0 LOAD_FAST                1 (newGroupInfo)
+              2 LOAD_METHOD              0 (items)
+              4 CALL_METHOD              0
+              6 GET_ITER
+        >>    8 FOR_ITER                30 (to 40)
+             10 UNPACK_SEQUENCE          2
+             12 STORE_FAST               2 (key)
+             14 STORE_FAST               3 (value)
+
+ 16          16 LOAD_GLOBAL              1 (hasattr)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_FAST                2 (key)
+             22 CALL_FUNCTION            2
+             24 POP_JUMP_IF_FALSE        8
+
+ 17          26 LOAD_GLOBAL              2 (setattr)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_FAST                2 (key)
+             32 LOAD_FAST                3 (value)
+             34 CALL_FUNCTION            3
+             36 POP_TOP
+             38 JUMP_ABSOLUTE            8
+        >>   40 LOAD_CONST               0 (None)
+             42 RETURN_VALUE
+
+=== LPDeviceGroupInfo.reInit ===
+ 20           0 LOAD_CONST               1 ('')
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (groupName)
+
+ 21           6 LOAD_CONST               1 ('')
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (groupTitle)
+
+ 22          12 LOAD_CONST               2 ('master')
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (roomState)
+
+ 23          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (device)
+             22 LOAD_ATTR                4 (uuid)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               5 (masterID)
+
+ 24          28 BUILD_LIST               0
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               6 (slaveList)
+
+ 25          34 LOAD_CONST               3 (-1)
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               7 (currentGroupType)
+
+ 26          40 LOAD_CONST               4 (False)
+             42 LOAD_FAST                0 (self)
+             44 STORE_ATTR               8 (surround)
+
+ 27          46 LOAD_CONST               4 (False)
+             48 LOAD_FAST                0 (self)
+             50 STORE_ATTR               9 (preventRoomStateUpdate)
+             52 LOAD_CONST               0 (None)
+             54 RETURN_VALUE
+
+=== LPDeviceGroupInfo.isMaster ===
+ 31           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (slaveList)
+              6 CALL_FUNCTION            1
+              8 LOAD_CONST               1 (0)
+             10 COMPARE_OP               4 (>)
+             12 RETURN_VALUE

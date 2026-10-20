@@ -1,0 +1,72 @@
+# module LPClientFramework.LPFeedback.LPFirmwareLogCollector
+
+[module] names: __doc__, time, concurrent.futures, ThreadPoolExecutor, pathlib, Path, LPClientFramework.LPUtility, logger, pureUUID, LPFirmwareLogCollector
+  str: 'PC Feedback 音箱固件日志收集器。\n\n对齐安卓 FeedbackToolsManager.downloadFirmwareLogs + FirmwareLogRequest：\n多台设备并发触发 getsyslog；SSDP 在线从设备独立收集，\n离线从设备由主设备触发 getsyslog:ip:<slaveIp> 并从主设备下载\n/data/sys.log 原始字节到固件日志目录。\n固件日志文件名对齐安卓：主设备 master-<主设备名>-<yyyyMMdd_HHmmss>.log，\n从设备 slave-<主设备名>-<从设备名>-<yyyyMMdd_HHmmss>.log，并去掉'
+  str: 'ThreadPoolExecutor'
+  str: 'Path'
+  str: 'logger'
+  str: 'pureUUID'
+  str: 'LPFirmwareLogCollector'
+
+def LPFirmwareLogCollector()  line 19
+  names: __name__, __module__, __qualname__, __doc__, __init__, staticmethod, _formatLogFileName, collectFromDevice, collectAll, _collectDeviceTask
+    str: 'LPFirmwareLogCollector'
+    str: '固件日志收集器：遍历已发现音箱并下载主/从设备 sys.log。\n\n    单台设备失败不抛出异常，collectAll 返回成功数量，\n    上层可据此容忍失败而不阻断反馈主流程。\n    '
+    str: 'LPFirmwareLogCollector.__init__'
+    str: 'LPFirmwareLogCollector._formatLogFileName'
+    str: 'LPFirmwareLogCollector.collectFromDevice'
+    str: 'LPFirmwareLogCollector.collectAll'
+    str: 'LPFirmwareLogCollector._collectDeviceTask'
+
+  def LPFirmwareLogCollector.__init__(self, firmwareLogDir, maxWorkers)  line 26
+    names: Path, _firmwareLogDir, max, _maxWorkers, lastDeviceTotal, lastDeviceSuccess
+      str: '初始化收集器。\n\n        参数:\n            firmwareLogDir (str|Path): 固件日志保存目录（对应安卓 LogsFirmwareDir）。\n            maxWorkers (int): 并发收集任务数上限。\n        返回:\n            无。\n        '
+
+  def LPFirmwareLogCollector._formatLogFileName(masterName, slaveName, timestamp)  line 41
+    names: time, strftime, localtime, replace
+      str: '按安卓命名规则生成固件日志文件名。\n\n        主设备为 master-<主设备名>-<yyyyMMdd_HHmmss>.log，从设备为\n        slave-<主设备名>-<从设备名>-<yyyyMMdd_HHmmss>.log，\n        随后去掉名称中的所有空格（对齐安卓 fileName.replace(" ", "")）。\n\n        参数:\n            masterName (str): 主设备名称。\n            slaveName (str|None): 从设备名称；None 表示主设备。\n            timestam'
+      str: '%Y%m%d_%H%M%S'
+      str: 'master-%s-%s.log'
+      str: 'slave-%s-%s-%s.log'
+
+  def LPFirmwareLogCollector.collectFromDevice(self, device, slaveIp, masterName, slaveName)  line 67
+    names: getattr, commonHttpGet, Exception, logger, warning, time, sleep, httpGetBytes, _formatLogFileName, _firmwareLogDir, mkdir, write_bytes, OSError
+      str: '从单台音箱触发打包并下载固件日志。\n\n        主设备命令为 getsyslog，等待 3s；SSDP 在线从设备独立触发自身\n        getsyslog 并等待 3s；离线从设备命令为 getsyslog:ip:<slaveIp>\n        （发往主设备），等待 6s。随后从主设备 IP 下载 /data/sys.log 字节流，\n        按安卓规则命名写入固件日志目录。\n\n        参数:\n            device (LPDevice): 设备实例（含 ip/uuid，用于命令通道）。\n            slaveIp (str|None'
+      str: 'name'
+      str: 'getsyslog'
+      str: 'getsyslog:ip:%s'
+      str: '[Feedback] trigger firmware log failed device=%s command=%s error=%s'
+      str: 'ip'
+      str: 'http://%s/data/sys.log'
+      str: 'parents'
+      str: 'exist_ok'
+      str: '[Feedback] save firmware log failed fileName=%s error=%s'
+
+  def LPFirmwareLogCollector.collectAll(self, devices, maxWorkers)  line 115
+    names: lastDeviceTotal, lastDeviceSuccess, pureUUID, getattr, set, groupInfo, get, append, list, isinstance, dict, Exception, logger, warning, len, min, _maxWorkers, max, ThreadPoolExecutor, result
+      str: '并发遍历所有音箱收集固件日志，对齐安卓的并发行为。\n\n        在线设备（含 stereo pair 在线从设备）各自独立触发 getsyslog 并下载\n        自己的 /data/sys.log；离线从设备由所属主设备触发\n        getsyslog:ip:<slaveIp> 并从主设备下载。不同设备并发执行，\n        同组离线从设备在主设备任务内串行；失败均不阻断其他设备。\n\n        参数:\n            devices (list): LPDevice 列表（来自 LPDeviceDiscoverManager.deviceList）。\n'
+      str: 'uuid'
+      str: 'name'
+      str: 'roomState'
+      str: 'master'
+      str: 'slave'
+      str: 'masterID'
+      str: 'groupName'
+      str: 'slaveList'
+      str: 'ip'
+      str: '[Feedback] collect firmware log failed device=%s error=%s'
+      str: 'max_workers'
+      str: 'LPFirmwareLogCollector.collectAll.<locals>.<listcomp>'
+      str: '[Feedback] firmware log task failed: %s'
+
+    def LPFirmwareLogCollector.collectAll.<listcomp>(.0)  line 174
+      names: submit, _collectDeviceTask
+
+  def LPFirmwareLogCollector._collectDeviceTask(self, device, offlineSlaves, masterName, slaveName)  line 186
+    names: collectFromDevice
+      str: '并发任务：收集一台主设备（或 SSDP 在线从设备）及其离线从设备日志。\n\n        参数:\n            device (LPDevice): 主设备或 SSDP 在线从设备实例。\n            offlineSlaves (list[tuple]): (从设备 IP, 从设备名称) 列表。\n            masterName (str): 主设备名称。\n            slaveName (str|None): SSDP 在线从设备自身名称；None 表示主设备。\n        返回:\n            int: 本次任务成功收集的设备数'
+      str: 'masterName'
+      str: 'slaveName'
+      str: 'slaveIp'
+      str: 'masterName'
+      str: 'slaveName'

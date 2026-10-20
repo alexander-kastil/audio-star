@@ -1,0 +1,566 @@
+# module beetsplug.lyrics
+
+[module] names: __doc__, difflib, errno, itertools, json, struct, os.path, os, re, requests, unicodedata, unidecode, warnings, urllib, bs4, SoupStrainer, HAS_BEAUTIFUL_SOUP, ImportError, langdetect, HAS_LANGDETECT, html.parser, HTMLParseError, Exception, beets, plugins, ui, compile, I, DIV_RE, S, COMMENT_RE, TAG_RE, BREAK_RE, URL_CHARACTERS, __version__, USER_AGENT, REST_INDEX_TEMPLATE, REST_CONF_TEMPLATE, unichar, unescape, extract_text_between, search_pairs, slug, try_parse_html, Backend, MusiXmatch, Genius, Tekstowo, remove_credits, _scrape_strip_cruft, _scrape_merge_paragraphs, scrape_lyrics_from_html, Google, BeetsPlugin, LyricsPlugin
+  str: 'Fetches, embeds, and displays lyrics.\n'
+  str: 'unidecode'
+  str: 'SoupStrainer'
+  str: 'HTMLParseError'
+  str: 'HTMLParseError'
+  str: 'plugins'
+  str: 'ui'
+  str: '<(/?)div>?'
+  str: '<!--.*-->'
+  str: '<[^>]*>'
+  str: '\\n?\\s*<br([\\s|/][^>]*)*>\\s*\\n?'
+  str: "'"
+  str: '"'
+  str: '-'
+  str: '...'
+  str: '‘'
+  str: '’'
+  str: '“'
+  str: '”'
+  str: '‐'
+  str: '‑'
+  str: '‒'
+  str: '–'
+  str: '—'
+  str: '―'
+  str: '‖'
+  str: '…'
+  str: 'beets/'
+  str: 'Lyrics\n======\n\n* :ref:`Song index <genindex>`\n* :ref:`search`\n\nArtist index:\n\n.. toctree::\n   :maxdepth: 1\n   :glob:\n\n   artists/*\n'
+  str: "# -*- coding: utf-8 -*-\nmaster_doc = 'index'\nproject = 'Lyrics'\ncopyright = 'none'\nauthor = 'Various Authors'\nlatex_documents = [\n    (master_doc, 'Lyrics.tex', project,\n     author, 'manual'),\n]\nepub_title = project\nepub_author = author\nepub_publisher = author\nepub_copyright = copyright\nepub_exclud"
+  str: 'unichar'
+  str: 'unescape'
+  str: 'extract_text_between'
+  str: 'search_pairs'
+  str: 'slug'
+  str: 'try_parse_html'
+  str: 'Backend'
+  str: 'MusiXmatch'
+  str: 'Genius'
+  str: 'Tekstowo'
+  str: 'remove_credits'
+  str: '_scrape_strip_cruft'
+  str: '_scrape_merge_paragraphs'
+  str: 'scrape_lyrics_from_html'
+  str: 'Google'
+  str: 'LyricsPlugin'
+
+def HTMLParseError()  line 51
+  names: __name__, __module__, __qualname__
+    str: 'HTMLParseError'
+
+def unichar(i)  line 116
+  names: chr, ValueError, struct, pack, decode
+    str: 'i'
+    str: 'utf-32'
+
+def unescape(text)  line 123
+  names: isinstance, bytes, decode, replace, re, sub
+    str: 'Resolve &#xxx; HTML entities (and some others).'
+    str: 'utf-8'
+    str: 'ignore'
+    str: '&nbsp;'
+    str: 'unescape.<locals>.replchar'
+    str: '&#(\\d+);'
+
+  def unescape.replchar(m)  line 129
+    names: group, unichar, int
+
+def extract_text_between(html, start_marker, end_marker)  line 136
+  names: split, ValueError
+
+def search_pairs(item)  line 145
+  names: title, artist, artist_sort, plugins, feat_tokens, append, format, split, itertools, product
+    str: 'Yield a pairs of artists and titles to search for.\n\n    The first item in the pair is the name of the artist, the second\n    item is a list of song names.\n\n    In addition to the artist and title obtained from the `item` the\n    method tries to strip extra information like paranthesized suffixes\n   '
+    str: 'search_pairs.<locals>.generate_alternatives'
+    str: '(.*?) '
+    str: '(.+?)\\s+[(].*[)]$'
+    str: '(.*?) {}'
+    str: 'for_artist'
+    str: '(.+?)\\s*:.*'
+    str: '/'
+    str: 'search_pairs.<locals>.<listcomp>'
+
+  def search_pairs.generate_alternatives(string, patterns)  line 159
+    names: re, search, IGNORECASE, append, group
+      str: 'Generate string alternatives by extracting first matching group for\n           each given pattern.\n        '
+
+  def search_pairs.<listcomp>(.0)  line 197
+    names: strip
+
+def slug(text)  line 202
+  names: re, sub, unidecode, lower, strip
+    str: 'Make a URL-safe, human-readable version of the given text\n\n    This will do the following:\n\n    1. decode unicode characters into ASCII\n    2. shift everything to lowercase\n    3. strip whitespace\n    4. replace other non-word characters with dashes\n    5. strip extra dashes\n\n    This somewhat dupli'
+    str: '\\W+'
+    str: '-'
+
+def try_parse_html(html, **kwargs)  line 221
+  names: bs4, BeautifulSoup, HTMLParseError
+    str: 'html.parser'
+
+def try_parse_html(html, **kwargs)  line 227
+
+def Backend()  line 231
+  names: __name__, __module__, __qualname__, REQUIRES_BS, __init__, staticmethod, _encode, build_url, fetch_url, fetch
+    str: 'Backend'
+    str: 'Backend.__init__'
+    str: 'Backend._encode'
+    str: 'Backend.build_url'
+    str: 'Backend.fetch_url'
+    str: 'Backend.fetch'
+
+  def Backend.__init__(self, config, log)  line 234
+    names: _log
+
+  def Backend._encode(s)  line 237
+    names: isinstance, str, URL_CHARACTERS, items, replace, encode, urllib, parse, quote
+      str: 'Encode the string for inclusion in a URL'
+      str: 'utf-8'
+      str: 'ignore'
+
+  def Backend.build_url(self, artist, title)  line 246
+    names: URL_PATTERN, _encode, title
+
+  def Backend.fetch_url(self, url)  line 250
+    names: warnings, catch_warnings, simplefilter, requests, get, USER_AGENT, RequestException, _log, debug, status_code, codes, ok, text
+      str: 'Retrieve the content at a given URL, or return None if the source\n        is unreachable.\n        '
+      str: 'ignore'
+      str: 'User-Agent'
+      str: 'verify'
+      str: 'headers'
+      str: 'lyrics request failed: {0}'
+      str: 'failed to fetch: {0} ({1})'
+
+  def Backend.fetch(self, artist, title)  line 273
+    names: NotImplementedError
+
+def MusiXmatch()  line 277
+  names: __name__, __module__, __qualname__, REPLACEMENTS, URL_PATTERN, classmethod, _encode, fetch, __classcell__
+    str: 'MusiXmatch'
+    str: '-'
+    str: 'Less_Than'
+    str: 'Greater_Than'
+    str: 'Number_'
+    str: '('
+    str: ')'
+    str: '\\s+'
+    str: '<'
+    str: '>'
+    str: '#'
+    str: '[\\[\\{]'
+    str: '[\\]\\}]'
+    str: 'https://www.musixmatch.com/lyrics/%s/%s'
+    str: 'MusiXmatch._encode'
+    str: 'MusiXmatch.fetch'
+
+  def MusiXmatch._encode(cls, s)  line 289
+    names: REPLACEMENTS, items, re, sub, super, _encode
+
+  def MusiXmatch.fetch(self, artist, title)  line 296
+    names: build_url, fetch_url, _log, warning, split, append, extract_text_between, join, strip, replace
+      str: 'We detected that your IP is blocked'
+      str: 'we are blocked at MusixMatch: url %s failed'
+      str: '<p class="mxm-lyrics__content'
+      str: '>'
+      str: '</p>'
+      str: ',"'
+      str: '\\n'
+      str: 'Instant lyrics for all your music.'
+      str: 'Lyrics | Musixmatch'
+
+def Genius()  line 324
+  names: __name__, __module__, __qualname__, __doc__, REQUIRES_BS, base_url, __init__, fetch, _search, _scrape_lyrics_from_html, __classcell__
+    str: 'Genius'
+    str: 'Fetch lyrics from Genius via genius-api.\n\n    Simply adapted from\n    bigishdata.com/2016/09/27/getting-song-lyrics-from-geniuss-api-scraping/\n    '
+    str: 'https://api.genius.com'
+    str: 'Genius.__init__'
+    str: 'Genius.fetch'
+    str: 'Genius._search'
+    str: 'Genius._scrape_lyrics_from_html'
+
+  def Genius.__init__(self, config, log)  line 335
+    names: super, __init__, as_str, api_key, USER_AGENT, headers
+      str: 'genius_api_key'
+      str: 'Bearer %s'
+      str: 'Authorization'
+      str: 'User-Agent'
+
+  def Genius.fetch(self, artist, title)  line 343
+    names: _search, _log, debug, slug, fetch_url, _scrape_lyrics_from_html
+      str: "Fetch lyrics from genius.com\n\n        Because genius doesn't allow accesssing lyrics via the api,\n        we first query the api for a url matching our artist & title,\n        then attempt to scrape that url for the lyrics.\n        "
+      str: 'Genius API request returned invalid JSON'
+      str: 'response'
+      str: 'hits'
+      str: 'result'
+      str: 'primary_artist'
+      str: 'name'
+      str: 'url'
+      str: "Genius failed to find a matching artist for '{0}'"
+
+  def Genius._search(self, artist, title)  line 369
+    names: base_url, lower, requests, get, headers, RequestException, _log, debug, json, ValueError
+      str: 'Searches the genius api for a given artist and title\n\n        https://docs.genius.com/#search-h2\n\n        :returns: json response\n        '
+      str: '/search'
+      str: 'q'
+      str: 'data'
+      str: 'headers'
+      str: 'Genius API request failed: {0}'
+
+  def Genius._scrape_lyrics_from_html(self, html)  line 390
+    names: try_parse_html, find, _log, debug, re, compile, parent, find_all, replace_with, get_text
+      str: 'Scrape lyrics from a given genius.com html'
+      str: 'Genius._scrape_lyrics_from_html.<locals>.<listcomp>'
+      str: 'script'
+      str: 'div'
+      str: 'lyrics'
+      str: 'class_'
+      str: 'Received unusual song page html'
+      str: 'Lyrics__Container'
+      str: 'LyricsPlaceholder__Message'
+      str: 'This song is an instrumental'
+      str: 'class_'
+      str: 'string'
+      str: 'Detected instrumental'
+      str: '[Instrumental]'
+      str: "Couldn't scrape page using known layouts"
+      str: 'br'
+      str: 'InreadAd__Container'
+
+    def Genius._scrape_lyrics_from_html.<listcomp>(.0)  line 398
+      names: extract
+
+def Tekstowo()  line 430
+  names: __name__, __module__, __qualname__, REQUIRES_BS, BASE_URL, URL_PATTERN, fetch, parse_search_results, extract_lyrics
+    str: 'Tekstowo'
+    str: 'http://www.tekstowo.pl'
+    str: '/wyszukaj.html?search-title=%s&search-artist=%s'
+    str: 'Tekstowo.fetch'
+    str: 'Tekstowo.parse_search_results'
+    str: 'Tekstowo.extract_lyrics'
+
+  def Tekstowo.fetch(self, artist, title)  line 437
+    names: build_url, fetch_url, parse_search_results, extract_lyrics
+
+  def Tekstowo.parse_search_results(self, html)  line 453
+    names: _scrape_strip_cruft, _scrape_merge_paragraphs, try_parse_html, find, find_all, BASE_URL, get
+      str: 'div'
+      str: 'content'
+      str: 'class_'
+      str: 'card'
+      str: 'box-przeboje'
+      str: 'a'
+      str: 'href'
+
+  def Tekstowo.extract_lyrics(self, html)  line 483
+    names: _scrape_strip_cruft, _scrape_merge_paragraphs, try_parse_html, find, get_text
+      str: 'div'
+      str: 'song-text'
+      str: 'class_'
+
+def remove_credits(text)  line 498
+  names: split, lower, pop, join
+    str: "Remove first/last line of text if it contains the word 'lyrics'\n    eg 'Lyrics by songsdatabase.com'\n    "
+    str: 'lyrics'
+
+def _scrape_strip_cruft(html, plain_text_out)  line 512
+  names: unescape, replace, re, sub, BREAK_RE, COMMENT_RE, TAG_RE, join, strip, split
+    str: 'Clean up HTML\n    '
+    str: ' +'
+    str: '(?s)<(script).*?</\\1>'
+    str: '_scrape_strip_cruft.<locals>.<listcomp>'
+    str: '\\n{3,}'
+    str: '\\n\\n'
+
+  def _scrape_strip_cruft.<listcomp>(.0)  line 527
+    names: strip
+
+def _scrape_merge_paragraphs(html)  line 532
+  names: re, sub
+    str: '</p>\\s*<p(\\s*[^>]*)>'
+    str: '<div .*>\\s*</div>'
+
+def scrape_lyrics_from_html(html)  line 537
+  names: _scrape_strip_cruft, _scrape_merge_paragraphs, try_parse_html, SoupStrainer, sorted, stripped_strings, len
+    str: 'Scrape lyrics from a URL. If no lyrics can be found, return None\n    instead.\n    '
+    str: 'scrape_lyrics_from_html.<locals>.is_text_notcode'
+    str: 'text'
+    str: 'parse_only'
+    str: 'key'
+    str: 'reverse'
+
+  def scrape_lyrics_from_html.is_text_notcode(text)  line 541
+    names: len, count, find
+      str: '{'
+      str: ';'
+
+def Google()  line 562
+  names: __name__, __module__, __qualname__, __doc__, REQUIRES_BS, __init__, is_lyrics, slugify, BY_TRANS, LYRICS_TRANS, is_page_candidate, fetch, __classcell__
+    str: 'Google'
+    str: 'Fetch lyrics from Google search results.'
+    str: 'Google.__init__'
+    str: 'Google.is_lyrics'
+    str: 'Google.slugify'
+    str: 'by'
+    str: 'par'
+    str: 'de'
+    str: 'von'
+    str: 'lyrics'
+    str: 'paroles'
+    str: 'letras'
+    str: 'liedtexte'
+    str: 'Google.is_page_candidate'
+    str: 'Google.fetch'
+
+  def Google.__init__(self, config, log)  line 567
+    names: super, __init__, as_str, api_key, engine_id
+      str: 'google_API_key'
+      str: 'google_engine_ID'
+
+  def Google.is_lyrics(self, text, artist)  line 572
+    names: count, _log, debug, append, remove_credits, len, re, findall, I
+      str: 'Determine whether the text seems to be valid lyrics.\n        '
+      str: "Ignoring too short lyrics '{0}'"
+      str: 'too_short'
+      str: 'lyrics'
+      str: 'copyright'
+      str: 'property'
+      str: 'links'
+      str: '\\W%s\\W'
+      str: 'Bad triggers detected: {0}'
+
+  def Google.slugify(self, text)  line 601
+    names: re, sub, strip, unicodedata, normalize, encode, str, decode, UnicodeDecodeError, _log, exception
+      str: 'Normalize a string and remove non-alphanumeric characters.\n        '
+      str: "[-'_\\s]"
+      str: '_'
+      str: '_+'
+      str: '([^,\\(]*)\\((.*?)\\)'
+      str: '\\g<1>'
+      str: 'NFKD'
+      str: 'ascii'
+      str: 'ignore'
+      str: '[-\\s]+'
+      str: 'utf-8'
+      str: "Failing to normalize '{0}'"
+
+  def Google.is_page_candidate(self, url_link, url_title, title, artist)  line 619
+    names: slugify, lower, re, search, group, find, BY_TRANS, replace, LYRICS_TRANS, sub, join, strip, difflib, SequenceMatcher, ratio
+      str: 'Return True if the URL title makes it a good candidate to be a\n        page that contains lyrics of title by artist.\n        '
+      str: '//([^/]+)/.*'
+      str: 'Google.is_page_candidate.<locals>.<listcomp>'
+      str: 'www.'
+      str: '(%s)'
+      str: '|'
+      str: '_|'
+
+    def Google.is_page_candidate.<listcomp>(.0)  line 635
+        str: '_'
+
+    def Google.is_page_candidate.<listcomp>(.0)  line 638
+      names: re, escape
+
+  def Google.fetch(self, artist, title)  line 646
+    names: api_key, engine_id, urllib, parse, quote, encode, fetch_url, _log, debug, json, loads, ValueError, keys, get, is_page_candidate, scrape_lyrics_from_html, is_lyrics
+      str: 'https://www.googleapis.com/customsearch/v1?key=%s&cx=%s&q=%s'
+      str: 'utf-8'
+      str: 'google backend returned no data'
+      str: 'google backend returned malformed JSON: {}'
+      str: 'error'
+      str: 'errors'
+      str: 'reason'
+      str: 'google backend error: {0}'
+      str: 'items'
+      str: 'link'
+      str: 'title'
+      str: 'got lyrics from {0}'
+      str: 'displayLink'
+
+def LyricsPlugin()  line 687
+  names: __name__, __module__, __qualname__, SOURCES, Google, MusiXmatch, Genius, Tekstowo, SOURCE_BACKENDS, __init__, sanitize_bs_sources, get_bing_access_token, commands, appendrest, writerest, writerest_indexes, imported, fetch_item_lyrics, get_lyrics, append_translation, __classcell__
+    str: 'LyricsPlugin'
+    str: 'google'
+    str: 'musixmatch'
+    str: 'genius'
+    str: 'tekstowo'
+    str: 'LyricsPlugin.__init__'
+    str: 'LyricsPlugin.sanitize_bs_sources'
+    str: 'LyricsPlugin.get_bing_access_token'
+    str: 'LyricsPlugin.commands'
+    str: 'LyricsPlugin.appendrest'
+    str: 'LyricsPlugin.writerest'
+    str: 'LyricsPlugin.writerest_indexes'
+    str: 'LyricsPlugin.imported'
+    str: 'LyricsPlugin.fetch_item_lyrics'
+    str: 'LyricsPlugin.get_lyrics'
+    str: 'LyricsPlugin.append_translation'
+
+  def LyricsPlugin.__init__(self)  line 696
+    names: super, __init__, imported, import_stages, config, add, SOURCES, redact, artist, album, rest, list, plugins, sanitize_choices, as_str_seq, HAS_BEAUTIFUL_SOUP, sanitize_bs_sources, get, _log, debug, remove, bing_auth_token, HAS_LANGDETECT, warning, backends
+      str: '009217259823014548361:lndtuqkycfu'
+      str: 'Ryq93pUGm8bM6eUWwD_M3NOFFDAtp2yEE7W76V-uFL5jks5dNvcGCdarqFjDhP9c'
+      str: 'auto'
+      str: 'bing_client_secret'
+      str: 'bing_lang_from'
+      str: 'bing_lang_to'
+      str: 'google_API_key'
+      str: 'google_engine_ID'
+      str: 'genius_api_key'
+      str: 'fallback'
+      str: 'force'
+      str: 'local'
+      str: 'sources'
+      str: 'bing_client_secret'
+      str: 'google_API_key'
+      str: 'google_engine_ID'
+      str: 'genius_api_key'
+      str: 'Unknown artist'
+      str: 'sources'
+      str: 'google'
+      str: 'Disabling google source: no API key configured.'
+      str: 'LyricsPlugin.__init__.<locals>.<listcomp>'
+      str: 'bing_lang_from'
+      str: 'To use bing translations, you need to install the langdetect module. See the documentation for further details.'
+
+    def LyricsPlugin.__init__.<listcomp>(.0)  line 745
+      names: lower
+
+    def LyricsPlugin.__init__.<listcomp>(.0)  line 754
+      names: SOURCE_BACKENDS, config, _log
+
+  def LyricsPlugin.sanitize_bs_sources(self, sources)  line 757
+    names: SOURCE_BACKENDS, REQUIRES_BS, _log, debug, append
+      str: 'To use the %s lyrics source, you must install the beautifulsoup4 module. See the documentation for further details.'
+
+  def LyricsPlugin.get_bing_access_token(self)  line 770
+    names: config, json, loads, requests, post, urllib, parse, urlencode, content, _log, warning
+      str: 'beets'
+      str: 'bing_client_secret'
+      str: 'https://api.microsofttranslator.com'
+      str: 'client_credentials'
+      str: 'client_id'
+      str: 'client_secret'
+      str: 'scope'
+      str: 'grant_type'
+      str: 'https://datamarket.accesscontrol.windows.net/v2/OAuth2-13'
+      str: 'data'
+      str: 'access_token'
+      str: 'Bearer '
+      str: 'Could not get Bing Translate API access token. Check your "bing_client_secret" password'
+
+  def LyricsPlugin.commands(self)  line 788
+    names: ui, Subcommand, parser, add_option, func
+      str: 'lyrics'
+      str: 'fetch song lyrics'
+      str: 'help'
+      str: '-p'
+      str: '--print'
+      str: 'printlyr'
+      str: 'store_true'
+      str: 'print lyrics to console'
+      str: 'dest'
+      str: 'action'
+      str: 'default'
+      str: 'help'
+      str: '-r'
+      str: '--write-rest'
+      str: 'writerest'
+      str: 'store'
+      str: 'dir'
+      str: 'write lyrics to given directory as ReST files'
+      str: 'dest'
+      str: 'action'
+      str: 'default'
+      str: 'metavar'
+      str: 'help'
+      str: '-f'
+      str: '--force'
+      str: 'force_refetch'
+      str: 'always re-download lyrics'
+      str: '-l'
+      str: '--local'
+      str: 'local_only'
+      str: 'do not fetch missing lyrics'
+      str: 'LyricsPlugin.commands.<locals>.func'
+
+    def LyricsPlugin.commands.func(lib, opts, args)  line 811
+      names: ui, should_write, writerest, writerest_indexes, items, decargs, local_only, config, fetch_item_lyrics, force_refetch, lyrics, printlyr, print_, appendrest
+        str: 'local'
+        str: 'force'
+        str: 'ReST files generated. to build, use one of:'
+        str: '  sphinx-build -b html %s _build/html'
+        str: '  sphinx-build -b epub %s _build/epub'
+        str: '  sphinx-build -b latex %s _build/latex && make -C _build/latex all-pdf'
+
+  def LyricsPlugin.appendrest(self, directory, item)  line 843
+    names: slug, artist, albumartist, writerest, strip, len, rest, album, format, title, lyrics, replace
+      str: 'Append the item to an ReST file\n\n        This will keep state (in the `rest` variable) in order to avoid\n        writing continuously to the same files.\n        '
+      str: '%s\n%s\n\n.. contents::\n   :local:\n\n'
+      str: '='
+      str: 'Unknown album'
+      str: '{}\n{}\n\n'
+      str: '-'
+      str: ':index:`%s`'
+      str: '| '
+      str: '\n| '
+      str: '{}\n{}\n\n{}\n\n'
+      str: '~'
+
+  def LyricsPlugin.writerest(self, directory)  line 869
+    names: rest, artist, os, path, join, slug, open, write, encode
+      str: 'Write self.rest to a ReST file\n        '
+      str: 'artists'
+      str: '.rst'
+      str: 'wb'
+      str: 'utf-8'
+
+  def LyricsPlugin.writerest_indexes(self, directory)  line 878
+    names: os, makedirs, path, join, OSError, errno, EEXIST, exists, open, write, REST_INDEX_TEMPLATE, REST_CONF_TEMPLATE
+      str: 'Write conf.py and index.rst files necessary for Sphinx\n\n        We write minimal configurations that are necessary for Sphinx\n        to operate. We do not overwrite existing files so that\n        customizations are respected.'
+      str: 'artists'
+      str: 'index.rst'
+      str: 'w'
+      str: 'conf.py'
+
+  def LyricsPlugin.imported(self, session, task)  line 900
+    names: config, imported_items, fetch_item_lyrics, lib
+      str: 'Import hook for fetching lyrics automatically.\n        '
+      str: 'auto'
+      str: 'force'
+
+  def LyricsPlugin.fetch_item_lyrics(self, lib, item, write, force)  line 908
+    names: lyrics, _log, info, search_pairs, any, join, HAS_LANGDETECT, config, get, langdetect, detect, as_str_seq, append_translation, try_write, store
+      str: 'Fetch and store lyrics for a single item. If ``write``, then the\n           lyrics will also be written to the file itself.\n        '
+      str: 'lyrics already present: {0}'
+      str: 'LyricsPlugin.fetch_item_lyrics.<locals>.<listcomp>'
+      str: '\n\n---\n\n'
+      str: 'fetched lyrics: {0}'
+      str: 'bing_client_secret'
+      str: 'bing_lang_to'
+      str: 'bing_lang_from'
+      str: 'lyrics not found: {0}'
+      str: 'fallback'
+
+    def LyricsPlugin.fetch_item_lyrics.<listcomp>(.0)  line 919
+      names: get_lyrics
+
+    def LyricsPlugin.fetch_item_lyrics.<listcomp>(.0)  line 923
+
+  def LyricsPlugin.get_lyrics(self, artist, title)  line 947
+    names: backends, fetch, _log, debug, __class__, __name__, _scrape_strip_cruft
+      str: 'Fetch lyrics, trying each source in turn. Return a string or\n        None if no lyrics were found.\n        '
+      str: 'got lyrics from backend: {0}'
+
+  def LyricsPlugin.append_translation(self, text, to_lang)  line 958
+    names: xml.etree, ElementTree, bing_auth_token, get_bing_access_token, set, split, join, requests, get, status_code, _log, debug, text, append_translation, fromstring, encode, dict, zip, format
+      str: 'ElementTree'
+      str: 'https://api.microsofttranslator.com/v2/Http.svc/Translate?text=%s&to=%s'
+      str: '|'
+      str: 'Authorization '
+      str: 'headers'
+      str: 'translation API error {}: {}'
+      str: 'token has expired'
+      str: 'utf-8'
+      str: '{} / {}\n'

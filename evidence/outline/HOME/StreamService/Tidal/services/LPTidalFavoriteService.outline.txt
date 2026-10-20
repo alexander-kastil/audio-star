@@ -1,0 +1,132 @@
+# module HOME.StreamService.Tidal.services.LPTidalFavoriteService
+
+[module] names: __doc__, typing, Any, Callable, Dict, Optional, PyQt6.QtCore, QCoreApplication, QObject, LPGlobalUI, HOME.StreamService.Tidal.services.LPTidalRequestScheduler, LPTidalRequest, LPTidalRequestScheduler, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, LPClientFramework.LPMSManager.Tidal.LPTidalFavoriteManager, LPTidalFavoriteManager, LPClientFramework.LPUtility, logger, FAVORITE_PENDING_TIMEOUT_SECONDS, object, toastFavoriteResult, LPTidalFavoriteService
+  str: '\nTIDAL 收藏写操作服务。\n'
+  str: 'Any'
+  str: 'Callable'
+  str: 'Dict'
+  str: 'Optional'
+  str: 'QCoreApplication'
+  str: 'QObject'
+  str: 'LPTidalRequest'
+  str: 'LPTidalRequestScheduler'
+  str: 'LPTidalStore'
+  str: 'LPFavoriteCacheManager'
+  str: 'LPTidalFavoriteManager'
+  str: 'logger'
+  str: 'result'
+  str: 'return'
+  str: 'toastFavoriteResult'
+  str: 'LPTidalFavoriteService'
+
+def toastFavoriteResult(result)  line 22
+  names: isinstance, dict, bool, get, QCoreApplication, translate, getattr, LPGlobalUI, showToast
+    str: '\n    用全局 Toast 展示收藏操作结果。\n\n    供页面已离场（无法再用页面内 Toast）时兜底，保证收藏失败不静默。\n\n    :param result: 收藏结果字典。\n    :return: None。\n    '
+    str: 'success'
+    str: 'desiredFavorite'
+    str: 'Qobuz Favorite'
+    str: 'Added to Favorites'
+    str: 'Removed From Favorites'
+    str: 'Add Failed'
+    str: 'Remove Failed'
+    str: 'toast'
+    str: 'mainWindow'
+
+def LPTidalFavoriteService()  line 51
+  names: __name__, __module__, __qualname__, __doc__, _instance, classmethod, instance, Optional, QObject, __init__, str, bool, Callable, Dict, Any, setFavorite, int, sweepStaleOperations, _notifyCallback, object, _handleResult, __classcell__
+    str: 'LPTidalFavoriteService'
+    str: 'TIDAL 收藏写操作唯一编排者，负责乐观更新、常驻调度、提交与失败回滚。\n\n    该服务是进程级单例，调度器不随 TIDAL 页面销毁而关闭：页面只负责发起与展示，\n    已确认的收藏结果一定写入通用缓存与 Store，避免页面离场丢弃回调导致状态长期不一致。\n    '
+    str: 'LPTidalFavoriteService.instance'
+    str: 'parent'
+    str: 'LPTidalFavoriteService.__init__'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: 'callback'
+    str: 'return'
+    str: 'LPTidalFavoriteService.setFavorite'
+    str: 'return'
+    str: 'LPTidalFavoriteService.sweepStaleOperations'
+    str: 'callback'
+    str: 'result'
+    str: 'return'
+    str: 'LPTidalFavoriteService._notifyCallback'
+    str: 'requestedUserId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'wasFavorite'
+    str: 'operationId'
+    str: 'previousFavoriteIds'
+    str: 'desiredFavorite'
+    str: 'callback'
+    str: 'result'
+    str: 'return'
+    str: 'LPTidalFavoriteService._handleResult'
+
+  def LPTidalFavoriteService.instance(cls)  line 60
+    names: _instance
+      str: '\n        返回 TIDAL 收藏写服务的全局单例。\n\n        :return: LPTidalFavoriteService 实例。\n        '
+
+  def LPTidalFavoriteService.__init__(self, parent)  line 71
+    names: super, __init__, LPTidalFavoriteManager, _manager, LPTidalRequestScheduler, _scheduler
+      str: '\n        初始化收藏管理器与常驻异步请求调度器。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def LPTidalFavoriteService.setFavorite(self, itemType, itemId, desiredFavorite, callback)  line 82
+    names: LPTidalStore, instance, accountState, str, get, strip, lower, bool, _notifyCallback, favoriteState, isFavorite, favoriteIds, beginOperation, setItemFavorite, LPTidalRequest, _scheduler, enqueue
+      str: '\n        异步设置指定条目收藏状态。\n\n        先做乐观更新，再经常驻调度器请求服务端；成功后提交服务端收藏 ID 到通用缓存与\n        Store 并广播 Collection 变化，失败时回滚本地状态并回调结果。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param desiredFavorite: 目标收藏状态。\n        :param callback: 可选结果回调（仅用于调用方的页面内 UI 展示，不承担状态提交），\n            参数为结果字'
+      str: 'userId'
+      str: 'itemType'
+      str: 'itemId'
+      str: 'desiredFavorite'
+      str: 'not_logged_in'
+      str: 'success'
+      str: 'error'
+      str: 'wasFavorite'
+      str: 'invalid_target'
+      str: 'operation_rejected'
+      str: 'tidal_favorite_%s_%s_%s::%s'
+      str: 'tidal_favorite'
+      str: 'LPTidalFavoriteService.setFavorite.<locals>.<lambda>'
+      str: 'key'
+      str: 'tag'
+      str: 'task'
+      str: 'callback'
+      str: 'priority'
+
+    def LPTidalFavoriteService.setFavorite.<lambda>()  line 134
+      names: _manager, requestSetFavorite, bool
+        str: 'previousFavoriteIds'
+
+    def LPTidalFavoriteService.setFavorite.<lambda>(result)  line 141
+      names: _handleResult, bool
+
+  def LPTidalFavoriteService.sweepStaleOperations(self)  line 155
+    names: LPTidalStore, instance, favoriteState, sweepStaleOperations, FAVORITE_PENDING_TIMEOUT_SECONDS, str, accountState, get, strip, LPFavoriteCacheManager, snapshot, setFavoriteIds, syncFavoriteFlagsFromState, notifyCollectionChanged, logger, warning
+      str: '\n        清理超时未完成的收藏写操作，并按通用缓存的服务端快照校正 Store 收藏状态。\n\n        兜底路径：任何异常导致回调未到达时，进行中的乐观状态不会永久停留在 Store，\n        Recently 等页面因此不会长期显示与服务端不一致的收藏结论。\n\n        :return: 被清理的悬空操作数量。\n        '
+      str: 'userId'
+      str: 'Tidal'
+      str: 'all'
+      str: '[TIDAL] sweep stale favorite operations removed=%s userId=%s'
+
+  def LPTidalFavoriteService._notifyCallback(self, callback, result)  line 184
+    names: Exception, logger, warning
+      str: '\n        安全回调调用方，异常不影响收藏主链路。\n\n        :param callback: 结果回调；为空时直接返回。\n        :param result: 结果字典。\n        :return: None。\n        '
+      str: '[TIDAL] favorite callback failed: %s'
+
+  def LPTidalFavoriteService._handleResult(self, requestedUserId, itemType, itemId, wasFavorite, operationId, previousFavoriteIds, desiredFavorite, callback, result)  line 199
+    names: LPTidalStore, instance, str, accountState, get, strip, logger, debug, favoriteState, isLatestOperation, isinstance, dict, bool, _manager, applyFavoriteIds, finishOperation, removeFavoriteFromCollectionSeeAll, notifyCollectionChanged, setFavoriteIds, setItemFavorite, sweepStaleOperations, Exception, warning, _notifyCallback
+      str: '\n        处理收藏请求结果：提交服务端状态、失败回滚，并回调调用方。\n\n        :param requestedUserId: 发起请求时的用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param wasFavorite: 操作前是否已收藏。\n        :param operationId: 操作版本号。\n        :param previousFavoriteIds: 操作前收藏 ID 快照。\n        :param desiredFavorite: '
+      str: 'userId'
+      str: '[TIDAL] skip stale favorite result userId=%s'
+      str: '[TIDAL] skip stale favorite operation'
+      str: 'success'
+      str: 'favoriteIds'
+      str: 'all'
+      str: '[TIDAL] sweep stale favorite operations failed: %s'
+      str: 'request_failed'
+      str: 'success'
+      str: 'error'
+      str: 'itemType'
+      str: 'itemId'
+      str: 'desiredFavorite'
+      str: 'wasFavorite'

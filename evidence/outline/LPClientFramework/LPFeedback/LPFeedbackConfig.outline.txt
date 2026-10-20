@@ -1,0 +1,39 @@
+# module LPClientFramework.LPFeedback.LPFeedbackConfig
+
+[module] names: __doc__, FRESHDESK_API_HOST, FRESHDESK_WEB_HOST, FRESHDESK_APP_ID, FRESHDESK_ACCESS_KEY, FRESHDESK_SECRET_KEY, STS_ENDPOINT, STS_ORIGIN, STS_PROJECT, FEEDBACK_AES_KEY, FEEDBACK_TYPE_DEBUG, FEEDBACK_DEFAULT_RECEIVER, isPlaceholder, requireFreshdeskCredentials, requireAesKey
+  str: 'PC Feedback 的发布配置占位定义。\n\n真实 Freshdesk 凭证由发布负责人替换这些占位值；真实 AES 密钥不得提交到源码。\n'
+  str: 'https://freshdesk.linkplay.com/apiv1/freshdesk/wiim'
+  str: 'https://wiim.freshdesk.com'
+  str: '<redacted>'
+  str: '<redacted>'
+  str: '<redacted>'
+  str: 'https://api.linkplay.com/datav3/log/feedbackUpload'
+  str: 'pc'
+  str: 'WiiMHome'
+  str: '<redacted>'
+  str: 'FeedbackDebug'
+  str: 'wiimlogs@linkplay.com'
+  str: 'isPlaceholder'
+  str: 'requireFreshdeskCredentials'
+  str: 'requireAesKey'
+
+def isPlaceholder(value)  line 22
+  names: str, strip, startswith, endswith
+    str: '判断配置值是否仍是未配置的占位符。\n\n    参数:\n        value (str): 待校验的配置值。\n    返回:\n        bool: True 表示配置尚未被发布值替换。\n    '
+    str: '__'
+
+def requireFreshdeskCredentials()  line 36
+  names: FRESHDESK_APP_ID, FRESHDESK_ACCESS_KEY, FRESHDESK_SECRET_KEY, any, RuntimeError
+    str: '返回已配置的 Freshdesk 应用凭证。\n\n    参数:\n        无。\n    返回:\n        tuple[str, str, str]: appId、accessKey 与 secretKey。\n    异常:\n        RuntimeError: 任一凭证仍为占位符时抛出。\n    '
+    str: 'requireFreshdeskCredentials.<locals>.<genexpr>'
+    str: 'Feedback service is not configured.'
+
+  def requireFreshdeskCredentials.<genexpr>(.0)  line 47
+    names: isPlaceholder
+
+def requireAesKey()  line 52
+  names: isPlaceholder, FEEDBACK_AES_KEY, RuntimeError, len, encode
+    str: '返回已配置的 Android 兼容 AES 密钥。\n\n    参数:\n        无。\n    返回:\n        str: 16 字节 AES 密钥。\n    异常:\n        RuntimeError: 密钥缺失或长度不符合 Android 兼容要求时抛出。\n    '
+    str: 'Feedback log encryption is not configured.'
+    str: 'utf-8'
+    str: 'Feedback log encryption key must be 16 bytes.'

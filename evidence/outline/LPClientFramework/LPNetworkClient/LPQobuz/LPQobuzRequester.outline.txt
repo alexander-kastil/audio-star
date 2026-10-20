@@ -1,0 +1,244 @@
+# module LPClientFramework.LPNetworkClient.LPQobuz.LPQobuzRequester
+
+[module] names: __doc__, LPClientFramework.LPNetworkClient.LPNetworkClient, LPNetworkClient, LPClientFramework.LPNetworkClient.LPQobuz.LPQobuzNetworkClient, LPQobuzNetworkClient, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPClientFramework.LPUtility, logger, LPQobuzRequester
+  str: '\n@Time ： 2025/7/11 12:06\n@Auth ： Chris\n@File ：LPQobuzRequester.py\n@Desc:\n'
+  str: 'LPNetworkClient'
+  str: 'LPQobuzNetworkClient'
+  str: 'LPHeaderType'
+  str: 'logger'
+  str: 'LPQobuzRequester'
+
+def LPQobuzRequester()  line 14
+  names: __name__, __module__, __qualname__, __init__, LPHeaderType, str, fetchFeaturedData, fetchRecommendData, fetchMyPlaylistData, fetchFavoriteData, fetchPurchaseData, fetchAlbumDetailData, fetchPlaylistDetailData, fetchArtistDetailData, fetchArtistReleases, fetchSimilarAlbumData, fetchSimilarArtistData, fetchSearchData, fetchTagsData, fetchFavoriteIds, fetchGenresData, fetchLastUpdate, changeFavoriteStatus, fetchAddTracksData, dict, fetchPlaylistCreateData, fetchDeletePlaylistData, fetchRemoveFromPlaylistData, checkDiscoverCached, checkArtistCached
+    str: 'LPQobuzRequester'
+    str: 'LPQobuzRequester.__init__'
+    str: 'headType'
+    str: 'genres'
+    str: 'tag'
+    str: 'LPQobuzRequester.fetchFeaturedData'
+    str: 'LPQobuzRequester.fetchRecommendData'
+    str: 'LPQobuzRequester.fetchMyPlaylistData'
+    str: 'headType'
+    str: 'genres'
+    str: 'LPQobuzRequester.fetchFavoriteData'
+    str: 'headType'
+    str: 'LPQobuzRequester.fetchPurchaseData'
+    str: 'LPQobuzRequester.fetchAlbumDetailData'
+    str: 'LPQobuzRequester.fetchPlaylistDetailData'
+    str: 'LPQobuzRequester.fetchArtistDetailData'
+    str: 'LPQobuzRequester.fetchArtistReleases'
+    str: 'genres'
+    str: 'LPQobuzRequester.fetchSimilarAlbumData'
+    str: 'LPQobuzRequester.fetchSimilarArtistData'
+    str: 'LPQobuzRequester.fetchSearchData'
+    str: 'LPQobuzRequester.fetchTagsData'
+    str: 'LPQobuzRequester.fetchFavoriteIds'
+    str: 'LPQobuzRequester.fetchGenresData'
+    str: 'LPQobuzRequester.fetchLastUpdate'
+    str: 'LPQobuzRequester.changeFavoriteStatus'
+    str: 'LPQobuzRequester.fetchAddTracksData'
+    str: 'data'
+    str: 'LPQobuzRequester.fetchPlaylistCreateData'
+    str: 'LPQobuzRequester.fetchDeletePlaylistData'
+    str: 'LPQobuzRequester.fetchRemoveFromPlaylistData'
+    str: 'LPQobuzRequester.checkDiscoverCached'
+    str: 'LPQobuzRequester.checkArtistCached'
+
+  def LPQobuzRequester.__init__(self, client)  line 16
+    names: client, redirectUrl, baseUrl, CheckFavorite, Favorite_Ids, User_LastUpdate, Favorite_ToggleStatus, Favorite_Delete, Favorite_Create, Favorite_PLAYLIST_Delete, Favorite_PLAYLIST_Create, Discover_NREndPoint, Discover_RecommendEndPoint, Discover_PlaylistEndPoint, Discover_EssentialDiscographyEndPoint, Discover_TopAlbumsEndPoint, Discover_QobuzissimeEndPoint, Discover_PressAccoladesEndPoint, Discover_PlaylistTagsEndPoint, Library_MyPlaylistEndPoint, Library_FavoriteEndPoint, Library_PurchasedEndPoint, Detail_AlbumEndPoint, Detail_PlaylistEndPoint, Detail_SimilarAlbumsEndPoint, Detail_ArtistEndPoint, Detail_ArtistSeeAllEndPoint, Genres_SelectorEndPoint, Search_EndPoint, SearchArtist_EndPoint, SearchAlbum_EndPoint, SearchTrack_EndPoint, SearchPlaylist_EndPoint, LPHeaderType, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_PLAYLIST, LP_HEADER_TYPE_COLLECTION, LP_HEADER_TYPE_ARTIST, qobuzHeadTypeMapping
+      str: 'https://www.qobuz.com/signin/oauth2?client_id=155398957&redirect_uri=https://auth.wiimhome.com/qobuz/wiimhome&response_type=code'
+      str: 'https://www.qobuz.com/api.json/0.2/'
+      str: 'favorite/status?type={}&item_id={}'
+      str: 'favorite/getUserFavoriteIds'
+      str: 'user/lastUpdate'
+      str: 'favorite/toggle'
+      str: 'favorite/delete'
+      str: 'favorite/create'
+      str: 'playlist/unsubscribe'
+      str: 'playlist/subscribe'
+      str: 'album/getFeatured?type=new-releases'
+      str: 'dynamic-tracks/get?type=weekly'
+      str: 'playlist/getFeatured?&type=last-created'
+      str: 'album/getFeatured?type=ideal-discography'
+      str: 'album/getFeatured?type=most-streamed'
+      str: 'album/getFeatured?type=qobuzissims'
+      str: 'album/getFeatured?type=press-awards'
+      str: 'playlist/getTags'
+      str: 'playlist/getUserPlaylists'
+      str: 'favorite/getUserFavorites?type='
+      str: 'purchase/getUserPurchases?type='
+      str: 'album/get?album_id='
+      str: 'playlist/get?extra=tracks,subscribers&playlist_id={}&offset={}&limit={}'
+      str: 'album/getFeatured?&type=best-sellers'
+      str: 'artist/page?artist_id='
+      str: 'artist/getReleasesGrid?artist_id='
+      str: 'genre/list'
+      str: 'catalog/search?query='
+      str: 'artist/search?query='
+      str: 'album/search?query='
+      str: 'track/search?query='
+      str: 'playlist/search?query='
+      str: 'album'
+      str: 'playlist'
+      str: 'track'
+      str: 'artist'
+
+  def LPQobuzRequester.fetchFeaturedData(self, headType, contentType, genres, tag, offset, limit)  line 76
+    names: baseUrl, qobuzHeadTypeMapping, LPHeaderType, LP_HEADER_TYPE_PLAYLIST, logger, debug, client, get
+      str: '/getFeatured?type='
+      str: '&offset='
+      str: '&limit='
+      str: '&tags='
+      str: '&genre_ids='
+      str: '[Qobuz] fetchFeaturedData url == '
+
+  def LPQobuzRequester.fetchRecommendData(self)  line 89
+    names: baseUrl, logger, debug, client, get
+      str: 'dynamic-tracks/get?type=weekly'
+      str: '[Qobuz] fetchRecommendData url == '
+
+  def LPQobuzRequester.fetchMyPlaylistData(self, offset, limit, useCache)  line 97
+    names: baseUrl, logger, debug, client, get
+      str: 'playlist/getUserPlaylists?offset='
+      str: '&limit='
+      str: '[Qobuz] fetchMyPlaylistData url == '
+
+  def LPQobuzRequester.fetchFavoriteData(self, headType, genres, offset, limit, useCache)  line 103
+    names: baseUrl, qobuzHeadTypeMapping, logger, debug, client, get
+      str: 'favorite/getUserFavorites?type='
+      str: 's&offset='
+      str: '&limit='
+      str: '&genre_ids='
+      str: '[Qobuz] fetchFavoriteData url == '
+
+  def LPQobuzRequester.fetchPurchaseData(self, headType, offset, limit, useCache)  line 110
+    names: baseUrl, qobuzHeadTypeMapping, logger, debug, client, get
+      str: 'purchase/getUserPurchases?type='
+      str: 's&offset='
+      str: '&limit='
+      str: '[Qobuz] fetchPurchaseData url == '
+
+  def LPQobuzRequester.fetchAlbumDetailData(self, albumID, offset, limit)  line 117
+    names: baseUrl, logger, debug, client, get
+      str: 'album/get?album_id='
+      str: '&offset='
+      str: '&limit='
+      str: '[Qobuz] fetchAlbumDetailData url == '
+
+  def LPQobuzRequester.fetchPlaylistDetailData(self, playlistID, offset, limit, useCache)  line 123
+    names: baseUrl, logger, debug, client, get
+      str: 'playlist/get?extra=tracks,subscribers&playlist_id='
+      str: '&offset='
+      str: '&limit='
+      str: '[Qobuz] fetchPlaylistDetailData url == '
+
+  def LPQobuzRequester.fetchArtistDetailData(self, artistID)  line 129
+    names: baseUrl, logger, debug, client, get
+      str: 'artist/page?artist_id='
+      str: '[Qobuz] fetchArtistDetailData url == '
+
+  def LPQobuzRequester.fetchArtistReleases(self, artistID, contentType, sort, offset, limit)  line 135
+    names: baseUrl, logger, debug, client, get
+      str: 'artist/getReleasesGrid?artist_id='
+      str: '&release_type='
+      str: '&sort='
+      str: '&offset='
+      str: '&limit='
+      str: '[Qobuz] fetchArtistReleases url == '
+
+  def LPQobuzRequester.fetchSimilarAlbumData(self, genres, offset, limit)  line 144
+    names: baseUrl, logger, debug, client, get
+      str: 'album/getFeatured?&type=best-sellers&offset='
+      str: '&limit='
+      str: '&genre_ids='
+      str: '[Qobuz] fetchSimilarAlbumData url == '
+
+  def LPQobuzRequester.fetchSimilarArtistData(self, artistID, offset, limit)  line 149
+    names: baseUrl, logger, debug, client, get
+      str: 'artist/getSimilarArtists?artist_id='
+      str: '&offset='
+      str: '&limit='
+      str: '[Qobuz] fetchSimilarArtistData url == '
+
+  def LPQobuzRequester.fetchSearchData(self, queryText, headType, offset, limit)  line 156
+    names: baseUrl, qobuzHeadTypeMapping, logger, debug, client, get
+      str: 'catalog/search?query='
+      str: '&offset='
+      str: '&limit='
+      str: '/search?query='
+      str: '[Qobuz] fetchSearchData url == '
+
+  def LPQobuzRequester.fetchTagsData(self)  line 166
+    names: baseUrl, logger, debug, client, get
+      str: 'playlist/getTags'
+      str: '[Qobuz] fetchTagsData url == '
+
+  def LPQobuzRequester.fetchFavoriteIds(self)  line 173
+    names: baseUrl, logger, debug, client, post
+      str: 'favorite/getUserFavoriteIds'
+      str: '[Qobuz] fetchFavoriteIds url == '
+
+  def LPQobuzRequester.fetchGenresData(self)  line 179
+    names: baseUrl, logger, debug, client, get
+      str: 'genre/list'
+      str: '[Qobuz] fetchGenresData url == '
+
+  def LPQobuzRequester.fetchLastUpdate(self)  line 185
+    names: baseUrl, logger, debug, client, post
+      str: 'user/lastUpdate'
+      str: '[Qobuz] fetchLastUpdate url == '
+
+  def LPQobuzRequester.changeFavoriteStatus(self, headType, itemId, changeType)  line 190
+    names: baseUrl, LPHeaderType, LP_HEADER_TYPE_PLAYLIST, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_SONG, LP_HEADER_TYPE_ARTIST, logger, debug, value, client, post
+      str: 'add'
+      str: 'playlist/subscribe'
+      str: 'playlist/unsubscribe'
+      str: 'favorite/create'
+      str: 'favorite/delete'
+      str: 'album_ids'
+      str: 'track_ids'
+      str: 'playlist_id'
+      str: 'artist_ids'
+      str: '[Qobuz] changeFavoriteStatus url == '
+      str: ' type:'
+      str: ' item_id:'
+      str: 'data'
+
+  def LPQobuzRequester.fetchAddTracksData(self, playlistId, tracksIds)  line 231
+    names: baseUrl, logger, debug, client, post
+      str: 'playlist/addTracks?playlist_id='
+      str: '&track_ids='
+      str: '[Qobuz] fetchAddTracksData url == '
+
+  def LPQobuzRequester.fetchPlaylistCreateData(self, data)  line 236
+    names: baseUrl, logger, debug, client, post
+      str: 'playlist/create'
+      str: '[Qobuz] fetchPlaylistCreateData url == '
+      str: ' , data == '
+      str: 'data'
+
+  def LPQobuzRequester.fetchDeletePlaylistData(self, playlistId)  line 241
+    names: baseUrl, logger, debug, client, post
+      str: 'playlist/delete'
+      str: 'playlist_id'
+      str: '[Qobuz] fetchPlaylistCreateData url == '
+      str: ' , data == '
+      str: 'data'
+
+  def LPQobuzRequester.fetchRemoveFromPlaylistData(self, playlistId, trackId)  line 248
+    names: baseUrl, logger, debug, client, post
+      str: 'playlist/deleteTracks'
+      str: 'playlist_id'
+      str: 'playlist_track_ids'
+      str: '[Qobuz] fetchRemoveFromPlaylistData url == '
+      str: ' , data == '
+      str: 'data'
+
+  def LPQobuzRequester.checkDiscoverCached(self)  line 257
+    names: baseUrl, client, cachedSession, cache, has_url
+      str: '\n        用 new release url 判断\n        '
+      str: 'album/getFeatured?type=new-releases&offset=0&limit=25'
+
+  def LPQobuzRequester.checkArtistCached(self, artistID)  line 265
+    names: baseUrl, client, cachedSession, cache, has_url
+      str: 'artist/page?artist_id='

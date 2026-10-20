@@ -1,0 +1,167 @@
+# module HOME.StreamService.WiiMRadio.utils.LPWiiMRadioRequestScheduler
+
+[module] names: __doc__, itertools, queue, threading, typing, Any, Callable, Dict, List, Optional, PyQt6.QtCore, QObject, pyqtSignal, pyqtSlot, LPClientFramework.LPUtility, logger, _LPWiiMRadioScheduledJob, _LPWiiMRadioWorkerPool, LPWiiMRadioRequestScheduler
+  str: '\nWiiMRadio 统一请求调度器。\n'
+  str: 'Any'
+  str: 'Callable'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'logger'
+  str: '_LPWiiMRadioScheduledJob'
+  str: '_LPWiiMRadioWorkerPool'
+  str: 'LPWiiMRadioRequestScheduler'
+
+def _LPWiiMRadioScheduledJob()  line 17
+  names: __name__, __module__, __qualname__, str, Callable, Any, int, Optional, __init__
+    str: '_LPWiiMRadioScheduledJob'
+    str: 'key'
+    str: 'task'
+    str: 'priorityRank'
+    str: 'callback'
+    str: 'return'
+    str: '_LPWiiMRadioScheduledJob.__init__'
+
+  def _LPWiiMRadioScheduledJob.__init__(self, key, task, priorityRank, callback)  line 18
+    names: str, strip, key, task, int, priorityRank, callbacks, generation, started
+      str: '\n        初始化内部调度任务。\n\n        :param key: 任务唯一键。\n        :param task: 实际执行函数。\n        :param priorityRank: 当前优先级序号，值越小优先级越高。\n        :param callback: 结果订阅回调。\n        :return: None。\n        '
+
+def _LPWiiMRadioWorkerPool()  line 43
+  names: __name__, __module__, __qualname__, str, int, Callable, List, Any, __init__, Optional, submit, _LPWiiMRadioScheduledJob, _enqueue, _worker_loop
+    str: '_LPWiiMRadioWorkerPool'
+    str: 'name'
+    str: 'workerCount'
+    str: 'deliveryHandler'
+    str: 'return'
+    str: '_LPWiiMRadioWorkerPool.__init__'
+    str: 'jobKey'
+    str: 'task'
+    str: 'callback'
+    str: 'priorityRank'
+    str: 'return'
+    str: '_LPWiiMRadioWorkerPool.submit'
+    str: 'job'
+    str: 'return'
+    str: '_LPWiiMRadioWorkerPool._enqueue'
+    str: 'return'
+    str: '_LPWiiMRadioWorkerPool._worker_loop'
+
+  def _LPWiiMRadioWorkerPool.__init__(self, name, workerCount, deliveryHandler)  line 44
+    names: str, strip, _name, max, int, _worker_count, _delivery_handler, threading, RLock, _lock, queue, PriorityQueue, _queue, _jobs, itertools, count, _sequence, _threads, range, Thread, _worker_loop, start, append
+      str: '\n        初始化工作池。\n\n        :param name: 工作池名称。\n        :param workerCount: 固定工作线程数量。\n        :param deliveryHandler: 任务完成后的投递函数。\n        :return: None。\n        '
+      str: 'WiiMRadio-'
+      str: '-'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+
+  def _LPWiiMRadioWorkerPool.submit(self, jobKey, task, callback, priorityRank)  line 76
+    names: str, strip, _lock, _jobs, get, _LPWiiMRadioScheduledJob, _enqueue, callbacks, append, started, priorityRank, int, generation
+      str: '\n        提交任务到工作池，若存在相同 key 则仅追加订阅并在必要时提升优先级。\n\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 结果订阅回调。\n        :param priorityRank: 当前优先级序号。\n        :return: None。\n        '
+      str: 'key'
+      str: 'task'
+      str: 'priorityRank'
+      str: 'callback'
+
+  def _LPWiiMRadioWorkerPool._enqueue(self, job)  line 116
+    names: _queue, put, priorityRank, next, _sequence, key, generation
+      str: '\n        将任务按当前优先级压入优先队列。\n\n        :param job: 内部任务对象。\n        :return: None。\n        '
+
+  def _LPWiiMRadioWorkerPool._worker_loop(self)  line 125
+    names: _queue, get, _lock, _jobs, task_done, started, generation, int, priorityRank, task, Exception, logger, warning, _name, pop, list, callbacks, _delivery_handler
+      str: '\n        后台线程主循环：按优先级取出任务并执行。\n\n        :param: 无。\n        :return: None。\n        '
+      str: '[WiiMRadioScheduler] pool='
+      str: ' job='
+      str: ' failed: '
+
+def LPWiiMRadioRequestScheduler()  line 170
+  names: __name__, __module__, __qualname__, pyqtSignal, str, object, _jobDeliveryReady, PRIORITY_VISIBLE, PRIORITY_PRELOAD, PRIORITY_BACKGROUND, _PRIORITY_RANKS, _instance, Optional, __annotations__, threading, Lock, _instance_lock, QObject, __init__, classmethod, instance, Callable, Any, submitApiTask, submitImageDownloadTask, submitImageDecodeTask, _submit, int, _priority_rank, List, _enqueue_delivery, pyqtSlot, _dispatch_delivery, __classcell__
+    str: 'LPWiiMRadioRequestScheduler'
+    str: 'visible'
+    str: 'preload'
+    str: 'background'
+    str: '_instance'
+    str: 'parent'
+    str: 'LPWiiMRadioRequestScheduler.__init__'
+    str: 'return'
+    str: 'LPWiiMRadioRequestScheduler.instance'
+    str: 'jobKey'
+    str: 'task'
+    str: 'callback'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioRequestScheduler.submitApiTask'
+    str: 'LPWiiMRadioRequestScheduler.submitImageDownloadTask'
+    str: 'LPWiiMRadioRequestScheduler.submitImageDecodeTask'
+    str: 'poolName'
+    str: 'jobKey'
+    str: 'task'
+    str: 'callback'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioRequestScheduler._submit'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioRequestScheduler._priority_rank'
+    str: 'poolName'
+    str: 'jobKey'
+    str: 'callbacks'
+    str: 'payload'
+    str: 'return'
+    str: 'LPWiiMRadioRequestScheduler._enqueue_delivery'
+    str: 'LPWiiMRadioRequestScheduler._dispatch_delivery'
+
+  def LPWiiMRadioRequestScheduler.__init__(self, parent)  line 186
+    names: super, __init__, _LPWiiMRadioWorkerPool, _enqueue_delivery, _pools, _jobDeliveryReady, connect, _dispatch_delivery
+      str: '\n        初始化调度器并启动固定工作池。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'api'
+      str: 'image_download'
+      str: 'image_decode'
+      str: 'api'
+      str: 'image_download'
+      str: 'image_decode'
+
+  def LPWiiMRadioRequestScheduler.instance(cls)  line 201
+    names: _instance_lock, _instance
+      str: '\n        返回全局调度器单例。\n\n        :param: 无。\n        :return: 调度器单例对象。\n        '
+
+  def LPWiiMRadioRequestScheduler.submitApiTask(self, jobKey, task, callback, priority)  line 214
+    names: _submit
+      str: '\n        提交 API 任务。\n\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 结果订阅回调。\n        :param priority: 优先级字符串。\n        :return: None。\n        '
+      str: 'api'
+
+  def LPWiiMRadioRequestScheduler.submitImageDownloadTask(self, jobKey, task, callback, priority)  line 232
+    names: _submit
+      str: '\n        提交图片下载任务。\n\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 结果订阅回调。\n        :param priority: 优先级字符串。\n        :return: None。\n        '
+      str: 'image_download'
+
+  def LPWiiMRadioRequestScheduler.submitImageDecodeTask(self, jobKey, task, callback, priority)  line 250
+    names: _submit
+      str: '\n        提交图片解码/缩放任务。\n\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 结果订阅回调。\n        :param priority: 优先级字符串。\n        :return: None。\n        '
+      str: 'image_decode'
+
+  def LPWiiMRadioRequestScheduler._submit(self, poolName, jobKey, task, callback, priority)  line 268
+    names: _pools, get, str, strip, submit, _priority_rank
+      str: '\n        将任务提交到指定工作池。\n\n        :param poolName: 工作池名称。\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 结果订阅回调。\n        :param priority: 优先级字符串。\n        :return: None。\n        '
+      str: 'jobKey'
+      str: 'task'
+      str: 'callback'
+      str: 'priorityRank'
+
+  def LPWiiMRadioRequestScheduler._priority_rank(self, priority)  line 296
+    names: str, PRIORITY_BACKGROUND, strip, lower, int, _PRIORITY_RANKS, get
+      str: '\n        将优先级字符串映射为内部排序值。\n\n        :param priority: 优先级字符串。\n        :return: 内部优先级序号。\n        '
+
+  def LPWiiMRadioRequestScheduler._enqueue_delivery(self, poolName, jobKey, callbacks, payload)  line 306
+    names: _jobDeliveryReady, emit
+      str: '\n        将后台线程结果切回主线程投递。\n\n        :param poolName: 工作池名称。\n        :param jobKey: 任务唯一键。\n        :param callbacks: 订阅回调列表。\n        :param payload: 执行结果。\n        :return: None。\n        '
+
+  def LPWiiMRadioRequestScheduler._dispatch_delivery(self, poolName, jobKey, callbacks, payload)  line 324
+    names: isinstance, list, callable, Exception, logger, warning
+      str: '\n        在主线程中依次执行订阅回调。\n\n        :param poolName: 工作池名称。\n        :param jobKey: 任务唯一键。\n        :param callbacks: 订阅回调列表。\n        :param payload: 执行结果。\n        :return: None。\n        '
+      str: '[WiiMRadioScheduler] dispatch failed pool='
+      str: ', job='
+      str: ', error='

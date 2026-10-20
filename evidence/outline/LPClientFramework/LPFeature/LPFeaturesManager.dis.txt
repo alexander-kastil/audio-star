@@ -1,0 +1,278 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/2/13 15:42\n@Auth ： Chris\n@File ：LPFeatureCanUtils.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (yaml)
+             10 STORE_NAME               1 (yaml)
+
+  9          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('LooseVersion',))
+             16 IMPORT_NAME              2 (distutils.version)
+             18 IMPORT_FROM              3 (LooseVersion)
+             20 STORE_NAME               3 (LooseVersion)
+             22 POP_TOP
+
+ 11          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('appLocalDataPath', 'logger'))
+             28 IMPORT_NAME              4 (LPClientFramework.LPUtility)
+             30 IMPORT_FROM              5 (appLocalDataPath)
+             32 STORE_NAME               5 (appLocalDataPath)
+             34 IMPORT_FROM              6 (logger)
+             36 STORE_NAME               6 (logger)
+             38 POP_TOP
+
+ 14          40 LOAD_BUILD_CLASS
+             42 LOAD_CONST               5 (<code object LPFeaturesManager at 0x000001F3253C47C0, file "LPClientFramework\LPFeature\LPFeaturesManager.py", line 14>)
+             44 LOAD_CONST               6 ('LPFeaturesManager')
+             46 MAKE_FUNCTION            0
+             48 LOAD_CONST               6 ('LPFeaturesManager')
+             50 CALL_FUNCTION            2
+             52 STORE_NAME               7 (LPFeaturesManager)
+
+ 60          54 LOAD_NAME                8 (__name__)
+             56 LOAD_CONST               7 ('__main__')
+             58 COMPARE_OP               2 (==)
+             60 POP_JUMP_IF_FALSE      108
+
+ 61          62 LOAD_NAME                7 (LPFeaturesManager)
+             64 CALL_FUNCTION            0
+             66 STORE_NAME               9 (feature_manager)
+
+ 63          68 LOAD_CONST               8 ('QUEUE_MOVE')
+             70 STORE_NAME              10 (feature_name)
+
+ 64          72 LOAD_CONST               9 ('1.4')
+             74 STORE_NAME              11 (current_version)
+
+ 66          76 LOAD_CONST              10 (<code object customConditionCheck at 0x000001F3253C4B30, file "LPClientFramework\LPFeature\LPFeaturesManager.py", line 66>)
+             78 LOAD_CONST              11 ('customConditionCheck')
+             80 MAKE_FUNCTION            0
+             82 STORE_NAME              12 (customConditionCheck)
+
+ 71          84 LOAD_NAME                9 (feature_manager)
+             86 LOAD_METHOD             13 (isEnabled)
+             88 LOAD_NAME               10 (feature_name)
+             90 LOAD_NAME               11 (current_version)
+             92 LOAD_NAME               12 (customConditionCheck)
+             94 LOAD_CONST              12 (12)
+             96 CALL_METHOD              4
+             98 STORE_NAME              14 (ret)
+
+ 72         100 LOAD_NAME               15 (print)
+            102 LOAD_NAME               14 (ret)
+            104 CALL_FUNCTION            1
+            106 POP_TOP
+        >>  108 LOAD_CONST               2 (None)
+            110 RETURN_VALUE
+
+=== LPFeaturesManager ===
+ 14           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeaturesManager')
+              6 STORE_NAME               2 (__qualname__)
+
+ 15           8 LOAD_CONST               1 ('\n    控制功能开关，如queue move\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+ 19          12 LOAD_CONST               2 (<code object __init__ at 0x000001F3253C4660, file "LPClientFramework\LPFeature\LPFeaturesManager.py", line 19>)
+             14 LOAD_CONST               3 ('LPFeaturesManager.__init__')
+             16 MAKE_FUNCTION            0
+             18 STORE_NAME               4 (__init__)
+
+ 23          20 LOAD_CONST               4 (<code object loadConfig at 0x000001F3253C49D0, file "LPClientFramework\LPFeature\LPFeaturesManager.py", line 23>)
+             22 LOAD_CONST               5 ('LPFeaturesManager.loadConfig')
+             24 MAKE_FUNCTION            0
+             26 STORE_NAME               5 (loadConfig)
+
+ 28          28 LOAD_CONST               9 ((None,))
+             30 LOAD_CONST               7 (<code object isEnabled at 0x000001F3253C4500, file "LPClientFramework\LPFeature\LPFeaturesManager.py", line 28>)
+             32 LOAD_CONST               8 ('LPFeaturesManager.isEnabled')
+             34 MAKE_FUNCTION            1 (defaults)
+             36 STORE_NAME               6 (isEnabled)
+             38 LOAD_CONST               6 (None)
+             40 RETURN_VALUE
+
+=== LPFeaturesManager.__init__ ===
+ 20           0 LOAD_GLOBAL              0 (appLocalDataPath)
+              2 CALL_FUNCTION            0
+              4 LOAD_CONST               1 ('feature.yml')
+              6 BINARY_TRUE_DIVIDE
+              8 STORE_FAST               1 (configFile)
+
+ 21          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (loadConfig)
+             14 LOAD_FAST                1 (configFile)
+             16 CALL_METHOD              1
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               2 (config)
+             22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPFeaturesManager.loadConfig ===
+ 24           0 LOAD_GLOBAL              0 (open)
+              2 LOAD_FAST                1 (config_file)
+              4 LOAD_CONST               1 ('r')
+              6 LOAD_CONST               2 ('utf-8')
+              8 LOAD_CONST               3 (('encoding',))
+             10 CALL_FUNCTION_KW         3
+             12 SETUP_WITH              26 (to 40)
+             14 STORE_FAST               2 (f)
+
+ 25          16 LOAD_GLOBAL              1 (yaml)
+             18 LOAD_METHOD              2 (safe_load)
+             20 LOAD_FAST                2 (f)
+             22 CALL_METHOD              1
+             24 STORE_FAST               3 (config)
+             26 POP_BLOCK
+             28 LOAD_CONST               0 (None)
+             30 DUP_TOP
+             32 DUP_TOP
+             34 CALL_FUNCTION            3
+             36 POP_TOP
+             38 JUMP_FORWARD            16 (to 56)
+        >>   40 WITH_EXCEPT_START
+             42 POP_JUMP_IF_TRUE        46
+             44 RERAISE
+        >>   46 POP_TOP
+             48 POP_TOP
+             50 POP_TOP
+             52 POP_EXCEPT
+             54 POP_TOP
+
+ 26     >>   56 LOAD_FAST                3 (config)
+             58 RETURN_VALUE
+
+=== LPFeaturesManager.isEnabled ===
+ 32           0 LOAD_FAST                1 (featureName)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (config)
+              6 CONTAINS_OP              1
+              8 POP_JUMP_IF_FALSE       32
+
+ 33          10 LOAD_GLOBAL              1 (logger)
+             12 LOAD_METHOD              2 (error)
+             14 LOAD_CONST               1 ('feature--')
+             16 LOAD_FAST                1 (featureName)
+             18 FORMAT_VALUE             0
+             20 LOAD_CONST               2 (' not exist! ')
+             22 BUILD_STRING             3
+             24 CALL_METHOD              1
+             26 POP_TOP
+
+ 34          28 LOAD_CONST               3 (False)
+             30 RETURN_VALUE
+
+ 36     >>   32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                0 (config)
+             36 LOAD_FAST                1 (featureName)
+             38 BINARY_SUBSCR
+             40 STORE_FAST               5 (feature)
+
+ 37          42 LOAD_FAST                5 (feature)
+             44 LOAD_METHOD              3 (get)
+             46 LOAD_CONST               4 ('enabled')
+             48 LOAD_CONST               3 (False)
+             50 CALL_METHOD              2
+             52 STORE_FAST               6 (enabled)
+
+ 38          54 LOAD_FAST                6 (enabled)
+             56 POP_JUMP_IF_TRUE        62
+
+ 39          58 LOAD_FAST                6 (enabled)
+             60 RETURN_VALUE
+
+ 42     >>   62 LOAD_FAST                5 (feature)
+             64 LOAD_METHOD              3 (get)
+             66 LOAD_CONST               5 ('min_version')
+             68 LOAD_CONST               6 (None)
+             70 CALL_METHOD              2
+             72 STORE_FAST               7 (minVer)
+
+ 43          74 LOAD_FAST                5 (feature)
+             76 LOAD_METHOD              3 (get)
+             78 LOAD_CONST               7 ('max_version')
+             80 LOAD_CONST               6 (None)
+             82 CALL_METHOD              2
+             84 STORE_FAST               8 (maxVer)
+
+ 44          86 LOAD_FAST                7 (minVer)
+             88 POP_JUMP_IF_FALSE      106
+             90 LOAD_GLOBAL              4 (LooseVersion)
+             92 LOAD_FAST                2 (currentVersion)
+             94 CALL_FUNCTION            1
+             96 LOAD_GLOBAL              4 (LooseVersion)
+             98 LOAD_FAST                7 (minVer)
+            100 CALL_FUNCTION            1
+            102 COMPARE_OP               0 (<)
+            104 POP_JUMP_IF_TRUE       122
+
+ 45     >>  106 LOAD_FAST                8 (maxVer)
+
+ 44         108 POP_JUMP_IF_FALSE      162
+
+ 45         110 LOAD_GLOBAL              4 (LooseVersion)
+            112 LOAD_FAST                2 (currentVersion)
+            114 CALL_FUNCTION            1
+            116 LOAD_FAST                8 (maxVer)
+            118 COMPARE_OP               5 (>=)
+
+ 44         120 POP_JUMP_IF_FALSE      162
+
+ 46     >>  122 LOAD_GLOBAL              1 (logger)
+            124 LOAD_METHOD              5 (debug)
+            126 LOAD_CONST               1 ('feature--')
+            128 LOAD_FAST                1 (featureName)
+            130 FORMAT_VALUE             0
+            132 LOAD_CONST               8 (' not allow in current version: ')
+            134 LOAD_FAST                2 (currentVersion)
+            136 FORMAT_VALUE             0
+            138 LOAD_CONST               9 (' (minVer: ')
+            140 LOAD_FAST                7 (minVer)
+            142 FORMAT_VALUE             0
+            144 LOAD_CONST              10 (', maxVer: ')
+            146 LOAD_FAST                8 (maxVer)
+            148 FORMAT_VALUE             0
+            150 LOAD_CONST              11 (')')
+            152 BUILD_STRING             9
+            154 CALL_METHOD              1
+            156 POP_TOP
+
+ 47         158 LOAD_CONST               3 (False)
+            160 RETURN_VALUE
+
+ 50     >>  162 LOAD_FAST                5 (feature)
+            164 LOAD_METHOD              3 (get)
+            166 LOAD_CONST              12 ('condition')
+            168 LOAD_CONST               3 (False)
+            170 CALL_METHOD              2
+            172 STORE_FAST               9 (conditionRequired)
+
+ 51         174 LOAD_FAST                9 (conditionRequired)
+            176 POP_JUMP_IF_FALSE      206
+
+ 52         178 LOAD_FAST                3 (customConditionMethod)
+            180 POP_JUMP_IF_FALSE      190
+
+ 53         182 LOAD_FAST                3 (customConditionMethod)
+            184 LOAD_FAST                4 (args)
+            186 CALL_FUNCTION_EX         0
+            188 RETURN_VALUE
+
+ 55     >>  190 LOAD_GLOBAL              6 (ValueError)
+            192 LOAD_CONST               1 ('feature--')
+            194 LOAD_FAST                1 (featureName)
+            196 FORMAT_VALUE             0
+            198 LOAD_CONST              13 (' need Implement customConditionMethod ！')
+            200 BUILD_STRING             3
+            202 CALL_FUNCTION            1
+            204 RAISE_VARARGS            1
+
+ 57     >>  206 LOAD_CONST              14 (True)
+            208 RETURN_VALUE
+
+=== customConditionCheck ===
+ 67           0 LOAD_CONST               1 (True)
+              2 RETURN_VALUE

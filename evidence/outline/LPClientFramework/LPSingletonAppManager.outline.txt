@@ -1,0 +1,66 @@
+# module LPClientFramework.LPSingletonAppManager
+
+[module] names: PyQt6.QtNetwork, QLocalServer, QLocalSocket, QAbstractSocket, PyQt6.QtCore, QObject, pyqtSignal, LPClientFramework.LPUtility, logger, LPSingletonAppManager
+  str: 'QLocalServer'
+  str: 'QLocalSocket'
+  str: 'QAbstractSocket'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'logger'
+  str: 'LPSingletonAppManager'
+
+def LPSingletonAppManager()  line 8
+  names: __name__, __module__, __qualname__, pyqtSignal, str, messageReceived, __init__, bool, is_running, _init_local_connection, _new_local_server, _new_local_connection, _handleMessage, sendMsgToPrimary, __classcell__
+    str: 'LPSingletonAppManager'
+    str: 'wiim_singleton!#@'
+    str: 'LPSingletonAppManager.__init__'
+    str: 'return'
+    str: 'LPSingletonAppManager.is_running'
+    str: 'LPSingletonAppManager._init_local_connection'
+    str: 'LPSingletonAppManager._new_local_server'
+    str: 'LPSingletonAppManager._new_local_connection'
+    str: 'LPSingletonAppManager._handleMessage'
+    str: 'message'
+    str: 'LPSingletonAppManager.sendMsgToPrimary'
+    str: 'wiim_singleton!#@'
+
+  def LPSingletonAppManager.__init__(self, key, timeout)  line 66
+    names: super, __init__, key, timeout, _is_running, _local_server, socket, msg, _init_local_connection
+
+  def LPSingletonAppManager.is_running(self)  line 77
+    names: _is_running
+
+  def LPSingletonAppManager._init_local_connection(self)  line 80
+    names: QLocalSocket, connectToServer, key, waitForConnected, timeout, logger, debug, _is_running, close, _new_local_server
+      str: '尝试连接已有实例，如果失败则创建本地 server'
+      str: '[_init_local_connection] '
+      str: ' already running.'
+
+  def LPSingletonAppManager._new_local_server(self)  line 93
+    names: QLocalServer, _local_server, setSocketOptions, SocketOption, WorldAccessOption, newConnection, connect, _new_local_connection, listen, key, serverError, QAbstractSocket, SocketError, AddressInUseError, removeServer, logger, debug, _is_running, errorString
+      str: '创建 LocalServer，并监听新连接'
+      str: 'Error: Could not listen even after removing stale server: '
+      str: 'self._local_server.serverError() = '
+      str: 'Error: Could not listen on '
+      str: ': '
+
+  def LPSingletonAppManager._new_local_connection(self)  line 114
+    names: logger, debug, _local_server, nextPendingConnection, socket, readyRead, connect
+      str: '收到新连接，激活窗口'
+      str: '[_onNewConnection] triggered'
+      str: '[_onNewConnection] socket connected'
+      str: 'LPSingletonAppManager._new_local_connection.<locals>.<lambda>'
+
+    def LPSingletonAppManager._new_local_connection.<lambda>()  line 119
+      names: _handleMessage
+
+  def LPSingletonAppManager._handleMessage(self)  line 121
+    names: socket, readAll, data, decode, msg, logger, debug, disconnectFromServer, messageReceived, emit
+      str: '[_handleMessage] msg = '
+
+  def LPSingletonAppManager.sendMsgToPrimary(self, message)  line 129
+    names: logger, debug, QLocalSocket, connectToServer, key, waitForConnected, write, encode, flush, waitForBytesWritten, disconnectFromServer
+      str: '\n        子实例调用，向主实例发送消息。\n        '
+      str: '[sendMsgToPrimary] msg = '
+      str: 'wiim://showApp'
+      str: '[sendMsgToPrimary] success'

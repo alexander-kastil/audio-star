@@ -1,0 +1,1445 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (('QApplication',))
+              4 IMPORT_NAME              0 (PyQt6.QtWidgets)
+              6 IMPORT_FROM              1 (QApplication)
+              8 STORE_NAME               1 (QApplication)
+             10 POP_TOP
+
+  2          12 LOAD_CONST               0 (0)
+             14 LOAD_CONST               2 (('QUdpSocket', 'QHostAddress', 'QNetworkInterface', 'QNetworkDatagram'))
+             16 IMPORT_NAME              2 (PyQt6.QtNetwork)
+             18 IMPORT_FROM              3 (QUdpSocket)
+             20 STORE_NAME               3 (QUdpSocket)
+             22 IMPORT_FROM              4 (QHostAddress)
+             24 STORE_NAME               4 (QHostAddress)
+             26 IMPORT_FROM              5 (QNetworkInterface)
+             28 STORE_NAME               5 (QNetworkInterface)
+             30 IMPORT_FROM              6 (QNetworkDatagram)
+             32 STORE_NAME               6 (QNetworkDatagram)
+             34 POP_TOP
+
+  3          36 LOAD_CONST               0 (0)
+             38 LOAD_CONST               3 (('QtNetwork',))
+             40 IMPORT_NAME              7 (PyQt6)
+             42 IMPORT_FROM              8 (QtNetwork)
+             44 STORE_NAME               8 (QtNetwork)
+             46 POP_TOP
+
+  4          48 LOAD_CONST               0 (0)
+             50 LOAD_CONST               4 (('QRunnable', 'QThreadPool'))
+             52 IMPORT_NAME              9 (PyQt6.QtCore)
+             54 IMPORT_FROM             10 (QRunnable)
+             56 STORE_NAME              10 (QRunnable)
+             58 IMPORT_FROM             11 (QThreadPool)
+             60 STORE_NAME              11 (QThreadPool)
+             62 POP_TOP
+
+  5          64 LOAD_CONST               0 (0)
+             66 LOAD_CONST               5 (('Random',))
+             68 IMPORT_NAME             12 (random)
+             70 IMPORT_FROM             13 (Random)
+             72 STORE_NAME              13 (Random)
+             74 POP_TOP
+
+  7          76 LOAD_CONST               0 (0)
+             78 LOAD_CONST               6 (None)
+             80 IMPORT_NAME             14 (threading)
+             82 STORE_NAME              14 (threading)
+
+  8          84 LOAD_CONST               0 (0)
+             86 LOAD_CONST               6 (None)
+             88 IMPORT_NAME             15 (platform)
+             90 STORE_NAME              15 (platform)
+
+  9          92 LOAD_CONST               0 (0)
+             94 LOAD_CONST               6 (None)
+             96 IMPORT_NAME             16 (time)
+             98 STORE_NAME              16 (time)
+
+ 11         100 LOAD_CONST               0 (0)
+            102 LOAD_CONST               7 (('LPUtility',))
+            104 IMPORT_NAME             17 (LPClientFramework)
+            106 IMPORT_FROM             18 (LPUtility)
+            108 STORE_NAME              18 (LPUtility)
+            110 POP_TOP
+
+ 12         112 LOAD_CONST               0 (0)
+            114 LOAD_CONST               8 (('logger',))
+            116 IMPORT_NAME             19 (LPClientFramework.CacheLog)
+            118 IMPORT_FROM             20 (logger)
+            120 STORE_NAME              20 (logger)
+            122 POP_TOP
+
+ 13         124 LOAD_CONST               0 (0)
+            126 LOAD_CONST               9 (('fetchLocalIP',))
+            128 IMPORT_NAME             21 (LPClientFramework.LPUtility)
+            130 IMPORT_FROM             22 (fetchLocalIP)
+            132 STORE_NAME              22 (fetchLocalIP)
+            134 POP_TOP
+
+ 15         136 LOAD_CONST              10 (1900)
+            138 STORE_NAME              23 (SSDP_PORT)
+
+ 16         140 LOAD_CONST              11 ('239.255.255.250')
+            142 STORE_NAME              24 (SSDP_ADDR_V4)
+
+ 17         144 LOAD_CONST              12 ('[FF05::C]')
+            146 STORE_NAME              25 (SSDP_ADDR_V6)
+
+ 20         148 LOAD_CONST              13 (<code object validInterfaces at 0x000001F324E75920, file "LPClientFramework\LPQTSSDPServer.py", line 20>)
+            150 LOAD_CONST              14 ('validInterfaces')
+            152 MAKE_FUNCTION            0
+            154 STORE_NAME              26 (validInterfaces)
+
+ 46         156 LOAD_BUILD_CLASS
+            158 LOAD_CONST              15 (<code object RequestHandler at 0x000001F3253CE920, file "LPClientFramework\LPQTSSDPServer.py", line 46>)
+            160 LOAD_CONST              16 ('RequestHandler')
+            162 MAKE_FUNCTION            0
+            164 LOAD_CONST              16 ('RequestHandler')
+            166 LOAD_NAME               10 (QRunnable)
+            168 CALL_FUNCTION            3
+            170 STORE_NAME              27 (RequestHandler)
+
+231         172 LOAD_BUILD_CLASS
+            174 LOAD_CONST              17 (<code object LPQTSSDPServer at 0x000001F3253CE710, file "LPClientFramework\LPQTSSDPServer.py", line 231>)
+            176 LOAD_CONST              18 ('LPQTSSDPServer')
+            178 MAKE_FUNCTION            0
+            180 LOAD_CONST              18 ('LPQTSSDPServer')
+            182 CALL_FUNCTION            2
+            184 STORE_NAME              28 (LPQTSSDPServer)
+            186 LOAD_CONST               6 (None)
+            188 RETURN_VALUE
+
+=== validInterfaces ===
+ 23           0 LOAD_GLOBAL              0 (QNetworkInterface)
+              2 LOAD_METHOD              1 (allInterfaces)
+              4 CALL_METHOD              0
+              6 STORE_FAST               0 (ifaces)
+
+ 24           8 LOAD_FAST                0 (ifaces)
+             10 LOAD_CONST               1 (None)
+             12 IS_OP                    0
+             14 POP_JUMP_IF_FALSE       20
+
+ 25          16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+ 27     >>   20 BUILD_LIST               0
+             22 STORE_FAST               1 (retInterfaces)
+
+ 28          24 LOAD_FAST                0 (ifaces)
+             26 GET_ITER
+        >>   28 FOR_ITER               114 (to 144)
+             30 STORE_FAST               2 (iface)
+
+ 29          32 LOAD_FAST                2 (iface)
+             34 LOAD_METHOD              2 (flags)
+             36 CALL_METHOD              0
+             38 STORE_FAST               3 (flags)
+
+ 30          40 LOAD_GLOBAL              3 (bool)
+             42 LOAD_FAST                3 (flags)
+             44 LOAD_GLOBAL              0 (QNetworkInterface)
+             46 LOAD_ATTR                4 (InterfaceFlag)
+             48 LOAD_ATTR                5 (IsLoopBack)
+             50 BINARY_AND
+             52 CALL_FUNCTION            1
+             54 STORE_FAST               4 (is_loopback)
+
+ 31          56 LOAD_GLOBAL              3 (bool)
+             58 LOAD_FAST                3 (flags)
+             60 LOAD_GLOBAL              0 (QNetworkInterface)
+             62 LOAD_ATTR                4 (InterfaceFlag)
+             64 LOAD_ATTR                6 (IsPointToPoint)
+             66 BINARY_AND
+             68 CALL_FUNCTION            1
+             70 STORE_FAST               5 (is_p2p)
+
+ 32          72 LOAD_GLOBAL              3 (bool)
+             74 LOAD_FAST                3 (flags)
+             76 LOAD_GLOBAL              0 (QNetworkInterface)
+             78 LOAD_ATTR                4 (InterfaceFlag)
+             80 LOAD_ATTR                7 (IsRunning)
+             82 BINARY_AND
+             84 CALL_FUNCTION            1
+             86 STORE_FAST               6 (is_running)
+
+ 33          88 LOAD_GLOBAL              3 (bool)
+             90 LOAD_FAST                3 (flags)
+             92 LOAD_GLOBAL              0 (QNetworkInterface)
+             94 LOAD_ATTR                4 (InterfaceFlag)
+             96 LOAD_ATTR                8 (CanMulticast)
+             98 BINARY_AND
+            100 CALL_FUNCTION            1
+            102 STORE_FAST               7 (canMulticast)
+
+ 35         104 LOAD_FAST                6 (is_running)
+            106 POP_JUMP_IF_FALSE       28
+            108 LOAD_FAST                7 (canMulticast)
+            110 POP_JUMP_IF_TRUE       114
+
+ 36         112 JUMP_ABSOLUTE           28
+
+ 38     >>  114 LOAD_FAST                2 (iface)
+            116 LOAD_METHOD              9 (isValid)
+            118 CALL_METHOD              0
+            120 POP_JUMP_IF_FALSE       28
+            122 LOAD_FAST                4 (is_loopback)
+            124 POP_JUMP_IF_TRUE        28
+            126 LOAD_FAST                5 (is_p2p)
+            128 POP_JUMP_IF_FALSE      132
+
+ 39         130 JUMP_ABSOLUTE           28
+
+ 41     >>  132 LOAD_FAST                1 (retInterfaces)
+            134 LOAD_METHOD             10 (append)
+            136 LOAD_FAST                2 (iface)
+            138 CALL_METHOD              1
+            140 POP_TOP
+            142 JUMP_ABSOLUTE           28
+
+ 43     >>  144 LOAD_FAST                1 (retInterfaces)
+            146 RETURN_VALUE
+
+=== RequestHandler ===
+ 46           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('RequestHandler')
+              6 STORE_NAME               2 (__qualname__)
+
+ 47           8 LOAD_CLOSURE             0 (__class__)
+             10 BUILD_TUPLE              1
+             12 LOAD_CONST               1 (<code object __init__ at 0x000001F3253A2B30, file "LPClientFramework\LPQTSSDPServer.py", line 47>)
+             14 LOAD_CONST               2 ('RequestHandler.__init__')
+             16 MAKE_FUNCTION            8 (closure)
+             18 STORE_NAME               3 (__init__)
+
+ 54          20 LOAD_CONST               3 (<code object run at 0x000001F3253A2DF0, file "LPClientFramework\LPQTSSDPServer.py", line 54>)
+             22 LOAD_CONST               4 ('RequestHandler.run')
+             24 MAKE_FUNCTION            0
+             26 STORE_NAME               4 (run)
+
+ 65          28 LOAD_CONST               5 (<code object received_MSEARCH at 0x000001F3253A2920, file "LPClientFramework\LPQTSSDPServer.py", line 65>)
+             30 LOAD_CONST               6 ('RequestHandler.received_MSEARCH')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               5 (received_MSEARCH)
+
+ 93          36 LOAD_CONST               7 (<code object respond at 0x000001F3253CED40, file "LPClientFramework\LPQTSSDPServer.py", line 93>)
+             38 LOAD_CONST               8 ('RequestHandler.respond')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               6 (respond)
+
+107          44 LOAD_CONST               9 (<code object notify_live_method at 0x000001F3253CEC90, file "LPClientFramework\LPQTSSDPServer.py", line 107>)
+             46 LOAD_CONST              10 ('RequestHandler.notify_live_method')
+             48 MAKE_FUNCTION            0
+             50 STORE_NAME               7 (notify_live_method)
+
+117          52 LOAD_CONST              11 (<code object notify_bye_method at 0x000001F3253CEDF0, file "LPClientFramework\LPQTSSDPServer.py", line 117>)
+             54 LOAD_CONST              12 ('RequestHandler.notify_bye_method')
+             56 MAKE_FUNCTION            0
+             58 STORE_NAME               8 (notify_bye_method)
+
+127          60 LOAD_CONST              13 (<code object notify at 0x000001F3253CEB30, file "LPClientFramework\LPQTSSDPServer.py", line 127>)
+             62 LOAD_CONST              14 ('RequestHandler.notify')
+             64 MAKE_FUNCTION            0
+             66 STORE_NAME               9 (notify)
+
+142          68 LOAD_CONST              15 (<code object respond_MSEARCH at 0x000001F3253CE660, file "LPClientFramework\LPQTSSDPServer.py", line 142>)
+             70 LOAD_CONST              16 ('RequestHandler.respond_MSEARCH')
+             72 MAKE_FUNCTION            0
+             74 STORE_NAME              10 (respond_MSEARCH)
+
+167          76 LOAD_CONST              17 (<code object send_NOTIFY at 0x000001F3253CE870, file "LPClientFramework\LPQTSSDPServer.py", line 167>)
+             78 LOAD_CONST              18 ('RequestHandler.send_NOTIFY')
+             80 MAKE_FUNCTION            0
+             82 STORE_NAME              11 (send_NOTIFY)
+
+188          84 LOAD_CONST              19 (<code object received_NOTIFY at 0x000001F3253CE500, file "LPClientFramework\LPQTSSDPServer.py", line 188>)
+             86 LOAD_CONST              20 ('RequestHandler.received_NOTIFY')
+             88 MAKE_FUNCTION            0
+             90 STORE_NAME              12 (received_NOTIFY)
+
+193          92 LOAD_CONST              21 (<code object http_parse_raw at 0x000001F3253CE3A0, file "LPClientFramework\LPQTSSDPServer.py", line 193>)
+             94 LOAD_CONST              22 ('RequestHandler.http_parse_raw')
+             96 MAKE_FUNCTION            0
+             98 STORE_NAME              13 (http_parse_raw)
+
+218         100 LOAD_CONST              23 (<code object build_notification_type at 0x000001F3253CE450, file "LPClientFramework\LPQTSSDPServer.py", line 218>)
+            102 LOAD_CONST              24 ('RequestHandler.build_notification_type')
+            104 MAKE_FUNCTION            0
+            106 STORE_NAME              14 (build_notification_type)
+
+223         108 LOAD_CONST              25 (<code object headers_join at 0x000001F3253CE9D0, file "LPClientFramework\LPQTSSDPServer.py", line 223>)
+            110 LOAD_CONST              26 ('RequestHandler.headers_join')
+            112 MAKE_FUNCTION            0
+            114 STORE_NAME              15 (headers_join)
+            116 LOAD_CLOSURE             0 (__class__)
+            118 DUP_TOP
+            120 STORE_NAME              16 (__classcell__)
+            122 RETURN_VALUE
+
+=== RequestHandler.__init__ ===
+ 48           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 49          10 LOAD_FAST                1 (datagram)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (datagram)
+
+ 50          16 LOAD_FAST                2 (sender_addr)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               3 (sender_addr)
+
+ 51          22 LOAD_FAST                3 (sender_port)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               4 (sender_port)
+
+ 52          28 LOAD_FAST                4 (ssdpServer)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               5 (ssdpServer)
+             34 LOAD_CONST               0 (None)
+             36 RETURN_VALUE
+
+=== RequestHandler.run ===
+ 55           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (http_parse_raw)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (datagram)
+              8 CALL_METHOD              1
+             10 UNPACK_SEQUENCE          4
+             12 STORE_FAST               1 (method)
+             14 STORE_FAST               2 (path)
+             16 STORE_FAST               3 (version)
+             18 STORE_FAST               4 (headers)
+
+ 57          20 LOAD_FAST                1 (method)
+             22 LOAD_CONST               1 ('M-SEARCH')
+             24 COMPARE_OP               2 (==)
+             26 POP_JUMP_IF_FALSE       50
+
+ 58          28 LOAD_FAST                0 (self)
+             30 LOAD_METHOD              2 (received_MSEARCH)
+             32 LOAD_FAST                4 (headers)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                3 (sender_addr)
+             38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                4 (sender_port)
+             42 BUILD_TUPLE              2
+             44 CALL_METHOD              2
+             46 POP_TOP
+             48 JUMP_FORWARD            44 (to 94)
+
+ 59     >>   50 LOAD_FAST                1 (method)
+             52 LOAD_CONST               2 ('NOTIFY')
+             54 COMPARE_OP               2 (==)
+             56 POP_JUMP_IF_FALSE       80
+
+ 60          58 LOAD_FAST                0 (self)
+             60 LOAD_METHOD              5 (received_NOTIFY)
+             62 LOAD_FAST                4 (headers)
+             64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                3 (sender_addr)
+             68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                4 (sender_port)
+             72 BUILD_TUPLE              2
+             74 CALL_METHOD              2
+             76 POP_TOP
+             78 JUMP_FORWARD            14 (to 94)
+
+ 62     >>   80 LOAD_GLOBAL              6 (logger)
+             82 LOAD_METHOD              7 (warning)
+             84 LOAD_CONST               3 ("[UPnPServer] unhandled Method '%s'")
+             86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                1 (datagram)
+             90 CALL_METHOD              2
+             92 POP_TOP
+        >>   94 LOAD_CONST               0 (None)
+             96 RETURN_VALUE
+
+=== RequestHandler.received_MSEARCH ===
+ 66           0 LOAD_FAST                2 (addr)
+              2 UNPACK_SEQUENCE          2
+              4 STORE_FAST               3 (address)
+              6 STORE_FAST               4 (port)
+
+ 67           8 SETUP_FINALLY           50 (to 60)
+
+ 68          10 LOAD_FAST                1 (headers)
+             12 LOAD_CONST               1 ('host')
+             14 BINARY_SUBSCR
+             16 STORE_FAST               5 (host)
+
+ 69          18 LOAD_GLOBAL              0 (str)
+             20 LOAD_FAST                1 (headers)
+             22 LOAD_CONST               2 ('man')
+             24 BINARY_SUBSCR
+             26 CALL_FUNCTION            1
+             28 LOAD_METHOD              1 (strip)
+             30 LOAD_CONST               3 ('"')
+             32 CALL_METHOD              1
+             34 STORE_FAST               6 (man)
+
+ 70          36 LOAD_GLOBAL              2 (int)
+             38 LOAD_FAST                1 (headers)
+             40 LOAD_CONST               4 ('mx')
+             42 BINARY_SUBSCR
+             44 CALL_FUNCTION            1
+             46 STORE_FAST               7 (mx)
+
+ 71          48 LOAD_FAST                1 (headers)
+             50 LOAD_CONST               5 ('st')
+             52 BINARY_SUBSCR
+             54 STORE_FAST               8 (st)
+             56 POP_BLOCK
+             58 JUMP_FORWARD            52 (to 112)
+
+ 72     >>   60 DUP_TOP
+             62 LOAD_GLOBAL              3 (Exception)
+             64 JUMP_IF_NOT_EXC_MATCH   110
+             66 POP_TOP
+             68 STORE_FAST               9 (e)
+             70 POP_TOP
+             72 SETUP_FINALLY           28 (to 102)
+
+ 73          74 LOAD_GLOBAL              4 (logger)
+             76 LOAD_METHOD              5 (warning)
+             78 LOAD_CONST               6 ('[UPnPServer] received invalid message: %s')
+             80 LOAD_FAST                1 (headers)
+             82 BINARY_MODULO
+             84 CALL_METHOD              1
+             86 POP_TOP
+
+ 74          88 POP_BLOCK
+             90 POP_EXCEPT
+             92 LOAD_CONST               0 (None)
+             94 STORE_FAST               9 (e)
+             96 DELETE_FAST              9 (e)
+             98 LOAD_CONST               0 (None)
+            100 RETURN_VALUE
+        >>  102 LOAD_CONST               0 (None)
+            104 STORE_FAST               9 (e)
+            106 DELETE_FAST              9 (e)
+            108 RERAISE
+        >>  110 RERAISE
+
+ 76     >>  112 LOAD_FAST                6 (man)
+            114 LOAD_CONST               7 ('ssdp:discover')
+            116 COMPARE_OP               3 (!=)
+            118 POP_JUMP_IF_FALSE      134
+
+ 77         120 LOAD_GLOBAL              4 (logger)
+            122 LOAD_METHOD              5 (warning)
+            124 LOAD_CONST               8 ("[UPnPServer] received message where MAN != 'ssdp:discover'")
+            126 CALL_METHOD              1
+            128 POP_TOP
+
+ 78         130 LOAD_CONST               0 (None)
+            132 RETURN_VALUE
+
+ 80     >>  134 LOAD_FAST                8 (st)
+            136 LOAD_CONST               9 (('urn:schemas-upnp-org:service:ContentDirectory:1', 'urn:schemas-upnp-org:device:MediaServer:1'))
+            138 CONTAINS_OP              0
+            140 POP_JUMP_IF_FALSE      224
+
+ 82         142 LOAD_GLOBAL              6 (LPUtility)
+            144 LOAD_METHOD              7 (fetchLocalIP)
+            146 CALL_METHOD              0
+            148 LOAD_FAST                3 (address)
+            150 LOAD_METHOD              8 (toString)
+            152 CALL_METHOD              0
+            154 COMPARE_OP               2 (==)
+            156 POP_JUMP_IF_FALSE      172
+
+ 83         158 LOAD_FAST                3 (address)
+            160 LOAD_METHOD              9 (setAddress)
+            162 LOAD_CONST              10 ('127.0.0.1')
+            164 CALL_METHOD              1
+            166 POP_TOP
+
+ 85         168 LOAD_CONST               0 (None)
+            170 RETURN_VALUE
+
+ 87     >>  172 LOAD_GLOBAL              4 (logger)
+            174 LOAD_METHOD             10 (debug)
+            176 LOAD_CONST              11 ('[UPnPServer] received_MSEARCH: %s')
+            178 LOAD_FAST                3 (address)
+            180 LOAD_METHOD              8 (toString)
+            182 CALL_METHOD              0
+            184 BINARY_MODULO
+            186 CALL_METHOD              1
+            188 POP_TOP
+
+ 89         190 LOAD_GLOBAL             11 (time)
+            192 LOAD_METHOD             12 (sleep)
+            194 LOAD_FAST                0 (self)
+            196 LOAD_ATTR               13 (ssdpServer)
+            198 LOAD_ATTR               14 (rand)
+            200 LOAD_METHOD             15 (randint)
+            202 LOAD_CONST              12 (1)
+            204 LOAD_FAST                7 (mx)
+            206 CALL_METHOD              2
+            208 CALL_METHOD              1
+            210 POP_TOP
+
+ 90         212 LOAD_FAST                0 (self)
+            214 LOAD_METHOD             16 (respond_MSEARCH)
+            216 LOAD_FAST                8 (st)
+            218 LOAD_FAST                2 (addr)
+            220 CALL_METHOD              2
+            222 POP_TOP
+        >>  224 LOAD_CONST               0 (None)
+            226 RETURN_VALUE
+
+=== RequestHandler.respond ===
+ 94           0 LOAD_FAST                2 (addr)
+              2 UNPACK_SEQUENCE          2
+              4 STORE_FAST               3 (address)
+              6 STORE_FAST               4 (port)
+
+ 95           8 LOAD_GLOBAL              0 (logger)
+             10 LOAD_METHOD              1 (debug)
+             12 LOAD_CONST               1 ('[UPnPServer] respond %s:%s')
+             14 LOAD_FAST                3 (address)
+             16 LOAD_METHOD              2 (toString)
+             18 CALL_METHOD              0
+             20 LOAD_FAST                4 (port)
+             22 CALL_METHOD              3
+             24 POP_TOP
+
+ 96          26 LOAD_CONST               2 ('HTTP/1.1 200 OK\r\n')
+             28 STORE_FAST               5 (msg)
+
+ 97          30 LOAD_FAST                5 (msg)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              3 (headers_join)
+             36 LOAD_FAST                1 (headers)
+             38 CALL_METHOD              1
+             40 INPLACE_ADD
+             42 STORE_FAST               5 (msg)
+
+ 98          44 LOAD_FAST                5 (msg)
+             46 LOAD_CONST               3 ('\r\n\r\n')
+             48 INPLACE_ADD
+             50 STORE_FAST               5 (msg)
+
+100          52 SETUP_FINALLY           28 (to 82)
+
+101          54 LOAD_GLOBAL              4 (QUdpSocket)
+             56 CALL_FUNCTION            0
+             58 STORE_FAST               6 (socket)
+
+102          60 LOAD_FAST                6 (socket)
+             62 LOAD_METHOD              5 (writeDatagram)
+             64 LOAD_FAST                5 (msg)
+             66 LOAD_METHOD              6 (encode)
+             68 CALL_METHOD              0
+             70 LOAD_FAST                3 (address)
+             72 LOAD_FAST                4 (port)
+             74 CALL_METHOD              3
+             76 POP_TOP
+             78 POP_BLOCK
+             80 JUMP_FORWARD            48 (to 130)
+
+103     >>   82 DUP_TOP
+             84 LOAD_GLOBAL              7 (Exception)
+             86 JUMP_IF_NOT_EXC_MATCH   128
+             88 POP_TOP
+             90 STORE_FAST               7 (e)
+             92 POP_TOP
+             94 SETUP_FINALLY           24 (to 120)
+
+104          96 LOAD_GLOBAL              0 (logger)
+             98 LOAD_METHOD              8 (warning)
+            100 LOAD_CONST               4 ('[UPnPServer] socket.error: %s')
+            102 LOAD_FAST                7 (e)
+            104 CALL_METHOD              2
+            106 POP_TOP
+            108 POP_BLOCK
+            110 POP_EXCEPT
+            112 LOAD_CONST               0 (None)
+            114 STORE_FAST               7 (e)
+            116 DELETE_FAST              7 (e)
+            118 JUMP_FORWARD            10 (to 130)
+        >>  120 LOAD_CONST               0 (None)
+            122 STORE_FAST               7 (e)
+            124 DELETE_FAST              7 (e)
+            126 RERAISE
+        >>  128 RERAISE
+        >>  130 LOAD_CONST               0 (None)
+            132 RETURN_VALUE
+
+=== RequestHandler.notify_live_method ===
+108           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (send_NOTIFY)
+              4 LOAD_CONST               1 ('')
+              6 LOAD_CONST               2 ('ssdp:alive')
+              8 CALL_METHOD              2
+             10 POP_TOP
+
+109          12 LOAD_GLOBAL              1 (time)
+             14 LOAD_METHOD              2 (sleep)
+             16 LOAD_CONST               3 (0.1)
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+110          22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              0 (send_NOTIFY)
+             26 LOAD_CONST               4 ('upnp:rootdevice')
+             28 LOAD_CONST               2 ('ssdp:alive')
+             30 CALL_METHOD              2
+             32 POP_TOP
+
+111          34 LOAD_GLOBAL              1 (time)
+             36 LOAD_METHOD              2 (sleep)
+             38 LOAD_CONST               3 (0.1)
+             40 CALL_METHOD              1
+             42 POP_TOP
+
+112          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              0 (send_NOTIFY)
+             48 LOAD_CONST               5 ('urn:schemas-upnp-org:service:ContentDirectory:1')
+             50 LOAD_CONST               2 ('ssdp:alive')
+             52 CALL_METHOD              2
+             54 POP_TOP
+
+113          56 LOAD_GLOBAL              1 (time)
+             58 LOAD_METHOD              2 (sleep)
+             60 LOAD_CONST               3 (0.1)
+             62 CALL_METHOD              1
+             64 POP_TOP
+
+114          66 LOAD_FAST                0 (self)
+             68 LOAD_METHOD              0 (send_NOTIFY)
+             70 LOAD_CONST               6 ('urn:schemas-upnp-org:device:MediaServer:1')
+             72 LOAD_CONST               2 ('ssdp:alive')
+             74 CALL_METHOD              2
+             76 POP_TOP
+             78 LOAD_CONST               0 (None)
+             80 RETURN_VALUE
+
+=== RequestHandler.notify_bye_method ===
+118           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (send_NOTIFY)
+              4 LOAD_CONST               1 ('')
+              6 LOAD_CONST               2 ('ssdp:byebye')
+              8 CALL_METHOD              2
+             10 POP_TOP
+
+119          12 LOAD_GLOBAL              1 (time)
+             14 LOAD_METHOD              2 (sleep)
+             16 LOAD_CONST               3 (0.1)
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+120          22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              0 (send_NOTIFY)
+             26 LOAD_CONST               4 ('upnp:rootdevice')
+             28 LOAD_CONST               2 ('ssdp:byebye')
+             30 CALL_METHOD              2
+             32 POP_TOP
+
+121          34 LOAD_GLOBAL              1 (time)
+             36 LOAD_METHOD              2 (sleep)
+             38 LOAD_CONST               3 (0.1)
+             40 CALL_METHOD              1
+             42 POP_TOP
+
+122          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              0 (send_NOTIFY)
+             48 LOAD_CONST               5 ('urn:schemas-upnp-org:service:ContentDirectory:1')
+             50 LOAD_CONST               2 ('ssdp:byebye')
+             52 CALL_METHOD              2
+             54 POP_TOP
+
+123          56 LOAD_GLOBAL              1 (time)
+             58 LOAD_METHOD              2 (sleep)
+             60 LOAD_CONST               3 (0.1)
+             62 CALL_METHOD              1
+             64 POP_TOP
+
+124          66 LOAD_FAST                0 (self)
+             68 LOAD_METHOD              0 (send_NOTIFY)
+             70 LOAD_CONST               6 ('urn:schemas-upnp-org:device:MediaServer:1')
+             72 LOAD_CONST               2 ('ssdp:byebye')
+             74 CALL_METHOD              2
+             76 POP_TOP
+             78 LOAD_CONST               0 (None)
+             80 RETURN_VALUE
+
+=== RequestHandler.notify ===
+128           0 LOAD_FAST                2 (addr)
+              2 UNPACK_SEQUENCE          2
+              4 STORE_FAST               3 (address)
+              6 STORE_FAST               4 (port)
+
+129           8 LOAD_CONST               1 ('NOTIFY * HTTP/1.1\r\n')
+             10 STORE_FAST               5 (msg)
+
+130          12 LOAD_FAST                5 (msg)
+             14 LOAD_FAST                0 (self)
+             16 LOAD_METHOD              0 (headers_join)
+             18 LOAD_FAST                1 (headers)
+             20 CALL_METHOD              1
+             22 INPLACE_ADD
+             24 STORE_FAST               5 (msg)
+
+131          26 LOAD_FAST                5 (msg)
+             28 LOAD_CONST               2 ('\r\n\r\n')
+             30 INPLACE_ADD
+             32 STORE_FAST               5 (msg)
+
+133          34 SETUP_FINALLY           60 (to 96)
+
+134          36 LOAD_GLOBAL              1 (validInterfaces)
+             38 CALL_FUNCTION            0
+             40 GET_ITER
+        >>   42 FOR_ITER                48 (to 92)
+             44 STORE_FAST               6 (interface)
+
+135          46 LOAD_GLOBAL              2 (QNetworkDatagram)
+             48 LOAD_FAST                5 (msg)
+             50 LOAD_METHOD              3 (encode)
+             52 CALL_METHOD              0
+             54 LOAD_FAST                3 (address)
+             56 LOAD_FAST                4 (port)
+             58 CALL_FUNCTION            3
+             60 STORE_FAST               7 (dataFrame)
+
+136          62 LOAD_FAST                7 (dataFrame)
+             64 LOAD_METHOD              4 (setInterfaceIndex)
+             66 LOAD_FAST                6 (interface)
+             68 LOAD_METHOD              5 (index)
+             70 CALL_METHOD              0
+             72 CALL_METHOD              1
+             74 POP_TOP
+
+137          76 LOAD_FAST                0 (self)
+             78 LOAD_ATTR                6 (ssdpServer)
+             80 LOAD_ATTR                7 (socket)
+             82 LOAD_METHOD              8 (writeDatagram)
+             84 LOAD_FAST                7 (dataFrame)
+             86 CALL_METHOD              1
+             88 POP_TOP
+             90 JUMP_ABSOLUTE           42
+        >>   92 POP_BLOCK
+             94 JUMP_FORWARD            48 (to 144)
+
+138     >>   96 DUP_TOP
+             98 LOAD_GLOBAL              9 (Exception)
+            100 JUMP_IF_NOT_EXC_MATCH   142
+            102 POP_TOP
+            104 STORE_FAST               8 (e)
+            106 POP_TOP
+            108 SETUP_FINALLY           24 (to 134)
+
+139         110 LOAD_GLOBAL             10 (logger)
+            112 LOAD_METHOD             11 (warning)
+            114 LOAD_CONST               3 ('[UPnPServer] socket.error: %s')
+            116 LOAD_FAST                8 (e)
+            118 CALL_METHOD              2
+            120 POP_TOP
+            122 POP_BLOCK
+            124 POP_EXCEPT
+            126 LOAD_CONST               0 (None)
+            128 STORE_FAST               8 (e)
+            130 DELETE_FAST              8 (e)
+            132 JUMP_FORWARD            10 (to 144)
+        >>  134 LOAD_CONST               0 (None)
+            136 STORE_FAST               8 (e)
+            138 DELETE_FAST              8 (e)
+            140 RERAISE
+        >>  142 RERAISE
+        >>  144 LOAD_CONST               0 (None)
+            146 RETURN_VALUE
+
+=== RequestHandler.respond_MSEARCH ===
+143           0 LOAD_FAST                2 (addr)
+              2 UNPACK_SEQUENCE          2
+              4 STORE_FAST               3 (address)
+              6 STORE_FAST               4 (port)
+
+146           8 LOAD_CONST               1 ('127.0.0.1')
+             10 STORE_FAST               5 (ip)
+
+147          12 LOAD_FAST                3 (address)
+             14 LOAD_METHOD              0 (toString)
+             16 CALL_METHOD              0
+             18 LOAD_CONST               1 ('127.0.0.1')
+             20 COMPARE_OP               3 (!=)
+             22 POP_JUMP_IF_FALSE       30
+
+148          24 LOAD_GLOBAL              1 (fetchLocalIP)
+             26 CALL_FUNCTION            0
+             28 STORE_FAST               5 (ip)
+
+150     >>   30 LOAD_CONST               2 ('http://%s:%d/upnp/DeviceDescription.xml')
+             32 LOAD_FAST                5 (ip)
+             34 LOAD_GLOBAL              2 (LPUtility)
+             36 LOAD_ATTR                3 (upnpServerPort)
+             38 BUILD_TUPLE              2
+             40 BINARY_MODULO
+             42 STORE_FAST               6 (location)
+
+151          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              4 (build_notification_type)
+             48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                5 (ssdpServer)
+             52 LOAD_ATTR                6 (uuid)
+             54 LOAD_FAST                1 (st)
+             56 CALL_METHOD              2
+             58 UNPACK_SEQUENCE          2
+             60 STORE_FAST               7 (usn)
+             62 STORE_FAST               1 (st)
+
+154          64 LOAD_CONST               3 ('max-age = %d')
+             66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR                5 (ssdpServer)
+             70 LOAD_ATTR                7 (responseExpire)
+             72 BINARY_MODULO
+
+155          74 LOAD_CONST               4 ('')
+
+156          76 LOAD_FAST                6 (location)
+
+157          78 LOAD_FAST                0 (self)
+             80 LOAD_ATTR                5 (ssdpServer)
+             82 LOAD_ATTR                8 (upnpServerStr)
+
+158          84 LOAD_FAST                1 (st)
+
+159          86 LOAD_FAST                7 (usn)
+
+160          88 LOAD_CONST               5 ('"http://schemas.upnp.org/upnp/1/0/"; ns=01')
+
+161          90 LOAD_FAST                0 (self)
+             92 LOAD_ATTR                5 (ssdpServer)
+             94 LOAD_ATTR                9 (bootID)
+
+162          96 LOAD_FAST                0 (self)
+             98 LOAD_ATTR                5 (ssdpServer)
+            100 LOAD_ATTR                9 (bootID)
+
+153         102 LOAD_CONST               6 (('CACHE-CONTROL', 'EXT', 'LOCATION', 'SERVER', 'ST', 'USN', 'OPT', '01-NLS', 'BOOTID.UPNP.ORG'))
+            104 BUILD_CONST_KEY_MAP      9
+            106 STORE_FAST               8 (headers)
+
+165         108 LOAD_FAST                0 (self)
+            110 LOAD_METHOD             10 (respond)
+            112 LOAD_FAST                8 (headers)
+            114 LOAD_FAST                3 (address)
+            116 LOAD_FAST                4 (port)
+            118 BUILD_TUPLE              2
+            120 CALL_METHOD              2
+            122 POP_TOP
+            124 LOAD_CONST               0 (None)
+            126 RETURN_VALUE
+
+=== RequestHandler.send_NOTIFY ===
+168           0 LOAD_GLOBAL              0 (fetchLocalIP)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               3 (ip)
+
+170           6 LOAD_CONST               1 ('http://%s:%d/upnp/DeviceDescription.xml')
+              8 LOAD_FAST                3 (ip)
+             10 LOAD_GLOBAL              1 (LPUtility)
+             12 LOAD_ATTR                2 (upnpServerPort)
+             14 BUILD_TUPLE              2
+             16 BINARY_MODULO
+             18 STORE_FAST               4 (location)
+
+171          20 LOAD_FAST                0 (self)
+             22 LOAD_METHOD              3 (build_notification_type)
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                4 (ssdpServer)
+             28 LOAD_ATTR                5 (uuid)
+             30 LOAD_FAST                1 (nt)
+             32 CALL_METHOD              2
+             34 UNPACK_SEQUENCE          2
+             36 STORE_FAST               5 (usn)
+             38 STORE_FAST               1 (nt)
+
+174          40 LOAD_CONST               2 ('%s:%d')
+             42 LOAD_GLOBAL              6 (SSDP_ADDR_V4)
+             44 LOAD_GLOBAL              7 (SSDP_PORT)
+             46 BUILD_TUPLE              2
+             48 BINARY_MODULO
+
+175          50 LOAD_CONST               3 ('max-age = %d')
+             52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                4 (ssdpServer)
+             56 LOAD_ATTR                8 (responseExpire)
+             58 BINARY_MODULO
+
+176          60 LOAD_FAST                4 (location)
+
+177          62 LOAD_FAST                0 (self)
+             64 LOAD_ATTR                4 (ssdpServer)
+             66 LOAD_ATTR                9 (upnpServerStr)
+
+178          68 LOAD_FAST                1 (nt)
+
+179          70 LOAD_FAST                2 (nts)
+
+180          72 LOAD_FAST                5 (usn)
+
+181          74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                4 (ssdpServer)
+             78 LOAD_ATTR               10 (bootID)
+
+182          80 LOAD_CONST               4 (1)
+
+173          82 LOAD_CONST               5 (('HOST', 'CACHE-CONTROL', 'LOCATION', 'SERVER', 'NT', 'NTS', 'USN', 'BOOTID.UPNP.ORG', 'CONFIGID.UPNP.ORG'))
+             84 BUILD_CONST_KEY_MAP      9
+             86 STORE_FAST               6 (headers)
+
+185          88 LOAD_FAST                0 (self)
+             90 LOAD_METHOD             11 (notify)
+             92 LOAD_FAST                6 (headers)
+             94 LOAD_GLOBAL             12 (QHostAddress)
+             96 LOAD_GLOBAL              6 (SSDP_ADDR_V4)
+             98 CALL_FUNCTION            1
+            100 LOAD_GLOBAL              7 (SSDP_PORT)
+            102 BUILD_TUPLE              2
+            104 CALL_METHOD              2
+            106 POP_TOP
+            108 LOAD_CONST               0 (None)
+            110 RETURN_VALUE
+
+=== RequestHandler.received_NOTIFY ===
+189           0 LOAD_FAST                2 (addr)
+              2 UNPACK_SEQUENCE          2
+              4 STORE_FAST               3 (address)
+              6 STORE_FAST               4 (port)
+              8 LOAD_CONST               0 (None)
+             10 RETURN_VALUE
+
+=== RequestHandler.http_parse_raw ===
+194           0 LOAD_FAST                1 (data)
+              2 LOAD_METHOD              0 (split)
+              4 LOAD_CONST               1 ('\r\n')
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (lines)
+
+196          10 LOAD_CONST               2 ((None, None, None))
+             12 UNPACK_SEQUENCE          3
+             14 STORE_FAST               3 (version)
+             16 STORE_FAST               4 (respCode)
+             18 STORE_FAST               5 (respText)
+
+197          20 BUILD_MAP                0
+             22 STORE_FAST               6 (headers)
+
+199          24 LOAD_GLOBAL              1 (range)
+             26 LOAD_GLOBAL              2 (len)
+             28 LOAD_FAST                2 (lines)
+             30 CALL_FUNCTION            1
+             32 CALL_FUNCTION            1
+             34 GET_ITER
+        >>   36 FOR_ITER               192 (to 230)
+             38 STORE_FAST               7 (x)
+
+200          40 LOAD_FAST                7 (x)
+             42 LOAD_CONST               3 (0)
+             44 COMPARE_OP               2 (==)
+             46 POP_JUMP_IF_FALSE      104
+
+201          48 LOAD_FAST                2 (lines)
+             50 LOAD_CONST               3 (0)
+             52 BINARY_SUBSCR
+             54 LOAD_METHOD              0 (split)
+             56 CALL_METHOD              0
+             58 UNPACK_SEQUENCE          3
+             60 STORE_FAST               3 (version)
+             62 STORE_FAST               4 (respCode)
+             64 STORE_FAST               5 (respText)
+
+202          66 SETUP_FINALLY           12 (to 80)
+
+203          68 LOAD_GLOBAL              3 (int)
+             70 LOAD_FAST                4 (respCode)
+             72 CALL_FUNCTION            1
+             74 STORE_FAST               4 (respCode)
+             76 POP_BLOCK
+             78 JUMP_ABSOLUTE          228
+
+204     >>   80 DUP_TOP
+             82 LOAD_GLOBAL              4 (ValueError)
+             84 JUMP_IF_NOT_EXC_MATCH   100
+             86 POP_TOP
+             88 POP_TOP
+             90 POP_TOP
+
+205          92 LOAD_FAST                4 (respCode)
+             94 STORE_FAST               4 (respCode)
+             96 POP_EXCEPT
+             98 JUMP_ABSOLUTE          228
+        >>  100 RERAISE
+            102 JUMP_ABSOLUTE           36
+
+206     >>  104 LOAD_FAST                7 (x)
+            106 LOAD_CONST               3 (0)
+            108 COMPARE_OP               4 (>)
+            110 POP_JUMP_IF_FALSE       36
+            112 LOAD_FAST                2 (lines)
+            114 LOAD_FAST                7 (x)
+            116 BINARY_SUBSCR
+            118 LOAD_METHOD              5 (strip)
+            120 CALL_METHOD              0
+            122 LOAD_CONST               4 ('')
+            124 COMPARE_OP               3 (!=)
+            126 POP_JUMP_IF_FALSE       36
+
+207         128 LOAD_FAST                2 (lines)
+            130 LOAD_FAST                7 (x)
+            132 BINARY_SUBSCR
+            134 LOAD_METHOD              6 (index)
+            136 LOAD_CONST               5 (':')
+            138 CALL_METHOD              1
+            140 STORE_FAST               8 (sep)
+
+208         142 LOAD_FAST                2 (lines)
+            144 LOAD_FAST                7 (x)
+            146 BINARY_SUBSCR
+            148 LOAD_CONST               0 (None)
+            150 LOAD_FAST                8 (sep)
+            152 BUILD_SLICE              2
+            154 BINARY_SUBSCR
+            156 LOAD_METHOD              7 (lower)
+            158 CALL_METHOD              0
+            160 STORE_FAST               9 (hk)
+
+209         162 LOAD_FAST                2 (lines)
+            164 LOAD_FAST                7 (x)
+            166 BINARY_SUBSCR
+            168 LOAD_FAST                8 (sep)
+            170 LOAD_CONST               6 (1)
+            172 BINARY_ADD
+            174 LOAD_CONST               0 (None)
+            176 BUILD_SLICE              2
+            178 BINARY_SUBSCR
+            180 LOAD_METHOD              5 (strip)
+            182 CALL_METHOD              0
+            184 STORE_FAST              10 (hv)
+
+211         186 LOAD_FAST                6 (headers)
+            188 LOAD_METHOD              8 (get)
+            190 LOAD_FAST                9 (hk)
+            192 LOAD_CONST               0 (None)
+            194 CALL_METHOD              2
+            196 LOAD_CONST               0 (None)
+            198 IS_OP                    1
+            200 POP_JUMP_IF_FALSE      220
+
+212         202 LOAD_FAST                6 (headers)
+            204 LOAD_FAST                9 (hk)
+            206 BINARY_SUBSCR
+            208 LOAD_FAST               10 (hv)
+            210 BUILD_LIST               2
+            212 LOAD_FAST                6 (headers)
+            214 LOAD_FAST                9 (hk)
+            216 STORE_SUBSCR
+            218 JUMP_ABSOLUTE           36
+
+214     >>  220 LOAD_FAST               10 (hv)
+            222 LOAD_FAST                6 (headers)
+            224 LOAD_FAST                9 (hk)
+            226 STORE_SUBSCR
+        >>  228 JUMP_ABSOLUTE           36
+
+216     >>  230 LOAD_FAST                3 (version)
+            232 LOAD_FAST                4 (respCode)
+            234 LOAD_FAST                5 (respText)
+            236 LOAD_FAST                6 (headers)
+            238 BUILD_TUPLE              4
+            240 RETURN_VALUE
+
+=== RequestHandler.build_notification_type ===
+219           0 LOAD_FAST                2 (nt)
+              2 LOAD_CONST               1 ('')
+              4 COMPARE_OP               2 (==)
+              6 POP_JUMP_IF_FALSE       24
+
+220           8 LOAD_CONST               2 ('uuid:')
+             10 LOAD_FAST                1 (uuid)
+             12 BINARY_ADD
+             14 LOAD_CONST               2 ('uuid:')
+             16 LOAD_FAST                1 (uuid)
+             18 BINARY_ADD
+             20 BUILD_TUPLE              2
+             22 RETURN_VALUE
+
+221     >>   24 LOAD_CONST               2 ('uuid:')
+             26 LOAD_FAST                1 (uuid)
+             28 BINARY_ADD
+             30 LOAD_CONST               3 ('::')
+             32 BINARY_ADD
+             34 LOAD_FAST                2 (nt)
+             36 BINARY_ADD
+             38 LOAD_FAST                2 (nt)
+             40 BUILD_TUPLE              2
+             42 RETURN_VALUE
+
+=== RequestHandler.headers_join ===
+224           0 LOAD_CONST               1 ('')
+              2 STORE_FAST               2 (msg)
+
+225           4 LOAD_FAST                1 (headers)
+              6 LOAD_METHOD              0 (items)
+              8 CALL_METHOD              0
+             10 GET_ITER
+        >>   12 FOR_ITER                36 (to 50)
+             14 UNPACK_SEQUENCE          2
+             16 STORE_FAST               3 (hk)
+             18 STORE_FAST               4 (hv)
+
+226          20 LOAD_FAST                2 (msg)
+             22 LOAD_GLOBAL              1 (str)
+             24 LOAD_FAST                3 (hk)
+             26 CALL_FUNCTION            1
+             28 LOAD_CONST               2 (': ')
+             30 BINARY_ADD
+             32 LOAD_GLOBAL              1 (str)
+             34 LOAD_FAST                4 (hv)
+             36 CALL_FUNCTION            1
+             38 BINARY_ADD
+             40 LOAD_CONST               3 ('\r\n')
+             42 BINARY_ADD
+             44 INPLACE_ADD
+             46 STORE_FAST               2 (msg)
+             48 JUMP_ABSOLUTE           12
+
+227     >>   50 LOAD_FAST                2 (msg)
+             52 RETURN_VALUE
+
+=== LPQTSSDPServer ===
+231           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPQTSSDPServer')
+              6 STORE_NAME               2 (__qualname__)
+
+232           8 LOAD_CONST              13 ((900,))
+             10 LOAD_CONST               2 (<code object __init__ at 0x000001F3253CEEA0, file "LPClientFramework\LPQTSSDPServer.py", line 232>)
+             12 LOAD_CONST               3 ('LPQTSSDPServer.__init__')
+             14 MAKE_FUNCTION            1 (defaults)
+             16 STORE_NAME               3 (__init__)
+
+247          18 LOAD_CONST               4 (<code object start at 0x000001F3253CE030, file "LPClientFramework\LPQTSSDPServer.py", line 247>)
+             20 LOAD_CONST               5 ('LPQTSSDPServer.start')
+             22 MAKE_FUNCTION            0
+             24 STORE_NAME               4 (start)
+
+270          26 LOAD_CONST               6 (<code object sendLiveNotify at 0x000001F3253CE7C0, file "LPClientFramework\LPQTSSDPServer.py", line 270>)
+             28 LOAD_CONST               7 ('LPQTSSDPServer.sendLiveNotify')
+             30 MAKE_FUNCTION            0
+             32 STORE_NAME               5 (sendLiveNotify)
+
+282          34 LOAD_CONST               8 (<code object receive_message at 0x000001F3253CEBE0, file "LPClientFramework\LPQTSSDPServer.py", line 282>)
+             36 LOAD_CONST               9 ('LPQTSSDPServer.receive_message')
+             38 MAKE_FUNCTION            0
+             40 STORE_NAME               6 (receive_message)
+
+295          42 LOAD_CONST              10 (<code object stop at 0x000001F3253CE0E0, file "LPClientFramework\LPQTSSDPServer.py", line 295>)
+             44 LOAD_CONST              11 ('LPQTSSDPServer.stop')
+             46 MAKE_FUNCTION            0
+             48 STORE_NAME               7 (stop)
+             50 LOAD_CONST              12 (None)
+             52 RETURN_VALUE
+
+=== LPQTSSDPServer.__init__ ===
+233           0 LOAD_FAST                1 (responseExpire)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (responseExpire)
+
+235           6 LOAD_CONST               1 (False)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (running)
+
+236          12 LOAD_GLOBAL              2 (Random)
+             14 CALL_FUNCTION            0
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               3 (rand)
+
+238          20 LOAD_GLOBAL              4 (int)
+             22 LOAD_GLOBAL              5 (time)
+             24 LOAD_METHOD              5 (time)
+             26 CALL_METHOD              0
+             28 CALL_FUNCTION            1
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               6 (bootID)
+
+239          34 LOAD_GLOBAL              7 (LPUtility)
+             36 LOAD_METHOD              8 (pcUUID)
+             38 CALL_METHOD              0
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               9 (uuid)
+
+240          44 LOAD_CONST               2 ('%s/%s UPnP/1.0 DLNADOC/1.50 WiiMHome/%s')
+             46 LOAD_GLOBAL             10 (platform)
+             48 LOAD_METHOD             11 (system)
+             50 CALL_METHOD              0
+             52 LOAD_GLOBAL             10 (platform)
+             54 LOAD_METHOD             12 (release)
+             56 CALL_METHOD              0
+             58 LOAD_GLOBAL             13 (QApplication)
+             60 LOAD_METHOD             14 (applicationVersion)
+             62 CALL_METHOD              0
+             64 BUILD_TUPLE              3
+             66 BINARY_MODULO
+             68 STORE_FAST               2 (SERVER_STRING)
+
+241          70 LOAD_FAST                2 (SERVER_STRING)
+             72 LOAD_FAST                0 (self)
+             74 STORE_ATTR              15 (upnpServerStr)
+
+243          76 LOAD_GLOBAL             16 (QUdpSocket)
+             78 CALL_FUNCTION            0
+             80 LOAD_FAST                0 (self)
+             82 STORE_ATTR              17 (socket)
+
+244          84 LOAD_GLOBAL             18 (QThreadPool)
+             86 CALL_FUNCTION            0
+             88 LOAD_FAST                0 (self)
+             90 STORE_ATTR              19 (thread_pool)
+             92 LOAD_CONST               0 (None)
+             94 RETURN_VALUE
+
+=== LPQTSSDPServer.start ===
+248           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (running)
+              4 POP_JUMP_IF_FALSE       20
+
+249           6 LOAD_GLOBAL              1 (logger)
+              8 LOAD_METHOD              2 (warning)
+             10 LOAD_CONST               1 ('[UPnPServer] already running')
+             12 CALL_METHOD              1
+             14 POP_TOP
+
+250          16 LOAD_CONST               0 (None)
+             18 RETURN_VALUE
+
+252     >>   20 LOAD_GLOBAL              3 (int)
+             22 LOAD_GLOBAL              4 (time)
+             24 LOAD_METHOD              4 (time)
+             26 CALL_METHOD              0
+             28 CALL_FUNCTION            1
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               5 (bootID)
+
+253          34 LOAD_GLOBAL              1 (logger)
+             36 LOAD_METHOD              6 (debug)
+             38 LOAD_CONST               2 ('[UPnPServer] ssdp start listen')
+             40 CALL_METHOD              1
+             42 POP_TOP
+
+255          44 LOAD_CONST               3 (True)
+             46 LOAD_FAST                0 (self)
+             48 STORE_ATTR               0 (running)
+
+257          50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                7 (socket)
+             54 LOAD_METHOD              8 (bind)
+             56 LOAD_GLOBAL              9 (QHostAddress)
+             58 LOAD_ATTR               10 (SpecialAddress)
+             60 LOAD_ATTR               11 (AnyIPv4)
+             62 LOAD_GLOBAL             12 (SSDP_PORT)
+             64 LOAD_GLOBAL             13 (QtNetwork)
+             66 LOAD_ATTR               14 (QAbstractSocket)
+             68 LOAD_ATTR               15 (BindFlag)
+             70 LOAD_ATTR               16 (ShareAddress)
+             72 LOAD_GLOBAL             13 (QtNetwork)
+             74 LOAD_ATTR               14 (QAbstractSocket)
+             76 LOAD_ATTR               15 (BindFlag)
+             78 LOAD_ATTR               17 (ReuseAddressHint)
+             80 BINARY_OR
+             82 CALL_METHOD              3
+             84 POP_TOP
+
+258          86 LOAD_GLOBAL             18 (validInterfaces)
+             88 CALL_FUNCTION            0
+             90 GET_ITER
+        >>   92 FOR_ITER                22 (to 116)
+             94 STORE_FAST               1 (interface)
+
+259          96 LOAD_FAST                0 (self)
+             98 LOAD_ATTR                7 (socket)
+            100 LOAD_METHOD             19 (joinMulticastGroup)
+            102 LOAD_GLOBAL              9 (QHostAddress)
+            104 LOAD_GLOBAL             20 (SSDP_ADDR_V4)
+            106 CALL_FUNCTION            1
+            108 LOAD_FAST                1 (interface)
+            110 CALL_METHOD              2
+            112 POP_TOP
+            114 JUMP_ABSOLUTE           92
+
+261     >>  116 LOAD_FAST                0 (self)
+            118 LOAD_ATTR                7 (socket)
+            120 LOAD_ATTR               21 (readyRead)
+            122 LOAD_METHOD             22 (connect)
+            124 LOAD_FAST                0 (self)
+            126 LOAD_ATTR               23 (receive_message)
+            128 CALL_METHOD              1
+            130 POP_TOP
+
+264         132 LOAD_CONST               3 (True)
+            134 LOAD_FAST                0 (self)
+            136 STORE_ATTR              24 (liveSwitch)
+
+265         138 LOAD_GLOBAL             25 (threading)
+            140 LOAD_ATTR               26 (Thread)
+            142 LOAD_FAST                0 (self)
+            144 LOAD_ATTR               27 (sendLiveNotify)
+            146 LOAD_CONST               4 (('target',))
+            148 CALL_FUNCTION_KW         1
+            150 LOAD_FAST                0 (self)
+            152 STORE_ATTR              28 (notifyThread)
+
+266         154 LOAD_FAST                0 (self)
+            156 LOAD_ATTR               28 (notifyThread)
+            158 LOAD_METHOD             29 (setDaemon)
+            160 LOAD_CONST               3 (True)
+            162 CALL_METHOD              1
+            164 POP_TOP
+
+267         166 LOAD_FAST                0 (self)
+            168 LOAD_ATTR               28 (notifyThread)
+            170 LOAD_METHOD             30 (start)
+            172 CALL_METHOD              0
+            174 POP_TOP
+            176 LOAD_CONST               0 (None)
+            178 RETURN_VALUE
+
+=== LPQTSSDPServer.sendLiveNotify ===
+272     >>    0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (liveSwitch)
+              4 POP_JUMP_IF_TRUE         8
+
+273           6 JUMP_ABSOLUTE           48
+
+275     >>    8 LOAD_GLOBAL              1 (RequestHandler)
+             10 LOAD_CONST               0 (None)
+             12 LOAD_CONST               0 (None)
+             14 LOAD_CONST               1 (0)
+             16 LOAD_FAST                0 (self)
+             18 CALL_FUNCTION            4
+             20 STORE_FAST               1 (handler)
+
+276          22 LOAD_FAST                1 (handler)
+             24 LOAD_METHOD              2 (notify_live_method)
+             26 CALL_METHOD              0
+             28 POP_TOP
+
+279          30 LOAD_GLOBAL              3 (time)
+             32 LOAD_METHOD              4 (sleep)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                5 (responseExpire)
+             38 LOAD_CONST               2 (600)
+             40 BINARY_ADD
+             42 CALL_METHOD              1
+             44 POP_TOP
+             46 JUMP_ABSOLUTE            0
+        >>   48 LOAD_CONST               0 (None)
+             50 RETURN_VALUE
+
+=== LPQTSSDPServer.receive_message ===
+283     >>    0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (socket)
+              4 LOAD_METHOD              1 (hasPendingDatagrams)
+              6 CALL_METHOD              0
+              8 POP_JUMP_IF_FALSE       74
+
+284          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (socket)
+             14 LOAD_METHOD              2 (pendingDatagramSize)
+             16 CALL_METHOD              0
+             18 STORE_FAST               1 (size)
+
+285          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                0 (socket)
+             24 LOAD_METHOD              3 (readDatagram)
+             26 LOAD_FAST                1 (size)
+             28 CALL_METHOD              1
+             30 UNPACK_SEQUENCE          3
+             32 STORE_FAST               2 (datagram)
+             34 STORE_FAST               3 (address)
+             36 STORE_FAST               4 (port)
+
+287          38 LOAD_FAST                2 (datagram)
+             40 LOAD_METHOD              4 (decode)
+             42 CALL_METHOD              0
+             44 STORE_FAST               5 (data)
+
+291          46 LOAD_GLOBAL              5 (RequestHandler)
+             48 LOAD_FAST                5 (data)
+             50 LOAD_FAST                3 (address)
+             52 LOAD_FAST                4 (port)
+             54 LOAD_FAST                0 (self)
+             56 CALL_FUNCTION            4
+             58 STORE_FAST               6 (handler)
+
+292          60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                6 (thread_pool)
+             64 LOAD_METHOD              7 (start)
+             66 LOAD_FAST                6 (handler)
+             68 CALL_METHOD              1
+             70 POP_TOP
+             72 JUMP_ABSOLUTE            0
+        >>   74 LOAD_CONST               0 (None)
+             76 RETURN_VALUE
+
+=== LPQTSSDPServer.stop ===
+296           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+              4 LOAD_CONST               1 ('[UPnPServer] stop')
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+298          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                2 (running)
+             14 POP_JUMP_IF_TRUE        30
+
+299          16 LOAD_GLOBAL              0 (logger)
+             18 LOAD_METHOD              3 (warning)
+             20 LOAD_CONST               2 ('[UPnPServer] already stop')
+             22 CALL_METHOD              1
+             24 POP_TOP
+
+300          26 LOAD_CONST               0 (None)
+             28 RETURN_VALUE
+
+302     >>   30 LOAD_CONST               3 (False)
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               4 (liveSwitch)
+
+303          36 LOAD_CONST               4 (0)
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               5 (bootID)
+
+304          42 LOAD_CONST               3 (False)
+             44 LOAD_FAST                0 (self)
+             46 STORE_ATTR               2 (running)
+
+306          48 LOAD_GLOBAL              6 (RequestHandler)
+             50 LOAD_CONST               0 (None)
+             52 LOAD_CONST               0 (None)
+             54 LOAD_CONST               4 (0)
+             56 LOAD_FAST                0 (self)
+             58 CALL_FUNCTION            4
+             60 STORE_FAST               1 (handler)
+
+307          62 LOAD_FAST                1 (handler)
+             64 LOAD_METHOD              7 (notify_bye_method)
+             66 CALL_METHOD              0
+             68 POP_TOP
+
+309          70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR                8 (socket)
+             74 LOAD_METHOD              9 (close)
+             76 CALL_METHOD              0
+             78 POP_TOP
+             80 LOAD_CONST               0 (None)
+             82 RETURN_VALUE

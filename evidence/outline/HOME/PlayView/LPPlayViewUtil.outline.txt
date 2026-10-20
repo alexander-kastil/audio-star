@@ -1,0 +1,66 @@
+# module HOME.PlayView.LPPlayViewUtil
+
+[module] names: __doc__, PIL, Image, PyQt6.QtCore, Qt, PyQt6.QtGui, QPixmap, QImage, QPainter, QPainterPath, QColor, LPClientFramework.LPPalette, extractThemeColorRgbFromImage, DEFAULT_BACKGROUND_COLOR, BACKGROUND_OVERLAY_ALPHA, setCurrentWidget, int, getPaletteBackgroundPixmap, _pixmapToPILImage, _buildDarkSolidBackgroundPixmap, centerCoverPixmap, _roundPixmap
+  str: '\n@Time ： 2025/9/23 16:24\n@Auth ： Chris\n@File ：LPPlayViewUtil.py\n@Desc:\n'
+  str: 'Image'
+  str: 'Qt'
+  str: 'QPixmap'
+  str: 'QImage'
+  str: 'QPainter'
+  str: 'QPainterPath'
+  str: 'QColor'
+  str: 'extractThemeColorRgbFromImage'
+  str: 'setCurrentWidget'
+  str: 'pixmap'
+  str: 'targetWidth'
+  str: 'targetHeight'
+  str: 'fallbackColor'
+  str: 'return'
+  str: 'getPaletteBackgroundPixmap'
+  str: 'pixmap'
+  str: 'return'
+  str: '_pixmapToPILImage'
+  str: 'color'
+  str: 'targetWidth'
+  str: 'targetHeight'
+  str: 'return'
+  str: '_buildDarkSolidBackgroundPixmap'
+  str: 'pixmap'
+  str: 'canvasSide'
+  str: 'imageSide'
+  str: 'radius'
+  str: 'return'
+  str: 'centerCoverPixmap'
+  str: 'pixmap'
+  str: 'radius'
+  str: 'return'
+  str: '_roundPixmap'
+
+def setCurrentWidget(stackWidget, newWidget)  line 19
+  names: currentWidget, hasattr, onLeave, indexOf, addWidget, setCurrentWidget, onEnter
+    str: 'onLeave'
+    str: 'onEnter'
+
+def getPaletteBackgroundPixmap(pixmap, targetWidth, targetHeight, fallbackColor)  line 32
+  names: int, QPixmap, DEFAULT_BACKGROUND_COLOR, isNull, extractThemeColorRgbFromImage, _pixmapToPILImage, QColor, _buildDarkSolidBackgroundPixmap
+    str: '\n    生成 PlayView 使用的主题色深色背景图。\n\n    Args:\n        pixmap: 原始封面图。\n        targetWidth: 目标背景宽度。\n        targetHeight: 目标背景高度。\n        fallbackColor: 取色失败时使用的兜底颜色。\n\n    Returns:\n        根据封面主题色生成的背景 QPixmap。\n    '
+
+def _pixmapToPILImage(pixmap)  line 66
+  names: toImage, convertToFormat, QImage, Format, Format_RGBA8888, width, height, constBits, asstring, sizeInBytes, Image, frombuffer
+    str: '\n    将 QPixmap 转换为 Pillow Image，供主题色算法分析。\n\n    Args:\n        pixmap: 原始封面图。\n\n    Returns:\n        RGBA 格式的 Pillow Image。\n    '
+    str: 'RGBA'
+    str: 'raw'
+
+def _buildDarkSolidBackgroundPixmap(color, targetWidth, targetHeight)  line 82
+  names: Image, new, red, green, blue, BACKGROUND_OVERLAY_ALPHA, alpha_composite, tobytes, QImage, Format, Format_RGBA8888, QPixmap, fromImage
+    str: '\n    根据输入颜色生成加深后的纯色背景图。\n\n    Args:\n        color: 背景基础颜色。\n        targetWidth: 背景图宽度。\n        targetHeight: 背景图高度。\n\n    Returns:\n        叠加黑色遮罩后的背景 QPixmap。\n    '
+    str: 'RGBA'
+    str: 'raw'
+
+def centerCoverPixmap(pixmap, canvasSide, imageSide, radius)  line 106
+  names: int, isNull, QPixmap, scaled, Qt, AspectRatioMode, KeepAspectRatio, TransformationMode, SmoothTransformation, _roundPixmap, fill, GlobalColor, transparent, QPainter, width, height, drawPixmap, end
+    str: '\n    将任意比例封面按比例缩放后绘制到正方形透明画布中心。\n\n    :param pixmap: 原始封面图。\n    :param canvasSide: 输出正方形画布边长。\n    :param imageSide: 封面图缩放目标边长；为空时使用画布边长。\n    :param radius: 封面圆角半径。\n    :return: 已居中绘制封面的正方形 QPixmap。\n    '
+
+def _roundPixmap(pixmap, radius)  line 142
+  names: QPixmap, width, height, fill, Qt, GlobalColor, transparent, QPainter, setRenderHint, RenderHint, Antialiasing, QPainterPath, addRoundedRect, setClipPath, drawPixmap, end
+    str: '\n    对封面图增加圆角，避免 PlayView 工具函数反向依赖 LPUtility 造成导入环。\n\n    :param pixmap: 需要处理的封面图。\n    :param radius: 圆角半径。\n    :return: 已应用圆角蒙版的 QPixmap。\n    '

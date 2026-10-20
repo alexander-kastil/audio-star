@@ -1,0 +1,75 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2024/12/25 13:32\n@Auth ： Chris\n@File ：LPPermissionUtils.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (os)
+             10 STORE_NAME               1 (os)
+
+ 10          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('logger',))
+             16 IMPORT_NAME              2 (LPClientFramework.LPUtility)
+             18 IMPORT_FROM              3 (logger)
+             20 STORE_NAME               3 (logger)
+             22 POP_TOP
+
+ 13          24 LOAD_BUILD_CLASS
+             26 LOAD_CONST               4 (<code object LPPermissionUtils at 0x000001F324E2D190, file "LPPermission\LPPermissionUtils.py", line 13>)
+             28 LOAD_CONST               5 ('LPPermissionUtils')
+             30 MAKE_FUNCTION            0
+             32 LOAD_CONST               5 ('LPPermissionUtils')
+             34 CALL_FUNCTION            2
+             36 STORE_NAME               4 (LPPermissionUtils)
+             38 LOAD_CONST               2 (None)
+             40 RETURN_VALUE
+
+=== LPPermissionUtils ===
+ 13           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPPermissionUtils')
+              6 STORE_NAME               2 (__qualname__)
+
+ 14           8 LOAD_CONST               1 (<code object __init__ at 0x000001F3253B0240, file "LPPermission\LPPermissionUtils.py", line 14>)
+             10 LOAD_CONST               2 ('LPPermissionUtils.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+
+ 16          16 LOAD_NAME                4 (staticmethod)
+
+ 17          18 LOAD_CONST               3 (<code object check_access_permission at 0x000001F324E2DF50, file "LPPermission\LPPermissionUtils.py", line 16>)
+             20 LOAD_CONST               4 ('LPPermissionUtils.check_access_permission')
+             22 MAKE_FUNCTION            0
+             24 CALL_FUNCTION            1
+             26 STORE_NAME               5 (check_access_permission)
+             28 LOAD_CONST               5 (None)
+             30 RETURN_VALUE
+
+=== LPPermissionUtils.__init__ ===
+ 15           0 LOAD_CONST               0 (None)
+              2 RETURN_VALUE
+
+=== LPPermissionUtils.check_access_permission ===
+ 18           0 LOAD_GLOBAL              0 (os)
+              2 LOAD_METHOD              1 (access)
+              4 LOAD_FAST                0 (dir_path)
+              6 LOAD_GLOBAL              0 (os)
+              8 LOAD_ATTR                2 (R_OK)
+             10 CALL_METHOD              2
+             12 POP_JUMP_IF_TRUE        34
+
+ 19          14 LOAD_GLOBAL              3 (logger)
+             16 LOAD_METHOD              4 (warning)
+             18 LOAD_CONST               1 ('LPPermissionUtils check_access_permission reject dir：')
+             20 LOAD_FAST                0 (dir_path)
+             22 FORMAT_VALUE             0
+             24 BUILD_STRING             2
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+ 20          30 LOAD_CONST               2 (False)
+             32 RETURN_VALUE
+
+ 21     >>   34 LOAD_CONST               3 (True)
+             36 RETURN_VALUE

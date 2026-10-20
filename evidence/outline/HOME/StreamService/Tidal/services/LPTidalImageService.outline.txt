@@ -1,0 +1,132 @@
+# module HOME.StreamService.Tidal.services.LPTidalImageService
+
+[module] names: __doc__, hashlib, logging, threading, pathlib, Path, typing, Optional, Set, PyQt6.QtCore, QObject, QUrl, pyqtSignal, LPClientFramework.LPImageService.LPGlobalQmlImageService, LPGlobalQmlImageService, LPClientFramework.LPImageService.LPImageProfiles, TIDAL_COVER_320_PROFILE, imageProfile, getLogger, logger, LPTidalImageService
+  str: '\nTIDAL 图片缓存服务 adapter。\n'
+  str: 'Path'
+  str: 'Optional'
+  str: 'Set'
+  str: 'QObject'
+  str: 'QUrl'
+  str: 'pyqtSignal'
+  str: 'LPGlobalQmlImageService'
+  str: 'TIDAL_COVER_320_PROFILE'
+  str: 'imageProfile'
+  str: 'linkplay'
+  str: 'LPTidalImageService'
+
+def LPTidalImageService()  line 21
+  names: __name__, __module__, __qualname__, pyqtSignal, str, thumbnailReady, object, thumbnailFailed, THUMBNAIL_SIZE, CACHE_TTL_SECONDS, FAILURE_RETRY_SECONDS, _instance, Optional, __annotations__, threading, Lock, _instance_lock, QObject, __init__, classmethod, instance, cancelPendingAndClear, cancelOwner, ensureThumbnail, thumbnailPath, requestThumbnail, cancelRequest, Path, _resolve_cache_path, _cache_file_path, _file_url, _owner_key_locked, _handleGlobalThumbnailReady, _handleGlobalThumbnailFailed, __classcell__
+    str: 'LPTidalImageService'
+    str: '_instance'
+    str: 'parent'
+    str: 'LPTidalImageService.__init__'
+    str: 'return'
+    str: 'LPTidalImageService.instance'
+    str: 'LPTidalImageService.cancelPendingAndClear'
+    str: 'ownerKey'
+    str: 'return'
+    str: 'LPTidalImageService.cancelOwner'
+    str: 'preload'
+    str: 'imageUrl'
+    str: 'priority'
+    str: 'ownerKey'
+    str: 'return'
+    str: 'LPTidalImageService.ensureThumbnail'
+    str: 'imageUrl'
+    str: 'return'
+    str: 'LPTidalImageService.thumbnailPath'
+    str: 'itemId'
+    str: 'imageUrl'
+    str: 'return'
+    str: 'LPTidalImageService.requestThumbnail'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalImageService.cancelRequest'
+    str: 'LPTidalImageService._resolve_cache_path'
+    str: 'LPTidalImageService._cache_file_path'
+    str: 'localPath'
+    str: 'return'
+    str: 'LPTidalImageService._file_url'
+    str: 'LPTidalImageService._owner_key_locked'
+    str: 'imageUrl'
+    str: 'imagePath'
+    str: 'profile'
+    str: 'return'
+    str: 'LPTidalImageService._handleGlobalThumbnailReady'
+    str: 'imageUrl'
+    str: 'profile'
+    str: 'error'
+    str: 'return'
+    str: 'LPTidalImageService._handleGlobalThumbnailFailed'
+    str: 'preload'
+
+  def LPTidalImageService.__init__(self, parent)  line 32
+    names: super, __init__, TIDAL_COVER_320_PROFILE, _profile, LPClientFramework.LPUtility, cacheCoverDir, Path, _cache_dir, mkdir, set, _cancelled, threading, RLock, _lock, _owner_generation, _known_owner_keys, LPGlobalQmlImageService, instance, _image_service, thumbnailReady, connect, _handleGlobalThumbnailReady, thumbnailFailed, _handleGlobalThumbnailFailed
+      str: '\n        初始化 TIDAL 图片服务 adapter。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'cacheCoverDir'
+      str: 'parents'
+      str: 'exist_ok'
+
+  def LPTidalImageService.instance(cls)  line 53
+    names: _instance_lock, _instance
+      str: '\n        返回 TIDAL 图片服务 adapter 单例。\n\n        :return: 图片服务单例。\n        '
+
+  def LPTidalImageService.cancelPendingAndClear(self)  line 65
+    names: _lock, _owner_key_locked, set, _known_owner_keys, _owner_generation, clear, _cancelled, sorted, _image_service, cancelOwner, clearFailure, _profile
+      str: '\n        取消当前 TIDAL 会话的在途图片请求并清空失败退避。\n\n        :return: None。\n        '
+      str: 'profile'
+
+  def LPTidalImageService.cancelOwner(self, ownerKey)  line 81
+    names: _lock, _owner_key_locked, _known_owner_keys, add, _image_service, cancelOwner
+      str: '\n        失效指定 TIDAL 页面或 tab 的图片 owner。\n\n        :param ownerKey: 页面或 tab owner 后缀。\n        :return: None。\n        '
+
+  def LPTidalImageService.ensureThumbnail(self, imageUrl, priority, ownerKey)  line 93
+    names: _lock, _owner_key_locked, _known_owner_keys, add, _image_service, ensureThumbnail, _profile
+      str: '\n        确保指定 TIDAL 图片 URL 的本地缩略图可用。\n\n        :param imageUrl: 远端或本地图片 URL。\n        :param priority: 调度优先级。\n        :param ownerKey: 页面或 tab owner 后缀。\n        :return: 已缓存时返回本地 file URL；未就绪时返回空字符串。\n        '
+      str: 'priority'
+      str: 'ownerKey'
+
+  def LPTidalImageService.thumbnailPath(self, imageUrl)  line 112
+    names: _image_service, thumbnailPath, _profile
+      str: '\n        返回指定图片 URL 当前可用的本地缩略图路径。\n\n        :param imageUrl: 远端或本地图片 URL。\n        :return: 本地 file URL；未命中时返回空字符串。\n        '
+
+  def LPTidalImageService.requestThumbnail(self, itemId, imageUrl)  line 121
+    names: str, strip, ensureThumbnail, thumbnailReady, emit
+      str: '\n        请求图片缩略图，命中缓存时立即发出旧双参数 ready 信号。\n\n        :param itemId: 条目 ID。\n        :param imageUrl: 图片 URL。\n        :return: None。\n        '
+      str: 'visible'
+      str: 'priority'
+
+  def LPTidalImageService.cancelRequest(self, itemId)  line 137
+    names: str, strip, _lock, _cancelled, add
+      str: '\n        记录指定条目取消请求，保留旧接口兼容。\n\n        :param itemId: 条目 ID。\n        :return: None。\n        '
+
+  def LPTidalImageService._resolve_cache_path(self, itemId, imageUrl)  line 150
+    names: _cache_file_path
+      str: '\n        计算 TIDAL 图片缓存文件路径。\n\n        :param itemId: 条目 ID。\n        :param imageUrl: 图片 URL。\n        :return: 缓存文件路径。\n        '
+
+  def LPTidalImageService._cache_file_path(self, imageUrl)  line 161
+    names: imageProfile, _profile, hashlib, md5, str, strip, encode, hexdigest, _cache_dir, name, size
+      str: '\n        根据图片 URL 计算新全局服务的 TIDAL 缩略图缓存路径。\n\n        :param imageUrl: 图片 URL。\n        :return: 缓存文件路径。\n        '
+      str: 'utf-8'
+      str: '_'
+      str: '.png'
+
+  def LPTidalImageService._file_url(self, localPath)  line 172
+    names: bytes, QUrl, fromLocalFile, str, toEncoded, decode
+      str: '\n        将本地路径转换为 QML 可消费的 encoded file URL。\n\n        :param localPath: 本地路径。\n        :return: file URL 字符串。\n        '
+      str: 'utf-8'
+
+  def LPTidalImageService._owner_key_locked(self, ownerKey)  line 181
+    names: str, strip, startswith, _owner_generation
+      str: '\n        返回当前 TIDAL 图片 owner key，调用方需持锁。\n\n        :param ownerKey: 页面或 tab owner 后缀。\n        :return: owner key。\n        '
+      str: 'tidal:'
+      str: ':'
+
+  def LPTidalImageService._handleGlobalThumbnailReady(self, imageUrl, imagePath, profile)  line 196
+    names: str, strip, _profile, thumbnailReady, emit
+      str: '\n        将全局三参数 ready 信号转换为 TIDAL 旧双参数信号。\n\n        :param imageUrl: 图片 URL。\n        :param imagePath: 本地 file URL。\n        :param profile: 图片 profile 名称。\n        :return: None。\n        '
+
+  def LPTidalImageService._handleGlobalThumbnailFailed(self, imageUrl, profile, error)  line 209
+    names: str, strip, _profile, logger, debug, thumbnailFailed, emit
+      str: '\n        将全局三参数 failed 信号转换为 TIDAL 旧双参数信号。\n\n        :param imageUrl: 图片 URL。\n        :param profile: 图片 profile 名称。\n        :param error: 异常对象。\n        :return: None。\n        '
+      str: '[TidalImageService][CacheTrace] failure profile=%s url=%s error=%s'

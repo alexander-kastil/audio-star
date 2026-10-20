@@ -1,0 +1,1281 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('SMB 访问服务：严格只访问 URL 指定的文件，绝不跨文件回退。\n\n作为 PC 端统一的 SMB 封面/资源读取入口，供 ``LPUtility`` / ``LPMediaInfo`` /\n``LPGlobalQmlImageService`` 等上层把 ``smb://`` URL 转成字节。\n\n强制约束（务必遵守）：\n1. 只读 URL path 指定的那一个文件；读不到就返回 None，绝不去读同目录其他封面文件。\n2. 打开文件使用 ``share_access="rwd"``（读+写+删除全共享），与 macOS 系统 SMB 客户端\n   行为一致，可与服务器上以写方式打开的句柄共存，提升“被占用文件”场景的读取成功率。\n3. 对瞬时锁做短间隔重试；重试的始终是同一个文件。\n4. ``smbprotocol`` 惰性导入：未安装时返回 None，不使应用崩溃，但必须打日志说明原因。\n5. URL 内嵌的明文口令不写入日志。\n\n日志约定：统一使用项目主 logger ``linkplay``，保证 SMB 失败原因随应用日志一起落盘/输出；\n因为导入失败、URL 解析失败、连接/认证失败、文件不存在在现象上都是“读不到封面”，\n所以每一步都必须给出可区分的日志，否则线上只能看到上游那句笼统的失败告警。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 20           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('annotations',))
+              8 IMPORT_NAME              1 (__future__)
+             10 IMPORT_FROM              2 (annotations)
+             12 STORE_NAME               2 (annotations)
+             14 POP_TOP
+
+ 22          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (None)
+             20 IMPORT_NAME              3 (logging)
+             22 STORE_NAME               3 (logging)
+
+ 23          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               3 (None)
+             28 IMPORT_NAME              4 (threading)
+             30 STORE_NAME               4 (threading)
+
+ 24          32 LOAD_CONST               1 (0)
+             34 LOAD_CONST               3 (None)
+             36 IMPORT_NAME              5 (time)
+             38 STORE_NAME               5 (time)
+
+ 25          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               3 (None)
+             44 IMPORT_NAME              6 (urllib.parse)
+             46 STORE_NAME               7 (urllib)
+
+ 26          48 LOAD_CONST               1 (0)
+             50 LOAD_CONST               4 (('Dict', 'Optional', 'Tuple'))
+             52 IMPORT_NAME              8 (typing)
+             54 IMPORT_FROM              9 (Dict)
+             56 STORE_NAME               9 (Dict)
+             58 IMPORT_FROM             10 (Optional)
+             60 STORE_NAME              10 (Optional)
+             62 IMPORT_FROM             11 (Tuple)
+             64 STORE_NAME              11 (Tuple)
+             66 POP_TOP
+
+ 30          68 LOAD_NAME                3 (logging)
+             70 LOAD_METHOD             12 (getLogger)
+             72 LOAD_CONST               5 ('linkplay')
+             74 CALL_METHOD              1
+             76 STORE_NAME              13 (logger)
+
+ 33          78 LOAD_CONST               6 (False)
+             80 STORE_GLOBAL            14 (_importErrorLogged)
+
+ 34          82 LOAD_NAME                4 (threading)
+             84 LOAD_METHOD             15 (Lock)
+             86 CALL_METHOD              0
+             88 STORE_NAME              16 (_importErrorLock)
+
+ 37          90 LOAD_CONST               7 ('str')
+             92 LOAD_CONST               7 ('str')
+             94 LOAD_CONST               8 (('url', 'return'))
+             96 BUILD_CONST_KEY_MAP      2
+             98 LOAD_CONST               9 (<code object _mask_smb_url at 0x000001F3253A2F50, file "LPClientFramework\LPSMBService.py", line 37>)
+            100 LOAD_CONST              10 ('_mask_smb_url')
+            102 MAKE_FUNCTION            4 (annotations)
+            104 STORE_NAME              17 (_mask_smb_url)
+
+ 61         106 LOAD_BUILD_CLASS
+            108 LOAD_CONST              11 (<code object LPSMBService at 0x000001F3253CE660, file "LPClientFramework\LPSMBService.py", line 61>)
+            110 LOAD_CONST              12 ('LPSMBService')
+            112 MAKE_FUNCTION            0
+            114 LOAD_CONST              12 ('LPSMBService')
+            116 LOAD_NAME               18 (object)
+            118 CALL_FUNCTION            3
+            120 STORE_NAME              19 (LPSMBService)
+            122 LOAD_CONST               3 (None)
+            124 RETURN_VALUE
+
+=== _mask_smb_url ===
+ 45           0 SETUP_FINALLY          128 (to 130)
+
+ 46           2 LOAD_GLOBAL              0 (urllib)
+              4 LOAD_ATTR                1 (parse)
+              6 LOAD_METHOD              2 (urlsplit)
+              8 LOAD_GLOBAL              3 (str)
+             10 LOAD_FAST                0 (url)
+             12 JUMP_IF_TRUE_OR_POP     16
+             14 LOAD_CONST               1 ('')
+        >>   16 CALL_FUNCTION            1
+             18 CALL_METHOD              1
+             20 STORE_FAST               1 (parts)
+
+ 47          22 LOAD_FAST                1 (parts)
+             24 LOAD_ATTR                4 (hostname)
+             26 POP_JUMP_IF_TRUE        42
+
+ 48          28 LOAD_GLOBAL              3 (str)
+             30 LOAD_FAST                0 (url)
+             32 JUMP_IF_TRUE_OR_POP     36
+             34 LOAD_CONST               1 ('')
+        >>   36 CALL_FUNCTION            1
+             38 POP_BLOCK
+             40 RETURN_VALUE
+
+ 50     >>   42 LOAD_FAST                1 (parts)
+             44 LOAD_ATTR                4 (hostname)
+             46 STORE_FAST               2 (netloc)
+
+ 51          48 LOAD_FAST                1 (parts)
+             50 LOAD_ATTR                5 (port)
+             52 POP_JUMP_IF_FALSE       70
+
+ 52          54 LOAD_CONST               2 ('%s:%d')
+             56 LOAD_FAST                1 (parts)
+             58 LOAD_ATTR                4 (hostname)
+             60 LOAD_FAST                1 (parts)
+             62 LOAD_ATTR                5 (port)
+             64 BUILD_TUPLE              2
+             66 BINARY_MODULO
+             68 STORE_FAST               2 (netloc)
+
+ 53     >>   70 LOAD_FAST                1 (parts)
+             72 LOAD_ATTR                6 (username)
+             74 POP_JUMP_IF_FALSE       98
+
+ 54          76 LOAD_CONST               3 ('%s@%s')
+             78 LOAD_GLOBAL              0 (urllib)
+             80 LOAD_ATTR                1 (parse)
+             82 LOAD_METHOD              7 (unquote)
+             84 LOAD_FAST                1 (parts)
+             86 LOAD_ATTR                6 (username)
+             88 CALL_METHOD              1
+             90 LOAD_FAST                2 (netloc)
+             92 BUILD_TUPLE              2
+             94 BINARY_MODULO
+             96 STORE_FAST               2 (netloc)
+
+ 56     >>   98 LOAD_GLOBAL              0 (urllib)
+            100 LOAD_ATTR                1 (parse)
+            102 LOAD_METHOD              8 (urlunsplit)
+            104 LOAD_FAST                1 (parts)
+            106 LOAD_ATTR                9 (scheme)
+            108 LOAD_FAST                2 (netloc)
+            110 LOAD_FAST                1 (parts)
+            112 LOAD_ATTR               10 (path)
+            114 LOAD_FAST                1 (parts)
+            116 LOAD_ATTR               11 (query)
+            118 LOAD_FAST                1 (parts)
+            120 LOAD_ATTR               12 (fragment)
+            122 BUILD_TUPLE              5
+            124 CALL_METHOD              1
+            126 POP_BLOCK
+            128 RETURN_VALUE
+
+ 57     >>  130 DUP_TOP
+            132 LOAD_GLOBAL             13 (Exception)
+            134 JUMP_IF_NOT_EXC_MATCH   158
+            136 POP_TOP
+            138 POP_TOP
+            140 POP_TOP
+
+ 58         142 LOAD_GLOBAL              3 (str)
+            144 LOAD_FAST                0 (url)
+            146 JUMP_IF_TRUE_OR_POP    150
+            148 LOAD_CONST               1 ('')
+        >>  150 CALL_FUNCTION            1
+            152 ROT_FOUR
+            154 POP_EXCEPT
+            156 RETURN_VALUE
+        >>  158 RERAISE
+            160 LOAD_CONST               4 (None)
+            162 RETURN_VALUE
+
+=== LPSMBService ===
+ 61           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPSMBService')
+              6 STORE_NAME               2 (__qualname__)
+
+ 62           8 LOAD_CONST               1 ('SMB 访问服务单例：负责 smb:// URL 解析、建连并读取指定文件字节。\n\n    线程安全：内部用锁保护缓存与按 URL 的读锁；``smbclient`` 本身线程安全，\n    可放后台线程直接调用。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+ 68          12 LOAD_CONST               2 (None)
+             14 STORE_NAME               4 (shared)
+
+ 70          16 LOAD_CONST               3 (<code object __init__ at 0x000001F3253DA190, file "LPClientFramework\LPSMBService.py", line 70>)
+             18 LOAD_CONST               4 ('LPSMBService.__init__')
+             20 MAKE_FUNCTION            0
+             22 STORE_NAME               5 (__init__)
+
+ 77          24 LOAD_NAME                6 (classmethod)
+
+ 78          26 LOAD_CONST               5 ("'LPSMBService'")
+             28 LOAD_CONST               6 (('return',))
+             30 BUILD_CONST_KEY_MAP      1
+             32 LOAD_CONST               7 (<code object get_shared at 0x000001F3253DA450, file "LPClientFramework\LPSMBService.py", line 77>)
+             34 LOAD_CONST               8 ('LPSMBService.get_shared')
+             36 MAKE_FUNCTION            4 (annotations)
+             38 CALL_FUNCTION            1
+             40 STORE_NAME               7 (get_shared)
+
+ 88          42 LOAD_NAME                8 (staticmethod)
+
+ 89          44 LOAD_CONST               9 ('str')
+             46 LOAD_CONST               9 ('str')
+             48 LOAD_CONST              10 (('url', 'return'))
+             50 BUILD_CONST_KEY_MAP      2
+             52 LOAD_CONST              11 (<code object mask_smb_url at 0x000001F3253DA660, file "LPClientFramework\LPSMBService.py", line 88>)
+             54 LOAD_CONST              12 ('LPSMBService.mask_smb_url')
+             56 MAKE_FUNCTION            4 (annotations)
+             58 CALL_FUNCTION            1
+             60 STORE_NAME               9 (mask_smb_url)
+
+ 99          62 LOAD_NAME                8 (staticmethod)
+
+100          64 LOAD_CONST               9 ('str')
+             66 LOAD_CONST              13 ('bool')
+             68 LOAD_CONST              10 (('url', 'return'))
+             70 BUILD_CONST_KEY_MAP      2
+             72 LOAD_CONST              14 (<code object is_smb_artwork_url at 0x000001F3253DAA80, file "LPClientFramework\LPSMBService.py", line 99>)
+             74 LOAD_CONST              15 ('LPSMBService.is_smb_artwork_url')
+             76 MAKE_FUNCTION            4 (annotations)
+             78 CALL_FUNCTION            1
+             80 STORE_NAME              10 (is_smb_artwork_url)
+
+110          82 LOAD_NAME                8 (staticmethod)
+
+111          84 LOAD_CONST               9 ('str')
+             86 LOAD_CONST              16 ('Optional[dict]')
+             88 LOAD_CONST              10 (('url', 'return'))
+             90 BUILD_CONST_KEY_MAP      2
+             92 LOAD_CONST              17 (<code object parse_smb_url at 0x000001F3253DA5B0, file "LPClientFramework\LPSMBService.py", line 110>)
+             94 LOAD_CONST              18 ('LPSMBService.parse_smb_url')
+             96 MAKE_FUNCTION            4 (annotations)
+             98 CALL_FUNCTION            1
+            100 STORE_NAME              11 (parse_smb_url)
+
+150         102 LOAD_CONST              44 ((15, 3, 1.0))
+            104 LOAD_CONST               9 ('str')
+            106 LOAD_CONST              22 ('int')
+            108 LOAD_CONST              22 ('int')
+            110 LOAD_CONST              23 ('float')
+            112 LOAD_CONST              24 ('Optional[bytes]')
+            114 LOAD_CONST              25 (('url', 'timeout', 'attempts', 'retry_delay', 'return'))
+            116 BUILD_CONST_KEY_MAP      5
+            118 LOAD_CONST              26 (<code object read_smb_file_bytes at 0x000001F3253DABE0, file "LPClientFramework\LPSMBService.py", line 150>)
+            120 LOAD_CONST              27 ('LPSMBService.read_smb_file_bytes')
+            122 MAKE_FUNCTION            5 (defaults, annotations)
+            124 STORE_NAME              12 (read_smb_file_bytes)
+
+200         126 LOAD_CONST               9 ('str')
+            128 LOAD_CONST              28 ('None')
+            130 LOAD_CONST              10 (('url', 'return'))
+            132 BUILD_CONST_KEY_MAP      2
+            134 LOAD_CONST              29 (<code object invalidate at 0x000001F3253DA7C0, file "LPClientFramework\LPSMBService.py", line 200>)
+            136 LOAD_CONST              30 ('LPSMBService.invalidate')
+            138 MAKE_FUNCTION            4 (annotations)
+            140 STORE_NAME              13 (invalidate)
+
+216         142 LOAD_NAME                8 (staticmethod)
+
+217         144 LOAD_CONST              31 ('dict')
+            146 LOAD_CONST               9 ('str')
+            148 LOAD_CONST              32 (('parsed', 'return'))
+            150 BUILD_CONST_KEY_MAP      2
+            152 LOAD_CONST              33 (<code object _describe_target at 0x000001F3253DA9D0, file "LPClientFramework\LPSMBService.py", line 216>)
+            154 LOAD_CONST              34 ('LPSMBService._describe_target')
+            156 MAKE_FUNCTION            4 (annotations)
+            158 CALL_FUNCTION            1
+            160 STORE_NAME              14 (_describe_target)
+
+232         162 LOAD_NAME                8 (staticmethod)
+
+233         164 LOAD_CONST              35 ('Exception')
+            166 LOAD_CONST              28 ('None')
+            168 LOAD_CONST              36 (('exc', 'return'))
+            170 BUILD_CONST_KEY_MAP      2
+            172 LOAD_CONST              37 (<code object _log_import_failure at 0x000001F3253DA870, file "LPClientFramework\LPSMBService.py", line 232>)
+            174 LOAD_CONST              38 ('LPSMBService._log_import_failure')
+            176 MAKE_FUNCTION            4 (annotations)
+            178 CALL_FUNCTION            1
+            180 STORE_NAME              15 (_log_import_failure)
+
+253         182 LOAD_CONST              31 ('dict')
+            184 LOAD_CONST              22 ('int')
+            186 LOAD_CONST              22 ('int')
+            188 LOAD_CONST              23 ('float')
+            190 LOAD_CONST              24 ('Optional[bytes]')
+            192 LOAD_CONST              39 (('parsed', 'timeout', 'attempts', 'retry_delay', 'return'))
+            194 BUILD_CONST_KEY_MAP      5
+            196 LOAD_CONST              40 (<code object _read_with_retry at 0x000001F3253DA920, file "LPClientFramework\LPSMBService.py", line 253>)
+            198 LOAD_CONST              41 ('LPSMBService._read_with_retry')
+            200 MAKE_FUNCTION            4 (annotations)
+            202 STORE_NAME              16 (_read_with_retry)
+
+318         204 LOAD_CONST              28 ('None')
+            206 LOAD_CONST               6 (('return',))
+            208 BUILD_CONST_KEY_MAP      1
+            210 LOAD_CONST              42 (<code object _prune_cache_locked at 0x000001F3253CEC90, file "LPClientFramework\LPSMBService.py", line 318>)
+            212 LOAD_CONST              43 ('LPSMBService._prune_cache_locked')
+            214 MAKE_FUNCTION            4 (annotations)
+            216 STORE_NAME              17 (_prune_cache_locked)
+            218 LOAD_CONST               2 (None)
+            220 RETURN_VALUE
+
+=== LPSMBService.__init__ ===
+ 72           0 LOAD_GLOBAL              0 (threading)
+              2 LOAD_METHOD              1 (Lock)
+              4 CALL_METHOD              0
+              6 LOAD_FAST                0 (self)
+              8 STORE_ATTR               2 (_lock)
+
+ 73          10 BUILD_MAP                0
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               3 (_url_locks)
+
+ 74          16 BUILD_MAP                0
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               4 (_bytes_cache)
+
+ 75          22 LOAD_CONST               1 (256)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               5 (_cache_limit)
+             28 LOAD_CONST               2 (None)
+             30 RETURN_VALUE
+
+=== LPSMBService.get_shared ===
+ 84           0 LOAD_FAST                0 (cls)
+              2 LOAD_ATTR                0 (shared)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       18
+
+ 85          10 LOAD_FAST                0 (cls)
+             12 CALL_FUNCTION            0
+             14 LOAD_FAST                0 (cls)
+             16 STORE_ATTR               0 (shared)
+
+ 86     >>   18 LOAD_FAST                0 (cls)
+             20 LOAD_ATTR                0 (shared)
+             22 RETURN_VALUE
+
+=== LPSMBService.mask_smb_url ===
+ 97           0 LOAD_GLOBAL              0 (_mask_smb_url)
+              2 LOAD_FAST                0 (url)
+              4 CALL_FUNCTION            1
+              6 RETURN_VALUE
+
+=== LPSMBService.is_smb_artwork_url ===
+108           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (url)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 LOAD_METHOD              3 (startswith)
+             20 LOAD_CONST               2 ('smb://')
+             22 CALL_METHOD              1
+             24 RETURN_VALUE
+
+=== LPSMBService.parse_smb_url ===
+120           0 LOAD_FAST                0 (url)
+              2 POP_JUMP_IF_TRUE         8
+
+121           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+123     >>    8 SETUP_FINALLY           16 (to 26)
+
+124          10 LOAD_GLOBAL              0 (urllib)
+             12 LOAD_ATTR                1 (parse)
+             14 LOAD_METHOD              2 (urlsplit)
+             16 LOAD_FAST                0 (url)
+             18 CALL_METHOD              1
+             20 STORE_FAST               1 (parts)
+             22 POP_BLOCK
+             24 JUMP_FORWARD            20 (to 46)
+
+125     >>   26 DUP_TOP
+             28 LOAD_GLOBAL              3 (Exception)
+             30 JUMP_IF_NOT_EXC_MATCH    44
+             32 POP_TOP
+             34 POP_TOP
+             36 POP_TOP
+
+126          38 POP_EXCEPT
+             40 LOAD_CONST               1 (None)
+             42 RETURN_VALUE
+        >>   44 RERAISE
+
+128     >>   46 LOAD_FAST                1 (parts)
+             48 LOAD_ATTR                4 (scheme)
+             50 JUMP_IF_TRUE_OR_POP     54
+             52 LOAD_CONST               2 ('')
+        >>   54 LOAD_METHOD              5 (lower)
+             56 CALL_METHOD              0
+             58 LOAD_CONST               3 ('smb')
+             60 COMPARE_OP               3 (!=)
+             62 POP_JUMP_IF_TRUE        70
+             64 LOAD_FAST                1 (parts)
+             66 LOAD_ATTR                6 (hostname)
+             68 POP_JUMP_IF_TRUE        74
+
+129     >>   70 LOAD_CONST               1 (None)
+             72 RETURN_VALUE
+
+131     >>   74 LOAD_CONST               4 (<code object <listcomp> at 0x000001F3253DA3A0, file "LPClientFramework\LPSMBService.py", line 131>)
+             76 LOAD_CONST               5 ('LPSMBService.parse_smb_url.<locals>.<listcomp>')
+             78 MAKE_FUNCTION            0
+             80 LOAD_FAST                1 (parts)
+             82 LOAD_ATTR                7 (path)
+             84 JUMP_IF_TRUE_OR_POP     88
+             86 LOAD_CONST               2 ('')
+        >>   88 LOAD_METHOD              8 (split)
+             90 LOAD_CONST               6 ('/')
+             92 CALL_METHOD              1
+             94 GET_ITER
+             96 CALL_FUNCTION            1
+             98 STORE_FAST               2 (segments)
+
+132         100 LOAD_FAST                2 (segments)
+            102 POP_JUMP_IF_TRUE       108
+
+133         104 LOAD_CONST               1 (None)
+            106 RETURN_VALUE
+
+135     >>  108 LOAD_FAST                2 (segments)
+            110 LOAD_CONST               7 (0)
+            112 BINARY_SUBSCR
+            114 STORE_FAST               3 (share)
+
+136         116 LOAD_FAST                2 (segments)
+            118 LOAD_CONST               8 (1)
+            120 LOAD_CONST               1 (None)
+            122 BUILD_SLICE              2
+            124 BINARY_SUBSCR
+            126 STORE_FAST               4 (rel)
+
+137         128 LOAD_FAST                4 (rel)
+            130 POP_JUMP_IF_FALSE      146
+            132 LOAD_CONST               6 ('/')
+            134 LOAD_CONST               6 ('/')
+            136 LOAD_METHOD              9 (join)
+            138 LOAD_FAST                4 (rel)
+            140 CALL_METHOD              1
+            142 BINARY_ADD
+            144 JUMP_FORWARD             2 (to 148)
+        >>  146 LOAD_CONST               2 ('')
+        >>  148 STORE_FAST               5 (file_path)
+
+138         150 LOAD_FAST                4 (rel)
+            152 POP_JUMP_IF_FALSE      168
+            154 LOAD_CONST               9 ('\\')
+            156 LOAD_CONST               9 ('\\')
+            158 LOAD_METHOD              9 (join)
+            160 LOAD_FAST                4 (rel)
+            162 CALL_METHOD              1
+            164 BINARY_ADD
+            166 JUMP_FORWARD             2 (to 170)
+        >>  168 LOAD_CONST               2 ('')
+        >>  170 STORE_FAST               6 (rel_unc)
+
+141         172 LOAD_FAST                1 (parts)
+            174 LOAD_ATTR                6 (hostname)
+
+142         176 LOAD_FAST                1 (parts)
+            178 LOAD_ATTR               10 (port)
+            180 JUMP_IF_TRUE_OR_POP    184
+            182 LOAD_CONST              10 (445)
+
+143     >>  184 LOAD_GLOBAL              0 (urllib)
+            186 LOAD_ATTR                1 (parse)
+            188 LOAD_METHOD             11 (unquote)
+            190 LOAD_FAST                1 (parts)
+            192 LOAD_ATTR               12 (username)
+            194 JUMP_IF_TRUE_OR_POP    198
+            196 LOAD_CONST               2 ('')
+        >>  198 CALL_METHOD              1
+
+144         200 LOAD_GLOBAL              0 (urllib)
+            202 LOAD_ATTR                1 (parse)
+            204 LOAD_METHOD             11 (unquote)
+            206 LOAD_FAST                1 (parts)
+            208 LOAD_ATTR               13 (password)
+            210 JUMP_IF_TRUE_OR_POP    214
+            212 LOAD_CONST               2 ('')
+        >>  214 CALL_METHOD              1
+
+145         216 LOAD_FAST                3 (share)
+
+146         218 LOAD_FAST                5 (file_path)
+
+147         220 LOAD_CONST              11 ('\\\\%s\\%s%s')
+            222 LOAD_FAST                1 (parts)
+            224 LOAD_ATTR                6 (hostname)
+            226 LOAD_FAST                3 (share)
+            228 LOAD_FAST                6 (rel_unc)
+            230 BUILD_TUPLE              3
+            232 BINARY_MODULO
+
+140         234 LOAD_CONST              12 (('host', 'port', 'user', 'password', 'share', 'file_path', 'unc'))
+            236 BUILD_CONST_KEY_MAP      7
+            238 RETURN_VALUE
+
+=== LPSMBService.parse_smb_url.<listcomp> ===
+131           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                24 (to 30)
+              6 STORE_FAST               1 (s)
+              8 LOAD_FAST                1 (s)
+             10 LOAD_CONST               0 ('')
+             12 COMPARE_OP               3 (!=)
+             14 POP_JUMP_IF_FALSE        4
+             16 LOAD_GLOBAL              0 (urllib)
+             18 LOAD_ATTR                1 (parse)
+             20 LOAD_METHOD              2 (unquote)
+             22 LOAD_FAST                1 (s)
+             24 CALL_METHOD              1
+             26 LIST_APPEND              2
+             28 JUMP_ABSOLUTE            4
+        >>   30 RETURN_VALUE
+
+=== LPSMBService.read_smb_file_bytes ===
+162           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (is_smb_artwork_url)
+              4 LOAD_FAST                1 (url)
+              6 CALL_METHOD              1
+              8 POP_JUMP_IF_TRUE        32
+
+163          10 LOAD_GLOBAL              1 (logger)
+             12 LOAD_METHOD              2 (debug)
+             14 LOAD_CONST               1 ('SMB 读取跳过（非 smb 地址）: url=%s')
+             16 LOAD_FAST                0 (self)
+             18 LOAD_METHOD              3 (mask_smb_url)
+             20 LOAD_FAST                1 (url)
+             22 CALL_METHOD              1
+             24 CALL_METHOD              2
+             26 POP_TOP
+
+164          28 LOAD_CONST               2 (None)
+             30 RETURN_VALUE
+
+166     >>   32 LOAD_FAST                1 (url)
+             34 STORE_FAST               5 (cache_key)
+
+167          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                4 (_lock)
+             40 SETUP_WITH             104 (to 146)
+             42 POP_TOP
+
+168          44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                5 (_bytes_cache)
+             48 LOAD_METHOD              6 (get)
+             50 LOAD_FAST                5 (cache_key)
+             52 CALL_METHOD              1
+             54 STORE_FAST               6 (hit)
+
+169          56 LOAD_FAST                6 (hit)
+             58 LOAD_CONST               2 (None)
+             60 IS_OP                    1
+             62 POP_JUMP_IF_FALSE      114
+
+170          64 LOAD_GLOBAL              1 (logger)
+             66 LOAD_METHOD              2 (debug)
+             68 LOAD_CONST               3 ('SMB 内存缓存命中: url=%s, size=%d')
+             70 LOAD_FAST                0 (self)
+             72 LOAD_METHOD              3 (mask_smb_url)
+             74 LOAD_FAST                1 (url)
+             76 CALL_METHOD              1
+             78 LOAD_GLOBAL              7 (len)
+             80 LOAD_FAST                6 (hit)
+             82 LOAD_CONST               4 (1)
+             84 BINARY_SUBSCR
+             86 CALL_FUNCTION            1
+             88 CALL_METHOD              3
+             90 POP_TOP
+
+171          92 LOAD_FAST                6 (hit)
+             94 LOAD_CONST               4 (1)
+             96 BINARY_SUBSCR
+             98 POP_BLOCK
+            100 ROT_TWO
+            102 LOAD_CONST               2 (None)
+            104 DUP_TOP
+            106 DUP_TOP
+            108 CALL_FUNCTION            3
+            110 POP_TOP
+            112 RETURN_VALUE
+
+172     >>  114 LOAD_FAST                0 (self)
+            116 LOAD_ATTR                8 (_url_locks)
+            118 LOAD_METHOD              9 (setdefault)
+            120 LOAD_FAST                5 (cache_key)
+            122 LOAD_GLOBAL             10 (threading)
+            124 LOAD_METHOD             11 (Lock)
+            126 CALL_METHOD              0
+            128 CALL_METHOD              2
+            130 STORE_FAST               7 (url_lock)
+            132 POP_BLOCK
+            134 LOAD_CONST               2 (None)
+            136 DUP_TOP
+            138 DUP_TOP
+            140 CALL_FUNCTION            3
+            142 POP_TOP
+            144 JUMP_FORWARD            16 (to 162)
+        >>  146 WITH_EXCEPT_START
+            148 POP_JUMP_IF_TRUE       152
+            150 RERAISE
+        >>  152 POP_TOP
+            154 POP_TOP
+            156 POP_TOP
+            158 POP_EXCEPT
+            160 POP_TOP
+
+174     >>  162 LOAD_FAST                7 (url_lock)
+            164 EXTENDED_ARG             1
+            166 SETUP_WITH             344 (to 512)
+            168 POP_TOP
+
+176         170 LOAD_FAST                0 (self)
+            172 LOAD_ATTR                4 (_lock)
+            174 SETUP_WITH             102 (to 278)
+            176 POP_TOP
+
+177         178 LOAD_FAST                0 (self)
+            180 LOAD_ATTR                5 (_bytes_cache)
+            182 LOAD_METHOD              6 (get)
+            184 LOAD_FAST                5 (cache_key)
+            186 CALL_METHOD              1
+            188 STORE_FAST               6 (hit)
+
+178         190 LOAD_FAST                6 (hit)
+            192 LOAD_CONST               2 (None)
+            194 IS_OP                    1
+            196 EXTENDED_ARG             1
+            198 POP_JUMP_IF_FALSE      264
+
+179         200 LOAD_GLOBAL              1 (logger)
+            202 LOAD_METHOD              2 (debug)
+            204 LOAD_CONST               3 ('SMB 内存缓存命中: url=%s, size=%d')
+            206 LOAD_FAST                0 (self)
+            208 LOAD_METHOD              3 (mask_smb_url)
+            210 LOAD_FAST                1 (url)
+            212 CALL_METHOD              1
+            214 LOAD_GLOBAL              7 (len)
+            216 LOAD_FAST                6 (hit)
+            218 LOAD_CONST               4 (1)
+            220 BINARY_SUBSCR
+            222 CALL_FUNCTION            1
+            224 CALL_METHOD              3
+            226 POP_TOP
+
+180         228 LOAD_FAST                6 (hit)
+            230 LOAD_CONST               4 (1)
+            232 BINARY_SUBSCR
+            234 POP_BLOCK
+            236 ROT_TWO
+            238 LOAD_CONST               2 (None)
+            240 DUP_TOP
+            242 DUP_TOP
+            244 CALL_FUNCTION            3
+            246 POP_TOP
+            248 POP_BLOCK
+            250 ROT_TWO
+            252 LOAD_CONST               2 (None)
+            254 DUP_TOP
+            256 DUP_TOP
+            258 CALL_FUNCTION            3
+            260 POP_TOP
+            262 RETURN_VALUE
+        >>  264 POP_BLOCK
+            266 LOAD_CONST               2 (None)
+            268 DUP_TOP
+            270 DUP_TOP
+            272 CALL_FUNCTION            3
+            274 POP_TOP
+            276 JUMP_FORWARD            18 (to 296)
+        >>  278 WITH_EXCEPT_START
+            280 EXTENDED_ARG             1
+            282 POP_JUMP_IF_TRUE       286
+            284 RERAISE
+        >>  286 POP_TOP
+            288 POP_TOP
+            290 POP_TOP
+            292 POP_EXCEPT
+            294 POP_TOP
+
+182     >>  296 LOAD_FAST                0 (self)
+            298 LOAD_METHOD             12 (parse_smb_url)
+            300 LOAD_FAST                1 (url)
+            302 CALL_METHOD              1
+            304 STORE_FAST               8 (parsed)
+
+183         306 LOAD_FAST                8 (parsed)
+            308 LOAD_CONST               2 (None)
+            310 IS_OP                    0
+            312 EXTENDED_ARG             1
+            314 POP_JUMP_IF_FALSE      350
+
+184         316 LOAD_GLOBAL              1 (logger)
+            318 LOAD_METHOD             13 (warning)
+            320 LOAD_CONST               5 ('SMB URL 解析失败（host/share/path 不合法）: url=%s')
+            322 LOAD_FAST                0 (self)
+            324 LOAD_METHOD              3 (mask_smb_url)
+            326 LOAD_FAST                1 (url)
+            328 CALL_METHOD              1
+            330 CALL_METHOD              2
+            332 POP_TOP
+
+185         334 POP_BLOCK
+            336 LOAD_CONST               2 (None)
+            338 DUP_TOP
+            340 DUP_TOP
+            342 CALL_FUNCTION            3
+            344 POP_TOP
+            346 LOAD_CONST               2 (None)
+            348 RETURN_VALUE
+
+187     >>  350 LOAD_FAST                0 (self)
+            352 LOAD_METHOD             14 (_read_with_retry)
+            354 LOAD_FAST                8 (parsed)
+            356 LOAD_FAST                2 (timeout)
+            358 LOAD_FAST                3 (attempts)
+            360 LOAD_FAST                4 (retry_delay)
+            362 CALL_METHOD              4
+            364 STORE_FAST               9 (data)
+
+188         366 LOAD_FAST                9 (data)
+            368 EXTENDED_ARG             1
+            370 POP_JUMP_IF_FALSE      464
+
+189         372 LOAD_FAST                0 (self)
+            374 LOAD_ATTR                4 (_lock)
+            376 SETUP_WITH              42 (to 420)
+            378 POP_TOP
+
+190         380 LOAD_GLOBAL             15 (time)
+            382 LOAD_METHOD             15 (time)
+            384 CALL_METHOD              0
+            386 LOAD_FAST                9 (data)
+            388 BUILD_TUPLE              2
+            390 LOAD_FAST                0 (self)
+            392 LOAD_ATTR                5 (_bytes_cache)
+            394 LOAD_FAST                5 (cache_key)
+            396 STORE_SUBSCR
+
+191         398 LOAD_FAST                0 (self)
+            400 LOAD_METHOD             16 (_prune_cache_locked)
+            402 CALL_METHOD              0
+            404 POP_TOP
+            406 POP_BLOCK
+            408 LOAD_CONST               2 (None)
+            410 DUP_TOP
+            412 DUP_TOP
+            414 CALL_FUNCTION            3
+            416 POP_TOP
+            418 JUMP_FORWARD            18 (to 438)
+        >>  420 WITH_EXCEPT_START
+            422 EXTENDED_ARG             1
+            424 POP_JUMP_IF_TRUE       428
+            426 RERAISE
+        >>  428 POP_TOP
+            430 POP_TOP
+            432 POP_TOP
+            434 POP_EXCEPT
+            436 POP_TOP
+
+192     >>  438 LOAD_GLOBAL              1 (logger)
+            440 LOAD_METHOD              2 (debug)
+            442 LOAD_CONST               6 ('SMB 读取成功: %s, size=%d')
+            444 LOAD_FAST                0 (self)
+            446 LOAD_METHOD             17 (_describe_target)
+            448 LOAD_FAST                8 (parsed)
+            450 CALL_METHOD              1
+            452 LOAD_GLOBAL              7 (len)
+            454 LOAD_FAST                9 (data)
+            456 CALL_FUNCTION            1
+            458 CALL_METHOD              3
+            460 POP_TOP
+            462 JUMP_FORWARD            30 (to 494)
+
+194     >>  464 LOAD_GLOBAL              1 (logger)
+            466 LOAD_METHOD             13 (warning)
+
+195         468 LOAD_CONST               7 ('SMB 读取最终失败: %s, url=%s, timeout=%ss, attempts=%d')
+
+196         470 LOAD_FAST                0 (self)
+            472 LOAD_METHOD             17 (_describe_target)
+            474 LOAD_FAST                8 (parsed)
+            476 CALL_METHOD              1
+            478 LOAD_FAST                0 (self)
+            480 LOAD_METHOD              3 (mask_smb_url)
+            482 LOAD_FAST                1 (url)
+            484 CALL_METHOD              1
+            486 LOAD_FAST                2 (timeout)
+            488 LOAD_FAST                3 (attempts)
+
+194         490 CALL_METHOD              5
+            492 POP_TOP
+
+198     >>  494 LOAD_FAST                9 (data)
+            496 POP_BLOCK
+            498 ROT_TWO
+            500 LOAD_CONST               2 (None)
+            502 DUP_TOP
+            504 DUP_TOP
+            506 CALL_FUNCTION            3
+            508 POP_TOP
+            510 RETURN_VALUE
+        >>  512 WITH_EXCEPT_START
+            514 EXTENDED_ARG             2
+            516 POP_JUMP_IF_TRUE       520
+            518 RERAISE
+        >>  520 POP_TOP
+            522 POP_TOP
+            524 POP_TOP
+            526 POP_EXCEPT
+            528 POP_TOP
+            530 LOAD_CONST               2 (None)
+            532 RETURN_VALUE
+
+=== LPSMBService.invalidate ===
+208           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              44 (to 50)
+              6 POP_TOP
+
+209           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_bytes_cache)
+             12 LOAD_METHOD              2 (pop)
+             14 LOAD_FAST                1 (url)
+             16 LOAD_CONST               1 (None)
+             18 CALL_METHOD              2
+             20 POP_TOP
+
+210          22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                3 (_url_locks)
+             26 LOAD_METHOD              2 (pop)
+             28 LOAD_FAST                1 (url)
+             30 LOAD_CONST               1 (None)
+             32 CALL_METHOD              2
+             34 POP_TOP
+             36 POP_BLOCK
+             38 LOAD_CONST               1 (None)
+             40 DUP_TOP
+             42 DUP_TOP
+             44 CALL_FUNCTION            3
+             46 POP_TOP
+             48 JUMP_FORWARD            16 (to 66)
+        >>   50 WITH_EXCEPT_START
+             52 POP_JUMP_IF_TRUE        56
+             54 RERAISE
+        >>   56 POP_TOP
+             58 POP_TOP
+             60 POP_TOP
+             62 POP_EXCEPT
+             64 POP_TOP
+        >>   66 LOAD_CONST               1 (None)
+             68 RETURN_VALUE
+
+=== LPSMBService._describe_target ===
+225           0 LOAD_CONST               1 ('host=%s, port=%s, user=%s, unc=%s')
+
+226           2 LOAD_FAST                0 (parsed)
+              4 LOAD_METHOD              0 (get)
+              6 LOAD_CONST               2 ('host')
+              8 CALL_METHOD              1
+
+227          10 LOAD_FAST                0 (parsed)
+             12 LOAD_METHOD              0 (get)
+             14 LOAD_CONST               3 ('port')
+             16 CALL_METHOD              1
+
+228          18 LOAD_FAST                0 (parsed)
+             20 LOAD_METHOD              0 (get)
+             22 LOAD_CONST               4 ('user')
+             24 CALL_METHOD              1
+             26 JUMP_IF_TRUE_OR_POP     30
+             28 LOAD_CONST               5 ('<anonymous>')
+
+229     >>   30 LOAD_FAST                0 (parsed)
+             32 LOAD_METHOD              0 (get)
+             34 LOAD_CONST               6 ('unc')
+             36 CALL_METHOD              1
+
+225          38 BUILD_TUPLE              4
+             40 BINARY_MODULO
+             42 RETURN_VALUE
+
+=== LPSMBService._log_import_failure ===
+242           0 LOAD_GLOBAL              0 (_importErrorLock)
+              2 SETUP_WITH              40 (to 44)
+              4 POP_TOP
+
+243           6 LOAD_GLOBAL              1 (_importErrorLogged)
+              8 POP_JUMP_IF_FALSE       26
+
+244          10 POP_BLOCK
+             12 LOAD_CONST               1 (None)
+             14 DUP_TOP
+             16 DUP_TOP
+             18 CALL_FUNCTION            3
+             20 POP_TOP
+             22 LOAD_CONST               1 (None)
+             24 RETURN_VALUE
+
+245     >>   26 LOAD_CONST               2 (True)
+             28 STORE_GLOBAL             1 (_importErrorLogged)
+             30 POP_BLOCK
+             32 LOAD_CONST               1 (None)
+             34 DUP_TOP
+             36 DUP_TOP
+             38 CALL_FUNCTION            3
+             40 POP_TOP
+             42 JUMP_FORWARD            16 (to 60)
+        >>   44 WITH_EXCEPT_START
+             46 POP_JUMP_IF_TRUE        50
+             48 RERAISE
+        >>   50 POP_TOP
+             52 POP_TOP
+             54 POP_TOP
+             56 POP_EXCEPT
+             58 POP_TOP
+
+247     >>   60 LOAD_GLOBAL              2 (logger)
+             62 LOAD_METHOD              3 (warning)
+
+248          64 LOAD_CONST               3 ('SMB 依赖导入失败，smb:// 封面一律读不到: error=%s: %s；请在运行/打包环境安装依赖: pip install smbprotocol==1.16.1 cryptography pyspnego')
+
+250          66 LOAD_GLOBAL              4 (type)
+             68 LOAD_FAST                0 (exc)
+             70 CALL_FUNCTION            1
+             72 LOAD_ATTR                5 (__name__)
+             74 LOAD_FAST                0 (exc)
+
+247          76 CALL_METHOD              3
+             78 POP_TOP
+             80 LOAD_CONST               1 (None)
+             82 RETURN_VALUE
+
+=== LPSMBService._read_with_retry ===
+265           0 SETUP_FINALLY           12 (to 14)
+
+266           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (None)
+              6 IMPORT_NAME              0 (smbclient)
+              8 STORE_FAST               5 (smbclient)
+             10 POP_BLOCK
+             12 JUMP_FORWARD            48 (to 62)
+
+267     >>   14 DUP_TOP
+             16 LOAD_GLOBAL              1 (Exception)
+             18 JUMP_IF_NOT_EXC_MATCH    60
+             20 POP_TOP
+             22 STORE_FAST               6 (exc)
+             24 POP_TOP
+             26 SETUP_FINALLY           24 (to 52)
+
+268          28 LOAD_FAST                0 (self)
+             30 LOAD_METHOD              2 (_log_import_failure)
+             32 LOAD_FAST                6 (exc)
+             34 CALL_METHOD              1
+             36 POP_TOP
+
+269          38 POP_BLOCK
+             40 POP_EXCEPT
+             42 LOAD_CONST               2 (None)
+             44 STORE_FAST               6 (exc)
+             46 DELETE_FAST              6 (exc)
+             48 LOAD_CONST               2 (None)
+             50 RETURN_VALUE
+        >>   52 LOAD_CONST               2 (None)
+             54 STORE_FAST               6 (exc)
+             56 DELETE_FAST              6 (exc)
+             58 RERAISE
+        >>   60 RERAISE
+
+271     >>   62 LOAD_FAST                1 (parsed)
+             64 LOAD_CONST               3 ('unc')
+             66 BINARY_SUBSCR
+             68 STORE_FAST               7 (unc)
+
+272          70 LOAD_FAST                1 (parsed)
+             72 LOAD_CONST               4 ('host')
+             74 BINARY_SUBSCR
+             76 STORE_FAST               8 (host)
+
+273          78 LOAD_FAST                1 (parsed)
+             80 LOAD_CONST               5 ('user')
+             82 BINARY_SUBSCR
+             84 STORE_FAST               9 (user)
+
+274          86 LOAD_FAST                1 (parsed)
+             88 LOAD_CONST               6 ('password')
+             90 BINARY_SUBSCR
+             92 STORE_FAST              10 (password)
+
+275          94 LOAD_FAST                1 (parsed)
+             96 LOAD_CONST               7 ('port')
+             98 BINARY_SUBSCR
+            100 STORE_FAST              11 (port)
+
+277         102 LOAD_CONST               2 (None)
+            104 STORE_FAST              12 (last_error)
+
+278         106 LOAD_GLOBAL              3 (range)
+            108 LOAD_FAST                3 (attempts)
+            110 CALL_FUNCTION            1
+            112 GET_ITER
+        >>  114 EXTENDED_ARG             1
+            116 FOR_ITER               312 (to 430)
+            118 STORE_FAST              13 (attempt)
+
+279         120 LOAD_GLOBAL              4 (time)
+            122 LOAD_METHOD              4 (time)
+            124 CALL_METHOD              0
+            126 STORE_FAST              14 (started_at)
+
+280         128 SETUP_FINALLY          170 (to 300)
+
+281         130 SETUP_FINALLY           24 (to 156)
+
+283         132 LOAD_FAST                5 (smbclient)
+            134 LOAD_ATTR                5 (register_session)
+            136 LOAD_FAST                8 (host)
+            138 LOAD_FAST                9 (user)
+            140 LOAD_FAST               10 (password)
+            142 LOAD_FAST               11 (port)
+
+284         144 LOAD_FAST                2 (timeout)
+
+283         146 LOAD_CONST               8 (('username', 'password', 'port', 'connection_timeout'))
+            148 CALL_FUNCTION_KW         5
+            150 POP_TOP
+            152 POP_BLOCK
+            154 JUMP_FORWARD            36 (to 192)
+
+285     >>  156 DUP_TOP
+            158 LOAD_GLOBAL              6 (TypeError)
+            160 JUMP_IF_NOT_EXC_MATCH   190
+            162 POP_TOP
+            164 POP_TOP
+            166 POP_TOP
+
+286         168 LOAD_FAST                5 (smbclient)
+            170 LOAD_ATTR                5 (register_session)
+            172 LOAD_FAST                8 (host)
+            174 LOAD_FAST                9 (user)
+            176 LOAD_FAST               10 (password)
+            178 LOAD_FAST               11 (port)
+            180 LOAD_CONST               9 (('username', 'password', 'port'))
+            182 CALL_FUNCTION_KW         4
+            184 POP_TOP
+            186 POP_EXCEPT
+            188 JUMP_FORWARD             2 (to 192)
+        >>  190 RERAISE
+
+289     >>  192 LOAD_FAST                5 (smbclient)
+            194 LOAD_ATTR                7 (open_file)
+            196 LOAD_FAST                7 (unc)
+            198 LOAD_CONST              10 ('rb')
+            200 LOAD_CONST              11 ('rwd')
+            202 LOAD_CONST              12 (('mode', 'share_access'))
+            204 CALL_FUNCTION_KW         3
+            206 SETUP_WITH              24 (to 232)
+            208 STORE_FAST              15 (f)
+
+290         210 LOAD_FAST               15 (f)
+            212 LOAD_METHOD              8 (read)
+            214 CALL_METHOD              0
+            216 STORE_FAST              16 (data)
+            218 POP_BLOCK
+            220 LOAD_CONST               2 (None)
+            222 DUP_TOP
+            224 DUP_TOP
+            226 CALL_FUNCTION            3
+            228 POP_TOP
+            230 JUMP_FORWARD            16 (to 248)
+        >>  232 WITH_EXCEPT_START
+            234 POP_JUMP_IF_TRUE       238
+            236 RERAISE
+        >>  238 POP_TOP
+            240 POP_TOP
+            242 POP_TOP
+            244 POP_EXCEPT
+            246 POP_TOP
+
+292     >>  248 LOAD_GLOBAL              9 (logger)
+            250 LOAD_METHOD             10 (debug)
+
+293         252 LOAD_CONST              13 ('SMB 单次读取成功: unc=%s, attempt=%d/%d, size=%d, cost=%.3fs')
+
+294         254 LOAD_FAST                7 (unc)
+            256 LOAD_FAST               13 (attempt)
+            258 LOAD_CONST              14 (1)
+            260 BINARY_ADD
+            262 LOAD_FAST                3 (attempts)
+            264 LOAD_GLOBAL             11 (len)
+            266 LOAD_FAST               16 (data)
+            268 EXTENDED_ARG             1
+            270 JUMP_IF_TRUE_OR_POP    274
+            272 LOAD_CONST              15 (b'')
+        >>  274 CALL_FUNCTION            1
+            276 LOAD_GLOBAL              4 (time)
+            278 LOAD_METHOD              4 (time)
+            280 CALL_METHOD              0
+            282 LOAD_FAST               14 (started_at)
+            284 BINARY_SUBTRACT
+
+292         286 CALL_METHOD              6
+            288 POP_TOP
+
+296         290 LOAD_FAST               16 (data)
+            292 POP_BLOCK
+            294 ROT_TWO
+            296 POP_TOP
+            298 RETURN_VALUE
+
+297     >>  300 DUP_TOP
+            302 LOAD_GLOBAL              1 (Exception)
+            304 EXTENDED_ARG             1
+            306 JUMP_IF_NOT_EXC_MATCH   426
+            308 POP_TOP
+            310 STORE_FAST               6 (exc)
+            312 POP_TOP
+            314 SETUP_FINALLY          102 (to 418)
+
+298         316 LOAD_FAST                6 (exc)
+            318 STORE_FAST              12 (last_error)
+
+301         320 LOAD_GLOBAL              9 (logger)
+            322 LOAD_METHOD             10 (debug)
+
+302         324 LOAD_CONST              16 ('SMB 单次读取失败: unc=%s, host=%s, port=%s, user=%s, attempt=%d/%d, timeout=%ss, cost=%.3fs, error=%s: %s')
+
+304         326 LOAD_FAST                7 (unc)
+            328 LOAD_FAST                8 (host)
+            330 LOAD_FAST               11 (port)
+            332 LOAD_FAST                9 (user)
+            334 EXTENDED_ARG             1
+            336 JUMP_IF_TRUE_OR_POP    340
+            338 LOAD_CONST              17 ('<anonymous>')
+        >>  340 LOAD_FAST               13 (attempt)
+            342 LOAD_CONST              14 (1)
+            344 BINARY_ADD
+            346 LOAD_FAST                3 (attempts)
+
+305         348 LOAD_FAST                2 (timeout)
+            350 LOAD_GLOBAL              4 (time)
+            352 LOAD_METHOD              4 (time)
+            354 CALL_METHOD              0
+            356 LOAD_FAST               14 (started_at)
+            358 BINARY_SUBTRACT
+            360 LOAD_GLOBAL             12 (type)
+            362 LOAD_FAST                6 (exc)
+            364 CALL_FUNCTION            1
+            366 LOAD_ATTR               13 (__name__)
+            368 LOAD_FAST                6 (exc)
+
+301         370 CALL_METHOD             11
+            372 POP_TOP
+
+307         374 LOAD_FAST               13 (attempt)
+            376 LOAD_FAST                3 (attempts)
+            378 LOAD_CONST              14 (1)
+            380 BINARY_SUBTRACT
+            382 COMPARE_OP               0 (<)
+            384 EXTENDED_ARG             1
+            386 POP_JUMP_IF_FALSE      406
+
+308         388 LOAD_GLOBAL              4 (time)
+            390 LOAD_METHOD             14 (sleep)
+            392 LOAD_FAST                4 (retry_delay)
+            394 LOAD_FAST               13 (attempt)
+            396 LOAD_CONST              14 (1)
+            398 BINARY_ADD
+            400 BINARY_MULTIPLY
+            402 CALL_METHOD              1
+            404 POP_TOP
+        >>  406 POP_BLOCK
+            408 POP_EXCEPT
+            410 LOAD_CONST               2 (None)
+            412 STORE_FAST               6 (exc)
+            414 DELETE_FAST              6 (exc)
+            416 JUMP_ABSOLUTE          114
+        >>  418 LOAD_CONST               2 (None)
+            420 STORE_FAST               6 (exc)
+            422 DELETE_FAST              6 (exc)
+            424 RERAISE
+        >>  426 RERAISE
+            428 JUMP_ABSOLUTE          114
+
+310     >>  430 LOAD_GLOBAL              9 (logger)
+            432 LOAD_METHOD             15 (warning)
+
+311         434 LOAD_CONST              18 ('SMB 读取失败，已用尽重试: unc=%s, attempts=%d, last_error=%s: %s')
+
+312         436 LOAD_FAST                7 (unc)
+            438 LOAD_FAST                3 (attempts)
+
+313         440 LOAD_FAST               12 (last_error)
+            442 LOAD_CONST               2 (None)
+            444 IS_OP                    1
+            446 EXTENDED_ARG             1
+            448 POP_JUMP_IF_FALSE      460
+            450 LOAD_GLOBAL             12 (type)
+            452 LOAD_FAST               12 (last_error)
+            454 CALL_FUNCTION            1
+            456 LOAD_ATTR               13 (__name__)
+            458 JUMP_FORWARD             2 (to 462)
+        >>  460 LOAD_CONST              19 ('None')
+
+314     >>  462 LOAD_FAST               12 (last_error)
+
+310         464 CALL_METHOD              5
+            466 POP_TOP
+
+316         468 LOAD_CONST               2 (None)
+            470 RETURN_VALUE
+
+=== LPSMBService._prune_cache_locked ===
+326           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_DEREF               0 (self)
+              4 LOAD_ATTR                1 (_bytes_cache)
+              6 CALL_FUNCTION            1
+              8 LOAD_DEREF               0 (self)
+             10 LOAD_ATTR                2 (_cache_limit)
+             12 COMPARE_OP               1 (<=)
+             14 POP_JUMP_IF_FALSE       20
+
+327          16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+329     >>   20 LOAD_GLOBAL              3 (sorted)
+             22 LOAD_DEREF               0 (self)
+             24 LOAD_ATTR                1 (_bytes_cache)
+             26 LOAD_CLOSURE             0 (self)
+             28 BUILD_TUPLE              1
+             30 LOAD_CONST               2 (<code object <lambda> at 0x000001F3253CEDF0, file "LPClientFramework\LPSMBService.py", line 329>)
+             32 LOAD_CONST               3 ('LPSMBService._prune_cache_locked.<locals>.<lambda>')
+             34 MAKE_FUNCTION            8 (closure)
+             36 LOAD_CONST               4 (('key',))
+             38 CALL_FUNCTION_KW         2
+             40 STORE_FAST               1 (sorted_keys)
+
+330          42 LOAD_FAST                1 (sorted_keys)
+             44 LOAD_CONST               1 (None)
+             46 LOAD_GLOBAL              0 (len)
+             48 LOAD_DEREF               0 (self)
+             50 LOAD_ATTR                1 (_bytes_cache)
+             52 CALL_FUNCTION            1
+             54 LOAD_DEREF               0 (self)
+             56 LOAD_ATTR                2 (_cache_limit)
+             58 BINARY_SUBTRACT
+             60 BUILD_SLICE              2
+             62 BINARY_SUBSCR
+             64 GET_ITER
+        >>   66 FOR_ITER                18 (to 86)
+             68 STORE_FAST               2 (key)
+
+331          70 LOAD_DEREF               0 (self)
+             72 LOAD_ATTR                1 (_bytes_cache)
+             74 LOAD_METHOD              4 (pop)
+             76 LOAD_FAST                2 (key)
+             78 LOAD_CONST               1 (None)
+             80 CALL_METHOD              2
+             82 POP_TOP
+             84 JUMP_ABSOLUTE           66
+        >>   86 LOAD_CONST               1 (None)
+             88 RETURN_VALUE
+
+=== LPSMBService._prune_cache_locked.<lambda> ===
+329           0 LOAD_DEREF               0 (self)
+              2 LOAD_ATTR                0 (_bytes_cache)
+              4 LOAD_FAST                0 (k)
+              6 BINARY_SUBSCR
+              8 LOAD_CONST               1 (0)
+             10 BINARY_SUBSCR
+             12 RETURN_VALUE

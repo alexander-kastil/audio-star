@@ -1,0 +1,744 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/12/29 13:26\n@Auth ： Chris\n@File ：LPSideBarListView.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Qt', 'QAbstractListModel', 'QSize', 'QRectF', 'QRect', 'QEvent'))
+              8 IMPORT_NAME              1 (PyQt6.QtCore)
+             10 IMPORT_FROM              2 (Qt)
+             12 STORE_NAME               2 (Qt)
+             14 IMPORT_FROM              3 (QAbstractListModel)
+             16 STORE_NAME               3 (QAbstractListModel)
+             18 IMPORT_FROM              4 (QSize)
+             20 STORE_NAME               4 (QSize)
+             22 IMPORT_FROM              5 (QRectF)
+             24 STORE_NAME               5 (QRectF)
+             26 IMPORT_FROM              6 (QRect)
+             28 STORE_NAME               6 (QRect)
+             30 IMPORT_FROM              7 (QEvent)
+             32 STORE_NAME               7 (QEvent)
+             34 POP_TOP
+
+  9          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               3 (('QPainter', 'QBrush', 'QColor', 'QPainterPath', 'QIcon', 'QPixmap', 'QFont', 'QLinearGradient'))
+             40 IMPORT_NAME              8 (PyQt6.QtGui)
+             42 IMPORT_FROM              9 (QPainter)
+             44 STORE_NAME               9 (QPainter)
+             46 IMPORT_FROM             10 (QBrush)
+             48 STORE_NAME              10 (QBrush)
+             50 IMPORT_FROM             11 (QColor)
+             52 STORE_NAME              11 (QColor)
+             54 IMPORT_FROM             12 (QPainterPath)
+             56 STORE_NAME              12 (QPainterPath)
+             58 IMPORT_FROM             13 (QIcon)
+             60 STORE_NAME              13 (QIcon)
+             62 IMPORT_FROM             14 (QPixmap)
+             64 STORE_NAME              14 (QPixmap)
+             66 IMPORT_FROM             15 (QFont)
+             68 STORE_NAME              15 (QFont)
+             70 IMPORT_FROM             16 (QLinearGradient)
+             72 STORE_NAME              16 (QLinearGradient)
+             74 POP_TOP
+
+ 10          76 LOAD_CONST               1 (0)
+             78 LOAD_CONST               4 (('QStyledItemDelegate', 'QStyle'))
+             80 IMPORT_NAME             17 (PyQt6.QtWidgets)
+             82 IMPORT_FROM             18 (QStyledItemDelegate)
+             84 STORE_NAME              18 (QStyledItemDelegate)
+             86 IMPORT_FROM             19 (QStyle)
+             88 STORE_NAME              19 (QStyle)
+             90 POP_TOP
+
+ 12          92 LOAD_CONST               1 (0)
+             94 LOAD_CONST               5 (None)
+             96 IMPORT_NAME             20 (LPGlobalUI)
+             98 STORE_NAME              20 (LPGlobalUI)
+
+ 13         100 LOAD_CONST               1 (0)
+            102 LOAD_CONST               6 (('Sub_Text',))
+            104 IMPORT_NAME             21 (LPClientFramework.LPConfig.LPFontConfig)
+            106 IMPORT_FROM             22 (Sub_Text)
+            108 STORE_NAME              22 (Sub_Text)
+            110 POP_TOP
+
+ 17         112 LOAD_CONST               7 (<code object paintSideBarSelectedBackground at 0x000001F3253AEC90, file "SideBar\LPSideBarListView.py", line 17>)
+            114 LOAD_CONST               8 ('paintSideBarSelectedBackground')
+            116 MAKE_FUNCTION            0
+            118 STORE_NAME              23 (paintSideBarSelectedBackground)
+
+ 47         120 LOAD_BUILD_CLASS
+            122 LOAD_CONST               9 (<code object LPSideBarListModel at 0x000001F3253AEEA0, file "SideBar\LPSideBarListView.py", line 47>)
+            124 LOAD_CONST              10 ('LPSideBarListModel')
+            126 MAKE_FUNCTION            0
+            128 LOAD_CONST              10 ('LPSideBarListModel')
+            130 LOAD_NAME                3 (QAbstractListModel)
+            132 CALL_FUNCTION            3
+            134 STORE_NAME              24 (LPSideBarListModel)
+
+ 96         136 LOAD_BUILD_CLASS
+            138 LOAD_CONST              11 (<code object LPSideBarListDelegate at 0x000001F324E69BE0, file "SideBar\LPSideBarListView.py", line 96>)
+            140 LOAD_CONST              12 ('LPSideBarListDelegate')
+            142 MAKE_FUNCTION            0
+            144 LOAD_CONST              12 ('LPSideBarListDelegate')
+            146 LOAD_NAME               18 (QStyledItemDelegate)
+            148 CALL_FUNCTION            3
+            150 STORE_NAME              25 (LPSideBarListDelegate)
+            152 LOAD_CONST               5 (None)
+            154 RETURN_VALUE
+
+=== paintSideBarSelectedBackground ===
+ 27           0 LOAD_FAST                0 (painter)
+              2 LOAD_METHOD              0 (setRenderHint)
+              4 LOAD_GLOBAL              1 (QPainter)
+              6 LOAD_ATTR                2 (RenderHint)
+              8 LOAD_ATTR                3 (Antialiasing)
+             10 CALL_METHOD              1
+             12 POP_TOP
+
+ 29          14 LOAD_GLOBAL              4 (QPainterPath)
+             16 CALL_FUNCTION            0
+             18 STORE_FAST               2 (highlightPath)
+
+ 30          20 LOAD_FAST                2 (highlightPath)
+             22 LOAD_METHOD              5 (addRoundedRect)
+             24 LOAD_GLOBAL              6 (QRectF)
+             26 LOAD_FAST                1 (cellRect)
+             28 CALL_FUNCTION            1
+             30 LOAD_CONST               1 (8)
+             32 LOAD_CONST               1 (8)
+             34 CALL_METHOD              3
+             36 POP_TOP
+
+ 32          38 LOAD_GLOBAL              7 (QColor)
+             40 LOAD_GLOBAL              8 (LPGlobalUI)
+             42 LOAD_ATTR                9 (THEME_ACCENT_COLOR)
+             44 CALL_FUNCTION            1
+             46 STORE_FAST               3 (highlightStartColor)
+
+ 33          48 LOAD_FAST                3 (highlightStartColor)
+             50 LOAD_METHOD             10 (setAlpha)
+             52 LOAD_CONST               2 (51)
+             54 CALL_METHOD              1
+             56 POP_TOP
+
+ 34          58 LOAD_GLOBAL              7 (QColor)
+             60 LOAD_GLOBAL              8 (LPGlobalUI)
+             62 LOAD_ATTR                9 (THEME_ACCENT_COLOR)
+             64 CALL_FUNCTION            1
+             66 STORE_FAST               4 (highlightEndColor)
+
+ 35          68 LOAD_FAST                4 (highlightEndColor)
+             70 LOAD_METHOD             10 (setAlpha)
+             72 LOAD_CONST               3 (15)
+             74 CALL_METHOD              1
+             76 POP_TOP
+
+ 36          78 LOAD_GLOBAL             11 (QLinearGradient)
+             80 LOAD_FAST                1 (cellRect)
+             82 LOAD_METHOD             12 (left)
+             84 CALL_METHOD              0
+             86 LOAD_FAST                1 (cellRect)
+             88 LOAD_METHOD             13 (top)
+             90 CALL_METHOD              0
+             92 LOAD_FAST                1 (cellRect)
+             94 LOAD_METHOD             14 (right)
+             96 CALL_METHOD              0
+             98 LOAD_FAST                1 (cellRect)
+            100 LOAD_METHOD             13 (top)
+            102 CALL_METHOD              0
+            104 CALL_FUNCTION            4
+            106 STORE_FAST               5 (gradient)
+
+ 37         108 LOAD_FAST                5 (gradient)
+            110 LOAD_METHOD             15 (setColorAt)
+            112 LOAD_CONST               4 (0)
+            114 LOAD_FAST                3 (highlightStartColor)
+            116 CALL_METHOD              2
+            118 POP_TOP
+
+ 38         120 LOAD_FAST                5 (gradient)
+            122 LOAD_METHOD             15 (setColorAt)
+            124 LOAD_CONST               5 (1)
+            126 LOAD_FAST                4 (highlightEndColor)
+            128 CALL_METHOD              2
+            130 POP_TOP
+
+ 39         132 LOAD_FAST                0 (painter)
+            134 LOAD_METHOD             16 (fillPath)
+            136 LOAD_FAST                2 (highlightPath)
+            138 LOAD_GLOBAL             17 (QBrush)
+            140 LOAD_FAST                5 (gradient)
+            142 CALL_FUNCTION            1
+            144 CALL_METHOD              2
+            146 POP_TOP
+
+ 41         148 LOAD_FAST                0 (painter)
+            150 LOAD_METHOD             18 (save)
+            152 CALL_METHOD              0
+            154 POP_TOP
+
+ 42         156 LOAD_FAST                0 (painter)
+            158 LOAD_METHOD             19 (setClipPath)
+            160 LOAD_FAST                2 (highlightPath)
+            162 CALL_METHOD              1
+            164 POP_TOP
+
+ 43         166 LOAD_FAST                0 (painter)
+            168 LOAD_METHOD             20 (fillRect)
+            170 LOAD_GLOBAL             21 (QRect)
+            172 LOAD_FAST                1 (cellRect)
+            174 LOAD_METHOD             22 (x)
+            176 CALL_METHOD              0
+            178 LOAD_FAST                1 (cellRect)
+            180 LOAD_METHOD             23 (y)
+            182 CALL_METHOD              0
+            184 LOAD_CONST               6 (3)
+            186 LOAD_FAST                1 (cellRect)
+            188 LOAD_METHOD             24 (height)
+            190 CALL_METHOD              0
+            192 CALL_FUNCTION            4
+            194 LOAD_GLOBAL              8 (LPGlobalUI)
+            196 LOAD_ATTR                9 (THEME_ACCENT_COLOR)
+            198 CALL_METHOD              2
+            200 POP_TOP
+
+ 44         202 LOAD_FAST                0 (painter)
+            204 LOAD_METHOD             25 (restore)
+            206 CALL_METHOD              0
+            208 POP_TOP
+            210 LOAD_CONST               7 (None)
+            212 RETURN_VALUE
+
+=== LPSideBarListModel ===
+ 47           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPSideBarListModel')
+              6 STORE_NAME               2 (__qualname__)
+
+ 49           8 LOAD_CONST               8 ((None,))
+             10 LOAD_CLOSURE             0 (__class__)
+             12 BUILD_TUPLE              1
+             14 LOAD_CONST               2 (<code object __init__ at 0x000001F3253AE240, file "SideBar\LPSideBarListView.py", line 49>)
+             16 LOAD_CONST               3 ('LPSideBarListModel.__init__')
+             18 MAKE_FUNCTION            9 (defaults, closure)
+             20 STORE_NAME               3 (__init__)
+
+ 63          22 LOAD_CONST               9 ((None,))
+             24 LOAD_CONST               4 (<code object rowCount at 0x000001F3253AE450, file "SideBar\LPSideBarListView.py", line 63>)
+             26 LOAD_CONST               5 ('LPSideBarListModel.rowCount')
+             28 MAKE_FUNCTION            1 (defaults)
+             30 STORE_NAME               4 (rowCount)
+
+ 75          32 LOAD_NAME                5 (Qt)
+             34 LOAD_ATTR                6 (ItemDataRole)
+             36 LOAD_ATTR                7 (DisplayRole)
+             38 BUILD_TUPLE              1
+             40 LOAD_CONST               6 (<code object data at 0x000001F3253AE870, file "SideBar\LPSideBarListView.py", line 75>)
+             42 LOAD_CONST               7 ('LPSideBarListModel.data')
+             44 MAKE_FUNCTION            1 (defaults)
+             46 STORE_NAME               8 (data)
+             48 LOAD_CLOSURE             0 (__class__)
+             50 DUP_TOP
+             52 STORE_NAME               9 (__classcell__)
+             54 RETURN_VALUE
+
+=== LPSideBarListModel.__init__ ===
+ 59           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                2 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 60          12 LOAD_FAST                1 (data)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_data)
+             18 LOAD_CONST               1 (None)
+             20 RETURN_VALUE
+
+=== LPSideBarListModel.rowCount ===
+ 72           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_data)
+              6 CALL_FUNCTION            1
+              8 RETURN_VALUE
+
+=== LPSideBarListModel.data ===
+ 85           0 LOAD_FAST                1 (index)
+              2 LOAD_METHOD              0 (row)
+              4 CALL_METHOD              0
+              6 STORE_FAST               3 (row)
+
+ 86           8 LOAD_FAST                3 (row)
+             10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (rowCount)
+             14 CALL_METHOD              0
+             16 COMPARE_OP               5 (>=)
+             18 POP_JUMP_IF_TRUE        28
+             20 LOAD_FAST                3 (row)
+             22 LOAD_CONST               1 (0)
+             24 COMPARE_OP               0 (<)
+             26 POP_JUMP_IF_FALSE       32
+
+ 87     >>   28 LOAD_CONST               2 (None)
+             30 RETURN_VALUE
+
+ 88     >>   32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                2 (_data)
+             36 LOAD_FAST                3 (row)
+             38 BINARY_SUBSCR
+             40 STORE_FAST               4 (item)
+
+ 89          42 LOAD_FAST                2 (role)
+             44 LOAD_GLOBAL              3 (Qt)
+             46 LOAD_ATTR                4 (ItemDataRole)
+             48 LOAD_ATTR                5 (DisplayRole)
+             50 COMPARE_OP               2 (==)
+             52 POP_JUMP_IF_FALSE       58
+
+ 90          54 LOAD_FAST                4 (item)
+             56 RETURN_VALUE
+
+ 93     >>   58 LOAD_CONST               2 (None)
+             60 RETURN_VALUE
+
+=== LPSideBarListDelegate ===
+ 96           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPSideBarListDelegate')
+              6 STORE_NAME               2 (__qualname__)
+
+100           8 LOAD_CLOSURE             0 (__class__)
+             10 BUILD_TUPLE              1
+             12 LOAD_CONST               1 (<code object __init__ at 0x000001F3253AEB30, file "SideBar\LPSideBarListView.py", line 100>)
+             14 LOAD_CONST               2 ('LPSideBarListDelegate.__init__')
+             16 MAKE_FUNCTION            8 (closure)
+             18 STORE_NAME               3 (__init__)
+
+115          20 LOAD_CLOSURE             0 (__class__)
+             22 BUILD_TUPLE              1
+             24 LOAD_CONST               3 (<code object eventFilter at 0x000001F3253AE030, file "SideBar\LPSideBarListView.py", line 115>)
+             26 LOAD_CONST               4 ('LPSideBarListDelegate.eventFilter')
+             28 MAKE_FUNCTION            8 (closure)
+             30 STORE_NAME               4 (eventFilter)
+
+139          32 LOAD_CONST               5 (<code object sizeHint at 0x000001F324E697C0, file "SideBar\LPSideBarListView.py", line 139>)
+             34 LOAD_CONST               6 ('LPSideBarListDelegate.sizeHint')
+             36 MAKE_FUNCTION            0
+             38 STORE_NAME               5 (sizeHint)
+
+152          40 LOAD_CONST               7 (<code object paint at 0x000001F324E69DF0, file "SideBar\LPSideBarListView.py", line 152>)
+             42 LOAD_CONST               8 ('LPSideBarListDelegate.paint')
+             44 MAKE_FUNCTION            0
+             46 STORE_NAME               6 (paint)
+             48 LOAD_CLOSURE             0 (__class__)
+             50 DUP_TOP
+             52 STORE_NAME               7 (__classcell__)
+             54 RETURN_VALUE
+
+=== LPSideBarListDelegate.__init__ ===
+109           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+111          12 LOAD_FAST                1 (parent)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (listview)
+
+112          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                2 (listview)
+             22 LOAD_METHOD              3 (setMouseTracking)
+             24 LOAD_CONST               1 (True)
+             26 CALL_METHOD              1
+             28 POP_TOP
+
+113          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                2 (listview)
+             34 LOAD_METHOD              4 (viewport)
+             36 CALL_METHOD              0
+             38 LOAD_METHOD              5 (installEventFilter)
+             40 LOAD_FAST                0 (self)
+             42 CALL_METHOD              1
+             44 POP_TOP
+             46 LOAD_CONST               2 (None)
+             48 RETURN_VALUE
+
+=== LPSideBarListDelegate.eventFilter ===
+126           0 LOAD_GLOBAL              0 (QEvent)
+              2 LOAD_ATTR                1 (Type)
+              4 LOAD_ATTR                2 (MouseButtonPress)
+
+127           6 LOAD_GLOBAL              0 (QEvent)
+              8 LOAD_ATTR                1 (Type)
+             10 LOAD_ATTR                3 (MouseButtonRelease)
+
+128          12 LOAD_GLOBAL              0 (QEvent)
+             14 LOAD_ATTR                1 (Type)
+             16 LOAD_ATTR                4 (MouseButtonDblClick)
+
+125          18 BUILD_TUPLE              3
+             20 STORE_FAST               3 (clickEvents)
+
+130          22 LOAD_FAST                1 (watched)
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                5 (listview)
+             28 LOAD_METHOD              6 (viewport)
+             30 CALL_METHOD              0
+             32 IS_OP                    0
+             34 POP_JUMP_IF_FALSE      102
+             36 LOAD_FAST                2 (event)
+             38 LOAD_METHOD              7 (type)
+             40 CALL_METHOD              0
+             42 LOAD_FAST                3 (clickEvents)
+             44 CONTAINS_OP              0
+             46 POP_JUMP_IF_FALSE      102
+
+131          48 LOAD_GLOBAL              8 (hasattr)
+             50 LOAD_FAST                2 (event)
+             52 LOAD_CONST               1 ('position')
+             54 CALL_FUNCTION            2
+             56 POP_JUMP_IF_FALSE       70
+             58 LOAD_FAST                2 (event)
+             60 LOAD_METHOD              9 (position)
+             62 CALL_METHOD              0
+             64 LOAD_METHOD             10 (toPoint)
+             66 CALL_METHOD              0
+             68 JUMP_FORWARD             6 (to 76)
+        >>   70 LOAD_FAST                2 (event)
+             72 LOAD_METHOD             11 (pos)
+             74 CALL_METHOD              0
+        >>   76 STORE_FAST               4 (position)
+
+132          78 LOAD_FAST                0 (self)
+             80 LOAD_ATTR                5 (listview)
+             82 LOAD_METHOD             12 (indexAt)
+             84 LOAD_FAST                4 (position)
+             86 CALL_METHOD              1
+             88 STORE_FAST               5 (index)
+
+133          90 LOAD_FAST                5 (index)
+             92 LOAD_METHOD             13 (isValid)
+             94 CALL_METHOD              0
+             96 POP_JUMP_IF_TRUE       102
+
+134          98 LOAD_CONST               2 (True)
+            100 RETURN_VALUE
+
+136     >>  102 LOAD_GLOBAL             14 (super)
+            104 CALL_FUNCTION            0
+            106 LOAD_METHOD             15 (eventFilter)
+            108 LOAD_FAST                1 (watched)
+            110 LOAD_FAST                2 (event)
+            112 CALL_METHOD              2
+            114 RETURN_VALUE
+
+=== LPSideBarListDelegate.sizeHint ===
+150           0 LOAD_GLOBAL              0 (QSize)
+              2 LOAD_FAST                1 (option)
+              4 LOAD_ATTR                1 (rect)
+              6 LOAD_METHOD              2 (width)
+              8 CALL_METHOD              0
+             10 LOAD_CONST               1 (45)
+             12 CALL_FUNCTION            2
+             14 RETURN_VALUE
+
+=== LPSideBarListDelegate.paint ===
+163           0 LOAD_FAST                3 (index)
+              2 LOAD_METHOD              0 (data)
+              4 CALL_METHOD              0
+              6 STORE_FAST               4 (data)
+
+164           8 LOAD_FAST                4 (data)
+             10 LOAD_CONST               1 (None)
+             12 IS_OP                    0
+             14 POP_JUMP_IF_FALSE       20
+
+165          16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+168     >>   20 LOAD_CONST               2 (10)
+             22 STORE_FAST               5 (iconLeftPadding)
+
+169          24 LOAD_CONST               3 (20)
+             26 STORE_FAST               6 (iconSize)
+
+170          28 LOAD_CONST               4 (12)
+             30 STORE_FAST               7 (titleLeftPadding)
+
+171          32 LOAD_CONST               4 (12)
+             34 STORE_FAST               8 (titleTopPadding)
+
+173          36 LOAD_FAST                2 (option)
+             38 LOAD_ATTR                1 (rect)
+             40 STORE_FAST               9 (cellRect)
+
+175          42 LOAD_FAST                1 (painter)
+             44 LOAD_METHOD              2 (setRenderHint)
+             46 LOAD_GLOBAL              3 (QPainter)
+             48 LOAD_ATTR                4 (RenderHint)
+             50 LOAD_ATTR                5 (TextAntialiasing)
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+179          56 LOAD_GLOBAL              6 (QBrush)
+             58 CALL_FUNCTION            0
+             60 STORE_FAST              10 (brush)
+
+180          62 LOAD_FAST               10 (brush)
+             64 LOAD_METHOD              7 (setStyle)
+             66 LOAD_GLOBAL              8 (Qt)
+             68 LOAD_ATTR                9 (BrushStyle)
+             70 LOAD_ATTR               10 (SolidPattern)
+             72 CALL_METHOD              1
+             74 POP_TOP
+
+181          76 LOAD_FAST                4 (data)
+             78 LOAD_CONST               5 ('icon')
+             80 BINARY_SUBSCR
+             82 STORE_FAST              11 (iconPath)
+
+182          84 LOAD_GLOBAL             11 (QPixmap)
+             86 LOAD_FAST               11 (iconPath)
+             88 LOAD_METHOD             12 (startswith)
+             90 LOAD_CONST               6 (':/')
+             92 CALL_METHOD              1
+             94 POP_JUMP_IF_FALSE      100
+             96 LOAD_FAST               11 (iconPath)
+             98 JUMP_FORWARD             8 (to 108)
+        >>  100 LOAD_GLOBAL             13 (LPGlobalUI)
+            102 LOAD_METHOD             14 (imagePath)
+            104 LOAD_FAST               11 (iconPath)
+            106 CALL_METHOD              1
+        >>  108 CALL_FUNCTION            1
+            110 STORE_FAST              12 (pixmap)
+
+183         112 LOAD_FAST                2 (option)
+            114 LOAD_ATTR               15 (state)
+            116 LOAD_GLOBAL             16 (QStyle)
+            118 LOAD_ATTR               17 (StateFlag)
+            120 LOAD_ATTR               18 (State_Selected)
+            122 BINARY_AND
+            124 POP_JUMP_IF_FALSE      154
+
+184         126 LOAD_FAST               10 (brush)
+            128 LOAD_METHOD             19 (setColor)
+            130 LOAD_GLOBAL             20 (QColor)
+            132 LOAD_CONST               7 (0)
+            134 LOAD_CONST               7 (0)
+            136 LOAD_CONST               7 (0)
+            138 LOAD_CONST               7 (0)
+            140 CALL_FUNCTION            4
+            142 CALL_METHOD              1
+            144 POP_TOP
+
+185         146 LOAD_GLOBAL             13 (LPGlobalUI)
+            148 LOAD_ATTR               21 (THEME_DEFAULT_COLOR)
+            150 STORE_FAST              13 (textColor)
+            152 JUMP_FORWARD            68 (to 222)
+
+186     >>  154 LOAD_FAST                2 (option)
+            156 LOAD_ATTR               15 (state)
+            158 LOAD_GLOBAL             16 (QStyle)
+            160 LOAD_ATTR               17 (StateFlag)
+            162 LOAD_ATTR               22 (State_MouseOver)
+            164 BINARY_AND
+            166 POP_JUMP_IF_FALSE      196
+
+189         168 LOAD_FAST               10 (brush)
+            170 LOAD_METHOD             19 (setColor)
+            172 LOAD_GLOBAL             20 (QColor)
+            174 LOAD_CONST               8 (255)
+            176 LOAD_CONST               8 (255)
+            178 LOAD_CONST               8 (255)
+            180 LOAD_CONST               9 (18)
+            182 CALL_FUNCTION            4
+            184 CALL_METHOD              1
+            186 POP_TOP
+
+190         188 LOAD_GLOBAL             13 (LPGlobalUI)
+            190 LOAD_ATTR               23 (THEME_LIGHT_COLOR_UI)
+            192 STORE_FAST              13 (textColor)
+            194 JUMP_FORWARD            26 (to 222)
+
+194     >>  196 LOAD_FAST               10 (brush)
+            198 LOAD_METHOD             19 (setColor)
+            200 LOAD_GLOBAL             20 (QColor)
+            202 LOAD_CONST               7 (0)
+            204 LOAD_CONST               7 (0)
+            206 LOAD_CONST               7 (0)
+            208 LOAD_CONST               7 (0)
+            210 CALL_FUNCTION            4
+            212 CALL_METHOD              1
+            214 POP_TOP
+
+195         216 LOAD_GLOBAL             13 (LPGlobalUI)
+            218 LOAD_ATTR               23 (THEME_LIGHT_COLOR_UI)
+            220 STORE_FAST              13 (textColor)
+
+197     >>  222 LOAD_FAST                1 (painter)
+            224 LOAD_METHOD              2 (setRenderHint)
+            226 LOAD_GLOBAL              3 (QPainter)
+            228 LOAD_ATTR                4 (RenderHint)
+            230 LOAD_ATTR               24 (Antialiasing)
+            232 CALL_METHOD              1
+            234 POP_TOP
+
+198         236 LOAD_GLOBAL             25 (QPainterPath)
+            238 CALL_FUNCTION            0
+            240 STORE_FAST              14 (path)
+
+199         242 LOAD_FAST               14 (path)
+            244 LOAD_METHOD             26 (addRoundedRect)
+            246 LOAD_GLOBAL             27 (QRectF)
+            248 LOAD_FAST                9 (cellRect)
+            250 CALL_FUNCTION            1
+            252 LOAD_CONST              10 (8)
+            254 LOAD_CONST              10 (8)
+            256 CALL_METHOD              3
+            258 POP_TOP
+
+200         260 LOAD_FAST                1 (painter)
+            262 LOAD_METHOD             28 (fillPath)
+            264 LOAD_FAST               14 (path)
+            266 LOAD_FAST               10 (brush)
+            268 CALL_METHOD              2
+            270 POP_TOP
+
+201         272 LOAD_FAST                2 (option)
+            274 LOAD_ATTR               15 (state)
+            276 LOAD_GLOBAL             16 (QStyle)
+            278 LOAD_ATTR               17 (StateFlag)
+            280 LOAD_ATTR               18 (State_Selected)
+            282 BINARY_AND
+            284 EXTENDED_ARG             1
+            286 POP_JUMP_IF_FALSE      298
+
+202         288 LOAD_GLOBAL             29 (paintSideBarSelectedBackground)
+            290 LOAD_FAST                1 (painter)
+            292 LOAD_FAST                9 (cellRect)
+            294 CALL_FUNCTION            2
+            296 POP_TOP
+
+204     >>  298 LOAD_FAST                9 (cellRect)
+            300 LOAD_METHOD             30 (height)
+            302 CALL_METHOD              0
+            304 LOAD_FAST                6 (iconSize)
+            306 BINARY_SUBTRACT
+            308 LOAD_CONST              11 (2)
+            310 BINARY_FLOOR_DIVIDE
+            312 STORE_FAST              15 (iconTopPadding)
+
+207         314 LOAD_GLOBAL             31 (QRect)
+            316 LOAD_FAST                9 (cellRect)
+            318 LOAD_METHOD             32 (x)
+            320 CALL_METHOD              0
+            322 LOAD_FAST                5 (iconLeftPadding)
+            324 BINARY_ADD
+            326 LOAD_FAST                9 (cellRect)
+            328 LOAD_METHOD             33 (y)
+            330 CALL_METHOD              0
+            332 LOAD_FAST               15 (iconTopPadding)
+            334 BINARY_ADD
+            336 LOAD_FAST                6 (iconSize)
+            338 LOAD_FAST                6 (iconSize)
+            340 CALL_FUNCTION            4
+            342 STORE_FAST              16 (iconRect)
+
+208         344 LOAD_GLOBAL             34 (QIcon)
+            346 CALL_FUNCTION            0
+            348 STORE_FAST              17 (icon)
+
+209         350 LOAD_FAST               17 (icon)
+            352 LOAD_METHOD             35 (addPixmap)
+            354 LOAD_FAST               12 (pixmap)
+            356 CALL_METHOD              1
+            358 POP_TOP
+
+211         360 LOAD_FAST               17 (icon)
+            362 LOAD_METHOD             36 (paint)
+            364 LOAD_FAST                1 (painter)
+            366 LOAD_FAST               16 (iconRect)
+            368 LOAD_METHOD             32 (x)
+            370 CALL_METHOD              0
+            372 LOAD_FAST               16 (iconRect)
+            374 LOAD_METHOD             33 (y)
+            376 CALL_METHOD              0
+            378 LOAD_FAST               16 (iconRect)
+            380 LOAD_METHOD             37 (width)
+            382 CALL_METHOD              0
+            384 LOAD_FAST               16 (iconRect)
+            386 LOAD_METHOD             30 (height)
+            388 CALL_METHOD              0
+            390 CALL_METHOD              5
+            392 POP_TOP
+
+214         394 LOAD_FAST                5 (iconLeftPadding)
+            396 LOAD_FAST                6 (iconSize)
+            398 BINARY_ADD
+            400 LOAD_FAST                7 (titleLeftPadding)
+            402 BINARY_ADD
+            404 STORE_FAST              18 (titleX)
+
+215         406 LOAD_GLOBAL             38 (QFont)
+            408 CALL_FUNCTION            0
+            410 STORE_FAST              19 (titleFont)
+
+216         412 LOAD_FAST               19 (titleFont)
+            414 LOAD_METHOD             39 (setPointSizeF)
+            416 LOAD_GLOBAL             40 (Sub_Text)
+            418 CALL_METHOD              1
+            420 POP_TOP
+
+217         422 LOAD_FAST                1 (painter)
+            424 LOAD_METHOD             41 (setFont)
+            426 LOAD_FAST               19 (titleFont)
+            428 CALL_METHOD              1
+            430 POP_TOP
+
+220         432 LOAD_GLOBAL             31 (QRect)
+            434 LOAD_FAST                9 (cellRect)
+            436 LOAD_METHOD             32 (x)
+            438 CALL_METHOD              0
+            440 LOAD_FAST               18 (titleX)
+            442 BINARY_ADD
+            444 LOAD_FAST                9 (cellRect)
+            446 LOAD_METHOD             33 (y)
+            448 CALL_METHOD              0
+            450 LOAD_FAST                8 (titleTopPadding)
+            452 BINARY_ADD
+            454 LOAD_FAST                9 (cellRect)
+            456 LOAD_METHOD             37 (width)
+            458 CALL_METHOD              0
+            460 LOAD_FAST               18 (titleX)
+            462 BINARY_SUBTRACT
+            464 LOAD_CONST              12 (21)
+            466 CALL_FUNCTION            4
+            468 STORE_FAST              20 (title_rect)
+
+222         470 LOAD_FAST                1 (painter)
+            472 LOAD_METHOD             42 (setPen)
+            474 LOAD_FAST               13 (textColor)
+            476 CALL_METHOD              1
+            478 POP_TOP
+
+224         480 LOAD_FAST                1 (painter)
+            482 LOAD_METHOD             43 (drawText)
+            484 LOAD_FAST               20 (title_rect)
+            486 LOAD_GLOBAL              8 (Qt)
+            488 LOAD_ATTR               44 (AlignmentFlag)
+            490 LOAD_ATTR               45 (AlignLeft)
+            492 LOAD_GLOBAL              8 (Qt)
+            494 LOAD_ATTR               44 (AlignmentFlag)
+            496 LOAD_ATTR               46 (AlignVCenter)
+            498 BINARY_OR
+            500 LOAD_FAST                4 (data)
+            502 LOAD_CONST              13 ('title')
+            504 BINARY_SUBSCR
+            506 CALL_METHOD              3
+            508 POP_TOP
+            510 LOAD_CONST               1 (None)
+            512 RETURN_VALUE

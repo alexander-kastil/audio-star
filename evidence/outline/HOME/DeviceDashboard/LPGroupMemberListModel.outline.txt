@@ -1,0 +1,102 @@
+# module HOME.DeviceDashboard.LPGroupMemberListModel
+
+[module] names: PyQt6.QtCore, QAbstractListModel, QModelIndex, Qt, pyqtProperty, pyqtSignal, LPGroupMemberListModel
+  str: 'QAbstractListModel'
+  str: 'QModelIndex'
+  str: 'Qt'
+  str: 'pyqtProperty'
+  str: 'pyqtSignal'
+  str: 'LPGroupMemberListModel'
+
+def LPGroupMemberListModel()  line 5
+  names: __name__, __module__, __qualname__, __doc__, Qt, ItemDataRole, UserRole, UuidRole, NameRole, VolumeRole, MuteRole, FixedVolumeRole, IsMasterRole, PlayStateRole, VolumeLockedRole, pyqtSignal, countChanged, _ROLE_KEYS, __init__, pyqtProperty, int, count, QModelIndex, rowCount, DisplayRole, data, roleNames, rows, setRows, staticmethod, _normalizeRow, __classcell__
+    str: 'LPGroupMemberListModel'
+    str: '设备组成员列表模型，负责向 QML 暴露稳定的成员行数据。'
+    str: 'uuid'
+    str: 'name'
+    str: 'volume'
+    str: 'mute'
+    str: 'fixedVolume'
+    str: 'isMaster'
+    str: 'playState'
+    str: 'volumeLocked'
+    str: 'LPGroupMemberListModel.__init__'
+    str: 'notify'
+    str: 'LPGroupMemberListModel.count'
+    str: 'LPGroupMemberListModel.rowCount'
+    str: 'LPGroupMemberListModel.data'
+    str: 'LPGroupMemberListModel.roleNames'
+    str: 'LPGroupMemberListModel.rows'
+    str: 'LPGroupMemberListModel.setRows'
+    str: 'LPGroupMemberListModel._normalizeRow'
+
+  def LPGroupMemberListModel.__init__(self, rows, parent)  line 30
+    names: super, __init__, list, _rows
+      str: '初始化设备组成员模型。\n\n        参数:\n            rows: 初始成员行列表。\n            parent: Qt 父对象。\n        返回:\n            None。\n        '
+      str: 'LPGroupMemberListModel.__init__.<locals>.<listcomp>'
+
+    def LPGroupMemberListModel.__init__.<listcomp>(.0)  line 40
+      names: _normalizeRow
+
+  def LPGroupMemberListModel.count(self)  line 42
+    names: len, _rows
+      str: '返回当前成员行数量。\n\n        参数:\n            无。\n        返回:\n            int: 当前模型行数。\n        '
+
+  def LPGroupMemberListModel.rowCount(self, parent)  line 53
+    names: isValid, len, _rows
+      str: '返回模型行数。\n\n        参数:\n            parent: Qt 模型父索引，本模型不使用层级结构。\n        返回:\n            int: 当前模型行数。\n        '
+
+  def LPGroupMemberListModel.data(self, index, role)  line 65
+    names: isValid, row, len, _rows, _ROLE_KEYS, get
+      str: '按 role 返回指定成员行字段。\n\n        参数:\n            index: Qt 模型索引。\n            role: QML 请求的字段 role。\n        返回:\n            object: 对应字段值；索引或 role 无效时返回 None。\n        '
+
+  def LPGroupMemberListModel.roleNames(self)  line 84
+    names: UuidRole, NameRole, VolumeRole, MuteRole, FixedVolumeRole, IsMasterRole, PlayStateRole, VolumeLockedRole
+      str: '返回 QML 可访问的 role 名称。\n\n        参数:\n            无。\n        返回:\n            dict: role id 到 QByteArray 名称的映射。\n        '
+
+  def LPGroupMemberListModel.rows(self)  line 103
+    names: _rows
+      str: '返回成员行快照，便于测试和兼容旧逻辑。\n\n        参数:\n            无。\n        返回:\n            list: 成员行字典副本列表。\n        '
+      str: 'LPGroupMemberListModel.rows.<locals>.<listcomp>'
+
+    def LPGroupMemberListModel.rows.<listcomp>(.0)  line 111
+      names: dict
+
+  def LPGroupMemberListModel.setRows(self, rows)  line 113
+    names: list, _rows, len, beginResetModel, endResetModel, countChanged, emit, enumerate, _ROLE_KEYS, items, index, dataChanged
+      str: '更新成员行数据。\n\n        参数:\n            rows: 新成员行列表。\n        返回:\n            bool: True 表示模型数据发生变化；False 表示没有变化。\n        '
+      str: 'LPGroupMemberListModel.setRows.<locals>.<listcomp>'
+
+    def LPGroupMemberListModel.setRows.<listcomp>(.0)  line 121
+      names: _normalizeRow
+
+    def LPGroupMemberListModel.setRows.<listcomp>(.0)  line 122
+      names: get
+        str: 'uuid'
+
+    def LPGroupMemberListModel.setRows.<listcomp>(.0)  line 123
+      names: get
+        str: 'uuid'
+
+    def LPGroupMemberListModel.setRows.<listcomp>(.0)  line 139
+      names: get
+
+  def LPGroupMemberListModel._normalizeRow(row)  line 150
+    names: isinstance, dict, str, get, int, round, float, bool
+      str: '标准化成员行字段，保证 QML role 类型稳定。\n\n        参数:\n            row: 原始成员行字典。\n        返回:\n            dict: 标准化后的成员行。\n        '
+      str: 'uuid'
+      str: 'name'
+      str: 'volume'
+      str: 'mute'
+      str: 'fixedVolume'
+      str: 'isMaster'
+      str: 'playState'
+      str: 'volumeLocked'
+      str: 'uuid'
+      str: 'name'
+      str: 'volume'
+      str: 'mute'
+      str: 'fixedVolume'
+      str: 'isMaster'
+      str: 'playState'
+      str: 'volumeLocked'

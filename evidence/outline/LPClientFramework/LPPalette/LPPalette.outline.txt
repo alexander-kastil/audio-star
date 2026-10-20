@@ -1,0 +1,472 @@
+# module LPClientFramework.LPPalette.LPPalette
+
+[module] names: __doc__, __future__, annotations, math, dataclasses, dataclass, enum, IntFlag, typing, Dict, List, Optional, Sequence, Tuple, Union, PIL, Image, MAX_COLOR_NUM, TARGET_IMAGE_SIZE, QUANTIZE_WORD_WIDTH, QUANTIZE_WORD_MASK, HIST_ARR_SIZE, constrain, truncatingRemainderDividing, modifyWordWidthWithValue, quantizedRed, quantizedGreen, quantizedBlue, rgb888ToHsl, rgb555ToHsl, hexColorToRgb, PaletteTargetMode, PaletteColorModel, PaletteSwatch, PaletteTarget, PFilter, VBox, PriorityBoxArray, PaletteAnalyzer, getPaletteImageColorWithMode, extractThemeColorRgbFromImage
+  str: '\niOS Palette 算法 Python 移植实现。\n\n该模块按 iOS 端 iOSPalette 的核心流程实现：\n1. 图像缩放到 112x112（保持比例）\n2. RGB888 -> RGB555 量化并构建直方图\n3. Median-cut 颜色分箱（最多 16 色）\n4. 过滤黑/白/near-red 颜色\n5. 按目标色模型（vibrant/muted/dark 等）计算分值并选色\n'
+  str: 'annotations'
+  str: 'dataclass'
+  str: 'IntFlag'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'Sequence'
+  str: 'Tuple'
+  str: 'Union'
+  str: 'Image'
+  str: 'float'
+  str: 'amount'
+  str: 'low'
+  str: 'high'
+  str: 'return'
+  str: 'constrain'
+  str: 'a'
+  str: 'b'
+  str: 'return'
+  str: 'truncatingRemainderDividing'
+  str: 'int'
+  str: 'value'
+  str: 'currentWidth'
+  str: 'targetWidth'
+  str: 'return'
+  str: 'modifyWordWidthWithValue'
+  str: 'color'
+  str: 'return'
+  str: 'quantizedRed'
+  str: 'quantizedGreen'
+  str: 'quantizedBlue'
+  str: 'Tuple[float, float, float]'
+  str: 'red'
+  str: 'green'
+  str: 'blue'
+  str: 'return'
+  str: 'rgb888ToHsl'
+  str: 'rgb555'
+  str: 'return'
+  str: 'rgb555ToHsl'
+  str: 'str'
+  str: 'Optional[Tuple[int, int, int]]'
+  str: 'hexColor'
+  str: 'return'
+  str: 'hexColorToRgb'
+  str: 'PaletteTargetMode'
+  str: 'PaletteColorModel'
+  str: 'PaletteSwatch'
+  str: 'PaletteTarget'
+  str: 'PFilter'
+  str: 'VBox'
+  str: 'PriorityBoxArray'
+  str: 'PaletteAnalyzer'
+  str: 'Optional[Image.Image]'
+  str: 'Tuple[Optional[PaletteColorModel], Optional[Dict[str, Union[PaletteColorModel, str]]], Optional[Exception]]'
+  str: 'image'
+  str: 'mode'
+  str: 'return'
+  str: 'getPaletteImageColorWithMode'
+  str: 'image'
+  str: 'return'
+  str: 'extractThemeColorRgbFromImage'
+
+def constrain(amount, low, high)  line 29
+    str: '\n    将数值限制在区间 [low, high] 内。\n\n    Args:\n        amount: 原始数值。\n        low: 下限。\n        high: 上限。\n\n    Returns:\n        限制后的数值。\n    '
+
+def truncatingRemainderDividing(a, b)  line 44
+  names: int, math, trunc
+    str: '\n    使用 iOS 同款“截断整除余数”策略计算浮点余数。\n\n    iOS 代码里为了跨设备稳定性，先放大成整数做 `%`，再缩回浮点。\n    这里保持同样行为，且保证余数符号与 C/ObjC 一致（与 Python `%` 不同）。\n\n    Args:\n        a: 被除数。\n        b: 除数。\n\n    Returns:\n        余数（浮点）。\n    '
+
+def modifyWordWidthWithValue(value, currentWidth, targetWidth)  line 71
+    str: '\n    按 iOS 同款逻辑做颜色位宽变换。\n\n    Args:\n        value: 原始数值。\n        currentWidth: 原位宽。\n        targetWidth: 目标位宽。\n\n    Returns:\n        位宽转换后的结果。\n    '
+
+def quantizedRed(color)  line 90
+  names: QUANTIZE_WORD_WIDTH, QUANTIZE_WORD_MASK
+
+def quantizedGreen(color)  line 94
+  names: QUANTIZE_WORD_WIDTH, QUANTIZE_WORD_MASK
+
+def quantizedBlue(color)  line 98
+  names: QUANTIZE_WORD_MASK
+
+def rgb888ToHsl(red, green, blue)  line 102
+  names: float, max, min, truncatingRemainderDividing, abs, constrain
+    str: '\n    RGB888 转 HSL，按 iOS PaletteColorUtils 实现移植。\n\n    Args:\n        red: 红色通道 [0,255]。\n        green: 绿色通道 [0,255]。\n        blue: 蓝色通道 [0,255]。\n\n    Returns:\n        (h, s, l)，其中 h: [0, 360]，s/l: [0, 1]。\n    '
+
+def rgb555ToHsl(rgb555)  line 148
+  names: modifyWordWidthWithValue, quantizedRed, quantizedGreen, quantizedBlue, rgb888ToHsl
+    str: '\n    RGB555 转 HSL。\n\n    Args:\n        rgb555: RGB555 packed color。\n\n    Returns:\n        (h, s, l)。\n    '
+
+def hexColorToRgb(hexColor)  line 164
+  names: strip, lower, startswith, len, int, ValueError
+    str: '\n    解析 #RRGGBB 形式颜色字符串。\n\n    Args:\n        hexColor: 颜色字符串。\n\n    Returns:\n        (r, g, b) 或 None。\n    '
+    str: '#'
+
+def PaletteTargetMode()  line 191
+  names: __name__, __module__, __qualname__, __doc__, DEFAULT_NON_MODE_PALETTE, VIBRANT_PALETTE, LIGHT_VIBRANT_PALETTE, DARK_VIBRANT_PALETTE, LIGHT_MUTED_PALETTE, MUTED_PALETTE, DARK_MUTED_PALETTE, ALL_MODE_PALETTE
+    str: 'PaletteTargetMode'
+    str: '\n    目标色模式，保持 iOS 枚举位定义一致。\n    '
+
+def PaletteColorModel()  line 206
+  names: __name__, __module__, __qualname__, __doc__, __annotations__, percentage
+    str: 'PaletteColorModel'
+    str: '\n    调色板颜色模型。\n\n    Args:\n        imageColorString: #RRGGBB 颜色字符串。\n        percentage: 颜色占比（0~1）。\n    '
+    str: 'str'
+    str: 'imageColorString'
+    str: 'float'
+    str: 'percentage'
+
+def PaletteSwatch()  line 220
+  names: __name__, __module__, __qualname__, __doc__, __init__, getHsl, getColorString
+    str: 'PaletteSwatch'
+    str: '\n    单个候选颜色样本。\n    '
+    str: 'int'
+    str: 'colorInt'
+    str: 'population'
+    str: 'PaletteSwatch.__init__'
+    str: 'Tuple[float, float, float]'
+    str: 'return'
+    str: 'PaletteSwatch.getHsl'
+    str: 'str'
+    str: 'PaletteSwatch.getColorString'
+
+  def PaletteSwatch.__init__(self, colorInt, population)  line 225
+    names: red, green, blue, population
+
+  def PaletteSwatch.getHsl(self)  line 231
+    names: rgb888ToHsl, red, green, blue
+
+  def PaletteSwatch.getColorString(self)  line 234
+    names: red, green, blue
+      str: '#'
+      str: '02x'
+
+def PaletteTarget()  line 238
+  names: __name__, __module__, __qualname__, __doc__, TARGET_DARK_LUMA, MAX_DARK_LUMA, MIN_LIGHT_LUMA, TARGET_LIGHT_LUMA, MIN_NORMAL_LUMA, TARGET_NORMAL_LUMA, MAX_NORMAL_LUMA, TARGET_MUTED_SATURATION, MAX_MUTED_SATURATION, TARGET_VIBRANT_SATURATION, MIN_VIBRANT_SATURATION, WEIGHT_SATURATION, WEIGHT_LUMA, WEIGHT_POPULATION, __init__, configureLumaAndSaturationWithMode, setDefaultLightLuma, setDefaultNormalLuma, setDefaultDarkLuma, setDefaultMutedSaturation, setDefaultVibrantSaturation, normalizeWeights, getTargetKey, staticmethod, getTargetModeKey, getMinSaturation, getTargetSaturation, getMaxSaturation, getMinLuma, getTargetLuma, getMaxLuma, getSaturationWeight, getLumaWeight, getPopulationWeight
+    str: 'PaletteTarget'
+    str: '\n    目标色规则（亮度/饱和度区间 + 权重）定义。\n    '
+    str: 'PaletteTargetMode'
+    str: 'mode'
+    str: 'PaletteTarget.__init__'
+    str: 'PaletteTarget.configureLumaAndSaturationWithMode'
+    str: 'PaletteTarget.setDefaultLightLuma'
+    str: 'PaletteTarget.setDefaultNormalLuma'
+    str: 'PaletteTarget.setDefaultDarkLuma'
+    str: 'PaletteTarget.setDefaultMutedSaturation'
+    str: 'PaletteTarget.setDefaultVibrantSaturation'
+    str: 'PaletteTarget.normalizeWeights'
+    str: 'str'
+    str: 'return'
+    str: 'PaletteTarget.getTargetKey'
+    str: 'mode'
+    str: 'return'
+    str: 'PaletteTarget.getTargetModeKey'
+    str: 'float'
+    str: 'PaletteTarget.getMinSaturation'
+    str: 'PaletteTarget.getTargetSaturation'
+    str: 'PaletteTarget.getMaxSaturation'
+    str: 'PaletteTarget.getMinLuma'
+    str: 'PaletteTarget.getTargetLuma'
+    str: 'PaletteTarget.getMaxLuma'
+    str: 'PaletteTarget.getSaturationWeight'
+    str: 'PaletteTarget.getLumaWeight'
+    str: 'PaletteTarget.getPopulationWeight'
+
+  def PaletteTarget.__init__(self, mode)  line 263
+    names: mode, saturationTargets, lightnessTargets, WEIGHT_SATURATION, WEIGHT_LUMA, WEIGHT_POPULATION, weights, configureLumaAndSaturationWithMode
+
+  def PaletteTarget.configureLumaAndSaturationWithMode(self, mode)  line 274
+    names: PaletteTargetMode, LIGHT_VIBRANT_PALETTE, setDefaultLightLuma, setDefaultVibrantSaturation, VIBRANT_PALETTE, setDefaultNormalLuma, DARK_VIBRANT_PALETTE, setDefaultDarkLuma, LIGHT_MUTED_PALETTE, setDefaultMutedSaturation, MUTED_PALETTE, DARK_MUTED_PALETTE
+
+  def PaletteTarget.setDefaultLightLuma(self)  line 294
+    names: MIN_LIGHT_LUMA, lightnessTargets, TARGET_LIGHT_LUMA
+
+  def PaletteTarget.setDefaultNormalLuma(self)  line 298
+    names: MIN_NORMAL_LUMA, lightnessTargets, TARGET_NORMAL_LUMA, MAX_NORMAL_LUMA
+
+  def PaletteTarget.setDefaultDarkLuma(self)  line 303
+    names: TARGET_DARK_LUMA, lightnessTargets, MAX_DARK_LUMA
+
+  def PaletteTarget.setDefaultMutedSaturation(self)  line 307
+    names: TARGET_MUTED_SATURATION, saturationTargets, MAX_MUTED_SATURATION
+
+  def PaletteTarget.setDefaultVibrantSaturation(self)  line 311
+    names: MIN_VIBRANT_SATURATION, saturationTargets, TARGET_VIBRANT_SATURATION
+
+  def PaletteTarget.normalizeWeights(self)  line 315
+    names: weights, sum
+      str: 'PaletteTarget.normalizeWeights.<locals>.<listcomp>'
+
+    def PaletteTarget.normalizeWeights.<listcomp>(.0)  line 316
+
+    def PaletteTarget.normalizeWeights.<listcomp>(.0)  line 320
+
+  def PaletteTarget.getTargetKey(self)  line 322
+    names: getTargetModeKey, mode
+
+  def PaletteTarget.getTargetModeKey(mode)  line 325
+    names: PaletteTargetMode, LIGHT_VIBRANT_PALETTE, VIBRANT_PALETTE, DARK_VIBRANT_PALETTE, LIGHT_MUTED_PALETTE, MUTED_PALETTE, DARK_MUTED_PALETTE, get
+      str: 'light_vibrant'
+      str: 'vibrant'
+      str: 'dark_vibrant'
+      str: 'light_muted'
+      str: 'muted'
+      str: 'dark_muted'
+
+  def PaletteTarget.getMinSaturation(self)  line 337
+    names: saturationTargets
+
+  def PaletteTarget.getTargetSaturation(self)  line 340
+    names: saturationTargets
+
+  def PaletteTarget.getMaxSaturation(self)  line 343
+    names: saturationTargets
+
+  def PaletteTarget.getMinLuma(self)  line 346
+    names: lightnessTargets
+
+  def PaletteTarget.getTargetLuma(self)  line 349
+    names: lightnessTargets
+
+  def PaletteTarget.getMaxLuma(self)  line 352
+    names: lightnessTargets
+
+  def PaletteTarget.getSaturationWeight(self)  line 355
+    names: weights
+
+  def PaletteTarget.getLumaWeight(self)  line 358
+    names: weights
+
+  def PaletteTarget.getPopulationWeight(self)  line 361
+    names: weights
+
+def PFilter()  line 365
+  names: __name__, __module__, __qualname__, __doc__, BLACK_MAX_LIGHTNESS, WHITE_MIN_LIGHTNESS, isAllowed, isBlack, isWhite, isNearRedILine
+    str: 'PFilter'
+    str: '\n    iOS 同款过滤器：过滤黑/白/接近红线颜色。\n    '
+    str: 'Sequence[float]'
+    str: 'bool'
+    str: 'hsl'
+    str: 'return'
+    str: 'PFilter.isAllowed'
+    str: 'PFilter.isBlack'
+    str: 'PFilter.isWhite'
+    str: 'PFilter.isNearRedILine'
+
+  def PFilter.isAllowed(self, hsl)  line 373
+    names: isBlack, isWhite, isNearRedILine
+
+  def PFilter.isBlack(self, hsl)  line 376
+    names: BLACK_MAX_LIGHTNESS
+
+  def PFilter.isWhite(self, hsl)  line 379
+    names: WHITE_MIN_LIGHTNESS
+
+  def PFilter.isNearRedILine(self, hsl)  line 382
+
+def VBox()  line 386
+  names: __name__, __module__, __qualname__, __doc__, COMPONENT_RED, COMPONENT_GREEN, COMPONENT_BLUE, __init__, getVolume, canSplit, splitBox, getAverageColor, fitBox, findSplitPoint, getLongestColorDimension, modifySignificantOctet, sortColorArray
+    str: 'VBox'
+    str: '\n    Median-cut 算法中的颜色盒子。\n    '
+    str: 'int'
+    str: 'List[int]'
+    str: 'lowerIndex'
+    str: 'upperIndex'
+    str: 'distinctColors'
+    str: 'histArr'
+    str: 'VBox.__init__'
+    str: 'return'
+    str: 'VBox.getVolume'
+    str: 'bool'
+    str: 'VBox.canSplit'
+    str: "Optional['VBox']"
+    str: 'VBox.splitBox'
+    str: 'Optional[PaletteSwatch]'
+    str: 'VBox.getAverageColor'
+    str: 'VBox.fitBox'
+    str: 'VBox.findSplitPoint'
+    str: 'VBox.getLongestColorDimension'
+    str: 'dimension'
+    str: 'lower'
+    str: 'upper'
+    str: 'VBox.modifySignificantOctet'
+    str: 'VBox.sortColorArray'
+
+  def VBox.__init__(self, lowerIndex, upperIndex, distinctColors, histArr)  line 395
+    names: lowerIndex, upperIndex, distinctColors, histArr, population, minRed, maxRed, minGreen, maxGreen, minBlue, maxBlue, fitBox
+
+  def VBox.getVolume(self)  line 409
+    names: maxRed, minRed, maxGreen, minGreen, maxBlue, minBlue
+
+  def VBox.canSplit(self)  line 412
+    names: upperIndex, lowerIndex
+
+  def VBox.splitBox(self)  line 415
+    names: canSplit, findSplitPoint, VBox, upperIndex, distinctColors, histArr, fitBox
+
+  def VBox.getAverageColor(self)  line 424
+    names: range, lowerIndex, upperIndex, distinctColors, histArr, quantizedRed, quantizedGreen, quantizedBlue, modifyWordWidthWithValue, QUANTIZE_WORD_WIDTH, PaletteSwatch
+
+  def VBox.fitBox(self)  line 447
+    names: range, lowerIndex, upperIndex, distinctColors, histArr, quantizedRed, quantizedGreen, quantizedBlue, max, min, population, minRed, maxRed, minGreen, maxGreen, minBlue, maxBlue
+
+  def VBox.findSplitPoint(self)  line 478
+    names: getLongestColorDimension, modifySignificantOctet, lowerIndex, upperIndex, sortColorArray, population, range, distinctColors, histArr
+
+  def VBox.getLongestColorDimension(self)  line 493
+    names: maxRed, minRed, maxGreen, minGreen, maxBlue, minBlue, COMPONENT_RED, COMPONENT_GREEN, COMPONENT_BLUE
+
+  def VBox.modifySignificantOctet(self, dimension, lower, upper)  line 504
+    names: COMPONENT_RED, range, distinctColors, COMPONENT_GREEN, quantizedGreen, QUANTIZE_WORD_WIDTH, quantizedRed, quantizedBlue
+
+  def VBox.sortColorArray(self)  line 516
+    names: sorted, distinctColors, lowerIndex, upperIndex
+
+def PriorityBoxArray()  line 521
+  names: __name__, __module__, __qualname__, __doc__, __init__, addVBox, poll, count, getVBoxArray
+    str: 'PriorityBoxArray'
+    str: '\n    优先队列（按 VBox 体积降序）。\n    '
+    str: 'PriorityBoxArray.__init__'
+    str: 'Optional[VBox]'
+    str: 'box'
+    str: 'PriorityBoxArray.addVBox'
+    str: 'return'
+    str: 'PriorityBoxArray.poll'
+    str: 'int'
+    str: 'PriorityBoxArray.count'
+    str: 'List[VBox]'
+    str: 'PriorityBoxArray.getVBoxArray'
+
+  def PriorityBoxArray.__init__(self)  line 526
+    names: vboxArray
+
+  def PriorityBoxArray.addVBox(self, box)  line 529
+    names: vboxArray, append, enumerate, getVolume, insert, len, MAX_COLOR_NUM, pop
+
+  def PriorityBoxArray.poll(self)  line 546
+    names: vboxArray, pop
+
+  def PriorityBoxArray.count(self)  line 551
+    names: len, vboxArray
+
+  def PriorityBoxArray.getVBoxArray(self)  line 554
+    names: vboxArray
+
+def PaletteAnalyzer()  line 558
+  names: __name__, __module__, __qualname__, __doc__, __init__, startToAnalyzeForTargetMode, startToAnalyzeImage, clearHistArray, rawPixelDataFromImage, scaleDownImage, splitBoxes, generateAverageColors, shouldIgnoreColor, shouldIgnoreColorByHsl, findMaxPopulation, getSwatchForTarget, getMaxScoredSwatchForTarget, shouldBeScoredForTarget, generateScoreForTarget, initTargetsWithMode
+    str: 'PaletteAnalyzer'
+    str: '\n    iOS Palette 算法主分析器（同步版本）。\n    '
+    str: 'Optional[Image.Image]'
+    str: 'image'
+    str: 'PaletteAnalyzer.__init__'
+    str: 'PaletteTargetMode'
+    str: 'Tuple[Optional[PaletteColorModel], Optional[Dict[str, Union[PaletteColorModel, str]]], Optional[Exception]]'
+    str: 'mode'
+    str: 'return'
+    str: 'PaletteAnalyzer.startToAnalyzeForTargetMode'
+    str: 'PaletteAnalyzer.startToAnalyzeImage'
+    str: 'PaletteAnalyzer.clearHistArray'
+    str: 'Image.Image'
+    str: 'List[Tuple[int, int, int, int]]'
+    str: 'image'
+    str: 'return'
+    str: 'PaletteAnalyzer.rawPixelDataFromImage'
+    str: 'PaletteAnalyzer.scaleDownImage'
+    str: 'PriorityBoxArray'
+    str: 'queue'
+    str: 'PaletteAnalyzer.splitBoxes'
+    str: 'List[PaletteSwatch]'
+    str: 'queue'
+    str: 'return'
+    str: 'PaletteAnalyzer.generateAverageColors'
+    str: 'int'
+    str: 'bool'
+    str: 'color'
+    str: 'return'
+    str: 'PaletteAnalyzer.shouldIgnoreColor'
+    str: 'Sequence[float]'
+    str: 'hsl'
+    str: 'return'
+    str: 'PaletteAnalyzer.shouldIgnoreColorByHsl'
+    str: 'PaletteAnalyzer.findMaxPopulation'
+    str: 'return'
+    str: 'PaletteAnalyzer.getSwatchForTarget'
+    str: 'PaletteTarget'
+    str: 'Optional[PaletteSwatch]'
+    str: 'target'
+    str: 'return'
+    str: 'PaletteAnalyzer.getMaxScoredSwatchForTarget'
+    str: 'PaletteSwatch'
+    str: 'swatch'
+    str: 'target'
+    str: 'return'
+    str: 'PaletteAnalyzer.shouldBeScoredForTarget'
+    str: 'float'
+    str: 'target'
+    str: 'swatch'
+    str: 'return'
+    str: 'PaletteAnalyzer.generateScoreForTarget'
+    str: 'mode'
+    str: 'PaletteAnalyzer.initTargetsWithMode'
+
+  def PaletteAnalyzer.__init__(self, image)  line 563
+    names: image, HIST_ARR_SIZE, histArr, distinctColors, swatchArray, targetArray, maxPopulation, pixelCount, isNeedColorDic, PFilter, filters
+
+  def PaletteAnalyzer.startToAnalyzeForTargetMode(self, mode)  line 574
+    names: initTargetsWithMode, image, ValueError, startToAnalyzeImage, getSwatchForTarget
+      str: '\n        按指定模式提取主题色。\n\n        Args:\n            mode: 目标色模式位标记。\n\n        Returns:\n            (recommendColor, allModeColorDic, error)\n        '
+      str: 'The image is null.'
+
+  def PaletteAnalyzer.startToAnalyzeImage(self)  line 594
+    names: clearHistArray, rawPixelDataFromImage, image, modifyWordWidthWithValue, QUANTIZE_WORD_WIDTH, histArr, distinctColors, range, HIST_ARR_SIZE, shouldIgnoreColor, append, len, MAX_COLOR_NUM, quantizedRed, quantizedGreen, quantizedBlue, PaletteSwatch, swatchArray, PriorityBoxArray, VBox, addVBox, splitBoxes, generateAverageColors, findMaxPopulation
+
+  def PaletteAnalyzer.clearHistArray(self)  line 640
+    names: HIST_ARR_SIZE, histArr
+
+  def PaletteAnalyzer.rawPixelDataFromImage(self, image)  line 643
+    names: scaleDownImage, convert, size, pixelCount, list, getdata
+      str: 'RGBA'
+
+  def PaletteAnalyzer.scaleDownImage(self, image)  line 650
+    names: size, TARGET_IMAGE_SIZE, float, min, max, int, round, hasattr, Image, Resampling, BILINEAR, resize
+      str: 'Resampling'
+
+  def PaletteAnalyzer.splitBoxes(self, queue)  line 668
+    names: count, MAX_COLOR_NUM, poll, canSplit, addVBox, splitBox
+
+  def PaletteAnalyzer.generateAverageColors(self, queue)  line 677
+    names: getVBoxArray, getAverageColor, shouldIgnoreColorByHsl, getHsl, append
+
+  def PaletteAnalyzer.shouldIgnoreColor(self, color)  line 685
+    names: shouldIgnoreColorByHsl, rgb555ToHsl
+
+  def PaletteAnalyzer.shouldIgnoreColorByHsl(self, hsl)  line 688
+    names: filters, isAllowed
+
+  def PaletteAnalyzer.findMaxPopulation(self)  line 694
+    names: swatchArray, max, population, maxPopulation
+
+  def PaletteAnalyzer.getSwatchForTarget(self)  line 700
+    names: targetArray, normalizeWeights, getMaxScoredSwatchForTarget, getTargetKey, PaletteColorModel, getColorString, pixelCount, float, population, isNeedColorDic
+      str: 'imageColorString'
+      str: 'percentage'
+      str: 'unrecognized error'
+
+  def PaletteAnalyzer.getMaxScoredSwatchForTarget(self, target)  line 725
+    names: swatchArray, shouldBeScoredForTarget, generateScoreForTarget
+
+  def PaletteAnalyzer.shouldBeScoredForTarget(self, swatch, target)  line 736
+    names: getHsl, getMinSaturation, getMaxSaturation, getMinLuma, getMaxLuma
+
+  def PaletteAnalyzer.generateScoreForTarget(self, target, swatch)  line 744
+    names: getHsl, getSaturationWeight, abs, getTargetSaturation, getLumaWeight, getTargetLuma, getPopulationWeight, maxPopulation, population, float
+
+  def PaletteAnalyzer.initTargetsWithMode(self, mode)  line 760
+    names: int, PaletteTargetMode, VIBRANT_PALETTE, ALL_MODE_PALETTE, extend, PaletteTarget, MUTED_PALETTE, LIGHT_VIBRANT_PALETTE, LIGHT_MUTED_PALETTE, DARK_VIBRANT_PALETTE, DARK_MUTED_PALETTE, append, targetArray, isNeedColorDic
+
+def getPaletteImageColorWithMode(image, mode)  line 797
+  names: PaletteAnalyzer, startToAnalyzeForTargetMode
+    str: '\n    对外导出：按模式提取调色板颜色。\n\n    Args:\n        image: Pillow Image。\n        mode: 目标色模式。\n\n    Returns:\n        (recommendColor, allModeColorDic, error)\n    '
+
+def extractThemeColorRgbFromImage(image)  line 815
+  names: getPaletteImageColorWithMode, PaletteTargetMode, ALL_MODE_PALETTE, get, isinstance, PaletteColorModel, hexColorToRgb, imageColorString
+    str: '\n    对外导出：按 iOS 业务顺序提取封面主题色。\n\n    选择顺序保持 iOS 业务逻辑一致：\n    vibrant -> dark_vibrant -> muted -> dark_muted\n\n    Args:\n        image: Pillow Image。\n\n    Returns:\n        (r, g, b) 或 None。\n    '
+    str: 'vibrant'
+    str: 'dark_vibrant'
+    str: 'muted'
+    str: 'dark_muted'

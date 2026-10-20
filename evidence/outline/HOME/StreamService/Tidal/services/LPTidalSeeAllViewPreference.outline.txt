@@ -1,0 +1,47 @@
+# module HOME.StreamService.Tidal.services.LPTidalSeeAllViewPreference
+
+[module] names: __doc__, typing, Optional, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPUtility, logger, LPTidalSeeAllViewPreference
+  str: '\nTIDAL See All 视图模式偏好服务。\n'
+  str: 'Optional'
+  str: 'LPUtility'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'LPTidalSeeAllViewPreference'
+
+def LPTidalSeeAllViewPreference()  line 13
+  names: __name__, __module__, __qualname__, __doc__, PREFERENCE_KEY, DEFAULT_MODE, VALID_MODES, classmethod, str, _normalizeMode, Optional, readViewMode, bool, saveViewMode
+    str: 'LPTidalSeeAllViewPreference'
+    str: '负责维护 TIDAL 所有 See All 页面共享的网格/列表视图模式偏好。'
+    str: 'seeAllViewMode'
+    str: 'grid'
+    str: 'grid'
+    str: 'list'
+    str: 'mode'
+    str: 'return'
+    str: 'LPTidalSeeAllViewPreference._normalizeMode'
+    str: 'userId'
+    str: 'return'
+    str: 'LPTidalSeeAllViewPreference.readViewMode'
+    str: 'userId'
+    str: 'mode'
+    str: 'return'
+    str: 'LPTidalSeeAllViewPreference.saveViewMode'
+
+  def LPTidalSeeAllViewPreference._normalizeMode(cls, mode)  line 21
+    names: str, strip, lower, VALID_MODES, DEFAULT_MODE
+      str: '\n        校验视图模式，非法值归一为默认值。\n\n        :param mode: 原始视图模式。\n        :return: 合法的视图模式。\n        '
+
+  def LPTidalSeeAllViewPreference.readViewMode(cls, userId)  line 34
+    names: str, strip, getattr, LPUtility, beginGroup, LPPlayListSource, Tidal, value, PREFERENCE_KEY, Exception, logger, debug, endGroup, lower, VALID_MODES
+      str: '\n        读取 TIDAL 所有 See All 页面共享的视图模式偏好。\n\n        :param userId: TIDAL 用户 ID。\n        :return: 已保存的合法视图模式，未保存或无效返回 None。\n        '
+      str: 'settings'
+      str: '/'
+      str: '[TIDAL] read see all view mode failed error=%s'
+
+  def LPTidalSeeAllViewPreference.saveViewMode(cls, userId, mode)  line 65
+    names: str, strip, _normalizeMode, getattr, LPUtility, beginGroup, LPPlayListSource, Tidal, value, setValue, PREFERENCE_KEY, hasattr, sync, endGroup, Exception, logger, debug
+      str: '\n        保存 TIDAL 所有 See All 页面共享的视图模式偏好。\n\n        :param userId: TIDAL 用户 ID。\n        :param mode: 视图模式，`grid` 或 `list`。\n        :return: 保存成功返回 True。\n        '
+      str: 'settings'
+      str: '/'
+      str: 'sync'
+      str: '[TIDAL] save see all view mode failed error=%s'

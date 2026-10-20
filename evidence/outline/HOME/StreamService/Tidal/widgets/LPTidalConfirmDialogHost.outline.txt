@@ -1,0 +1,72 @@
+# module HOME.StreamService.Tidal.widgets.LPTidalConfirmDialogHost
+
+[module] names: __doc__, typing, Callable, Optional, PyQt6.QtCore, QMetaObject, Qt, QUrl, pyqtSlot, PyQt6.QtQml, QQmlContext, PyQt6.QtQuickWidgets, QQuickWidget, PyQt6.QtWidgets, QDialog, QVBoxLayout, LPGlobalUI, HOME.StreamService.Tidal.services.LPTidalQmlContext, applyTidalSharedQmlContext, resolveTidalQmlPath, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, LPClientFramework.LPUtility, logger, LPTidalConfirmDialogHost
+  str: '\nTIDAL 通用确认弹窗宿主，通过 app 级 QDialog + QQuickWidget 实现顶层弹窗。\n'
+  str: 'Callable'
+  str: 'Optional'
+  str: 'QMetaObject'
+  str: 'Qt'
+  str: 'QUrl'
+  str: 'pyqtSlot'
+  str: 'QQmlContext'
+  str: 'QQuickWidget'
+  str: 'QDialog'
+  str: 'QVBoxLayout'
+  str: 'applyTidalSharedQmlContext'
+  str: 'resolveTidalQmlPath'
+  str: 'LPTidalStore'
+  str: 'logger'
+  str: 'LPTidalConfirmDialogHost'
+
+def LPTidalConfirmDialogHost()  line 22
+  names: __name__, __module__, __qualname__, __doc__, _instance, Optional, __annotations__, object, __init__, classmethod, instance, pyqtSlot, str, show, onConfirm, onCancel, __classcell__
+    str: 'LPTidalConfirmDialogHost'
+    str: 'TIDAL 通用确认弹窗宿主，通过 app 级 QDialog + QQuickWidget 实现顶层弹窗。'
+    str: '_instance'
+    str: 'parent'
+    str: 'LPTidalConfirmDialogHost.__init__'
+    str: 'return'
+    str: 'LPTidalConfirmDialogHost.instance'
+    str: 'title'
+    str: 'message'
+    str: 'confirmText'
+    str: 'cancelText'
+    str: 'confirmButtonColor'
+    str: 'return'
+    str: 'LPTidalConfirmDialogHost.show'
+    str: 'LPTidalConfirmDialogHost.onConfirm'
+    str: 'LPTidalConfirmDialogHost.onCancel'
+
+  def LPTidalConfirmDialogHost.__init__(self, parent)  line 27
+    names: super, __init__, LPTidalStore, instance, _store, _on_confirm_callback, setModal, setWindowTitle, setWindowFlags, Qt, WindowType, Dialog, FramelessWindowHint, NoDropShadowWindowHint, setAttribute, WidgetAttribute, WA_TranslucentBackground, resize, QVBoxLayout, setContentsMargins, QQuickWidget, _quick_widget, setResizeMode, ResizeMode, SizeRootObjectToView, setClearColor, GlobalColor, transparent, rootContext, applyTidalSharedQmlContext, setContextProperty, resolveTidalQmlPath, exists, setSource, QUrl, fromLocalFile, str, status, Status, Ready, errors, logger, error, toString, addWidget
+      str: '\n        初始化确认弹窗宿主。\n\n        :param parent: 父级窗口，默认使用 LPGlobalUI.mainWindow。\n        :return: None。\n        '
+      str: 'Confirm'
+      str: 'tidalStore'
+      str: 'sharedStore'
+      str: 'confirmDialogHost'
+      str: 'dialogs/TidalConfirmDialog.qml'
+      str: 'qrc:/qml/Tidal/dialogs/TidalConfirmDialog.qml'
+      str: '[TIDAL] ConfirmDialog load failed: %s'
+
+  def LPTidalConfirmDialogHost.instance(cls)  line 71
+    names: _instance, getattr, LPGlobalUI
+      str: '\n        返回确认弹窗宿主单例。\n\n        :return: 宿主实例。\n        '
+      str: 'mainWindow'
+
+  def LPTidalConfirmDialogHost.show(self, title, message, confirmText, cancelText, confirmButtonColor)  line 83
+    names: _quick_widget, rootObject, setProperty, str, strip, QMetaObject, invokeMethod, Qt, ConnectionType, QueuedConnection, super, show, raise_, activateWindow
+      str: '\n        弹出确认弹窗，设置文案后打开 QML Popup 并显示 QDialog。\n\n        :param title: 弹窗标题。\n        :param message: 弹窗消息内容。\n        :param confirmText: 确认按钮文字。\n        :param cancelText: 取消按钮文字。\n        :param confirmButtonColor: 确认按钮底色，仅非空时设置。\n        :return: None。\n        '
+      str: 'title'
+      str: 'message'
+      str: 'confirmText'
+      str: 'cancelText'
+      str: 'confirmButtonColor'
+      str: 'open'
+
+  def LPTidalConfirmDialogHost.onConfirm(self)  line 116
+    names: hide, _on_confirm_callback
+      str: '\n        QML 确认按钮回调，隐藏弹窗并执行确认回调。\n\n        :return: None。\n        '
+
+  def LPTidalConfirmDialogHost.onCancel(self)  line 129
+    names: hide, _on_confirm_callback
+      str: '\n        QML 取消/关闭按钮回调，隐藏弹窗并清理回调。\n\n        :return: None。\n        '

@@ -1,0 +1,102 @@
+# module LPClientFramework.LPMusicLibrary.LPRecentlyPlayListCodec
+
+[module] names: __doc__, LPClientFramework.LPPlayList.LPPlayList, headerTypeValue, headerTypeEnum, LP_HEADER_TYPE_VALUE_MAP, LPHeaderType, LPClientFramework.LPUtility, applyDictToObject, logger, object, LPRecentlyPlayListCodec
+  str: '\nRecently Played 的播放列表快照编解码层。\n\n负责把 ``detail["playList"]`` 在「具体音源的播放列表对象」和「可落盘的字典」之间互转。\n所有音源恢复播放上下文时都走这里，统一处理对象属性映射、headType 还原、index 归一化和缺失字段补默认值。\n'
+  str: 'headerTypeValue'
+  str: 'headerTypeEnum'
+  str: 'LP_HEADER_TYPE_VALUE_MAP'
+  str: 'LPHeaderType'
+  str: 'applyDictToObject'
+  str: 'logger'
+  str: 'LPRecentlyPlayListCodec'
+
+def LPRecentlyPlayListCodec()  line 18
+  names: __name__, __module__, __qualname__, __doc__, staticmethod, _toStorableValue, _objectToDict, playListToDetail, _dictToObject, _restoreHeader, _restoreItem, _restoreAccount, playListFromDetail, currentItemFromPlayList, showValue
+    str: 'LPRecentlyPlayListCodec'
+    str: 'Recently 播放列表快照的编解码器，全部为静态方法，无需实例化。'
+    str: 'LPRecentlyPlayListCodec._toStorableValue'
+    str: 'LPRecentlyPlayListCodec._objectToDict'
+    str: 'LPRecentlyPlayListCodec.playListToDetail'
+    str: 'LPRecentlyPlayListCodec._dictToObject'
+    str: 'LPRecentlyPlayListCodec._restoreHeader'
+    str: 'LPRecentlyPlayListCodec._restoreItem'
+    str: 'LPRecentlyPlayListCodec._restoreAccount'
+    str: 'LPRecentlyPlayListCodec.playListFromDetail'
+    str: 'LPRecentlyPlayListCodec.currentItemFromPlayList'
+    str: 'LPRecentlyPlayListCodec.showValue'
+
+  def LPRecentlyPlayListCodec._toStorableValue(value)  line 25
+    names: isinstance, bool, int, float, str, dict, items, list, tuple
+      str: '\n        把单个属性值归一成可 JSON 序列化的结构。\n\n        - 基础类型（None / bool / int / float / str）原样保留\n        - dict / list 递归处理其中元素\n        - 其它对象（嵌套播放项、状态机、回调等）一律丢弃，避免落库失败\n        '
+      str: 'LPRecentlyPlayListCodec._toStorableValue.<locals>.<dictcomp>'
+      str: 'LPRecentlyPlayListCodec._toStorableValue.<locals>.<listcomp>'
+
+    def LPRecentlyPlayListCodec._toStorableValue.<dictcomp>(.0)  line 37
+      names: LPRecentlyPlayListCodec, _toStorableValue
+
+    def LPRecentlyPlayListCodec._toStorableValue.<listcomp>(.0)  line 39
+      names: LPRecentlyPlayListCodec, _toStorableValue
+
+  def LPRecentlyPlayListCodec._objectToDict(obj, excludeKeys)  line 42
+    names: set, vars, items, startswith, callable, LPRecentlyPlayListCodec, _toStorableValue, isinstance, dict, list, tuple
+      str: '把对象的公开属性浅拷贝成字典，跳过非可序列化字段。'
+      str: '_'
+
+  def LPRecentlyPlayListCodec.playListToDetail(playList, showDict, extra)  line 64
+    names: LPRecentlyPlayListCodec, _objectToDict, getattr, headerTypeValue, dict, isinstance, update
+      str: '\n        把播放列表对象序列化成可写入 ``detail`` 的字典。\n\n        Args:\n            playList: 具体音源的播放列表对象，需包含 header / list / index / account。\n            showDict: UI 行为信息，例如是否允许 openMore、canNavigate。\n            extra: 需要额外合并进 detail 的字段。\n\n        Returns:\n            ``{"playList": ..., "show": ..., "account": ..'
+      str: 'header'
+      str: 'LPRecentlyPlayListCodec.playListToDetail.<locals>.<listcomp>'
+      str: 'list'
+      str: 'index'
+      str: 'header'
+      str: 'list'
+      str: 'index'
+      str: 'headType'
+      str: 'account'
+      str: 'playList'
+      str: 'show'
+      str: 'account'
+
+    def LPRecentlyPlayListCodec.playListToDetail.<listcomp>(.0)  line 82
+      names: LPRecentlyPlayListCodec, _objectToDict
+
+  def LPRecentlyPlayListCodec._dictToObject(target, valueDict, excludeKeys)  line 111
+    names: applyDictToObject
+      str: 'applyDictToObject 的薄封装，统一排除键。'
+
+  def LPRecentlyPlayListCodec._restoreHeader(headerDict, headerClass, source)  line 116
+    names: LPRecentlyPlayListCodec, _dictToObject, headerTypeEnum, getattr, headType, mediaSource
+      str: 'headType'
+      str: 'mediaSource'
+
+  def LPRecentlyPlayListCodec._restoreItem(itemDict, itemClass, source)  line 125
+    names: LPRecentlyPlayListCodec, _dictToObject, getattr, trackSource
+      str: 'trackSource'
+
+  def LPRecentlyPlayListCodec._restoreAccount(accountDict, accountClass, source, normalizeAccount)  line 133
+    names: LPRecentlyPlayListCodec, _dictToObject, getattr, source, callable, Exception, logger, warning
+      str: 'source'
+      str: '[RecentlyCodec] normalizeAccount failed: %s'
+
+  def LPRecentlyPlayListCodec.playListFromDetail(detailDict, playListClass, headerClass, itemClass, source, accountClass, accountExcludeKeys, normalizeHeader, normalizeAccount, normalizeItem)  line 146
+    names: isinstance, dict, get, LPRecentlyPlayListCodec, _restoreHeader, header, callable, Exception, logger, warning, list, _restoreItem, append, int, TypeError, ValueError, len, index, _restoreAccount, account
+      str: '\n        从 ``detail["playList"]`` 还原出具体音源的播放列表对象。\n\n        Args:\n            detailDict: recently 记录中的 detail 字典。\n            playListClass: 目标播放列表类型。\n            headerClass: 目标 header 类型。\n            itemClass: 目标播放项类型。\n            source: 音源标识，用于给缺失的 mediaSource / trackSource / account.source 补默认'
+      str: 'playList'
+      str: 'header'
+      str: '[RecentlyCodec] normalizeHeader failed: %s'
+      str: 'list'
+      str: '[RecentlyCodec] normalizeItem failed: %s'
+      str: 'index'
+      str: 'account'
+
+  def LPRecentlyPlayListCodec.currentItemFromPlayList(playList)  line 227
+    names: getattr, int, TypeError, ValueError, len, list
+      str: '\n        取播放列表当前播放项，越界时回退到第一项。\n\n        Args:\n            playList: 已反序列化的播放列表对象。\n\n        Returns:\n            当前播放项对象；列表为空时返回 None。\n        '
+      str: 'list'
+      str: 'index'
+
+  def LPRecentlyPlayListCodec.showValue(detailDict, key, default)  line 249
+    names: isinstance, dict, get
+      str: '\n        读取 detail["show"] 中的 UI 行为字段。\n\n        Args:\n            detailDict: recently detail 字典。\n            key: 字段名，例如 openMore / canNavigate。\n            default: 字段缺失时的回退值。\n\n        Returns:\n            字段值或 default。\n        '
+      str: 'show'

@@ -1,0 +1,266 @@
+# module LPClientFramework.LPImageService.LPGlobalQmlImageService
+
+[module] names: __doc__, hashlib, logging, threading, time, pathlib, Path, typing, Any, Dict, Optional, Set, Tuple, requests, PyQt6.QtCore, QObject, Qt, QUrl, pyqtSignal, PyQt6.QtGui, QImage, LPClientFramework.LPImageService.LPGlobalImageScheduler, LPGlobalImageScheduler, LPClientFramework.LPImageService.LPImageProfiles, LPImageProfile, imageProfile, LPClientFramework.LPSMBService, LPSMBService, getLogger, logger, LPGlobalQmlImageService
+  str: '\n全局 QML 图片下载、缩略图和缓存服务。\n'
+  str: 'Path'
+  str: 'Any'
+  str: 'Dict'
+  str: 'Optional'
+  str: 'Set'
+  str: 'Tuple'
+  str: 'QObject'
+  str: 'Qt'
+  str: 'QUrl'
+  str: 'pyqtSignal'
+  str: 'QImage'
+  str: 'LPGlobalImageScheduler'
+  str: 'LPImageProfile'
+  str: 'imageProfile'
+  str: 'LPSMBService'
+  str: 'linkplay'
+  str: 'LPGlobalQmlImageService'
+
+def LPGlobalQmlImageService()  line 25
+  names: __name__, __module__, __qualname__, pyqtSignal, str, thumbnailReady, object, thumbnailFailed, FAILURE_RETRY_SECONDS, _instance, Optional, __annotations__, threading, Lock, _instance_lock, QObject, LPGlobalImageScheduler, Path, __init__, classmethod, instance, PRIORITY_PRELOAD, ensureThumbnail, thumbnailPath, cancelOwner, clearFailure, Dict, Any, stats, LPImageProfile, _schedule_fetch, bytes, _download_raw_image, _handle_download_finished, _decode_and_store_thumbnail, _handle_decode_finished, Exception, _mark_failure, _cache_file_path, _original_cache_file_path, bool, _is_expired, _file_url, _normalize_url, _is_remote_url, Tuple, _request_key, _job_key, int, _owner_generation_locked, _has_valid_owner_locked, _purge_expired_failures_locked, _extract_status_code, __classcell__
+    str: 'LPGlobalQmlImageService'
+    str: '_instance'
+    str: 'parent'
+    str: 'scheduler'
+    str: 'cacheDir'
+    str: 'LPGlobalQmlImageService.__init__'
+    str: 'return'
+    str: 'LPGlobalQmlImageService.instance'
+    str: 'url'
+    str: 'profile'
+    str: 'priority'
+    str: 'ownerKey'
+    str: 'return'
+    str: 'LPGlobalQmlImageService.ensureThumbnail'
+    str: 'url'
+    str: 'profile'
+    str: 'return'
+    str: 'LPGlobalQmlImageService.thumbnailPath'
+    str: 'ownerKey'
+    str: 'return'
+    str: 'LPGlobalQmlImageService.cancelOwner'
+    str: 'LPGlobalQmlImageService.clearFailure'
+    str: 'LPGlobalQmlImageService.stats'
+    str: 'LPGlobalQmlImageService._schedule_fetch'
+    str: 'url'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._download_raw_image'
+    str: 'url'
+    str: 'profile'
+    str: 'result'
+    str: 'priority'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._handle_download_finished'
+    str: 'url'
+    str: 'profile'
+    str: 'rawData'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._decode_and_store_thumbnail'
+    str: 'url'
+    str: 'profile'
+    str: 'result'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._handle_decode_finished'
+    str: 'url'
+    str: 'profile'
+    str: 'error'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._mark_failure'
+    str: 'LPGlobalQmlImageService._cache_file_path'
+    str: 'LPGlobalQmlImageService._original_cache_file_path'
+    str: 'localPath'
+    str: 'profile'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._is_expired'
+    str: 'localPath'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._file_url'
+    str: 'LPGlobalQmlImageService._normalize_url'
+    str: 'LPGlobalQmlImageService._is_remote_url'
+    str: 'LPGlobalQmlImageService._request_key'
+    str: 'LPGlobalQmlImageService._job_key'
+    str: 'LPGlobalQmlImageService._owner_generation_locked'
+    str: 'ownerMap'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._has_valid_owner_locked'
+    str: 'LPGlobalQmlImageService._purge_expired_failures_locked'
+    str: 'error'
+    str: 'default'
+    str: 'return'
+    str: 'LPGlobalQmlImageService._extract_status_code'
+
+  def LPGlobalQmlImageService.__init__(self, parent, scheduler, cacheDir)  line 34
+    names: super, __init__, LPClientFramework.LPUtility, cacheCoverDir, Path, _cache_dir, mkdir, LPGlobalImageScheduler, instance, _scheduler, threading, RLock, _lock, set, _pending_keys, _pending_owners, _pending_phases, _failure_expire_at, _owner_generations, _cache_hits, _cache_misses, _cache_failures, _failure_backoff_hits
+      str: '\n        初始化全局 QML 图片服务。\n\n        :param parent: 父级 QObject。\n        :param scheduler: 图片调度器，测试可注入。\n        :param cacheDir: 缓存目录，测试可注入。\n        :return: None。\n        '
+      str: 'cacheCoverDir'
+      str: 'parents'
+      str: 'exist_ok'
+
+  def LPGlobalQmlImageService.instance(cls)  line 68
+    names: _instance_lock, _instance
+      str: '\n        返回全局 QML 图片服务单例。\n\n        :param: 无。\n        :return: 服务单例。\n        '
+
+  def LPGlobalQmlImageService.ensureThumbnail(self, url, profile, priority, ownerKey)  line 81
+    names: _normalize_url, _is_remote_url, imageProfile, _cache_file_path, exists, _is_expired, _lock, _cache_hits, _file_url, _cache_misses, _schedule_fetch
+      str: '\n        确保指定 URL 和 profile 的本地缩略图可用。\n\n        :param url: 远程或本地图片 URL。\n        :param profile: 图片 profile 名称。\n        :param priority: 调度优先级。\n        :param ownerKey: 页面、状态或账号 owner 标识。\n        :return: 已缓存时返回本地 file URL；未就绪时返回空字符串。\n        '
+
+  def LPGlobalQmlImageService.thumbnailPath(self, url, profile)  line 117
+    names: _normalize_url, _is_remote_url, imageProfile, _cache_file_path, exists, _file_url
+      str: '\n        查询当前已缓存的缩略图路径，不触发下载。\n\n        :param url: 远程或本地图片 URL。\n        :param profile: 图片 profile 名称。\n        :return: 本地 file URL；未命中时返回空字符串。\n        '
+
+  def LPGlobalQmlImageService.cancelOwner(self, ownerKey)  line 137
+    names: str, strip, _lock, _owner_generation_locked, _owner_generations
+      str: '\n        取消指定 owner 的未开始订阅，并让旧 generation 的在途结果失效。\n\n        :param ownerKey: owner 标识。\n        :return: None。\n        '
+
+  def LPGlobalQmlImageService.clearFailure(self, url, profile)  line 150
+    names: _normalize_url, str, strip, _lock, _failure_expire_at, clear, pop
+      str: '\n        清除失败退避记录。\n\n        :param url: 指定 URL，空字符串表示不限 URL。\n        :param profile: 指定 profile，空字符串表示不限 profile。\n        :return: None。\n        '
+      str: 'LPGlobalQmlImageService.clearFailure.<locals>.<listcomp>'
+
+    def LPGlobalQmlImageService.clearFailure.<listcomp>(.0)  line 164
+
+  def LPGlobalQmlImageService.stats(self)  line 173
+    names: _lock, len, _pending_keys, _cache_hits, _cache_misses, _cache_failures, _failure_backoff_hits, _scheduler, stats
+      str: '\n        返回服务调试统计。\n\n        :param: 无。\n        :return: 统计字典。\n        '
+      str: 'pending'
+      str: 'cacheHit'
+      str: 'cacheMiss'
+      str: 'cacheFail'
+      str: 'failureBackoffHit'
+      str: 'scheduler'
+
+  def LPGlobalQmlImageService._schedule_fetch(self, url, profile, priority, ownerKey)  line 191
+    names: str, strip, _lock, _purge_expired_failures_locked, _request_key, name, float, _failure_expire_at, get, time, _failure_backoff_hits, _owner_generation_locked, _pending_owners, setdefault, _pending_keys, _pending_phases, add, _job_key, _scheduler, submitImageDownloadTask
+      str: '\n        安排指定图片的下载和缩略图生成任务。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile。\n        :param priority: 调度优先级。\n        :param ownerKey: owner 标识。\n        :return: None。\n        '
+      str: 'download'
+      str: 'LPGlobalQmlImageService._schedule_fetch.<locals>.<lambda>'
+      str: 'jobKey'
+      str: 'task'
+      str: 'callback'
+      str: 'priority'
+
+    def LPGlobalQmlImageService._schedule_fetch.<lambda>(targetUrl)  line 233
+      names: _download_raw_image
+
+    def LPGlobalQmlImageService._schedule_fetch.<lambda>(targetUrl)  line 240
+      names: _download_raw_image
+
+    def LPGlobalQmlImageService._schedule_fetch.<lambda>(result, targetUrl, targetProfile, taskPriority)  line 241
+      names: _handle_download_finished
+
+  def LPGlobalQmlImageService._download_raw_image(self, url)  line 250
+    names: _normalize_url, startswith, LPSMBService, get_shared, read_smb_file_bytes, ValueError, bytes, logger, debug, close, requests, get, int, getattr, raise_for_status, content, Exception, _extract_status_code
+      str: '\n        下载远端原始图片字节。\n\n        :param url: 远端图片 URL。\n        :return: 原始图片字节。\n        '
+      str: 'smb://'
+      str: 'timeout'
+      str: 'SMB image read failed'
+      str: '[GlobalImageService] download url='
+      str: ' status_code='
+      str: 'status_code'
+
+  def LPGlobalQmlImageService._handle_download_finished(self, url, profile, result, priority)  line 279
+    names: isinstance, Exception, _mark_failure, name, bytes, bytearray, ValueError, _lock, _pending_phases, _request_key, _scheduler, submitImageDecodeTask, _job_key
+      str: '\n        处理下载完成，并成功时提交解码任务。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile。\n        :param result: 下载结果。\n        :param priority: 调度优先级。\n        :return: None。\n        '
+      str: 'empty_image_bytes'
+      str: 'decode'
+      str: 'decode::'
+      str: 'LPGlobalQmlImageService._handle_download_finished.<locals>.<lambda>'
+      str: 'jobKey'
+      str: 'task'
+      str: 'callback'
+      str: 'priority'
+
+    def LPGlobalQmlImageService._handle_download_finished.<lambda>(targetUrl, targetProfile, imageBytes)  line 307
+      names: _decode_and_store_thumbnail
+
+    def LPGlobalQmlImageService._handle_download_finished.<lambda>(decodeResult, targetUrl, targetProfile)  line 312
+      names: _handle_decode_finished, name
+
+  def LPGlobalQmlImageService._decode_and_store_thumbnail(self, url, profile, rawData)  line 320
+    names: QImage, loadFromData, ValueError, saveOriginal, _original_cache_file_path, name, Path, open, write, replace, convertToFormat, Format, Format_ARGB32, scaled, size, aspectMode, Qt, TransformationMode, SmoothTransformation, _cache_file_path, save, str, _file_url
+      str: '\n        解码原图并写入指定 profile 的缩略图缓存。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile。\n        :param rawData: 原始图片字节。\n        :return: 本地 file URL。\n        '
+      str: 'image_load_failed'
+      str: '.tmp'
+      str: 'wb'
+      str: 'PNG'
+      str: 'image_save_failed'
+
+  def LPGlobalQmlImageService._handle_decode_finished(self, url, profile, result)  line 354
+    names: isinstance, Exception, _mark_failure, str, strip, ValueError, _request_key, _lock, _pending_keys, discard, _pending_phases, pop, _pending_owners, _has_valid_owner_locked, thumbnailReady, emit
+      str: '\n        处理缩略图生成结束。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile 名称。\n        :param result: 解码结果。\n        :return: None。\n        '
+      str: 'empty_thumbnail_path'
+
+  def LPGlobalQmlImageService._mark_failure(self, url, profile, error)  line 387
+    names: _request_key, _lock, time, FAILURE_RETRY_SECONDS, _failure_expire_at, _pending_keys, discard, _pending_phases, pop, _pending_owners, _has_valid_owner_locked, _cache_failures, logger, debug, thumbnailFailed, emit
+      str: '\n        记录失败退避并发出失败信号。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile 名称。\n        :param error: 异常对象。\n        :return: None。\n        '
+      str: '[GlobalImageService] thumbnail failed profile='
+      str: ' url='
+      str: ', error='
+
+  def LPGlobalQmlImageService._cache_file_path(self, url, profile)  line 408
+    names: hashlib, md5, _normalize_url, encode, hexdigest, useSharedUrlCacheLayout, _cache_dir, size, name
+      str: '\n        计算缩略图缓存路径。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile。\n        :return: 缓存文件路径。\n        '
+      str: 'utf-8'
+      str: '_'
+      str: '.png'
+
+  def LPGlobalQmlImageService._original_cache_file_path(self, url, profile)  line 422
+    names: hashlib, md5, _normalize_url, encode, hexdigest, imageProfile, useSharedUrlCacheLayout, _cache_dir
+      str: '\n        计算原图缓存路径。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile 名称。\n        :return: 原图缓存文件路径。\n        '
+      str: 'utf-8'
+      str: '_'
+      str: '_original'
+
+  def LPGlobalQmlImageService._is_expired(self, localPath, profile)  line 437
+    names: time, stat, st_mtime, int, ttlSeconds, OSError
+      str: '\n        判断本地缓存是否过期。\n\n        :param localPath: 本地缓存路径。\n        :param profile: 图片 profile。\n        :return: 已过期返回 True。\n        '
+
+  def LPGlobalQmlImageService._file_url(self, localPath)  line 450
+    names: bytes, QUrl, fromLocalFile, str, toEncoded, decode
+      str: '\n        转换为 QML 可消费的 encoded file URL。\n\n        :param localPath: 本地文件路径。\n        :return: encoded file URL。\n        '
+      str: 'utf-8'
+
+  def LPGlobalQmlImageService._normalize_url(self, url)  line 459
+    names: str, strip
+      str: '\n        归一化 URL 字符串。\n\n        :param url: 原始 URL。\n        :return: 去除空白后的 URL。\n        '
+
+  def LPGlobalQmlImageService._is_remote_url(self, url)  line 468
+    names: _normalize_url, startswith
+      str: '\n        判断 URL 是否为 HTTP(S) 远端地址。\n\n        :param url: 待判断 URL。\n        :return: 远端地址返回 True。\n        '
+      str: 'http://'
+      str: 'https://'
+      str: 'smb://'
+
+  def LPGlobalQmlImageService._request_key(self, url, profile)  line 479
+    names: str, strip, _normalize_url
+      str: '\n        构建内部请求 key。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile 名称。\n        :return: profile 和 URL 组成的 key。\n        '
+
+  def LPGlobalQmlImageService._job_key(self, url, profile)  line 489
+    names: _request_key
+      str: '\n        构建调度器任务 key。\n\n        :param url: 远端图片 URL。\n        :param profile: 图片 profile 名称。\n        :return: 字符串任务 key。\n        '
+      str: '::'
+
+  def LPGlobalQmlImageService._owner_generation_locked(self, ownerKey)  line 500
+    names: str, strip, int, _owner_generations, get
+      str: '\n        返回 owner 当前 generation，调用方需持锁。\n\n        :param ownerKey: owner 标识。\n        :return: 当前 generation。\n        '
+
+  def LPGlobalQmlImageService._has_valid_owner_locked(self, ownerMap)  line 512
+    names: items, _owner_generation_locked, int
+      str: '\n        判断请求是否仍有有效 owner，调用方需持锁。\n\n        :param ownerMap: owner 与请求 generation 的映射。\n        :return: 有有效 owner 或 ownerless 订阅时返回 True。\n        '
+
+  def LPGlobalQmlImageService._purge_expired_failures_locked(self)  line 528
+    names: time, _failure_expire_at, items, pop
+      str: '\n        清理已过期失败退避记录，调用方需持锁。\n\n        :param: 无。\n        :return: None。\n        '
+      str: 'LPGlobalQmlImageService._purge_expired_failures_locked.<locals>.<listcomp>'
+
+    def LPGlobalQmlImageService._purge_expired_failures_locked.<listcomp>(.0)  line 536
+
+  def LPGlobalQmlImageService._extract_status_code(self, error, default)  line 540
+    names: getattr, int, TypeError, ValueError
+      str: '\n        从请求异常中提取响应码。\n\n        :param error: 异常对象。\n        :param default: 默认响应码。\n        :return: 响应码。\n        '
+      str: 'response'
+      str: 'status_code'

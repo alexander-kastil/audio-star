@@ -1,0 +1,461 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/7/23 17:35\n@Auth ： Chris\n@File ：LPQobuzNetworkClient.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+  9          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (time)
+             18 STORE_NAME               2 (time)
+
+ 11          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (requests)
+             26 STORE_NAME               3 (requests)
+
+ 12          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (requests_cache)
+             34 STORE_NAME               4 (requests_cache)
+
+ 13          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               3 (('RequestException',))
+             40 IMPORT_NAME              3 (requests)
+             42 IMPORT_FROM              5 (RequestException)
+             44 STORE_NAME               5 (RequestException)
+             46 POP_TOP
+
+ 15          48 LOAD_CONST               1 (0)
+             50 LOAD_CONST               2 (None)
+             52 IMPORT_NAME              6 (LPGlobalUI)
+             54 STORE_NAME               6 (LPGlobalUI)
+
+ 16          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               4 (('LPNetworkClient',))
+             60 IMPORT_NAME              7 (LPClientFramework.LPNetworkClient.LPNetworkClient)
+             62 IMPORT_FROM              8 (LPNetworkClient)
+             64 STORE_NAME               8 (LPNetworkClient)
+             66 POP_TOP
+
+ 17          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               5 (('LPPlayListSource',))
+             72 IMPORT_NAME              9 (LPClientFramework.LPPlayList.LPPlayList)
+             74 IMPORT_FROM             10 (LPPlayListSource)
+             76 STORE_NAME              10 (LPPlayListSource)
+             78 POP_TOP
+
+ 18          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               6 (('logger',))
+             84 IMPORT_NAME             11 (LPClientFramework.LPUtility)
+             86 IMPORT_FROM             12 (logger)
+             88 STORE_NAME              12 (logger)
+             90 POP_TOP
+
+ 19          92 LOAD_CONST               1 (0)
+             94 LOAD_CONST               7 (('AESCipher',))
+             96 IMPORT_NAME             13 (LPClientFramework.util.aes)
+             98 IMPORT_FROM             14 (AESCipher)
+            100 STORE_NAME              14 (AESCipher)
+            102 POP_TOP
+
+ 22         104 LOAD_BUILD_CLASS
+            106 LOAD_CONST               8 (<code object LPQobuzNetworkClient at 0x000001F3253A2B30, file "LPClientFramework\LPNetworkClient\LPQobuz\LPQobuzNetworkClient.py", line 22>)
+            108 LOAD_CONST               9 ('LPQobuzNetworkClient')
+            110 MAKE_FUNCTION            0
+            112 LOAD_CONST               9 ('LPQobuzNetworkClient')
+            114 LOAD_NAME                8 (LPNetworkClient)
+            116 CALL_FUNCTION            3
+            118 STORE_NAME              15 (LPQobuzNetworkClient)
+            120 LOAD_CONST               2 (None)
+            122 RETURN_VALUE
+
+=== LPQobuzNetworkClient ===
+ 22           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPQobuzNetworkClient')
+              6 STORE_NAME               2 (__qualname__)
+
+ 24           8 LOAD_CONST               8 ((True, None, True, 10))
+             10 LOAD_CONST               4 (<code object request at 0x000001F3253A2BE0, file "LPClientFramework\LPNetworkClient\LPQobuz\LPQobuzNetworkClient.py", line 24>)
+             12 LOAD_CONST               5 ('LPQobuzNetworkClient.request')
+             14 MAKE_FUNCTION            1 (defaults)
+             16 STORE_NAME               3 (request)
+
+ 78          18 LOAD_CONST               6 (<code object _refresh_token at 0x000001F3253A2DF0, file "LPClientFramework\LPNetworkClient\LPQobuz\LPQobuzNetworkClient.py", line 78>)
+             20 LOAD_CONST               7 ('LPQobuzNetworkClient._refresh_token')
+             22 MAKE_FUNCTION            0
+             24 STORE_NAME               4 (_refresh_token)
+             26 LOAD_CONST               2 (None)
+             28 RETURN_VALUE
+
+=== LPQobuzNetworkClient.request ===
+ 25           0 LOAD_FAST                4 (headers)
+              2 LOAD_CONST               0 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+ 26           8 BUILD_MAP                0
+             10 STORE_FAST               4 (headers)
+
+ 28     >>   12 LOAD_FAST                3 (useCache)
+             14 POP_JUMP_IF_FALSE       24
+
+ 29          16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                0 (cachedSession)
+             20 STORE_FAST               8 (session)
+             22 JUMP_FORWARD             6 (to 30)
+
+ 31     >>   24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                1 (session)
+             28 STORE_FAST               8 (session)
+
+ 34     >>   30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              2 (getToken)
+             34 CALL_METHOD              0
+             36 STORE_FAST               9 (token)
+
+ 36          38 LOAD_FAST                9 (token)
+             40 POP_JUMP_IF_FALSE       62
+
+ 37          42 LOAD_FAST                4 (headers)
+             44 LOAD_METHOD              3 (update)
+
+ 38          46 LOAD_CONST               1 ('Authorization')
+             48 LOAD_CONST               2 ('Bearer ')
+             50 LOAD_FAST                9 (token)
+             52 FORMAT_VALUE             0
+             54 BUILD_STRING             2
+
+ 37          56 BUILD_MAP                1
+             58 CALL_METHOD              1
+             60 POP_TOP
+
+ 41     >>   62 SETUP_FINALLY           30 (to 94)
+
+ 42          64 LOAD_FAST                8 (session)
+             66 LOAD_ATTR                4 (request)
+             68 LOAD_FAST                1 (method)
+             70 LOAD_FAST                2 (url)
+             72 BUILD_TUPLE              2
+             74 LOAD_FAST                4 (headers)
+             76 LOAD_FAST                6 (timeout)
+             78 LOAD_CONST               3 (('headers', 'timeout'))
+             80 BUILD_CONST_KEY_MAP      2
+             82 LOAD_FAST                7 (kwargs)
+             84 DICT_MERGE               1
+             86 CALL_FUNCTION_EX         1
+             88 STORE_FAST              10 (response)
+             90 POP_BLOCK
+             92 JUMP_FORWARD           204 (to 298)
+
+ 43     >>   94 DUP_TOP
+             96 LOAD_GLOBAL              5 (RequestException)
+             98 EXTENDED_ARG             1
+            100 JUMP_IF_NOT_EXC_MATCH   296
+            102 POP_TOP
+            104 STORE_FAST              11 (e)
+            106 POP_TOP
+            108 SETUP_FINALLY          178 (to 288)
+
+ 44         110 LOAD_GLOBAL              6 (logger)
+            112 LOAD_METHOD              7 (warning)
+            114 LOAD_CONST               4 ('[LPQobuzNetworkClient] request url=')
+            116 LOAD_FAST                2 (url)
+            118 FORMAT_VALUE             0
+            120 LOAD_CONST               5 (' failed once, retrying: e=')
+            122 LOAD_FAST               11 (e)
+            124 FORMAT_VALUE             0
+            126 BUILD_STRING             4
+            128 CALL_METHOD              1
+            130 POP_TOP
+
+ 47         132 LOAD_FAST                3 (useCache)
+            134 POP_JUMP_IF_FALSE      174
+
+ 48         136 LOAD_FAST                0 (self)
+            138 LOAD_ATTR                0 (cachedSession)
+            140 LOAD_METHOD              8 (close)
+            142 CALL_METHOD              0
+            144 POP_TOP
+
+ 49         146 LOAD_GLOBAL              9 (requests_cache)
+            148 LOAD_ATTR               10 (CachedSession)
+            150 LOAD_FAST                0 (self)
+            152 LOAD_ATTR               11 (cacheName)
+            154 LOAD_CONST               6 ('memory')
+            156 LOAD_CONST               7 (3600)
+            158 LOAD_CONST               8 (('backend', 'expire_after'))
+            160 CALL_FUNCTION_KW         3
+            162 LOAD_FAST                0 (self)
+            164 STORE_ATTR               0 (cachedSession)
+
+ 50         166 LOAD_FAST                0 (self)
+            168 LOAD_ATTR                0 (cachedSession)
+            170 STORE_FAST               8 (session)
+            172 JUMP_FORWARD            26 (to 200)
+
+ 52     >>  174 LOAD_FAST                0 (self)
+            176 LOAD_ATTR                1 (session)
+            178 LOAD_METHOD              8 (close)
+            180 CALL_METHOD              0
+            182 POP_TOP
+
+ 53         184 LOAD_GLOBAL             12 (requests)
+            186 LOAD_METHOD             13 (Session)
+            188 CALL_METHOD              0
+            190 LOAD_FAST                0 (self)
+            192 STORE_ATTR               1 (session)
+
+ 54         194 LOAD_FAST                0 (self)
+            196 LOAD_ATTR                1 (session)
+            198 STORE_FAST               8 (session)
+
+ 56     >>  200 SETUP_FINALLY           30 (to 232)
+
+ 57         202 LOAD_FAST                8 (session)
+            204 LOAD_ATTR                4 (request)
+            206 LOAD_FAST                1 (method)
+            208 LOAD_FAST                2 (url)
+            210 BUILD_TUPLE              2
+            212 LOAD_FAST                4 (headers)
+            214 LOAD_FAST                6 (timeout)
+            216 LOAD_CONST               3 (('headers', 'timeout'))
+            218 BUILD_CONST_KEY_MAP      2
+            220 LOAD_FAST                7 (kwargs)
+            222 DICT_MERGE               1
+            224 CALL_FUNCTION_EX         1
+            226 STORE_FAST              10 (response)
+            228 POP_BLOCK
+            230 JUMP_FORWARD            44 (to 276)
+
+ 58     >>  232 DUP_TOP
+            234 LOAD_GLOBAL              5 (RequestException)
+            236 EXTENDED_ARG             1
+            238 JUMP_IF_NOT_EXC_MATCH   274
+            240 POP_TOP
+            242 POP_TOP
+            244 POP_TOP
+
+ 60         246 LOAD_GLOBAL              6 (logger)
+            248 LOAD_METHOD             14 (error)
+            250 LOAD_CONST               4 ('[LPQobuzNetworkClient] request url=')
+            252 LOAD_FAST                2 (url)
+            254 FORMAT_VALUE             0
+            256 LOAD_CONST               9 (' ---------failed [twice]--------, e=')
+            258 LOAD_FAST               11 (e)
+            260 FORMAT_VALUE             0
+            262 BUILD_STRING             4
+            264 CALL_METHOD              1
+            266 POP_TOP
+
+ 61         268 RAISE_VARARGS            0
+            270 POP_EXCEPT
+            272 JUMP_FORWARD             2 (to 276)
+        >>  274 RERAISE
+        >>  276 POP_BLOCK
+            278 POP_EXCEPT
+            280 LOAD_CONST               0 (None)
+            282 STORE_FAST              11 (e)
+            284 DELETE_FAST             11 (e)
+            286 JUMP_FORWARD            10 (to 298)
+        >>  288 LOAD_CONST               0 (None)
+            290 STORE_FAST              11 (e)
+            292 DELETE_FAST             11 (e)
+            294 RERAISE
+        >>  296 RERAISE
+
+ 63     >>  298 LOAD_GLOBAL              6 (logger)
+            300 LOAD_METHOD             15 (debug)
+            302 LOAD_CONST              10 ('token == ')
+            304 LOAD_FAST                9 (token)
+            306 FORMAT_VALUE             0
+            308 BUILD_STRING             2
+            310 CALL_METHOD              1
+            312 POP_TOP
+
+ 64         314 LOAD_FAST               10 (response)
+            316 LOAD_ATTR               16 (status_code)
+            318 LOAD_CONST              11 (401)
+            320 COMPARE_OP               2 (==)
+            322 EXTENDED_ARG             1
+            324 POP_JUMP_IF_FALSE      420
+            326 LOAD_FAST                5 (retry)
+            328 EXTENDED_ARG             1
+            330 POP_JUMP_IF_FALSE      420
+
+ 65         332 LOAD_FAST                0 (self)
+            334 LOAD_ATTR               17 (tokenProvider)
+            336 LOAD_METHOD             18 (refreshToken)
+            338 LOAD_FAST                0 (self)
+            340 LOAD_ATTR               19 (_refresh_token)
+            342 CALL_METHOD              1
+            344 STORE_FAST              12 (ret)
+
+ 66         346 LOAD_FAST                0 (self)
+            348 LOAD_METHOD              2 (getToken)
+            350 CALL_METHOD              0
+            352 STORE_FAST               9 (token)
+
+ 67         354 LOAD_FAST                4 (headers)
+            356 LOAD_METHOD              3 (update)
+
+ 68         358 LOAD_CONST               1 ('Authorization')
+            360 LOAD_CONST               2 ('Bearer ')
+            362 LOAD_FAST                9 (token)
+            364 FORMAT_VALUE             0
+            366 BUILD_STRING             2
+
+ 67         368 BUILD_MAP                1
+            370 CALL_METHOD              1
+            372 POP_TOP
+
+ 70         374 LOAD_GLOBAL              6 (logger)
+            376 LOAD_METHOD             15 (debug)
+            378 LOAD_CONST              12 ('401--t == ')
+            380 LOAD_FAST                9 (token)
+            382 FORMAT_VALUE             0
+            384 BUILD_STRING             2
+            386 CALL_METHOD              1
+            388 POP_TOP
+
+ 71         390 LOAD_FAST                0 (self)
+            392 LOAD_ATTR                4 (request)
+            394 LOAD_FAST                1 (method)
+            396 LOAD_FAST                2 (url)
+            398 BUILD_TUPLE              2
+            400 LOAD_FAST                3 (useCache)
+            402 LOAD_FAST                4 (headers)
+            404 LOAD_CONST              13 (False)
+            406 LOAD_CONST              14 (10)
+            408 LOAD_CONST              15 (('useCache', 'headers', 'retry', 'timeout'))
+            410 BUILD_CONST_KEY_MAP      4
+            412 LOAD_FAST                7 (kwargs)
+            414 DICT_MERGE               1
+            416 CALL_FUNCTION_EX         1
+            418 RETURN_VALUE
+
+ 74     >>  420 LOAD_FAST               10 (response)
+            422 LOAD_METHOD             20 (raise_for_status)
+            424 CALL_METHOD              0
+            426 POP_TOP
+
+ 75         428 LOAD_FAST               10 (response)
+            430 RETURN_VALUE
+
+=== LPQobuzNetworkClient._refresh_token ===
+ 79           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+              4 LOAD_CONST               1 ('[LPQobuzNetworkClient] _refresh_token...')
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+ 80          10 SETUP_FINALLY          122 (to 134)
+
+ 81          12 LOAD_CONST               2 ('GetUserInfo')
+             14 STORE_FAST               1 (cmd)
+
+ 82          16 LOAD_CONST               3 ('AccountSource')
+             18 LOAD_GLOBAL              2 (LPPlayListSource)
+             20 LOAD_ATTR                3 (Qobuz)
+             22 LOAD_ATTR                4 (value)
+             24 BUILD_MAP                1
+             26 STORE_FAST               2 (param)
+
+ 83          28 LOAD_GLOBAL              5 (LPGlobalUI)
+             30 LOAD_ATTR                6 (currentDevice)
+             32 LOAD_METHOD              7 (upnpPost)
+             34 LOAD_FAST                1 (cmd)
+             36 LOAD_FAST                2 (param)
+             38 CALL_METHOD              2
+             40 STORE_FAST               3 (responseDict)
+
+ 85          42 LOAD_GLOBAL              8 (json)
+             44 LOAD_METHOD              9 (loads)
+             46 LOAD_FAST                3 (responseDict)
+             48 LOAD_METHOD             10 (get)
+             50 LOAD_CONST               4 ('Result')
+             52 LOAD_CONST               5 ('')
+             54 CALL_METHOD              2
+             56 CALL_METHOD              1
+             58 STORE_FAST               4 (result)
+
+ 87          60 LOAD_FAST                4 (result)
+             62 LOAD_METHOD             10 (get)
+             64 LOAD_CONST               6 ('accessToken')
+             66 LOAD_CONST               0 (None)
+             68 CALL_METHOD              2
+             70 STORE_FAST               5 (accessToken)
+
+ 88          72 LOAD_FAST                5 (accessToken)
+             74 POP_JUMP_IF_FALSE      128
+
+ 89          76 LOAD_GLOBAL             11 (AESCipher)
+             78 LOAD_METHOD             12 (decrypt2)
+             80 LOAD_GLOBAL              5 (LPGlobalUI)
+             82 LOAD_ATTR                6 (currentDevice)
+             84 LOAD_ATTR               13 (uuid)
+             86 LOAD_CONST               0 (None)
+             88 LOAD_CONST               7 (16)
+             90 BUILD_SLICE              2
+             92 BINARY_SUBSCR
+             94 LOAD_FAST                5 (accessToken)
+             96 CALL_METHOD              2
+             98 STORE_FAST               5 (accessToken)
+
+ 90         100 LOAD_GLOBAL              0 (logger)
+            102 LOAD_METHOD              1 (debug)
+            104 LOAD_CONST               8 ('[LPQobuzNetworkClient] _refresh_token --> replaceToken')
+            106 CALL_METHOD              1
+            108 POP_TOP
+
+ 91         110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR               14 (tokenProvider)
+            114 LOAD_METHOD             15 (replaceToken)
+            116 LOAD_FAST                5 (accessToken)
+            118 CALL_METHOD              1
+            120 POP_TOP
+
+ 92         122 POP_BLOCK
+            124 LOAD_CONST               9 (True)
+            126 RETURN_VALUE
+
+ 93     >>  128 POP_BLOCK
+            130 LOAD_CONST              10 (False)
+            132 RETURN_VALUE
+
+ 95     >>  134 DUP_TOP
+            136 LOAD_GLOBAL             16 (Exception)
+            138 JUMP_IF_NOT_EXC_MATCH   186
+            140 POP_TOP
+            142 STORE_FAST               6 (e)
+            144 POP_TOP
+            146 SETUP_FINALLY           30 (to 178)
+
+ 96         148 LOAD_GLOBAL              0 (logger)
+            150 LOAD_METHOD              1 (debug)
+            152 LOAD_CONST              11 ('[LPQobuzNetworkClient] _refresh_token error=')
+            154 LOAD_FAST                6 (e)
+            156 FORMAT_VALUE             0
+            158 BUILD_STRING             2
+            160 CALL_METHOD              1
+            162 POP_TOP
+
+ 97         164 POP_BLOCK
+            166 POP_EXCEPT
+            168 LOAD_CONST               0 (None)
+            170 STORE_FAST               6 (e)
+            172 DELETE_FAST              6 (e)
+            174 LOAD_CONST              10 (False)
+            176 RETURN_VALUE
+        >>  178 LOAD_CONST               0 (None)
+            180 STORE_FAST               6 (e)
+            182 DELETE_FAST              6 (e)
+            184 RERAISE
+        >>  186 RERAISE
+            188 LOAD_CONST               0 (None)
+            190 RETURN_VALUE

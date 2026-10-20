@@ -1,0 +1,173 @@
+# module LPClientFramework.LPQueueManager
+
+[module] names: time, enum, Enum, operator, index, threading, Thread, cherrypy, response, LPGlobalUI, LPClientFramework, LPUtility, LPPublicDefine, LPClientFramework.LPPlayList.LPLocalMusicPlayList, LPLocalMusicPlayList, LPLocalMusicPlayHeader, LPClientFramework.LPPlayList.LPPlayList, LPPlayMusicList, LPPlayHeader, LPPlayListSource, LPClientFramework.LPUtility, logger, currentDevice, MEDIATYPE_RADIO, MEDIATYPE_STATION, MEDIATYPE_SPOTIFY, MEDIATYPE_TIDAL_CONNECT, MEDIATYPE_ROON, MEDIATYPE_CHROME_CAST, queueSpecialMediaType, isQueueSupportedMediaType, LPQueueState, LPAppendToQueueAllowEnum, object, LPQueueManager
+  str: 'Enum'
+  str: 'index'
+  str: 'Thread'
+  str: 'response'
+  str: 'LPUtility'
+  str: 'LPPublicDefine'
+  str: 'LPLocalMusicPlayList'
+  str: 'LPLocalMusicPlayHeader'
+  str: 'LPPlayMusicList'
+  str: 'LPPlayHeader'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'currentDevice'
+  str: 'isQueueSupportedMediaType'
+  str: 'LPQueueState'
+  str: 'LPAppendToQueueAllowEnum'
+  str: 'LPQueueManager'
+
+def isQueueSupportedMediaType(mediaType)  line 28
+  names: queueSpecialMediaType
+    str: '\n    判断当前媒体类型是否支持队列。\n    '
+
+def LPQueueState()  line 35
+  names: __name__, __module__, __qualname__, queueReady, queueNotReady, sourceNotSupportQueue, queueEmpty
+    str: 'LPQueueState'
+
+def LPAppendToQueueAllowEnum()  line 41
+  names: __name__, __module__, __qualname__, LP_AppendToQueue_allow, LP_AppendToQueue_forbidden_exceed, LP_AppendToQueue_forbidden_queue
+    str: 'LPAppendToQueueAllowEnum'
+
+def LPQueueManager()  line 47
+  names: __name__, __module__, __qualname__, __init__, property, status, _update, requestQueue, add_to_next, add_to_last, isPlayingWiFiContent, isPlayingSpecialSource, canAppendToQueue, delete_from_queue, deleteFromQueue, get_queue_index
+    str: 'LPQueueManager'
+    str: 'LPQueueManager.__init__'
+    str: 'LPQueueManager.status'
+    str: 'LPQueueManager._update'
+    str: 'LPQueueManager.requestQueue'
+    str: 'LPQueueManager.add_to_next'
+    str: 'LPQueueManager.add_to_last'
+    str: 'LPQueueManager.isPlayingWiFiContent'
+    str: 'LPQueueManager.isPlayingSpecialSource'
+    str: 'LPQueueManager.canAppendToQueue'
+    str: 'LPQueueManager.delete_from_queue'
+    str: 'LPQueueManager.deleteFromQueue'
+    str: 'LPQueueManager.get_queue_index'
+
+  def LPQueueManager.__init__(self, device)  line 48
+    names: device, playList, version, checkSum, getattr, mediaInfo, lastMediaType, lastTrackSource, needsQueueRefresh
+      str: 'mediaType'
+      str: 'trackSource'
+
+  def LPQueueManager.status(self)  line 59
+    names: device, mediaInfo, mediaType, trackSource, LPQueueState, queueEmpty, isQueueSupportedMediaType, sourceNotSupportQueue, playList, queueNotReady, queueReady
+
+  def LPQueueManager._update(self, mediaInfo)  line 76
+    names: get, device, mediaInfo, mediaType, trackSource, lastMediaType, lastTrackSource, playList, version, checkSum, bool, isQueueSupportedMediaType, needsQueueRefresh, index, LPUtility, triggerDeviceInfoUpdate
+      str: 'mediaType'
+      str: 'trackSource'
+      str: 'lastPlayIndex'
+      str: 'queue'
+
+  def LPQueueManager.requestQueue(self)  line 99
+    names: needsQueueRefresh, device, asyncUpnpPost, playList
+      str: 'LPQueueManager.requestQueue.<locals>.callback'
+      str: 'BrowseQueue'
+      str: 'QueueName'
+      str: 'CurrentQueue'
+
+    def LPQueueManager.requestQueue.callback(response)  line 102
+      names: LPUtility, triggerDeviceInfoUpdate, device, get, playList, version, logger, debug, name
+        str: 'queue'
+        str: 'musicList'
+        str: 'version'
+        str: '%s queue changed'
+
+  def LPQueueManager.add_to_next(self, play_item, finished_method)  line 122
+    names: Thread, start
+      str: '\n        添加一首到队列，为下一首\n        :param play_item:\n        :param finished_method:\n        :return:\n        '
+      str: 'LPQueueManager.add_to_next.<locals>._async_add'
+      str: 'target'
+      str: 'args'
+
+    def LPQueueManager.add_to_next._async_add(play_item, finished_method)  line 129
+      names: isPlayingSpecialSource, isPlayingWiFiContent, LPLocalMusicPlayList, LPLocalMusicPlayHeader, headTitle, header, list, append, generateXML, device, upnpPost, playList, index, str, get
+        str: 'MyMusic Track'
+        str: '1'
+        str: 'CreateQueue'
+        str: 'QueueContext'
+        str: 'AppendTracksInQueueEx'
+        str: 'QueueContext'
+        str: 'Direction'
+        str: 'StartIndex'
+        str: 'error'
+
+  def LPQueueManager.add_to_last(self, play_item, finished_method)  line 158
+    names: Thread, start
+      str: '\n        添加到队列，当前播放的后面\n        :param play_item:\n        :param finished_method:\n        :return:\n        '
+      str: 'LPQueueManager.add_to_last.<locals>._async_add'
+      str: 'target'
+      str: 'args'
+
+    def LPQueueManager.add_to_last._async_add(play_item, finished_method)  line 166
+      names: isPlayingSpecialSource, isPlayingWiFiContent, LPLocalMusicPlayList, LPLocalMusicPlayHeader, headTitle, header, list, append, generateXML, device, upnpPost, len, playList, str, get
+        str: 'MyMusic Track'
+        str: '1'
+        str: 'CreateQueue'
+        str: 'QueueContext'
+        str: 'AppendTracksInQueueEx'
+        str: 'QueueContext'
+        str: 'Direction'
+        str: 'StartIndex'
+        str: 'error'
+
+  def LPQueueManager.isPlayingWiFiContent(self)  line 194
+    names: LPGlobalUI, currentDevice, mediaInfo, trackName, artist, playState
+      str: 'STOPPED'
+      str: 'NO_MEDIA_PRESENT'
+
+  def LPQueueManager.isPlayingSpecialSource(self)  line 204
+    names: LPGlobalUI, currentDevice, mediaInfo, mediaType, LPPublicDefine, MEDIATYPE_LINEIN, MEDIATYPE_BLUETOOTH, MEDIATYPE_EXTERNAL_USB, MEDIATYPE_EXTERNAL_TF, MEDIATYPE_OPTICAL, MEDIATYPE_OPTICAL2, MEDIATYPE_AIRPLAY, MEDIATYPE_CO_AXIAL, MEDIATYPE_CO_AXIAL2, MEDIATYPE_HDMI, MEDIATYPE_PHONO
+      str: 'USB_DAC'
+      str: 'TV'
+
+  def LPQueueManager.canAppendToQueue(self, source)  line 212
+    names: LPGlobalUI, currentDevice, mediaInfo, isPlayingWiFiContent, isPlayingSpecialSource, LPAppendToQueueAllowEnum, LP_AppendToQueue_allow, mediaType, LP_AppendToQueue_forbidden_queue, trackSource
+      str: 'SONGLIST'
+
+  def LPQueueManager.delete_from_queue(self, index, action_key, finished_method)  line 228
+    names: Thread, start
+      str: 'LPQueueManager.delete_from_queue.<locals>._asyncOperate'
+      str: 'target'
+      str: 'args'
+
+    def LPQueueManager.delete_from_queue._asyncOperate(index, action_key, finished_method)  line 229
+      names: LPGlobalUI, currentDevice, logger, debug, upnpPost, str, get
+        str: 'delete_from_queue no device !'
+        str: 'RemoveTracksInQueue'
+        str: 'CurrentQueue'
+        str: 'QueueName'
+        str: 'RangStart'
+        str: 'RangEnd'
+        str: 'status_code'
+
+  def LPQueueManager.deleteFromQueue(self, row, callback)  line 241
+    names: Thread, start
+      str: 'LPQueueManager.deleteFromQueue.<locals>._asyncOperate'
+      str: 'target'
+      str: 'args'
+
+    def LPQueueManager.deleteFromQueue._asyncOperate(row, callback)  line 243
+      names: LPGlobalUI, currentDevice, upnpPost, str, get
+        str: 'RemoveTracksInQueue'
+        str: 'CurrentQueue'
+        str: 'QueueName'
+        str: 'RangStart'
+        str: 'RangEnd'
+        str: 'status_code'
+
+  def LPQueueManager.get_queue_index(self, result_queue)  line 252
+    names: Thread, start
+      str: 'LPQueueManager.get_queue_index.<locals>._asyncOperate'
+      str: 'target'
+      str: 'args'
+
+    def LPQueueManager.get_queue_index._asyncOperate(result_queue)  line 253
+      names: LPGlobalUI, currentDevice, logger, debug, upnpPost, put
+        str: 'get_queue_index no device !'
+        str: 'GetQueueIndex'
+        str: 'QueueName'
+        str: 'CurrentQueue'

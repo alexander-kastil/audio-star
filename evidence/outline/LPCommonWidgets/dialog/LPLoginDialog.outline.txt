@@ -1,0 +1,97 @@
+# module LPCommonWidgets.dialog.LPLoginDialog
+
+[module] names: __doc__, string, Template, PyQt6.QtCore, Qt, QCoreApplication, pyqtSignal, pyqtSlot, QSize, PyQt6.QtGui, QPainterPath, QRegion, QPixmap, QIcon, QAction, PyQt6.QtWidgets, QDialog, QLineEdit, QToolButton, QWidgetAction, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPConfig.LPFontConfig, SiderBar_Subtitle, LPClientFramework.LPUtility, logger, LPClientFramework.util.aes, AESCipher, LPLoginDialog
+  str: '\n@Time ： 2025/1/6 16:43\n@Auth ： Chris\n@File ：LPLoginDialog.py\n@Desc:\n'
+  str: 'Template'
+  str: 'Qt'
+  str: 'QCoreApplication'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'QSize'
+  str: 'QPainterPath'
+  str: 'QRegion'
+  str: 'QPixmap'
+  str: 'QIcon'
+  str: 'QAction'
+  str: 'QDialog'
+  str: 'QLineEdit'
+  str: 'QToolButton'
+  str: 'QWidgetAction'
+  str: 'LPUtility'
+  str: 'SiderBar_Subtitle'
+  str: 'logger'
+  str: 'AESCipher'
+  str: 'LPLoginDialog'
+
+def LPLoginDialog()  line 21
+  names: __name__, __module__, __qualname__, pyqtSignal, str, bool, loginSignal, loginSuccessSignal, loginFailSignal, __init__, setupUi, handleLogin, pyqtSlot, toggle_password_visibility, autofill, exec, loginSuccess, loginFail, validateLogin, __classcell__
+    str: 'LPLoginDialog'
+    str: 'LPLoginDialog.__init__'
+    str: 'LPLoginDialog.setupUi'
+    str: 'LPLoginDialog.handleLogin'
+    str: 'LPLoginDialog.toggle_password_visibility'
+    str: 'LPLoginDialog.autofill'
+    str: 'LPLoginDialog.exec'
+    str: 'LPLoginDialog.loginSuccess'
+    str: 'LPLoginDialog.loginFail'
+    str: 'LPLoginDialog.validateLogin'
+
+  def LPLoginDialog.__init__(self, source, picUrl, parent)  line 28
+    names: super, __init__, source, parent, picUrl, loginSuccessSignal, connect, loginSuccess, loginFailSignal, loginFail, loginSignal, validateLogin
+
+  def LPLoginDialog.setupUi(self, ui)  line 39
+    names: getattr, super, callable, setupUi, setWindowFlags, Qt, WindowType, Dialog, FramelessWindowHint, setAttribute, WidgetAttribute, WA_TranslucentBackground, QPixmap, picUrl, imageLabel, height, scaledToHeight, TransformationMode, SmoothTransformation, setPixmap, setScaledContents, QCoreApplication, translate, accountLabel, setText, accountInput, setPlaceholderText, passwordLabel, passwordInput, setEchoMode, QLineEdit, EchoMode, Password, loginButton, cancelButton, clicked, connect, reject, handleLogin, remembermeCheckBox, LPUtility, tintImage, LPGlobalUI, imagePath, THEME_BACKGROUND_COLOR, eye_open_img, eye_close_img, QToolButton, toggle_button, setIcon, QIcon, setIconSize, QSize, setCheckable, QWidgetAction, setDefaultWidget, setCursor, CursorShape, PointingHandCursor, setStyleSheet, toggle_password_visibility, addAction, ActionPosition, TrailingPosition, Template, substitute, THEME_FONT_COLOR_UI, name, THEME_DIALOG_BACK_COLOR_UI, THEME_BUTTON_BACK_COLOR_UI, QSS_THEME_BUTTON_BACK_PRESS_COLOR, SiderBar_Subtitle
+      str: 'setupUi'
+      str: 'Login'
+      str: 'Email/Username'
+      str: 'Enter your username'
+      str: 'Password'
+      str: 'Enter your password'
+      str: 'Cancel'
+      str: 'Remember me'
+      str: 'eye_open.png'
+      str: 'eye_close.png'
+      str: 'QToolButton { border: none; padding: 0px; }'
+      str: '                \n                QDialog{\n                    color: $fontColor;\n                }\n                QFrame{\n                    border:none;\n                    background-color: transparent;\n                }\n                QFrame#mainFrame{\n                    border-radius: 20px;\n'
+      str: 'fontColor'
+      str: 'dialogBg'
+      str: 'buttonBg'
+      str: 'buttonHoverBg'
+      str: 'checkBoxFontSize'
+
+  def LPLoginDialog.handleLogin(self)  line 159
+    names: loginButton, setEnabled, accountInput, text, passwordInput, remembermeCheckBox, isChecked, loginSignal, emit
+
+  def LPLoginDialog.toggle_password_visibility(self, checked)  line 170
+    names: passwordInput, setEchoMode, QLineEdit, EchoMode, Normal, toggle_button, setIcon, QIcon, eye_open_img, Password, eye_close_img
+      str: '切换密码显示状态'
+
+  def LPLoginDialog.autofill(self, username, password)  line 181
+    names: accountInput, setText, passwordInput, remembermeCheckBox, setChecked, toggle_password_visibility
+
+  def LPLoginDialog.exec(self)  line 191
+    names: LPUtility, loadAccountForSource, source, autofill, super, exec
+      str: 'username'
+      str: 'password'
+
+  def LPLoginDialog.loginSuccess(self)  line 202
+    names: accept, parent, updateAccountSignal, emit, updateLoginButtonSignal, logger, debug
+      str: 'login success'
+
+  def LPLoginDialog.loginFail(self)  line 209
+    names: QCoreApplication, translate, LPGlobalUI, toast, showToast, parent, passwordInput, clear, logger, debug
+      str: 'Login'
+      str: 'login failed! Please check username or password again!'
+      str: 'login fail'
+
+  def LPLoginDialog.validateLogin(self, username, password, isRemember)  line 216
+    names: strip, QCoreApplication, translate, LPGlobalUI, toast, showToast, parent, loginButton, setEnabled, currentDevice, uuid, AESCipher, encrypt, deviceStreamServiceManager, loginAccountForSource, source
+      str: 'LPLoginDialog.validateLogin.<locals>.finishMethod'
+      str: 'Login'
+      str: "The username can't be empty"
+      str: "The password can't be empty"
+
+    def LPLoginDialog.validateLogin.finishMethod(account)  line 218
+      names: loginButton, setEnabled, userId, loginSuccessSignal, emit, LPUtility, rememberForSource, LPGlobalUI, currentDevice, uuid, source, logger, debug, clearRememberForSource, loginFailSignal
+        str: ' remember password'
+        str: ' clear remember password'

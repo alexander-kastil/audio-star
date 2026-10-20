@@ -1,0 +1,47 @@
+# module LPClientFramework.LPFeedback.LPLkp1Signer
+
+[module] names: __doc__, datetime, hashlib, hmac, urllib.parse, quote_plus, urlparse, LPLkp1Signer
+  str: 'Linkplay STS 接口使用的 LKP1-HMAC-SHA256 签名器。'
+  str: 'quote_plus'
+  str: 'urlparse'
+  str: 'LPLkp1Signer'
+
+def LPLkp1Signer()  line 10
+  names: __name__, __module__, __qualname__, __doc__, staticmethod, sign, _signingKey, _hmac
+    str: 'LPLkp1Signer'
+    str: '按 Android LinkPlayInterceptor 规则构造 STS 请求头。'
+    str: 'LPLkp1Signer.sign'
+    str: 'LPLkp1Signer._signingKey'
+    str: 'LPLkp1Signer._hmac'
+
+  def LPLkp1Signer.sign(method, url, body, uuid, origin, project, now)  line 13
+    names: urlparse, datetime, now, timezone, utc, tzinfo, replace, astimezone, strftime, quote_plus, str, netloc, path, hashlib, sha256, hexdigest, join, upper, encode, LPLkp1Signer, _signingKey, hmac, new
+      str: '为 STS JSON 请求生成 LKP1 鉴权头。\n\n        参数:\n            method (str): HTTP 方法。\n            url (str): 完整 STS URL。\n            body (bytes): 原始 JSON 请求体。\n            uuid (str): PC 持久化 UUID。\n            origin (str): 客户端来源标识。\n            project (str): 项目名称。\n            now (datetime|None): 可注入的 UTC 时间，用于'
+      str: 'tzinfo'
+      str: '%Y%m%dT%H%M%SZ'
+      str: '%Y%m%d'
+      str: '/'
+      str: 'host:%s\nx-linkplay-date:%s\nx-linkplay-origin:%s\nx-linkplay-project:%s\nx-linkplay-uuid:%s\n'
+      str: 'host;x-linkplay-date;x-linkplay-origin;x-linkplay-project;x-linkplay-uuid'
+      str: '%s/%s/%s/linkplay_request'
+      str: 'LKP1-HMAC-SHA256'
+      str: 'utf-8'
+      str: 'LKP1-HMAC-SHA256 Credential=linkplay/%s, SignedHeaders=%s, Signature=%s'
+      str: 'X-Linkplay-Date'
+      str: 'X-Linkplay-Uuid'
+      str: 'X-Linkplay-Project'
+      str: 'X-Linkplay-Origin'
+      str: 'X-Linkplay-Content'
+      str: 'Authorization'
+
+  def LPLkp1Signer._signingKey(uuid, dateStamp, origin, project)  line 77
+    names: LPLkp1Signer, _hmac, encode
+      str: '派生 LKP1 四级 HMAC 签名密钥。\n\n        参数:\n            uuid (str): PC 持久化 UUID。\n            dateStamp (str): yyyyMMdd 日期字符串。\n            origin (str): 客户端来源标识。\n            project (str): URL 编码后的项目名称。\n        返回:\n            bytes: 最终签名密钥。\n        '
+      str: 'LKP1'
+      str: 'utf-8'
+      str: 'linkplay_request'
+
+  def LPLkp1Signer._hmac(key, message)  line 94
+    names: hmac, new, encode, hashlib, sha256, digest
+      str: '计算一次 HMAC-SHA256 摘要。\n\n        参数:\n            key (bytes): HMAC 密钥。\n            message (str): UTF-8 文本消息。\n        返回:\n            bytes: HMAC 摘要。\n        '
+      str: 'utf-8'

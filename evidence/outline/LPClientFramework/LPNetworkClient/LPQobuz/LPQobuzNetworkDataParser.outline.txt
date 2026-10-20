@@ -1,0 +1,509 @@
+# module LPClientFramework.LPNetworkClient.LPQobuz.LPQobuzNetworkDataParser
+
+[module] names: __doc__, copy, enum, json, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPPlayListSource, LPClientFramework.LPPlayList.LPQobuzPlayList, LPQobuzPlayHeader, LPQobuzPlayList, LPQobuzPlayItem, Enum, LPQobuzContentType, LPQobuzUrl, LPQobuzNetworkDataParser, LPQobuzAlbumsParser, LPQobuzArtistsParser, LPQobuzTracksParser, LPQobuzPlaylistParser, LPQobuzArtistDetailParser, LPQobuzArtistSeeAllParser, LPQobuzSearchDetailParser, LPQobuzTagsParser, LPQobuzGenresParser
+  str: '\n@Time ： 2025/7/4 15:18\n@Auth ： Chris\n@File ：LPQobuzNetworkDataParser.py\n@Desc:\n'
+  str: 'LPHeaderType'
+  str: 'LPPlayListSource'
+  str: 'LPQobuzPlayHeader'
+  str: 'LPQobuzPlayList'
+  str: 'LPQobuzPlayItem'
+  str: 'LPQobuzContentType'
+  str: 'LPQobuzUrl'
+  str: 'LPQobuzNetworkDataParser'
+  str: 'LPQobuzAlbumsParser'
+  str: 'LPQobuzArtistsParser'
+  str: 'LPQobuzTracksParser'
+  str: 'LPQobuzPlaylistParser'
+  str: 'LPQobuzArtistDetailParser'
+  str: 'LPQobuzArtistSeeAllParser'
+  str: 'LPQobuzSearchDetailParser'
+  str: 'LPQobuzTagsParser'
+  str: 'LPQobuzGenresParser'
+
+def LPQobuzContentType()  line 15
+  names: __name__, __module__, __qualname__, Albums, Artists, Playlists, Tracks, Detail_Artist, Detail_Playlist, Search_Summary
+    str: 'LPQobuzContentType'
+    str: 'albums'
+    str: 'artists'
+    str: 'playlists'
+    str: 'tracks'
+    str: 'detail_artist'
+    str: 'tracks_p'
+    str: 'search_summary'
+
+def LPQobuzUrl()  line 24
+  names: __name__, __module__, __qualname__, BaseUrl, ArtistDetail_EndPoint
+    str: 'LPQobuzUrl'
+    str: 'https://www.qobuz.com/api.json/0.2/'
+    str: 'artist/page?artist_id='
+
+def LPQobuzNetworkDataParser()  line 28
+  names: __name__, __module__, __qualname__, __init__, parse, classmethod, parseForContent, dict, str, any, deepGetByPath
+    str: 'LPQobuzNetworkDataParser'
+    str: 'LPQobuzNetworkDataParser.__init__'
+    str: 'LPQobuzNetworkDataParser.parse'
+    str: 'LPQobuzNetworkDataParser.parseForContent'
+    str: 'data'
+    str: 'path'
+    str: 'return'
+    str: 'LPQobuzNetworkDataParser.deepGetByPath'
+
+  def LPQobuzNetworkDataParser.__init__(self)  line 31
+    names: searchUrl
+
+  def LPQobuzNetworkDataParser.parse(self, response)  line 34
+    names: json, loads, text, request, url, searchUrl, Exception
+
+  def LPQobuzNetworkDataParser.parseForContent(cls, contentType)  line 45
+    names: LPHeaderType, LP_HEADER_TYPE_ALBUM, LPQobuzAlbumsParser, LP_HEADER_TYPE_PLAYLIST, LPQobuzPlaylistParser, LP_HEADER_TYPE_ARTIST, LPQobuzArtistsParser, LP_HEADER_TYPE_COLLECTION, LPQobuzTracksParser, LPQobuzContentType, Detail_Artist, LPQobuzArtistDetailParser, Search_Summary, LPQobuzSearchDetailParser
+
+  def LPQobuzNetworkDataParser.deepGetByPath(self, data, path, default)  line 70
+    names: split, isinstance, dict, get, list, str
+      str: '.'
+
+def LPQobuzAlbumsParser()  line 86
+  names: __name__, __module__, __qualname__, __init__, parse, parseGenre, parseItem, __classcell__
+    str: 'LPQobuzAlbumsParser'
+    str: 'LPQobuzAlbumsParser.__init__'
+    str: 'LPQobuzAlbumsParser.parse'
+    str: 'LPQobuzAlbumsParser.parseGenre'
+    str: 'LPQobuzAlbumsParser.parseItem'
+
+  def LPQobuzAlbumsParser.__init__(self)  line 88
+    names: super, __init__, field, retDict
+      str: 'albums'
+
+  def LPQobuzAlbumsParser.parse(self, response)  line 94
+    names: super, parse, LPQobuzPlayHeader, LPHeaderType, LP_HEADER_TYPE_ALBUM, headType, deepGetByPath, field, offset, limit, total, mediaCount, LPQobuzPlayList, parseItem, header, list
+      str: '.offset'
+      str: '.limit'
+      str: '.total'
+      str: 'media_count'
+      str: '.media_count'
+      str: '.items'
+
+  def LPQobuzAlbumsParser.parseGenre(self, genreItemData)  line 115
+    names: LPQobuzPlayItem, get, trackId, trackName, genrePath, append
+      str: 'id'
+      str: 'name'
+      str: 'path'
+
+  def LPQobuzAlbumsParser.parseItem(self, itemData)  line 126
+    names: LPQobuzPlayItem, isAlbum, get, trackId, parentalWarning, trackDuration, hires, trackName, trackVersion, deepGetByPath, trackArtist, artistId, trackImage, date, streamable, parseGenre, genreObjArr, dateAdd, label, tracksCount, trackNumber, mediaNumber, append
+      str: 'id'
+      str: 'parental_warning'
+      str: 'duration'
+      str: 'hires'
+      str: 'title'
+      str: 'version'
+      str: 'artist.name'
+      str: 'artist.id'
+      str: 'image.small'
+      str: 'image.large'
+      str: 'image.thumbnail'
+      str: 'release_date_stream'
+      str: 'release_date_original'
+      str: 'release_date_download'
+      str: 'streamable'
+      str: 'genre'
+      str: 'favorited_at'
+      str: 'label.name'
+      str: 'tracks_count'
+      str: 'track_number'
+      str: 'media_number'
+
+def LPQobuzArtistsParser()  line 162
+  names: __name__, __module__, __qualname__, __init__, parse, parseItem, __classcell__
+    str: 'LPQobuzArtistsParser'
+    str: 'LPQobuzArtistsParser.__init__'
+    str: 'LPQobuzArtistsParser.parse'
+    str: 'LPQobuzArtistsParser.parseItem'
+
+  def LPQobuzArtistsParser.__init__(self)  line 164
+    names: field, retDict
+      str: 'artists'
+
+  def LPQobuzArtistsParser.parse(self, response)  line 169
+    names: super, parse, LPQobuzPlayHeader, LPHeaderType, LP_HEADER_TYPE_ARTIST, headType, deepGetByPath, field, offset, limit, total, LPQobuzPlayList, parseItem, header, list
+      str: '.offset'
+      str: '.limit'
+      str: '.total'
+      str: '.items'
+
+  def LPQobuzArtistsParser.parseItem(self, itemData)  line 191
+    names: LPQobuzPlayItem, isArtist, get, trackId, trackName, deepGetByPath, trackImage, dateAdd, append
+      str: 'id'
+      str: 'name'
+      str: 'image.medium'
+      str: 'image.small'
+      str: 'image.large'
+      str: 'favorited_at'
+
+def LPQobuzTracksParser()  line 212
+  names: __name__, __module__, __qualname__, __init__, parse, parseGenre, parseItem, __classcell__
+    str: 'LPQobuzTracksParser'
+    str: 'LPQobuzTracksParser.__init__'
+    str: 'LPQobuzTracksParser.parse'
+    str: 'LPQobuzTracksParser.parseGenre'
+    str: 'LPQobuzTracksParser.parseItem'
+
+  def LPQobuzTracksParser.__init__(self)  line 214
+    names: super, __init__, field, retDict, LPQobuzPlayHeader, header
+      str: 'tracks'
+
+  def LPQobuzTracksParser.parse(self, response)  line 221
+    names: super, parse, LPPlayListSource, Qobuz, value, header, mediaSource, LPHeaderType, LP_HEADER_TYPE_COLLECTION, headType, get, headTitle, deepGetByPath, field, offset, limit, total, duration, imageUrl, totalTracks, hires, qualityStr, weeklyQBaseline, descText, mediaCount, trackArtist, date, parentalWarning, label, trackOwner, isPublic, graphics, searchUrl, LPQobuzPlayList, parseItem, list
+      str: 'title'
+      str: 'name'
+      str: '.offset'
+      str: '.limit'
+      str: '.total'
+      str: 'duration'
+      str: 'images.small'
+      str: 'images.large'
+      str: 'image.small'
+      str: 'image.large'
+      str: 'image_rectangle'
+      str: 'track_count'
+      str: 'hires'
+      str: 'maximum_technical_specifications'
+      str: 'baseline'
+      str: 'description'
+      str: 'media_count'
+      str: '.media_count'
+      str: 'artist.name'
+      str: 'release_date_stream'
+      str: 'release_date_original'
+      str: 'release_date_download'
+      str: 'parental_warning'
+      str: 'label.name'
+      str: 'owner.name'
+      str: 'is_public'
+      str: 'graphics'
+      str: '.items'
+
+  def LPQobuzTracksParser.parseGenre(self, genreItemData)  line 267
+    names: LPQobuzPlayItem, get, trackId, trackName, genrePath, append
+      str: 'id'
+      str: 'name'
+      str: 'path'
+
+  def LPQobuzTracksParser.parseItem(self, itemData)  line 280
+    names: enumerate, LPQobuzPlayItem, isTrack, get, trackId, trackName, trackVersion, deepGetByPath, trackArtist, artistId, header, imageUrl, trackImage, albumName, albumId, streamable, parentalWarning, trackDuration, hires, date, dateAdd, parseGenre, genreObjArr, trackNumber, mediaNumber, playlistTrackId, searchUrl, startIndex, append
+      str: 'id'
+      str: 'title'
+      str: 'version'
+      str: 'performer.name'
+      str: 'performer.id'
+      str: 'album.image.small'
+      str: 'album.image.large'
+      str: 'album.image.thumbnail'
+      str: 'album.title'
+      str: 'album.id'
+      str: 'streamable'
+      str: 'parental_warning'
+      str: 'duration'
+      str: 'hires'
+      str: 'release_date_stream'
+      str: 'release_date_original'
+      str: 'release_date_download'
+      str: 'favorited_at'
+      str: 'album.genre'
+      str: 'track_number'
+      str: 'media_number'
+      str: 'playlist_track_id'
+
+def LPQobuzPlaylistParser()  line 320
+  names: __name__, __module__, __qualname__, __init__, parse, parseGenre, parseItem, __classcell__
+    str: 'LPQobuzPlaylistParser'
+    str: 'LPQobuzPlaylistParser.__init__'
+    str: 'LPQobuzPlaylistParser.parse'
+    str: 'LPQobuzPlaylistParser.parseGenre'
+    str: 'LPQobuzPlaylistParser.parseItem'
+
+  def LPQobuzPlaylistParser.__init__(self)  line 322
+    names: field, retDict
+      str: 'playlists'
+
+  def LPQobuzPlaylistParser.parse(self, response)  line 327
+    names: super, parse, LPQobuzPlayHeader, LPHeaderType, LP_HEADER_TYPE_PLAYLIST, headType, deepGetByPath, field, offset, limit, total, LPQobuzPlayList, parseItem, header, list
+      str: '.offset'
+      str: '.limit'
+      str: '.total'
+      str: '.items'
+
+  def LPQobuzPlaylistParser.parseGenre(self, genreItemsData)  line 352
+    names: LPQobuzPlayItem, get, trackId, trackName, genrePath, append
+      str: 'id'
+      str: 'name'
+      str: 'path'
+
+  def LPQobuzPlaylistParser.parseItem(self, itemData)  line 362
+    names: LPQobuzPlayItem, isPlaylist, get, trackId, parentalWarning, trackDuration, hires, isPublic, trackName, trackImage, deepGetByPath, trackOwner, ownerId, tracksCount, playlistImageList, parseGenre, genreObjArr, lastUpdate, dateAdd, append
+      str: 'id'
+      str: 'parental_warning'
+      str: 'duration'
+      str: 'hires'
+      str: 'is_public'
+      str: 'name'
+      str: 'image_rectangle'
+      str: 'owner.name'
+      str: 'owner.id'
+      str: 'tracks_count'
+      str: 'images150'
+      str: 'images300'
+      str: 'images50'
+      str: 'genres'
+      str: 'updated_at'
+      str: 'subscribed_at'
+
+def LPQobuzArtistDetailParser()  line 391
+  names: __name__, __module__, __qualname__, __init__, parse, parseGenre, parseHeader, parseItem, __classcell__
+    str: 'LPQobuzArtistDetailParser'
+    str: 'LPQobuzArtistDetailParser.__init__'
+    str: 'LPQobuzArtistDetailParser.parse'
+    str: 'LPQobuzArtistDetailParser.parseGenre'
+    str: 'LPQobuzArtistDetailParser.parseHeader'
+    str: 'LPQobuzArtistDetailParser.parseItem'
+
+  def LPQobuzArtistDetailParser.__init__(self)  line 393
+    names: super, __init__, data, imageBase, LPQobuzPlayHeader, header, retDict, LPHeaderType, LP_HEADER_TYPE_ARTIST, LP_HEADER_TYPE_COLLECTION, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_PLAYLIST, itemFields, releaseFields, keyMap
+      str: 'https://static.qobuz.com/images/artists/covers/large/'
+      str: 'similar_artists'
+      str: 'field'
+      str: 'headType'
+      str: 'top_tracks'
+      str: 'last_release'
+      str: 'tracks_appears_on'
+      str: 'playlists'
+      str: 'album'
+      str: 'live'
+      str: 'compilation'
+      str: 'epSingle'
+      str: 'download'
+      str: 'other'
+
+  def LPQobuzArtistDetailParser.parse(self, response)  line 427
+    names: super, parse, data, deepGetByPath, header, headTitle, get, headId, LPQobuzUrl, BaseUrl, value, ArtistDetail_EndPoint, str, searchUrl, imageBase, imageUrl, describe, itemFields, LPQobuzPlayList, parseHeader, LPHeaderType, LP_HEADER_TYPE_COLLECTION, parseItem, list, retDict, releaseFields, LP_HEADER_TYPE_ALBUM, copy, deepcopy, headType, hasMore, keyMap
+      str: 'name.display'
+      str: 'id'
+      str: 'images.portrait.hash'
+      str: 'images.portrait.format'
+      str: '.'
+      str: 'biography.content'
+      str: 'field'
+      str: 'headType'
+      str: 'last_release'
+      str: '.items'
+      str: 'releases'
+      str: 'type'
+      str: 'has_more'
+      str: 'items'
+      str: 'LPQobuzArtistDetailParser.parse.<locals>.<dictcomp>'
+
+    def LPQobuzArtistDetailParser.parse.<dictcomp>(.0)  line 484
+      names: retDict, get
+
+  def LPQobuzArtistDetailParser.parseGenre(self, genreItemData)  line 489
+    names: LPQobuzPlayItem, get, trackId, trackName, genrePath, append
+      str: 'id'
+      str: 'name'
+      str: 'path'
+
+  def LPQobuzArtistDetailParser.parseHeader(self, field, headType)  line 502
+    names: copy, deepcopy, header, headType, deepGetByPath, data, hasMore
+      str: '.has_more'
+
+  def LPQobuzArtistDetailParser.parseItem(self, itemData, headType)  line 509
+    names: enumerate, LPQobuzPlayItem, get, trackId, parentalWarning, trackDuration, deepGetByPath, hires, LPHeaderType, LP_HEADER_TYPE_ARTIST, trackName, imageBase, trackImage, LP_HEADER_TYPE_ALBUM, trackVersion, trackArtist, artistId, data, date, streamable, parseGenre, genreObjArr, LP_HEADER_TYPE_PLAYLIST, trackOwner, LP_HEADER_TYPE_COLLECTION, albumName, albumId, searchUrl, startIndex, append
+      str: 'id'
+      str: 'parental_warning'
+      str: 'duration'
+      str: 'rights.hires_streamable'
+      str: 'name.display'
+      str: 'images.portrait.hash'
+      str: 'images.portrait.format'
+      str: '.'
+      str: 'title'
+      str: 'version'
+      str: 'artist.name.display'
+      str: 'artist.id'
+      str: 'image.small'
+      str: 'image.large'
+      str: 'image.thumbnail'
+      str: 'dates.original'
+      str: 'dates.stream'
+      str: 'dates.download'
+      str: 'rights.streamable'
+      str: 'genre'
+      str: 'images.rectangle'
+      str: 'owner.name'
+      str: 'album.image.small'
+      str: 'album.image.large'
+      str: 'album.image.thumbnail'
+      str: 'album.title'
+      str: 'album.id'
+
+def LPQobuzArtistSeeAllParser()  line 564
+  names: __name__, __module__, __qualname__, __init__, parse, parseGenre, parseItem, __classcell__
+    str: 'LPQobuzArtistSeeAllParser'
+    str: 'LPQobuzArtistSeeAllParser.__init__'
+    str: 'LPQobuzArtistSeeAllParser.parse'
+    str: 'LPQobuzArtistSeeAllParser.parseGenre'
+    str: 'LPQobuzArtistSeeAllParser.parseItem'
+
+  def LPQobuzArtistSeeAllParser.__init__(self)  line 566
+
+  def LPQobuzArtistSeeAllParser.parse(self, response)  line 570
+    names: super, parse, LPQobuzPlayHeader, LPQobuzPlayList, get, hasMore, LPHeaderType, LP_HEADER_TYPE_ALBUM, parseItem, header, list
+      str: 'has_more'
+      str: 'items'
+
+  def LPQobuzArtistSeeAllParser.parseGenre(self, genreItemData)  line 588
+    names: LPQobuzPlayItem, get, trackId, trackName, genrePath, append
+      str: 'id'
+      str: 'name'
+      str: 'path'
+
+  def LPQobuzArtistSeeAllParser.parseItem(self, itemData, headType)  line 597
+    names: LPQobuzPlayItem, get, trackId, parentalWarning, trackDuration, deepGetByPath, hires, isAlbum, trackName, trackVersion, trackArtist, artistId, trackImage, data, date, streamable, parseGenre, genreObjArr, append
+      str: 'id'
+      str: 'parental_warning'
+      str: 'duration'
+      str: 'rights.hires_streamable'
+      str: 'title'
+      str: 'version'
+      str: 'artist.name.display'
+      str: 'artist.id'
+      str: 'image.small'
+      str: 'image.large'
+      str: 'image.thumbnail'
+      str: 'dates.original'
+      str: 'dates.stream'
+      str: 'dates.download'
+      str: 'rights.streamable'
+      str: 'genre'
+
+def LPQobuzSearchDetailParser()  line 627
+  names: __name__, __module__, __qualname__, __init__, parse, parseItem, __classcell__
+    str: 'LPQobuzSearchDetailParser'
+    str: 'LPQobuzSearchDetailParser.__init__'
+    str: 'LPQobuzSearchDetailParser.parse'
+    str: 'LPQobuzSearchDetailParser.parseItem'
+
+  def LPQobuzSearchDetailParser.__init__(self)  line 629
+    names: super, __init__, retDict, LPHeaderType, LP_HEADER_TYPE_COLLECTION, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_SONG, LP_HEADER_TYPE_ARTIST, LP_HEADER_TYPE_PLAYLIST, itemFields
+      str: 'most_popular'
+      str: 'field'
+      str: 'headType'
+      str: 'albums'
+      str: 'tracks'
+      str: 'artists'
+      str: 'playlists'
+
+  def LPQobuzSearchDetailParser.parse(self, response)  line 643
+    names: super, parse, itemFields, LPQobuzPlayList, LPQobuzPlayHeader, headType, get, searchQueryText, deepGetByPath, total, parseItem, header, list, retDict
+      str: 'field'
+      str: 'headType'
+      str: 'query'
+      str: '.total'
+      str: '.items'
+
+  def LPQobuzSearchDetailParser.parseItem(self, itemData, headType)  line 675
+    names: LPQobuzPlayItem, get, trackId, parentalWarning, trackDuration, LPHeaderType, LP_HEADER_TYPE_ARTIST, trackName, deepGetByPath, trackImage, LP_HEADER_TYPE_ALBUM, trackVersion, trackArtist, artistId, streamable, hires, LP_HEADER_TYPE_PLAYLIST, trackOwner, playlistImageList, LP_HEADER_TYPE_SONG, albumName, albumId, LP_HEADER_TYPE_COLLECTION, isAlbum, isArtist, isTrack, isPlaylist, append
+      str: 'id'
+      str: 'parental_warning'
+      str: 'duration'
+      str: 'name'
+      str: 'image.medium'
+      str: 'image.small'
+      str: 'title'
+      str: 'version'
+      str: 'artist.name'
+      str: 'artist.id'
+      str: 'image.large'
+      str: 'image.thumbnail'
+      str: 'streamable'
+      str: 'hires'
+      str: 'image_rectangle'
+      str: 'owner.name'
+      str: 'images150'
+      str: 'images300'
+      str: 'images50'
+      str: 'performer.name'
+      str: 'performer.id'
+      str: 'album.image.small'
+      str: 'album.image.large'
+      str: 'album.image.thumbnail'
+      str: 'album.title'
+      str: 'album.id'
+      str: 'rights.streamable'
+      str: 'type'
+      str: 'albums'
+      str: 'artists'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'content.id'
+      str: 'content.hires'
+      str: 'content.title'
+      str: 'content.version'
+      str: 'content.artist.name'
+      str: 'content.artist.id'
+      str: 'content.image.small'
+      str: 'content.image.large'
+      str: 'content.image.thumbnail'
+      str: 'content.name'
+      str: 'content.image.medium'
+      str: 'content.duration'
+      str: 'content.performer.name'
+      str: 'content.performer.id'
+      str: 'content.album.image.small'
+      str: 'content.album.image.large'
+      str: 'content.album.image.thumbnail'
+      str: 'content.album.title'
+      str: 'content.album.id'
+
+def LPQobuzTagsParser()  line 761
+  names: __name__, __module__, __qualname__, __init__, parse, parseItem, __classcell__
+    str: 'LPQobuzTagsParser'
+    str: 'LPQobuzTagsParser.__init__'
+    str: 'LPQobuzTagsParser.parse'
+    str: 'LPQobuzTagsParser.parseItem'
+
+  def LPQobuzTagsParser.__init__(self)  line 763
+    names: field, retDict
+      str: 'tags'
+
+  def LPQobuzTagsParser.parse(self, response)  line 768
+    names: super, parse, LPQobuzPlayHeader, headType, LPQobuzPlayList, get, field, parseItem, header, list
+      str: 'tags'
+
+  def LPQobuzTagsParser.parseItem(self, itemData)  line 787
+    names: LPQobuzPlayItem, get, trackId, json, loads, trackName, trackSlug, append
+      str: 'featured_tag_id'
+      str: 'name_json'
+      str: 'en'
+      str: 'slug'
+
+def LPQobuzGenresParser()  line 804
+  names: __name__, __module__, __qualname__, __init__, parse, parseItem, __classcell__
+    str: 'LPQobuzGenresParser'
+    str: 'LPQobuzGenresParser.__init__'
+    str: 'LPQobuzGenresParser.parse'
+    str: 'LPQobuzGenresParser.parseItem'
+
+  def LPQobuzGenresParser.__init__(self)  line 806
+    names: field, retDict
+      str: 'genres'
+
+  def LPQobuzGenresParser.parse(self, response)  line 811
+    names: super, parse, LPQobuzPlayHeader, headType, LPQobuzPlayList, deepGetByPath, field, parseItem, header, list
+      str: 'genres'
+      str: '.items'
+
+  def LPQobuzGenresParser.parseItem(self, itemData)  line 829
+    names: LPQobuzPlayItem, get, trackId, trackName, genrePath, trackSlug, append
+      str: 'id'
+      str: 'name'
+      str: 'path'
+      str: 'slug'

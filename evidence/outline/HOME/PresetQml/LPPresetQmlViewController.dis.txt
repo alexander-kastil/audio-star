@@ -1,0 +1,2676 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nPreset（预设快捷键）QML 版页面控制器。\n\n职责：\n- 作为 QWidget 宿主，内嵌 QQuickWidget 加载 LPPresetQmlPage.qml。\n- 把自身作为 QML contextProperty("controller") 暴露，提供页面状态、数据模型与交互槽。\n- viewWillAppear 时向设备请求 GetKeyMapping，解析后刷新模型。\n- 处理卡片点击（MCUKeyShortClick）与右键删除（弹通用确认框 + SetKeyMapping）。\n\n业务逻辑迁移自 HOME/LPPresetViewController.py，但与之完全解耦，开发期并行对比。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 14           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (copy)
+             10 STORE_NAME               1 (copy)
+
+ 15          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('Optional',))
+             16 IMPORT_NAME              2 (typing)
+             18 IMPORT_FROM              3 (Optional)
+             20 STORE_NAME               3 (Optional)
+             22 POP_TOP
+
+ 17          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('QCoreApplication', 'Qt', 'QTimer', 'QUrl', 'pyqtProperty', 'pyqtSignal', 'pyqtSlot'))
+             28 IMPORT_NAME              4 (PyQt6.QtCore)
+             30 IMPORT_FROM              5 (QCoreApplication)
+             32 STORE_NAME               5 (QCoreApplication)
+             34 IMPORT_FROM              6 (Qt)
+             36 STORE_NAME               6 (Qt)
+             38 IMPORT_FROM              7 (QTimer)
+             40 STORE_NAME               7 (QTimer)
+             42 IMPORT_FROM              8 (QUrl)
+             44 STORE_NAME               8 (QUrl)
+             46 IMPORT_FROM              9 (pyqtProperty)
+             48 STORE_NAME               9 (pyqtProperty)
+             50 IMPORT_FROM             10 (pyqtSignal)
+             52 STORE_NAME              10 (pyqtSignal)
+             54 IMPORT_FROM             11 (pyqtSlot)
+             56 STORE_NAME              11 (pyqtSlot)
+             58 POP_TOP
+
+ 18          60 LOAD_CONST               1 (0)
+             62 LOAD_CONST               5 (('QQmlContext',))
+             64 IMPORT_NAME             12 (PyQt6.QtQml)
+             66 IMPORT_FROM             13 (QQmlContext)
+             68 STORE_NAME              13 (QQmlContext)
+             70 POP_TOP
+
+ 19          72 LOAD_CONST               1 (0)
+             74 LOAD_CONST               6 (('QQuickWidget',))
+             76 IMPORT_NAME             14 (PyQt6.QtQuickWidgets)
+             78 IMPORT_FROM             15 (QQuickWidget)
+             80 STORE_NAME              15 (QQuickWidget)
+             82 POP_TOP
+
+ 20          84 LOAD_CONST               1 (0)
+             86 LOAD_CONST               7 (('QVBoxLayout', 'QWidget'))
+             88 IMPORT_NAME             16 (PyQt6.QtWidgets)
+             90 IMPORT_FROM             17 (QVBoxLayout)
+             92 STORE_NAME              17 (QVBoxLayout)
+             94 IMPORT_FROM             18 (QWidget)
+             96 STORE_NAME              18 (QWidget)
+             98 POP_TOP
+
+ 21         100 LOAD_CONST               1 (0)
+            102 LOAD_CONST               8 (('BeautifulSoup',))
+            104 IMPORT_NAME             19 (bs4)
+            106 IMPORT_FROM             20 (BeautifulSoup)
+            108 STORE_NAME              20 (BeautifulSoup)
+            110 POP_TOP
+
+ 23         112 LOAD_CONST               1 (0)
+            114 LOAD_CONST               2 (None)
+            116 IMPORT_NAME             21 (LPGlobalUI)
+            118 STORE_NAME              21 (LPGlobalUI)
+
+ 24         120 LOAD_CONST               1 (0)
+            122 LOAD_CONST               9 (('LPStreamServiceManager', 'LPUtility'))
+            124 IMPORT_NAME             22 (LPClientFramework)
+            126 IMPORT_FROM             23 (LPStreamServiceManager)
+            128 STORE_NAME              23 (LPStreamServiceManager)
+            130 IMPORT_FROM             24 (LPUtility)
+            132 STORE_NAME              24 (LPUtility)
+            134 POP_TOP
+
+ 25         136 LOAD_CONST               1 (0)
+            138 LOAD_CONST              10 (('DEVICE_ACCOUNT_UNKNOWN',))
+            140 IMPORT_NAME             25 (LPClientFramework.LPDeviceStreamServiceManager)
+            142 IMPORT_FROM             26 (DEVICE_ACCOUNT_UNKNOWN)
+            144 STORE_NAME              26 (DEVICE_ACCOUNT_UNKNOWN)
+            146 POP_TOP
+
+ 26         148 LOAD_CONST               1 (0)
+            150 LOAD_CONST              11 (('LPPresetListModel', 'LPPresetQmlStore', 'presetSourceCanPlay', 'presetSourceNeedsDeviceAccount'))
+            152 IMPORT_NAME             27 (HOME.PresetQml.LPPresetQmlStore)
+            154 IMPORT_FROM             28 (LPPresetListModel)
+            156 STORE_NAME              28 (LPPresetListModel)
+            158 IMPORT_FROM             29 (LPPresetQmlStore)
+            160 STORE_NAME              29 (LPPresetQmlStore)
+            162 IMPORT_FROM             30 (presetSourceCanPlay)
+            164 STORE_NAME              30 (presetSourceCanPlay)
+            166 IMPORT_FROM             31 (presetSourceNeedsDeviceAccount)
+            168 STORE_NAME              31 (presetSourceNeedsDeviceAccount)
+            170 POP_TOP
+
+ 32         172 LOAD_CONST               1 (0)
+            174 LOAD_CONST              12 (('LPUIPath',))
+            176 IMPORT_NAME             32 (LPClientFramework.LPConfig)
+            178 IMPORT_FROM             33 (LPUIPath)
+            180 STORE_NAME              33 (LPUIPath)
+            182 POP_TOP
+
+ 33         184 LOAD_CONST               1 (0)
+            186 LOAD_CONST              13 (('StackWidget_Title',))
+            188 IMPORT_NAME             34 (LPClientFramework.LPConfig.LPFontConfig)
+            190 IMPORT_FROM             35 (StackWidget_Title)
+            192 STORE_NAME              35 (StackWidget_Title)
+            194 POP_TOP
+
+ 34         196 LOAD_CONST               1 (0)
+            198 LOAD_CONST              14 (('logger',))
+            200 IMPORT_NAME             36 (LPClientFramework.LPUtility)
+            202 IMPORT_FROM             37 (logger)
+            204 STORE_NAME              37 (logger)
+            206 POP_TOP
+
+ 36         208 SETUP_FINALLY           16 (to 226)
+
+ 37         210 LOAD_CONST               1 (0)
+            212 LOAD_CONST              15 (('Sub_Text',))
+            214 IMPORT_NAME             34 (LPClientFramework.LPConfig.LPFontConfig)
+            216 IMPORT_FROM             38 (Sub_Text)
+            218 STORE_NAME              38 (Sub_Text)
+            220 POP_TOP
+            222 POP_BLOCK
+            224 JUMP_FORWARD            22 (to 248)
+
+ 38     >>  226 DUP_TOP
+            228 LOAD_NAME               39 (Exception)
+            230 JUMP_IF_NOT_EXC_MATCH   246
+            232 POP_TOP
+            234 POP_TOP
+            236 POP_TOP
+
+ 39         238 LOAD_CONST              16 (13)
+            240 STORE_NAME              38 (Sub_Text)
+            242 POP_EXCEPT
+            244 JUMP_FORWARD             2 (to 248)
+        >>  246 RERAISE
+
+ 42     >>  248 LOAD_CONST              17 ('loading')
+            250 STORE_NAME              40 (STATE_LOADING)
+
+ 43         252 LOAD_CONST              18 ('notSupport')
+            254 STORE_NAME              41 (STATE_NOT_SUPPORT)
+
+ 44         256 LOAD_CONST              19 ('error')
+            258 STORE_NAME              42 (STATE_ERROR)
+
+ 45         260 LOAD_CONST              20 ('ready')
+            262 STORE_NAME              43 (STATE_READY)
+
+ 48         264 LOAD_BUILD_CLASS
+            266 LOAD_CONST              21 (<code object LPPresetQmlViewController at 0x000001F324E69240, file "PresetQml\LPPresetQmlViewController.py", line 48>)
+            268 LOAD_CONST              22 ('LPPresetQmlViewController')
+            270 MAKE_FUNCTION            0
+            272 LOAD_CONST              22 ('LPPresetQmlViewController')
+            274 LOAD_NAME               18 (QWidget)
+            276 CALL_FUNCTION            3
+            278 STORE_NAME              44 (LPPresetQmlViewController)
+            280 LOAD_CONST               2 (None)
+            282 RETURN_VALUE
+
+=== LPPresetQmlViewController ===
+ 48           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPPresetQmlViewController')
+              6 STORE_NAME               2 (__qualname__)
+
+ 49           8 LOAD_CONST               1 ('\n    Preset QML 版页面控制器。\n\n    通过 QQuickWidget 承载 QML 视图，自身只负责动作分发与数据装配，\n    视觉与交互完全交给 LPPresetQmlPage.qml / LPPresetQmlCard.qml。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+ 57          12 LOAD_NAME                4 (pyqtSignal)
+             14 CALL_FUNCTION            0
+             16 STORE_NAME               5 (pageStateChanged)
+
+ 58          18 LOAD_NAME                4 (pyqtSignal)
+             20 CALL_FUNCTION            0
+             22 STORE_NAME               6 (playingInfoChanged)
+
+ 60          24 LOAD_CONST              63 ((None,))
+             26 LOAD_NAME                7 (Optional)
+             28 LOAD_NAME                8 (QWidget)
+             30 BINARY_SUBSCR
+             32 LOAD_CONST               3 (('parent',))
+             34 BUILD_CONST_KEY_MAP      1
+             36 LOAD_CLOSURE             0 (__class__)
+             38 BUILD_TUPLE              1
+             40 LOAD_CONST               4 (<code object __init__ at 0x000001F324E60DF0, file "PresetQml\LPPresetQmlViewController.py", line 60>)
+             42 LOAD_CONST               5 ('LPPresetQmlViewController.__init__')
+             44 MAKE_FUNCTION           13 (defaults, annotations, closure)
+             46 STORE_NAME               9 (__init__)
+
+ 96          48 LOAD_CONST               2 (None)
+             50 LOAD_CONST               6 (('return',))
+             52 BUILD_CONST_KEY_MAP      1
+             54 LOAD_CONST               7 (<code object _setupQmlPage at 0x000001F3253AE870, file "PresetQml\LPPresetQmlViewController.py", line 96>)
+             56 LOAD_CONST               8 ('LPPresetQmlViewController._setupQmlPage')
+             58 MAKE_FUNCTION            4 (annotations)
+             60 STORE_NAME              10 (_setupQmlPage)
+
+126          62 LOAD_NAME               11 (QQmlContext)
+             64 LOAD_CONST               2 (None)
+             66 LOAD_CONST               9 (('ctx', 'return'))
+             68 BUILD_CONST_KEY_MAP      2
+             70 LOAD_CONST              10 (<code object _applyThemeContext at 0x000001F3253AED40, file "PresetQml\LPPresetQmlViewController.py", line 126>)
+             72 LOAD_CONST              11 ('LPPresetQmlViewController._applyThemeContext')
+             74 MAKE_FUNCTION            4 (annotations)
+             76 STORE_NAME              12 (_applyThemeContext)
+
+144          78 LOAD_NAME               13 (pyqtProperty)
+             80 LOAD_NAME               14 (str)
+             82 LOAD_NAME                5 (pageStateChanged)
+             84 LOAD_CONST              12 (('notify',))
+             86 CALL_FUNCTION_KW         2
+
+145          88 LOAD_NAME               14 (str)
+             90 LOAD_CONST               6 (('return',))
+             92 BUILD_CONST_KEY_MAP      1
+             94 LOAD_CONST              13 (<code object pageState at 0x000001F3253AE2F0, file "PresetQml\LPPresetQmlViewController.py", line 144>)
+             96 LOAD_CONST              14 ('LPPresetQmlViewController.pageState')
+             98 MAKE_FUNCTION            4 (annotations)
+            100 CALL_FUNCTION            1
+            102 STORE_NAME              15 (pageState)
+
+153         104 LOAD_NAME               13 (pyqtProperty)
+            106 LOAD_NAME               16 (int)
+            108 LOAD_CONST              15 (True)
+            110 LOAD_CONST              16 (('constant',))
+            112 CALL_FUNCTION_KW         2
+
+154         114 LOAD_NAME               16 (int)
+            116 LOAD_CONST               6 (('return',))
+            118 BUILD_CONST_KEY_MAP      1
+            120 LOAD_CONST              17 (<code object titleFontSize at 0x000001F3253C47C0, file "PresetQml\LPPresetQmlViewController.py", line 153>)
+            122 LOAD_CONST              18 ('LPPresetQmlViewController.titleFontSize')
+            124 MAKE_FUNCTION            4 (annotations)
+            126 CALL_FUNCTION            1
+            128 STORE_NAME              17 (titleFontSize)
+
+162         130 LOAD_NAME               13 (pyqtProperty)
+            132 LOAD_NAME               16 (int)
+            134 LOAD_NAME                6 (playingInfoChanged)
+            136 LOAD_CONST              12 (('notify',))
+            138 CALL_FUNCTION_KW         2
+
+163         140 LOAD_NAME               16 (int)
+            142 LOAD_CONST               6 (('return',))
+            144 BUILD_CONST_KEY_MAP      1
+            146 LOAD_CONST              19 (<code object playingPresetIndex at 0x000001F3253C4450, file "PresetQml\LPPresetQmlViewController.py", line 162>)
+            148 LOAD_CONST              20 ('LPPresetQmlViewController.playingPresetIndex')
+            150 MAKE_FUNCTION            4 (annotations)
+            152 CALL_FUNCTION            1
+            154 STORE_NAME              18 (playingPresetIndex)
+
+171         156 LOAD_NAME               13 (pyqtProperty)
+            158 LOAD_NAME               14 (str)
+            160 LOAD_NAME                6 (playingInfoChanged)
+            162 LOAD_CONST              12 (('notify',))
+            164 CALL_FUNCTION_KW         2
+
+172         166 LOAD_NAME               14 (str)
+            168 LOAD_CONST               6 (('return',))
+            170 BUILD_CONST_KEY_MAP      1
+            172 LOAD_CONST              21 (<code object playState at 0x000001F3253C4C90, file "PresetQml\LPPresetQmlViewController.py", line 171>)
+            174 LOAD_CONST              22 ('LPPresetQmlViewController.playState')
+            176 MAKE_FUNCTION            4 (annotations)
+            178 CALL_FUNCTION            1
+            180 STORE_NAME              19 (playState)
+
+184         182 LOAD_NAME               20 (pyqtSlot)
+            184 LOAD_NAME               16 (int)
+            186 CALL_FUNCTION            1
+
+185         188 LOAD_NAME               16 (int)
+            190 LOAD_CONST               2 (None)
+            192 LOAD_CONST              23 (('index', 'return'))
+            194 BUILD_CONST_KEY_MAP      2
+            196 LOAD_CONST              24 (<code object onPresetClicked at 0x000001F3253C4500, file "PresetQml\LPPresetQmlViewController.py", line 184>)
+            198 LOAD_CONST              25 ('LPPresetQmlViewController.onPresetClicked')
+            200 MAKE_FUNCTION            4 (annotations)
+            202 CALL_FUNCTION            1
+            204 STORE_NAME              21 (onPresetClicked)
+
+224         206 LOAD_NAME               22 (dict)
+            208 LOAD_CONST               2 (None)
+            210 LOAD_CONST              26 (('item', 'return'))
+            212 BUILD_CONST_KEY_MAP      2
+            214 LOAD_CONST              27 (<code object _showUnplayableToast at 0x000001F3253C4030, file "PresetQml\LPPresetQmlViewController.py", line 224>)
+            216 LOAD_CONST              28 ('LPPresetQmlViewController._showUnplayableToast')
+            218 MAKE_FUNCTION            4 (annotations)
+            220 STORE_NAME              23 (_showUnplayableToast)
+
+251         222 LOAD_NAME               20 (pyqtSlot)
+            224 LOAD_NAME               16 (int)
+            226 LOAD_NAME               14 (str)
+            228 CALL_FUNCTION            2
+
+252         230 LOAD_NAME               16 (int)
+            232 LOAD_NAME               14 (str)
+            234 LOAD_CONST               2 (None)
+            236 LOAD_CONST              29 (('index', 'displayName', 'return'))
+            238 BUILD_CONST_KEY_MAP      3
+            240 LOAD_CONST              30 (<code object onPresetDeleteRequested at 0x000001F3253C40E0, file "PresetQml\LPPresetQmlViewController.py", line 251>)
+            242 LOAD_CONST              31 ('LPPresetQmlViewController.onPresetDeleteRequested')
+            244 MAKE_FUNCTION            4 (annotations)
+            246 CALL_FUNCTION            1
+            248 STORE_NAME              24 (onPresetDeleteRequested)
+
+266         250 LOAD_CONST               2 (None)
+            252 LOAD_CONST               6 (('return',))
+            254 BUILD_CONST_KEY_MAP      1
+            256 LOAD_CONST              32 (<code object viewWillAppear at 0x000001F3253C43A0, file "PresetQml\LPPresetQmlViewController.py", line 266>)
+            258 LOAD_CONST              33 ('LPPresetQmlViewController.viewWillAppear')
+            260 MAKE_FUNCTION            4 (annotations)
+            262 STORE_NAME              25 (viewWillAppear)
+
+275         264 LOAD_CONST               2 (None)
+            266 LOAD_CONST               6 (('return',))
+            268 BUILD_CONST_KEY_MAP      1
+            270 LOAD_CONST              34 (<code object viewWillDisappear at 0x000001F3253C49D0, file "PresetQml\LPPresetQmlViewController.py", line 275>)
+            272 LOAD_CONST              35 ('LPPresetQmlViewController.viewWillDisappear')
+            274 MAKE_FUNCTION            4 (annotations)
+            276 STORE_NAME              26 (viewWillDisappear)
+
+298         278 LOAD_CONST              64 ((None, None))
+            280 LOAD_CONST              36 (<code object deviceInfoUpdate at 0x000001F3253C4BE0, file "PresetQml\LPPresetQmlViewController.py", line 298>)
+            282 LOAD_CONST              37 ('LPPresetQmlViewController.deviceInfoUpdate')
+            284 MAKE_FUNCTION            1 (defaults)
+            286 STORE_NAME              27 (deviceInfoUpdate)
+
+331         288 LOAD_CONST               2 (None)
+            290 LOAD_CONST               6 (('return',))
+            292 BUILD_CONST_KEY_MAP      1
+            294 LOAD_CONST              38 (<code object _syncCurrentDeviceState at 0x000001F3253C4B30, file "PresetQml\LPPresetQmlViewController.py", line 331>)
+            296 LOAD_CONST              39 ('LPPresetQmlViewController._syncCurrentDeviceState')
+            298 MAKE_FUNCTION            4 (annotations)
+            300 STORE_NAME              28 (_syncCurrentDeviceState)
+
+355         302 LOAD_CONST               2 (None)
+            304 LOAD_CONST               6 (('return',))
+            306 BUILD_CONST_KEY_MAP      1
+            308 LOAD_CONST              40 (<code object _onAccountChanged at 0x000001F3253C4DF0, file "PresetQml\LPPresetQmlViewController.py", line 355>)
+            310 LOAD_CONST              41 ('LPPresetQmlViewController._onAccountChanged')
+            312 MAKE_FUNCTION            4 (annotations)
+            314 STORE_NAME              29 (_onAccountChanged)
+
+371         316 LOAD_CONST               2 (None)
+            318 LOAD_CONST               6 (('return',))
+            320 BUILD_CONST_KEY_MAP      1
+            322 LOAD_CONST              42 (<code object _refreshPlayableFlags at 0x000001F3253C4920, file "PresetQml\LPPresetQmlViewController.py", line 371>)
+            324 LOAD_CONST              43 ('LPPresetQmlViewController._refreshPlayableFlags')
+            326 MAKE_FUNCTION            4 (annotations)
+            328 STORE_NAME              30 (_refreshPlayableFlags)
+
+386         330 LOAD_NAME               31 (list)
+            332 LOAD_CONST               2 (None)
+            334 LOAD_CONST              44 (('items', 'return'))
+            336 BUILD_CONST_KEY_MAP      2
+            338 LOAD_CONST              45 (<code object _fetchDeviceAccountsForItems at 0x000001F324E69BE0, file "PresetQml\LPPresetQmlViewController.py", line 386>)
+            340 LOAD_CONST              46 ('LPPresetQmlViewController._fetchDeviceAccountsForItems')
+            342 MAKE_FUNCTION            4 (annotations)
+            344 STORE_NAME              32 (_fetchDeviceAccountsForItems)
+
+414         346 LOAD_CONST               2 (None)
+            348 LOAD_CONST               6 (('return',))
+            350 BUILD_CONST_KEY_MAP      1
+            352 LOAD_CONST              47 (<code object _refreshPlayingInfo at 0x000001F324E69DF0, file "PresetQml\LPPresetQmlViewController.py", line 414>)
+            354 LOAD_CONST              48 ('LPPresetQmlViewController._refreshPlayingInfo')
+            356 MAKE_FUNCTION            4 (annotations)
+            358 STORE_NAME              33 (_refreshPlayingInfo)
+
+463         360 LOAD_CONST               2 (None)
+            362 LOAD_CONST               6 (('return',))
+            364 BUILD_CONST_KEY_MAP      1
+            366 LOAD_CONST              49 (<code object _fetchCurrentQueueName at 0x000001F324E695B0, file "PresetQml\LPPresetQmlViewController.py", line 463>)
+            368 LOAD_CONST              50 ('LPPresetQmlViewController._fetchCurrentQueueName')
+            370 MAKE_FUNCTION            4 (annotations)
+            372 STORE_NAME              34 (_fetchCurrentQueueName)
+
+484         374 LOAD_NAME               14 (str)
+            376 LOAD_NAME               14 (str)
+            378 LOAD_CONST               2 (None)
+            380 LOAD_CONST              51 (('target_state', 'command', 'return'))
+            382 BUILD_CONST_KEY_MAP      3
+            384 LOAD_CONST              52 (<code object _togglePlayback at 0x000001F324E69F50, file "PresetQml\LPPresetQmlViewController.py", line 484>)
+            386 LOAD_CONST              53 ('LPPresetQmlViewController._togglePlayback')
+            388 MAKE_FUNCTION            4 (annotations)
+            390 STORE_NAME              35 (_togglePlayback)
+
+508         392 LOAD_CONST               2 (None)
+            394 LOAD_CONST               6 (('return',))
+            396 BUILD_CONST_KEY_MAP      1
+            398 LOAD_CONST              54 (<code object _fetchPresetList at 0x000001F324E690E0, file "PresetQml\LPPresetQmlViewController.py", line 508>)
+            400 LOAD_CONST              55 ('LPPresetQmlViewController._fetchPresetList')
+            402 MAKE_FUNCTION            4 (annotations)
+            404 STORE_NAME              36 (_fetchPresetList)
+
+570         406 LOAD_NAME               16 (int)
+            408 LOAD_CONST               2 (None)
+            410 LOAD_CONST              23 (('index', 'return'))
+            412 BUILD_CONST_KEY_MAP      2
+            414 LOAD_CONST              56 (<code object _removePresetItem at 0x000001F324E69B30, file "PresetQml\LPPresetQmlViewController.py", line 570>)
+            416 LOAD_CONST              57 ('LPPresetQmlViewController._removePresetItem')
+            418 MAKE_FUNCTION            4 (annotations)
+            420 STORE_NAME              37 (_removePresetItem)
+
+631         422 LOAD_NAME               14 (str)
+            424 LOAD_CONST               2 (None)
+            426 LOAD_CONST              58 (('state', 'return'))
+            428 BUILD_CONST_KEY_MAP      2
+            430 LOAD_CONST              59 (<code object _setPageState at 0x000001F324E692F0, file "PresetQml\LPPresetQmlViewController.py", line 631>)
+            432 LOAD_CONST              60 ('LPPresetQmlViewController._setPageState')
+            434 MAKE_FUNCTION            4 (annotations)
+            436 STORE_NAME              38 (_setPageState)
+
+643         438 LOAD_NAME               16 (int)
+            440 LOAD_NAME               14 (str)
+            442 LOAD_CONST               2 (None)
+            444 LOAD_CONST              29 (('index', 'displayName', 'return'))
+            446 BUILD_CONST_KEY_MAP      3
+            448 LOAD_CONST              61 (<code object _showDeleteConfirm at 0x000001F324E693A0, file "PresetQml\LPPresetQmlViewController.py", line 643>)
+            450 LOAD_CONST              62 ('LPPresetQmlViewController._showDeleteConfirm')
+            452 MAKE_FUNCTION            4 (annotations)
+            454 STORE_NAME              39 (_showDeleteConfirm)
+            456 LOAD_CLOSURE             0 (__class__)
+            458 DUP_TOP
+            460 STORE_NAME              40 (__classcell__)
+            462 RETURN_VALUE
+
+=== LPPresetQmlViewController.__init__ ===
+ 66           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 68          12 LOAD_GLOBAL              2 (STATE_LOADING)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               3 (_pageState)
+
+ 69          18 LOAD_CONST               1 (-1)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               4 (_playingPresetIndex)
+
+ 70          24 LOAD_CONST               2 ('')
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               5 (_playState)
+
+ 71          30 LOAD_CONST               2 ('')
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               6 (_currentQueueName)
+
+ 72          36 LOAD_CONST               2 ('')
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               7 (_trackedDeviceUuid)
+
+ 73          42 LOAD_CONST               3 (False)
+             44 LOAD_FAST                0 (self)
+             46 STORE_ATTR               8 (_observerRegistered)
+
+ 74          48 LOAD_CONST               3 (False)
+             50 LOAD_FAST                0 (self)
+             52 STORE_ATTR               9 (_accountObserverRegistered)
+
+ 75          54 LOAD_GLOBAL             10 (set)
+             56 CALL_FUNCTION            0
+             58 LOAD_FAST                0 (self)
+             60 STORE_ATTR              11 (_deviceAccountFetchInFlight)
+
+ 76          62 LOAD_CONST               4 (None)
+             64 LOAD_FAST                0 (self)
+             66 STORE_ATTR              12 (_xmlObj)
+
+ 79          68 LOAD_CONST               5 (True)
+             70 LOAD_FAST                0 (self)
+             72 STORE_ATTR              13 (deleteOnPrune)
+
+ 81          74 LOAD_CONST               6 (0)
+             76 LOAD_FAST                0 (self)
+             78 STORE_ATTR              14 (_fetchGeneration)
+
+ 83          80 LOAD_GLOBAL             15 (LPPresetListModel)
+             82 LOAD_FAST                0 (self)
+             84 CALL_FUNCTION            1
+             86 LOAD_FAST                0 (self)
+             88 STORE_ATTR              16 (presetModel)
+
+ 84          90 LOAD_GLOBAL             17 (LPPresetQmlStore)
+             92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR               16 (presetModel)
+             96 CALL_FUNCTION            1
+             98 LOAD_FAST                0 (self)
+            100 STORE_ATTR              18 (_store)
+
+ 86         102 LOAD_CONST               4 (None)
+            104 LOAD_FAST                0 (self)
+            106 STORE_ATTR              19 (quickWidget)
+
+ 88         108 LOAD_GLOBAL             20 (QVBoxLayout)
+            110 LOAD_FAST                0 (self)
+            112 CALL_FUNCTION            1
+            114 STORE_FAST               2 (layout)
+
+ 89         116 LOAD_FAST                2 (layout)
+            118 LOAD_METHOD             21 (setContentsMargins)
+            120 LOAD_CONST               6 (0)
+            122 LOAD_CONST               6 (0)
+            124 LOAD_CONST               6 (0)
+            126 LOAD_CONST               6 (0)
+            128 CALL_METHOD              4
+            130 POP_TOP
+
+ 90         132 LOAD_FAST                0 (self)
+            134 LOAD_METHOD             22 (_setupQmlPage)
+            136 CALL_METHOD              0
+            138 POP_TOP
+            140 LOAD_CONST               4 (None)
+            142 RETURN_VALUE
+
+=== LPPresetQmlViewController._setupQmlPage ===
+102           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (quickWidget)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    1
+              8 POP_JUMP_IF_FALSE       14
+
+103          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+104     >>   14 LOAD_GLOBAL              1 (QQuickWidget)
+             16 LOAD_FAST                0 (self)
+             18 CALL_FUNCTION            1
+             20 STORE_FAST               1 (quick)
+
+105          22 LOAD_FAST                1 (quick)
+             24 LOAD_METHOD              2 (setResizeMode)
+             26 LOAD_GLOBAL              1 (QQuickWidget)
+             28 LOAD_ATTR                3 (ResizeMode)
+             30 LOAD_ATTR                4 (SizeRootObjectToView)
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+106          36 LOAD_FAST                1 (quick)
+             38 LOAD_METHOD              5 (setAttribute)
+             40 LOAD_GLOBAL              6 (Qt)
+             42 LOAD_ATTR                7 (WidgetAttribute)
+             44 LOAD_ATTR                8 (WA_TranslucentBackground)
+             46 LOAD_CONST               2 (False)
+             48 CALL_METHOD              2
+             50 POP_TOP
+
+107          52 LOAD_FAST                1 (quick)
+             54 LOAD_METHOD              9 (setClearColor)
+             56 LOAD_GLOBAL             10 (LPGlobalUI)
+             58 LOAD_ATTR               11 (THEME_BACKGROUND_COLOR)
+             60 CALL_METHOD              1
+             62 POP_TOP
+
+108          64 LOAD_FAST                1 (quick)
+             66 LOAD_METHOD             12 (setStyleSheet)
+             68 LOAD_CONST               3 ('background-color: %s;')
+             70 LOAD_GLOBAL             10 (LPGlobalUI)
+             72 LOAD_ATTR               11 (THEME_BACKGROUND_COLOR)
+             74 LOAD_METHOD             13 (name)
+             76 CALL_METHOD              0
+             78 BINARY_MODULO
+             80 CALL_METHOD              1
+             82 POP_TOP
+
+110          84 LOAD_FAST                1 (quick)
+             86 LOAD_METHOD             14 (rootContext)
+             88 CALL_METHOD              0
+             90 STORE_FAST               2 (ctx)
+
+111          92 LOAD_FAST                2 (ctx)
+             94 LOAD_METHOD             15 (setContextProperty)
+             96 LOAD_CONST               4 ('controller')
+             98 LOAD_FAST                0 (self)
+            100 CALL_METHOD              2
+            102 POP_TOP
+
+112         104 LOAD_FAST                2 (ctx)
+            106 LOAD_METHOD             15 (setContextProperty)
+            108 LOAD_CONST               5 ('presetModel')
+            110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR               16 (presetModel)
+            114 CALL_METHOD              2
+            116 POP_TOP
+
+113         118 LOAD_FAST                0 (self)
+            120 LOAD_METHOD             17 (_applyThemeContext)
+            122 LOAD_FAST                2 (ctx)
+            124 CALL_METHOD              1
+            126 POP_TOP
+
+115         128 LOAD_FAST                1 (quick)
+            130 LOAD_METHOD             18 (setSource)
+            132 LOAD_GLOBAL             19 (QUrl)
+            134 LOAD_GLOBAL             20 (LPUIPath)
+            136 LOAD_ATTR               21 (PresetQmlPageQML)
+            138 CALL_FUNCTION            1
+            140 CALL_METHOD              1
+            142 POP_TOP
+
+116         144 LOAD_FAST                1 (quick)
+            146 LOAD_METHOD             22 (status)
+            148 CALL_METHOD              0
+            150 LOAD_GLOBAL              1 (QQuickWidget)
+            152 LOAD_ATTR               23 (Status)
+            154 LOAD_ATTR               24 (Ready)
+            156 COMPARE_OP               3 (!=)
+            158 POP_JUMP_IF_FALSE      212
+
+117         160 LOAD_GLOBAL             25 (logger)
+            162 LOAD_METHOD             26 (error)
+            164 LOAD_CONST               6 ('[PresetQml] QML load failed status=%s')
+            166 LOAD_FAST                1 (quick)
+            168 LOAD_METHOD             22 (status)
+            170 CALL_METHOD              0
+            172 BINARY_MODULO
+            174 CALL_METHOD              1
+            176 POP_TOP
+
+118         178 LOAD_FAST                1 (quick)
+            180 LOAD_METHOD             27 (errors)
+            182 CALL_METHOD              0
+            184 GET_ITER
+        >>  186 FOR_ITER                22 (to 210)
+            188 STORE_FAST               3 (err)
+
+119         190 LOAD_GLOBAL             25 (logger)
+            192 LOAD_METHOD             26 (error)
+            194 LOAD_CONST               7 ('[PresetQml] qml error: %s')
+            196 LOAD_FAST                3 (err)
+            198 LOAD_METHOD             28 (toString)
+            200 CALL_METHOD              0
+            202 BINARY_MODULO
+            204 CALL_METHOD              1
+            206 POP_TOP
+            208 JUMP_ABSOLUTE          186
+        >>  210 JUMP_FORWARD            10 (to 222)
+
+121     >>  212 LOAD_GLOBAL             25 (logger)
+            214 LOAD_METHOD             29 (debug)
+            216 LOAD_CONST               8 ('[PresetQml] QML loaded successfully')
+            218 CALL_METHOD              1
+            220 POP_TOP
+
+123     >>  222 LOAD_FAST                0 (self)
+            224 LOAD_METHOD             30 (layout)
+            226 CALL_METHOD              0
+            228 LOAD_METHOD             31 (addWidget)
+            230 LOAD_FAST                1 (quick)
+            232 CALL_METHOD              1
+            234 POP_TOP
+
+124         236 LOAD_FAST                1 (quick)
+            238 LOAD_FAST                0 (self)
+            240 STORE_ATTR               0 (quickWidget)
+            242 LOAD_CONST               1 (None)
+            244 RETURN_VALUE
+
+=== LPPresetQmlViewController._applyThemeContext ===
+133           0 LOAD_FAST                1 (ctx)
+              2 LOAD_METHOD              0 (setContextProperty)
+              4 LOAD_CONST               1 ('presetQmlBgColor')
+              6 LOAD_GLOBAL              1 (LPGlobalUI)
+              8 LOAD_ATTR                2 (THEME_BACKGROUND_COLOR_UI)
+             10 LOAD_METHOD              3 (name)
+             12 CALL_METHOD              0
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+134          18 LOAD_FAST                1 (ctx)
+             20 LOAD_METHOD              0 (setContextProperty)
+             22 LOAD_CONST               2 ('presetQmlItemBackColor')
+             24 LOAD_GLOBAL              1 (LPGlobalUI)
+             26 LOAD_ATTR                4 (THEME_ITEM_BACK_COLOR)
+             28 LOAD_METHOD              3 (name)
+             30 CALL_METHOD              0
+             32 CALL_METHOD              2
+             34 POP_TOP
+
+135          36 LOAD_FAST                1 (ctx)
+             38 LOAD_METHOD              0 (setContextProperty)
+             40 LOAD_CONST               3 ('presetQmlHoverBackColor')
+             42 LOAD_GLOBAL              1 (LPGlobalUI)
+             44 LOAD_ATTR                5 (THEME_TABLE_HOVER_BACK_COLOR)
+             46 LOAD_METHOD              3 (name)
+             48 CALL_METHOD              0
+             50 CALL_METHOD              2
+             52 POP_TOP
+
+136          54 LOAD_FAST                1 (ctx)
+             56 LOAD_METHOD              0 (setContextProperty)
+             58 LOAD_CONST               4 ('presetQmlDefaultColor')
+             60 LOAD_GLOBAL              1 (LPGlobalUI)
+             62 LOAD_ATTR                6 (THEME_DEFAULT_COLOR)
+             64 LOAD_METHOD              3 (name)
+             66 CALL_METHOD              0
+             68 CALL_METHOD              2
+             70 POP_TOP
+
+137          72 LOAD_FAST                1 (ctx)
+             74 LOAD_METHOD              0 (setContextProperty)
+             76 LOAD_CONST               5 ('presetQmlDisableColor')
+             78 LOAD_GLOBAL              1 (LPGlobalUI)
+             80 LOAD_ATTR                7 (THEME_DISABLE_COLOR)
+             82 LOAD_METHOD              3 (name)
+             84 CALL_METHOD              0
+             86 CALL_METHOD              2
+             88 POP_TOP
+
+138          90 LOAD_FAST                1 (ctx)
+             92 LOAD_METHOD              0 (setContextProperty)
+             94 LOAD_CONST               6 ('presetQmlHighlightColor')
+             96 LOAD_GLOBAL              1 (LPGlobalUI)
+             98 LOAD_ATTR                8 (THEME_HIGH_HIGH_COLOR)
+            100 LOAD_METHOD              3 (name)
+            102 CALL_METHOD              0
+            104 CALL_METHOD              2
+            106 POP_TOP
+            108 LOAD_CONST               7 (None)
+            110 RETURN_VALUE
+
+=== LPPresetQmlViewController.pageState ===
+151           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_pageState)
+              4 RETURN_VALUE
+
+=== LPPresetQmlViewController.titleFontSize ===
+160           0 LOAD_GLOBAL              0 (int)
+              2 LOAD_GLOBAL              1 (StackWidget_Title)
+              4 CALL_FUNCTION            1
+              6 RETURN_VALUE
+
+=== LPPresetQmlViewController.playingPresetIndex ===
+169           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_playingPresetIndex)
+              4 RETURN_VALUE
+
+=== LPPresetQmlViewController.playState ===
+178           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_playState)
+              4 RETURN_VALUE
+
+=== LPPresetQmlViewController.onPresetClicked ===
+195           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (presetModel)
+              4 LOAD_METHOD              1 (itemByIndex)
+              6 LOAD_FAST                1 (index)
+              8 CALL_METHOD              1
+             10 STORE_FAST               2 (item)
+
+196          12 LOAD_FAST                2 (item)
+             14 LOAD_CONST               1 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_TRUE        30
+             20 LOAD_FAST                2 (item)
+             22 LOAD_METHOD              2 (get)
+             24 LOAD_CONST               2 ('isEmpty')
+             26 CALL_METHOD              1
+             28 POP_JUMP_IF_FALSE       34
+
+197     >>   30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+198     >>   34 LOAD_FAST                2 (item)
+             36 LOAD_METHOD              2 (get)
+             38 LOAD_CONST               3 ('canPlay')
+             40 CALL_METHOD              1
+             42 POP_JUMP_IF_TRUE        58
+
+199          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              3 (_showUnplayableToast)
+             48 LOAD_FAST                2 (item)
+             50 CALL_METHOD              1
+             52 POP_TOP
+
+200          54 LOAD_CONST               1 (None)
+             56 RETURN_VALUE
+
+201     >>   58 LOAD_GLOBAL              4 (LPGlobalUI)
+             60 LOAD_ATTR                5 (currentDevice)
+             62 STORE_FAST               3 (device)
+
+202          64 LOAD_FAST                3 (device)
+             66 LOAD_CONST               1 (None)
+             68 IS_OP                    0
+             70 POP_JUMP_IF_FALSE       86
+
+203          72 LOAD_GLOBAL              6 (logger)
+             74 LOAD_METHOD              7 (debug)
+             76 LOAD_CONST               4 ('[PresetQml] click ignored: no current device')
+             78 CALL_METHOD              1
+             80 POP_TOP
+
+204          82 LOAD_CONST               1 (None)
+             84 RETURN_VALUE
+
+205     >>   86 LOAD_GLOBAL              6 (logger)
+             88 LOAD_METHOD              7 (debug)
+             90 LOAD_CONST               5 ('[PresetQml] click preset index=%d')
+             92 LOAD_FAST                1 (index)
+             94 BINARY_MODULO
+             96 CALL_METHOD              1
+             98 POP_TOP
+
+206         100 LOAD_FAST                1 (index)
+            102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                8 (_playingPresetIndex)
+            106 COMPARE_OP               2 (==)
+            108 POP_JUMP_IF_FALSE      152
+            110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR                9 (_playState)
+            114 LOAD_CONST               6 (('PLAYING', 'TRANSITIONING'))
+            116 CONTAINS_OP              0
+            118 POP_JUMP_IF_FALSE      152
+
+207         120 LOAD_GLOBAL              6 (logger)
+            122 LOAD_METHOD              7 (debug)
+            124 LOAD_CONST               7 ('[PresetQml] current preset playing -> Pause index=%d')
+            126 LOAD_FAST                1 (index)
+            128 BINARY_MODULO
+            130 CALL_METHOD              1
+            132 POP_TOP
+
+208         134 LOAD_FAST                0 (self)
+            136 LOAD_METHOD             10 (_togglePlayback)
+            138 LOAD_FAST                3 (device)
+            140 LOAD_CONST               8 ('PAUSED_PLAYBACK')
+            142 LOAD_CONST               9 ('Pause')
+            144 CALL_METHOD              3
+            146 POP_TOP
+
+209         148 LOAD_CONST               1 (None)
+            150 RETURN_VALUE
+
+210     >>  152 LOAD_FAST                1 (index)
+            154 LOAD_FAST                0 (self)
+            156 LOAD_ATTR                8 (_playingPresetIndex)
+            158 COMPARE_OP               2 (==)
+            160 POP_JUMP_IF_FALSE      204
+            162 LOAD_FAST                0 (self)
+            164 LOAD_ATTR                9 (_playState)
+            166 LOAD_CONST               8 ('PAUSED_PLAYBACK')
+            168 COMPARE_OP               2 (==)
+            170 POP_JUMP_IF_FALSE      204
+
+211         172 LOAD_GLOBAL              6 (logger)
+            174 LOAD_METHOD              7 (debug)
+            176 LOAD_CONST              10 ('[PresetQml] current preset paused -> Play index=%d')
+            178 LOAD_FAST                1 (index)
+            180 BINARY_MODULO
+            182 CALL_METHOD              1
+            184 POP_TOP
+
+212         186 LOAD_FAST                0 (self)
+            188 LOAD_METHOD             10 (_togglePlayback)
+            190 LOAD_FAST                3 (device)
+            192 LOAD_CONST              11 ('PLAYING')
+            194 LOAD_CONST              12 ('Play')
+            196 CALL_METHOD              3
+            198 POP_TOP
+
+213         200 LOAD_CONST               1 (None)
+            202 RETURN_VALUE
+
+214     >>  204 SETUP_FINALLY           18 (to 224)
+
+215         206 LOAD_FAST                3 (device)
+            208 LOAD_METHOD             11 (commonHttpGet)
+            210 LOAD_CONST              13 ('MCUKeyShortClick:%d')
+            212 LOAD_FAST                1 (index)
+            214 BINARY_MODULO
+            216 CALL_METHOD              1
+            218 POP_TOP
+            220 POP_BLOCK
+            222 JUMP_FORWARD            58 (to 282)
+
+216     >>  224 DUP_TOP
+            226 LOAD_GLOBAL             12 (Exception)
+            228 EXTENDED_ARG             1
+            230 JUMP_IF_NOT_EXC_MATCH   280
+            232 POP_TOP
+            234 STORE_FAST               4 (exc)
+            236 POP_TOP
+            238 SETUP_FINALLY           32 (to 272)
+
+217         240 LOAD_GLOBAL              6 (logger)
+            242 LOAD_METHOD             13 (error)
+            244 LOAD_CONST              14 ('[PresetQml] MCUKeyShortClick failed index=%s err=%s')
+            246 LOAD_FAST                1 (index)
+            248 LOAD_FAST                4 (exc)
+            250 BUILD_TUPLE              2
+            252 BINARY_MODULO
+            254 CALL_METHOD              1
+            256 POP_TOP
+
+218         258 POP_BLOCK
+            260 POP_EXCEPT
+            262 LOAD_CONST               1 (None)
+            264 STORE_FAST               4 (exc)
+            266 DELETE_FAST              4 (exc)
+            268 LOAD_CONST               1 (None)
+            270 RETURN_VALUE
+        >>  272 LOAD_CONST               1 (None)
+            274 STORE_FAST               4 (exc)
+            276 DELETE_FAST              4 (exc)
+            278 RERAISE
+        >>  280 RERAISE
+
+220     >>  282 LOAD_FAST                1 (index)
+            284 LOAD_FAST                0 (self)
+            286 STORE_ATTR               8 (_playingPresetIndex)
+
+221         288 LOAD_CONST              15 ('TRANSITIONING')
+            290 LOAD_FAST                0 (self)
+            292 STORE_ATTR               9 (_playState)
+
+222         294 LOAD_FAST                0 (self)
+            296 LOAD_ATTR               14 (playingInfoChanged)
+            298 LOAD_METHOD             15 (emit)
+            300 CALL_METHOD              0
+            302 POP_TOP
+            304 LOAD_CONST               1 (None)
+            306 RETURN_VALUE
+
+=== LPPresetQmlViewController._showUnplayableToast ===
+233           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (item)
+              4 LOAD_METHOD              1 (get)
+              6 LOAD_CONST               1 ('source')
+              8 LOAD_CONST               2 ('')
+             10 CALL_METHOD              2
+             12 JUMP_IF_TRUE_OR_POP     16
+             14 LOAD_CONST               2 ('')
+        >>   16 CALL_FUNCTION            1
+             18 STORE_FAST               2 (source)
+
+234          20 LOAD_GLOBAL              2 (LPStreamServiceManager)
+             22 LOAD_METHOD              3 (supportContents)
+             24 CALL_METHOD              0
+             26 STORE_FAST               3 (support)
+
+235          28 LOAD_FAST                2 (source)
+             30 LOAD_CONST               3 ('Pandora')
+             32 COMPARE_OP               2 (==)
+             34 POP_JUMP_IF_FALSE       94
+             36 LOAD_CONST               4 ('Pandora2')
+             38 LOAD_FAST                3 (support)
+             40 CONTAINS_OP              0
+             42 POP_JUMP_IF_FALSE       94
+
+236          44 LOAD_GLOBAL              0 (str)
+             46 LOAD_FAST                3 (support)
+             48 LOAD_METHOD              1 (get)
+             50 LOAD_CONST               4 ('Pandora2')
+             52 CALL_METHOD              1
+             54 JUMP_IF_TRUE_OR_POP     58
+             56 BUILD_MAP                0
+        >>   58 LOAD_METHOD              1 (get)
+             60 LOAD_CONST               5 ('title')
+             62 LOAD_CONST               2 ('')
+             64 CALL_METHOD              2
+             66 JUMP_IF_TRUE_OR_POP     70
+             68 LOAD_CONST               3 ('Pandora')
+        >>   70 CALL_FUNCTION            1
+             72 STORE_FAST               4 (title)
+
+237          74 LOAD_GLOBAL              4 (QCoreApplication)
+             76 LOAD_METHOD              5 (translate)
+
+238          78 LOAD_CONST               6 ('Preset')
+
+239          80 LOAD_CONST               7 ('Your {0} preset has expired after the {0} upgrade. Please set it again.')
+
+237          82 CALL_METHOD              2
+             84 LOAD_METHOD              6 (format)
+
+240          86 LOAD_FAST                4 (title)
+
+237          88 CALL_METHOD              1
+             90 STORE_FAST               5 (msg)
+             92 JUMP_FORWARD            48 (to 142)
+
+242     >>   94 LOAD_GLOBAL              0 (str)
+             96 LOAD_FAST                3 (support)
+             98 LOAD_METHOD              1 (get)
+            100 LOAD_FAST                2 (source)
+            102 CALL_METHOD              1
+            104 JUMP_IF_TRUE_OR_POP    108
+            106 BUILD_MAP                0
+        >>  108 LOAD_METHOD              1 (get)
+            110 LOAD_CONST               5 ('title')
+            112 LOAD_CONST               2 ('')
+            114 CALL_METHOD              2
+            116 JUMP_IF_TRUE_OR_POP    120
+            118 LOAD_FAST                2 (source)
+        >>  120 CALL_FUNCTION            1
+            122 STORE_FAST               4 (title)
+
+243         124 LOAD_GLOBAL              4 (QCoreApplication)
+            126 LOAD_METHOD              5 (translate)
+
+244         128 LOAD_CONST               6 ('Preset')
+
+245         130 LOAD_CONST               8 ('Your {0} account has been logged out on your device.')
+
+243         132 CALL_METHOD              2
+            134 LOAD_METHOD              6 (format)
+
+245         136 LOAD_FAST                4 (title)
+
+243         138 CALL_METHOD              1
+            140 STORE_FAST               5 (msg)
+
+246     >>  142 LOAD_GLOBAL              7 (logger)
+            144 LOAD_METHOD              8 (debug)
+            146 LOAD_CONST               9 ('[PresetQml] click blocked: source=%r canPlay=False')
+            148 LOAD_FAST                2 (source)
+            150 BINARY_MODULO
+            152 CALL_METHOD              1
+            154 POP_TOP
+
+247         156 LOAD_GLOBAL              9 (getattr)
+            158 LOAD_GLOBAL             10 (LPGlobalUI)
+            160 LOAD_CONST              10 ('toast')
+            162 LOAD_CONST              11 (None)
+            164 CALL_FUNCTION            3
+            166 STORE_FAST               6 (toast)
+
+248         168 LOAD_FAST                6 (toast)
+            170 LOAD_CONST              11 (None)
+            172 IS_OP                    1
+            174 POP_JUMP_IF_FALSE      196
+
+249         176 LOAD_FAST                6 (toast)
+            178 LOAD_METHOD             11 (showToast)
+            180 LOAD_FAST                5 (msg)
+            182 LOAD_GLOBAL              9 (getattr)
+            184 LOAD_GLOBAL             10 (LPGlobalUI)
+            186 LOAD_CONST              12 ('mainWindow')
+            188 LOAD_CONST              11 (None)
+            190 CALL_FUNCTION            3
+            192 CALL_METHOD              2
+            194 POP_TOP
+        >>  196 LOAD_CONST              11 (None)
+            198 RETURN_VALUE
+
+=== LPPresetQmlViewController.onPresetDeleteRequested ===
+260           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_showDeleteConfirm)
+              4 LOAD_FAST                1 (index)
+              6 LOAD_FAST                2 (displayName)
+              8 CALL_METHOD              2
+             10 POP_TOP
+             12 LOAD_CONST               1 (None)
+             14 RETURN_VALUE
+
+=== LPPresetQmlViewController.viewWillAppear ===
+272           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_fetchPresetList)
+              4 CALL_METHOD              0
+              6 POP_TOP
+
+273           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (_syncCurrentDeviceState)
+             12 CALL_METHOD              0
+             14 POP_TOP
+             16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+=== LPPresetQmlViewController.viewWillDisappear ===
+285           0 LOAD_FAST                0 (self)
+              2 DUP_TOP
+              4 LOAD_ATTR                0 (_fetchGeneration)
+              6 LOAD_CONST               1 (1)
+              8 INPLACE_ADD
+             10 ROT_TWO
+             12 STORE_ATTR               0 (_fetchGeneration)
+
+286          14 LOAD_CONST               2 (None)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               1 (_xmlObj)
+
+287          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_observerRegistered)
+             24 POP_JUMP_IF_FALSE       42
+
+288          26 LOAD_GLOBAL              3 (LPUtility)
+             28 LOAD_METHOD              4 (deRegisterDeviceInfoChanged)
+             30 LOAD_FAST                0 (self)
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+289          36 LOAD_CONST               3 (False)
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               2 (_observerRegistered)
+
+290     >>   42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                5 (_accountObserverRegistered)
+             46 POP_JUMP_IF_FALSE       68
+
+291          48 LOAD_GLOBAL              3 (LPUtility)
+             50 LOAD_METHOD              6 (removeNotificationObserver)
+             52 LOAD_CONST               4 ('accountChanged')
+             54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                7 (_onAccountChanged)
+             58 CALL_METHOD              2
+             60 POP_TOP
+
+292          62 LOAD_CONST               3 (False)
+             64 LOAD_FAST                0 (self)
+             66 STORE_ATTR               5 (_accountObserverRegistered)
+        >>   68 LOAD_CONST               2 (None)
+             70 RETURN_VALUE
+
+=== LPPresetQmlViewController.deviceInfoUpdate ===
+307           0 LOAD_FAST                2 (infoType)
+              2 LOAD_CONST               1 ('accountRegister')
+              4 COMPARE_OP               2 (==)
+              6 POP_JUMP_IF_FALSE       58
+
+309           8 LOAD_FAST                3 (detail)
+             10 JUMP_IF_TRUE_OR_POP     14
+             12 BUILD_MAP                0
+        >>   14 LOAD_METHOD              0 (get)
+             16 LOAD_CONST               2 ('source')
+             18 LOAD_CONST               3 (None)
+             20 CALL_METHOD              2
+             22 STORE_FAST               4 (fetch_source)
+
+310          24 LOAD_FAST                4 (fetch_source)
+             26 POP_JUMP_IF_FALSE       40
+
+311          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                1 (_deviceAccountFetchInFlight)
+             32 LOAD_METHOD              2 (discard)
+             34 LOAD_FAST                4 (fetch_source)
+             36 CALL_METHOD              1
+             38 POP_TOP
+
+312     >>   40 LOAD_GLOBAL              3 (QTimer)
+             42 LOAD_METHOD              4 (singleShot)
+             44 LOAD_CONST               4 (0)
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                5 (_refreshPlayableFlags)
+             50 CALL_METHOD              2
+             52 POP_TOP
+
+313          54 LOAD_CONST               3 (None)
+             56 RETURN_VALUE
+
+314     >>   58 LOAD_FAST                2 (infoType)
+             60 LOAD_CONST               5 ('accountChange')
+             62 COMPARE_OP               2 (==)
+             64 POP_JUMP_IF_FALSE       84
+
+316          66 LOAD_GLOBAL              3 (QTimer)
+             68 LOAD_METHOD              4 (singleShot)
+             70 LOAD_CONST               4 (0)
+             72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR                5 (_refreshPlayableFlags)
+             76 CALL_METHOD              2
+             78 POP_TOP
+
+317          80 LOAD_CONST               3 (None)
+             82 RETURN_VALUE
+
+318     >>   84 LOAD_FAST                2 (infoType)
+             86 LOAD_CONST               6 ('media')
+             88 COMPARE_OP               3 (!=)
+             90 POP_JUMP_IF_FALSE       96
+
+319          92 LOAD_CONST               3 (None)
+             94 RETURN_VALUE
+
+320     >>   96 LOAD_GLOBAL              6 (getattr)
+             98 LOAD_GLOBAL              7 (LPGlobalUI)
+            100 LOAD_CONST               7 ('currentDevice')
+            102 LOAD_CONST               3 (None)
+            104 CALL_FUNCTION            3
+            106 STORE_FAST               5 (current_device)
+
+321         108 LOAD_FAST                5 (current_device)
+            110 LOAD_CONST               3 (None)
+            112 IS_OP                    1
+            114 POP_JUMP_IF_FALSE      184
+            116 LOAD_FAST                1 (device)
+            118 LOAD_CONST               3 (None)
+            120 IS_OP                    1
+            122 POP_JUMP_IF_FALSE      184
+
+322         124 LOAD_GLOBAL              8 (str)
+            126 LOAD_GLOBAL              6 (getattr)
+            128 LOAD_FAST                5 (current_device)
+            130 LOAD_CONST               8 ('uuid')
+            132 LOAD_CONST               9 ('')
+            134 CALL_FUNCTION            3
+            136 JUMP_IF_TRUE_OR_POP    140
+            138 LOAD_CONST               9 ('')
+        >>  140 CALL_FUNCTION            1
+            142 STORE_FAST               6 (current_uuid)
+
+323         144 LOAD_GLOBAL              8 (str)
+            146 LOAD_GLOBAL              6 (getattr)
+            148 LOAD_FAST                1 (device)
+            150 LOAD_CONST               8 ('uuid')
+            152 LOAD_CONST               9 ('')
+            154 CALL_FUNCTION            3
+            156 JUMP_IF_TRUE_OR_POP    160
+            158 LOAD_CONST               9 ('')
+        >>  160 CALL_FUNCTION            1
+            162 STORE_FAST               7 (notify_uuid)
+
+324         164 LOAD_FAST                6 (current_uuid)
+            166 POP_JUMP_IF_FALSE      184
+            168 LOAD_FAST                7 (notify_uuid)
+            170 POP_JUMP_IF_FALSE      184
+            172 LOAD_FAST                6 (current_uuid)
+            174 LOAD_FAST                7 (notify_uuid)
+            176 COMPARE_OP               3 (!=)
+            178 POP_JUMP_IF_FALSE      184
+
+325         180 LOAD_CONST               3 (None)
+            182 RETURN_VALUE
+
+326     >>  184 LOAD_CONST              10 ('queueName')
+            186 LOAD_FAST                3 (detail)
+            188 JUMP_IF_TRUE_OR_POP    192
+            190 BUILD_MAP                0
+        >>  192 CONTAINS_OP              0
+            194 POP_JUMP_IF_FALSE      242
+
+327         196 LOAD_GLOBAL              8 (str)
+            198 LOAD_FAST                3 (detail)
+            200 JUMP_IF_TRUE_OR_POP    204
+            202 BUILD_MAP                0
+        >>  204 LOAD_METHOD              0 (get)
+            206 LOAD_CONST              10 ('queueName')
+            208 LOAD_CONST               9 ('')
+            210 CALL_METHOD              2
+            212 JUMP_IF_TRUE_OR_POP    216
+            214 LOAD_CONST               9 ('')
+        >>  216 CALL_FUNCTION            1
+            218 LOAD_METHOD              9 (strip)
+            220 CALL_METHOD              0
+            222 LOAD_FAST                0 (self)
+            224 STORE_ATTR              10 (_currentQueueName)
+
+328         226 LOAD_GLOBAL             11 (logger)
+            228 LOAD_METHOD             12 (debug)
+            230 LOAD_CONST              11 ('[PresetQml] cached queueName=%r')
+            232 LOAD_FAST                0 (self)
+            234 LOAD_ATTR               10 (_currentQueueName)
+            236 BINARY_MODULO
+            238 CALL_METHOD              1
+            240 POP_TOP
+
+329     >>  242 LOAD_GLOBAL              3 (QTimer)
+            244 LOAD_METHOD              4 (singleShot)
+            246 LOAD_CONST               4 (0)
+            248 LOAD_FAST                0 (self)
+            250 LOAD_ATTR               13 (_refreshPlayingInfo)
+            252 CALL_METHOD              2
+            254 POP_TOP
+            256 LOAD_CONST               3 (None)
+            258 RETURN_VALUE
+
+=== LPPresetQmlViewController._syncCurrentDeviceState ===
+337           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPGlobalUI)
+              4 LOAD_CONST               1 ('currentDevice')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               1 (device)
+
+338          12 LOAD_FAST                1 (device)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    1
+             18 POP_JUMP_IF_FALSE       40
+             20 LOAD_GLOBAL              2 (str)
+             22 LOAD_GLOBAL              0 (getattr)
+             24 LOAD_FAST                1 (device)
+             26 LOAD_CONST               3 ('uuid')
+             28 LOAD_CONST               4 ('')
+             30 CALL_FUNCTION            3
+             32 JUMP_IF_TRUE_OR_POP     36
+             34 LOAD_CONST               4 ('')
+        >>   36 CALL_FUNCTION            1
+             38 JUMP_FORWARD             2 (to 42)
+        >>   40 LOAD_CONST               4 ('')
+        >>   42 STORE_FAST               2 (device_uuid)
+
+339          44 LOAD_FAST                2 (device_uuid)
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                3 (_trackedDeviceUuid)
+             50 COMPARE_OP               3 (!=)
+             52 POP_JUMP_IF_FALSE       88
+
+340          54 LOAD_FAST                2 (device_uuid)
+             56 LOAD_FAST                0 (self)
+             58 STORE_ATTR               3 (_trackedDeviceUuid)
+
+341          60 LOAD_CONST               4 ('')
+             62 LOAD_FAST                0 (self)
+             64 STORE_ATTR               4 (_currentQueueName)
+
+342          66 LOAD_CONST               5 (-1)
+             68 LOAD_FAST                0 (self)
+             70 STORE_ATTR               5 (_playingPresetIndex)
+
+343          72 LOAD_CONST               4 ('')
+             74 LOAD_FAST                0 (self)
+             76 STORE_ATTR               6 (_playState)
+
+344          78 LOAD_FAST                0 (self)
+             80 LOAD_ATTR                7 (playingInfoChanged)
+             82 LOAD_METHOD              8 (emit)
+             84 CALL_METHOD              0
+             86 POP_TOP
+
+345     >>   88 LOAD_FAST                0 (self)
+             90 LOAD_ATTR                9 (_observerRegistered)
+             92 POP_JUMP_IF_TRUE       110
+
+346          94 LOAD_GLOBAL             10 (LPUtility)
+             96 LOAD_METHOD             11 (registerDeviceInfoChanged)
+             98 LOAD_FAST                0 (self)
+            100 CALL_METHOD              1
+            102 POP_TOP
+
+347         104 LOAD_CONST               6 (True)
+            106 LOAD_FAST                0 (self)
+            108 STORE_ATTR               9 (_observerRegistered)
+
+348     >>  110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR               12 (_accountObserverRegistered)
+            114 POP_JUMP_IF_TRUE       136
+
+349         116 LOAD_GLOBAL             10 (LPUtility)
+            118 LOAD_METHOD             13 (addNotificationObserver)
+            120 LOAD_CONST               7 ('accountChanged')
+            122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR               14 (_onAccountChanged)
+            126 CALL_METHOD              2
+            128 POP_TOP
+
+350         130 LOAD_CONST               6 (True)
+            132 LOAD_FAST                0 (self)
+            134 STORE_ATTR              12 (_accountObserverRegistered)
+
+351     >>  136 LOAD_FAST                0 (self)
+            138 LOAD_ATTR                4 (_currentQueueName)
+            140 POP_JUMP_IF_TRUE       150
+
+352         142 LOAD_FAST                0 (self)
+            144 LOAD_METHOD             15 (_fetchCurrentQueueName)
+            146 CALL_METHOD              0
+            148 POP_TOP
+
+353     >>  150 LOAD_FAST                0 (self)
+            152 LOAD_METHOD             16 (_refreshPlayingInfo)
+            154 CALL_METHOD              0
+            156 POP_TOP
+            158 LOAD_CONST               2 (None)
+            160 RETURN_VALUE
+
+=== LPPresetQmlViewController._onAccountChanged ===
+362           0 LOAD_FAST                1 (params)
+              2 JUMP_IF_TRUE_OR_POP      6
+              4 BUILD_MAP                0
+        >>    6 LOAD_METHOD              0 (get)
+              8 LOAD_CONST               1 ('device')
+             10 LOAD_CONST               2 (None)
+             12 CALL_METHOD              2
+             14 STORE_FAST               2 (device)
+
+363          16 LOAD_GLOBAL              1 (getattr)
+             18 LOAD_GLOBAL              2 (LPGlobalUI)
+             20 LOAD_CONST               3 ('currentDevice')
+             22 LOAD_CONST               2 (None)
+             24 CALL_FUNCTION            3
+             26 STORE_FAST               3 (current_device)
+
+364          28 LOAD_FAST                2 (device)
+             30 LOAD_CONST               2 (None)
+             32 IS_OP                    1
+             34 POP_JUMP_IF_FALSE      104
+             36 LOAD_FAST                3 (current_device)
+             38 LOAD_CONST               2 (None)
+             40 IS_OP                    1
+             42 POP_JUMP_IF_FALSE      104
+
+365          44 LOAD_GLOBAL              3 (str)
+             46 LOAD_GLOBAL              1 (getattr)
+             48 LOAD_FAST                2 (device)
+             50 LOAD_CONST               4 ('uuid')
+             52 LOAD_CONST               5 ('')
+             54 CALL_FUNCTION            3
+             56 JUMP_IF_TRUE_OR_POP     60
+             58 LOAD_CONST               5 ('')
+        >>   60 CALL_FUNCTION            1
+             62 STORE_FAST               4 (device_uuid)
+
+366          64 LOAD_GLOBAL              3 (str)
+             66 LOAD_GLOBAL              1 (getattr)
+             68 LOAD_FAST                3 (current_device)
+             70 LOAD_CONST               4 ('uuid')
+             72 LOAD_CONST               5 ('')
+             74 CALL_FUNCTION            3
+             76 JUMP_IF_TRUE_OR_POP     80
+             78 LOAD_CONST               5 ('')
+        >>   80 CALL_FUNCTION            1
+             82 STORE_FAST               5 (current_uuid)
+
+367          84 LOAD_FAST                4 (device_uuid)
+             86 POP_JUMP_IF_FALSE      104
+             88 LOAD_FAST                5 (current_uuid)
+             90 POP_JUMP_IF_FALSE      104
+             92 LOAD_FAST                4 (device_uuid)
+             94 LOAD_FAST                5 (current_uuid)
+             96 COMPARE_OP               3 (!=)
+             98 POP_JUMP_IF_FALSE      104
+
+368         100 LOAD_CONST               2 (None)
+            102 RETURN_VALUE
+
+369     >>  104 LOAD_GLOBAL              4 (QTimer)
+            106 LOAD_METHOD              5 (singleShot)
+            108 LOAD_CONST               6 (0)
+            110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR                6 (_refreshPlayableFlags)
+            114 CALL_METHOD              2
+            116 POP_TOP
+            118 LOAD_CONST               2 (None)
+            120 RETURN_VALUE
+
+=== LPPresetQmlViewController._refreshPlayableFlags ===
+377           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPGlobalUI)
+              4 LOAD_CONST               1 ('currentDevice')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               1 (device)
+
+378          12 LOAD_FAST                1 (device)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       24
+
+379          20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+380     >>   24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (presetModel)
+             28 LOAD_ATTR                3 (items)
+             30 GET_ITER
+        >>   32 FOR_ITER                68 (to 102)
+             34 STORE_FAST               2 (item)
+
+381          36 LOAD_FAST                2 (item)
+             38 LOAD_METHOD              4 (get)
+             40 LOAD_CONST               3 ('isEmpty')
+             42 CALL_METHOD              1
+             44 POP_JUMP_IF_FALSE       48
+
+382          46 JUMP_ABSOLUTE           32
+
+383     >>   48 LOAD_GLOBAL              5 (presetSourceCanPlay)
+             50 LOAD_GLOBAL              6 (str)
+             52 LOAD_FAST                2 (item)
+             54 LOAD_METHOD              4 (get)
+             56 LOAD_CONST               4 ('source')
+             58 LOAD_CONST               5 ('')
+             60 CALL_METHOD              2
+             62 JUMP_IF_TRUE_OR_POP     66
+             64 LOAD_CONST               5 ('')
+        >>   66 CALL_FUNCTION            1
+             68 LOAD_FAST                1 (device)
+             70 CALL_FUNCTION            2
+             72 STORE_FAST               3 (can_play)
+
+384          74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                2 (presetModel)
+             78 LOAD_METHOD              7 (updateCanPlay)
+             80 LOAD_GLOBAL              8 (int)
+             82 LOAD_FAST                2 (item)
+             84 LOAD_METHOD              4 (get)
+             86 LOAD_CONST               6 ('index')
+             88 LOAD_CONST               7 (0)
+             90 CALL_METHOD              2
+             92 CALL_FUNCTION            1
+             94 LOAD_FAST                3 (can_play)
+             96 CALL_METHOD              2
+             98 POP_TOP
+            100 JUMP_ABSOLUTE           32
+        >>  102 LOAD_CONST               2 (None)
+            104 RETURN_VALUE
+
+=== LPPresetQmlViewController._fetchDeviceAccountsForItems ===
+396           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPGlobalUI)
+              4 LOAD_CONST               1 ('currentDevice')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               2 (device)
+
+397          12 LOAD_FAST                2 (device)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    1
+             18 POP_JUMP_IF_FALSE       32
+             20 LOAD_GLOBAL              0 (getattr)
+             22 LOAD_FAST                2 (device)
+             24 LOAD_CONST               3 ('deviceStreamServiceManager')
+             26 LOAD_CONST               2 (None)
+             28 CALL_FUNCTION            3
+             30 JUMP_FORWARD             2 (to 34)
+        >>   32 LOAD_CONST               2 (None)
+        >>   34 STORE_FAST               3 (manager)
+
+398          36 LOAD_FAST                3 (manager)
+             38 LOAD_CONST               2 (None)
+             40 IS_OP                    0
+             42 POP_JUMP_IF_FALSE       48
+
+399          44 LOAD_CONST               2 (None)
+             46 RETURN_VALUE
+
+400     >>   48 LOAD_FAST                1 (items)
+             50 JUMP_IF_TRUE_OR_POP     54
+             52 BUILD_LIST               0
+        >>   54 GET_ITER
+        >>   56 FOR_ITER               100 (to 158)
+             58 STORE_FAST               4 (item)
+
+401          60 LOAD_FAST                4 (item)
+             62 LOAD_METHOD              2 (get)
+             64 LOAD_CONST               4 ('isEmpty')
+             66 CALL_METHOD              1
+             68 POP_JUMP_IF_FALSE       72
+
+402          70 JUMP_ABSOLUTE           56
+
+403     >>   72 LOAD_GLOBAL              3 (str)
+             74 LOAD_FAST                4 (item)
+             76 LOAD_METHOD              2 (get)
+             78 LOAD_CONST               5 ('source')
+             80 LOAD_CONST               6 ('')
+             82 CALL_METHOD              2
+             84 JUMP_IF_TRUE_OR_POP     88
+             86 LOAD_CONST               6 ('')
+        >>   88 CALL_FUNCTION            1
+             90 STORE_FAST               5 (source)
+
+404          92 LOAD_FAST                5 (source)
+             94 POP_JUMP_IF_TRUE        98
+
+405          96 JUMP_ABSOLUTE           56
+
+406     >>   98 LOAD_GLOBAL              4 (presetSourceNeedsDeviceAccount)
+            100 LOAD_FAST                5 (source)
+            102 CALL_FUNCTION            1
+            104 POP_JUMP_IF_TRUE       108
+
+407         106 JUMP_ABSOLUTE           56
+
+408     >>  108 LOAD_FAST                5 (source)
+            110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR                5 (_deviceAccountFetchInFlight)
+            114 CONTAINS_OP              0
+            116 POP_JUMP_IF_FALSE      120
+
+409         118 JUMP_ABSOLUTE           56
+
+410     >>  120 LOAD_FAST                3 (manager)
+            122 LOAD_METHOD              6 (deviceAccountForSource)
+            124 LOAD_FAST                5 (source)
+            126 CALL_METHOD              1
+            128 LOAD_GLOBAL              7 (DEVICE_ACCOUNT_UNKNOWN)
+            130 IS_OP                    0
+            132 POP_JUMP_IF_FALSE       56
+
+411         134 LOAD_FAST                0 (self)
+            136 LOAD_ATTR                5 (_deviceAccountFetchInFlight)
+            138 LOAD_METHOD              8 (add)
+            140 LOAD_FAST                5 (source)
+            142 CALL_METHOD              1
+            144 POP_TOP
+
+412         146 LOAD_FAST                2 (device)
+            148 LOAD_METHOD              9 (updateUserInfoForSource)
+            150 LOAD_FAST                5 (source)
+            152 CALL_METHOD              1
+            154 POP_TOP
+            156 JUMP_ABSOLUTE           56
+        >>  158 LOAD_CONST               2 (None)
+            160 RETURN_VALUE
+
+=== LPPresetQmlViewController._refreshPlayingInfo ===
+420           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPGlobalUI)
+              4 LOAD_CONST               1 ('currentDevice')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               1 (device)
+
+421          12 LOAD_FAST                1 (device)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    1
+             18 POP_JUMP_IF_FALSE       32
+             20 LOAD_GLOBAL              0 (getattr)
+             22 LOAD_FAST                1 (device)
+             24 LOAD_CONST               3 ('mediaInfo')
+             26 LOAD_CONST               2 (None)
+             28 CALL_FUNCTION            3
+             30 JUMP_FORWARD             2 (to 34)
+        >>   32 LOAD_CONST               2 (None)
+        >>   34 STORE_FAST               2 (media)
+
+422          36 LOAD_FAST                2 (media)
+             38 LOAD_CONST               2 (None)
+             40 IS_OP                    1
+             42 POP_JUMP_IF_FALSE       64
+             44 LOAD_GLOBAL              2 (str)
+             46 LOAD_GLOBAL              0 (getattr)
+             48 LOAD_FAST                2 (media)
+             50 LOAD_CONST               4 ('playState')
+             52 LOAD_CONST               5 ('')
+             54 CALL_FUNCTION            3
+             56 JUMP_IF_TRUE_OR_POP     60
+             58 LOAD_CONST               5 ('')
+        >>   60 CALL_FUNCTION            1
+             62 JUMP_FORWARD             2 (to 66)
+        >>   64 LOAD_CONST               5 ('')
+        >>   66 STORE_FAST               3 (play_state)
+
+423          68 LOAD_CONST               6 (-1)
+             70 STORE_FAST               4 (new_index)
+
+424          72 LOAD_CONST               5 ('')
+             74 STORE_FAST               5 (new_state)
+
+425          76 LOAD_FAST                3 (play_state)
+             78 LOAD_CONST               7 (('', 'STOPPED', 'NO_MEDIA_PRESENT'))
+             80 CONTAINS_OP              1
+             82 EXTENDED_ARG             1
+             84 POP_JUMP_IF_FALSE      388
+
+426          86 LOAD_FAST                2 (media)
+             88 LOAD_CONST               2 (None)
+             90 IS_OP                    1
+             92 POP_JUMP_IF_FALSE      114
+             94 LOAD_GLOBAL              2 (str)
+             96 LOAD_GLOBAL              0 (getattr)
+             98 LOAD_FAST                2 (media)
+            100 LOAD_CONST               8 ('trackSource')
+            102 LOAD_CONST               5 ('')
+            104 CALL_FUNCTION            3
+            106 JUMP_IF_TRUE_OR_POP    110
+            108 LOAD_CONST               5 ('')
+        >>  110 CALL_FUNCTION            1
+            112 JUMP_FORWARD             2 (to 116)
+        >>  114 LOAD_CONST               5 ('')
+        >>  116 STORE_FAST               6 (source)
+
+427         118 LOAD_FAST                2 (media)
+            120 LOAD_CONST               2 (None)
+            122 IS_OP                    1
+            124 POP_JUMP_IF_FALSE      146
+            126 LOAD_GLOBAL              2 (str)
+            128 LOAD_GLOBAL              0 (getattr)
+            130 LOAD_FAST                2 (media)
+            132 LOAD_CONST               9 ('mediaType')
+            134 LOAD_CONST               5 ('')
+            136 CALL_FUNCTION            3
+            138 JUMP_IF_TRUE_OR_POP    142
+            140 LOAD_CONST               5 ('')
+        >>  142 CALL_FUNCTION            1
+            144 JUMP_FORWARD             2 (to 148)
+        >>  146 LOAD_CONST               5 ('')
+        >>  148 STORE_FAST               7 (media_type)
+
+428         150 LOAD_FAST                0 (self)
+            152 LOAD_ATTR                3 (_currentQueueName)
+            154 STORE_FAST               8 (queue_name)
+
+433         156 LOAD_CONST               6 (-1)
+            158 STORE_FAST               9 (match_rank)
+
+434         160 LOAD_CONST               5 ('')
+            162 STORE_FAST              10 (match_suffix)
+
+435         164 LOAD_FAST                0 (self)
+            166 LOAD_ATTR                4 (presetModel)
+            168 LOAD_ATTR                5 (items)
+            170 GET_ITER
+        >>  172 FOR_ITER               214 (to 388)
+            174 STORE_FAST              11 (item)
+
+436         176 LOAD_FAST               11 (item)
+            178 LOAD_METHOD              6 (get)
+            180 LOAD_CONST              10 ('isEmpty')
+            182 CALL_METHOD              1
+            184 POP_JUMP_IF_FALSE      188
+
+437         186 JUMP_ABSOLUTE          172
+
+438     >>  188 LOAD_FAST                6 (source)
+            190 LOAD_FAST               11 (item)
+            192 LOAD_METHOD              6 (get)
+            194 LOAD_CONST              11 ('source')
+            196 LOAD_CONST               5 ('')
+            198 CALL_METHOD              2
+            200 COMPARE_OP               3 (!=)
+            202 POP_JUMP_IF_FALSE      222
+            204 LOAD_FAST                7 (media_type)
+            206 LOAD_FAST               11 (item)
+            208 LOAD_METHOD              6 (get)
+            210 LOAD_CONST              11 ('source')
+            212 LOAD_CONST               5 ('')
+            214 CALL_METHOD              2
+            216 COMPARE_OP               3 (!=)
+            218 POP_JUMP_IF_FALSE      222
+
+439         220 JUMP_ABSOLUTE          172
+
+440     >>  222 LOAD_GLOBAL              2 (str)
+            224 LOAD_FAST               11 (item)
+            226 LOAD_METHOD              6 (get)
+            228 LOAD_CONST              12 ('name')
+            230 LOAD_CONST               5 ('')
+            232 CALL_METHOD              2
+            234 JUMP_IF_TRUE_OR_POP    238
+            236 LOAD_CONST               5 ('')
+        >>  238 CALL_FUNCTION            1
+            240 STORE_FAST              12 (name)
+
+441         242 LOAD_FAST               12 (name)
+            244 POP_JUMP_IF_TRUE       248
+
+442         246 JUMP_ABSOLUTE          172
+
+443     >>  248 LOAD_CONST               6 (-1)
+            250 STORE_FAST              13 (rank)
+
+444         252 LOAD_CONST               5 ('')
+            254 STORE_FAST              14 (suffix)
+
+445         256 LOAD_FAST                8 (queue_name)
+            258 EXTENDED_ARG             1
+            260 POP_JUMP_IF_FALSE      278
+            262 LOAD_FAST                8 (queue_name)
+            264 LOAD_FAST               12 (name)
+            266 COMPARE_OP               2 (==)
+            268 EXTENDED_ARG             1
+            270 POP_JUMP_IF_FALSE      278
+
+446         272 LOAD_CONST              13 (2)
+            274 STORE_FAST              13 (rank)
+            276 JUMP_FORWARD            46 (to 324)
+
+447     >>  278 LOAD_FAST                8 (queue_name)
+            280 EXTENDED_ARG             1
+            282 POP_JUMP_IF_FALSE      324
+
+448         284 LOAD_FAST               12 (name)
+            286 LOAD_METHOD              7 (partition)
+            288 LOAD_CONST              14 ('_#~')
+            290 CALL_METHOD              1
+            292 UNPACK_SEQUENCE          3
+            294 STORE_FAST              15 (base)
+            296 STORE_FAST              16 (sep)
+            298 STORE_FAST              17 (tail)
+
+449         300 LOAD_FAST               16 (sep)
+            302 EXTENDED_ARG             1
+            304 POP_JUMP_IF_FALSE      324
+            306 LOAD_FAST                8 (queue_name)
+            308 LOAD_FAST               15 (base)
+            310 COMPARE_OP               2 (==)
+            312 EXTENDED_ARG             1
+            314 POP_JUMP_IF_FALSE      324
+
+450         316 LOAD_CONST              15 (1)
+            318 STORE_FAST              13 (rank)
+
+451         320 LOAD_FAST               17 (tail)
+            322 STORE_FAST              14 (suffix)
+
+452     >>  324 LOAD_FAST               13 (rank)
+            326 LOAD_FAST                9 (match_rank)
+            328 COMPARE_OP               4 (>)
+            330 EXTENDED_ARG             1
+            332 POP_JUMP_IF_TRUE       358
+            334 LOAD_FAST               13 (rank)
+            336 LOAD_FAST                9 (match_rank)
+            338 COMPARE_OP               2 (==)
+            340 POP_JUMP_IF_FALSE      172
+            342 LOAD_FAST               13 (rank)
+            344 LOAD_CONST              15 (1)
+            346 COMPARE_OP               2 (==)
+            348 POP_JUMP_IF_FALSE      172
+            350 LOAD_FAST               14 (suffix)
+            352 LOAD_FAST               10 (match_suffix)
+            354 COMPARE_OP               4 (>)
+            356 POP_JUMP_IF_FALSE      172
+
+453     >>  358 LOAD_FAST               13 (rank)
+            360 STORE_FAST               9 (match_rank)
+
+454         362 LOAD_FAST               14 (suffix)
+            364 STORE_FAST              10 (match_suffix)
+
+455         366 LOAD_GLOBAL              8 (int)
+            368 LOAD_FAST               11 (item)
+            370 LOAD_METHOD              6 (get)
+            372 LOAD_CONST              16 ('index')
+            374 LOAD_CONST               6 (-1)
+            376 CALL_METHOD              2
+            378 CALL_FUNCTION            1
+            380 STORE_FAST               4 (new_index)
+
+456         382 LOAD_FAST                3 (play_state)
+            384 STORE_FAST               5 (new_state)
+            386 JUMP_ABSOLUTE          172
+
+457     >>  388 LOAD_FAST                4 (new_index)
+            390 LOAD_FAST                0 (self)
+            392 LOAD_ATTR                9 (_playingPresetIndex)
+            394 COMPARE_OP               3 (!=)
+            396 EXTENDED_ARG             1
+            398 POP_JUMP_IF_TRUE       412
+            400 LOAD_FAST                5 (new_state)
+            402 LOAD_FAST                0 (self)
+            404 LOAD_ATTR               10 (_playState)
+            406 COMPARE_OP               3 (!=)
+            408 EXTENDED_ARG             1
+            410 POP_JUMP_IF_FALSE      452
+
+458     >>  412 LOAD_FAST                4 (new_index)
+            414 LOAD_FAST                0 (self)
+            416 STORE_ATTR               9 (_playingPresetIndex)
+
+459         418 LOAD_FAST                5 (new_state)
+            420 LOAD_FAST                0 (self)
+            422 STORE_ATTR              10 (_playState)
+
+460         424 LOAD_GLOBAL             11 (logger)
+            426 LOAD_METHOD             12 (debug)
+            428 LOAD_CONST              17 ('[PresetQml] playing info -> index=%d state=%r')
+            430 LOAD_FAST                4 (new_index)
+            432 LOAD_FAST                5 (new_state)
+            434 BUILD_TUPLE              2
+            436 BINARY_MODULO
+            438 CALL_METHOD              1
+            440 POP_TOP
+
+461         442 LOAD_FAST                0 (self)
+            444 LOAD_ATTR               13 (playingInfoChanged)
+            446 LOAD_METHOD             14 (emit)
+            448 CALL_METHOD              0
+            450 POP_TOP
+        >>  452 LOAD_CONST               2 (None)
+            454 RETURN_VALUE
+
+=== LPPresetQmlViewController._fetchCurrentQueueName ===
+469           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPGlobalUI)
+              4 LOAD_CONST               1 ('currentDevice')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               1 (device)
+
+470          12 LOAD_FAST                1 (device)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       24
+
+471          20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+473     >>   24 LOAD_CLOSURE             0 (self)
+             26 BUILD_TUPLE              1
+             28 LOAD_CONST               3 (<code object _onQueue at 0x000001F324E69710, file "PresetQml\LPPresetQmlViewController.py", line 473>)
+             30 LOAD_CONST               4 ('LPPresetQmlViewController._fetchCurrentQueueName.<locals>._onQueue')
+             32 MAKE_FUNCTION            8 (closure)
+             34 STORE_FAST               2 (_onQueue)
+
+482          36 LOAD_FAST                1 (device)
+             38 LOAD_METHOD              2 (asyncUpnpPost)
+             40 LOAD_CONST               5 ('BrowseQueue')
+             42 LOAD_CONST               6 ('QueueName')
+             44 LOAD_CONST               7 ('CurrentQueue')
+             46 BUILD_MAP                1
+             48 LOAD_FAST                2 (_onQueue)
+             50 CALL_METHOD              3
+             52 POP_TOP
+             54 LOAD_CONST               2 (None)
+             56 RETURN_VALUE
+
+=== LPPresetQmlViewController._fetchCurrentQueueName._onQueue ===
+474           0 LOAD_FAST                0 (response)
+              2 JUMP_IF_TRUE_OR_POP      6
+              4 BUILD_MAP                0
+        >>    6 LOAD_METHOD              0 (get)
+              8 LOAD_CONST               1 ('musicList')
+             10 LOAD_CONST               0 (None)
+             12 CALL_METHOD              2
+             14 STORE_FAST               1 (music_list)
+
+475          16 LOAD_FAST                1 (music_list)
+             18 LOAD_CONST               0 (None)
+             20 IS_OP                    1
+             22 POP_JUMP_IF_FALSE       36
+             24 LOAD_GLOBAL              1 (getattr)
+             26 LOAD_FAST                1 (music_list)
+             28 LOAD_CONST               2 ('header')
+             30 LOAD_CONST               0 (None)
+             32 CALL_FUNCTION            3
+             34 JUMP_FORWARD             2 (to 38)
+        >>   36 LOAD_CONST               0 (None)
+        >>   38 STORE_FAST               2 (header)
+
+476          40 LOAD_FAST                2 (header)
+             42 LOAD_CONST               0 (None)
+             44 IS_OP                    1
+             46 POP_JUMP_IF_FALSE       60
+             48 LOAD_GLOBAL              1 (getattr)
+             50 LOAD_FAST                2 (header)
+             52 LOAD_CONST               3 ('headTitle')
+             54 LOAD_CONST               0 (None)
+             56 CALL_FUNCTION            3
+             58 JUMP_FORWARD             2 (to 62)
+        >>   60 LOAD_CONST               0 (None)
+        >>   62 STORE_FAST               3 (list_name)
+
+477          64 LOAD_FAST                3 (list_name)
+             66 POP_JUMP_IF_FALSE      112
+
+478          68 LOAD_GLOBAL              2 (str)
+             70 LOAD_FAST                3 (list_name)
+             72 CALL_FUNCTION            1
+             74 LOAD_METHOD              3 (strip)
+             76 CALL_METHOD              0
+             78 LOAD_DEREF               0 (self)
+             80 STORE_ATTR               4 (_currentQueueName)
+
+479          82 LOAD_GLOBAL              5 (logger)
+             84 LOAD_METHOD              6 (debug)
+             86 LOAD_CONST               4 ('[PresetQml] BrowseQueue listName=%r')
+             88 LOAD_DEREF               0 (self)
+             90 LOAD_ATTR                4 (_currentQueueName)
+             92 BINARY_MODULO
+             94 CALL_METHOD              1
+             96 POP_TOP
+
+480          98 LOAD_GLOBAL              7 (QTimer)
+            100 LOAD_METHOD              8 (singleShot)
+            102 LOAD_CONST               5 (0)
+            104 LOAD_DEREF               0 (self)
+            106 LOAD_ATTR                9 (_refreshPlayingInfo)
+            108 CALL_METHOD              2
+            110 POP_TOP
+        >>  112 LOAD_CONST               0 (None)
+            114 RETURN_VALUE
+
+=== LPPresetQmlViewController._togglePlayback ===
+493           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_FAST                1 (device)
+              4 LOAD_CONST               1 ('updateMediaInfo')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               4 (update_media_info)
+
+494          12 LOAD_GLOBAL              1 (callable)
+             14 LOAD_FAST                4 (update_media_info)
+             16 CALL_FUNCTION            1
+             18 POP_JUMP_IF_FALSE       34
+
+495          20 LOAD_FAST                4 (update_media_info)
+             22 LOAD_CONST               3 ('playState')
+             24 LOAD_FAST                2 (target_state)
+             26 BUILD_MAP                1
+             28 CALL_FUNCTION            1
+             30 POP_TOP
+             32 JUMP_FORWARD            26 (to 60)
+
+497     >>   34 LOAD_GLOBAL              0 (getattr)
+             36 LOAD_FAST                1 (device)
+             38 LOAD_CONST               4 ('mediaInfo')
+             40 LOAD_CONST               2 (None)
+             42 CALL_FUNCTION            3
+             44 STORE_FAST               5 (media)
+
+498          46 LOAD_FAST                5 (media)
+             48 LOAD_CONST               2 (None)
+             50 IS_OP                    1
+             52 POP_JUMP_IF_FALSE       60
+
+499          54 LOAD_FAST                2 (target_state)
+             56 LOAD_FAST                5 (media)
+             58 STORE_ATTR               2 (playState)
+
+500     >>   60 LOAD_FAST                1 (device)
+             62 LOAD_METHOD              3 (asyncUpnpPost)
+             64 LOAD_FAST                3 (command)
+             66 LOAD_CONST               2 (None)
+             68 CALL_METHOD              2
+             70 POP_TOP
+
+501          72 LOAD_FAST                2 (target_state)
+             74 LOAD_FAST                0 (self)
+             76 STORE_ATTR               4 (_playState)
+
+502          78 LOAD_FAST                0 (self)
+             80 LOAD_ATTR                5 (playingInfoChanged)
+             82 LOAD_METHOD              6 (emit)
+             84 CALL_METHOD              0
+             86 POP_TOP
+             88 LOAD_CONST               2 (None)
+             90 RETURN_VALUE
+
+=== LPPresetQmlViewController._fetchPresetList ===
+514           0 LOAD_GLOBAL              0 (LPGlobalUI)
+              2 LOAD_ATTR                1 (currentDevice)
+              4 STORE_DEREF              0 (device)
+
+515           6 LOAD_DEREF               0 (device)
+              8 POP_JUMP_IF_FALSE       22
+             10 LOAD_GLOBAL              2 (getattr)
+             12 LOAD_DEREF               0 (device)
+             14 LOAD_CONST               1 ('presetNum')
+             16 LOAD_CONST               2 (0)
+             18 CALL_FUNCTION            3
+             20 JUMP_FORWARD             2 (to 24)
+        >>   22 LOAD_CONST               2 (0)
+        >>   24 STORE_FAST               1 (presetNum)
+
+516          26 LOAD_GLOBAL              3 (logger)
+             28 LOAD_METHOD              4 (debug)
+             30 LOAD_CONST               3 ('[PresetQml] viewWillAppear fetch: device=%s presetNum=%s')
+
+517          32 LOAD_DEREF               0 (device)
+             34 POP_JUMP_IF_FALSE       48
+             36 LOAD_GLOBAL              2 (getattr)
+             38 LOAD_DEREF               0 (device)
+             40 LOAD_CONST               4 ('uuid')
+             42 LOAD_CONST               5 (None)
+             44 CALL_FUNCTION            3
+             46 JUMP_FORWARD             2 (to 50)
+        >>   48 LOAD_CONST               5 (None)
+        >>   50 LOAD_FAST                1 (presetNum)
+             52 BUILD_TUPLE              2
+
+516          54 BINARY_MODULO
+             56 CALL_METHOD              1
+             58 POP_TOP
+
+518          60 LOAD_DEREF               0 (device)
+             62 LOAD_CONST               5 (None)
+             64 IS_OP                    0
+             66 POP_JUMP_IF_TRUE        76
+             68 LOAD_FAST                1 (presetNum)
+             70 LOAD_CONST               2 (0)
+             72 COMPARE_OP               2 (==)
+             74 POP_JUMP_IF_FALSE      100
+
+519     >>   76 LOAD_GLOBAL              3 (logger)
+             78 LOAD_METHOD              4 (debug)
+             80 LOAD_CONST               6 ('[PresetQml] -> notSupport (no device or presetNum==0)')
+             82 CALL_METHOD              1
+             84 POP_TOP
+
+520          86 LOAD_DEREF               2 (self)
+             88 LOAD_METHOD              5 (_setPageState)
+             90 LOAD_GLOBAL              6 (STATE_NOT_SUPPORT)
+             92 CALL_METHOD              1
+             94 POP_TOP
+
+521          96 LOAD_CONST               5 (None)
+             98 RETURN_VALUE
+
+523     >>  100 LOAD_DEREF               2 (self)
+            102 LOAD_METHOD              5 (_setPageState)
+            104 LOAD_GLOBAL              7 (STATE_LOADING)
+            106 CALL_METHOD              1
+            108 POP_TOP
+
+524         110 LOAD_DEREF               2 (self)
+            112 LOAD_ATTR                8 (_fetchGeneration)
+            114 STORE_DEREF              1 (generation)
+
+526         116 LOAD_CLOSURE             0 (device)
+            118 LOAD_CLOSURE             1 (generation)
+            120 LOAD_CLOSURE             2 (self)
+            122 BUILD_TUPLE              3
+            124 LOAD_CONST               7 (<code object _parseXML at 0x000001F324E69A80, file "PresetQml\LPPresetQmlViewController.py", line 526>)
+            126 LOAD_CONST               8 ('LPPresetQmlViewController._fetchPresetList.<locals>._parseXML')
+            128 MAKE_FUNCTION            8 (closure)
+            130 STORE_FAST               2 (_parseXML)
+
+568         132 LOAD_DEREF               0 (device)
+            134 LOAD_METHOD              9 (asyncUpnpPost)
+            136 LOAD_CONST               9 ('GetKeyMapping')
+            138 BUILD_MAP                0
+            140 LOAD_FAST                2 (_parseXML)
+            142 CALL_METHOD              3
+            144 POP_TOP
+            146 LOAD_CONST               5 (None)
+            148 RETURN_VALUE
+
+=== LPPresetQmlViewController._fetchPresetList._parseXML ===
+527           0 LOAD_DEREF               1 (generation)
+              2 LOAD_DEREF               2 (self)
+              4 LOAD_ATTR                0 (_fetchGeneration)
+              6 COMPARE_OP               3 (!=)
+              8 POP_JUMP_IF_FALSE       24
+
+528          10 LOAD_GLOBAL              1 (logger)
+             12 LOAD_METHOD              2 (debug)
+             14 LOAD_CONST               1 ('[PresetQml] stale GetKeyMapping response ignored')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+529          20 LOAD_CONST               0 (None)
+             22 RETURN_VALUE
+
+530     >>   24 LOAD_FAST                0 (response)
+             26 LOAD_METHOD              3 (get)
+             28 LOAD_CONST               2 ('error')
+             30 LOAD_CONST               0 (None)
+             32 CALL_METHOD              2
+             34 LOAD_CONST               0 (None)
+             36 IS_OP                    1
+             38 POP_JUMP_IF_FALSE       64
+
+531          40 LOAD_GLOBAL              1 (logger)
+             42 LOAD_METHOD              2 (debug)
+             44 LOAD_CONST               3 ('[PresetQml] GetKeyMapping error -> state=error')
+             46 CALL_METHOD              1
+             48 POP_TOP
+
+532          50 LOAD_DEREF               2 (self)
+             52 LOAD_METHOD              4 (_setPageState)
+             54 LOAD_GLOBAL              5 (STATE_ERROR)
+             56 CALL_METHOD              1
+             58 POP_TOP
+
+533          60 LOAD_CONST               0 (None)
+             62 RETURN_VALUE
+
+534     >>   64 LOAD_FAST                0 (response)
+             66 LOAD_METHOD              3 (get)
+             68 LOAD_CONST               4 ('xml')
+             70 LOAD_CONST               0 (None)
+             72 CALL_METHOD              2
+             74 STORE_FAST               1 (xmlStr)
+
+535          76 LOAD_DEREF               2 (self)
+             78 LOAD_ATTR                6 (_store)
+             80 LOAD_METHOD              7 (parseXmlAndBuildItems)
+             82 LOAD_FAST                1 (xmlStr)
+             84 LOAD_DEREF               0 (device)
+             86 LOAD_ATTR                8 (presetNum)
+             88 LOAD_DEREF               0 (device)
+             90 CALL_METHOD              3
+             92 STORE_FAST               2 (items)
+
+536          94 LOAD_DEREF               2 (self)
+             96 LOAD_ATTR                6 (_store)
+             98 LOAD_ATTR                9 (xmlObj)
+            100 LOAD_DEREF               2 (self)
+            102 STORE_ATTR              10 (_xmlObj)
+
+537         104 LOAD_GLOBAL              1 (logger)
+            106 LOAD_METHOD              2 (debug)
+            108 LOAD_CONST               5 ('[PresetQml] GetKeyMapping parsed items=%d (presetNum=%d)')
+            110 LOAD_GLOBAL             11 (len)
+            112 LOAD_FAST                2 (items)
+            114 CALL_FUNCTION            1
+            116 LOAD_DEREF               0 (device)
+            118 LOAD_ATTR                8 (presetNum)
+            120 BUILD_TUPLE              2
+            122 BINARY_MODULO
+            124 CALL_METHOD              1
+            126 POP_TOP
+
+538         128 LOAD_FAST                2 (items)
+            130 POP_JUMP_IF_TRUE       146
+
+539         132 LOAD_DEREF               2 (self)
+            134 LOAD_METHOD              4 (_setPageState)
+            136 LOAD_GLOBAL              5 (STATE_ERROR)
+            138 CALL_METHOD              1
+            140 POP_TOP
+
+540         142 LOAD_CONST               0 (None)
+            144 RETURN_VALUE
+
+541     >>  146 LOAD_DEREF               2 (self)
+            148 LOAD_ATTR               12 (presetModel)
+            150 LOAD_METHOD             13 (setItems)
+            152 LOAD_FAST                2 (items)
+            154 CALL_METHOD              1
+            156 POP_TOP
+
+542         158 LOAD_DEREF               2 (self)
+            160 LOAD_METHOD             14 (_fetchDeviceAccountsForItems)
+            162 LOAD_FAST                2 (items)
+            164 CALL_METHOD              1
+            166 POP_TOP
+
+543         168 LOAD_GLOBAL             15 (QTimer)
+            170 LOAD_METHOD             16 (singleShot)
+            172 LOAD_CONST               6 (0)
+            174 LOAD_DEREF               2 (self)
+            176 LOAD_ATTR               17 (_refreshPlayingInfo)
+            178 CALL_METHOD              2
+            180 POP_TOP
+
+546         182 LOAD_GLOBAL             18 (getattr)
+            184 LOAD_DEREF               0 (device)
+            186 LOAD_CONST               7 ('mediaInfo')
+            188 LOAD_CONST               0 (None)
+            190 CALL_FUNCTION            3
+            192 STORE_FAST               3 (media)
+
+547         194 LOAD_GLOBAL             18 (getattr)
+            196 LOAD_DEREF               0 (device)
+            198 LOAD_CONST               8 ('queueManager')
+            200 LOAD_CONST               0 (None)
+            202 CALL_FUNCTION            3
+            204 STORE_FAST               4 (queue_manager)
+
+548         206 LOAD_CONST               0 (None)
+            208 STORE_FAST               5 (queue_list_name)
+
+549         210 LOAD_FAST                4 (queue_manager)
+            212 LOAD_CONST               0 (None)
+            214 IS_OP                    1
+            216 EXTENDED_ARG             1
+            218 POP_JUMP_IF_FALSE      282
+
+550         220 LOAD_GLOBAL             18 (getattr)
+            222 LOAD_FAST                4 (queue_manager)
+            224 LOAD_CONST               9 ('playList')
+            226 LOAD_CONST               0 (None)
+            228 CALL_FUNCTION            3
+            230 STORE_FAST               6 (play_list)
+
+551         232 LOAD_FAST                6 (play_list)
+            234 LOAD_CONST               0 (None)
+            236 IS_OP                    1
+            238 POP_JUMP_IF_FALSE      252
+            240 LOAD_GLOBAL             18 (getattr)
+            242 LOAD_FAST                6 (play_list)
+            244 LOAD_CONST              10 ('header')
+            246 LOAD_CONST               0 (None)
+            248 CALL_FUNCTION            3
+            250 JUMP_FORWARD             2 (to 254)
+        >>  252 LOAD_CONST               0 (None)
+        >>  254 STORE_FAST               7 (header)
+
+552         256 LOAD_FAST                7 (header)
+            258 LOAD_CONST               0 (None)
+            260 IS_OP                    1
+            262 EXTENDED_ARG             1
+            264 POP_JUMP_IF_FALSE      278
+            266 LOAD_GLOBAL             18 (getattr)
+            268 LOAD_FAST                7 (header)
+            270 LOAD_CONST              11 ('headTitle')
+            272 LOAD_CONST               0 (None)
+            274 CALL_FUNCTION            3
+            276 JUMP_FORWARD             2 (to 280)
+        >>  278 LOAD_CONST               0 (None)
+        >>  280 STORE_FAST               5 (queue_list_name)
+
+553     >>  282 LOAD_GLOBAL              1 (logger)
+            284 LOAD_METHOD              2 (debug)
+            286 LOAD_CONST              12 ('[PresetQml] current media snapshot: playState=%r trackSource=%r mediaType=%r trackId=%r itemId=%r itemName=%r queueListName=%r')
+
+555         288 LOAD_GLOBAL             18 (getattr)
+            290 LOAD_FAST                3 (media)
+            292 LOAD_CONST              13 ('playState')
+            294 LOAD_CONST               0 (None)
+            296 CALL_FUNCTION            3
+
+556         298 LOAD_GLOBAL             18 (getattr)
+            300 LOAD_FAST                3 (media)
+            302 LOAD_CONST              14 ('trackSource')
+            304 LOAD_CONST               0 (None)
+            306 CALL_FUNCTION            3
+
+557         308 LOAD_GLOBAL             18 (getattr)
+            310 LOAD_FAST                3 (media)
+            312 LOAD_CONST              15 ('mediaType')
+            314 LOAD_CONST               0 (None)
+            316 CALL_FUNCTION            3
+
+558         318 LOAD_GLOBAL             18 (getattr)
+            320 LOAD_FAST                3 (media)
+            322 LOAD_CONST              16 ('trackId')
+            324 LOAD_CONST               0 (None)
+            326 CALL_FUNCTION            3
+
+559         328 LOAD_GLOBAL             18 (getattr)
+            330 LOAD_FAST                3 (media)
+            332 LOAD_CONST              17 ('itemId')
+            334 LOAD_CONST               0 (None)
+            336 CALL_FUNCTION            3
+
+560         338 LOAD_GLOBAL             18 (getattr)
+            340 LOAD_FAST                3 (media)
+            342 LOAD_CONST              18 ('itemName')
+            344 LOAD_CONST               0 (None)
+            346 CALL_FUNCTION            3
+
+561         348 LOAD_FAST                5 (queue_list_name)
+
+555         350 BUILD_TUPLE              7
+
+553         352 BINARY_MODULO
+            354 CALL_METHOD              1
+            356 POP_TOP
+
+563         358 LOAD_FAST                2 (items)
+            360 GET_ITER
+        >>  362 FOR_ITER                30 (to 394)
+            364 STORE_FAST               8 (item)
+
+564         366 LOAD_FAST                8 (item)
+            368 LOAD_METHOD              3 (get)
+            370 LOAD_CONST              19 ('isEmpty')
+            372 CALL_METHOD              1
+            374 EXTENDED_ARG             1
+            376 POP_JUMP_IF_TRUE       362
+
+565         378 LOAD_DEREF               2 (self)
+            380 LOAD_ATTR                6 (_store)
+            382 LOAD_METHOD             19 (ensureCoverForItem)
+            384 LOAD_FAST                8 (item)
+            386 CALL_METHOD              1
+            388 POP_TOP
+            390 EXTENDED_ARG             1
+            392 JUMP_ABSOLUTE          362
+
+566     >>  394 LOAD_DEREF               2 (self)
+            396 LOAD_METHOD              4 (_setPageState)
+            398 LOAD_GLOBAL             20 (STATE_READY)
+            400 CALL_METHOD              1
+            402 POP_TOP
+            404 LOAD_CONST               0 (None)
+            406 RETURN_VALUE
+
+=== LPPresetQmlViewController._removePresetItem ===
+577           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_xmlObj)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       24
+
+578          10 LOAD_GLOBAL              1 (logger)
+             12 LOAD_METHOD              2 (warning)
+             14 LOAD_CONST               2 ('[PresetQml] delete skipped: no xmlObj')
+             16 CALL_METHOD              1
+             18 POP_TOP
+
+579          20 LOAD_CONST               1 (None)
+             22 RETURN_VALUE
+
+581     >>   24 LOAD_CLOSURE             0 (index)
+             26 BUILD_TUPLE              1
+             28 LOAD_CONST               3 (<code object finishedMethod at 0x000001F324E69500, file "PresetQml\LPPresetQmlViewController.py", line 581>)
+             30 LOAD_CONST               4 ('LPPresetQmlViewController._removePresetItem.<locals>.finishedMethod')
+             32 MAKE_FUNCTION            8 (closure)
+             34 STORE_FAST               2 (finishedMethod)
+
+588          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                3 (presetModel)
+             40 LOAD_METHOD              4 (itemByIndex)
+             42 LOAD_DEREF               0 (index)
+             44 CALL_METHOD              1
+             46 STORE_FAST               3 (item)
+
+589          48 LOAD_FAST                3 (item)
+             50 POP_JUMP_IF_FALSE      176
+
+590          52 LOAD_CONST               1 (None)
+             54 LOAD_FAST                3 (item)
+             56 LOAD_CONST               5 ('name')
+             58 STORE_SUBSCR
+
+591          60 LOAD_CONST               6 ('')
+             62 LOAD_FAST                3 (item)
+             64 LOAD_CONST               7 ('source')
+             66 STORE_SUBSCR
+
+592          68 LOAD_CONST               6 ('')
+             70 LOAD_FAST                3 (item)
+             72 LOAD_CONST               8 ('picUrl')
+             74 STORE_SUBSCR
+
+593          76 LOAD_CONST               6 ('')
+             78 LOAD_FAST                3 (item)
+             80 LOAD_CONST               9 ('displayName')
+             82 STORE_SUBSCR
+
+594          84 LOAD_CONST               6 ('')
+             86 LOAD_FAST                3 (item)
+             88 LOAD_CONST              10 ('sourceIcon')
+             90 STORE_SUBSCR
+
+595          92 LOAD_CONST               6 ('')
+             94 LOAD_FAST                3 (item)
+             96 LOAD_CONST              11 ('coverUrl')
+             98 STORE_SUBSCR
+
+596         100 LOAD_CONST              12 (True)
+            102 LOAD_FAST                3 (item)
+            104 LOAD_CONST              13 ('isEmpty')
+            106 STORE_SUBSCR
+
+597         108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR                3 (presetModel)
+            112 LOAD_ATTR                5 (items)
+            114 LOAD_METHOD              6 (index)
+            116 LOAD_FAST                3 (item)
+            118 CALL_METHOD              1
+            120 STORE_FAST               4 (row)
+
+598         122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR                3 (presetModel)
+            126 LOAD_METHOD              6 (index)
+            128 LOAD_FAST                4 (row)
+            130 CALL_METHOD              1
+            132 STORE_FAST               5 (idx)
+
+599         134 LOAD_FAST                0 (self)
+            136 LOAD_ATTR                3 (presetModel)
+            138 LOAD_ATTR                7 (dataChanged)
+            140 LOAD_METHOD              8 (emit)
+
+600         142 LOAD_FAST                5 (idx)
+            144 LOAD_FAST                5 (idx)
+
+602         146 LOAD_GLOBAL              9 (LPPresetListModel)
+            148 LOAD_ATTR               10 (DisplayNameRole)
+
+603         150 LOAD_GLOBAL              9 (LPPresetListModel)
+            152 LOAD_ATTR               11 (SourceIconRole)
+
+604         154 LOAD_GLOBAL              9 (LPPresetListModel)
+            156 LOAD_ATTR               12 (CoverUrlRole)
+
+605         158 LOAD_GLOBAL              9 (LPPresetListModel)
+            160 LOAD_ATTR               13 (IsEmptyRole)
+
+601         162 BUILD_LIST               4
+
+599         164 CALL_METHOD              3
+            166 POP_TOP
+
+608         168 LOAD_FAST                0 (self)
+            170 LOAD_METHOD             14 (_refreshPlayingInfo)
+            172 CALL_METHOD              0
+            174 POP_TOP
+
+611     >>  176 LOAD_FAST                0 (self)
+            178 LOAD_ATTR                0 (_xmlObj)
+            180 LOAD_METHOD             15 (find)
+            182 LOAD_CONST              14 ('Key')
+            184 LOAD_GLOBAL             16 (str)
+            186 LOAD_DEREF               0 (index)
+            188 CALL_FUNCTION            1
+            190 BINARY_ADD
+            192 CALL_METHOD              1
+            194 STORE_FAST               6 (itemToReplace)
+
+612         196 LOAD_FAST                6 (itemToReplace)
+            198 LOAD_CONST               1 (None)
+            200 IS_OP                    0
+            202 POP_JUMP_IF_FALSE      208
+
+613         204 LOAD_CONST               1 (None)
+            206 RETURN_VALUE
+
+614     >>  208 LOAD_FAST                6 (itemToReplace)
+            210 LOAD_METHOD             17 (clear)
+            212 CALL_METHOD              0
+            214 POP_TOP
+
+615         216 LOAD_CONST              15 ('<RoutineId>Empty</RoutineId>')
+            218 STORE_FAST               7 (replaceXml)
+
+616         220 LOAD_CONST              16 ('<container>%s</container>')
+            222 LOAD_FAST                7 (replaceXml)
+            224 BINARY_MODULO
+            226 STORE_FAST               8 (wrappedXML)
+
+617         228 LOAD_GLOBAL             18 (BeautifulSoup)
+            230 LOAD_FAST                8 (wrappedXML)
+            232 LOAD_CONST              17 ('xml')
+            234 CALL_FUNCTION            2
+            236 STORE_FAST               9 (soup)
+
+618         238 LOAD_FAST                9 (soup)
+            240 LOAD_METHOD             15 (find)
+            242 LOAD_CONST              18 ('container')
+            244 CALL_METHOD              1
+            246 STORE_FAST              10 (container)
+
+619         248 LOAD_FAST               10 (container)
+            250 LOAD_ATTR               19 (contents)
+            252 GET_ITER
+        >>  254 FOR_ITER                20 (to 276)
+            256 STORE_FAST              11 (content)
+
+620         258 LOAD_FAST                6 (itemToReplace)
+            260 LOAD_METHOD             20 (append)
+            262 LOAD_GLOBAL             21 (copy)
+            264 LOAD_METHOD             21 (copy)
+            266 LOAD_FAST               11 (content)
+            268 CALL_METHOD              1
+            270 CALL_METHOD              1
+            272 POP_TOP
+            274 JUMP_ABSOLUTE          254
+
+622     >>  276 LOAD_GLOBAL             16 (str)
+            278 LOAD_FAST                0 (self)
+            280 LOAD_ATTR                0 (_xmlObj)
+            282 CALL_FUNCTION            1
+            284 STORE_FAST              12 (setKeyMappingXml)
+
+623         286 LOAD_GLOBAL             22 (LPGlobalUI)
+            288 LOAD_ATTR               23 (currentDevice)
+            290 LOAD_METHOD             24 (asyncUpnpPost)
+
+624         292 LOAD_CONST              19 ('SetKeyMapping')
+            294 LOAD_CONST              20 ('QueueContext')
+            296 LOAD_FAST               12 (setKeyMappingXml)
+            298 BUILD_MAP                1
+            300 LOAD_FAST                2 (finishedMethod)
+
+623         302 CALL_METHOD              3
+            304 POP_TOP
+            306 LOAD_CONST               1 (None)
+            308 RETURN_VALUE
+
+=== LPPresetQmlViewController._removePresetItem.finishedMethod ===
+582           0 LOAD_FAST                0 (response)
+              2 LOAD_METHOD              0 (get)
+              4 LOAD_CONST               1 ('status_code')
+              6 LOAD_CONST               0 (None)
+              8 CALL_METHOD              2
+             10 LOAD_CONST               2 (200)
+             12 COMPARE_OP               2 (==)
+             14 POP_JUMP_IF_FALSE       32
+
+583          16 LOAD_GLOBAL              1 (logger)
+             18 LOAD_METHOD              2 (debug)
+             20 LOAD_CONST               3 ('[PresetQml] delete index:%s success')
+             22 LOAD_DEREF               0 (index)
+             24 BINARY_MODULO
+             26 CALL_METHOD              1
+             28 POP_TOP
+             30 JUMP_FORWARD            14 (to 46)
+
+585     >>   32 LOAD_GLOBAL              1 (logger)
+             34 LOAD_METHOD              2 (debug)
+             36 LOAD_CONST               4 ('[PresetQml] delete index:%s failed')
+             38 LOAD_DEREF               0 (index)
+             40 BINARY_MODULO
+             42 CALL_METHOD              1
+             44 POP_TOP
+        >>   46 LOAD_CONST               0 (None)
+             48 RETURN_VALUE
+
+=== LPPresetQmlViewController._setPageState ===
+638           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_pageState)
+              4 LOAD_FAST                1 (state)
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE       14
+
+639          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+640     >>   14 LOAD_FAST                1 (state)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               0 (_pageState)
+
+641          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                1 (pageStateChanged)
+             24 LOAD_METHOD              2 (emit)
+             26 CALL_METHOD              0
+             28 POP_TOP
+             30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+=== LPPresetQmlViewController._showDeleteConfirm ===
+651           0 LOAD_CONST               1 (0)
+              2 LOAD_CONST               2 (('LPConfirmDialogHost',))
+              4 IMPORT_NAME              0 (LPCommonWidgets.dialog.LPConfirmDialogHost)
+              6 IMPORT_FROM              1 (LPConfirmDialogHost)
+              8 STORE_FAST               3 (LPConfirmDialogHost)
+             10 POP_TOP
+
+653          12 LOAD_FAST                3 (LPConfirmDialogHost)
+             14 LOAD_METHOD              2 (instance)
+             16 CALL_METHOD              0
+             18 STORE_FAST               4 (host)
+
+654          20 LOAD_FAST                4 (host)
+             22 LOAD_ATTR                3 (showDialog)
+
+655          24 LOAD_GLOBAL              4 (QCoreApplication)
+             26 LOAD_METHOD              5 (translate)
+             28 LOAD_CONST               3 ('Preset')
+             30 LOAD_CONST               4 ('Delete preset?')
+             32 CALL_METHOD              2
+
+656          34 LOAD_GLOBAL              4 (QCoreApplication)
+             36 LOAD_METHOD              5 (translate)
+
+657          38 LOAD_CONST               3 ('Preset')
+
+658          40 LOAD_CONST               5 ('Are you sure you want to delete “%s”? This action can’t be undone.')
+
+656          42 CALL_METHOD              2
+
+659          44 LOAD_FAST                2 (displayName)
+
+656          46 BINARY_MODULO
+
+660          48 LOAD_GLOBAL              4 (QCoreApplication)
+             50 LOAD_METHOD              5 (translate)
+             52 LOAD_CONST               3 ('Preset')
+             54 LOAD_CONST               6 ('Delete')
+             56 CALL_METHOD              2
+
+661          58 LOAD_GLOBAL              4 (QCoreApplication)
+             60 LOAD_METHOD              5 (translate)
+             62 LOAD_CONST               3 ('Preset')
+             64 LOAD_CONST               7 ('Cancel')
+             66 CALL_METHOD              2
+
+662          68 LOAD_CONST               8 (True)
+
+663          70 LOAD_CLOSURE             0 (index)
+             72 LOAD_CLOSURE             1 (self)
+             74 BUILD_TUPLE              2
+             76 LOAD_CONST               9 (<code object <lambda> at 0x000001F324E69660, file "PresetQml\LPPresetQmlViewController.py", line 663>)
+             78 LOAD_CONST              10 ('LPPresetQmlViewController._showDeleteConfirm.<locals>.<lambda>')
+             80 MAKE_FUNCTION            8 (closure)
+
+654          82 LOAD_CONST              11 (('title', 'message', 'confirmText', 'cancelText', 'showCancel', 'onConfirmed'))
+             84 CALL_FUNCTION_KW         6
+             86 POP_TOP
+             88 LOAD_CONST              12 (None)
+             90 RETURN_VALUE
+
+=== LPPresetQmlViewController._showDeleteConfirm.<lambda> ===
+663           0 LOAD_DEREF               1 (self)
+              2 LOAD_METHOD              0 (_removePresetItem)
+              4 LOAD_DEREF               0 (index)
+              6 CALL_METHOD              1
+              8 RETURN_VALUE

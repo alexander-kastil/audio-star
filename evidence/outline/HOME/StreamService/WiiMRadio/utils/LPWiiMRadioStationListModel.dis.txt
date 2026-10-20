@@ -1,0 +1,1904 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nWiiMRadio station 增量列表模型。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Any', 'Dict', 'List', 'Optional'))
+              8 IMPORT_NAME              1 (typing)
+             10 IMPORT_FROM              2 (Any)
+             12 STORE_NAME               2 (Any)
+             14 IMPORT_FROM              3 (Dict)
+             16 STORE_NAME               3 (Dict)
+             18 IMPORT_FROM              4 (List)
+             20 STORE_NAME               4 (List)
+             22 IMPORT_FROM              5 (Optional)
+             24 STORE_NAME               5 (Optional)
+             26 POP_TOP
+
+  8          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('QAbstractListModel', 'QModelIndex', 'QObject', 'Qt', 'pyqtSlot'))
+             32 IMPORT_NAME              6 (PyQt6.QtCore)
+             34 IMPORT_FROM              7 (QAbstractListModel)
+             36 STORE_NAME               7 (QAbstractListModel)
+             38 IMPORT_FROM              8 (QModelIndex)
+             40 STORE_NAME               8 (QModelIndex)
+             42 IMPORT_FROM              9 (QObject)
+             44 STORE_NAME               9 (QObject)
+             46 IMPORT_FROM             10 (Qt)
+             48 STORE_NAME              10 (Qt)
+             50 IMPORT_FROM             11 (pyqtSlot)
+             52 STORE_NAME              11 (pyqtSlot)
+             54 POP_TOP
+
+ 10          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               4 (('LPWiiMRadioRequestScheduler',))
+             60 IMPORT_NAME             12 (HOME.StreamService.WiiMRadio.utils.LPWiiMRadioRequestScheduler)
+             62 IMPORT_FROM             13 (LPWiiMRadioRequestScheduler)
+             64 STORE_NAME              13 (LPWiiMRadioRequestScheduler)
+             66 POP_TOP
+
+ 11          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               5 (('LPWiiMRadioThumbnailService',))
+             72 IMPORT_NAME             14 (HOME.StreamService.WiiMRadio.utils.LPWiiMRadioThumbnailService)
+             74 IMPORT_FROM             15 (LPWiiMRadioThumbnailService)
+             76 STORE_NAME              15 (LPWiiMRadioThumbnailService)
+             78 POP_TOP
+
+ 12          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               6 (('logger',))
+             84 IMPORT_NAME             16 (LPClientFramework.LPUtility)
+             86 IMPORT_FROM             17 (logger)
+             88 STORE_NAME              17 (logger)
+             90 POP_TOP
+
+ 16          92 LOAD_BUILD_CLASS
+             94 LOAD_CONST               7 (<code object LPWiiMRadioStationListModel at 0x000001F3253C4660, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 16>)
+             96 LOAD_CONST               8 ('LPWiiMRadioStationListModel')
+             98 MAKE_FUNCTION            0
+            100 LOAD_CONST               8 ('LPWiiMRadioStationListModel')
+            102 LOAD_NAME                7 (QAbstractListModel)
+            104 CALL_FUNCTION            3
+            106 STORE_NAME              18 (LPWiiMRadioStationListModel)
+            108 LOAD_CONST               9 (None)
+            110 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel ===
+ 16           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPWiiMRadioStationListModel')
+              6 STORE_NAME               2 (__qualname__)
+
+ 17           8 LOAD_CONST               1 (500)
+             10 STORE_NAME               3 (MAX_ITEMS)
+
+ 18          12 LOAD_CONST               2 (4)
+             14 STORE_NAME               4 (PRELOAD_BEFORE)
+
+ 19          16 LOAD_CONST               3 (8)
+             18 STORE_NAME               5 (PRELOAD_AFTER)
+
+ 21          20 LOAD_NAME                6 (int)
+             22 LOAD_NAME                7 (Qt)
+             24 LOAD_ATTR                8 (ItemDataRole)
+             26 LOAD_ATTR                9 (UserRole)
+             28 CALL_FUNCTION            1
+             30 LOAD_CONST               4 (1)
+             32 BINARY_ADD
+             34 STORE_NAME              10 (STATION_ID_ROLE)
+
+ 22          36 LOAD_NAME               10 (STATION_ID_ROLE)
+             38 LOAD_CONST               4 (1)
+             40 BINARY_ADD
+             42 STORE_NAME              11 (NAME_ROLE)
+
+ 23          44 LOAD_NAME               10 (STATION_ID_ROLE)
+             46 LOAD_CONST               5 (2)
+             48 BINARY_ADD
+             50 STORE_NAME              12 (FAVICON_ROLE)
+
+ 24          52 LOAD_NAME               10 (STATION_ID_ROLE)
+             54 LOAD_CONST               6 (3)
+             56 BINARY_ADD
+             58 STORE_NAME              13 (STREAM_URL_ROLE)
+
+ 25          60 LOAD_NAME               10 (STATION_ID_ROLE)
+             62 LOAD_CONST               2 (4)
+             64 BINARY_ADD
+             66 STORE_NAME              14 (FAVICON_THUMB_PATH_ROLE)
+
+ 26          68 LOAD_NAME               10 (STATION_ID_ROLE)
+             70 LOAD_CONST               7 (5)
+             72 BINARY_ADD
+             74 STORE_NAME              15 (CITY_ROLE)
+
+ 27          76 LOAD_NAME               10 (STATION_ID_ROLE)
+             78 LOAD_CONST               8 (6)
+             80 BINARY_ADD
+             82 STORE_NAME              16 (REGION_ROLE)
+
+ 28          84 LOAD_NAME               10 (STATION_ID_ROLE)
+             86 LOAD_CONST               9 (7)
+             88 BINARY_ADD
+             90 STORE_NAME              17 (COUNTRY_ROLE)
+
+ 29          92 LOAD_NAME               10 (STATION_ID_ROLE)
+             94 LOAD_CONST               3 (8)
+             96 BINARY_ADD
+             98 STORE_NAME              18 (COUNTRY_CODE_ROLE)
+
+ 30         100 LOAD_NAME               10 (STATION_ID_ROLE)
+            102 LOAD_CONST              10 (9)
+            104 BINARY_ADD
+            106 STORE_NAME              19 (GENRES_ROLE)
+
+ 32         108 LOAD_CONST              67 ((None,))
+            110 LOAD_NAME               20 (Optional)
+            112 LOAD_NAME               21 (QObject)
+            114 BINARY_SUBSCR
+            116 LOAD_CONST              12 (('parent',))
+            118 BUILD_CONST_KEY_MAP      1
+            120 LOAD_CLOSURE             0 (__class__)
+            122 BUILD_TUPLE              1
+            124 LOAD_CONST              13 (<code object __init__ at 0x000001F3253CE0E0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 32>)
+            126 LOAD_CONST              14 ('LPWiiMRadioStationListModel.__init__')
+            128 MAKE_FUNCTION           13 (defaults, annotations, closure)
+            130 STORE_NAME              22 (__init__)
+
+ 48         132 LOAD_CONST              15 (<code object __del__ at 0x000001F324E69BE0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 48>)
+            134 LOAD_CONST              16 ('LPWiiMRadioStationListModel.__del__')
+            136 MAKE_FUNCTION            0
+            138 STORE_NAME              23 (__del__)
+
+ 51         140 LOAD_NAME               24 (QModelIndex)
+            142 CALL_FUNCTION            0
+            144 BUILD_TUPLE              1
+            146 LOAD_NAME               24 (QModelIndex)
+            148 LOAD_NAME                6 (int)
+            150 LOAD_CONST              17 (('parent', 'return'))
+            152 BUILD_CONST_KEY_MAP      2
+            154 LOAD_CONST              18 (<code object rowCount at 0x000001F324E69240, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 51>)
+            156 LOAD_CONST              19 ('LPWiiMRadioStationListModel.rowCount')
+            158 MAKE_FUNCTION            5 (defaults, annotations)
+            160 STORE_NAME              25 (rowCount)
+
+ 62         162 LOAD_NAME                6 (int)
+            164 LOAD_NAME                7 (Qt)
+            166 LOAD_ATTR                8 (ItemDataRole)
+            168 LOAD_ATTR               26 (DisplayRole)
+            170 CALL_FUNCTION            1
+            172 BUILD_TUPLE              1
+            174 LOAD_NAME               24 (QModelIndex)
+            176 LOAD_NAME                6 (int)
+            178 LOAD_NAME               27 (Any)
+            180 LOAD_CONST              20 (('index', 'role', 'return'))
+            182 BUILD_CONST_KEY_MAP      3
+            184 LOAD_CONST              21 (<code object data at 0x000001F324E69660, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 62>)
+            186 LOAD_CONST              22 ('LPWiiMRadioStationListModel.data')
+            188 MAKE_FUNCTION            5 (defaults, annotations)
+            190 STORE_NAME              28 (data)
+
+ 98         192 LOAD_NAME               29 (Dict)
+            194 LOAD_NAME                6 (int)
+            196 LOAD_NAME               30 (bytes)
+            198 BUILD_TUPLE              2
+            200 BINARY_SUBSCR
+            202 LOAD_CONST              23 (('return',))
+            204 BUILD_CONST_KEY_MAP      1
+            206 LOAD_CONST              24 (<code object roleNames at 0x000001F324E695B0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 98>)
+            208 LOAD_CONST              25 ('LPWiiMRadioStationListModel.roleNames')
+            210 MAKE_FUNCTION            4 (annotations)
+            212 STORE_NAME              31 (roleNames)
+
+118         214 LOAD_CONST              11 (None)
+            216 LOAD_CONST              23 (('return',))
+            218 BUILD_CONST_KEY_MAP      1
+            220 LOAD_CONST              26 (<code object cleanup at 0x000001F324E69EA0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 118>)
+            222 LOAD_CONST              27 ('LPWiiMRadioStationListModel.cleanup')
+            224 MAKE_FUNCTION            4 (annotations)
+            226 STORE_NAME              32 (cleanup)
+
+131         228 LOAD_CONST              11 (None)
+            230 LOAD_CONST              23 (('return',))
+            232 BUILD_CONST_KEY_MAP      1
+            234 LOAD_CONST              28 (<code object reconnect at 0x000001F324E69F50, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 131>)
+            236 LOAD_CONST              29 ('LPWiiMRadioStationListModel.reconnect')
+            238 MAKE_FUNCTION            4 (annotations)
+            240 STORE_NAME              33 (reconnect)
+
+145         242 LOAD_NAME               34 (pyqtSlot)
+            244 LOAD_NAME                6 (int)
+            246 LOAD_NAME                6 (int)
+            248 CALL_FUNCTION            2
+
+146         250 LOAD_NAME                6 (int)
+            252 LOAD_NAME                6 (int)
+            254 LOAD_CONST              11 (None)
+            256 LOAD_CONST              30 (('firstIndex', 'lastIndex', 'return'))
+            258 BUILD_CONST_KEY_MAP      3
+            260 LOAD_CONST              31 (<code object updateVisibleRange at 0x000001F324E699D0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 145>)
+            262 LOAD_CONST              32 ('LPWiiMRadioStationListModel.updateVisibleRange')
+            264 MAKE_FUNCTION            4 (annotations)
+            266 CALL_FUNCTION            1
+            268 STORE_NAME              35 (updateVisibleRange)
+
+173         270 LOAD_NAME               34 (pyqtSlot)
+            272 CALL_FUNCTION            0
+
+174         274 LOAD_CONST              11 (None)
+            276 LOAD_CONST              23 (('return',))
+            278 BUILD_CONST_KEY_MAP      1
+            280 LOAD_CONST              33 (<code object clearVisibleRange at 0x000001F324E69710, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 173>)
+            282 LOAD_CONST              34 ('LPWiiMRadioStationListModel.clearVisibleRange')
+            284 MAKE_FUNCTION            4 (annotations)
+            286 CALL_FUNCTION            1
+            288 STORE_NAME              36 (clearVisibleRange)
+
+184         290 LOAD_CONST              11 (None)
+            292 LOAD_CONST              23 (('return',))
+            294 BUILD_CONST_KEY_MAP      1
+            296 LOAD_CONST              35 (<code object clear at 0x000001F324E697C0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 184>)
+            298 LOAD_CONST              36 ('LPWiiMRadioStationListModel.clear')
+            300 MAKE_FUNCTION            4 (annotations)
+            302 STORE_NAME              37 (clear)
+
+200         304 LOAD_CONST              68 ((0,))
+            306 LOAD_NAME               38 (List)
+            308 LOAD_NAME               29 (Dict)
+            310 LOAD_NAME               39 (str)
+            312 LOAD_NAME               27 (Any)
+            314 BUILD_TUPLE              2
+            316 BINARY_SUBSCR
+            318 BINARY_SUBSCR
+            320 LOAD_NAME                6 (int)
+            322 LOAD_NAME                6 (int)
+            324 LOAD_CONST              38 (('items', 'maxItems', 'return'))
+            326 BUILD_CONST_KEY_MAP      3
+            328 LOAD_CONST              39 (<code object resetItems at 0x000001F324E69B30, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 200>)
+            330 LOAD_CONST              40 ('LPWiiMRadioStationListModel.resetItems')
+            332 MAKE_FUNCTION            5 (defaults, annotations)
+            334 STORE_NAME              40 (resetItems)
+
+217         336 LOAD_NAME               41 (bool)
+            338 LOAD_CONST              23 (('return',))
+            340 BUILD_CONST_KEY_MAP      1
+            342 LOAD_CONST              41 (<code object isFull at 0x000001F324E693A0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 217>)
+            344 LOAD_CONST              42 ('LPWiiMRadioStationListModel.isFull')
+            346 MAKE_FUNCTION            4 (annotations)
+            348 STORE_NAME              42 (isFull)
+
+226         350 LOAD_CONST              69 ((0,))
+            352 LOAD_NAME               38 (List)
+            354 LOAD_NAME               29 (Dict)
+            356 LOAD_NAME               39 (str)
+            358 LOAD_NAME               27 (Any)
+            360 BUILD_TUPLE              2
+            362 BINARY_SUBSCR
+            364 BINARY_SUBSCR
+            366 LOAD_NAME                6 (int)
+            368 LOAD_NAME                6 (int)
+            370 LOAD_CONST              38 (('items', 'maxItems', 'return'))
+            372 BUILD_CONST_KEY_MAP      3
+            374 LOAD_CONST              43 (<code object appendItems at 0x000001F324E69450, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 226>)
+            376 LOAD_CONST              44 ('LPWiiMRadioStationListModel.appendItems')
+            378 MAKE_FUNCTION            5 (defaults, annotations)
+            380 STORE_NAME              43 (appendItems)
+
+266         382 LOAD_NAME                6 (int)
+            384 LOAD_CONST              23 (('return',))
+            386 BUILD_CONST_KEY_MAP      1
+            388 LOAD_CONST              45 (<code object count at 0x000001F324E69870, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 266>)
+            390 LOAD_CONST              46 ('LPWiiMRadioStationListModel.count')
+            392 MAKE_FUNCTION            4 (annotations)
+            394 STORE_NAME              44 (count)
+
+275         396 LOAD_NAME               38 (List)
+            398 LOAD_NAME               29 (Dict)
+            400 LOAD_NAME               39 (str)
+            402 LOAD_NAME               39 (str)
+            404 BUILD_TUPLE              2
+            406 BINARY_SUBSCR
+            408 BINARY_SUBSCR
+            410 LOAD_CONST              23 (('return',))
+            412 BUILD_CONST_KEY_MAP      1
+            414 LOAD_CONST              47 (<code object itemsSnapshot at 0x000001F324E69920, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 275>)
+            416 LOAD_CONST              48 ('LPWiiMRadioStationListModel.itemsSnapshot')
+            418 MAKE_FUNCTION            4 (annotations)
+            420 STORE_NAME              45 (itemsSnapshot)
+
+284         422 LOAD_NAME               39 (str)
+            424 LOAD_NAME               20 (Optional)
+            426 LOAD_NAME               29 (Dict)
+            428 LOAD_NAME               39 (str)
+            430 LOAD_NAME               39 (str)
+            432 BUILD_TUPLE              2
+            434 BINARY_SUBSCR
+            436 BINARY_SUBSCR
+            438 LOAD_CONST              49 (('stationId', 'return'))
+            440 BUILD_CONST_KEY_MAP      2
+            442 LOAD_CONST              50 (<code object findItemByStationId at 0x000001F324E69500, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 284>)
+            444 LOAD_CONST              51 ('LPWiiMRadioStationListModel.findItemByStationId')
+            446 MAKE_FUNCTION            4 (annotations)
+            448 STORE_NAME              46 (findItemByStationId)
+
+299         450 LOAD_NAME                6 (int)
+            452 LOAD_CONST              23 (('return',))
+            454 BUILD_CONST_KEY_MAP      1
+            456 LOAD_CONST              52 (<code object uniqueFaviconCount at 0x000001F3253AE450, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 299>)
+            458 LOAD_CONST              53 ('LPWiiMRadioStationListModel.uniqueFaviconCount')
+            460 MAKE_FUNCTION            4 (annotations)
+            462 STORE_NAME              47 (uniqueFaviconCount)
+
+308         464 LOAD_NAME               39 (str)
+            466 LOAD_NAME               39 (str)
+            468 LOAD_NAME               41 (bool)
+            470 LOAD_CONST              54 (('stationId', 'thumbnailPath', 'return'))
+            472 BUILD_CONST_KEY_MAP      3
+            474 LOAD_CONST              55 (<code object updateThumbnailPathByStationId at 0x000001F3253AE5B0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 308>)
+            476 LOAD_CONST              56 ('LPWiiMRadioStationListModel.updateThumbnailPathByStationId')
+            478 MAKE_FUNCTION            4 (annotations)
+            480 STORE_NAME              48 (updateThumbnailPathByStationId)
+
+332         482 LOAD_NAME               34 (pyqtSlot)
+            484 LOAD_NAME               39 (str)
+            486 LOAD_NAME               39 (str)
+            488 CALL_FUNCTION            2
+
+333         490 LOAD_NAME               39 (str)
+            492 LOAD_NAME               39 (str)
+            494 LOAD_CONST              11 (None)
+            496 LOAD_CONST              57 (('faviconUrl', 'thumbnailPath', 'return'))
+            498 BUILD_CONST_KEY_MAP      3
+            500 LOAD_CONST              58 (<code object _onThumbnailReady at 0x000001F3253AE9D0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 332>)
+            502 LOAD_CONST              59 ('LPWiiMRadioStationListModel._onThumbnailReady')
+            504 MAKE_FUNCTION            4 (annotations)
+            506 CALL_FUNCTION            1
+            508 STORE_NAME              49 (_onThumbnailReady)
+
+359         510 LOAD_CONST              70 ((0,))
+            512 LOAD_NAME               38 (List)
+            514 LOAD_NAME               29 (Dict)
+            516 LOAD_NAME               39 (str)
+            518 LOAD_NAME               27 (Any)
+            520 BUILD_TUPLE              2
+            522 BINARY_SUBSCR
+            524 BINARY_SUBSCR
+            526 LOAD_NAME                6 (int)
+            528 LOAD_NAME               38 (List)
+            530 LOAD_NAME               29 (Dict)
+            532 LOAD_NAME               39 (str)
+            534 LOAD_NAME               39 (str)
+            536 BUILD_TUPLE              2
+            538 BINARY_SUBSCR
+            540 BINARY_SUBSCR
+            542 LOAD_CONST              38 (('items', 'maxItems', 'return'))
+            544 BUILD_CONST_KEY_MAP      3
+            546 LOAD_CONST              60 (<code object _normalize_items at 0x000001F3253C4B30, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 359>)
+            548 LOAD_CONST              61 ('LPWiiMRadioStationListModel._normalize_items')
+            550 MAKE_FUNCTION            5 (defaults, annotations)
+            552 STORE_NAME              50 (_normalize_items)
+
+382         554 LOAD_NAME               29 (Dict)
+            556 LOAD_NAME               39 (str)
+            558 LOAD_NAME               27 (Any)
+            560 BUILD_TUPLE              2
+            562 BINARY_SUBSCR
+            564 LOAD_NAME               20 (Optional)
+            566 LOAD_NAME               29 (Dict)
+            568 LOAD_NAME               39 (str)
+            570 LOAD_NAME               39 (str)
+            572 BUILD_TUPLE              2
+            574 BINARY_SUBSCR
+            576 BINARY_SUBSCR
+            578 LOAD_CONST              62 (('item', 'return'))
+            580 BUILD_CONST_KEY_MAP      2
+            582 LOAD_CONST              63 (<code object _normalize_item at 0x000001F3253C4BE0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 382>)
+            584 LOAD_CONST              64 ('LPWiiMRadioStationListModel._normalize_item')
+            586 MAKE_FUNCTION            4 (annotations)
+            588 STORE_NAME              51 (_normalize_item)
+
+411         590 LOAD_CONST              11 (None)
+            592 LOAD_CONST              23 (('return',))
+            594 BUILD_CONST_KEY_MAP      1
+            596 LOAD_CONST              65 (<code object _schedule_visible_range_thumbnails at 0x000001F3253C4190, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 411>)
+            598 LOAD_CONST              66 ('LPWiiMRadioStationListModel._schedule_visible_range_thumbnails')
+            600 MAKE_FUNCTION            4 (annotations)
+            602 STORE_NAME              52 (_schedule_visible_range_thumbnails)
+            604 LOAD_CLOSURE             0 (__class__)
+            606 DUP_TOP
+            608 STORE_NAME              53 (__classcell__)
+            610 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.__init__ ===
+ 39           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 40          12 BUILD_LIST               0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_items)
+
+ 41          18 LOAD_GLOBAL              3 (logger)
+             20 LOAD_METHOD              4 (debug)
+             22 LOAD_CONST               1 ('LPWiiMRadioStationListModel _items ')
+             24 LOAD_GLOBAL              5 (len)
+             26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                2 (_items)
+             30 CALL_FUNCTION            1
+             32 FORMAT_VALUE             0
+             34 BUILD_STRING             2
+             36 CALL_METHOD              1
+             38 POP_TOP
+
+ 42          40 LOAD_GLOBAL              6 (set)
+             42 CALL_FUNCTION            0
+             44 LOAD_FAST                0 (self)
+             46 STORE_ATTR               7 (_station_ids)
+
+ 43          48 LOAD_GLOBAL              8 (LPWiiMRadioThumbnailService)
+             50 LOAD_METHOD              9 (instance)
+             52 CALL_METHOD              0
+             54 LOAD_FAST                0 (self)
+             56 STORE_ATTR              10 (_thumbnail_service)
+
+ 44          58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR               10 (_thumbnail_service)
+             62 LOAD_ATTR               11 (thumbnailReady)
+             64 LOAD_METHOD             12 (connect)
+             66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR               13 (_onThumbnailReady)
+             70 CALL_METHOD              1
+             72 POP_TOP
+
+ 45          74 LOAD_CONST               2 (-1)
+             76 LOAD_FAST                0 (self)
+             78 STORE_ATTR              14 (_visible_first_index)
+
+ 46          80 LOAD_CONST               2 (-1)
+             82 LOAD_FAST                0 (self)
+             84 STORE_ATTR              15 (_visible_last_index)
+             86 LOAD_CONST               3 (None)
+             88 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.__del__ ===
+ 49           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (debug)
+              4 LOAD_CONST               1 ('LPWiiMRadioStationListModel enter __del__')
+              6 CALL_METHOD              1
+              8 POP_TOP
+             10 LOAD_CONST               0 (None)
+             12 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.rowCount ===
+ 58           0 LOAD_FAST                1 (parent)
+              2 LOAD_METHOD              0 (isValid)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_FALSE       12
+
+ 59           8 LOAD_CONST               1 (0)
+             10 RETURN_VALUE
+
+ 60     >>   12 LOAD_GLOBAL              1 (len)
+             14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (_items)
+             18 CALL_FUNCTION            1
+             20 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.data ===
+ 70           0 LOAD_FAST                1 (index)
+              2 LOAD_METHOD              0 (isValid)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        12
+
+ 71           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+ 72     >>   12 LOAD_FAST                1 (index)
+             14 LOAD_METHOD              1 (row)
+             16 CALL_METHOD              0
+             18 STORE_FAST               3 (row)
+
+ 73          20 LOAD_FAST                3 (row)
+             22 LOAD_CONST               2 (0)
+             24 COMPARE_OP               0 (<)
+             26 POP_JUMP_IF_TRUE        42
+             28 LOAD_FAST                3 (row)
+             30 LOAD_GLOBAL              2 (len)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_items)
+             36 CALL_FUNCTION            1
+             38 COMPARE_OP               5 (>=)
+             40 POP_JUMP_IF_FALSE       46
+
+ 74     >>   42 LOAD_CONST               1 (None)
+             44 RETURN_VALUE
+
+ 75     >>   46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                3 (_items)
+             50 LOAD_FAST                3 (row)
+             52 BINARY_SUBSCR
+             54 STORE_FAST               4 (item)
+
+ 76          56 LOAD_FAST                2 (role)
+             58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                4 (STATION_ID_ROLE)
+             62 COMPARE_OP               2 (==)
+             64 POP_JUMP_IF_FALSE       78
+
+ 77          66 LOAD_FAST                4 (item)
+             68 LOAD_METHOD              5 (get)
+             70 LOAD_CONST               3 ('stationId')
+             72 LOAD_CONST               4 ('')
+             74 CALL_METHOD              2
+             76 RETURN_VALUE
+
+ 78     >>   78 LOAD_FAST                2 (role)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                6 (NAME_ROLE)
+             84 COMPARE_OP               2 (==)
+             86 POP_JUMP_IF_FALSE      100
+
+ 79          88 LOAD_FAST                4 (item)
+             90 LOAD_METHOD              5 (get)
+             92 LOAD_CONST               5 ('name')
+             94 LOAD_CONST               4 ('')
+             96 CALL_METHOD              2
+             98 RETURN_VALUE
+
+ 80     >>  100 LOAD_FAST                2 (role)
+            102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                7 (FAVICON_ROLE)
+            106 COMPARE_OP               2 (==)
+            108 POP_JUMP_IF_FALSE      122
+
+ 81         110 LOAD_FAST                4 (item)
+            112 LOAD_METHOD              5 (get)
+            114 LOAD_CONST               6 ('favicon')
+            116 LOAD_CONST               4 ('')
+            118 CALL_METHOD              2
+            120 RETURN_VALUE
+
+ 82     >>  122 LOAD_FAST                2 (role)
+            124 LOAD_FAST                0 (self)
+            126 LOAD_ATTR                8 (STREAM_URL_ROLE)
+            128 COMPARE_OP               2 (==)
+            130 POP_JUMP_IF_FALSE      144
+
+ 83         132 LOAD_FAST                4 (item)
+            134 LOAD_METHOD              5 (get)
+            136 LOAD_CONST               7 ('streamUrl')
+            138 LOAD_CONST               4 ('')
+            140 CALL_METHOD              2
+            142 RETURN_VALUE
+
+ 84     >>  144 LOAD_FAST                2 (role)
+            146 LOAD_FAST                0 (self)
+            148 LOAD_ATTR                9 (FAVICON_THUMB_PATH_ROLE)
+            150 COMPARE_OP               2 (==)
+            152 POP_JUMP_IF_FALSE      166
+
+ 85         154 LOAD_FAST                4 (item)
+            156 LOAD_METHOD              5 (get)
+            158 LOAD_CONST               8 ('faviconThumbPath')
+            160 LOAD_CONST               4 ('')
+            162 CALL_METHOD              2
+            164 RETURN_VALUE
+
+ 86     >>  166 LOAD_FAST                2 (role)
+            168 LOAD_FAST                0 (self)
+            170 LOAD_ATTR               10 (CITY_ROLE)
+            172 COMPARE_OP               2 (==)
+            174 POP_JUMP_IF_FALSE      188
+
+ 87         176 LOAD_FAST                4 (item)
+            178 LOAD_METHOD              5 (get)
+            180 LOAD_CONST               9 ('city')
+            182 LOAD_CONST               4 ('')
+            184 CALL_METHOD              2
+            186 RETURN_VALUE
+
+ 88     >>  188 LOAD_FAST                2 (role)
+            190 LOAD_FAST                0 (self)
+            192 LOAD_ATTR               11 (REGION_ROLE)
+            194 COMPARE_OP               2 (==)
+            196 POP_JUMP_IF_FALSE      210
+
+ 89         198 LOAD_FAST                4 (item)
+            200 LOAD_METHOD              5 (get)
+            202 LOAD_CONST              10 ('region')
+            204 LOAD_CONST               4 ('')
+            206 CALL_METHOD              2
+            208 RETURN_VALUE
+
+ 90     >>  210 LOAD_FAST                2 (role)
+            212 LOAD_FAST                0 (self)
+            214 LOAD_ATTR               12 (COUNTRY_ROLE)
+            216 COMPARE_OP               2 (==)
+            218 POP_JUMP_IF_FALSE      232
+
+ 91         220 LOAD_FAST                4 (item)
+            222 LOAD_METHOD              5 (get)
+            224 LOAD_CONST              11 ('country')
+            226 LOAD_CONST               4 ('')
+            228 CALL_METHOD              2
+            230 RETURN_VALUE
+
+ 92     >>  232 LOAD_FAST                2 (role)
+            234 LOAD_FAST                0 (self)
+            236 LOAD_ATTR               13 (COUNTRY_CODE_ROLE)
+            238 COMPARE_OP               2 (==)
+            240 POP_JUMP_IF_FALSE      254
+
+ 93         242 LOAD_FAST                4 (item)
+            244 LOAD_METHOD              5 (get)
+            246 LOAD_CONST              12 ('countryCode')
+            248 LOAD_CONST               4 ('')
+            250 CALL_METHOD              2
+            252 RETURN_VALUE
+
+ 94     >>  254 LOAD_FAST                2 (role)
+            256 LOAD_FAST                0 (self)
+            258 LOAD_ATTR               14 (GENRES_ROLE)
+            260 COMPARE_OP               2 (==)
+            262 EXTENDED_ARG             1
+            264 POP_JUMP_IF_FALSE      278
+
+ 95         266 LOAD_FAST                4 (item)
+            268 LOAD_METHOD              5 (get)
+            270 LOAD_CONST              13 ('genres')
+            272 LOAD_CONST               4 ('')
+            274 CALL_METHOD              2
+            276 RETURN_VALUE
+
+ 96     >>  278 LOAD_CONST               1 (None)
+            280 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.roleNames ===
+106           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (STATION_ID_ROLE)
+              4 LOAD_CONST               1 (b'stationId')
+
+107           6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                1 (NAME_ROLE)
+             10 LOAD_CONST               2 (b'name')
+
+108          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (FAVICON_ROLE)
+             16 LOAD_CONST               3 (b'favicon')
+
+109          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (STREAM_URL_ROLE)
+             22 LOAD_CONST               4 (b'streamUrl')
+
+110          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                4 (FAVICON_THUMB_PATH_ROLE)
+             28 LOAD_CONST               5 (b'faviconThumbPath')
+
+111          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                5 (CITY_ROLE)
+             34 LOAD_CONST               6 (b'city')
+
+112          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                6 (REGION_ROLE)
+             40 LOAD_CONST               7 (b'region')
+
+113          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                7 (COUNTRY_ROLE)
+             46 LOAD_CONST               8 (b'country')
+
+114          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                8 (COUNTRY_CODE_ROLE)
+             52 LOAD_CONST               9 (b'countryCode')
+
+115          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                9 (GENRES_ROLE)
+             58 LOAD_CONST              10 (b'genres')
+
+105          60 BUILD_MAP               10
+             62 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.cleanup ===
+125           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (clearVisibleRange)
+              4 CALL_METHOD              0
+              6 POP_TOP
+
+126           8 SETUP_FINALLY           20 (to 30)
+
+127          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (_thumbnail_service)
+             14 LOAD_ATTR                2 (thumbnailReady)
+             16 LOAD_METHOD              3 (disconnect)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                4 (_onThumbnailReady)
+             22 CALL_METHOD              1
+             24 POP_TOP
+             26 POP_BLOCK
+             28 JUMP_FORWARD            22 (to 52)
+
+128     >>   30 DUP_TOP
+             32 LOAD_GLOBAL              5 (RuntimeError)
+             34 LOAD_GLOBAL              6 (TypeError)
+             36 BUILD_TUPLE              2
+             38 JUMP_IF_NOT_EXC_MATCH    50
+             40 POP_TOP
+             42 POP_TOP
+             44 POP_TOP
+
+129          46 POP_EXCEPT
+             48 JUMP_FORWARD             2 (to 52)
+        >>   50 RERAISE
+        >>   52 LOAD_CONST               1 (None)
+             54 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.reconnect ===
+139           0 SETUP_FINALLY           20 (to 22)
+
+140           2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_thumbnail_service)
+              6 LOAD_ATTR                1 (thumbnailReady)
+              8 LOAD_METHOD              2 (disconnect)
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                3 (_onThumbnailReady)
+             14 CALL_METHOD              1
+             16 POP_TOP
+             18 POP_BLOCK
+             20 JUMP_FORWARD            22 (to 44)
+
+141     >>   22 DUP_TOP
+             24 LOAD_GLOBAL              4 (RuntimeError)
+             26 LOAD_GLOBAL              5 (TypeError)
+             28 BUILD_TUPLE              2
+             30 JUMP_IF_NOT_EXC_MATCH    42
+             32 POP_TOP
+             34 POP_TOP
+             36 POP_TOP
+
+142          38 POP_EXCEPT
+             40 JUMP_FORWARD             2 (to 44)
+        >>   42 RERAISE
+
+143     >>   44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                0 (_thumbnail_service)
+             48 LOAD_ATTR                1 (thumbnailReady)
+             50 LOAD_METHOD              6 (connect)
+             52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                3 (_onThumbnailReady)
+             56 CALL_METHOD              1
+             58 POP_TOP
+             60 LOAD_CONST               1 (None)
+             62 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.updateVisibleRange ===
+154           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_items)
+              6 CALL_FUNCTION            1
+              8 STORE_FAST               3 (count)
+
+155          10 LOAD_FAST                3 (count)
+             12 LOAD_CONST               1 (0)
+             14 COMPARE_OP               1 (<=)
+             16 POP_JUMP_IF_FALSE       34
+
+156          18 LOAD_CONST               2 (-1)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               2 (_visible_first_index)
+
+157          24 LOAD_CONST               2 (-1)
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               3 (_visible_last_index)
+
+158          30 LOAD_CONST               3 (None)
+             32 RETURN_VALUE
+
+160     >>   34 LOAD_GLOBAL              4 (max)
+             36 LOAD_CONST               1 (0)
+             38 LOAD_GLOBAL              5 (int)
+             40 LOAD_FAST                1 (firstIndex)
+             42 CALL_FUNCTION            1
+             44 CALL_FUNCTION            2
+             46 STORE_FAST               4 (first)
+
+161          48 LOAD_GLOBAL              6 (min)
+             50 LOAD_FAST                3 (count)
+             52 LOAD_CONST               4 (1)
+             54 BINARY_SUBTRACT
+             56 LOAD_GLOBAL              5 (int)
+             58 LOAD_FAST                2 (lastIndex)
+             60 CALL_FUNCTION            1
+             62 CALL_FUNCTION            2
+             64 STORE_FAST               5 (last)
+
+162          66 LOAD_FAST                5 (last)
+             68 LOAD_FAST                4 (first)
+             70 COMPARE_OP               0 (<)
+             72 POP_JUMP_IF_FALSE       90
+
+163          74 LOAD_CONST               2 (-1)
+             76 LOAD_FAST                0 (self)
+             78 STORE_ATTR               2 (_visible_first_index)
+
+164          80 LOAD_CONST               2 (-1)
+             82 LOAD_FAST                0 (self)
+             84 STORE_ATTR               3 (_visible_last_index)
+
+165          86 LOAD_CONST               3 (None)
+             88 RETURN_VALUE
+
+166     >>   90 LOAD_FAST                4 (first)
+             92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR                2 (_visible_first_index)
+             96 COMPARE_OP               2 (==)
+             98 POP_JUMP_IF_FALSE      114
+            100 LOAD_FAST                5 (last)
+            102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                3 (_visible_last_index)
+            106 COMPARE_OP               2 (==)
+            108 POP_JUMP_IF_FALSE      114
+
+167         110 LOAD_CONST               3 (None)
+            112 RETURN_VALUE
+
+169     >>  114 LOAD_FAST                4 (first)
+            116 LOAD_FAST                0 (self)
+            118 STORE_ATTR               2 (_visible_first_index)
+
+170         120 LOAD_FAST                5 (last)
+            122 LOAD_FAST                0 (self)
+            124 STORE_ATTR               3 (_visible_last_index)
+
+171         126 LOAD_FAST                0 (self)
+            128 LOAD_METHOD              7 (_schedule_visible_range_thumbnails)
+            130 CALL_METHOD              0
+            132 POP_TOP
+            134 LOAD_CONST               3 (None)
+            136 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.clearVisibleRange ===
+181           0 LOAD_CONST               1 (-1)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_visible_first_index)
+
+182           6 LOAD_CONST               1 (-1)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_visible_last_index)
+             12 LOAD_CONST               2 (None)
+             14 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.clear ===
+191           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_items)
+              4 POP_JUMP_IF_TRUE        10
+
+192           6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+193     >>   10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (beginResetModel)
+             14 CALL_METHOD              0
+             16 POP_TOP
+
+194          18 BUILD_LIST               0
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               0 (_items)
+
+195          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (_station_ids)
+             28 LOAD_METHOD              3 (clear)
+             30 CALL_METHOD              0
+             32 POP_TOP
+
+196          34 LOAD_CONST               2 (-1)
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               4 (_visible_first_index)
+
+197          40 LOAD_CONST               2 (-1)
+             42 LOAD_FAST                0 (self)
+             44 STORE_ATTR               5 (_visible_last_index)
+
+198          46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              6 (endResetModel)
+             50 CALL_METHOD              0
+             52 POP_TOP
+             54 LOAD_CONST               1 (None)
+             56 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.resetItems ===
+208           0 LOAD_FAST                2 (maxItems)
+              2 LOAD_CONST               1 (0)
+              4 COMPARE_OP               1 (<=)
+              6 POP_JUMP_IF_FALSE       14
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (MAX_ITEMS)
+             12 JUMP_FORWARD            10 (to 24)
+        >>   14 LOAD_GLOBAL              1 (min)
+             16 LOAD_FAST                2 (maxItems)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                0 (MAX_ITEMS)
+             22 CALL_FUNCTION            2
+        >>   24 STORE_FAST               3 (effective_max)
+
+209          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                2 (_normalize_items)
+             30 LOAD_FAST                1 (items)
+             32 LOAD_FAST                3 (effective_max)
+             34 LOAD_CONST               2 (('maxItems',))
+             36 CALL_FUNCTION_KW         2
+             38 STORE_FAST               4 (normalized)
+
+210          40 LOAD_FAST                0 (self)
+             42 LOAD_METHOD              3 (beginResetModel)
+             44 CALL_METHOD              0
+             46 POP_TOP
+
+211          48 LOAD_FAST                4 (normalized)
+             50 LOAD_FAST                0 (self)
+             52 STORE_ATTR               4 (_items)
+
+212          54 LOAD_CONST               3 (<code object <setcomp> at 0x000001F324E692F0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 212>)
+             56 LOAD_CONST               4 ('LPWiiMRadioStationListModel.resetItems.<locals>.<setcomp>')
+             58 MAKE_FUNCTION            0
+             60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                4 (_items)
+             64 GET_ITER
+             66 CALL_FUNCTION            1
+             68 LOAD_FAST                0 (self)
+             70 STORE_ATTR               5 (_station_ids)
+
+213          72 LOAD_FAST                0 (self)
+             74 LOAD_METHOD              6 (endResetModel)
+             76 CALL_METHOD              0
+             78 POP_TOP
+
+214          80 LOAD_FAST                0 (self)
+             82 LOAD_METHOD              7 (_schedule_visible_range_thumbnails)
+             84 CALL_METHOD              0
+             86 POP_TOP
+
+215          88 LOAD_GLOBAL              8 (len)
+             90 LOAD_FAST                0 (self)
+             92 LOAD_ATTR                4 (_items)
+             94 CALL_FUNCTION            1
+             96 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.resetItems.<setcomp> ===
+212           0 BUILD_SET                0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                28 (to 34)
+              6 STORE_FAST               1 (item)
+              8 LOAD_FAST                1 (item)
+             10 LOAD_METHOD              0 (get)
+             12 LOAD_CONST               0 ('stationId')
+             14 LOAD_CONST               1 ('')
+             16 CALL_METHOD              2
+             18 POP_JUMP_IF_FALSE        4
+             20 LOAD_FAST                1 (item)
+             22 LOAD_METHOD              0 (get)
+             24 LOAD_CONST               0 ('stationId')
+             26 LOAD_CONST               1 ('')
+             28 CALL_METHOD              2
+             30 SET_ADD                  2
+             32 JUMP_ABSOLUTE            4
+        >>   34 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.isFull ===
+224           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_items)
+              6 CALL_FUNCTION            1
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                2 (MAX_ITEMS)
+             12 COMPARE_OP               5 (>=)
+             14 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.appendItems ===
+234           0 LOAD_FAST                1 (items)
+              2 POP_JUMP_IF_TRUE         8
+
+235           4 LOAD_CONST               1 (0)
+              6 RETURN_VALUE
+
+237     >>    8 LOAD_FAST                2 (maxItems)
+             10 LOAD_CONST               1 (0)
+             12 COMPARE_OP               1 (<=)
+             14 POP_JUMP_IF_FALSE       22
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                0 (MAX_ITEMS)
+             20 JUMP_FORWARD            10 (to 32)
+        >>   22 LOAD_GLOBAL              1 (min)
+             24 LOAD_FAST                2 (maxItems)
+             26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                0 (MAX_ITEMS)
+             30 CALL_FUNCTION            2
+        >>   32 STORE_FAST               3 (effective_max)
+
+239          34 BUILD_LIST               0
+             36 STORE_FAST               4 (to_append)
+
+240          38 LOAD_FAST                1 (items)
+             40 JUMP_IF_TRUE_OR_POP     44
+             42 BUILD_LIST               0
+        >>   44 GET_ITER
+        >>   46 FOR_ITER                80 (to 128)
+             48 STORE_FAST               5 (item)
+
+241          50 LOAD_FAST                0 (self)
+             52 LOAD_METHOD              2 (_normalize_item)
+             54 LOAD_FAST                5 (item)
+             56 CALL_METHOD              1
+             58 STORE_FAST               6 (normalized_item)
+
+242          60 LOAD_FAST                6 (normalized_item)
+             62 POP_JUMP_IF_TRUE        66
+
+243          64 JUMP_ABSOLUTE           46
+
+244     >>   66 LOAD_FAST                6 (normalized_item)
+             68 LOAD_METHOD              3 (get)
+             70 LOAD_CONST               2 ('stationId')
+             72 LOAD_CONST               3 ('')
+             74 CALL_METHOD              2
+             76 STORE_FAST               7 (station_id)
+
+245          78 LOAD_FAST                7 (station_id)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                4 (_station_ids)
+             84 CONTAINS_OP              0
+             86 POP_JUMP_IF_FALSE       90
+
+246          88 JUMP_ABSOLUTE           46
+
+247     >>   90 LOAD_GLOBAL              5 (len)
+             92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR                6 (_items)
+             96 CALL_FUNCTION            1
+             98 LOAD_GLOBAL              5 (len)
+            100 LOAD_FAST                4 (to_append)
+            102 CALL_FUNCTION            1
+            104 BINARY_ADD
+            106 LOAD_FAST                3 (effective_max)
+            108 COMPARE_OP               5 (>=)
+            110 POP_JUMP_IF_FALSE      116
+
+248         112 POP_TOP
+            114 JUMP_ABSOLUTE          128
+
+249     >>  116 LOAD_FAST                4 (to_append)
+            118 LOAD_METHOD              7 (append)
+            120 LOAD_FAST                6 (normalized_item)
+            122 CALL_METHOD              1
+            124 POP_TOP
+            126 JUMP_ABSOLUTE           46
+
+251     >>  128 LOAD_FAST                4 (to_append)
+            130 POP_JUMP_IF_TRUE       136
+
+252         132 LOAD_CONST               1 (0)
+            134 RETURN_VALUE
+
+254     >>  136 LOAD_GLOBAL              5 (len)
+            138 LOAD_FAST                0 (self)
+            140 LOAD_ATTR                6 (_items)
+            142 CALL_FUNCTION            1
+            144 STORE_FAST               8 (start_row)
+
+255         146 LOAD_FAST                8 (start_row)
+            148 LOAD_GLOBAL              5 (len)
+            150 LOAD_FAST                4 (to_append)
+            152 CALL_FUNCTION            1
+            154 BINARY_ADD
+            156 LOAD_CONST               4 (1)
+            158 BINARY_SUBTRACT
+            160 STORE_FAST               9 (end_row)
+
+256         162 LOAD_FAST                0 (self)
+            164 LOAD_METHOD              8 (beginInsertRows)
+            166 LOAD_GLOBAL              9 (QModelIndex)
+            168 CALL_FUNCTION            0
+            170 LOAD_FAST                8 (start_row)
+            172 LOAD_FAST                9 (end_row)
+            174 CALL_METHOD              3
+            176 POP_TOP
+
+257         178 LOAD_FAST                0 (self)
+            180 LOAD_ATTR                6 (_items)
+            182 LOAD_METHOD             10 (extend)
+            184 LOAD_FAST                4 (to_append)
+            186 CALL_METHOD              1
+            188 POP_TOP
+
+258         190 LOAD_FAST                4 (to_append)
+            192 GET_ITER
+        >>  194 FOR_ITER                32 (to 228)
+            196 STORE_FAST               5 (item)
+
+259         198 LOAD_FAST                5 (item)
+            200 LOAD_METHOD              3 (get)
+            202 LOAD_CONST               2 ('stationId')
+            204 LOAD_CONST               3 ('')
+            206 CALL_METHOD              2
+            208 STORE_FAST               7 (station_id)
+
+260         210 LOAD_FAST                7 (station_id)
+            212 POP_JUMP_IF_FALSE      194
+
+261         214 LOAD_FAST                0 (self)
+            216 LOAD_ATTR                4 (_station_ids)
+            218 LOAD_METHOD             11 (add)
+            220 LOAD_FAST                7 (station_id)
+            222 CALL_METHOD              1
+            224 POP_TOP
+            226 JUMP_ABSOLUTE          194
+
+262     >>  228 LOAD_FAST                0 (self)
+            230 LOAD_METHOD             12 (endInsertRows)
+            232 CALL_METHOD              0
+            234 POP_TOP
+
+263         236 LOAD_FAST                0 (self)
+            238 LOAD_METHOD             13 (_schedule_visible_range_thumbnails)
+            240 CALL_METHOD              0
+            242 POP_TOP
+
+264         244 LOAD_GLOBAL              5 (len)
+            246 LOAD_FAST                4 (to_append)
+            248 CALL_FUNCTION            1
+            250 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.count ===
+273           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_items)
+              6 CALL_FUNCTION            1
+              8 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.itemsSnapshot ===
+282           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F324E690E0, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 282>)
+              2 LOAD_CONST               2 ('LPWiiMRadioStationListModel.itemsSnapshot.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (_items)
+             10 GET_ITER
+             12 CALL_FUNCTION            1
+             14 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.itemsSnapshot.<listcomp> ===
+282           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (dict)
+             10 LOAD_FAST                1 (item)
+             12 CALL_FUNCTION            1
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.findItemByStationId ===
+291           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (stationId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               2 (station_id)
+
+292          16 LOAD_FAST                2 (station_id)
+             18 POP_JUMP_IF_TRUE        24
+
+293          20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+294     >>   24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (_items)
+             28 GET_ITER
+        >>   30 FOR_ITER                32 (to 64)
+             32 STORE_FAST               3 (item)
+
+295          34 LOAD_FAST                3 (item)
+             36 LOAD_METHOD              3 (get)
+             38 LOAD_CONST               3 ('stationId')
+             40 LOAD_CONST               1 ('')
+             42 CALL_METHOD              2
+             44 LOAD_FAST                2 (station_id)
+             46 COMPARE_OP               2 (==)
+             48 POP_JUMP_IF_FALSE       30
+
+296          50 LOAD_GLOBAL              4 (dict)
+             52 LOAD_FAST                3 (item)
+             54 CALL_FUNCTION            1
+             56 ROT_TWO
+             58 POP_TOP
+             60 RETURN_VALUE
+             62 JUMP_ABSOLUTE           30
+
+297     >>   64 LOAD_CONST               2 (None)
+             66 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.uniqueFaviconCount ===
+306           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_CONST               1 (<code object <setcomp> at 0x000001F3253AE870, file "StreamService\WiiMRadio\utils\LPWiiMRadioStationListModel.py", line 306>)
+              4 LOAD_CONST               2 ('LPWiiMRadioStationListModel.uniqueFaviconCount.<locals>.<setcomp>')
+              6 MAKE_FUNCTION            0
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_items)
+             12 GET_ITER
+             14 CALL_FUNCTION            1
+             16 CALL_FUNCTION            1
+             18 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.uniqueFaviconCount.<setcomp> ===
+306           0 BUILD_SET                0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                28 (to 34)
+              6 STORE_FAST               1 (item)
+              8 LOAD_FAST                1 (item)
+             10 LOAD_METHOD              0 (get)
+             12 LOAD_CONST               0 ('favicon')
+             14 LOAD_CONST               1 ('')
+             16 CALL_METHOD              2
+             18 POP_JUMP_IF_FALSE        4
+             20 LOAD_FAST                1 (item)
+             22 LOAD_METHOD              0 (get)
+             24 LOAD_CONST               0 ('favicon')
+             26 LOAD_CONST               1 ('')
+             28 CALL_METHOD              2
+             30 SET_ADD                  2
+             32 JUMP_ABSOLUTE            4
+        >>   34 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel.updateThumbnailPathByStationId ===
+316           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (stationId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               3 (station_id)
+
+317          16 LOAD_GLOBAL              0 (str)
+             18 LOAD_FAST                2 (thumbnailPath)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              1 (strip)
+             28 CALL_METHOD              0
+             30 STORE_FAST               4 (next_path)
+
+318          32 LOAD_FAST                3 (station_id)
+             34 POP_JUMP_IF_FALSE       40
+             36 LOAD_FAST                4 (next_path)
+             38 POP_JUMP_IF_TRUE        44
+
+319     >>   40 LOAD_CONST               2 (False)
+             42 RETURN_VALUE
+
+321     >>   44 LOAD_GLOBAL              2 (enumerate)
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                3 (_items)
+             50 CALL_FUNCTION            1
+             52 GET_ITER
+        >>   54 FOR_ITER                92 (to 148)
+             56 UNPACK_SEQUENCE          2
+             58 STORE_FAST               5 (row)
+             60 STORE_FAST               6 (item)
+
+322          62 LOAD_FAST                6 (item)
+             64 LOAD_METHOD              4 (get)
+             66 LOAD_CONST               3 ('stationId')
+             68 LOAD_CONST               1 ('')
+             70 CALL_METHOD              2
+             72 LOAD_FAST                3 (station_id)
+             74 COMPARE_OP               3 (!=)
+             76 POP_JUMP_IF_FALSE       80
+
+323          78 JUMP_ABSOLUTE           54
+
+324     >>   80 LOAD_FAST                6 (item)
+             82 LOAD_METHOD              4 (get)
+             84 LOAD_CONST               4 ('faviconThumbPath')
+             86 LOAD_CONST               1 ('')
+             88 CALL_METHOD              2
+             90 LOAD_FAST                4 (next_path)
+             92 COMPARE_OP               2 (==)
+             94 POP_JUMP_IF_FALSE      102
+
+325          96 POP_TOP
+             98 LOAD_CONST               2 (False)
+            100 RETURN_VALUE
+
+326     >>  102 LOAD_FAST                4 (next_path)
+            104 LOAD_FAST                6 (item)
+            106 LOAD_CONST               4 ('faviconThumbPath')
+            108 STORE_SUBSCR
+
+327         110 LOAD_FAST                0 (self)
+            112 LOAD_METHOD              5 (index)
+            114 LOAD_FAST                5 (row)
+            116 LOAD_CONST               5 (0)
+            118 CALL_METHOD              2
+            120 STORE_FAST               7 (index)
+
+328         122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR                6 (dataChanged)
+            126 LOAD_METHOD              7 (emit)
+            128 LOAD_FAST                7 (index)
+            130 LOAD_FAST                7 (index)
+            132 LOAD_FAST                0 (self)
+            134 LOAD_ATTR                8 (FAVICON_THUMB_PATH_ROLE)
+            136 BUILD_LIST               1
+            138 CALL_METHOD              3
+            140 POP_TOP
+
+329         142 POP_TOP
+            144 LOAD_CONST               6 (True)
+            146 RETURN_VALUE
+
+330     >>  148 LOAD_CONST               2 (False)
+            150 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel._onThumbnailReady ===
+341           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (faviconUrl)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               3 (target_url)
+
+342          16 LOAD_GLOBAL              0 (str)
+             18 LOAD_FAST                2 (thumbnailPath)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              1 (strip)
+             28 CALL_METHOD              0
+             30 STORE_FAST               4 (next_path)
+
+343          32 LOAD_FAST                3 (target_url)
+             34 POP_JUMP_IF_FALSE       40
+             36 LOAD_FAST                4 (next_path)
+             38 POP_JUMP_IF_TRUE        44
+
+344     >>   40 LOAD_CONST               2 (None)
+             42 RETURN_VALUE
+
+346     >>   44 BUILD_LIST               0
+             46 STORE_FAST               5 (changed_rows)
+
+347          48 LOAD_GLOBAL              2 (enumerate)
+             50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                3 (_items)
+             54 CALL_FUNCTION            1
+             56 GET_ITER
+        >>   58 FOR_ITER                62 (to 122)
+             60 UNPACK_SEQUENCE          2
+             62 STORE_FAST               6 (row)
+             64 STORE_FAST               7 (item)
+
+348          66 LOAD_FAST                7 (item)
+             68 LOAD_METHOD              4 (get)
+             70 LOAD_CONST               3 ('favicon')
+             72 LOAD_CONST               1 ('')
+             74 CALL_METHOD              2
+             76 LOAD_FAST                3 (target_url)
+             78 COMPARE_OP               3 (!=)
+             80 POP_JUMP_IF_FALSE       84
+
+349          82 JUMP_ABSOLUTE           58
+
+350     >>   84 LOAD_FAST                7 (item)
+             86 LOAD_METHOD              4 (get)
+             88 LOAD_CONST               4 ('faviconThumbPath')
+             90 LOAD_CONST               1 ('')
+             92 CALL_METHOD              2
+             94 LOAD_FAST                4 (next_path)
+             96 COMPARE_OP               2 (==)
+             98 POP_JUMP_IF_FALSE      102
+
+351         100 JUMP_ABSOLUTE           58
+
+352     >>  102 LOAD_FAST                4 (next_path)
+            104 LOAD_FAST                7 (item)
+            106 LOAD_CONST               4 ('faviconThumbPath')
+            108 STORE_SUBSCR
+
+353         110 LOAD_FAST                5 (changed_rows)
+            112 LOAD_METHOD              5 (append)
+            114 LOAD_FAST                6 (row)
+            116 CALL_METHOD              1
+            118 POP_TOP
+            120 JUMP_ABSOLUTE           58
+
+355     >>  122 LOAD_FAST                5 (changed_rows)
+            124 GET_ITER
+        >>  126 FOR_ITER                36 (to 164)
+            128 STORE_FAST               6 (row)
+
+356         130 LOAD_FAST                0 (self)
+            132 LOAD_METHOD              6 (index)
+            134 LOAD_FAST                6 (row)
+            136 LOAD_CONST               5 (0)
+            138 CALL_METHOD              2
+            140 STORE_FAST               8 (index)
+
+357         142 LOAD_FAST                0 (self)
+            144 LOAD_ATTR                7 (dataChanged)
+            146 LOAD_METHOD              8 (emit)
+            148 LOAD_FAST                8 (index)
+            150 LOAD_FAST                8 (index)
+            152 LOAD_FAST                0 (self)
+            154 LOAD_ATTR                9 (FAVICON_THUMB_PATH_ROLE)
+            156 BUILD_LIST               1
+            158 CALL_METHOD              3
+            160 POP_TOP
+            162 JUMP_ABSOLUTE          126
+        >>  164 LOAD_CONST               2 (None)
+            166 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel._normalize_items ===
+367           0 BUILD_LIST               0
+              2 STORE_FAST               3 (normalized)
+
+368           4 LOAD_GLOBAL              0 (set)
+              6 CALL_FUNCTION            0
+              8 STORE_FAST               4 (seen_ids)
+
+369          10 LOAD_FAST                1 (items)
+             12 JUMP_IF_TRUE_OR_POP     16
+             14 BUILD_LIST               0
+        >>   16 GET_ITER
+        >>   18 FOR_ITER                86 (to 106)
+             20 STORE_FAST               5 (item)
+
+370          22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              1 (_normalize_item)
+             26 LOAD_FAST                5 (item)
+             28 CALL_METHOD              1
+             30 STORE_FAST               6 (normalized_item)
+
+371          32 LOAD_FAST                6 (normalized_item)
+             34 POP_JUMP_IF_TRUE        38
+
+372          36 JUMP_ABSOLUTE           18
+
+373     >>   38 LOAD_FAST                6 (normalized_item)
+             40 LOAD_METHOD              2 (get)
+             42 LOAD_CONST               1 ('stationId')
+             44 LOAD_CONST               2 ('')
+             46 CALL_METHOD              2
+             48 STORE_FAST               7 (station_id)
+
+374          50 LOAD_FAST                7 (station_id)
+             52 LOAD_FAST                4 (seen_ids)
+             54 CONTAINS_OP              0
+             56 POP_JUMP_IF_FALSE       60
+
+375          58 JUMP_ABSOLUTE           18
+
+376     >>   60 LOAD_FAST                4 (seen_ids)
+             62 LOAD_METHOD              3 (add)
+             64 LOAD_FAST                7 (station_id)
+             66 CALL_METHOD              1
+             68 POP_TOP
+
+377          70 LOAD_FAST                3 (normalized)
+             72 LOAD_METHOD              4 (append)
+             74 LOAD_FAST                6 (normalized_item)
+             76 CALL_METHOD              1
+             78 POP_TOP
+
+378          80 LOAD_FAST                2 (maxItems)
+             82 LOAD_CONST               3 (0)
+             84 COMPARE_OP               4 (>)
+             86 POP_JUMP_IF_FALSE       18
+             88 LOAD_GLOBAL              5 (len)
+             90 LOAD_FAST                3 (normalized)
+             92 CALL_FUNCTION            1
+             94 LOAD_FAST                2 (maxItems)
+             96 COMPARE_OP               5 (>=)
+             98 POP_JUMP_IF_FALSE       18
+
+379         100 POP_TOP
+            102 JUMP_ABSOLUTE          106
+            104 JUMP_ABSOLUTE           18
+
+380     >>  106 LOAD_FAST                3 (normalized)
+            108 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel._normalize_item ===
+389           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (item)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+390          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+391     >>   14 LOAD_GLOBAL              2 (str)
+             16 LOAD_FAST                1 (item)
+             18 LOAD_METHOD              3 (get)
+             20 LOAD_CONST               2 ('stationId')
+             22 LOAD_FAST                1 (item)
+             24 LOAD_METHOD              3 (get)
+             26 LOAD_CONST               3 ('stationID')
+             28 LOAD_FAST                1 (item)
+             30 LOAD_METHOD              3 (get)
+             32 LOAD_CONST               4 ('StationID')
+             34 LOAD_CONST               5 ('')
+             36 CALL_METHOD              2
+             38 CALL_METHOD              2
+             40 CALL_METHOD              2
+             42 JUMP_IF_TRUE_OR_POP     46
+             44 LOAD_CONST               5 ('')
+        >>   46 CALL_FUNCTION            1
+             48 LOAD_METHOD              4 (strip)
+             50 CALL_METHOD              0
+             52 STORE_FAST               2 (station_id)
+
+392          54 LOAD_FAST                2 (station_id)
+             56 POP_JUMP_IF_TRUE        62
+
+393          58 LOAD_CONST               1 (None)
+             60 RETURN_VALUE
+
+395     >>   62 LOAD_FAST                2 (station_id)
+
+396          64 LOAD_GLOBAL              2 (str)
+             66 LOAD_FAST                1 (item)
+             68 LOAD_METHOD              3 (get)
+             70 LOAD_CONST               6 ('name')
+             72 LOAD_FAST                1 (item)
+             74 LOAD_METHOD              3 (get)
+             76 LOAD_CONST               7 ('Name')
+             78 LOAD_CONST               5 ('')
+             80 CALL_METHOD              2
+             82 CALL_METHOD              2
+             84 JUMP_IF_TRUE_OR_POP     88
+             86 LOAD_CONST               5 ('')
+        >>   88 CALL_FUNCTION            1
+             90 LOAD_METHOD              4 (strip)
+             92 CALL_METHOD              0
+
+397          94 LOAD_GLOBAL              2 (str)
+             96 LOAD_FAST                1 (item)
+             98 LOAD_METHOD              3 (get)
+            100 LOAD_CONST               8 ('favicon')
+            102 LOAD_FAST                1 (item)
+            104 LOAD_METHOD              3 (get)
+            106 LOAD_CONST               9 ('Favicon')
+            108 LOAD_CONST               5 ('')
+            110 CALL_METHOD              2
+            112 CALL_METHOD              2
+            114 JUMP_IF_TRUE_OR_POP    118
+            116 LOAD_CONST               5 ('')
+        >>  118 CALL_FUNCTION            1
+            120 LOAD_METHOD              4 (strip)
+            122 CALL_METHOD              0
+
+398         124 LOAD_GLOBAL              2 (str)
+            126 LOAD_FAST                1 (item)
+            128 LOAD_METHOD              3 (get)
+            130 LOAD_CONST              10 ('streamUrl')
+            132 LOAD_FAST                1 (item)
+            134 LOAD_METHOD              3 (get)
+            136 LOAD_CONST              11 ('StreamUrl')
+            138 LOAD_CONST               5 ('')
+            140 CALL_METHOD              2
+            142 CALL_METHOD              2
+            144 JUMP_IF_TRUE_OR_POP    148
+            146 LOAD_CONST               5 ('')
+        >>  148 CALL_FUNCTION            1
+            150 LOAD_METHOD              4 (strip)
+            152 CALL_METHOD              0
+
+399         154 LOAD_GLOBAL              2 (str)
+
+400         156 LOAD_FAST                1 (item)
+            158 LOAD_METHOD              3 (get)
+            160 LOAD_CONST              12 ('faviconThumbPath')
+            162 LOAD_FAST                1 (item)
+            164 LOAD_METHOD              3 (get)
+            166 LOAD_CONST              13 ('FaviconThumbPath')
+            168 LOAD_CONST               5 ('')
+            170 CALL_METHOD              2
+            172 CALL_METHOD              2
+            174 JUMP_IF_TRUE_OR_POP    178
+            176 LOAD_CONST               5 ('')
+
+399     >>  178 CALL_FUNCTION            1
+            180 LOAD_METHOD              4 (strip)
+            182 CALL_METHOD              0
+
+402         184 LOAD_GLOBAL              2 (str)
+            186 LOAD_FAST                1 (item)
+            188 LOAD_METHOD              3 (get)
+            190 LOAD_CONST              14 ('city')
+            192 LOAD_FAST                1 (item)
+            194 LOAD_METHOD              3 (get)
+            196 LOAD_CONST              15 ('City')
+            198 LOAD_CONST               5 ('')
+            200 CALL_METHOD              2
+            202 CALL_METHOD              2
+            204 JUMP_IF_TRUE_OR_POP    208
+            206 LOAD_CONST               5 ('')
+        >>  208 CALL_FUNCTION            1
+            210 LOAD_METHOD              4 (strip)
+            212 CALL_METHOD              0
+
+403         214 LOAD_GLOBAL              2 (str)
+
+404         216 LOAD_FAST                1 (item)
+            218 LOAD_METHOD              3 (get)
+            220 LOAD_CONST              16 ('region')
+            222 LOAD_FAST                1 (item)
+            224 LOAD_METHOD              3 (get)
+            226 LOAD_CONST              17 ('Subcountry')
+            228 LOAD_FAST                1 (item)
+            230 LOAD_METHOD              3 (get)
+            232 LOAD_CONST              18 ('subcountry')
+            234 LOAD_FAST                1 (item)
+            236 LOAD_METHOD              3 (get)
+            238 LOAD_CONST              19 ('Region')
+            240 LOAD_CONST               5 ('')
+            242 CALL_METHOD              2
+            244 CALL_METHOD              2
+            246 CALL_METHOD              2
+            248 CALL_METHOD              2
+            250 JUMP_IF_TRUE_OR_POP    254
+            252 LOAD_CONST               5 ('')
+
+403     >>  254 CALL_FUNCTION            1
+            256 LOAD_METHOD              4 (strip)
+            258 CALL_METHOD              0
+
+406         260 LOAD_GLOBAL              2 (str)
+            262 LOAD_FAST                1 (item)
+            264 LOAD_METHOD              3 (get)
+            266 LOAD_CONST              20 ('country')
+            268 LOAD_FAST                1 (item)
+            270 LOAD_METHOD              3 (get)
+            272 LOAD_CONST              21 ('Country')
+            274 LOAD_CONST               5 ('')
+            276 CALL_METHOD              2
+            278 CALL_METHOD              2
+            280 EXTENDED_ARG             1
+            282 JUMP_IF_TRUE_OR_POP    286
+            284 LOAD_CONST               5 ('')
+        >>  286 CALL_FUNCTION            1
+            288 LOAD_METHOD              4 (strip)
+            290 CALL_METHOD              0
+
+407         292 LOAD_GLOBAL              2 (str)
+            294 LOAD_FAST                1 (item)
+            296 LOAD_METHOD              3 (get)
+            298 LOAD_CONST              22 ('countryCode')
+            300 LOAD_FAST                1 (item)
+            302 LOAD_METHOD              3 (get)
+            304 LOAD_CONST              23 ('CountryCode')
+            306 LOAD_CONST               5 ('')
+            308 CALL_METHOD              2
+            310 CALL_METHOD              2
+            312 EXTENDED_ARG             1
+            314 JUMP_IF_TRUE_OR_POP    318
+            316 LOAD_CONST               5 ('')
+        >>  318 CALL_FUNCTION            1
+            320 LOAD_METHOD              4 (strip)
+            322 CALL_METHOD              0
+            324 LOAD_METHOD              5 (upper)
+            326 CALL_METHOD              0
+
+408         328 LOAD_GLOBAL              2 (str)
+            330 LOAD_FAST                1 (item)
+            332 LOAD_METHOD              3 (get)
+            334 LOAD_CONST              24 ('genres')
+            336 LOAD_FAST                1 (item)
+            338 LOAD_METHOD              3 (get)
+            340 LOAD_CONST              25 ('Genres')
+            342 LOAD_CONST               5 ('')
+            344 CALL_METHOD              2
+            346 CALL_METHOD              2
+            348 EXTENDED_ARG             1
+            350 JUMP_IF_TRUE_OR_POP    354
+            352 LOAD_CONST               5 ('')
+        >>  354 CALL_FUNCTION            1
+            356 LOAD_METHOD              4 (strip)
+            358 CALL_METHOD              0
+
+394         360 LOAD_CONST              26 (('stationId', 'name', 'favicon', 'streamUrl', 'faviconThumbPath', 'city', 'region', 'country', 'countryCode', 'genres'))
+            362 BUILD_CONST_KEY_MAP     10
+            364 RETURN_VALUE
+
+=== LPWiiMRadioStationListModel._schedule_visible_range_thumbnails ===
+418           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_visible_first_index)
+              4 LOAD_CONST               1 (0)
+              6 COMPARE_OP               0 (<)
+              8 POP_JUMP_IF_TRUE        20
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (_visible_last_index)
+             14 LOAD_CONST               1 (0)
+             16 COMPARE_OP               0 (<)
+             18 POP_JUMP_IF_FALSE       24
+
+419     >>   20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+420     >>   24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (_items)
+             28 POP_JUMP_IF_TRUE        34
+
+421          30 LOAD_CONST               2 (None)
+             32 RETURN_VALUE
+
+423     >>   34 LOAD_GLOBAL              3 (max)
+             36 LOAD_CONST               1 (0)
+             38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                0 (_visible_first_index)
+             42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                4 (PRELOAD_BEFORE)
+             46 BINARY_SUBTRACT
+             48 CALL_FUNCTION            2
+             50 STORE_FAST               1 (start_index)
+
+424          52 LOAD_GLOBAL              5 (min)
+             54 LOAD_GLOBAL              6 (len)
+             56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                2 (_items)
+             60 CALL_FUNCTION            1
+             62 LOAD_CONST               3 (1)
+             64 BINARY_SUBTRACT
+             66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR                1 (_visible_last_index)
+             70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR                7 (PRELOAD_AFTER)
+             74 BINARY_ADD
+             76 CALL_FUNCTION            2
+             78 STORE_FAST               2 (end_index)
+
+425          80 BUILD_LIST               0
+             82 STORE_FAST               3 (changed_rows)
+
+427          84 LOAD_GLOBAL              8 (range)
+             86 LOAD_FAST                1 (start_index)
+             88 LOAD_FAST                2 (end_index)
+             90 LOAD_CONST               3 (1)
+             92 BINARY_ADD
+             94 CALL_FUNCTION            2
+             96 GET_ITER
+        >>   98 FOR_ITER               166 (to 266)
+            100 STORE_FAST               4 (row)
+
+428         102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                2 (_items)
+            106 LOAD_FAST                4 (row)
+            108 BINARY_SUBSCR
+            110 STORE_FAST               5 (item)
+
+429         112 LOAD_GLOBAL              9 (isinstance)
+            114 LOAD_FAST                5 (item)
+            116 LOAD_GLOBAL             10 (dict)
+            118 CALL_FUNCTION            2
+            120 POP_JUMP_IF_TRUE       124
+
+430         122 JUMP_ABSOLUTE           98
+
+431     >>  124 LOAD_GLOBAL             11 (str)
+            126 LOAD_FAST                5 (item)
+            128 LOAD_METHOD             12 (get)
+            130 LOAD_CONST               4 ('favicon')
+            132 LOAD_CONST               5 ('')
+            134 CALL_METHOD              2
+            136 JUMP_IF_TRUE_OR_POP    140
+            138 LOAD_CONST               5 ('')
+        >>  140 CALL_FUNCTION            1
+            142 LOAD_METHOD             13 (strip)
+            144 CALL_METHOD              0
+            146 STORE_FAST               6 (favicon)
+
+432         148 LOAD_FAST                6 (favicon)
+            150 POP_JUMP_IF_TRUE       154
+
+433         152 JUMP_ABSOLUTE           98
+
+434     >>  154 LOAD_GLOBAL             11 (str)
+            156 LOAD_FAST                5 (item)
+            158 LOAD_METHOD             12 (get)
+            160 LOAD_CONST               6 ('faviconThumbPath')
+            162 LOAD_CONST               5 ('')
+            164 CALL_METHOD              2
+            166 JUMP_IF_TRUE_OR_POP    170
+            168 LOAD_CONST               5 ('')
+        >>  170 CALL_FUNCTION            1
+            172 LOAD_METHOD             13 (strip)
+            174 CALL_METHOD              0
+            176 STORE_FAST               7 (current_path)
+
+438         178 LOAD_FAST                0 (self)
+            180 LOAD_ATTR                0 (_visible_first_index)
+            182 LOAD_FAST                4 (row)
+
+437         184 DUP_TOP
+            186 ROT_THREE
+            188 COMPARE_OP               1 (<=)
+            190 POP_JUMP_IF_FALSE      202
+
+438         192 LOAD_FAST                0 (self)
+            194 LOAD_ATTR                1 (_visible_last_index)
+
+437         196 COMPARE_OP               1 (<=)
+            198 POP_JUMP_IF_FALSE      212
+            200 JUMP_FORWARD             4 (to 206)
+        >>  202 POP_TOP
+            204 JUMP_FORWARD             6 (to 212)
+        >>  206 LOAD_GLOBAL             14 (LPWiiMRadioRequestScheduler)
+            208 LOAD_ATTR               15 (PRIORITY_VISIBLE)
+            210 JUMP_FORWARD             4 (to 216)
+
+439     >>  212 LOAD_GLOBAL             14 (LPWiiMRadioRequestScheduler)
+            214 LOAD_ATTR               16 (PRIORITY_PRELOAD)
+
+436     >>  216 STORE_FAST               8 (priority)
+
+441         218 LOAD_FAST                0 (self)
+            220 LOAD_ATTR               17 (_thumbnail_service)
+            222 LOAD_ATTR               18 (ensureThumbnail)
+            224 LOAD_FAST                6 (favicon)
+            226 LOAD_FAST                8 (priority)
+            228 LOAD_CONST               7 (('priority',))
+            230 CALL_FUNCTION_KW         2
+            232 STORE_FAST               9 (thumbnail_path)
+
+442         234 LOAD_FAST                9 (thumbnail_path)
+            236 POP_JUMP_IF_FALSE       98
+            238 LOAD_FAST                7 (current_path)
+            240 LOAD_FAST                9 (thumbnail_path)
+            242 COMPARE_OP               3 (!=)
+            244 POP_JUMP_IF_FALSE       98
+
+443         246 LOAD_FAST                9 (thumbnail_path)
+            248 LOAD_FAST                5 (item)
+            250 LOAD_CONST               6 ('faviconThumbPath')
+            252 STORE_SUBSCR
+
+444         254 LOAD_FAST                3 (changed_rows)
+            256 LOAD_METHOD             19 (append)
+            258 LOAD_FAST                4 (row)
+            260 CALL_METHOD              1
+            262 POP_TOP
+            264 JUMP_ABSOLUTE           98
+
+446     >>  266 LOAD_FAST                3 (changed_rows)
+            268 GET_ITER
+        >>  270 FOR_ITER                38 (to 310)
+            272 STORE_FAST               4 (row)
+
+447         274 LOAD_FAST                0 (self)
+            276 LOAD_METHOD             20 (index)
+            278 LOAD_FAST                4 (row)
+            280 LOAD_CONST               1 (0)
+            282 CALL_METHOD              2
+            284 STORE_FAST              10 (index)
+
+448         286 LOAD_FAST                0 (self)
+            288 LOAD_ATTR               21 (dataChanged)
+            290 LOAD_METHOD             22 (emit)
+            292 LOAD_FAST               10 (index)
+            294 LOAD_FAST               10 (index)
+            296 LOAD_FAST                0 (self)
+            298 LOAD_ATTR               23 (FAVICON_THUMB_PATH_ROLE)
+            300 BUILD_LIST               1
+            302 CALL_METHOD              3
+            304 POP_TOP
+            306 EXTENDED_ARG             1
+            308 JUMP_ABSOLUTE          270
+        >>  310 LOAD_CONST               2 (None)
+            312 RETURN_VALUE

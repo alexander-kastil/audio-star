@@ -1,0 +1,935 @@
+# module LPClientFramework.LPDevice
+
+[module] names: threading, xml.sax.saxutils, unescape, requests, json, distutils.version, LooseVersion, PyQt6.QtCore, QTimer, cherrypy, response, urllib3.exceptions, InsecureRequestWarning, LPClientFramework, UPnPTool, LPTLSTool, LPUtility, LPStreamServiceManager, LPPublicDefine, LPClientFramework.LPDeviceStreamServiceManager, LPDeviceStreamServiceManager, LPClientFramework.LPMediaInfo, LPMediaInfo, LPClientFramework.LPDeviceManager.LPDeviceGroupInfo, LPDeviceGroupInfo, LPClientFramework.LPDeviceManager.LPGroup, LPGroupType, LPClientFramework.LPPlayList.LPPlayList, LPPlayMusicList, LPPlayHeader, LPPlayItem, LPPlayListSource, LPClientFramework.LPPublicDefine, LPAudioInputEnum, LPClientFramework.LPQueueManager, LPQueueManager, LPClientFramework.LPUtility, logger, logAcctBifurcate, Thread, bs4, BeautifulSoup, LPDeviceConfigDict, LPDeviceImageNameDict, _diagnoseSlaveUuids, object, LPDeviceSetting, LPDevice
+  str: 'unescape'
+  str: 'LooseVersion'
+  str: 'QTimer'
+  str: 'response'
+  str: 'InsecureRequestWarning'
+  str: 'UPnPTool'
+  str: 'LPTLSTool'
+  str: 'LPUtility'
+  str: 'LPStreamServiceManager'
+  str: 'LPPublicDefine'
+  str: 'LPDeviceStreamServiceManager'
+  str: 'LPMediaInfo'
+  str: 'LPDeviceGroupInfo'
+  str: 'LPGroupType'
+  str: 'LPPlayMusicList'
+  str: 'LPPlayHeader'
+  str: 'LPPlayItem'
+  str: 'LPPlayListSource'
+  str: 'LPAudioInputEnum'
+  str: 'LPQueueManager'
+  str: 'logger'
+  str: 'logAcctBifurcate'
+  str: 'Thread'
+  str: 'BeautifulSoup'
+  str: 'WiiM Mini'
+  str: 'wiim_mini'
+  str: 'name'
+  str: 'supportTouchControl'
+  str: 'supportStatusLight'
+  str: 'supportOverrideVolume'
+  str: 'supportVolumeIndicator'
+  str: 'supportFixedVolumeOutput'
+  str: 'supportSPDIFOutput'
+  str: 'supportCoaxOutput'
+  str: 'supportMQA'
+  str: 'supportSubwoofer'
+  str: 'supportSyncAudio'
+  str: 'image'
+  str: 'WiiM Pro'
+  str: 'wiim_pro'
+  str: 'WiiM Pro Plus'
+  str: 'name'
+  str: 'supportTouchControl'
+  str: 'supportStatusLight'
+  str: 'supportOverrideVolume'
+  str: 'supportVolumeIndicator'
+  str: 'supportFixedVolumeOutput'
+  str: 'supportSPDIFOutput'
+  str: 'supportCoaxOutput'
+  str: 'supportMQA'
+  str: 'supportDACDigitalFilter'
+  str: 'supportSubwoofer'
+  str: 'supportSyncAudio'
+  str: 'supportLineinInputResolution'
+  str: 'image'
+  str: 'WiiM Amp'
+  str: 'wiim_amp'
+  str: 'name'
+  str: 'supportTouchControl'
+  str: 'supportStatusLight'
+  str: 'supportOverrideVolume'
+  str: 'supportVolumeIndicator'
+  str: 'supportFixedVolumeOutput'
+  str: 'supportSPDIFOutput'
+  str: 'supportCoaxOutput'
+  str: 'supportMQA'
+  str: 'supportSubwoofer'
+  str: 'supportSyncAudio'
+  str: 'supportLineinInputResolution'
+  str: 'image'
+  str: 'WiiM Amp Pro'
+  str: 'WiiM Ultra'
+  str: 'wiim_ultra'
+  str: 'WiiM CI MOD S'
+  str: 'Muzo_Mini'
+  str: 'WiiM_Pro_with_gc4a'
+  str: 'WiiM_Pro_AVS'
+  str: 'WiiM_Pro_Plus'
+  str: 'WiiM_AMP'
+  str: 'WiiM_Amp_Pro'
+  str: 'WiiM_Ultra'
+  str: 'WiiM_CI_MOD_S'
+  str: 'wiim_amp_ultra'
+  str: 'wiim_c10'
+  str: 'wiim_c10_mod_a80'
+  str: 'wiim_bar'
+  str: 'wiim_remote'
+  str: 'wiim_sound'
+  str: 'wiim_sound_lite'
+  str: 'wiim_sub'
+  str: 'wiim_sub_pro'
+  str: 'wiim_vibelink_amp'
+  str: 'Muzo_Mini'
+  str: 'WiiM_Pro_with_gc4a'
+  str: 'WiiM_Pro_AVS'
+  str: 'WiiM_Pro_Plus'
+  str: 'WiiM_AMP'
+  str: 'WiiM_Amp_Pro'
+  str: 'WiiM_Amp_4layer'
+  str: 'WiiM_AMP_No_MFI'
+  str: 'WiiM_Amp_Ultra'
+  str: 'WiiM_Ultra'
+  str: 'WiiM_Ultra_X'
+  str: 'WiiM_Ultra_CN'
+  str: 'WiiM_CI_MOD_S'
+  str: 'WiiM_CI_MOD_A80'
+  str: 'WiiM_Bar'
+  str: 'WiiM_Remote'
+  str: 'WiiM_Sound'
+  str: 'WiiM_Sound_CN'
+  str: 'WiiM_Sound_Lite'
+  str: 'WiiM_Sound_Lite_V2'
+  str: 'WiiM_SUB'
+  str: 'WiiM_Sub'
+  str: 'WiiM_Sub_Pro'
+  str: 'WiiM_Vibelink_Amp'
+  str: '_diagnoseSlaveUuids'
+  str: 'LPDeviceSetting'
+  str: 'LPDevice'
+
+def _diagnoseSlaveUuids(slaveList)  line 64
+  names: list, isinstance, dict, get, getattr, LPUtility, pureUUID, append
+    str: '提取从设备 uuid，用于分组问题诊断日志。\n\n    Args:\n        slaveList (list): 从设备列表，元素可为 dict 或带 uuid 属性的对象。\n\n    Returns:\n        list: 规范化后的 uuid 列表。\n    '
+    str: 'uuid'
+
+def LPDeviceSetting()  line 85
+  names: __name__, __module__, __qualname__, __init__, property, configDict, supportSyncAudio, supportStatusLight, supportTouchControl, supportOverrideVolume, supportVolumeIndicator, supportFixedVolumeOutput, supportMQA, supportDACDigitalFilter, supportSPDIFOutput, supportFixedResolution, supportLineinInputResolution, supportCoaxOutput, supportAudioChannel, supportSubwoofer
+    str: 'LPDeviceSetting'
+    str: 'LPDeviceSetting.__init__'
+    str: 'LPDeviceSetting.configDict'
+    str: 'LPDeviceSetting.supportSyncAudio'
+    str: 'LPDeviceSetting.supportStatusLight'
+    str: 'LPDeviceSetting.supportTouchControl'
+    str: 'LPDeviceSetting.supportOverrideVolume'
+    str: 'LPDeviceSetting.supportVolumeIndicator'
+    str: 'LPDeviceSetting.supportFixedVolumeOutput'
+    str: 'LPDeviceSetting.supportMQA'
+    str: 'LPDeviceSetting.supportDACDigitalFilter'
+    str: 'LPDeviceSetting.supportSPDIFOutput'
+    str: 'LPDeviceSetting.supportFixedResolution'
+    str: 'LPDeviceSetting.supportLineinInputResolution'
+    str: 'LPDeviceSetting.supportCoaxOutput'
+    str: 'LPDeviceSetting.supportAudioChannel'
+    str: 'LPDeviceSetting.supportSubwoofer'
+
+  def LPDeviceSetting.__init__(self, device)  line 86
+    names: uuid, deviceId, productName, hifiSRCVersion, supportAudioChannel, audioChannel
+
+  def LPDeviceSetting.configDict(self)  line 94
+    names: LPDeviceConfigDict, get, productName
+
+  def LPDeviceSetting.supportSyncAudio(self)  line 98
+    names: configDict, get
+      str: 'supportSyncAudio'
+
+  def LPDeviceSetting.supportStatusLight(self)  line 101
+    names: configDict, get
+      str: 'supportStatusLight'
+
+  def LPDeviceSetting.supportTouchControl(self)  line 104
+    names: configDict, get
+      str: 'supportTouchControl'
+
+  def LPDeviceSetting.supportOverrideVolume(self)  line 107
+    names: configDict, get
+      str: 'supportOverrideVolume'
+
+  def LPDeviceSetting.supportVolumeIndicator(self)  line 110
+    names: configDict, get
+      str: 'supportVolumeIndicator'
+
+  def LPDeviceSetting.supportFixedVolumeOutput(self)  line 113
+    names: configDict, get
+      str: 'supportFixedVolumeOutput'
+
+  def LPDeviceSetting.supportMQA(self)  line 116
+    names: configDict, get
+      str: 'supportMQA'
+
+  def LPDeviceSetting.supportDACDigitalFilter(self)  line 119
+    names: configDict, get
+      str: 'supportDACDigitalFilter'
+
+  def LPDeviceSetting.supportSPDIFOutput(self)  line 122
+    names: configDict, get, hifiSRCVersion, LooseVersion
+      str: 'supportFixedVolumeOutput'
+      str: '1.0'
+
+  def LPDeviceSetting.supportFixedResolution(self)  line 131
+    names: hifiSRCVersion, LooseVersion
+      str: '1.1'
+
+  def LPDeviceSetting.supportLineinInputResolution(self)  line 137
+    names: configDict, get
+      str: 'supportLineinInputResolution'
+
+  def LPDeviceSetting.supportCoaxOutput(self)  line 141
+    names: configDict, get
+      str: 'supportCoaxOutput'
+
+  def LPDeviceSetting.supportAudioChannel(self)  line 144
+    names: audioChannel
+
+  def LPDeviceSetting.supportSubwoofer(self)  line 147
+    names: configDict, get
+      str: 'supportSubwoofer'
+
+def LPDevice()  line 151
+  names: __name__, __module__, __qualname__, __init__, init, asyncFetchMediaInfo, createDeviceSetting, property, productShowName, deviceImageName, isWiiMPro, isWiiMAMP, isWiiMUltra, isWiiMSub, currentPLM, isMaster, supportNewGroup, supportNamedGroup, updateDeviceInfo, initGroupInfo, updateGroupInfo, dealSlaveAction, dealLPMRM, _normalizeSlaveItem, staticmethod, _safeInt, _applyMultiroomStatus, _applySlaveList, refreshMultiroomState, supportPLM, supportCapability, fastPlay, tlsCommand, asyncUpnpPost, upnpPost, upnpPostWithRetry, commonHttpGet, httpGetBytes, commonHttpPost, fetchMediaInfo, updateMediaInfo, parseQueue, _resolveQueueTrackImage, updateInfo, LPPlayMusicList, list, drag_drop_rows, getUserInfoAsync, updateUserInfoForSource, updateStreamServiceAccount, mediaInfoInterceptor, setMediaInfo, guardMediaInfoRollback, _expireMediaShield, _clearMediaShield, setCurrentNameGroup, saveNameGroupList, getNameGroupList, getSlaveList, ungroup
+    str: 'LPDevice'
+    str: 'LPDevice.__init__'
+    str: 'LPDevice.init'
+    str: 'LPDevice.asyncFetchMediaInfo'
+    str: 'LPDevice.createDeviceSetting'
+    str: 'LPDevice.productShowName'
+    str: 'LPDevice.deviceImageName'
+    str: 'LPDevice.isWiiMPro'
+    str: 'LPDevice.isWiiMAMP'
+    str: 'LPDevice.isWiiMUltra'
+    str: 'LPDevice.isWiiMSub'
+    str: 'LPDevice.currentPLM'
+    str: 'LPDevice.isMaster'
+    str: 'LPDevice.supportNewGroup'
+    str: 'LPDevice.supportNamedGroup'
+    str: 'LPDevice.updateDeviceInfo'
+    str: 'LPDevice.initGroupInfo'
+    str: 'LPDevice.updateGroupInfo'
+    str: 'LPDevice.dealSlaveAction'
+    str: 'LPDevice.dealLPMRM'
+    str: 'LPDevice._normalizeSlaveItem'
+    str: 'LPDevice._safeInt'
+    str: 'LPDevice._applyMultiroomStatus'
+    str: 'LPDevice._applySlaveList'
+    str: 'LPDevice.refreshMultiroomState'
+    str: 'LPDevice.supportPLM'
+    str: 'LPDevice.supportCapability'
+    str: 'LPDevice.fastPlay'
+    str: 'LPDevice.tlsCommand'
+    str: 'LPDevice.asyncUpnpPost'
+    str: 'LPDevice.upnpPost'
+    str: 'LPDevice.upnpPostWithRetry'
+    str: 'LPDevice.commonHttpGet'
+    str: 'LPDevice.httpGetBytes'
+    str: 'LPDevice.commonHttpPost'
+    str: 'LPDevice.fetchMediaInfo'
+    str: 'LPDevice.updateMediaInfo'
+    str: 'LPDevice.parseQueue'
+    str: 'LPDevice._resolveQueueTrackImage'
+    str: 'LPDevice.updateInfo'
+    str: 'play_list'
+    str: 'music_array'
+    str: 'LPDevice.drag_drop_rows'
+    str: 'LPDevice.getUserInfoAsync'
+    str: 'LPDevice.updateUserInfoForSource'
+    str: 'LPDevice.updateStreamServiceAccount'
+    str: 'LPDevice.mediaInfoInterceptor'
+    str: 'LPDevice.setMediaInfo'
+    str: 'LPDevice.guardMediaInfoRollback'
+    str: 'LPDevice._expireMediaShield'
+    str: 'LPDevice._clearMediaShield'
+    str: 'LPDevice.setCurrentNameGroup'
+    str: 'LPDevice.saveNameGroupList'
+    str: 'LPDevice.getNameGroupList'
+    str: 'LPDevice.getSlaveList'
+    str: 'LPDevice.ungroup'
+
+  def LPDevice.__init__(self, ip, upnpPort)  line 152
+    names: ip, upnpPort, statusDict, uuid, hasTF, hasUsb, streamServiceVersion, streamServiceCapability, sidArr, presetNum, LPMediaInfo, mediaInfo, LPQueueManager, queueManager, fixedVolume, deviceSetting, hifiSRCVersion, supportAudioChannel, isEthernet, spdifName, lineName, audioOutputModeVer, supportDLNACast, autoSenseVersion, LPDeviceStreamServiceManager, deviceStreamServiceManager, LPDeviceGroupInfo, groupInfo, _mediaUpdateShield, _mediaShieldTimer, _mediaShieldTimeoutMs, threading, Condition, streamServiceCapCondition
+
+  def LPDevice.init(self)  line 205
+    names: updateDeviceInfo, deviceStreamServiceManager, startMediaInfoWorker, createDeviceSetting, Thread, start
+      str: 'LPDevice.init.<locals>._asyncLoadInit'
+      str: 'target'
+
+    def LPDevice.init._asyncLoadInit()  line 218
+      names: fetchMediaInfo, upnpPostWithRetry, streamServiceCapCondition, get, streamServiceVersion, streamServiceCapability, deviceStreamServiceManager, updateAppStreamServiceCapability, registerDeviceStreamService, notify, commonHttpGet, json, loads, spdifName, lineName, Exception
+        str: 'StreamServicesCapability'
+        str: 'apiTimeout'
+        str: 'version'
+        str: 'streamServices'
+        str: 'getModeRename'
+        str: 'status_code'
+        str: 'body'
+        str: 'SPDIF-In'
+        str: 'Line-In'
+
+  def LPDevice.asyncFetchMediaInfo(self)  line 258
+    names: Thread, start
+      str: 'LPDevice.asyncFetchMediaInfo.<locals>._asyncLoad'
+      str: 'target'
+
+    def LPDevice.asyncFetchMediaInfo._asyncLoad()  line 259
+      names: fetchMediaInfo
+
+  def LPDevice.createDeviceSetting(self)  line 265
+    names: LPDeviceSetting, deviceSetting
+      str: '工厂方法\n        '
+
+  def LPDevice.productShowName(self)  line 270
+    names: LPDeviceConfigDict, get, productName
+      str: 'name'
+      str: 'WiiM Device'
+
+  def LPDevice.deviceImageName(self)  line 274
+    names: LPDeviceImageNameDict, get, productName, LPDeviceConfigDict
+      str: 'image'
+      str: 'default_device'
+
+  def LPDevice.isWiiMPro(self)  line 281
+    names: productName
+      str: 'WiiM_Pro_with_gc4a'
+      str: 'WiiM_Pro_AVS'
+      str: 'WiiM_Pro_Plus'
+
+  def LPDevice.isWiiMAMP(self)  line 288
+    names: productName
+      str: 'WiiM_AMP'
+      str: 'WiiM_Amp_Pro'
+      str: 'WiiM_Amp_4layer'
+      str: 'WiiM_Amp_Ultra'
+      str: 'WiiM_AMP_No_MFI'
+      str: 'WiiM_CI_MOD_A80'
+
+  def LPDevice.isWiiMUltra(self)  line 295
+    names: productName
+      str: 'WiiM_Ultra'
+
+  def LPDevice.isWiiMSub(self)  line 302
+    names: productName
+      str: 'WiiM_Sub_Pro'
+      str: 'WiiM_SUB'
+
+  def LPDevice.currentPLM(self)  line 311
+    names: mediaInfo, mediaType, LPPublicDefine, MEDIATYPE_LINEIN, LPAudioInputEnum, plm_linein, MEDIATYPE_BLUETOOTH, supportPLM, plm_extern_bt, plm_bluetooth, MEDIATYPE_LOCALLIST_TF, MEDIATYPE_EXTERNAL_TF, plm_tf, MEDIATYPE_USB_DAC, plm_pc_usb, MEDIATYPE_EXTERNAL_USB, MEDIATYPE_LOCALLIST, plm_usb, MEDIATYPE_OPTICAL, plm_optical, MEDIATYPE_XLR, plm_xlr, MEDIATYPE_HDMI, plm_hdmi, MEDIATYPE_AUX2, plm_linein2, MEDIATYPE_RCA, plm_rca, MEDIATYPE_RADIO2, plm_radio, MEDIATYPE_CO_AXIAL, plm_coaxial, MEDIATYPE_CO_AXIAL2, plm_coaxial2, MEDIATYPE_PHONO, plm_phono, MEDIATYPE_ARC, plm_arc, MEDIATYPE_OPTICAL2, plm_optical2, plm_wifi
+
+  def LPDevice.isMaster(self)  line 356
+    names: groupInfo, isMaster
+
+  def LPDevice.supportNewGroup(self)  line 360
+    names: statusDict, get, LooseVersion
+      str: 'wmrm_version'
+      str: '0'
+      str: 'wmrm_sub_ver'
+      str: '4.2'
+
+  def LPDevice.supportNamedGroup(self)  line 368
+    names: len, statusDict, get
+      str: 'wmrm_sub_ver'
+
+  def LPDevice.updateDeviceInfo(self)  line 374
+    names: logger, info, ip, upnpPost, get, json, loads, len, bytes, fromhex, decode, Exception, print, statusDict, uuid, name, productName, mediaInfo, mute, int, presetNum, securityVersion, plms, capability, fixedVolume, hifiSRCVersion, supportAudioChannel, isEthernet, audioOutputModeVer, supportDLNACast, autoSenseVersion, debug, initGroupInfo, warning, groupInfo, roomState, slaveList, slaveBoxArray
+      str: '%s Start GetControlDeviceInfo'
+      str: 'GetControlDeviceInfo'
+      str: 'error'
+      str: 'Status'
+      str: 'CurrentMute'
+      str: 'SlaveList'
+      str: 'essid'
+      str: 'utf-8'
+      str: 'uuid'
+      str: 'DeviceName'
+      str: 'project'
+      str: '1'
+      str: 'preset_key'
+      str: 'security_version'
+      str: '0'
+      str: 'plm_support'
+      str: 'capability'
+      str: 'volume_control'
+      str: 'HiFiSRC_version'
+      str: 'audio_channel_config'
+      str: 'eth0'
+      str: '0.0.0.0'
+      str: 'audioOutputModeVer'
+      str: 'audiocast'
+      str: 'autoSenseVersion'
+      str: '[group-diagnose][updateDeviceInfo] device=%s ip=%s uuid=%s group=%s master_uuid=%s groupName=%s slaveListRaw=%s'
+      str: 'group'
+      str: 'master_uuid'
+      str: 'GroupName'
+      str: 'init group info failed for '
+      str: ': '
+      str: 'master'
+      str: '%s GetControlDeviceInfo finished'
+
+  def LPDevice.initGroupInfo(self, slaveInfoDict)  line 437
+    names: statusDict, logger, error, uuid, str, get, LPUtility, pureUUID, LPGroupType, normalize, Default, int, info, name, len, debug, _diagnoseSlaveUuids, updateGroupInfo
+      str: 'device: '
+      str: ' init groupInfo failed'
+      str: 'group'
+      str: '0'
+      str: '1'
+      str: 'slave'
+      str: 'master'
+      str: 'GroupName'
+      str: 'master_uuid'
+      str: 'LPDevice.initGroupInfo.<locals>.<listcomp>'
+      str: 'slave_list'
+      str: 'group_type'
+      str: 'surround'
+      str: 'groupName'
+      str: 'groupTitle'
+      str: 'roomState'
+      str: 'masterID'
+      str: 'slaveList'
+      str: 'currentGroupType'
+      str: 'surround'
+      str: '[initGroupInfo] upnp SlaveList device=%s uuid=%s childCount=%s'
+      str: 'slaveList'
+      str: '[group-diagnose][initGroupInfo] device=%s uuid=%s groupFlag=%s roomState=%s masterID=%s groupName=%s currentGroupType=%s slaveUuids=%s raw=%s'
+      str: 'roomState'
+      str: 'masterID'
+      str: 'groupName'
+      str: 'currentGroupType'
+
+    def LPDevice.initGroupInfo.<listcomp>(.0)  line 448
+      names: isinstance, dict, _normalizeSlaveItem
+
+  def LPDevice.updateGroupInfo(self, groupInfoDict)  line 472
+    names: groupInfo, _update
+
+  def LPDevice.dealSlaveAction(self, message)  line 475
+    names: logger, debug, name, uuid, groupInfo, roomState, masterID, _diagnoseSlaveUuids, slaveList, getSlaveList, get, json, loads, Exception, warning, getattr, list, len, LPUtility, triggerDeviceInfoUpdate
+      str: '[group-diagnose][dealSlaveAction] device=%s uuid=%s notify=%s beforeRoomState=%s beforeMasterID=%s beforeSlaveUuids=%s'
+      str: '[group-diagnose][dealSlaveAction.getSlaveList] device=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'
+      str: '{}'
+      str: '[LPDevice dealSlaveAction] parse getSlaveList failed for %s: %s'
+      str: 'name'
+      str: 'slave_list'
+      str: '[group-diagnose][dealSlaveAction.applied] device=%s uuid=%s action=%s slaveUuids=%s childCount=%s'
+      str: 'slaveAction'
+      str: 'action'
+      str: 'master'
+      str: 'multiRoom'
+
+  def LPDevice.dealLPMRM(self, message)  line 517
+    names: logger, debug, name, uuid, LPUtility, triggerDeviceInfoUpdate
+      str: '[group-diagnose][dealLPMRM] device=%s uuid=%s body=%s'
+      str: 'multiRoom'
+
+  def LPDevice._normalizeSlaveItem(self, item)  line 528
+    names: dict, str, LPUtility, pureUUID, get, strip, lower, replace
+      str: 'uuid'
+      str: '-'
+
+  def LPDevice._safeInt(value, default)  line 533
+    names: int, Exception
+
+  def LPDevice._applyMultiroomStatus(self, statusDict)  line 540
+    names: isinstance, dict, groupInfo, groupName, roomState, masterID, get, name, groupTitle, statusDict, str, LPUtility, pureUUID, logger, debug, uuid
+      str: 'GroupName'
+      str: 'group'
+      str: '0'
+      str: '1'
+      str: 'slave'
+      str: 'master'
+      str: 'master_uuid'
+      str: '[group-diagnose][_applyMultiroomStatus] device=%s uuid=%s changed=%s groupFlag=%s oldRoomState=%s newRoomState=%s oldMasterID=%s newMasterID=%s oldGroupName=%s newGroupName=%s raw=%s'
+
+  def LPDevice._applySlaveList(self, slaveInfo)  line 587
+    names: isinstance, dict, _diagnoseSlaveUuids, groupInfo, slaveList, get, LPGroupType, normalize, Default, currentGroupType, roomState, masterID, logger, debug, name, uuid
+      str: 'LPDevice._applySlaveList.<locals>.<listcomp>'
+      str: 'slave_list'
+      str: 'group_type'
+      str: 'master'
+      str: '[group-diagnose][_applySlaveList] device=%s uuid=%s changed=%s oldSlaveUuids=%s newSlaveUuids=%s groupType=%s raw=%s'
+
+    def LPDevice._applySlaveList.<listcomp>(.0)  line 593
+      names: isinstance, dict, _normalizeSlaveItem
+
+  def LPDevice.refreshMultiroomState(self)  line 621
+    names: commonHttpGet, logger, debug, name, uuid, get, json, loads, _applyMultiroomStatus, Exception, warning, groupInfo, roomState, _applySlaveList, slaveList, masterID, len, _diagnoseSlaveUuids
+      str: 'getStatusEx'
+      str: '[group-diagnose][refreshMultiroomState.getStatusEx] device=%s uuid=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'
+      str: '[device dashboard] parse getStatusEx failed for '
+      str: ': '
+      str: 'master'
+      str: 'multiroom:getSlaveList'
+      str: '[group-diagnose][refreshMultiroomState.getSlaveList] device=%s uuid=%s status=%s body=%s'
+      str: '[LPDevice] parse slave list failed for '
+      str: '[LPDevice] multiroom state updated device=%s uuid=%s roomState=%s masterID=%s childCount=%s'
+      str: '[group-diagnose][refreshMultiroomState.final] device=%s uuid=%s changed=%s roomState=%s masterID=%s slaveUuids=%s childCount=%s'
+
+  def LPDevice.supportPLM(self, mode)  line 684
+    names: LPAudioInputEnum, plm_linein, plms
+
+  def LPDevice.supportCapability(self, mode)  line 699
+    names: capability
+
+  def LPDevice.fastPlay(self, musicList, finishMethod)  line 711
+    names: getattr, index, len, list, updateMediaInfoForSource, Exception, guardMediaInfoRollback, Thread, start
+      str: 'list'
+      str: 'trackSource'
+      str: 'PC_RemoteLocal'
+      str: 'deviceStreamServiceManager'
+      str: 'header'
+      str: 'LPDevice.fastPlay.<locals>._asyncPlay'
+      str: 'target'
+      str: 'args'
+
+    def LPDevice.fastPlay._asyncPlay(musicList, finishMethod)  line 728
+      names: len, list, generateXML, index, logger, debug, upnpPost, get, header, headTitle, min, int, range, append, reversed
+        str: '1. createqueue\n            2. playwithindex\n            3. append\n            '
+        str: 'play xml: %s'
+        str: 'CreateQueue'
+        str: 'QueueContext'
+        str: 'error'
+        str: 'PlayQueueWithIndex'
+        str: 'QueueName'
+        str: 'Index'
+        str: 'LPDevice.fastPlay.<locals>._asyncPlay.<locals>._chunks'
+        str: 'AppendTracksInQueueEx'
+        str: '1'
+        str: '0'
+        str: 'QueueContext'
+        str: 'Direction'
+        str: 'StartIndex'
+
+      def LPDevice.fastPlay._asyncPlay._chunks(lst, n)  line 773
+        names: range, len
+          str: 'Yield successive n-sized chunks from lst.'
+
+  def LPDevice.tlsCommand(self, command)  line 836
+    names: LPTLSTool, tlsCmd, ip
+
+  def LPDevice.asyncUpnpPost(self, command, inParams, callbackMethod)  line 839
+    names: Thread, start
+      str: 'LPDevice.asyncUpnpPost.<locals>._asyncMethod'
+      str: 'target'
+      str: 'args'
+
+    def LPDevice.asyncUpnpPost._asyncMethod(command, inParams, callbackMethod)  line 840
+      names: upnpPost
+
+  def LPDevice.upnpPost(self, command, inParams, apiTimeout)  line 849
+    names: UPnPTool, upnpPost, ip, json, loads, update, len, parseQueue
+      str: 'ControlSource'
+      str: 'WiiMApp'
+      str: 'StreamServicesCapability'
+      str: 'http://%s:59152/upnp/control/rendercontrol1'
+      str: 'RenderingControl:1'
+      str: '0'
+      str: '1.0'
+      str: 'InstanceID'
+      str: 'AppVersion'
+      str: 'StreamCapability'
+      str: 'timeout'
+      str: 'status_code'
+      str: 'GetControlDeviceInfo'
+      str: 'InstanceID'
+      str: 'MultiType'
+      str: 'Router'
+      str: 'SlaveMask'
+      str: 'SlaveList'
+      str: 'Ssid'
+      str: 'Status'
+      str: 'CurrentVolume'
+      str: 'CurrentMute'
+      str: 'CurrentChannel'
+      str: 'GetUserInfo'
+      str: 'http://%s:59152/upnp/control/PlayQueue1'
+      str: 'PlayQueue:1'
+      str: 'Result'
+      str: 'GetInfoEx'
+      str: 'http://%s:59152/upnp/control/rendertransport1'
+      str: 'AVTransport:1'
+      str: 'CurrentTransportState'
+      str: 'TrackDuration'
+      str: 'TrackMetaData'
+      str: 'TrackURI'
+      str: 'RelTime'
+      str: 'LoopMode'
+      str: 'CurrentVolume'
+      str: 'TrackSource'
+      str: 'PlayMedium'
+      str: 'Next'
+      str: 'Previous'
+      str: 'Play'
+      str: '1'
+      str: 'InstanceID'
+      str: 'Speed'
+      str: 'Pause'
+      str: 'SetVolume'
+      str: 'Master'
+      str: 'InstanceID'
+      str: 'Channel'
+      str: 'SetMute'
+      str: 'Seek'
+      str: 'REL_TIME'
+      str: 'InstanceID'
+      str: 'Unit'
+      str: 'SetQueueLoopMode'
+      str: 'CreateQueue'
+      str: 'QueuePolicy'
+      str: 'AppendTracksInQueueEx'
+      str: 'PlayQueueWithIndex'
+      str: 'BrowseQueue'
+      str: 'SkipQueue'
+      str: 'QueueContext'
+      str: 'musicList'
+      str: 'version'
+      str: 'musicList'
+      str: 'version'
+      str: 'xml'
+      str: 'xml'
+      str: 'GetKeyMapping'
+      str: 'AirplayAutoSyncDelay'
+      str: 'DeleteQueue'
+      str: 'RemoveTracksInQueue'
+      str: 'GetQueueIndex'
+      str: 'CurrentIndex'
+      str: 'PreloadingIndex'
+      str: 'GetBasicUserInfo'
+      str: 'UserLogin'
+      str: 'UserLogout'
+      str: 'BackUpQueue'
+      str: 'SetKeyMapping'
+
+  def LPDevice.upnpPostWithRetry(self, command, inParams, apiTimeout, maxRetries, retryDelay, retryBackoff)  line 1005
+    names: time, range, upnpPost, get, logger, warning, sleep, error
+      str: '带重试的 UPNP POST 请求，针对 timeout 场景做可配置的重试。\n\n        UPnPTool.upnpPost 在请求超时（requests.exceptions.Timeout）时\n        返回 status_code == -2，本方法对此类 timeout 错误自动重试。\n        其他类型错误（status_code == -1 或其他 HTTP 非 200）不做重试。\n\n        Args:\n            command (str): UPNP 命令名，与 upnpPost 同\n            inParams (dict|'
+      str: 'apiTimeout'
+      str: 'status_code'
+      str: 'upnpPostWithRetry timeout attempt %d/%d for command=%s, retrying in %.1fs'
+      str: 'upnpPostWithRetry all %d attempts timeout for command=%s'
+
+  def LPDevice.commonHttpGet(self, command, *args, **kwargs)  line 1056
+    names: ip, logger, debug, LPTLSTool, twoNames, requests, packages, urllib3, disable_warnings, InsecureRequestWarning, session, get, Exception, warning, status_code, text
+      str: 'https://%s/httpapi.asp?command=%s'
+      str: 'commonHttpGet: %s'
+      str: 'category'
+      str: 'cert'
+      str: 'verify'
+      str: 'timeout'
+      str: 'https get exception: %s'
+      str: 'status_code'
+      str: 'error'
+      str: 'status_code'
+      str: 'body'
+
+  def LPDevice.httpGetBytes(self, url, timeout)  line 1076
+    names: startswith, replace, LPTLSTool, twoNames, requests, packages, urllib3, disable_warnings, InsecureRequestWarning, session, get, Exception, logger, warning, status_code, content
+      str: '下载 URL 的原始字节内容，https 优先并在失败时回退 http。\n\n        用于下载音箱固件日志 /data/sys.log 等二进制文件；https 请求复用\n        LPTLSTool 设备证书，http 请求直连（对齐安卓的 http 下载路径）。\n\n        参数:\n            url (str): 完整下载地址，建议 http://<ip>/data/sys.log。\n            timeout (int): 单次请求超时秒数。\n        返回:\n            bytes|None: 成功返回响应原始字节，全部失败'
+      str: 'http://'
+      str: 'https://'
+      str: 'category'
+      str: 'cert'
+      str: 'verify'
+      str: 'timeout'
+      str: 'timeout'
+      str: 'httpGetBytes exception url=%s error=%s'
+      str: 'httpGetBytes status url=%s status=%s'
+      str: 'httpGetBytes cert exception url=%s error=%s'
+
+  def LPDevice.commonHttpPost(self, command, payload)  line 1114
+    names: ip, logger, debug, json, dumps, LPTLSTool, twoNames, requests, packages, urllib3, disable_warnings, InsecureRequestWarning, session, post, Exception, warning, status_code, text
+      str: 'https://%s/httpapi.asp'
+      str: 'commonHttpPost: %s'
+      str: 'command='
+      str: ':'
+      str: 'category'
+      str: 'cert'
+      str: 'verify'
+      str: 'data'
+      str: 'https get exception: %s'
+      str: 'status_code'
+      str: 'error'
+      str: 'status_code'
+      str: 'body'
+
+  def LPDevice.fetchMediaInfo(self)  line 1170
+    names: upnpPostWithRetry, get, logger, warning, int, float, updateMediaInfo
+      str: 'LPDevice.fetchMediaInfo.<locals>._parseMeta'
+      str: 'GetInfoEx'
+      str: 'apiTimeout'
+      str: 'status_code'
+      str: 'GetInfoEx exception: %s'
+      str: 'CurrentTransportState'
+      str: 'TrackDuration'
+      str: 'TrackURI'
+      str: 'RelTime'
+      str: 'LoopMode'
+      str: 'CurrentVolume'
+      str: 'TrackSource'
+      str: 'PlayMedium'
+      str: 'playState'
+      str: 'duration'
+      str: 'playUri'
+      str: 'progress'
+      str: 'loopMode'
+      str: 'volume'
+      str: 'trackSource'
+      str: 'mediaType'
+      str: 'TrackMetaData'
+
+    def LPDevice.fetchMediaInfo._parseMeta(metaData)  line 1171
+      names: BeautifulSoup, find, logger, warning, int, float, items, get, str, text, bool, debug
+        str: 'xml'
+        str: 'item'
+        str: 'fetchMediaInfo exception: %s'
+        str: 'name'
+        str: 'guiBehavior'
+        str: 'trackId'
+        str: 'customUUID'
+        str: 'trackName'
+        str: 'artistId'
+        str: 'artist'
+        str: 'albumId'
+        str: 'album'
+        str: 'artworkUri'
+        str: 'localArtworkUri'
+        str: 'quality'
+        str: 'name'
+        str: 'type'
+        str: 'actualQuality'
+        str: 'trackRateHz'
+        str: 'trackFormat'
+        str: 'trackBitrate'
+        str: 'ratingURI'
+        str: 'song:guibehavior'
+        str: 'song:id'
+        str: 'custom:uuid'
+        str: 'dc:title'
+        str: 'song:singerid'
+        str: 'upnp:artist'
+        str: 'song:albumid'
+        str: 'upnp:album'
+        str: 'upnp:albumArtURI'
+        str: 'upnp:localAlbumArtURI'
+        str: 'song:quality'
+        str: 'song:actualQuality'
+        str: 'song:rate_hz'
+        str: 'song:format_s'
+        str: 'song:bitrate'
+        str: 'upnp:ratingURI'
+        str: 'type'
+        str: '0'
+        str: 'id'
+        str: 'itemId'
+        str: 'itemName'
+        str: 'retDict["itemName"] -> '
+
+  def LPDevice.updateMediaInfo(self, mediaInfo)  line 1247
+    names: get, statusDict, name, fixedVolume, mediaInfo, _update, queueManager, LPUtility, triggerDeviceInfoUpdate
+      str: 'deviceName'
+      str: 'DeviceName'
+      str: 'fixedVolume'
+      str: 'volume_control'
+      str: 'media'
+
+  def LPDevice.parseQueue(self, xml)  line 1263
+    names: BeautifulSoup, find, text, LPPlayMusicList, int, index, LPPlayHeader, headTitle, mediaSource, totalTracks, quality, searchUrl, imageUrl, header, find_all, str, getattr, streamServiceForSource, LPStreamServiceManager, parseQueuePlayItem, LPPlayItem, trackSource, trackUrl, trackName, logger, debug, trackId, _resolveQueueTrackImage, trackImage, trackArtist, albumName, findAll, get, isdigit, trackDuration, list, append
+      str: 'xml'
+      str: 'QueueVersion'
+      str: 'LastPlayIndex'
+      str: 'ListName'
+      str: 'SourceName'
+      str: 'TrackNumber'
+      str: 'Quality'
+      str: 'SearchUrl'
+      str: 'PicUrl'
+      str: 'Tracks'
+      str: 'recursive'
+      str: 'Source'
+      str: 'Id'
+      str: 'deviceStreamServiceManager'
+      str: 'URL'
+      str: 'Metadata'
+      str: 'dc:title'
+      str: 'song:id'
+      str: 'id'
+      str: '[parseQueue] Both trackId and songId are empty for source=%s, skipping'
+      str: 'upnp:artist'
+      str: 'upnp:album'
+      str: 'res'
+      str: 'duration'
+      str: 'musicList'
+      str: 'version'
+
+  def LPDevice._resolveQueueTrackImage(self, trackSource, metaDataObj)  line 1334
+    names: find, text, LPStreamServiceManager, isDeviceUsbTrackSource, str, strip, startswith, mediaInfo, _fixArtworkUriHost
+      str: '解析 BrowseQueue 单曲封面的真实可访问地址。\n\n        设备自身 U 盘播放（trackSource 属 UPnPServer/USBDiskQueue）时，固件以设备视角把封面 host\n        写成 127.0.0.1，PC 直接请求会打到本机而失败；此处对齐 LPMediaInfo._resolvedArtworkUri 的选择顺序：\n        优先用指向设备 IP 的 ``upnp:localAlbumArtURI``，缺失时回退 ``upnp:albumArtURI`` 并把 127.0.0.1\n        替换为设备 IP。普通音源（DLNA/'
+      str: 'upnp:albumArtURI'
+      str: 'upnp:localAlbumArtURI'
+      str: 'http'
+
+  def LPDevice.updateInfo(self, info)  line 1360
+    names: get, logger, debug, deviceStreamServiceManager, recordDeviceAccountNotify, accountChangedForSource, LPUtility, postNotification
+      str: 'eventType'
+      str: 'source'
+      str: 'updateInfo: eventType='
+      str: ', source='
+      str: 'accountChanged'
+      str: 'device'
+      str: 'notify'
+
+  def LPDevice.drag_drop_rows(self, source_index, target_index, play_list, music_array, finished_method)  line 1377
+    names: Thread, start
+      str: 'LPDevice.drag_drop_rows.<locals>._asyncOperate'
+      str: 'target'
+      str: 'args'
+
+    def LPDevice.drag_drop_rows._asyncOperate(source_index, target_index, play_list, music_array, finished_method)  line 1378
+      names: upnpPost, str, get, logger, debug, generateXML
+        str: 'RemoveTracksInQueue'
+        str: 'CurrentQueue'
+        str: 'QueueName'
+        str: 'RangStart'
+        str: 'RangEnd'
+        str: 'status_code'
+        str: 'drag_drop_rows source_index delete  ==  '
+        str: 'drag_drop_rows xml ======================== \n '
+        str: 'AppendTracksInQueueEx'
+        str: '0'
+        str: 'QueueContext'
+        str: 'Direction'
+        str: 'StartIndex'
+        str: '1'
+        str: 'drag_drop_rows target_index add  ==  '
+
+  def LPDevice.getUserInfoAsync(self, command, inParams, source, callbackMethod)  line 1402
+    names: Thread, start
+      str: 'LPDevice.getUserInfoAsync.<locals>._asyncMethod'
+      str: 'target'
+      str: 'args'
+
+    def LPDevice.getUserInfoAsync._asyncMethod(command, inParams, source, callbackMethod)  line 1403
+      names: upnpPost
+
+  def LPDevice.updateUserInfoForSource(self, source)  line 1412
+    names: getUserInfoAsync
+      str: 'LPDevice.updateUserInfoForSource.<locals>.finished_method'
+      str: 'GetUserInfo'
+      str: 'AccountSource'
+
+    def LPDevice.updateUserInfoForSource.finished_method(source, result)  line 1413
+      names: json, loads, Exception, logger, error, str, deviceStreamServiceManager, recordDeviceAccount, registerAccountForSource, LPUtility, triggerDeviceInfoUpdate
+        str: 'status_code'
+        str: 'Result'
+        str: ' updateUserInfoForSource error:'
+        str: 'accountRegister'
+        str: 'source'
+
+  def LPDevice.updateStreamServiceAccount(self)  line 1429
+    names: Thread, start
+      str: 'LPDevice.updateStreamServiceAccount.<locals>._asyncUpdateStreamServiceAccount'
+      str: 'target'
+      str: 'args'
+
+    def LPDevice.updateStreamServiceAccount._asyncUpdateStreamServiceAccount()  line 1430
+      names: streamServiceCapCondition, streamServiceVersion, logger, debug, wait, LooseVersion, upnpPost, get, updateUserInfoForSource, error, name, deviceStreamServiceManager, streamServiceCapability, keys
+        str: 'Waiting for self.streamServiceVersion...'
+        str: '1.3'
+        str: 'updateStreamServiceAccount streamServiceVersion >= 1.3 ==============='
+        str: 'GetBasicUserInfo'
+        str: 'userId'
+        str: 'streamServices'
+        str: 'id'
+        str: 'updateStreamServiceAccount '
+        str: ' basicuserinfo is None !'
+        str: 'updateStreamServiceAccount streamServiceVersion < 1.3 ==============='
+
+  def LPDevice.mediaInfoInterceptor(self, message)  line 1470
+    names: _mediaUpdateShield, get, bool, _clearMediaShield
+      str: '方向性防回滚：shield 启用时只丢弃旧歌“无元数据的中间态”，\n        带完整元数据 / PLAYING 的切歌信号直接放行并提前解除 shield。\n\n        替换旧的“固定 5s 全吞 block”：旧实现会连第二首（新歌）的 notify 一起\n        吞掉导致 UI 停留旧歌；本实现以“新歌事件”为解除钥匙，对齐 iOS 端做法。\n        '
+      str: 'queueName'
+      str: 'volume'
+      str: 'mute'
+      str: 'loopMode'
+      str: 'fixedVolume'
+      str: 'playState'
+      str: 'metaData'
+      str: 'trackName'
+      str: 'PLAYING'
+
+  def LPDevice.setMediaInfo(self, mediaInfo)  line 1503
+    names: mediaInfo, set, LPUtility, triggerDeviceInfoUpdate
+      str: 'media'
+
+  def LPDevice.guardMediaInfoRollback(self)  line 1509
+    names: _mediaUpdateShield, _mediaShieldTimer, QTimer, setSingleShot, timeout, connect, _expireMediaShield, start, _mediaShieldTimeoutMs
+      str: 'App 发起播放后启用方向性防回滚（替换旧的 blockMediaInfoNotify）。\n\n        在播放命令下发前调用；设备带回放目标元数据 / PLAYING 的事件到达即自动\n        解除（见 mediaInfoInterceptor），若长时间未确认则看门狗超时兜底解除，\n        避免长时间屏蔽设备状态导致真实切歌事件被吞。\n\n        :return: None。\n        '
+
+  def LPDevice._expireMediaShield(self)  line 1525
+    names: _mediaUpdateShield
+      str: '看门狗超时兑底：解除 shield，之后设备事件全部直通。'
+
+  def LPDevice._clearMediaShield(self)  line 1531
+    names: _mediaUpdateShield
+      str: '收到目标切歌信号时提前解除 shield（幂等）。\n\n        注意：可能在 UPnP 通知子线程被调用，这里只置布尔标志，不做 QTimer 跨线程操作；\n        残留的看门狗到点后由 _expireMediaShield 幂等跳过。\n        '
+
+  def LPDevice.setCurrentNameGroup(self, payload)  line 1541
+    names: logger, debug, name, ip, uuid, commonHttpPost, get
+      str: '[group-diagnose][debug][LPDevice.setCurrentNameGroup.send] device=%s ip=%s uuid=%s payload=%s'
+      str: 'multiroom:setcurrentnamegroup'
+      str: '[group-diagnose][debug][LPDevice.setCurrentNameGroup.response] device=%s ip=%s uuid=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'
+
+  def LPDevice.saveNameGroupList(self, payload)  line 1561
+    names: logger, debug, name, ip, uuid, commonHttpPost, get
+      str: '[group-diagnose][debug][LPDevice.saveNameGroupList.send] device=%s ip=%s uuid=%s payload=%s'
+      str: 'multiroom:savenamegrouplist'
+      str: '[group-diagnose][debug][LPDevice.saveNameGroupList.response] device=%s ip=%s uuid=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'
+
+  def LPDevice.getNameGroupList(self)  line 1581
+    names: commonHttpGet, logger, debug, name, ip, uuid, get
+      str: 'multiroom:getnamegrouplist'
+      str: '[group-diagnose][debug][LPDevice.getNameGroupList.response] device=%s ip=%s uuid=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'
+
+  def LPDevice.getSlaveList(self)  line 1594
+    names: commonHttpGet, logger, debug, name, ip, uuid, get
+      str: 'multiroom:getSlaveList'
+      str: '[group-diagnose][debug][LPDevice.getSlaveList.response] device=%s ip=%s uuid=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'
+
+  def LPDevice.ungroup(self)  line 1607
+    names: logger, debug, name, ip, uuid, commonHttpGet, get
+      str: '[group-diagnose][debug][LPDevice.ungroup.send] device=%s ip=%s uuid=%s'
+      str: 'multiroom:Ungroup'
+      str: '[group-diagnose][debug][LPDevice.ungroup.response] device=%s ip=%s uuid=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'

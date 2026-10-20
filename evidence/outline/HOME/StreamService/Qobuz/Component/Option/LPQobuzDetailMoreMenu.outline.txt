@@ -1,0 +1,85 @@
+# module HOME.StreamService.Qobuz.Component.Option.LPQobuzDetailMoreMenu
+
+[module] names: __doc__, PyQt6.QtCore, Qt, pyqtSignal, QCoreApplication, pyqtSlot, QPoint, PyQt6.QtGui, QIcon, PyQt6.QtWidgets, QMenu, LPGlobalUI, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPPublicDefine, LPMSCommonOption, LPClientFramework.LPUtility, logger, Option_Add_To_Playlist, Option_View_Artist, Option_View_Album, QobuzSupportedCommonOption, LPQobuzDetailMoreMenu
+  str: '\n@Time ： 2025/7/25 13:51\n@Auth ： Chris\n@File ：LPQobuzDetailMoreMenu.py\n@Desc:\n'
+  str: 'Qt'
+  str: 'pyqtSignal'
+  str: 'QCoreApplication'
+  str: 'pyqtSlot'
+  str: 'QPoint'
+  str: 'QIcon'
+  str: 'QMenu'
+  str: 'LPPlayListSource'
+  str: 'LPMSCommonOption'
+  str: 'logger'
+  str: 'LPQobuzDetailMoreMenu'
+
+def LPQobuzDetailMoreMenu()  line 25
+  names: __name__, __module__, __qualname__, pyqtSignal, noOptionSignal, __init__, setupUI, buildActions, _onNoOption, showMenu, pyqtSlot, addToPlaylist, viewArtist, viewAlbum, _canArtistCallback, _addPlaylistCallback, _albumCallback, __classcell__
+    str: 'LPQobuzDetailMoreMenu'
+    str: 'LPQobuzDetailMoreMenu.__init__'
+    str: 'LPQobuzDetailMoreMenu.setupUI'
+    str: 'LPQobuzDetailMoreMenu.buildActions'
+    str: 'LPQobuzDetailMoreMenu._onNoOption'
+    str: 'LPQobuzDetailMoreMenu.showMenu'
+    str: 'LPQobuzDetailMoreMenu.addToPlaylist'
+    str: 'LPQobuzDetailMoreMenu.viewArtist'
+    str: 'LPQobuzDetailMoreMenu.viewAlbum'
+    str: 'LPQobuzDetailMoreMenu._canArtistCallback'
+    str: 'LPQobuzDetailMoreMenu._addPlaylistCallback'
+    str: 'LPQobuzDetailMoreMenu._albumCallback'
+
+  def LPQobuzDetailMoreMenu.__init__(self, playItem, parent)  line 29
+    names: super, __init__, parent, LPPlayListSource, Qobuz, value, source, playItem
+
+  def LPQobuzDetailMoreMenu.setupUI(self)  line 37
+    names: setWindowFlags, Qt, WindowType, Popup, FramelessWindowHint, NoDropShadowWindowHint, setAttribute, WidgetAttribute, WA_TranslucentBackground, noOptionSignal, connect, _onNoOption, setStyleSheet, LPGlobalUI, THEME_TABLE_HOVER_BACK_COLOR, name, THEME_TABLE_HIGHLIGHT_BACK_COLOR, THEME_DISABLE_COLOR
+      str: '\n            QMenu{\n                border-radius: 3px;\n                background-color: %s;\n                color: rgb(255, 255, 255);\n                font: 14px;\n                min-width: 150px;               \n            }\n            QMenu::item{\n                border-radius: 3px;\n           '
+
+  def LPQobuzDetailMoreMenu.buildActions(self, device)  line 89
+    names: deviceStreamServiceManager, streamServiceForSource, source, streamService, LPTrackMoreViewControllerCanViewArtist, playItem, _canArtistCallback, QCoreApplication, translate, LPMSCommonOption, Option_View_Artist, value, QIcon, LPGlobalUI, imagePath, addAction, viewArtistAction, triggered, connect, viewArtist, LPTrackMoreViewControllerCanViewAlbum, _albumCallback, Option_View_Album, viewAlbumAction, viewAlbum
+      str: 'TrackMore'
+      str: 'lib/mymusic_artist.png'
+      str: 'lib/mymusic_album.png'
+
+  def LPQobuzDetailMoreMenu._onNoOption(self)  line 118
+    names: logger, debug, QCoreApplication, translate, addAction
+      str: '_onNoOption'
+      str: 'TrackMore'
+      str: 'No More Options'
+
+  def LPQobuzDetailMoreMenu.showMenu(self, pos)  line 124
+    names: buildActions, LPGlobalUI, currentDevice, actions, noOptionSignal, emit, parent, mapToGlobal, rect, topRight, sizeHint, x, y, height, exec, QPoint
+
+  def LPQobuzDetailMoreMenu.addToPlaylist(self)  line 139
+
+  def LPQobuzDetailMoreMenu.viewArtist(self)  line 143
+    names: streamService, LPTrackMoreViewControllerViewArtist, playItem
+      str: 'LPQobuzDetailMoreMenu.viewArtist.<locals>._viewCallback'
+
+    def LPQobuzDetailMoreMenu.viewArtist._viewCallback(viewController)  line 145
+      names: type, LPGlobalUI, getTopWidget, navigationManager, pop, push, streamService, detailNavigationItemId
+        str: 'artist'
+
+  def LPQobuzDetailMoreMenu.viewAlbum(self)  line 153
+    names: streamService, LPTrackMoreViewControllerViewAlbum, playItem
+      str: 'LPQobuzDetailMoreMenu.viewAlbum.<locals>._viewCallback'
+
+    def LPQobuzDetailMoreMenu.viewAlbum._viewCallback(viewController)  line 155
+      names: type, LPGlobalUI, getTopWidget, navigationManager, pop, push, streamService, detailNavigationItemId
+        str: 'album'
+
+  def LPQobuzDetailMoreMenu._canArtistCallback(self, canView, item)  line 163
+    names: logger, debug, playItem, trackId
+      str: 'qobuz detail track --> '
+      str: ' can not view artist'
+
+  def LPQobuzDetailMoreMenu._addPlaylistCallback(self, canView, item)  line 167
+    names: logger, debug, playItem, trackId
+      str: 'qobuz detail track --> '
+      str: ' can not add to playlist'
+
+  def LPQobuzDetailMoreMenu._albumCallback(self, canView, item)  line 171
+    names: logger, debug, playItem, trackId
+      str: 'qobuz detail track --> '
+      str: ' can not view album'

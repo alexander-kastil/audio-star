@@ -1,0 +1,48 @@
+# module LPClientFramework.LPConfig.LPFontConfig
+
+[module] names: __doc__, platform, WINDOWS_UI_FONT_FAMILY, getScale, scale, getApplicationFont, getStartupApplicationFont, getFontFamily, getMonospaceFont, getMonospaceFontFamily, DEFAULT, SiderBar_Subtitle, MiniBar_Subtitle, StackWidget_Title, Table_Subtitle, ItemCard_Title, ItemCard_Subtitle, MyMusic_Title, MyMusic_Subtitle, MyMusic_ArtistAbout, DeviceSettings_Subtitle, PlayView_Track_Title, PlayView_Album_Title, PlayView_Source_Title, PlayView_Format_Title, Qobuz_Tab_Title, Qobuz_Sub_Title, Qobuz_Pure_Text, ErrorCodeTip, Big_Title, Sub_Title, Small_Title, Main_Text, Sub_Text, Min_Text
+  str: '\n@Time ： 2025/5/23 11:38\n@Auth ： Chris\n@File ：LPFontConfig.py\n@Desc:\n'
+  str: 'Verdana'
+  str: 'getScale'
+  str: 'getApplicationFont'
+  str: 'getStartupApplicationFont'
+  str: 'getFontFamily'
+  str: 'getMonospaceFont'
+  str: 'getMonospaceFontFamily'
+
+def getScale(benchmarkDPI)  line 14
+  names: platform, system
+    str: '\n    计算不同平台下的字体缩放比例。\n\n    :param benchmarkDPI: 基准 DPI。\n    :return: 字体缩放比例。\n    '
+    str: 'Darwin'
+
+def getApplicationFont()  line 32
+  names: PyQt6.QtGui, QFont, PyQt6.QtWidgets, QApplication, instance, font
+    str: '\n    获取当前应用默认字体的副本。\n\n    :param: 无。\n    :return: 当前 QApplication 默认字体；应用尚未创建时返回 Qt 默认字体。\n    '
+    str: 'QFont'
+    str: 'QApplication'
+
+def getStartupApplicationFont()  line 48
+  names: getApplicationFont, platform, system, PyQt6.QtGui, QFontDatabase, families, next, setFamily
+    str: '\n    获取应用启动字体，Windows 优先使用适合英文 UI 的 Segoe UI。\n\n    :param: 无。\n    :return: Windows 安装 Segoe UI 时返回对应字体，否则返回当前应用默认字体。\n    '
+    str: 'Windows'
+    str: 'QFontDatabase'
+    str: 'getStartupApplicationFont.<locals>.<genexpr>'
+
+  def getStartupApplicationFont.<genexpr>(.0)  line 63
+    names: casefold, WINDOWS_UI_FONT_FAMILY
+
+def getFontFamily()  line 71
+  names: PyQt6.QtGui, QFontInfo, getApplicationFont, family
+    str: '\n    获取当前应用默认字体族，供 QSS 与 QML 上下文使用。\n    :return: Qt 实际解析出的当前应用默认字体族。\n    '
+    str: 'QFontInfo'
+
+def getMonospaceFont()  line 81
+  names: PyQt6.QtGui, QFont, QFontInfo, getApplicationFont, setStyleHint, StyleHint, Monospace, setFixedPitch, family, setFamily
+    str: '\n    获取系统匹配的等宽字体副本。\n    :return: 系统等宽字体；解析失败时返回当前应用默认字体。\n    '
+    str: 'QFont'
+    str: 'QFontInfo'
+
+def getMonospaceFontFamily()  line 97
+  names: PyQt6.QtGui, QFontInfo, getMonospaceFont, family
+    str: '\n    获取系统匹配的等宽字体族，供 QML 上下文使用。\n    :return: 系统等宽字体族；解析失败时返回当前应用默认字体族。\n    '
+    str: 'QFontInfo'

@@ -1,0 +1,3494 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nWindows WinSparkle 更新管理模块。\n该模块负责：\n1. 动态加载 WinSparkle.dll；\n2. 读取配置并解析 appcast feed；\n3. 初始化 WinSparkle 并触发自动/手动检查；\n4. 注册更新安装前关机协同回调；\n5. 在应用退出时清理 WinSparkle 资源。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 12           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (ctypes)
+             10 STORE_NAME               1 (ctypes)
+
+ 13          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (json)
+             18 STORE_NAME               2 (json)
+
+ 14          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (os)
+             26 STORE_NAME               3 (os)
+
+ 15          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (platform)
+             34 STORE_NAME               4 (platform)
+
+ 16          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              5 (re)
+             42 STORE_NAME               5 (re)
+
+ 17          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               2 (None)
+             48 IMPORT_NAME              6 (sys)
+             50 STORE_NAME               6 (sys)
+
+ 18          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               2 (None)
+             56 IMPORT_NAME              7 (threading)
+             58 STORE_NAME               7 (threading)
+
+ 19          60 LOAD_CONST               1 (0)
+             62 LOAD_CONST               2 (None)
+             64 IMPORT_NAME              8 (urllib.request)
+             66 STORE_NAME               9 (urllib)
+
+ 20          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               2 (None)
+             72 IMPORT_NAME             10 (xml.etree.ElementTree)
+             74 IMPORT_FROM             11 (etree)
+             76 ROT_TWO
+             78 POP_TOP
+             80 IMPORT_FROM             12 (ElementTree)
+             82 STORE_NAME              13 (ET)
+             84 POP_TOP
+
+ 21          86 LOAD_CONST               1 (0)
+             88 LOAD_CONST               3 (('Path',))
+             90 IMPORT_NAME             14 (pathlib)
+             92 IMPORT_FROM             15 (Path)
+             94 STORE_NAME              15 (Path)
+             96 POP_TOP
+
+ 23          98 LOAD_CONST               1 (0)
+            100 LOAD_CONST               4 (('appVersion', 'logger'))
+            102 IMPORT_NAME             16 (LPClientFramework.LPUtility)
+            104 IMPORT_FROM             17 (appVersion)
+            106 STORE_NAME              17 (appVersion)
+            108 IMPORT_FROM             18 (logger)
+            110 STORE_NAME              18 (logger)
+            112 POP_TOP
+
+ 26         114 LOAD_BUILD_CLASS
+            116 LOAD_CONST               5 (<code object LPWinSparkleUpdater at 0x000001F3253AE920, file "LPClientFramework\LPWinSparkleUpdater.py", line 26>)
+            118 LOAD_CONST               6 ('LPWinSparkleUpdater')
+            120 MAKE_FUNCTION            0
+            122 LOAD_CONST               6 ('LPWinSparkleUpdater')
+            124 CALL_FUNCTION            2
+            126 STORE_NAME              19 (LPWinSparkleUpdater)
+            128 LOAD_CONST               2 (None)
+            130 RETURN_VALUE
+
+=== LPWinSparkleUpdater ===
+ 26           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPWinSparkleUpdater')
+              6 STORE_NAME               2 (__qualname__)
+
+ 27           8 LOAD_CONST               1 ('Windows 平台 WinSparkle 更新管理器。')
+             10 STORE_NAME               3 (__doc__)
+
+ 29          12 LOAD_CONST               2 (<code object __init__ at 0x000001F324E69660, file "LPClientFramework\LPWinSparkleUpdater.py", line 29>)
+             14 LOAD_CONST               3 ('LPWinSparkleUpdater.__init__')
+             16 MAKE_FUNCTION            0
+             18 STORE_NAME               4 (__init__)
+
+ 75          20 LOAD_CONST               4 (<code object setShutdownHooks at 0x000001F324E69710, file "LPClientFramework\LPWinSparkleUpdater.py", line 75>)
+             22 LOAD_CONST               5 ('LPWinSparkleUpdater.setShutdownHooks')
+             24 MAKE_FUNCTION            0
+             26 STORE_NAME               5 (setShutdownHooks)
+
+ 88          28 LOAD_CONST               6 (<code object _loadConfig at 0x000001F324E69030, file "LPClientFramework\LPWinSparkleUpdater.py", line 88>)
+             30 LOAD_CONST               7 ('LPWinSparkleUpdater._loadConfig')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               6 (_loadConfig)
+
+120          36 LOAD_CONST               8 (<code object _sparkleConfig at 0x000001F324E69500, file "LPClientFramework\LPWinSparkleUpdater.py", line 120>)
+             38 LOAD_CONST               9 ('LPWinSparkleUpdater._sparkleConfig')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               7 (_sparkleConfig)
+
+132          44 LOAD_CONST              10 (<code object _normalizeShortVersion at 0x000001F324E69450, file "LPClientFramework\LPWinSparkleUpdater.py", line 132>)
+             46 LOAD_CONST              11 ('LPWinSparkleUpdater._normalizeShortVersion')
+             48 MAKE_FUNCTION            0
+             50 STORE_NAME               8 (_normalizeShortVersion)
+
+146          52 LOAD_CONST              12 (<code object _resolveCurrentVersion at 0x000001F324E69C90, file "LPClientFramework\LPWinSparkleUpdater.py", line 146>)
+             54 LOAD_CONST              13 ('LPWinSparkleUpdater._resolveCurrentVersion')
+             56 MAKE_FUNCTION            0
+             58 STORE_NAME               9 (_resolveCurrentVersion)
+
+158          60 LOAD_CONST              14 (<code object _compareVersions at 0x000001F324E69B30, file "LPClientFramework\LPWinSparkleUpdater.py", line 158>)
+             62 LOAD_CONST              15 ('LPWinSparkleUpdater._compareVersions')
+             64 MAKE_FUNCTION            0
+             66 STORE_NAME              10 (_compareVersions)
+
+180          68 LOAD_CONST              16 (<code object _dllCandidates at 0x000001F324E69EA0, file "LPClientFramework\LPWinSparkleUpdater.py", line 180>)
+             70 LOAD_CONST              17 ('LPWinSparkleUpdater._dllCandidates')
+             72 MAKE_FUNCTION            0
+             74 STORE_NAME              11 (_dllCandidates)
+
+218          76 LOAD_CONST              18 (<code object _loadDLL at 0x000001F324E695B0, file "LPClientFramework\LPWinSparkleUpdater.py", line 218>)
+             78 LOAD_CONST              19 ('LPWinSparkleUpdater._loadDLL')
+             80 MAKE_FUNCTION            0
+             82 STORE_NAME              12 (_loadDLL)
+
+300          84 LOAD_CONST              20 (<code object _registerShutdownCallbacks at 0x000001F324E69DF0, file "LPClientFramework\LPWinSparkleUpdater.py", line 300>)
+             86 LOAD_CONST              21 ('LPWinSparkleUpdater._registerShutdownCallbacks')
+             88 MAKE_FUNCTION            0
+             90 STORE_NAME              13 (_registerShutdownCallbacks)
+
+350          92 LOAD_CONST              22 (<code object _registerUpdateResultCallbacks at 0x000001F3253C4EA0, file "LPClientFramework\LPWinSparkleUpdater.py", line 350>)
+             94 LOAD_CONST              23 ('LPWinSparkleUpdater._registerUpdateResultCallbacks')
+             96 MAKE_FUNCTION            0
+             98 STORE_NAME              14 (_registerUpdateResultCallbacks)
+
+423         100 LOAD_CONST              24 (<code object setUpdateFoundCallback at 0x000001F3253C4660, file "LPClientFramework\LPWinSparkleUpdater.py", line 423>)
+            102 LOAD_CONST              25 ('LPWinSparkleUpdater.setUpdateFoundCallback')
+            104 MAKE_FUNCTION            0
+            106 STORE_NAME              15 (setUpdateFoundCallback)
+
+436         108 LOAD_CONST              26 (<code object setUserRunInstallerCallback at 0x000001F3253C4B30, file "LPClientFramework\LPWinSparkleUpdater.py", line 436>)
+            110 LOAD_CONST              27 ('LPWinSparkleUpdater.setUserRunInstallerCallback')
+            112 MAKE_FUNCTION            0
+            114 STORE_NAME              16 (setUserRunInstallerCallback)
+
+448         116 LOAD_CONST              28 (<code object _registerInstallerCallbacks at 0x000001F3253C4870, file "LPClientFramework\LPWinSparkleUpdater.py", line 448>)
+            118 LOAD_CONST              29 ('LPWinSparkleUpdater._registerInstallerCallbacks')
+            120 MAKE_FUNCTION            0
+            122 STORE_NAME              17 (_registerInstallerCallbacks)
+
+494         124 LOAD_CONST              30 (<code object _safeInvokeResultCallback at 0x000001F3253C40E0, file "LPClientFramework\LPWinSparkleUpdater.py", line 494>)
+            126 LOAD_CONST              31 ('LPWinSparkleUpdater._safeInvokeResultCallback')
+            128 MAKE_FUNCTION            0
+            130 STORE_NAME              18 (_safeInvokeResultCallback)
+
+512         132 LOAD_CONST              32 (<code object _classifyCheckError at 0x000001F3253C4A80, file "LPClientFramework\LPWinSparkleUpdater.py", line 512>)
+            134 LOAD_CONST              33 ('LPWinSparkleUpdater._classifyCheckError')
+            136 MAKE_FUNCTION            0
+            138 STORE_NAME              19 (_classifyCheckError)
+
+535         140 LOAD_CONST              69 ((None, None, None, None, None, None))
+            142 LOAD_CONST              35 (<code object _setLastCheckDetail at 0x000001F3253C49D0, file "LPClientFramework\LPWinSparkleUpdater.py", line 535>)
+            144 LOAD_CONST              36 ('LPWinSparkleUpdater._setLastCheckDetail')
+            146 MAKE_FUNCTION            1 (defaults)
+            148 STORE_NAME              20 (_setLastCheckDetail)
+
+574         150 LOAD_CONST              37 (<code object getLastCheckDetail at 0x000001F3253C4190, file "LPClientFramework\LPWinSparkleUpdater.py", line 574>)
+            152 LOAD_CONST              38 ('LPWinSparkleUpdater.getLastCheckDetail')
+            154 MAKE_FUNCTION            0
+            156 STORE_NAME              21 (getLastCheckDetail)
+
+585         158 LOAD_CONST              39 (<code object _fetchLatestVersionFromAppcast at 0x000001F3253C45B0, file "LPClientFramework\LPWinSparkleUpdater.py", line 585>)
+            160 LOAD_CONST              40 ('LPWinSparkleUpdater._fetchLatestVersionFromAppcast')
+            162 MAKE_FUNCTION            0
+            164 STORE_NAME              22 (_fetchLatestVersionFromAppcast)
+
+638         166 LOAD_CONST              70 ((None,))
+            168 LOAD_CONST              41 (<code object notifyUpdateFound at 0x000001F3253C4920, file "LPClientFramework\LPWinSparkleUpdater.py", line 638>)
+            170 LOAD_CONST              42 ('LPWinSparkleUpdater.notifyUpdateFound')
+            172 MAKE_FUNCTION            1 (defaults)
+            174 STORE_NAME              23 (notifyUpdateFound)
+
+655         176 LOAD_CONST              71 ((None,))
+            178 LOAD_CONST              43 (<code object notifyNoUpdateFound at 0x000001F3253C4450, file "LPClientFramework\LPWinSparkleUpdater.py", line 655>)
+            180 LOAD_CONST              44 ('LPWinSparkleUpdater.notifyNoUpdateFound')
+            182 MAKE_FUNCTION            1 (defaults)
+            184 STORE_NAME              24 (notifyNoUpdateFound)
+
+672         186 LOAD_CONST              45 (<code object _runBackgroundAppcastProbe at 0x000001F3253C4C90, file "LPClientFramework\LPWinSparkleUpdater.py", line 672>)
+            188 LOAD_CONST              46 ('LPWinSparkleUpdater._runBackgroundAppcastProbe')
+            190 MAKE_FUNCTION            0
+            192 STORE_NAME              25 (_runBackgroundAppcastProbe)
+
+734         194 LOAD_CONST              47 (<code object resolveFeedURL at 0x000001F3253C4DF0, file "LPClientFramework\LPWinSparkleUpdater.py", line 734>)
+            196 LOAD_CONST              48 ('LPWinSparkleUpdater.resolveFeedURL')
+            198 MAKE_FUNCTION            0
+            200 STORE_NAME              26 (resolveFeedURL)
+
+748         202 LOAD_CONST              49 (<code object setTemporaryFeedURL at 0x000001F3253C4030, file "LPClientFramework\LPWinSparkleUpdater.py", line 748>)
+            204 LOAD_CONST              50 ('LPWinSparkleUpdater.setTemporaryFeedURL')
+            206 MAKE_FUNCTION            0
+            208 STORE_NAME              27 (setTemporaryFeedURL)
+
+759         210 LOAD_CONST              51 (<code object clearTemporaryFeedURL at 0x000001F3253C4BE0, file "LPClientFramework\LPWinSparkleUpdater.py", line 759>)
+            212 LOAD_CONST              52 ('LPWinSparkleUpdater.clearTemporaryFeedURL')
+            214 MAKE_FUNCTION            0
+            216 STORE_NAME              28 (clearTemporaryFeedURL)
+
+770         218 LOAD_CONST              53 (<code object applyCurrentFeedURL at 0x000001F3253AEBE0, file "LPClientFramework\LPWinSparkleUpdater.py", line 770>)
+            220 LOAD_CONST              54 ('LPWinSparkleUpdater.applyCurrentFeedURL')
+            222 MAKE_FUNCTION            0
+            224 STORE_NAME              29 (applyCurrentFeedURL)
+
+810         226 LOAD_CONST              55 (<code object initUpdater at 0x000001F3253AEC90, file "LPClientFramework\LPWinSparkleUpdater.py", line 810>)
+            228 LOAD_CONST              56 ('LPWinSparkleUpdater.initUpdater')
+            230 MAKE_FUNCTION            0
+            232 STORE_NAME              30 (initUpdater)
+
+868         234 LOAD_CONST              57 (<code object isReady at 0x000001F3253AEEA0, file "LPClientFramework\LPWinSparkleUpdater.py", line 868>)
+            236 LOAD_CONST              58 ('LPWinSparkleUpdater.isReady')
+            238 MAKE_FUNCTION            0
+            240 STORE_NAME              31 (isReady)
+
+879         242 LOAD_CONST              59 (<code object ensureReady at 0x000001F3253AE2F0, file "LPClientFramework\LPWinSparkleUpdater.py", line 879>)
+            244 LOAD_CONST              60 ('LPWinSparkleUpdater.ensureReady')
+            246 MAKE_FUNCTION            0
+            248 STORE_NAME              32 (ensureReady)
+
+899         250 LOAD_CONST              61 (<code object triggerBackgroundCheck at 0x000001F3253AE710, file "LPClientFramework\LPWinSparkleUpdater.py", line 899>)
+            252 LOAD_CONST              62 ('LPWinSparkleUpdater.triggerBackgroundCheck')
+            254 MAKE_FUNCTION            0
+            256 STORE_NAME              33 (triggerBackgroundCheck)
+
+930         258 LOAD_CONST              63 (<code object isBackgroundCheckRunning at 0x000001F3253AE030, file "LPClientFramework\LPWinSparkleUpdater.py", line 930>)
+            260 LOAD_CONST              64 ('LPWinSparkleUpdater.isBackgroundCheckRunning')
+            262 MAKE_FUNCTION            0
+            264 STORE_NAME              34 (isBackgroundCheckRunning)
+
+941         266 LOAD_CONST              65 (<code object checkForUpdatesManually at 0x000001F3253AED40, file "LPClientFramework\LPWinSparkleUpdater.py", line 941>)
+            268 LOAD_CONST              66 ('LPWinSparkleUpdater.checkForUpdatesManually')
+            270 MAKE_FUNCTION            0
+            272 STORE_NAME              35 (checkForUpdatesManually)
+
+962         274 LOAD_CONST              67 (<code object cleanup at 0x000001F3253AE7C0, file "LPClientFramework\LPWinSparkleUpdater.py", line 962>)
+            276 LOAD_CONST              68 ('LPWinSparkleUpdater.cleanup')
+            278 MAKE_FUNCTION            0
+            280 STORE_NAME              36 (cleanup)
+            282 LOAD_CONST              34 (None)
+            284 RETURN_VALUE
+
+=== LPWinSparkleUpdater.__init__ ===
+ 38           0 LOAD_CONST               1 (None)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_dll)
+
+ 39           6 LOAD_CONST               2 (False)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_ready)
+
+ 40          12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              2 (_loadConfig)
+             16 CALL_METHOD              0
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               3 (_config)
+
+ 43          22 LOAD_CONST               1 (None)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               4 (_canShutdownHandler)
+
+ 44          28 LOAD_CONST               1 (None)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               5 (_shutdownRequestHandler)
+
+ 47          34 LOAD_CONST               1 (None)
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               6 (_canShutdownCallback)
+
+ 48          40 LOAD_CONST               1 (None)
+             42 LOAD_FAST                0 (self)
+             44 STORE_ATTR               7 (_shutdownRequestCallback)
+
+ 49          46 LOAD_GLOBAL              8 (getattr)
+             48 LOAD_GLOBAL              9 (ctypes)
+             50 LOAD_CONST               3 ('WINFUNCTYPE')
+             52 LOAD_GLOBAL              9 (ctypes)
+             54 LOAD_ATTR               10 (CFUNCTYPE)
+             56 CALL_FUNCTION            3
+             58 STORE_FAST               1 (callback_type)
+
+ 50          60 LOAD_FAST                1 (callback_type)
+             62 LOAD_GLOBAL              9 (ctypes)
+             64 LOAD_ATTR               11 (c_int)
+             66 CALL_FUNCTION            1
+             68 LOAD_FAST                0 (self)
+             70 STORE_ATTR              12 (_canShutdownCallbackType)
+
+ 51          72 LOAD_FAST                1 (callback_type)
+             74 LOAD_CONST               1 (None)
+             76 CALL_FUNCTION            1
+             78 LOAD_FAST                0 (self)
+             80 STORE_ATTR              13 (_shutdownRequestCallbackType)
+
+ 52          82 LOAD_FAST                1 (callback_type)
+             84 LOAD_GLOBAL              9 (ctypes)
+             86 LOAD_ATTR               11 (c_int)
+             88 LOAD_GLOBAL              9 (ctypes)
+             90 LOAD_ATTR               14 (c_wchar_p)
+             92 CALL_FUNCTION            2
+             94 LOAD_FAST                0 (self)
+             96 STORE_ATTR              15 (_userRunInstallerCallbackType)
+
+ 55          98 LOAD_CONST               1 (None)
+            100 LOAD_FAST                0 (self)
+            102 STORE_ATTR              16 (_onUpdateFoundCallback)
+
+ 57         104 LOAD_CONST               1 (None)
+            106 LOAD_FAST                0 (self)
+            108 STORE_ATTR              17 (_onNoUpdateFoundCallback)
+
+ 58         110 LOAD_CONST               1 (None)
+            112 LOAD_FAST                0 (self)
+            114 STORE_ATTR              18 (_onUserRunInstallerCallback)
+
+ 61         116 LOAD_CONST               1 (None)
+            118 LOAD_FAST                0 (self)
+            120 STORE_ATTR              19 (_didFindUpdateCallback)
+
+ 62         122 LOAD_CONST               1 (None)
+            124 LOAD_FAST                0 (self)
+            126 STORE_ATTR              20 (_didNotFindUpdateCallback)
+
+ 63         128 LOAD_CONST               1 (None)
+            130 LOAD_FAST                0 (self)
+            132 STORE_ATTR              21 (_updateCheckErrorCallback)
+
+ 64         134 LOAD_CONST               1 (None)
+            136 LOAD_FAST                0 (self)
+            138 STORE_ATTR              22 (_userRunInstallerCallback)
+
+ 65         140 LOAD_FAST                1 (callback_type)
+            142 LOAD_CONST               1 (None)
+            144 CALL_FUNCTION            1
+            146 LOAD_FAST                0 (self)
+            148 STORE_ATTR              23 (_updateFoundCallbackType)
+
+ 66         150 LOAD_FAST                1 (callback_type)
+            152 LOAD_CONST               1 (None)
+            154 CALL_FUNCTION            1
+            156 LOAD_FAST                0 (self)
+            158 STORE_ATTR              24 (_noUpdateFoundCallbackType)
+
+ 67         160 LOAD_FAST                1 (callback_type)
+            162 LOAD_CONST               1 (None)
+            164 CALL_FUNCTION            1
+            166 LOAD_FAST                0 (self)
+            168 STORE_ATTR              25 (_errorCallbackType)
+
+ 69         170 LOAD_CONST               1 (None)
+            172 LOAD_FAST                0 (self)
+            174 STORE_ATTR              26 (_backgroundCheckThread)
+
+ 71         176 BUILD_MAP                0
+            178 LOAD_FAST                0 (self)
+            180 STORE_ATTR              27 (_lastCheckDetail)
+
+ 73         182 LOAD_CONST               4 ('')
+            184 LOAD_FAST                0 (self)
+            186 STORE_ATTR              28 (_temporaryFeedURL)
+            188 LOAD_CONST               1 (None)
+            190 RETURN_VALUE
+
+=== LPWinSparkleUpdater.setShutdownHooks ===
+ 85           0 LOAD_FAST                1 (canShutdownHandler)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_canShutdownHandler)
+
+ 86           6 LOAD_FAST                2 (shutdownRequestHandler)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_shutdownRequestHandler)
+             12 LOAD_CONST               1 (None)
+             14 RETURN_VALUE
+
+=== LPWinSparkleUpdater._loadConfig ===
+ 97           0 LOAD_GLOBAL              0 (hasattr)
+              2 LOAD_GLOBAL              1 (sys)
+              4 LOAD_CONST               1 ('_MEIPASS')
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       30
+
+ 98          10 LOAD_GLOBAL              2 (Path)
+             12 LOAD_GLOBAL              1 (sys)
+             14 LOAD_ATTR                3 (_MEIPASS)
+             16 CALL_FUNCTION            1
+             18 LOAD_CONST               2 ('data')
+             20 BINARY_TRUE_DIVIDE
+             22 LOAD_CONST               3 ('config.json')
+             24 BINARY_TRUE_DIVIDE
+             26 STORE_FAST               1 (config_path)
+             28 JUMP_FORWARD           100 (to 130)
+
+100     >>   30 LOAD_GLOBAL              2 (Path)
+             32 LOAD_GLOBAL              4 (__file__)
+             34 CALL_FUNCTION            1
+             36 LOAD_METHOD              5 (resolve)
+             38 CALL_METHOD              0
+             40 LOAD_ATTR                6 (parent)
+             42 LOAD_ATTR                6 (parent)
+             44 STORE_FAST               2 (repo_root)
+
+102          46 LOAD_FAST                2 (repo_root)
+             48 LOAD_CONST               4 ('HOME')
+             50 BINARY_TRUE_DIVIDE
+             52 LOAD_CONST               2 ('data')
+             54 BINARY_TRUE_DIVIDE
+             56 LOAD_CONST               3 ('config.json')
+             58 BINARY_TRUE_DIVIDE
+
+103          60 LOAD_GLOBAL              2 (Path)
+             62 LOAD_GLOBAL              4 (__file__)
+             64 CALL_FUNCTION            1
+             66 LOAD_METHOD              5 (resolve)
+             68 CALL_METHOD              0
+             70 LOAD_ATTR                6 (parent)
+             72 LOAD_CONST               2 ('data')
+             74 BINARY_TRUE_DIVIDE
+             76 LOAD_CONST               3 ('config.json')
+             78 BINARY_TRUE_DIVIDE
+
+101          80 BUILD_LIST               2
+             82 STORE_FAST               3 (candidates)
+
+105          84 LOAD_CONST               5 (None)
+             86 STORE_FAST               1 (config_path)
+
+106          88 LOAD_FAST                3 (candidates)
+             90 GET_ITER
+        >>   92 FOR_ITER                20 (to 114)
+             94 STORE_FAST               4 (candidate)
+
+107          96 LOAD_FAST                4 (candidate)
+             98 LOAD_METHOD              7 (is_file)
+            100 CALL_METHOD              0
+            102 POP_JUMP_IF_FALSE       92
+
+108         104 LOAD_FAST                4 (candidate)
+            106 STORE_FAST               1 (config_path)
+
+109         108 POP_TOP
+            110 JUMP_ABSOLUTE          114
+            112 JUMP_ABSOLUTE           92
+
+110     >>  114 LOAD_FAST                1 (config_path)
+            116 LOAD_CONST               5 (None)
+            118 IS_OP                    0
+            120 POP_JUMP_IF_FALSE      130
+
+111         122 LOAD_FAST                3 (candidates)
+            124 LOAD_CONST               6 (0)
+            126 BINARY_SUBSCR
+            128 STORE_FAST               1 (config_path)
+
+113     >>  130 SETUP_FINALLY           68 (to 200)
+
+114         132 LOAD_GLOBAL              8 (open)
+            134 LOAD_FAST                1 (config_path)
+            136 LOAD_CONST               7 ('r')
+            138 LOAD_CONST               8 ('utf-8-sig')
+            140 LOAD_CONST               9 ('ignore')
+            142 LOAD_CONST              10 (('encoding', 'errors'))
+            144 CALL_FUNCTION_KW         4
+            146 SETUP_WITH              32 (to 180)
+            148 STORE_FAST               5 (config_file)
+
+115         150 LOAD_GLOBAL              9 (json)
+            152 LOAD_METHOD             10 (loads)
+            154 LOAD_FAST                5 (config_file)
+            156 LOAD_METHOD             11 (read)
+            158 CALL_METHOD              0
+            160 CALL_METHOD              1
+            162 POP_BLOCK
+            164 ROT_TWO
+            166 LOAD_CONST               5 (None)
+            168 DUP_TOP
+            170 DUP_TOP
+            172 CALL_FUNCTION            3
+            174 POP_TOP
+            176 POP_BLOCK
+            178 RETURN_VALUE
+        >>  180 WITH_EXCEPT_START
+            182 POP_JUMP_IF_TRUE       186
+            184 RERAISE
+        >>  186 POP_TOP
+            188 POP_TOP
+            190 POP_TOP
+            192 POP_EXCEPT
+            194 POP_TOP
+            196 POP_BLOCK
+            198 JUMP_FORWARD            54 (to 254)
+
+116     >>  200 DUP_TOP
+            202 LOAD_GLOBAL             12 (Exception)
+            204 EXTENDED_ARG             0
+            206 JUMP_IF_NOT_EXC_MATCH   252
+            208 POP_TOP
+            210 STORE_FAST               6 (error)
+            212 POP_TOP
+            214 SETUP_FINALLY           28 (to 244)
+
+117         216 LOAD_GLOBAL             13 (logger)
+            218 LOAD_METHOD             14 (warning)
+            220 LOAD_CONST              11 ('[winsparkle] 加载配置失败: %s')
+            222 LOAD_FAST                6 (error)
+            224 CALL_METHOD              2
+            226 POP_TOP
+
+118         228 BUILD_MAP                0
+            230 POP_BLOCK
+            232 ROT_FOUR
+            234 POP_EXCEPT
+            236 LOAD_CONST               5 (None)
+            238 STORE_FAST               6 (error)
+            240 DELETE_FAST              6 (error)
+            242 RETURN_VALUE
+        >>  244 LOAD_CONST               5 (None)
+            246 STORE_FAST               6 (error)
+            248 DELETE_FAST              6 (error)
+            250 RERAISE
+        >>  252 RERAISE
+        >>  254 LOAD_CONST               5 (None)
+            256 RETURN_VALUE
+
+=== LPWinSparkleUpdater._sparkleConfig ===
+129           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_config)
+              4 LOAD_METHOD              1 (get)
+              6 LOAD_CONST               1 ('sparkle')
+              8 BUILD_MAP                0
+             10 CALL_METHOD              2
+             12 STORE_FAST               1 (sparkle)
+
+130          14 LOAD_GLOBAL              2 (isinstance)
+             16 LOAD_FAST                1 (sparkle)
+             18 LOAD_GLOBAL              3 (dict)
+             20 CALL_FUNCTION            2
+             22 POP_JUMP_IF_FALSE       28
+             24 LOAD_FAST                1 (sparkle)
+             26 RETURN_VALUE
+        >>   28 BUILD_MAP                0
+             30 RETURN_VALUE
+
+=== LPWinSparkleUpdater._normalizeShortVersion ===
+141           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F324E692F0, file "LPClientFramework\LPWinSparkleUpdater.py", line 141>)
+              2 LOAD_CONST               2 ('LPWinSparkleUpdater._normalizeShortVersion.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_GLOBAL              0 (re)
+              8 LOAD_METHOD              1 (split)
+             10 LOAD_CONST               3 ('[^0-9]+')
+             12 LOAD_GLOBAL              2 (str)
+             14 LOAD_FAST                1 (versionValue)
+             16 CALL_FUNCTION            1
+             18 CALL_METHOD              2
+             20 GET_ITER
+             22 CALL_FUNCTION            1
+             24 STORE_FAST               2 (groups)
+
+142          26 LOAD_FAST                2 (groups)
+             28 POP_JUMP_IF_TRUE        34
+
+143          30 LOAD_CONST               4 ('0')
+             32 RETURN_VALUE
+
+144     >>   34 LOAD_CONST               5 ('.')
+             36 LOAD_METHOD              3 (join)
+             38 LOAD_CONST               6 (<code object <genexpr> at 0x000001F324E693A0, file "LPClientFramework\LPWinSparkleUpdater.py", line 144>)
+             40 LOAD_CONST               7 ('LPWinSparkleUpdater._normalizeShortVersion.<locals>.<genexpr>')
+             42 MAKE_FUNCTION            0
+             44 LOAD_FAST                2 (groups)
+             46 GET_ITER
+             48 CALL_FUNCTION            1
+             50 CALL_METHOD              1
+             52 RETURN_VALUE
+
+=== LPWinSparkleUpdater._normalizeShortVersion.<listcomp> ===
+141           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (item)
+              8 LOAD_FAST                1 (item)
+             10 POP_JUMP_IF_FALSE        4
+             12 LOAD_FAST                1 (item)
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPWinSparkleUpdater._normalizeShortVersion.<genexpr> ===
+144           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                18 (to 22)
+              4 STORE_FAST               1 (item)
+              6 LOAD_GLOBAL              0 (str)
+              8 LOAD_GLOBAL              1 (int)
+             10 LOAD_FAST                1 (item)
+             12 CALL_FUNCTION            1
+             14 CALL_FUNCTION            1
+             16 YIELD_VALUE
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            2
+        >>   22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPWinSparkleUpdater._resolveCurrentVersion ===
+155           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_config)
+              4 LOAD_METHOD              1 (get)
+              6 LOAD_CONST               1 ('version')
+              8 LOAD_GLOBAL              2 (appVersion)
+             10 CALL_METHOD              2
+             12 STORE_FAST               1 (version_value)
+
+156          14 LOAD_FAST                0 (self)
+             16 LOAD_METHOD              3 (_normalizeShortVersion)
+             18 LOAD_FAST                1 (version_value)
+             20 CALL_METHOD              1
+             22 RETURN_VALUE
+
+=== LPWinSparkleUpdater._compareVersions ===
+168           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F324E690E0, file "LPClientFramework\LPWinSparkleUpdater.py", line 168>)
+              2 LOAD_CONST               2 ('LPWinSparkleUpdater._compareVersions.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              0 (_normalizeShortVersion)
+             10 LOAD_FAST                1 (leftVersion)
+             12 CALL_METHOD              1
+             14 LOAD_METHOD              1 (split)
+             16 LOAD_CONST               3 ('.')
+             18 CALL_METHOD              1
+             20 GET_ITER
+             22 CALL_FUNCTION            1
+             24 STORE_FAST               3 (left_parts)
+
+169          26 LOAD_CONST               4 (<code object <listcomp> at 0x000001F324E69240, file "LPClientFramework\LPWinSparkleUpdater.py", line 169>)
+             28 LOAD_CONST               2 ('LPWinSparkleUpdater._compareVersions.<locals>.<listcomp>')
+             30 MAKE_FUNCTION            0
+             32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              0 (_normalizeShortVersion)
+             36 LOAD_FAST                2 (rightVersion)
+             38 CALL_METHOD              1
+             40 LOAD_METHOD              1 (split)
+             42 LOAD_CONST               3 ('.')
+             44 CALL_METHOD              1
+             46 GET_ITER
+             48 CALL_FUNCTION            1
+             50 STORE_FAST               4 (right_parts)
+
+170          52 LOAD_GLOBAL              2 (max)
+             54 LOAD_GLOBAL              3 (len)
+             56 LOAD_FAST                3 (left_parts)
+             58 CALL_FUNCTION            1
+             60 LOAD_GLOBAL              3 (len)
+             62 LOAD_FAST                4 (right_parts)
+             64 CALL_FUNCTION            1
+             66 CALL_FUNCTION            2
+             68 STORE_FAST               5 (max_len)
+
+171          70 LOAD_FAST                3 (left_parts)
+             72 LOAD_METHOD              4 (extend)
+             74 LOAD_CONST               5 (0)
+             76 BUILD_LIST               1
+             78 LOAD_FAST                5 (max_len)
+             80 LOAD_GLOBAL              3 (len)
+             82 LOAD_FAST                3 (left_parts)
+             84 CALL_FUNCTION            1
+             86 BINARY_SUBTRACT
+             88 BINARY_MULTIPLY
+             90 CALL_METHOD              1
+             92 POP_TOP
+
+172          94 LOAD_FAST                4 (right_parts)
+             96 LOAD_METHOD              4 (extend)
+             98 LOAD_CONST               5 (0)
+            100 BUILD_LIST               1
+            102 LOAD_FAST                5 (max_len)
+            104 LOAD_GLOBAL              3 (len)
+            106 LOAD_FAST                4 (right_parts)
+            108 CALL_FUNCTION            1
+            110 BINARY_SUBTRACT
+            112 BINARY_MULTIPLY
+            114 CALL_METHOD              1
+            116 POP_TOP
+
+174         118 LOAD_FAST                3 (left_parts)
+            120 LOAD_FAST                4 (right_parts)
+            122 COMPARE_OP               4 (>)
+            124 POP_JUMP_IF_FALSE      130
+
+175         126 LOAD_CONST               6 (1)
+            128 RETURN_VALUE
+
+176     >>  130 LOAD_FAST                3 (left_parts)
+            132 LOAD_FAST                4 (right_parts)
+            134 COMPARE_OP               0 (<)
+            136 POP_JUMP_IF_FALSE      142
+
+177         138 LOAD_CONST               7 (-1)
+            140 RETURN_VALUE
+
+178     >>  142 LOAD_CONST               5 (0)
+            144 RETURN_VALUE
+
+=== LPWinSparkleUpdater._compareVersions.<listcomp> ===
+168           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (int)
+             10 LOAD_FAST                1 (item)
+             12 CALL_FUNCTION            1
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPWinSparkleUpdater._compareVersions.<listcomp> ===
+169           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (int)
+             10 LOAD_FAST                1 (item)
+             12 CALL_FUNCTION            1
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== LPWinSparkleUpdater._dllCandidates ===
+189           0 BUILD_LIST               0
+              2 STORE_FAST               1 (candidates)
+
+191           4 LOAD_GLOBAL              0 (os)
+              6 LOAD_ATTR                1 (environ)
+              8 LOAD_METHOD              2 (get)
+             10 LOAD_CONST               1 ('WIIM_WINSPARKLE_DLL_PATH')
+             12 LOAD_CONST               2 ('')
+             14 CALL_METHOD              2
+             16 LOAD_METHOD              3 (strip)
+             18 CALL_METHOD              0
+             20 STORE_FAST               2 (env_path)
+
+192          22 LOAD_FAST                2 (env_path)
+             24 POP_JUMP_IF_FALSE       36
+
+193          26 LOAD_FAST                1 (candidates)
+             28 LOAD_METHOD              4 (append)
+             30 LOAD_FAST                2 (env_path)
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+195     >>   36 LOAD_GLOBAL              5 (hasattr)
+             38 LOAD_GLOBAL              6 (sys)
+             40 LOAD_CONST               3 ('_MEIPASS')
+             42 CALL_FUNCTION            2
+             44 POP_JUMP_IF_FALSE       98
+
+196          46 LOAD_GLOBAL              7 (Path)
+             48 LOAD_GLOBAL              6 (sys)
+             50 LOAD_ATTR                8 (_MEIPASS)
+             52 CALL_FUNCTION            1
+             54 STORE_FAST               3 (meipass)
+
+197          56 LOAD_FAST                1 (candidates)
+             58 LOAD_METHOD              9 (extend)
+
+199          60 LOAD_GLOBAL             10 (str)
+             62 LOAD_FAST                3 (meipass)
+             64 LOAD_CONST               4 ('WinSparkle.dll')
+             66 BINARY_TRUE_DIVIDE
+             68 CALL_FUNCTION            1
+
+200          70 LOAD_GLOBAL             10 (str)
+             72 LOAD_FAST                3 (meipass)
+             74 LOAD_CONST               5 ('third_party')
+             76 BINARY_TRUE_DIVIDE
+             78 LOAD_CONST               6 ('winsparkle')
+             80 BINARY_TRUE_DIVIDE
+             82 LOAD_CONST               7 ('win-x64')
+             84 BINARY_TRUE_DIVIDE
+             86 LOAD_CONST               4 ('WinSparkle.dll')
+             88 BINARY_TRUE_DIVIDE
+             90 CALL_FUNCTION            1
+
+198          92 BUILD_LIST               2
+
+197          94 CALL_METHOD              1
+             96 POP_TOP
+
+204     >>   98 LOAD_GLOBAL              7 (Path)
+            100 LOAD_GLOBAL             11 (__file__)
+            102 CALL_FUNCTION            1
+            104 LOAD_METHOD             12 (resolve)
+            106 CALL_METHOD              0
+            108 LOAD_ATTR               13 (parent)
+            110 LOAD_ATTR               13 (parent)
+            112 STORE_FAST               4 (repo_root)
+
+205         114 LOAD_FAST                1 (candidates)
+            116 LOAD_METHOD              9 (extend)
+
+207         118 LOAD_GLOBAL             10 (str)
+            120 LOAD_FAST                4 (repo_root)
+            122 LOAD_CONST               5 ('third_party')
+            124 BINARY_TRUE_DIVIDE
+            126 LOAD_CONST               6 ('winsparkle')
+            128 BINARY_TRUE_DIVIDE
+            130 LOAD_CONST               7 ('win-x64')
+            132 BINARY_TRUE_DIVIDE
+            134 LOAD_CONST               4 ('WinSparkle.dll')
+            136 BINARY_TRUE_DIVIDE
+            138 CALL_FUNCTION            1
+
+208         140 LOAD_GLOBAL             10 (str)
+            142 LOAD_FAST                4 (repo_root)
+            144 LOAD_CONST               8 ('HOME')
+            146 BINARY_TRUE_DIVIDE
+            148 LOAD_CONST               5 ('third_party')
+            150 BINARY_TRUE_DIVIDE
+            152 LOAD_CONST               6 ('winsparkle')
+            154 BINARY_TRUE_DIVIDE
+            156 LOAD_CONST               7 ('win-x64')
+            158 BINARY_TRUE_DIVIDE
+            160 LOAD_CONST               4 ('WinSparkle.dll')
+            162 BINARY_TRUE_DIVIDE
+            164 CALL_FUNCTION            1
+
+206         166 BUILD_LIST               2
+
+205         168 CALL_METHOD              1
+            170 POP_TOP
+
+212         172 BUILD_LIST               0
+            174 STORE_FAST               5 (unique_candidates)
+
+213         176 LOAD_FAST                1 (candidates)
+            178 GET_ITER
+        >>  180 FOR_ITER                26 (to 208)
+            182 STORE_FAST               6 (item)
+
+214         184 LOAD_FAST                6 (item)
+            186 POP_JUMP_IF_FALSE      180
+            188 LOAD_FAST                6 (item)
+            190 LOAD_FAST                5 (unique_candidates)
+            192 CONTAINS_OP              1
+            194 POP_JUMP_IF_FALSE      180
+
+215         196 LOAD_FAST                5 (unique_candidates)
+            198 LOAD_METHOD              4 (append)
+            200 LOAD_FAST                6 (item)
+            202 CALL_METHOD              1
+            204 POP_TOP
+            206 JUMP_ABSOLUTE          180
+
+216     >>  208 LOAD_FAST                5 (unique_candidates)
+            210 RETURN_VALUE
+
+=== LPWinSparkleUpdater._loadDLL ===
+227           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_dll)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    1
+              8 POP_JUMP_IF_FALSE       14
+
+228          10 LOAD_CONST               2 (True)
+             12 RETURN_VALUE
+
+230     >>   14 LOAD_FAST                0 (self)
+             16 LOAD_METHOD              1 (_dllCandidates)
+             18 CALL_METHOD              0
+             20 GET_ITER
+        >>   22 EXTENDED_ARG             2
+             24 FOR_ITER               570 (to 596)
+             26 STORE_FAST               1 (dll_path)
+
+231          28 LOAD_GLOBAL              2 (os)
+             30 LOAD_ATTR                3 (path)
+             32 LOAD_METHOD              4 (isfile)
+             34 LOAD_FAST                1 (dll_path)
+             36 CALL_METHOD              1
+             38 POP_JUMP_IF_TRUE        42
+
+232          40 JUMP_ABSOLUTE           22
+
+234     >>   42 EXTENDED_ARG             1
+             44 SETUP_FINALLY          496 (to 542)
+
+235          46 LOAD_GLOBAL              5 (ctypes)
+             48 LOAD_METHOD              6 (WinDLL)
+             50 LOAD_FAST                1 (dll_path)
+             52 CALL_METHOD              1
+             54 STORE_FAST               2 (dll)
+
+236          56 LOAD_GLOBAL              5 (ctypes)
+             58 LOAD_ATTR                7 (c_char_p)
+             60 BUILD_LIST               1
+             62 LOAD_FAST                2 (dll)
+             64 LOAD_ATTR                8 (win_sparkle_set_appcast_url)
+             66 STORE_ATTR               9 (argtypes)
+
+237          68 LOAD_CONST               1 (None)
+             70 LOAD_FAST                2 (dll)
+             72 LOAD_ATTR                8 (win_sparkle_set_appcast_url)
+             74 STORE_ATTR              10 (restype)
+
+239          76 LOAD_GLOBAL              5 (ctypes)
+             78 LOAD_ATTR               11 (c_wchar_p)
+
+240          80 LOAD_GLOBAL              5 (ctypes)
+             82 LOAD_ATTR               11 (c_wchar_p)
+
+241          84 LOAD_GLOBAL              5 (ctypes)
+             86 LOAD_ATTR               11 (c_wchar_p)
+
+238          88 BUILD_LIST               3
+             90 LOAD_FAST                2 (dll)
+             92 LOAD_ATTR               12 (win_sparkle_set_app_details)
+             94 STORE_ATTR               9 (argtypes)
+
+243          96 LOAD_CONST               1 (None)
+             98 LOAD_FAST                2 (dll)
+            100 LOAD_ATTR               12 (win_sparkle_set_app_details)
+            102 STORE_ATTR              10 (restype)
+
+244         104 BUILD_LIST               0
+            106 LOAD_FAST                2 (dll)
+            108 LOAD_ATTR               13 (win_sparkle_init)
+            110 STORE_ATTR               9 (argtypes)
+
+245         112 LOAD_CONST               1 (None)
+            114 LOAD_FAST                2 (dll)
+            116 LOAD_ATTR               13 (win_sparkle_init)
+            118 STORE_ATTR              10 (restype)
+
+246         120 BUILD_LIST               0
+            122 LOAD_FAST                2 (dll)
+            124 LOAD_ATTR               14 (win_sparkle_cleanup)
+            126 STORE_ATTR               9 (argtypes)
+
+247         128 LOAD_CONST               1 (None)
+            130 LOAD_FAST                2 (dll)
+            132 LOAD_ATTR               14 (win_sparkle_cleanup)
+            134 STORE_ATTR              10 (restype)
+
+248         136 BUILD_LIST               0
+            138 LOAD_FAST                2 (dll)
+            140 LOAD_ATTR               15 (win_sparkle_check_update_without_ui)
+            142 STORE_ATTR               9 (argtypes)
+
+249         144 LOAD_CONST               1 (None)
+            146 LOAD_FAST                2 (dll)
+            148 LOAD_ATTR               15 (win_sparkle_check_update_without_ui)
+            150 STORE_ATTR              10 (restype)
+
+250         152 BUILD_LIST               0
+            154 LOAD_FAST                2 (dll)
+            156 LOAD_ATTR               16 (win_sparkle_check_update_with_ui)
+            158 STORE_ATTR               9 (argtypes)
+
+251         160 LOAD_CONST               1 (None)
+            162 LOAD_FAST                2 (dll)
+            164 LOAD_ATTR               16 (win_sparkle_check_update_with_ui)
+            166 STORE_ATTR              10 (restype)
+
+252         168 LOAD_GLOBAL             17 (hasattr)
+            170 LOAD_FAST                2 (dll)
+            172 LOAD_CONST               3 ('win_sparkle_set_automatic_check_for_updates')
+            174 CALL_FUNCTION            2
+            176 POP_JUMP_IF_FALSE      198
+
+253         178 LOAD_GLOBAL              5 (ctypes)
+            180 LOAD_ATTR               18 (c_int)
+            182 BUILD_LIST               1
+            184 LOAD_FAST                2 (dll)
+            186 LOAD_ATTR               19 (win_sparkle_set_automatic_check_for_updates)
+            188 STORE_ATTR               9 (argtypes)
+
+254         190 LOAD_CONST               1 (None)
+            192 LOAD_FAST                2 (dll)
+            194 LOAD_ATTR               19 (win_sparkle_set_automatic_check_for_updates)
+            196 STORE_ATTR              10 (restype)
+
+255     >>  198 LOAD_GLOBAL             17 (hasattr)
+            200 LOAD_FAST                2 (dll)
+            202 LOAD_CONST               4 ('win_sparkle_set_update_check_interval')
+            204 CALL_FUNCTION            2
+            206 POP_JUMP_IF_FALSE      228
+
+256         208 LOAD_GLOBAL              5 (ctypes)
+            210 LOAD_ATTR               18 (c_int)
+            212 BUILD_LIST               1
+            214 LOAD_FAST                2 (dll)
+            216 LOAD_ATTR               20 (win_sparkle_set_update_check_interval)
+            218 STORE_ATTR               9 (argtypes)
+
+257         220 LOAD_CONST               1 (None)
+            222 LOAD_FAST                2 (dll)
+            224 LOAD_ATTR               20 (win_sparkle_set_update_check_interval)
+            226 STORE_ATTR              10 (restype)
+
+258     >>  228 LOAD_GLOBAL             17 (hasattr)
+            230 LOAD_FAST                2 (dll)
+            232 LOAD_CONST               5 ('win_sparkle_set_lang')
+            234 CALL_FUNCTION            2
+            236 EXTENDED_ARG             1
+            238 POP_JUMP_IF_FALSE      260
+
+259         240 LOAD_GLOBAL              5 (ctypes)
+            242 LOAD_ATTR                7 (c_char_p)
+            244 BUILD_LIST               1
+            246 LOAD_FAST                2 (dll)
+            248 LOAD_ATTR               21 (win_sparkle_set_lang)
+            250 STORE_ATTR               9 (argtypes)
+
+260         252 LOAD_CONST               1 (None)
+            254 LOAD_FAST                2 (dll)
+            256 LOAD_ATTR               21 (win_sparkle_set_lang)
+            258 STORE_ATTR              10 (restype)
+
+261     >>  260 LOAD_GLOBAL             17 (hasattr)
+            262 LOAD_FAST                2 (dll)
+            264 LOAD_CONST               6 ('win_sparkle_set_eddsa_public_key')
+            266 CALL_FUNCTION            2
+            268 EXTENDED_ARG             1
+            270 POP_JUMP_IF_FALSE      292
+
+262         272 LOAD_GLOBAL              5 (ctypes)
+            274 LOAD_ATTR                7 (c_char_p)
+            276 BUILD_LIST               1
+            278 LOAD_FAST                2 (dll)
+            280 LOAD_ATTR               22 (win_sparkle_set_eddsa_public_key)
+            282 STORE_ATTR               9 (argtypes)
+
+263         284 LOAD_CONST               1 (None)
+            286 LOAD_FAST                2 (dll)
+            288 LOAD_ATTR               22 (win_sparkle_set_eddsa_public_key)
+            290 STORE_ATTR              10 (restype)
+
+264     >>  292 LOAD_GLOBAL             17 (hasattr)
+            294 LOAD_FAST                2 (dll)
+            296 LOAD_CONST               7 ('win_sparkle_set_dsa_pub_pem')
+            298 CALL_FUNCTION            2
+            300 EXTENDED_ARG             1
+            302 POP_JUMP_IF_FALSE      324
+
+265         304 LOAD_GLOBAL              5 (ctypes)
+            306 LOAD_ATTR                7 (c_char_p)
+            308 BUILD_LIST               1
+            310 LOAD_FAST                2 (dll)
+            312 LOAD_ATTR               23 (win_sparkle_set_dsa_pub_pem)
+            314 STORE_ATTR               9 (argtypes)
+
+266         316 LOAD_CONST               1 (None)
+            318 LOAD_FAST                2 (dll)
+            320 LOAD_ATTR               23 (win_sparkle_set_dsa_pub_pem)
+            322 STORE_ATTR              10 (restype)
+
+268     >>  324 LOAD_GLOBAL             17 (hasattr)
+            326 LOAD_FAST                2 (dll)
+            328 LOAD_CONST               8 ('win_sparkle_set_can_shutdown_callback')
+            330 CALL_FUNCTION            2
+            332 EXTENDED_ARG             1
+            334 POP_JUMP_IF_FALSE      356
+
+269         336 LOAD_FAST                0 (self)
+            338 LOAD_ATTR               24 (_canShutdownCallbackType)
+            340 BUILD_LIST               1
+            342 LOAD_FAST                2 (dll)
+            344 LOAD_ATTR               25 (win_sparkle_set_can_shutdown_callback)
+            346 STORE_ATTR               9 (argtypes)
+
+270         348 LOAD_CONST               1 (None)
+            350 LOAD_FAST                2 (dll)
+            352 LOAD_ATTR               25 (win_sparkle_set_can_shutdown_callback)
+            354 STORE_ATTR              10 (restype)
+
+271     >>  356 LOAD_GLOBAL             17 (hasattr)
+            358 LOAD_FAST                2 (dll)
+            360 LOAD_CONST               9 ('win_sparkle_set_shutdown_request_callback')
+            362 CALL_FUNCTION            2
+            364 EXTENDED_ARG             1
+            366 POP_JUMP_IF_FALSE      388
+
+273         368 LOAD_FAST                0 (self)
+            370 LOAD_ATTR               26 (_shutdownRequestCallbackType)
+
+272         372 BUILD_LIST               1
+            374 LOAD_FAST                2 (dll)
+            376 LOAD_ATTR               27 (win_sparkle_set_shutdown_request_callback)
+            378 STORE_ATTR               9 (argtypes)
+
+275         380 LOAD_CONST               1 (None)
+            382 LOAD_FAST                2 (dll)
+            384 LOAD_ATTR               27 (win_sparkle_set_shutdown_request_callback)
+            386 STORE_ATTR              10 (restype)
+
+276     >>  388 LOAD_GLOBAL             17 (hasattr)
+            390 LOAD_FAST                2 (dll)
+            392 LOAD_CONST              10 ('win_sparkle_set_did_find_update_callback')
+            394 CALL_FUNCTION            2
+            396 EXTENDED_ARG             1
+            398 POP_JUMP_IF_FALSE      420
+
+277         400 LOAD_FAST                0 (self)
+            402 LOAD_ATTR               28 (_updateFoundCallbackType)
+            404 BUILD_LIST               1
+            406 LOAD_FAST                2 (dll)
+            408 LOAD_ATTR               29 (win_sparkle_set_did_find_update_callback)
+            410 STORE_ATTR               9 (argtypes)
+
+278         412 LOAD_CONST               1 (None)
+            414 LOAD_FAST                2 (dll)
+            416 LOAD_ATTR               29 (win_sparkle_set_did_find_update_callback)
+            418 STORE_ATTR              10 (restype)
+
+279     >>  420 LOAD_GLOBAL             17 (hasattr)
+            422 LOAD_FAST                2 (dll)
+            424 LOAD_CONST              11 ('win_sparkle_set_did_not_find_update_callback')
+            426 CALL_FUNCTION            2
+            428 EXTENDED_ARG             1
+            430 POP_JUMP_IF_FALSE      452
+
+280         432 LOAD_FAST                0 (self)
+            434 LOAD_ATTR               30 (_noUpdateFoundCallbackType)
+            436 BUILD_LIST               1
+            438 LOAD_FAST                2 (dll)
+            440 LOAD_ATTR               31 (win_sparkle_set_did_not_find_update_callback)
+            442 STORE_ATTR               9 (argtypes)
+
+281         444 LOAD_CONST               1 (None)
+            446 LOAD_FAST                2 (dll)
+            448 LOAD_ATTR               31 (win_sparkle_set_did_not_find_update_callback)
+            450 STORE_ATTR              10 (restype)
+
+282     >>  452 LOAD_GLOBAL             17 (hasattr)
+            454 LOAD_FAST                2 (dll)
+            456 LOAD_CONST              12 ('win_sparkle_set_error_callback')
+            458 CALL_FUNCTION            2
+            460 EXTENDED_ARG             1
+            462 POP_JUMP_IF_FALSE      484
+
+283         464 LOAD_FAST                0 (self)
+            466 LOAD_ATTR               32 (_errorCallbackType)
+            468 BUILD_LIST               1
+            470 LOAD_FAST                2 (dll)
+            472 LOAD_ATTR               33 (win_sparkle_set_error_callback)
+            474 STORE_ATTR               9 (argtypes)
+
+284         476 LOAD_CONST               1 (None)
+            478 LOAD_FAST                2 (dll)
+            480 LOAD_ATTR               33 (win_sparkle_set_error_callback)
+            482 STORE_ATTR              10 (restype)
+
+285     >>  484 LOAD_GLOBAL             17 (hasattr)
+            486 LOAD_FAST                2 (dll)
+            488 LOAD_CONST              13 ('win_sparkle_set_user_run_installer_callback')
+            490 CALL_FUNCTION            2
+            492 EXTENDED_ARG             2
+            494 POP_JUMP_IF_FALSE      516
+
+287         496 LOAD_FAST                0 (self)
+            498 LOAD_ATTR               34 (_userRunInstallerCallbackType)
+
+286         500 BUILD_LIST               1
+            502 LOAD_FAST                2 (dll)
+            504 LOAD_ATTR               35 (win_sparkle_set_user_run_installer_callback)
+            506 STORE_ATTR               9 (argtypes)
+
+289         508 LOAD_CONST               1 (None)
+            510 LOAD_FAST                2 (dll)
+            512 LOAD_ATTR               35 (win_sparkle_set_user_run_installer_callback)
+            514 STORE_ATTR              10 (restype)
+
+291     >>  516 LOAD_FAST                2 (dll)
+            518 LOAD_FAST                0 (self)
+            520 STORE_ATTR               0 (_dll)
+
+292         522 LOAD_GLOBAL             36 (logger)
+            524 LOAD_METHOD             37 (info)
+            526 LOAD_CONST              14 ('[winsparkle] DLL 加载成功: %s')
+            528 LOAD_FAST                1 (dll_path)
+            530 CALL_METHOD              2
+            532 POP_TOP
+
+293         534 POP_BLOCK
+            536 POP_TOP
+            538 LOAD_CONST               2 (True)
+            540 RETURN_VALUE
+
+294     >>  542 DUP_TOP
+            544 LOAD_GLOBAL             38 (Exception)
+            546 EXTENDED_ARG             2
+            548 JUMP_IF_NOT_EXC_MATCH   592
+            550 POP_TOP
+            552 STORE_FAST               3 (error)
+            554 POP_TOP
+            556 SETUP_FINALLY           26 (to 584)
+
+295         558 LOAD_GLOBAL             36 (logger)
+            560 LOAD_METHOD             39 (warning)
+            562 LOAD_CONST              15 ('[winsparkle] DLL 加载失败: %s, error: %s')
+            564 LOAD_FAST                1 (dll_path)
+            566 LOAD_FAST                3 (error)
+            568 CALL_METHOD              3
+            570 POP_TOP
+            572 POP_BLOCK
+            574 POP_EXCEPT
+            576 LOAD_CONST               1 (None)
+            578 STORE_FAST               3 (error)
+            580 DELETE_FAST              3 (error)
+            582 JUMP_ABSOLUTE           22
+        >>  584 LOAD_CONST               1 (None)
+            586 STORE_FAST               3 (error)
+            588 DELETE_FAST              3 (error)
+            590 RERAISE
+        >>  592 RERAISE
+            594 JUMP_ABSOLUTE           22
+
+297     >>  596 LOAD_GLOBAL             36 (logger)
+            598 LOAD_METHOD             39 (warning)
+            600 LOAD_CONST              16 ('[winsparkle] 未找到可用的 WinSparkle.dll')
+            602 CALL_METHOD              1
+            604 POP_TOP
+
+298         606 LOAD_CONST              17 (False)
+            608 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerShutdownCallbacks ===
+309           0 LOAD_DEREF               0 (self)
+              2 LOAD_ATTR                0 (_dll)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       14
+
+310          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+312     >>   14 LOAD_GLOBAL              1 (hasattr)
+             16 LOAD_DEREF               0 (self)
+             18 LOAD_ATTR                0 (_dll)
+             20 LOAD_CONST               2 ('win_sparkle_set_can_shutdown_callback')
+             22 CALL_FUNCTION            2
+             24 POP_JUMP_IF_TRUE        40
+
+313          26 LOAD_GLOBAL              2 (logger)
+             28 LOAD_METHOD              3 (warning)
+             30 LOAD_CONST               3 ('[winsparkle] 当前 DLL 不支持 can_shutdown callback')
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+314          36 LOAD_CONST               1 (None)
+             38 RETURN_VALUE
+
+315     >>   40 LOAD_GLOBAL              1 (hasattr)
+             42 LOAD_DEREF               0 (self)
+             44 LOAD_ATTR                0 (_dll)
+             46 LOAD_CONST               4 ('win_sparkle_set_shutdown_request_callback')
+             48 CALL_FUNCTION            2
+             50 POP_JUMP_IF_TRUE        66
+
+316          52 LOAD_GLOBAL              2 (logger)
+             54 LOAD_METHOD              3 (warning)
+             56 LOAD_CONST               5 ('[winsparkle] 当前 DLL 不支持 shutdown_request callback')
+             58 CALL_METHOD              1
+             60 POP_TOP
+
+317          62 LOAD_CONST               1 (None)
+             64 RETURN_VALUE
+
+319     >>   66 LOAD_DEREF               0 (self)
+             68 LOAD_ATTR                4 (_canShutdownCallbackType)
+
+320          70 LOAD_CLOSURE             0 (self)
+             72 BUILD_TUPLE              1
+             74 LOAD_CONST               6 (<code object _canShutdownCallback at 0x000001F324E69A80, file "LPClientFramework\LPWinSparkleUpdater.py", line 319>)
+             76 LOAD_CONST               7 ('LPWinSparkleUpdater._registerShutdownCallbacks.<locals>._canShutdownCallback')
+             78 MAKE_FUNCTION            8 (closure)
+             80 CALL_FUNCTION            1
+             82 STORE_FAST               1 (_canShutdownCallback)
+
+332          84 LOAD_DEREF               0 (self)
+             86 LOAD_ATTR                5 (_shutdownRequestCallbackType)
+
+333          88 LOAD_CLOSURE             0 (self)
+             90 BUILD_TUPLE              1
+             92 LOAD_CONST               8 (<code object _shutdownRequestCallback at 0x000001F324E699D0, file "LPClientFramework\LPWinSparkleUpdater.py", line 332>)
+             94 LOAD_CONST               9 ('LPWinSparkleUpdater._registerShutdownCallbacks.<locals>._shutdownRequestCallback')
+             96 MAKE_FUNCTION            8 (closure)
+             98 CALL_FUNCTION            1
+            100 STORE_FAST               2 (_shutdownRequestCallback)
+
+341         102 SETUP_FINALLY           54 (to 158)
+
+342         104 LOAD_FAST                1 (_canShutdownCallback)
+            106 LOAD_DEREF               0 (self)
+            108 STORE_ATTR               6 (_canShutdownCallback)
+
+343         110 LOAD_FAST                2 (_shutdownRequestCallback)
+            112 LOAD_DEREF               0 (self)
+            114 STORE_ATTR               7 (_shutdownRequestCallback)
+
+344         116 LOAD_DEREF               0 (self)
+            118 LOAD_ATTR                0 (_dll)
+            120 LOAD_METHOD              8 (win_sparkle_set_can_shutdown_callback)
+            122 LOAD_DEREF               0 (self)
+            124 LOAD_ATTR                6 (_canShutdownCallback)
+            126 CALL_METHOD              1
+            128 POP_TOP
+
+345         130 LOAD_DEREF               0 (self)
+            132 LOAD_ATTR                0 (_dll)
+            134 LOAD_METHOD              9 (win_sparkle_set_shutdown_request_callback)
+            136 LOAD_DEREF               0 (self)
+            138 LOAD_ATTR                7 (_shutdownRequestCallback)
+            140 CALL_METHOD              1
+            142 POP_TOP
+
+346         144 LOAD_GLOBAL              2 (logger)
+            146 LOAD_METHOD             10 (info)
+            148 LOAD_CONST              10 ('[winsparkle] shutdown callbacks registered')
+            150 CALL_METHOD              1
+            152 POP_TOP
+            154 POP_BLOCK
+            156 JUMP_FORWARD            48 (to 206)
+
+347     >>  158 DUP_TOP
+            160 LOAD_GLOBAL             11 (Exception)
+            162 JUMP_IF_NOT_EXC_MATCH   204
+            164 POP_TOP
+            166 STORE_FAST               3 (error)
+            168 POP_TOP
+            170 SETUP_FINALLY           24 (to 196)
+
+348         172 LOAD_GLOBAL              2 (logger)
+            174 LOAD_METHOD              3 (warning)
+            176 LOAD_CONST              11 ('[winsparkle] register shutdown callbacks failed: %s')
+            178 LOAD_FAST                3 (error)
+            180 CALL_METHOD              2
+            182 POP_TOP
+            184 POP_BLOCK
+            186 POP_EXCEPT
+            188 LOAD_CONST               1 (None)
+            190 STORE_FAST               3 (error)
+            192 DELETE_FAST              3 (error)
+            194 JUMP_FORWARD            10 (to 206)
+        >>  196 LOAD_CONST               1 (None)
+            198 STORE_FAST               3 (error)
+            200 DELETE_FAST              3 (error)
+            202 RERAISE
+        >>  204 RERAISE
+        >>  206 LOAD_CONST               1 (None)
+            208 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerShutdownCallbacks._canShutdownCallback ===
+321           0 SETUP_FINALLY           56 (to 58)
+
+322           2 LOAD_CONST               1 (True)
+              4 STORE_FAST               0 (allow_shutdown)
+
+323           6 LOAD_GLOBAL              0 (callable)
+              8 LOAD_DEREF               0 (self)
+             10 LOAD_ATTR                1 (_canShutdownHandler)
+             12 CALL_FUNCTION            1
+             14 POP_JUMP_IF_FALSE       28
+
+324          16 LOAD_GLOBAL              2 (bool)
+             18 LOAD_DEREF               0 (self)
+             20 LOAD_METHOD              1 (_canShutdownHandler)
+             22 CALL_METHOD              0
+             24 CALL_FUNCTION            1
+             26 STORE_FAST               0 (allow_shutdown)
+
+325     >>   28 LOAD_FAST                0 (allow_shutdown)
+             30 POP_JUMP_IF_FALSE       36
+             32 LOAD_CONST               2 (1)
+             34 JUMP_FORWARD             2 (to 38)
+        >>   36 LOAD_CONST               3 (0)
+        >>   38 STORE_FAST               1 (result)
+
+326          40 LOAD_GLOBAL              3 (logger)
+             42 LOAD_METHOD              4 (info)
+             44 LOAD_CONST               4 ('[winsparkle] can_shutdown called result=%s')
+             46 LOAD_FAST                1 (result)
+             48 CALL_METHOD              2
+             50 POP_TOP
+
+327          52 LOAD_FAST                1 (result)
+             54 POP_BLOCK
+             56 RETURN_VALUE
+
+328     >>   58 DUP_TOP
+             60 LOAD_GLOBAL              5 (Exception)
+             62 JUMP_IF_NOT_EXC_MATCH   106
+             64 POP_TOP
+             66 STORE_FAST               2 (error)
+             68 POP_TOP
+             70 SETUP_FINALLY           26 (to 98)
+
+329          72 LOAD_GLOBAL              3 (logger)
+             74 LOAD_METHOD              6 (warning)
+             76 LOAD_CONST               5 ('[winsparkle] can_shutdown callback failed: %s')
+             78 LOAD_FAST                2 (error)
+             80 CALL_METHOD              2
+             82 POP_TOP
+
+330          84 POP_BLOCK
+             86 POP_EXCEPT
+             88 LOAD_CONST               0 (None)
+             90 STORE_FAST               2 (error)
+             92 DELETE_FAST              2 (error)
+             94 LOAD_CONST               3 (0)
+             96 RETURN_VALUE
+        >>   98 LOAD_CONST               0 (None)
+            100 STORE_FAST               2 (error)
+            102 DELETE_FAST              2 (error)
+            104 RERAISE
+        >>  106 RERAISE
+            108 LOAD_CONST               0 (None)
+            110 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerShutdownCallbacks._shutdownRequestCallback ===
+334           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+              4 LOAD_CONST               1 ('[winsparkle] shutdown_request received')
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+335          10 SETUP_FINALLY           22 (to 34)
+
+336          12 LOAD_GLOBAL              2 (callable)
+             14 LOAD_DEREF               0 (self)
+             16 LOAD_ATTR                3 (_shutdownRequestHandler)
+             18 CALL_FUNCTION            1
+             20 POP_JUMP_IF_FALSE       30
+
+337          22 LOAD_DEREF               0 (self)
+             24 LOAD_METHOD              3 (_shutdownRequestHandler)
+             26 CALL_METHOD              0
+             28 POP_TOP
+        >>   30 POP_BLOCK
+             32 JUMP_FORWARD            48 (to 82)
+
+338     >>   34 DUP_TOP
+             36 LOAD_GLOBAL              4 (Exception)
+             38 JUMP_IF_NOT_EXC_MATCH    80
+             40 POP_TOP
+             42 STORE_FAST               0 (error)
+             44 POP_TOP
+             46 SETUP_FINALLY           24 (to 72)
+
+339          48 LOAD_GLOBAL              0 (logger)
+             50 LOAD_METHOD              5 (warning)
+             52 LOAD_CONST               2 ('[winsparkle] shutdown_request callback failed: %s')
+             54 LOAD_FAST                0 (error)
+             56 CALL_METHOD              2
+             58 POP_TOP
+             60 POP_BLOCK
+             62 POP_EXCEPT
+             64 LOAD_CONST               0 (None)
+             66 STORE_FAST               0 (error)
+             68 DELETE_FAST              0 (error)
+             70 JUMP_FORWARD            10 (to 82)
+        >>   72 LOAD_CONST               0 (None)
+             74 STORE_FAST               0 (error)
+             76 DELETE_FAST              0 (error)
+             78 RERAISE
+        >>   80 RERAISE
+        >>   82 LOAD_CONST               0 (None)
+             84 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerUpdateResultCallbacks ===
+360           0 LOAD_DEREF               0 (self)
+              2 LOAD_ATTR                0 (_dll)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       14
+
+361          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+363     >>   14 LOAD_DEREF               0 (self)
+             16 LOAD_ATTR                1 (_updateFoundCallbackType)
+
+364          18 LOAD_CLOSURE             0 (self)
+             20 BUILD_TUPLE              1
+             22 LOAD_CONST               2 (<code object _didFindUpdate at 0x000001F324E69920, file "LPClientFramework\LPWinSparkleUpdater.py", line 363>)
+             24 LOAD_CONST               3 ('LPWinSparkleUpdater._registerUpdateResultCallbacks.<locals>._didFindUpdate')
+             26 MAKE_FUNCTION            8 (closure)
+             28 CALL_FUNCTION            1
+             30 STORE_FAST               1 (_didFindUpdate)
+
+377          32 LOAD_DEREF               0 (self)
+             34 LOAD_ATTR                2 (_noUpdateFoundCallbackType)
+
+378          36 LOAD_CLOSURE             0 (self)
+             38 BUILD_TUPLE              1
+             40 LOAD_CONST               4 (<code object _didNotFindUpdate at 0x000001F324E69870, file "LPClientFramework\LPWinSparkleUpdater.py", line 377>)
+             42 LOAD_CONST               5 ('LPWinSparkleUpdater._registerUpdateResultCallbacks.<locals>._didNotFindUpdate')
+             44 MAKE_FUNCTION            8 (closure)
+             46 CALL_FUNCTION            1
+             48 STORE_FAST               2 (_didNotFindUpdate)
+
+391          50 LOAD_DEREF               0 (self)
+             52 LOAD_ATTR                3 (_errorCallbackType)
+
+392          54 LOAD_CLOSURE             0 (self)
+             56 BUILD_TUPLE              1
+             58 LOAD_CONST               6 (<code object _updateCheckError at 0x000001F324E697C0, file "LPClientFramework\LPWinSparkleUpdater.py", line 391>)
+             60 LOAD_CONST               7 ('LPWinSparkleUpdater._registerUpdateResultCallbacks.<locals>._updateCheckError')
+             62 MAKE_FUNCTION            8 (closure)
+             64 CALL_FUNCTION            1
+             66 STORE_FAST               3 (_updateCheckError)
+
+407          68 SETUP_FINALLY          130 (to 200)
+
+408          70 LOAD_GLOBAL              4 (hasattr)
+             72 LOAD_DEREF               0 (self)
+             74 LOAD_ATTR                0 (_dll)
+             76 LOAD_CONST               8 ('win_sparkle_set_did_find_update_callback')
+             78 CALL_FUNCTION            2
+             80 POP_JUMP_IF_FALSE      112
+
+409          82 LOAD_FAST                1 (_didFindUpdate)
+             84 LOAD_DEREF               0 (self)
+             86 STORE_ATTR               5 (_didFindUpdateCallback)
+
+410          88 LOAD_DEREF               0 (self)
+             90 LOAD_ATTR                0 (_dll)
+             92 LOAD_METHOD              6 (win_sparkle_set_did_find_update_callback)
+             94 LOAD_DEREF               0 (self)
+             96 LOAD_ATTR                5 (_didFindUpdateCallback)
+             98 CALL_METHOD              1
+            100 POP_TOP
+
+411         102 LOAD_GLOBAL              7 (logger)
+            104 LOAD_METHOD              8 (info)
+            106 LOAD_CONST               9 ('[winsparkle] did_find_update callback registered')
+            108 CALL_METHOD              1
+            110 POP_TOP
+
+412     >>  112 LOAD_GLOBAL              4 (hasattr)
+            114 LOAD_DEREF               0 (self)
+            116 LOAD_ATTR                0 (_dll)
+            118 LOAD_CONST              10 ('win_sparkle_set_did_not_find_update_callback')
+            120 CALL_FUNCTION            2
+            122 POP_JUMP_IF_FALSE      154
+
+413         124 LOAD_FAST                2 (_didNotFindUpdate)
+            126 LOAD_DEREF               0 (self)
+            128 STORE_ATTR               9 (_didNotFindUpdateCallback)
+
+414         130 LOAD_DEREF               0 (self)
+            132 LOAD_ATTR                0 (_dll)
+            134 LOAD_METHOD             10 (win_sparkle_set_did_not_find_update_callback)
+            136 LOAD_DEREF               0 (self)
+            138 LOAD_ATTR                9 (_didNotFindUpdateCallback)
+            140 CALL_METHOD              1
+            142 POP_TOP
+
+415         144 LOAD_GLOBAL              7 (logger)
+            146 LOAD_METHOD              8 (info)
+            148 LOAD_CONST              11 ('[winsparkle] did_not_find_update callback registered')
+            150 CALL_METHOD              1
+            152 POP_TOP
+
+416     >>  154 LOAD_GLOBAL              4 (hasattr)
+            156 LOAD_DEREF               0 (self)
+            158 LOAD_ATTR                0 (_dll)
+            160 LOAD_CONST              12 ('win_sparkle_set_error_callback')
+            162 CALL_FUNCTION            2
+            164 POP_JUMP_IF_FALSE      196
+
+417         166 LOAD_FAST                3 (_updateCheckError)
+            168 LOAD_DEREF               0 (self)
+            170 STORE_ATTR              11 (_updateCheckErrorCallback)
+
+418         172 LOAD_DEREF               0 (self)
+            174 LOAD_ATTR                0 (_dll)
+            176 LOAD_METHOD             12 (win_sparkle_set_error_callback)
+            178 LOAD_DEREF               0 (self)
+            180 LOAD_ATTR               11 (_updateCheckErrorCallback)
+            182 CALL_METHOD              1
+            184 POP_TOP
+
+419         186 LOAD_GLOBAL              7 (logger)
+            188 LOAD_METHOD              8 (info)
+            190 LOAD_CONST              13 ('[winsparkle] error callback registered')
+            192 CALL_METHOD              1
+            194 POP_TOP
+        >>  196 POP_BLOCK
+            198 JUMP_FORWARD            48 (to 248)
+
+420     >>  200 DUP_TOP
+            202 LOAD_GLOBAL             13 (Exception)
+            204 JUMP_IF_NOT_EXC_MATCH   246
+            206 POP_TOP
+            208 STORE_FAST               4 (error)
+            210 POP_TOP
+            212 SETUP_FINALLY           24 (to 238)
+
+421         214 LOAD_GLOBAL              7 (logger)
+            216 LOAD_METHOD             14 (warning)
+            218 LOAD_CONST              14 ('[winsparkle] register update result callbacks failed: %s')
+            220 LOAD_FAST                4 (error)
+            222 CALL_METHOD              2
+            224 POP_TOP
+            226 POP_BLOCK
+            228 POP_EXCEPT
+            230 LOAD_CONST               1 (None)
+            232 STORE_FAST               4 (error)
+            234 DELETE_FAST              4 (error)
+            236 JUMP_FORWARD            10 (to 248)
+        >>  238 LOAD_CONST               1 (None)
+            240 STORE_FAST               4 (error)
+            242 DELETE_FAST              4 (error)
+            244 RERAISE
+        >>  246 RERAISE
+        >>  248 LOAD_CONST               1 (None)
+            250 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerUpdateResultCallbacks._didFindUpdate ===
+365           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+              4 LOAD_CONST               1 ('[winsparkle] did_find_update callback received')
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+366          10 SETUP_FINALLY           48 (to 60)
+
+367          12 LOAD_DEREF               0 (self)
+             14 LOAD_ATTR                2 (_setLastCheckDetail)
+
+368          16 LOAD_CONST               2 ('found')
+
+369          18 LOAD_CONST               3 ('winsparkle_native')
+
+370          20 LOAD_DEREF               0 (self)
+             22 LOAD_METHOD              3 (_resolveCurrentVersion)
+             24 CALL_METHOD              0
+
+367          26 LOAD_CONST               4 (('resultKind', 'source', 'currentVersion'))
+             28 CALL_FUNCTION_KW         3
+             30 STORE_FAST               0 (detail)
+
+372          32 LOAD_GLOBAL              4 (callable)
+             34 LOAD_DEREF               0 (self)
+             36 LOAD_ATTR                5 (_onUpdateFoundCallback)
+             38 CALL_FUNCTION            1
+             40 POP_JUMP_IF_FALSE       56
+
+373          42 LOAD_DEREF               0 (self)
+             44 LOAD_METHOD              6 (_safeInvokeResultCallback)
+             46 LOAD_DEREF               0 (self)
+             48 LOAD_ATTR                5 (_onUpdateFoundCallback)
+             50 LOAD_FAST                0 (detail)
+             52 CALL_METHOD              2
+             54 POP_TOP
+        >>   56 POP_BLOCK
+             58 JUMP_FORWARD            48 (to 108)
+
+374     >>   60 DUP_TOP
+             62 LOAD_GLOBAL              7 (Exception)
+             64 JUMP_IF_NOT_EXC_MATCH   106
+             66 POP_TOP
+             68 STORE_FAST               1 (error)
+             70 POP_TOP
+             72 SETUP_FINALLY           24 (to 98)
+
+375          74 LOAD_GLOBAL              0 (logger)
+             76 LOAD_METHOD              8 (warning)
+             78 LOAD_CONST               5 ('[winsparkle] did_find_update handler failed: %s')
+             80 LOAD_FAST                1 (error)
+             82 CALL_METHOD              2
+             84 POP_TOP
+             86 POP_BLOCK
+             88 POP_EXCEPT
+             90 LOAD_CONST               0 (None)
+             92 STORE_FAST               1 (error)
+             94 DELETE_FAST              1 (error)
+             96 JUMP_FORWARD            10 (to 108)
+        >>   98 LOAD_CONST               0 (None)
+            100 STORE_FAST               1 (error)
+            102 DELETE_FAST              1 (error)
+            104 RERAISE
+        >>  106 RERAISE
+        >>  108 LOAD_CONST               0 (None)
+            110 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerUpdateResultCallbacks._didNotFindUpdate ===
+379           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+              4 LOAD_CONST               1 ('[winsparkle] did_not_find_update callback received')
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+380          10 SETUP_FINALLY           48 (to 60)
+
+381          12 LOAD_DEREF               0 (self)
+             14 LOAD_ATTR                2 (_setLastCheckDetail)
+
+382          16 LOAD_CONST               2 ('no_update')
+
+383          18 LOAD_CONST               3 ('winsparkle_native')
+
+384          20 LOAD_DEREF               0 (self)
+             22 LOAD_METHOD              3 (_resolveCurrentVersion)
+             24 CALL_METHOD              0
+
+381          26 LOAD_CONST               4 (('resultKind', 'source', 'currentVersion'))
+             28 CALL_FUNCTION_KW         3
+             30 STORE_FAST               0 (detail)
+
+386          32 LOAD_GLOBAL              4 (callable)
+             34 LOAD_DEREF               0 (self)
+             36 LOAD_ATTR                5 (_onNoUpdateFoundCallback)
+             38 CALL_FUNCTION            1
+             40 POP_JUMP_IF_FALSE       56
+
+387          42 LOAD_DEREF               0 (self)
+             44 LOAD_METHOD              6 (_safeInvokeResultCallback)
+             46 LOAD_DEREF               0 (self)
+             48 LOAD_ATTR                5 (_onNoUpdateFoundCallback)
+             50 LOAD_FAST                0 (detail)
+             52 CALL_METHOD              2
+             54 POP_TOP
+        >>   56 POP_BLOCK
+             58 JUMP_FORWARD            48 (to 108)
+
+388     >>   60 DUP_TOP
+             62 LOAD_GLOBAL              7 (Exception)
+             64 JUMP_IF_NOT_EXC_MATCH   106
+             66 POP_TOP
+             68 STORE_FAST               1 (error)
+             70 POP_TOP
+             72 SETUP_FINALLY           24 (to 98)
+
+389          74 LOAD_GLOBAL              0 (logger)
+             76 LOAD_METHOD              8 (warning)
+             78 LOAD_CONST               5 ('[winsparkle] did_not_find_update handler failed: %s')
+             80 LOAD_FAST                1 (error)
+             82 CALL_METHOD              2
+             84 POP_TOP
+             86 POP_BLOCK
+             88 POP_EXCEPT
+             90 LOAD_CONST               0 (None)
+             92 STORE_FAST               1 (error)
+             94 DELETE_FAST              1 (error)
+             96 JUMP_FORWARD            10 (to 108)
+        >>   98 LOAD_CONST               0 (None)
+            100 STORE_FAST               1 (error)
+            102 DELETE_FAST              1 (error)
+            104 RERAISE
+        >>  106 RERAISE
+        >>  108 LOAD_CONST               0 (None)
+            110 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerUpdateResultCallbacks._updateCheckError ===
+393           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (warning)
+              4 LOAD_CONST               1 ('[winsparkle] error callback received')
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+394          10 SETUP_FINALLY           52 (to 64)
+
+395          12 LOAD_DEREF               0 (self)
+             14 LOAD_ATTR                2 (_setLastCheckDetail)
+
+396          16 LOAD_CONST               2 ('error')
+
+397          18 LOAD_CONST               3 ('winsparkle_native')
+
+398          20 LOAD_DEREF               0 (self)
+             22 LOAD_METHOD              3 (_resolveCurrentVersion)
+             24 CALL_METHOD              0
+
+399          26 LOAD_CONST               4 ('updater_sdk')
+
+400          28 LOAD_CONST               5 ('winsparkle error callback received')
+
+395          30 LOAD_CONST               6 (('resultKind', 'source', 'currentVersion', 'errorCategory', 'errorMessage'))
+             32 CALL_FUNCTION_KW         5
+             34 STORE_FAST               0 (detail)
+
+402          36 LOAD_GLOBAL              4 (callable)
+             38 LOAD_DEREF               0 (self)
+             40 LOAD_ATTR                5 (_onNoUpdateFoundCallback)
+             42 CALL_FUNCTION            1
+             44 POP_JUMP_IF_FALSE       60
+
+403          46 LOAD_DEREF               0 (self)
+             48 LOAD_METHOD              6 (_safeInvokeResultCallback)
+             50 LOAD_DEREF               0 (self)
+             52 LOAD_ATTR                5 (_onNoUpdateFoundCallback)
+             54 LOAD_FAST                0 (detail)
+             56 CALL_METHOD              2
+             58 POP_TOP
+        >>   60 POP_BLOCK
+             62 JUMP_FORWARD            48 (to 112)
+
+404     >>   64 DUP_TOP
+             66 LOAD_GLOBAL              7 (Exception)
+             68 JUMP_IF_NOT_EXC_MATCH   110
+             70 POP_TOP
+             72 STORE_FAST               1 (error)
+             74 POP_TOP
+             76 SETUP_FINALLY           24 (to 102)
+
+405          78 LOAD_GLOBAL              0 (logger)
+             80 LOAD_METHOD              1 (warning)
+             82 LOAD_CONST               7 ('[winsparkle] error handler failed: %s')
+             84 LOAD_FAST                1 (error)
+             86 CALL_METHOD              2
+             88 POP_TOP
+             90 POP_BLOCK
+             92 POP_EXCEPT
+             94 LOAD_CONST               0 (None)
+             96 STORE_FAST               1 (error)
+             98 DELETE_FAST              1 (error)
+            100 JUMP_FORWARD            10 (to 112)
+        >>  102 LOAD_CONST               0 (None)
+            104 STORE_FAST               1 (error)
+            106 DELETE_FAST              1 (error)
+            108 RERAISE
+        >>  110 RERAISE
+        >>  112 LOAD_CONST               0 (None)
+            114 RETURN_VALUE
+
+=== LPWinSparkleUpdater.setUpdateFoundCallback ===
+433           0 LOAD_FAST                1 (onUpdateFound)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_onUpdateFoundCallback)
+
+434           6 LOAD_FAST                2 (onNoUpdateFound)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_onNoUpdateFoundCallback)
+             12 LOAD_CONST               1 (None)
+             14 RETURN_VALUE
+
+=== LPWinSparkleUpdater.setUserRunInstallerCallback ===
+446           0 LOAD_FAST                1 (onUserRunInstaller)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_onUserRunInstallerCallback)
+              6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerInstallerCallbacks ===
+457           0 LOAD_DEREF               0 (self)
+              2 LOAD_ATTR                0 (_dll)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       14
+
+458          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+460     >>   14 LOAD_GLOBAL              1 (hasattr)
+             16 LOAD_DEREF               0 (self)
+             18 LOAD_ATTR                0 (_dll)
+             20 LOAD_CONST               2 ('win_sparkle_set_user_run_installer_callback')
+             22 CALL_FUNCTION            2
+             24 POP_JUMP_IF_TRUE        40
+
+461          26 LOAD_GLOBAL              2 (logger)
+             28 LOAD_METHOD              3 (warning)
+             30 LOAD_CONST               3 ('[winsparkle] current DLL does not support user_run_installer callback')
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+462          36 LOAD_CONST               1 (None)
+             38 RETURN_VALUE
+
+464     >>   40 LOAD_DEREF               0 (self)
+             42 LOAD_ATTR                4 (_userRunInstallerCallbackType)
+
+465          44 LOAD_CLOSURE             0 (self)
+             46 BUILD_TUPLE              1
+             48 LOAD_CONST               4 (<code object _userRunInstallerCallback at 0x000001F3253C4240, file "LPClientFramework\LPWinSparkleUpdater.py", line 464>)
+             50 LOAD_CONST               5 ('LPWinSparkleUpdater._registerInstallerCallbacks.<locals>._userRunInstallerCallback')
+             52 MAKE_FUNCTION            8 (closure)
+             54 CALL_FUNCTION            1
+             56 STORE_FAST               1 (_userRunInstallerCallback)
+
+487          58 SETUP_FINALLY           34 (to 94)
+
+488          60 LOAD_FAST                1 (_userRunInstallerCallback)
+             62 LOAD_DEREF               0 (self)
+             64 STORE_ATTR               5 (_userRunInstallerCallback)
+
+489          66 LOAD_DEREF               0 (self)
+             68 LOAD_ATTR                0 (_dll)
+             70 LOAD_METHOD              6 (win_sparkle_set_user_run_installer_callback)
+             72 LOAD_DEREF               0 (self)
+             74 LOAD_ATTR                5 (_userRunInstallerCallback)
+             76 CALL_METHOD              1
+             78 POP_TOP
+
+490          80 LOAD_GLOBAL              2 (logger)
+             82 LOAD_METHOD              7 (info)
+             84 LOAD_CONST               6 ('[winsparkle] user_run_installer callback registered')
+             86 CALL_METHOD              1
+             88 POP_TOP
+             90 POP_BLOCK
+             92 JUMP_FORWARD            48 (to 142)
+
+491     >>   94 DUP_TOP
+             96 LOAD_GLOBAL              8 (Exception)
+             98 JUMP_IF_NOT_EXC_MATCH   140
+            100 POP_TOP
+            102 STORE_FAST               2 (error)
+            104 POP_TOP
+            106 SETUP_FINALLY           24 (to 132)
+
+492         108 LOAD_GLOBAL              2 (logger)
+            110 LOAD_METHOD              3 (warning)
+            112 LOAD_CONST               7 ('[winsparkle] register user_run_installer callback failed: %s')
+            114 LOAD_FAST                2 (error)
+            116 CALL_METHOD              2
+            118 POP_TOP
+            120 POP_BLOCK
+            122 POP_EXCEPT
+            124 LOAD_CONST               1 (None)
+            126 STORE_FAST               2 (error)
+            128 DELETE_FAST              2 (error)
+            130 JUMP_FORWARD            10 (to 142)
+        >>  132 LOAD_CONST               1 (None)
+            134 STORE_FAST               2 (error)
+            136 DELETE_FAST              2 (error)
+            138 RERAISE
+        >>  140 RERAISE
+        >>  142 LOAD_CONST               1 (None)
+            144 RETURN_VALUE
+
+=== LPWinSparkleUpdater._registerInstallerCallbacks._userRunInstallerCallback ===
+466           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (installerPath)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 STORE_FAST               1 (installer_path)
+
+467          12 LOAD_GLOBAL              1 (logger)
+             14 LOAD_METHOD              2 (info)
+
+468          16 LOAD_CONST               2 ('[winsparkle] user_run_installer callback received installer_path=%s')
+
+469          18 LOAD_FAST                1 (installer_path)
+
+467          20 CALL_METHOD              2
+             22 POP_TOP
+
+471          24 SETUP_FINALLY           82 (to 108)
+
+472          26 LOAD_DEREF               0 (self)
+             28 LOAD_METHOD              3 (getLastCheckDetail)
+             30 CALL_METHOD              0
+             32 STORE_FAST               2 (last_detail)
+
+473          34 LOAD_DEREF               0 (self)
+             36 LOAD_ATTR                4 (_setLastCheckDetail)
+
+474          38 LOAD_CONST               3 ('found')
+
+475          40 LOAD_CONST               4 ('winsparkle_user_run_installer')
+
+476          42 LOAD_GLOBAL              0 (str)
+             44 LOAD_FAST                2 (last_detail)
+             46 LOAD_METHOD              5 (get)
+             48 LOAD_CONST               5 ('latest_version')
+             50 LOAD_CONST               1 ('')
+             52 CALL_METHOD              2
+             54 JUMP_IF_TRUE_OR_POP     58
+             56 LOAD_CONST               1 ('')
+        >>   58 CALL_FUNCTION            1
+
+477          60 LOAD_DEREF               0 (self)
+             62 LOAD_METHOD              6 (_resolveCurrentVersion)
+             64 CALL_METHOD              0
+
+473          66 LOAD_CONST               6 (('resultKind', 'source', 'latestVersion', 'currentVersion'))
+             68 CALL_FUNCTION_KW         4
+             70 STORE_FAST               3 (detail)
+
+479          72 LOAD_FAST                1 (installer_path)
+             74 LOAD_FAST                3 (detail)
+             76 LOAD_CONST               7 ('installer_path')
+             78 STORE_SUBSCR
+
+480          80 LOAD_GLOBAL              7 (callable)
+             82 LOAD_DEREF               0 (self)
+             84 LOAD_ATTR                8 (_onUserRunInstallerCallback)
+             86 CALL_FUNCTION            1
+             88 POP_JUMP_IF_FALSE      104
+
+481          90 LOAD_DEREF               0 (self)
+             92 LOAD_METHOD              9 (_safeInvokeResultCallback)
+             94 LOAD_DEREF               0 (self)
+             96 LOAD_ATTR                8 (_onUserRunInstallerCallback)
+             98 LOAD_FAST                3 (detail)
+            100 CALL_METHOD              2
+            102 POP_TOP
+        >>  104 POP_BLOCK
+            106 JUMP_FORWARD            48 (to 156)
+
+482     >>  108 DUP_TOP
+            110 LOAD_GLOBAL             10 (Exception)
+            112 JUMP_IF_NOT_EXC_MATCH   154
+            114 POP_TOP
+            116 STORE_FAST               4 (error)
+            118 POP_TOP
+            120 SETUP_FINALLY           24 (to 146)
+
+483         122 LOAD_GLOBAL              1 (logger)
+            124 LOAD_METHOD             11 (warning)
+            126 LOAD_CONST               8 ('[winsparkle] user_run_installer handler failed: %s')
+            128 LOAD_FAST                4 (error)
+            130 CALL_METHOD              2
+            132 POP_TOP
+            134 POP_BLOCK
+            136 POP_EXCEPT
+            138 LOAD_CONST               0 (None)
+            140 STORE_FAST               4 (error)
+            142 DELETE_FAST              4 (error)
+            144 JUMP_FORWARD            10 (to 156)
+        >>  146 LOAD_CONST               0 (None)
+            148 STORE_FAST               4 (error)
+            150 DELETE_FAST              4 (error)
+            152 RERAISE
+        >>  154 RERAISE
+
+485     >>  156 LOAD_CONST               9 (0)
+            158 RETURN_VALUE
+
+=== LPWinSparkleUpdater._safeInvokeResultCallback ===
+504           0 LOAD_GLOBAL              0 (callable)
+              2 LOAD_FAST                1 (callback)
+              4 CALL_FUNCTION            1
+              6 POP_JUMP_IF_TRUE        12
+
+505           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+507     >>   12 SETUP_FINALLY           12 (to 26)
+
+508          14 LOAD_FAST                1 (callback)
+             16 LOAD_FAST                2 (detail)
+             18 CALL_FUNCTION            1
+             20 POP_TOP
+             22 POP_BLOCK
+             24 JUMP_FORWARD            24 (to 50)
+
+509     >>   26 DUP_TOP
+             28 LOAD_GLOBAL              1 (TypeError)
+             30 JUMP_IF_NOT_EXC_MATCH    48
+             32 POP_TOP
+             34 POP_TOP
+             36 POP_TOP
+
+510          38 LOAD_FAST                1 (callback)
+             40 CALL_FUNCTION            0
+             42 POP_TOP
+             44 POP_EXCEPT
+             46 JUMP_FORWARD             2 (to 50)
+        >>   48 RERAISE
+        >>   50 LOAD_CONST               1 (None)
+             52 RETURN_VALUE
+
+=== LPWinSparkleUpdater._classifyCheckError ===
+521           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (errorMessage)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (lower)
+             12 CALL_METHOD              0
+             14 STORE_DEREF              0 (message)
+
+522          16 LOAD_DEREF               0 (message)
+             18 POP_JUMP_IF_TRUE        24
+
+523          20 LOAD_CONST               2 ('unknown')
+             22 RETURN_VALUE
+
+525     >>   24 LOAD_GLOBAL              2 (any)
+             26 LOAD_CLOSURE             0 (message)
+             28 BUILD_TUPLE              1
+             30 LOAD_CONST               3 (<code object <genexpr> at 0x000001F3253C4710, file "LPClientFramework\LPWinSparkleUpdater.py", line 525>)
+             32 LOAD_CONST               4 ('LPWinSparkleUpdater._classifyCheckError.<locals>.<genexpr>')
+             34 MAKE_FUNCTION            8 (closure)
+             36 LOAD_CONST               5 (('timeout', 'timed out'))
+             38 GET_ITER
+             40 CALL_FUNCTION            1
+             42 CALL_FUNCTION            1
+             44 POP_JUMP_IF_FALSE       50
+
+526          46 LOAD_CONST               6 ('download_timeout')
+             48 RETURN_VALUE
+
+527     >>   50 LOAD_GLOBAL              2 (any)
+             52 LOAD_CLOSURE             0 (message)
+             54 BUILD_TUPLE              1
+             56 LOAD_CONST               7 (<code object <genexpr> at 0x000001F3253C4500, file "LPClientFramework\LPWinSparkleUpdater.py", line 527>)
+             58 LOAD_CONST               4 ('LPWinSparkleUpdater._classifyCheckError.<locals>.<genexpr>')
+             60 MAKE_FUNCTION            8 (closure)
+             62 LOAD_CONST               8 (('dns', 'socket', 'connection', 'ssl', 'tls', 'refused', 'unreachable'))
+             64 GET_ITER
+             66 CALL_FUNCTION            1
+             68 CALL_FUNCTION            1
+             70 POP_JUMP_IF_FALSE       76
+
+528          72 LOAD_CONST               9 ('network')
+             74 RETURN_VALUE
+
+529     >>   76 LOAD_GLOBAL              2 (any)
+             78 LOAD_CLOSURE             0 (message)
+             80 BUILD_TUPLE              1
+             82 LOAD_CONST              10 (<code object <genexpr> at 0x000001F3253C4F50, file "LPClientFramework\LPWinSparkleUpdater.py", line 529>)
+             84 LOAD_CONST               4 ('LPWinSparkleUpdater._classifyCheckError.<locals>.<genexpr>')
+             86 MAKE_FUNCTION            8 (closure)
+             88 LOAD_CONST              11 (('http', '404', '403', '500', '503'))
+             90 GET_ITER
+             92 CALL_FUNCTION            1
+             94 CALL_FUNCTION            1
+             96 POP_JUMP_IF_FALSE      102
+
+530          98 LOAD_CONST              12 ('feed_unreachable')
+            100 RETURN_VALUE
+
+531     >>  102 LOAD_GLOBAL              2 (any)
+            104 LOAD_CLOSURE             0 (message)
+            106 BUILD_TUPLE              1
+            108 LOAD_CONST              13 (<code object <genexpr> at 0x000001F3253C43A0, file "LPClientFramework\LPWinSparkleUpdater.py", line 531>)
+            110 LOAD_CONST               4 ('LPWinSparkleUpdater._classifyCheckError.<locals>.<genexpr>')
+            112 MAKE_FUNCTION            8 (closure)
+            114 LOAD_CONST              14 (('xml', 'parse', 'malformed', 'appcast'))
+            116 GET_ITER
+            118 CALL_FUNCTION            1
+            120 CALL_FUNCTION            1
+            122 POP_JUMP_IF_FALSE      128
+
+532         124 LOAD_CONST              15 ('feed_parse')
+            126 RETURN_VALUE
+
+533     >>  128 LOAD_CONST               2 ('unknown')
+            130 RETURN_VALUE
+
+=== LPWinSparkleUpdater._classifyCheckError.<genexpr> ===
+525           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (token)
+              6 LOAD_FAST                1 (token)
+              8 LOAD_DEREF               0 (message)
+             10 CONTAINS_OP              0
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== LPWinSparkleUpdater._classifyCheckError.<genexpr> ===
+527           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (token)
+              6 LOAD_FAST                1 (token)
+              8 LOAD_DEREF               0 (message)
+             10 CONTAINS_OP              0
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== LPWinSparkleUpdater._classifyCheckError.<genexpr> ===
+529           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (token)
+              6 LOAD_FAST                1 (token)
+              8 LOAD_DEREF               0 (message)
+             10 CONTAINS_OP              0
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== LPWinSparkleUpdater._classifyCheckError.<genexpr> ===
+531           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (token)
+              6 LOAD_FAST                1 (token)
+              8 LOAD_DEREF               0 (message)
+             10 CONTAINS_OP              0
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== LPWinSparkleUpdater._setLastCheckDetail ===
+562           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (resultKind)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('unknown')
+        >>    8 CALL_FUNCTION            1
+
+563          10 LOAD_GLOBAL              0 (str)
+             12 LOAD_FAST                2 (source)
+             14 JUMP_IF_TRUE_OR_POP     18
+             16 LOAD_CONST               2 ('winsparkle')
+        >>   18 CALL_FUNCTION            1
+
+564          20 LOAD_FAST                3 (latestVersion)
+             22 LOAD_CONST               3 (None)
+             24 IS_OP                    0
+             26 POP_JUMP_IF_FALSE       32
+             28 LOAD_CONST               4 ('')
+             30 JUMP_FORWARD             6 (to 38)
+        >>   32 LOAD_GLOBAL              0 (str)
+             34 LOAD_FAST                3 (latestVersion)
+             36 CALL_FUNCTION            1
+
+565     >>   38 LOAD_FAST                4 (currentVersion)
+             40 LOAD_CONST               3 (None)
+             42 IS_OP                    0
+             44 POP_JUMP_IF_FALSE       50
+             46 LOAD_CONST               4 ('')
+             48 JUMP_FORWARD             6 (to 56)
+        >>   50 LOAD_GLOBAL              0 (str)
+             52 LOAD_FAST                4 (currentVersion)
+             54 CALL_FUNCTION            1
+
+566     >>   56 LOAD_FAST                5 (compareResult)
+
+567          58 LOAD_FAST                6 (errorCategory)
+             60 LOAD_CONST               3 (None)
+             62 IS_OP                    0
+             64 POP_JUMP_IF_FALSE       70
+             66 LOAD_CONST               4 ('')
+             68 JUMP_FORWARD             6 (to 76)
+        >>   70 LOAD_GLOBAL              0 (str)
+             72 LOAD_FAST                6 (errorCategory)
+             74 CALL_FUNCTION            1
+
+568     >>   76 LOAD_FAST                7 (errorCode)
+             78 LOAD_CONST               3 (None)
+             80 IS_OP                    0
+             82 POP_JUMP_IF_FALSE       88
+             84 LOAD_CONST               4 ('')
+             86 JUMP_FORWARD             6 (to 94)
+        >>   88 LOAD_GLOBAL              0 (str)
+             90 LOAD_FAST                7 (errorCode)
+             92 CALL_FUNCTION            1
+
+569     >>   94 LOAD_FAST                8 (errorMessage)
+             96 LOAD_CONST               3 (None)
+             98 IS_OP                    0
+            100 POP_JUMP_IF_FALSE      106
+            102 LOAD_CONST               4 ('')
+            104 JUMP_FORWARD             6 (to 112)
+        >>  106 LOAD_GLOBAL              0 (str)
+            108 LOAD_FAST                8 (errorMessage)
+            110 CALL_FUNCTION            1
+
+561     >>  112 LOAD_CONST               5 (('result_kind', 'source', 'latest_version', 'current_version', 'compare_result', 'error_category', 'error_code', 'error_message'))
+            114 BUILD_CONST_KEY_MAP      8
+            116 STORE_FAST               9 (detail)
+
+571         118 LOAD_FAST                9 (detail)
+            120 LOAD_FAST                0 (self)
+            122 STORE_ATTR               1 (_lastCheckDetail)
+
+572         124 LOAD_GLOBAL              2 (dict)
+            126 LOAD_FAST                9 (detail)
+            128 CALL_FUNCTION            1
+            130 RETURN_VALUE
+
+=== LPWinSparkleUpdater.getLastCheckDetail ===
+583           0 LOAD_GLOBAL              0 (dict)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_lastCheckDetail)
+              6 CALL_FUNCTION            1
+              8 RETURN_VALUE
+
+=== LPWinSparkleUpdater._fetchLatestVersionFromAppcast ===
+594           0 LOAD_GLOBAL              0 (urllib)
+              2 LOAD_ATTR                1 (request)
+              4 LOAD_ATTR                2 (Request)
+
+595           6 LOAD_FAST                1 (feedUrl)
+
+597           8 LOAD_CONST               1 ('WiiM Home WinSparkle Probe')
+
+598          10 LOAD_CONST               2 ('application/rss+xml, application/xml, text/xml, */*')
+
+596          12 LOAD_CONST               3 (('User-Agent', 'Accept'))
+             14 BUILD_CONST_KEY_MAP      2
+
+594          16 LOAD_CONST               4 (('headers',))
+             18 CALL_FUNCTION_KW         2
+             20 STORE_FAST               2 (request)
+
+601          22 LOAD_GLOBAL              0 (urllib)
+             24 LOAD_ATTR                1 (request)
+             26 LOAD_ATTR                3 (urlopen)
+             28 LOAD_FAST                2 (request)
+             30 LOAD_CONST               5 (10)
+             32 LOAD_CONST               6 (('timeout',))
+             34 CALL_FUNCTION_KW         2
+             36 SETUP_WITH              24 (to 62)
+             38 STORE_FAST               3 (response)
+
+602          40 LOAD_FAST                3 (response)
+             42 LOAD_METHOD              4 (read)
+             44 CALL_METHOD              0
+             46 STORE_FAST               4 (content)
+             48 POP_BLOCK
+             50 LOAD_CONST               7 (None)
+             52 DUP_TOP
+             54 DUP_TOP
+             56 CALL_FUNCTION            3
+             58 POP_TOP
+             60 JUMP_FORWARD            16 (to 78)
+        >>   62 WITH_EXCEPT_START
+             64 POP_JUMP_IF_TRUE        68
+             66 RERAISE
+        >>   68 POP_TOP
+             70 POP_TOP
+             72 POP_TOP
+             74 POP_EXCEPT
+             76 POP_TOP
+
+604     >>   78 LOAD_GLOBAL              5 (ET)
+             80 LOAD_METHOD              6 (fromstring)
+             82 LOAD_FAST                4 (content)
+             84 CALL_METHOD              1
+             86 STORE_FAST               5 (root)
+
+605          88 LOAD_CONST               8 ('sparkle')
+             90 LOAD_CONST               9 ('http://www.andymatuschak.org/xml-namespaces/sparkle')
+             92 BUILD_MAP                1
+             94 STORE_FAST               6 (sparkle_ns)
+
+607          96 LOAD_CONST               7 (None)
+             98 STORE_FAST               7 (latest_version)
+
+608         100 LOAD_FAST                5 (root)
+            102 LOAD_METHOD              7 (findall)
+            104 LOAD_CONST              10 ('.//item')
+            106 CALL_METHOD              1
+            108 GET_ITER
+        >>  110 FOR_ITER               134 (to 246)
+            112 STORE_FAST               8 (item)
+
+609         114 LOAD_FAST                8 (item)
+            116 LOAD_ATTR                8 (findtext)
+            118 LOAD_CONST              11 ('sparkle:shortVersionString')
+            120 LOAD_FAST                6 (sparkle_ns)
+            122 LOAD_CONST              12 (('namespaces',))
+            124 CALL_FUNCTION_KW         2
+            126 STORE_FAST               9 (candidate)
+
+610         128 LOAD_GLOBAL              9 (isinstance)
+            130 LOAD_FAST                9 (candidate)
+            132 LOAD_GLOBAL             10 (str)
+            134 CALL_FUNCTION            2
+            136 POP_JUMP_IF_FALSE      146
+
+611         138 LOAD_FAST                9 (candidate)
+            140 LOAD_METHOD             11 (strip)
+            142 CALL_METHOD              0
+            144 STORE_FAST               9 (candidate)
+
+613     >>  146 LOAD_FAST                9 (candidate)
+            148 POP_JUMP_IF_TRUE       210
+
+614         150 LOAD_FAST                8 (item)
+            152 LOAD_METHOD             12 (find)
+            154 LOAD_CONST              13 ('enclosure')
+            156 CALL_METHOD              1
+            158 STORE_FAST              10 (enclosure)
+
+615         160 LOAD_FAST               10 (enclosure)
+            162 LOAD_CONST               7 (None)
+            164 IS_OP                    1
+            166 POP_JUMP_IF_FALSE      210
+
+617         168 LOAD_FAST               10 (enclosure)
+            170 LOAD_ATTR               13 (attrib)
+            172 LOAD_METHOD             14 (get)
+
+618         174 LOAD_CONST              14 ('{http://www.andymatuschak.org/xml-namespaces/sparkle}shortVersionString')
+
+617         176 CALL_METHOD              1
+            178 JUMP_IF_TRUE_OR_POP    190
+
+620         180 LOAD_FAST               10 (enclosure)
+            182 LOAD_ATTR               13 (attrib)
+            184 LOAD_METHOD             14 (get)
+
+621         186 LOAD_CONST              15 ('{http://www.andymatuschak.org/xml-namespaces/sparkle}version')
+
+620         188 CALL_METHOD              1
+
+616     >>  190 STORE_FAST               9 (candidate)
+
+624         192 LOAD_GLOBAL              9 (isinstance)
+            194 LOAD_FAST                9 (candidate)
+            196 LOAD_GLOBAL             10 (str)
+            198 CALL_FUNCTION            2
+            200 POP_JUMP_IF_FALSE      210
+
+625         202 LOAD_FAST                9 (candidate)
+            204 LOAD_METHOD             11 (strip)
+            206 CALL_METHOD              0
+            208 STORE_FAST               9 (candidate)
+
+627     >>  210 LOAD_FAST                9 (candidate)
+            212 POP_JUMP_IF_TRUE       216
+
+628         214 JUMP_ABSOLUTE          110
+
+630     >>  216 LOAD_FAST                7 (latest_version)
+            218 LOAD_CONST               7 (None)
+            220 IS_OP                    0
+            222 POP_JUMP_IF_TRUE       240
+            224 LOAD_FAST                0 (self)
+            226 LOAD_METHOD             15 (_compareVersions)
+            228 LOAD_FAST                9 (candidate)
+            230 LOAD_FAST                7 (latest_version)
+            232 CALL_METHOD              2
+            234 LOAD_CONST              16 (0)
+            236 COMPARE_OP               4 (>)
+            238 POP_JUMP_IF_FALSE      110
+
+631     >>  240 LOAD_FAST                9 (candidate)
+            242 STORE_FAST               7 (latest_version)
+            244 JUMP_ABSOLUTE          110
+
+633     >>  246 LOAD_FAST                7 (latest_version)
+            248 EXTENDED_ARG             1
+            250 POP_JUMP_IF_TRUE       260
+
+634         252 LOAD_GLOBAL             16 (ValueError)
+            254 LOAD_CONST              17 ('no valid version found in appcast')
+            256 CALL_FUNCTION            1
+            258 RAISE_VARARGS            1
+
+636     >>  260 LOAD_FAST                7 (latest_version)
+            262 RETURN_VALUE
+
+=== LPWinSparkleUpdater.notifyUpdateFound ===
+647           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+              4 LOAD_CONST               1 ('[winsparkle.probe] notifyUpdateFound called')
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+648          10 LOAD_GLOBAL              2 (isinstance)
+             12 LOAD_FAST                1 (detail)
+             14 LOAD_GLOBAL              3 (dict)
+             16 CALL_FUNCTION            2
+             18 POP_JUMP_IF_FALSE       24
+             20 LOAD_FAST                1 (detail)
+             22 JUMP_FORWARD             6 (to 30)
+        >>   24 LOAD_FAST                0 (self)
+             26 LOAD_METHOD              4 (getLastCheckDetail)
+             28 CALL_METHOD              0
+        >>   30 STORE_FAST               2 (callback_detail)
+
+649          32 LOAD_GLOBAL              5 (callable)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                6 (_onUpdateFoundCallback)
+             38 CALL_FUNCTION            1
+             40 POP_JUMP_IF_FALSE      110
+
+650          42 SETUP_FINALLY           18 (to 62)
+
+651          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              7 (_safeInvokeResultCallback)
+             48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                6 (_onUpdateFoundCallback)
+             52 LOAD_FAST                2 (callback_detail)
+             54 CALL_METHOD              2
+             56 POP_TOP
+             58 POP_BLOCK
+             60 JUMP_FORWARD            48 (to 110)
+
+652     >>   62 DUP_TOP
+             64 LOAD_GLOBAL              8 (Exception)
+             66 JUMP_IF_NOT_EXC_MATCH   108
+             68 POP_TOP
+             70 STORE_FAST               3 (error)
+             72 POP_TOP
+             74 SETUP_FINALLY           24 (to 100)
+
+653          76 LOAD_GLOBAL              0 (logger)
+             78 LOAD_METHOD              9 (warning)
+             80 LOAD_CONST               2 ('[winsparkle.probe] onUpdateFoundCallback failed: %s')
+             82 LOAD_FAST                3 (error)
+             84 CALL_METHOD              2
+             86 POP_TOP
+             88 POP_BLOCK
+             90 POP_EXCEPT
+             92 LOAD_CONST               3 (None)
+             94 STORE_FAST               3 (error)
+             96 DELETE_FAST              3 (error)
+             98 JUMP_FORWARD            10 (to 110)
+        >>  100 LOAD_CONST               3 (None)
+            102 STORE_FAST               3 (error)
+            104 DELETE_FAST              3 (error)
+            106 RERAISE
+        >>  108 RERAISE
+        >>  110 LOAD_CONST               3 (None)
+            112 RETURN_VALUE
+
+=== LPWinSparkleUpdater.notifyNoUpdateFound ===
+664           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+              4 LOAD_CONST               1 ('[winsparkle.probe] notifyNoUpdateFound called')
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+665          10 LOAD_GLOBAL              2 (isinstance)
+             12 LOAD_FAST                1 (detail)
+             14 LOAD_GLOBAL              3 (dict)
+             16 CALL_FUNCTION            2
+             18 POP_JUMP_IF_FALSE       24
+             20 LOAD_FAST                1 (detail)
+             22 JUMP_FORWARD             6 (to 30)
+        >>   24 LOAD_FAST                0 (self)
+             26 LOAD_METHOD              4 (getLastCheckDetail)
+             28 CALL_METHOD              0
+        >>   30 STORE_FAST               2 (callback_detail)
+
+666          32 LOAD_GLOBAL              5 (callable)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                6 (_onNoUpdateFoundCallback)
+             38 CALL_FUNCTION            1
+             40 POP_JUMP_IF_FALSE      110
+
+667          42 SETUP_FINALLY           18 (to 62)
+
+668          44 LOAD_FAST                0 (self)
+             46 LOAD_METHOD              7 (_safeInvokeResultCallback)
+             48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                6 (_onNoUpdateFoundCallback)
+             52 LOAD_FAST                2 (callback_detail)
+             54 CALL_METHOD              2
+             56 POP_TOP
+             58 POP_BLOCK
+             60 JUMP_FORWARD            48 (to 110)
+
+669     >>   62 DUP_TOP
+             64 LOAD_GLOBAL              8 (Exception)
+             66 JUMP_IF_NOT_EXC_MATCH   108
+             68 POP_TOP
+             70 STORE_FAST               3 (error)
+             72 POP_TOP
+             74 SETUP_FINALLY           24 (to 100)
+
+670          76 LOAD_GLOBAL              0 (logger)
+             78 LOAD_METHOD              9 (warning)
+             80 LOAD_CONST               2 ('[winsparkle.probe] onNoUpdateFoundCallback failed: %s')
+             82 LOAD_FAST                3 (error)
+             84 CALL_METHOD              2
+             86 POP_TOP
+             88 POP_BLOCK
+             90 POP_EXCEPT
+             92 LOAD_CONST               3 (None)
+             94 STORE_FAST               3 (error)
+             96 DELETE_FAST              3 (error)
+             98 JUMP_FORWARD            10 (to 110)
+        >>  100 LOAD_CONST               3 (None)
+            102 STORE_FAST               3 (error)
+            104 DELETE_FAST              3 (error)
+            106 RERAISE
+        >>  108 RERAISE
+        >>  110 LOAD_CONST               3 (None)
+            112 RETURN_VALUE
+
+=== LPWinSparkleUpdater._runBackgroundAppcastProbe ===
+681           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (resolveFeedURL)
+              4 CALL_METHOD              0
+              6 STORE_FAST               1 (feed_url)
+
+682           8 LOAD_FAST                1 (feed_url)
+             10 POP_JUMP_IF_TRUE        60
+
+683          12 LOAD_GLOBAL              1 (logger)
+             14 LOAD_METHOD              2 (warning)
+             16 LOAD_CONST               1 ('[winsparkle.probe] background probe skipped: feed URL unavailable')
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+684          22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                3 (_setLastCheckDetail)
+
+685          26 LOAD_CONST               2 ('error')
+
+686          28 LOAD_CONST               3 ('winsparkle_probe')
+
+687          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              4 (_resolveCurrentVersion)
+             34 CALL_METHOD              0
+
+688          36 LOAD_CONST               4 ('feed_unreachable')
+
+689          38 LOAD_CONST               5 ('feed URL unavailable')
+
+684          40 LOAD_CONST               6 (('resultKind', 'source', 'currentVersion', 'errorCategory', 'errorMessage'))
+             42 CALL_FUNCTION_KW         5
+             44 STORE_FAST               2 (detail)
+
+691          46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              5 (notifyNoUpdateFound)
+             50 LOAD_FAST                2 (detail)
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+692          56 LOAD_CONST               7 (None)
+             58 RETURN_VALUE
+
+694     >>   60 SETUP_FINALLY          120 (to 182)
+
+695          62 LOAD_FAST                0 (self)
+             64 LOAD_METHOD              6 (_fetchLatestVersionFromAppcast)
+             66 LOAD_FAST                1 (feed_url)
+             68 CALL_METHOD              1
+             70 STORE_FAST               3 (latest_version)
+
+696          72 LOAD_FAST                0 (self)
+             74 LOAD_METHOD              4 (_resolveCurrentVersion)
+             76 CALL_METHOD              0
+             78 STORE_FAST               4 (current_version)
+
+697          80 LOAD_FAST                0 (self)
+             82 LOAD_METHOD              7 (_compareVersions)
+             84 LOAD_FAST                3 (latest_version)
+             86 LOAD_FAST                4 (current_version)
+             88 CALL_METHOD              2
+             90 STORE_FAST               5 (compare_result)
+
+698          92 LOAD_GLOBAL              1 (logger)
+             94 LOAD_METHOD              8 (info)
+
+699          96 LOAD_CONST               8 ('[winsparkle.probe] latest_version=%s current_version=%s compare=%s')
+
+700          98 LOAD_FAST                3 (latest_version)
+
+701         100 LOAD_FAST                4 (current_version)
+
+702         102 LOAD_FAST                5 (compare_result)
+
+698         104 CALL_METHOD              4
+            106 POP_TOP
+
+704         108 LOAD_FAST                5 (compare_result)
+            110 LOAD_CONST               9 (0)
+            112 COMPARE_OP               4 (>)
+            114 POP_JUMP_IF_FALSE      148
+
+705         116 LOAD_FAST                0 (self)
+            118 LOAD_ATTR                3 (_setLastCheckDetail)
+
+706         120 LOAD_CONST              10 ('found')
+
+707         122 LOAD_CONST               3 ('winsparkle_probe')
+
+708         124 LOAD_FAST                3 (latest_version)
+
+709         126 LOAD_FAST                4 (current_version)
+
+710         128 LOAD_FAST                5 (compare_result)
+
+705         130 LOAD_CONST              11 (('resultKind', 'source', 'latestVersion', 'currentVersion', 'compareResult'))
+            132 CALL_FUNCTION_KW         5
+            134 STORE_FAST               2 (detail)
+
+712         136 LOAD_FAST                0 (self)
+            138 LOAD_METHOD              9 (notifyUpdateFound)
+            140 LOAD_FAST                2 (detail)
+            142 CALL_METHOD              1
+            144 POP_TOP
+            146 JUMP_FORWARD            30 (to 178)
+
+714     >>  148 LOAD_FAST                0 (self)
+            150 LOAD_ATTR                3 (_setLastCheckDetail)
+
+715         152 LOAD_CONST              12 ('no_update')
+
+716         154 LOAD_CONST               3 ('winsparkle_probe')
+
+717         156 LOAD_FAST                3 (latest_version)
+
+718         158 LOAD_FAST                4 (current_version)
+
+719         160 LOAD_FAST                5 (compare_result)
+
+714         162 LOAD_CONST              11 (('resultKind', 'source', 'latestVersion', 'currentVersion', 'compareResult'))
+            164 CALL_FUNCTION_KW         5
+            166 STORE_FAST               2 (detail)
+
+721         168 LOAD_FAST                0 (self)
+            170 LOAD_METHOD              5 (notifyNoUpdateFound)
+            172 LOAD_FAST                2 (detail)
+            174 CALL_METHOD              1
+            176 POP_TOP
+        >>  178 POP_BLOCK
+            180 JUMP_FORWARD            98 (to 280)
+
+722     >>  182 DUP_TOP
+            184 LOAD_GLOBAL             10 (Exception)
+            186 EXTENDED_ARG             1
+            188 JUMP_IF_NOT_EXC_MATCH   278
+            190 POP_TOP
+            192 STORE_FAST               6 (error)
+            194 POP_TOP
+            196 SETUP_FINALLY           72 (to 270)
+
+723         198 LOAD_GLOBAL              1 (logger)
+            200 LOAD_METHOD              2 (warning)
+            202 LOAD_CONST              13 ('[winsparkle.probe] background appcast probe failed: %s')
+            204 LOAD_FAST                6 (error)
+            206 CALL_METHOD              2
+            208 POP_TOP
+
+724         210 LOAD_GLOBAL             11 (str)
+            212 LOAD_FAST                6 (error)
+            214 CALL_FUNCTION            1
+            216 STORE_FAST               7 (error_message)
+
+725         218 LOAD_FAST                0 (self)
+            220 LOAD_ATTR                3 (_setLastCheckDetail)
+
+726         222 LOAD_CONST               2 ('error')
+
+727         224 LOAD_CONST               3 ('winsparkle_probe')
+
+728         226 LOAD_FAST                0 (self)
+            228 LOAD_METHOD              4 (_resolveCurrentVersion)
+            230 CALL_METHOD              0
+
+729         232 LOAD_FAST                0 (self)
+            234 LOAD_METHOD             12 (_classifyCheckError)
+            236 LOAD_FAST                7 (error_message)
+            238 CALL_METHOD              1
+
+730         240 LOAD_FAST                7 (error_message)
+
+725         242 LOAD_CONST               6 (('resultKind', 'source', 'currentVersion', 'errorCategory', 'errorMessage'))
+            244 CALL_FUNCTION_KW         5
+            246 STORE_FAST               2 (detail)
+
+732         248 LOAD_FAST                0 (self)
+            250 LOAD_METHOD              5 (notifyNoUpdateFound)
+            252 LOAD_FAST                2 (detail)
+            254 CALL_METHOD              1
+            256 POP_TOP
+            258 POP_BLOCK
+            260 POP_EXCEPT
+            262 LOAD_CONST               7 (None)
+            264 STORE_FAST               6 (error)
+            266 DELETE_FAST              6 (error)
+            268 JUMP_FORWARD            10 (to 280)
+        >>  270 LOAD_CONST               7 (None)
+            272 STORE_FAST               6 (error)
+            274 DELETE_FAST              6 (error)
+            276 RERAISE
+        >>  278 RERAISE
+        >>  280 LOAD_CONST               7 (None)
+            282 RETURN_VALUE
+
+=== LPWinSparkleUpdater.resolveFeedURL ===
+743           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_temporaryFeedURL)
+              6 JUMP_IF_TRUE_OR_POP     10
+              8 LOAD_CONST               1 ('')
+        >>   10 CALL_FUNCTION            1
+             12 LOAD_METHOD              2 (strip)
+             14 CALL_METHOD              0
+             16 STORE_FAST               1 (temporary_feed)
+
+744          18 LOAD_FAST                1 (temporary_feed)
+             20 POP_JUMP_IF_FALSE       26
+
+745          22 LOAD_FAST                1 (temporary_feed)
+             24 RETURN_VALUE
+
+746     >>   26 LOAD_CONST               2 ('https://assets.wiimhome.com/appexe/appcast-beta-win-x86_64.xml')
+             28 RETURN_VALUE
+
+=== LPWinSparkleUpdater.setTemporaryFeedURL ===
+757           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (feedURL)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_temporaryFeedURL)
+             18 LOAD_CONST               2 (None)
+             20 RETURN_VALUE
+
+=== LPWinSparkleUpdater.clearTemporaryFeedURL ===
+768           0 LOAD_CONST               1 ('')
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_temporaryFeedURL)
+              6 LOAD_CONST               2 (None)
+              8 RETURN_VALUE
+
+=== LPWinSparkleUpdater.applyCurrentFeedURL ===
+779           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_METHOD              1 (resolveFeedURL)
+              6 CALL_METHOD              0
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 LOAD_CONST               1 ('')
+        >>   12 CALL_FUNCTION            1
+             14 LOAD_METHOD              2 (strip)
+             16 CALL_METHOD              0
+             18 STORE_FAST               1 (feed_url)
+
+780          20 LOAD_FAST                1 (feed_url)
+             22 POP_JUMP_IF_TRUE        36
+
+782          24 LOAD_CONST               2 (False)
+
+783          26 LOAD_CONST               3 ('feed URL unavailable')
+
+784          28 LOAD_CONST               1 ('')
+
+781          30 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+             32 BUILD_CONST_KEY_MAP      3
+             34 RETURN_VALUE
+
+787     >>   36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                3 (_dll)
+             40 LOAD_CONST               5 (None)
+             42 IS_OP                    0
+             44 POP_JUMP_IF_FALSE       58
+
+789          46 LOAD_CONST               2 (False)
+
+790          48 LOAD_CONST               6 ('winsparkle dll unavailable')
+
+791          50 LOAD_FAST                1 (feed_url)
+
+788          52 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+             54 BUILD_CONST_KEY_MAP      3
+             56 RETURN_VALUE
+
+794     >>   58 SETUP_FINALLY           44 (to 104)
+
+795          60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                3 (_dll)
+             64 LOAD_METHOD              4 (win_sparkle_set_appcast_url)
+             66 LOAD_FAST                1 (feed_url)
+             68 LOAD_METHOD              5 (encode)
+             70 LOAD_CONST               7 ('utf-8')
+             72 CALL_METHOD              1
+             74 CALL_METHOD              1
+             76 POP_TOP
+
+796          78 LOAD_GLOBAL              6 (logger)
+             80 LOAD_METHOD              7 (info)
+             82 LOAD_CONST               8 ('[winsparkle] 已应用 feed URL: %s')
+             84 LOAD_FAST                1 (feed_url)
+             86 CALL_METHOD              2
+             88 POP_TOP
+
+798          90 LOAD_CONST               9 (True)
+
+799          92 LOAD_CONST              10 ('ok')
+
+800          94 LOAD_FAST                1 (feed_url)
+
+797          96 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+             98 BUILD_CONST_KEY_MAP      3
+            100 POP_BLOCK
+            102 RETURN_VALUE
+
+802     >>  104 DUP_TOP
+            106 LOAD_GLOBAL              8 (Exception)
+            108 JUMP_IF_NOT_EXC_MATCH   166
+            110 POP_TOP
+            112 STORE_FAST               2 (error)
+            114 POP_TOP
+            116 SETUP_FINALLY           40 (to 158)
+
+803         118 LOAD_GLOBAL              6 (logger)
+            120 LOAD_METHOD              9 (warning)
+            122 LOAD_CONST              11 ('[winsparkle] 应用 feed URL 失败: %s')
+            124 LOAD_FAST                2 (error)
+            126 CALL_METHOD              2
+            128 POP_TOP
+
+805         130 LOAD_CONST               2 (False)
+
+806         132 LOAD_GLOBAL              0 (str)
+            134 LOAD_FAST                2 (error)
+            136 CALL_FUNCTION            1
+
+807         138 LOAD_FAST                1 (feed_url)
+
+804         140 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+            142 BUILD_CONST_KEY_MAP      3
+            144 POP_BLOCK
+            146 ROT_FOUR
+            148 POP_EXCEPT
+            150 LOAD_CONST               5 (None)
+            152 STORE_FAST               2 (error)
+            154 DELETE_FAST              2 (error)
+            156 RETURN_VALUE
+        >>  158 LOAD_CONST               5 (None)
+            160 STORE_FAST               2 (error)
+            162 DELETE_FAST              2 (error)
+            164 RERAISE
+        >>  166 RERAISE
+            168 LOAD_CONST               5 (None)
+            170 RETURN_VALUE
+
+=== LPWinSparkleUpdater.initUpdater ===
+819           0 LOAD_GLOBAL              0 (platform)
+              2 LOAD_METHOD              1 (system)
+              4 CALL_METHOD              0
+              6 LOAD_CONST               1 ('Windows')
+              8 COMPARE_OP               3 (!=)
+             10 POP_JUMP_IF_FALSE       32
+
+820          12 LOAD_GLOBAL              2 (logger)
+             14 LOAD_METHOD              3 (info)
+             16 LOAD_CONST               2 ('[winsparkle] 非 Windows 平台，跳过初始化')
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+821          22 LOAD_CONST               3 (False)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               4 (_ready)
+
+822          28 LOAD_CONST               3 (False)
+             30 RETURN_VALUE
+
+824     >>   32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              5 (_sparkleConfig)
+             36 CALL_METHOD              0
+             38 LOAD_METHOD              6 (get)
+             40 LOAD_CONST               4 ('enabled')
+             42 LOAD_CONST               5 (True)
+             44 CALL_METHOD              2
+             46 LOAD_CONST               5 (True)
+             48 IS_OP                    1
+             50 POP_JUMP_IF_FALSE       72
+
+825          52 LOAD_GLOBAL              2 (logger)
+             54 LOAD_METHOD              3 (info)
+             56 LOAD_CONST               6 ('[winsparkle] 配置关闭，跳过初始化')
+             58 CALL_METHOD              1
+             60 POP_TOP
+
+826          62 LOAD_CONST               3 (False)
+             64 LOAD_FAST                0 (self)
+             66 STORE_ATTR               4 (_ready)
+
+827          68 LOAD_CONST               3 (False)
+             70 RETURN_VALUE
+
+829     >>   72 LOAD_FAST                0 (self)
+             74 LOAD_METHOD              7 (_loadDLL)
+             76 CALL_METHOD              0
+             78 POP_JUMP_IF_TRUE        90
+
+830          80 LOAD_CONST               3 (False)
+             82 LOAD_FAST                0 (self)
+             84 STORE_ATTR               4 (_ready)
+
+831          86 LOAD_CONST               3 (False)
+             88 RETURN_VALUE
+
+833     >>   90 LOAD_FAST                0 (self)
+             92 LOAD_METHOD              8 (resolveFeedURL)
+             94 CALL_METHOD              0
+             96 STORE_FAST               1 (feed_url)
+
+834          98 LOAD_FAST                1 (feed_url)
+            100 POP_JUMP_IF_TRUE       122
+
+835         102 LOAD_GLOBAL              2 (logger)
+            104 LOAD_METHOD              9 (warning)
+            106 LOAD_CONST               7 ('[winsparkle] 未解析到 feed URL，无法初始化')
+            108 CALL_METHOD              1
+            110 POP_TOP
+
+836         112 LOAD_CONST               3 (False)
+            114 LOAD_FAST                0 (self)
+            116 STORE_ATTR               4 (_ready)
+
+837         118 LOAD_CONST               3 (False)
+            120 RETURN_VALUE
+
+839     >>  122 SETUP_FINALLY          206 (to 330)
+
+840         124 LOAD_FAST                0 (self)
+            126 LOAD_ATTR               10 (_dll)
+            128 LOAD_METHOD             11 (win_sparkle_set_appcast_url)
+            130 LOAD_FAST                1 (feed_url)
+            132 LOAD_METHOD             12 (encode)
+            134 LOAD_CONST               8 ('utf-8')
+            136 CALL_METHOD              1
+            138 CALL_METHOD              1
+            140 POP_TOP
+
+841         142 LOAD_FAST                0 (self)
+            144 LOAD_METHOD             13 (_resolveCurrentVersion)
+            146 CALL_METHOD              0
+            148 STORE_FAST               2 (current_version)
+
+842         150 LOAD_FAST                0 (self)
+            152 LOAD_ATTR               10 (_dll)
+            154 LOAD_METHOD             14 (win_sparkle_set_app_details)
+            156 LOAD_CONST               9 ('Linkplay')
+            158 LOAD_CONST              10 ('WiiM Home')
+            160 LOAD_FAST                2 (current_version)
+            162 CALL_METHOD              3
+            164 POP_TOP
+
+843         166 LOAD_GLOBAL             15 (hasattr)
+            168 LOAD_FAST                0 (self)
+            170 LOAD_ATTR               10 (_dll)
+            172 LOAD_CONST              11 ('win_sparkle_set_automatic_check_for_updates')
+            174 CALL_FUNCTION            2
+            176 POP_JUMP_IF_FALSE      200
+
+844         178 LOAD_FAST                0 (self)
+            180 LOAD_ATTR               10 (_dll)
+            182 LOAD_METHOD             16 (win_sparkle_set_automatic_check_for_updates)
+            184 LOAD_CONST              12 (0)
+            186 CALL_METHOD              1
+            188 POP_TOP
+
+845         190 LOAD_GLOBAL              2 (logger)
+            192 LOAD_METHOD              3 (info)
+            194 LOAD_CONST              13 ('[winsparkle] automatic checks overridden to False')
+            196 CALL_METHOD              1
+            198 POP_TOP
+
+846     >>  200 LOAD_GLOBAL             15 (hasattr)
+            202 LOAD_FAST                0 (self)
+            204 LOAD_ATTR               10 (_dll)
+            206 LOAD_CONST              14 ('win_sparkle_set_update_check_interval')
+            208 CALL_FUNCTION            2
+            210 POP_JUMP_IF_FALSE      234
+
+847         212 LOAD_FAST                0 (self)
+            214 LOAD_ATTR               10 (_dll)
+            216 LOAD_METHOD             17 (win_sparkle_set_update_check_interval)
+            218 LOAD_CONST              15 (7200)
+            220 CALL_METHOD              1
+            222 POP_TOP
+
+848         224 LOAD_GLOBAL              2 (logger)
+            226 LOAD_METHOD              3 (info)
+            228 LOAD_CONST              16 ('[winsparkle] update check interval overridden to 7200s')
+            230 CALL_METHOD              1
+            232 POP_TOP
+
+849     >>  234 LOAD_GLOBAL             15 (hasattr)
+            236 LOAD_FAST                0 (self)
+            238 LOAD_ATTR               10 (_dll)
+            240 LOAD_CONST              17 ('win_sparkle_set_lang')
+            242 CALL_FUNCTION            2
+            244 EXTENDED_ARG             1
+            246 POP_JUMP_IF_FALSE      270
+
+850         248 LOAD_FAST                0 (self)
+            250 LOAD_ATTR               10 (_dll)
+            252 LOAD_METHOD             18 (win_sparkle_set_lang)
+            254 LOAD_CONST              18 (b'en')
+            256 CALL_METHOD              1
+            258 POP_TOP
+
+851         260 LOAD_GLOBAL              2 (logger)
+            262 LOAD_METHOD              3 (info)
+            264 LOAD_CONST              19 ('[winsparkle] language overridden to en')
+            266 CALL_METHOD              1
+            268 POP_TOP
+
+852     >>  270 LOAD_FAST                0 (self)
+            272 LOAD_METHOD             19 (_registerShutdownCallbacks)
+            274 CALL_METHOD              0
+            276 POP_TOP
+
+853         278 LOAD_FAST                0 (self)
+            280 LOAD_METHOD             20 (_registerUpdateResultCallbacks)
+            282 CALL_METHOD              0
+            284 POP_TOP
+
+854         286 LOAD_FAST                0 (self)
+            288 LOAD_METHOD             21 (_registerInstallerCallbacks)
+            290 CALL_METHOD              0
+            292 POP_TOP
+
+855         294 LOAD_FAST                0 (self)
+            296 LOAD_ATTR               10 (_dll)
+            298 LOAD_METHOD             22 (win_sparkle_init)
+            300 CALL_METHOD              0
+            302 POP_TOP
+
+856         304 LOAD_CONST               5 (True)
+            306 LOAD_FAST                0 (self)
+            308 STORE_ATTR               4 (_ready)
+
+857         310 LOAD_GLOBAL              2 (logger)
+            312 LOAD_METHOD              3 (info)
+
+858         314 LOAD_CONST              20 ('[winsparkle] WinSparkle init success, feed=%s, version=%s')
+
+859         316 LOAD_FAST                1 (feed_url)
+
+860         318 LOAD_FAST                2 (current_version)
+
+857         320 CALL_METHOD              3
+            322 POP_TOP
+
+862         324 POP_BLOCK
+            326 LOAD_CONST               5 (True)
+            328 RETURN_VALUE
+
+863     >>  330 DUP_TOP
+            332 LOAD_GLOBAL             23 (Exception)
+            334 EXTENDED_ARG             1
+            336 JUMP_IF_NOT_EXC_MATCH   386
+            338 POP_TOP
+            340 STORE_FAST               3 (error)
+            342 POP_TOP
+            344 SETUP_FINALLY           32 (to 378)
+
+864         346 LOAD_GLOBAL              2 (logger)
+            348 LOAD_METHOD              9 (warning)
+            350 LOAD_CONST              21 ('[winsparkle] 初始化失败: %s')
+            352 LOAD_FAST                3 (error)
+            354 CALL_METHOD              2
+            356 POP_TOP
+
+865         358 LOAD_CONST               3 (False)
+            360 LOAD_FAST                0 (self)
+            362 STORE_ATTR               4 (_ready)
+
+866         364 POP_BLOCK
+            366 POP_EXCEPT
+            368 LOAD_CONST              22 (None)
+            370 STORE_FAST               3 (error)
+            372 DELETE_FAST              3 (error)
+            374 LOAD_CONST               3 (False)
+            376 RETURN_VALUE
+        >>  378 LOAD_CONST              22 (None)
+            380 STORE_FAST               3 (error)
+            382 DELETE_FAST              3 (error)
+            384 RERAISE
+        >>  386 RERAISE
+            388 LOAD_CONST              22 (None)
+            390 RETURN_VALUE
+
+=== LPWinSparkleUpdater.isReady ===
+877           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_ready)
+              4 LOAD_CONST               1 (True)
+              6 IS_OP                    0
+              8 RETURN_VALUE
+
+=== LPWinSparkleUpdater.ensureReady ===
+888           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (isReady)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_FALSE       12
+
+889           8 LOAD_CONST               1 (True)
+             10 RETURN_VALUE
+
+890     >>   12 LOAD_GLOBAL              1 (logger)
+             14 LOAD_METHOD              2 (info)
+             16 LOAD_CONST               2 ('[winsparkle] ensureReady: 更新器不可用，尝试重新初始化')
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+891          22 LOAD_CONST               3 (False)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               3 (_ready)
+
+892          28 LOAD_FAST                0 (self)
+             30 LOAD_METHOD              4 (initUpdater)
+             32 CALL_METHOD              0
+             34 STORE_FAST               1 (result)
+
+893          36 LOAD_FAST                1 (result)
+             38 POP_JUMP_IF_FALSE       52
+
+894          40 LOAD_GLOBAL              1 (logger)
+             42 LOAD_METHOD              2 (info)
+             44 LOAD_CONST               4 ('[winsparkle] ensureReady: 重新初始化成功')
+             46 CALL_METHOD              1
+             48 POP_TOP
+             50 JUMP_FORWARD            10 (to 62)
+
+896     >>   52 LOAD_GLOBAL              1 (logger)
+             54 LOAD_METHOD              5 (warning)
+             56 LOAD_CONST               5 ('[winsparkle] ensureReady: 重新初始化失败')
+             58 CALL_METHOD              1
+             60 POP_TOP
+
+897     >>   62 LOAD_FAST                1 (result)
+             64 RETURN_VALUE
+
+=== LPWinSparkleUpdater.triggerBackgroundCheck ===
+909           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (isReady)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        22
+
+910           8 LOAD_GLOBAL              1 (logger)
+             10 LOAD_METHOD              2 (warning)
+             12 LOAD_CONST               1 ('[winsparkle] 未就绪，无法触发后台检查')
+             14 CALL_METHOD              1
+             16 POP_TOP
+
+911          18 LOAD_CONST               2 (False)
+             20 RETURN_VALUE
+
+913     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                3 (_backgroundCheckThread)
+             26 LOAD_CONST               3 (None)
+             28 IS_OP                    1
+             30 POP_JUMP_IF_FALSE       56
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_backgroundCheckThread)
+             36 LOAD_METHOD              4 (is_alive)
+             38 CALL_METHOD              0
+             40 POP_JUMP_IF_FALSE       56
+
+914          42 LOAD_GLOBAL              1 (logger)
+             44 LOAD_METHOD              5 (info)
+             46 LOAD_CONST               4 ('[winsparkle.probe] 后台 appcast 探测仍在进行，跳过重复触发')
+             48 CALL_METHOD              1
+             50 POP_TOP
+
+915          52 LOAD_CONST               2 (False)
+             54 RETURN_VALUE
+
+917     >>   56 LOAD_GLOBAL              6 (threading)
+             58 LOAD_ATTR                7 (Thread)
+
+918          60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                8 (_runBackgroundAppcastProbe)
+
+919          64 LOAD_CONST               5 ('winsparkle-appcast-probe')
+
+920          66 LOAD_CONST               6 (True)
+
+917          68 LOAD_CONST               7 (('target', 'name', 'daemon'))
+             70 CALL_FUNCTION_KW         3
+             72 LOAD_FAST                0 (self)
+             74 STORE_ATTR               3 (_backgroundCheckThread)
+
+922          76 LOAD_FAST                0 (self)
+             78 LOAD_ATTR                3 (_backgroundCheckThread)
+             80 LOAD_METHOD              9 (start)
+             82 CALL_METHOD              0
+             84 POP_TOP
+
+923          86 LOAD_GLOBAL              1 (logger)
+             88 LOAD_METHOD              5 (info)
+
+924          90 LOAD_CONST               8 ('[winsparkle.probe] 已触发后台 appcast 探测 callback_registered(found=%s, not_found=%s)')
+
+925          92 LOAD_GLOBAL             10 (callable)
+             94 LOAD_FAST                0 (self)
+             96 LOAD_ATTR               11 (_onUpdateFoundCallback)
+             98 CALL_FUNCTION            1
+
+926         100 LOAD_GLOBAL             10 (callable)
+            102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR               12 (_onNoUpdateFoundCallback)
+            106 CALL_FUNCTION            1
+
+923         108 CALL_METHOD              3
+            110 POP_TOP
+
+928         112 LOAD_CONST               6 (True)
+            114 RETURN_VALUE
+
+=== LPWinSparkleUpdater.isBackgroundCheckRunning ===
+939           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_backgroundCheckThread)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    1
+              8 JUMP_IF_FALSE_OR_POP    18
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_backgroundCheckThread)
+             14 LOAD_METHOD              1 (is_alive)
+             16 CALL_METHOD              0
+        >>   18 RETURN_VALUE
+
+=== LPWinSparkleUpdater.checkForUpdatesManually ===
+950           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (isReady)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        22
+
+951           8 LOAD_GLOBAL              1 (logger)
+             10 LOAD_METHOD              2 (warning)
+             12 LOAD_CONST               1 ('[winsparkle] 未就绪，无法手动检查更新')
+             14 CALL_METHOD              1
+             16 POP_TOP
+
+952          18 LOAD_CONST               2 (False)
+             20 RETURN_VALUE
+
+954     >>   22 SETUP_FINALLY           26 (to 50)
+
+955          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                3 (_dll)
+             28 LOAD_METHOD              4 (win_sparkle_check_update_with_ui)
+             30 CALL_METHOD              0
+             32 POP_TOP
+
+956          34 LOAD_GLOBAL              1 (logger)
+             36 LOAD_METHOD              5 (info)
+             38 LOAD_CONST               3 ('[winsparkle] 已触发手动检查更新')
+             40 CALL_METHOD              1
+             42 POP_TOP
+
+957          44 POP_BLOCK
+             46 LOAD_CONST               4 (True)
+             48 RETURN_VALUE
+
+958     >>   50 DUP_TOP
+             52 LOAD_GLOBAL              6 (Exception)
+             54 JUMP_IF_NOT_EXC_MATCH    98
+             56 POP_TOP
+             58 STORE_FAST               1 (error)
+             60 POP_TOP
+             62 SETUP_FINALLY           26 (to 90)
+
+959          64 LOAD_GLOBAL              1 (logger)
+             66 LOAD_METHOD              2 (warning)
+             68 LOAD_CONST               5 ('[winsparkle] 手动检查失败: %s')
+             70 LOAD_FAST                1 (error)
+             72 CALL_METHOD              2
+             74 POP_TOP
+
+960          76 POP_BLOCK
+             78 POP_EXCEPT
+             80 LOAD_CONST               6 (None)
+             82 STORE_FAST               1 (error)
+             84 DELETE_FAST              1 (error)
+             86 LOAD_CONST               2 (False)
+             88 RETURN_VALUE
+        >>   90 LOAD_CONST               6 (None)
+             92 STORE_FAST               1 (error)
+             94 DELETE_FAST              1 (error)
+             96 RERAISE
+        >>   98 RERAISE
+            100 LOAD_CONST               6 (None)
+            102 RETURN_VALUE
+
+=== LPWinSparkleUpdater.cleanup ===
+971           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_dll)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       38
+
+972          10 LOAD_CONST               2 (False)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               1 (_ready)
+
+973          16 LOAD_CONST               1 (None)
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               2 (_canShutdownCallback)
+
+974          22 LOAD_CONST               1 (None)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               3 (_shutdownRequestCallback)
+
+975          28 LOAD_CONST               1 (None)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               4 (_userRunInstallerCallback)
+
+976          34 LOAD_CONST               1 (None)
+             36 RETURN_VALUE
+
+978     >>   38 SETUP_FINALLY          108 (to 148)
+             40 SETUP_FINALLY           24 (to 66)
+
+979          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                0 (_dll)
+             46 LOAD_METHOD              5 (win_sparkle_cleanup)
+             48 CALL_METHOD              0
+             50 POP_TOP
+
+980          52 LOAD_GLOBAL              6 (logger)
+             54 LOAD_METHOD              7 (info)
+             56 LOAD_CONST               3 ('[winsparkle] cleanup 完成')
+             58 CALL_METHOD              1
+             60 POP_TOP
+             62 POP_BLOCK
+             64 JUMP_FORWARD            48 (to 114)
+
+981     >>   66 DUP_TOP
+             68 LOAD_GLOBAL              8 (Exception)
+             70 JUMP_IF_NOT_EXC_MATCH   112
+             72 POP_TOP
+             74 STORE_FAST               1 (error)
+             76 POP_TOP
+             78 SETUP_FINALLY           24 (to 104)
+
+982          80 LOAD_GLOBAL              6 (logger)
+             82 LOAD_METHOD              9 (warning)
+             84 LOAD_CONST               4 ('[winsparkle] cleanup 失败: %s')
+             86 LOAD_FAST                1 (error)
+             88 CALL_METHOD              2
+             90 POP_TOP
+             92 POP_BLOCK
+             94 POP_EXCEPT
+             96 LOAD_CONST               1 (None)
+             98 STORE_FAST               1 (error)
+            100 DELETE_FAST              1 (error)
+            102 JUMP_FORWARD            10 (to 114)
+        >>  104 LOAD_CONST               1 (None)
+            106 STORE_FAST               1 (error)
+            108 DELETE_FAST              1 (error)
+            110 RERAISE
+        >>  112 RERAISE
+        >>  114 POP_BLOCK
+
+984         116 LOAD_CONST               2 (False)
+            118 LOAD_FAST                0 (self)
+            120 STORE_ATTR               1 (_ready)
+
+985         122 LOAD_CONST               1 (None)
+            124 LOAD_FAST                0 (self)
+            126 STORE_ATTR               2 (_canShutdownCallback)
+
+986         128 LOAD_CONST               1 (None)
+            130 LOAD_FAST                0 (self)
+            132 STORE_ATTR               3 (_shutdownRequestCallback)
+
+987         134 LOAD_CONST               1 (None)
+            136 LOAD_FAST                0 (self)
+            138 STORE_ATTR               4 (_userRunInstallerCallback)
+
+988         140 LOAD_CONST               1 (None)
+            142 LOAD_FAST                0 (self)
+            144 STORE_ATTR              10 (_backgroundCheckThread)
+            146 JUMP_FORWARD            32 (to 180)
+
+984     >>  148 LOAD_CONST               2 (False)
+            150 LOAD_FAST                0 (self)
+            152 STORE_ATTR               1 (_ready)
+
+985         154 LOAD_CONST               1 (None)
+            156 LOAD_FAST                0 (self)
+            158 STORE_ATTR               2 (_canShutdownCallback)
+
+986         160 LOAD_CONST               1 (None)
+            162 LOAD_FAST                0 (self)
+            164 STORE_ATTR               3 (_shutdownRequestCallback)
+
+987         166 LOAD_CONST               1 (None)
+            168 LOAD_FAST                0 (self)
+            170 STORE_ATTR               4 (_userRunInstallerCallback)
+
+988         172 LOAD_CONST               1 (None)
+            174 LOAD_FAST                0 (self)
+            176 STORE_ATTR              10 (_backgroundCheckThread)
+            178 RERAISE
+        >>  180 LOAD_CONST               1 (None)
+            182 RETURN_VALUE

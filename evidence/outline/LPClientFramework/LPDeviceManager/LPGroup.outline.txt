@@ -1,0 +1,316 @@
+# module LPClientFramework.LPDeviceManager.LPGroup
+
+[module] names: __doc__, re, LPClientFramework, LPUtility, LPGroupType_Default, LPGroupType_User, LPGroupType_Temp, LPGroupType_StereoPair, LPGroupType_MultiChannel, LPGroupType, LPGroupObject
+  str: '\n@Time ： 2026/3/19 18:55\n@Auth ： Chris\n@File ：LPGroup.py\n@Desc: Group Object\n'
+  str: 'LPUtility'
+  str: 'LPGroupType'
+  str: 'LPGroupObject'
+
+def LPGroupType()  line 20
+  names: __name__, __module__, __qualname__, LPGroupType_Default, Default, LPGroupType_User, User, LPGroupType_Temp, Temp, LPGroupType_StereoPair, StereoPair, LPGroupType_MultiChannel, MultiChannel, classmethod, normalize, isDefault, isUser, isTemp, isStereoPair, isMultiChannel
+    str: 'LPGroupType'
+    str: 'LPGroupType.normalize'
+    str: 'LPGroupType.isDefault'
+    str: 'LPGroupType.isUser'
+    str: 'LPGroupType.isTemp'
+    str: 'LPGroupType.isStereoPair'
+    str: 'LPGroupType.isMultiChannel'
+
+  def LPGroupType.normalize(cls, value, default)  line 27
+    names: isinstance, bool, int, Exception, Default, User, Temp, StereoPair, MultiChannel
+      str: '把外部传入的 group_type 归一化为已知枚举值。\n\n        参数:\n            value: 外部传入的 group_type，支持 int、str 或可转 int 对象。\n            default: 无法识别时返回的默认枚举值。\n        返回:\n            int: 归一化后的 group_type。\n        '
+
+  def LPGroupType.isDefault(cls, value)  line 49
+    names: normalize, Default
+      str: '判断 group_type 是否为默认值。'
+
+  def LPGroupType.isUser(cls, value)  line 54
+    names: normalize, User
+      str: '判断 group_type 是否为用户组。'
+
+  def LPGroupType.isTemp(cls, value)  line 59
+    names: normalize, Temp
+      str: '判断 group_type 是否为临时组。'
+
+  def LPGroupType.isStereoPair(cls, value)  line 64
+    names: normalize, StereoPair
+      str: '判断 group_type 是否为 stereo pair。'
+
+  def LPGroupType.isMultiChannel(cls, value)  line 69
+    names: normalize, MultiChannel
+      str: '判断 group_type 是否为 multi channel。'
+
+def LPGroupObject()  line 75
+  names: __name__, __module__, __qualname__, __doc__, LPGroupType_Default, __init__, copy, group_type_value, is_stereo_pair, property, memberUuids, staticmethod, normalize_uuid, to_bool, to_float, clamp_volume, handle_volume_limits, online_slave_map, _media_volume_initialized, _snapshot_value_from_slave_item, _slave_item_status_snapshot, _member_media_snapshot, group_volume_entries, adjustable_group_volume_entries, has_adjustable_group_volume_members, _compute_volume_from_entries, compute_group_mute, compute_group_volume, compute_group_display_volume, member_rows, resolve_member_device, member_rows_snapshot_for_volume_adjust, open_all_mute_box_when_group_is_mute, set_group_mute, set_group_volume, toggle_member_mute, set_member_volume
+    str: 'LPGroupObject'
+    str: '设备命名组对象，保存组标识、成员、显示名称和运行状态。'
+    str: 'LPGroupObject.__init__'
+    str: 'LPGroupObject.copy'
+    str: 'LPGroupObject.group_type_value'
+    str: 'LPGroupObject.is_stereo_pair'
+    str: 'LPGroupObject.memberUuids'
+    str: 'LPGroupObject.normalize_uuid'
+    str: 'LPGroupObject.to_bool'
+    str: 'LPGroupObject.to_float'
+    str: 'LPGroupObject.clamp_volume'
+    str: 'LPGroupObject.handle_volume_limits'
+    str: 'LPGroupObject.online_slave_map'
+    str: 'LPGroupObject._media_volume_initialized'
+    str: 'LPGroupObject._snapshot_value_from_slave_item'
+    str: 'LPGroupObject._slave_item_status_snapshot'
+    str: 'LPGroupObject._member_media_snapshot'
+    str: 'LPGroupObject.group_volume_entries'
+    str: 'LPGroupObject.adjustable_group_volume_entries'
+    str: 'LPGroupObject.has_adjustable_group_volume_members'
+    str: 'LPGroupObject._compute_volume_from_entries'
+    str: 'LPGroupObject.compute_group_mute'
+    str: 'LPGroupObject.compute_group_volume'
+    str: 'LPGroupObject.compute_group_display_volume'
+    str: 'LPGroupObject.member_rows'
+    str: 'LPGroupObject.resolve_member_device'
+    str: 'LPGroupObject.member_rows_snapshot_for_volume_adjust'
+    str: 'LPGroupObject.open_all_mute_box_when_group_is_mute'
+    str: 'LPGroupObject.set_group_mute'
+    str: 'LPGroupObject.set_group_volume'
+    str: 'LPGroupObject.toggle_member_mute'
+    str: 'LPGroupObject.set_member_volume'
+
+  def LPGroupObject.__init__(self, groupName, masterDevice, groupId, slaveList, active, updateTime, channel, createGroupType, groupFullName)  line 78
+    names: groupName, groupFullName, masterDevice, groupId, slaveList, active, updateTime, channel, LPGroupType, normalize, LPGroupType_Default, createGroupType
+      str: '初始化设备命名组对象。\n\n        Args:\n            groupName (str): 下发给设备的组名，可能受设备协议长度限制。\n            masterDevice (object): 组主设备对象。\n            groupId (str): 命名组唯一标识。\n            slaveList (list): 从设备成员列表。\n            active (bool): 是否为当前激活组。\n            updateTime (str): 更新时间戳。\n            channel (int): 声道配'
+
+  def LPGroupObject.copy(self)  line 115
+    names: LPGroupObject, groupName, groupFullName, masterDevice, groupId, slaveList, active, updateTime, channel, createGroupType
+      str: '复制当前命名组对象。\n\n        Returns:\n            LPGroupObject: 当前命名组对象的浅拷贝。\n        '
+      str: 'groupName'
+      str: 'groupFullName'
+      str: 'masterDevice'
+      str: 'groupId'
+      str: 'slaveList'
+      str: 'active'
+      str: 'updateTime'
+      str: 'channel'
+      str: 'createGroupType'
+
+  def LPGroupObject.group_type_value(self)  line 133
+    names: LPGroupType, normalize, createGroupType, LPGroupType_Default
+      str: '返回当前组类型的归一化值。\n\n        参数:\n            无。\n        返回:\n            int: 当前组类型的标准枚举值。\n        '
+
+  def LPGroupObject.is_stereo_pair(self)  line 143
+    names: group_type_value, LPGroupType, StereoPair
+      str: '判断当前组是否为 stereo pair。\n\n        参数:\n            无。\n        返回:\n            bool: True 表示当前组类型为 stereo pair。\n        '
+
+  def LPGroupObject.memberUuids(self)  line 153
+    names: masterDevice, uuid, slaveList, LPUtility, pureUUID, get, append
+      str: 'uuid'
+
+  def LPGroupObject.normalize_uuid(value)  line 162
+    names: LPUtility, pureUUID
+
+  def LPGroupObject.to_bool(value)  line 166
+    names: isinstance, bool, int, float, str, strip, lower
+      str: '1'
+      str: 'true'
+      str: 'yes'
+      str: 'on'
+
+  def LPGroupObject.to_float(value, default)  line 176
+    names: float, Exception
+
+  def LPGroupObject.clamp_volume(value)  line 183
+    names: int, round, float, Exception
+
+  def LPGroupObject.handle_volume_limits(value)  line 195
+    names: float, Exception
+
+  def LPGroupObject.online_slave_map(online_slave_list)  line 207
+    names: list, LPGroupObject, normalize_uuid, getattr
+      str: '按 uuid 建立在线子设备索引。\n\n        参数:\n            online_slave_list (list): 在线子设备对象列表。\n        返回:\n            dict: key 为规范化 uuid，value 为设备对象。\n        '
+      str: 'uuid'
+
+  def LPGroupObject._media_volume_initialized(media)  line 223
+    names: bool, getattr
+      str: '判断媒体音量是否已经由设备回包初始化。\n\n        参数:\n            media (object): 设备媒体信息对象。\n        返回:\n            bool: True 表示可直接信任 media.volume；False 表示仍是默认占位值。\n        '
+      str: 'volumeInitialized'
+
+  def LPGroupObject._snapshot_value_from_slave_item(self, item, key, default)  line 236
+    names: isinstance, dict, get, upper
+      str: '读取 master SlaveList 快照中的成员字段。\n\n        参数:\n            item (dict | object): SlaveList 成员条目。\n            key (str): 需要读取的字段名。\n            default: 字段缺失时的默认值。\n        返回:\n            object: 快照字段值或默认值。\n        '
+
+  def LPGroupObject._slave_item_status_snapshot(self, raw_uuid, item)  line 250
+    names: _snapshot_value_from_slave_item, masterDevice, getattr, list, normalize_uuid, isinstance, dict, get
+      str: '为成员查找带音量状态的 SlaveList 快照。\n\n        参数:\n            raw_uuid (str): 已规范化的成员 uuid。\n            item (dict | object): 当前组成员条目。\n        返回:\n            dict | object: 优先返回带 volume/mute 的组态快照；找不到则返回原始成员条目。\n        '
+      str: 'volume'
+      str: 'groupInfo'
+      str: 'slaveList'
+      str: 'uuid'
+
+  def LPGroupObject._member_media_snapshot(self, media, slave_item)  line 272
+    names: _media_volume_initialized, to_float, getattr, bool, _snapshot_value_from_slave_item, to_bool
+      str: '合并在线 media 与 SlaveList 快照中的音量状态。\n\n        参数:\n            media (object): 在线设备的 mediaInfo。\n            slave_item (dict | object | None): master SlaveList 中对应成员快照。\n        返回:\n            dict: 包含 volume 与 mute 的可展示状态。\n        '
+      str: 'volume'
+      str: 'mute'
+      str: 'volume'
+      str: 'mute'
+
+  def LPGroupObject.group_volume_entries(self, online_slave_list)  line 301
+    names: masterDevice, getattr, append, bool, to_float, is_stereo_pair, online_slave_map, normalize_uuid, list, slaveList, isinstance, dict, get, add, _slave_item_status_snapshot, _member_media_snapshot, to_bool
+      str: '返回组音量聚合所需的成员状态快照。\n\n        参数:\n            online_slave_list (list|None): 当前在线子设备对象列表。\n        返回:\n            list[dict]: 每个成员的 mute、volume、fixedVolume 快照列表。\n        '
+      str: 'mediaInfo'
+      str: 'mute'
+      str: 'volume'
+      str: 'fixedVolume'
+      str: 'mute'
+      str: 'volume'
+      str: 'fixedVolume'
+      str: 'volumeLocked'
+      str: 'uuid'
+      str: 'Mute'
+      str: 'Volume'
+      str: 'volume_control'
+      str: 'volumeControl'
+
+  def LPGroupObject.adjustable_group_volume_entries(self, online_slave_list)  line 363
+    names: group_volume_entries
+      str: '返回组内仍可调音量的成员条目。\n\n        参数:\n            online_slave_list (list|None): 当前在线子设备对象列表。\n        返回:\n            list[dict]: 过滤掉 fixed-volume 成员后的音量条目列表。\n        '
+      str: 'LPGroupObject.adjustable_group_volume_entries.<locals>.<listcomp>'
+
+    def LPGroupObject.adjustable_group_volume_entries.<listcomp>(.0)  line 371
+      names: get
+        str: 'fixedVolume'
+
+  def LPGroupObject.has_adjustable_group_volume_members(self, online_slave_list)  line 377
+    names: bool, adjustable_group_volume_entries
+      str: '判断设备组是否还存在可调音量成员。\n\n        参数:\n            online_slave_list (list|None): 当前在线子设备对象列表。\n        返回:\n            bool: True 表示至少存在一个非 fixed-volume 成员，否则为 False。\n        '
+
+  def LPGroupObject._compute_volume_from_entries(self, entries)  line 387
+    names: all, int, round, max
+      str: '按传入成员条目计算聚合音量值。\n\n        参数:\n            entries (list[dict]): 包含 mute 和 volume 字段的成员条目。\n        返回:\n            int: 聚合后的组音量值。\n        '
+      str: 'LPGroupObject._compute_volume_from_entries.<locals>.<genexpr>'
+      str: 'LPGroupObject._compute_volume_from_entries.<locals>.<listcomp>'
+
+    def LPGroupObject._compute_volume_from_entries.<genexpr>(.0)  line 398
+      names: bool, get
+        str: 'mute'
+
+    def LPGroupObject._compute_volume_from_entries.<genexpr>(.0)  line 400
+      names: to_float, get
+        str: 'volume'
+
+    def LPGroupObject._compute_volume_from_entries.<listcomp>(.0)  line 402
+      names: bool, get, to_float
+        str: 'mute'
+        str: 'volume'
+
+  def LPGroupObject.compute_group_mute(self, online_slave_list)  line 411
+    names: adjustable_group_volume_entries, all
+      str: '按组内可调成员计算组静音态。\n\n        参数:\n            online_slave_list (list|None): 当前在线子设备对象列表。\n        返回:\n            bool: True 表示全部可调成员都处于静音，否则为 False。\n        '
+      str: 'LPGroupObject.compute_group_mute.<locals>.<genexpr>'
+
+    def LPGroupObject.compute_group_mute.<genexpr>(.0)  line 422
+      names: bool, get
+        str: 'mute'
+
+  def LPGroupObject.compute_group_volume(self, online_slave_list)  line 424
+    names: _compute_volume_from_entries, adjustable_group_volume_entries
+      str: '按组内可调成员计算可写组音量。\n\n        参数:\n            online_slave_list (list|None): 当前在线子设备对象列表。\n        返回:\n            int: 仅基于非 fixed-volume 成员计算出的组音量；没有可调成员时返回 0。\n        '
+
+  def LPGroupObject.compute_group_display_volume(self, online_slave_list)  line 434
+    names: adjustable_group_volume_entries, _compute_volume_from_entries, group_volume_entries
+      str: '计算组卡片应展示的音量值。\n\n        参数:\n            online_slave_list (list|None): 当前在线子设备对象列表。\n        返回:\n            int: 若存在可调成员则沿用可调组音量；否则退回全成员只读聚合值。\n        '
+
+  def LPGroupObject.member_rows(self, online_slave_list)  line 447
+    names: masterDevice, getattr, append, int, round, bool, is_stereo_pair, online_slave_map, normalize_uuid, list, slaveList, isinstance, dict, get, add, _slave_item_status_snapshot, strip, _member_media_snapshot, to_float
+      str: 'uuid'
+      str: 'mediaInfo'
+      str: 'name'
+      str: 'volume'
+      str: 'mute'
+      str: 'fixedVolume'
+      str: 'playState'
+      str: 'uuid'
+      str: 'name'
+      str: 'volume'
+      str: 'mute'
+      str: 'fixedVolume'
+      str: 'isMaster'
+      str: 'playState'
+      str: 'volumeLocked'
+
+  def LPGroupObject.resolve_member_device(self, member_uuid, online_slave_list, resolve_member_device_by_uuid)  line 502
+    names: normalize_uuid, masterDevice, getattr, callable, list
+      str: 'uuid'
+
+  def LPGroupObject.member_rows_snapshot_for_volume_adjust(self, member_rows, online_slave_list, resolve_member_device_by_uuid)  line 521
+    names: list, isinstance, dict, get, resolve_member_device, append, to_float, bool
+      str: 'uuid'
+      str: 'volume'
+      str: 'mute'
+      str: 'fixedVolume'
+      str: 'volumeLocked'
+      str: 'uuid'
+      str: 'device'
+      str: 'volume'
+      str: 'mute'
+      str: 'fixedVolume'
+      str: 'volumeLocked'
+
+  def LPGroupObject.open_all_mute_box_when_group_is_mute(self, members)  line 539
+    names: bool, get, updateMediaInfo, asyncUpnpPost
+      str: 'mute'
+      str: 'fixedVolume'
+      str: 'device'
+      str: 'SetMute'
+      str: 'DesiredMute'
+      str: '0'
+
+  def LPGroupObject.set_group_mute(self, mute, online_slave_list, resolve_member_device_by_uuid)  line 563
+    names: bool, member_rows, list, isinstance, dict, get, resolve_member_device, getattr, asyncUpnpPost, updateMediaInfo, slaveList, to_bool
+      str: 'fixedVolume'
+      str: 'uuid'
+      str: 'mediaInfo'
+      str: 'mute'
+      str: 'SetMute'
+      str: 'DesiredMute'
+      str: '1'
+      str: '0'
+      str: 'volume_control'
+      str: 'volumeControl'
+      str: 'Mute'
+
+  def LPGroupObject.set_group_volume(self, value, member_rows, online_slave_list, resolve_member_device_by_uuid, post_to_device, force_post)  line 606
+    names: handle_volume_limits, compute_group_volume, abs, member_rows_snapshot_for_volume_adjust, open_all_mute_box_when_group_is_mute, bool, get, to_float, clamp_volume, normalize_uuid, updateMediaInfo, asyncUpnpPost, str, list, slaveList, isinstance, dict
+      str: 'member_rows'
+      str: 'online_slave_list'
+      str: 'resolve_member_device_by_uuid'
+      str: 'fixedVolume'
+      str: 'mute'
+      str: 'device'
+      str: 'volume'
+      str: 'uuid'
+      str: 'SetVolume'
+      str: 'Single'
+      str: 'Channel'
+      str: 'DesiredVolume'
+      str: 'Volume'
+
+  def LPGroupObject.toggle_member_mute(self, member_uuid, online_slave_list, resolve_member_device_by_uuid)  line 679
+    names: is_stereo_pair, resolve_member_device, bool, getattr, asyncUpnpPost, updateMediaInfo
+      str: '切换单个成员设备静音状态。\n\n        参数:\n            member_uuid (str): 目标成员设备 uuid。\n            online_slave_list (list|None): 当前在线子设备对象列表。\n            resolve_member_device_by_uuid (callable|None): 外部成员设备解析函数。\n        返回:\n            bool: True 表示已切换成员静音；False 表示成员不可调、不可解析或 stereo pair 禁止单独静音。\n        '
+      str: 'fixedVolume'
+      str: 'mediaInfo'
+      str: 'mute'
+      str: 'SetMute'
+      str: 'DesiredMute'
+      str: '1'
+      str: '0'
+
+  def LPGroupObject.set_member_volume(self, member_uuid, value, online_slave_list, resolve_member_device_by_uuid)  line 706
+    names: resolve_member_device, is_stereo_pair, bool, getattr, int, round, float, Exception, asyncUpnpPost, str, updateMediaInfo
+      str: 'fixedVolume'
+      str: 'SetVolume'
+      str: 'Single'
+      str: 'Channel'
+      str: 'DesiredVolume'
+      str: 'volume'
+      str: 'mute'

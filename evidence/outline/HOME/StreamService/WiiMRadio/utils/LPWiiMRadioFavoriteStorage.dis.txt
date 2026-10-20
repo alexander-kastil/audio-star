@@ -1,0 +1,946 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nWiiMRadio 收藏统一缓存适配层。\n\n负责旧版 wiimradio-favorites.json 的一次性迁移、缓存缺失时从旧备份恢复，\n以及 WiiMRadio 收藏在统一 favoriteCache 中的读写。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+  9          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (threading)
+             18 STORE_NAME               2 (threading)
+
+ 10          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (time)
+             26 STORE_NAME               3 (time)
+
+ 11          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('Path',))
+             32 IMPORT_NAME              4 (pathlib)
+             34 IMPORT_FROM              5 (Path)
+             36 STORE_NAME               5 (Path)
+             38 POP_TOP
+
+ 12          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               4 (('Any', 'Dict', 'List', 'Optional'))
+             44 IMPORT_NAME              6 (typing)
+             46 IMPORT_FROM              7 (Any)
+             48 STORE_NAME               7 (Any)
+             50 IMPORT_FROM              8 (Dict)
+             52 STORE_NAME               8 (Dict)
+             54 IMPORT_FROM              9 (List)
+             56 STORE_NAME               9 (List)
+             58 IMPORT_FROM             10 (Optional)
+             60 STORE_NAME              10 (Optional)
+             62 POP_TOP
+
+ 14          64 LOAD_CONST               1 (0)
+             66 LOAD_CONST               5 (('LPFavoriteCacheManager', 'WIIMRADIO_LOCAL_USER_ID'))
+             68 IMPORT_NAME             11 (LPClientFramework.LPFavoriteCacheManager)
+             70 IMPORT_FROM             12 (LPFavoriteCacheManager)
+             72 STORE_NAME              12 (LPFavoriteCacheManager)
+             74 IMPORT_FROM             13 (WIIMRADIO_LOCAL_USER_ID)
+             76 STORE_NAME              13 (WIIMRADIO_LOCAL_USER_ID)
+             78 POP_TOP
+
+ 18          80 LOAD_CONST               1 (0)
+             82 LOAD_CONST               6 (('logger', 'userDataDir'))
+             84 IMPORT_NAME             14 (LPClientFramework.LPUtility)
+             86 IMPORT_FROM             15 (logger)
+             88 STORE_NAME              15 (logger)
+             90 IMPORT_FROM             16 (userDataDir)
+             92 STORE_NAME              16 (userDataDir)
+             94 POP_TOP
+
+ 21          96 LOAD_CONST               7 ('WiiMRadio')
+             98 STORE_NAME              17 (SOURCE)
+
+ 22         100 LOAD_NAME               13 (WIIMRADIO_LOCAL_USER_ID)
+            102 STORE_NAME              18 (LOCAL_USER_ID)
+
+ 23         104 LOAD_CONST               8 ('station')
+            106 STORE_NAME              19 (ITEM_TYPE)
+
+ 26         108 LOAD_NAME               16 (userDataDir)
+            110 LOAD_CONST               9 ('wiimradio-favorites.json')
+            112 BINARY_TRUE_DIVIDE
+            114 STORE_NAME              20 (LEGACY_FAVORITES_PATH)
+
+ 29         116 LOAD_NAME                2 (threading)
+            118 LOAD_METHOD             21 (RLock)
+            120 CALL_METHOD              0
+            122 STORE_NAME              22 (_STORAGE_LOCK)
+
+ 32         124 LOAD_NAME                7 (Any)
+            126 LOAD_NAME               23 (str)
+            128 LOAD_CONST              10 (('value', 'return'))
+            130 BUILD_CONST_KEY_MAP      2
+            132 LOAD_CONST              11 (<code object _normalize_station_text_field at 0x000001F324E69EA0, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 32>)
+            134 LOAD_CONST              12 ('_normalize_station_text_field')
+            136 MAKE_FUNCTION            4 (annotations)
+            138 STORE_NAME              24 (_normalize_station_text_field)
+
+ 42         140 LOAD_NAME                7 (Any)
+            142 LOAD_NAME               23 (str)
+            144 LOAD_CONST              13 (('countryCode', 'return'))
+            146 BUILD_CONST_KEY_MAP      2
+            148 LOAD_CONST              14 (<code object _normalize_station_country_code at 0x000001F324E69DF0, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 42>)
+            150 LOAD_CONST              15 ('_normalize_station_country_code')
+            152 MAKE_FUNCTION            4 (annotations)
+            154 STORE_NAME              25 (_normalize_station_country_code)
+
+ 52         156 LOAD_NAME                8 (Dict)
+            158 LOAD_NAME               23 (str)
+            160 LOAD_NAME                7 (Any)
+            162 BUILD_TUPLE              2
+            164 BINARY_SUBSCR
+            166 LOAD_NAME                8 (Dict)
+            168 LOAD_NAME               23 (str)
+            170 LOAD_NAME               23 (str)
+            172 BUILD_TUPLE              2
+            174 BINARY_SUBSCR
+            176 LOAD_CONST              16 (('item', 'return'))
+            178 BUILD_CONST_KEY_MAP      2
+            180 LOAD_CONST              17 (<code object extractStationLocationFields at 0x000001F324E695B0, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 52>)
+            182 LOAD_CONST              18 ('extractStationLocationFields')
+            184 MAKE_FUNCTION            4 (annotations)
+            186 STORE_NAME              26 (extractStationLocationFields)
+
+ 78         188 LOAD_NAME                8 (Dict)
+            190 LOAD_NAME               23 (str)
+            192 LOAD_NAME                7 (Any)
+            194 BUILD_TUPLE              2
+            196 BINARY_SUBSCR
+            198 LOAD_NAME               10 (Optional)
+            200 LOAD_NAME                8 (Dict)
+            202 LOAD_NAME               23 (str)
+            204 LOAD_NAME               23 (str)
+            206 BUILD_TUPLE              2
+            208 BINARY_SUBSCR
+            210 BINARY_SUBSCR
+            212 LOAD_CONST              16 (('item', 'return'))
+            214 BUILD_CONST_KEY_MAP      2
+            216 LOAD_CONST              19 (<code object normalizeFavoriteItem at 0x000001F324E69240, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 78>)
+            218 LOAD_CONST              20 ('normalizeFavoriteItem')
+            220 MAKE_FUNCTION            4 (annotations)
+            222 STORE_NAME              27 (normalizeFavoriteItem)
+
+102         224 LOAD_NAME               12 (LPFavoriteCacheManager)
+            226 LOAD_CONST              21 (('return',))
+            228 BUILD_CONST_KEY_MAP      1
+            230 LOAD_CONST              22 (<code object _cache at 0x000001F324E69F50, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 102>)
+            232 LOAD_CONST              23 ('_cache')
+            234 MAKE_FUNCTION            4 (annotations)
+            236 STORE_NAME              28 (_cache)
+
+111         238 LOAD_NAME                9 (List)
+            240 LOAD_NAME                8 (Dict)
+            242 LOAD_NAME               23 (str)
+            244 LOAD_NAME               23 (str)
+            246 BUILD_TUPLE              2
+            248 BINARY_SUBSCR
+            250 BINARY_SUBSCR
+            252 LOAD_CONST              21 (('return',))
+            254 BUILD_CONST_KEY_MAP      1
+            256 LOAD_CONST              24 (<code object _loadLegacyItems at 0x000001F324E69A80, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 111>)
+            258 LOAD_CONST              25 ('_loadLegacyItems')
+            260 MAKE_FUNCTION            4 (annotations)
+            262 STORE_NAME              29 (_loadLegacyItems)
+
+142         264 LOAD_NAME                9 (List)
+            266 LOAD_NAME                8 (Dict)
+            268 LOAD_NAME               23 (str)
+            270 LOAD_NAME               23 (str)
+            272 BUILD_TUPLE              2
+            274 BINARY_SUBSCR
+            276 BINARY_SUBSCR
+            278 LOAD_CONST               2 (None)
+            280 LOAD_CONST              26 (('items', 'return'))
+            282 BUILD_CONST_KEY_MAP      2
+            284 LOAD_CONST              27 (<code object _applySnapshot at 0x000001F324E699D0, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 142>)
+            286 LOAD_CONST              28 ('_applySnapshot')
+            288 MAKE_FUNCTION            4 (annotations)
+            290 STORE_NAME              30 (_applySnapshot)
+
+160         292 LOAD_NAME                9 (List)
+            294 LOAD_NAME                8 (Dict)
+            296 LOAD_NAME               23 (str)
+            298 LOAD_NAME               23 (str)
+            300 BUILD_TUPLE              2
+            302 BINARY_SUBSCR
+            304 BINARY_SUBSCR
+            306 LOAD_CONST              21 (('return',))
+            308 BUILD_CONST_KEY_MAP      1
+            310 LOAD_CONST              29 (<code object ensureLoaded at 0x000001F324E692F0, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 160>)
+            312 LOAD_CONST              30 ('ensureLoaded')
+            314 MAKE_FUNCTION            4 (annotations)
+            316 STORE_NAME              31 (ensureLoaded)
+
+181         318 LOAD_NAME                9 (List)
+            320 LOAD_NAME                8 (Dict)
+            322 LOAD_NAME               23 (str)
+            324 LOAD_NAME               23 (str)
+            326 BUILD_TUPLE              2
+            328 BINARY_SUBSCR
+            330 BINARY_SUBSCR
+            332 LOAD_CONST               2 (None)
+            334 LOAD_CONST              26 (('items', 'return'))
+            336 BUILD_CONST_KEY_MAP      2
+            338 LOAD_CONST              31 (<code object saveFavorites at 0x000001F324E69B30, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 181>)
+            340 LOAD_CONST              32 ('saveFavorites')
+            342 MAKE_FUNCTION            4 (annotations)
+            344 STORE_NAME              32 (saveFavorites)
+
+192         346 LOAD_CONST              36 ((None,))
+
+193         348 LOAD_NAME               23 (str)
+
+194         350 LOAD_NAME               33 (bool)
+
+195         352 LOAD_NAME               10 (Optional)
+            354 LOAD_NAME                8 (Dict)
+            356 LOAD_NAME               23 (str)
+            358 LOAD_NAME                7 (Any)
+            360 BUILD_TUPLE              2
+            362 BINARY_SUBSCR
+            364 BINARY_SUBSCR
+
+196         366 LOAD_NAME               33 (bool)
+
+192         368 LOAD_CONST              33 (('stationId', 'isFavorite', 'itemData', 'return'))
+            370 BUILD_CONST_KEY_MAP      4
+            372 LOAD_CONST              34 (<code object applyFavoriteChange at 0x000001F324E693A0, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 192>)
+            374 LOAD_CONST              35 ('applyFavoriteChange')
+            376 MAKE_FUNCTION            5 (defaults, annotations)
+            378 STORE_NAME              34 (applyFavoriteChange)
+            380 LOAD_CONST               2 (None)
+            382 RETURN_VALUE
+
+=== _normalize_station_text_field ===
+ 39           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (value)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 RETURN_VALUE
+
+=== _normalize_station_country_code ===
+ 49           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (countryCode)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (upper)
+             16 CALL_METHOD              0
+             18 RETURN_VALUE
+
+=== extractStationLocationFields ===
+ 59           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (item)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        26
+
+ 61          10 LOAD_CONST               1 ('')
+
+ 62          12 LOAD_CONST               1 ('')
+
+ 63          14 LOAD_CONST               1 ('')
+
+ 64          16 LOAD_CONST               1 ('')
+
+ 65          18 LOAD_CONST               1 ('')
+
+ 60          20 LOAD_CONST               2 (('city', 'region', 'country', 'countryCode', 'genres'))
+             22 BUILD_CONST_KEY_MAP      5
+             24 RETURN_VALUE
+
+ 68     >>   26 LOAD_GLOBAL              2 (_normalize_station_text_field)
+             28 LOAD_FAST                0 (item)
+             30 LOAD_METHOD              3 (get)
+             32 LOAD_CONST               3 ('city')
+             34 LOAD_FAST                0 (item)
+             36 LOAD_METHOD              3 (get)
+             38 LOAD_CONST               4 ('City')
+             40 LOAD_CONST               1 ('')
+             42 CALL_METHOD              2
+             44 CALL_METHOD              2
+             46 CALL_FUNCTION            1
+
+ 69          48 LOAD_GLOBAL              2 (_normalize_station_text_field)
+
+ 70          50 LOAD_FAST                0 (item)
+             52 LOAD_METHOD              3 (get)
+             54 LOAD_CONST               5 ('region')
+             56 LOAD_FAST                0 (item)
+             58 LOAD_METHOD              3 (get)
+             60 LOAD_CONST               6 ('Subcountry')
+             62 LOAD_FAST                0 (item)
+             64 LOAD_METHOD              3 (get)
+             66 LOAD_CONST               7 ('subcountry')
+             68 LOAD_FAST                0 (item)
+             70 LOAD_METHOD              3 (get)
+             72 LOAD_CONST               8 ('Region')
+             74 LOAD_CONST               1 ('')
+             76 CALL_METHOD              2
+             78 CALL_METHOD              2
+             80 CALL_METHOD              2
+             82 CALL_METHOD              2
+
+ 69          84 CALL_FUNCTION            1
+
+ 72          86 LOAD_GLOBAL              2 (_normalize_station_text_field)
+             88 LOAD_FAST                0 (item)
+             90 LOAD_METHOD              3 (get)
+             92 LOAD_CONST               9 ('country')
+             94 LOAD_FAST                0 (item)
+             96 LOAD_METHOD              3 (get)
+             98 LOAD_CONST              10 ('Country')
+            100 LOAD_CONST               1 ('')
+            102 CALL_METHOD              2
+            104 CALL_METHOD              2
+            106 CALL_FUNCTION            1
+
+ 73         108 LOAD_GLOBAL              4 (_normalize_station_country_code)
+            110 LOAD_FAST                0 (item)
+            112 LOAD_METHOD              3 (get)
+            114 LOAD_CONST              11 ('countryCode')
+            116 LOAD_FAST                0 (item)
+            118 LOAD_METHOD              3 (get)
+            120 LOAD_CONST              12 ('CountryCode')
+            122 LOAD_CONST               1 ('')
+            124 CALL_METHOD              2
+            126 CALL_METHOD              2
+            128 CALL_FUNCTION            1
+
+ 74         130 LOAD_GLOBAL              2 (_normalize_station_text_field)
+            132 LOAD_FAST                0 (item)
+            134 LOAD_METHOD              3 (get)
+            136 LOAD_CONST              13 ('genres')
+            138 LOAD_FAST                0 (item)
+            140 LOAD_METHOD              3 (get)
+            142 LOAD_CONST              14 ('Genres')
+            144 LOAD_CONST               1 ('')
+            146 CALL_METHOD              2
+            148 CALL_METHOD              2
+            150 CALL_FUNCTION            1
+
+ 67         152 LOAD_CONST               2 (('city', 'region', 'country', 'countryCode', 'genres'))
+            154 BUILD_CONST_KEY_MAP      5
+            156 RETURN_VALUE
+
+=== normalizeFavoriteItem ===
+ 85           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (item)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+ 86          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+ 87     >>   14 LOAD_GLOBAL              2 (str)
+             16 LOAD_FAST                0 (item)
+             18 LOAD_METHOD              3 (get)
+             20 LOAD_CONST               2 ('stationId')
+             22 LOAD_FAST                0 (item)
+             24 LOAD_METHOD              3 (get)
+             26 LOAD_CONST               3 ('stationID')
+             28 LOAD_FAST                0 (item)
+             30 LOAD_METHOD              3 (get)
+             32 LOAD_CONST               4 ('StationID')
+             34 LOAD_CONST               5 ('')
+             36 CALL_METHOD              2
+             38 CALL_METHOD              2
+             40 CALL_METHOD              2
+             42 JUMP_IF_TRUE_OR_POP     46
+             44 LOAD_CONST               5 ('')
+        >>   46 CALL_FUNCTION            1
+             48 LOAD_METHOD              4 (strip)
+             50 CALL_METHOD              0
+             52 STORE_FAST               1 (station_id)
+
+ 88          54 LOAD_FAST                1 (station_id)
+             56 POP_JUMP_IF_TRUE        62
+
+ 89          58 LOAD_CONST               1 (None)
+             60 RETURN_VALUE
+
+ 91     >>   62 LOAD_FAST                1 (station_id)
+
+ 92          64 LOAD_GLOBAL              2 (str)
+             66 LOAD_FAST                0 (item)
+             68 LOAD_METHOD              3 (get)
+             70 LOAD_CONST               6 ('name')
+             72 LOAD_FAST                0 (item)
+             74 LOAD_METHOD              3 (get)
+             76 LOAD_CONST               7 ('Name')
+             78 LOAD_CONST               5 ('')
+             80 CALL_METHOD              2
+             82 CALL_METHOD              2
+             84 JUMP_IF_TRUE_OR_POP     88
+             86 LOAD_CONST               5 ('')
+        >>   88 CALL_FUNCTION            1
+             90 LOAD_METHOD              4 (strip)
+             92 CALL_METHOD              0
+
+ 93          94 LOAD_GLOBAL              2 (str)
+             96 LOAD_FAST                0 (item)
+             98 LOAD_METHOD              3 (get)
+            100 LOAD_CONST               8 ('favicon')
+            102 LOAD_FAST                0 (item)
+            104 LOAD_METHOD              3 (get)
+            106 LOAD_CONST               9 ('Favicon')
+            108 LOAD_CONST               5 ('')
+            110 CALL_METHOD              2
+            112 CALL_METHOD              2
+            114 JUMP_IF_TRUE_OR_POP    118
+            116 LOAD_CONST               5 ('')
+        >>  118 CALL_FUNCTION            1
+            120 LOAD_METHOD              4 (strip)
+            122 CALL_METHOD              0
+
+ 94         124 LOAD_GLOBAL              2 (str)
+
+ 95         126 LOAD_FAST                0 (item)
+            128 LOAD_METHOD              3 (get)
+            130 LOAD_CONST              10 ('faviconThumbPath')
+            132 LOAD_FAST                0 (item)
+            134 LOAD_METHOD              3 (get)
+            136 LOAD_CONST              11 ('FaviconThumbPath')
+            138 LOAD_CONST               5 ('')
+            140 CALL_METHOD              2
+            142 CALL_METHOD              2
+            144 JUMP_IF_TRUE_OR_POP    148
+            146 LOAD_CONST               5 ('')
+
+ 94     >>  148 CALL_FUNCTION            1
+            150 LOAD_METHOD              4 (strip)
+            152 CALL_METHOD              0
+
+ 97         154 LOAD_GLOBAL              2 (str)
+            156 LOAD_FAST                0 (item)
+            158 LOAD_METHOD              3 (get)
+            160 LOAD_CONST              12 ('streamUrl')
+            162 LOAD_FAST                0 (item)
+            164 LOAD_METHOD              3 (get)
+            166 LOAD_CONST              13 ('StreamUrl')
+            168 LOAD_CONST               5 ('')
+            170 CALL_METHOD              2
+            172 CALL_METHOD              2
+            174 JUMP_IF_TRUE_OR_POP    178
+            176 LOAD_CONST               5 ('')
+        >>  178 CALL_FUNCTION            1
+            180 LOAD_METHOD              4 (strip)
+            182 CALL_METHOD              0
+
+ 90         184 LOAD_CONST              14 (('stationId', 'name', 'favicon', 'faviconThumbPath', 'streamUrl'))
+            186 BUILD_CONST_KEY_MAP      5
+
+ 98         188 LOAD_GLOBAL              5 (extractStationLocationFields)
+            190 LOAD_FAST                0 (item)
+            192 CALL_FUNCTION            1
+
+ 90         194 DICT_UPDATE              1
+            196 RETURN_VALUE
+
+=== _cache ===
+108           0 LOAD_GLOBAL              0 (LPFavoriteCacheManager)
+              2 LOAD_METHOD              1 (instance)
+              4 CALL_METHOD              0
+              6 RETURN_VALUE
+
+=== _loadLegacyItems ===
+117           0 LOAD_GLOBAL              0 (Path)
+              2 LOAD_GLOBAL              1 (LEGACY_FAVORITES_PATH)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               0 (path)
+
+118           8 LOAD_FAST                0 (path)
+             10 LOAD_METHOD              2 (exists)
+             12 CALL_METHOD              0
+             14 POP_JUMP_IF_TRUE        20
+
+119          16 BUILD_LIST               0
+             18 RETURN_VALUE
+
+120     >>   20 SETUP_FINALLY           60 (to 82)
+
+121          22 LOAD_GLOBAL              3 (open)
+             24 LOAD_FAST                0 (path)
+             26 LOAD_CONST               1 ('r')
+             28 LOAD_CONST               2 ('utf-8')
+             30 LOAD_CONST               3 (('encoding',))
+             32 CALL_FUNCTION_KW         3
+             34 SETUP_WITH              26 (to 62)
+             36 STORE_FAST               1 (file_obj)
+
+122          38 LOAD_GLOBAL              4 (json)
+             40 LOAD_METHOD              5 (load)
+             42 LOAD_FAST                1 (file_obj)
+             44 CALL_METHOD              1
+             46 STORE_FAST               2 (payload)
+             48 POP_BLOCK
+             50 LOAD_CONST               4 (None)
+             52 DUP_TOP
+             54 DUP_TOP
+             56 CALL_FUNCTION            3
+             58 POP_TOP
+             60 JUMP_FORWARD            16 (to 78)
+        >>   62 WITH_EXCEPT_START
+             64 POP_JUMP_IF_TRUE        68
+             66 RERAISE
+        >>   68 POP_TOP
+             70 POP_TOP
+             72 POP_TOP
+             74 POP_EXCEPT
+             76 POP_TOP
+        >>   78 POP_BLOCK
+             80 JUMP_FORWARD            58 (to 140)
+
+123     >>   82 DUP_TOP
+             84 LOAD_GLOBAL              6 (OSError)
+             86 LOAD_GLOBAL              4 (json)
+             88 LOAD_ATTR                7 (JSONDecodeError)
+             90 BUILD_TUPLE              2
+             92 JUMP_IF_NOT_EXC_MATCH   138
+             94 POP_TOP
+             96 STORE_FAST               3 (exc)
+             98 POP_TOP
+            100 SETUP_FINALLY           28 (to 130)
+
+124         102 LOAD_GLOBAL              8 (logger)
+            104 LOAD_METHOD              9 (warning)
+            106 LOAD_CONST               5 ('[WiiMRadio] load legacy favorites failed: %s')
+            108 LOAD_FAST                3 (exc)
+            110 CALL_METHOD              2
+            112 POP_TOP
+
+125         114 BUILD_LIST               0
+            116 POP_BLOCK
+            118 ROT_FOUR
+            120 POP_EXCEPT
+            122 LOAD_CONST               4 (None)
+            124 STORE_FAST               3 (exc)
+            126 DELETE_FAST              3 (exc)
+            128 RETURN_VALUE
+        >>  130 LOAD_CONST               4 (None)
+            132 STORE_FAST               3 (exc)
+            134 DELETE_FAST              3 (exc)
+            136 RERAISE
+        >>  138 RERAISE
+
+127     >>  140 LOAD_GLOBAL             10 (isinstance)
+            142 LOAD_FAST                2 (payload)
+            144 LOAD_GLOBAL             11 (dict)
+            146 CALL_FUNCTION            2
+            148 POP_JUMP_IF_FALSE      162
+            150 LOAD_FAST                2 (payload)
+            152 LOAD_METHOD             12 (get)
+            154 LOAD_CONST               6 ('favorites')
+            156 BUILD_LIST               0
+            158 CALL_METHOD              2
+            160 JUMP_FORWARD            16 (to 178)
+        >>  162 LOAD_GLOBAL             10 (isinstance)
+            164 LOAD_FAST                2 (payload)
+            166 LOAD_GLOBAL             13 (list)
+            168 CALL_FUNCTION            2
+            170 POP_JUMP_IF_FALSE      176
+            172 LOAD_FAST                2 (payload)
+            174 JUMP_FORWARD             2 (to 178)
+        >>  176 BUILD_LIST               0
+        >>  178 STORE_FAST               4 (raw_items)
+
+128         180 BUILD_LIST               0
+            182 STORE_FAST               5 (favorites)
+
+129         184 LOAD_GLOBAL             14 (set)
+            186 CALL_FUNCTION            0
+            188 STORE_FAST               6 (seen_ids)
+
+130         190 LOAD_FAST                4 (raw_items)
+            192 GET_ITER
+        >>  194 FOR_ITER                56 (to 252)
+            196 STORE_FAST               7 (raw_item)
+
+131         198 LOAD_GLOBAL             15 (normalizeFavoriteItem)
+            200 LOAD_FAST                7 (raw_item)
+            202 CALL_FUNCTION            1
+            204 STORE_FAST               8 (item)
+
+132         206 LOAD_FAST                8 (item)
+            208 POP_JUMP_IF_TRUE       212
+
+133         210 JUMP_ABSOLUTE          194
+
+134     >>  212 LOAD_FAST                8 (item)
+            214 LOAD_CONST               7 ('stationId')
+            216 BINARY_SUBSCR
+            218 STORE_FAST               9 (station_id)
+
+135         220 LOAD_FAST                9 (station_id)
+            222 LOAD_FAST                6 (seen_ids)
+            224 CONTAINS_OP              0
+            226 POP_JUMP_IF_FALSE      230
+
+136         228 JUMP_ABSOLUTE          194
+
+137     >>  230 LOAD_FAST                6 (seen_ids)
+            232 LOAD_METHOD             16 (add)
+            234 LOAD_FAST                9 (station_id)
+            236 CALL_METHOD              1
+            238 POP_TOP
+
+138         240 LOAD_FAST                5 (favorites)
+            242 LOAD_METHOD             17 (append)
+            244 LOAD_FAST                8 (item)
+            246 CALL_METHOD              1
+            248 POP_TOP
+            250 JUMP_ABSOLUTE          194
+
+139     >>  252 LOAD_FAST                5 (favorites)
+            254 RETURN_VALUE
+
+=== _applySnapshot ===
+149           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F324E69710, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 149>)
+              2 LOAD_CONST               2 ('_applySnapshot.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                0 (items)
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 BUILD_LIST               0
+        >>   12 GET_ITER
+             14 CALL_FUNCTION            1
+             16 STORE_FAST               1 (normalized)
+
+150          18 LOAD_CONST               3 ('stations')
+             20 LOAD_CONST               4 (<code object <listcomp> at 0x000001F324E697C0, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 150>)
+             22 LOAD_CONST               2 ('_applySnapshot.<locals>.<listcomp>')
+             24 MAKE_FUNCTION            0
+             26 LOAD_FAST                1 (normalized)
+             28 GET_ITER
+             30 CALL_FUNCTION            1
+             32 BUILD_MAP                1
+             34 STORE_FAST               2 (ids)
+
+151          36 LOAD_GLOBAL              0 (_cache)
+             38 CALL_FUNCTION            0
+             40 LOAD_ATTR                1 (applyServerSnapshot)
+
+152          42 LOAD_GLOBAL              2 (SOURCE)
+
+153          44 LOAD_GLOBAL              3 (LOCAL_USER_ID)
+
+154          46 LOAD_FAST                2 (ids)
+
+155          48 LOAD_CONST               3 ('stations')
+             50 LOAD_FAST                1 (normalized)
+             52 BUILD_MAP                1
+
+156          54 LOAD_GLOBAL              4 (time)
+             56 LOAD_METHOD              4 (time)
+             58 CALL_METHOD              0
+
+151          60 LOAD_CONST               5 (('items', 'snapshotAt'))
+             62 CALL_FUNCTION_KW         5
+             64 POP_TOP
+             66 LOAD_CONST               6 (None)
+             68 RETURN_VALUE
+
+=== _applySnapshot.<listcomp> ===
+149           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_GLOBAL              1 (dict)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_FAST                1 (item)
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE
+
+=== _applySnapshot.<listcomp> ===
+150           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (item)
+              8 LOAD_FAST                1 (item)
+             10 LOAD_CONST               0 ('stationId')
+             12 BINARY_SUBSCR
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE
+
+=== ensureLoaded ===
+170           0 LOAD_GLOBAL              0 (_STORAGE_LOCK)
+              2 SETUP_WITH             102 (to 106)
+              4 POP_TOP
+
+171           6 LOAD_GLOBAL              1 (_cache)
+              8 CALL_FUNCTION            0
+             10 STORE_FAST               0 (cache)
+
+172          12 LOAD_FAST                0 (cache)
+             14 LOAD_METHOD              2 (favoriteItems)
+             16 LOAD_GLOBAL              3 (SOURCE)
+             18 LOAD_GLOBAL              4 (LOCAL_USER_ID)
+             20 LOAD_GLOBAL              5 (ITEM_TYPE)
+             22 CALL_METHOD              3
+             24 JUMP_IF_TRUE_OR_POP     28
+             26 BUILD_LIST               0
+        >>   28 STORE_FAST               1 (current)
+
+173          30 LOAD_FAST                0 (cache)
+             32 LOAD_METHOD              6 (status)
+             34 LOAD_GLOBAL              3 (SOURCE)
+             36 LOAD_GLOBAL              4 (LOCAL_USER_ID)
+             38 CALL_METHOD              2
+             40 LOAD_CONST               1 (('missing', 'syncing', 'failed'))
+             42 CONTAINS_OP              0
+             44 POP_JUMP_IF_FALSE       74
+
+174          46 LOAD_FAST                1 (current)
+             48 POP_JUMP_IF_FALSE       64
+
+175          50 LOAD_FAST                0 (cache)
+             52 LOAD_METHOD              7 (markSynced)
+             54 LOAD_GLOBAL              3 (SOURCE)
+             56 LOAD_GLOBAL              4 (LOCAL_USER_ID)
+             58 CALL_METHOD              2
+             60 POP_TOP
+             62 JUMP_FORWARD            10 (to 74)
+
+177     >>   64 LOAD_GLOBAL              8 (_applySnapshot)
+             66 LOAD_GLOBAL              9 (_loadLegacyItems)
+             68 CALL_FUNCTION            0
+             70 CALL_FUNCTION            1
+             72 POP_TOP
+
+178     >>   74 LOAD_FAST                0 (cache)
+             76 LOAD_METHOD              2 (favoriteItems)
+             78 LOAD_GLOBAL              3 (SOURCE)
+             80 LOAD_GLOBAL              4 (LOCAL_USER_ID)
+             82 LOAD_GLOBAL              5 (ITEM_TYPE)
+             84 CALL_METHOD              3
+             86 JUMP_IF_TRUE_OR_POP     90
+             88 BUILD_LIST               0
+        >>   90 POP_BLOCK
+             92 ROT_TWO
+             94 LOAD_CONST               2 (None)
+             96 DUP_TOP
+             98 DUP_TOP
+            100 CALL_FUNCTION            3
+            102 POP_TOP
+            104 RETURN_VALUE
+        >>  106 WITH_EXCEPT_START
+            108 POP_JUMP_IF_TRUE       112
+            110 RERAISE
+        >>  112 POP_TOP
+            114 POP_TOP
+            116 POP_TOP
+            118 POP_EXCEPT
+            120 POP_TOP
+            122 LOAD_CONST               2 (None)
+            124 RETURN_VALUE
+
+=== saveFavorites ===
+188           0 LOAD_GLOBAL              0 (_STORAGE_LOCK)
+              2 SETUP_WITH              24 (to 28)
+              4 POP_TOP
+
+189           6 LOAD_GLOBAL              1 (_applySnapshot)
+              8 LOAD_FAST                0 (items)
+             10 CALL_FUNCTION            1
+             12 POP_TOP
+             14 POP_BLOCK
+             16 LOAD_CONST               1 (None)
+             18 DUP_TOP
+             20 DUP_TOP
+             22 CALL_FUNCTION            3
+             24 POP_TOP
+             26 JUMP_FORWARD            16 (to 44)
+        >>   28 WITH_EXCEPT_START
+             30 POP_JUMP_IF_TRUE        34
+             32 RERAISE
+        >>   34 POP_TOP
+             36 POP_TOP
+             38 POP_TOP
+             40 POP_EXCEPT
+             42 POP_TOP
+        >>   44 LOAD_CONST               1 (None)
+             46 RETURN_VALUE
+
+=== applyFavoriteChange ===
+205           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (stationId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_DEREF              0 (station_id)
+
+206          16 LOAD_DEREF               0 (station_id)
+             18 POP_JUMP_IF_TRUE        24
+
+207          20 LOAD_CONST               2 (False)
+             22 RETURN_VALUE
+
+208     >>   24 LOAD_GLOBAL              2 (_STORAGE_LOCK)
+             26 SETUP_WITH             182 (to 210)
+             28 POP_TOP
+
+209          30 LOAD_GLOBAL              3 (ensureLoaded)
+             32 CALL_FUNCTION            0
+             34 POP_TOP
+
+210          36 LOAD_GLOBAL              4 (_cache)
+             38 CALL_FUNCTION            0
+             40 STORE_FAST               3 (cache)
+
+211          42 LOAD_FAST                1 (isFavorite)
+             44 POP_JUMP_IF_FALSE      178
+
+212          46 LOAD_GLOBAL              5 (isinstance)
+             48 LOAD_FAST                2 (itemData)
+             50 LOAD_GLOBAL              6 (dict)
+             52 CALL_FUNCTION            2
+             54 POP_JUMP_IF_FALSE       64
+             56 LOAD_GLOBAL              7 (normalizeFavoriteItem)
+             58 LOAD_FAST                2 (itemData)
+             60 CALL_FUNCTION            1
+             62 JUMP_FORWARD             2 (to 66)
+        >>   64 LOAD_CONST               3 (None)
+        >>   66 STORE_FAST               4 (normalized)
+
+213          68 LOAD_FAST                4 (normalized)
+             70 LOAD_CONST               3 (None)
+             72 IS_OP                    0
+             74 POP_JUMP_IF_TRUE        88
+             76 LOAD_FAST                4 (normalized)
+             78 LOAD_CONST               4 ('stationId')
+             80 BINARY_SUBSCR
+             82 LOAD_DEREF               0 (station_id)
+             84 COMPARE_OP               3 (!=)
+             86 POP_JUMP_IF_FALSE      154
+
+214     >>   88 LOAD_GLOBAL              8 (next)
+
+215          90 LOAD_CLOSURE             0 (station_id)
+             92 BUILD_TUPLE              1
+             94 LOAD_CONST               5 (<code object <genexpr> at 0x000001F324E69BE0, file "StreamService\WiiMRadio\utils\LPWiiMRadioFavoriteStorage.py", line 215>)
+             96 LOAD_CONST               6 ('applyFavoriteChange.<locals>.<genexpr>')
+             98 MAKE_FUNCTION            8 (closure)
+
+217         100 LOAD_FAST                3 (cache)
+            102 LOAD_METHOD              9 (favoriteItems)
+            104 LOAD_GLOBAL             10 (SOURCE)
+            106 LOAD_GLOBAL             11 (LOCAL_USER_ID)
+            108 LOAD_GLOBAL             12 (ITEM_TYPE)
+            110 CALL_METHOD              3
+            112 JUMP_IF_TRUE_OR_POP    116
+            114 BUILD_LIST               0
+
+215     >>  116 GET_ITER
+            118 CALL_FUNCTION            1
+
+220         120 LOAD_CONST               3 (None)
+
+214         122 CALL_FUNCTION            2
+            124 STORE_FAST               5 (existing)
+
+222         126 LOAD_FAST                5 (existing)
+            128 LOAD_CONST               3 (None)
+            130 IS_OP                    0
+            132 POP_JUMP_IF_FALSE      150
+
+223         134 POP_BLOCK
+            136 LOAD_CONST               3 (None)
+            138 DUP_TOP
+            140 DUP_TOP
+            142 CALL_FUNCTION            3
+            144 POP_TOP
+            146 LOAD_CONST               2 (False)
+            148 RETURN_VALUE
+
+224     >>  150 LOAD_FAST                5 (existing)
+            152 STORE_FAST               4 (normalized)
+
+225     >>  154 LOAD_FAST                3 (cache)
+            156 LOAD_ATTR               13 (applyLocalChange)
+
+226         158 LOAD_GLOBAL             10 (SOURCE)
+
+227         160 LOAD_GLOBAL             11 (LOCAL_USER_ID)
+
+228         162 LOAD_GLOBAL             12 (ITEM_TYPE)
+
+229         164 LOAD_DEREF               0 (station_id)
+
+230         166 LOAD_CONST               7 (True)
+
+231         168 LOAD_FAST                4 (normalized)
+
+225         170 LOAD_CONST               8 (('itemData',))
+            172 CALL_FUNCTION_KW         6
+            174 POP_TOP
+            176 JUMP_FORWARD            18 (to 196)
+
+234     >>  178 LOAD_FAST                3 (cache)
+            180 LOAD_METHOD             13 (applyLocalChange)
+            182 LOAD_GLOBAL             10 (SOURCE)
+            184 LOAD_GLOBAL             11 (LOCAL_USER_ID)
+            186 LOAD_GLOBAL             12 (ITEM_TYPE)
+            188 LOAD_DEREF               0 (station_id)
+            190 LOAD_CONST               2 (False)
+            192 CALL_METHOD              5
+            194 POP_TOP
+        >>  196 POP_BLOCK
+            198 LOAD_CONST               3 (None)
+            200 DUP_TOP
+            202 DUP_TOP
+            204 CALL_FUNCTION            3
+            206 POP_TOP
+            208 JUMP_FORWARD            16 (to 226)
+        >>  210 WITH_EXCEPT_START
+            212 POP_JUMP_IF_TRUE       216
+            214 RERAISE
+        >>  216 POP_TOP
+            218 POP_TOP
+            220 POP_TOP
+            222 POP_EXCEPT
+            224 POP_TOP
+
+235     >>  226 LOAD_CONST               7 (True)
+            228 RETURN_VALUE
+
+=== applyFavoriteChange.<genexpr> ===
+215           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                24 (to 28)
+
+217           4 STORE_FAST               1 (item)
+
+218           6 LOAD_FAST                1 (item)
+              8 LOAD_METHOD              0 (get)
+             10 LOAD_CONST               0 ('stationId')
+             12 CALL_METHOD              1
+             14 LOAD_DEREF               0 (station_id)
+             16 COMPARE_OP               2 (==)
+             18 POP_JUMP_IF_FALSE        2
+
+216          20 LOAD_FAST                1 (item)
+             22 YIELD_VALUE
+             24 POP_TOP
+             26 JUMP_ABSOLUTE            2
+        >>   28 LOAD_CONST               1 (None)
+             30 RETURN_VALUE

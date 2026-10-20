@@ -1,0 +1,105 @@
+# module HOME.StreamService.Qobuz.Component.GenresSelector.LPQobuzGenresSelector
+
+[module] names: __doc__, string, Template, PyQt6.QtCore, QPoint, Qt, pyqtSignal, QTimer, QCoreApplication, PyQt6.QtWidgets, QCheckBox, LPGlobalUI, HOME.StreamService.Qobuz.LPQobuzBaseViewController, LPQobuzBaseViewController, LPClientFramework.CacheLog, logger, LPClientFramework.LPConfig.LPFontConfig, DEFAULT, LPClientFramework.LPNetworkClient.LPNetworkClient, LPRequestCommonResult, LPQobuzGenresSelector
+  str: '\n@Time ： 2025/7/29 17:12\n@Auth ： Chris\n@File ：LPQobuzGenresSelector.py\n@Desc:\n'
+  str: 'Template'
+  str: 'QPoint'
+  str: 'Qt'
+  str: 'pyqtSignal'
+  str: 'QTimer'
+  str: 'QCoreApplication'
+  str: 'QCheckBox'
+  str: 'LPQobuzBaseViewController'
+  str: 'logger'
+  str: 'DEFAULT'
+  str: 'LPRequestCommonResult'
+  str: 'LPQobuzGenresSelector'
+
+def LPQobuzGenresSelector()  line 20
+  names: __name__, __module__, __qualname__, pyqtSignal, showSignal, __init__, setupUi, onSelectAllToggled, onCheckboxClicked, changeToggleBoxStatus, _doRefresh, toggleSelect, getGenreList, populateGrid, showGenre, updatePosition, _show, focusOutEvent, refreshCheckboxesFromManager, __classcell__
+    str: 'LPQobuzGenresSelector'
+    str: 'LPQobuzGenresSelector.__init__'
+    str: 'LPQobuzGenresSelector.setupUi'
+    str: 'LPQobuzGenresSelector.onSelectAllToggled'
+    str: 'LPQobuzGenresSelector.onCheckboxClicked'
+    str: 'LPQobuzGenresSelector.changeToggleBoxStatus'
+    str: 'LPQobuzGenresSelector._doRefresh'
+    str: 'LPQobuzGenresSelector.toggleSelect'
+    str: 'LPQobuzGenresSelector.getGenreList'
+    str: 'LPQobuzGenresSelector.populateGrid'
+    str: 'LPQobuzGenresSelector.showGenre'
+    str: 'LPQobuzGenresSelector.updatePosition'
+    str: 'LPQobuzGenresSelector._show'
+    str: 'LPQobuzGenresSelector.focusOutEvent'
+    str: 'LPQobuzGenresSelector.refreshCheckboxesFromManager'
+
+  def LPQobuzGenresSelector.__init__(self, parent, genreManager)  line 23
+    names: super, __init__, parent, genreManager, playList, checkboxes, selectAllFlag, showSignal, connect, _show, QTimer, refreshTimer, setSingleShot, timeout, _doRefresh, allGenres
+
+  def LPQobuzGenresSelector.setupUi(self, ui)  line 43
+    names: getattr, super, callable, setupUi, setWindowFlags, Qt, WindowType, Popup, FramelessWindowHint, NoDropShadowWindowHint, setAttribute, WidgetAttribute, WA_StyledBackground, WA_TranslucentBackground, toggleBox, setStyleSheet, LPGlobalUI, THEME_BUTTON_BACK_COLOR_UI, name, setText, QCoreApplication, translate, clicked, connect, onSelectAllToggled, Template, substitute, THEME_FONT_COLOR_UI, THEME_DIALOG_BACK_COLOR_UI, DEFAULT
+      str: 'setupUi'
+      str: '\n                QCheckBox::indicator{ \n                    width: 0; height: 0; \n                }\n                QCheckBox{\n                    text-decoration: underline;\n                    color: %s;\n                }\n            '
+      str: 'qobuz selector'
+      str: 'Select all'
+      str: '\n                QFrame{\n                    background-color: $background;\n                    border:none;\n                }               \n                QFrame#mainFrame{\n                    border-radius: 10px;                   \n                }\n                QPushButton {\n                '
+      str: 'fontColor'
+      str: 'checkedFontColor'
+      str: 'background'
+      str: 'fontSize'
+
+  def LPQobuzGenresSelector.onSelectAllToggled(self, checked)  line 92
+    names: checkboxes, setChecked, toggleBox, setText, QCoreApplication, translate, genreManager, selectAllGenres, clearGenres
+      str: 'qobuz selector'
+      str: 'Deselect all'
+      str: 'Select all'
+
+  def LPQobuzGenresSelector.onCheckboxClicked(self)  line 108
+    names: sender, genreManager, toggleGenre, genre, changeToggleBoxStatus, refreshTimer, start
+
+  def LPQobuzGenresSelector.changeToggleBoxStatus(self)  line 115
+    names: logger, debug, len, genreManager, selectedGenres, allGenres, toggleBox, setChecked, setText, QCoreApplication, translate
+      str: '[qobuz genres selector] changeToggleBoxStatus...'
+      str: '[qobuz genres selector] all'
+      str: 'qobuz selector'
+      str: 'Deselect all'
+      str: '[qobuz genres selector] not all'
+      str: 'Select all'
+
+  def LPQobuzGenresSelector._doRefresh(self)  line 128
+    names: genreManager, genresChangedSignal, emit, selectedGenres
+
+  def LPQobuzGenresSelector.toggleSelect(self)  line 131
+    names: selectAllFlag, checkboxes, setChecked, toggleButton, setText, genreManager, clearGenres
+      str: 'Deselect all'
+      str: 'Select all'
+
+  def LPQobuzGenresSelector.getGenreList(self)  line 146
+    names: LPRequestCommonResult, qobuz, requestMgr, fetchGenresData, fetch
+      str: 'result'
+      str: 'LPQobuzGenresSelector.getGenreList.<locals>.callback'
+
+    def LPQobuzGenresSelector.getGenreList.callback(result)  line 147
+      names: is_success, data, list, allGenres, genreManager, setAllGenres, showSignal, emit
+
+  def LPQobuzGenresSelector.populateGrid(self)  line 158
+    names: reversed, range, genresGridLayout, count, itemAt, widget, deleteLater, enumerate, allGenres, QCheckBox, trackName, genre, clicked, connect, onCheckboxClicked, setStyleSheet, DEFAULT, setCursor, Qt, CursorShape, PointingHandCursor, addWidget, checkboxes, append
+      str: 'color: white; font-size: '
+      str: 'pt'
+
+  def LPQobuzGenresSelector.showGenre(self)  line 177
+    names: allGenres, genreManager, loadAllGenresFromCache, logger, debug, showSignal, emit, getGenreList
+      str: 'showGenre allGenre use cache'
+      str: 'showGenre allGenre use request'
+
+  def LPQobuzGenresSelector.updatePosition(self)  line 190
+    names: parent, genresSelectButton, mapToGlobal, QPoint, height, x, width, y, move
+
+  def LPQobuzGenresSelector._show(self)  line 203
+    names: checkboxes, populateGrid, refreshCheckboxesFromManager, updatePosition, show
+
+  def LPQobuzGenresSelector.focusOutEvent(self, event)  line 214
+    names: close, super, focusOutEvent
+
+  def LPQobuzGenresSelector.refreshCheckboxesFromManager(self)  line 219
+    names: genreManager, getSelectedKeys, checkboxes, genre, trackId, setChecked, changeToggleBoxStatus

@@ -1,0 +1,131 @@
+# module LPClientFramework.LPPlayList.LPPlayList
+
+[module] names: enum, Enum, pathlib, Path, xml.sax.saxutils, escape, LPClientFramework, LPUtility, LPClientFramework.LPUtility, logger, LPPlayListSource, LPHeaderType, _normalizeHeaderTypeScalarValue, LP_HEADER_TYPE_VALUE_MAP, items, LP_HEADER_TYPE_ENUM_MAP, headerTypeValue, headerTypeEnum, object, LPPlayMusicList, LPAccount, LPPlayHeader, LPPlayItem
+  str: 'Enum'
+  str: 'Path'
+  str: 'escape'
+  str: 'LPUtility'
+  str: 'logger'
+  str: 'LPPlayListSource'
+  str: 'LPHeaderType'
+  str: '_normalizeHeaderTypeScalarValue'
+  str: '<dictcomp>'
+  str: 'headerTypeValue'
+  str: 'headerTypeEnum'
+  str: 'LPPlayMusicList'
+  str: 'LPAccount'
+  str: 'LPPlayHeader'
+  str: 'LPPlayItem'
+
+def LPPlayListSource()  line 9
+  names: __name__, __module__, __qualname__, UPnPServer, LocalMusic, RadioParadise2, WiiMRadio, TuneIn, Qobuz, Tidal, Soundtrack
+    str: 'LPPlayListSource'
+    str: 'UPnPServer'
+    str: 'PC_RemoteLocal'
+    str: 'RadioParadise2'
+    str: 'WiiMRadio'
+    str: 'newTuneIn'
+    str: 'Qobuz'
+    str: 'Tidal'
+    str: 'Soundtrack'
+
+def LPHeaderType()  line 19
+  names: __name__, __module__, __qualname__, LP_HEADER_TYPE_COLLECTION, LP_HEADER_TYPE_PLAYLIST, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_ARTIST, LP_HEADER_TYPE_STATION, LP_HEADER_TYPE_SONG, LP_HEADER_TYPE_PODCAST, LP_HEADER_TYPE_SHOW, LP_HEADER_TYPE_EPISODE
+    str: 'LPHeaderType'
+
+def _normalizeHeaderTypeScalarValue(headType)  line 31
+  names: hasattr, value, isinstance, tuple, len
+    str: '\n    把 LPHeaderType 或其落盘后的值归一成基础值。\n\n    Args:\n        headType: 枚举、tuple、数字或其他基础值。\n\n    Returns:\n        便于存储和比较的基础值。\n    '
+    str: 'value'
+
+def <dictcomp>(.0)  line 50
+  names: _normalizeHeaderTypeScalarValue
+
+def <dictcomp>(.0)  line 55
+
+def headerTypeValue(headType)  line 61
+  names: _normalizeHeaderTypeScalarValue
+    str: '\n    获取 LPHeaderType 对应的基础值。\n\n    Args:\n        headType: LPHeaderType 枚举或其序列化后的值。\n\n    Returns:\n        可落盘、可比较的基础值。\n    '
+
+def headerTypeEnum(headType)  line 74
+  names: _normalizeHeaderTypeScalarValue, LP_HEADER_TYPE_ENUM_MAP, get
+    str: '\n    把基础值还原成 LPHeaderType 枚举。\n\n    Args:\n        headType: LPHeaderType 枚举、tuple、数字或字符串值。\n\n    Returns:\n        能识别时返回 LPHeaderType，否则原样返回。\n    '
+
+def LPPlayMusicList()  line 87
+  names: __name__, __module__, __qualname__, __init__, generateXML, getPicUrl
+    str: 'LPPlayMusicList'
+    str: 'LPPlayMusicList.__init__'
+    str: 'LPPlayMusicList.generateXML'
+    str: 'LPPlayMusicList.getPicUrl'
+
+  def LPPlayMusicList.__init__(self)  line 88
+    names: account, header, list, index
+
+  def LPPlayMusicList.generateXML(self, musicArray, startPlayIndex)  line 95
+    names: escape, header, headTitle, mediaSource, len, searchUrl, imageUrl, range, trackUrl, trackId, LPPlayListSource, LocalMusic, value, LPUtility, pcUUID, albumId, artistId, trackName, trackArtist, albumName, trackDuration, trackImage
+      str: '<?xml version="1.0"?><PlayList>'
+      str: '<ListName>%s</ListName>'
+      str: '<ListInfo>'
+      str: '<Radio>%s</Radio>'
+      str: '0'
+      str: '<SourceName>%s</SourceName>'
+      str: '<TrackNumber>%d</TrackNumber>'
+      str: '<SearchUrl>%s</SearchUrl>'
+      str: '<Quality>0</Quality>'
+      str: '<PicUrl>%s</PicUrl>'
+      str: '<StartPlayIndex>%s</StartPlayIndex>'
+      str: '</ListInfo>'
+      str: '<Tracks>'
+      str: '<Track%d>'
+      str: '<URL>%s</URL>'
+      str: '<Source>%s</Source>'
+      str: '<Id>%s</Id>'
+      str: '<Metadata>'
+      str: '<?xml version="1.0" encoding="UTF-8"?><DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:song="www.linkplay.com/song/" xmlns:custom="www.linkplay.com/custom/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><upnp:class>object.item.a'
+      str: '<custom:uuid>%s</custom:uuid>'
+      str: '<song:id>%s</song:id>'
+      str: '<song:albumid>%s</song:albumid>'
+      str: '<song:singerid>%s</song:singerid>'
+      str: '<dc:title>%s</dc:title>'
+      str: '<upnp:artist>%s</upnp:artist>'
+      str: '<upnp:album>%s</upnp:album>'
+      str: '<res protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;" duration="%d">%s</res>'
+      str: '<upnp:albumArtURI>%s</upnp:albumArtURI>'
+      str: '</item></DIDL-Lite>'
+      str: '</Metadata></Track%d>'
+      str: '</Tracks></PlayList>'
+
+  def LPPlayMusicList.getPicUrl(self)  line 142
+    names: header, imageUrl, list, trackImage
+
+def LPAccount()  line 153
+  names: __name__, __module__, __qualname__, __init__, getCacheDir
+    str: 'LPAccount'
+    str: 'LPAccount.__init__'
+    str: 'LPAccount.getCacheDir'
+
+  def LPAccount.__init__(self)  line 154
+    names: source, userId, userName, userPassword, token, refreshToken, expressIn, update, showName
+
+  def LPAccount.getCacheDir(self)  line 165
+    names: userId, logger, error, LPUtility, SSCacheDir, source, str, Path, resolve, mkdir, Exception
+      str: 'getCacheDir userId =='
+      str: 'parents'
+      str: 'exist_ok'
+      str: 'getCacheDir Exception e=='
+
+def LPPlayHeader()  line 183
+  names: __name__, __module__, __qualname__, __init__
+    str: 'LPPlayHeader'
+    str: 'LPPlayHeader.__init__'
+
+  def LPPlayHeader.__init__(self)  line 184
+    names: headTitle, headId, playOrigin, mediaType, headType, mediaSource, searchUrl, loopMode, creator, quality, imageUrl, totalTracks, describe, totalPage, currentPage, perPage
+
+def LPPlayItem()  line 203
+  names: __name__, __module__, __qualname__, __init__
+    str: 'LPPlayItem'
+    str: 'LPPlayItem.__init__'
+
+  def LPPlayItem.__init__(self)  line 204
+    names: trackSource, trackName, trackId, trackUrl, trackImage, trackArtist, artistId, trackSize, trackDuration, playCount, albumName, albumId, createTime

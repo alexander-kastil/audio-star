@@ -1,0 +1,977 @@
+# module LPClientFramework.LPUpdateCoordinator
+
+[module] names: __doc__, platform, time, uuid, enum, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPMacSparkleUpdater, LPMacSparkleUpdater, LPClientFramework.LPUtility, logger, LPClientFramework.LPWinSparkleUpdater, LPWinSparkleUpdater, _HIDDEN_BETA_FEED_MAC_ARM64, _HIDDEN_BETA_FEED_MAC_X86_64, _HIDDEN_BETA_FEED_WIN_X64, Enum, LPOTAEventName, LPOTAFinalResult, LPOTAFinalErrorStage, LPOTAFinalErrorCategory, LPOTAFinalErrorCode, LPOTATelemetryTracker, LPUpdateFlowCoordinator
+  str: '\n更新协调模块。\n该模块负责：\n1. 管理 OTA 埋点会话与补账；\n2. 协调 macOS Sparkle / Windows WinSparkle 更新流程；\n3. 向 UI 层暴露统一的更新检查入口。\n'
+  str: 'LPUtility'
+  str: 'LPMacSparkleUpdater'
+  str: 'logger'
+  str: 'LPWinSparkleUpdater'
+  str: 'https://assets.wiimhome.com/appexe/beta/appcast-beta-mac-arm64.xml'
+  str: 'https://assets.wiimhome.com/appexe/beta/appcast-beta-mac-x86_64.xml'
+  str: 'https://assets.wiimhome.com/appexe/beta/appcast-beta-win-x86_64.xml'
+  str: 'LPOTAEventName'
+  str: 'LPOTAFinalResult'
+  str: 'LPOTAFinalErrorStage'
+  str: 'LPOTAFinalErrorCategory'
+  str: 'LPOTAFinalErrorCode'
+  str: 'LPOTATelemetryTracker'
+  str: 'LPUpdateFlowCoordinator'
+
+def LPOTAEventName()  line 26
+  names: __name__, __module__, __qualname__, __doc__, CHECK_STARTED, CHECK_RESULT, UPDATE_STARTED, DOWNLOAD_RESULT, INSTALL_STARTED, FINAL_RESULT
+    str: 'LPOTAEventName'
+    str: 'OTA 埋点事件名称枚举。'
+    str: 'ota_check_started'
+    str: 'ota_check_result'
+    str: 'ota_update_started'
+    str: 'ota_download_result'
+    str: 'ota_install_started'
+    str: 'ota_final_result'
+
+def LPOTAFinalResult()  line 37
+  names: __name__, __module__, __qualname__, __doc__, SUCCESS, FAILED
+    str: 'LPOTAFinalResult'
+    str: 'OTA 最终结果枚举。'
+    str: 'success'
+    str: 'failed'
+
+def LPOTAFinalErrorStage()  line 44
+  names: __name__, __module__, __qualname__, __doc__, DOWNLOAD, PRE_INSTALL, POST_RESTART_VERIFY, SESSION_RECOVERY, TIMEOUT
+    str: 'LPOTAFinalErrorStage'
+    str: 'OTA 最终失败阶段枚举。'
+    str: 'download'
+    str: 'pre_install'
+    str: 'post_restart_verify'
+    str: 'session_recovery'
+    str: 'timeout'
+
+def LPOTAFinalErrorCategory()  line 54
+  names: __name__, __module__, __qualname__, __doc__, DOWNLOAD, USER_CANCELLED, DOWNLOAD_LIFECYCLE, SESSION_INTERRUPTED, SESSION_RECOVERY, POST_INSTALL_VERIFY, VERSION_COMPARE, TIMEOUT
+    str: 'LPOTAFinalErrorCategory'
+    str: 'OTA 最终失败错误分类枚举。'
+    str: 'download'
+    str: 'user_cancelled'
+    str: 'download_lifecycle'
+    str: 'session_interrupted'
+    str: 'session_recovery'
+    str: 'post_install_verify'
+    str: 'version_compare'
+    str: 'timeout'
+
+def LPOTAFinalErrorCode()  line 67
+  names: __name__, __module__, __qualname__, __doc__, DOWNLOAD_FAILED, DOWNLOAD_CANCELLED, DOWNLOAD_STAGE_UNKNOWN, RESTART_BEFORE_INSTALL, MISSING_ATTEMPT_ID, SESSION_EXPIRED, UNEXPECTED_SESSION_STATUS, TARGET_VERSION_NOT_REACHED, VERSION_COMPARE_INCONCLUSIVE, PROCESS_TIMEOUT
+    str: 'LPOTAFinalErrorCode'
+    str: 'OTA 最终失败错误码枚举。'
+    str: 'download_failed'
+    str: 'download_cancelled'
+    str: 'download_stage_unknown'
+    str: 'restart_before_install'
+    str: 'missing_attempt_id'
+    str: 'session_expired'
+    str: 'unexpected_session_status'
+    str: 'target_version_not_reached'
+    str: 'version_compare_inconclusive'
+    str: 'process_timeout'
+
+def LPOTATelemetryTracker()  line 83
+  names: __name__, __module__, __qualname__, __doc__, OTA_TIMEOUT_MS, OTA_SESSION_RETENTION_MS, __init__, setUpdaters, getLastUpdateCheckReason, _nowMs, _currentUpdaterEngine, _compareVersionStrings, _isSessionUpgradedByVersion, _logOTAEvent, _readOTASession, _writeOTASession, _clearOTASession, _enumValue, _safeInt, _resolveAttemptIdForFinalEvent, _buildOTASessionData, _ensureSessionDeadline, _shouldDelayWindowsManualTimeout, _armOTASessionTimeout, _touchOTASessionProgress, _isActiveOTASessionStatus, _isWindowsManualSession, _canReplaceWindowsManualSession, _buildWindowsManualOTASessionData, _classifyDownloadFinalError, _emitOTAFinalResult, _emitOTAFinalFailure, _reportOTAFinalResult, _reportOTAFinalFailure, _currentUpdaterLastCheckDetail, _ensureOTAPendingSession, _ensureOTAUpdateStartedEvent, _markOTADownloadStarted, _recordOTADownloadResult, _recordOTAFinalFailureForDownload, recordDownloadLifecycleForSparkle, recordDownloadReadyForWinSparkle, _recordOTAInstallStarted, tickOTATimeoutMonitor, resumePendingOTASession, recordUpdateInstallStartedForSparkle, recordUpdateInstallStartedForWinSparkle, recordManualUpdateConfirmedForWinSparkle, _clearPendingWindowsManualSessionOnNoUpdate, recordUpdateCheckTrigger, recordUpdateCallback, logStartupUpdateCheckPending
+    str: 'LPOTATelemetryTracker'
+    str: 'OTA 埋点追踪器。'
+    str: 'LPOTATelemetryTracker.__init__'
+    str: 'LPOTATelemetryTracker.setUpdaters'
+    str: 'LPOTATelemetryTracker.getLastUpdateCheckReason'
+    str: 'LPOTATelemetryTracker._nowMs'
+    str: 'LPOTATelemetryTracker._currentUpdaterEngine'
+    str: 'LPOTATelemetryTracker._compareVersionStrings'
+    str: 'LPOTATelemetryTracker._isSessionUpgradedByVersion'
+    str: 'LPOTATelemetryTracker._logOTAEvent'
+    str: 'LPOTATelemetryTracker._readOTASession'
+    str: 'LPOTATelemetryTracker._writeOTASession'
+    str: 'LPOTATelemetryTracker._clearOTASession'
+    str: 'LPOTATelemetryTracker._enumValue'
+    str: 'LPOTATelemetryTracker._safeInt'
+    str: 'LPOTATelemetryTracker._resolveAttemptIdForFinalEvent'
+    str: 'pending'
+    str: 'LPOTATelemetryTracker._buildOTASessionData'
+    str: 'LPOTATelemetryTracker._ensureSessionDeadline'
+    str: 'LPOTATelemetryTracker._shouldDelayWindowsManualTimeout'
+    str: 'LPOTATelemetryTracker._armOTASessionTimeout'
+    str: 'LPOTATelemetryTracker._touchOTASessionProgress'
+    str: 'LPOTATelemetryTracker._isActiveOTASessionStatus'
+    str: 'LPOTATelemetryTracker._isWindowsManualSession'
+    str: 'LPOTATelemetryTracker._canReplaceWindowsManualSession'
+    str: 'LPOTATelemetryTracker._buildWindowsManualOTASessionData'
+    str: 'LPOTATelemetryTracker._classifyDownloadFinalError'
+    str: 'LPOTATelemetryTracker._emitOTAFinalResult'
+    str: 'LPOTATelemetryTracker._emitOTAFinalFailure'
+    str: 'completed'
+    str: 'LPOTATelemetryTracker._reportOTAFinalResult'
+    str: 'LPOTATelemetryTracker._reportOTAFinalFailure'
+    str: 'LPOTATelemetryTracker._currentUpdaterLastCheckDetail'
+    str: 'LPOTATelemetryTracker._ensureOTAPendingSession'
+    str: 'LPOTATelemetryTracker._ensureOTAUpdateStartedEvent'
+    str: 'LPOTATelemetryTracker._markOTADownloadStarted'
+    str: 'LPOTATelemetryTracker._recordOTADownloadResult'
+    str: 'LPOTATelemetryTracker._recordOTAFinalFailureForDownload'
+    str: 'LPOTATelemetryTracker.recordDownloadLifecycleForSparkle'
+    str: 'LPOTATelemetryTracker.recordDownloadReadyForWinSparkle'
+    str: 'LPOTATelemetryTracker._recordOTAInstallStarted'
+    str: 'LPOTATelemetryTracker.tickOTATimeoutMonitor'
+    str: 'LPOTATelemetryTracker.resumePendingOTASession'
+    str: 'LPOTATelemetryTracker.recordUpdateInstallStartedForSparkle'
+    str: 'LPOTATelemetryTracker.recordUpdateInstallStartedForWinSparkle'
+    str: 'manual_menu'
+    str: 'LPOTATelemetryTracker.recordManualUpdateConfirmedForWinSparkle'
+    str: 'LPOTATelemetryTracker._clearPendingWindowsManualSessionOnNoUpdate'
+    str: 'LPOTATelemetryTracker.recordUpdateCheckTrigger'
+    str: 'LPOTATelemetryTracker.recordUpdateCallback'
+    str: 'LPOTATelemetryTracker.logStartupUpdateCheckPending'
+    str: 'pending'
+    str: 'completed'
+    str: 'completed'
+    str: 'pending'
+    str: 'manual_menu'
+
+  def LPOTATelemetryTracker.__init__(self, macUpdater, winUpdater)  line 89
+    names: _macUpdater, _winUpdater, _lastUpdateCheckReason, _lastUpdateCheckTriggeredAt, _lastUpdateCallbackAt, _lastUpdateCallbackKind, _lastUpdateCheckId
+      str: '\n        初始化 OTA 埋点追踪器。\n\n        参数:\n            macUpdater (LPMacSparkleUpdater | None): macOS 更新器实例。\n            winUpdater (LPWinSparkleUpdater | None): Windows 更新器实例。\n        返回:\n            无\n        '
+
+  def LPOTATelemetryTracker.setUpdaters(self, macUpdater, winUpdater)  line 109
+    names: _macUpdater, _winUpdater
+      str: '\n        注入更新器实例。\n\n        参数:\n            macUpdater (LPMacSparkleUpdater | None): macOS 更新器实例。\n            winUpdater (LPWinSparkleUpdater | None): Windows 更新器实例。\n        返回:\n            无\n        '
+
+  def LPOTATelemetryTracker.getLastUpdateCheckReason(self)  line 122
+    names: str, _lastUpdateCheckReason
+      str: '\n        获取最近一次检查触发来源。\n\n        参数:\n            无\n        返回:\n            str: 最近一次检查来源，未设置时返回空字符串。\n        '
+
+  def LPOTATelemetryTracker._nowMs(self)  line 133
+    names: int, time
+      str: '\n        获取当前毫秒时间戳。\n\n        参数:\n            无\n        返回:\n            int: 当前毫秒时间戳。\n        '
+
+  def LPOTATelemetryTracker._currentUpdaterEngine(self)  line 144
+    names: platform, system
+      str: '\n        获取当前平台更新引擎标识。\n\n        参数:\n            无\n        返回:\n            str: Darwin 返回 sparkle，Windows 返回 winsparkle，其它返回 unknown。\n        '
+      str: 'Darwin'
+      str: 'sparkle'
+      str: 'Windows'
+      str: 'winsparkle'
+      str: 'unknown'
+
+  def LPOTATelemetryTracker._compareVersionStrings(self, leftVersion, rightVersion)  line 160
+    names: max, len, extend
+      str: '\n        比较两个版本号大小。\n\n        参数:\n            leftVersion (str): 左侧版本号。\n            rightVersion (str): 右侧版本号。\n        返回:\n            int: 左侧更大返回 1，相等返回 0，更小返回 -1。\n        '
+      str: 'LPOTATelemetryTracker._compareVersionStrings.<locals>._normalize'
+
+    def LPOTATelemetryTracker._compareVersionStrings._normalize(version_text)  line 171
+      names: str, replace, split, strip, append, int, ValueError, join
+        str: '-'
+        str: '.'
+        str: 'LPOTATelemetryTracker._compareVersionStrings.<locals>._normalize.<locals>.<genexpr>'
+
+      def LPOTATelemetryTracker._compareVersionStrings._normalize.<genexpr>(.0)  line 180
+        names: isdigit
+
+  def LPOTATelemetryTracker._isSessionUpgradedByVersion(self, sessionData)  line 196
+    names: isinstance, dict, str, get, LPUtility, appVersion, _compareVersionStrings
+      str: '\n        基于会话版本信息判断当前是否已完成升级。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n        返回:\n            bool: 当前版本达到 target_version 或高于 from_version 时返回 True，否则返回 False。\n        '
+      str: 'from_version'
+      str: 'target_version'
+
+  def LPOTATelemetryTracker._logOTAEvent(self, eventName, params)  line 216
+    names: isinstance, str, strip, platform, system, _currentUpdaterEngine, LPUtility, fetchNetworkType, dict, update, LPGlobalUI, eventTrack, logEvent
+      str: '\n        统一上报 OTA 埋点事件。\n\n        参数:\n            eventName (str): 事件名称。\n            params (dict | None): 事件扩展参数。\n        返回:\n            无\n        '
+      str: 'platform_name'
+      str: 'updater_engine'
+      str: 'network_type'
+
+  def LPOTATelemetryTracker._readOTASession(self)  line 240
+    names: LPUtility, readOTASession
+      str: '\n        读取当前 OTA 会话。\n\n        参数:\n            无\n        返回:\n            dict: OTA 会话信息。\n        '
+
+  def LPOTATelemetryTracker._writeOTASession(self, sessionData)  line 251
+    names: LPUtility, writeOTASession
+      str: '\n        写入 OTA 会话。\n\n        参数:\n            sessionData (dict): OTA 会话信息。\n        返回:\n            无\n        '
+
+  def LPOTATelemetryTracker._clearOTASession(self)  line 262
+    names: LPUtility, clearOTASession
+      str: '\n        清理 OTA 会话。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPOTATelemetryTracker._enumValue(self, enumOrValue)  line 273
+    names: isinstance, enum, Enum, str, value
+      str: '\n        将枚举值或普通值统一转换为字符串。\n\n        参数:\n            enumOrValue (enum.Enum | object): 待转换值。\n        返回:\n            str: 统一后的字符串值。\n        '
+
+  def LPOTATelemetryTracker._safeInt(self, rawValue, defaultValue)  line 286
+    names: int, Exception
+      str: '\n        安全解析整数，失败时返回默认值。\n\n        参数:\n            rawValue (object): 待解析值。\n            defaultValue (int): 解析失败时返回值。\n        返回:\n            int: 解析后的整数值。\n        '
+
+  def LPOTATelemetryTracker._resolveAttemptIdForFinalEvent(self, sessionData)  line 301
+    names: str, get, strip, uuid, uuid4, hex, logger, warning
+      str: '\n        获取最终事件使用的 attempt_id，缺失时自动生成兜底值。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n        返回:\n            tuple[str, bool]: (attempt_id, 是否为兜底生成)。\n        '
+      str: 'attempt_id'
+      str: 'recovered_'
+      str: '[ota.session] missing attempt_id while finalizing, use fallback attempt_id=%s'
+
+  def LPOTATelemetryTracker._buildOTASessionData(self, updaterEngine, triggerSource, detail, initialStatus)  line 320
+    names: isinstance, dict, _nowMs, str, _lastUpdateCheckReason, _lastUpdateCheckId, uuid, uuid4, hex, _currentUpdaterEngine, LPUtility, appVersion, get, OTA_TIMEOUT_MS
+      str: '\n        构建新的 OTA 会话数据结构。\n\n        参数:\n            updaterEngine (str): 更新引擎标识。\n            triggerSource (str | None): 触发来源。\n            detail (dict | None): 更新详情。\n            initialStatus (str): 初始状态。\n        返回:\n            dict: 新会话数据。\n        '
+      str: 'manual'
+      str: 'pending'
+      str: 'latest_version'
+      str: 'attempt_id'
+      str: 'status'
+      str: 'trigger_source'
+      str: 'updater_engine'
+      str: 'from_version'
+      str: 'target_version'
+      str: 'check_id'
+      str: 'confirm_started_at_ms'
+      str: 'started_at_ms'
+      str: 'download_started_at_ms'
+      str: 'download_finished_at_ms'
+      str: 'download_duration_ms'
+      str: 'download_result'
+      str: 'download_error_category'
+      str: 'download_error_code'
+      str: 'download_error_message'
+      str: 'install_started_at_ms'
+      str: 'timeout_deadline_ms'
+      str: 'timeout_reported'
+      str: 'last_progress_at_ms'
+      str: 'final_event_count'
+      str: 'last_final_result'
+      str: 'last_final_at_ms'
+      str: 'reconciled_from_timeout'
+      str: 'confirm_source'
+
+  def LPOTATelemetryTracker._ensureSessionDeadline(self, sessionData)  line 364
+    names: isinstance, dict, _safeInt, get, _nowMs, _shouldDelayWindowsManualTimeout, OTA_TIMEOUT_MS
+      str: '\n        确保会话存在有效超时截止时间。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n        返回:\n            dict: 更新后的会话数据。\n        '
+      str: 'confirm_started_at_ms'
+      str: 'started_at_ms'
+      str: 'timeout_deadline_ms'
+
+  def LPOTATelemetryTracker._shouldDelayWindowsManualTimeout(self, sessionData)  line 390
+    names: isinstance, dict, str, get, strip, lower, _safeInt, bool
+      str: '\n        判断 Windows 手动更新会话是否应延后启动超时计时。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n        返回:\n            bool: 需要延后超时计时返回 True，否则返回 False。\n        '
+      str: 'updater_engine'
+      str: 'confirm_source'
+      str: 'install_started_at_ms'
+      str: 'download_reported'
+      str: 'winsparkle'
+      str: 'winsparkle_manual_click'
+
+  def LPOTATelemetryTracker._armOTASessionTimeout(self, sessionData, baseTimeMs)  line 413
+    names: isinstance, dict, _safeInt, _nowMs, OTA_TIMEOUT_MS
+      str: '\n        以指定起点为 OTA 会话设置新的超时截止时间。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n            baseTimeMs (int | None): 超时起点毫秒时间戳；为空时使用当前时间。\n        返回:\n            dict: 更新后的 OTA 会话数据。\n        '
+      str: 'timeout_deadline_ms'
+      str: 'timeout_reported'
+
+  def LPOTATelemetryTracker._touchOTASessionProgress(self, sessionData, status)  line 434
+    names: isinstance, dict, _ensureSessionDeadline, str, strip, _nowMs, _writeOTASession
+      str: '\n        刷新 OTA 会话进度时间并可选更新状态。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n            status (str | None): 新状态。\n        返回:\n            dict: 更新后的会话数据。\n        '
+      str: 'status'
+      str: 'last_progress_at_ms'
+
+  def LPOTATelemetryTracker._isActiveOTASessionStatus(self, statusText)  line 453
+    names: str, strip, lower
+      str: '\n        判断状态是否属于活动中的 OTA 会话。\n\n        参数:\n            statusText (str): 状态文本。\n        返回:\n            bool: 活动态返回 True，否则返回 False。\n        '
+      str: 'pending'
+      str: 'in_progress'
+      str: 'downloading'
+      str: 'installing'
+      str: 'awaiting_post_restart_verify'
+      str: 'timeout_failed_pending_reconcile'
+
+  def LPOTATelemetryTracker._isWindowsManualSession(self, sessionData)  line 472
+    names: isinstance, dict, str, get, strip, lower
+      str: '\n        判断 OTA 会话是否属于 Windows 手动更新链路。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n        返回:\n            bool: 属于 Windows 手动更新会话返回 True，否则返回 False。\n        '
+      str: 'updater_engine'
+      str: 'confirm_source'
+      str: 'winsparkle'
+      str: 'winsparkle_manual_click'
+
+  def LPOTATelemetryTracker._canReplaceWindowsManualSession(self, sessionData)  line 488
+    names: isinstance, dict, str, get, strip, lower, _safeInt
+      str: '\n        判断当前 Windows 手动更新会话是否允许被新的手动检查覆盖。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n        返回:\n            bool: 可直接替换返回 True，否则返回 False。\n        '
+      str: 'updater_engine'
+      str: 'winsparkle'
+      str: 'status'
+      str: 'download_started_at_ms'
+      str: 'install_started_at_ms'
+      str: 'downloading'
+      str: 'installing'
+      str: 'awaiting_post_restart_verify'
+
+  def LPOTATelemetryTracker._buildWindowsManualOTASessionData(self, triggerSource, detail)  line 513
+    names: _buildOTASessionData, dict
+      str: '\n        构建 Windows 手动检查更新所需的初始 OTA 会话数据。\n\n        参数:\n            triggerSource (str | None): 触发来源。\n            detail (dict | None): 更新详情。\n        返回:\n            dict: 新的 Windows 手动 OTA 会话数据。\n        '
+      str: 'winsparkle'
+      str: 'pending'
+      str: 'updaterEngine'
+      str: 'triggerSource'
+      str: 'detail'
+      str: 'initialStatus'
+      str: 'winsparkle_manual_click'
+      str: 'confirm_source'
+      str: 'timeout_deadline_ms'
+      str: 'timeout_reported'
+
+  def LPOTATelemetryTracker._classifyDownloadFinalError(self, errorCategory, errorCode)  line 534
+    names: str, strip, lower, LPOTAFinalErrorCategory, USER_CANCELLED, LPOTAFinalErrorCode, DOWNLOAD_CANCELLED, DOWNLOAD_LIFECYCLE, DOWNLOAD_STAGE_UNKNOWN, DOWNLOAD, DOWNLOAD_FAILED
+      str: '\n        根据下载错误信息映射 OTA 最终失败分类。\n\n        参数:\n            errorCategory (str): 下载错误分类。\n            errorCode (str): 下载错误码。\n        返回:\n            tuple[LPOTAFinalErrorCategory, LPOTAFinalErrorCode]: 规范化后的分类与错误码。\n        '
+      str: 'user_cancelled'
+      str: 'download_cancelled'
+      str: 'download_lifecycle_unknown'
+      str: 'unknown_stage'
+
+  def LPOTATelemetryTracker._emitOTAFinalResult(self, sessionData, result, errorStage, errorCategory, errorCode, errorMessage, extraParams)  line 552
+    names: isinstance, dict, _nowMs, _safeInt, get, max, _resolveAttemptIdForFinalEvent, _enumValue, str, LPUtility, appVersion, bool, update, _logOTAEvent, LPOTAEventName, FINAL_RESULT, value
+      str: '\n        统一上报 ota_final_result 事件。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n            result (LPOTAFinalResult | str): OTA 最终结果。\n            errorStage (LPOTAFinalErrorStage | str): 失败阶段。\n            errorCategory (LPOTAFinalErrorCategory | str): 失败分类。\n            errorCode (LPOTAFin'
+      str: 'confirm_started_at_ms'
+      str: 'started_at_ms'
+      str: 'install_started_at_ms'
+      str: 'download_started_at_ms'
+      str: 'download_finished_at_ms'
+      str: 'download_duration_ms'
+      str: 'from_version'
+      str: 'target_version'
+      str: 'attempt_id'
+      str: 'result'
+      str: 'from_version'
+      str: 'target_version'
+      str: 'current_version'
+      str: 'confirm_started_at_ms'
+      str: 'download_started_at_ms'
+      str: 'download_finished_at_ms'
+      str: 'install_started_at_ms'
+      str: 'download_duration_ms'
+      str: 'end_to_end_duration_ms'
+      str: 'install_duration_ms'
+      str: 'error_stage'
+      str: 'error_category'
+      str: 'error_code'
+      str: 'error_message_raw'
+      str: 'attempt_id_recovered'
+
+  def LPOTATelemetryTracker._emitOTAFinalFailure(self, sessionData, errorStage, errorCategory, errorCode, errorMessage, extraParams)  line 622
+    names: _emitOTAFinalResult, LPOTAFinalResult, FAILED
+      str: '\n        统一上报 OTA 最终失败事件。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n            errorStage (LPOTAFinalErrorStage | str): 失败阶段。\n            errorCategory (LPOTAFinalErrorCategory | str): 失败分类。\n            errorCode (LPOTAFinalErrorCode | str): 失败错误码。\n            errorMessage (str): 原始错误信'
+      str: 'errorStage'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'extraParams'
+
+  def LPOTATelemetryTracker._reportOTAFinalResult(self, sessionData, result, errorStage, errorCategory, errorCode, errorMessage, keepSession, nextStatus, reconciledFromTimeout)  line 646
+    names: isinstance, dict, _ensureSessionDeadline, _safeInt, get, _enumValue, _nowMs, _emitOTAFinalResult, bool, str, _writeOTASession, _clearOTASession
+      str: '\n        上报 OTA 最终结果并更新会话持久化状态。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n            result (LPOTAFinalResult | str): 最终结果。\n            errorStage (LPOTAFinalErrorStage | str): 错误阶段。\n            errorCategory (LPOTAFinalErrorCategory | str): 错误分类。\n            errorCode (LPOTAFinalError'
+      str: 'final_event_count'
+      str: 'last_final_result'
+      str: 'last_final_at_ms'
+      str: 'reconciled_from_timeout'
+      str: 'final_event_index'
+      str: 'reconciled_from_timeout'
+      str: 'result'
+      str: 'errorStage'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'extraParams'
+      str: 'status'
+
+  def LPOTATelemetryTracker._reportOTAFinalFailure(self, sessionData, errorStage, errorCategory, errorCode, errorMessage, keepSession, nextStatus, reconciledFromTimeout)  line 701
+    names: _reportOTAFinalResult, LPOTAFinalResult, FAILED
+      str: '\n        上报 OTA 最终失败并更新会话持久化状态。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n            errorStage (LPOTAFinalErrorStage | str): 错误阶段。\n            errorCategory (LPOTAFinalErrorCategory | str): 错误分类。\n            errorCode (LPOTAFinalErrorCode | str): 错误码。\n            errorMessage (str): 原'
+      str: 'errorStage'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'keepSession'
+      str: 'nextStatus'
+      str: 'reconciledFromTimeout'
+
+  def LPOTATelemetryTracker._currentUpdaterLastCheckDetail(self)  line 739
+    names: platform, system, _macUpdater, getLastCheckDetail, _winUpdater
+      str: '\n        获取当前平台更新器最近一次检查详情。\n\n        参数:\n            无\n        返回:\n            dict: 最近一次检查详情；不可用时返回空字典。\n        '
+      str: 'Darwin'
+      str: 'Windows'
+
+  def LPOTATelemetryTracker._ensureOTAPendingSession(self, updaterEngine, triggerSource, detail, initialStatus)  line 755
+    names: isinstance, dict, _currentUpdaterLastCheckDetail, _nowMs, _readOTASession, str, get, _safeInt, _isActiveOTASessionStatus, OTA_SESSION_RETENTION_MS, logger, warning, _clearOTASession, strip, _lastUpdateCheckId, _lastUpdateCheckReason, _currentUpdaterEngine, _ensureSessionDeadline, _writeOTASession, _buildOTASessionData, info
+      str: '\n        获取或创建 OTA 尝试会话，并返回会话副本。\n\n        参数:\n            updaterEngine (str): 更新引擎标识，例如 sparkle、winsparkle。\n            triggerSource (str | None): 触发来源。\n            detail (dict | None): 更新详情，可包含最新版本号。\n            initialStatus (str): 会话初始状态。\n        返回:\n            dict: 可用的 OTA 会话数据。\n        '
+      str: 'status'
+      str: 'confirm_started_at_ms'
+      str: 'started_at_ms'
+      str: '[ota.session] stale active session dropped attempt_id=%s status=%s age_ms=%s'
+      str: 'attempt_id'
+      str: 'latest_version'
+      str: 'target_version'
+      str: 'check_id'
+      str: 'trigger_source'
+      str: 'manual'
+      str: 'updater_engine'
+      str: 'updaterEngine'
+      str: 'triggerSource'
+      str: 'detail'
+      str: 'initialStatus'
+      str: '[ota.session] created session attempt_id=%s status=%s engine=%s from=%s target=%s trigger=%s'
+      str: 'from_version'
+
+  def LPOTATelemetryTracker._ensureOTAUpdateStartedEvent(self, sessionData)  line 827
+    names: isinstance, dict, _nowMs, int, get, _ensureSessionDeadline, _writeOTASession
+      str: '\n        确保 OTA 会话具备确认开始时间（幂等）。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n        返回:\n            dict: 更新后的 OTA 会话数据。\n        '
+      str: 'confirm_started_at_ms'
+      str: 'started_at_ms'
+      str: 'last_progress_at_ms'
+      str: 'status'
+      str: 'in_progress'
+      str: 'pending'
+
+  def LPOTATelemetryTracker._markOTADownloadStarted(self, sessionData)  line 854
+    names: isinstance, dict, int, get, _nowMs, _ensureSessionDeadline, _writeOTASession, logger, info
+      str: '\n        记录 OTA 下载开始时间（幂等）。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n        返回:\n            dict: 更新后的 OTA 会话数据。\n        '
+      str: 'download_started_at_ms'
+      str: 'confirm_started_at_ms'
+      str: 'started_at_ms'
+      str: 'downloading'
+      str: 'status'
+      str: 'last_progress_at_ms'
+      str: '[ota.download] download started attempt_id=%s started_at_ms=%s'
+      str: 'attempt_id'
+
+  def LPOTATelemetryTracker._recordOTADownloadResult(self, sessionData, result, errorCategory, errorCode, errorMessage)  line 889
+    names: isinstance, dict, get, str, strip, lower, _nowMs, int, _ensureSessionDeadline, _writeOTASession, logger, info
+      str: '\n        记录 OTA 下载结果事件（幂等）。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n            result (str): 下载结果，支持 success/failed/cancelled/unavailable。\n            errorCategory (str): 错误分类。\n            errorCode (str): 错误码。\n            errorMessage (str): 原始错误信息。\n        返回:\n            dict: 更新'
+      str: 'download_reported'
+      str: 'unavailable'
+      str: 'success'
+      str: 'failed'
+      str: 'cancelled'
+      str: 'unavailable'
+      str: 'download_started_at_ms'
+      str: 'download_finished_at_ms'
+      str: 'download_duration_ms'
+      str: 'download_result'
+      str: 'download_error_category'
+      str: 'download_error_code'
+      str: 'download_error_message'
+      str: 'success'
+      str: 'unavailable'
+      str: 'downloading'
+      str: 'status'
+      str: 'last_progress_at_ms'
+      str: '[ota.download] download result attempt_id=%s result=%s duration_ms=%s'
+      str: 'attempt_id'
+
+  def LPOTATelemetryTracker._recordOTAFinalFailureForDownload(self, sessionData, errorCategory, errorCode, errorMessage)  line 950
+    names: isinstance, dict, _classifyDownloadFinalError, _reportOTAFinalFailure, LPOTAFinalErrorStage, DOWNLOAD, logger, info, str, get
+      str: '\n        在下载失败/取消时立即补发 OTA 最终失败事件并清理会话。\n\n        参数:\n            sessionData (dict): OTA 会话数据。\n            errorCategory (str): 错误分类。\n            errorCode (str): 错误码。\n            errorMessage (str): 原始错误信息。\n        返回:\n            无\n        '
+      str: 'errorStage'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'keepSession'
+      str: '[ota.session] download failed finalized attempt_id=%s category=%s code=%s'
+      str: 'attempt_id'
+      str: 'error_category'
+      str: 'error_code'
+
+  def LPOTATelemetryTracker.recordDownloadLifecycleForSparkle(self, detail)  line 981
+    names: platform, system, isinstance, dict, str, get, strip, lower, startswith, _ensureOTAPendingSession, _lastUpdateCheckReason, _ensureOTAUpdateStartedEvent, _markOTADownloadStarted, _recordOTADownloadResult, _touchOTASessionProgress, _recordOTAFinalFailureForDownload, any, logger, info
+      str: '\n        处理 macOS Sparkle 下载生命周期回调并完成下载埋点记录。\n\n        参数:\n            detail (dict | None): 下载生命周期详情。\n        返回:\n            无\n        '
+      str: 'Darwin'
+      str: 'lifecycle_stage'
+      str: 'download_'
+      str: 'downloading'
+      str: 'pending'
+      str: 'sparkle'
+      str: 'updaterEngine'
+      str: 'triggerSource'
+      str: 'detail'
+      str: 'initialStatus'
+      str: 'download_started'
+      str: 'download_succeeded'
+      str: 'success'
+      str: 'status'
+      str: 'download_failed'
+      str: 'error_category'
+      str: 'unknown'
+      str: 'error_code'
+      str: 'error_message'
+      str: 'failed'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'download_cancelled'
+      str: 'user cancelled download'
+      str: 'cancelled'
+      str: 'user_cancelled'
+      str: 'LPOTATelemetryTracker.recordDownloadLifecycleForSparkle.<locals>.<genexpr>'
+      str: 'fail'
+      str: 'error'
+      str: 'cancel'
+      str: 'unsupported download lifecycle stage: '
+      str: 'download_lifecycle_unknown'
+      str: 'unknown_stage'
+      str: '[ota.download] ignored unsupported lifecycle stage=%s'
+
+    def LPOTATelemetryTracker.recordDownloadLifecycleForSparkle.<genexpr>(.0)  line 1055
+
+  def LPOTATelemetryTracker.recordDownloadReadyForWinSparkle(self, detail)  line 1077
+    names: platform, system, isinstance, dict, _ensureOTAPendingSession, _lastUpdateCheckReason, _ensureOTAUpdateStartedEvent, _safeInt, get, _nowMs, _ensureSessionDeadline, _writeOTASession, logger, info, _isWindowsManualSession, _armOTASessionTimeout, _recordOTADownloadResult
+      str: '\n        处理 WinSparkle installer-ready 回调，并记录下载完成时间点。\n\n        参数:\n            detail (dict | None): WinSparkle 回调详情。\n        返回:\n            dict: 更新后的 OTA 会话数据。\n        '
+      str: 'Windows'
+      str: 'winsparkle'
+      str: 'downloading'
+      str: 'updaterEngine'
+      str: 'triggerSource'
+      str: 'detail'
+      str: 'initialStatus'
+      str: 'download_started_at_ms'
+      str: 'confirm_started_at_ms'
+      str: 'started_at_ms'
+      str: 'status'
+      str: 'last_progress_at_ms'
+      str: '[ota.download] winsparkle download start aligned to confirm time attempt_id=%s started_at_ms=%s'
+      str: 'attempt_id'
+      str: 'winsparkle_manual_click'
+      str: 'confirm_source'
+      str: 'baseTimeMs'
+      str: 'success'
+
+  def LPOTATelemetryTracker._recordOTAInstallStarted(self, updaterEngine, triggerSource, detail)  line 1126
+    names: isinstance, dict, _currentUpdaterLastCheckDetail, _ensureOTAPendingSession, _ensureOTAUpdateStartedEvent, get, _recordOTADownloadResult, _nowMs, int, _safeInt, _armOTASessionTimeout, _ensureSessionDeadline, _writeOTASession
+      str: '\n        记录 OTA 安装开始，并持久化会话用于重启后补账。\n\n        参数:\n            updaterEngine (str): 更新引擎标识，例如 sparkle、winsparkle。\n            triggerSource (str | None): 更新触发来源。\n            detail (dict | None): 本轮更新详情，可携带 latest_version。\n        返回:\n            dict: 已写入的 OTA 会话数据。\n        '
+      str: 'installing'
+      str: 'updaterEngine'
+      str: 'triggerSource'
+      str: 'detail'
+      str: 'initialStatus'
+      str: 'download_reported'
+      str: 'unavailable'
+      str: 'download lifecycle callbacks unavailable'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'install_started_reported'
+      str: 'install_started_at_ms'
+      str: 'timeout_deadline_ms'
+      str: 'baseTimeMs'
+      str: 'last_progress_at_ms'
+      str: 'awaiting_post_restart_verify'
+      str: 'status'
+
+  def LPOTATelemetryTracker.tickOTATimeoutMonitor(self, nowMs)  line 1172
+    names: _safeInt, _nowMs, _readOTASession, isinstance, dict, str, get, strip, lower, _reportOTAFinalFailure, LPOTAFinalErrorStage, SESSION_RECOVERY, LPOTAFinalErrorCategory, LPOTAFinalErrorCode, MISSING_ATTEMPT_ID, logger, warning, _ensureSessionDeadline, max, OTA_SESSION_RETENTION_MS, _clearOTASession, SESSION_EXPIRED, _isSessionUpgradedByVersion, _reportOTAFinalResult, LPOTAFinalResult, SUCCESS, info, bool, _writeOTASession, TIMEOUT, PROCESS_TIMEOUT
+      str: '\n        执行 OTA 超时与纠偏检测。\n\n        参数:\n            nowMs (int | None): 外部注入的当前毫秒时间戳。\n        返回:\n            无\n        '
+      str: 'status'
+      str: 'attempt_id'
+      str: 'missing attempt_id while ticking timeout monitor'
+      str: 'errorStage'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'keepSession'
+      str: '[ota.timeout] invalid session without attempt_id finalized attempt_id=%s'
+      str: 'confirm_started_at_ms'
+      str: 'started_at_ms'
+      str: 'last_final_result'
+      str: '[ota.timeout] session expired after finalized result, clear session attempt_id=%s status=%s age_ms=%s'
+      str: 'ota session expired before finalization, age_ms='
+      str: '[ota.timeout] session expired and finalized as failed attempt_id=%s status=%s age_ms=%s'
+      str: 'timeout_failed_pending_reconcile'
+      str: 'keepSession'
+      str: 'reconciledFromTimeout'
+      str: '[ota.timeout] timeout session reconciled by success attempt_id=%s'
+      str: 'keepSession'
+      str: '[ota.timeout] session finalized as success by version attempt_id=%s'
+      str: 'timeout_deadline_ms'
+      str: 'timeout_reported'
+      str: 'ota timeout exceeded 10 minutes, now_ms='
+      str: ', deadline_ms='
+      str: 'errorStage'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'keepSession'
+      str: 'nextStatus'
+      str: '[ota.timeout] session finalized as timeout failure attempt_id=%s'
+
+  def LPOTATelemetryTracker.resumePendingOTASession(self)  line 1286
+    names: logger, info, tickOTATimeoutMonitor, _readOTASession, isinstance, dict, str, get, strip, lower, _isActiveOTASessionStatus, _reportOTAFinalFailure, LPOTAFinalErrorStage, SESSION_RECOVERY, LPOTAFinalErrorCategory, LPOTAFinalErrorCode, UNEXPECTED_SESSION_STATUS, warning
+      str: '\n        在应用启动时恢复未完成 OTA 会话并执行补账逻辑。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: '[ota.session] resume check on startup'
+      str: '[ota.session] no pending session found'
+      str: 'status'
+      str: 'timeout_failed_pending_reconcile'
+      str: '[ota.session] timeout_failed_pending_reconcile waiting for later success attempt_id=%s'
+      str: 'attempt_id'
+      str: 'unexpected session status while resuming: '
+      str: 'errorStage'
+      str: 'errorCategory'
+      str: 'errorCode'
+      str: 'errorMessage'
+      str: 'keepSession'
+      str: '[ota.session] unexpected status finalized as failed status=%s attempt_id=%s'
+      str: '[ota.session] resume keep waiting status=%s attempt_id=%s'
+
+  def LPOTATelemetryTracker.recordUpdateInstallStartedForSparkle(self, detail)  line 1332
+    names: platform, system, isinstance, dict, _currentUpdaterLastCheckDetail, _recordOTAInstallStarted, _lastUpdateCheckReason
+      str: '\n        记录 macOS Sparkle 即将安装更新事件并持久化 OTA 会话。\n\n        参数:\n            detail (dict | None): Sparkle 安装开始详情。\n        返回:\n            无\n        '
+      str: 'Darwin'
+      str: 'sparkle'
+      str: 'updaterEngine'
+      str: 'triggerSource'
+      str: 'detail'
+
+  def LPOTATelemetryTracker.recordUpdateInstallStartedForWinSparkle(self)  line 1351
+    names: platform, system, _currentUpdaterLastCheckDetail, _recordOTAInstallStarted, _lastUpdateCheckReason
+      str: '\n        记录 Windows 更新安装前退出事件，并写入 OTA 会话用于跨启动补账。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'Windows'
+      str: 'winsparkle'
+      str: 'updaterEngine'
+      str: 'triggerSource'
+      str: 'detail'
+
+  def LPOTATelemetryTracker.recordManualUpdateConfirmedForWinSparkle(self, triggerSource)  line 1370
+    names: platform, system, _currentUpdaterLastCheckDetail, _readOTASession, isinstance, dict, _canReplaceWindowsManualSession, logger, info, str, get, _lastUpdateCheckId, _isActiveOTASessionStatus, _buildWindowsManualOTASessionData, _writeOTASession
+      str: '\n        在 Windows 手动点击更新后写入 OTA 确认起点会话。\n\n        参数:\n            triggerSource (str): 触发来源。\n        返回:\n            dict: 已写入的 OTA 会话数据。\n        '
+      str: 'Windows'
+      str: '[ota.session] replace windows manual session old_attempt_id=%s new_check_id=%s'
+      str: 'attempt_id'
+      str: 'status'
+      str: '[ota.session] keep existing session for repeated manual check attempt_id=%s status=%s'
+      str: 'triggerSource'
+      str: 'detail'
+      str: '[ota.session] created windows manual session attempt_id=%s check_id=%s trigger=%s'
+      str: 'check_id'
+      str: 'trigger_source'
+
+  def LPOTATelemetryTracker._clearPendingWindowsManualSessionOnNoUpdate(self)  line 1408
+    names: _readOTASession, isinstance, dict, str, get, strip, lower, _safeInt, logger, info, _clearOTASession
+      str: '\n        在 Windows 手动检查无更新时清理仅用于串联的 pending 会话。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'status'
+      str: 'updater_engine'
+      str: 'confirm_source'
+      str: 'download_started_at_ms'
+      str: 'install_started_at_ms'
+      str: 'winsparkle'
+      str: 'winsparkle_manual_click'
+      str: 'pending'
+      str: 'in_progress'
+      str: '[ota.session] clear pending manual winsparkle session without update attempt_id=%s'
+      str: 'attempt_id'
+
+  def LPOTATelemetryTracker.recordUpdateCheckTrigger(self, reason)  line 1438
+    names: uuid, uuid4, hex, _lastUpdateCheckId, str, _lastUpdateCheckReason, time, monotonic, _lastUpdateCheckTriggeredAt, logger, info, _lastUpdateCallbackKind, dict
+      str: '\n        记录最近一次后台更新检查的触发原因和时间。\n\n        参数:\n            reason (str): 触发原因，例如 startup、periodic。\n        返回:\n            dict: 本次检查上下文，包含 check_id/trigger_source/triggered_at_monotonic。\n        '
+      str: 'check_id'
+      str: 'trigger_source'
+      str: 'triggered_at_monotonic'
+      str: '[update.trace] check dispatched reason=%s check_id=%s last_callback_kind=%s'
+
+  def LPOTATelemetryTracker.recordUpdateCallback(self, callback_kind, detail, checkContext)  line 1463
+    names: isinstance, dict, str, get, strip, lower, _lastUpdateCheckId, _lastUpdateCheckReason, _lastUpdateCheckTriggeredAt, int, float, time, monotonic, _lastUpdateCallbackAt, _lastUpdateCallbackKind, _readOTASession, _nowMs, _writeOTASession, platform, system, _clearPendingWindowsManualSessionOnNoUpdate, logger, info
+      str: '\n        记录最近一次更新结果回调信息。\n\n        参数:\n            callback_kind (str): 回调类型，例如 found、not_found。\n            detail (dict | None): 更新检查详情。\n            checkContext (dict | None): 对应检查上下文，用于避免并发检查时 check_id 串线。\n        返回:\n            无\n        '
+      str: 'result_kind'
+      str: 'found'
+      str: 'no_update'
+      str: 'error'
+      str: 'found'
+      str: 'no_update'
+      str: 'check_id'
+      str: 'trigger_source'
+      str: 'triggered_at_monotonic'
+      str: 'error'
+      str: 'error_category'
+      str: 'unknown'
+      str: 'error_code'
+      str: 'error_message'
+      str: 'latest_version'
+      str: 'target_version'
+      str: 'last_progress_at_ms'
+      str: 'no_update'
+      str: 'error'
+      str: 'Windows'
+      str: '[update.trace] callback received kind=%s check_id=%s elapsed_since_dispatch=%s reason=%s detail=%s'
+      str: 'n/a'
+      str: '.3f'
+      str: 's'
+
+  def LPOTATelemetryTracker.logStartupUpdateCheckPending(self)  line 1531
+    names: _lastUpdateCheckReason, _lastUpdateCheckTriggeredAt, _lastUpdateCallbackAt, logger, info, _lastUpdateCallbackKind, time, monotonic, warning
+      str: '\n        在启动后台检查发起后输出诊断日志，确认是否迟迟未收到结果回调。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'startup'
+      str: '[update.trace] startup check already produced callback kind=%s'
+      str: '[update.trace] startup check dispatched %.3fs ago but no update result callback received yet; check updater bridge / SDK callback path'
+
+def LPUpdateFlowCoordinator()  line 1559
+  names: __name__, __module__, __qualname__, __doc__, __init__, setUICallbacks, setWinShutdownHooks, _buildHiddenBetaResult, _resolveHiddenBetaFeedURLForCurrentPlatform, _clearHiddenBetaLock, _expireHiddenBetaLockIfNeeded, _releaseHiddenBetaLockByCallbackContext, _safeInvokeResultCallback, _registerUpdaterCallbacks, initUpdater, isMacReady, isCurrentPlatformReady, ensureCurrentUpdaterReady, triggerBackgroundCheck, triggerStartupCheck, triggerPeriodicCheck, triggerHiddenBetaCheck, checkForUpdatesManually, resumePendingOTASession, tickOTATimeoutMonitor, logStartupUpdateCheckPending, markWinInstallStarted
+    str: 'LPUpdateFlowCoordinator'
+    str: '更新流程协调器。'
+    str: 'LPUpdateFlowCoordinator.__init__'
+    str: 'LPUpdateFlowCoordinator.setUICallbacks'
+    str: 'LPUpdateFlowCoordinator.setWinShutdownHooks'
+    str: 'LPUpdateFlowCoordinator._buildHiddenBetaResult'
+    str: 'LPUpdateFlowCoordinator._resolveHiddenBetaFeedURLForCurrentPlatform'
+    str: 'LPUpdateFlowCoordinator._clearHiddenBetaLock'
+    str: 'LPUpdateFlowCoordinator._expireHiddenBetaLockIfNeeded'
+    str: 'LPUpdateFlowCoordinator._releaseHiddenBetaLockByCallbackContext'
+    str: 'LPUpdateFlowCoordinator._safeInvokeResultCallback'
+    str: 'LPUpdateFlowCoordinator._registerUpdaterCallbacks'
+    str: 'LPUpdateFlowCoordinator.initUpdater'
+    str: 'LPUpdateFlowCoordinator.isMacReady'
+    str: 'LPUpdateFlowCoordinator.isCurrentPlatformReady'
+    str: 'LPUpdateFlowCoordinator.ensureCurrentUpdaterReady'
+    str: 'LPUpdateFlowCoordinator.triggerBackgroundCheck'
+    str: 'LPUpdateFlowCoordinator.triggerStartupCheck'
+    str: 'LPUpdateFlowCoordinator.triggerPeriodicCheck'
+    str: 'friendly_name_hidden_tap'
+    str: 'LPUpdateFlowCoordinator.triggerHiddenBetaCheck'
+    str: 'manual_menu'
+    str: 'LPUpdateFlowCoordinator.checkForUpdatesManually'
+    str: 'LPUpdateFlowCoordinator.resumePendingOTASession'
+    str: 'LPUpdateFlowCoordinator.tickOTATimeoutMonitor'
+    str: 'LPUpdateFlowCoordinator.logStartupUpdateCheckPending'
+    str: 'LPUpdateFlowCoordinator.markWinInstallStarted'
+    str: 'friendly_name_hidden_tap'
+    str: 'manual_menu'
+
+  def LPUpdateFlowCoordinator.__init__(self, telemetryTracker)  line 1562
+    names: LPMacSparkleUpdater, _macUpdater, LPWinSparkleUpdater, _winUpdater, LPOTATelemetryTracker, _telemetryTracker, setUpdaters, _onUpdateFoundCallback, _onNoUpdateFoundCallback, _activeCheckContext, _hiddenBetaCooldownSeconds, _hiddenBetaCooldownUntil, _hiddenBetaLockTimeoutSeconds, _hiddenBetaLockCheckId, _hiddenBetaLockStartedAt, _hiddenBetaLockPlatform
+      str: '\n        初始化更新流程协调器。\n\n        参数:\n            telemetryTracker (LPOTATelemetryTracker | None): OTA 埋点追踪器。\n        返回:\n            无\n        '
+
+  def LPUpdateFlowCoordinator.setUICallbacks(self, onUpdateFound, onNoUpdateFound)  line 1588
+    names: _onUpdateFoundCallback, _onNoUpdateFoundCallback
+      str: '\n        设置 UI 回调。\n\n        参数:\n            onUpdateFound (callable | None): 发现可更新时回调。\n            onNoUpdateFound (callable | None): 未发现更新时回调。\n        返回:\n            无\n        '
+
+  def LPUpdateFlowCoordinator.setWinShutdownHooks(self, canShutdownHandler, shutdownRequestHandler)  line 1601
+    names: _winUpdater, setShutdownHooks
+      str: '\n        设置 Windows 更新安装前退出协同回调。\n\n        参数:\n            canShutdownHandler (callable): 返回是否允许退出。\n            shutdownRequestHandler (callable): 请求退出时回调。\n        返回:\n            无\n        '
+
+  def LPUpdateFlowCoordinator._buildHiddenBetaResult(self, status, message, checkId)  line 1613
+    names: str, platform, system
+      str: '\n        统一构建隐藏 Beta 触发结果字典。\n\n        参数:\n            status (str): 结果状态码。\n            message (str): 用户可读提示文本。\n            checkId (str): 本次检查上下文 ID。\n        返回:\n            dict: 结构化结果，包含 status/message/check_id/platform。\n        '
+      str: 'status'
+      str: 'message'
+      str: 'check_id'
+      str: 'platform'
+
+  def LPUpdateFlowCoordinator._resolveHiddenBetaFeedURLForCurrentPlatform(self)  line 1631
+    names: platform, system, machine, lower, _HIDDEN_BETA_FEED_MAC_X86_64, _HIDDEN_BETA_FEED_MAC_ARM64, _HIDDEN_BETA_FEED_WIN_X64
+      str: '\n        解析当前平台隐藏 Beta 检查使用的 appcast URL。\n\n        参数:\n            无\n        返回:\n            str: 当前平台对应的 Beta feed URL；不支持平台时返回空字符串。\n        '
+      str: 'Darwin'
+      str: 'x86_64'
+      str: 'amd64'
+      str: 'Windows'
+
+  def LPUpdateFlowCoordinator._clearHiddenBetaLock(self, reason)  line 1650
+    names: str, _hiddenBetaLockPlatform, _macUpdater, clearTemporaryFeedURL, _winUpdater, _hiddenBetaLockCheckId, logger, info, _hiddenBetaLockStartedAt
+      str: '\n        清理隐藏 Beta 临时 feed 锁，并恢复默认 feed 解析。\n\n        参数:\n            reason (str): 清理原因，仅用于日志。\n        返回:\n            无\n        '
+      str: 'Darwin'
+      str: 'Windows'
+      str: '[update.hiddenbeta] lock cleared reason=%s check_id=%s platform=%s'
+
+  def LPUpdateFlowCoordinator._expireHiddenBetaLockIfNeeded(self)  line 1677
+    names: _hiddenBetaLockCheckId, float, _hiddenBetaLockStartedAt, time, monotonic, _hiddenBetaLockTimeoutSeconds, logger, warning, str, _clearHiddenBetaLock
+      str: '\n        检查隐藏 Beta 锁是否超时，超时则自动清理。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: '[update.hiddenbeta] lock timeout detected age=%.3fs check_id=%s'
+      str: 'timeout'
+
+  def LPUpdateFlowCoordinator._releaseHiddenBetaLockByCallbackContext(self, callbackContext, callbackKind)  line 1704
+    names: _hiddenBetaLockCheckId, isinstance, dict, str, get, _clearHiddenBetaLock
+      str: '\n        按回调上下文匹配并释放隐藏 Beta 临时 feed 锁。\n\n        参数:\n            callbackContext (dict | None): 检查回调上下文字典。\n            callbackKind (str): 回调类型标识（found/not_found）。\n        返回:\n            无\n        '
+      str: 'check_id'
+      str: 'callback_'
+      str: 'unknown'
+
+  def LPUpdateFlowCoordinator._safeInvokeResultCallback(self, callback, detail)  line 1725
+    names: callable, TypeError
+      str: '\n        安全调用结果回调，兼容 0/1 参数签名。\n\n        参数:\n            callback (callable): 目标回调。\n            detail (dict): 回调详情。\n        返回:\n            无\n        '
+
+  def LPUpdateFlowCoordinator._registerUpdaterCallbacks(self)  line 1743
+    names: platform, system, _macUpdater, setUpdateFoundCallback, setInstallWillStartCallback, setDownloadLifecycleCallback, logger, info, _winUpdater, setUserRunInstallerCallback
+      str: '\n        注册平台更新器回调。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'LPUpdateFlowCoordinator._registerUpdaterCallbacks.<locals>._onFound'
+      str: 'LPUpdateFlowCoordinator._registerUpdaterCallbacks.<locals>._onNotFound'
+      str: 'LPUpdateFlowCoordinator._registerUpdaterCallbacks.<locals>._onInstallWillStart'
+      str: 'LPUpdateFlowCoordinator._registerUpdaterCallbacks.<locals>._onDownloadLifecycle'
+      str: 'LPUpdateFlowCoordinator._registerUpdaterCallbacks.<locals>._onWinInstallerReady'
+      str: 'Darwin'
+      str: '[update.callback] registered mac updater callbacks'
+      str: 'Windows'
+      str: '[update.callback] registered windows updater callbacks'
+
+    def LPUpdateFlowCoordinator._registerUpdaterCallbacks._onFound(detail)  line 1753
+      names: isinstance, dict, logger, info, _activeCheckContext, _telemetryTracker, recordUpdateCallback, _releaseHiddenBetaLockByCallbackContext, _safeInvokeResultCallback, _onUpdateFoundCallback
+        str: '\n            处理发现更新回调。\n\n            参数:\n                detail (dict | None): 更新详情。\n            返回:\n                无\n            '
+        str: '[update.callback] background update-found callback received on worker side detail=%s'
+        str: 'found'
+        str: 'checkContext'
+
+    def LPUpdateFlowCoordinator._registerUpdaterCallbacks._onNotFound(detail)  line 1777
+      names: isinstance, dict, logger, info, _activeCheckContext, _telemetryTracker, recordUpdateCallback, _releaseHiddenBetaLockByCallbackContext, _safeInvokeResultCallback, _onNoUpdateFoundCallback
+        str: '\n            处理无更新/错误回调。\n\n            参数:\n                detail (dict | None): 更新详情。\n            返回:\n                无\n            '
+        str: '[update.callback] background no-update callback received on worker side detail=%s'
+        str: 'not_found'
+        str: 'checkContext'
+
+    def LPUpdateFlowCoordinator._registerUpdaterCallbacks._onInstallWillStart(detail)  line 1801
+      names: isinstance, dict, logger, info, _telemetryTracker, recordUpdateInstallStartedForSparkle
+        str: '\n            处理安装即将开始回调。\n\n            参数:\n                detail (dict | None): 安装前详情。\n            返回:\n                无\n            '
+        str: '[update.callback] install-will-start callback received detail=%s'
+
+    def LPUpdateFlowCoordinator._registerUpdaterCallbacks._onDownloadLifecycle(detail)  line 1817
+      names: isinstance, dict, logger, info, _telemetryTracker, recordDownloadLifecycleForSparkle
+        str: '\n            处理下载生命周期回调。\n\n            参数:\n                detail (dict | None): 下载生命周期详情。\n            返回:\n                无\n            '
+        str: '[update.callback] download lifecycle callback received detail=%s'
+
+    def LPUpdateFlowCoordinator._registerUpdaterCallbacks._onWinInstallerReady(detail)  line 1833
+      names: isinstance, dict, logger, info, _telemetryTracker, recordDownloadReadyForWinSparkle
+        str: '\n            处理 Windows WinSparkle 安装器就绪回调。\n\n            参数:\n                detail (dict | None): 安装器就绪回调详情。\n            返回:\n                无\n            '
+        str: '[update.callback] windows installer-ready callback received detail=%s'
+
+  def LPUpdateFlowCoordinator.initUpdater(self)  line 1859
+    names: platform, system, _macUpdater, initUpdater, _winUpdater, _registerUpdaterCallbacks, bool
+      str: '\n        初始化当前平台更新器并注册回调。\n\n        参数:\n            无\n        返回:\n            bool: 初始化成功返回 True，否则返回 False。\n        '
+      str: 'Darwin'
+      str: 'Windows'
+
+  def LPUpdateFlowCoordinator.isMacReady(self)  line 1877
+    names: _macUpdater, isReady
+      str: '\n        判断 macOS 更新器是否可用。\n\n        参数:\n            无\n        返回:\n            bool: 可用返回 True，否则返回 False。\n        '
+
+  def LPUpdateFlowCoordinator.isCurrentPlatformReady(self)  line 1888
+    names: platform, system, _macUpdater, isReady, _winUpdater
+      str: '\n        判断当前平台更新器是否可用。\n\n        参数:\n            无\n        返回:\n            bool: 可用返回 True，否则返回 False。\n        '
+      str: 'Darwin'
+      str: 'Windows'
+
+  def LPUpdateFlowCoordinator.ensureCurrentUpdaterReady(self)  line 1904
+    names: platform, system, _macUpdater, ensureReady, _winUpdater
+      str: '\n        确保当前平台更新器处于可用状态。\n\n        参数:\n            无\n        返回:\n            bool: 可用返回 True，否则返回 False。\n        '
+      str: 'Darwin'
+      str: 'Windows'
+
+  def LPUpdateFlowCoordinator.triggerBackgroundCheck(self, reason)  line 1920
+    names: _telemetryTracker, recordUpdateCheckTrigger, platform, system, _macUpdater, isReady, recordUpdateCallback, str, LPUtility, appVersion, isBackgroundCheckRunning, triggerBackgroundCheck, dict, _activeCheckContext, _winUpdater
+      str: '\n        触发后台更新检查并记录触发埋点。\n\n        参数:\n            reason (str): 触发原因。\n        返回:\n            bool: 触发成功返回 True，否则返回 False。\n        '
+      str: 'Darwin'
+      str: 'not_found'
+      str: 'error'
+      str: 'sparkle_background'
+      str: 'updater_sdk'
+      str: 'updater_not_ready'
+      str: 'sparkle updater not ready'
+      str: 'result_kind'
+      str: 'source'
+      str: 'error_category'
+      str: 'error_code'
+      str: 'error_message'
+      str: 'current_version'
+      str: 'checkContext'
+      str: 'check_in_progress'
+      str: 'dispatch_busy'
+      str: 'sparkle background check already running'
+      str: 'dispatch_failed'
+      str: 'dispatch_rejected'
+      str: 'sparkle background check dispatch failed'
+      str: 'Windows'
+      str: 'winsparkle_background'
+      str: 'winsparkle updater not ready'
+      str: 'winsparkle background check already running'
+      str: 'winsparkle background check dispatch failed'
+      str: 'update_background'
+      str: 'unsupported_platform'
+      str: 'platform_not_supported'
+      str: 'unsupported platform: '
+
+  def LPUpdateFlowCoordinator.triggerStartupCheck(self)  line 2046
+    names: triggerBackgroundCheck
+      str: '\n        触发启动阶段后台检查。\n\n        参数:\n            无\n        返回:\n            bool: 触发成功返回 True，否则返回 False。\n        '
+      str: 'startup'
+
+  def LPUpdateFlowCoordinator.triggerPeriodicCheck(self)  line 2057
+    names: triggerBackgroundCheck
+      str: '\n        触发周期后台检查。\n\n        参数:\n            无\n        返回:\n            bool: 触发成功返回 True，否则返回 False。\n        '
+      str: 'periodic'
+
+  def LPUpdateFlowCoordinator.triggerHiddenBetaCheck(self, triggerSource)  line 2068
+    names: _expireHiddenBetaLockIfNeeded, time, monotonic, float, _hiddenBetaCooldownUntil, int, max, _buildHiddenBetaResult, _hiddenBetaLockCheckId, platform, system, ensureCurrentUpdaterReady, _macUpdater, isBackgroundCheckRunning, _winUpdater, _resolveHiddenBetaFeedURLForCurrentPlatform, setTemporaryFeedURL, _hiddenBetaLockPlatform, applyCurrentFeedURL, bool, get, str, _clearHiddenBetaLock, logger, warning, triggerBackgroundCheck, isinstance, _activeCheckContext, dict, _hiddenBetaLockStartedAt, _hiddenBetaCooldownSeconds, info
+      str: '\n        触发隐藏入口的一次性 Beta feed 检查（仅当前进程有效）。\n\n        参数:\n            triggerSource (str): 触发来源标识。\n        返回:\n            dict: 触发结果，包含 status/message/check_id/platform。\n        '
+      str: 'cooldown'
+      str: 'Beta mode is cooling down, retry in '
+      str: 's'
+      str: 'check_running'
+      str: 'A beta update check is still pending'
+      str: 'checkId'
+      str: 'Darwin'
+      str: 'Windows'
+      str: 'unsupported_platform'
+      str: 'Unsupported platform: '
+      str: 'updater_not_ready'
+      str: ' updater is not ready'
+      str: 'Darwin'
+      str: 'Sparkle background check is in progress'
+      str: 'Windows'
+      str: 'WinSparkle background check is in progress'
+      str: 'feed_switch_failed'
+      str: 'Beta feed URL is unavailable'
+      str: 'ok'
+      str: 'message'
+      str: 'apply feed failed'
+      str: 'Sparkle beta feed switch failed: '
+      str: '[update.hiddenbeta] WinSparkle runtime feed apply failed, continue with probe fallback: %s'
+      str: 'dispatch_failed'
+      str: 'Dispatch hidden beta update check failed'
+      str: 'check_id'
+      str: 'missing_check_id'
+      str: 'Dispatch hidden beta update check failed: missing check_id'
+      str: '[update.hiddenbeta] started platform=%s check_id=%s feed=%s'
+      str: 'started'
+      str: 'Enter Beta Mode!'
+
+  def LPUpdateFlowCoordinator.checkForUpdatesManually(self, triggerSource)  line 2182
+    names: _telemetryTracker, recordUpdateCheckTrigger, platform, system, _macUpdater, isReady, recordUpdateCallback, str, LPUtility, appVersion, checkForUpdatesManually, dict, _activeCheckContext, _winUpdater, recordManualUpdateConfirmedForWinSparkle
+      str: '\n        触发手动检查更新。\n\n        参数:\n            triggerSource (str): 触发来源。\n        返回:\n            bool: 触发成功返回 True，否则返回 False。\n        '
+      str: 'Darwin'
+      str: 'not_found'
+      str: 'error'
+      str: 'sparkle_manual'
+      str: 'updater_sdk'
+      str: 'updater_not_ready'
+      str: 'sparkle updater not ready'
+      str: 'result_kind'
+      str: 'source'
+      str: 'error_category'
+      str: 'error_code'
+      str: 'error_message'
+      str: 'current_version'
+      str: 'checkContext'
+      str: 'dispatch_failed'
+      str: 'manual_dispatch_failed'
+      str: 'sparkle manual check dispatch failed'
+      str: 'Windows'
+      str: 'winsparkle_manual'
+      str: 'winsparkle updater not ready'
+      str: 'winsparkle manual check dispatch failed'
+      str: 'update_manual'
+      str: 'unsupported_platform'
+      str: 'platform_not_supported'
+      str: 'unsupported platform: '
+
+  def LPUpdateFlowCoordinator.resumePendingOTASession(self)  line 2279
+    names: _telemetryTracker, resumePendingOTASession
+      str: '\n        在启动时恢复并补账未完成的 OTA 会话。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPUpdateFlowCoordinator.tickOTATimeoutMonitor(self)  line 2290
+    names: _telemetryTracker, tickOTATimeoutMonitor
+      str: '\n        执行 OTA 超时监控与纠偏检查。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPUpdateFlowCoordinator.logStartupUpdateCheckPending(self)  line 2301
+    names: _telemetryTracker, logStartupUpdateCheckPending
+      str: '\n        输出启动检查是否超时未回调的诊断日志。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPUpdateFlowCoordinator.markWinInstallStarted(self)  line 2312
+    names: _telemetryTracker, recordUpdateInstallStartedForWinSparkle
+      str: '\n        标记 Windows 安装开始并写入 OTA 会话。\n\n        参数:\n            无\n        返回:\n            无\n        '

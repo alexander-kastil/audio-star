@@ -1,0 +1,63 @@
+# module LPClientFramework.LPMediaHttpServer
+
+[module] names: mediafile, MediaFile, os, hashlib, pathlib, Path, cherrypy, LPClientFramework, LPUtility, LPClientFramework.LPUtility, logger, _isAccessibleMusicFilePath, MediaServerPage
+  str: 'MediaFile'
+  str: 'Path'
+  str: 'LPUtility'
+  str: 'logger'
+  str: '_isAccessibleMusicFilePath'
+  str: 'MediaServerPage'
+
+def _isAccessibleMusicFilePath(filePath)  line 11
+  names: LPUtility, isAccessibleLocalMusicFilePath
+    str: '\n    判断媒体服务是否允许访问指定音频文件。\n\n    参数:\n        filePath (str): 待校验的文件路径。\n    返回:\n        bool: 路径仍在跟踪目录下或已入库时返回 True，否则返回 False。\n    '
+
+def MediaServerPage()  line 23
+  names: __name__, __module__, __qualname__, cherrypy, expose, index, music, cover
+    str: 'MediaServerPage'
+    str: 'MediaServerPage.index'
+    str: 'MediaServerPage.music'
+    str: 'MediaServerPage.cover'
+
+  def MediaServerPage.index(self)  line 24
+      str: 'WiiM Home Media Service'
+
+  def MediaServerPage.music(self, path)  line 28
+    names: len, cherrypy, HTTPError, bytes, fromhex, decode, Exception, logger, debug, _isAccessibleMusicFilePath, os, path, exists, Path, suffix, lower, LPUtility, musicFileType, request, headers, get, split, int, open, read, response, str, getsize
+      str: 'File empty'
+      str: 'utf-8'
+      str: 'Invalid encode'
+      str: 'media http server 404 reason: %s'
+      str: 'Music dir not found: %s'
+      str: 'File not exists'
+      str: 'Invalid file type'
+      str: 'Range'
+      str: '='
+      str: '-'
+      str: 'rb'
+      str: 'audio/mpeg'
+      str: 'Content-Type'
+      str: 'Content-Length'
+      str: 'bytes'
+      str: 'Accept-Ranges'
+      str: 'bytes '
+      str: '/'
+      str: 'Content-Range'
+
+  def MediaServerPage.cover(self, path)  line 84
+    names: len, cherrypy, HTTPError, bytes, fromhex, decode, Exception, logger, debug, _isAccessibleMusicFilePath, os, path, exists, Path, suffix, lower, LPUtility, musicFileType, hashlib, md5, encode, hexdigest, cacheCoverDir, MediaFile, art, open, write, read, response, headers, str
+      str: 'File empty'
+      str: 'utf-8'
+      str: 'Invalid encode'
+      str: 'media http server 404 reason: %s'
+      str: 'Music dir not found: %s'
+      str: 'File not exists'
+      str: 'Invalid file type'
+      str: 'No cover support'
+      str: 'wb'
+      str: 'rb'
+      str: 'image/png'
+      str: 'Content-Type'
+      str: 'Content-Length'
+      str: 'bytes'
+      str: 'Accept-Ranges'

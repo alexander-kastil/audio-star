@@ -1,0 +1,249 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/7/14\n@Auth ： AI Assistant\n@File ：LPNativeCrashHandler.py\n@Desc ：跨平台原生崩溃捕获模块，提供统一入口 install_native_crash_handler()。\n        Windows   : UEF + MiniDumpWriteDump 生成 .dmp\n        macOS     : POSIX 信号处理器 + 依赖系统 CrashReporter 生成 .crash\n        共用      : faulthandler 输出 Python traceback、qInstallMessageHandler 输出 Qt 致命日志\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 12           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (os)
+             10 STORE_NAME               1 (os)
+
+ 13          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (sys)
+             18 STORE_NAME               2 (sys)
+
+ 14          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (datetime)
+             26 STORE_NAME               3 (datetime)
+
+ 17          28 LOAD_CONST               3 (<code object install_native_crash_handler at 0x000001F324E76240, file "LPClientFramework\util\LPNativeCrashHandler.py", line 17>)
+             30 LOAD_CONST               4 ('install_native_crash_handler')
+             32 MAKE_FUNCTION            0
+             34 STORE_NAME               4 (install_native_crash_handler)
+
+ 38          36 LOAD_CONST               5 (<code object get_crash_dir at 0x000001F324E76500, file "LPClientFramework\util\LPNativeCrashHandler.py", line 38>)
+             38 LOAD_CONST               6 ('get_crash_dir')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               5 (get_crash_dir)
+
+ 62          44 LOAD_CONST               7 (<code object generate_crash_timestamp at 0x000001F324E76A80, file "LPClientFramework\util\LPNativeCrashHandler.py", line 62>)
+             46 LOAD_CONST               8 ('generate_crash_timestamp')
+             48 MAKE_FUNCTION            0
+             50 STORE_NAME               6 (generate_crash_timestamp)
+
+ 75          52 LOAD_CONST              11 ((None,))
+             54 LOAD_CONST               9 (<code object _write_python_traceback_simple at 0x000001F324E76920, file "LPClientFramework\util\LPNativeCrashHandler.py", line 75>)
+             56 LOAD_CONST              10 ('_write_python_traceback_simple')
+             58 MAKE_FUNCTION            1 (defaults)
+             60 STORE_NAME               7 (_write_python_traceback_simple)
+             62 LOAD_CONST               2 (None)
+             64 RETURN_VALUE
+
+=== install_native_crash_handler ===
+ 29           0 LOAD_GLOBAL              0 (sys)
+              2 LOAD_ATTR                1 (platform)
+              4 LOAD_CONST               1 ('win32')
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE       30
+
+ 30          10 LOAD_CONST               2 (0)
+             12 LOAD_CONST               3 (('_install_win32',))
+             14 IMPORT_NAME              2 (LPClientFramework.util.LPNativeCrashHandler_win)
+             16 IMPORT_FROM              3 (_install_win32)
+             18 STORE_FAST               0 (_install_win32)
+             20 POP_TOP
+
+ 31          22 LOAD_FAST                0 (_install_win32)
+             24 CALL_FUNCTION            0
+             26 POP_TOP
+             28 JUMP_FORWARD            28 (to 58)
+
+ 32     >>   30 LOAD_GLOBAL              0 (sys)
+             32 LOAD_ATTR                1 (platform)
+             34 LOAD_CONST               4 ('darwin')
+             36 COMPARE_OP               2 (==)
+             38 POP_JUMP_IF_FALSE       58
+
+ 33          40 LOAD_CONST               2 (0)
+             42 LOAD_CONST               5 (('_install_darwin',))
+             44 IMPORT_NAME              4 (LPClientFramework.util.LPNativeCrashHandler_mac)
+             46 IMPORT_FROM              5 (_install_darwin)
+             48 STORE_FAST               1 (_install_darwin)
+             50 POP_TOP
+
+ 34          52 LOAD_FAST                1 (_install_darwin)
+             54 CALL_FUNCTION            0
+             56 POP_TOP
+        >>   58 LOAD_CONST               6 (None)
+             60 RETURN_VALUE
+
+=== get_crash_dir ===
+ 51           0 LOAD_GLOBAL              0 (sys)
+              2 LOAD_ATTR                1 (platform)
+              4 LOAD_CONST               1 ('win32')
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE       34
+
+ 52          10 LOAD_GLOBAL              2 (os)
+             12 LOAD_ATTR                3 (environ)
+             14 LOAD_METHOD              4 (get)
+             16 LOAD_CONST               2 ('APPDATA')
+             18 LOAD_GLOBAL              2 (os)
+             20 LOAD_ATTR                5 (path)
+             22 LOAD_METHOD              6 (expanduser)
+             24 LOAD_CONST               3 ('~')
+             26 CALL_METHOD              1
+             28 CALL_METHOD              2
+             30 STORE_FAST               0 (base)
+             32 JUMP_FORWARD            46 (to 80)
+
+ 53     >>   34 LOAD_GLOBAL              0 (sys)
+             36 LOAD_ATTR                1 (platform)
+             38 LOAD_CONST               4 ('darwin')
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       58
+
+ 54          44 LOAD_GLOBAL              2 (os)
+             46 LOAD_ATTR                5 (path)
+             48 LOAD_METHOD              6 (expanduser)
+             50 LOAD_CONST               5 ('~/Library/Logs')
+             52 CALL_METHOD              1
+             54 STORE_FAST               0 (base)
+             56 JUMP_FORWARD            22 (to 80)
+
+ 56     >>   58 LOAD_GLOBAL              2 (os)
+             60 LOAD_ATTR                3 (environ)
+             62 LOAD_METHOD              4 (get)
+             64 LOAD_CONST               6 ('XDG_DATA_HOME')
+             66 LOAD_GLOBAL              2 (os)
+             68 LOAD_ATTR                5 (path)
+             70 LOAD_METHOD              6 (expanduser)
+             72 LOAD_CONST               7 ('~/.local/share')
+             74 CALL_METHOD              1
+             76 CALL_METHOD              2
+             78 STORE_FAST               0 (base)
+
+ 57     >>   80 LOAD_GLOBAL              2 (os)
+             82 LOAD_ATTR                5 (path)
+             84 LOAD_METHOD              7 (join)
+             86 LOAD_FAST                0 (base)
+             88 LOAD_CONST               8 ('WiiMHome')
+             90 LOAD_CONST               9 ('crashes')
+             92 CALL_METHOD              3
+             94 STORE_FAST               1 (crash_dir)
+
+ 58          96 LOAD_GLOBAL              2 (os)
+             98 LOAD_ATTR                8 (makedirs)
+            100 LOAD_FAST                1 (crash_dir)
+            102 LOAD_CONST              10 (True)
+            104 LOAD_CONST              11 (('exist_ok',))
+            106 CALL_FUNCTION_KW         2
+            108 POP_TOP
+
+ 59         110 LOAD_FAST                1 (crash_dir)
+            112 RETURN_VALUE
+
+=== generate_crash_timestamp ===
+ 72           0 LOAD_GLOBAL              0 (datetime)
+              2 LOAD_ATTR                0 (datetime)
+              4 LOAD_METHOD              1 (now)
+              6 CALL_METHOD              0
+              8 LOAD_METHOD              2 (strftime)
+             10 LOAD_CONST               1 ('%Y%m%d_%H%M%S_%f')
+             12 CALL_METHOD              1
+             14 RETURN_VALUE
+
+=== _write_python_traceback_simple ===
+ 86           0 SETUP_FINALLY          134 (to 136)
+
+ 87           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (None)
+              6 IMPORT_NAME              0 (faulthandler)
+              8 STORE_FAST               1 (faulthandler)
+
+ 88          10 LOAD_GLOBAL              1 (get_crash_dir)
+             12 CALL_FUNCTION            0
+             14 STORE_FAST               2 (crash_dir)
+
+ 89          16 LOAD_FAST                0 (dump_path)
+             18 POP_JUMP_IF_FALSE       42
+
+ 90          20 LOAD_FAST                0 (dump_path)
+             22 LOAD_METHOD              2 (replace)
+             24 LOAD_CONST               3 ('.dmp')
+             26 LOAD_CONST               4 ('.traceback.txt')
+             28 CALL_METHOD              2
+             30 LOAD_METHOD              2 (replace)
+             32 LOAD_CONST               5 ('.signo')
+             34 LOAD_CONST               4 ('.traceback.txt')
+             36 CALL_METHOD              2
+             38 STORE_FAST               3 (tb_path)
+             40 JUMP_FORWARD            28 (to 70)
+
+ 92     >>   42 LOAD_GLOBAL              3 (generate_crash_timestamp)
+             44 CALL_FUNCTION            0
+             46 STORE_FAST               4 (ts)
+
+ 93          48 LOAD_GLOBAL              4 (os)
+             50 LOAD_ATTR                5 (path)
+             52 LOAD_METHOD              6 (join)
+             54 LOAD_FAST                2 (crash_dir)
+             56 LOAD_CONST               6 ('traceback_')
+             58 LOAD_FAST                4 (ts)
+             60 FORMAT_VALUE             0
+             62 LOAD_CONST               7 ('.txt')
+             64 BUILD_STRING             3
+             66 CALL_METHOD              2
+             68 STORE_FAST               3 (tb_path)
+
+ 94     >>   70 LOAD_GLOBAL              7 (open)
+             72 LOAD_FAST                3 (tb_path)
+             74 LOAD_CONST               8 ('w')
+             76 LOAD_CONST               9 ('utf-8')
+             78 LOAD_CONST              10 (('encoding',))
+             80 CALL_FUNCTION_KW         3
+             82 SETUP_WITH              30 (to 114)
+             84 STORE_FAST               5 (tb_f)
+
+ 95          86 LOAD_FAST                1 (faulthandler)
+             88 LOAD_ATTR                8 (dump_traceback)
+             90 LOAD_FAST                5 (tb_f)
+             92 LOAD_CONST              11 (True)
+             94 LOAD_CONST              12 (('file', 'all_threads'))
+             96 CALL_FUNCTION_KW         2
+             98 POP_TOP
+            100 POP_BLOCK
+            102 LOAD_CONST               2 (None)
+            104 DUP_TOP
+            106 DUP_TOP
+            108 CALL_FUNCTION            3
+            110 POP_TOP
+            112 JUMP_FORWARD            16 (to 130)
+        >>  114 WITH_EXCEPT_START
+            116 POP_JUMP_IF_TRUE       120
+            118 RERAISE
+        >>  120 POP_TOP
+            122 POP_TOP
+            124 POP_TOP
+            126 POP_EXCEPT
+            128 POP_TOP
+
+ 96     >>  130 LOAD_FAST                3 (tb_path)
+            132 POP_BLOCK
+            134 RETURN_VALUE
+
+ 97     >>  136 DUP_TOP
+            138 LOAD_GLOBAL              9 (Exception)
+            140 JUMP_IF_NOT_EXC_MATCH   154
+            142 POP_TOP
+            144 POP_TOP
+            146 POP_TOP
+
+ 98         148 POP_EXCEPT
+            150 LOAD_CONST               2 (None)
+            152 RETURN_VALUE
+        >>  154 RERAISE
+            156 LOAD_CONST               2 (None)
+            158 RETURN_VALUE

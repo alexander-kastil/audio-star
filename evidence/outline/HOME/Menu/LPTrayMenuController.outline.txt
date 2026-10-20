@@ -1,0 +1,43 @@
+# module HOME.Menu.LPTrayMenuController
+
+[module] names: __doc__, platform, PyQt6.QtCore, QCoreApplication, QObject, PyQt6.QtGui, QAction, QIcon, PyQt6.QtWidgets, QMenu, QSystemTrayIcon, LPGlobalUI, LPTrayMenuController
+  str: '系统托盘菜单控制器。\n\n将从 WiiMHome.py 中拆分出的托盘菜单代码迁移至此，\n负责托盘图标创建（含平台差异）、托盘上下文菜单（打开应用 / 退出）\n以及退出流程中的托盘图标清理。\n'
+  str: 'QCoreApplication'
+  str: 'QObject'
+  str: 'QAction'
+  str: 'QIcon'
+  str: 'QMenu'
+  str: 'QSystemTrayIcon'
+  str: 'LPTrayMenuController'
+
+def LPTrayMenuController()  line 18
+  names: __name__, __module__, __qualname__, __doc__, __init__, setupTrayMenu, hideTrayIcon, __classcell__
+    str: 'LPTrayMenuController'
+    str: '管理系统托盘图标与托盘上下文菜单。'
+    str: 'LPTrayMenuController.__init__'
+    str: 'LPTrayMenuController.setupTrayMenu'
+    str: 'LPTrayMenuController.hideTrayIcon'
+
+  def LPTrayMenuController.__init__(self, owner, onShow, onQuit)  line 21
+    names: super, __init__, owner, _onShow, _onQuit, trayIcon
+      str: '初始化托盘控制器。\n\n        参数:\n            owner (QMainWindow): 主窗口实例，作为托盘图标的父对象。\n            onShow (callable): 打开/恢复主窗口的回调。\n            onQuit (callable): 退出应用的回调。\n        返回:\n            无。\n        '
+
+  def LPTrayMenuController.setupTrayMenu(self)  line 37
+    names: QSystemTrayIcon, owner, trayIcon, platform, system, LPGlobalUI, imagePath, QIcon, setIsMask, setIcon, QMenu, QCoreApplication, translate, QAction, triggered, connect, _onShow, _onQuit, addAction, addSeparator, setContextMenu, activated, show
+      str: '\n        创建托盘图标与上下文菜单。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'Darwin'
+      str: 'tray_ico.png'
+      str: 'app.ico'
+      str: 'MainWindow'
+      str: 'Open WiiM'
+      str: 'Quit'
+      str: 'LPTrayMenuController.setupTrayMenu.<locals>.onTrayActivated'
+
+    def LPTrayMenuController.setupTrayMenu.onTrayActivated(reason)  line 74
+      names: platform, system, QSystemTrayIcon, ActivationReason, Trigger, _onShow
+        str: '\n            deal click -- windows need\n            '
+        str: 'Windows'
+
+  def LPTrayMenuController.hideTrayIcon(self)  line 85
+    names: trayIcon, hide, deleteLater
+      str: '\n        隐藏并销毁托盘图标（退出流程调用）。\n\n        参数:\n            无\n        返回:\n            无\n        '

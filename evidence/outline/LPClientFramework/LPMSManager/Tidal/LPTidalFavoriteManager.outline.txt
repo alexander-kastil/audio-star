@@ -1,0 +1,277 @@
+# module LPClientFramework.LPMSManager.Tidal.LPTidalFavoriteManager
+
+[module] names: __doc__, typing, Any, Dict, List, Optional, PyQt6.QtCore, QObject, HOME.StreamService.Tidal.data.LPTidalDataProvider, LPTidalDataProvider, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, LPClientFramework.LPUtility, logger, LPTidalFavoriteManager
+  str: '\nTIDAL 收藏管理器。\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'LPTidalDataProvider'
+  str: 'LPTidalStore'
+  str: 'LPFavoriteCacheManager'
+  str: 'logger'
+  str: 'LPTidalFavoriteManager'
+
+def LPTidalFavoriteManager()  line 16
+  names: __name__, __module__, __qualname__, __doc__, Optional, QObject, __init__, str, bool, Dict, Any, requestFavoriteIds, List, applyFavoriteIds, refreshFavoriteIds, requestCollection, requestSubscription, applySubscriptionData, applyCollectionData, object, refreshCollection, requestToggleFavorite, requestSetFavorite, toggleFavorite, setFavorite, _favoriteIdsFromResult, _normalizeFavoriteIds, _fallbackFavoriteIds, _fallbackFavoriteIdsForDesired, _favoriteTypeForItem, __classcell__
+    str: 'LPTidalFavoriteManager'
+    str: '负责同步收藏 ID、拉取收藏列表和执行收藏切换。'
+    str: 'parent'
+    str: 'LPTidalFavoriteManager.__init__'
+    str: 'userId'
+    str: 'countryCode'
+    str: 'skipCache'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.requestFavoriteIds'
+    str: 'favoriteIds'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.applyFavoriteIds'
+    str: 'LPTidalFavoriteManager.refreshFavoriteIds'
+    str: 'userId'
+    str: 'countryCode'
+    str: 'skipCache'
+    str: 'sortPreferences'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.requestCollection'
+    str: 'userId'
+    str: 'skipCache'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.requestSubscription'
+    str: 'subscriptionInfo'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.applySubscriptionData'
+    str: 'payload'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.applyCollectionData'
+    str: 'LPTidalFavoriteManager.refreshCollection'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'countryCode'
+    str: 'wasFavorite'
+    str: 'previousFavoriteIds'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.requestToggleFavorite'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: 'countryCode'
+    str: 'previousFavoriteIds'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.requestSetFavorite'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.toggleFavorite'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalFavoriteManager.setFavorite'
+    str: 'result'
+    str: 'return'
+    str: 'LPTidalFavoriteManager._favoriteIdsFromResult'
+    str: 'LPTidalFavoriteManager._normalizeFavoriteIds'
+    str: 'previousFavoriteIds'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'wasFavorite'
+    str: 'return'
+    str: 'LPTidalFavoriteManager._fallbackFavoriteIds'
+    str: 'previousFavoriteIds'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: 'return'
+    str: 'LPTidalFavoriteManager._fallbackFavoriteIdsForDesired'
+    str: 'itemType'
+    str: 'return'
+    str: 'LPTidalFavoriteManager._favoriteTypeForItem'
+
+  def LPTidalFavoriteManager.__init__(self, parent)  line 19
+    names: super, __init__, LPTidalStore, instance, _store, LPTidalDataProvider, _provider
+      str: '\n        初始化收藏管理器。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def LPTidalFavoriteManager.requestFavoriteIds(self, userId, countryCode, skipCache)  line 30
+    names: LPFavoriteCacheManager, instance, snapshot, _provider, refreshFavoriteIds
+      str: '\n        仅请求收藏 ID 集合，不直接写入状态。\n\n        :param userId: TIDAL 用户 ID。\n        :param countryCode: 国家代码，保留参数以兼容现有调用。\n        :param skipCache: 为 True 时跳过应用层与 API 缓存，强制实时拉取。\n        :return: 请求结果字典。\n        '
+      str: 'Tidal'
+      str: 'success'
+      str: 'data'
+      str: 'from_cache'
+      str: 'skipCache'
+
+  def LPTidalFavoriteManager.applyFavoriteIds(self, favoriteIds)  line 46
+    names: _normalizeFavoriteIds, str, _store, accountState, get, strip, LPFavoriteCacheManager, instance, applyServerSnapshot, favoriteState, favoriteIds, isinstance, dict, list, fromkeys, collectionState, updateFavoriteIds, syncFavoriteFlagsFromState
+      str: '\n        将收藏 ID 集合写入本地缓存与 store，避免最终一致性丢数据。\n\n        :param favoriteIds: 收藏 ID 字典。\n        :return: 归一化后的收藏 ID 字典。\n        '
+      str: 'userId'
+      str: 'Tidal'
+
+  def LPTidalFavoriteManager.refreshFavoriteIds(self, userId, countryCode, skipCache)  line 66
+    names: requestFavoriteIds, _favoriteIdsFromResult, logger, warning, applyFavoriteIds
+      str: '\n        刷新收藏 ID 集合。\n\n        :param userId: TIDAL 用户 ID。\n        :param countryCode: 国家代码。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :return: 收藏 ID 字典。\n        '
+      str: 'countryCode'
+      str: 'skipCache'
+      str: '[TIDAL] refreshFavoriteIds failed'
+
+  def LPTidalFavoriteManager.requestCollection(self, userId, countryCode, skipCache, sortPreferences)  line 82
+    names: _provider, loadCollection
+      str: '\n        仅请求收藏页数据，不直接写入状态。\n\n        :param userId: TIDAL 用户 ID。\n        :param countryCode: 国家代码。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :param sortPreferences: Collection 各 section 的排序偏好。\n        :return: 请求结果字典。\n        '
+      str: 'skipCache'
+      str: 'sortPreferences'
+
+  def LPTidalFavoriteManager.requestSubscription(self, userId, skipCache)  line 105
+    names: _provider, loadSubscription, isinstance, dict, bool, get, _normalizeSubscriptionPayload
+      str: '\n        仅请求账号订阅状态，不直接写入状态。\n\n        :param userId: TIDAL 用户 ID。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :return: 请求结果字典。\n        '
+      str: 'skipCache'
+      str: 'success'
+      str: 'data'
+      str: 'status_code'
+      str: 'success'
+      str: 'data'
+      str: 'status_code'
+
+  def LPTidalFavoriteManager.applySubscriptionData(self, subscriptionInfo)  line 122
+    names: _store, setSubscriptionInfo, isinstance, dict
+      str: '\n        将账号订阅状态写入 Store。\n\n        :param subscriptionInfo: 归一化后的订阅信息。\n        :return: None。\n        '
+
+  def LPTidalFavoriteManager.applyCollectionData(self, payload)  line 131
+    names: isinstance, dict, _store, collectionState, setCollectionData, get, applySubscriptionData, syncFavoriteFlagsFromState
+      str: '\n        将收藏页数据写入 store。\n\n        :param payload: 归一化后的收藏页数据。\n        :return: None。\n        '
+      str: 'subscriptionInfo'
+
+  def LPTidalFavoriteManager.refreshCollection(self, userId, countryCode, skipCache)  line 145
+    names: requestCollection, isinstance, dict, bool, get, logger, warning, applyCollectionData
+      str: '\n        刷新收藏页数据。\n\n        :param userId: TIDAL 用户 ID。\n        :param countryCode: 国家代码。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :return: 请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'skipCache'
+      str: 'success'
+      str: '[TIDAL] refreshCollection failed'
+      str: 'data'
+
+  def LPTidalFavoriteManager.requestToggleFavorite(self, userId, itemType, itemId, countryCode, wasFavorite, previousFavoriteIds)  line 161
+    names: str, strip, lower, bool, _store, collectionState, isFavorite, _provider, removeFavorite, addFavorite, isinstance, dict, get, _favoriteIdsFromResult, requestFavoriteIds, _fallbackFavoriteIds
+      str: '\n        仅请求切换收藏并返回最新收藏 ID，不直接写入状态。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param countryCode: 国家代码。\n        :param wasFavorite: 操作前是否已收藏；在后台线程调用时应由主线程预先传入。\n        :param previousFavoriteIds: 操作前的收藏 ID 快照，用于刷新失败时兜底推导最终状态。\n        :r'
+      str: 'countryCode'
+      str: 'success'
+      str: 'countryCode'
+      str: 'skipCache'
+      str: 'error'
+      str: 'status_code'
+      str: 'success'
+      str: 'error'
+      str: 'status_code'
+      str: 'itemType'
+      str: 'itemId'
+      str: 'wasFavorite'
+      str: 'desiredFavorite'
+      str: 'favoriteIds'
+
+  def LPTidalFavoriteManager.requestSetFavorite(self, userId, itemType, itemId, desiredFavorite, countryCode, previousFavoriteIds)  line 218
+    names: str, strip, lower, bool, _provider, addFavorite, removeFavorite, isinstance, dict, get, _favoriteIdsFromResult, requestFavoriteIds, _fallbackFavoriteIdsForDesired
+      str: '\n        仅请求设置收藏目标状态并返回最新收藏 ID，不直接写入状态。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param desiredFavorite: 目标收藏状态。\n        :param countryCode: 国家代码。\n        :param previousFavoriteIds: 操作前收藏 ID 快照，用于刷新失败时兜底推导最终状态。\n        :return: 统一结果字典'
+      str: 'countryCode'
+      str: 'success'
+      str: 'countryCode'
+      str: 'skipCache'
+      str: 'error'
+      str: 'status_code'
+      str: 'success'
+      str: 'error'
+      str: 'status_code'
+      str: 'itemType'
+      str: 'itemId'
+      str: 'desiredFavorite'
+      str: 'favoriteIds'
+
+  def LPTidalFavoriteManager.toggleFavorite(self, userId, itemType, itemId, countryCode)  line 274
+    names: requestToggleFavorite, _store, collectionState, isFavorite, favoriteIds, bool, get, applyFavoriteIds
+      str: '\n        切换收藏状态。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param countryCode: 国家代码。\n        :return: 请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'wasFavorite'
+      str: 'previousFavoriteIds'
+      str: 'success'
+      str: 'favoriteIds'
+
+  def LPTidalFavoriteManager.setFavorite(self, userId, itemType, itemId, desiredFavorite, countryCode)  line 296
+    names: requestSetFavorite, _store, favoriteState, favoriteIds, bool, get, applyFavoriteIds
+      str: '\n        设置收藏状态。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param desiredFavorite: 目标收藏状态。\n        :param countryCode: 国家代码。\n        :return: 请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'previousFavoriteIds'
+      str: 'success'
+      str: 'favoriteIds'
+
+  def LPTidalFavoriteManager._favoriteIdsFromResult(self, result)  line 319
+    names: isinstance, dict, bool, get, _provider, normalizeFavoriteIds
+      str: '\n        从请求结果中提取并归一化收藏 ID。\n\n        :param result: 请求结果字典。\n        :return: 收藏 ID 字典；失败时返回空字典。\n        '
+      str: 'success'
+      str: 'data'
+
+  def LPTidalFavoriteManager._normalizeFavoriteIds(self, favoriteIds)  line 330
+    names: isinstance, dict, get
+      str: '\n        将收藏 ID 字典归一化为固定结构。\n\n        :param favoriteIds: 原始收藏 ID 数据。\n        :return: 归一化后的收藏 ID 字典。\n        '
+      str: 'LPTidalFavoriteManager._normalizeFavoriteIds.<locals>.<listcomp>'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+
+    def LPTidalFavoriteManager._normalizeFavoriteIds.<listcomp>(.0)  line 339
+      names: str
+
+    def LPTidalFavoriteManager._normalizeFavoriteIds.<listcomp>(.0)  line 340
+      names: str
+
+    def LPTidalFavoriteManager._normalizeFavoriteIds.<listcomp>(.0)  line 341
+      names: str
+
+    def LPTidalFavoriteManager._normalizeFavoriteIds.<listcomp>(.0)  line 342
+      names: str
+
+    def LPTidalFavoriteManager._normalizeFavoriteIds.<listcomp>(.0)  line 343
+      names: str
+
+  def LPTidalFavoriteManager._fallbackFavoriteIds(self, previousFavoriteIds, itemType, itemId, wasFavorite)  line 346
+    names: _normalizeFavoriteIds, _favoriteTypeForItem, str, strip, get, append
+      str: '\n        在刷新收藏 ID 失败时，根据操作前快照推导最终状态。\n\n        :param previousFavoriteIds: 操作前收藏 ID 快照。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param wasFavorite: 操作前是否已收藏。\n        :return: 推导出的收藏 ID 字典。\n        '
+      str: 'LPTidalFavoriteManager._fallbackFavoriteIds.<locals>.<listcomp>'
+
+    def LPTidalFavoriteManager._fallbackFavoriteIds.<listcomp>(.0)  line 365
+
+  def LPTidalFavoriteManager._fallbackFavoriteIdsForDesired(self, previousFavoriteIds, itemType, itemId, desiredFavorite)  line 371
+    names: _normalizeFavoriteIds, _favoriteTypeForItem, str, strip, get, bool, insert, list, dict, fromkeys
+      str: '\n        在刷新收藏 ID 失败时，根据目标状态推导最终收藏 ID。\n\n        :param previousFavoriteIds: 操作前收藏 ID 快照。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param desiredFavorite: 目标收藏状态。\n        :return: 推导出的收藏 ID 字典。\n        '
+      str: 'LPTidalFavoriteManager._fallbackFavoriteIdsForDesired.<locals>.<listcomp>'
+
+    def LPTidalFavoriteManager._fallbackFavoriteIdsForDesired.<listcomp>(.0)  line 390
+
+  def LPTidalFavoriteManager._favoriteTypeForItem(self, itemType)  line 396
+    names: str, strip, lower, get
+      str: '\n        将条目类型映射到收藏 ID 字典键。\n\n        :param itemType: 条目类型。\n        :return: 收藏 ID 字典键。\n        '
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'artist'
+      str: 'artists'
+      str: 'album'
+      str: 'albums'
+      str: 'track'
+      str: 'tracks'
+      str: 'playlist'
+      str: 'playlists'
+      str: 'video'
+      str: 'videos'

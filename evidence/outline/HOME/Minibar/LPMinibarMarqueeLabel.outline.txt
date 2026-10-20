@@ -1,0 +1,89 @@
+# module HOME.Minibar.LPMinibarMarqueeLabel
+
+[module] names: __doc__, PyQt6.QtCore, QEvent, QRectF, Qt, QTimer, PyQt6.QtGui, QFontMetrics, QPainter, QPixmap, PyQt6.QtWidgets, QLabel, QSizePolicy, LPMinibarMarqueeLabel
+  str: '\n@Time ： 2026/5/22\n@Auth ： Codex\n@File ：LPMinibarMarqueeLabel.py\n@Desc: minibar 设备名称滚动横幅标签。\n'
+  str: 'QEvent'
+  str: 'QRectF'
+  str: 'Qt'
+  str: 'QTimer'
+  str: 'QFontMetrics'
+  str: 'QPainter'
+  str: 'QPixmap'
+  str: 'QLabel'
+  str: 'QSizePolicy'
+  str: 'LPMinibarMarqueeLabel'
+
+def LPMinibarMarqueeLabel()  line 13
+  names: __name__, __module__, __qualname__, __doc__, __init__, setText, text, _updateTextWidth, _invalidateStrip, _renderStrip, changeEvent, resizeEvent, hideEvent, showEvent, paintEvent, _advanceScroll, _shouldScroll, _updateScrollState, __classcell__
+    str: 'LPMinibarMarqueeLabel'
+    str: 'minibar 设备名称滚动标签，负责在文本超宽时横向循环滚动。'
+    str: 'LPMinibarMarqueeLabel.__init__'
+    str: 'LPMinibarMarqueeLabel.setText'
+    str: 'LPMinibarMarqueeLabel.text'
+    str: 'LPMinibarMarqueeLabel._updateTextWidth'
+    str: 'LPMinibarMarqueeLabel._invalidateStrip'
+    str: 'LPMinibarMarqueeLabel._renderStrip'
+    str: 'LPMinibarMarqueeLabel.changeEvent'
+    str: 'LPMinibarMarqueeLabel.resizeEvent'
+    str: 'LPMinibarMarqueeLabel.hideEvent'
+    str: 'LPMinibarMarqueeLabel.showEvent'
+    str: 'LPMinibarMarqueeLabel.paintEvent'
+    str: 'LPMinibarMarqueeLabel._advanceScroll'
+    str: 'LPMinibarMarqueeLabel._shouldScroll'
+    str: 'LPMinibarMarqueeLabel._updateScrollState'
+
+  def LPMinibarMarqueeLabel.__init__(self, parent)  line 16
+    names: super, __init__, _fullText, _textWidth, _scrollOffset, _scrollGap, _scrollStep, _strip, _stripKey, QTimer, _timer, setInterval, timeout, connect, _advanceScroll, setSizePolicy, QSizePolicy, Policy, Fixed, setAlignment, Qt, AlignmentFlag, AlignHCenter, AlignVCenter
+      str: '初始化滚动标签。\n\n        :param parent: 父级 QWidget。\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel.setText(self, text)  line 36
+    names: str, _fullText, _scrollOffset, _updateTextWidth, _invalidateStrip, setToolTip, _updateScrollState, update
+      str: '设置完整设备名称，并根据宽度决定是否启动滚动。\n\n        :param text: 需要展示的设备名称。\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel.text(self)  line 50
+    names: _fullText
+      str: '返回当前完整设备名称。\n\n        :return: 完整设备名称字符串。\n        '
+
+  def LPMinibarMarqueeLabel._updateTextWidth(self)  line 57
+    names: QFontMetrics, font, horizontalAdvance, _fullText, _textWidth
+      str: '重新计算并缓存完整文本的像素宽度，避免每帧重复度量。\n\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel._invalidateStrip(self)  line 64
+    names: _strip, _stripKey
+      str: '使预渲染滚动条失效，下次绘制时重建。\n\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel._renderStrip(self)  line 72
+    names: contentsRect, max, width, _textWidth, _scrollGap, height, devicePixelRatioF, QPixmap, int, round, _strip, setDevicePixelRatio, fill, Qt, GlobalColor, transparent, _stripKey, QPainter, setFont, font, setPen, palette, color, foregroundRole, QRectF, drawText, AlignmentFlag, AlignVCenter, _fullText, moveLeft, end
+      str: '把两段文本预渲染到位图，逐帧绘制时只做位图平移。\n\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel.changeEvent(self, event)  line 97
+    names: super, changeEvent, type, QEvent, Type, FontChange, _scrollOffset, _updateTextWidth, _invalidateStrip, _updateScrollState, update, PaletteChange
+      str: '字体或配色变化时刷新文本宽度与预渲染位图。\n\n        :param event: Qt 事件。\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel.resizeEvent(self, event)  line 114
+    names: super, resizeEvent, _scrollOffset, _invalidateStrip, _updateScrollState
+      str: '处理尺寸变化并重新计算滚动状态。\n\n        :param event: Qt 尺寸变化事件。\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel.hideEvent(self, event)  line 125
+    names: super, hideEvent, _timer, isActive, stop
+      str: '隐藏时停止滚动定时器，避免不可见时继续空转。\n\n        :param event: Qt 隐藏事件。\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel.showEvent(self, event)  line 135
+    names: super, showEvent, _updateScrollState, update
+      str: '重新显示时按需恢复滚动定时器。\n\n        :param event: Qt 显示事件。\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel.paintEvent(self, event)  line 145
+    names: _shouldScroll, super, paintEvent, contentsRect, width, _textWidth, _scrollGap, height, _strip, _stripKey, devicePixelRatioF, _renderStrip, QPainter, drawPixmap, x, _scrollOffset, y
+      str: '绘制设备名称，超宽时绘制循环滚动横幅。\n\n        :param event: Qt 绘制事件。\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel._advanceScroll(self)  line 162
+    names: isVisible, _timer, isActive, stop, _shouldScroll, _scrollOffset, _updateScrollState, _scrollStep, _textWidth, _scrollGap, update
+      str: '推进滚动位置。\n\n        :return: None。\n        '
+
+  def LPMinibarMarqueeLabel._shouldScroll(self)  line 181
+    names: _fullText, _textWidth, max, contentsRect, width
+      str: '判断当前文本是否需要滚动。\n\n        :return: 需要滚动时返回 True，否则返回 False。\n        '
+
+  def LPMinibarMarqueeLabel._updateScrollState(self)  line 190
+    names: _shouldScroll, super, setText, isVisible, _timer, isActive, start, stop, _fullText
+      str: '根据文本宽度启动或停止滚动定时器。\n\n        :return: None。\n        '

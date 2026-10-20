@@ -1,0 +1,251 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('本地音乐主库（SQLite）的共享访问契约。\n\nPhase 0 起 Recently 与 beets 共用同一个主库文件 ``{userDataDir}/beets/musiclibrary.db``；\n本模块是主库路径、连接参数与 busy_timeout 的唯一来源，避免各业务模块各自拼接路径\n或重复设置 PRAGMA。\n\n职责边界：\n- 提供 :func:`databasePath` / :func:`connect` 与 ``BUSY_TIMEOUT_MS`` / ``JOURNAL_MODE`` 常量；\n- 提供 beets 写门禁状态的**只读**查询，自身不持有冻结状态（冻结唯一入口是\n  ``LPBeetsTaskCoordinator``）；\n- 不在模块级导入 ``LPBeetsWrapper``，也不导入 ``LPMusicLibrary`` 包（其包级导入会连带\n  ``LPRecentlyManager`` / ``LPPlayList``），避免环依赖与包级副作用。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 16           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (sqlite3)
+             10 STORE_NAME               1 (sqlite3)
+
+ 17          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('Path',))
+             16 IMPORT_NAME              2 (pathlib)
+             18 IMPORT_FROM              3 (Path)
+             20 STORE_NAME               3 (Path)
+             22 POP_TOP
+
+ 19          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('LPUtility',))
+             28 IMPORT_NAME              4 (LPClientFramework)
+             30 IMPORT_FROM              5 (LPUtility)
+             32 STORE_NAME               5 (LPUtility)
+             34 POP_TOP
+
+ 23          36 LOAD_CONST               5 ('beets')
+             38 STORE_NAME               6 (DATABASE_DIR_NAME)
+
+ 24          40 LOAD_CONST               6 ('musiclibrary.db')
+             42 STORE_NAME               7 (DATABASE_FILE_NAME)
+
+ 27          44 LOAD_CONST               7 (5000)
+             46 STORE_NAME               8 (BUSY_TIMEOUT_MS)
+
+ 30          48 LOAD_CONST               8 ('wal')
+             50 STORE_NAME               9 (JOURNAL_MODE)
+
+ 33          52 LOAD_CONST               9 (<code object databasePath at 0x000001F3253B0450, file "LPClientFramework\LPMusicDatabase.py", line 33>)
+             54 LOAD_CONST              10 ('databasePath')
+             56 MAKE_FUNCTION            0
+             58 STORE_NAME              10 (databasePath)
+
+ 44          60 LOAD_CONST              18 ((None, False))
+             62 LOAD_CONST              12 (<code object connect at 0x000001F3253A2920, file "LPClientFramework\LPMusicDatabase.py", line 44>)
+             64 LOAD_CONST              13 ('connect')
+             66 MAKE_FUNCTION            1 (defaults)
+             68 STORE_NAME              11 (connect)
+
+ 80          70 LOAD_CONST              14 (<code object _beetsWrapperModule at 0x000001F3253A2BE0, file "LPClientFramework\LPMusicDatabase.py", line 80>)
+             72 LOAD_CONST              15 ('_beetsWrapperModule')
+             74 MAKE_FUNCTION            0
+             76 STORE_NAME              12 (_beetsWrapperModule)
+
+ 95          78 LOAD_CONST              16 (<code object beetsWriteBlockedReason at 0x000001F3253A2EA0, file "LPClientFramework\LPMusicDatabase.py", line 95>)
+             80 LOAD_CONST              17 ('beetsWriteBlockedReason')
+             82 MAKE_FUNCTION            0
+             84 STORE_NAME              13 (beetsWriteBlockedReason)
+             86 LOAD_CONST               2 (None)
+             88 RETURN_VALUE
+
+=== databasePath ===
+ 41           0 LOAD_GLOBAL              0 (Path)
+              2 LOAD_GLOBAL              1 (LPUtility)
+              4 LOAD_ATTR                2 (userDataDir)
+              6 CALL_FUNCTION            1
+              8 LOAD_GLOBAL              3 (DATABASE_DIR_NAME)
+             10 BINARY_TRUE_DIVIDE
+             12 LOAD_GLOBAL              4 (DATABASE_FILE_NAME)
+             14 BINARY_TRUE_DIVIDE
+             16 LOAD_METHOD              5 (resolve)
+             18 CALL_METHOD              0
+             20 RETURN_VALUE
+
+=== connect ===
+ 53           0 LOAD_FAST                0 (path)
+              2 POP_JUMP_IF_FALSE       12
+              4 LOAD_GLOBAL              0 (Path)
+              6 LOAD_FAST                0 (path)
+              8 CALL_FUNCTION            1
+             10 JUMP_FORWARD             4 (to 16)
+        >>   12 LOAD_GLOBAL              1 (databasePath)
+             14 CALL_FUNCTION            0
+        >>   16 STORE_FAST               2 (target)
+
+ 55          18 LOAD_FAST                1 (readonly)
+             20 POP_JUMP_IF_FALSE       72
+
+ 56          22 LOAD_GLOBAL              2 (sqlite3)
+             24 LOAD_ATTR                3 (connect)
+
+ 57          26 LOAD_CONST               1 ('file:%s?mode=ro')
+             28 LOAD_FAST                2 (target)
+             30 LOAD_METHOD              4 (as_posix)
+             32 CALL_METHOD              0
+             34 BINARY_MODULO
+
+ 58          36 LOAD_CONST               2 (True)
+
+ 59          38 LOAD_CONST               3 (False)
+
+ 56          40 LOAD_CONST               4 (('uri', 'check_same_thread'))
+             42 CALL_FUNCTION_KW         3
+             44 STORE_FAST               3 (conn)
+
+ 61          46 LOAD_GLOBAL              2 (sqlite3)
+             48 LOAD_ATTR                5 (Row)
+             50 LOAD_FAST                3 (conn)
+             52 STORE_ATTR               6 (row_factory)
+
+ 62          54 LOAD_FAST                3 (conn)
+             56 LOAD_METHOD              7 (execute)
+             58 LOAD_CONST               5 ('PRAGMA busy_timeout=%d;')
+             60 LOAD_GLOBAL              8 (BUSY_TIMEOUT_MS)
+             62 BINARY_MODULO
+             64 CALL_METHOD              1
+             66 POP_TOP
+
+ 63          68 LOAD_FAST                3 (conn)
+             70 RETURN_VALUE
+
+ 65     >>   72 LOAD_FAST                2 (target)
+             74 LOAD_ATTR                9 (parent)
+             76 LOAD_ATTR               10 (mkdir)
+             78 LOAD_CONST               2 (True)
+             80 LOAD_CONST               2 (True)
+             82 LOAD_CONST               6 (('parents', 'exist_ok'))
+             84 CALL_FUNCTION_KW         2
+             86 POP_TOP
+
+ 68          88 LOAD_GLOBAL              2 (sqlite3)
+             90 LOAD_ATTR                3 (connect)
+             92 LOAD_GLOBAL             11 (str)
+             94 LOAD_FAST                2 (target)
+             96 CALL_FUNCTION            1
+             98 LOAD_CONST               3 (False)
+            100 LOAD_CONST               7 (('check_same_thread',))
+            102 CALL_FUNCTION_KW         2
+            104 STORE_FAST               3 (conn)
+
+ 69         106 LOAD_GLOBAL              2 (sqlite3)
+            108 LOAD_ATTR                5 (Row)
+            110 LOAD_FAST                3 (conn)
+            112 STORE_ATTR               6 (row_factory)
+
+ 70         114 LOAD_FAST                3 (conn)
+            116 LOAD_METHOD              7 (execute)
+            118 LOAD_CONST               5 ('PRAGMA busy_timeout=%d;')
+            120 LOAD_GLOBAL              8 (BUSY_TIMEOUT_MS)
+            122 BINARY_MODULO
+            124 CALL_METHOD              1
+            126 POP_TOP
+
+ 73         128 LOAD_FAST                3 (conn)
+            130 LOAD_METHOD              7 (execute)
+            132 LOAD_CONST               8 ('PRAGMA journal_mode;')
+            134 CALL_METHOD              1
+            136 LOAD_METHOD             12 (fetchone)
+            138 CALL_METHOD              0
+            140 LOAD_CONST               9 (0)
+            142 BINARY_SUBSCR
+            144 STORE_FAST               4 (currentMode)
+
+ 74         146 LOAD_GLOBAL             11 (str)
+            148 LOAD_FAST                4 (currentMode)
+            150 CALL_FUNCTION            1
+            152 LOAD_METHOD             13 (lower)
+            154 CALL_METHOD              0
+            156 LOAD_GLOBAL             14 (JOURNAL_MODE)
+            158 COMPARE_OP               3 (!=)
+            160 POP_JUMP_IF_FALSE      176
+
+ 75         162 LOAD_FAST                3 (conn)
+            164 LOAD_METHOD              7 (execute)
+            166 LOAD_CONST              10 ('PRAGMA journal_mode=%s;')
+            168 LOAD_GLOBAL             14 (JOURNAL_MODE)
+            170 BINARY_MODULO
+            172 CALL_METHOD              1
+            174 POP_TOP
+
+ 77     >>  176 LOAD_FAST                3 (conn)
+            178 RETURN_VALUE
+
+=== _beetsWrapperModule ===
+ 88           0 SETUP_FINALLY           16 (to 18)
+
+ 89           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (None)
+              6 IMPORT_NAME              0 (LPClientFramework.LPBeetsWrapper)
+              8 IMPORT_FROM              1 (LPBeetsWrapper)
+             10 STORE_FAST               0 (wrapper)
+             12 POP_TOP
+             14 POP_BLOCK
+             16 JUMP_FORWARD            20 (to 38)
+
+ 90     >>   18 DUP_TOP
+             20 LOAD_GLOBAL              2 (Exception)
+             22 JUMP_IF_NOT_EXC_MATCH    36
+             24 POP_TOP
+             26 POP_TOP
+             28 POP_TOP
+
+ 91          30 POP_EXCEPT
+             32 LOAD_CONST               2 (None)
+             34 RETURN_VALUE
+        >>   36 RERAISE
+
+ 92     >>   38 LOAD_FAST                0 (wrapper)
+             40 RETURN_VALUE
+
+=== beetsWriteBlockedReason ===
+103           0 LOAD_GLOBAL              0 (_beetsWrapperModule)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               0 (wrapper)
+
+104           6 LOAD_FAST                0 (wrapper)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_FALSE       18
+
+105          14 LOAD_CONST               1 (None)
+             16 RETURN_VALUE
+
+107     >>   18 LOAD_GLOBAL              1 (getattr)
+             20 LOAD_FAST                0 (wrapper)
+             22 LOAD_CONST               2 ('activeStagedMergeSession')
+             24 LOAD_CONST               1 (None)
+             26 CALL_FUNCTION            3
+             28 STORE_FAST               1 (activeSessionQuery)
+
+108          30 LOAD_GLOBAL              2 (callable)
+             32 LOAD_FAST                1 (activeSessionQuery)
+             34 CALL_FUNCTION            1
+             36 POP_JUMP_IF_FALSE       52
+             38 LOAD_FAST                1 (activeSessionQuery)
+             40 CALL_FUNCTION            0
+             42 LOAD_CONST               1 (None)
+             44 IS_OP                    1
+             46 POP_JUMP_IF_FALSE       52
+
+109          48 LOAD_CONST               3 ('staged beets import in progress')
+             50 RETURN_VALUE
+
+111     >>   52 LOAD_FAST                0 (wrapper)
+             54 LOAD_METHOD              3 (isDBBusy)
+             56 CALL_METHOD              0
+             58 POP_JUMP_IF_FALSE       64
+
+112          60 LOAD_CONST               4 ('beets exclusive write in progress')
+             62 RETURN_VALUE
+
+114     >>   64 LOAD_CONST               1 (None)
+             66 RETURN_VALUE

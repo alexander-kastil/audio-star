@@ -1,0 +1,204 @@
+# module HOME.Queue.LPQueueDialog
+
+[module] names: __doc__, threading, string, Template, PyQt6.QtCore, Qt, QCoreApplication, pyqtSignal, QPoint, QEvent, QTimer, PyQt6.QtGui, QIcon, QCursor, QColor, PyQt6.QtWidgets, QDialog, QAbstractItemView, QApplication, LPGlobalUI, HOME.LPWaitingSpinner, LPWaitingSpinner, HOME.Queue.LPQueueListView, LPQueueListModel, LPQueueDelegate, HOME.Queue.LPQueueOptionMenu, LPQueueOptionMenu, LPClientFramework, LPUtility, LPClientFramework.LPConfig.LPFontConfig, Sub_Title, Sub_Text, Main_Text, LPClientFramework.LPEventFilter.ButtonEventFilter.LPButtonEventFilter, LPButtonEventFilter, LPClientFramework.LPQueueManager, LPQueueState, LPClientFramework.LPShuffleManager, LPShuffleManager, LPClientFramework.LPUtility, logger, LPCommonWidgets.menu.LPCustomMenu, LPMenuItem, LPQueueDialog
+  str: '\n@Time ： 2025/9/29 13:38\n@Auth ： Chris\n@File ：LPQueueDialog.py\n@Desc:\n'
+  str: 'Template'
+  str: 'Qt'
+  str: 'QCoreApplication'
+  str: 'pyqtSignal'
+  str: 'QPoint'
+  str: 'QEvent'
+  str: 'QTimer'
+  str: 'QIcon'
+  str: 'QCursor'
+  str: 'QColor'
+  str: 'QDialog'
+  str: 'QAbstractItemView'
+  str: 'QApplication'
+  str: 'LPWaitingSpinner'
+  str: 'LPQueueListModel'
+  str: 'LPQueueDelegate'
+  str: 'LPQueueOptionMenu'
+  str: 'LPUtility'
+  str: 'Sub_Title'
+  str: 'Sub_Text'
+  str: 'Main_Text'
+  str: 'LPButtonEventFilter'
+  str: 'LPQueueState'
+  str: 'LPShuffleManager'
+  str: 'logger'
+  str: 'LPMenuItem'
+  str: 'LPQueueDialog'
+
+def LPQueueDialog()  line 28
+  names: __name__, __module__, __qualname__, pyqtSignal, updateUISignal, updateDeviceInfoSignal, bool, updateShuffleButtonSignal, updateLoopModeSignal, object, checkQueueNameSignal, closedSignal, __init__, setupUi, _updateUI, showWithDelay, stopLoading, showLoading, showContent, _updateDeviceInfo, _updateShuffleButton, focusOutEvent, eventFilter, updatePosition, showEvent, onDialogShown, onDialogClosed, closeEvent, onDeviceChanged, onOptClicked, onQueueItemDelete, updateUI, deviceInfoUpdate, checkQueueNameChanged, _updateLoopMode, _updateTracksNum, onLoopButtonPressed, onShuffleButtonPressed, __classcell__
+    str: 'LPQueueDialog'
+    str: 'LPQueueDialog.__init__'
+    str: 'LPQueueDialog.setupUi'
+    str: 'LPQueueDialog._updateUI'
+    str: 'LPQueueDialog.showWithDelay'
+    str: 'LPQueueDialog.stopLoading'
+    str: 'LPQueueDialog.showLoading'
+    str: 'LPQueueDialog.showContent'
+    str: 'LPQueueDialog._updateDeviceInfo'
+    str: 'LPQueueDialog._updateShuffleButton'
+    str: 'LPQueueDialog.focusOutEvent'
+    str: 'LPQueueDialog.eventFilter'
+    str: 'LPQueueDialog.updatePosition'
+    str: 'LPQueueDialog.showEvent'
+    str: 'LPQueueDialog.onDialogShown'
+    str: 'LPQueueDialog.onDialogClosed'
+    str: 'LPQueueDialog.closeEvent'
+    str: 'LPQueueDialog.onDeviceChanged'
+    str: 'LPQueueDialog.onOptClicked'
+    str: 'LPQueueDialog.onQueueItemDelete'
+    str: 'LPQueueDialog.updateUI'
+    str: 'LPQueueDialog.deviceInfoUpdate'
+    str: 'LPQueueDialog.checkQueueNameChanged'
+    str: 'LPQueueDialog._updateLoopMode'
+    str: 'LPQueueDialog._updateTracksNum'
+    str: 'LPQueueDialog.onLoopButtonPressed'
+    str: 'LPQueueDialog.onShuffleButtonPressed'
+
+  def LPQueueDialog.__init__(self, parent)  line 40
+    names: super, __init__, parent, updateUISignal, connect, _updateUI, updateDeviceInfoSignal, _updateDeviceInfo, updateShuffleButtonSignal, _updateShuffleButton, updateLoopModeSignal, _updateLoopMode, checkQueueNameSignal, checkQueueNameChanged, currentQueueName, firstTimeEnterQueue, QApplication, instance, installEventFilter, loadingSpinner, model
+      str: '\n        初始化队列弹窗控制器。\n\n        参数:\n            parent: 弹窗所属的 minibar 控制器宿主。\n        返回值:\n            None。\n        '
+
+  def LPQueueDialog.setupUi(self, ui)  line 68
+    names: getattr, super, callable, setupUi, setWindowFlags, Qt, WindowType, Tool, FramelessWindowHint, NoDropShadowWindowHint, setAttribute, WidgetAttribute, WA_TranslucentBackground, titleLabel, setText, QCoreApplication, translate, queueListView, LPQueueDelegate, delegate, setItemDelegate, optClicked, connect, onOptClicked, LPUtility, tintImage, LPGlobalUI, imagePath, THEME_LIGHT_COLOR, LPButtonEventFilter, shuffleButton, QIcon, clicked, onShuffleButtonPressed, loopButton, onLoopButtonPressed, currentDevice, queueManager, requestQueue, Template, setStyleSheet, substitute, THEME_FONT_COLOR_UI, name, THEME_DISABLE_COLOR, Sub_Title, Sub_Text, Main_Text
+      str: 'setupUi'
+      str: 'queue dialog'
+      str: 'Queue'
+      str: 'miniBar/shuffle.png'
+      str: 'image'
+      str: 'miniBar/repeat.png'
+      str: '\n                QFrame{\n                    border:none;\n                    background-color: transparent;\n                }\n                QFrame#mainFrame{\n                    border-radius: 8px;\n                    background-color: rgb(27, 27, 27);\n                }\n                QLabel#not'
+      str: 'fontColor'
+      str: 'trackNumLabelFontColor'
+      str: 'titleLabelFontSize'
+      str: 'trackNumLabelFontSize'
+      str: 'noteLabelFontSize'
+
+  def LPQueueDialog._updateUI(self)  line 148
+    names: LPGlobalUI, currentDevice, queueManager, status, LPQueueState, queueEmpty, trackNumLabel, setText, loadingButton, hide, noteLabel, QCoreApplication, translate, stackedWidget, setCurrentIndex, queueNotReady, showLoading, sourceNotSupportQueue, stopLoading, showContent, updateLoopModeSignal, emit
+      str: 'Queue'
+      str: 'Nothing here yet'
+      str: "Current music doesn't support queue"
+
+  def LPQueueDialog.showWithDelay(self, delay_ms)  line 171
+    names: QTimer, showLoadingTimer, setSingleShot, timeout, connect, showLoading, start
+      str: '延迟显示 Loading，避免闪烁'
+
+  def LPQueueDialog.stopLoading(self)  line 179
+    names: hasattr, showLoadingTimer, stop
+      str: '请求结束时调用'
+      str: 'showLoadingTimer'
+
+  def LPQueueDialog.showLoading(self)  line 185
+    names: noteLabel, setText, QCoreApplication, translate, stackedWidget, setCurrentIndex, loadingButton, show, loadingSpinner, LPWaitingSpinner, QColor, is_spinning, start
+      str: 'Queue'
+      str: 'Loading'
+      str: 'roundness'
+      str: 'fade'
+      str: 'radius'
+      str: 'lines'
+      str: 'line_length'
+      str: 'line_width'
+      str: 'speed'
+      str: 'color'
+
+  def LPQueueDialog.showContent(self)  line 207
+    names: loadingSpinner, is_spinning, stop, LPGlobalUI, currentDevice, queueManager, playList, list, updateShuffleButtonSignal, emit, LPQueueListModel, queueListView, model, setModel, rowsInserted, connect, _updateTracksNum, rowsRemoved, trackNumLabel, setText, QCoreApplication, translate, rowCount, logger, debug, firstTimeEnterQueue, index, scrollTo, QAbstractItemView, ScrollHint, PositionAtTop, stackedWidget, setCurrentIndex
+      str: 'Queue'
+      str: '(%n tracks)'
+      str: '[_updateUI] row_count='
+
+  def LPQueueDialog._updateDeviceInfo(self)  line 235
+    names: LPGlobalUI, currentDevice, queueManager, playList, list, LPQueueListModel, queueListView, model, setModel, trackNumLabel, setText, QCoreApplication, translate, rowCount
+      str: 'Queue'
+      str: '(%n tracks)'
+
+  def LPQueueDialog._updateShuffleButton(self, enabled)  line 242
+    names: shuffleButton, canClick, setCursor, Qt, CursorShape, PointingHandCursor, ForbiddenCursor
+
+  def LPQueueDialog.focusOutEvent(self, event)  line 249
+    names: QApplication, focusWidget, isAncestorOf, QCursor, pos, parent, queueButton, geometry, contains, mapFromGlobal, queueListView, jumpButton, ignore, super, focusOutEvent, close
+
+  def LPQueueDialog.eventFilter(self, obj, event)  line 268
+    names: parent, type, QEvent, Type, Move, updatePosition, MouseButtonPress, QCursor, pos, geometry, contains, globalPosition, toPoint, QApplication, widgetAt, queueButton, super, eventFilter, close
+
+  def LPQueueDialog.updatePosition(self)  line 291
+    names: parent, miniBarFrame, geometry, mapToGlobal, topLeft, top, width, x, y, setGeometry
+
+  def LPQueueDialog.showEvent(self, event)  line 305
+    names: super, showEvent, updatePosition, onDialogShown
+
+  def LPQueueDialog.onDialogShown(self)  line 310
+    names: logger, debug, LPUtility, addNotificationObserver, onDeviceChanged, registerDeviceInfoChanged, updateUI, LPGlobalUI, currentDevice
+      str: '[queue dialog] onDialogShown ====='
+      str: 'DeviceChanged'
+
+  def LPQueueDialog.onDialogClosed(self)  line 316
+    names: logger, debug, LPUtility, removeNotificationObserver, onDeviceChanged, deRegisterDeviceInfoChanged
+      str: '[queue dialog] onDialogClosed ====='
+      str: 'DeviceChanged'
+
+  def LPQueueDialog.closeEvent(self, event)  line 321
+    names: print, QCursor, pos, super, closeEvent, onDialogClosed, closedSignal, emit
+      str: '\n        处理队列弹窗关闭并通知 minibar 同步按钮状态。\n\n        参数:\n            event: Qt 关闭事件。\n        返回值:\n            None。\n        '
+      str: 'Popup closed'
+
+  def LPQueueDialog.onDeviceChanged(self, params)  line 344
+    names: logger, debug, LPGlobalUI, currentDevice, get, uuid, updateUI
+      str: '[queue dialog] onDeviceChanged'
+      str: 'device'
+
+  def LPQueueDialog.onOptClicked(self, index, globalPos)  line 355
+    names: print, queueListView, canItemDelete, LPMenuItem, QCoreApplication, translate, LPGlobalUI, imagePath, clicked, connect, append, LPQueueOptionMenu, x, sizeHint, width, y, showMoreMenu, QPoint
+      str: 'hahahha'
+      str: 'queue menu'
+      str: 'Delete'
+      str: 'delete.png'
+      str: 'LPQueueDialog.onOptClicked.<locals>.<lambda>'
+
+    def LPQueueDialog.onOptClicked.<lambda>()  line 362
+      names: onQueueItemDelete
+
+  def LPQueueDialog.onQueueItemDelete(self, index)  line 378
+    names: isValid, queueListView, deleteItem
+
+  def LPQueueDialog.updateUI(self, device)  line 384
+    names: LPGlobalUI, currentDevice, uuid, queueManager, requestQueue, updateUISignal, emit
+
+  def LPQueueDialog.deviceInfoUpdate(self, device, infoType, detail)  line 392
+    names: uuid, LPGlobalUI, currentDevice, updateUISignal, emit, get, updateDeviceInfoSignal, checkQueueNameSignal, queueListView, update
+      str: 'queue'
+      str: 'trackId'
+      str: 'queueName'
+      str: 'playState'
+
+  def LPQueueDialog.checkQueueNameChanged(self, device, newQueueName)  line 414
+    names: logger, debug, currentQueueName, queueManager, playList, trackNumLabel, setText, showLoading, LPGlobalUI, currentDevice, requestQueue
+      str: '[play view queue section] checkQueueNameChanged'
+
+  def LPQueueDialog._updateLoopMode(self)  line 429
+    names: LPGlobalUI, currentDevice, queueManager, status, value, loopButton, hide, shuffleButton, show, LPShuffleManager, updateLoopShuffleButton
+
+  def LPQueueDialog._updateTracksNum(self)  line 439
+    names: logger, debug, model, rowCount, trackNumLabel, setText, QCoreApplication, translate
+      str: 'queue removed, update tracks num'
+      str: '[update_tracks_num_label] row_count='
+      str: 'Queue'
+      str: '(%n tracks)'
+
+  def LPQueueDialog.onLoopButtonPressed(self)  line 446
+    names: LPShuffleManager, nextLoopMode, LPGlobalUI, currentDevice, updateMediaInfo, int, updateLoopModeSignal, emit, asyncUpnpPost
+      str: 'loopMode'
+      str: 'SetQueueLoopMode'
+      str: 'LoopMode'
+
+  def LPQueueDialog.onShuffleButtonPressed(self)  line 452
+    names: shuffleButton, canClick, showWithDelay, LPShuffleManager, nextShuffleMode, LPGlobalUI, currentDevice, updateMediaInfo, int, updateLoopModeSignal, emit, updateShuffleButtonSignal, asyncUpnpPost
+      str: 'loopMode'
+      str: 'SetQueueLoopMode'
+      str: 'LoopMode'

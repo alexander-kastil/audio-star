@@ -1,0 +1,482 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nRecently Played 视图模式偏好服务。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Optional',))
+              8 IMPORT_NAME              1 (typing)
+             10 IMPORT_FROM              2 (Optional)
+             12 STORE_NAME               2 (Optional)
+             14 POP_TOP
+
+  8          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('LPUtility',))
+             20 IMPORT_NAME              3 (LPClientFramework)
+             22 IMPORT_FROM              4 (LPUtility)
+             24 STORE_NAME               4 (LPUtility)
+             26 POP_TOP
+
+  9          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               4 (('logger',))
+             32 IMPORT_NAME              5 (LPClientFramework.LPUtility)
+             34 IMPORT_FROM              6 (logger)
+             36 STORE_NAME               6 (logger)
+             38 POP_TOP
+
+ 12          40 LOAD_BUILD_CLASS
+             42 LOAD_CONST               5 (<code object LPRecentlyViewPreference at 0x000001F3253C4C90, file "RecentlyPlayed\LPRecentlyViewPreference.py", line 12>)
+             44 LOAD_CONST               6 ('LPRecentlyViewPreference')
+             46 MAKE_FUNCTION            0
+             48 LOAD_CONST               6 ('LPRecentlyViewPreference')
+             50 CALL_FUNCTION            2
+             52 STORE_NAME               7 (LPRecentlyViewPreference)
+             54 LOAD_CONST               7 (None)
+             56 RETURN_VALUE
+
+=== LPRecentlyViewPreference ===
+ 12           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPRecentlyViewPreference')
+              6 STORE_NAME               2 (__qualname__)
+
+ 13           8 LOAD_CONST               1 ('负责维护 Recently Played 页面共享的卡片/列表视图模式偏好。')
+             10 STORE_NAME               3 (__doc__)
+
+ 16          12 LOAD_CONST               2 ('RecentlyPlayed')
+             14 STORE_NAME               4 (PREFERENCE_GROUP)
+
+ 17          16 LOAD_CONST               3 ('recentlyViewMode')
+             18 STORE_NAME               5 (PREFERENCE_KEY)
+
+ 18          20 LOAD_CONST               4 ('card')
+             22 STORE_NAME               6 (DEFAULT_MODE)
+
+ 19          24 LOAD_CONST               5 (('card', 'list'))
+             26 STORE_NAME               7 (VALID_MODES)
+
+ 21          28 LOAD_NAME                8 (classmethod)
+
+ 22          30 LOAD_NAME                9 (str)
+             32 LOAD_NAME                9 (str)
+             34 LOAD_CONST               6 (('mode', 'return'))
+             36 BUILD_CONST_KEY_MAP      2
+             38 LOAD_CONST               7 (<code object _normalizeMode at 0x000001F3253C0DF0, file "RecentlyPlayed\LPRecentlyViewPreference.py", line 21>)
+             40 LOAD_CONST               8 ('LPRecentlyViewPreference._normalizeMode')
+             42 MAKE_FUNCTION            4 (annotations)
+             44 CALL_FUNCTION            1
+             46 STORE_NAME              10 (_normalizeMode)
+
+ 34          48 LOAD_NAME                8 (classmethod)
+
+ 35          50 LOAD_NAME               11 (Optional)
+             52 LOAD_NAME                9 (str)
+             54 BINARY_SUBSCR
+             56 LOAD_CONST               9 (('return',))
+             58 BUILD_CONST_KEY_MAP      1
+             60 LOAD_CONST              10 (<code object readViewMode at 0x000001F3253C0EA0, file "RecentlyPlayed\LPRecentlyViewPreference.py", line 34>)
+             62 LOAD_CONST              11 ('LPRecentlyViewPreference.readViewMode')
+             64 MAKE_FUNCTION            4 (annotations)
+             66 CALL_FUNCTION            1
+             68 STORE_NAME              12 (readViewMode)
+
+ 63          70 LOAD_NAME                8 (classmethod)
+
+ 64          72 LOAD_NAME                9 (str)
+             74 LOAD_NAME               13 (bool)
+             76 LOAD_CONST               6 (('mode', 'return'))
+             78 BUILD_CONST_KEY_MAP      2
+             80 LOAD_CONST              12 (<code object saveViewMode at 0x000001F3253C0F50, file "RecentlyPlayed\LPRecentlyViewPreference.py", line 63>)
+             82 LOAD_CONST              13 ('LPRecentlyViewPreference.saveViewMode')
+             84 MAKE_FUNCTION            4 (annotations)
+             86 CALL_FUNCTION            1
+             88 STORE_NAME              14 (saveViewMode)
+             90 LOAD_CONST              14 (None)
+             92 RETURN_VALUE
+
+=== LPRecentlyViewPreference._normalizeMode ===
+ 29           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (mode)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               2 (value)
+
+ 30          20 LOAD_FAST                2 (value)
+             22 LOAD_FAST                0 (cls)
+             24 LOAD_ATTR                3 (VALID_MODES)
+             26 CONTAINS_OP              1
+             28 POP_JUMP_IF_FALSE       36
+
+ 31          30 LOAD_FAST                0 (cls)
+             32 LOAD_ATTR                4 (DEFAULT_MODE)
+             34 RETURN_VALUE
+
+ 32     >>   36 LOAD_FAST                2 (value)
+             38 RETURN_VALUE
+
+=== LPRecentlyViewPreference.readViewMode ===
+ 41           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPUtility)
+              4 LOAD_CONST               1 ('settings')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               1 (settings)
+
+ 42          12 LOAD_FAST                1 (settings)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       24
+
+ 43          20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+ 44     >>   24 LOAD_CONST               3 (False)
+             26 STORE_FAST               2 (group_opened)
+
+ 45          28 SETUP_FINALLY          164 (to 194)
+             30 SETUP_FINALLY           34 (to 66)
+
+ 46          32 LOAD_FAST                1 (settings)
+             34 LOAD_METHOD              2 (beginGroup)
+             36 LOAD_FAST                0 (cls)
+             38 LOAD_ATTR                3 (PREFERENCE_GROUP)
+             40 CALL_METHOD              1
+             42 POP_TOP
+
+ 47          44 LOAD_CONST               4 (True)
+             46 STORE_FAST               2 (group_opened)
+
+ 48          48 LOAD_FAST                1 (settings)
+             50 LOAD_METHOD              4 (value)
+             52 LOAD_FAST                0 (cls)
+             54 LOAD_ATTR                5 (PREFERENCE_KEY)
+             56 LOAD_CONST               5 ('')
+             58 CALL_METHOD              2
+             60 STORE_FAST               3 (raw_value)
+             62 POP_BLOCK
+             64 JUMP_FORWARD            88 (to 154)
+
+ 49     >>   66 DUP_TOP
+             68 LOAD_GLOBAL              6 (Exception)
+             70 JUMP_IF_NOT_EXC_MATCH   152
+             72 POP_TOP
+             74 STORE_FAST               4 (exc)
+             76 POP_TOP
+             78 SETUP_FINALLY           64 (to 144)
+
+ 50          80 LOAD_GLOBAL              7 (logger)
+             82 LOAD_METHOD              8 (debug)
+             84 LOAD_CONST               6 ('[RecentlyPlayed] read view mode failed error=%s')
+             86 LOAD_FAST                4 (exc)
+             88 CALL_METHOD              2
+             90 POP_TOP
+
+ 51          92 POP_BLOCK
+             94 POP_EXCEPT
+             96 LOAD_CONST               2 (None)
+             98 STORE_FAST               4 (exc)
+            100 DELETE_FAST              4 (exc)
+            102 POP_BLOCK
+
+ 53         104 LOAD_FAST                2 (group_opened)
+            106 POP_JUMP_IF_FALSE      140
+
+ 54         108 SETUP_FINALLY           12 (to 122)
+
+ 55         110 LOAD_FAST                1 (settings)
+            112 LOAD_METHOD              9 (endGroup)
+            114 CALL_METHOD              0
+            116 POP_TOP
+            118 POP_BLOCK
+            120 JUMP_FORWARD            18 (to 140)
+
+ 56     >>  122 DUP_TOP
+            124 LOAD_GLOBAL              6 (Exception)
+            126 JUMP_IF_NOT_EXC_MATCH   138
+            128 POP_TOP
+            130 POP_TOP
+            132 POP_TOP
+
+ 57         134 POP_EXCEPT
+            136 JUMP_FORWARD             2 (to 140)
+        >>  138 RERAISE
+
+ 51     >>  140 LOAD_CONST               2 (None)
+            142 RETURN_VALUE
+        >>  144 LOAD_CONST               2 (None)
+            146 STORE_FAST               4 (exc)
+            148 DELETE_FAST              4 (exc)
+            150 RERAISE
+        >>  152 RERAISE
+        >>  154 POP_BLOCK
+
+ 53         156 LOAD_FAST                2 (group_opened)
+            158 POP_JUMP_IF_FALSE      232
+
+ 54         160 SETUP_FINALLY           12 (to 174)
+
+ 55         162 LOAD_FAST                1 (settings)
+            164 LOAD_METHOD              9 (endGroup)
+            166 CALL_METHOD              0
+            168 POP_TOP
+            170 POP_BLOCK
+            172 JUMP_ABSOLUTE          232
+
+ 56     >>  174 DUP_TOP
+            176 LOAD_GLOBAL              6 (Exception)
+            178 JUMP_IF_NOT_EXC_MATCH   190
+            180 POP_TOP
+            182 POP_TOP
+            184 POP_TOP
+
+ 57         186 POP_EXCEPT
+            188 JUMP_ABSOLUTE          232
+        >>  190 RERAISE
+            192 JUMP_FORWARD            38 (to 232)
+
+ 53     >>  194 LOAD_FAST                2 (group_opened)
+            196 POP_JUMP_IF_FALSE      230
+
+ 54         198 SETUP_FINALLY           12 (to 212)
+
+ 55         200 LOAD_FAST                1 (settings)
+            202 LOAD_METHOD              9 (endGroup)
+            204 CALL_METHOD              0
+            206 POP_TOP
+            208 POP_BLOCK
+            210 JUMP_FORWARD            18 (to 230)
+
+ 56     >>  212 DUP_TOP
+            214 LOAD_GLOBAL              6 (Exception)
+            216 JUMP_IF_NOT_EXC_MATCH   228
+            218 POP_TOP
+            220 POP_TOP
+            222 POP_TOP
+
+ 57         224 POP_EXCEPT
+            226 JUMP_FORWARD             2 (to 230)
+        >>  228 RERAISE
+        >>  230 RERAISE
+
+ 58     >>  232 LOAD_GLOBAL             10 (str)
+            234 LOAD_FAST                3 (raw_value)
+            236 JUMP_IF_TRUE_OR_POP    240
+            238 LOAD_CONST               5 ('')
+        >>  240 CALL_FUNCTION            1
+            242 LOAD_METHOD             11 (strip)
+            244 CALL_METHOD              0
+            246 LOAD_METHOD             12 (lower)
+            248 CALL_METHOD              0
+            250 STORE_FAST               5 (value)
+
+ 59         252 LOAD_FAST                5 (value)
+            254 LOAD_FAST                0 (cls)
+            256 LOAD_ATTR               13 (VALID_MODES)
+            258 CONTAINS_OP              1
+            260 EXTENDED_ARG             1
+            262 POP_JUMP_IF_FALSE      268
+
+ 60         264 LOAD_CONST               2 (None)
+            266 RETURN_VALUE
+
+ 61     >>  268 LOAD_FAST                5 (value)
+            270 RETURN_VALUE
+
+=== LPRecentlyViewPreference.saveViewMode ===
+ 71           0 LOAD_FAST                0 (cls)
+              2 LOAD_METHOD              0 (_normalizeMode)
+              4 LOAD_FAST                1 (mode)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (normalized_mode)
+
+ 72          10 LOAD_GLOBAL              1 (getattr)
+             12 LOAD_GLOBAL              2 (LPUtility)
+             14 LOAD_CONST               1 ('settings')
+             16 LOAD_CONST               2 (None)
+             18 CALL_FUNCTION            3
+             20 STORE_FAST               3 (settings)
+
+ 73          22 LOAD_FAST                3 (settings)
+             24 LOAD_CONST               2 (None)
+             26 IS_OP                    0
+             28 POP_JUMP_IF_FALSE       34
+
+ 74          30 LOAD_CONST               3 (False)
+             32 RETURN_VALUE
+
+ 75     >>   34 LOAD_CONST               3 (False)
+             36 STORE_FAST               4 (group_opened)
+
+ 76          38 SETUP_FINALLY          226 (to 266)
+             40 SETUP_FINALLY           92 (to 134)
+
+ 77          42 LOAD_FAST                3 (settings)
+             44 LOAD_METHOD              3 (beginGroup)
+             46 LOAD_FAST                0 (cls)
+             48 LOAD_ATTR                4 (PREFERENCE_GROUP)
+             50 CALL_METHOD              1
+             52 POP_TOP
+
+ 78          54 LOAD_CONST               4 (True)
+             56 STORE_FAST               4 (group_opened)
+
+ 79          58 LOAD_FAST                3 (settings)
+             60 LOAD_METHOD              5 (setValue)
+             62 LOAD_FAST                0 (cls)
+             64 LOAD_ATTR                6 (PREFERENCE_KEY)
+             66 LOAD_FAST                2 (normalized_mode)
+             68 CALL_METHOD              2
+             70 POP_TOP
+
+ 80          72 LOAD_GLOBAL              7 (hasattr)
+             74 LOAD_FAST                3 (settings)
+             76 LOAD_CONST               5 ('sync')
+             78 CALL_FUNCTION            2
+             80 POP_JUMP_IF_FALSE       90
+
+ 81          82 LOAD_FAST                3 (settings)
+             84 LOAD_METHOD              8 (sync)
+             86 CALL_METHOD              0
+             88 POP_TOP
+
+ 82     >>   90 POP_BLOCK
+             92 POP_BLOCK
+
+ 87          94 LOAD_FAST                4 (group_opened)
+             96 POP_JUMP_IF_FALSE      130
+
+ 88          98 SETUP_FINALLY           12 (to 112)
+
+ 89         100 LOAD_FAST                3 (settings)
+            102 LOAD_METHOD              9 (endGroup)
+            104 CALL_METHOD              0
+            106 POP_TOP
+            108 POP_BLOCK
+            110 JUMP_FORWARD            18 (to 130)
+
+ 90     >>  112 DUP_TOP
+            114 LOAD_GLOBAL             10 (Exception)
+            116 JUMP_IF_NOT_EXC_MATCH   128
+            118 POP_TOP
+            120 POP_TOP
+            122 POP_TOP
+
+ 91         124 POP_EXCEPT
+            126 JUMP_FORWARD             2 (to 130)
+        >>  128 RERAISE
+
+ 82     >>  130 LOAD_CONST               4 (True)
+            132 RETURN_VALUE
+
+ 83     >>  134 DUP_TOP
+            136 LOAD_GLOBAL             10 (Exception)
+            138 JUMP_IF_NOT_EXC_MATCH   220
+            140 POP_TOP
+            142 STORE_FAST               5 (exc)
+            144 POP_TOP
+            146 SETUP_FINALLY           64 (to 212)
+
+ 84         148 LOAD_GLOBAL             11 (logger)
+            150 LOAD_METHOD             12 (debug)
+            152 LOAD_CONST               6 ('[RecentlyPlayed] save view mode failed error=%s')
+            154 LOAD_FAST                5 (exc)
+            156 CALL_METHOD              2
+            158 POP_TOP
+
+ 85         160 POP_BLOCK
+            162 POP_EXCEPT
+            164 LOAD_CONST               2 (None)
+            166 STORE_FAST               5 (exc)
+            168 DELETE_FAST              5 (exc)
+            170 POP_BLOCK
+
+ 87         172 LOAD_FAST                4 (group_opened)
+            174 POP_JUMP_IF_FALSE      208
+
+ 88         176 SETUP_FINALLY           12 (to 190)
+
+ 89         178 LOAD_FAST                3 (settings)
+            180 LOAD_METHOD              9 (endGroup)
+            182 CALL_METHOD              0
+            184 POP_TOP
+            186 POP_BLOCK
+            188 JUMP_FORWARD            18 (to 208)
+
+ 90     >>  190 DUP_TOP
+            192 LOAD_GLOBAL             10 (Exception)
+            194 JUMP_IF_NOT_EXC_MATCH   206
+            196 POP_TOP
+            198 POP_TOP
+            200 POP_TOP
+
+ 91         202 POP_EXCEPT
+            204 JUMP_FORWARD             2 (to 208)
+        >>  206 RERAISE
+
+ 85     >>  208 LOAD_CONST               3 (False)
+            210 RETURN_VALUE
+        >>  212 LOAD_CONST               2 (None)
+            214 STORE_FAST               5 (exc)
+            216 DELETE_FAST              5 (exc)
+            218 RERAISE
+        >>  220 RERAISE
+            222 POP_BLOCK
+
+ 87         224 LOAD_FAST                4 (group_opened)
+            226 EXTENDED_ARG             1
+            228 POP_JUMP_IF_FALSE      308
+
+ 88         230 SETUP_FINALLY           12 (to 244)
+
+ 89         232 LOAD_FAST                3 (settings)
+            234 LOAD_METHOD              9 (endGroup)
+            236 CALL_METHOD              0
+            238 POP_TOP
+            240 POP_BLOCK
+            242 JUMP_FORWARD            20 (to 264)
+
+ 90     >>  244 DUP_TOP
+            246 LOAD_GLOBAL             10 (Exception)
+            248 EXTENDED_ARG             1
+            250 JUMP_IF_NOT_EXC_MATCH   262
+            252 POP_TOP
+            254 POP_TOP
+            256 POP_TOP
+
+ 91         258 POP_EXCEPT
+            260 JUMP_FORWARD             2 (to 264)
+        >>  262 RERAISE
+        >>  264 JUMP_FORWARD            42 (to 308)
+
+ 87     >>  266 LOAD_FAST                4 (group_opened)
+            268 EXTENDED_ARG             1
+            270 POP_JUMP_IF_FALSE      306
+
+ 88         272 SETUP_FINALLY           12 (to 286)
+
+ 89         274 LOAD_FAST                3 (settings)
+            276 LOAD_METHOD              9 (endGroup)
+            278 CALL_METHOD              0
+            280 POP_TOP
+            282 POP_BLOCK
+            284 JUMP_FORWARD            20 (to 306)
+
+ 90     >>  286 DUP_TOP
+            288 LOAD_GLOBAL             10 (Exception)
+            290 EXTENDED_ARG             1
+            292 JUMP_IF_NOT_EXC_MATCH   304
+            294 POP_TOP
+            296 POP_TOP
+            298 POP_TOP
+
+ 91         300 POP_EXCEPT
+            302 JUMP_FORWARD             2 (to 306)
+        >>  304 RERAISE
+        >>  306 RERAISE
+        >>  308 LOAD_CONST               2 (None)
+            310 RETURN_VALUE

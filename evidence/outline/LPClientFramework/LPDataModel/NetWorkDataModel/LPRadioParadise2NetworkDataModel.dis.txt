@@ -1,0 +1,122 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/2/14 17:51\n@Auth ： Chris\n@File ：LPRadioParadise2UpnpDataModel.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('pyqtSignal',))
+              8 IMPORT_NAME              1 (PyQt6.QtCore)
+             10 IMPORT_FROM              2 (pyqtSignal)
+             12 STORE_NAME               2 (pyqtSignal)
+             14 POP_TOP
+
+ 10          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('LPNetworkDataModel',))
+             20 IMPORT_NAME              3 (LPClientFramework.LPDataModel.NetWorkDataModel.LPNetworkDataModel)
+             22 IMPORT_FROM              4 (LPNetworkDataModel)
+             24 STORE_NAME               4 (LPNetworkDataModel)
+             26 POP_TOP
+
+ 11          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               4 (('logger',))
+             32 IMPORT_NAME              5 (LPClientFramework.LPUtility)
+             34 IMPORT_FROM              6 (logger)
+             36 STORE_NAME               6 (logger)
+             38 POP_TOP
+
+ 14          40 LOAD_BUILD_CLASS
+             42 LOAD_CONST               5 (<code object LPRadioParadise2NetworkDataModel at 0x000001F324E69BE0, file "LPClientFramework\LPDataModel\NetWorkDataModel\LPRadioParadise2NetworkDataModel.py", line 14>)
+             44 LOAD_CONST               6 ('LPRadioParadise2NetworkDataModel')
+             46 MAKE_FUNCTION            0
+             48 LOAD_CONST               6 ('LPRadioParadise2NetworkDataModel')
+             50 LOAD_NAME                4 (LPNetworkDataModel)
+             52 CALL_FUNCTION            3
+             54 STORE_NAME               7 (LPRadioParadise2NetworkDataModel)
+             56 LOAD_CONST               7 (None)
+             58 RETURN_VALUE
+
+=== LPRadioParadise2NetworkDataModel ===
+ 14           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPRadioParadise2NetworkDataModel')
+              6 STORE_NAME               2 (__qualname__)
+
+ 15           8 LOAD_NAME                3 (pyqtSignal)
+             10 CALL_FUNCTION            0
+             12 STORE_NAME               4 (loadSkeletonSignal)
+
+ 17          14 LOAD_CLOSURE             0 (__class__)
+             16 BUILD_TUPLE              1
+             18 LOAD_CONST               1 (<code object __init__ at 0x000001F324E69C90, file "LPClientFramework\LPDataModel\NetWorkDataModel\LPRadioParadise2NetworkDataModel.py", line 17>)
+             20 LOAD_CONST               2 ('LPRadioParadise2NetworkDataModel.__init__')
+             22 MAKE_FUNCTION            8 (closure)
+             24 STORE_NAME               5 (__init__)
+
+ 22          26 LOAD_CONST               3 (<code object fetchChannelData at 0x000001F324E692F0, file "LPClientFramework\LPDataModel\NetWorkDataModel\LPRadioParadise2NetworkDataModel.py", line 22>)
+             28 LOAD_CONST               4 ('LPRadioParadise2NetworkDataModel.fetchChannelData')
+             30 MAKE_FUNCTION            0
+             32 STORE_NAME               6 (fetchChannelData)
+             34 LOAD_CLOSURE             0 (__class__)
+             36 DUP_TOP
+             38 STORE_NAME               7 (__classcell__)
+             40 RETURN_VALUE
+
+=== LPRadioParadise2NetworkDataModel.__init__ ===
+ 18           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 19          10 LOAD_CONST               1 ('https://api.radioparadise.com/api/list_chan?C_user_id={}')
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (channelUrlFormatter)
+             16 LOAD_CONST               0 (None)
+             18 RETURN_VALUE
+
+=== LPRadioParadise2NetworkDataModel.fetchChannelData ===
+ 23           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (channelUrlFormatter)
+              4 LOAD_METHOD              1 (format)
+              6 LOAD_FAST                1 (cUserId)
+              8 CALL_METHOD              1
+             10 STORE_FAST               3 (url)
+
+ 24          12 LOAD_GLOBAL              2 (logger)
+             14 LOAD_METHOD              3 (debug)
+             16 LOAD_CONST               1 ('[RadioParadise2] fetchChannelData url == ')
+             18 LOAD_FAST                3 (url)
+             20 BINARY_ADD
+             22 CALL_METHOD              1
+             24 POP_TOP
+
+ 25          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                4 (session)
+             30 LOAD_ATTR                5 (cache)
+             32 LOAD_METHOD              6 (has_url)
+             34 LOAD_FAST                3 (url)
+             36 CALL_METHOD              1
+             38 POP_JUMP_IF_TRUE        60
+
+ 26          40 LOAD_GLOBAL              2 (logger)
+             42 LOAD_METHOD              3 (debug)
+             44 LOAD_CONST               2 ('url == not has_url')
+             46 CALL_METHOD              1
+             48 POP_TOP
+
+ 27          50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                7 (loadSkeletonSignal)
+             54 LOAD_METHOD              8 (emit)
+             56 CALL_METHOD              0
+             58 POP_TOP
+
+ 28     >>   60 LOAD_FAST                0 (self)
+             62 LOAD_METHOD              9 (getData)
+             64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR               10 (worker)
+             68 LOAD_FAST                3 (url)
+             70 LOAD_FAST                2 (callback)
+             72 CALL_METHOD              3
+             74 POP_TOP
+             76 LOAD_CONST               0 (None)
+             78 RETURN_VALUE

@@ -1,0 +1,177 @@
+# module LPClientFramework.LPDeviceStreamServiceManager
+
+[module] names: __doc__, json, importlib, import_module, queue, Queue, Empty, threading, Thread, typing, Type, LPGlobalUI, LPClientFramework.LPConfig.LPAppFeatureConfig, isWiiMRadioEnabled, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPAccount, LPPlayListSource, LPClientFramework.LPPlayList.LPRadioParadise2PlayList, LPRadioParadise2Account, LPClientFramework.LPStreamServiceManager, LPStreamService, supportContents, defaultSupportContents, LPClientFramework.LPUtility, logger, object, DEVICE_ACCOUNT_UNKNOWN, LPDeviceStreamServiceManager
+  str: '\n@Time ： 2025/1/3 9:36\n@Auth ： Chris\n@File ：LPDeviceAccountManager.py\n@Desc:\n'
+  str: 'import_module'
+  str: 'Queue'
+  str: 'Empty'
+  str: 'Thread'
+  str: 'Type'
+  str: 'isWiiMRadioEnabled'
+  str: 'LPUtility'
+  str: 'LPAccount'
+  str: 'LPPlayListSource'
+  str: 'LPRadioParadise2Account'
+  str: 'LPStreamService'
+  str: 'supportContents'
+  str: 'logger'
+  str: 'LPDeviceStreamServiceManager'
+
+def LPDeviceStreamServiceManager()  line 27
+  names: __name__, __module__, __qualname__, __doc__, __init__, startMediaInfoWorker, _mediaInfoWorkerLoop, staticmethod, pcServiceCapability, registerDeviceStreamService, updateAppStreamServiceCapability, str, dict, deviceCapabilityForSource, Type, LPStreamService, streamServiceForSource, guiBehaviorForSource, guiCanForSource, deviceAccountForSource, recordDeviceAccount, recordDeviceAccountNotify, bool, _userinfoHasIdentity, _notifyPayload, accountForSource, registerAccountForSource, logoutAccountForSource, loginAccountForSource, supportContents, isCurrentPlayChannel, isCurrentPlayItem, accountChangedForSource, updateMediaInfoForSource
+    str: 'LPDeviceStreamServiceManager'
+    str: '设备流媒体服务管理器，负责注册、调用各音源的服务实例。\n\n    内部维护一个单工作线程（_mediaInfoWorker），用于异步刷新 mediaInfo。\n    工作线程从 _mediaInfoQueue 中取任务执行，队列深度始终 ≤ 1：\n    新任务入队前会先清空队列，保证快速切歌时只执行最后一次请求，\n    避免多线程并发导致的乱序或 UI 闪烁。\n    '
+    str: 'LPDeviceStreamServiceManager.__init__'
+    str: 'LPDeviceStreamServiceManager.startMediaInfoWorker'
+    str: 'LPDeviceStreamServiceManager._mediaInfoWorkerLoop'
+    str: 'LPDeviceStreamServiceManager.pcServiceCapability'
+    str: 'LPDeviceStreamServiceManager.registerDeviceStreamService'
+    str: 'LPDeviceStreamServiceManager.updateAppStreamServiceCapability'
+    str: 'source'
+    str: 'return'
+    str: 'LPDeviceStreamServiceManager.deviceCapabilityForSource'
+    str: 'return'
+    str: 'LPDeviceStreamServiceManager.streamServiceForSource'
+    str: 'LPDeviceStreamServiceManager.guiBehaviorForSource'
+    str: 'LPDeviceStreamServiceManager.guiCanForSource'
+    str: 'LPDeviceStreamServiceManager.deviceAccountForSource'
+    str: 'LPDeviceStreamServiceManager.recordDeviceAccount'
+    str: 'LPDeviceStreamServiceManager.recordDeviceAccountNotify'
+    str: 'LPDeviceStreamServiceManager._userinfoHasIdentity'
+    str: 'LPDeviceStreamServiceManager._notifyPayload'
+    str: 'LPDeviceStreamServiceManager.accountForSource'
+    str: 'LPDeviceStreamServiceManager.registerAccountForSource'
+    str: 'LPDeviceStreamServiceManager.logoutAccountForSource'
+    str: 'LPDeviceStreamServiceManager.loginAccountForSource'
+    str: 'LPDeviceStreamServiceManager.supportContents'
+    str: 'LPDeviceStreamServiceManager.isCurrentPlayChannel'
+    str: 'LPDeviceStreamServiceManager.isCurrentPlayItem'
+    str: 'LPDeviceStreamServiceManager.accountChangedForSource'
+    str: 'LPDeviceStreamServiceManager.updateMediaInfoForSource'
+
+  def LPDeviceStreamServiceManager.__init__(self, device)  line 36
+    names: streamServiceDict, device, _deviceAccountState, streamServiceCapability, _deviceCapabilityList, Queue, _mediaInfoQueue, _mediaInfoWorker
+
+  def LPDeviceStreamServiceManager.startMediaInfoWorker(self)  line 54
+    names: _mediaInfoWorker, is_alive, Thread, _mediaInfoWorkerLoop, start
+      str: '启动 mediaInfo 后台工作线程。\n\n        仅当设备 init() 成功后才调用本方法；若线程已启动则直接返回，\n        避免设备信息更新等场景下重复调用 init() 导致线程被重复创建。\n        '
+      str: 'mediaInfoWorker'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+
+  def LPDeviceStreamServiceManager._mediaInfoWorkerLoop(self)  line 70
+    names: _mediaInfoQueue, get, updateMediaInfoWithItem, Exception, logger, error
+      str: '工作线程主循环，持续从队列中取出最新的 mediaInfo 更新任务执行。\n\n        队列为空时阻塞等待，不占用 CPU；取到任务后同步执行，\n        执行完毕后再次进入等待。由于入队前会先清空旧任务，\n        因此只会处理最新的一次切歌请求。\n        '
+      str: 'block'
+      str: '[mediaInfoWorker] update failed: '
+
+  def LPDeviceStreamServiceManager.pcServiceCapability()  line 85
+    names: LPDeviceStreamServiceManager, supportContents
+
+  def LPDeviceStreamServiceManager.registerDeviceStreamService(self)  line 90
+    names: streamServiceCapability, logger, debug, items, get, import_module, getattr, streamServiceDict
+      str: 'app no need registerDeviceStreamService'
+      str: 'module'
+      str: 'class'
+      str: '[LPDeviceStreamServiceManager] register: %s'
+
+  def LPDeviceStreamServiceManager.updateAppStreamServiceCapability(self, deviceCapability)  line 107
+    names: list, _deviceCapabilityList, supportContents, streamServiceCapability, keys, pop
+      str: 'LPDeviceStreamServiceManager.updateAppStreamServiceCapability.<locals>.<listcomp>'
+
+    def LPDeviceStreamServiceManager.updateAppStreamServiceCapability.<listcomp>(.0)  line 110
+        str: 'id'
+
+  def LPDeviceStreamServiceManager.deviceCapabilityForSource(self, source)  line 115
+    names: _deviceCapabilityList, isinstance, dict, get
+      str: '返回设备原始 capability 中指定音源的信息，未找到返回空字典。'
+      str: 'id'
+
+  def LPDeviceStreamServiceManager.streamServiceForSource(self, source)  line 124
+    names: streamServiceDict, get
+
+  def LPDeviceStreamServiceManager.guiBehaviorForSource(self, source, device)  line 131
+    names: streamServiceForSource, streamGuiBehavior
+
+  def LPDeviceStreamServiceManager.guiCanForSource(self, source, device, key)  line 137
+    names: streamServiceForSource, LPStreamService, guiCan
+      str: '\n        key: prev,next,loop,shuffle\n        '
+
+  def LPDeviceStreamServiceManager.deviceAccountForSource(self, source)  line 150
+    names: DEVICE_ACCOUNT_UNKNOWN, _deviceAccountState, get
+      str: '\n        返回设备侧指定源的账号状态（不依赖 PC 是否实现该源）。\n\n        :param source: 音源标识。\n        :return: 账号信息 dict；已确认未登录返回 None；未上报过返回 DEVICE_ACCOUNT_UNKNOWN。\n        '
+
+  def LPDeviceStreamServiceManager.recordDeviceAccount(self, source, userinfo)  line 161
+    names: _userinfoHasIdentity, _deviceAccountState
+      str: '\n        记录设备侧账号状态，空账号信息按已确认未登录处理。\n\n        :param source: 音源标识。\n        :param userinfo: 设备返回/通知的账号信息 dict；无有效身份信息时视为未登录。\n        :return: None。\n        '
+
+  def LPDeviceStreamServiceManager.recordDeviceAccountNotify(self, source, notify)  line 176
+    names: isinstance, dict, get, recordDeviceAccount, _notifyPayload
+      str: '\n        根据设备 accountChange / logout 通知更新设备侧账号状态。\n\n        :param source: 音源标识。\n        :param notify: 设备通知字典。\n        :return: None。\n        '
+      str: 'eventType'
+      str: 'accountChange'
+      str: 'logout'
+
+  def LPDeviceStreamServiceManager._userinfoHasIdentity(userinfo)  line 190
+    names: isinstance, dict, get, append, items, join, str, lower, strip
+      str: '\n        判断账号信息字典是否包含有效身份字段。\n\n        字段名先做小写去符号归一化再匹配，兼容设备返回的 camelCase\n        与小写风格（例如 SoundMachine 返回 username / contact_email）。\n        不把通用的 id 视为身份字段，避免把非账号 id 误判为已登录。\n\n        :param userinfo: 账号信息字典。\n        :return: 含有效身份字段返回 True。\n        '
+      str: 'user'
+      str: 'loginname'
+      str: 'sessionid'
+      str: 'id'
+      str: 'uid'
+      str: 'username'
+      str: 'email'
+      str: 'contactemail'
+      str: 'showname'
+      str: 'userid'
+      str: 'anonuserid'
+      str: 'LPDeviceStreamServiceManager._userinfoHasIdentity.<locals>.<genexpr>'
+
+    def LPDeviceStreamServiceManager._userinfoHasIdentity.<genexpr>(.0)  line 214
+      names: isalnum
+
+  def LPDeviceStreamServiceManager._notifyPayload(notify)  line 219
+    names: isinstance, dict, get, str, json, loads, Exception
+      str: '\n        从设备通知中解析账号 payload。\n\n        :param notify: 设备通知字典。\n        :return: payload 字典；无法解析返回空字典。\n        '
+      str: 'payload'
+
+  def LPDeviceStreamServiceManager.accountForSource(self, source)  line 238
+    names: streamServiceForSource, getAccount
+
+  def LPDeviceStreamServiceManager.registerAccountForSource(self, source, userinfo)  line 245
+    names: recordDeviceAccount, streamServiceForSource, registerAccount
+      str: '注册指定音源账号并统一通知账号状态变化。\n\n        参数:\n            source: 音源标识。\n            userinfo: 设备返回的账号信息。\n        返回值:\n            None。\n        '
+
+  def LPDeviceStreamServiceManager.logoutAccountForSource(self, source)  line 259
+    names: streamServiceForSource, logoutAccount, recordDeviceAccount
+
+  def LPDeviceStreamServiceManager.loginAccountForSource(self, source, username, password, finishedMethod)  line 265
+    names: streamServiceForSource, loginAccount
+
+  def LPDeviceStreamServiceManager.supportContents()  line 269
+    names: LPUtility, appLocalDataPath, open, json, load, defaultSupportContents, items, isWiiMRadioEnabled, pop
+      str: '读取已配置音源，缺失字段回退到全局音源配置。\n\n        参数:\n            无。\n        返回值:\n            dict: JSON 字段优先、已应用功能开关的音源配置。\n        '
+      str: 'LPSupportedStreamServiceConfig.json'
+      str: 'r'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'LPDeviceStreamServiceManager.supportContents.<locals>.<dictcomp>'
+      str: 'WiiMRadio'
+
+    def LPDeviceStreamServiceManager.supportContents.<dictcomp>(.0)  line 283
+      names: get
+
+  def LPDeviceStreamServiceManager.isCurrentPlayChannel(self, source, device, channelItem)  line 292
+    names: streamServiceForSource, isCurrentPlayChannel
+
+  def LPDeviceStreamServiceManager.isCurrentPlayItem(self, source, device, playItem)  line 297
+    names: streamServiceForSource, isCurrentPlayItem
+
+  def LPDeviceStreamServiceManager.accountChangedForSource(self, device, source, notify)  line 302
+    names: streamServiceForSource, accountChanged
+
+  def LPDeviceStreamServiceManager.updateMediaInfoForSource(self, device, source, data, header)  line 308
+    names: streamServiceForSource, LPStreamService, _mediaInfoQueue, empty, get_nowait, Empty, put
+      str: '将 mediaInfo 更新任务投递到后台工作线程执行。\n\n        入队前先清空队列中未执行的旧任务，保证快速切歌时只处理\n        最后一次请求，避免中间状态的封面或曲目信息覆盖最新值。\n\n        :param device: 当前播放设备。\n        :param source: 音源标识（如 Qobuz / RadioParadise2）。\n        :param data: 播放项数据。\n        :param header: 播放列表头信息，可选。\n        '

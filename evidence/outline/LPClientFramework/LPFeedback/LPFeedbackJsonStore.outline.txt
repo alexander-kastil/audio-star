@@ -1,0 +1,79 @@
+# module LPClientFramework.LPFeedback.LPFeedbackJsonStore
+
+[module] names: __doc__, json, os, tempfile, time, pathlib, Path, LPFeedbackJsonStore
+  str: 'Feedback 单次提交的 JSON 状态文件管理器。'
+  str: 'Path'
+  str: 'LPFeedbackJsonStore'
+
+def LPFeedbackJsonStore()  line 11
+  names: __name__, __module__, __qualname__, __doc__, __init__, create, update, markFailed, remove, read, _pathFor, _write
+    str: 'LPFeedbackJsonStore'
+    str: '以原子替换方式维护单次发送状态，不读取或恢复历史任务。'
+    str: 'LPFeedbackJsonStore.__init__'
+    str: 'LPFeedbackJsonStore.create'
+    str: 'LPFeedbackJsonStore.update'
+    str: 'LPFeedbackJsonStore.markFailed'
+    str: 'LPFeedbackJsonStore.remove'
+    str: 'LPFeedbackJsonStore.read'
+    str: 'LPFeedbackJsonStore._pathFor'
+    str: 'LPFeedbackJsonStore._write'
+
+  def LPFeedbackJsonStore.__init__(self, rootDirectory)  line 14
+    names: Path, _rootDirectory
+      str: '初始化状态文件根目录。\n\n        参数:\n            rootDirectory (str|Path): Feedback 状态文件保存目录。\n        返回:\n            无。\n        '
+
+  def LPFeedbackJsonStore.create(self, record)  line 24
+    names: _write
+      str: '创建一条发送中的状态记录。\n\n        参数:\n            record (dict): 至少包含 submissionId 与 stage 的状态字典。\n        返回:\n            Path: 状态 JSON 文件路径。\n        '
+
+  def LPFeedbackJsonStore.update(self, record, stage, **changes)  line 34
+    names: update, _write
+      str: '更新内存记录并原子写回状态文件。\n\n        参数:\n            record (dict): 当前状态字典。\n            stage (str): 新阶段名称。\n            **changes: 要合并的额外字段。\n        返回:\n            Path: 更新后的状态 JSON 文件路径。\n        '
+      str: 'stage'
+
+  def LPFeedbackJsonStore.markFailed(self, record, stage, errorMessage)  line 48
+    names: str, _write
+      str: '将一次提交标记为失败并保留诊断信息。\n\n        参数:\n            record (dict): 当前状态字典。\n            stage (str): 失败发生的流程阶段。\n            errorMessage (str): 面向诊断的错误摘要。\n        返回:\n            Path: 失败 JSON 文件路径。\n        '
+      str: 'failed'
+      str: 'stage'
+      str: 'failedStage'
+      str: 'Unknown feedback error.'
+      str: 'error'
+
+  def LPFeedbackJsonStore.remove(self, record)  line 63
+    names: _pathFor, unlink, FileNotFoundError
+      str: '删除成功提交的临时状态文件。\n\n        参数:\n            record (dict): 包含 submissionId 的状态字典。\n        返回:\n            None。\n        '
+
+  def LPFeedbackJsonStore.read(self, submissionId)  line 77
+    names: _pathFor, exists, open, json, load
+      str: '读取指定状态文件，仅供测试和人工诊断使用。\n\n        参数:\n            submissionId (str): 提交唯一标识。\n        返回:\n            dict|None: 文件不存在时返回 None。\n        '
+      str: 'submissionId'
+      str: 'r'
+      str: 'utf-8'
+      str: 'encoding'
+
+  def LPFeedbackJsonStore._pathFor(self, record)  line 91
+    names: str, get, strip, ValueError, _rootDirectory
+      str: '根据提交 ID 返回固定的状态文件路径。\n\n        参数:\n            record (dict): 包含 submissionId 的状态字典。\n        返回:\n            Path: JSON 文件路径。\n        异常:\n            ValueError: 缺少 submissionId 时抛出。\n        '
+      str: 'submissionId'
+      str: 'Feedback state record requires submissionId.'
+      str: '.json'
+
+  def LPFeedbackJsonStore._write(self, record)  line 106
+    names: _rootDirectory, mkdir, int, time, setdefault, _pathFor, tempfile, mkstemp, stem, str, os, fdopen, json, dump, flush, fsync, fileno, replace, path, exists, unlink
+      str: '将状态字典以临时文件加 replace 的方式写入磁盘。\n\n        参数:\n            record (dict): 待写入的状态字典。\n        返回:\n            Path: 写入后的 JSON 文件路径。\n        '
+      str: 'parents'
+      str: 'exist_ok'
+      str: 'updatedAt'
+      str: 'createdAt'
+      str: '.'
+      str: '.tmp'
+      str: 'prefix'
+      str: 'suffix'
+      str: 'dir'
+      str: 'w'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'ensure_ascii'
+      str: 'sort_keys'
+      str: 'indent'

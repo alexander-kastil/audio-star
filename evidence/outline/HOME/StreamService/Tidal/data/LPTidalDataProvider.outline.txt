@@ -1,0 +1,2849 @@
+# module HOME.StreamService.Tidal.data.LPTidalDataProvider
+
+[module] names: __doc__, collections, OrderedDict, concurrent.futures, ThreadPoolExecutor, as_completed, json, logging, hashlib, os, pathlib, Path, sys, threading, time, typing, Any, Callable, Dict, List, Optional, urllib.parse, parse_qsl, urlencode, urlsplit, urlunsplit, requests_cache, PyQt6.QtCore, QObject, QStandardPaths, pyqtSignal, HOME.StreamService.Tidal.config.LPTidalImageConfig, LPTidalImageSize, buildTidalImageUrl, tidalImageSizeForItemField, tidalNormalizeImageSize, getLogger, logger, LPTidalDataProvider
+  str: '\nTIDAL API 数据提供层。\n'
+  str: 'OrderedDict'
+  str: 'ThreadPoolExecutor'
+  str: 'as_completed'
+  str: 'Path'
+  str: 'Any'
+  str: 'Callable'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'parse_qsl'
+  str: 'urlencode'
+  str: 'urlsplit'
+  str: 'urlunsplit'
+  str: 'QObject'
+  str: 'QStandardPaths'
+  str: 'pyqtSignal'
+  str: 'LPTidalImageSize'
+  str: 'buildTidalImageUrl'
+  str: 'tidalImageSizeForItemField'
+  str: 'tidalNormalizeImageSize'
+  str: 'linkplay'
+  str: 'LPTidalDataProvider'
+
+def LPTidalDataProvider()  line 32
+  names: __name__, __module__, __qualname__, __doc__, DEFAULT_BASE_URL, MAX_RESPONSE_CACHE_ENTRIES, MAX_OPTIONAL_NOT_FOUND_CACHE_ENTRIES, OPTIONAL_NOT_FOUND_CACHE_SECONDS, FAILURE_POLICY_REQUIRED, FAILURE_POLICY_OPTIONAL_CONTENT, FAILURE_POLICY_CAPABILITY_PROBE, frozenset, INVALID_RESOURCE_IDS, MAX_MIX_META_ENTRIES, _mix_meta_by_id, Dict, str, __annotations__, threading, Lock, _mix_meta_lock, AGGREGATE_REQUEST_MAX_WORKERS, BoundedSemaphore, _aggregate_request_slots, pyqtSignal, object, requestFailed, GENRE_IMAGE_FALLBACK, Optional, QObject, __init__, setBaseUrl, classmethod, Any, bool, isValidResourceId, hasInvalidResourceIdentifier, clearCaches, _registerMixMeta, _mixMetaForId, _genreImageMapFromResponse, cacheGenreImageMapFrom, genreImageIdForPath, buildUrl, _buildQueueSearchUrl, int, List, _annotateQueuePlaybackItems, _searchQueueTypesForSection, Path, _tidalCacheRoot, requestJson, getJson, postJson, deleteJson, postForm, _retryAfterForcedTokenRefresh, search, Callable, _executeConcurrentRequests, loadHomeData, loadAlbumDetail, _loadAllAlbumTracks, loadArtistDetail, loadArtistRadio, loadMixDetail, loadPlaylistDetail, loadPlaylistDetailInfo, loadPlaylistItems, createUserPlaylist, updatePlaylist, deletePlaylist, addPlaylistItems, removePlaylistItems, movePlaylistItems, filterUserCreatedPlaylists, loadUserPlaylists, MY_PLAYLISTS_PAGE_LIMIT, COLLECTION_PLAYLISTS_PAGE_LIMIT, loadMyPlaylists, loadVideoDetail, loadGenreDetail, loadSeeAll, _filterArtistAlbumItemsForSection, _isArtistSingleOrEpAlbum, _albumDetailArtists, _filterItemsById, _markFavoriteFlags, _buildAlbumRailSection, _collectionSortParams, loadCollection, loginByUsername, loadSubscription, _normalizeGenrePath, _normalizeMoodPath, normalizeSubscriptionInfo, refreshFavoriteIds, addFavorite, removeFavorite, _resolvePlaylistItemIndex, _resolvePlaylistItemOrderIndex, _resolvePlaylistEtag, _playlistMutationHeaders, _normalizePlaylistItems, _normalizeIdList, _normalizeIndexList, _playlistSourceType, _playlistCreatorId, _isUserCreatedPlaylistItem, _playlistCreatorSubtitle, isUserOwnedPlaylist, extractPlaylistUuid, _invalidatePlaylistCaches, _authHeaders, _headersAfterTokenRefresh, _headersFromCurrentAccount, _hasAuthHeaders, _hasRefreshableDevice, _resolvedCountryCode, _accountState, _requestCacheKey, _getCachedResponse, _normalizedFailurePolicy, _shouldSuppressNotFoundTelemetry, _hasOptionalNotFoundCache, _setOptionalNotFoundCache, _setCachedResponse, _probeFeaturedCategoryPaths, list, _buildFeaturedResourceSections, _featuredResourceItemType, _featuredResourceSectionTitle, _featuredHeroResourceLabel, _featuredCategoryResourceTypes, tuple, _homeSupportedFeaturedResourceTypes, _filterFeaturedCategoriesForHome, _logFeaturedCategoryProbeResult, normalizeSearchResults, _extractSearchSection, _normalizeSubscriptionPayload, _normalizeCombinedPlaylists, _normalizeFavoriteListPayload, _favoriteIdsValue, _normalizeFavoriteIdsPayload, normalizeFavoriteIds, _loadFavoriteIdsForCurrentUser, _favoriteEndpointType, _favoritePayloadKey, _buildDetailResult, _normalizeInfoPayload, _normalizeTextPayload, _normalizeCreditPayload, _normalizeListPayload, _totalNumberOfItems, _extractRawItems, _extractPageModuleItems, _filterCustomMixItems, _isVideoMixItem, _compactTypeText, _firstPayloadObject, _extractItems, _normalizeItem, _normalizeItemType, _buildSubtitle, _normalizeArtistItems, _normalizeAlbumItem, _resolveNameValue, _resolveImageUrl, _resolveImageUrlWithTrace, _resolveTidalImageSize, LPTidalImageSize, SIZE_640, _normalizeImageSource, _buildTidalImageUrl, _firstValue, _safeInt, __classcell__
+    str: 'LPTidalDataProvider'
+    str: '封装 TIDAL 请求会话、URL 组装和 JSON 响应解析。'
+    str: 'https://api.tidal.com'
+    str: 'required'
+    str: 'optional_content'
+    str: 'capability_probe'
+    str: '0'
+    str: 'none'
+    str: 'null'
+    str: 'undefined'
+    str: 'artisttoptracks'
+    str: '_mix_meta_by_id'
+    str: '658519e4-8aea-41a8-86f9-e3fbfb31a630'
+    str: 'b100bf56-2285-48ad-a608-386a7254fe8c'
+    str: 'abc8250d-3fbe-4acc-a69d-29fcd0eb46be'
+    str: '0239132d-99be-41f4-929d-e27280f7bff1'
+    str: 'ddb3306e-c787-4468-a791-8efbe746aa8a'
+    str: '05fd0839-86f1-4517-a211-b9c20f17bfa2'
+    str: 'e388fbee-3506-4000-ac4c-c4853f857d0a'
+    str: '674f6c6c-24db-4baf-8cc9-abcda685f2a3'
+    str: '7f53e08b-9e07-4813-99cb-237388122847'
+    str: '81a066ce-11f9-4685-a739-24dd9be85e5f'
+    str: 'aad3c1fd-655a-43fa-8c9d-aab439340395'
+    str: 'b0208879-eb06-4669-a5fb-cf1009b46a11'
+    str: 'd251e1ed-fef2-45a9-98d9-e8d5745f9bdd'
+    str: 'a20b6923-0b2c-4651-b9ef-f88372355a74'
+    str: '04fb4597-c712-49ad-9b71-a5aefbe1d894'
+    str: 'd73a5448-0a5e-4606-9f3e-113d93eaaf05'
+    str: '3cce1ba2-2530-4384-8c51-dfdf81868a9d'
+    str: '7cf188f8-93df-4119-b624-47dfb4d70e51'
+    str: '8ee3c6ed-7342-430d-8e5d-20dc72d6ac77'
+    str: '8173edc1-ca03-4f22-8706-c8800848d331'
+    str: 'hiphop'
+    str: 'funk'
+    str: 'country'
+    str: 'pop'
+    str: 'latin'
+    str: 'dance'
+    str: 'electronic'
+    str: 'rock'
+    str: 'americana'
+    str: 'reggae'
+    str: 'classical'
+    str: 'world'
+    str: 'metal'
+    str: 'blues'
+    str: 'jazz'
+    str: 'film'
+    str: 'gospel'
+    str: 'comedy'
+    str: 'kids'
+    str: 'retro'
+    str: 'GENRE_IMAGE_FALLBACK'
+    str: 'baseUrl'
+    str: 'parent'
+    str: 'LPTidalDataProvider.__init__'
+    str: 'baseUrl'
+    str: 'return'
+    str: 'LPTidalDataProvider.setBaseUrl'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalDataProvider.isValidResourceId'
+    str: 'path'
+    str: 'return'
+    str: 'LPTidalDataProvider.hasInvalidResourceIdentifier'
+    str: 'return'
+    str: 'LPTidalDataProvider.clearCaches'
+    str: 'itemId'
+    str: 'title'
+    str: 'subtitle'
+    str: 'imageUrl'
+    str: 'imagePath'
+    str: 'return'
+    str: 'LPTidalDataProvider._registerMixMeta'
+    str: 'mixId'
+    str: 'return'
+    str: 'LPTidalDataProvider._mixMetaForId'
+    str: 'genresResponse'
+    str: 'return'
+    str: 'LPTidalDataProvider._genreImageMapFromResponse'
+    str: 'LPTidalDataProvider.cacheGenreImageMapFrom'
+    str: 'genrePath'
+    str: 'return'
+    str: 'LPTidalDataProvider.genreImageIdForPath'
+    str: 'LPTidalDataProvider.buildUrl'
+    str: 'path'
+    str: 'params'
+    str: 'return'
+    str: 'LPTidalDataProvider._buildQueueSearchUrl'
+    str: 'items'
+    str: 'path'
+    str: 'params'
+    str: 'offset'
+    str: 'limit'
+    str: 'return'
+    str: 'LPTidalDataProvider._annotateQueuePlaybackItems'
+    str: 'sectionKey'
+    str: 'fallbackTypes'
+    str: 'return'
+    str: 'LPTidalDataProvider._searchQueueTypesForSection'
+    str: 'LPTidalDataProvider._tidalCacheRoot'
+    str: 'method'
+    str: 'path'
+    str: 'params'
+    str: 'payload'
+    str: 'headers'
+    str: 'timeout'
+    str: 'retryOnAuthRefresh'
+    str: 'useFormBody'
+    str: 'skipCache'
+    str: 'failurePolicy'
+    str: 'return'
+    str: 'LPTidalDataProvider.requestJson'
+    str: 'path'
+    str: 'params'
+    str: 'headers'
+    str: 'timeout'
+    str: 'skipCache'
+    str: 'failurePolicy'
+    str: 'return'
+    str: 'LPTidalDataProvider.getJson'
+    str: 'path'
+    str: 'payload'
+    str: 'params'
+    str: 'headers'
+    str: 'timeout'
+    str: 'return'
+    str: 'LPTidalDataProvider.postJson'
+    str: 'path'
+    str: 'params'
+    str: 'headers'
+    str: 'timeout'
+    str: 'return'
+    str: 'LPTidalDataProvider.deleteJson'
+    str: 'path'
+    str: 'form'
+    str: 'params'
+    str: 'headers'
+    str: 'timeout'
+    str: 'return'
+    str: 'LPTidalDataProvider.postForm'
+    str: 'method'
+    str: 'path'
+    str: 'params'
+    str: 'payload'
+    str: 'headers'
+    str: 'timeout'
+    str: 'status_code'
+    str: 'return'
+    str: 'LPTidalDataProvider._retryAfterForcedTokenRefresh'
+    str: 'TRACKS,ALBUMS,ARTISTS,PLAYLISTS'
+    str: 'query'
+    str: 'countryCode'
+    str: 'types'
+    str: 'offset'
+    str: 'limit'
+    str: 'return'
+    str: 'LPTidalDataProvider.search'
+    str: 'requests'
+    str: 'return'
+    str: 'LPTidalDataProvider._executeConcurrentRequests'
+    str: 'countryCode'
+    str: 'skipCache'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadHomeData'
+    str: 'itemId'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadAlbumDetail'
+    str: 'albumId'
+    str: 'countryCode'
+    str: 'headers'
+    str: 'return'
+    str: 'LPTidalDataProvider._loadAllAlbumTracks'
+    str: 'LPTidalDataProvider.loadArtistDetail'
+    str: 'itemId'
+    str: 'offset'
+    str: 'limit'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadArtistRadio'
+    str: 'mixId'
+    str: 'offset'
+    str: 'limit'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadMixDetail'
+    str: 'itemId'
+    str: 'countryCode'
+    str: 'offset'
+    str: 'limit'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadPlaylistDetail'
+    str: 'playlistId'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadPlaylistDetailInfo'
+    str: 'itemId'
+    str: 'countryCode'
+    str: 'offset'
+    str: 'limit'
+    str: 'skipCache'
+    str: 'favoriteIds'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadPlaylistItems'
+    str: 'userId'
+    str: 'title'
+    str: 'description'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalDataProvider.createUserPlaylist'
+    str: 'playlistUuid'
+    str: 'title'
+    str: 'description'
+    str: 'return'
+    str: 'LPTidalDataProvider.updatePlaylist'
+    str: 'playlistUuid'
+    str: 'return'
+    str: 'LPTidalDataProvider.deletePlaylist'
+    str: '*'
+    str: 'playlistUuid'
+    str: 'itemIds'
+    str: 'toIndex'
+    str: 'countryCode'
+    str: 'etag'
+    str: 'return'
+    str: 'LPTidalDataProvider.addPlaylistItems'
+    str: 'playlistUuid'
+    str: 'indices'
+    str: 'return'
+    str: 'LPTidalDataProvider.removePlaylistItems'
+    str: 'playlistUuid'
+    str: 'indices'
+    str: 'toIndex'
+    str: 'return'
+    str: 'LPTidalDataProvider.movePlaylistItems'
+    str: 'playlists'
+    str: 'return'
+    str: 'LPTidalDataProvider.filterUserCreatedPlaylists'
+    str: 'userId'
+    str: 'countryCode'
+    str: 'skipCache'
+    str: 'sortPreferences'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadUserPlaylists'
+    str: 'LPTidalDataProvider.loadMyPlaylists'
+    str: 'LPTidalDataProvider.loadVideoDetail'
+    str: 'genre'
+    str: 'itemId'
+    str: 'title'
+    str: 'countryCode'
+    str: 'categoryType'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadGenreDetail'
+    str: 'descriptor'
+    str: 'offset'
+    str: 'limit'
+    str: 'order'
+    str: 'orderDirection'
+    str: 'countryCode'
+    str: 'skipCache'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadSeeAll'
+    str: 'items'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalDataProvider._filterArtistAlbumItemsForSection'
+    str: 'item'
+    str: 'return'
+    str: 'LPTidalDataProvider._isArtistSingleOrEpAlbum'
+    str: 'detailInfo'
+    str: 'return'
+    str: 'LPTidalDataProvider._albumDetailArtists'
+    str: 'items'
+    str: 'excludedItemIds'
+    str: 'return'
+    str: 'LPTidalDataProvider._filterItemsById'
+    str: 'items'
+    str: 'favoriteItemIds'
+    str: 'return'
+    str: 'LPTidalDataProvider._markFavoriteFlags'
+    str: 'sectionKey'
+    str: 'title'
+    str: 'items'
+    str: 'endpointPath'
+    str: 'queryParams'
+    str: 'excludeItemIds'
+    str: 'return'
+    str: 'LPTidalDataProvider._buildAlbumRailSection'
+    str: 'sortPreferences'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalDataProvider._collectionSortParams'
+    str: 'LPTidalDataProvider.loadCollection'
+    str: 'username'
+    str: 'password'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalDataProvider.loginByUsername'
+    str: 'userId'
+    str: 'skipCache'
+    str: 'return'
+    str: 'LPTidalDataProvider.loadSubscription'
+    str: 'LPTidalDataProvider._normalizeGenrePath'
+    str: 'LPTidalDataProvider._normalizeMoodPath'
+    str: 'responseData'
+    str: 'return'
+    str: 'LPTidalDataProvider.normalizeSubscriptionInfo'
+    str: 'LPTidalDataProvider.refreshFavoriteIds'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalDataProvider.addFavorite'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalDataProvider.removeFavorite'
+    str: 'item'
+    str: 'base_offset'
+    str: 'enumerate_index'
+    str: 'return'
+    str: 'LPTidalDataProvider._resolvePlaylistItemIndex'
+    str: 'LPTidalDataProvider._resolvePlaylistItemOrderIndex'
+    str: 'LPTidalDataProvider._resolvePlaylistEtag'
+    str: 'playlistUuid'
+    str: 'etag'
+    str: 'return'
+    str: 'LPTidalDataProvider._playlistMutationHeaders'
+    str: 'responseData'
+    str: 'offset'
+    str: 'return'
+    str: 'LPTidalDataProvider._normalizePlaylistItems'
+    str: 'values'
+    str: 'return'
+    str: 'LPTidalDataProvider._normalizeIdList'
+    str: 'LPTidalDataProvider._normalizeIndexList'
+    str: 'LPTidalDataProvider._playlistSourceType'
+    str: 'LPTidalDataProvider._playlistCreatorId'
+    str: 'LPTidalDataProvider._isUserCreatedPlaylistItem'
+    str: 'LPTidalDataProvider._playlistCreatorSubtitle'
+    str: 'LPTidalDataProvider.isUserOwnedPlaylist'
+    str: 'LPTidalDataProvider.extractPlaylistUuid'
+    str: 'LPTidalDataProvider._invalidatePlaylistCaches'
+    str: 'mode'
+    str: 'return'
+    str: 'LPTidalDataProvider._authHeaders'
+    str: 'headers'
+    str: 'force'
+    str: 'return'
+    str: 'LPTidalDataProvider._headersAfterTokenRefresh'
+    str: 'headers'
+    str: 'return'
+    str: 'LPTidalDataProvider._headersFromCurrentAccount'
+    str: 'LPTidalDataProvider._hasAuthHeaders'
+    str: 'LPTidalDataProvider._hasRefreshableDevice'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPTidalDataProvider._resolvedCountryCode'
+    str: 'LPTidalDataProvider._accountState'
+    str: 'method'
+    str: 'url'
+    str: 'params'
+    str: 'payload'
+    str: 'headers'
+    str: 'return'
+    str: 'LPTidalDataProvider._requestCacheKey'
+    str: 'cacheKey'
+    str: 'return'
+    str: 'LPTidalDataProvider._getCachedResponse'
+    str: 'failurePolicy'
+    str: 'return'
+    str: 'LPTidalDataProvider._normalizedFailurePolicy'
+    str: 'LPTidalDataProvider._shouldSuppressNotFoundTelemetry'
+    str: 'LPTidalDataProvider._hasOptionalNotFoundCache'
+    str: 'LPTidalDataProvider._setOptionalNotFoundCache'
+    str: 'cacheKey'
+    str: 'etag'
+    str: 'data'
+    str: 'return'
+    str: 'LPTidalDataProvider._setCachedResponse'
+    str: 'featuredResponse'
+    str: 'params'
+    str: 'headers'
+    str: 'knownResponses'
+    str: 'skipCache'
+    str: 'return'
+    str: 'LPTidalDataProvider._probeFeaturedCategoryPaths'
+    str: 'featuredItems'
+    str: 'featuredPathResponses'
+    str: 'return'
+    str: 'LPTidalDataProvider._buildFeaturedResourceSections'
+    str: 'resourceType'
+    str: 'return'
+    str: 'LPTidalDataProvider._featuredResourceItemType'
+    str: 'categoryTitle'
+    str: 'resourceType'
+    str: 'return'
+    str: 'LPTidalDataProvider._featuredResourceSectionTitle'
+    str: 'LPTidalDataProvider._featuredHeroResourceLabel'
+    str: 'category'
+    str: 'return'
+    str: 'LPTidalDataProvider._featuredCategoryResourceTypes'
+    str: 'LPTidalDataProvider._homeSupportedFeaturedResourceTypes'
+    str: 'featuredItems'
+    str: 'return'
+    str: 'LPTidalDataProvider._filterFeaturedCategoriesForHome'
+    str: 'categoryName'
+    str: 'pathSegment'
+    str: 'resourceType'
+    str: 'endpointPath'
+    str: 'response'
+    str: 'reusedExisting'
+    str: 'return'
+    str: 'LPTidalDataProvider._logFeaturedCategoryProbeResult'
+    str: 'LPTidalDataProvider.normalizeSearchResults'
+    str: 'queueParams'
+    str: 'payload'
+    str: 'keys'
+    str: 'queueParams'
+    str: 'return'
+    str: 'LPTidalDataProvider._extractSearchSection'
+    str: 'LPTidalDataProvider._normalizeSubscriptionPayload'
+    str: 'LPTidalDataProvider._normalizeCombinedPlaylists'
+    str: 'responseData'
+    str: 'itemType'
+    str: 'return'
+    str: 'LPTidalDataProvider._normalizeFavoriteListPayload'
+    str: 'value'
+    str: 'return'
+    str: 'LPTidalDataProvider._favoriteIdsValue'
+    str: 'LPTidalDataProvider._normalizeFavoriteIdsPayload'
+    str: 'LPTidalDataProvider.normalizeFavoriteIds'
+    str: 'skipCache'
+    str: 'return'
+    str: 'LPTidalDataProvider._loadFavoriteIdsForCurrentUser'
+    str: 'itemType'
+    str: 'return'
+    str: 'LPTidalDataProvider._favoriteEndpointType'
+    str: 'favoriteType'
+    str: 'return'
+    str: 'LPTidalDataProvider._favoritePayloadKey'
+    str: 'primary'
+    str: 'payload'
+    str: 'return'
+    str: 'LPTidalDataProvider._buildDetailResult'
+    str: 'LPTidalDataProvider._normalizeInfoPayload'
+    str: 'responseData'
+    str: 'textType'
+    str: 'return'
+    str: 'LPTidalDataProvider._normalizeTextPayload'
+    str: 'LPTidalDataProvider._normalizeCreditPayload'
+    str: 'LPTidalDataProvider._normalizeListPayload'
+    str: 'LPTidalDataProvider._totalNumberOfItems'
+    str: 'LPTidalDataProvider._extractRawItems'
+    str: 'pageData'
+    str: 'return'
+    str: 'LPTidalDataProvider._extractPageModuleItems'
+    str: 'items'
+    str: 'return'
+    str: 'LPTidalDataProvider._filterCustomMixItems'
+    str: 'LPTidalDataProvider._isVideoMixItem'
+    str: 'LPTidalDataProvider._compactTypeText'
+    str: 'LPTidalDataProvider._firstPayloadObject'
+    str: 'payload'
+    str: 'keys'
+    str: 'return'
+    str: 'LPTidalDataProvider._extractItems'
+    str: 'item'
+    str: 'itemType'
+    str: 'forceItemType'
+    str: 'return'
+    str: 'LPTidalDataProvider._normalizeItem'
+    str: 'item'
+    str: 'fallback'
+    str: 'forceItemType'
+    str: 'return'
+    str: 'LPTidalDataProvider._normalizeItemType'
+    str: 'item'
+    str: 'itemType'
+    str: 'return'
+    str: 'LPTidalDataProvider._buildSubtitle'
+    str: 'LPTidalDataProvider._normalizeArtistItems'
+    str: 'LPTidalDataProvider._normalizeAlbumItem'
+    str: 'item'
+    str: 'keys'
+    str: 'return'
+    str: 'LPTidalDataProvider._resolveNameValue'
+    str: 'LPTidalDataProvider._resolveImageUrl'
+    str: 'LPTidalDataProvider._resolveImageUrlWithTrace'
+    str: 'itemType'
+    str: 'fieldKey'
+    str: 'return'
+    str: 'LPTidalDataProvider._resolveTidalImageSize'
+    str: 'value'
+    str: 'size'
+    str: 'return'
+    str: 'LPTidalDataProvider._normalizeImageSource'
+    str: 'imageId'
+    str: 'size'
+    str: 'return'
+    str: 'LPTidalDataProvider._buildTidalImageUrl'
+    str: 'LPTidalDataProvider._firstValue'
+    str: 'LPTidalDataProvider._safeInt'
+    str: 'TRACKS,ALBUMS,ARTISTS,PLAYLISTS'
+    str: '*'
+    str: 'genre'
+
+  def LPTidalDataProvider.__init__(self, baseUrl, parent)  line 85
+    names: super, __init__, str, DEFAULT_BASE_URL, rstrip, _base_url, _tidalCacheRoot, mkdir, requests_cache, CachedSession, _session, OrderedDict, _response_cache, threading, RLock, _response_cache_lock, _optional_not_found_cache, _optional_not_found_cache_lock, _genre_image_map
+      str: '\n        初始化数据提供层。\n\n        :param baseUrl: TIDAL API 基础地址。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: '/'
+      str: 'parents'
+      str: 'exist_ok'
+      str: 'tidal_request_cache'
+      str: 'cache_name'
+      str: 'expire_after'
+
+  def LPTidalDataProvider.setBaseUrl(self, baseUrl)  line 106
+    names: str, rstrip, _base_url
+      str: '\n        更新 API 基础地址。\n\n        :param baseUrl: TIDAL API 基础地址。\n        :return: None。\n        '
+      str: '/'
+
+  def LPTidalDataProvider.isValidResourceId(cls, itemId)  line 115
+    names: str, strip, lower, bool, INVALID_RESOURCE_IDS
+      str: '\n        判断条目 ID 是否可安全拼入 TIDAL 资源路径。\n\n        :param itemId: 待校验的资源 ID。\n        :return: 非空且非已知占位值返回 True。\n        '
+
+  def LPTidalDataProvider.hasInvalidResourceIdentifier(cls, path)  line 126
+    names: urlsplit, str, path, split, enumerate, lower, isValidResourceId
+      str: '\n        判断 API 路径中的资源 ID 是否为已知占位值。\n\n        :param path: TIDAL API 相对路径。\n        :return: 含无效 album/artist/playlist/mix/video ID 返回 True。\n        '
+      str: 'LPTidalDataProvider.hasInvalidResourceIdentifier.<locals>.<listcomp>'
+      str: '/'
+      str: 'artists'
+      str: 'videos'
+      str: 'playlists'
+      str: 'mixes'
+      str: 'albums'
+
+    def LPTidalDataProvider.hasInvalidResourceIdentifier.<listcomp>(.0)  line 134
+
+  def LPTidalDataProvider.clearCaches(self)  line 141
+    names: _session, cache, clear, Exception, logger, warning, _response_cache_lock, _response_cache, _optional_not_found_cache_lock, _optional_not_found_cache, _mix_meta_lock, _mix_meta_by_id
+      str: '\n        清空 HTTP 磁盘缓存和内存 ETag 缓存，登出时调用。\n\n        清空 requests_cache 的磁盘响应缓存和内存层 ETag 缓存，\n        避免上一个账号的 API 响应在登出后继续命中。\n\n        :return: None。\n        '
+      str: '[TIDAL] clear requests_cache failed: '
+
+  def LPTidalDataProvider._registerMixMeta(self, itemId, title, subtitle, imageUrl, imagePath)  line 161
+    names: str, strip, _mix_meta_lock, _mix_meta_by_id, len, MAX_MIX_META_ENTRIES, pop, next, iter
+      str: '\n        登记归一化 mix 卡片的元数据供详情与播放队列复用。\n\n        :param itemId: mix ID。\n        :param title: mix 标题。\n        :param subtitle: mix 副标题。\n        :param imageUrl: mix 封面 URL。\n        :param imagePath: mix 本地封面路径。\n        :return: None。\n        '
+      str: 'title'
+      str: 'subtitle'
+      str: 'imageUrl'
+      str: 'imagePath'
+
+  def LPTidalDataProvider._mixMetaForId(self, mixId)  line 186
+    names: str, strip, _mix_meta_lock, _mix_meta_by_id, get, isinstance, dict
+      str: '\n        读取 mix 元数据注册表中指定 mix 的元数据。\n\n        :param mixId: mix ID。\n        :return: 元数据字典；未登记时返回空字典。\n        '
+
+  def LPTidalDataProvider._genreImageMapFromResponse(self, genresResponse)  line 200
+    names: isinstance, dict, get, list, tuple, str, strip, lower
+      str: '\n        从 /v1/genres 响应中提取 genre path→imageId 映射。\n\n        :param genresResponse: getJson 的返回字典。\n        :return: genre path（小写）→ imageId 映射；数据无效时返回空字典。\n        '
+      str: 'data'
+      str: 'path'
+      str: 'image'
+
+  def LPTidalDataProvider.cacheGenreImageMapFrom(self, genresResponse)  line 220
+    names: _genreImageMapFromResponse, _genre_image_map
+      str: '\n        首页拉取到 /v1/genres 后缓存其 path→imageId 映射。\n\n        :param genresResponse: /v1/genres 的 getJson 返回。\n        :return: None。\n        '
+
+  def LPTidalDataProvider.genreImageIdForPath(self, genrePath)  line 231
+    names: str, strip, lower, _genre_image_map, _authHeaders, _resolvedCountryCode, getJson, _genreImageMapFromResponse, Exception, logger, warning, dict, GENRE_IMAGE_FALLBACK, get
+      str: '\n        返回 TIDAL genre 分类封面图的 imageId。\n\n        优先使用动态 /v1/genres 数据构造的映射，未加载或异常时回退到内置\n        GENRE_IMAGE_FALLBACK 映射，保证离线或未进入 TIDAL 首页时也有封面。\n\n        :param genrePath: genre 分类 path，例如 Hiphop / Pop。\n        :return: imageId，无法解析时返回空串。\n        '
+      str: 'token'
+      str: 'countryCode'
+      str: '/v1/genres'
+      str: 'params'
+      str: 'headers'
+      str: '[TIDAL] build genre image map failed, fallback: %s'
+
+  def LPTidalDataProvider.buildUrl(self, path)  line 258
+    names: str, strip, object, __getattribute__, rstrip, Exception, LPTidalDataProvider, DEFAULT_BASE_URL, startswith, lstrip
+      str: '\n        拼接完整 API URL。\n\n        :param path: 接口路径。\n        :return: 完整 URL。\n        '
+      str: '_base_url'
+      str: '/'
+      str: 'http://'
+      str: 'https://'
+
+  def LPTidalDataProvider._buildQueueSearchUrl(self, path, params)  line 278
+    names: buildUrl, urlsplit, dict, parse_qsl, query, items, str, urlunsplit, scheme, netloc, path, urlencode, fragment
+      str: '\n        构建可写入播放队列 XML 的完整 SearchUrl。\n\n        :param path: TIDAL API 路径或完整 URL。\n        :param params: 查询参数。\n        :return: 完整 SearchUrl。\n        '
+      str: 'keep_blank_values'
+
+  def LPTidalDataProvider._annotateQueuePlaybackItems(self, items, path, params, offset, limit)  line 294
+    names: _buildQueueSearchUrl, max, int, isinstance, list, dict, str, get, strip, lower, bool, append
+      str: '\n        为分页 track 条目写入播放队列页 URL 和页内起播序号。\n\n        :param items: 已归一化条目列表。\n        :param path: 当前分页请求路径。\n        :param params: 当前分页请求参数。\n        :param offset: 当前分页偏移。\n        :param limit: 当前分页大小。\n        :return: 带队列播放字段的条目列表。\n        '
+      str: 'itemType'
+      str: 'track'
+      str: 'allowStreaming'
+      str: 'queueSearchUrl'
+      str: 'queueStartIndex'
+      str: 'queuePageOffset'
+      str: 'queuePageLimit'
+      str: 'extra'
+
+  def LPTidalDataProvider._searchQueueTypesForSection(self, sectionKey, fallbackTypes)  line 337
+    names: str, strip, lower, get
+      str: '\n        返回搜索分区播放队列应使用的 TIDAL types 参数。\n\n        :param sectionKey: 搜索分区标识。\n        :param fallbackTypes: 原始请求 types。\n        :return: TIDAL types 参数。\n        '
+      str: 'ARTISTS'
+      str: 'ALBUMS'
+      str: 'TRACKS'
+      str: 'PLAYLISTS'
+      str: 'VIDEOS'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'TRACKS,ALBUMS,ARTISTS,PLAYLISTS'
+
+  def LPTidalDataProvider._tidalCacheRoot(self)  line 355
+    names: QStandardPaths, writableLocation, StandardLocation, GenericCacheLocation, Path
+      str: '\n        返回 TIDAL API 本地缓存根目录。\n\n        :return: 缓存目录路径。\n        '
+      str: 'com.linkplay.wiimhome'
+
+  def LPTidalDataProvider.requestJson(self, method, path, params, payload, headers, timeout, retryOnAuthRefresh, useFormBody, skipCache, failurePolicy)  line 364
+    names: hasInvalidResourceIdentifier, logger, warning, ValueError, buildUrl, str, strip, upper, _headersAfterTokenRefresh, dict, setdefault, _requestCacheKey, hashlib, sha256, encode, hexdigest, _normalizedFailurePolicy, _response_cache_lock, _response_cache, pop, _optional_not_found_cache_lock, _optional_not_found_cache, _shouldSuppressNotFoundTelemetry, _hasOptionalNotFoundCache, info, RuntimeError, _getCachedResponse, get, time, monotonic, _session, request, int, bool, getattr, debug, url, status_code, sorted, keys, raise_for_status, text, json, Exception, loads, headers, _setCachedResponse, _hasAuthHeaders, _retryAfterForcedTokenRefresh, _setOptionalNotFoundCache, requestFailed, emit, HOME.StreamService.Tidal.services.LPTidalEventTrack, LPTidalEventTrack, api_error, _resolvedCountryCode
+      str: '\n        发起 JSON 请求并返回解析结果。\n\n        :param method: HTTP 方法。\n        :param path: 接口路径。\n        :param params: 查询参数。\n        :param payload: JSON 或表单请求体。\n        :param headers: 额外请求头。\n        :param timeout: 请求超时秒数。\n        :param retryOnAuthRefresh: 401 后是否允许刷新 token 并重试一次。\n        :param useFormB'
+      str: '[TidalDataProvider] reject request with invalid resource id path=%s'
+      str: 'Invalid TIDAL resource id.'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+      str: 'status_code'
+      str: 'GET'
+      str: 'force'
+      str: 'Content-Type'
+      str: 'application/x-www-form-urlencoded'
+      str: 'utf-8'
+      str: '[TidalDataProvider] optional 404 negative-cache hit method=%s path=%s cache_key=%s'
+      str: 'Optional TIDAL content is unavailable.'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+      str: 'status_code'
+      str: 'from_negative_cache'
+      str: 'etag'
+      str: 'If-None-Match'
+      str: 'method'
+      str: 'url'
+      str: 'params'
+      str: 'headers'
+      str: 'timeout'
+      str: 'data'
+      str: 'json'
+      str: 'force_refresh'
+      str: 'from_cache'
+      str: 'expires'
+      str: 'created_at'
+      str: '[TidalDataProvider][CacheTrace] method=%s url=%s status=%s from_cache=%s elapsed_ms=%s cache_key=%s expires=%s created_at=%s etag_memory=%s request_headers=%s'
+      str: 'success'
+      str: 'data'
+      str: 'status_code'
+      str: 'from_cache'
+      str: 'etag'
+      str: '304 response without cached body'
+      str: 'success'
+      str: 'data'
+      str: 'status_code'
+      str: 'ETag'
+      str: 'Etag'
+      str: 'success'
+      str: 'data'
+      str: 'status_code'
+      str: 'from_cache'
+      str: 'etag'
+      str: 'raw_text'
+      str: 'response'
+      str: 'status_code'
+      str: 'text'
+      str: 'headers'
+      str: '[TidalDataProvider][CacheTrace] request failed method=%s url=%s elapsed_ms=%s cache_key=%s etag_memory=%s error=%s'
+      str: 'method'
+      str: 'path'
+      str: 'params'
+      str: 'payload'
+      str: 'headers'
+      str: 'timeout'
+      str: 'status_code'
+      str: 'success'
+      str: '[TidalDataProvider] optional 404 ignored method=%s path=%s policy=%s elapsed_ms=%s'
+      str: 'LPTidalEventTrack'
+      str: 'endpoint'
+      str: 'method'
+      str: 'status_code'
+      str: 'elapsed_ms'
+      str: 'account_country_code'
+      str: 'error'
+
+  def LPTidalDataProvider.getJson(self, path, params, headers, timeout, skipCache, failurePolicy)  line 566
+    names: requestJson
+      str: '\n        发送 GET JSON 请求。\n\n        :param path: 接口路径。\n        :param params: 查询参数。\n        :param headers: 额外请求头。\n        :param timeout: 请求超时秒数。\n        :param skipCache: 为 True 时强制走网络请求，不使用缓存。\n        :param failurePolicy: 请求失败语义。\n        :return: 请求结果字典。\n        '
+      str: 'GET'
+      str: 'params'
+      str: 'headers'
+      str: 'timeout'
+      str: 'skipCache'
+      str: 'failurePolicy'
+
+  def LPTidalDataProvider.postJson(self, path, payload, params, headers, timeout)  line 596
+    names: requestJson
+      str: '\n        发送 POST JSON 请求。\n\n        :param path: 接口路径。\n        :param payload: JSON 请求体。\n        :param params: 查询参数。\n        :param headers: 额外请求头。\n        :param timeout: 请求超时秒数。\n        :return: 请求结果字典。\n        '
+      str: 'POST'
+      str: 'params'
+      str: 'payload'
+      str: 'headers'
+      str: 'timeout'
+
+  def LPTidalDataProvider.deleteJson(self, path, params, headers, timeout)  line 616
+    names: requestJson
+      str: '\n        发送 DELETE 请求。\n\n        :param path: 接口路径。\n        :param params: 查询参数。\n        :param headers: 额外请求头。\n        :param timeout: 请求超时秒数。\n        :return: 请求结果字典。\n        '
+      str: 'DELETE'
+      str: 'params'
+      str: 'headers'
+      str: 'timeout'
+
+  def LPTidalDataProvider.postForm(self, path, form, params, headers, timeout)  line 634
+    names: requestJson
+      str: '\n        发送 application/x-www-form-urlencoded POST 请求。\n\n        :param path: 接口路径。\n        :param form: 表单字段字典。\n        :param params: 查询参数。\n        :param headers: 额外请求头。\n        :param timeout: 请求超时秒数。\n        :return: 请求结果字典。\n        '
+      str: 'POST'
+      str: 'params'
+      str: 'payload'
+      str: 'headers'
+      str: 'timeout'
+      str: 'useFormBody'
+
+  def LPTidalDataProvider._retryAfterForcedTokenRefresh(self, method, path, params, payload, headers, timeout, status_code)  line 654
+    names: logger, debug, LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager, LPTidalLoginManager, instance, ensureFreshToken, Exception, warning, RuntimeError, _headersFromCurrentAccount, requestJson
+      str: '\n        401 后强制从设备同步 token 并重试一次原请求。\n\n        :param method: HTTP 方法。\n        :param path: 接口路径。\n        :param params: 查询参数。\n        :param payload: JSON 请求体。\n        :param headers: 原始请求头。\n        :param timeout: 请求超时秒数。\n        :param status_code: 原始失败状态码。\n        :return: 重试结果；无法刷新时返回失败。\n      '
+      str: '[TidalDataProvider] force token refresh after status=%s path=%s'
+      str: 'LPTidalLoginManager'
+      str: 'force'
+      str: '[TidalDataProvider] forced token refresh failed: %s'
+      str: 'TIDAL token refresh failed'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+      str: 'status_code'
+      str: 'params'
+      str: 'payload'
+      str: 'headers'
+      str: 'timeout'
+      str: 'retryOnAuthRefresh'
+
+  def LPTidalDataProvider.search(self, query, countryCode, types, offset, limit)  line 697
+    names: str, strip, _resolvedCountryCode, max, int, min, getJson, _authHeaders, isinstance, dict, get
+      str: '\n        使用 `/v1/search/top-hits/` 执行搜索请求。\n\n        :param query: 搜索关键字。\n        :param countryCode: 国家代码。\n        :param types: 搜索类型列表。\n        :param offset: 搜索分页偏移。\n        :param limit: 搜索分页大小。\n        :return: 请求结果字典。\n        '
+      str: 'query'
+      str: 'countryCode'
+      str: 'types'
+      str: 'offset'
+      str: 'limit'
+      str: '/v1/search/top-hits/'
+      str: 'token'
+      str: 'params'
+      str: 'headers'
+      str: 'data'
+      str: '_queueSearchParams'
+
+  def LPTidalDataProvider._executeConcurrentRequests(self, requests)  line 728
+    names: items, min, AGGREGATE_REQUEST_MAX_WORKERS, len, type, _aggregate_request_slots, Callable, Any, ThreadPoolExecutor, as_completed, result, Exception, logger, warning
+      str: '按共享并发上限执行一批相互独立的聚合请求。\n\n        :param requests: 以结果键为索引的无参数请求函数。\n        :return: 以相同结果键保存请求结果的字典。\n        '
+      str: 'LPTidalDataProvider._executeConcurrentRequests.<locals>.<listcomp>'
+      str: 'task'
+      str: 'return'
+      str: 'LPTidalDataProvider._executeConcurrentRequests.<locals>.run_with_shared_slot'
+      str: 'TidalAggregateApi'
+      str: 'max_workers'
+      str: 'thread_name_prefix'
+      str: 'LPTidalDataProvider._executeConcurrentRequests.<locals>.<dictcomp>'
+      str: '[TIDAL][Aggregate] concurrent request failed key=%s error=%s'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+
+    def LPTidalDataProvider._executeConcurrentRequests.<listcomp>(.0)  line 734
+      names: str, strip, callable
+
+    def LPTidalDataProvider._executeConcurrentRequests.run_with_shared_slot(task)  line 745
+        str: '占用一个全局聚合请求槽并执行任务。\n\n            :param task: 待执行的无参数请求函数。\n            :return: 请求函数返回值。\n            '
+
+    def LPTidalDataProvider._executeConcurrentRequests.<dictcomp>(.0)  line 755
+      names: submit
+
+  def LPTidalDataProvider.loadHomeData(self, countryCode, skipCache)  line 765
+    names: _resolvedCountryCode, _authHeaders, _executeConcurrentRequests, _loadFavoriteIdsForCurrentUser, get, cacheGenreImageMapFrom, _probeFeaturedCategoryPaths, any, _filterFeaturedCategoriesForHome, _normalizeListPayload, _filterCustomMixItems, _extractPageModuleItems, set, _buildFeaturedResourceSections, str, isinstance, list, next
+      str: '\n        拉取 TIDAL 首页所需的 editorial 数据。\n\n        :param countryCode: 国家代码。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :return: 归一化后的首页数据。\n        '
+      str: 'countryCode'
+      str: 'limit'
+      str: 'token'
+      str: 'deviceType'
+      str: 'PHONE'
+      str: 'LPTidalDataProvider.loadHomeData.<locals>.<lambda>'
+      str: 'featured'
+      str: 'favorite_ids'
+      str: 'new_albums'
+      str: 'new_tracks'
+      str: 'new_playlists'
+      str: 'rising_tracks'
+      str: 'rising_albums'
+      str: 'genres'
+      str: 'moods'
+      str: 'hi_res_albums'
+      str: 'custom_mixes'
+      str: 'featured'
+      str: 'new_albums'
+      str: 'new_tracks'
+      str: 'new_playlists'
+      str: 'rising_tracks'
+      str: 'rising_albums'
+      str: 'genres'
+      str: 'moods'
+      str: 'hi_res_albums'
+      str: 'custom_mixes'
+      str: 'new:albums'
+      str: 'new:tracks'
+      str: 'new:playlists'
+      str: 'featuredResponse'
+      str: 'params'
+      str: 'headers'
+      str: 'knownResponses'
+      str: 'skipCache'
+      str: 'LPTidalDataProvider.loadHomeData.<locals>.<genexpr>'
+      str: 'data'
+      str: 'category'
+      str: 'track'
+      str: 'album'
+      str: 'genre'
+      str: 'mood'
+      str: 'LPTidalDataProvider.loadHomeData.<locals>.<listcomp>'
+      str: 'favorite_ids'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'itemMode'
+      str: 'playlist'
+      str: 'items'
+      str: 'itemId'
+      str: 'isFavorite'
+      str: 'sections'
+      str: 'Featured'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'itemMode'
+      str: 'isCategory'
+      str: 'custom-mixes'
+      str: 'Custom Mixes'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'itemMode'
+      str: 'seeAllEnabled'
+      str: 'Genres'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'itemMode'
+      str: 'isCategory'
+      str: 'seeAllEnabled'
+      str: 'Moods'
+      str: 'hi-res-albums'
+      str: 'Hi-Res Albums'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'itemMode'
+      str: 'rising-new-albums'
+      str: 'Rising Albums'
+      str: 'rising-new-tracks'
+      str: 'Rising Tracks'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 778
+      names: getJson
+        str: '/v1/featured'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 780
+      names: getJson
+        str: '/v1/featured/new/albums'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 781
+      names: getJson
+        str: '/v1/featured/new/tracks'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 782
+      names: getJson
+        str: '/v1/featured/new/playlists'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 783
+      names: getJson
+        str: '/v1/rising/new/tracks'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 784
+      names: getJson
+        str: '/v1/rising/new/albums'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 785
+      names: getJson
+        str: '/v1/genres'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 786
+      names: getJson
+        str: '/v1/moods'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 787
+      names: getJson
+        str: '/v1/master/recommended/albums'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<lambda>()  line 788
+      names: getJson
+        str: '/v1/pages/my_collection_my_mixes'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadHomeData.<genexpr>(.0)  line 814
+      names: isinstance, dict, bool, get
+        str: 'success'
+
+    def LPTidalDataProvider.loadHomeData.<listcomp>(.0)  line 825
+      names: _normalizeItem
+        str: 'playlist'
+        str: 'forceItemType'
+
+    def LPTidalDataProvider.loadHomeData.<genexpr>(.0)  line 828
+      names: str
+
+    def LPTidalDataProvider.loadHomeData.<genexpr>(.0)  line 829
+      names: str
+
+    def LPTidalDataProvider.loadHomeData.<genexpr>(.0)  line 830
+      names: str
+
+    def LPTidalDataProvider.loadHomeData.<listcomp>(.0)  line 853
+      names: str, get, startswith
+        str: 'sectionKey'
+        str: 'featured-exclusive-'
+
+    def LPTidalDataProvider.loadHomeData.<listcomp>(.0)  line 858
+      names: str, get, startswith
+        str: 'sectionKey'
+        str: 'featured-exclusive-'
+
+    def LPTidalDataProvider.loadHomeData.<genexpr>(.0)  line 865
+      names: isinstance, dict, get
+        str: 'error'
+
+  def LPTidalDataProvider.loadAlbumDetail(self, itemId, countryCode)  line 881
+    names: str, strip, _resolvedCountryCode, _authHeaders, getJson, _loadAllAlbumTracks, FAILURE_POLICY_OPTIONAL_CONTENT, _loadFavoriteIdsForCurrentUser, _normalizeInfoPayload, get, bool, _filterItemsById, _normalizeListPayload, set, _markFavoriteFlags, _buildAlbumRailSection, append, _albumDetailArtists, _buildDetailResult, _normalizeCreditPayload
+      str: '\n        拉取专辑详情页所需数据。\n\n        :param itemId: 专辑 ID。\n        :param countryCode: 国家代码。\n        :return: 归一化后的请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'token'
+      str: '/v1/albums/'
+      str: 'params'
+      str: 'headers'
+      str: 'countryCode'
+      str: 'headers'
+      str: '/similar'
+      str: 'params'
+      str: 'headers'
+      str: 'failurePolicy'
+      str: '/credits'
+      str: 'skipCache'
+      str: 'data'
+      str: 'album'
+      str: 'itemId'
+      str: 'success'
+      str: 'LPTidalDataProvider.loadAlbumDetail.<locals>.<genexpr>'
+      str: 'albums'
+      str: 'isFavorite'
+      str: 'tracks'
+      str: 'albumSimilar'
+      str: 'Similar Albums'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'endpointPath'
+      str: 'excludeItemIds'
+      str: 'title'
+      str: '/v1/artists/'
+      str: '/albums'
+      str: 'filter'
+      str: 'ALBUMS'
+      str: 'albumArtistAlbums::'
+      str: 'More from '
+      str: 'More from this artist'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'endpointPath'
+      str: 'queryParams'
+      str: 'excludeItemIds'
+      str: 'primary'
+      str: 'detailInfo'
+      str: 'tracks'
+      str: 'credits'
+      str: 'albumRailSections'
+
+    def LPTidalDataProvider.loadAlbumDetail.<genexpr>(.0)  line 910
+      names: str
+
+    def LPTidalDataProvider.loadAlbumDetail.<genexpr>(.0)  line 913
+      names: str
+
+  def LPTidalDataProvider._loadAllAlbumTracks(self, albumId, countryCode, headers)  line 962
+    names: str, strip, isinstance, dict, _authHeaders, _resolvedCountryCode, getJson, bool, get, _normalizeListPayload, _annotateQueuePlaybackItems, extend, _totalNumberOfItems, len
+      str: '\n        按响应总数分页拉取专辑全部曲目。\n\n        :param albumId: 专辑 ID。\n        :param countryCode: 国家代码。\n        :param headers: 已构造的请求头；为空时使用 token 请求头。\n        :return: 已归一化并带分页播放上下文的全部曲目。\n        '
+      str: 'token'
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: '/v1/albums/'
+      str: '/tracks'
+      str: 'params'
+      str: 'headers'
+      str: 'success'
+      str: 'data'
+      str: 'track'
+
+  def LPTidalDataProvider.loadArtistDetail(self, itemId, countryCode)  line 1012
+    names: str, strip, _resolvedCountryCode, _authHeaders, getJson, FAILURE_POLICY_OPTIONAL_CONTENT, _loadFavoriteIdsForCurrentUser, _normalizeInfoPayload, get, _normalizeListPayload, _annotateQueuePlaybackItems, set, _buildDetailResult, _normalizeTextPayload
+      str: '\n        拉取艺人详情页所需数据。\n\n        :param itemId: 艺人 ID。\n        :param countryCode: 国家代码。\n        :return: 归一化后的请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'token'
+      str: '/v1/artists/'
+      str: 'params'
+      str: 'headers'
+      str: '/toptracks'
+      str: '/albums'
+      str: 'filter'
+      str: 'ALBUMS'
+      str: 'EPSANDSINGLES'
+      str: '/videos'
+      str: '/similar'
+      str: 'params'
+      str: 'headers'
+      str: 'failurePolicy'
+      str: '/related'
+      str: 'limit'
+      str: 'offset'
+      str: '/radio'
+      str: '/bio'
+      str: 'includeImageLinks'
+      str: 'true'
+      str: 'skipCache'
+      str: 'data'
+      str: 'artist'
+      str: 'track'
+      str: 'album'
+      str: 'video'
+      str: 'LPTidalDataProvider.loadArtistDetail.<locals>.<genexpr>'
+      str: 'artists'
+      str: 'tracks'
+      str: 'albums'
+      str: 'videos'
+      str: 'itemId'
+      str: 'isFavorite'
+      str: 'bio'
+      str: 'primary'
+      str: 'detailInfo'
+      str: 'tracks'
+      str: 'albums'
+      str: 'singles'
+      str: 'videos'
+      str: 'artists'
+      str: 'radioTracks'
+      str: 'bioInfo'
+
+    def LPTidalDataProvider.loadArtistDetail.<genexpr>(.0)  line 1063
+      names: str
+
+    def LPTidalDataProvider.loadArtistDetail.<genexpr>(.0)  line 1064
+      names: str
+
+    def LPTidalDataProvider.loadArtistDetail.<genexpr>(.0)  line 1065
+      names: str
+
+    def LPTidalDataProvider.loadArtistDetail.<genexpr>(.0)  line 1066
+      names: str
+
+  def LPTidalDataProvider.loadArtistRadio(self, itemId, offset, limit, countryCode)  line 1090
+    names: str, strip, _resolvedCountryCode, _authHeaders, getJson, isinstance, get, dict, int, _normalizeListPayload, _annotateQueuePlaybackItems, _buildDetailResult, _normalizeInfoPayload
+      str: '\n        拉取艺人电台曲目，支持分页。\n\n        :param itemId: 艺人 ID。\n        :param offset: 分页偏移。\n        :param limit: 每页条数。\n        :param countryCode: 国家代码。\n        :return: 归一化后的请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'token'
+      str: '/v1/artists/'
+      str: 'countryCode'
+      str: 'params'
+      str: 'headers'
+      str: '/radio'
+      str: 'data'
+      str: 'totalNumberOfItems'
+      str: 'track'
+      str: 'artist'
+      str: 'primary'
+      str: 'detailInfo'
+      str: 'tracks'
+      str: 'hasMore'
+
+  def LPTidalDataProvider.loadMixDetail(self, mixId, offset, limit, countryCode)  line 1117
+    names: str, strip, _resolvedCountryCode, _authHeaders, getJson, isinstance, get, dict, int, _mixMetaForId, _normalizeListPayload, _annotateQueuePlaybackItems, _buildDetailResult
+      str: '\n        拉取 Mix 详情曲目列表。\n\n        :param mixId: Mix ID。\n        :param offset: 分页偏移。\n        :param limit: 每页条数。\n        :param countryCode: 国家代码。\n        :return: 归一化后的请求结果字典。\n        '
+      str: 'PHONE'
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'deviceType'
+      str: 'token'
+      str: '/v1/mixes/'
+      str: '/items'
+      str: 'params'
+      str: 'headers'
+      str: 'data'
+      str: 'totalNumberOfItems'
+      str: 'mix'
+      str: 'title'
+      str: 'subtitle'
+      str: 'imageUrl'
+      str: 'imagePath'
+      str: 'itemId'
+      str: 'itemType'
+      str: 'title'
+      str: 'subtitle'
+      str: 'imageUrl'
+      str: 'imagePath'
+      str: 'track'
+      str: 'primary'
+      str: 'detailInfo'
+      str: 'tracks'
+      str: 'hasMore'
+
+  def LPTidalDataProvider.loadPlaylistDetail(self, itemId, countryCode, offset, limit)  line 1152
+    names: str, strip, _resolvedCountryCode, _loadFavoriteIdsForCurrentUser, getJson, _authHeaders, loadPlaylistItems, isinstance, dict, get, _normalizeInfoPayload, set, _buildDetailResult, bool, int
+      str: '\n        实时拉取歌单详情页所需数据。\n\n        :param itemId: 歌单 ID。\n        :param countryCode: 国家代码。\n        :param offset: 曲目分页偏移。\n        :param limit: 曲目分页大小。\n        :return: 归一化后的请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'skipCache'
+      str: '/v1/playlists/'
+      str: 'session'
+      str: 'params'
+      str: 'headers'
+      str: 'skipCache'
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'skipCache'
+      str: 'favoriteIds'
+      str: 'data'
+      str: 'playlist'
+      str: 'tracks'
+      str: 'LPTidalDataProvider.loadPlaylistDetail.<locals>.<genexpr>'
+      str: 'playlists'
+      str: 'itemId'
+      str: 'isFavorite'
+      str: 'hasMore'
+      str: 'offset'
+      str: 'limit'
+      str: 'primary'
+      str: 'detailInfo'
+      str: 'tracks'
+      str: 'hasMore'
+      str: 'offset'
+      str: 'limit'
+
+    def LPTidalDataProvider.loadPlaylistDetail.<genexpr>(.0)  line 1183
+      names: str
+
+  def LPTidalDataProvider.loadPlaylistDetailInfo(self, playlistId, countryCode)  line 1194
+    names: str, strip, _resolvedCountryCode, getJson, _authHeaders, isinstance, dict, bool, get, _normalizeInfoPayload
+      str: '\n        仅拉取歌单详情信息（不含曲目列表），用于收藏页封面校准。\n\n        TIDAL 列表接口的封面 UUID 更新滞后且与详情接口不同步，\n        收藏页刷新后按详情接口的最新封面校准自建歌单 imageUrl。\n\n        :param playlistId: 歌单 UUID。\n        :param countryCode: 国家代码。\n        :return: 归一化后的歌单详情信息字典。\n        '
+      str: 'itemId'
+      str: 'imageUrl'
+      str: 'success'
+      str: 'data'
+      str: 'countryCode'
+      str: '/v1/playlists/'
+      str: 'session'
+      str: 'params'
+      str: 'headers'
+      str: 'skipCache'
+      str: 'success'
+      str: 'data'
+      str: 'playlist'
+      str: 'itemId'
+      str: 'imageUrl'
+
+  def LPTidalDataProvider.loadPlaylistItems(self, itemId, countryCode, offset, limit, skipCache, favoriteIds)  line 1229
+    names: str, strip, max, min, int, _resolvedCountryCode, getJson, _authHeaders, _normalizePlaylistItems, get, _annotateQueuePlaybackItems, isinstance, dict, _loadFavoriteIdsForCurrentUser, set, bool, len
+      str: '\n        分页拉取歌单曲目列表。\n\n        :param itemId: 歌单 ID。\n        :param countryCode: 国家代码。\n        :param offset: 分页偏移。\n        :param limit: 分页大小。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :param favoriteIds: 可复用的收藏 ID；为空时实时拉取当前用户收藏 ID。\n        :return: 归一化后的分页结果字典。\n        '
+      str: 'INDEX'
+      str: 'ASC'
+      str: 'countryCode'
+      str: 'order'
+      str: 'orderDirection'
+      str: 'limit'
+      str: 'offset'
+      str: '/v1/playlists/'
+      str: '/items'
+      str: 'session'
+      str: 'params'
+      str: 'headers'
+      str: 'skipCache'
+      str: 'data'
+      str: 'offset'
+      str: 'skipCache'
+      str: 'LPTidalDataProvider.loadPlaylistItems.<locals>.<setcomp>'
+      str: 'tracks'
+      str: 'itemId'
+      str: 'isFavorite'
+      str: 'success'
+      str: 'error'
+      str: 'tracks'
+      str: 'hasMore'
+      str: 'offset'
+      str: 'limit'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+
+    def LPTidalDataProvider.loadPlaylistItems.<setcomp>(.0)  line 1278
+      names: str
+
+  def LPTidalDataProvider.createUserPlaylist(self, userId, title, description, countryCode)  line 1296
+    names: str, strip, _resolvedCountryCode, postForm, _authHeaders, isinstance, dict, bool, get, _invalidatePlaylistCaches
+      str: '\n        创建用户歌单。\n\n        :param userId: TIDAL 用户 ID。\n        :param title: 歌单标题。\n        :param description: 歌单描述。\n        :param countryCode: 国家代码。\n        :return: 请求结果字典，成功时 data 含 uuid。\n        '
+      str: 'title'
+      str: 'description'
+      str: 'countryCode'
+      str: '/v1/users/'
+      str: '/playlists'
+      str: 'session'
+      str: 'form'
+      str: 'params'
+      str: 'headers'
+      str: 'success'
+
+  def LPTidalDataProvider.updatePlaylist(self, playlistUuid, title, description)  line 1322
+    names: str, strip, postForm, _authHeaders, isinstance, dict, bool, get, _invalidatePlaylistCaches
+      str: '\n        更新歌单标题和描述。\n\n        :param playlistUuid: 歌单 UUID。\n        :param title: 歌单标题。\n        :param description: 歌单描述。\n        :return: 请求结果字典。\n        '
+      str: 'title'
+      str: 'description'
+      str: '/v1/playlists/'
+      str: 'session'
+      str: 'form'
+      str: 'headers'
+      str: 'success'
+
+  def LPTidalDataProvider.deletePlaylist(self, playlistUuid)  line 1345
+    names: str, strip, deleteJson, _authHeaders, isinstance, dict, bool, get, _invalidatePlaylistCaches
+      str: '\n        删除歌单。\n\n        :param playlistUuid: 歌单 UUID。\n        :return: 请求结果字典。\n        '
+      str: '/v1/playlists/'
+      str: 'session'
+      str: 'headers'
+      str: 'success'
+
+  def LPTidalDataProvider.addPlaylistItems(self, playlistUuid, itemIds, toIndex, countryCode, etag)  line 1361
+    names: str, strip, _normalizeIdList, ValueError, int, _resolvedCountryCode, dict, _authHeaders, postForm, isinstance, bool, get, _invalidatePlaylistCaches
+      str: '\n        向歌单添加曲目或视频。\n\n        :param playlistUuid: 歌单 UUID。\n        :param itemIds: 单个或多个条目 ID，内部会规范为逗号分隔字符串。\n        :param toIndex: 插入位置，-1 表示追加到末尾。\n        :param countryCode: 国家代码。\n        :param etag: If-None-Match 头，默认使用通配符。\n        :return: 请求结果字典。\n        '
+      str: 'itemIds is required'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+      str: 'SKIP'
+      str: 'FAIL'
+      str: 'itemIds'
+      str: 'onDupes'
+      str: 'onArtifactNotFound'
+      str: 'toIndex'
+      str: 'countryCode'
+      str: 'session'
+      str: '*'
+      str: 'If-None-Match'
+      str: '/v1/playlists/'
+      str: '/items'
+      str: 'form'
+      str: 'params'
+      str: 'headers'
+      str: 'success'
+
+  def LPTidalDataProvider.removePlaylistItems(self, playlistUuid, indices)  line 1403
+    names: str, strip, _normalizeIndexList, ValueError, deleteJson, _playlistMutationHeaders, isinstance, dict, bool, get, _invalidatePlaylistCaches
+      str: '\n        从歌单移除指定索引的曲目。\n\n        :param playlistUuid: 歌单 UUID。\n        :param indices: 歌单内索引，支持单个值或列表。\n        :return: 请求结果字典。\n        '
+      str: 'indices is required'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+      str: '/v1/playlists/'
+      str: '/items/'
+      str: 'headers'
+      str: 'success'
+
+  def LPTidalDataProvider.movePlaylistItems(self, playlistUuid, indices, toIndex)  line 1423
+    names: str, strip, _normalizeIndexList, ValueError, int, postForm, _playlistMutationHeaders, isinstance, dict, bool, get, _invalidatePlaylistCaches
+      str: '\n        移动歌单内曲目到新的索引位置。\n\n        :param playlistUuid: 歌单 UUID。\n        :param indices: 源索引，支持单个值或列表。\n        :param toIndex: 目标索引。\n        :return: 请求结果字典。\n        '
+      str: 'indices is required'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+      str: 'toIndex'
+      str: '/v1/playlists/'
+      str: '/items/'
+      str: 'form'
+      str: 'headers'
+      str: 'success'
+
+  def LPTidalDataProvider.filterUserCreatedPlaylists(self, playlists)  line 1446
+    names: isinstance, list, dict, _isUserCreatedPlaylistItem, append
+      str: '\n        从歌单列表中过滤出用户自建歌单。\n\n        :param playlists: 已归一化歌单条目列表。\n        :return: 可写歌单列表。\n        '
+
+  def LPTidalDataProvider.loadUserPlaylists(self, userId, countryCode, skipCache, sortPreferences)  line 1461
+    names: str, strip, _resolvedCountryCode, _collectionSortParams, COLLECTION_PLAYLISTS_PAGE_LIMIT, getJson, _authHeaders, _normalizeCombinedPlaylists, isinstance, dict, get, filterUserCreatedPlaylists, bool
+      str: '\n        拉取用户歌单合并列表，并拆分出用户自建歌单供 Add-to-playlist 使用。\n\n        :param userId: TIDAL 用户 ID。\n        :param countryCode: 国家代码。\n        :param skipCache: 为 True 时跳过 API 缓存，默认每次实时拉取。\n        :param sortPreferences: Collection 各 section 的排序偏好。\n        :return: 包含 allPlaylists 与 userCreatedPlaylists 的请求结果字典'
+      str: 'allPlaylists'
+      str: 'userCreatedPlaylists'
+      str: 'success'
+      str: 'data'
+      str: 'countryCode'
+      str: 'userPlaylists'
+      str: 'offset'
+      str: 'limit'
+      str: '/v1/users/'
+      str: '/playlistsAndFavoritePlaylists'
+      str: 'token'
+      str: 'params'
+      str: 'headers'
+      str: 'skipCache'
+      str: 'data'
+      str: 'success'
+      str: 'error'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+
+  def LPTidalDataProvider.loadMyPlaylists(self, userId, countryCode, skipCache, sortPreferences)  line 1516
+    names: str, strip, MY_PLAYLISTS_PAGE_LIMIT, _resolvedCountryCode, _collectionSortParams, getJson, _authHeaders, isinstance, dict, bool, get, _normalizeListPayload, extend, int
+      str: '\n        分页拉取用户自建歌单全量列表，供 Add-to-playlist 弹窗使用。\n\n        通过 users/{id}/playlists 端点循环分页，直到累计条目数达到 totalNumberOfItems。\n        终止条件参考安卓 TidalResult.nextPageOffset：offset + limit >= total。\n\n        :param userId: TIDAL 用户 ID。\n        :param countryCode: 国家代码。\n        :param skipCache: 为 True 时跳过 API 缓'
+      str: 'userCreatedPlaylists'
+      str: 'success'
+      str: 'data'
+      str: 'countryCode'
+      str: 'userPlaylists'
+      str: 'offset'
+      str: 'limit'
+      str: '/v1/users/'
+      str: '/playlists'
+      str: 'token'
+      str: 'params'
+      str: 'headers'
+      str: 'skipCache'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+      str: 'playlist'
+      str: 'totalNumberOfItems'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+
+  def LPTidalDataProvider.loadVideoDetail(self, itemId, countryCode)  line 1579
+    names: str, strip, _resolvedCountryCode, getJson, _authHeaders, _buildDetailResult, _normalizeInfoPayload, get, _normalizeListPayload
+      str: '\n        拉取视频详情页所需数据。\n\n        :param itemId: 视频 ID。\n        :param countryCode: 国家代码。\n        :return: 归一化后的请求结果字典。\n        '
+      str: 'countryCode'
+      str: '/v1/videos/'
+      str: 'token'
+      str: 'params'
+      str: 'headers'
+      str: '/recommendations'
+      str: 'session'
+      str: 'data'
+      str: 'video'
+      str: 'primary'
+      str: 'detailInfo'
+      str: 'videos'
+
+  def LPTidalDataProvider.loadGenreDetail(self, itemId, title, countryCode, categoryType)  line 1597
+    names: str, strip, lower, _normalizeMoodPath, _normalizeGenrePath, _resolvedCountryCode, _authHeaders, getJson, _normalizeListPayload, get, _annotateQueuePlaybackItems, _loadFavoriteIdsForCurrentUser, set, any, next, _buildDetailResult
+      str: '\n        拉取流派或心情详情页所需数据。\n\n        :param itemId: 分类路径、slug 或 ID。\n        :param title: 首页分类卡片带入的展示标题。\n        :param countryCode: 国家代码。\n        :param categoryType: 分类类型，支持 genre 或 mood。\n        :return: 归一化后的请求结果字典。\n        '
+      str: 'genre'
+      str: 'genre'
+      str: 'mood'
+      str: 'mood'
+      str: 'countryCode'
+      str: 'offset'
+      str: 'limit'
+      str: 'token'
+      str: '/v1/moods/'
+      str: '/playlists'
+      str: 'params'
+      str: 'headers'
+      str: 'success'
+      str: 'data'
+      str: '/v1/genres/'
+      str: '/tracks'
+      str: '/albums'
+      str: 'data'
+      str: 'playlist'
+      str: 'track'
+      str: 'album'
+      str: 'skipCache'
+      str: 'LPTidalDataProvider.loadGenreDetail.<locals>.<genexpr>'
+      str: 'playlists'
+      str: 'tracks'
+      str: 'albums'
+      str: 'itemId'
+      str: 'isFavorite'
+      str: 'success'
+      str: 'error'
+      str: 'Mood'
+      str: 'Genre'
+      str: ' Playlists'
+      str: 'Playlists'
+      str: 'TIDAL '
+      str: 'itemId'
+      str: 'itemType'
+      str: 'title'
+      str: 'subtitle'
+      str: 'description'
+      str: 'playlistSectionTitle'
+      str: 'primary'
+      str: 'detailInfo'
+      str: 'playlists'
+      str: 'tracks'
+      str: 'albums'
+
+    def LPTidalDataProvider.loadGenreDetail.<genexpr>(.0)  line 1631
+      names: str
+
+    def LPTidalDataProvider.loadGenreDetail.<genexpr>(.0)  line 1632
+      names: str
+
+    def LPTidalDataProvider.loadGenreDetail.<genexpr>(.0)  line 1633
+      names: str
+
+    def LPTidalDataProvider.loadGenreDetail.<genexpr>(.0)  line 1640
+      names: isinstance, dict, bool, get
+        str: 'success'
+
+    def LPTidalDataProvider.loadGenreDetail.<genexpr>(.0)  line 1644
+      names: isinstance, dict, get
+        str: 'error'
+
+  def LPTidalDataProvider.loadSeeAll(self, descriptor, offset, limit, order, orderDirection, countryCode, skipCache)  line 1666
+    names: str, getattr, strip, lower, bool, dict, list, max, min, int, _resolvedCountryCode, update, upper, getJson, _authHeaders, _normalizeCombinedPlaylists, get, _normalizeFavoriteListPayload, _extractPageModuleItems, _filterCustomMixItems, _normalizeListPayload, _annotateQueuePlaybackItems, len, isinstance, _filterArtistAlbumItemsForSection, _filterItemsById, _totalNumberOfItems
+      str: '\n        拉取 See All 页面分页数据。\n\n        :param descriptor: See All 数据源描述。\n        :param offset: 分页偏移。\n        :param limit: 分页大小。\n        :param order: 服务端排序字段。\n        :param orderDirection: 服务端排序方向。\n        :param countryCode: 国家代码。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :return'
+      str: 'sectionKey'
+      str: 'endpointPath'
+      str: 'itemType'
+      str: 'authMode'
+      str: 'token'
+      str: 'sourceKind'
+      str: 'supportsSort'
+      str: 'queryParams'
+      str: 'excludeItemIds'
+      str: 'Invalid See All descriptor.'
+      str: 'items'
+      str: 'hasMore'
+      str: 'success'
+      str: 'error'
+      str: 'data'
+      str: 'countryCode'
+      str: 'limit'
+      str: 'offset'
+      str: 'detail'
+      str: 'artistAlbums'
+      str: 'ALBUMS'
+      str: 'filter'
+      str: 'artistSingles'
+      str: 'EPSANDSINGLES'
+      str: 'page_module'
+      str: 'PHONE'
+      str: 'deviceType'
+      str: 'defaultOrder'
+      str: 'NAME'
+      str: 'defaultOrderDirection'
+      str: 'ASC'
+      str: 'ASC'
+      str: 'DESC'
+      str: 'order'
+      str: 'orderDirection'
+      str: 'params'
+      str: 'headers'
+      str: 'skipCache'
+      str: 'collection'
+      str: 'userPlaylists'
+      str: 'data'
+      str: 'custom-mixes'
+      str: 'LPTidalDataProvider.loadSeeAll.<locals>.<listcomp>'
+      str: 'track'
+      str: 'success'
+      str: 'artistAlbums'
+      str: 'artistSingles'
+      str: 'error'
+      str: 'items'
+      str: 'hasMore'
+      str: 'offset'
+      str: 'limit'
+      str: 'sectionKey'
+      str: 'totalNumberOfItems'
+
+    def LPTidalDataProvider.loadSeeAll.<listcomp>(.0)  line 1731
+      names: _normalizeItem
+        str: 'forceItemType'
+
+  def LPTidalDataProvider._filterArtistAlbumItemsForSection(self, items, sectionKey)  line 1759
+    names: isinstance, list
+      str: '\n        按 Artist 详情分区过滤专辑列表。\n\n        :param items: 已归一化专辑条目列表。\n        :param sectionKey: Artist 详情分区标识。\n        :return: 过滤后的条目列表。\n        '
+      str: 'LPTidalDataProvider._filterArtistAlbumItemsForSection.<locals>.<listcomp>'
+      str: 'artistSingles'
+      str: 'artistAlbums'
+
+    def LPTidalDataProvider._filterArtistAlbumItemsForSection.<listcomp>(.0)  line 1767
+      names: isinstance, dict
+
+    def LPTidalDataProvider._filterArtistAlbumItemsForSection.<listcomp>(.0)  line 1769
+      names: _isArtistSingleOrEpAlbum
+
+    def LPTidalDataProvider._filterArtistAlbumItemsForSection.<listcomp>(.0)  line 1771
+      names: _isArtistSingleOrEpAlbum
+
+  def LPTidalDataProvider._isArtistSingleOrEpAlbum(self, item)  line 1774
+    names: get, isinstance, dict, str, strip, lower, int, TypeError, ValueError
+      str: '\n        判断艺人专辑条目是否属于 EP 或 Single。\n\n        :param item: 专辑条目。\n        :return: 是 EP 或 Single 返回 True。\n        '
+      str: 'extra'
+      str: 'type'
+      str: 'albumType'
+      str: 'releaseType'
+      str: 'productType'
+      str: 'ep'
+      str: 'singles'
+      str: 'single'
+      str: 'lp'
+      str: 'album'
+      str: 'trackCount'
+
+  def LPTidalDataProvider._albumDetailArtists(self, detailInfo)  line 1801
+    names: isinstance, dict, set, get, list, str, strip, add, append
+      str: '\n        提取专辑详情中的有效艺人列表，供动态 artist section 复用。\n\n        :param detailInfo: 专辑详情头部信息。\n        :return: 艺人字典列表。\n        '
+      str: 'artists'
+      str: 'itemId'
+      str: 'id'
+      str: 'title'
+      str: 'name'
+      str: 'itemId'
+      str: 'title'
+      str: 'artistId'
+      str: 'artistName'
+      str: 'subtitle'
+
+  def LPTidalDataProvider._filterItemsById(self, items, excludedItemIds)  line 1827
+    names: isinstance, list, dict, str, get, strip, append
+      str: '\n        过滤指定条目 ID，常用于详情页排除当前正在查看的专辑。\n\n        :param items: 原始条目列表。\n        :param excludedItemIds: 需要排除的条目 ID 列表。\n        :return: 过滤后的条目列表。\n        '
+      str: 'LPTidalDataProvider._filterItemsById.<locals>.<setcomp>'
+      str: 'itemId'
+
+    def LPTidalDataProvider._filterItemsById.<setcomp>(.0)  line 1835
+      names: str, strip
+
+  def LPTidalDataProvider._markFavoriteFlags(self, items, favoriteItemIds)  line 1850
+    names: isinstance, list, set, tuple, dict, str, get, strip
+      str: '\n        将收藏状态回填到条目列表。\n\n        :param items: 条目列表。\n        :param favoriteItemIds: 收藏 ID 列表。\n        :return: None。\n        '
+      str: 'LPTidalDataProvider._markFavoriteFlags.<locals>.<setcomp>'
+      str: 'itemId'
+      str: 'isFavorite'
+
+    def LPTidalDataProvider._markFavoriteFlags.<setcomp>(.0)  line 1858
+      names: str, strip
+
+  def LPTidalDataProvider._buildAlbumRailSection(self, sectionKey, title, items, endpointPath, queryParams, excludeItemIds)  line 1868
+    names: str, strip, isinstance, list, dict, get, append, len
+      str: '\n        构建专辑详情页横向区块 payload。\n\n        :param sectionKey: 区块标识。\n        :param title: 区块标题。\n        :param items: 已归一化条目列表。\n        :param endpointPath: See All 请求路径。\n        :param queryParams: See All 额外查询参数。\n        :param excludeItemIds: See All 结果中需要排除的条目 ID。\n        :return: 区块字典或 None。\n      '
+      str: 'itemId'
+      str: 'LPTidalDataProvider._buildAlbumRailSection.<locals>.<listcomp>'
+      str: 'album'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'itemType'
+      str: 'items'
+      str: 'seeAllEnabled'
+      str: 'endpointPath'
+      str: 'queryParams'
+      str: 'excludeItemIds'
+
+    def LPTidalDataProvider._buildAlbumRailSection.<listcomp>(.0)  line 1900
+      names: str, strip
+
+  def LPTidalDataProvider._collectionSortParams(self, sortPreferences, sectionKey)  line 1916
+    names: isinstance, dict, get, str, strip, upper
+      str: '\n        返回 Collection 分区请求排序参数。\n\n        :param sortPreferences: Collection 各 section 的排序偏好。\n        :param sectionKey: 收藏 section 标识。\n        :return: 包含 order 和 orderDirection 的参数字典。\n        '
+      str: 'order'
+      str: 'DATE'
+      str: 'direction'
+      str: 'DESC'
+      str: 'ASC'
+      str: 'DESC'
+      str: 'order'
+      str: 'orderDirection'
+
+  def LPTidalDataProvider.loadCollection(self, userId, countryCode, skipCache, sortPreferences)  line 1940
+    names: str, strip, _resolvedCountryCode, _authHeaders, _collectionSortParams, COLLECTION_PLAYLISTS_PAGE_LIMIT, _executeConcurrentRequests, get, any, _normalizeFavoriteListPayload, _annotateQueuePlaybackItems, _normalizeSubscriptionPayload, _normalizeCombinedPlaylists, _normalizeFavoriteIdsPayload
+      str: '\n        拉取我的收藏页所需数据。\n\n        :param userId: TIDAL 用户 ID。\n        :param countryCode: 国家代码。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :param sortPreferences: Collection 各 section 的排序偏好。\n        :return: 归一化后的收藏页请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'token'
+      str: 'userPlaylists'
+      str: 'offset'
+      str: 'limit'
+      str: 'favoriteArtists'
+      str: 'favoriteAlbums'
+      str: 'favoriteTracks'
+      str: 'favoriteVideos'
+      str: 'LPTidalDataProvider.loadCollection.<locals>.<lambda>'
+      str: 'subscription'
+      str: 'playlists'
+      str: 'favorite_artists'
+      str: 'favorite_albums'
+      str: 'favorite_tracks'
+      str: 'favorite_videos'
+      str: 'favorite_ids'
+      str: 'subscription'
+      str: 'playlists'
+      str: 'favorite_artists'
+      str: 'favorite_albums'
+      str: 'favorite_tracks'
+      str: 'favorite_videos'
+      str: 'favorite_ids'
+      str: 'LPTidalDataProvider.loadCollection.<locals>.<genexpr>'
+      str: 'data'
+      str: 'track'
+      str: '/v1/users/'
+      str: '/favorites/tracks'
+      str: 'artist'
+      str: 'album'
+      str: 'video'
+      str: 'subscriptionInfo'
+      str: 'userPlaylists'
+      str: 'favoriteArtists'
+      str: 'favoriteAlbums'
+      str: 'favoriteTracks'
+      str: 'favoriteVideos'
+      str: 'favoriteIds'
+      str: 'success'
+      str: 'data'
+
+    def LPTidalDataProvider.loadCollection.<lambda>()  line 1975
+      names: loadSubscription
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadCollection.<lambda>()  line 1976
+      names: getJson
+        str: '/v1/users/'
+        str: '/playlistsAndFavoritePlaylists'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadCollection.<lambda>()  line 1982
+      names: getJson
+        str: '/v1/users/'
+        str: '/favorites/artists'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadCollection.<lambda>()  line 1988
+      names: getJson
+        str: '/v1/users/'
+        str: '/favorites/albums'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadCollection.<lambda>()  line 1994
+      names: getJson
+        str: '/v1/users/'
+        str: '/favorites/tracks'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadCollection.<lambda>()  line 2000
+      names: getJson
+        str: '/v1/users/'
+        str: '/favorites/videos'
+        str: 'params'
+        str: 'headers'
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadCollection.<lambda>()  line 2006
+      names: refreshFavoriteIds
+        str: 'skipCache'
+
+    def LPTidalDataProvider.loadCollection.<genexpr>(.0)  line 2015
+      names: isinstance, dict, bool, get
+        str: 'success'
+
+  def LPTidalDataProvider.loginByUsername(self, username, password, countryCode)  line 2049
+    names: str, strip, _resolvedCountryCode, postJson, _authHeaders
+      str: '\n        使用用户名和密码执行登录。\n\n        :param username: 用户名或邮箱。\n        :param password: 密码。\n        :param countryCode: 国家代码。\n        :return: 请求结果字典。\n        '
+      str: 'username'
+      str: 'password'
+      str: 'countryCode'
+      str: '/v1/login/username'
+      str: 'token'
+      str: 'payload'
+      str: 'params'
+      str: 'headers'
+
+  def LPTidalDataProvider.loadSubscription(self, userId, skipCache)  line 2065
+    names: getJson, str, strip, _authHeaders
+      str: '\n        拉取用户订阅状态。\n\n        :param userId: TIDAL 用户 ID。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :return: 请求结果字典。\n        '
+      str: '/v1/users/'
+      str: '/subscription'
+      str: 'token'
+      str: 'headers'
+      str: 'skipCache'
+
+  def LPTidalDataProvider._normalizeGenrePath(self, itemId)  line 2079
+    names: str, strip, split, startswith, len
+      str: '\n        将首页 genre 条目的 path/id 归一化为 `/v1/genres/{genre}` 所需路径段。\n\n        :param itemId: 原始流派路径、slug 或 ID。\n        :return: 可拼接到 genre 子接口的路径段。\n        '
+      str: '://'
+      str: '/'
+      str: 'v1/genres/'
+      str: 'genres/'
+
+  def LPTidalDataProvider._normalizeMoodPath(self, itemId)  line 2096
+    names: str, strip, split, startswith, len
+      str: '\n        将首页 mood 条目的 path/id 归一化为 `/v1/moods/{mood}` 所需路径段。\n\n        :param itemId: 原始心情路径、slug 或 ID。\n        :return: 可拼接到 mood 子接口的路径段。\n        '
+      str: '://'
+      str: '/'
+      str: 'v1/moods/'
+      str: 'moods/'
+
+  def LPTidalDataProvider.normalizeSubscriptionInfo(self, responseData)  line 2113
+    names: _normalizeSubscriptionPayload
+      str: '\n        公开的订阅信息归一化接口。\n\n        :param responseData: 接口响应数据。\n        :return: 订阅信息字典。\n        '
+
+  def LPTidalDataProvider.refreshFavoriteIds(self, userId, skipCache)  line 2122
+    names: getJson, str, strip, _authHeaders
+      str: '\n        拉取收藏 ID 集合。\n\n        :param userId: TIDAL 用户 ID。\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :return: 请求结果字典。\n        '
+      str: '/v1/users/'
+      str: '/favorites/ids'
+      str: 'token'
+      str: 'headers'
+      str: 'skipCache'
+
+  def LPTidalDataProvider.addFavorite(self, userId, itemType, itemId, countryCode)  line 2136
+    names: _favoriteEndpointType, _favoritePayloadKey, str, strip, _resolvedCountryCode, requestJson, _authHeaders
+      str: '\n        添加收藏。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param countryCode: 国家代码。\n        :return: 请求结果字典。\n        '
+      str: 'countryCode'
+      str: 'POST'
+      str: '/v1/users/'
+      str: '/favorites/'
+      str: 'token'
+      str: 'params'
+      str: 'payload'
+      str: 'headers'
+      str: 'useFormBody'
+
+  def LPTidalDataProvider.removeFavorite(self, userId, itemType, itemId)  line 2158
+    names: _favoriteEndpointType, deleteJson, str, strip, _authHeaders
+      str: '\n        取消收藏。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 请求结果字典。\n        '
+      str: '/v1/users/'
+      str: '/favorites/'
+      str: '/'
+      str: 'token'
+      str: 'headers'
+
+  def LPTidalDataProvider._resolvePlaylistItemIndex(self, item, base_offset, enumerate_index)  line 2173
+    names: max, int
+      str: '\n        解析歌单条目可用于写接口的行索引。\n\n        :param item: 原始歌单条目字典。\n        :param base_offset: 当前分页偏移。\n        :param enumerate_index: 当前页内的枚举序号。\n        :return: 歌单内 0-based 行索引。\n        '
+
+  def LPTidalDataProvider._resolvePlaylistItemOrderIndex(self, item)  line 2184
+    names: _firstValue, get, isinstance, dict, _safeInt
+      str: '\n        解析 TIDAL 回包中的稀疏排序权重。\n\n        :param item: 原始歌单条目字典。\n        :return: 排序权重，缺失时返回 None。\n        '
+      str: 'index'
+      str: 'itemIndex'
+      str: 'playlistIndex'
+      str: 'item'
+
+  def LPTidalDataProvider._resolvePlaylistEtag(self, playlistUuid)  line 2200
+    names: str, strip, _response_cache_lock, _response_cache, items, get
+      str: '\n        从内存缓存中解析歌单写操作所需的 ETag。\n\n        :param playlistUuid: 歌单 UUID。\n        :return: 可用 ETag，未命中时返回通配符。\n        '
+      str: '*'
+      str: '/playlists/'
+      str: 'etag'
+
+  def LPTidalDataProvider._playlistMutationHeaders(self, playlistUuid, etag)  line 2219
+    names: dict, _authHeaders, str, strip, _resolvePlaylistEtag
+      str: '\n        生成歌单写操作请求头，包含 session 鉴权与 If-None-Match。\n\n        :param playlistUuid: 歌单 UUID，用于回退读取缓存 ETag。\n        :param etag: 显式指定的 ETag，空值时尝试缓存，最终回退为通配符。\n        :return: 请求头字典。\n        '
+      str: 'session'
+      str: '*'
+      str: 'If-None-Match'
+
+  def LPTidalDataProvider._normalizePlaylistItems(self, responseData, offset)  line 2232
+    names: _extractRawItems, max, int, enumerate, isinstance, dict, _resolvePlaylistItemIndex, _resolvePlaylistItemOrderIndex, _normalizeItem, get, append
+      str: '\n        归一化歌单曲目列表，并保留歌单内索引。\n\n        :param responseData: 接口响应数据。\n        :param offset: 当前分页偏移。\n        :return: 曲目条目列表。\n        '
+      str: 'track'
+      str: 'playlistIndex'
+      str: 'playlistOrderIndex'
+      str: 'extra'
+
+  def LPTidalDataProvider._normalizeIdList(self, values)  line 2260
+    names: isinstance, str, split, join, list, tuple, set, strip
+      str: '\n        将 ID 列表规范为逗号分隔字符串。\n\n        :param values: 单个 ID、列表或逗号分隔字符串。\n        :return: 逗号分隔 ID 字符串。\n        '
+      str: 'LPTidalDataProvider._normalizeIdList.<locals>.<listcomp>'
+      str: ','
+
+    def LPTidalDataProvider._normalizeIdList.<listcomp>(.0)  line 2270
+      names: strip
+
+    def LPTidalDataProvider._normalizeIdList.<listcomp>(.0)  line 2273
+      names: str, strip
+
+  def LPTidalDataProvider._normalizeIndexList(self, values)  line 2278
+    names: isinstance, str, split, join, list, tuple, set, append, int, TypeError, ValueError
+      str: '\n        将歌单索引列表规范为逗号分隔字符串。\n\n        :param values: 单个索引、列表或逗号分隔字符串。\n        :return: 逗号分隔索引字符串。\n        '
+      str: 'LPTidalDataProvider._normalizeIndexList.<locals>.<listcomp>'
+      str: ','
+
+    def LPTidalDataProvider._normalizeIndexList.<listcomp>(.0)  line 2288
+      names: strip
+
+  def LPTidalDataProvider._playlistSourceType(self, item)  line 2303
+    names: isinstance, dict, str, get, strip, upper
+      str: '\n        读取歌单来源类型标记。\n\n        :param item: 原始或已归一化歌单条目。\n        :return: 来源类型字符串，缺省返回空字符串。\n        '
+      str: '_sourceType'
+      str: 'extra'
+
+  def LPTidalDataProvider._playlistCreatorId(self, item)  line 2320
+    names: isinstance, dict, get, str, strip
+      str: '\n        解析歌单创建者 ID。\n\n        :param item: 原始或已归一化歌单条目。\n        :return: 创建者 ID 字符串。\n        '
+      str: 'creator'
+      str: 'extra'
+      str: 'id'
+      str: 'creatorId'
+
+  def LPTidalDataProvider._isUserCreatedPlaylistItem(self, item)  line 2345
+    names: _playlistSourceType, _accountState, str, get, strip, _playlistCreatorId, bool
+      str: '\n        判断歌单条目是否为用户自建歌单。\n\n        :param item: 原始或已归一化歌单条目。\n        :return: 用户自建返回 True。\n        '
+      str: 'USER_CREATED'
+      str: 'USER_FAVORITE'
+      str: 'userId'
+
+  def LPTidalDataProvider._playlistCreatorSubtitle(self, item)  line 2362
+    names: _isUserCreatedPlaylistItem
+      str: '\n        生成歌单卡片副标题，标识创建来源。\n\n        :param item: 原始或已归一化歌单条目。\n        :return: "By You" 或 "By TIDAL"。\n        '
+      str: 'By You'
+      str: 'By TIDAL'
+
+  def LPTidalDataProvider.isUserOwnedPlaylist(self, detailInfo)  line 2373
+    names: isinstance, dict, _isUserCreatedPlaylistItem
+      str: '\n        判断歌单详情是否属于当前登录用户。\n\n        :param detailInfo: 歌单详情字典。\n        :return: 用户自建返回 True。\n        '
+
+  def LPTidalDataProvider.extractPlaylistUuid(self, responseData)  line 2384
+    names: _firstPayloadObject, isinstance, dict, str, _firstValue, strip
+      str: '\n        从创建歌单响应中提取 UUID。\n\n        :param responseData: 接口响应 data 字段。\n        :return: 歌单 UUID。\n        '
+      str: 'uuid'
+      str: 'id'
+      str: 'itemId'
+
+  def LPTidalDataProvider._invalidatePlaylistCaches(self, playlistUuid)  line 2396
+    names: str, strip, _response_cache_lock, _response_cache, keys, append, pop
+      str: '\n        清理歌单相关内存缓存，避免写操作后读到旧数据。\n\n        :param playlistUuid: 可选的歌单 UUID，用于定向失效。\n        :return: None。\n        '
+      str: 'playlistsAndFavoritePlaylists'
+      str: '/playlists/'
+
+  def LPTidalDataProvider._authHeaders(self, mode)  line 2416
+    names: _accountState, str, strip, lower, get
+      str: '\n        根据接口类型生成 TIDAL 鉴权请求头。\n\n        :param mode: `token` 使用访问令牌，`session` 额外携带会话 ID。\n        :return: 请求头字典；无可用凭证时返回空字典。\n        '
+      str: 'token'
+      str: 'sessionId'
+      str: 'Bearer '
+      str: 'Authorization'
+      str: 'session'
+      str: 'X-Tidal-SessionId'
+
+  def LPTidalDataProvider._headersAfterTokenRefresh(self, headers, force)  line 2434
+    names: dict, _hasAuthHeaders, _hasRefreshableDevice, LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager, LPTidalLoginManager, instance, ensureFreshToken, Exception, logger, warning, _headersFromCurrentAccount
+      str: '\n        根据当前 Store 账号状态刷新请求头里的 token。\n\n        :param headers: 原始请求头。\n        :param force: 是否强制从设备同步账号。\n        :return: 可能更新后的请求头。\n        '
+      str: 'LPTidalLoginManager'
+      str: 'force'
+      str: '[TidalDataProvider] token refresh check failed: %s'
+
+  def LPTidalDataProvider._headersFromCurrentAccount(self, headers)  line 2458
+    names: dict, _accountState, str, get, strip
+      str: '\n        使用 Store 中当前账号信息更新已有鉴权请求头。\n\n        :param headers: 原始请求头。\n        :return: 更新后的请求头。\n        '
+      str: 'token'
+      str: 'sessionId'
+      str: 'Authorization'
+      str: 'Bearer '
+      str: 'X-Tidal-SessionId'
+
+  def LPTidalDataProvider._hasAuthHeaders(self, headers)  line 2476
+    names: dict, bool, str, get, strip
+      str: '\n        判断请求是否携带 TIDAL 账号凭证。\n\n        :param headers: 请求头。\n        :return: 携带 Authorization 或 SessionId 返回 True。\n        '
+      str: 'Authorization'
+      str: 'X-Tidal-SessionId'
+
+  def LPTidalDataProvider._hasRefreshableDevice(self)  line 2489
+    names: sys, modules, get, getattr, bool, hasattr
+      str: '\n        判断当前进程是否已有可用于同步账号的设备对象。\n\n        :return: 存在当前设备和音源管理器返回 True。\n        '
+      str: 'LPGlobalUI'
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+
+  def LPTidalDataProvider._resolvedCountryCode(self, countryCode)  line 2499
+    names: str, strip, upper, _accountState, get
+      str: '\n        返回请求使用的国家代码。\n\n        :param countryCode: 调用方显式传入的国家代码。\n        :return: 两位大写国家代码，缺省返回 US。\n        '
+      str: 'countryCode'
+      str: 'US'
+
+  def LPTidalDataProvider._accountState(self)  line 2512
+    names: HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, instance, accountState, Exception
+      str: '\n        读取 TIDAL 全局账号状态。\n\n        :return: 账号状态字典。\n        '
+      str: 'LPTidalStore'
+
+  def LPTidalDataProvider._requestCacheKey(self, method, url, params, payload, headers)  line 2524
+    names: str, strip, upper, get, json, dumps
+      str: '\n        生成请求缓存键。\n\n        :param method: HTTP 方法。\n        :param url: 完整请求地址。\n        :param params: 查询参数。\n        :param payload: 请求体。\n        :param headers: 请求头。\n        :return: 缓存键。\n        '
+      str: 'Authorization'
+      str: 'X-Tidal-SessionId'
+      str: 'method'
+      str: 'url'
+      str: 'params'
+      str: 'payload'
+      str: 'authorization'
+      str: 'sessionId'
+      str: ','
+      str: ':'
+      str: 'sort_keys'
+      str: 'ensure_ascii'
+      str: 'separators'
+
+  def LPTidalDataProvider._getCachedResponse(self, cacheKey)  line 2552
+    names: _response_cache_lock, _response_cache, get, move_to_end
+      str: '\n        读取本地缓存的响应内容，命中时刷新 LRU 顺序。\n\n        :param cacheKey: 缓存键。\n        :return: 缓存命中时返回响应字典，否则返回 None。\n        '
+      str: 'etag'
+      str: 'data'
+      str: 'etag'
+      str: 'data'
+
+  def LPTidalDataProvider._normalizedFailurePolicy(self, failurePolicy)  line 2567
+    names: str, strip, lower, FAILURE_POLICY_REQUIRED, FAILURE_POLICY_OPTIONAL_CONTENT, FAILURE_POLICY_CAPABILITY_PROBE
+      str: '\n        归一化请求失败语义，未知值一律按必需请求处理。\n\n        :param failurePolicy: 调用方声明的失败语义。\n        :return: 可识别的失败语义字符串。\n        '
+
+  def LPTidalDataProvider._shouldSuppressNotFoundTelemetry(self, failurePolicy)  line 2582
+    names: FAILURE_POLICY_OPTIONAL_CONTENT, FAILURE_POLICY_CAPABILITY_PROBE
+      str: '\n        判断指定失败语义的 404 是否仅记录本地日志。\n\n        :param failurePolicy: 已归一化的失败语义。\n        :return: 可选内容或能力探测返回 True。\n        '
+
+  def LPTidalDataProvider._hasOptionalNotFoundCache(self, cacheKey)  line 2594
+    names: time, monotonic, _optional_not_found_cache_lock, _optional_not_found_cache, get, OPTIONAL_NOT_FOUND_CACHE_SECONDS, pop, move_to_end
+      str: '\n        判断可选内容 404 负缓存是否仍在有效期内。\n\n        :param cacheKey: 请求缓存键。\n        :return: 命中未过期负缓存返回 True。\n        '
+
+  def LPTidalDataProvider._setOptionalNotFoundCache(self, cacheKey)  line 2612
+    names: _optional_not_found_cache_lock, time, monotonic, _optional_not_found_cache, move_to_end, len, MAX_OPTIONAL_NOT_FOUND_CACHE_ENTRIES, popitem
+      str: '\n        记录一次可选内容 404，供短时去重请求使用。\n\n        :param cacheKey: 请求缓存键。\n        :return: None。\n        '
+      str: 'last'
+
+  def LPTidalDataProvider._setCachedResponse(self, cacheKey, etag, data)  line 2627
+    names: _response_cache_lock, _response_cache, move_to_end, str, len, MAX_RESPONSE_CACHE_ENTRIES, popitem
+      str: '\n        写入本地响应缓存，并在超过上限时淘汰最久未使用的条目。\n\n        :param cacheKey: 缓存键。\n        :param etag: 服务端返回的 ETag。\n        :param data: 响应体数据。\n        :return: None。\n        '
+      str: 'etag'
+      str: 'data'
+      str: 'last'
+
+  def LPTidalDataProvider._probeFeaturedCategoryPaths(self, featuredResponse, params, headers, knownResponses, skipCache)  line 2647
+    names: isinstance, dict, bool, get, _extractRawItems, str, _firstValue, strip, _featuredCategoryResourceTypes, setdefault, append, _logFeaturedCategoryProbeResult, _executeConcurrentRequests
+      str: '\n        基于 `/v1/featured` 返回的 path 探测分类子接口是否可用。\n\n        :param featuredResponse: `/v1/featured` 的请求结果字典。\n        :param params: 探测请求共用的查询参数。\n        :param headers: 探测请求共用的鉴权头。\n        :param knownResponses: 已经请求过的 path/type 结果，避免重复发起网络请求。\n        :return: 以 `path:type` 为键的响应字典。\n        '
+      str: 'success'
+      str: 'data'
+      str: 'name'
+      str: 'title'
+      str: 'path'
+      str: 'slug'
+      str: '/'
+      str: ':'
+      str: '/v1/featured/'
+      str: 'tracks'
+      str: 'limit'
+      str: 'LPTidalDataProvider._probeFeaturedCategoryPaths.<locals>.<lambda>'
+      str: 'categoryName'
+      str: 'pathSegment'
+      str: 'resourceType'
+      str: 'endpointPath'
+      str: 'responseKey'
+      str: 'categoryName'
+      str: 'pathSegment'
+      str: 'resourceType'
+      str: 'endpointPath'
+      str: 'response'
+      str: 'reusedExisting'
+      str: 'responseKey'
+      str: 'categoryName'
+      str: 'pathSegment'
+      str: 'resourceType'
+      str: 'endpointPath'
+
+    def LPTidalDataProvider._probeFeaturedCategoryPaths.<lambda>(request_path, request_params)  line 2694
+      names: getJson, FAILURE_POLICY_CAPABILITY_PROBE
+        str: 'params'
+        str: 'headers'
+        str: 'timeout'
+        str: 'skipCache'
+        str: 'failurePolicy'
+
+  def LPTidalDataProvider._buildFeaturedResourceSections(self, featuredItems, featuredPathResponses)  line 2735
+    names: isinstance, list, dict, get, str, strip, _featuredCategoryResourceTypes, lower, bool, _featuredResourceItemType, _normalizeListPayload, append, _featuredResourceSectionTitle
+      str: '\n        将 Featured 分类资源拆成首页独立区块。\n\n        :param featuredItems: `/v1/featured` 归一化后的分类条目。\n        :param featuredPathResponses: 以 `path:type` 为键的响应字典。\n        :return: 首页 Featured 资源区块列表。\n        '
+      str: 'extra'
+      str: 'path'
+      str: 'itemId'
+      str: '/'
+      str: 'title'
+      str: ':'
+      str: 'success'
+      str: 'data'
+      str: 'featured-'
+      str: '-'
+      str: '/v1/featured/'
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'itemMode'
+      str: 'seeAllEnabled'
+      str: 'endpointPath'
+
+  def LPTidalDataProvider._featuredResourceItemType(self, resourceType)  line 2776
+    names: get, str, strip, lower
+      str: '\n        将 Featured 资源类型映射为首页条目类型。\n\n        :param resourceType: 资源类型。\n        :return: 首页条目类型。\n        '
+      str: 'album'
+      str: 'track'
+      str: 'playlist'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+
+  def LPTidalDataProvider._featuredResourceSectionTitle(self, categoryTitle, resourceType)  line 2790
+    names: str, strip, _featuredHeroResourceLabel
+      str: '\n        生成 Featured 动态区块标题。\n\n        :param categoryTitle: Featured 分类标题。\n        :param resourceType: 资源类型。\n        :return: 区块标题。\n        '
+
+  def LPTidalDataProvider._featuredHeroResourceLabel(self, resourceType)  line 2802
+    names: get, str, strip, lower, title
+      str: '\n        返回 Featured 资源类型对应的展示文本。\n\n        :param resourceType: 资源类型。\n        :return: 展示文本。\n        '
+      str: 'Albums'
+      str: 'Tracks'
+      str: 'Playlists'
+      str: 'Videos'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+
+  def LPTidalDataProvider._featuredCategoryResourceTypes(self, category)  line 2817
+    names: set, _homeSupportedFeaturedResourceTypes, bool, get, append
+      str: '\n        根据 Featured 分类能力字段生成需要探测的资源类型列表。\n\n        :param category: `/v1/featured` 中的单个分类对象。\n        :return: 资源类型列表，例如 `albums/tracks/playlists`。\n        '
+
+  def LPTidalDataProvider._homeSupportedFeaturedResourceTypes(self)  line 2836
+      str: '\n        返回首页 Featured Hero 允许展示的资源类型。\n\n        :return: 资源类型元组。\n        '
+      str: 'playlists'
+      str: 'albums'
+      str: 'tracks'
+
+  def LPTidalDataProvider._filterFeaturedCategoriesForHome(self, featuredItems)  line 2844
+    names: isinstance, list, dict, get, _featuredCategoryResourceTypes, append
+      str: '\n        过滤首页 Featured 分类，移除只包含视频资源的分类。\n\n        :param featuredItems: 归一化后的 Featured 分类条目。\n        :return: 可在首页展示的分类条目列表。\n        '
+      str: 'extra'
+
+  def LPTidalDataProvider._logFeaturedCategoryProbeResult(self, categoryName, pathSegment, resourceType, endpointPath, response, reusedExisting)  line 2861
+    names: isinstance, dict, logger, warning, type, __name__, bool, get, str
+      str: '\n        输出 Featured 分类 path 探测结果摘要。\n\n        :param categoryName: 分类名称。\n        :param pathSegment: `/v1/featured` 返回的 path 片段。\n        :param resourceType: 探测的资源类型。\n        :param endpointPath: 探测的完整接口路径。\n        :param response: 探测请求结果字典。\n        :param reusedExisting: 是否复用首页已存在的 `new/*` 请求结果。\n  '
+      str: '[TidalHome][FeaturedProbe] category=%s path=%s resource=%s endpoint=%s response_type=%s reused_existing=%s'
+      str: '--'
+      str: 'success'
+      str: 'error'
+      str: '[TidalHome][FeaturedProbe] category=%s path=%s resource=%s endpoint=%s status=%s reused_existing=%s error=%s'
+      str: 'status_code'
+
+  def LPTidalDataProvider.normalizeSearchResults(self, responseData)  line 2906
+    names: isinstance, dict, get, _extractSearchSection
+      str: '\n        将搜索响应规范化为统一的分类字典。\n\n        :param responseData: `/v1/search/top-hits/` 返回的数据。\n        :return: 包含 top/artists/albums/tracks/playlists 的字典。\n        '
+      str: '_queueSearchParams'
+      str: 'top'
+      str: 'topResults'
+      str: 'topHits'
+      str: 'items'
+      str: 'queueParams'
+      str: 'artists'
+      str: 'artistResults'
+      str: 'albums'
+      str: 'albumResults'
+      str: 'tracks'
+      str: 'trackResults'
+      str: 'playlists'
+      str: 'playlistResults'
+      str: 'videos'
+      str: 'videoResults'
+      str: 'top'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+
+  def LPTidalDataProvider._extractSearchSection(self, payload, queueParams, *keys)  line 2924
+    names: isinstance, get, dict, list, str, int, len, _searchQueueTypesForSection, _annotateQueuePlaybackItems
+      str: '\n        从搜索响应中提取分类条目与分页元数据。\n\n        :param payload: 搜索响应字典。\n        :param keys: 候选键名。\n        :return: 分类分页结果字典。\n        '
+      str: 'data'
+      str: 'artists'
+      str: 'tracks'
+      str: 'videos'
+      str: 'playlists'
+      str: 'albums'
+      str: 'LPTidalDataProvider._extractSearchSection.<locals>.<listcomp>'
+      str: 'limit'
+      str: 'offset'
+      str: 'types'
+      str: 'types'
+      str: 'offset'
+      str: 'limit'
+      str: '/v1/search/top-hits/'
+      str: 'items'
+      str: 'limit'
+      str: 'offset'
+      str: 'totalNumberOfItems'
+      str: 'hasMore'
+      str: 'items'
+      str: 'totalNumberOfItems'
+
+    def LPTidalDataProvider._extractSearchSection.<listcomp>(.0)  line 2948
+      names: isinstance, dict, _normalizeItem
+        str: 'forceItemType'
+
+    def LPTidalDataProvider._extractSearchSection.<listcomp>(.0)  line 2971
+      names: isinstance, dict, _normalizeItem
+        str: 'forceItemType'
+
+  def LPTidalDataProvider._normalizeSubscriptionPayload(self, responseData)  line 3001
+    names: _firstPayloadObject, get, isinstance, dict, _firstValue, str
+      str: '\n        归一化订阅信息。\n\n        :param responseData: 接口响应数据。\n        :return: 订阅信息字典。\n        '
+      str: 'premiumAccess'
+      str: 'Free'
+      str: 'TIDAL Streaming Service'
+      str: 'subscription'
+      str: 'type'
+      str: 'plan'
+      str: 'status'
+      str: 'description'
+      str: 'validUntil'
+      str: 'expiresAt'
+      str: 'expirationDate'
+      str: 'title'
+      str: 'validUntil'
+      str: 'extra'
+
+  def LPTidalDataProvider._normalizeCombinedPlaylists(self, responseData)  line 3029
+    names: _extractRawItems, get, isinstance, dict, append
+      str: '\n        解析 playlistsAndFavoritePlaylists 合并端点的响应。\n        合并端点的 items 结构为 {"type": "USER_CREATED"|"USER_FAVORITE", "playlist": {...}}，\n        需要先展开 playlist 嵌套层再归一化。\n\n        :param responseData: 合并端点响应数据。\n        :return: 通用条目列表。\n        '
+      str: 'playlist'
+      str: 'type'
+      str: '_sourceType'
+      str: 'LPTidalDataProvider._normalizeCombinedPlaylists.<locals>.<listcomp>'
+
+    def LPTidalDataProvider._normalizeCombinedPlaylists.<listcomp>(.0)  line 3047
+      names: _normalizeItem
+        str: 'playlist'
+        str: 'forceItemType'
+
+  def LPTidalDataProvider._normalizeFavoriteListPayload(self, responseData, itemType)  line 3049
+    names: _normalizeListPayload
+      str: '\n        归一化收藏列表，并默认标记为已收藏。\n\n        :param responseData: 接口响应数据。\n        :param itemType: 条目类型。\n        :return: 通用条目列表。\n        '
+      str: 'isFavorite'
+
+  def LPTidalDataProvider._favoriteIdsValue(self, value)  line 3062
+    names: isinstance, dict, _favoriteIdsValue, get, list, _firstValue, append, str
+      str: '\n        从收藏 ID 字段值中抽取字符串 ID 列表。\n\n        :param value: 接口返回的收藏 ID 字段值。\n        :return: 字符串 ID 列表。\n        '
+      str: 'ids'
+      str: 'items'
+      str: 'data'
+      str: 'values'
+      str: 'id'
+      str: 'itemId'
+      str: 'uuid'
+
+  def LPTidalDataProvider._normalizeFavoriteIdsPayload(self, responseData)  line 3089
+    names: isinstance, dict, items, _favoriteIdsValue, get, _normalizeFavoriteIdsPayload
+      str: '\n        归一化收藏 ID 响应。\n\n        :param responseData: 接口响应数据。\n        :return: 按类型分组的收藏 ID 字典。\n        '
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'artists'
+      str: 'artist'
+      str: 'ARTISTS'
+      str: 'ARTIST'
+      str: 'albums'
+      str: 'album'
+      str: 'ALBUMS'
+      str: 'ALBUM'
+      str: 'tracks'
+      str: 'track'
+      str: 'TRACKS'
+      str: 'TRACK'
+      str: 'playlists'
+      str: 'playlist'
+      str: 'PLAYLISTS'
+      str: 'PLAYLIST'
+      str: 'videos'
+      str: 'video'
+      str: 'VIDEOS'
+      str: 'VIDEO'
+      str: 'data'
+
+  def LPTidalDataProvider.normalizeFavoriteIds(self, responseData)  line 3125
+    names: _normalizeFavoriteIdsPayload
+      str: '\n        公开的收藏 ID 归一化接口。\n\n        :param responseData: 接口响应数据。\n        :return: 按类型分组的收藏 ID 字典。\n        '
+
+  def LPTidalDataProvider._loadFavoriteIdsForCurrentUser(self, skipCache)  line 3134
+    names: _accountState, str, get, strip, refreshFavoriteIds, isinstance, dict, bool, _normalizeFavoriteIdsPayload
+      str: '\n        为当前账号拉取收藏 ID 集合。\n\n        :param skipCache: 为 True 时跳过 API 缓存，强制实时拉取。\n        :return: 收藏 ID 字典，未登录或请求失败时返回空字典。\n        '
+      str: 'userId'
+      str: 'skipCache'
+      str: 'success'
+      str: 'data'
+
+  def LPTidalDataProvider._favoriteEndpointType(self, itemType)  line 3150
+    names: str, strip, lower, get
+      str: '\n        将条目类型映射到收藏接口路径类型。\n\n        :param itemType: 条目类型。\n        :return: 收藏接口类型。\n        '
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'artist'
+      str: 'artists'
+      str: 'album'
+      str: 'albums'
+      str: 'track'
+      str: 'tracks'
+      str: 'playlist'
+      str: 'playlists'
+      str: 'video'
+      str: 'videos'
+
+  def LPTidalDataProvider._favoritePayloadKey(self, favoriteType)  line 3172
+    names: str, strip, lower, get
+      str: '\n        返回添加收藏接口要求的请求体字段名。\n\n        :param favoriteType: 收藏接口类型。\n        :return: 请求体字段名。\n        '
+      str: 'artistIds'
+      str: 'albumIds'
+      str: 'trackIds'
+      str: 'uuids'
+      str: 'videoIds'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+
+  def LPTidalDataProvider._buildDetailResult(self, primary, **payload)  line 3189
+    names: isinstance, dict, bool, get
+      str: '\n        组装详情页统一返回结构。\n\n        :param primary: 主详情请求结果。\n        :param payload: 已归一化的数据字段。\n        :return: 统一请求结果字典。\n        '
+      str: 'success'
+      str: 'error'
+      str: 'success'
+      str: 'data'
+      str: 'error'
+
+  def LPTidalDataProvider._normalizeInfoPayload(self, responseData, itemType)  line 3200
+    names: _firstPayloadObject, _normalizeItem, _firstValue, isinstance, get, dict, list, len, str, update, isUserOwnedPlaylist
+      str: '\n        将详情响应规范化为页面头部信息。\n\n        :param responseData: 接口响应数据。\n        :param itemType: 条目类型。\n        :return: 详情信息字典。\n        '
+      str: 'itemId'
+      str: 'itemType'
+      str: 'title'
+      str: 'subtitle'
+      str: 'imageUrl'
+      str: 'forceItemType'
+      str: 'description'
+      str: 'summary'
+      str: 'text'
+      str: 'body'
+      str: 'audioQuality'
+      str: 'quality'
+      str: 'soundQuality'
+      str: 'releaseDate'
+      str: 'streamStartDate'
+      str: 'date'
+      str: 'mediaMetadata'
+      str: 'tags'
+      str: 'LPTidalDataProvider._normalizeInfoPayload.<locals>.<listcomp>'
+      str: 'LOSSLESS'
+      str: 'HIGH'
+      str: 'MAX'
+      str: 'copyright'
+      str: 'copyrightText'
+      str: 'artist'
+      str: 'id'
+      str: 'itemId'
+      str: 'artists'
+      str: 'creator'
+      str: 'year'
+      str: 'creatorName'
+      str: 'ownerName'
+      str: 'createdBy'
+      str: 'fanCount'
+      str: 'fans'
+      str: 'numberOfFans'
+      str: 'duration'
+      str: 'totalDuration'
+      str: 'description'
+      str: 'quality'
+      str: 'releaseDate'
+      str: 'mediaMetadata'
+      str: 'isHigh'
+      str: 'isMax'
+      str: 'qualityBadge'
+      str: 'copyright'
+      str: 'artistId'
+      str: 'creatorName'
+      str: 'creatorId'
+      str: 'fanCount'
+      str: 'duration'
+      str: 'isUserPlaylist'
+
+    def LPTidalDataProvider._normalizeInfoPayload.<listcomp>(.0)  line 3219
+      names: str
+
+  def LPTidalDataProvider._normalizeTextPayload(self, responseData, textType)  line 3256
+    names: _firstPayloadObject, str, _firstValue, isinstance, HOME.StreamService.Tidal.data.LPTidalWimpLinkParser, parseBioText
+      str: '\n        将评论或简介响应规范化为文本信息。\n\n        :param responseData: 接口响应数据。\n        :param textType: 文本类型。\n        :return: 文本信息字典。\n        '
+      str: 'title'
+      str: 'headline'
+      str: 'name'
+      str: 'text'
+      str: 'body'
+      str: 'summary'
+      str: 'description'
+      str: 'bio'
+      str: 'source'
+      str: 'provider'
+      str: 'providerName'
+      str: 'parseBioText'
+      str: 'type'
+      str: 'title'
+      str: 'text'
+      str: 'segments'
+      str: 'source'
+
+  def LPTidalDataProvider._normalizeCreditPayload(self, responseData)  line 3278
+    names: _extractRawItems, isinstance, dict, _firstValue, append, str
+      str: '\n        将制作名单响应规范化为列表。\n\n        :param responseData: 接口响应数据。\n        :return: 制作名单列表。\n        '
+      str: 'name'
+      str: 'artistName'
+      str: 'personName'
+      str: 'role'
+      str: 'type'
+      str: 'credit'
+      str: 'contribution'
+      str: 'id'
+      str: 'itemId'
+      str: 'itemId'
+      str: 'itemType'
+      str: 'title'
+      str: 'subtitle'
+      str: 'imageUrl'
+      str: 'imagePath'
+      str: 'extra'
+
+  def LPTidalDataProvider._normalizeListPayload(self, responseData, itemType)  line 3303
+    names: _extractRawItems, _normalizeItem, get, append
+      str: '\n        将列表响应规范化为通用条目列表。\n\n        :param responseData: 接口响应数据。\n        :param itemType: 条目类型。\n        :return: 通用条目列表。\n        '
+      str: 'forceItemType'
+      str: 'itemId'
+      str: 'title'
+
+  def LPTidalDataProvider._totalNumberOfItems(self, responseData)  line 3318
+    names: isinstance, dict, get, append, max, int, Exception
+      str: '\n        从 TIDAL 分页响应中提取 totalNumberOfItems。\n\n        :param responseData: 接口响应数据。\n        :return: 响应总数，缺失时返回 None。\n        '
+      str: 'data'
+      str: 'results'
+      str: 'albums'
+      str: 'artists'
+      str: 'tracks'
+      str: 'videos'
+      str: 'playlists'
+      str: 'totalNumberOfItems'
+
+  def LPTidalDataProvider._extractRawItems(self, responseData)  line 3342
+    names: isinstance, list, dict, get, any
+      str: '\n        从多种 TIDAL 响应形态中提取原始条目列表。\n\n        :param responseData: 接口响应数据。\n        :return: 原始条目字典列表。\n        '
+      str: 'LPTidalDataProvider._extractRawItems.<locals>.<listcomp>'
+      str: 'items'
+      str: 'data'
+      str: 'results'
+      str: 'albums'
+      str: 'artists'
+      str: 'tracks'
+      str: 'videos'
+      str: 'playlists'
+      str: 'items'
+      str: 'LPTidalDataProvider._extractRawItems.<locals>.<genexpr>'
+      str: 'id'
+      str: 'itemId'
+      str: 'title'
+      str: 'name'
+      str: 'uuid'
+      str: 'path'
+
+    def LPTidalDataProvider._extractRawItems.<listcomp>(.0)  line 3350
+      names: isinstance, dict
+
+    def LPTidalDataProvider._extractRawItems.<listcomp>(.0)  line 3356
+      names: isinstance, dict
+
+    def LPTidalDataProvider._extractRawItems.<listcomp>(.0)  line 3360
+      names: isinstance, dict
+
+    def LPTidalDataProvider._extractRawItems.<genexpr>(.0)  line 3361
+
+  def LPTidalDataProvider._extractPageModuleItems(self, pageData)  line 3365
+    names: isinstance, dict, get, list, _extractRawItems, extend
+      str: '\n        从 pages 端点的嵌套结构 (rows[].modules[].items[]) 中提取条目列表。\n\n        :param pageData: pages 端点响应数据。\n        :return: 原始条目字典列表。\n        '
+      str: 'rows'
+      str: 'modules'
+      str: 'items'
+      str: 'pagedList'
+      str: 'LPTidalDataProvider._extractPageModuleItems.<locals>.<genexpr>'
+
+    def LPTidalDataProvider._extractPageModuleItems.<genexpr>(.0)  line 3393
+      names: isinstance, dict
+
+  def LPTidalDataProvider._filterCustomMixItems(self, items)  line 3396
+    names: isinstance, list
+      str: '\n        过滤 Custom Mixes 中不支持播放的 video mix。\n\n        :param items: 原始 Custom Mix 条目列表。\n        :return: 移除 video mix 后的条目列表。\n        '
+      str: 'LPTidalDataProvider._filterCustomMixItems.<locals>.<listcomp>'
+
+    def LPTidalDataProvider._filterCustomMixItems.<listcomp>(.0)  line 3405
+      names: isinstance, dict, _isVideoMixItem
+
+  def LPTidalDataProvider._isVideoMixItem(self, item)  line 3407
+    names: isinstance, dict, get, append, str, any
+      str: '\n        判断原始 mix 条目是否为 video mix。\n\n        :param item: 原始 mix 条目。\n        :return: 是 video mix 时返回 True。\n        '
+      str: 'item'
+      str: 'mixType'
+      str: 'mix_type'
+      str: 'type'
+      str: 'itemType'
+      str: 'resourceType'
+      str: 'contentType'
+      str: 'mediaType'
+      str: 'LPTidalDataProvider._isVideoMixItem.<locals>.<listcomp>'
+      str: 'LPTidalDataProvider._isVideoMixItem.<locals>.<genexpr>'
+
+    def LPTidalDataProvider._isVideoMixItem.<listcomp>(.0)  line 3431
+      names: _compactTypeText
+
+    def LPTidalDataProvider._isVideoMixItem.<listcomp>(.0)  line 3432
+      names: _compactTypeText
+
+    def LPTidalDataProvider._isVideoMixItem.<genexpr>(.0)  line 3433
+        str: 'video'
+        str: 'mix'
+
+    def LPTidalDataProvider._isVideoMixItem.<genexpr>(.0)  line 3435
+        str: 'musicvideos'
+        str: 'videos'
+        str: 'musicvideo'
+        str: 'video'
+
+  def LPTidalDataProvider._compactTypeText(self, value)  line 3439
+    names: join, str, strip, lower
+      str: '\n        将类型字段压缩成便于匹配的文本。\n\n        :param value: 原始类型字段值。\n        :return: 小写且去除分隔符的类型文本。\n        '
+      str: 'LPTidalDataProvider._compactTypeText.<locals>.<genexpr>'
+
+    def LPTidalDataProvider._compactTypeText.<genexpr>(.0)  line 3446
+      names: isalnum
+
+  def LPTidalDataProvider._firstPayloadObject(self, responseData)  line 3448
+    names: isinstance, dict, get, list
+      str: '\n        从响应数据中取第一个可用于详情展示的对象。\n\n        :param responseData: 接口响应数据。\n        :return: 详情对象字典。\n        '
+      str: 'data'
+
+  def LPTidalDataProvider._extractItems(self, payload, *keys)  line 3466
+    names: get, isinstance, list, dict
+      str: '\n        从响应体中提取条目列表。\n\n        :param payload: 响应字典。\n        :param keys: 候选键名。\n        :return: 条目列表。\n        '
+      str: 'LPTidalDataProvider._extractItems.<locals>.<listcomp>'
+      str: 'items'
+      str: 'data'
+
+    def LPTidalDataProvider._extractItems.<listcomp>(.0)  line 3477
+      names: isinstance, dict, _normalizeItem
+
+    def LPTidalDataProvider._extractItems.<listcomp>(.0)  line 3481
+      names: isinstance, dict, _normalizeItem
+
+    def LPTidalDataProvider._extractItems.<listcomp>(.0)  line 3487
+      names: isinstance, dict, _normalizeItem
+
+    def LPTidalDataProvider._extractItems.<listcomp>(.0)  line 3491
+      names: isinstance, dict, _normalizeItem
+
+  def LPTidalDataProvider._normalizeItem(self, item, itemType, forceItemType)  line 3494
+    names: isinstance, dict, get, items, str, strip, _normalizeItemType, _firstValue, _buildSubtitle, _resolveImageUrl, _normalizeArtistItems, join, _resolveNameValue, _normalizeAlbumItem, list, _safeInt, bool, _registerMixMeta, _isUserCreatedPlaylistItem
+      str: '\n        将搜索结果条目转换为统一字段。\n\n        :param item: 原始条目字典。\n        :param itemType: 分类名称。\n        :param forceItemType: 是否强制使用调用方提供的条目类型。\n        :return: 统一条目字典。\n        '
+      str: 'item'
+      str: 'value'
+      str: 'type'
+      str: 'itemType'
+      str: 'forceItemType'
+      str: 'mixType'
+      str: 'mix'
+      str: 'id'
+      str: 'itemId'
+      str: 'uuid'
+      str: 'tid'
+      str: 'path'
+      str: 'slug'
+      str: 'title'
+      str: 'name'
+      str: 'trackName'
+      str: 'albumName'
+      str: 'artistName'
+      str: 'playlistName'
+      str: 'videoName'
+      str: 'subTitle'
+      str: 'shortSubtitle'
+      str: 'imagePath'
+      str: 'localImagePath'
+      str: ', '
+      str: 'LPTidalDataProvider._normalizeItem.<locals>.<genexpr>'
+      str: 'artist'
+      str: 'artists'
+      str: 'ownerName'
+      str: 'creatorName'
+      str: 'album'
+      str: 'parentTitle'
+      str: 'year'
+      str: 'releaseDate'
+      str: 'trackCount'
+      str: 'tracksCount'
+      str: 'numberOfTracks'
+      str: 'numberOfItems'
+      str: 'numberOfVideos'
+      str: 'duration'
+      str: 'trackDuration'
+      str: 'videoDuration'
+      str: 'playlist'
+      str: 'isFavorite'
+      str: 'favorite'
+      str: 'isExplicit'
+      str: 'explicit'
+      str: 'sectionKey'
+      str: 'allowStreaming'
+      str: 'streamable'
+      str: 'itemId'
+      str: 'itemType'
+      str: 'title'
+      str: 'subtitle'
+      str: 'imageUrl'
+      str: 'imagePath'
+      str: 'artistName'
+      str: 'artists'
+      str: 'artistId'
+      str: 'albumName'
+      str: 'albumId'
+      str: 'album'
+      str: 'year'
+      str: 'trackCount'
+      str: 'duration'
+      str: 'isFavorite'
+      str: 'isExplicit'
+      str: 'sectionKey'
+      str: 'extra'
+      str: 'allowStreaming'
+      str: 'subtitle'
+      str: 'imageUrl'
+      str: 'isUserPlaylist'
+
+    def LPTidalDataProvider._normalizeItem.<genexpr>(.0)  line 3532
+      names: isinstance, dict, str, get, strip
+        str: 'title'
+
+  def LPTidalDataProvider._normalizeItemType(self, item, fallback, forceItemType)  line 3587
+    names: str, strip, lower, isinstance, dict, get, _firstValue
+      str: '\n        归一化条目类型。\n\n        :param item: 原始条目字典。\n        :param fallback: 默认类型。\n        :param forceItemType: 是否强制使用默认类型。\n        :return: 归一化后的类型字符串。\n        '
+      str: 'track'
+      str: 'video'
+      str: 'album'
+      str: 'artist'
+      str: 'playlist'
+      str: 'genre'
+      str: 'mood'
+      str: 'category'
+      str: 'track'
+      str: 'tracks'
+      str: 'music video'
+      str: 'musicvideo'
+      str: 'album'
+      str: 'albums'
+      str: 'artist'
+      str: 'artists'
+      str: 'playlist'
+      str: 'playlists'
+      str: 'video'
+      str: 'videos'
+      str: 'genre'
+      str: 'genres'
+      str: 'mood'
+      str: 'moods'
+      str: 'category'
+      str: 'featured'
+      str: 'itemType'
+      str: 'type'
+      str: 'resourceType'
+
+  def LPTidalDataProvider._buildSubtitle(self, item, itemType)  line 3645
+    names: _resolveNameValue, append, str, _playlistCreatorSubtitle, _firstValue, join
+      str: '\n        生成展示副标题。\n\n        :param item: 原始条目字典。\n        :param itemType: 条目类型。\n        :return: 副标题字符串。\n        '
+      str: 'artistName'
+      str: 'artist'
+      str: 'artists'
+      str: 'ownerName'
+      str: 'creatorName'
+      str: 'albumName'
+      str: 'album'
+      str: 'parentTitle'
+      str: 'track'
+      str: 'playlist'
+      str: 'album'
+      str: 'video'
+      str: 'country'
+      str: 'countryCode'
+      str: ' - '
+      str: 'LPTidalDataProvider._buildSubtitle.<locals>.<listcomp>'
+
+    def LPTidalDataProvider._buildSubtitle.<listcomp>(.0)  line 3670
+
+  def LPTidalDataProvider._normalizeArtistItems(self, item)  line 3672
+    names: get, isinstance, list, dict, _firstValue, str, strip, append
+      str: '\n        归一化条目中的艺人列表，供 QML 拆分显示和点击跳转。\n\n        :param item: 原始条目字典。\n        :return: 包含 itemId 和 title 的艺人列表。\n        '
+      str: 'artists'
+      str: 'name'
+      str: 'title'
+      str: 'artistName'
+      str: 'id'
+      str: 'itemId'
+      str: 'artistId'
+      str: 'itemId'
+      str: 'title'
+      str: 'artist'
+
+  def LPTidalDataProvider._normalizeAlbumItem(self, item)  line 3709
+    names: isinstance, get, dict, _firstValue, str, _resolveNameValue
+      str: '\n        归一化条目中的专辑信息（id + title），供 QML 卡片副标题及列表列 album 点击跳转详情页使用。\n\n        :param item: 原始条目字典。\n        :return: {"itemId": str, "title": str} 或 None。\n        '
+      str: 'album'
+      str: 'parent'
+      str: 'albumInfo'
+      str: 'id'
+      str: 'itemId'
+      str: 'uuid'
+      str: 'albumId'
+      str: 'title'
+      str: 'name'
+      str: 'albumName'
+      str: 'itemId'
+      str: 'title'
+      str: 'parentId'
+      str: 'parentTitle'
+
+  def LPTidalDataProvider._resolveNameValue(self, item, *keys)  line 3736
+    names: _firstValue, isinstance, dict, str, list, append, join
+      str: '\n        从普通字符串或嵌套对象中解析展示名称。\n\n        :param item: 原始条目字典。\n        :param keys: 候选键名。\n        :return: 展示名称字符串。\n        '
+      str: 'name'
+      str: 'title'
+      str: 'artistName'
+      str: 'albumName'
+      str: ', '
+
+  def LPTidalDataProvider._resolveImageUrl(self, item, itemType)  line 3760
+    names: _resolveImageUrlWithTrace
+      str: '\n        根据条目内容解析可直接展示的图片地址。\n\n        :param item: 原始条目字典。\n        :param itemType: 归一化后的条目类型。\n        :return: 图片地址或空字符串。\n        '
+
+  def LPTidalDataProvider._resolveImageUrlWithTrace(self, item, itemType)  line 3771
+    names: _firstValue, _normalizeImageSource, str, get, isinstance, dict, startswith, _resolveTidalImageSize, LPTidalImageSize, SIZE_640
+      str: '\n        根据条目内容解析图片地址，并返回命中的字段信息。\n\n        :param item: 原始条目字典。\n        :param itemType: 归一化后的条目类型。\n        :return: `(图片地址, 命中字段, 原始字段值)`。\n        '
+      str: 'imageUrl'
+      str: 'imagePath'
+      str: 'customImageUrl'
+      str: 'thumbnail'
+      str: 'artwork'
+      str: 'category'
+      str: 'artist'
+      str: 'mix'
+      str: 'playlist'
+      str: 'video'
+      str: 'album'
+      str: 'track'
+      str: 'mood'
+      str: 'genre'
+      str: 'playlist'
+      str: 'images'
+      str: 'L'
+      str: 'LARGE'
+      str: 'M'
+      str: 'MEDIUM'
+      str: 'S'
+      str: 'SMALL'
+      str: 'url'
+      str: 'http'
+      str: 'images.'
+      str: '.url'
+      str: 'cover'
+      str: 'squareImage'
+      str: 'image'
+      str: 'coverImage'
+      str: 'imageId'
+      str: 'picture'
+      str: 'selectedAlbumCoverFallback'
+      str: 'albumCover'
+      str: 'artistImage'
+      str: 'artist'
+      str: 'picture'
+      str: 'artistImage'
+      str: 'image'
+      str: 'squareImage'
+      str: 'cover'
+      str: 'coverImage'
+      str: 'imageId'
+      str: 'selectedAlbumCoverFallback'
+      str: 'albumCover'
+      str: 'image'
+      str: 'squareImage'
+      str: 'cover'
+      str: 'coverImage'
+      str: 'imageId'
+      str: 'picture'
+      str: 'selectedAlbumCoverFallback'
+      str: 'albumCover'
+      str: 'artistImage'
+      str: 'LARGE'
+      str: 'MEDIUM'
+      str: 'SMALL'
+      str: 'album'
+      str: 'cover'
+      str: 'image'
+      str: 'squareImage'
+      str: 'imageId'
+      str: 'picture'
+      str: 'album.'
+      str: 'picture'
+      str: 'image'
+      str: 'cover'
+      str: 'artist.'
+
+  def LPTidalDataProvider._resolveTidalImageSize(self, itemType, fieldKey)  line 3867
+    names: tidalImageSizeForItemField, value
+      str: '\n        按条目类型选择 TIDAL CDN 可用尺寸。\n\n        playlist/mix 等 squareImage 在 CDN 上通常只有 640 及以下尺寸，\n        album/track 默认也使用 640，避免 UI 与缓存过度拉取大图。\n\n        :param itemType: 条目类型。\n        :param fieldKey: 命中的图片字段名。\n        :return: TIDAL 图片尺寸字符串，例如 `640x640`。\n        '
+
+  def LPTidalDataProvider._normalizeImageSource(self, value, size)  line 3880
+    names: str, strip, startswith, rsplit, _buildTidalImageUrl
+      str: '\n        将图片字段统一转换成可加载的地址。\n\n        :param value: 原始图片字段值。\n        :param size: TIDAL 图片 ID 转 URL 时使用的目标尺寸。\n        :return: 可用图片地址或空字符串。\n        '
+      str: 'http://'
+      str: 'https://'
+      str: 'file://'
+      str: 'qrc:/'
+      str: '/'
+      str: '.'
+
+  def LPTidalDataProvider._buildTidalImageUrl(self, imageId, size)  line 3897
+    names: tidalNormalizeImageSize, buildTidalImageUrl
+      str: '\n        按 TIDAL 资源规则构造图片地址。\n\n        :param imageId: 图片 UUID 或资源 ID。\n        :param size: 目标尺寸，例如 `640x640`。\n        :return: 图片地址。\n        '
+
+  def LPTidalDataProvider._firstValue(self, item, *keys)  line 3908
+    names: get
+      str: '\n        取多个候选键中的第一个有效值。\n\n        :param item: 原始条目字典。\n        :param keys: 候选键名。\n        :return: 第一个非空值。\n        '
+
+  def LPTidalDataProvider._safeInt(self, value)  line 3922
+    names: int, Exception
+      str: '\n        安全转换整数。\n\n        :param value: 任意待转换值。\n        :return: 转换失败时返回 0。\n        '

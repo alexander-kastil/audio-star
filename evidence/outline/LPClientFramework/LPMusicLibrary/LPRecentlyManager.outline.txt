@@ -1,0 +1,213 @@
+# module LPClientFramework.LPMusicLibrary.LPRecentlyManager
+
+[module] names: __doc__, threading, uuid, LPClientFramework.LPMusicLibrary.LPMusicLibraryDBManager, LPMusicLibraryDBManager, RECENTLY_DIRECTORY_NAME, RECENTLY_DIRECTORY_TYPE, LPClientFramework.LPMusicLibrary.LPRecentlyPlayListCodec, LPRecentlyPlayListCodec, LPClientFramework.LPPlayList.LPPlayList, LPAccount, LPPlayListSource, headerTypeEnum, headerTypeValue, LPHeaderType, LPClientFramework.LPPublicDefine, SOURCES_NO_LOGIN, LPClientFramework.LPUtility, logger, postNotification, RECENTLY_PLAYED_CHANGED_NOTIFY, RECENTLY_DEFAULT_LIMIT, object, LPRecentlyManager
+  str: '\nRecently Played 的对外管理器。\n\n负责把播放成功后的上下文整理成 ``detail`` 快照并落库，同时提供读取、删除、音源推导等能力。\n页面层、音源 StreamService、WiiMHome 主窗口都通过 ``LPRecentlyManager.instance()`` 访问 Recently 数据。\n\n主写入路径：``addRecentlyPlayedWithMusicList(playList, showDict)``\n- 从 playList 中提取 header / account / 当前播放项\n- 通过 LPRecentlyPlayListCodec 序列化'
+  str: 'LPMusicLibraryDBManager'
+  str: 'RECENTLY_DIRECTORY_NAME'
+  str: 'RECENTLY_DIRECTORY_TYPE'
+  str: 'LPRecentlyPlayListCodec'
+  str: 'LPAccount'
+  str: 'LPPlayListSource'
+  str: 'headerTypeEnum'
+  str: 'headerTypeValue'
+  str: 'LPHeaderType'
+  str: 'SOURCES_NO_LOGIN'
+  str: 'logger'
+  str: 'postNotification'
+  str: 'RecentlyPlayedChangedNotify'
+  str: 'LPRecentlyManager'
+
+def LPRecentlyManager()  line 45
+  names: __name__, __module__, __qualname__, __doc__, _instance, threading, Lock, _instanceLock, frozenset, _QUEUE_DEDUP_TYPE_VALUES, __init__, classmethod, instance, _accountIdentifier, _accountDict, _typeValueFromHeader, addRecentlyPlayedWithAccount, addRecentlyPlayedWithMusicList, _writeRecentlyItem, RECENTLY_DEFAULT_LIMIT, getRecentlyRawList, deleteRecentlyItems, sourceFromDetail, sourceNeedsDeviceAccount, isAccountMismatch, _recordAccountInfo, _recordAccountIdentities, staticmethod, _deviceAccountIdentities, recordAccountName, showOpenMore, canNavigate
+    str: 'LPRecentlyManager'
+    str: 'Recently Played 单例管理器。'
+    str: 'LPRecentlyManager.__init__'
+    str: 'LPRecentlyManager.instance'
+    str: 'LPRecentlyManager._accountIdentifier'
+    str: 'LPRecentlyManager._accountDict'
+    str: 'LPRecentlyManager._typeValueFromHeader'
+    str: 'LPRecentlyManager.addRecentlyPlayedWithAccount'
+    str: 'LPRecentlyManager.addRecentlyPlayedWithMusicList'
+    str: 'LPRecentlyManager._writeRecentlyItem'
+    str: 'LPRecentlyManager.getRecentlyRawList'
+    str: 'LPRecentlyManager.deleteRecentlyItems'
+    str: 'LPRecentlyManager.sourceFromDetail'
+    str: 'LPRecentlyManager.sourceNeedsDeviceAccount'
+    str: 'LPRecentlyManager.isAccountMismatch'
+    str: 'LPRecentlyManager._recordAccountInfo'
+    str: 'LPRecentlyManager._recordAccountIdentities'
+    str: 'LPRecentlyManager._deviceAccountIdentities'
+    str: 'LPRecentlyManager.recordAccountName'
+    str: 'LPRecentlyManager.showOpenMore'
+    str: 'LPRecentlyManager.canNavigate'
+
+  def LPRecentlyManager.__init__(self)  line 53
+    names: LPMusicLibraryDBManager, instance, _db, ensureDirectory, RECENTLY_DIRECTORY_NAME, RECENTLY_DIRECTORY_TYPE, _directoryId, threading, Lock, _writeLock
+
+  def LPRecentlyManager.instance(cls)  line 60
+    names: _instance, _instanceLock
+
+  def LPRecentlyManager._accountIdentifier(self, account)  line 72
+    names: getattr, str
+      str: '从 account 对象推导唯一标识，缺失时回退到匿名标识。'
+      str: 'anonymous'
+      str: 'userId'
+      str: 'anonUserId'
+      str: 'userName'
+
+  def LPRecentlyManager._accountDict(self, account, source)  line 84
+    names: LPAccount, _accountIdentifier, getattr
+      str: '把 account 对象整理成可落库的字典。'
+      str: 'source'
+      str: 'userId'
+      str: 'userName'
+      str: 'token'
+      str: 'refreshToken'
+      str: 'accountId'
+      str: 'source'
+      str: 'userId'
+      str: 'userName'
+      str: 'token'
+      str: 'refreshToken'
+
+  def LPRecentlyManager._typeValueFromHeader(self, header)  line 97
+    names: getattr, LPHeaderType, LP_HEADER_TYPE_COLLECTION, headerTypeEnum, isinstance, value, tuple, int, TypeError, ValueError
+      str: '把 header.headType 归一成可落库的整数。'
+      str: 'headType'
+
+  def LPRecentlyManager.addRecentlyPlayedWithAccount(self, header, playItem, showDict, source, account)  line 112
+    names: str, getattr, logger, debug, _accountDict, dict, LPRecentlyPlayListCodec, _objectToDict, _writeRecentlyItem
+      str: '\n        以单条播放项的形式写入 Recently。\n\n        Args:\n            header: 播放上下文 header。\n            playItem: 当前播放项。\n            showDict: UI 行为信息，例如是否允许 openMore / canNavigate。\n            source: 音源标识，为空时回退到 header.mediaSource。\n            account: 账号对象，为空时使用空账号。\n\n        Returns:\n            写入成功返回 itemI'
+      str: 'playOrigin'
+      str: 'search_track'
+      str: '[RecentlyManager] addRecentlyPlayedWithAccount ignore because playOrigin is search_track'
+      str: 'mediaSource'
+      str: 'trackSource'
+      str: 'header'
+      str: 'item'
+      str: 'show'
+      str: 'account'
+
+  def LPRecentlyManager.addRecentlyPlayedWithMusicList(self, playList, showDict)  line 147
+    names: getattr, logger, debug, str, LPRecentlyPlayListCodec, currentItemFromPlayList, _accountDict, dict, playListToDetail, _writeRecentlyItem
+      str: '\n        Recently 的主写入路径：把完整播放列表快照写入。\n\n        会优先使用 ``playList.header`` / ``playList.account`` / ``playList.list[playList.index]``。\n\n        Args:\n            playList: 具体音源的播放列表对象。\n            showDict: UI 行为信息。\n\n        Returns:\n            写入成功返回 itemId，失败返回 None。\n        '
+      str: 'header'
+      str: '[RecentlyManager] addRecentlyPlayedWithMusicList ignore because header is empty'
+      str: 'playOrigin'
+      str: 'search_track'
+      str: '[RecentlyManager] addRecentlyPlayedWithMusicList ignore because playOrigin is search_track'
+      str: 'list'
+      str: '[RecentlyManager] addRecentlyPlayedWithMusicList ignore because list is empty'
+      str: 'mediaSource'
+      str: 'trackSource'
+      str: 'account'
+      str: 'source'
+
+  def LPRecentlyManager._writeRecentlyItem(self, detail, header, currentItem, showDict, accountDict, source)  line 194
+    names: _typeValueFromHeader, getattr, _QUEUE_DEDUP_TYPE_VALUES, str, uuid, uuid4, headerTypeValue, LPHeaderType, LP_HEADER_TYPE_COLLECTION, _directoryId, get, bool, _writeLock, _db, upsertAccount, addRecentlyItem, RECENTLY_DIRECTORY_NAME, RECENTLY_DIRECTORY_TYPE, postNotification, RECENTLY_PLAYED_CHANGED_NOTIFY
+      str: '整理 LibMusicItem 字段并写入 DB；队列型记录按列表 id 去重，成功后发送通知。'
+      str: 'headId'
+      str: 'trackId'
+      str: 'imageUrl'
+      str: 'trackImage'
+      str: '%s_%s_%s'
+      str: 'accountId'
+      str: 'headTitle'
+      str: 'trackName'
+      str: 'trackArtist'
+      str: 'openMore'
+      str: 'canNavigate'
+      str: 'checkDuplicate'
+      str: 'itemId'
+      str: 'directoryId'
+      str: 'accountId'
+      str: 'source'
+      str: 'trackName'
+      str: 'trackId'
+      str: 'trackImage'
+      str: 'trackArtist'
+      str: 'typeValue'
+      str: 'openMore'
+      str: 'canNavigate'
+      str: 'checkDuplicate'
+      str: 'detail'
+
+  def LPRecentlyManager.getRecentlyRawList(self, limit)  line 254
+    names: _db, getRecentlyItems, _directoryId
+      str: '\n        读取原始 Recently 记录。\n\n        Args:\n            limit: 最多返回的条数，默认 ``200``；传入 ``-1`` 返回全部。\n\n        Returns:\n            原始字典列表，按 createTime 倒序。\n        '
+
+  def LPRecentlyManager.deleteRecentlyItems(self, itemIds)  line 266
+    names: _db, deleteRecentlyItems, _directoryId, postNotification, RECENTLY_PLAYED_CHANGED_NOTIFY
+      str: '\n        按 itemId 批量删除 Recently 记录，删除后发送变更通知。\n\n        Args:\n            itemIds: 待删除的 itemId 列表。\n        '
+
+  def LPRecentlyManager.sourceFromDetail(self, detailDict)  line 282
+    names: isinstance, dict, get
+      str: '\n        从 detail 推导音源，优先使用 playList.header.mediaSource，缺失时回退到 playList.account.source。\n\n        Args:\n            detailDict: recently 记录中的 detail 字典。\n\n        Returns:\n            音源标识字符串；无法推导时返回 None。\n        '
+      str: 'playList'
+      str: 'header'
+      str: 'mediaSource'
+      str: 'account'
+      str: 'source'
+
+  def LPRecentlyManager.sourceNeedsDeviceAccount(self, source)  line 327
+    names: bool, SOURCES_NO_LOGIN
+      str: '\n        判断某音源是否需要依赖设备账号状态才能判定 Recently 可播放。\n\n        Args:\n            source: 音源标识字符串。\n\n        Returns:\n            需要设备账号返回 True，无需登录返回 False。\n        '
+
+  def LPRecentlyManager.isAccountMismatch(self, rawItem, device)  line 339
+    names: isinstance, dict, get, sourceFromDetail, SOURCES_NO_LOGIN, getattr, LPClientFramework.LPDeviceStreamServiceManager, DEVICE_ACCOUNT_UNKNOWN, deviceAccountForSource, _recordAccountIdentities, _deviceAccountIdentities
+      str: '\n        判断某条 Recently 记录相对当前设备账号是否不匹配（用于 UI 灰显与点击拦截）。\n\n        对齐 iOS LPMusicLibraryRecentlyTableViewCell 的 LPMUSIC_ACCOUNT_SAME 判定：\n        - 无需登录的源始终可播放；\n        - 需要登录的源要求设备当前账号与记录保存的账号身份一致；\n        - 设备账号状态未知时乐观放行，由页面异步 GetUserInfo 补齐后刷新；\n        - 设备已确认未登录或账号不一致视为不匹配。\n\n        Args:\n          '
+      str: 'source'
+      str: 'detail'
+      str: 'deviceStreamServiceManager'
+      str: 'DEVICE_ACCOUNT_UNKNOWN'
+
+  def LPRecentlyManager._recordAccountInfo(self, rawItem)  line 382
+    names: get, isinstance, dict
+      str: '\n        提取 Recently 记录中落库的账号字典。\n\n        Args:\n            rawItem: Recently 原始记录字典。\n\n        Returns:\n            账号字典；兼容 playList 与单条两种 detail 结构。\n        '
+      str: 'detail'
+      str: 'playList'
+      str: 'account'
+
+  def LPRecentlyManager._recordAccountIdentities(self, rawItem)  line 403
+    names: set, _recordAccountInfo, get, add, str, strip, lower
+      str: '\n        归一化记录账号的所有身份字段，用于与设备账号比对。\n\n        Args:\n            rawItem: Recently 原始记录字典。\n\n        Returns:\n            身份字符串集合；无身份时返回空集合。\n        '
+      str: 'accountId'
+      str: 'userId'
+      str: 'anonUserId'
+      str: 'userName'
+      str: 'email'
+      str: 'loginName'
+      str: 'accountId'
+
+  def LPRecentlyManager._deviceAccountIdentities(userinfo)  line 424
+    names: set, isinstance, dict, get, append, items, join, str, lower, strip, add
+      str: '\n        从设备账号信息字典提取归一化身份字段。\n\n        Args:\n            userinfo: 设备侧账号信息字典。\n\n        Returns:\n            身份字符串集合。\n        '
+      str: 'user'
+      str: 'loginname'
+      str: 'uid'
+      str: 'username'
+      str: 'email'
+      str: 'contactemail'
+      str: 'userid'
+      str: 'anonuserid'
+      str: 'LPRecentlyManager._deviceAccountIdentities.<locals>.<genexpr>'
+
+    def LPRecentlyManager._deviceAccountIdentities.<genexpr>(.0)  line 448
+      names: isalnum
+
+  def LPRecentlyManager.recordAccountName(self, rawItem)  line 453
+    names: _recordAccountInfo, str, get
+      str: '\n        返回记录账号的展示名。\n\n        Args:\n            rawItem: Recently 原始记录字典。\n\n        Returns:\n            展示名字符串；缺失时回退到 userId / accountId，均缺失返回空串。\n        '
+      str: 'userName'
+      str: 'userId'
+      str: 'accountId'
+
+  def LPRecentlyManager.showOpenMore(self, rawItem)  line 468
+    names: isinstance, dict, bool, get
+      str: '是否允许显示 openMore。'
+      str: 'openMore'
+
+  def LPRecentlyManager.canNavigate(self, rawItem)  line 474
+    names: isinstance, dict, bool, get
+      str: '是否允许显示右侧导航箭头。'
+      str: 'canNavigate'

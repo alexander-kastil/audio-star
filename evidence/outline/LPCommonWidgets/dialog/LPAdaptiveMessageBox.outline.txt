@@ -1,0 +1,68 @@
+# module LPCommonWidgets.dialog.LPAdaptiveMessageBox
+
+[module] names: __doc__, re, PyQt6, QtGui, QtWidgets, PyQt6.QtCore, QEvent, PyQt6.QtWidgets, QApplication, QLabel, QMessageBox, LPAdaptiveMessageBox
+  str: '自适应尺寸的公共消息确认弹窗组件。'
+  str: 'QtGui'
+  str: 'QtWidgets'
+  str: 'QEvent'
+  str: 'QApplication'
+  str: 'QLabel'
+  str: 'QMessageBox'
+  str: 'LPAdaptiveMessageBox'
+
+def LPAdaptiveMessageBox()  line 10
+  names: __name__, __module__, __qualname__, __doc__, __init__, setText, _textWidth, _textWithBreakOpportunities, _updateRoundedMask, _applyAdaptiveLayout, showEvent, event, __classcell__
+    str: 'LPAdaptiveMessageBox'
+    str: '自适应尺寸的消息确认弹窗，统一 Windows 和 macOS 的文字换行与尺寸计算。'
+    str: 'LPAdaptiveMessageBox.__init__'
+    str: 'LPAdaptiveMessageBox.setText'
+    str: 'LPAdaptiveMessageBox._textWidth'
+    str: 'LPAdaptiveMessageBox._textWithBreakOpportunities'
+    str: 'LPAdaptiveMessageBox._updateRoundedMask'
+    str: 'LPAdaptiveMessageBox._applyAdaptiveLayout'
+    str: 'LPAdaptiveMessageBox.showEvent'
+    str: 'LPAdaptiveMessageBox.event'
+
+  def LPAdaptiveMessageBox.__init__(self, parent)  line 13
+    names: _messageText, super, __init__, _maximumContentWidth, _minimumDialogWidth, _horizontalContentMargin, _labelRightPadding, _maskRadius, _applyingAdaptiveLayout
+      str: '初始化弹窗。\n\n        :param parent: 父级控件。\n        :return: None。\n        '
+
+  def LPAdaptiveMessageBox.setText(self, text)  line 28
+    names: str, _messageText, super, setText
+      str: '保存原始消息文字，供自适应布局测量和恢复显示。\n\n        :param text: 要展示的消息文字。\n        :return: None。\n        '
+
+  def LPAdaptiveMessageBox._textWidth(self, label)  line 37
+    names: QtGui, QFontMetrics, font, max, _messageText, splitlines
+      str: '计算消息文字每一行的实际像素宽度。\n\n        :param label: QMessageBox 内部的消息标签。\n        :return: 消息文字的最大行宽。\n        '
+      str: 'LPAdaptiveMessageBox._textWidth.<locals>.<genexpr>'
+      str: 'default'
+
+    def LPAdaptiveMessageBox._textWidth.<genexpr>(.0)  line 44
+      names: horizontalAdvance
+
+  def LPAdaptiveMessageBox._textWithBreakOpportunities(self, label, contentWidth)  line 46
+    names: QtGui, QFontMetrics, font, re, split, _messageText, join
+      str: '仅为超过内容宽度的连续文本添加不可见换行机会。\n\n        :param label: QMessageBox 内部的消息标签。\n        :param contentWidth: 消息标签的可用内容宽度。\n        :return: 可在任意字符边界换行的显示文本。\n        '
+      str: '(\\s+)'
+      str: 'LPAdaptiveMessageBox._textWithBreakOpportunities.<locals>.<genexpr>'
+
+    def LPAdaptiveMessageBox._textWithBreakOpportunities.<genexpr>(.0)  line 55
+      names: isspace, horizontalAdvance, join
+        str: '\u200b'
+
+  def LPAdaptiveMessageBox._updateRoundedMask(self)  line 62
+    names: QtGui, QPainterPath, addRoundedRect, width, height, _maskRadius, setMask, QRegion, toFillPolygon, toPolygon
+      str: '根据当前弹窗尺寸同步更新圆角遮罩。\n\n        :return: None。\n        '
+
+  def LPAdaptiveMessageBox._applyAdaptiveLayout(self)  line 71
+    names: _applyingAdaptiveLayout, isVisible, findChild, QLabel, height, setWordWrap, setMaximumWidth, layout, activate, screen, QApplication, primaryScreen, availableGeometry, width, min, _maximumContentWidth, max, _horizontalContentMargin, _minimumDialogWidth, _textWidth, setFixedWidth, _labelRightPadding, setText, _textWithBreakOpportunities, _messageText, totalMinimumSize, totalHeightForWidth, sizeHint, setFixedSize, _updateRoundedMask
+      str: '依据实际文字宽度设置弹窗宽高；超过统一上限时自动换行。\n\n        :return: None。\n        '
+      str: 'qt_msgbox_label'
+
+  def LPAdaptiveMessageBox.showEvent(self, event)  line 129
+    names: super, showEvent, _applyAdaptiveLayout
+      str: '在 Qt 完成默认布局后应用跨平台自适应尺寸。\n\n        :param event: 显示事件。\n        :return: None。\n        '
+
+  def LPAdaptiveMessageBox.event(self, event)  line 138
+    names: type, QEvent, Type, LayoutRequest, QtWidgets, QDialog, event, _applyAdaptiveLayout, super
+      str: '拦截布局请求，防止 QMessageBox 恢复平台相关的自动换行策略。\n\n        :param event: 待处理的 Qt 事件。\n        :return: 事件处理结果。\n        '

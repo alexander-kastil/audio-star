@@ -1,0 +1,637 @@
+# module HOME.StreamService.WiiMRadio.utils.LPWiiMRadioDataProvider
+
+[module] names: __doc__, copy, json, statistics, threading, time, uuid, typing, Any, Callable, Dict, List, Optional, PyQt6.QtCore, QObject, pyqtSignal, requests, requests_cache, LPClientFramework.LPEventTrack, LPAuthenticatedRequestClient, LPClientFramework.LPUtility, logger, cacheDir, eventCountryCode, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioRequestScheduler, LPWiiMRadioRequestScheduler, _WIIM_RADIO_API_HOST, _WIIM_RADIO_LOCATION_API_HOST, _WIIM_RADIO_APP_ID, _WIIM_RADIO_ACCESS_KEY, _WIIM_RADIO_SECRET_KEY, _WIIM_RADIO_STATION_LIST_ENDPOINT, _WIIM_RADIO_LOCATION_ENDPOINT, _EVENT_STATION_LIST_ERROR, _EVENT_AREA_NUM, _EVENT_STATION_LIST_TIME_COST, _EVENT_TOOL_LOCATION_ERROR, _STATION_LIST_TIME_COST_BATCH_SIZE, _LPWiiMRadioEventAnalytics, _wiimRadioEventAnalytics, LPWiiMRadioDataProvider
+  str: '\nWiiMRadio 异步数据提供层。\n'
+  str: 'Any'
+  str: 'Callable'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'LPAuthenticatedRequestClient'
+  str: 'logger'
+  str: 'cacheDir'
+  str: 'eventCountryCode'
+  str: 'LPWiiMRadioRequestScheduler'
+  str: 'https://cloud-api.linkplay.com/prod/'
+  str: 'https://api.linkplay.com'
+  str: '<redacted>'
+  str: '<redacted>'
+  str: '/radio/station/list'
+  str: '/apiv1/tool/location'
+  str: 'ss_wiimradio_station_list'
+  str: 'ss_wiimradio_area_num'
+  str: 'ss_wiimradio_station_list_time_cost'
+  str: 'ss_wiimradio_tool_location'
+  str: '_LPWiiMRadioEventAnalytics'
+  str: 'LPWiiMRadioDataProvider'
+
+def _LPWiiMRadioEventAnalytics()  line 39
+  names: __name__, __module__, __qualname__, __init__, Dict, str, Any, int, trackStationListResult, trackLocationResult, _buildStationListErrorParams, _buildAreaNumParams, _trackStationListTimeCost, List, _buildTimeCostParams, _logEvent, _filterNonEmptyEntries, _serializePayload, bool, _isAreaRequest, _normalizeCountryCode, _normalizeSubcountryCode, _readErrorCode, _readErrorDesc, _safeInt
+    str: '_LPWiiMRadioEventAnalytics'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics.__init__'
+    str: 'requestPayload'
+    str: 'result'
+    str: 'durationMs'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics.trackStationListResult'
+    str: 'result'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics.trackLocationResult'
+    str: 'requestPayload'
+    str: 'result'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._buildStationListErrorParams'
+    str: '_LPWiiMRadioEventAnalytics._buildAreaNumParams'
+    str: 'requestPayload'
+    str: 'durationMs'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._trackStationListTimeCost'
+    str: 'records'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._buildTimeCostParams'
+    str: 'eventName'
+    str: 'params'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._logEvent'
+    str: 'payload'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._filterNonEmptyEntries'
+    str: '_LPWiiMRadioEventAnalytics._serializePayload'
+    str: 'requestPayload'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._isAreaRequest'
+    str: 'countryCode'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._normalizeCountryCode'
+    str: 'subcountryCode'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._normalizeSubcountryCode'
+    str: '_LPWiiMRadioEventAnalytics._readErrorCode'
+    str: '_LPWiiMRadioEventAnalytics._readErrorDesc'
+    str: 'value'
+    str: 'default'
+    str: 'return'
+    str: '_LPWiiMRadioEventAnalytics._safeInt'
+
+  def _LPWiiMRadioEventAnalytics.__init__(self)  line 40
+    names: threading, Lock, _lock, _station_time_cost_records
+      str: '\n        初始化 WiiMRadio 埋点辅助器。\n\n        :param: 无。\n        :return: None。\n        '
+
+  def _LPWiiMRadioEventAnalytics.trackStationListResult(self, requestPayload, result, durationMs)  line 50
+    names: isinstance, dict, bool, get, _logEvent, _EVENT_STATION_LIST_ERROR, _buildStationListErrorParams, _isAreaRequest, _EVENT_AREA_NUM, _buildAreaNumParams, _trackStationListTimeCost
+      str: '\n        按结果统一处理 station/list 的错误、地区数量与耗时统计埋点。\n\n        :param requestPayload: 原始请求体。\n        :param result: 归一化请求结果。\n        :param durationMs: 当前请求耗时，单位毫秒。\n        :return: None。\n        '
+      str: 'success'
+
+  def _LPWiiMRadioEventAnalytics.trackLocationResult(self, result)  line 82
+    names: isinstance, dict, bool, get, _logEvent, _EVENT_TOOL_LOCATION_ERROR, _readErrorCode, _readErrorDesc
+      str: '\n        处理 location 接口失败埋点。\n\n        :param result: 归一化后的 location 结果。\n        :return: None。\n        '
+      str: 'success'
+      str: 'parameters'
+      str: 'errorCode'
+      str: 'errorDesc'
+
+  def _LPWiiMRadioEventAnalytics._buildStationListErrorParams(self, requestPayload, result)  line 101
+    names: _serializePayload, _readErrorCode, _readErrorDesc
+      str: '\n        构造 station/list 失败埋点参数。\n\n        :param requestPayload: 原始请求体。\n        :param result: 归一化后的请求结果。\n        :return: 埋点参数字典。\n        '
+      str: 'parameters'
+      str: 'errorCode'
+      str: 'errorDesc'
+
+  def _LPWiiMRadioEventAnalytics._buildAreaNumParams(self, requestPayload, result)  line 119
+    names: get, isinstance, list, _normalizeCountryCode, _normalizeSubcountryCode, len, _safeInt
+      str: '\n        构造地区电台数量埋点参数。\n\n        :param requestPayload: 原始请求体。\n        :param result: 归一化后的请求结果。\n        :return: 埋点参数字典。\n        '
+      str: 'items'
+      str: 'countryCode'
+      str: 'subcountryCode'
+      str: 'pageSize'
+      str: 'pageNo'
+      str: 'countryCode'
+      str: 'subCountryCode'
+      str: 'number'
+      str: 'pageSize'
+      str: 'pageNo'
+
+  def _LPWiiMRadioEventAnalytics._trackStationListTimeCost(self, requestPayload, durationMs)  line 141
+    names: max, _safeInt, _serializePayload, _lock, _station_time_cost_records, append, len, _STATION_LIST_TIME_COST_BATCH_SIZE, list, _logEvent, _EVENT_STATION_LIST_TIME_COST, _buildTimeCostParams
+      str: '\n        累积 station/list 成功请求耗时，并在满 10 条时上报统计埋点。\n\n        :param requestPayload: 原始请求体。\n        :param durationMs: 当前请求耗时，单位毫秒。\n        :return: None。\n        '
+      str: 'durationMs'
+      str: 'parameters'
+
+  def _LPWiiMRadioEventAnalytics._buildTimeCostParams(self, records)  line 167
+    names: str, _STATION_LIST_TIME_COST_BATCH_SIZE, max, min, int, round, statistics, median, get
+      str: '\n        根据一批请求耗时记录构造耗时统计埋点参数。\n\n        :param records: 请求耗时记录列表。\n        :return: 埋点参数字典。\n        '
+      str: '_LPWiiMRadioEventAnalytics._buildTimeCostParams.<locals>.<listcomp>'
+      str: 'minTime'
+      str: 'maxTime'
+      str: 'medianTime'
+      str: 'maxTimeParameters'
+      str: 'totalCount'
+      str: '_LPWiiMRadioEventAnalytics._buildTimeCostParams.<locals>.<genexpr>'
+      str: '_LPWiiMRadioEventAnalytics._buildTimeCostParams.<locals>.<lambda>'
+      str: 'key'
+      str: 'parameters'
+
+    def _LPWiiMRadioEventAnalytics._buildTimeCostParams.<listcomp>(.0)  line 174
+      names: isinstance, dict, max, _safeInt, get
+        str: 'durationMs'
+
+    def _LPWiiMRadioEventAnalytics._buildTimeCostParams.<genexpr>(.0)  line 185
+      names: isinstance, dict
+
+    def _LPWiiMRadioEventAnalytics._buildTimeCostParams.<lambda>(row)  line 186
+      names: _safeInt, get
+        str: 'durationMs'
+
+  def _LPWiiMRadioEventAnalytics._logEvent(self, eventName, params)  line 196
+    names: LPGlobalUI, isinstance, dict, eventCountryCode, Exception, pop, eventTrack, logEvent, logger, warning
+      str: '\n        通过全局埋点发送器异步发送事件。\n\n        本方法是 WiiMRadio 四个云 API 事件的唯一出口，统一补充设备系统\n        地区码 "country_code"（与请求体里来自 /location 接口的 camelCase\n        "countryCode" 语义不同，后者表示实际请求地区，保持原样）。\n\n        :param eventName: 埋点事件名。\n        :param params: 业务参数字典。\n        :return: None。\n        '
+      str: 'country_code'
+      str: '[WiiMRadio] logEvent failed event='
+      str: ', error='
+
+  def _LPWiiMRadioEventAnalytics._filterNonEmptyEntries(self, payload)  line 223
+    names: isinstance, dict, items, str, list, len
+      str: '\n        过滤字典中值为空的键，避免上报参数超过长度限制。\n\n        判定为空的值：None、空字符串、空列表、空字典；数字 0 等有效值予以保留。\n\n        :param payload: 原始字典。\n        :return: 仅包含非空值的新字典；非字典入参原样返回。\n        '
+
+  def _LPWiiMRadioEventAnalytics._serializePayload(self, payload)  line 245
+    names: isinstance, dict, list, _filterNonEmptyEntries, json, dumps, TypeError, str
+      str: '\n        将请求体稳定序列化为 JSON 字符串。\n\n        为避免上报参数超过 100 字符长度限制，序列化前会剔除值为空的键\n        （None / 空字符串 / 空集合），该处理同时作用于 station/list 失败埋点的\n        parameters 与耗时统计埋点的 maxTimeParameters 字段。\n\n        :param payload: 原始请求体。\n        :return: 过滤空值键后稳定序列化的字符串；过滤后为空则返回空字符串。\n        '
+      str: ','
+      str: ':'
+      str: 'ensure_ascii'
+      str: 'sort_keys'
+      str: 'separators'
+
+  def _LPWiiMRadioEventAnalytics._isAreaRequest(self, requestPayload)  line 266
+    names: isinstance, dict, bool, _normalizeCountryCode, get, _normalizeSubcountryCode
+      str: '\n        判断当前 station/list 请求是否带地区维度。\n\n        :param requestPayload: 原始请求体。\n        :return: 带 `countryCode` 或 `subcountryCode` 返回 True。\n        '
+      str: 'countryCode'
+      str: 'subcountryCode'
+
+  def _LPWiiMRadioEventAnalytics._normalizeCountryCode(self, countryCode)  line 280
+    names: str, strip, upper, len
+      str: '\n        将国家代码归一化为两位大写字符串。\n\n        :param countryCode: 原始国家代码。\n        :return: 合法国家代码；无效时返回空字符串。\n        '
+
+  def _LPWiiMRadioEventAnalytics._normalizeSubcountryCode(self, subcountryCode)  line 290
+    names: str, strip
+      str: '\n        将子地区代码归一化为去空白后的字符串。\n\n        :param subcountryCode: 原始子地区代码。\n        :return: 归一化后的子地区代码。\n        '
+
+  def _LPWiiMRadioEventAnalytics._readErrorCode(self, result)  line 299
+    names: isinstance, dict, _safeInt, get
+      str: '\n        从归一化结果中读取错误码。\n\n        :param result: 归一化后的请求结果。\n        :return: 错误码整数；不存在时返回 0。\n        '
+      str: 'errorCode'
+
+  def _LPWiiMRadioEventAnalytics._readErrorDesc(self, result)  line 310
+    names: isinstance, dict, str, get, strip
+      str: '\n        从归一化结果中读取错误描述，并按前 100 个字符截断。\n\n        :param result: 归一化后的请求结果。\n        :return: 截断至 100 字符以内的错误描述字符串。\n        '
+      str: 'errorDesc'
+      str: 'error'
+
+  def _LPWiiMRadioEventAnalytics._safeInt(self, value, default)  line 325
+    names: int, TypeError, ValueError
+      str: '\n        将任意值安全转换为整数。\n\n        :param value: 待转换的值。\n        :param default: 转换失败时的默认值。\n        :return: 整数结果。\n        '
+
+def LPWiiMRadioDataProvider()  line 343
+  names: __name__, __module__, __qualname__, ERROR_KIND_NONE, ERROR_KIND_HTTP_4XX, ERROR_KIND_TIMEOUT, ERROR_KIND_NETWORK, ERROR_KIND_BUSINESS, ERROR_KIND_UNKNOWN, pyqtSignal, object, _responseReady, threading, Lock, _shared_lock, _shared_session, _shared_station_client, _shared_location_client, int, Optional, QObject, __init__, classmethod, _ensure_shared_clients, LPWiiMRadioRequestScheduler, PRIORITY_BACKGROUND, Dict, str, Any, Callable, fetchStations, PRIORITY_VISIBLE, fetchGlobalSearchStations, fetchLocationCountryCode, _build_global_search_payload, _build_station_request_key, _build_location_request_key, _dispatch_response, _request_station_list, _build_station_list_url, _request_location_country_code, _normalize_result, _build_empty_result, _normalize_location_result, _build_empty_location_result, _classify_status_error, _extract_response_business_code, _extract_response_message, _build_business_error_text, Exception, _extract_exception_error_info, _parse_response_json, _normalize_station_item, _normalize_country_code, _normalize_subcountry_code, _safe_int, float, _calculate_elapsed_ms, __classcell__
+    str: 'LPWiiMRadioDataProvider'
+    str: 'none'
+    str: 'http_4xx'
+    str: 'timeout'
+    str: 'network'
+    str: 'business'
+    str: 'unknown'
+    str: 'timeout'
+    str: 'parent'
+    str: 'LPWiiMRadioDataProvider.__init__'
+    str: 'timeout'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._ensure_shared_clients'
+    str: 'payload'
+    str: 'callback'
+    str: 'context'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider.fetchStations'
+    str: 'keyword'
+    str: 'callback'
+    str: 'context'
+    str: 'pageNo'
+    str: 'pageSize'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider.fetchGlobalSearchStations'
+    str: 'callback'
+    str: 'context'
+    str: 'priority'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider.fetchLocationCountryCode'
+    str: 'keyword'
+    str: 'pageNo'
+    str: 'pageSize'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._build_global_search_payload'
+    str: 'payload'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._build_station_request_key'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._build_location_request_key'
+    str: 'result'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._dispatch_response'
+    str: 'LPWiiMRadioDataProvider._request_station_list'
+    str: 'LPWiiMRadioDataProvider._build_station_list_url'
+    str: 'LPWiiMRadioDataProvider._request_location_country_code'
+    str: 'responsePayload'
+    str: 'requestPayload'
+    str: 'statusCode'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._normalize_result'
+    str: 'requestPayload'
+    str: 'status_code'
+    str: 'error'
+    str: 'error_code'
+    str: 'error_desc'
+    str: 'error_kind'
+    str: 'request_id'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._build_empty_result'
+    str: 'responsePayload'
+    str: 'statusCode'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._normalize_location_result'
+    str: 'status_code'
+    str: 'error'
+    str: 'error_code'
+    str: 'error_desc'
+    str: 'error_kind'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._build_empty_location_result'
+    str: 'statusCode'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._classify_status_error'
+    str: 'responsePayload'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._extract_response_business_code'
+    str: 'LPWiiMRadioDataProvider._extract_response_message'
+    str: 'businessCode'
+    str: 'message'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._build_business_error_text'
+    str: 'exc'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._extract_exception_error_info'
+    str: 'response'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._parse_response_json'
+    str: 'rawItem'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._normalize_station_item'
+    str: 'countryCode'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._normalize_country_code'
+    str: 'subcountryCode'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._normalize_subcountry_code'
+    str: 'value'
+    str: 'default'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._safe_int'
+    str: 'startTime'
+    str: 'return'
+    str: 'LPWiiMRadioDataProvider._calculate_elapsed_ms'
+
+  def LPWiiMRadioDataProvider.__init__(self, timeout, parent)  line 357
+    names: super, __init__, _ensure_shared_clients, __class__, _shared_station_client, _client, _shared_location_client, _location_client, LPWiiMRadioRequestScheduler, instance, _scheduler, _callbacks, threading, Lock, _lock, _wiimRadioEventAnalytics, _event_analytics, _responseReady, connect, _dispatch_response
+      str: '\n        初始化数据提供器。\n\n        :param timeout: HTTP 请求超时秒数。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def LPWiiMRadioDataProvider._ensure_shared_clients(cls, timeout)  line 375
+    names: _shared_lock, _shared_session, requests_cache, CachedSession, str, cacheDir, cache, delete, Exception, logger, debug, _shared_station_client, LPAuthenticatedRequestClient, _WIIM_RADIO_API_HOST, _WIIM_RADIO_APP_ID, _WIIM_RADIO_ACCESS_KEY, _WIIM_RADIO_SECRET_KEY, _shared_location_client, _WIIM_RADIO_LOCATION_API_HOST
+      str: '\n        懒初始化全局共享的缓存 Session 与鉴权客户端。\n\n        :param timeout: HTTP 请求超时秒数。\n        :return: None。\n        '
+      str: 'wiimradio_api_cache'
+      str: 'GET'
+      str: 'POST'
+      str: 'expire_after'
+      str: 'allowable_methods'
+      str: 'expired'
+      str: '[WiiMRadio] cache cleanup skipped: '
+      str: 'api_host'
+      str: 'app_id'
+      str: 'access_key'
+      str: 'secret_key'
+      str: 'timeout'
+      str: 'session'
+
+  def LPWiiMRadioDataProvider.fetchStations(self, payload, callback, context, priority)  line 413
+    names: uuid, uuid4, hex, isinstance, dict, copy, deepcopy, _lock, _callbacks, _build_station_request_key, Any, str, Dict, _scheduler, submitApiTask
+      str: '\n        异步请求电台列表。\n\n        :param payload: `station/list` 接口请求体。\n        :param callback: 主线程回调函数，入参为归一化结果字典。\n        :param context: 回调透传上下文。\n        :param priority: 调度优先级。\n        :return: 当前请求的唯一标识。\n        '
+      str: 'result'
+      str: 'requestToken'
+      str: 'responseContext'
+      str: 'return'
+      str: 'LPWiiMRadioDataProvider.fetchStations.<locals>._deliver'
+      str: 'LPWiiMRadioDataProvider.fetchStations.<locals>.<lambda>'
+      str: 'jobKey'
+      str: 'task'
+      str: 'callback'
+      str: 'priority'
+
+    def LPWiiMRadioDataProvider.fetchStations._deliver(result, requestToken, responseContext)  line 437
+      names: isinstance, dict, _build_empty_result, str, copy, deepcopy, _responseReady, emit
+        str: '\n            将调度器结果转发为当前 DataProvider 的统一响应格式。\n\n            :param result: 调度器返回结果。\n            :param requestToken: 请求唯一标识。\n            :param responseContext: 透传上下文。\n            :return: None。\n            '
+        str: 'status_code'
+        str: 'error'
+        str: 'error_code'
+        str: 'error_desc'
+        str: 'requestToken'
+        str: 'context'
+
+    def LPWiiMRadioDataProvider.fetchStations.<lambda>(safeRequestPayload)  line 460
+      names: _request_station_list
+
+  def LPWiiMRadioDataProvider.fetchGlobalSearchStations(self, keyword, callback, context, pageNo, pageSize, priority)  line 466
+    names: _build_global_search_payload, fetchStations
+      str: '\n        异步请求 WiiMRadio 首页全局搜索结果。\n\n        :param keyword: 搜索关键字，仅映射到接口的 name 字段。\n        :param callback: 主线程回调函数，入参为归一化结果字典。\n        :param context: 回调透传上下文。\n        :param pageNo: 目标页码。\n        :param pageSize: 每页返回条数。\n        :param priority: 调度优先级。\n        :return: 当前请求的唯一标识。\n        '
+      str: 'callback'
+      str: 'context'
+      str: 'priority'
+
+  def LPWiiMRadioDataProvider.fetchLocationCountryCode(self, callback, context, priority)  line 489
+    names: uuid, uuid4, hex, isinstance, dict, copy, deepcopy, _lock, _callbacks, Any, str, Dict, _scheduler, submitApiTask, _build_location_request_key, _request_location_country_code
+      str: '\n        异步请求 location API 获取国家代码。\n\n        :param callback: 主线程回调函数，入参为归一化结果字典。\n        :param context: 回调透传上下文。\n        :param priority: 调度优先级。\n        :return: 当前请求的唯一标识。\n        '
+      str: 'result'
+      str: 'requestToken'
+      str: 'responseContext'
+      str: 'return'
+      str: 'LPWiiMRadioDataProvider.fetchLocationCountryCode.<locals>._deliver'
+      str: 'jobKey'
+      str: 'task'
+      str: 'callback'
+      str: 'priority'
+
+    def LPWiiMRadioDataProvider.fetchLocationCountryCode._deliver(result, requestToken, responseContext)  line 508
+      names: isinstance, dict, _build_empty_location_result, str, copy, deepcopy, _responseReady, emit
+        str: '\n            将 location 结果转发为统一响应格式。\n\n            :param result: 调度器返回结果。\n            :param requestToken: 请求唯一标识。\n            :param responseContext: 透传上下文。\n            :return: None。\n            '
+        str: 'status_code'
+        str: 'error'
+        str: 'error_code'
+        str: 'error_desc'
+        str: 'requestToken'
+        str: 'context'
+
+  def LPWiiMRadioDataProvider._build_global_search_payload(self, keyword, pageNo, pageSize)  line 536
+    names: str, strip, _safe_int
+      str: '\n        构建首页全局搜索请求体。\n\n        :param keyword: 搜索关键字。\n        :param pageNo: 页码。\n        :param pageSize: 每页数量。\n        :return: `station/list` 接口请求体。\n        '
+      str: 'clickCount'
+      str: 'isDistinct'
+      str: 'stationId'
+      str: 'name'
+      str: 'customName'
+      str: 'language'
+      str: 'languageCodes'
+      str: 'country'
+      str: 'countryCode'
+      str: 'categories'
+      str: 'customTags'
+      str: 'tags'
+      str: 'pageNo'
+      str: 'pageSize'
+      str: 'orderByStr'
+      str: 'sortStr'
+
+  def LPWiiMRadioDataProvider._build_station_request_key(self, payload)  line 564
+    names: isinstance, dict, json, dumps, TypeError, str
+      str: '\n        为 `station/list` 请求构建可去重的稳定缓存键。\n\n        :param payload: 请求体字典。\n        :return: 稳定请求键。\n        '
+      str: ','
+      str: ':'
+      str: 'ensure_ascii'
+      str: 'sort_keys'
+      str: 'separators'
+      str: 'station_list::'
+
+  def LPWiiMRadioDataProvider._build_location_request_key(self)  line 578
+      str: '\n        返回 location 请求的固定去重键。\n\n        :param: 无。\n        :return: location 请求键。\n        '
+      str: 'location_country_code'
+
+  def LPWiiMRadioDataProvider._dispatch_response(self, result)  line 587
+    names: str, get, _lock, _callbacks, pop
+      str: '\n        在主线程中分发请求结果。\n\n        :param result: 归一化后的请求结果。\n        :return: None。\n        '
+      str: 'requestToken'
+
+  def LPWiiMRadioDataProvider._request_station_list(self, payload)  line 602
+    names: time, perf_counter, _build_station_list_url, _client, post, _WIIM_RADIO_STATION_LIST_ENDPOINT, _extract_response_message, _build_empty_result, _classify_status_error, _normalize_result, requests, Timeout, str, ERROR_KIND_TIMEOUT, ConnectionError, ERROR_KIND_NETWORK, HTTPError, _extract_exception_error_info, _safe_int, get, Exception, ERROR_KIND_UNKNOWN, logger, debug, _event_analytics, trackStationListResult, _calculate_elapsed_ms
+      str: '\n        执行 `station/list` 请求并归一化响应结构。\n\n        :param payload: 接口请求体。\n        :return: 统一格式的分页结果。\n        '
+      str: 'http_status_error'
+      str: 'status_code'
+      str: 'error'
+      str: 'error_code'
+      str: 'error_desc'
+      str: 'error_kind'
+      str: 'timeout'
+      str: 'network_error'
+      str: 'statusCode'
+      str: 'message'
+      str: '[WiiMRadio] station_list url='
+      str: ' status_code='
+
+  def LPWiiMRadioDataProvider._build_station_list_url(self)  line 678
+    names: _WIIM_RADIO_API_HOST, rstrip, _WIIM_RADIO_STATION_LIST_ENDPOINT
+      str: '\n        构造 `station/list` 请求完整 URL。\n\n        :param: 无。\n        :return: 接口完整 URL。\n        '
+      str: '/'
+
+  def LPWiiMRadioDataProvider._request_location_country_code(self)  line 687
+    names: time, perf_counter, _location_client, get, _WIIM_RADIO_LOCATION_ENDPOINT, _extract_response_message, logger, warning, _build_empty_location_result, _classify_status_error, info, _normalize_location_result, requests, Timeout, str, ERROR_KIND_TIMEOUT, ConnectionError, ERROR_KIND_NETWORK, HTTPError, _extract_exception_error_info, _safe_int, Exception, ERROR_KIND_UNKNOWN, debug, _calculate_elapsed_ms, _event_analytics, trackLocationResult
+      str: '\n        执行 location API 请求并归一化国家代码响应。\n\n        :param: 无。\n        :return: 统一格式的国家代码结果。\n        '
+      str: '[WiiMRadio] location status_code='
+      str: 'http_status_error'
+      str: 'status_code'
+      str: 'error'
+      str: 'error_code'
+      str: 'error_desc'
+      str: 'error_kind'
+      str: 'location response_payload -> '
+      str: '[WiiMRadio] location request timeout: '
+      str: 'timeout'
+      str: '[WiiMRadio] location network failed: '
+      str: 'network_error'
+      str: 'statusCode'
+      str: '[WiiMRadio] location http failed: '
+      str: 'message'
+      str: '[WiiMRadio] location request failed: '
+      str: '[WiiMRadio] location request elapsedMs='
+
+  def LPWiiMRadioDataProvider._normalize_result(self, responsePayload, requestPayload, statusCode)  line 754
+    names: isinstance, dict, _build_empty_result, ERROR_KIND_UNKNOWN, _extract_response_business_code, _extract_response_message, _build_business_error_text, ERROR_KIND_BUSINESS, str, get, list, _normalize_station_item, append, _safe_int, len, ERROR_KIND_NONE
+      str: '\n        将接口响应转换为统一分页结构。\n\n        :param responsePayload: 原始接口响应。\n        :param requestPayload: 原始请求体。\n        :param statusCode: HTTP 状态码。\n        :return: 归一化后的分页结果。\n        '
+      str: 'invalid_response'
+      str: 'status_code'
+      str: 'error'
+      str: 'error_code'
+      str: 'error_desc'
+      str: 'error_kind'
+      str: 'requestId'
+      str: 'status_code'
+      str: 'error'
+      str: 'error_code'
+      str: 'error_desc'
+      str: 'error_kind'
+      str: 'request_id'
+      str: 'resultList'
+      str: 'pageNo'
+      str: 'default'
+      str: 'pageSize'
+      str: 'totalPages'
+      str: 'totalRows'
+      str: 'items'
+      str: 'pageNo'
+      str: 'pageSize'
+      str: 'totalPages'
+      str: 'totalRows'
+      str: 'hasMore'
+      str: 'statusCode'
+      str: 'success'
+      str: 'error'
+      str: 'errorCode'
+      str: 'errorDesc'
+      str: 'errorKind'
+      str: 'requestId'
+
+  def LPWiiMRadioDataProvider._build_empty_result(self, requestPayload, status_code, error, error_code, error_desc, error_kind, request_id)  line 820
+    names: _safe_int, get, ERROR_KIND_UNKNOWN
+      str: '\n        构造空结果兜底对象。\n\n        :param requestPayload: 原始请求体。\n        :param status_code: HTTP 状态码。\n        :param error: 错误描述。\n        :param error_code: 业务错误码或 HTTP 错误码。\n        :param error_desc: 用于埋点的错误说明。\n        :param error_kind: 稳定错误类型。\n        :param request_id: 请求 ID。\n        :return: 统一格式的空分'
+      str: 'pageNo'
+      str: 'pageSize'
+      str: 'items'
+      str: 'pageNo'
+      str: 'pageSize'
+      str: 'totalPages'
+      str: 'totalRows'
+      str: 'hasMore'
+      str: 'statusCode'
+      str: 'success'
+      str: 'error'
+      str: 'errorCode'
+      str: 'errorDesc'
+      str: 'errorKind'
+      str: 'requestId'
+
+  def LPWiiMRadioDataProvider._normalize_location_result(self, responsePayload, statusCode)  line 858
+    names: isinstance, dict, _build_empty_location_result, ERROR_KIND_UNKNOWN, _extract_response_business_code, _extract_response_message, _build_business_error_text, ERROR_KIND_BUSINESS, get, _normalize_country_code, _normalize_subcountry_code, logger, debug, ERROR_KIND_NONE, str, strip
+      str: '\n        将 location API 响应转换为统一地区代码结构。\n\n        :param responsePayload: 原始接口响应。\n        :param statusCode: HTTP 状态码。\n        :return: 归一化后的地区代码结果。\n        '
+      str: 'invalid_response'
+      str: 'status_code'
+      str: 'error'
+      str: 'error_code'
+      str: 'error_desc'
+      str: 'error_kind'
+      str: 'data'
+      str: 'invalid_data'
+      str: 'countryCode'
+      str: 'region'
+      str: 'get country_code -> '
+      str: 'invalid_country_code'
+      str: 'message'
+      str: 'countryCode'
+      str: 'subcountryCode'
+      str: 'statusCode'
+      str: 'success'
+      str: 'error'
+      str: 'errorCode'
+      str: 'errorDesc'
+      str: 'errorKind'
+      str: 'message'
+
+  def LPWiiMRadioDataProvider._build_empty_location_result(self, status_code, error, error_code, error_desc, error_kind)  line 929
+    names: ERROR_KIND_UNKNOWN
+      str: '\n        构造地区代码接口的空结果兜底对象。\n\n        :param status_code: HTTP 状态码。\n        :param error: 错误描述。\n        :param error_code: 业务错误码或 HTTP 错误码。\n        :param error_desc: 用于埋点的错误说明。\n        :param error_kind: 稳定错误类型。\n        :return: 统一格式的地区代码结果。\n        '
+      str: 'countryCode'
+      str: 'subcountryCode'
+      str: 'statusCode'
+      str: 'success'
+      str: 'error'
+      str: 'errorCode'
+      str: 'errorDesc'
+      str: 'errorKind'
+      str: 'message'
+
+  def LPWiiMRadioDataProvider._classify_status_error(self, statusCode)  line 959
+    names: _safe_int, ERROR_KIND_HTTP_4XX, ERROR_KIND_UNKNOWN
+      str: '\n        根据 HTTP 状态码转换为页面可识别的错误类型。\n\n        :param statusCode: HTTP 状态码。\n        :return: 稳定错误类型字符串。\n        '
+
+  def LPWiiMRadioDataProvider._extract_response_business_code(self, responsePayload)  line 971
+    names: isinstance, dict, int, get, TypeError, ValueError
+      str: '\n        从原始响应中提取业务错误码。\n\n        :param responsePayload: 原始接口响应。\n        :return: 可解析的业务码；字段缺失或不可解析时返回 None。\n        '
+      str: 'code'
+
+  def LPWiiMRadioDataProvider._extract_response_message(self, responsePayload)  line 985
+    names: isinstance, dict, str, get, strip
+      str: '\n        从原始响应中提取错误说明文本。\n\n        :param responsePayload: 原始接口响应。\n        :return: message 字段的字符串结果。\n        '
+      str: 'message'
+
+  def LPWiiMRadioDataProvider._build_business_error_text(self, businessCode, message)  line 996
+      str: '\n        组装业务错误描述文本。\n\n        :param businessCode: 业务错误码。\n        :param message: 后端 message。\n        :return: 拼接后的错误文本。\n        '
+      str: 'business_error:'
+      str: ':'
+
+  def LPWiiMRadioDataProvider._extract_exception_error_info(self, exc)  line 1009
+    names: getattr, _parse_response_json, _safe_int, _extract_response_message
+      str: '\n        从请求异常对象中提取 HTTP 状态码与响应 message。\n\n        :param exc: 请求异常对象。\n        :return: 包含 `statusCode` 与 `message` 的字典。\n        '
+      str: 'response'
+      str: 'statusCode'
+      str: 'message'
+      str: 'status_code'
+
+  def LPWiiMRadioDataProvider._parse_response_json(self, response)  line 1029
+    names: isinstance, requests, Response, json, dict, ValueError, TypeError, str, getattr, strip, loads
+      str: '\n        安全解析响应对象中的 JSON 文本。\n\n        :param response: requests 响应对象。\n        :return: 解析成功时返回字典，否则返回空字典。\n        '
+      str: 'text'
+
+  def LPWiiMRadioDataProvider._normalize_station_item(self, rawItem)  line 1055
+    names: isinstance, dict, str, get, strip, _normalize_country_code
+      str: '\n        将单个电台条目转换为 UI 可消费结构。\n\n        :param rawItem: 原始电台条目字典。\n        :return: 归一化后的电台条目；无有效 ID 时返回 None。\n        '
+      str: 'StationID'
+      str: 'Name'
+      str: 'customName'
+      str: 'Favicon'
+      str: 'StreamUrl'
+      str: 'Url'
+      str: 'URL'
+      str: 'City'
+      str: 'city'
+      str: 'Subcountry'
+      str: 'subcountry'
+      str: 'Region'
+      str: 'region'
+      str: 'Country'
+      str: 'country'
+      str: 'CountryCode'
+      str: 'countryCode'
+      str: 'Genres'
+      str: 'genres'
+      str: 'stationId'
+      str: 'name'
+      str: 'favicon'
+      str: 'streamUrl'
+      str: 'city'
+      str: 'region'
+      str: 'country'
+      str: 'countryCode'
+      str: 'genres'
+
+  def LPWiiMRadioDataProvider._normalize_country_code(self, countryCode)  line 1092
+    names: str, strip, upper, len
+      str: '\n        将任意国家代码归一化为两位大写字符串。\n\n        :param countryCode: 原始国家代码。\n        :return: 合法国家代码；无效时返回空字符串。\n        '
+
+  def LPWiiMRadioDataProvider._normalize_subcountry_code(self, subcountryCode)  line 1102
+    names: str, strip
+      str: '\n        将任意子地区代码归一化为接口可接受的字符串。\n\n        :param subcountryCode: 原始子地区代码。\n        :return: 去除首尾空白后的子地区代码；无效时返回空字符串。\n        '
+
+  def LPWiiMRadioDataProvider._safe_int(self, value, default)  line 1111
+    names: int, TypeError, ValueError
+      str: '\n        将任意值安全转换为整数。\n\n        :param value: 待转换的值。\n        :param default: 转换失败时的默认值。\n        :return: 整数结果。\n        '
+
+  def LPWiiMRadioDataProvider._calculate_elapsed_ms(self, startTime)  line 1124
+    names: max, int, round, time, perf_counter, float
+      str: '\n        计算从起始时刻到当前的耗时毫秒数。\n\n        :param startTime: `time.perf_counter()` 的起始值。\n        :return: 四舍五入后的毫秒整数。\n        '

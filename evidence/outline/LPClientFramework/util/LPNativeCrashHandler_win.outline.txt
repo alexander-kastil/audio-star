@@ -1,0 +1,174 @@
+# module LPClientFramework.util.LPNativeCrashHandler_win
+
+[module] names: __doc__, ctypes, wintypes, os, sys, signal, datetime, MiniDumpNormal, EXCEPTION_CONTINUE_SEARCH, getattr, CFUNCTYPE, _CALLBACK_FACTORY, LONG, c_void_p, _TOP_LEVEL_EXCEPTION_FILTER_TYPE, Structure, _MINIDUMP_EXCEPTION_INFORMATION, _kernel32, _dbghelp, _previous_unhandled_filter_ref, _unhandled_filter_installed, _dump_in_progress, _configure_winapi, _get_winapi, _get_native_file_handle, _get_last_error, _format_windows_error, _report_crash_handler_error, _remove_failed_dump, _get_crash_dir, _generate_crash_filename, _write_python_traceback_to_file, _try_write_minidump, _write_minidump, _unhandled_filter_impl, _unhandled_filter_ref, _sigabrt_handler, _qt_fatal_message_handler, install_qt_fatal_handler, _install_unhandled_exception_filter, _install_win32
+  str: '\n@Time ： 2026/7/14\n@Auth ： AI Assistant\n@File ：LPNativeCrashHandler_win.py\n@Desc ：Windows 平台原生崩溃处理器实现。\n\n工作原理:\n  1. 通过 kernel32.SetUnhandledExceptionFilter 注册顶层未处理异常过滤器，\n     只在 SEH 异常最终无人处理、进程即将退出时获得通知。\n  2. 回调中调用 dbghelp.MiniDumpWriteDump 生成 .dmp 小型转储。\n  3. 同时调用 faulthandler.dump_traceback 输出 Pytho'
+  str: 'wintypes'
+  str: 'WINFUNCTYPE'
+  str: '_MINIDUMP_EXCEPTION_INFORMATION'
+  str: '_configure_winapi'
+  str: '_get_winapi'
+  str: '_get_native_file_handle'
+  str: '_get_last_error'
+  str: '_format_windows_error'
+  str: '_report_crash_handler_error'
+  str: '_remove_failed_dump'
+  str: '_get_crash_dir'
+  str: 'crash'
+  str: 'dmp'
+  str: '_generate_crash_filename'
+  str: '_write_python_traceback_to_file'
+  str: '_try_write_minidump'
+  str: '_write_minidump'
+  str: '_unhandled_filter_impl'
+  str: '_sigabrt_handler'
+  str: '_qt_fatal_message_handler'
+  str: 'install_qt_fatal_handler'
+  str: '_install_unhandled_exception_filter'
+  str: '_install_win32'
+  str: 'crash'
+  str: 'dmp'
+
+def _MINIDUMP_EXCEPTION_INFORMATION()  line 45
+  names: __name__, __module__, __qualname__, __doc__, wintypes, DWORD, ctypes, c_void_p, BOOL, _fields_
+    str: '_MINIDUMP_EXCEPTION_INFORMATION'
+    str: '描述 MiniDumpWriteDump 所需异常上下文。'
+    str: 'ThreadId'
+    str: 'ExceptionPointers'
+    str: 'ClientPointers'
+
+def _configure_winapi(kernel32, dbghelp)  line 61
+  names: GetCurrentProcess, argtypes, wintypes, HANDLE, restype, GetCurrentProcessId, DWORD, GetCurrentThreadId, _TOP_LEVEL_EXCEPTION_FILTER_TYPE, SetUnhandledExceptionFilter, ctypes, c_void_p, LPCWSTR, OutputDebugStringW, POINTER, _MINIDUMP_EXCEPTION_INFORMATION, MiniDumpWriteDump, BOOL
+    str: '为崩溃处理所用 WinAPI 声明准确的 ctypes 签名。\n\n    参数:\n        kernel32: 已加载的 kernel32 WinDLL。\n        dbghelp: 已加载的 dbghelp WinDLL。\n\n    返回:\n        无\n    '
+
+def _get_winapi()  line 94
+  names: _kernel32, _dbghelp, ctypes, WinDLL, _configure_winapi
+    str: '按需加载并配置 Windows 崩溃处理 API。\n\n    参数:\n        无\n\n    返回:\n        tuple: kernel32 和 dbghelp WinDLL。\n    '
+    str: 'kernel32'
+    str: 'use_last_error'
+    str: 'dbghelp'
+
+def _get_native_file_handle(dump_file)  line 111
+  names: msvcrt, get_osfhandle, fileno
+    str: '把 Python 文件对象的 CRT 描述符转换为 Windows HANDLE。\n\n    参数:\n        dump_file: 以二进制写模式打开的 Python 文件对象。\n\n    返回:\n        int: Windows 原生文件句柄。\n    '
+
+def _get_last_error()  line 124
+  names: ctypes, get_last_error
+    str: '获取最近一次 WinAPI 调用保存的错误码。\n\n    参数:\n        无\n\n    返回:\n        int: Windows 错误码或 HRESULT。\n    '
+
+def _format_windows_error(error_code)  line 136
+  names: str
+    str: '把有符号错误值格式化为可诊断的 HRESULT/Win32 信息。\n\n    参数:\n        error_code (int): ctypes 返回的错误值。\n\n    返回:\n        str: 包含有符号值、十六进制值及可用 Win32 子错误码的文本。\n    '
+    str: ' (HRESULT 0x'
+    str: '08X'
+    str: ', Win32 '
+    str: ')'
+    str: ' (0x'
+
+def _report_crash_handler_error(message)  line 154
+  names: print, sys, stderr, Exception, _get_winapi, OutputDebugStringW
+    str: '将崩溃处理器自身错误输出到标准错误和调试器。\n\n    参数:\n        message (str): 待输出的错误消息。\n\n    返回:\n        无\n    '
+    str: '[CrashHandler] '
+    str: 'file'
+    str: 'flush'
+
+def _remove_failed_dump(dump_path)  line 175
+  names: os, remove, FileNotFoundError, Exception, _report_crash_handler_error
+    str: '删除 MiniDumpWriteDump 失败后留下的不完整文件。\n\n    参数:\n        dump_path (str 或 None): 待删除的 dump 路径。\n\n    返回:\n        无\n    '
+    str: '无法删除失败的 dump '
+    str: ': '
+
+def _get_crash_dir()  line 194
+  names: os, environ, get, path, expanduser, join, makedirs
+    str: '\n    获取崩溃文件存放目录（%APPDATA%/WiiMHome/crashes/）。\n\n    参数:\n        无\n\n    返回:\n        str: 崩溃目录的绝对路径\n    '
+    str: 'APPDATA'
+    str: '~'
+    str: 'WiiMHome'
+    str: 'crashes'
+    str: 'exist_ok'
+
+def _generate_crash_filename(prefix, ext)  line 210
+  names: datetime, now, strftime, _get_crash_dir, os, path, join
+    str: '\n    生成带时间戳的崩溃文件名。\n\n    参数:\n        prefix (str): 文件名前缀\n        ext (str): 文件扩展名（不含点号）\n\n    返回:\n        str: 完整文件路径\n    '
+    str: '%Y%m%d_%H%M%S_%f'
+    str: '_'
+    str: '.'
+
+def _write_python_traceback_to_file(dump_path)  line 226
+  names: faulthandler, replace, open, dump_traceback, Exception
+    str: '\n    将 Python 各线程调用栈写入文本文件。\n\n    参数:\n        dump_path (str): 关联的 .dmp 文件路径，用于生成对应的 .traceback.txt\n\n    返回:\n        无\n    '
+    str: '.dmp'
+    str: '.traceback.txt'
+    str: 'w'
+    str: 'utf-8'
+    str: 'encoding'
+    str: 'file'
+    str: 'all_threads'
+
+def _try_write_minidump(kernel32, dbghelp, dump_path, exc_info_ref)  line 245
+  names: open, _get_native_file_handle, OSError, MiniDumpWriteDump, GetCurrentProcess, GetCurrentProcessId, wintypes, HANDLE, MiniDumpNormal, _get_last_error
+    str: '执行一次可靠性优先的 MiniDumpNormal 写入。\n\n    每次调用都会重新以 ``wb`` 打开文件，确保重试前清除首次失败留下的\n    不完整内容。\n\n    参数:\n        kernel32: 已配置的 kernel32 WinDLL。\n        dbghelp: 已配置的 dbghelp WinDLL。\n        dump_path (str): dump 输出路径。\n        exc_info_ref: MINIDUMP_EXCEPTION_INFORMATION 指针或 None。\n\n    返回:\n        tuple: ``(是否成功'
+    str: 'wb'
+    str: 'buffering'
+    str: 'msvcrt.get_osfhandle 返回无效句柄'
+
+def _write_minidump(exc_pointers_ptr)  line 278
+  names: _dump_in_progress, _get_winapi, _generate_crash_filename, _MINIDUMP_EXCEPTION_INFORMATION, GetCurrentThreadId, ThreadId, ExceptionPointers, ClientPointers, ctypes, byref, append, _try_write_minidump, _report_crash_handler_error, _format_windows_error, _write_python_traceback_to_file, _remove_failed_dump, join, Exception
+    str: '调用 MiniDumpWriteDump 生成可靠性优先的 .dmp 小型转储。\n\n    参数:\n        exc_pointers_ptr (ctypes.c_void_p, optional): UEF 回调传入的\n            EXCEPTION_POINTERS 指针。SIGABRT 场景下为 None。\n\n    返回:\n        str 或 None: 生成的 .dmp 文件路径。失败或重入时返回 None。\n    '
+    str: 'crash'
+    str: 'dmp'
+    str: 'prefix'
+    str: 'ext'
+    str: '带异常上下文'
+    str: '不带异常上下文'
+    str: 'MiniDumpWriteDump '
+    str: '失败: '
+    str: '；'
+    str: '的 MiniDumpNormal 降级成功，路径: '
+    str: '_write_minidump.<locals>.<genexpr>'
+    str: 'MiniDumpWriteDump 全部失败，'
+    str: '，路径: '
+    str: '生成 minidump 异常: '
+
+  def _write_minidump.<genexpr>(.0)  line 332
+    names: _format_windows_error
+      str: ': '
+
+def _unhandled_filter_impl(exc_pointers_ptr)  line 350
+  names: _write_minidump, _previous_unhandled_filter_ref, Exception, _report_crash_handler_error, EXCEPTION_CONTINUE_SEARCH
+    str: '记录最终未处理的 Windows SEH 异常，并延续既有处理链。\n\n    参数:\n        exc_pointers_ptr (ctypes.c_void_p): EXCEPTION_POINTERS 指针。\n\n    返回:\n        int: 既有过滤器的返回值；没有既有过滤器时返回\n            EXCEPTION_CONTINUE_SEARCH，让 Windows 继续默认崩溃流程。\n    '
+    str: '调用既有未处理异常过滤器失败: '
+
+def _sigabrt_handler(signum, frame)  line 377
+  names: _write_minidump, Exception, signal, SIGABRT, SIG_DFL
+    str: '\n    SIGABRT 信号处理器：处理 Windows 上 abort() / qFatal() / pure virtual call 场景。\n\n    abort() 不进入 UEF，而是发出 SIGABRT 信号，因此需要单独的处理器。\n    由于 abort 场景下没有 exception_pointers，dmp 中不包含异常上下文，\n    但进程内存快照仍然有分析价值。\n\n    参数:\n        signum (int): 信号编号（SIGABRT = 6）\n        frame: 当前栈帧\n\n    返回:\n        无（最后恢复默认处理器让进程正常终'
+
+def _qt_fatal_message_handler(msg_type, context, message)  line 401
+  names: value, _get_crash_dir, datetime, now, strftime, os, path, join, open, write, file, line, function, category, Exception, PyQt6.QtCore, qFormatLogMessage, sys, stderr, flush
+    str: '\n    Qt 消息处理器：保留标准输出，并在 qFatal() 调用时将上下文写入崩溃目录。\n\n    qFatal() 之后 Qt 会调用 abort()，因此这里写日志后 SIGABRT 处理器会继续执行。\n    日志文件为崩溃前的"最后一条线索"，记录了触发 qFatal 的 Qt 源文件、行号和消息。\n\n    参数:\n        msg_type (QtMsgType): 消息级别枚举\n        context (QMessageLogContext): 消息上下文（含文件、行号、函数名）\n        message (str): 致命错误的消息文本\n    '
+    str: '%Y%m%d_%H%M%S'
+    str: 'qt_fatal_'
+    str: '.log'
+    str: 'w'
+    str: 'utf-8'
+    str: 'encoding'
+    str: 'QtFatalMsg: '
+    str: '  File: '
+    str: '  Line: '
+    str: '  Function: '
+    str: '  Category: '
+    str: 'qFormatLogMessage'
+
+def install_qt_fatal_handler()  line 442
+  names: PyQt6.QtCore, qInstallMessageHandler, _qt_fatal_message_handler, Exception
+    str: '\n    安装 Qt 的 qInstallMessageHandler，捕获 qFatal() 消息。\n\n    需要在 QApplication 创建之后调用。如果 PyQt6 尚未导入，则跳过。\n\n    参数:\n        无\n\n    返回:\n        无\n    '
+    str: 'qInstallMessageHandler'
+
+def _install_unhandled_exception_filter()  line 461
+  names: _unhandled_filter_installed, _get_winapi, SetUnhandledExceptionFilter, _unhandled_filter_ref, ctypes, cast, c_void_p, value, getattr, _TOP_LEVEL_EXCEPTION_FILTER_TYPE, _previous_unhandled_filter_ref
+    str: '安装顶层未处理异常过滤器并保存原有过滤器。\n\n    参数:\n        无\n\n    返回:\n        无\n    '
+    str: 'value'
+
+def _install_win32()  line 483
+  names: _install_unhandled_exception_filter, signal, SIGABRT, _sigabrt_handler, Exception, _get_crash_dir, print
+    str: '安装 Windows 顶层未处理异常和 SIGABRT 处理器。\n\n    参数:\n        无\n\n    返回:\n        无\n    '
+    str: '[CrashHandler] Windows 未处理异常过滤器已安装，dump 目录: '

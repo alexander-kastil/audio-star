@@ -1,0 +1,235 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL Mix 详情页控制器。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Any', 'Optional'))
+              8 IMPORT_NAME              1 (typing)
+             10 IMPORT_FROM              2 (Any)
+             12 STORE_NAME               2 (Any)
+             14 IMPORT_FROM              3 (Optional)
+             16 STORE_NAME               3 (Optional)
+             18 POP_TOP
+
+  8          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               3 (('QWidget',))
+             24 IMPORT_NAME              4 (PyQt6.QtWidgets)
+             26 IMPORT_FROM              5 (QWidget)
+             28 STORE_NAME               5 (QWidget)
+             30 POP_TOP
+
+ 10          32 LOAD_CONST               1 (0)
+             34 LOAD_CONST               4 (('LPTidalDetailViewControllerBase',))
+             36 IMPORT_NAME              6 (HOME.StreamService.Tidal.controllers.base.LPTidalDetailViewControllerBase)
+             38 IMPORT_FROM              7 (LPTidalDetailViewControllerBase)
+             40 STORE_NAME               7 (LPTidalDetailViewControllerBase)
+             42 POP_TOP
+
+ 11          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               5 (('LPTidalStore',))
+             48 IMPORT_NAME              8 (HOME.StreamService.Tidal.state.LPTidalStore)
+             50 IMPORT_FROM              9 (LPTidalStore)
+             52 STORE_NAME               9 (LPTidalStore)
+             54 POP_TOP
+
+ 12          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               6 (('LPUIPath',))
+             60 IMPORT_NAME             10 (LPClientFramework.LPConfig)
+             62 IMPORT_FROM             11 (LPUIPath)
+             64 STORE_NAME              11 (LPUIPath)
+             66 POP_TOP
+
+ 15          68 LOAD_BUILD_CLASS
+             70 LOAD_CONST               7 (<code object LPTidalMixDetailViewController at 0x000001F3253C4BE0, file "StreamService\Tidal\controllers\details\LPTidalMixDetailViewController.py", line 15>)
+             72 LOAD_CONST               8 ('LPTidalMixDetailViewController')
+             74 MAKE_FUNCTION            0
+             76 LOAD_CONST               8 ('LPTidalMixDetailViewController')
+             78 LOAD_NAME                7 (LPTidalDetailViewControllerBase)
+             80 CALL_FUNCTION            3
+             82 STORE_NAME              12 (LPTidalMixDetailViewController)
+             84 LOAD_CONST               9 (None)
+             86 RETURN_VALUE
+
+=== LPTidalMixDetailViewController ===
+ 15           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalMixDetailViewController')
+              6 STORE_NAME               2 (__qualname__)
+
+ 16           8 LOAD_CONST               1 ('TIDAL Mix 详情页，负责加载 Mix 曲目和播放控制。')
+             10 STORE_NAME               3 (__doc__)
+
+ 18          12 LOAD_CONST              12 (('', '', '', None))
+             14 LOAD_NAME                4 (str)
+             16 LOAD_NAME                4 (str)
+             18 LOAD_NAME                4 (str)
+             20 LOAD_NAME                4 (str)
+             22 LOAD_NAME                5 (Optional)
+             24 LOAD_NAME                6 (QWidget)
+             26 BINARY_SUBSCR
+             28 LOAD_CONST               4 (('itemId', 'itemTitle', 'itemSubtitle', 'itemImageUrl', 'parent'))
+             30 BUILD_CONST_KEY_MAP      5
+             32 LOAD_CLOSURE             0 (__class__)
+             34 BUILD_TUPLE              1
+             36 LOAD_CONST               5 (<code object __init__ at 0x000001F3253AE450, file "StreamService\Tidal\controllers\details\LPTidalMixDetailViewController.py", line 18>)
+             38 LOAD_CONST               6 ('LPTidalMixDetailViewController.__init__')
+             40 MAKE_FUNCTION           13 (defaults, annotations, closure)
+             42 STORE_NAME               7 (__init__)
+
+ 35          44 LOAD_CONST               7 (<code object _fetchDetailData at 0x000001F3253AE9D0, file "StreamService\Tidal\controllers\details\LPTidalMixDetailViewController.py", line 35>)
+             46 LOAD_CONST               8 ('LPTidalMixDetailViewController._fetchDetailData')
+             48 MAKE_FUNCTION            0
+             50 STORE_NAME               8 (_fetchDetailData)
+
+ 38          52 LOAD_NAME                9 (Any)
+             54 LOAD_CONST               3 (None)
+             56 LOAD_CONST               9 (('result', 'return'))
+             58 BUILD_CONST_KEY_MAP      2
+             60 LOAD_CLOSURE             0 (__class__)
+             62 BUILD_TUPLE              1
+             64 LOAD_CONST              10 (<code object _handleDetailResult at 0x000001F3253C49D0, file "StreamService\Tidal\controllers\details\LPTidalMixDetailViewController.py", line 38>)
+             66 LOAD_CONST              11 ('LPTidalMixDetailViewController._handleDetailResult')
+             68 MAKE_FUNCTION           12 (annotations, closure)
+             70 STORE_NAME              10 (_handleDetailResult)
+             72 LOAD_CLOSURE             0 (__class__)
+             74 DUP_TOP
+             76 STORE_NAME              11 (__classcell__)
+             78 RETURN_VALUE
+
+=== LPTidalMixDetailViewController.__init__ ===
+ 19           0 LOAD_GLOBAL              0 (LPTidalStore)
+              2 LOAD_METHOD              1 (instance)
+              4 CALL_METHOD              0
+              6 STORE_FAST               6 (store)
+
+ 20           8 LOAD_FAST                6 (store)
+             10 LOAD_METHOD              2 (acquireMixDetailState)
+             12 LOAD_FAST                1 (itemId)
+             14 CALL_METHOD              1
+             16 STORE_FAST               7 (state)
+
+ 21          18 LOAD_GLOBAL              3 (super)
+             20 CALL_FUNCTION            0
+             22 LOAD_ATTR                4 (__init__)
+
+ 22          24 LOAD_FAST                1 (itemId)
+
+ 23          26 LOAD_CONST               1 ('mix')
+
+ 24          28 LOAD_FAST                7 (state)
+
+ 25          30 LOAD_GLOBAL              5 (LPUIPath)
+             32 LOAD_ATTR                6 (TidalMixDetailQML)
+
+ 26          34 LOAD_CONST               2 ('pages/TidalMixDetail.qml')
+
+ 27          36 LOAD_CONST               3 ('tidalMixDetailState')
+
+ 28          38 LOAD_FAST                5 (parent)
+
+ 21          40 LOAD_CONST               4 (('itemId', 'itemType', 'state', 'qmlPath', 'qmlFileName', 'specificContextName', 'parent'))
+             42 CALL_FUNCTION_KW         7
+             44 POP_TOP
+
+ 30          46 LOAD_FAST                2 (itemTitle)
+             48 POP_JUMP_IF_TRUE        54
+             50 LOAD_FAST                4 (itemImageUrl)
+             52 POP_JUMP_IF_FALSE       70
+
+ 31     >>   54 LOAD_FAST                2 (itemTitle)
+             56 LOAD_FAST                3 (itemSubtitle)
+             58 LOAD_FAST                4 (itemImageUrl)
+             60 LOAD_CONST               5 (('title', 'subtitle', 'imageUrl'))
+             62 BUILD_CONST_KEY_MAP      3
+             64 LOAD_FAST                0 (self)
+             66 STORE_ATTR               7 (_pending_mix_meta)
+             68 JUMP_FORWARD             6 (to 76)
+
+ 33     >>   70 LOAD_CONST               0 (None)
+             72 LOAD_FAST                0 (self)
+             74 STORE_ATTR               7 (_pending_mix_meta)
+        >>   76 LOAD_CONST               0 (None)
+             78 RETURN_VALUE
+
+=== LPTidalMixDetailViewController._fetchDetailData ===
+ 36           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_provider)
+              4 LOAD_METHOD              1 (loadMixDetail)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                2 (_item_id)
+             10 CALL_METHOD              1
+             12 RETURN_VALUE
+
+=== LPTidalMixDetailViewController._handleDetailResult ===
+ 39           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (_handleDetailResult)
+              6 LOAD_FAST                1 (result)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 40          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (_pending_mix_meta)
+             16 POP_JUMP_IF_FALSE       94
+
+ 41          18 LOAD_GLOBAL              3 (dict)
+             20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                4 (_state)
+             24 LOAD_ATTR                5 (detailInfo)
+             26 CALL_FUNCTION            1
+             28 STORE_FAST               2 (info)
+
+ 42          30 LOAD_FAST                2 (info)
+             32 LOAD_METHOD              6 (update)
+             34 LOAD_CONST               1 (<code object <dictcomp> at 0x000001F3253C45B0, file "StreamService\Tidal\controllers\details\LPTidalMixDetailViewController.py", line 42>)
+             36 LOAD_CONST               2 ('LPTidalMixDetailViewController._handleDetailResult.<locals>.<dictcomp>')
+             38 MAKE_FUNCTION            0
+             40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                2 (_pending_mix_meta)
+             44 LOAD_METHOD              7 (items)
+             46 CALL_METHOD              0
+             48 GET_ITER
+             50 CALL_FUNCTION            1
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+ 44          56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                4 (_state)
+             60 LOAD_METHOD              8 (_ensureDetailThumbnail)
+             62 LOAD_FAST                2 (info)
+             64 CALL_METHOD              1
+             66 POP_TOP
+
+ 45          68 LOAD_FAST                2 (info)
+             70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR                4 (_state)
+             74 STORE_ATTR               9 (_detailInfo)
+
+ 46          76 LOAD_FAST                0 (self)
+             78 LOAD_ATTR                4 (_state)
+             80 LOAD_ATTR               10 (detailInfoChanged)
+             82 LOAD_METHOD             11 (emit)
+             84 CALL_METHOD              0
+             86 POP_TOP
+
+ 47          88 LOAD_CONST               0 (None)
+             90 LOAD_FAST                0 (self)
+             92 STORE_ATTR               2 (_pending_mix_meta)
+        >>   94 LOAD_CONST               0 (None)
+             96 RETURN_VALUE
+
+=== LPTidalMixDetailViewController._handleDetailResult.<dictcomp> ===
+ 42           0 BUILD_MAP                0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 UNPACK_SEQUENCE          2
+              8 STORE_FAST               1 (k)
+             10 STORE_FAST               2 (v)
+             12 LOAD_FAST                2 (v)
+             14 POP_JUMP_IF_FALSE        4
+             16 LOAD_FAST                1 (k)
+             18 LOAD_FAST                2 (v)
+             20 MAP_ADD                  2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE

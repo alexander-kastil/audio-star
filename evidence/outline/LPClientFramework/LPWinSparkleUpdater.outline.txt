@@ -1,0 +1,431 @@
+# module LPClientFramework.LPWinSparkleUpdater
+
+[module] names: __doc__, ctypes, json, os, platform, re, sys, threading, urllib.request, urllib, xml.etree.ElementTree, etree, ElementTree, ET, pathlib, Path, LPClientFramework.LPUtility, appVersion, logger, LPWinSparkleUpdater
+  str: '\nWindows WinSparkle 更新管理模块。\n该模块负责：\n1. 动态加载 WinSparkle.dll；\n2. 读取配置并解析 appcast feed；\n3. 初始化 WinSparkle 并触发自动/手动检查；\n4. 注册更新安装前关机协同回调；\n5. 在应用退出时清理 WinSparkle 资源。\n'
+  str: 'Path'
+  str: 'appVersion'
+  str: 'logger'
+  str: 'LPWinSparkleUpdater'
+
+def LPWinSparkleUpdater()  line 26
+  names: __name__, __module__, __qualname__, __doc__, __init__, setShutdownHooks, _loadConfig, _sparkleConfig, _normalizeShortVersion, _resolveCurrentVersion, _compareVersions, _dllCandidates, _loadDLL, _registerShutdownCallbacks, _registerUpdateResultCallbacks, setUpdateFoundCallback, setUserRunInstallerCallback, _registerInstallerCallbacks, _safeInvokeResultCallback, _classifyCheckError, _setLastCheckDetail, getLastCheckDetail, _fetchLatestVersionFromAppcast, notifyUpdateFound, notifyNoUpdateFound, _runBackgroundAppcastProbe, resolveFeedURL, setTemporaryFeedURL, clearTemporaryFeedURL, applyCurrentFeedURL, initUpdater, isReady, ensureReady, triggerBackgroundCheck, isBackgroundCheckRunning, checkForUpdatesManually, cleanup
+    str: 'LPWinSparkleUpdater'
+    str: 'Windows 平台 WinSparkle 更新管理器。'
+    str: 'LPWinSparkleUpdater.__init__'
+    str: 'LPWinSparkleUpdater.setShutdownHooks'
+    str: 'LPWinSparkleUpdater._loadConfig'
+    str: 'LPWinSparkleUpdater._sparkleConfig'
+    str: 'LPWinSparkleUpdater._normalizeShortVersion'
+    str: 'LPWinSparkleUpdater._resolveCurrentVersion'
+    str: 'LPWinSparkleUpdater._compareVersions'
+    str: 'LPWinSparkleUpdater._dllCandidates'
+    str: 'LPWinSparkleUpdater._loadDLL'
+    str: 'LPWinSparkleUpdater._registerShutdownCallbacks'
+    str: 'LPWinSparkleUpdater._registerUpdateResultCallbacks'
+    str: 'LPWinSparkleUpdater.setUpdateFoundCallback'
+    str: 'LPWinSparkleUpdater.setUserRunInstallerCallback'
+    str: 'LPWinSparkleUpdater._registerInstallerCallbacks'
+    str: 'LPWinSparkleUpdater._safeInvokeResultCallback'
+    str: 'LPWinSparkleUpdater._classifyCheckError'
+    str: 'LPWinSparkleUpdater._setLastCheckDetail'
+    str: 'LPWinSparkleUpdater.getLastCheckDetail'
+    str: 'LPWinSparkleUpdater._fetchLatestVersionFromAppcast'
+    str: 'LPWinSparkleUpdater.notifyUpdateFound'
+    str: 'LPWinSparkleUpdater.notifyNoUpdateFound'
+    str: 'LPWinSparkleUpdater._runBackgroundAppcastProbe'
+    str: 'LPWinSparkleUpdater.resolveFeedURL'
+    str: 'LPWinSparkleUpdater.setTemporaryFeedURL'
+    str: 'LPWinSparkleUpdater.clearTemporaryFeedURL'
+    str: 'LPWinSparkleUpdater.applyCurrentFeedURL'
+    str: 'LPWinSparkleUpdater.initUpdater'
+    str: 'LPWinSparkleUpdater.isReady'
+    str: 'LPWinSparkleUpdater.ensureReady'
+    str: 'LPWinSparkleUpdater.triggerBackgroundCheck'
+    str: 'LPWinSparkleUpdater.isBackgroundCheckRunning'
+    str: 'LPWinSparkleUpdater.checkForUpdatesManually'
+    str: 'LPWinSparkleUpdater.cleanup'
+
+  def LPWinSparkleUpdater.__init__(self)  line 29
+    names: _dll, _ready, _loadConfig, _config, _canShutdownHandler, _shutdownRequestHandler, _canShutdownCallback, _shutdownRequestCallback, getattr, ctypes, CFUNCTYPE, c_int, _canShutdownCallbackType, _shutdownRequestCallbackType, c_wchar_p, _userRunInstallerCallbackType, _onUpdateFoundCallback, _onNoUpdateFoundCallback, _onUserRunInstallerCallback, _didFindUpdateCallback, _didNotFindUpdateCallback, _updateCheckErrorCallback, _userRunInstallerCallback, _updateFoundCallbackType, _noUpdateFoundCallbackType, _errorCallbackType, _backgroundCheckThread, _lastCheckDetail, _temporaryFeedURL
+      str: '\n        初始化 WinSparkle 更新器状态。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'WINFUNCTYPE'
+
+  def LPWinSparkleUpdater.setShutdownHooks(self, canShutdownHandler, shutdownRequestHandler)  line 75
+    names: _canShutdownHandler, _shutdownRequestHandler
+      str: '\n        设置 WinSparkle 关机协同回调处理器。\n\n        参数:\n            canShutdownHandler (callable): 返回 bool，表示当前是否允许退出。\n            shutdownRequestHandler (callable): 接收到安装前关机请求时执行。\n        返回:\n            无\n        '
+
+  def LPWinSparkleUpdater._loadConfig(self)  line 88
+    names: hasattr, sys, Path, _MEIPASS, __file__, resolve, parent, is_file, open, json, loads, read, Exception, logger, warning
+      str: '\n        读取应用配置文件。\n\n        参数:\n            无\n        返回:\n            dict: 解析后的配置字典；读取失败时返回空字典。\n        '
+      str: '_MEIPASS'
+      str: 'data'
+      str: 'config.json'
+      str: 'HOME'
+      str: 'r'
+      str: 'utf-8-sig'
+      str: 'ignore'
+      str: 'encoding'
+      str: 'errors'
+      str: '[winsparkle] 加载配置失败: %s'
+
+  def LPWinSparkleUpdater._sparkleConfig(self)  line 120
+    names: _config, get, isinstance, dict
+      str: '\n        获取 sparkle 配置段。\n\n        参数:\n            无\n        返回:\n            dict: sparkle 节点配置，不存在时返回空字典。\n        '
+      str: 'sparkle'
+
+  def LPWinSparkleUpdater._normalizeShortVersion(self, versionValue)  line 132
+    names: re, split, str, join
+      str: '\n        将版本文本归一化为 WinSparkle 可比较的点分版本号。\n\n        参数:\n            versionValue (str): 版本信息文本。\n        返回:\n            str: 归一化后的点分版本号字符串。\n        '
+      str: 'LPWinSparkleUpdater._normalizeShortVersion.<locals>.<listcomp>'
+      str: '[^0-9]+'
+      str: '0'
+      str: '.'
+      str: 'LPWinSparkleUpdater._normalizeShortVersion.<locals>.<genexpr>'
+
+    def LPWinSparkleUpdater._normalizeShortVersion.<listcomp>(.0)  line 141
+
+    def LPWinSparkleUpdater._normalizeShortVersion.<genexpr>(.0)  line 144
+      names: str, int
+
+  def LPWinSparkleUpdater._resolveCurrentVersion(self)  line 146
+    names: _config, get, appVersion, _normalizeShortVersion
+      str: '\n        解析本地用于 WinSparkle 比对的当前版本号。\n\n        参数:\n            无\n        返回:\n            str: 本地当前版本号。\n        '
+      str: 'version'
+
+  def LPWinSparkleUpdater._compareVersions(self, leftVersion, rightVersion)  line 158
+    names: _normalizeShortVersion, split, max, len, extend
+      str: '\n        比较两个版本号大小。\n\n        参数:\n            leftVersion (str): 左侧版本号。\n            rightVersion (str): 右侧版本号。\n        返回:\n            int: 左侧更大返回 1，相等返回 0，更小返回 -1。\n        '
+      str: 'LPWinSparkleUpdater._compareVersions.<locals>.<listcomp>'
+      str: '.'
+
+    def LPWinSparkleUpdater._compareVersions.<listcomp>(.0)  line 168
+      names: int
+
+    def LPWinSparkleUpdater._compareVersions.<listcomp>(.0)  line 169
+      names: int
+
+  def LPWinSparkleUpdater._dllCandidates(self)  line 180
+    names: os, environ, get, strip, append, hasattr, sys, Path, _MEIPASS, extend, str, __file__, resolve, parent
+      str: '\n        生成 WinSparkle.dll 候选路径列表。\n\n        参数:\n            无\n        返回:\n            list[str]: 按优先级排序的 DLL 路径。\n        '
+      str: 'WIIM_WINSPARKLE_DLL_PATH'
+      str: '_MEIPASS'
+      str: 'WinSparkle.dll'
+      str: 'third_party'
+      str: 'winsparkle'
+      str: 'win-x64'
+      str: 'HOME'
+
+  def LPWinSparkleUpdater._loadDLL(self)  line 218
+    names: _dll, _dllCandidates, os, path, isfile, ctypes, WinDLL, c_char_p, win_sparkle_set_appcast_url, argtypes, restype, c_wchar_p, win_sparkle_set_app_details, win_sparkle_init, win_sparkle_cleanup, win_sparkle_check_update_without_ui, win_sparkle_check_update_with_ui, hasattr, c_int, win_sparkle_set_automatic_check_for_updates, win_sparkle_set_update_check_interval, win_sparkle_set_lang, win_sparkle_set_eddsa_public_key, win_sparkle_set_dsa_pub_pem, _canShutdownCallbackType, win_sparkle_set_can_shutdown_callback, _shutdownRequestCallbackType, win_sparkle_set_shutdown_request_callback, _updateFoundCallbackType, win_sparkle_set_did_find_update_callback, _noUpdateFoundCallbackType, win_sparkle_set_did_not_find_update_callback, _errorCallbackType, win_sparkle_set_error_callback, _userRunInstallerCallbackType, win_sparkle_set_user_run_installer_callback, logger, info, Exception, warning
+      str: '\n        加载 WinSparkle.dll 并设置函数签名。\n\n        参数:\n            无\n        返回:\n            bool: 成功加载返回 True，否则返回 False。\n        '
+      str: 'win_sparkle_set_automatic_check_for_updates'
+      str: 'win_sparkle_set_update_check_interval'
+      str: 'win_sparkle_set_lang'
+      str: 'win_sparkle_set_eddsa_public_key'
+      str: 'win_sparkle_set_dsa_pub_pem'
+      str: 'win_sparkle_set_can_shutdown_callback'
+      str: 'win_sparkle_set_shutdown_request_callback'
+      str: 'win_sparkle_set_did_find_update_callback'
+      str: 'win_sparkle_set_did_not_find_update_callback'
+      str: 'win_sparkle_set_error_callback'
+      str: 'win_sparkle_set_user_run_installer_callback'
+      str: '[winsparkle] DLL 加载成功: %s'
+      str: '[winsparkle] DLL 加载失败: %s, error: %s'
+      str: '[winsparkle] 未找到可用的 WinSparkle.dll'
+
+  def LPWinSparkleUpdater._registerShutdownCallbacks(self)  line 300
+    names: _dll, hasattr, logger, warning, _canShutdownCallbackType, _shutdownRequestCallbackType, _canShutdownCallback, _shutdownRequestCallback, win_sparkle_set_can_shutdown_callback, win_sparkle_set_shutdown_request_callback, info, Exception
+      str: '\n        注册 WinSparkle 关机协同回调。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'win_sparkle_set_can_shutdown_callback'
+      str: '[winsparkle] 当前 DLL 不支持 can_shutdown callback'
+      str: 'win_sparkle_set_shutdown_request_callback'
+      str: '[winsparkle] 当前 DLL 不支持 shutdown_request callback'
+      str: 'LPWinSparkleUpdater._registerShutdownCallbacks.<locals>._canShutdownCallback'
+      str: 'LPWinSparkleUpdater._registerShutdownCallbacks.<locals>._shutdownRequestCallback'
+      str: '[winsparkle] shutdown callbacks registered'
+      str: '[winsparkle] register shutdown callbacks failed: %s'
+
+    def LPWinSparkleUpdater._registerShutdownCallbacks._canShutdownCallback()  line 319
+      names: callable, _canShutdownHandler, bool, logger, info, Exception, warning
+        str: '[winsparkle] can_shutdown called result=%s'
+        str: '[winsparkle] can_shutdown callback failed: %s'
+
+    def LPWinSparkleUpdater._registerShutdownCallbacks._shutdownRequestCallback()  line 332
+      names: logger, info, callable, _shutdownRequestHandler, Exception, warning
+        str: '[winsparkle] shutdown_request received'
+        str: '[winsparkle] shutdown_request callback failed: %s'
+
+  def LPWinSparkleUpdater._registerUpdateResultCallbacks(self)  line 350
+    names: _dll, _updateFoundCallbackType, _noUpdateFoundCallbackType, _errorCallbackType, hasattr, _didFindUpdateCallback, win_sparkle_set_did_find_update_callback, logger, info, _didNotFindUpdateCallback, win_sparkle_set_did_not_find_update_callback, _updateCheckErrorCallback, win_sparkle_set_error_callback, Exception, warning
+      str: '\n        注册 WinSparkle 原生检查结果回调（发现更新 / 未发现更新 / 错误）。\n        回调在 WinSparkle 工作线程触发，需通过上层信号转发至 Qt 主线程。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'LPWinSparkleUpdater._registerUpdateResultCallbacks.<locals>._didFindUpdate'
+      str: 'LPWinSparkleUpdater._registerUpdateResultCallbacks.<locals>._didNotFindUpdate'
+      str: 'LPWinSparkleUpdater._registerUpdateResultCallbacks.<locals>._updateCheckError'
+      str: 'win_sparkle_set_did_find_update_callback'
+      str: '[winsparkle] did_find_update callback registered'
+      str: 'win_sparkle_set_did_not_find_update_callback'
+      str: '[winsparkle] did_not_find_update callback registered'
+      str: 'win_sparkle_set_error_callback'
+      str: '[winsparkle] error callback registered'
+      str: '[winsparkle] register update result callbacks failed: %s'
+
+    def LPWinSparkleUpdater._registerUpdateResultCallbacks._didFindUpdate()  line 363
+      names: logger, info, _setLastCheckDetail, _resolveCurrentVersion, callable, _onUpdateFoundCallback, _safeInvokeResultCallback, Exception, warning
+        str: '[winsparkle] did_find_update callback received'
+        str: 'found'
+        str: 'winsparkle_native'
+        str: 'resultKind'
+        str: 'source'
+        str: 'currentVersion'
+        str: '[winsparkle] did_find_update handler failed: %s'
+
+    def LPWinSparkleUpdater._registerUpdateResultCallbacks._didNotFindUpdate()  line 377
+      names: logger, info, _setLastCheckDetail, _resolveCurrentVersion, callable, _onNoUpdateFoundCallback, _safeInvokeResultCallback, Exception, warning
+        str: '[winsparkle] did_not_find_update callback received'
+        str: 'no_update'
+        str: 'winsparkle_native'
+        str: 'resultKind'
+        str: 'source'
+        str: 'currentVersion'
+        str: '[winsparkle] did_not_find_update handler failed: %s'
+
+    def LPWinSparkleUpdater._registerUpdateResultCallbacks._updateCheckError()  line 391
+      names: logger, warning, _setLastCheckDetail, _resolveCurrentVersion, callable, _onNoUpdateFoundCallback, _safeInvokeResultCallback, Exception
+        str: '[winsparkle] error callback received'
+        str: 'error'
+        str: 'winsparkle_native'
+        str: 'updater_sdk'
+        str: 'winsparkle error callback received'
+        str: 'resultKind'
+        str: 'source'
+        str: 'currentVersion'
+        str: 'errorCategory'
+        str: 'errorMessage'
+        str: '[winsparkle] error handler failed: %s'
+
+  def LPWinSparkleUpdater.setUpdateFoundCallback(self, onUpdateFound, onNoUpdateFound)  line 423
+    names: _onUpdateFoundCallback, _onNoUpdateFoundCallback
+      str: '\n        设置后台更新检查结果回调。\n\n        参数:\n            onUpdateFound (callable | None): 发现可用更新时调用，无参数。\n            onNoUpdateFound (callable | None): 确认无可用更新或检查出错时调用，无参数。\n        返回:\n            无\n        '
+
+  def LPWinSparkleUpdater.setUserRunInstallerCallback(self, onUserRunInstaller)  line 436
+    names: _onUserRunInstallerCallback
+      str: '\n        设置 WinSparkle 报告安装器就绪时的回调。\n\n        参数:\n            onUserRunInstaller (callable | None): 安装器就绪时调用的回调。\n                兼容 0 参数或 1 参数签名。\n        返回:\n            无\n        '
+
+  def LPWinSparkleUpdater._registerInstallerCallbacks(self)  line 448
+    names: _dll, hasattr, logger, warning, _userRunInstallerCallbackType, _userRunInstallerCallback, win_sparkle_set_user_run_installer_callback, info, Exception
+      str: '\n        注册 WinSparkle 安装器就绪回调，用作下载完成信号。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'win_sparkle_set_user_run_installer_callback'
+      str: '[winsparkle] current DLL does not support user_run_installer callback'
+      str: 'LPWinSparkleUpdater._registerInstallerCallbacks.<locals>._userRunInstallerCallback'
+      str: '[winsparkle] user_run_installer callback registered'
+      str: '[winsparkle] register user_run_installer callback failed: %s'
+
+    def LPWinSparkleUpdater._registerInstallerCallbacks._userRunInstallerCallback(installerPath)  line 464
+      names: str, logger, info, getLastCheckDetail, _setLastCheckDetail, get, _resolveCurrentVersion, callable, _onUserRunInstallerCallback, _safeInvokeResultCallback, Exception, warning
+        str: '[winsparkle] user_run_installer callback received installer_path=%s'
+        str: 'found'
+        str: 'winsparkle_user_run_installer'
+        str: 'latest_version'
+        str: 'resultKind'
+        str: 'source'
+        str: 'latestVersion'
+        str: 'currentVersion'
+        str: 'installer_path'
+        str: '[winsparkle] user_run_installer handler failed: %s'
+
+  def LPWinSparkleUpdater._safeInvokeResultCallback(self, callback, detail)  line 494
+    names: callable, TypeError
+      str: '\n        兼容调用更新结果回调（支持 0 参数或 1 参数签名）。\n\n        参数:\n            callback (callable): 上层回调函数。\n            detail (dict): 本轮检查结果详情。\n        返回:\n            无\n        '
+
+  def LPWinSparkleUpdater._classifyCheckError(self, errorMessage)  line 512
+    names: str, lower, any
+      str: '\n        将检查更新错误文本归类为统一错误类型。\n\n        参数:\n            errorMessage (str): 原始错误文本。\n        返回:\n            str: 统一错误分类。\n        '
+      str: 'unknown'
+      str: 'LPWinSparkleUpdater._classifyCheckError.<locals>.<genexpr>'
+      str: 'timeout'
+      str: 'timed out'
+      str: 'download_timeout'
+      str: 'dns'
+      str: 'socket'
+      str: 'connection'
+      str: 'ssl'
+      str: 'tls'
+      str: 'refused'
+      str: 'unreachable'
+      str: 'network'
+      str: 'http'
+      str: '404'
+      str: '403'
+      str: '500'
+      str: '503'
+      str: 'feed_unreachable'
+      str: 'xml'
+      str: 'parse'
+      str: 'malformed'
+      str: 'appcast'
+      str: 'feed_parse'
+
+    def LPWinSparkleUpdater._classifyCheckError.<genexpr>(.0)  line 525
+
+    def LPWinSparkleUpdater._classifyCheckError.<genexpr>(.0)  line 527
+
+    def LPWinSparkleUpdater._classifyCheckError.<genexpr>(.0)  line 529
+
+    def LPWinSparkleUpdater._classifyCheckError.<genexpr>(.0)  line 531
+
+  def LPWinSparkleUpdater._setLastCheckDetail(self, resultKind, source, latestVersion, currentVersion, compareResult, errorCategory, errorCode, errorMessage)  line 535
+    names: str, _lastCheckDetail, dict
+      str: '\n        更新并返回最近一次检查结果详情。\n\n        参数:\n            resultKind (str): 结果类型，found/no_update/error。\n            source (str): 结果来源标识。\n            latestVersion (str | None): 最新版本号。\n            currentVersion (str | None): 当前版本号。\n            compareResult (int | None): 版本比较结果。\n            errorCategory '
+      str: 'unknown'
+      str: 'winsparkle'
+      str: 'result_kind'
+      str: 'source'
+      str: 'latest_version'
+      str: 'current_version'
+      str: 'compare_result'
+      str: 'error_category'
+      str: 'error_code'
+      str: 'error_message'
+
+  def LPWinSparkleUpdater.getLastCheckDetail(self)  line 574
+    names: dict, _lastCheckDetail
+      str: '\n        获取最近一次检查详情副本。\n\n        参数:\n            无\n        返回:\n            dict: 最近一次检查详情。\n        '
+
+  def LPWinSparkleUpdater._fetchLatestVersionFromAppcast(self, feedUrl)  line 585
+    names: urllib, request, Request, urlopen, read, ET, fromstring, findall, findtext, isinstance, str, strip, find, attrib, get, _compareVersions, ValueError
+      str: '\n        从 appcast XML 中提取最新版本号。\n\n        参数:\n            feedUrl (str): appcast 地址。\n        返回:\n            str: appcast 中解析出的最新版本号。\n        '
+      str: 'WiiM Home WinSparkle Probe'
+      str: 'application/rss+xml, application/xml, text/xml, */*'
+      str: 'User-Agent'
+      str: 'Accept'
+      str: 'headers'
+      str: 'timeout'
+      str: 'sparkle'
+      str: 'http://www.andymatuschak.org/xml-namespaces/sparkle'
+      str: './/item'
+      str: 'sparkle:shortVersionString'
+      str: 'namespaces'
+      str: 'enclosure'
+      str: '{http://www.andymatuschak.org/xml-namespaces/sparkle}shortVersionString'
+      str: '{http://www.andymatuschak.org/xml-namespaces/sparkle}version'
+      str: 'no valid version found in appcast'
+
+  def LPWinSparkleUpdater.notifyUpdateFound(self, detail)  line 638
+    names: logger, info, isinstance, dict, getLastCheckDetail, callable, _onUpdateFoundCallback, _safeInvokeResultCallback, Exception, warning
+      str: '\n        通知上层当前发现可用更新。\n\n        参数:\n            detail (dict | None): 更新检查详情。\n        返回:\n            无\n        '
+      str: '[winsparkle.probe] notifyUpdateFound called'
+      str: '[winsparkle.probe] onUpdateFoundCallback failed: %s'
+
+  def LPWinSparkleUpdater.notifyNoUpdateFound(self, detail)  line 655
+    names: logger, info, isinstance, dict, getLastCheckDetail, callable, _onNoUpdateFoundCallback, _safeInvokeResultCallback, Exception, warning
+      str: '\n        通知上层当前未发现可用更新。\n\n        参数:\n            detail (dict | None): 更新检查详情。\n        返回:\n            无\n        '
+      str: '[winsparkle.probe] notifyNoUpdateFound called'
+      str: '[winsparkle.probe] onNoUpdateFoundCallback failed: %s'
+
+  def LPWinSparkleUpdater._runBackgroundAppcastProbe(self)  line 672
+    names: resolveFeedURL, logger, warning, _setLastCheckDetail, _resolveCurrentVersion, notifyNoUpdateFound, _fetchLatestVersionFromAppcast, _compareVersions, info, notifyUpdateFound, Exception, str, _classifyCheckError
+      str: '\n        在后台线程请求并解析 appcast，仅将检测结果通过 Python 回调返回给 Qt。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: '[winsparkle.probe] background probe skipped: feed URL unavailable'
+      str: 'error'
+      str: 'winsparkle_probe'
+      str: 'feed_unreachable'
+      str: 'feed URL unavailable'
+      str: 'resultKind'
+      str: 'source'
+      str: 'currentVersion'
+      str: 'errorCategory'
+      str: 'errorMessage'
+      str: '[winsparkle.probe] latest_version=%s current_version=%s compare=%s'
+      str: 'found'
+      str: 'resultKind'
+      str: 'source'
+      str: 'latestVersion'
+      str: 'currentVersion'
+      str: 'compareResult'
+      str: 'no_update'
+      str: '[winsparkle.probe] background appcast probe failed: %s'
+
+  def LPWinSparkleUpdater.resolveFeedURL(self)  line 734
+    names: str, _temporaryFeedURL, strip
+      str: '\n        返回当前有效的 Windows 更新 feed URL。\n\n        参数:\n            无\n        返回:\n            str: 固定 feed URL。\n        '
+      str: 'https://assets.wiimhome.com/appexe/appcast-beta-win-x86_64.xml'
+
+  def LPWinSparkleUpdater.setTemporaryFeedURL(self, feedURL)  line 748
+    names: str, strip, _temporaryFeedURL
+      str: '\n        设置运行时临时 feed URL（仅当前进程有效）。\n\n        参数:\n            feedURL (str): 临时 feed 地址；为空字符串时表示清空。\n        返回:\n            无\n        '
+
+  def LPWinSparkleUpdater.clearTemporaryFeedURL(self)  line 759
+    names: _temporaryFeedURL
+      str: '\n        清空运行时临时 feed URL，恢复默认 stable feed 解析。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPWinSparkleUpdater.applyCurrentFeedURL(self)  line 770
+    names: str, resolveFeedURL, strip, _dll, win_sparkle_set_appcast_url, encode, logger, info, Exception, warning
+      str: '\n        将 resolveFeedURL 的当前结果应用到 WinSparkle。\n\n        参数:\n            无\n        返回:\n            dict: 包含 ok/message/feed_url 的应用结果。\n        '
+      str: 'feed URL unavailable'
+      str: 'ok'
+      str: 'message'
+      str: 'feed_url'
+      str: 'winsparkle dll unavailable'
+      str: 'utf-8'
+      str: '[winsparkle] 已应用 feed URL: %s'
+      str: 'ok'
+      str: '[winsparkle] 应用 feed URL 失败: %s'
+
+  def LPWinSparkleUpdater.initUpdater(self)  line 810
+    names: platform, system, logger, info, _ready, _sparkleConfig, get, _loadDLL, resolveFeedURL, warning, _dll, win_sparkle_set_appcast_url, encode, _resolveCurrentVersion, win_sparkle_set_app_details, hasattr, win_sparkle_set_automatic_check_for_updates, win_sparkle_set_update_check_interval, win_sparkle_set_lang, _registerShutdownCallbacks, _registerUpdateResultCallbacks, _registerInstallerCallbacks, win_sparkle_init, Exception
+      str: '\n        初始化 WinSparkle 更新器。\n\n        参数:\n            无\n        返回:\n            bool: 初始化成功返回 True，否则返回 False。\n        '
+      str: 'Windows'
+      str: '[winsparkle] 非 Windows 平台，跳过初始化'
+      str: 'enabled'
+      str: '[winsparkle] 配置关闭，跳过初始化'
+      str: '[winsparkle] 未解析到 feed URL，无法初始化'
+      str: 'utf-8'
+      str: 'Linkplay'
+      str: 'WiiM Home'
+      str: 'win_sparkle_set_automatic_check_for_updates'
+      str: '[winsparkle] automatic checks overridden to False'
+      str: 'win_sparkle_set_update_check_interval'
+      str: '[winsparkle] update check interval overridden to 7200s'
+      str: 'win_sparkle_set_lang'
+      str: '[winsparkle] language overridden to en'
+      str: '[winsparkle] WinSparkle init success, feed=%s, version=%s'
+      str: '[winsparkle] 初始化失败: %s'
+
+  def LPWinSparkleUpdater.isReady(self)  line 868
+    names: _ready
+      str: '\n        返回 WinSparkle 当前是否可用。\n\n        参数:\n            无\n        返回:\n            bool: 可用返回 True，否则返回 False。\n        '
+
+  def LPWinSparkleUpdater.ensureReady(self)  line 879
+    names: isReady, logger, info, _ready, initUpdater, warning
+      str: '\n        确保 WinSparkle 更新器处于可用状态；若不可用则尝试重新初始化。\n\n        参数:\n            无\n        返回:\n            bool: 可用（或恢复成功）返回 True，否则返回 False。\n        '
+      str: '[winsparkle] ensureReady: 更新器不可用，尝试重新初始化'
+      str: '[winsparkle] ensureReady: 重新初始化成功'
+      str: '[winsparkle] ensureReady: 重新初始化失败'
+
+  def LPWinSparkleUpdater.triggerBackgroundCheck(self)  line 899
+    names: isReady, logger, warning, _backgroundCheckThread, is_alive, info, threading, Thread, _runBackgroundAppcastProbe, start, callable, _onUpdateFoundCallback, _onNoUpdateFoundCallback
+      str: '\n        触发后台检查更新。\n        为避免 WinSparkle 的 without_ui 在发现更新时直接弹窗，这里改为 Python appcast 探测。\n\n        参数:\n            无\n        返回:\n            bool: 成功触发返回 True，否则返回 False。\n        '
+      str: '[winsparkle] 未就绪，无法触发后台检查'
+      str: '[winsparkle.probe] 后台 appcast 探测仍在进行，跳过重复触发'
+      str: 'winsparkle-appcast-probe'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+      str: '[winsparkle.probe] 已触发后台 appcast 探测 callback_registered(found=%s, not_found=%s)'
+
+  def LPWinSparkleUpdater.isBackgroundCheckRunning(self)  line 930
+    names: _backgroundCheckThread, is_alive
+      str: '\n        返回后台 appcast 探测线程是否仍在执行。\n\n        参数:\n            无\n        返回:\n            bool: 探测线程运行中返回 True，否则返回 False。\n        '
+
+  def LPWinSparkleUpdater.checkForUpdatesManually(self)  line 941
+    names: isReady, logger, warning, _dll, win_sparkle_check_update_with_ui, info, Exception
+      str: '\n        手动触发检查更新（带 UI）。\n\n        参数:\n            无\n        返回:\n            bool: 成功触发返回 True，否则返回 False。\n        '
+      str: '[winsparkle] 未就绪，无法手动检查更新'
+      str: '[winsparkle] 已触发手动检查更新'
+      str: '[winsparkle] 手动检查失败: %s'
+
+  def LPWinSparkleUpdater.cleanup(self)  line 962
+    names: _dll, _ready, _canShutdownCallback, _shutdownRequestCallback, _userRunInstallerCallback, win_sparkle_cleanup, logger, info, Exception, warning, _backgroundCheckThread
+      str: '\n        清理 WinSparkle 资源。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: '[winsparkle] cleanup 完成'
+      str: '[winsparkle] cleanup 失败: %s'

@@ -1,0 +1,2387 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n收藏缓存生命周期同步器。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  5           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (threading)
+             10 STORE_NAME               1 (threading)
+
+  6          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (time)
+             18 STORE_NAME               2 (time)
+
+  7          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               3 (('Dict', 'List', 'Optional', 'Tuple'))
+             24 IMPORT_NAME              3 (typing)
+             26 IMPORT_FROM              4 (Dict)
+             28 STORE_NAME               4 (Dict)
+             30 IMPORT_FROM              5 (List)
+             32 STORE_NAME               5 (List)
+             34 IMPORT_FROM              6 (Optional)
+             36 STORE_NAME               6 (Optional)
+             38 IMPORT_FROM              7 (Tuple)
+             40 STORE_NAME               7 (Tuple)
+             42 POP_TOP
+
+  9          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               2 (None)
+             48 IMPORT_NAME              8 (LPGlobalUI)
+             50 STORE_NAME               8 (LPGlobalUI)
+
+ 10          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               4 (('LPFavoriteCacheManager',))
+             56 IMPORT_NAME              9 (LPClientFramework.LPFavoriteCacheManager)
+             58 IMPORT_FROM             10 (LPFavoriteCacheManager)
+             60 STORE_NAME              10 (LPFavoriteCacheManager)
+             62 POP_TOP
+
+ 11          64 LOAD_CONST               1 (0)
+             66 LOAD_CONST               5 (('WIIMRADIO_LOCAL_USER_ID',))
+             68 IMPORT_NAME              9 (LPClientFramework.LPFavoriteCacheManager)
+             70 IMPORT_FROM             11 (WIIMRADIO_LOCAL_USER_ID)
+             72 STORE_NAME              11 (WIIMRADIO_LOCAL_USER_ID)
+             74 POP_TOP
+
+ 12          76 LOAD_CONST               1 (0)
+             78 LOAD_CONST               6 (('addNotificationObserver', 'deRegisterDeviceInfoChanged', 'logger', 'registerDeviceInfoChanged', 'removeNotificationObserver'))
+             80 IMPORT_NAME             12 (LPClientFramework.LPUtility)
+             82 IMPORT_FROM             13 (addNotificationObserver)
+             84 STORE_NAME              13 (addNotificationObserver)
+             86 IMPORT_FROM             14 (deRegisterDeviceInfoChanged)
+             88 STORE_NAME              14 (deRegisterDeviceInfoChanged)
+             90 IMPORT_FROM             15 (logger)
+             92 STORE_NAME              15 (logger)
+             94 IMPORT_FROM             16 (registerDeviceInfoChanged)
+             96 STORE_NAME              16 (registerDeviceInfoChanged)
+             98 IMPORT_FROM             17 (removeNotificationObserver)
+            100 STORE_NAME              17 (removeNotificationObserver)
+            102 POP_TOP
+
+ 21         104 LOAD_BUILD_CLASS
+            106 LOAD_CONST               7 (<code object LPFavoriteSyncCoordinator at 0x000001F3253AEC90, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 21>)
+            108 LOAD_CONST               8 ('LPFavoriteSyncCoordinator')
+            110 MAKE_FUNCTION            0
+            112 LOAD_CONST               8 ('LPFavoriteSyncCoordinator')
+            114 CALL_FUNCTION            2
+            116 STORE_NAME              18 (LPFavoriteSyncCoordinator)
+            118 LOAD_CONST               2 (None)
+            120 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator ===
+ 21           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFavoriteSyncCoordinator')
+              6 STORE_NAME               2 (__qualname__)
+
+ 22           8 LOAD_CONST               1 ('收藏缓存生命周期同步器：监听设备/账号事件并按 (source, userId) 调度拉取与清理。')
+             10 STORE_NAME               3 (__doc__)
+
+ 24          12 LOAD_CONST               2 (None)
+             14 STORE_NAME               4 (_instance)
+
+ 27          16 LOAD_CONST               3 (('Tidal', 'Qobuz', 'WiiMRadio'))
+             18 STORE_NAME               5 (FAVORITE_SOURCES)
+
+ 29          20 LOAD_CONST               4 (3600.0)
+             22 STORE_NAME               6 (SYNC_TTL_SECONDS)
+
+ 31          24 LOAD_CONST               4 (3600.0)
+             26 STORE_NAME               7 (PERIODIC_SYNC_INTERVAL_SECONDS)
+
+ 33          28 LOAD_CONST               5 ((30, 120, 600))
+             30 STORE_NAME               8 (RETRY_DELAYS)
+
+ 35          32 LOAD_NAME                9 (classmethod)
+
+ 36          34 LOAD_CONST               0 ('LPFavoriteSyncCoordinator')
+             36 LOAD_CONST               6 (('return',))
+             38 BUILD_CONST_KEY_MAP      1
+             40 LOAD_CONST               7 (<code object instance at 0x000001F324E692F0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 35>)
+             42 LOAD_CONST               8 ('LPFavoriteSyncCoordinator.instance')
+             44 MAKE_FUNCTION            4 (annotations)
+             46 CALL_FUNCTION            1
+             48 STORE_NAME              10 (instance)
+
+ 46          50 LOAD_CONST               9 (<code object __init__ at 0x000001F324E69920, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 46>)
+             52 LOAD_CONST              10 ('LPFavoriteSyncCoordinator.__init__')
+             54 MAKE_FUNCTION            0
+             56 STORE_NAME              11 (__init__)
+
+ 62          58 LOAD_NAME               12 (str)
+             60 LOAD_NAME               12 (str)
+             62 LOAD_NAME               13 (Dict)
+             64 LOAD_CONST              11 (('source', 'userId', 'return'))
+             66 BUILD_CONST_KEY_MAP      3
+             68 LOAD_CONST              12 (<code object _stateFor at 0x000001F324E69870, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 62>)
+             70 LOAD_CONST              13 ('LPFavoriteSyncCoordinator._stateFor')
+             72 MAKE_FUNCTION            4 (annotations)
+             74 STORE_NAME              14 (_stateFor)
+
+ 84          76 LOAD_CONST               2 (None)
+             78 LOAD_CONST               6 (('return',))
+             80 BUILD_CONST_KEY_MAP      1
+             82 LOAD_CONST              14 (<code object start at 0x000001F324E693A0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 84>)
+             84 LOAD_CONST              15 ('LPFavoriteSyncCoordinator.start')
+             86 MAKE_FUNCTION            4 (annotations)
+             88 STORE_NAME              15 (start)
+
+102          90 LOAD_CONST               2 (None)
+             92 LOAD_CONST               6 (('return',))
+             94 BUILD_CONST_KEY_MAP      1
+             96 LOAD_CONST              16 (<code object stop at 0x000001F324E69450, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 102>)
+             98 LOAD_CONST              17 ('LPFavoriteSyncCoordinator.stop')
+            100 MAKE_FUNCTION            4 (annotations)
+            102 STORE_NAME              16 (stop)
+
+117         104 LOAD_CONST               2 (None)
+            106 LOAD_CONST               6 (('return',))
+            108 BUILD_CONST_KEY_MAP      1
+            110 LOAD_CONST              18 (<code object _startPeriodicSync at 0x000001F324E69500, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 117>)
+            112 LOAD_CONST              19 ('LPFavoriteSyncCoordinator._startPeriodicSync')
+            114 MAKE_FUNCTION            4 (annotations)
+            116 STORE_NAME              17 (_startPeriodicSync)
+
+134         118 LOAD_CONST               2 (None)
+            120 LOAD_CONST               6 (('return',))
+            122 BUILD_CONST_KEY_MAP      1
+            124 LOAD_CONST              20 (<code object _stopPeriodicSync at 0x000001F324E690E0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 134>)
+            126 LOAD_CONST              21 ('LPFavoriteSyncCoordinator._stopPeriodicSync')
+            128 MAKE_FUNCTION            4 (annotations)
+            130 STORE_NAME              18 (_stopPeriodicSync)
+
+149         132 LOAD_CONST               2 (None)
+            134 LOAD_CONST               6 (('return',))
+            136 BUILD_CONST_KEY_MAP      1
+            138 LOAD_CONST              22 (<code object _periodicLoop at 0x000001F3253CEF50, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 149>)
+            140 LOAD_CONST              23 ('LPFavoriteSyncCoordinator._periodicLoop')
+            142 MAKE_FUNCTION            4 (annotations)
+            144 STORE_NAME              19 (_periodicLoop)
+
+164         146 LOAD_CONST               2 (None)
+            148 LOAD_CONST               6 (('return',))
+            150 BUILD_CONST_KEY_MAP      1
+            152 LOAD_CONST              24 (<code object _periodicSyncTick at 0x000001F3253CE710, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 164>)
+            154 LOAD_CONST              25 ('LPFavoriteSyncCoordinator._periodicSyncTick')
+            156 MAKE_FUNCTION            4 (annotations)
+            158 STORE_NAME              20 (_periodicSyncTick)
+
+177         160 LOAD_CONST              67 ((False,))
+            162 LOAD_NAME               12 (str)
+            164 LOAD_NAME               12 (str)
+            166 LOAD_NAME               21 (bool)
+            168 LOAD_CONST               2 (None)
+            170 LOAD_CONST              27 (('source', 'userId', 'force', 'return'))
+            172 BUILD_CONST_KEY_MAP      4
+            174 LOAD_CONST              28 (<code object requestSync at 0x000001F3253CE5B0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 177>)
+            176 LOAD_CONST              29 ('LPFavoriteSyncCoordinator.requestSync')
+            178 MAKE_FUNCTION            5 (defaults, annotations)
+            180 STORE_NAME              22 (requestSync)
+
+209         182 LOAD_CONST               2 (None)
+            184 LOAD_CONST               6 (('return',))
+            186 BUILD_CONST_KEY_MAP      1
+            188 LOAD_CONST              30 (<code object _prepareSingletons at 0x000001F3253CE2F0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 209>)
+            190 LOAD_CONST              31 ('LPFavoriteSyncCoordinator._prepareSingletons')
+            192 MAKE_FUNCTION            4 (annotations)
+            194 STORE_NAME              23 (_prepareSingletons)
+
+227         196 LOAD_NAME               12 (str)
+            198 LOAD_NAME               12 (str)
+            200 LOAD_CONST               2 (None)
+            202 LOAD_CONST              11 (('source', 'userId', 'return'))
+            204 BUILD_CONST_KEY_MAP      3
+            206 LOAD_CONST              32 (<code object clearUser at 0x000001F3253CE660, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 227>)
+            208 LOAD_CONST              33 ('LPFavoriteSyncCoordinator.clearUser')
+            210 MAKE_FUNCTION            4 (annotations)
+            212 STORE_NAME              24 (clearUser)
+
+242         214 LOAD_NAME               12 (str)
+            216 LOAD_NAME               12 (str)
+            218 LOAD_NAME               25 (float)
+            220 LOAD_CONST               2 (None)
+            222 LOAD_CONST              34 (('source', 'userId', 'delay', 'return'))
+            224 BUILD_CONST_KEY_MAP      4
+            226 LOAD_CONST              35 (<code object _scheduleRetry at 0x000001F3253CEC90, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 242>)
+            228 LOAD_CONST              36 ('LPFavoriteSyncCoordinator._scheduleRetry')
+            230 MAKE_FUNCTION            4 (annotations)
+            232 STORE_NAME              26 (_scheduleRetry)
+
+270         234 LOAD_NAME               12 (str)
+            236 LOAD_NAME               12 (str)
+            238 LOAD_CONST               2 (None)
+            240 LOAD_CONST              11 (('source', 'userId', 'return'))
+            242 BUILD_CONST_KEY_MAP      3
+            244 LOAD_CONST              37 (<code object _cancelRetry at 0x000001F3253CEB30, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 270>)
+            246 LOAD_CONST              38 ('LPFavoriteSyncCoordinator._cancelRetry')
+            248 MAKE_FUNCTION            4 (annotations)
+            250 STORE_NAME              27 (_cancelRetry)
+
+284         252 LOAD_CONST               2 (None)
+            254 LOAD_CONST               6 (('return',))
+            256 BUILD_CONST_KEY_MAP      1
+            258 LOAD_CONST              39 (<code object _cancelAllRetries at 0x000001F3253CE500, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 284>)
+            260 LOAD_CONST              40 ('LPFavoriteSyncCoordinator._cancelAllRetries')
+            262 MAKE_FUNCTION            4 (annotations)
+            264 STORE_NAME              28 (_cancelAllRetries)
+
+296         266 LOAD_CONST              68 ((False,))
+            268 LOAD_NAME               29 (object)
+            270 LOAD_NAME               21 (bool)
+            272 LOAD_CONST               2 (None)
+            274 LOAD_CONST              41 (('device', 'force', 'return'))
+            276 BUILD_CONST_KEY_MAP      3
+            278 LOAD_CONST              42 (<code object syncNowForDevice at 0x000001F3253CEEA0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 296>)
+            280 LOAD_CONST              43 ('LPFavoriteSyncCoordinator.syncNowForDevice')
+            282 MAKE_FUNCTION            5 (defaults, annotations)
+            284 STORE_NAME              30 (syncNowForDevice)
+
+321         286 LOAD_NAME               13 (Dict)
+            288 LOAD_CONST               2 (None)
+            290 LOAD_CONST              44 (('params', 'return'))
+            292 BUILD_CONST_KEY_MAP      2
+            294 LOAD_CONST              45 (<code object _onAccountChangedForSource at 0x000001F3253CE450, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 321>)
+            296 LOAD_CONST              46 ('LPFavoriteSyncCoordinator._onAccountChangedForSource')
+            298 MAKE_FUNCTION            4 (annotations)
+            300 STORE_NAME              31 (_onAccountChangedForSource)
+
+340         302 LOAD_NAME               13 (Dict)
+            304 LOAD_CONST               2 (None)
+            306 LOAD_CONST              44 (('params', 'return'))
+            308 BUILD_CONST_KEY_MAP      2
+            310 LOAD_CONST              47 (<code object _onDeviceChanged at 0x000001F3253CE3A0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 340>)
+            312 LOAD_CONST              48 ('LPFavoriteSyncCoordinator._onDeviceChanged')
+            314 MAKE_FUNCTION            4 (annotations)
+            316 STORE_NAME              32 (_onDeviceChanged)
+
+349         318 LOAD_CONST              69 ((None, None))
+            320 LOAD_NAME               29 (object)
+            322 LOAD_NAME               29 (object)
+            324 LOAD_NAME               29 (object)
+            326 LOAD_CONST               2 (None)
+            328 LOAD_CONST              49 (('device', 'infoType', 'detail', 'return'))
+            330 BUILD_CONST_KEY_MAP      4
+            332 LOAD_CONST              50 (<code object deviceInfoUpdate at 0x000001F3253CE9D0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 349>)
+            334 LOAD_CONST              51 ('LPFavoriteSyncCoordinator.deviceInfoUpdate')
+            336 MAKE_FUNCTION            5 (defaults, annotations)
+            338 STORE_NAME              33 (deviceInfoUpdate)
+
+376         340 LOAD_NAME               34 (staticmethod)
+
+377         342 LOAD_NAME               13 (Dict)
+            344 LOAD_NAME               12 (str)
+            346 LOAD_CONST              52 (('notify', 'return'))
+            348 BUILD_CONST_KEY_MAP      2
+            350 LOAD_CONST              53 (<code object _userIdFromNotify at 0x000001F3253CE920, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 376>)
+            352 LOAD_CONST              54 ('LPFavoriteSyncCoordinator._userIdFromNotify')
+            354 MAKE_FUNCTION            4 (annotations)
+            356 CALL_FUNCTION            1
+            358 STORE_NAME              35 (_userIdFromNotify)
+
+397         360 LOAD_NAME               12 (str)
+            362 LOAD_NAME               12 (str)
+            364 LOAD_CONST              55 (('source', 'return'))
+            366 BUILD_CONST_KEY_MAP      2
+            368 LOAD_CONST              56 (<code object _currentUserIdForSource at 0x000001F3253CEDF0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 397>)
+            370 LOAD_CONST              57 ('LPFavoriteSyncCoordinator._currentUserIdForSource')
+            372 MAKE_FUNCTION            4 (annotations)
+            374 STORE_NAME              36 (_currentUserIdForSource)
+
+413         376 LOAD_NAME               12 (str)
+            378 LOAD_NAME               12 (str)
+            380 LOAD_CONST               2 (None)
+            382 LOAD_CONST              11 (('source', 'userId', 'return'))
+            384 BUILD_CONST_KEY_MAP      3
+            386 LOAD_CONST              58 (<code object _syncSource at 0x000001F3253CE030, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 413>)
+            388 LOAD_CONST              59 ('LPFavoriteSyncCoordinator._syncSource')
+            390 MAKE_FUNCTION            4 (annotations)
+            392 STORE_NAME              37 (_syncSource)
+
+457         394 LOAD_CONST               2 (None)
+            396 LOAD_CONST               6 (('return',))
+            398 BUILD_CONST_KEY_MAP      1
+            400 LOAD_CONST              60 (<code object _syncWiiMRadioLocal at 0x000001F3253CE870, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 457>)
+            402 LOAD_CONST              61 ('LPFavoriteSyncCoordinator._syncWiiMRadioLocal')
+            404 MAKE_FUNCTION            4 (annotations)
+            406 STORE_NAME              38 (_syncWiiMRadioLocal)
+
+467         408 LOAD_NAME               12 (str)
+            410 LOAD_NAME               13 (Dict)
+            412 LOAD_NAME               12 (str)
+            414 LOAD_NAME               39 (List)
+            416 LOAD_NAME               12 (str)
+            418 BINARY_SUBSCR
+            420 BUILD_TUPLE              2
+            422 BINARY_SUBSCR
+            424 LOAD_CONST              62 (('userId', 'return'))
+            426 BUILD_CONST_KEY_MAP      2
+            428 LOAD_CONST              63 (<code object _fetchTidalIds at 0x000001F3253CE7C0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 467>)
+            430 LOAD_CONST              64 ('LPFavoriteSyncCoordinator._fetchTidalIds')
+            432 MAKE_FUNCTION            4 (annotations)
+            434 STORE_NAME              40 (_fetchTidalIds)
+
+494         436 LOAD_NAME               12 (str)
+            438 LOAD_NAME               13 (Dict)
+            440 LOAD_NAME               12 (str)
+            442 LOAD_NAME               39 (List)
+            444 LOAD_NAME               12 (str)
+            446 BINARY_SUBSCR
+            448 BUILD_TUPLE              2
+            450 BINARY_SUBSCR
+            452 LOAD_CONST              62 (('userId', 'return'))
+            454 BUILD_CONST_KEY_MAP      2
+            456 LOAD_CONST              65 (<code object _fetchQobuzIds at 0x000001F3253AE710, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 494>)
+            458 LOAD_CONST              66 ('LPFavoriteSyncCoordinator._fetchQobuzIds')
+            460 MAKE_FUNCTION            4 (annotations)
+            462 STORE_NAME              41 (_fetchQobuzIds)
+            464 LOAD_CONST               2 (None)
+            466 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.instance ===
+ 42           0 LOAD_FAST                0 (cls)
+              2 LOAD_ATTR                0 (_instance)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       18
+
+ 43          10 LOAD_FAST                0 (cls)
+             12 CALL_FUNCTION            0
+             14 LOAD_FAST                0 (cls)
+             16 STORE_ATTR               0 (_instance)
+
+ 44     >>   18 LOAD_FAST                0 (cls)
+             20 LOAD_ATTR                0 (_instance)
+             22 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.__init__ ===
+ 48           0 LOAD_CONST               1 (False)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_started)
+
+ 49           6 BUILD_MAP                0
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_sync_states)
+
+ 50          12 LOAD_GLOBAL              2 (threading)
+             14 LOAD_METHOD              3 (RLock)
+             16 CALL_METHOD              0
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               4 (_states_lock)
+
+ 52          22 BUILD_MAP                0
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               5 (_retry_timers)
+
+ 54          28 LOAD_CONST               2 (None)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               6 (_periodic_stop)
+
+ 55          34 LOAD_CONST               2 (None)
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               7 (_periodic_thread)
+
+ 58          40 LOAD_CONST               3 (<code object <dictcomp> at 0x000001F324E697C0, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 58>)
+             42 LOAD_CONST               4 ('LPFavoriteSyncCoordinator.__init__.<locals>.<dictcomp>')
+             44 MAKE_FUNCTION            0
+
+ 59          46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                8 (FAVORITE_SOURCES)
+
+ 58          50 GET_ITER
+             52 CALL_FUNCTION            1
+             54 LOAD_FAST                0 (self)
+             56 STORE_ATTR               9 (_fetch_locks)
+             58 LOAD_CONST               2 (None)
+             60 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.__init__.<dictcomp> ===
+ 58           0 BUILD_MAP                0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                14 (to 20)
+
+ 59           6 STORE_FAST               1 (source)
+              8 LOAD_FAST                1 (source)
+             10 LOAD_GLOBAL              0 (threading)
+             12 LOAD_METHOD              1 (Lock)
+             14 CALL_METHOD              0
+             16 MAP_ADD                  2
+             18 JUMP_ABSOLUTE            4
+        >>   20 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._stateFor ===
+ 70           0 LOAD_FAST                1 (source)
+              2 LOAD_FAST                2 (userId)
+              4 BUILD_TUPLE              2
+              6 STORE_FAST               3 (key)
+
+ 71           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (_states_lock)
+             12 SETUP_WITH              70 (to 84)
+             14 POP_TOP
+
+ 72          16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (_sync_states)
+             20 LOAD_METHOD              2 (get)
+             22 LOAD_FAST                3 (key)
+             24 CALL_METHOD              1
+             26 STORE_FAST               4 (state)
+
+ 73          28 LOAD_FAST                4 (state)
+             30 LOAD_CONST               1 (None)
+             32 IS_OP                    0
+             34 POP_JUMP_IF_FALSE       66
+
+ 75          36 LOAD_CONST               2 ('idle')
+
+ 76          38 LOAD_CONST               3 (0.0)
+
+ 77          40 LOAD_CONST               4 (0)
+
+ 78          42 LOAD_CONST               3 (0.0)
+
+ 79          44 LOAD_GLOBAL              3 (threading)
+             46 LOAD_METHOD              4 (RLock)
+             48 CALL_METHOD              0
+
+ 74          50 LOAD_CONST               5 (('status', 'lastSyncAt', 'retryCount', 'nextRetryAt', 'lock'))
+             52 BUILD_CONST_KEY_MAP      5
+             54 STORE_FAST               4 (state)
+
+ 81          56 LOAD_FAST                4 (state)
+             58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                1 (_sync_states)
+             62 LOAD_FAST                3 (key)
+             64 STORE_SUBSCR
+
+ 82     >>   66 LOAD_FAST                4 (state)
+             68 POP_BLOCK
+             70 ROT_TWO
+             72 LOAD_CONST               1 (None)
+             74 DUP_TOP
+             76 DUP_TOP
+             78 CALL_FUNCTION            3
+             80 POP_TOP
+             82 RETURN_VALUE
+        >>   84 WITH_EXCEPT_START
+             86 POP_JUMP_IF_TRUE        90
+             88 RERAISE
+        >>   90 POP_TOP
+             92 POP_TOP
+             94 POP_TOP
+             96 POP_EXCEPT
+             98 POP_TOP
+            100 LOAD_CONST               1 (None)
+            102 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.start ===
+ 90           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_started)
+              4 POP_JUMP_IF_FALSE       10
+
+ 91           6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+ 92     >>   10 LOAD_CONST               2 (True)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               0 (_started)
+
+ 93          16 LOAD_GLOBAL              1 (addNotificationObserver)
+             18 LOAD_CONST               3 ('accountChangedForSource')
+             20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                2 (_onAccountChangedForSource)
+             24 CALL_FUNCTION            2
+             26 POP_TOP
+
+ 94          28 LOAD_GLOBAL              1 (addNotificationObserver)
+             30 LOAD_CONST               4 ('DeviceChanged')
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_onDeviceChanged)
+             36 CALL_FUNCTION            2
+             38 POP_TOP
+
+ 95          40 LOAD_GLOBAL              4 (registerDeviceInfoChanged)
+             42 LOAD_FAST                0 (self)
+             44 CALL_FUNCTION            1
+             46 POP_TOP
+
+ 96          48 LOAD_FAST                0 (self)
+             50 LOAD_METHOD              5 (_prepareSingletons)
+             52 CALL_METHOD              0
+             54 POP_TOP
+
+ 97          56 LOAD_GLOBAL              6 (getattr)
+             58 LOAD_GLOBAL              7 (LPGlobalUI)
+             60 LOAD_CONST               5 ('currentDevice')
+             62 LOAD_CONST               1 (None)
+             64 CALL_FUNCTION            3
+             66 STORE_FAST               1 (device)
+
+ 98          68 LOAD_FAST                1 (device)
+             70 LOAD_CONST               1 (None)
+             72 IS_OP                    1
+             74 POP_JUMP_IF_FALSE       90
+
+ 99          76 LOAD_FAST                0 (self)
+             78 LOAD_ATTR                8 (syncNowForDevice)
+             80 LOAD_FAST                1 (device)
+             82 LOAD_CONST               2 (True)
+             84 LOAD_CONST               6 (('force',))
+             86 CALL_FUNCTION_KW         2
+             88 POP_TOP
+
+100     >>   90 LOAD_FAST                0 (self)
+             92 LOAD_METHOD              9 (_startPeriodicSync)
+             94 CALL_METHOD              0
+             96 POP_TOP
+             98 LOAD_CONST               1 (None)
+            100 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.stop ===
+108           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_started)
+              4 POP_JUMP_IF_TRUE        10
+
+109           6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+110     >>   10 LOAD_CONST               2 (False)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               0 (_started)
+
+111          16 LOAD_FAST                0 (self)
+             18 LOAD_METHOD              1 (_stopPeriodicSync)
+             20 CALL_METHOD              0
+             22 POP_TOP
+
+112          24 LOAD_GLOBAL              2 (removeNotificationObserver)
+             26 LOAD_CONST               3 ('accountChangedForSource')
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                3 (_onAccountChangedForSource)
+             32 CALL_FUNCTION            2
+             34 POP_TOP
+
+113          36 LOAD_GLOBAL              2 (removeNotificationObserver)
+             38 LOAD_CONST               4 ('DeviceChanged')
+             40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                4 (_onDeviceChanged)
+             44 CALL_FUNCTION            2
+             46 POP_TOP
+
+114          48 LOAD_GLOBAL              5 (deRegisterDeviceInfoChanged)
+             50 LOAD_FAST                0 (self)
+             52 CALL_FUNCTION            1
+             54 POP_TOP
+
+115          56 LOAD_FAST                0 (self)
+             58 LOAD_METHOD              6 (_cancelAllRetries)
+             60 CALL_METHOD              0
+             62 POP_TOP
+             64 LOAD_CONST               1 (None)
+             66 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._startPeriodicSync ===
+123           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_periodic_thread)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    1
+              8 POP_JUMP_IF_FALSE       24
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_periodic_thread)
+             14 LOAD_METHOD              1 (is_alive)
+             16 CALL_METHOD              0
+             18 POP_JUMP_IF_FALSE       24
+
+124          20 LOAD_CONST               1 (None)
+             22 RETURN_VALUE
+
+125     >>   24 LOAD_GLOBAL              2 (threading)
+             26 LOAD_METHOD              3 (Event)
+             28 CALL_METHOD              0
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               4 (_periodic_stop)
+
+126          34 LOAD_GLOBAL              2 (threading)
+             36 LOAD_ATTR                5 (Thread)
+
+127          38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                6 (_periodicLoop)
+
+128          42 LOAD_CONST               2 ('favoriteSyncPeriodic')
+
+129          44 LOAD_CONST               3 (True)
+
+126          46 LOAD_CONST               4 (('target', 'name', 'daemon'))
+             48 CALL_FUNCTION_KW         3
+             50 STORE_FAST               1 (thread)
+
+131          52 LOAD_FAST                1 (thread)
+             54 LOAD_FAST                0 (self)
+             56 STORE_ATTR               0 (_periodic_thread)
+
+132          58 LOAD_FAST                1 (thread)
+             60 LOAD_METHOD              7 (start)
+             62 CALL_METHOD              0
+             64 POP_TOP
+             66 LOAD_CONST               1 (None)
+             68 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._stopPeriodicSync ===
+140           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_periodic_stop)
+              4 STORE_FAST               1 (stop_event)
+
+141           6 LOAD_FAST                1 (stop_event)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    1
+             12 POP_JUMP_IF_FALSE       22
+
+142          14 LOAD_FAST                1 (stop_event)
+             16 LOAD_METHOD              1 (set)
+             18 CALL_METHOD              0
+             20 POP_TOP
+
+143     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                2 (_periodic_thread)
+             26 STORE_FAST               2 (thread)
+
+144          28 LOAD_CONST               1 (None)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               2 (_periodic_thread)
+
+145          34 LOAD_CONST               1 (None)
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               0 (_periodic_stop)
+
+146          40 LOAD_FAST                2 (thread)
+             42 LOAD_CONST               1 (None)
+             44 IS_OP                    1
+             46 POP_JUMP_IF_FALSE       68
+             48 LOAD_FAST                2 (thread)
+             50 LOAD_METHOD              3 (is_alive)
+             52 CALL_METHOD              0
+             54 POP_JUMP_IF_FALSE       68
+
+147          56 LOAD_FAST                2 (thread)
+             58 LOAD_ATTR                4 (join)
+             60 LOAD_CONST               2 (1.0)
+             62 LOAD_CONST               3 (('timeout',))
+             64 CALL_FUNCTION_KW         1
+             66 POP_TOP
+        >>   68 LOAD_CONST               1 (None)
+             70 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._periodicLoop ===
+155           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_periodic_stop)
+              4 STORE_FAST               1 (stop_event)
+
+156     >>    6 LOAD_FAST                1 (stop_event)
+              8 LOAD_METHOD              1 (wait)
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                2 (PERIODIC_SYNC_INTERVAL_SECONDS)
+             14 CALL_METHOD              1
+             16 POP_JUMP_IF_TRUE        90
+
+157          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (_started)
+             22 POP_JUMP_IF_TRUE        26
+
+158          24 JUMP_ABSOLUTE           90
+
+159     >>   26 SETUP_FINALLY           12 (to 40)
+
+160          28 LOAD_FAST                0 (self)
+             30 LOAD_METHOD              4 (_periodicSyncTick)
+             32 CALL_METHOD              0
+             34 POP_TOP
+             36 POP_BLOCK
+             38 JUMP_ABSOLUTE            6
+
+161     >>   40 DUP_TOP
+             42 LOAD_GLOBAL              5 (Exception)
+             44 JUMP_IF_NOT_EXC_MATCH    86
+             46 POP_TOP
+             48 STORE_FAST               2 (exc)
+             50 POP_TOP
+             52 SETUP_FINALLY           24 (to 78)
+
+162          54 LOAD_GLOBAL              6 (logger)
+             56 LOAD_METHOD              7 (warning)
+             58 LOAD_CONST               1 ('[FavoriteSync] periodic sync failed: %s')
+             60 LOAD_FAST                2 (exc)
+             62 CALL_METHOD              2
+             64 POP_TOP
+             66 POP_BLOCK
+             68 POP_EXCEPT
+             70 LOAD_CONST               2 (None)
+             72 STORE_FAST               2 (exc)
+             74 DELETE_FAST              2 (exc)
+             76 JUMP_ABSOLUTE            6
+        >>   78 LOAD_CONST               2 (None)
+             80 STORE_FAST               2 (exc)
+             82 DELETE_FAST              2 (exc)
+             84 RERAISE
+        >>   86 RERAISE
+             88 JUMP_ABSOLUTE            6
+        >>   90 LOAD_CONST               2 (None)
+             92 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._periodicSyncTick ===
+170           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_started)
+              4 POP_JUMP_IF_TRUE        10
+
+171           6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+172     >>   10 LOAD_GLOBAL              1 (getattr)
+             12 LOAD_GLOBAL              2 (LPGlobalUI)
+             14 LOAD_CONST               2 ('currentDevice')
+             16 LOAD_CONST               1 (None)
+             18 CALL_FUNCTION            3
+             20 STORE_FAST               1 (device)
+
+173          22 LOAD_FAST                1 (device)
+             24 LOAD_CONST               1 (None)
+             26 IS_OP                    0
+             28 POP_JUMP_IF_FALSE       34
+
+174          30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+175     >>   34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                3 (syncNowForDevice)
+             38 LOAD_FAST                1 (device)
+             40 LOAD_CONST               3 (False)
+             42 LOAD_CONST               4 (('force',))
+             44 CALL_FUNCTION_KW         2
+             46 POP_TOP
+             48 LOAD_CONST               1 (None)
+             50 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.requestSync ===
+186           0 LOAD_FAST                1 (source)
+              2 POP_JUMP_IF_FALSE        8
+              4 LOAD_FAST                2 (userId)
+              6 POP_JUMP_IF_TRUE        12
+
+187     >>    8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+188     >>   12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              0 (_prepareSingletons)
+             16 CALL_METHOD              0
+             18 POP_TOP
+
+189          20 LOAD_FAST                0 (self)
+             22 LOAD_METHOD              1 (_stateFor)
+             24 LOAD_FAST                1 (source)
+             26 LOAD_FAST                2 (userId)
+             28 CALL_METHOD              2
+             30 STORE_FAST               4 (state)
+
+190          32 LOAD_FAST                4 (state)
+             34 LOAD_CONST               2 ('lock')
+             36 BINARY_SUBSCR
+             38 SETUP_WITH             150 (to 190)
+             40 POP_TOP
+
+191          42 LOAD_FAST                4 (state)
+             44 LOAD_CONST               3 ('status')
+             46 BINARY_SUBSCR
+             48 LOAD_CONST               4 ('syncing')
+             50 COMPARE_OP               2 (==)
+             52 POP_JUMP_IF_FALSE       70
+
+192          54 POP_BLOCK
+             56 LOAD_CONST               1 (None)
+             58 DUP_TOP
+             60 DUP_TOP
+             62 CALL_FUNCTION            3
+             64 POP_TOP
+             66 LOAD_CONST               1 (None)
+             68 RETURN_VALUE
+
+193     >>   70 LOAD_GLOBAL              2 (time)
+             72 LOAD_METHOD              2 (time)
+             74 CALL_METHOD              0
+             76 STORE_FAST               5 (now)
+
+194          78 LOAD_FAST                3 (force)
+             80 POP_JUMP_IF_TRUE       168
+
+195          82 LOAD_FAST                4 (state)
+             84 LOAD_CONST               3 ('status')
+             86 BINARY_SUBSCR
+             88 LOAD_CONST               5 ('synced')
+             90 COMPARE_OP               2 (==)
+             92 POP_JUMP_IF_FALSE      128
+             94 LOAD_FAST                5 (now)
+             96 LOAD_FAST                4 (state)
+             98 LOAD_CONST               6 ('lastSyncAt')
+            100 BINARY_SUBSCR
+            102 BINARY_SUBTRACT
+            104 LOAD_FAST                0 (self)
+            106 LOAD_ATTR                3 (SYNC_TTL_SECONDS)
+            108 COMPARE_OP               0 (<)
+            110 POP_JUMP_IF_FALSE      128
+
+196         112 POP_BLOCK
+            114 LOAD_CONST               1 (None)
+            116 DUP_TOP
+            118 DUP_TOP
+            120 CALL_FUNCTION            3
+            122 POP_TOP
+            124 LOAD_CONST               1 (None)
+            126 RETURN_VALUE
+
+197     >>  128 LOAD_FAST                4 (state)
+            130 LOAD_CONST               3 ('status')
+            132 BINARY_SUBSCR
+            134 LOAD_CONST               7 ('failed')
+            136 COMPARE_OP               2 (==)
+            138 POP_JUMP_IF_FALSE      168
+            140 LOAD_FAST                5 (now)
+            142 LOAD_FAST                4 (state)
+            144 LOAD_CONST               8 ('nextRetryAt')
+            146 BINARY_SUBSCR
+            148 COMPARE_OP               0 (<)
+            150 POP_JUMP_IF_FALSE      168
+
+198         152 POP_BLOCK
+            154 LOAD_CONST               1 (None)
+            156 DUP_TOP
+            158 DUP_TOP
+            160 CALL_FUNCTION            3
+            162 POP_TOP
+            164 LOAD_CONST               1 (None)
+            166 RETURN_VALUE
+
+199     >>  168 LOAD_CONST               4 ('syncing')
+            170 LOAD_FAST                4 (state)
+            172 LOAD_CONST               3 ('status')
+            174 STORE_SUBSCR
+            176 POP_BLOCK
+            178 LOAD_CONST               1 (None)
+            180 DUP_TOP
+            182 DUP_TOP
+            184 CALL_FUNCTION            3
+            186 POP_TOP
+            188 JUMP_FORWARD            16 (to 206)
+        >>  190 WITH_EXCEPT_START
+            192 POP_JUMP_IF_TRUE       196
+            194 RERAISE
+        >>  196 POP_TOP
+            198 POP_TOP
+            200 POP_TOP
+            202 POP_EXCEPT
+            204 POP_TOP
+
+200     >>  206 LOAD_GLOBAL              4 (LPFavoriteCacheManager)
+            208 LOAD_METHOD              5 (instance)
+            210 CALL_METHOD              0
+            212 LOAD_METHOD              6 (markSyncing)
+            214 LOAD_FAST                1 (source)
+            216 LOAD_FAST                2 (userId)
+            218 CALL_METHOD              2
+            220 POP_TOP
+
+201         222 LOAD_GLOBAL              7 (threading)
+            224 LOAD_ATTR                8 (Thread)
+
+202         226 LOAD_FAST                0 (self)
+            228 LOAD_ATTR                9 (_syncSource)
+
+203         230 LOAD_FAST                1 (source)
+            232 LOAD_FAST                2 (userId)
+            234 BUILD_TUPLE              2
+
+204         236 LOAD_CONST               9 ('favoriteSync_%s_%s')
+            238 LOAD_FAST                1 (source)
+            240 LOAD_FAST                2 (userId)
+            242 BUILD_TUPLE              2
+            244 BINARY_MODULO
+
+205         246 LOAD_CONST              10 (True)
+
+201         248 LOAD_CONST              11 (('target', 'args', 'name', 'daemon'))
+            250 CALL_FUNCTION_KW         4
+            252 STORE_FAST               6 (worker)
+
+207         254 LOAD_FAST                6 (worker)
+            256 LOAD_METHOD             10 (start)
+            258 CALL_METHOD              0
+            260 POP_TOP
+            262 LOAD_CONST               1 (None)
+            264 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._prepareSingletons ===
+215           0 LOAD_GLOBAL              0 (threading)
+              2 LOAD_METHOD              1 (current_thread)
+              4 CALL_METHOD              0
+              6 LOAD_GLOBAL              0 (threading)
+              8 LOAD_METHOD              2 (main_thread)
+             10 CALL_METHOD              0
+             12 IS_OP                    1
+             14 POP_JUMP_IF_FALSE       20
+
+217          16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+218     >>   20 SETUP_FINALLY           52 (to 74)
+
+219          22 LOAD_GLOBAL              3 (LPFavoriteCacheManager)
+             24 LOAD_METHOD              4 (instance)
+             26 CALL_METHOD              0
+             28 POP_TOP
+
+220          30 LOAD_CONST               2 (0)
+             32 LOAD_CONST               3 (('LPTidalLoginManager',))
+             34 IMPORT_NAME              5 (LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager)
+             36 IMPORT_FROM              6 (LPTidalLoginManager)
+             38 STORE_FAST               1 (LPTidalLoginManager)
+             40 POP_TOP
+
+221          42 LOAD_FAST                1 (LPTidalLoginManager)
+             44 LOAD_METHOD              4 (instance)
+             46 CALL_METHOD              0
+             48 POP_TOP
+
+222          50 LOAD_CONST               2 (0)
+             52 LOAD_CONST               4 (('LPQobuzManager',))
+             54 IMPORT_NAME              7 (LPClientFramework.LPMSManager.Qobuz.LPQobuzManager)
+             56 IMPORT_FROM              8 (LPQobuzManager)
+             58 STORE_FAST               2 (LPQobuzManager)
+             60 POP_TOP
+
+223          62 LOAD_FAST                2 (LPQobuzManager)
+             64 LOAD_METHOD              4 (instance)
+             66 CALL_METHOD              0
+             68 POP_TOP
+             70 POP_BLOCK
+             72 JUMP_FORWARD            48 (to 122)
+
+224     >>   74 DUP_TOP
+             76 LOAD_GLOBAL              9 (Exception)
+             78 JUMP_IF_NOT_EXC_MATCH   120
+             80 POP_TOP
+             82 STORE_FAST               3 (exc)
+             84 POP_TOP
+             86 SETUP_FINALLY           24 (to 112)
+
+225          88 LOAD_GLOBAL             10 (logger)
+             90 LOAD_METHOD             11 (warning)
+             92 LOAD_CONST               5 ('[FavoriteSync] prepare singletons failed: %s')
+             94 LOAD_FAST                3 (exc)
+             96 CALL_METHOD              2
+             98 POP_TOP
+            100 POP_BLOCK
+            102 POP_EXCEPT
+            104 LOAD_CONST               1 (None)
+            106 STORE_FAST               3 (exc)
+            108 DELETE_FAST              3 (exc)
+            110 JUMP_FORWARD            10 (to 122)
+        >>  112 LOAD_CONST               1 (None)
+            114 STORE_FAST               3 (exc)
+            116 DELETE_FAST              3 (exc)
+            118 RERAISE
+        >>  120 RERAISE
+        >>  122 LOAD_CONST               1 (None)
+            124 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.clearUser ===
+235           0 LOAD_FAST                1 (source)
+              2 POP_JUMP_IF_FALSE        8
+              4 LOAD_FAST                2 (userId)
+              6 POP_JUMP_IF_TRUE        12
+
+236     >>    8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+237     >>   12 LOAD_GLOBAL              0 (LPFavoriteCacheManager)
+             14 LOAD_METHOD              1 (instance)
+             16 CALL_METHOD              0
+             18 LOAD_METHOD              2 (clearUser)
+             20 LOAD_FAST                1 (source)
+             22 LOAD_FAST                2 (userId)
+             24 CALL_METHOD              2
+             26 POP_TOP
+
+238          28 LOAD_FAST                0 (self)
+             30 LOAD_METHOD              3 (_cancelRetry)
+             32 LOAD_FAST                1 (source)
+             34 LOAD_FAST                2 (userId)
+             36 CALL_METHOD              2
+             38 POP_TOP
+
+239          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                4 (_states_lock)
+             44 SETUP_WITH              34 (to 80)
+             46 POP_TOP
+
+240          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                5 (_sync_states)
+             52 LOAD_METHOD              6 (pop)
+             54 LOAD_FAST                1 (source)
+             56 LOAD_FAST                2 (userId)
+             58 BUILD_TUPLE              2
+             60 LOAD_CONST               1 (None)
+             62 CALL_METHOD              2
+             64 POP_TOP
+             66 POP_BLOCK
+             68 LOAD_CONST               1 (None)
+             70 DUP_TOP
+             72 DUP_TOP
+             74 CALL_FUNCTION            3
+             76 POP_TOP
+             78 JUMP_FORWARD            16 (to 96)
+        >>   80 WITH_EXCEPT_START
+             82 POP_JUMP_IF_TRUE        86
+             84 RERAISE
+        >>   86 POP_TOP
+             88 POP_TOP
+             90 POP_TOP
+             92 POP_EXCEPT
+             94 POP_TOP
+        >>   96 LOAD_CONST               1 (None)
+             98 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._scheduleRetry ===
+251           0 LOAD_DEREF               2 (source)
+              2 LOAD_DEREF               3 (userId)
+              4 BUILD_TUPLE              2
+              6 STORE_DEREF              0 (key)
+
+253           8 LOAD_CONST               1 (None)
+             10 LOAD_CONST               2 (('return',))
+             12 BUILD_CONST_KEY_MAP      1
+             14 LOAD_CLOSURE             0 (key)
+             16 LOAD_CLOSURE             1 (self)
+             18 LOAD_CLOSURE             2 (source)
+             20 LOAD_CLOSURE             3 (userId)
+             22 BUILD_TUPLE              4
+             24 LOAD_CONST               3 (<code object _fire at 0x000001F3253CED40, file "LPClientFramework\LPFavoriteSyncCoordinator.py", line 253>)
+             26 LOAD_CONST               4 ('LPFavoriteSyncCoordinator._scheduleRetry.<locals>._fire')
+             28 MAKE_FUNCTION           12 (annotations, closure)
+             30 STORE_FAST               4 (_fire)
+
+261          32 LOAD_DEREF               1 (self)
+             34 LOAD_ATTR                0 (_states_lock)
+             36 SETUP_WITH              72 (to 110)
+             38 POP_TOP
+
+262          40 LOAD_DEREF               1 (self)
+             42 LOAD_ATTR                1 (_retry_timers)
+             44 LOAD_METHOD              2 (get)
+             46 LOAD_DEREF               0 (key)
+             48 CALL_METHOD              1
+             50 STORE_FAST               5 (existing)
+
+263          52 LOAD_FAST                5 (existing)
+             54 LOAD_CONST               1 (None)
+             56 IS_OP                    1
+             58 POP_JUMP_IF_FALSE       68
+
+264          60 LOAD_FAST                5 (existing)
+             62 LOAD_METHOD              3 (cancel)
+             64 CALL_METHOD              0
+             66 POP_TOP
+
+265     >>   68 LOAD_GLOBAL              4 (threading)
+             70 LOAD_METHOD              5 (Timer)
+             72 LOAD_FAST                3 (delay)
+             74 LOAD_FAST                4 (_fire)
+             76 CALL_METHOD              2
+             78 STORE_FAST               6 (timer)
+
+266          80 LOAD_CONST               5 (True)
+             82 LOAD_FAST                6 (timer)
+             84 STORE_ATTR               6 (daemon)
+
+267          86 LOAD_FAST                6 (timer)
+             88 LOAD_DEREF               1 (self)
+             90 LOAD_ATTR                1 (_retry_timers)
+             92 LOAD_DEREF               0 (key)
+             94 STORE_SUBSCR
+             96 POP_BLOCK
+             98 LOAD_CONST               1 (None)
+            100 DUP_TOP
+            102 DUP_TOP
+            104 CALL_FUNCTION            3
+            106 POP_TOP
+            108 JUMP_FORWARD            16 (to 126)
+        >>  110 WITH_EXCEPT_START
+            112 POP_JUMP_IF_TRUE       116
+            114 RERAISE
+        >>  116 POP_TOP
+            118 POP_TOP
+            120 POP_TOP
+            122 POP_EXCEPT
+            124 POP_TOP
+
+268     >>  126 LOAD_FAST                6 (timer)
+            128 LOAD_METHOD              7 (start)
+            130 CALL_METHOD              0
+            132 POP_TOP
+            134 LOAD_CONST               1 (None)
+            136 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._scheduleRetry._fire ===
+255           0 LOAD_DEREF               1 (self)
+              2 LOAD_ATTR                0 (_states_lock)
+              4 SETUP_WITH              30 (to 36)
+              6 POP_TOP
+
+256           8 LOAD_DEREF               1 (self)
+             10 LOAD_ATTR                1 (_retry_timers)
+             12 LOAD_METHOD              2 (pop)
+             14 LOAD_DEREF               0 (key)
+             16 LOAD_CONST               1 (None)
+             18 CALL_METHOD              2
+             20 POP_TOP
+             22 POP_BLOCK
+             24 LOAD_CONST               1 (None)
+             26 DUP_TOP
+             28 DUP_TOP
+             30 CALL_FUNCTION            3
+             32 POP_TOP
+             34 JUMP_FORWARD            16 (to 52)
+        >>   36 WITH_EXCEPT_START
+             38 POP_JUMP_IF_TRUE        42
+             40 RERAISE
+        >>   42 POP_TOP
+             44 POP_TOP
+             46 POP_TOP
+             48 POP_EXCEPT
+             50 POP_TOP
+
+257     >>   52 LOAD_DEREF               1 (self)
+             54 LOAD_ATTR                3 (_started)
+             56 POP_JUMP_IF_TRUE        62
+
+258          58 LOAD_CONST               1 (None)
+             60 RETURN_VALUE
+
+259     >>   62 LOAD_DEREF               1 (self)
+             64 LOAD_ATTR                4 (requestSync)
+             66 LOAD_DEREF               2 (source)
+             68 LOAD_DEREF               3 (userId)
+             70 LOAD_CONST               2 (False)
+             72 LOAD_CONST               3 (('force',))
+             74 CALL_FUNCTION_KW         3
+             76 POP_TOP
+             78 LOAD_CONST               1 (None)
+             80 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._cancelRetry ===
+278           0 LOAD_FAST                1 (source)
+              2 LOAD_FAST                2 (userId)
+              4 BUILD_TUPLE              2
+              6 STORE_FAST               3 (key)
+
+279           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (_states_lock)
+             12 SETUP_WITH              30 (to 44)
+             14 POP_TOP
+
+280          16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (_retry_timers)
+             20 LOAD_METHOD              2 (pop)
+             22 LOAD_FAST                3 (key)
+             24 LOAD_CONST               1 (None)
+             26 CALL_METHOD              2
+             28 STORE_FAST               4 (timer)
+             30 POP_BLOCK
+             32 LOAD_CONST               1 (None)
+             34 DUP_TOP
+             36 DUP_TOP
+             38 CALL_FUNCTION            3
+             40 POP_TOP
+             42 JUMP_FORWARD            16 (to 60)
+        >>   44 WITH_EXCEPT_START
+             46 POP_JUMP_IF_TRUE        50
+             48 RERAISE
+        >>   50 POP_TOP
+             52 POP_TOP
+             54 POP_TOP
+             56 POP_EXCEPT
+             58 POP_TOP
+
+281     >>   60 LOAD_FAST                4 (timer)
+             62 LOAD_CONST               1 (None)
+             64 IS_OP                    1
+             66 POP_JUMP_IF_FALSE       76
+
+282          68 LOAD_FAST                4 (timer)
+             70 LOAD_METHOD              3 (cancel)
+             72 CALL_METHOD              0
+             74 POP_TOP
+        >>   76 LOAD_CONST               1 (None)
+             78 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._cancelAllRetries ===
+290           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_states_lock)
+              4 SETUP_WITH              40 (to 46)
+              6 POP_TOP
+
+291           8 LOAD_GLOBAL              1 (list)
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                2 (_retry_timers)
+             14 LOAD_METHOD              3 (values)
+             16 CALL_METHOD              0
+             18 CALL_FUNCTION            1
+             20 STORE_FAST               1 (timers)
+
+292          22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                2 (_retry_timers)
+             26 LOAD_METHOD              4 (clear)
+             28 CALL_METHOD              0
+             30 POP_TOP
+             32 POP_BLOCK
+             34 LOAD_CONST               1 (None)
+             36 DUP_TOP
+             38 DUP_TOP
+             40 CALL_FUNCTION            3
+             42 POP_TOP
+             44 JUMP_FORWARD            16 (to 62)
+        >>   46 WITH_EXCEPT_START
+             48 POP_JUMP_IF_TRUE        52
+             50 RERAISE
+        >>   52 POP_TOP
+             54 POP_TOP
+             56 POP_TOP
+             58 POP_EXCEPT
+             60 POP_TOP
+
+293     >>   62 LOAD_FAST                1 (timers)
+             64 GET_ITER
+        >>   66 FOR_ITER                12 (to 80)
+             68 STORE_FAST               2 (timer)
+
+294          70 LOAD_FAST                2 (timer)
+             72 LOAD_METHOD              5 (cancel)
+             74 CALL_METHOD              0
+             76 POP_TOP
+             78 JUMP_ABSOLUTE           66
+        >>   80 LOAD_CONST               1 (None)
+             82 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.syncNowForDevice ===
+304           0 LOAD_FAST                1 (device)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+305           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+306     >>   12 LOAD_GLOBAL              0 (getattr)
+             14 LOAD_FAST                1 (device)
+             16 LOAD_CONST               2 ('deviceStreamServiceManager')
+             18 LOAD_CONST               1 (None)
+             20 CALL_FUNCTION            3
+             22 STORE_FAST               3 (manager)
+
+307          24 LOAD_FAST                3 (manager)
+             26 LOAD_CONST               1 (None)
+             28 IS_OP                    0
+             30 POP_JUMP_IF_FALSE       36
+
+308          32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+309     >>   36 LOAD_GLOBAL              0 (getattr)
+             38 LOAD_FAST                3 (manager)
+             40 LOAD_CONST               3 ('streamServiceCapability')
+             42 LOAD_CONST               1 (None)
+             44 CALL_FUNCTION            3
+             46 JUMP_IF_TRUE_OR_POP     50
+             48 BUILD_MAP                0
+        >>   50 STORE_FAST               4 (capability)
+
+310          52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                1 (FAVORITE_SOURCES)
+             56 GET_ITER
+        >>   58 FOR_ITER                94 (to 154)
+             60 STORE_FAST               5 (source)
+
+311          62 LOAD_FAST                5 (source)
+             64 LOAD_FAST                4 (capability)
+             66 CONTAINS_OP              1
+             68 POP_JUMP_IF_FALSE       72
+
+312          70 JUMP_ABSOLUTE           58
+
+313     >>   72 LOAD_FAST                5 (source)
+             74 LOAD_CONST               4 ('WiiMRadio')
+             76 COMPARE_OP               2 (==)
+             78 POP_JUMP_IF_FALSE       98
+
+314          80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                2 (requestSync)
+             84 LOAD_FAST                5 (source)
+             86 LOAD_GLOBAL              3 (WIIMRADIO_LOCAL_USER_ID)
+             88 LOAD_FAST                2 (force)
+             90 LOAD_CONST               5 (('force',))
+             92 CALL_FUNCTION_KW         3
+             94 POP_TOP
+
+315          96 JUMP_ABSOLUTE           58
+
+316     >>   98 LOAD_FAST                3 (manager)
+            100 LOAD_METHOD              4 (accountForSource)
+            102 LOAD_FAST                5 (source)
+            104 CALL_METHOD              1
+            106 STORE_FAST               6 (account)
+
+317         108 LOAD_GLOBAL              5 (str)
+            110 LOAD_GLOBAL              0 (getattr)
+            112 LOAD_FAST                6 (account)
+            114 LOAD_CONST               6 ('userId')
+            116 LOAD_CONST               7 ('')
+            118 CALL_FUNCTION            3
+            120 JUMP_IF_TRUE_OR_POP    124
+            122 LOAD_CONST               7 ('')
+        >>  124 CALL_FUNCTION            1
+            126 LOAD_METHOD              6 (strip)
+            128 CALL_METHOD              0
+            130 STORE_FAST               7 (userId)
+
+318         132 LOAD_FAST                7 (userId)
+            134 POP_JUMP_IF_FALSE       58
+
+319         136 LOAD_FAST                0 (self)
+            138 LOAD_ATTR                2 (requestSync)
+            140 LOAD_FAST                5 (source)
+            142 LOAD_FAST                7 (userId)
+            144 LOAD_FAST                2 (force)
+            146 LOAD_CONST               5 (('force',))
+            148 CALL_FUNCTION_KW         3
+            150 POP_TOP
+            152 JUMP_ABSOLUTE           58
+        >>  154 LOAD_CONST               1 (None)
+            156 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._onAccountChangedForSource ===
+328           0 LOAD_FAST                1 (params)
+              2 LOAD_METHOD              0 (get)
+              4 LOAD_CONST               1 ('notify')
+              6 CALL_METHOD              1
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 BUILD_MAP                0
+        >>   12 STORE_FAST               2 (notify)
+
+329          14 LOAD_GLOBAL              1 (str)
+             16 LOAD_FAST                2 (notify)
+             18 LOAD_METHOD              0 (get)
+             20 LOAD_CONST               2 ('source')
+             22 LOAD_CONST               3 ('')
+             24 CALL_METHOD              2
+             26 JUMP_IF_TRUE_OR_POP     30
+             28 LOAD_CONST               3 ('')
+        >>   30 CALL_FUNCTION            1
+             32 LOAD_METHOD              2 (strip)
+             34 CALL_METHOD              0
+             36 STORE_FAST               3 (source)
+
+330          38 LOAD_FAST                3 (source)
+             40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                3 (FAVORITE_SOURCES)
+             44 CONTAINS_OP              1
+             46 POP_JUMP_IF_TRUE        56
+             48 LOAD_FAST                3 (source)
+             50 LOAD_CONST               4 ('WiiMRadio')
+             52 COMPARE_OP               2 (==)
+             54 POP_JUMP_IF_FALSE       60
+
+331     >>   56 LOAD_CONST               5 (None)
+             58 RETURN_VALUE
+
+332     >>   60 LOAD_GLOBAL              1 (str)
+             62 LOAD_FAST                2 (notify)
+             64 LOAD_METHOD              0 (get)
+             66 LOAD_CONST               6 ('eventType')
+             68 LOAD_CONST               3 ('')
+             70 CALL_METHOD              2
+             72 JUMP_IF_TRUE_OR_POP     76
+             74 LOAD_CONST               3 ('')
+        >>   76 CALL_FUNCTION            1
+             78 LOAD_METHOD              2 (strip)
+             80 CALL_METHOD              0
+             82 LOAD_METHOD              4 (lower)
+             84 CALL_METHOD              0
+             86 STORE_FAST               4 (event_type)
+
+333          88 LOAD_FAST                0 (self)
+             90 LOAD_METHOD              5 (_userIdFromNotify)
+             92 LOAD_FAST                2 (notify)
+             94 CALL_METHOD              1
+             96 JUMP_IF_TRUE_OR_POP    106
+             98 LOAD_FAST                0 (self)
+            100 LOAD_METHOD              6 (_currentUserIdForSource)
+            102 LOAD_FAST                3 (source)
+            104 CALL_METHOD              1
+        >>  106 STORE_FAST               5 (userId)
+
+334         108 LOAD_FAST                4 (event_type)
+            110 LOAD_CONST               7 ('accountchange')
+            112 COMPARE_OP               2 (==)
+            114 POP_JUMP_IF_FALSE      138
+
+335         116 LOAD_FAST                5 (userId)
+            118 POP_JUMP_IF_FALSE      158
+
+336         120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR                7 (requestSync)
+            124 LOAD_FAST                3 (source)
+            126 LOAD_FAST                5 (userId)
+            128 LOAD_CONST               8 (True)
+            130 LOAD_CONST               9 (('force',))
+            132 CALL_FUNCTION_KW         3
+            134 POP_TOP
+            136 JUMP_FORWARD            20 (to 158)
+
+337     >>  138 LOAD_FAST                4 (event_type)
+            140 LOAD_CONST              10 ('logout')
+            142 COMPARE_OP               2 (==)
+            144 POP_JUMP_IF_FALSE      158
+
+338         146 LOAD_FAST                0 (self)
+            148 LOAD_METHOD              8 (clearUser)
+            150 LOAD_FAST                3 (source)
+            152 LOAD_FAST                5 (userId)
+            154 CALL_METHOD              2
+            156 POP_TOP
+        >>  158 LOAD_CONST               5 (None)
+            160 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._onDeviceChanged ===
+347           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (syncNowForDevice)
+              4 LOAD_FAST                1 (params)
+              6 LOAD_METHOD              1 (get)
+              8 LOAD_CONST               1 ('device')
+             10 CALL_METHOD              1
+             12 LOAD_CONST               2 (False)
+             14 LOAD_CONST               3 (('force',))
+             16 CALL_FUNCTION_KW         2
+             18 POP_TOP
+             20 LOAD_CONST               4 (None)
+             22 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator.deviceInfoUpdate ===
+358           0 LOAD_FAST                2 (infoType)
+              2 LOAD_CONST               1 ('accountRegister')
+              4 COMPARE_OP               3 (!=)
+              6 POP_JUMP_IF_FALSE       12
+
+359           8 LOAD_CONST               2 (None)
+             10 RETURN_VALUE
+
+360     >>   12 LOAD_GLOBAL              0 (getattr)
+             14 LOAD_GLOBAL              1 (LPGlobalUI)
+             16 LOAD_CONST               3 ('currentDevice')
+             18 LOAD_CONST               2 (None)
+             20 CALL_FUNCTION            3
+             22 STORE_FAST               4 (current_device)
+
+361          24 LOAD_FAST                1 (device)
+             26 LOAD_CONST               2 (None)
+             28 IS_OP                    0
+             30 POP_JUMP_IF_TRUE        40
+             32 LOAD_FAST                4 (current_device)
+             34 LOAD_CONST               2 (None)
+             36 IS_OP                    0
+             38 POP_JUMP_IF_FALSE       44
+
+362     >>   40 LOAD_CONST               2 (None)
+             42 RETURN_VALUE
+
+363     >>   44 LOAD_GLOBAL              0 (getattr)
+             46 LOAD_FAST                1 (device)
+             48 LOAD_CONST               4 ('uuid')
+             50 LOAD_CONST               2 (None)
+             52 CALL_FUNCTION            3
+             54 LOAD_GLOBAL              0 (getattr)
+             56 LOAD_FAST                4 (current_device)
+             58 LOAD_CONST               4 ('uuid')
+             60 LOAD_CONST               2 (None)
+             62 CALL_FUNCTION            3
+             64 COMPARE_OP               3 (!=)
+             66 POP_JUMP_IF_FALSE       72
+
+364          68 LOAD_CONST               2 (None)
+             70 RETURN_VALUE
+
+365     >>   72 LOAD_GLOBAL              2 (str)
+             74 LOAD_FAST                3 (detail)
+             76 JUMP_IF_TRUE_OR_POP     80
+             78 BUILD_MAP                0
+        >>   80 LOAD_METHOD              3 (get)
+             82 LOAD_CONST               5 ('source')
+             84 LOAD_CONST               6 ('')
+             86 CALL_METHOD              2
+             88 JUMP_IF_TRUE_OR_POP     92
+             90 LOAD_CONST               6 ('')
+        >>   92 CALL_FUNCTION            1
+             94 STORE_FAST               5 (source)
+
+366          96 LOAD_FAST                5 (source)
+             98 LOAD_FAST                0 (self)
+            100 LOAD_ATTR                4 (FAVORITE_SOURCES)
+            102 CONTAINS_OP              1
+            104 POP_JUMP_IF_FALSE      110
+
+367         106 LOAD_CONST               2 (None)
+            108 RETURN_VALUE
+
+368     >>  110 LOAD_GLOBAL              0 (getattr)
+            112 LOAD_FAST                1 (device)
+            114 LOAD_CONST               7 ('deviceStreamServiceManager')
+            116 LOAD_CONST               2 (None)
+            118 CALL_FUNCTION            3
+            120 STORE_FAST               6 (manager)
+
+369         122 LOAD_FAST                6 (manager)
+            124 LOAD_CONST               2 (None)
+            126 IS_OP                    0
+            128 POP_JUMP_IF_FALSE      134
+
+370         130 LOAD_CONST               2 (None)
+            132 RETURN_VALUE
+
+371     >>  134 LOAD_FAST                6 (manager)
+            136 LOAD_METHOD              5 (accountForSource)
+            138 LOAD_FAST                5 (source)
+            140 CALL_METHOD              1
+            142 STORE_FAST               7 (account)
+
+372         144 LOAD_GLOBAL              2 (str)
+            146 LOAD_GLOBAL              0 (getattr)
+            148 LOAD_FAST                7 (account)
+            150 LOAD_CONST               8 ('userId')
+            152 LOAD_CONST               6 ('')
+            154 CALL_FUNCTION            3
+            156 JUMP_IF_TRUE_OR_POP    160
+            158 LOAD_CONST               6 ('')
+        >>  160 CALL_FUNCTION            1
+            162 LOAD_METHOD              6 (strip)
+            164 CALL_METHOD              0
+            166 STORE_FAST               8 (userId)
+
+373         168 LOAD_FAST                8 (userId)
+            170 POP_JUMP_IF_FALSE      188
+
+374         172 LOAD_FAST                0 (self)
+            174 LOAD_ATTR                7 (requestSync)
+            176 LOAD_FAST                5 (source)
+            178 LOAD_FAST                8 (userId)
+            180 LOAD_CONST               9 (True)
+            182 LOAD_CONST              10 (('force',))
+            184 CALL_FUNCTION_KW         3
+            186 POP_TOP
+        >>  188 LOAD_CONST               2 (None)
+            190 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._userIdFromNotify ===
+384           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (notify)
+              4 LOAD_METHOD              1 (get)
+              6 LOAD_CONST               1 ('payload')
+              8 CALL_METHOD              1
+             10 LOAD_GLOBAL              2 (dict)
+             12 CALL_FUNCTION            2
+             14 POP_JUMP_IF_FALSE       26
+             16 LOAD_FAST                0 (notify)
+             18 LOAD_METHOD              1 (get)
+             20 LOAD_CONST               1 ('payload')
+             22 CALL_METHOD              1
+             24 JUMP_FORWARD             2 (to 28)
+        >>   26 BUILD_MAP                0
+        >>   28 STORE_FAST               1 (payload)
+
+386          30 LOAD_FAST                0 (notify)
+             32 LOAD_METHOD              1 (get)
+             34 LOAD_CONST               2 ('userId')
+             36 CALL_METHOD              1
+
+387          38 LOAD_FAST                1 (payload)
+             40 LOAD_METHOD              1 (get)
+             42 LOAD_CONST               2 ('userId')
+             44 CALL_METHOD              1
+
+388          46 LOAD_GLOBAL              0 (isinstance)
+             48 LOAD_FAST                1 (payload)
+             50 LOAD_METHOD              1 (get)
+             52 LOAD_CONST               3 ('user')
+             54 CALL_METHOD              1
+             56 LOAD_GLOBAL              2 (dict)
+             58 CALL_FUNCTION            2
+             60 POP_JUMP_IF_FALSE       80
+             62 LOAD_FAST                1 (payload)
+             64 LOAD_METHOD              1 (get)
+             66 LOAD_CONST               3 ('user')
+             68 BUILD_MAP                0
+             70 CALL_METHOD              2
+             72 LOAD_METHOD              1 (get)
+             74 LOAD_CONST               2 ('userId')
+             76 CALL_METHOD              1
+             78 JUMP_FORWARD             2 (to 82)
+        >>   80 LOAD_CONST               4 (None)
+
+389     >>   82 LOAD_GLOBAL              0 (isinstance)
+             84 LOAD_FAST                1 (payload)
+             86 LOAD_METHOD              1 (get)
+             88 LOAD_CONST               5 ('userinfo')
+             90 CALL_METHOD              1
+             92 LOAD_GLOBAL              2 (dict)
+             94 CALL_FUNCTION            2
+             96 POP_JUMP_IF_FALSE      116
+             98 LOAD_FAST                1 (payload)
+            100 LOAD_METHOD              1 (get)
+            102 LOAD_CONST               5 ('userinfo')
+            104 BUILD_MAP                0
+            106 CALL_METHOD              2
+            108 LOAD_METHOD              1 (get)
+            110 LOAD_CONST               2 ('userId')
+            112 CALL_METHOD              1
+            114 JUMP_FORWARD             2 (to 118)
+        >>  116 LOAD_CONST               4 (None)
+
+385     >>  118 BUILD_TUPLE              4
+            120 STORE_FAST               2 (candidates)
+
+391         122 LOAD_FAST                2 (candidates)
+            124 GET_ITER
+        >>  126 FOR_ITER                32 (to 160)
+            128 STORE_FAST               3 (candidate)
+
+392         130 LOAD_GLOBAL              3 (str)
+            132 LOAD_FAST                3 (candidate)
+            134 JUMP_IF_TRUE_OR_POP    138
+            136 LOAD_CONST               6 ('')
+        >>  138 CALL_FUNCTION            1
+            140 LOAD_METHOD              4 (strip)
+            142 CALL_METHOD              0
+            144 STORE_FAST               4 (value)
+
+393         146 LOAD_FAST                4 (value)
+            148 POP_JUMP_IF_FALSE      126
+
+394         150 LOAD_FAST                4 (value)
+            152 ROT_TWO
+            154 POP_TOP
+            156 RETURN_VALUE
+            158 JUMP_ABSOLUTE          126
+
+395     >>  160 LOAD_CONST               6 ('')
+            162 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._currentUserIdForSource ===
+404           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPGlobalUI)
+              4 LOAD_CONST               1 ('currentDevice')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               2 (device)
+
+405          12 LOAD_FAST                2 (device)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       24
+
+406          20 LOAD_CONST               3 ('')
+             22 RETURN_VALUE
+
+407     >>   24 LOAD_GLOBAL              0 (getattr)
+             26 LOAD_FAST                2 (device)
+             28 LOAD_CONST               4 ('deviceStreamServiceManager')
+             30 LOAD_CONST               2 (None)
+             32 CALL_FUNCTION            3
+             34 STORE_FAST               3 (manager)
+
+408          36 LOAD_FAST                3 (manager)
+             38 LOAD_CONST               2 (None)
+             40 IS_OP                    0
+             42 POP_JUMP_IF_FALSE       48
+
+409          44 LOAD_CONST               3 ('')
+             46 RETURN_VALUE
+
+410     >>   48 LOAD_FAST                3 (manager)
+             50 LOAD_METHOD              2 (accountForSource)
+             52 LOAD_FAST                1 (source)
+             54 CALL_METHOD              1
+             56 STORE_FAST               4 (account)
+
+411          58 LOAD_GLOBAL              3 (str)
+             60 LOAD_GLOBAL              0 (getattr)
+             62 LOAD_FAST                4 (account)
+             64 LOAD_CONST               5 ('userId')
+             66 LOAD_CONST               3 ('')
+             68 CALL_FUNCTION            3
+             70 JUMP_IF_TRUE_OR_POP     74
+             72 LOAD_CONST               3 ('')
+        >>   74 CALL_FUNCTION            1
+             76 LOAD_METHOD              4 (strip)
+             78 CALL_METHOD              0
+             80 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._syncSource ===
+421           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_stateFor)
+              4 LOAD_FAST                1 (source)
+              6 LOAD_FAST                2 (userId)
+              8 CALL_METHOD              2
+             10 STORE_FAST               3 (state)
+
+422          12 EXTENDED_ARG             1
+             14 SETUP_FINALLY          286 (to 302)
+
+423          16 LOAD_FAST                1 (source)
+             18 LOAD_CONST               1 (('Tidal', 'Qobuz'))
+             20 CONTAINS_OP              0
+             22 POP_JUMP_IF_FALSE      128
+
+424          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                1 (_fetch_locks)
+             28 LOAD_FAST                1 (source)
+             30 BINARY_SUBSCR
+             32 SETUP_WITH              54 (to 88)
+             34 POP_TOP
+
+425          36 LOAD_GLOBAL              2 (time)
+             38 LOAD_METHOD              2 (time)
+             40 CALL_METHOD              0
+             42 STORE_FAST               4 (started_at)
+
+426          44 LOAD_FAST                1 (source)
+             46 LOAD_CONST               2 ('Tidal')
+             48 COMPARE_OP               2 (==)
+             50 POP_JUMP_IF_FALSE       64
+
+427          52 LOAD_FAST                0 (self)
+             54 LOAD_METHOD              3 (_fetchTidalIds)
+             56 LOAD_FAST                2 (userId)
+             58 CALL_METHOD              1
+             60 STORE_FAST               5 (ids)
+             62 JUMP_FORWARD            10 (to 74)
+
+429     >>   64 LOAD_FAST                0 (self)
+             66 LOAD_METHOD              4 (_fetchQobuzIds)
+             68 LOAD_FAST                2 (userId)
+             70 CALL_METHOD              1
+             72 STORE_FAST               5 (ids)
+        >>   74 POP_BLOCK
+             76 LOAD_CONST               3 (None)
+             78 DUP_TOP
+             80 DUP_TOP
+             82 CALL_FUNCTION            3
+             84 POP_TOP
+             86 JUMP_FORWARD            16 (to 104)
+        >>   88 WITH_EXCEPT_START
+             90 POP_JUMP_IF_TRUE        94
+             92 RERAISE
+        >>   94 POP_TOP
+             96 POP_TOP
+             98 POP_TOP
+            100 POP_EXCEPT
+            102 POP_TOP
+
+432     >>  104 LOAD_GLOBAL              5 (LPFavoriteCacheManager)
+            106 LOAD_METHOD              6 (instance)
+            108 CALL_METHOD              0
+            110 LOAD_ATTR                7 (applyServerSnapshot)
+
+433         112 LOAD_FAST                1 (source)
+            114 LOAD_FAST                2 (userId)
+            116 LOAD_FAST                5 (ids)
+            118 LOAD_FAST                4 (started_at)
+
+432         120 LOAD_CONST               4 (('snapshotAt',))
+            122 CALL_FUNCTION_KW         4
+            124 POP_TOP
+            126 JUMP_FORWARD            66 (to 194)
+
+435     >>  128 LOAD_FAST                1 (source)
+            130 LOAD_CONST               5 ('WiiMRadio')
+            132 COMPARE_OP               2 (==)
+            134 POP_JUMP_IF_FALSE      188
+
+436         136 LOAD_FAST                0 (self)
+            138 LOAD_ATTR                1 (_fetch_locks)
+            140 LOAD_FAST                1 (source)
+            142 BINARY_SUBSCR
+            144 SETUP_WITH              24 (to 170)
+            146 POP_TOP
+
+437         148 LOAD_FAST                0 (self)
+            150 LOAD_METHOD              8 (_syncWiiMRadioLocal)
+            152 CALL_METHOD              0
+            154 POP_TOP
+            156 POP_BLOCK
+            158 LOAD_CONST               3 (None)
+            160 DUP_TOP
+            162 DUP_TOP
+            164 CALL_FUNCTION            3
+            166 POP_TOP
+            168 JUMP_ABSOLUTE          194
+        >>  170 WITH_EXCEPT_START
+            172 POP_JUMP_IF_TRUE       176
+            174 RERAISE
+        >>  176 POP_TOP
+            178 POP_TOP
+            180 POP_TOP
+            182 POP_EXCEPT
+            184 POP_TOP
+            186 JUMP_FORWARD             6 (to 194)
+
+439     >>  188 POP_BLOCK
+            190 LOAD_CONST               3 (None)
+            192 RETURN_VALUE
+
+440     >>  194 LOAD_FAST                3 (state)
+            196 LOAD_CONST               6 ('lock')
+            198 BINARY_SUBSCR
+            200 SETUP_WITH              52 (to 254)
+            202 POP_TOP
+
+441         204 LOAD_CONST               7 ('synced')
+            206 LOAD_FAST                3 (state)
+            208 LOAD_CONST               8 ('status')
+            210 STORE_SUBSCR
+
+442         212 LOAD_GLOBAL              2 (time)
+            214 LOAD_METHOD              2 (time)
+            216 CALL_METHOD              0
+            218 LOAD_FAST                3 (state)
+            220 LOAD_CONST               9 ('lastSyncAt')
+            222 STORE_SUBSCR
+
+443         224 LOAD_CONST              10 (0)
+            226 LOAD_FAST                3 (state)
+            228 LOAD_CONST              11 ('retryCount')
+            230 STORE_SUBSCR
+
+444         232 LOAD_CONST              12 (0.0)
+            234 LOAD_FAST                3 (state)
+            236 LOAD_CONST              13 ('nextRetryAt')
+            238 STORE_SUBSCR
+            240 POP_BLOCK
+            242 LOAD_CONST               3 (None)
+            244 DUP_TOP
+            246 DUP_TOP
+            248 CALL_FUNCTION            3
+            250 POP_TOP
+            252 JUMP_FORWARD            18 (to 272)
+        >>  254 WITH_EXCEPT_START
+            256 EXTENDED_ARG             1
+            258 POP_JUMP_IF_TRUE       262
+            260 RERAISE
+        >>  262 POP_TOP
+            264 POP_TOP
+            266 POP_TOP
+            268 POP_EXCEPT
+            270 POP_TOP
+
+445     >>  272 LOAD_FAST                0 (self)
+            274 LOAD_METHOD              9 (_cancelRetry)
+            276 LOAD_FAST                1 (source)
+            278 LOAD_FAST                2 (userId)
+            280 CALL_METHOD              2
+            282 POP_TOP
+
+446         284 LOAD_GLOBAL             10 (logger)
+            286 LOAD_METHOD             11 (debug)
+            288 LOAD_CONST              14 ('[FavoriteSync] synced source=%s userId=%s')
+            290 LOAD_FAST                1 (source)
+            292 LOAD_FAST                2 (userId)
+            294 CALL_METHOD              3
+            296 POP_TOP
+            298 POP_BLOCK
+            300 JUMP_FORWARD           206 (to 508)
+
+447     >>  302 DUP_TOP
+            304 LOAD_GLOBAL             12 (Exception)
+            306 EXTENDED_ARG             1
+            308 JUMP_IF_NOT_EXC_MATCH   506
+            310 POP_TOP
+            312 STORE_FAST               6 (exc)
+            314 POP_TOP
+            316 SETUP_FINALLY          180 (to 498)
+
+448         318 LOAD_GLOBAL             10 (logger)
+            320 LOAD_METHOD             13 (warning)
+            322 LOAD_CONST              15 ('[FavoriteSync] sync failed source=%s userId=%s error=%s')
+            324 LOAD_FAST                1 (source)
+            326 LOAD_FAST                2 (userId)
+            328 LOAD_FAST                6 (exc)
+            330 CALL_METHOD              4
+            332 POP_TOP
+
+449         334 LOAD_GLOBAL              5 (LPFavoriteCacheManager)
+            336 LOAD_METHOD              6 (instance)
+            338 CALL_METHOD              0
+            340 LOAD_METHOD             14 (markFailed)
+            342 LOAD_FAST                1 (source)
+            344 LOAD_FAST                2 (userId)
+            346 CALL_METHOD              2
+            348 POP_TOP
+
+450         350 LOAD_FAST                3 (state)
+            352 LOAD_CONST               6 ('lock')
+            354 BINARY_SUBSCR
+            356 SETUP_WITH              90 (to 448)
+            358 POP_TOP
+
+451         360 LOAD_CONST              16 ('failed')
+            362 LOAD_FAST                3 (state)
+            364 LOAD_CONST               8 ('status')
+            366 STORE_SUBSCR
+
+452         368 LOAD_FAST                3 (state)
+            370 LOAD_CONST              11 ('retryCount')
+            372 DUP_TOP_TWO
+            374 BINARY_SUBSCR
+            376 LOAD_CONST              17 (1)
+            378 INPLACE_ADD
+            380 ROT_THREE
+            382 STORE_SUBSCR
+
+453         384 LOAD_GLOBAL             15 (min)
+            386 LOAD_FAST                3 (state)
+            388 LOAD_CONST              11 ('retryCount')
+            390 BINARY_SUBSCR
+            392 LOAD_CONST              17 (1)
+            394 BINARY_SUBTRACT
+            396 LOAD_GLOBAL             16 (len)
+            398 LOAD_FAST                0 (self)
+            400 LOAD_ATTR               17 (RETRY_DELAYS)
+            402 CALL_FUNCTION            1
+            404 LOAD_CONST              17 (1)
+            406 BINARY_SUBTRACT
+            408 CALL_FUNCTION            2
+            410 STORE_FAST               7 (delay_index)
+
+454         412 LOAD_GLOBAL              2 (time)
+            414 LOAD_METHOD              2 (time)
+            416 CALL_METHOD              0
+            418 LOAD_FAST                0 (self)
+            420 LOAD_ATTR               17 (RETRY_DELAYS)
+            422 LOAD_FAST                7 (delay_index)
+            424 BINARY_SUBSCR
+            426 BINARY_ADD
+            428 LOAD_FAST                3 (state)
+            430 LOAD_CONST              13 ('nextRetryAt')
+            432 STORE_SUBSCR
+            434 POP_BLOCK
+            436 LOAD_CONST               3 (None)
+            438 DUP_TOP
+            440 DUP_TOP
+            442 CALL_FUNCTION            3
+            444 POP_TOP
+            446 JUMP_FORWARD            18 (to 466)
+        >>  448 WITH_EXCEPT_START
+            450 EXTENDED_ARG             1
+            452 POP_JUMP_IF_TRUE       456
+            454 RERAISE
+        >>  456 POP_TOP
+            458 POP_TOP
+            460 POP_TOP
+            462 POP_EXCEPT
+            464 POP_TOP
+
+455     >>  466 LOAD_FAST                0 (self)
+            468 LOAD_METHOD             18 (_scheduleRetry)
+            470 LOAD_FAST                1 (source)
+            472 LOAD_FAST                2 (userId)
+            474 LOAD_FAST                0 (self)
+            476 LOAD_ATTR               17 (RETRY_DELAYS)
+            478 LOAD_FAST                7 (delay_index)
+            480 BINARY_SUBSCR
+            482 CALL_METHOD              3
+            484 POP_TOP
+            486 POP_BLOCK
+            488 POP_EXCEPT
+            490 LOAD_CONST               3 (None)
+            492 STORE_FAST               6 (exc)
+            494 DELETE_FAST              6 (exc)
+            496 JUMP_FORWARD            10 (to 508)
+        >>  498 LOAD_CONST               3 (None)
+            500 STORE_FAST               6 (exc)
+            502 DELETE_FAST              6 (exc)
+            504 RERAISE
+        >>  506 RERAISE
+        >>  508 LOAD_CONST               3 (None)
+            510 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._syncWiiMRadioLocal ===
+463           0 LOAD_CONST               1 (0)
+              2 LOAD_CONST               2 (('ensureLoaded',))
+              4 IMPORT_NAME              0 (HOME.StreamService.WiiMRadio.utils.LPWiiMRadioFavoriteStorage)
+              6 IMPORT_FROM              1 (ensureLoaded)
+              8 STORE_FAST               1 (ensureLoaded)
+             10 POP_TOP
+
+465          12 LOAD_FAST                1 (ensureLoaded)
+             14 CALL_FUNCTION            0
+             16 POP_TOP
+             18 LOAD_CONST               3 (None)
+             20 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._fetchTidalIds ===
+475           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPGlobalUI)
+              4 LOAD_CONST               1 ('currentDevice')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               2 (device)
+
+476          12 LOAD_FAST                2 (device)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       28
+
+477          20 LOAD_GLOBAL              2 (RuntimeError)
+             22 LOAD_CONST               3 ('no current device for tidal favorite sync')
+             24 CALL_FUNCTION            1
+             26 RAISE_VARARGS            1
+
+478     >>   28 LOAD_CONST               4 (0)
+             30 LOAD_CONST               5 (('LPTidalStore',))
+             32 IMPORT_NAME              3 (HOME.StreamService.Tidal.state.LPTidalStore)
+             34 IMPORT_FROM              4 (LPTidalStore)
+             36 STORE_FAST               3 (LPTidalStore)
+             38 POP_TOP
+
+479          40 LOAD_CONST               4 (0)
+             42 LOAD_CONST               6 (('LPTidalLoginManager',))
+             44 IMPORT_NAME              5 (LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager)
+             46 IMPORT_FROM              6 (LPTidalLoginManager)
+             48 STORE_FAST               4 (LPTidalLoginManager)
+             50 POP_TOP
+
+481          52 LOAD_FAST                4 (LPTidalLoginManager)
+             54 LOAD_ATTR                7 (_instance)
+             56 LOAD_CONST               2 (None)
+             58 IS_OP                    0
+             60 POP_JUMP_IF_FALSE       70
+
+482          62 LOAD_GLOBAL              2 (RuntimeError)
+             64 LOAD_CONST               7 ('tidal login manager not prepared on main thread')
+             66 CALL_FUNCTION            1
+             68 RAISE_VARARGS            1
+
+483     >>   70 LOAD_FAST                4 (LPTidalLoginManager)
+             72 LOAD_METHOD              8 (instance)
+             74 CALL_METHOD              0
+             76 STORE_FAST               5 (login_manager)
+
+485          78 LOAD_FAST                3 (LPTidalStore)
+             80 LOAD_METHOD              8 (instance)
+             82 CALL_METHOD              0
+             84 STORE_FAST               6 (store)
+
+486          86 LOAD_GLOBAL              9 (str)
+             88 LOAD_FAST                6 (store)
+             90 LOAD_ATTR               10 (accountState)
+             92 LOAD_METHOD             11 (get)
+             94 LOAD_CONST               8 ('token')
+             96 LOAD_CONST               9 ('')
+             98 CALL_METHOD              2
+            100 JUMP_IF_TRUE_OR_POP    104
+            102 LOAD_CONST               9 ('')
+        >>  104 CALL_FUNCTION            1
+            106 LOAD_METHOD             12 (strip)
+            108 CALL_METHOD              0
+            110 POP_JUMP_IF_TRUE       126
+
+487         112 LOAD_FAST                5 (login_manager)
+            114 LOAD_ATTR               13 (syncAccountFromDevice)
+            116 LOAD_FAST                2 (device)
+            118 LOAD_CONST              10 (False)
+            120 LOAD_CONST              11 (('fetchIfMissing',))
+            122 CALL_FUNCTION_KW         2
+            124 POP_TOP
+
+488     >>  126 LOAD_FAST                5 (login_manager)
+            128 LOAD_ATTR               14 (ensureFreshToken)
+            130 LOAD_CONST              12 (True)
+            132 LOAD_CONST              13 (('force',))
+            134 CALL_FUNCTION_KW         1
+            136 POP_TOP
+
+489         138 LOAD_FAST                5 (login_manager)
+            140 LOAD_ATTR               15 (_provider)
+            142 LOAD_ATTR               16 (refreshFavoriteIds)
+            144 LOAD_FAST                1 (userId)
+            146 LOAD_CONST              12 (True)
+            148 LOAD_CONST              14 (('skipCache',))
+            150 CALL_FUNCTION_KW         2
+            152 STORE_FAST               7 (result)
+
+490         154 LOAD_GLOBAL             17 (isinstance)
+            156 LOAD_FAST                7 (result)
+            158 LOAD_GLOBAL             18 (dict)
+            160 CALL_FUNCTION            2
+            162 POP_JUMP_IF_FALSE      178
+            164 LOAD_GLOBAL             19 (bool)
+            166 LOAD_FAST                7 (result)
+            168 LOAD_METHOD             11 (get)
+            170 LOAD_CONST              15 ('success')
+            172 CALL_METHOD              1
+            174 CALL_FUNCTION            1
+            176 POP_JUMP_IF_TRUE       186
+
+491     >>  178 LOAD_GLOBAL              2 (RuntimeError)
+            180 LOAD_CONST              16 ('tidal favorite ids request failed')
+            182 CALL_FUNCTION            1
+            184 RAISE_VARARGS            1
+
+492     >>  186 LOAD_FAST                5 (login_manager)
+            188 LOAD_ATTR               15 (_provider)
+            190 LOAD_METHOD             20 (normalizeFavoriteIds)
+            192 LOAD_FAST                7 (result)
+            194 LOAD_METHOD             11 (get)
+            196 LOAD_CONST              17 ('data')
+            198 CALL_METHOD              1
+            200 CALL_METHOD              1
+            202 RETURN_VALUE
+
+=== LPFavoriteSyncCoordinator._fetchQobuzIds ===
+502           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPGlobalUI)
+              4 LOAD_CONST               1 ('currentDevice')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               2 (device)
+
+503          12 LOAD_FAST                2 (device)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       28
+
+504          20 LOAD_GLOBAL              2 (RuntimeError)
+             22 LOAD_CONST               3 ('no current device for qobuz favorite sync')
+             24 CALL_FUNCTION            1
+             26 RAISE_VARARGS            1
+
+505     >>   28 LOAD_CONST               4 (0)
+             30 LOAD_CONST               5 (('LPQobuzManager',))
+             32 IMPORT_NAME              3 (LPClientFramework.LPMSManager.Qobuz.LPQobuzManager)
+             34 IMPORT_FROM              4 (LPQobuzManager)
+             36 STORE_FAST               3 (LPQobuzManager)
+             38 POP_TOP
+
+507          40 LOAD_FAST                3 (LPQobuzManager)
+             42 LOAD_ATTR                5 (_instance)
+             44 LOAD_CONST               2 (None)
+             46 IS_OP                    0
+             48 POP_JUMP_IF_FALSE       58
+
+508          50 LOAD_GLOBAL              2 (RuntimeError)
+             52 LOAD_CONST               6 ('qobuz manager not prepared on main thread')
+             54 CALL_FUNCTION            1
+             56 RAISE_VARARGS            1
+
+509     >>   58 LOAD_FAST                3 (LPQobuzManager)
+             60 LOAD_METHOD              6 (instance)
+             62 CALL_METHOD              0
+             64 STORE_FAST               4 (qobuz)
+
+511          66 LOAD_FAST                2 (device)
+             68 LOAD_ATTR                7 (deviceStreamServiceManager)
+             70 LOAD_METHOD              8 (accountForSource)
+             72 LOAD_CONST               7 ('Qobuz')
+             74 CALL_METHOD              1
+             76 STORE_FAST               5 (account)
+
+512          78 LOAD_FAST                5 (account)
+             80 LOAD_CONST               2 (None)
+             82 IS_OP                    0
+             84 POP_JUMP_IF_TRUE       110
+             86 LOAD_GLOBAL              9 (str)
+             88 LOAD_GLOBAL              0 (getattr)
+             90 LOAD_FAST                5 (account)
+             92 LOAD_CONST               8 ('userId')
+             94 LOAD_CONST               9 ('')
+             96 CALL_FUNCTION            3
+             98 JUMP_IF_TRUE_OR_POP    102
+            100 LOAD_CONST               9 ('')
+        >>  102 CALL_FUNCTION            1
+            104 LOAD_METHOD             10 (strip)
+            106 CALL_METHOD              0
+            108 POP_JUMP_IF_TRUE       118
+
+513     >>  110 LOAD_GLOBAL              2 (RuntimeError)
+            112 LOAD_CONST              10 ('qobuz account missing for favorite sync')
+            114 CALL_FUNCTION            1
+            116 RAISE_VARARGS            1
+
+514     >>  118 LOAD_GLOBAL              0 (getattr)
+            120 LOAD_FAST                4 (qobuz)
+            122 LOAD_CONST              11 ('loginMgr')
+            124 LOAD_CONST               2 (None)
+            126 CALL_FUNCTION            3
+            128 STORE_FAST               6 (login_mgr)
+
+515         130 LOAD_FAST                6 (login_mgr)
+            132 LOAD_CONST               2 (None)
+            134 IS_OP                    0
+            136 POP_JUMP_IF_FALSE      146
+
+516         138 LOAD_GLOBAL              2 (RuntimeError)
+            140 LOAD_CONST              12 ('qobuz login manager missing for favorite sync')
+            142 CALL_FUNCTION            1
+            144 RAISE_VARARGS            1
+
+517     >>  146 LOAD_FAST                5 (account)
+            148 LOAD_FAST                6 (login_mgr)
+            150 STORE_ATTR              11 (account)
+
+518         152 LOAD_GLOBAL              0 (getattr)
+            154 LOAD_FAST                6 (login_mgr)
+            156 LOAD_CONST              13 ('tokenProvider')
+            158 LOAD_CONST               2 (None)
+            160 CALL_FUNCTION            3
+            162 STORE_FAST               7 (token_provider)
+
+519         164 LOAD_FAST                7 (token_provider)
+            166 LOAD_CONST               2 (None)
+            168 IS_OP                    1
+            170 POP_JUMP_IF_FALSE      182
+
+520         172 LOAD_FAST                7 (token_provider)
+            174 LOAD_METHOD             12 (setAccount)
+            176 LOAD_FAST                5 (account)
+            178 CALL_METHOD              1
+            180 POP_TOP
+
+521     >>  182 LOAD_GLOBAL              0 (getattr)
+            184 LOAD_GLOBAL              0 (getattr)
+            186 LOAD_GLOBAL              0 (getattr)
+            188 LOAD_FAST                4 (qobuz)
+            190 LOAD_CONST              14 ('requestMgr')
+            192 LOAD_CONST               2 (None)
+            194 CALL_FUNCTION            3
+            196 LOAD_CONST              15 ('requester')
+            198 LOAD_CONST               2 (None)
+            200 CALL_FUNCTION            3
+            202 LOAD_CONST              16 ('client')
+            204 LOAD_CONST               2 (None)
+            206 CALL_FUNCTION            3
+            208 STORE_FAST               8 (client)
+
+522         210 LOAD_FAST                8 (client)
+            212 LOAD_CONST               2 (None)
+            214 IS_OP                    1
+            216 POP_JUMP_IF_FALSE      232
+
+523         218 LOAD_GLOBAL              0 (getattr)
+            220 LOAD_FAST                5 (account)
+            222 LOAD_CONST              17 ('token')
+            224 LOAD_CONST               2 (None)
+            226 CALL_FUNCTION            3
+            228 LOAD_FAST                8 (client)
+            230 STORE_ATTR              13 (token)
+
+524     >>  232 LOAD_GLOBAL              0 (getattr)
+            234 LOAD_FAST                4 (qobuz)
+            236 LOAD_CONST              14 ('requestMgr')
+            238 LOAD_CONST               2 (None)
+            240 CALL_FUNCTION            3
+            242 STORE_FAST               9 (request_mgr)
+
+525         244 LOAD_FAST                9 (request_mgr)
+            246 LOAD_CONST               2 (None)
+            248 IS_OP                    0
+            250 EXTENDED_ARG             1
+            252 POP_JUMP_IF_FALSE      262
+
+526         254 LOAD_GLOBAL              2 (RuntimeError)
+            256 LOAD_CONST              18 ('qobuz request manager missing for favorite sync')
+            258 CALL_FUNCTION            1
+            260 RAISE_VARARGS            1
+
+527     >>  262 LOAD_FAST                9 (request_mgr)
+            264 LOAD_METHOD             14 (fetchFavoriteIds)
+            266 CALL_METHOD              0
+            268 UNPACK_SEQUENCE          2
+            270 STORE_FAST              10 (data)
+            272 STORE_FAST              11 (_status_code)
+
+528         274 LOAD_GLOBAL             15 (isinstance)
+            276 LOAD_FAST               10 (data)
+            278 LOAD_GLOBAL             16 (dict)
+            280 CALL_FUNCTION            2
+            282 EXTENDED_ARG             1
+            284 POP_JUMP_IF_TRUE       318
+
+529         286 LOAD_GLOBAL             17 (logger)
+            288 LOAD_METHOD             18 (warning)
+            290 LOAD_CONST              19 ('[FavoriteSync] qobuz favorite ids response not dict: %r')
+            292 LOAD_GLOBAL              9 (str)
+            294 LOAD_FAST               10 (data)
+            296 CALL_FUNCTION            1
+            298 LOAD_CONST               2 (None)
+            300 LOAD_CONST              20 (500)
+            302 BUILD_SLICE              2
+            304 BINARY_SUBSCR
+            306 CALL_METHOD              2
+            308 POP_TOP
+
+530         310 LOAD_GLOBAL              2 (RuntimeError)
+            312 LOAD_CONST              21 ('qobuz favorite ids request failed')
+            314 CALL_FUNCTION            1
+            316 RAISE_VARARGS            1
+
+532     >>  318 LOAD_CONST              22 ('playlists')
+            320 LOAD_FAST               10 (data)
+            322 CONTAINS_OP              1
+            324 EXTENDED_ARG             1
+            326 POP_JUMP_IF_FALSE      378
+
+533         328 LOAD_GLOBAL             19 (LPFavoriteCacheManager)
+            330 LOAD_METHOD              6 (instance)
+            332 CALL_METHOD              0
+            334 LOAD_METHOD             20 (snapshot)
+            336 LOAD_CONST               7 ('Qobuz')
+            338 LOAD_FAST                1 (userId)
+            340 CALL_METHOD              2
+            342 STORE_FAST              12 (cached)
+
+534         344 LOAD_FAST               12 (cached)
+            346 EXTENDED_ARG             1
+            348 POP_JUMP_IF_FALSE      378
+            350 LOAD_FAST               12 (cached)
+            352 LOAD_METHOD             21 (get)
+            354 LOAD_CONST              22 ('playlists')
+            356 CALL_METHOD              1
+            358 EXTENDED_ARG             1
+            360 POP_JUMP_IF_FALSE      378
+
+535         362 LOAD_GLOBAL             22 (list)
+            364 LOAD_FAST               12 (cached)
+            366 LOAD_CONST              22 ('playlists')
+            368 BINARY_SUBSCR
+            370 CALL_FUNCTION            1
+            372 LOAD_FAST               10 (data)
+            374 LOAD_CONST              22 ('playlists')
+            376 STORE_SUBSCR
+
+536     >>  378 LOAD_GLOBAL             17 (logger)
+            380 LOAD_METHOD             23 (debug)
+            382 LOAD_CONST              23 ('[FavoriteSync] qobuz favorite ids keys=%s')
+            384 LOAD_GLOBAL             24 (sorted)
+            386 LOAD_FAST               10 (data)
+            388 LOAD_METHOD             25 (keys)
+            390 CALL_METHOD              0
+            392 CALL_FUNCTION            1
+            394 CALL_METHOD              2
+            396 POP_TOP
+
+537         398 LOAD_FAST               10 (data)
+            400 RETURN_VALUE

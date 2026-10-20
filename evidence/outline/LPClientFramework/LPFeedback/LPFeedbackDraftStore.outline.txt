@@ -1,0 +1,75 @@
+# module LPClientFramework.LPFeedback.LPFeedbackDraftStore
+
+[module] names: __doc__, hashlib, os, shutil, time, pathlib, Path, LPFeedbackDraftStore
+  str: 'Feedback 填写中草稿的跨会话持久化封装。'
+  str: 'Path'
+  str: 'LPFeedbackDraftStore'
+
+def LPFeedbackDraftStore()  line 11
+  names: __name__, __module__, __qualname__, __doc__, _SUBJECT_KEY, _EMAIL_KEY, _DESCRIPTION_KEY, _ATTACHMENT_PATHS_KEY, _UPDATED_AT_KEY, _KEYS, __init__, save, load, clear, copyAttachment, removeAttachment, classmethod, cleanupExpired
+    str: 'LPFeedbackDraftStore'
+    str: '保存反馈弹窗未提交的填写草稿，并维护附件图片副本。\n\n    草稿包含主题/邮箱/描述文本与已选附件（图片副本路径列表）。\n    任意关闭方式不清除草稿，下次打开弹窗可恢复；只有提交成功或用户主动清除时才删除。\n    附件图片在选图时复制到缓存目录 feedback_draft_attachments 下，\n    避免用户移动/删除原图后草稿恢复时引用失效。\n    '
+    str: 'feedback/draft/subject'
+    str: 'feedback/draft/email'
+    str: 'feedback/draft/description'
+    str: 'feedback/draft/attachmentPaths'
+    str: 'feedback/draft/updatedAt'
+    str: 'LPFeedbackDraftStore.__init__'
+    str: 'LPFeedbackDraftStore.save'
+    str: 'LPFeedbackDraftStore.load'
+    str: 'LPFeedbackDraftStore.clear'
+    str: 'LPFeedbackDraftStore.copyAttachment'
+    str: 'LPFeedbackDraftStore.removeAttachment'
+    str: 'LPFeedbackDraftStore.cleanupExpired'
+
+  def LPFeedbackDraftStore.__init__(self, settingsStore, attachmentCacheDir)  line 33
+    names: _settingsStore, Path, _attachmentCacheDir
+      str: '初始化草稿存储。\n\n        参数:\n            settingsStore (object): 应用设置存储（QSettings 或兼容替身），提供\n                value/setValue/remove/sync 方法。\n            attachmentCacheDir (str|Path): 附件图片副本缓存目录。\n        返回:\n            无。\n        '
+
+  def LPFeedbackDraftStore.save(self, subject, email, description, attachmentPaths)  line 49
+    names: any, clear, _settingsStore, setValue, _SUBJECT_KEY, str, _EMAIL_KEY, _DESCRIPTION_KEY, _ATTACHMENT_PATHS_KEY, _UPDATED_AT_KEY, int, time, getattr, callable
+      str: '保存一份草稿；三个文本全空且无附件时视为无效草稿并清除。\n\n        参数:\n            subject (str): 反馈主题。\n            email (str): 用户邮箱。\n            description (str): 问题描述。\n            attachmentPaths (list[str]): 已选附件（图片副本）路径列表。\n        返回:\n            None。\n        '
+      str: 'LPFeedbackDraftStore.save.<locals>.<listcomp>'
+      str: 'LPFeedbackDraftStore.save.<locals>.<genexpr>'
+      str: 'sync'
+
+    def LPFeedbackDraftStore.save.<listcomp>(.0)  line 60
+      names: str
+
+    def LPFeedbackDraftStore.save.<genexpr>(.0)  line 61
+      names: str, strip
+
+  def LPFeedbackDraftStore.load(self)  line 74
+    names: str, _settingsStore, value, _SUBJECT_KEY, _EMAIL_KEY, _DESCRIPTION_KEY, list, _ATTACHMENT_PATHS_KEY, int, _UPDATED_AT_KEY, any
+      str: '读取草稿；不存在或内容无效（全空且无附件）时返回 None。\n\n        参数:\n            无。\n        返回:\n            dict|None: 包含 subject/email/description/attachmentPaths/updatedAt\n                的草稿字典；无有效草稿时返回 None。\n        '
+      str: 'LPFeedbackDraftStore.load.<locals>.<genexpr>'
+      str: 'subject'
+      str: 'email'
+      str: 'description'
+      str: 'attachmentPaths'
+      str: 'updatedAt'
+
+    def LPFeedbackDraftStore.load.<genexpr>(.0)  line 88
+      names: strip
+
+  def LPFeedbackDraftStore.clear(self)  line 100
+    names: list, _settingsStore, value, _ATTACHMENT_PATHS_KEY, Path, unlink, OSError, _KEYS, remove, shutil, rmtree, _attachmentCacheDir
+      str: '删除草稿元数据与全部附件图片副本（含副本目录）。'
+      str: 'ignore_errors'
+
+  def LPFeedbackDraftStore.copyAttachment(self, srcPath)  line 115
+    names: hashlib, sha1, os, path, realpath, str, encode, hexdigest, splitext, lower, _attachmentCacheDir, exists, mkdir, shutil, copyfile, OSError
+      str: '把图片复制到草稿缓存目录，返回副本路径。\n\n        副本文件名由源文件真实路径哈希决定：同一张图多次选择返回同一副本路径，\n        便于附件去重；复制失败时返回 None（由调用方决定回退策略）。\n\n        参数:\n            srcPath (str): 源图片文件路径。\n        返回:\n            str|None: 副本路径；复制失败时返回 None。\n        '
+      str: 'utf-8'
+      str: '.img'
+      str: 'parents'
+      str: 'exist_ok'
+
+  def LPFeedbackDraftStore.removeAttachment(self, cachedPath)  line 137
+    names: Path, unlink, OSError
+      str: '删除单个附件图片副本文件（文件不存在时静默忽略）。\n\n        参数:\n            cachedPath (str): 附件副本路径。\n        返回:\n            None。\n        '
+
+  def LPFeedbackDraftStore.cleanupExpired(cls, settingsStore, attachmentCacheDir, maxAgeDays)  line 153
+    names: int, value, _UPDATED_AT_KEY, time, list, _ATTACHMENT_PATHS_KEY, Path, unlink, OSError, _KEYS, remove, shutil, rmtree
+      str: '清理超过 maxAgeDays 天未更新的草稿及其附件图片副本。\n\n        在应用启动时调用；过期草稿连同副本文件与元数据一并删除，\n        未过期或不存在草稿时不作任何处理。\n\n        参数:\n            settingsStore (object): 应用设置存储（QSettings 或兼容替身）。\n            attachmentCacheDir (str|Path): 附件图片副本缓存目录。\n            maxAgeDays (int): 草稿最大保留天数。\n        返回:\n            None。\n    '
+      str: 'ignore_errors'

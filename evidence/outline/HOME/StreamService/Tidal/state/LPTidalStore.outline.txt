@@ -1,0 +1,2433 @@
+# module HOME.StreamService.Tidal.state.LPTidalStore
+
+[module] names: __doc__, json, time, weakref, logging, pathlib, Path, typing, Any, Dict, Iterable, List, Optional, PyQt6.QtCore, QAbstractListModel, QModelIndex, QObject, QSortFilterProxyModel, Qt, pyqtProperty, pyqtSignal, pyqtSlot, HOME.StreamService.Tidal.services.LPTidalImageService, LPTidalImageService, HOME.StreamService.Tidal.models.LPTidalListModel, LPTidalListModel, getLogger, logger, LPTidalSectionListModel, _TidalBaseState, LPTidalSeeAllDescriptor, LPTidalSeeAllFilterModel, LPTidalHomeState, LPTidalSearchState, _TidalDetailState, LPTidalAlbumDetailState, LPTidalArtistDetailState, LPTidalPlaylistDetailState, LPTidalVideoDetailState, LPTidalGenreDetailState, LPTidalArtistRadioDetailState, LPTidalMixDetailState, LPTidalFavoriteState, LPTidalCollectionState, LPTidalSeeAllState, LPTidalToastState, LPTidalStore
+  str: '\nTIDAL 统一状态管理。\n'
+  str: 'Path'
+  str: 'Any'
+  str: 'Dict'
+  str: 'Iterable'
+  str: 'List'
+  str: 'Optional'
+  str: 'QAbstractListModel'
+  str: 'QModelIndex'
+  str: 'QObject'
+  str: 'QSortFilterProxyModel'
+  str: 'Qt'
+  str: 'pyqtProperty'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'LPTidalImageService'
+  str: 'LPTidalListModel'
+  str: 'linkplay'
+  str: 'LPTidalSectionListModel'
+  str: '_TidalBaseState'
+  str: 'LPTidalSeeAllDescriptor'
+  str: 'LPTidalSeeAllFilterModel'
+  str: 'LPTidalHomeState'
+  str: 'LPTidalSearchState'
+  str: '_TidalDetailState'
+  str: 'LPTidalAlbumDetailState'
+  str: 'LPTidalArtistDetailState'
+  str: 'LPTidalPlaylistDetailState'
+  str: 'LPTidalVideoDetailState'
+  str: 'LPTidalGenreDetailState'
+  str: 'LPTidalArtistRadioDetailState'
+  str: 'LPTidalMixDetailState'
+  str: 'LPTidalFavoriteState'
+  str: 'LPTidalCollectionState'
+  str: 'LPTidalSeeAllState'
+  str: 'LPTidalToastState'
+  str: 'LPTidalStore'
+
+def LPTidalSectionListModel()  line 21
+  names: __name__, __module__, __qualname__, __doc__, int, Qt, ItemDataRole, UserRole, SECTION_KEY_ROLE, TITLE_ROLE, ITEMS_ROLE, IS_LOADING_ROLE, IS_CATEGORY_ROLE, SEE_ALL_ENABLED_ROLE, ITEM_MODE_ROLE, Optional, QObject, __init__, QModelIndex, rowCount, DisplayRole, Any, data, Dict, bytes, roleNames, clear, List, str, setSections, upsertSection, sectionForKey, sectionKeys, LPTidalListModel, itemsModelForSection, itemForSection, __classcell__
+    str: 'LPTidalSectionListModel'
+    str: '首页区块列表模型，承载 section 元数据与其对应内容模型。'
+    str: 'parent'
+    str: 'LPTidalSectionListModel.__init__'
+    str: 'parent'
+    str: 'return'
+    str: 'LPTidalSectionListModel.rowCount'
+    str: 'index'
+    str: 'role'
+    str: 'return'
+    str: 'LPTidalSectionListModel.data'
+    str: 'return'
+    str: 'LPTidalSectionListModel.roleNames'
+    str: 'LPTidalSectionListModel.clear'
+    str: 'sections'
+    str: 'return'
+    str: 'LPTidalSectionListModel.setSections'
+    str: 'section'
+    str: 'return'
+    str: 'LPTidalSectionListModel.upsertSection'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalSectionListModel.sectionForKey'
+    str: 'LPTidalSectionListModel.sectionKeys'
+    str: 'LPTidalSectionListModel.itemsModelForSection'
+    str: 'sectionKey'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalSectionListModel.itemForSection'
+
+  def LPTidalSectionListModel.__init__(self, parent)  line 32
+    names: super, __init__, _sections
+      str: '\n        初始化首页区块模型。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def LPTidalSectionListModel.rowCount(self, parent)  line 42
+    names: isValid, len, _sections
+      str: '\n        返回区块数量。\n\n        :param parent: 父级索引。\n        :return: 区块数量。\n        '
+
+  def LPTidalSectionListModel.data(self, index, role)  line 53
+    names: isValid, row, len, _sections, SECTION_KEY_ROLE, get, TITLE_ROLE, ITEMS_ROLE, IS_LOADING_ROLE, bool, IS_CATEGORY_ROLE, SEE_ALL_ENABLED_ROLE, ITEM_MODE_ROLE
+      str: '\n        返回指定区块字段。\n\n        :param index: 模型索引。\n        :param role: Qt 角色值。\n        :return: 字段值。\n        '
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'isLoading'
+      str: 'isCategory'
+      str: 'seeAllEnabled'
+      str: 'itemMode'
+
+  def LPTidalSectionListModel.roleNames(self)  line 83
+    names: SECTION_KEY_ROLE, TITLE_ROLE, ITEMS_ROLE, IS_LOADING_ROLE, IS_CATEGORY_ROLE, SEE_ALL_ENABLED_ROLE, ITEM_MODE_ROLE
+      str: '\n        返回 QML 角色映射。\n\n        :return: 角色名称字典。\n        '
+
+  def LPTidalSectionListModel.clear(self)  line 99
+    names: _sections, beginResetModel, endResetModel
+      str: '\n        清空所有区块。\n\n        :return: None。\n        '
+
+  def LPTidalSectionListModel.setSections(self, sections)  line 111
+    names: beginResetModel, _sections, endResetModel
+      str: '\n        用新的区块列表替换当前内容。\n\n        :param sections: 区块字典序列。\n        :return: None。\n        '
+      str: 'LPTidalSectionListModel.setSections.<locals>.<listcomp>'
+
+    def LPTidalSectionListModel.setSections.<listcomp>(.0)  line 118
+      names: isinstance, dict
+
+  def LPTidalSectionListModel.upsertSection(self, section)  line 123
+    names: isinstance, dict, str, get, strip, enumerate, _sections, update, index, dataChanged, emit, list, roleNames, keys, len, beginInsertRows, QModelIndex, append, endInsertRows
+      str: '\n        按 sectionKey 插入或更新区块。\n\n        :param section: 区块字典。\n        :return: None。\n        '
+      str: 'sectionKey'
+
+  def LPTidalSectionListModel.sectionForKey(self, sectionKey)  line 146
+    names: str, strip, _sections, get, dict
+      str: '\n        按 sectionKey 返回区块副本。\n\n        :param sectionKey: 区块标识。\n        :return: 区块字典或 None。\n        '
+      str: 'sectionKey'
+
+  def LPTidalSectionListModel.sectionKeys(self)  line 161
+    names: _sections
+      str: '\n        返回当前所有区块标识。\n\n        :return: 区块标识列表。\n        '
+      str: 'LPTidalSectionListModel.sectionKeys.<locals>.<listcomp>'
+
+    def LPTidalSectionListModel.sectionKeys.<listcomp>(.0)  line 167
+      names: str, get, strip
+        str: 'sectionKey'
+
+  def LPTidalSectionListModel.itemsModelForSection(self, sectionKey)  line 173
+    names: str, strip, _sections, get, isinstance, LPTidalListModel
+      str: '\n        返回指定区块的条目模型。\n\n        :param sectionKey: 区块标识。\n        :return: 条目模型或 None。\n        '
+      str: 'sectionKey'
+      str: 'items'
+
+  def LPTidalSectionListModel.itemForSection(self, sectionKey, itemId)  line 190
+    names: sectionForKey, get, isinstance, LPTidalListModel, itemAt, findIndexById
+      str: '\n        按区块和条目 ID 返回条目副本。\n\n        :param sectionKey: 区块标识。\n        :param itemId: 条目 ID。\n        :return: 条目字典或 None。\n        '
+      str: 'items'
+
+def _TidalBaseState()  line 207
+  names: __name__, __module__, __qualname__, __doc__, VISIBLE_THUMBNAIL_WINDOW_LIMIT, VISIBLE_THUMBNAIL_PRELOAD_BEFORE, VISIBLE_THUMBNAIL_PRELOAD_AFTER, str, Optional, QObject, __init__, property, int, lastAccessMs, activeRefCount, touch, activate, deactivate, dispose, imageOwnerKey, cancelImageOwner, _now_ms, List, LPTidalListModel, _trackedImageModels, _handleThumbnailReady, bool, _scheduleVisibleModelThumbnails, __classcell__
+    str: '_TidalBaseState'
+    str: '页面状态基类，提供生命周期和回收控制。'
+    str: 'cacheKey'
+    str: 'parent'
+    str: '_TidalBaseState.__init__'
+    str: 'return'
+    str: '_TidalBaseState.lastAccessMs'
+    str: '_TidalBaseState.activeRefCount'
+    str: '_TidalBaseState.touch'
+    str: '_TidalBaseState.activate'
+    str: '_TidalBaseState.deactivate'
+    str: '_TidalBaseState.dispose'
+    str: '_TidalBaseState.imageOwnerKey'
+    str: '_TidalBaseState.cancelImageOwner'
+    str: '_TidalBaseState._now_ms'
+    str: '_TidalBaseState._trackedImageModels'
+    str: 'imageUrl'
+    str: 'imagePath'
+    str: 'return'
+    str: '_TidalBaseState._handleThumbnailReady'
+    str: 'model'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'ownerKey'
+    str: 'return'
+    str: '_TidalBaseState._scheduleVisibleModelThumbnails'
+
+  def _TidalBaseState.__init__(self, cacheKey, parent)  line 214
+    names: super, __init__, str, strip, cacheKey, _now_ms, _created_ms, _last_access_ms, _active_count, _disposed, weakref, ref, _parent_ref, LPTidalImageService, instance, _image_service, thumbnailReady, connect, _handleThumbnailReady, RuntimeError, TypeError
+      str: '\n        初始化状态基类。\n\n        :param cacheKey: 状态缓存键。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def _TidalBaseState.lastAccessMs(self)  line 235
+    names: _last_access_ms
+      str: '\n        返回最近访问时间戳。\n\n        :return: 毫秒时间戳。\n        '
+
+  def _TidalBaseState.activeRefCount(self)  line 244
+    names: _active_count
+      str: '\n        返回当前活跃引用数。\n\n        :return: 活跃引用数。\n        '
+
+  def _TidalBaseState.touch(self)  line 253
+    names: _now_ms, _last_access_ms
+      str: '\n        刷新最近访问时间。\n\n        :return: None。\n        '
+
+  def _TidalBaseState.activate(self)  line 261
+    names: _active_count, touch
+      str: '\n        标记状态进入活跃。\n\n        :return: None。\n        '
+
+  def _TidalBaseState.deactivate(self)  line 270
+    names: max, _active_count, touch
+      str: '\n        标记状态退出活跃。\n\n        :return: None。\n        '
+
+  def _TidalBaseState.dispose(self)  line 279
+    names: _disposed, _image_service, thumbnailReady, disconnect, _handleThumbnailReady, RuntimeError, TypeError
+      str: '\n        标记状态已销毁。\n\n        :return: None。\n        '
+
+  def _TidalBaseState.imageOwnerKey(self)  line 291
+    names: cacheKey
+      str: '\n        返回当前状态用于图片请求的 owner 后缀。\n\n        :return: 图片 owner 后缀。\n        '
+
+  def _TidalBaseState.cancelImageOwner(self)  line 299
+    names: str, imageOwnerKey, strip, _image_service, cancelOwner
+      str: '\n        失效当前状态的未完成图片请求。\n\n        :return: None。\n        '
+
+  def _TidalBaseState._now_ms(self)  line 309
+    names: int, time
+      str: '\n        获取当前毫秒时间戳。\n\n        :return: 毫秒时间戳。\n        '
+
+  def _TidalBaseState._trackedImageModels(self)  line 317
+      str: '\n        返回当前状态中需要回填图片路径的模型列表。\n\n        :return: TIDAL 列表模型列表。\n        '
+
+  def _TidalBaseState._handleThumbnailReady(self, imageUrl, imagePath)  line 325
+    names: str, strip, _active_count, hasattr, isinstance, getattr, dict, _detailInfo, get, detailInfoChanged, emit, _trackedImageModels, LPTidalListModel, updateImagePathByUrl, logger, debug, cacheKey
+      str: '\n        处理图片服务完成事件，并回填当前状态持有的模型。\n\n        :param imageUrl: 原始图片 URL。\n        :param imagePath: 本地图片 file URL。\n        :return: None。\n        '
+      str: '_detailInfo'
+      str: 'imageUrl'
+      str: 'imagePath'
+      str: '[TIDAL] thumbnail applied cacheKey=%s url=%s'
+
+  def _TidalBaseState._scheduleVisibleModelThumbnails(self, model, firstIndex, lastIndex, ownerKey)  line 353
+    names: isinstance, LPTidalListModel, count, int, TypeError, ValueError, max, min, VISIBLE_THUMBNAIL_WINDOW_LIMIT, VISIBLE_THUMBNAIL_PRELOAD_BEFORE, VISIBLE_THUMBNAIL_PRELOAD_AFTER, str, imageOwnerKey, strip, range, itemMapAt, dict, get, _image_service, ensureThumbnail, updateImagePathByUrl
+      str: '\n        按模型可见范围调度图片缩略图，并即时回填已缓存路径。\n\n        :param model: 需要预取图片的列表模型。\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :param ownerKey: 图片请求 owner 后缀。\n        :return: 至少有本地缓存路径被立即回填时返回 True。\n        '
+      str: 'imageUrl'
+      str: 'visible'
+      str: 'preload'
+      str: 'priority'
+      str: 'ownerKey'
+
+def LPTidalSeeAllDescriptor()  line 409
+  names: __name__, __module__, __qualname__, __doc__, str, bool, Optional, List, Dict, Any, __init__, property, cacheKey, isValid, toMap
+    str: 'LPTidalSeeAllDescriptor'
+    str: 'TIDAL See All 数据源描述，约束页面标题、来源和服务端能力。'
+    str: 'token'
+    str: 'ASC'
+    str: 'home'
+    str: 'sectionKey'
+    str: 'title'
+    str: 'itemType'
+    str: 'endpointPath'
+    str: 'authMode'
+    str: 'supportsSort'
+    str: 'defaultOrder'
+    str: 'defaultOrderDirection'
+    str: 'sourceKind'
+    str: 'sortOptions'
+    str: 'queryParams'
+    str: 'excludeItemIds'
+    str: 'itemId'
+    str: 'streamType'
+    str: 'imageUrl'
+    str: 'LPTidalSeeAllDescriptor.__init__'
+    str: 'return'
+    str: 'LPTidalSeeAllDescriptor.cacheKey'
+    str: 'LPTidalSeeAllDescriptor.isValid'
+    str: 'LPTidalSeeAllDescriptor.toMap'
+    str: 'token'
+    str: 'ASC'
+    str: 'home'
+
+  def LPTidalSeeAllDescriptor.__init__(self, sectionKey, title, itemType, endpointPath, authMode, supportsSort, defaultOrder, defaultOrderDirection, sourceKind, sortOptions, queryParams, excludeItemIds, itemId, streamType, imageUrl)  line 412
+    names: str, strip, sectionKey, title, lower, itemType, endpointPath, authMode, bool, supportsSort, upper, defaultOrder, defaultOrderDirection, sourceKind, list, sortOptions, dict, queryParams, excludeItemIds, itemId, streamType, imageUrl
+      str: '\n        初始化 See All 描述对象。\n\n        :param sectionKey: 区块标识。\n        :param title: 页面标题。\n        :param itemType: 条目类型。\n        :param endpointPath: TIDAL API 路径。\n        :param authMode: 鉴权模式，`token` 或 `session`。\n        :param supportsSort: 是否支持服务端排序。\n        :param defaultOrder: 默认排序字段。\n        :'
+      str: 'token'
+      str: 'ASC'
+      str: 'home'
+      str: 'LPTidalSeeAllDescriptor.__init__.<locals>.<listcomp>'
+
+    def LPTidalSeeAllDescriptor.__init__.<listcomp>(.0)  line 460
+      names: str, strip
+
+  def LPTidalSeeAllDescriptor.cacheKey(self)  line 469
+    names: json, dumps, queryParams, sorted, set, excludeItemIds, sectionKey, itemType, endpointPath
+      str: '\n        返回状态缓存键。\n\n        :return: 缓存键。\n        '
+      str: ','
+      str: ':'
+      str: 'ensure_ascii'
+      str: 'sort_keys'
+      str: 'separators'
+      str: 'ensure_ascii'
+      str: 'separators'
+      str: 'see_all::'
+      str: '::'
+
+  def LPTidalSeeAllDescriptor.isValid(self)  line 480
+    names: bool, sectionKey, itemType, endpointPath
+      str: '\n        判断描述是否可用于请求。\n\n        :return: 可用返回 True。\n        '
+
+  def LPTidalSeeAllDescriptor.toMap(self)  line 488
+    names: sectionKey, title, itemType, endpointPath, authMode, supportsSort, defaultOrder, defaultOrderDirection, sourceKind, sortOptions, dict, queryParams, list, excludeItemIds, itemId, streamType, imageUrl
+      str: '\n        转换为 QML 可读取的字典。\n\n        :return: 描述字段字典。\n        '
+      str: 'sectionKey'
+      str: 'title'
+      str: 'itemType'
+      str: 'endpointPath'
+      str: 'authMode'
+      str: 'supportsSort'
+      str: 'defaultOrder'
+      str: 'defaultOrderDirection'
+      str: 'sourceKind'
+      str: 'sortOptions'
+      str: 'queryParams'
+      str: 'excludeItemIds'
+      str: 'itemId'
+      str: 'streamType'
+      str: 'imageUrl'
+
+def LPTidalSeeAllFilterModel()  line 513
+  names: __name__, __module__, __qualname__, __doc__, Optional, QObject, __init__, str, setFilterText, int, QModelIndex, bool, filterAcceptsRow, __classcell__
+    str: 'LPTidalSeeAllFilterModel'
+    str: 'TIDAL See All 过滤模型，按标题、艺人、专辑和副标题过滤已加载条目。'
+    str: 'parent'
+    str: 'LPTidalSeeAllFilterModel.__init__'
+    str: 'text'
+    str: 'return'
+    str: 'LPTidalSeeAllFilterModel.setFilterText'
+    str: 'sourceRow'
+    str: 'sourceParent'
+    str: 'return'
+    str: 'LPTidalSeeAllFilterModel.filterAcceptsRow'
+
+  def LPTidalSeeAllFilterModel.__init__(self, parent)  line 516
+    names: super, __init__, _filter_text, setFilterCaseSensitivity, Qt, CaseSensitivity, CaseInsensitive
+      str: '\n        初始化过滤模型。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def LPTidalSeeAllFilterModel.setFilterText(self, text)  line 527
+    names: str, strip, lower, _filter_text, invalidateFilter
+      str: '\n        更新过滤文本。\n\n        :param text: 过滤关键字。\n        :return: None。\n        '
+
+  def LPTidalSeeAllFilterModel.filterAcceptsRow(self, sourceRow, sourceParent)  line 540
+    names: _filter_text, sourceModel, index, join, LPTidalListModel, TITLE_ROLE, SUBTITLE_ROLE, ARTIST_NAME_ROLE, ALBUM_NAME_ROLE, YEAR_ROLE
+      str: '\n        判断源模型行是否匹配过滤条件。\n\n        :param sourceRow: 源模型行号。\n        :param sourceParent: 源模型父索引。\n        :return: 匹配返回 True。\n        '
+      str: 'LPTidalSeeAllFilterModel.filterAcceptsRow.<locals>.<genexpr>'
+
+    def LPTidalSeeAllFilterModel.filterAcceptsRow.<genexpr>(.0)  line 554
+      names: str, data, lower
+
+def LPTidalHomeState()  line 567
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, sectionDataChanged, featuredCategoriesChanged, isInitialLoadingChanged, favoriteRevisionChanged, searchTextChanged, searchStateChanged, str, Optional, QObject, __init__, List, LPTidalListModel, _trackedImageModels, markHomeFetched, int, bool, isHomeCacheValid, resetHomeCache, pyqtProperty, sectionData, featuredCategories, isInitialLoading, favoriteRevision, searchText, hasSearchState, Dict, Any, setFeaturedCategories, setSectionModel, setSections, setInitialLoading, setFavoriteRevision, bumpFavoriteRevision, setSearchText, setSearchState, findItem, pyqtSlot, sectionInfo, sectionCount, sectionInfoAt, updateHomeSectionVisibleRange, clearHomeSectionVisibleRange, clearHomeVisibleRanges, _pruneSectionVisibleRanges, __classcell__
+    str: 'LPTidalHomeState'
+    str: 'TIDAL 首页状态，保存首页区块模型与初始加载标识。'
+    str: 'cacheKey'
+    str: 'parent'
+    str: 'LPTidalHomeState.__init__'
+    str: 'return'
+    str: 'LPTidalHomeState._trackedImageModels'
+    str: 'userId'
+    str: 'return'
+    str: 'LPTidalHomeState.markHomeFetched'
+    str: 'userId'
+    str: 'ttlSeconds'
+    str: 'return'
+    str: 'LPTidalHomeState.isHomeCacheValid'
+    str: 'LPTidalHomeState.resetHomeCache'
+    str: 'notify'
+    str: 'LPTidalHomeState.sectionData'
+    str: 'LPTidalHomeState.featuredCategories'
+    str: 'LPTidalHomeState.isInitialLoading'
+    str: 'LPTidalHomeState.favoriteRevision'
+    str: 'LPTidalHomeState.searchText'
+    str: 'LPTidalHomeState.hasSearchState'
+    str: 'items'
+    str: 'return'
+    str: 'LPTidalHomeState.setFeaturedCategories'
+    str: 'key'
+    str: 'model'
+    str: 'return'
+    str: 'LPTidalHomeState.setSectionModel'
+    str: 'sections'
+    str: 'return'
+    str: 'LPTidalHomeState.setSections'
+    str: 'value'
+    str: 'return'
+    str: 'LPTidalHomeState.setInitialLoading'
+    str: 'revision'
+    str: 'return'
+    str: 'LPTidalHomeState.setFavoriteRevision'
+    str: 'LPTidalHomeState.bumpFavoriteRevision'
+    str: 'text'
+    str: 'return'
+    str: 'LPTidalHomeState.setSearchText'
+    str: 'LPTidalHomeState.setSearchState'
+    str: 'sectionKey'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalHomeState.findItem'
+    str: 'QVariantMap'
+    str: 'result'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalHomeState.sectionInfo'
+    str: 'LPTidalHomeState.sectionCount'
+    str: 'sectionIndex'
+    str: 'return'
+    str: 'LPTidalHomeState.sectionInfoAt'
+    str: 'sectionKey'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: 'LPTidalHomeState.updateHomeSectionVisibleRange'
+    str: 'LPTidalHomeState.clearHomeSectionVisibleRange'
+    str: 'LPTidalHomeState.clearHomeVisibleRanges'
+    str: 'LPTidalHomeState._pruneSectionVisibleRanges'
+
+  def LPTidalHomeState.__init__(self, cacheKey, parent)  line 577
+    names: super, __init__, LPTidalSectionListModel, _sectionData, LPTidalListModel, _featured_categories, _isInitialLoading, _favoriteRevision, _searchText, _searchState, _section_visible_ranges, _home_fetched_at, _home_fetched_user_id
+      str: '\n        初始化首页状态。\n\n        :param cacheKey: 状态缓存键。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+
+  def LPTidalHomeState._trackedImageModels(self)  line 597
+    names: _featured_categories, _sectionData, sectionKeys, itemsModelForSection, isinstance, LPTidalListModel, append
+      str: '\n        返回首页持有的图片模型列表。\n\n        :return: 图片模型列表。\n        '
+
+  def LPTidalHomeState.markHomeFetched(self, userId)  line 610
+    names: time, _home_fetched_at, str, strip, _home_fetched_user_id
+      str: '\n        在首页数据成功拉取后记录时间戳与所属用户，作为 TTL 新鲜度判据。\n\n        :param userId: 当前拉取数据对应的用户 ID。\n        :return: None。\n        '
+
+  def LPTidalHomeState.isHomeCacheValid(self, userId, ttlSeconds)  line 620
+    names: _sectionData, rowCount, _home_fetched_at, _home_fetched_user_id, str, strip, time, int
+      str: '\n        判断当前首页缓存是否在 TTL 内且属于同一用户。\n\n        :param userId: 当前登录用户 ID。\n        :param ttlSeconds: 缓存有效期秒数。\n        :return: 有数据、同用户且未过期返回 True。\n        '
+
+  def LPTidalHomeState.resetHomeCache(self)  line 636
+    names: _home_fetched_at, _home_fetched_user_id, _sectionData, clear, _featured_categories, _section_visible_ranges, sectionDataChanged, emit, featuredCategoriesChanged
+      str: '\n        清空首页缓存数据并重置新鲜度时间戳，用于登出或切换账号。\n\n        :return: None。\n        '
+
+  def LPTidalHomeState.sectionData(self)  line 650
+    names: _sectionData
+      str: '\n        返回首页区块模型。\n\n        :return: 区块模型对象。\n        '
+
+  def LPTidalHomeState.featuredCategories(self)  line 659
+    names: _featured_categories
+      str: '\n        返回 Featured 分类模型。\n\n        :return: Featured 分类模型对象。\n        '
+
+  def LPTidalHomeState.isInitialLoading(self)  line 668
+    names: _isInitialLoading
+      str: '\n        返回首页是否处于首次加载中。\n\n        :return: 首次加载中返回 True。\n        '
+
+  def LPTidalHomeState.favoriteRevision(self)  line 677
+    names: _favoriteRevision
+      str: '\n        返回首页收藏状态修订号。\n\n        :return: 修订号。\n        '
+
+  def LPTidalHomeState.searchText(self)  line 686
+    names: _searchText
+      str: '\n        返回首页搜索关键字。\n\n        :return: 搜索文本。\n        '
+
+  def LPTidalHomeState.hasSearchState(self)  line 695
+    names: _searchState
+      str: '\n        返回是否有搜索状态。\n\n        :return: 有搜索状态返回 True。\n        '
+
+  def LPTidalHomeState.setFeaturedCategories(self, items)  line 704
+    names: _featured_categories, setItems, isinstance, list, featuredCategoriesChanged, emit
+      str: '\n        更新首页 Featured 分类模型。\n\n        :param items: Featured 分类条目列表。\n        :return: None。\n        '
+
+  def LPTidalHomeState.setSectionModel(self, key, model)  line 714
+    names: str, strip, _sectionData, upsertSection, sectionDataChanged, emit
+      str: '\n        更新某个首页区块对应的模型。\n\n        :param key: 区块标识。\n        :param model: 列表模型对象。\n        :return: None。\n        '
+      str: 'sectionKey'
+      str: 'title'
+      str: 'items'
+      str: 'isLoading'
+      str: 'isCategory'
+      str: 'seeAllEnabled'
+
+  def LPTidalHomeState.setSections(self, sections)  line 735
+    names: _sectionData, setSections, _pruneSectionVisibleRanges, sectionDataChanged, emit
+      str: '\n        批量设置首页区块。\n\n        :param sections: 区块字典列表。\n        :return: None。\n        '
+
+  def LPTidalHomeState.setInitialLoading(self, value)  line 746
+    names: bool, _isInitialLoading, isInitialLoadingChanged, emit
+      str: '\n        更新首次加载标识。\n\n        :param value: 是否首次加载。\n        :return: None。\n        '
+
+  def LPTidalHomeState.setFavoriteRevision(self, revision)  line 759
+    names: int, _favoriteRevision, favoriteRevisionChanged, emit
+      str: '\n        更新收藏修订号。\n\n        :param revision: 修订号。\n        :return: None。\n        '
+
+  def LPTidalHomeState.bumpFavoriteRevision(self)  line 772
+    names: setFavoriteRevision, _favoriteRevision
+      str: '\n        递增收藏修订号。\n\n        :return: None。\n        '
+
+  def LPTidalHomeState.setSearchText(self, text)  line 780
+    names: str, _searchText, searchTextChanged, emit
+      str: '\n        更新首页搜索词。\n\n        :param text: 搜索文本。\n        :return: None。\n        '
+
+  def LPTidalHomeState.setSearchState(self, value)  line 793
+    names: bool, _searchState, searchStateChanged, emit
+      str: '\n        更新是否存在搜索状态。\n\n        :param value: 是否存在搜索状态。\n        :return: None。\n        '
+
+  def LPTidalHomeState.findItem(self, sectionKey, itemId)  line 806
+    names: _sectionData, itemForSection
+      str: '\n        查找首页区块中的条目。\n\n        :param sectionKey: 区块标识。\n        :param itemId: 条目 ID。\n        :return: 条目字典或 None。\n        '
+
+  def LPTidalHomeState.sectionInfo(self, sectionKey)  line 816
+    names: _sectionData, sectionForKey
+      str: '\n        返回指定首页区块的描述字典。\n\n        :param sectionKey: 区块标识。\n        :return: 区块描述字典。\n        '
+
+  def LPTidalHomeState.sectionCount(self)  line 826
+    names: _sectionData, rowCount
+      str: '\n        返回首页区块数量。\n\n        :return: 首页区块数量。\n        '
+
+  def LPTidalHomeState.sectionInfoAt(self, sectionIndex)  line 835
+    names: int, TypeError, ValueError, _sectionData, sectionKeys, len, sectionForKey
+      str: '\n        按顺序返回首页区块描述字典。\n\n        :param sectionIndex: 区块索引。\n        :return: 区块描述字典。\n        '
+
+  def LPTidalHomeState.updateHomeSectionVisibleRange(self, sectionKey, firstIndex, lastIndex)  line 852
+    names: str, strip, _sectionData, itemsModelForSection, isinstance, LPTidalListModel, count, _section_visible_ranges, pop, max, int, min, get, logger, debug, _scheduleVisibleModelThumbnails
+      str: '\n        更新首页区块可见范围，并触发图片缩略图预取。\n\n        :param sectionKey: 区块标识。\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :return: None。\n        '
+      str: '[TIDAL] visible range section=%s first=%s last=%s'
+
+  def LPTidalHomeState.clearHomeSectionVisibleRange(self, sectionKey)  line 881
+    names: str, strip, _section_visible_ranges, pop
+      str: '\n        清空首页区块可见范围。\n\n        :param sectionKey: 区块标识。\n        :return: None。\n        '
+
+  def LPTidalHomeState.clearHomeVisibleRanges(self)  line 893
+    names: _section_visible_ranges
+      str: '\n        清空所有首页区块可见范围。\n\n        :return: None。\n        '
+
+  def LPTidalHomeState._pruneSectionVisibleRanges(self)  line 901
+    names: set, _sectionData, sectionKeys, _section_visible_ranges, items
+      str: '\n        移除当前页面已不存在的区块可见范围。\n\n        :return: None。\n        '
+      str: 'LPTidalHomeState._pruneSectionVisibleRanges.<locals>.<dictcomp>'
+
+    def LPTidalHomeState._pruneSectionVisibleRanges.<dictcomp>(.0)  line 908
+
+def LPTidalSearchState()  line 915
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, searchTextChanged, searchFilterChanged, resultModelsChanged, loadingStateChanged, errorMessageChanged, FILTER_TOP, FILTER_ARTISTS, FILTER_ALBUMS, FILTER_TRACKS, FILTER_PLAYLISTS, str, Optional, QObject, __init__, List, LPTidalListModel, _trackedImageModels, pyqtProperty, searchText, searchFilter, bool, isLoading, errorMessage, int, revision, topResults, artistResults, albumResults, trackResults, playlistResults, videoResults, Dict, resultTotals, resultHasMore, resultLoadingMore, setSearchText, setSearchFilter, setLoading, setErrorMessage, clearResults, Any, setResults, appendResults, setSearchResultLoadingMore, hasMoreForResult, isLoadingMoreForResult, offsetForResult, limitForResult, pyqtSlot, updateSearchVisibleRange, _modelForResultKey, _normalizeResultKey, _itemsFromSearchSection, _updateSearchSectionMeta, __classcell__
+    str: 'LPTidalSearchState'
+    str: 'TIDAL 搜索状态，保存搜索词、筛选项和分类型结果模型。'
+    str: 'top'
+    str: 'artists'
+    str: 'albums'
+    str: 'tracks'
+    str: 'playlists'
+    str: 'cacheKey'
+    str: 'parent'
+    str: 'LPTidalSearchState.__init__'
+    str: 'return'
+    str: 'LPTidalSearchState._trackedImageModels'
+    str: 'notify'
+    str: 'LPTidalSearchState.searchText'
+    str: 'LPTidalSearchState.searchFilter'
+    str: 'LPTidalSearchState.isLoading'
+    str: 'LPTidalSearchState.errorMessage'
+    str: 'LPTidalSearchState.revision'
+    str: 'LPTidalSearchState.topResults'
+    str: 'LPTidalSearchState.artistResults'
+    str: 'LPTidalSearchState.albumResults'
+    str: 'LPTidalSearchState.trackResults'
+    str: 'LPTidalSearchState.playlistResults'
+    str: 'LPTidalSearchState.videoResults'
+    str: 'QVariantMap'
+    str: 'LPTidalSearchState.resultTotals'
+    str: 'LPTidalSearchState.resultHasMore'
+    str: 'LPTidalSearchState.resultLoadingMore'
+    str: 'text'
+    str: 'return'
+    str: 'LPTidalSearchState.setSearchText'
+    str: 'filterKey'
+    str: 'return'
+    str: 'LPTidalSearchState.setSearchFilter'
+    str: 'loading'
+    str: 'return'
+    str: 'LPTidalSearchState.setLoading'
+    str: 'message'
+    str: 'return'
+    str: 'LPTidalSearchState.setErrorMessage'
+    str: 'LPTidalSearchState.clearResults'
+    str: 'resultMap'
+    str: 'return'
+    str: 'LPTidalSearchState.setResults'
+    str: 'resultKey'
+    str: 'sectionData'
+    str: 'return'
+    str: 'LPTidalSearchState.appendResults'
+    str: 'resultKey'
+    str: 'loading'
+    str: 'return'
+    str: 'LPTidalSearchState.setSearchResultLoadingMore'
+    str: 'resultKey'
+    str: 'return'
+    str: 'LPTidalSearchState.hasMoreForResult'
+    str: 'LPTidalSearchState.isLoadingMoreForResult'
+    str: 'LPTidalSearchState.offsetForResult'
+    str: 'LPTidalSearchState.limitForResult'
+    str: 'resultKey'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: 'LPTidalSearchState.updateSearchVisibleRange'
+    str: 'LPTidalSearchState._modelForResultKey'
+    str: 'LPTidalSearchState._normalizeResultKey'
+    str: 'sectionData'
+    str: 'return'
+    str: 'LPTidalSearchState._itemsFromSearchSection'
+    str: 'resultKey'
+    str: 'sectionData'
+    str: 'loadedCount'
+    str: 'return'
+    str: 'LPTidalSearchState._updateSearchSectionMeta'
+
+  def LPTidalSearchState.__init__(self, cacheKey, parent)  line 930
+    names: super, __init__, _searchText, FILTER_TOP, _searchFilter, _isLoading, _errorMessage, _revision, LPTidalListModel, _topResults, _artistResults, _albumResults, _trackResults, _playlistResults, _videoResults, _resultTotals, _resultOffsets, _resultLimits, _resultHasMore, _resultLoadingMore
+      str: '\n        初始化搜索状态。\n\n        :param cacheKey: 状态缓存键。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+
+  def LPTidalSearchState._trackedImageModels(self)  line 956
+    names: _topResults, _artistResults, _albumResults, _trackResults, _playlistResults, _videoResults
+      str: '\n        返回搜索页持有的图片模型列表。\n\n        :return: 图片模型列表。\n        '
+
+  def LPTidalSearchState.searchText(self)  line 971
+    names: _searchText
+      str: '返回搜索关键字。'
+
+  def LPTidalSearchState.searchFilter(self)  line 976
+    names: _searchFilter
+      str: '返回当前筛选项。'
+
+  def LPTidalSearchState.isLoading(self)  line 981
+    names: _isLoading
+      str: '返回是否处于搜索加载中。'
+
+  def LPTidalSearchState.errorMessage(self)  line 986
+    names: _errorMessage
+      str: '返回错误信息。'
+
+  def LPTidalSearchState.revision(self)  line 991
+    names: _revision
+      str: '返回结果修订号。'
+
+  def LPTidalSearchState.topResults(self)  line 996
+    names: _topResults
+      str: '返回 Top 结果模型。'
+
+  def LPTidalSearchState.artistResults(self)  line 1001
+    names: _artistResults
+      str: '返回艺人结果模型。'
+
+  def LPTidalSearchState.albumResults(self)  line 1006
+    names: _albumResults
+      str: '返回专辑结果模型。'
+
+  def LPTidalSearchState.trackResults(self)  line 1011
+    names: _trackResults
+      str: '返回曲目结果模型。'
+
+  def LPTidalSearchState.playlistResults(self)  line 1016
+    names: _playlistResults
+      str: '返回歌单结果模型。'
+
+  def LPTidalSearchState.videoResults(self)  line 1021
+    names: _videoResults
+      str: '返回视频结果模型。'
+
+  def LPTidalSearchState.resultTotals(self)  line 1026
+    names: dict, _resultTotals
+      str: '返回各搜索分类的服务端总数。'
+
+  def LPTidalSearchState.resultHasMore(self)  line 1031
+    names: dict, _resultHasMore
+      str: '返回各搜索分类是否还有下一页。'
+
+  def LPTidalSearchState.resultLoadingMore(self)  line 1036
+    names: dict, _resultLoadingMore
+      str: '返回各搜索分类是否正在加载下一页。'
+
+  def LPTidalSearchState.setSearchText(self, text)  line 1041
+    names: str, _searchText, searchTextChanged, emit
+      str: '更新搜索关键字。'
+
+  def LPTidalSearchState.setSearchFilter(self, filterKey)  line 1049
+    names: str, FILTER_TOP, strip, lower, FILTER_ARTISTS, FILTER_ALBUMS, FILTER_TRACKS, FILTER_PLAYLISTS, _searchFilter, searchFilterChanged, emit
+      str: '更新当前筛选项。'
+
+  def LPTidalSearchState.setLoading(self, loading)  line 1066
+    names: bool, _isLoading, loadingStateChanged, emit
+      str: '更新加载状态。'
+
+  def LPTidalSearchState.setErrorMessage(self, message)  line 1074
+    names: str, _errorMessage, errorMessageChanged, emit
+      str: '更新错误信息。'
+
+  def LPTidalSearchState.clearResults(self)  line 1082
+    names: _topResults, clear, _artistResults, _albumResults, _trackResults, _playlistResults, _videoResults, _resultTotals, _resultOffsets, _resultLimits, _resultHasMore, _resultLoadingMore, _revision, resultModelsChanged, emit
+      str: '清空所有结果。'
+
+  def LPTidalSearchState.setResults(self, resultMap)  line 1098
+    names: isinstance, dict, _resultLoadingMore, _itemsFromSearchSection, get, _updateSearchSectionMeta, FILTER_TOP, len, FILTER_ARTISTS, FILTER_ALBUMS, FILTER_TRACKS, FILTER_PLAYLISTS, _topResults, setItems, _artistResults, _albumResults, _trackResults, _playlistResults, _videoResults, _revision, resultModelsChanged, emit
+      str: '批量设置搜索结果。'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'top'
+      str: 'LPTidalSearchState.setResults.<locals>.<listcomp>'
+
+    def LPTidalSearchState.setResults.<listcomp>(.0)  line 1108
+      names: str, get, strip, lower
+        str: 'itemType'
+        str: 'video'
+
+  def LPTidalSearchState.appendResults(self, resultKey, sectionData)  line 1124
+    names: _normalizeResultKey, _modelForResultKey, _itemsFromSearchSection, appendItems, count, _updateSearchSectionMeta, _resultLoadingMore, _revision, resultModelsChanged, emit
+      str: '\n        追加指定搜索分类的分页结果。\n\n        :param resultKey: 搜索分类标识。\n        :param sectionData: 分类分页结果。\n        :return: None。\n        '
+
+  def LPTidalSearchState.setSearchResultLoadingMore(self, resultKey, loading)  line 1145
+    names: _normalizeResultKey, bool, _resultLoadingMore, get, resultModelsChanged, emit
+      str: '\n        更新指定搜索分类的分页加载状态。\n\n        :param resultKey: 搜索分类标识。\n        :param loading: 是否加载中。\n        :return: None。\n        '
+
+  def LPTidalSearchState.hasMoreForResult(self, resultKey)  line 1160
+    names: _normalizeResultKey, bool, _resultHasMore, get
+      str: '\n        返回指定搜索分类是否还有下一页。\n\n        :param resultKey: 搜索分类标识。\n        :return: 有下一页返回 True。\n        '
+
+  def LPTidalSearchState.isLoadingMoreForResult(self, resultKey)  line 1170
+    names: _normalizeResultKey, bool, _resultLoadingMore, get
+      str: '\n        返回指定搜索分类是否正在加载下一页。\n\n        :param resultKey: 搜索分类标识。\n        :return: 加载中返回 True。\n        '
+
+  def LPTidalSearchState.offsetForResult(self, resultKey)  line 1180
+    names: _normalizeResultKey, int, _resultOffsets, get
+      str: '\n        返回指定搜索分类下一次分页偏移。\n\n        :param resultKey: 搜索分类标识。\n        :return: 分页偏移。\n        '
+
+  def LPTidalSearchState.limitForResult(self, resultKey)  line 1190
+    names: _normalizeResultKey, int, _resultLimits, get
+      str: '\n        返回指定搜索分类分页大小。\n\n        :param resultKey: 搜索分类标识。\n        :return: 分页大小。\n        '
+
+  def LPTidalSearchState.updateSearchVisibleRange(self, resultKey, firstIndex, lastIndex)  line 1200
+    names: _modelForResultKey, _scheduleVisibleModelThumbnails
+      str: '\n        更新搜索结果可见范围，并触发缩略图预取。\n\n        :param resultKey: 搜索结果类型。\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :return: None。\n        '
+
+  def LPTidalSearchState._modelForResultKey(self, resultKey)  line 1214
+    names: str, strip, lower, FILTER_ARTISTS, _artistResults, FILTER_ALBUMS, _albumResults, FILTER_TRACKS, _trackResults, FILTER_PLAYLISTS, _playlistResults, _videoResults, _topResults
+      str: '\n        返回指定搜索结果类型的模型。\n\n        :param resultKey: 搜索结果类型。\n        :return: 列表模型或 None。\n        '
+      str: 'videos'
+
+  def LPTidalSearchState._normalizeResultKey(self, resultKey)  line 1234
+    names: str, strip, lower, FILTER_ARTISTS, FILTER_ALBUMS, FILTER_TRACKS, FILTER_PLAYLISTS, FILTER_TOP
+      str: '\n        归一化搜索分类标识。\n\n        :param resultKey: 搜索分类标识。\n        :return: 归一化后的分类标识。\n        '
+      str: 'videos'
+
+  def LPTidalSearchState._itemsFromSearchSection(self, sectionData)  line 1246
+    names: isinstance, dict, get
+      str: '\n        从搜索分类结构中提取条目列表。\n\n        :param sectionData: 分类结构或条目列表。\n        :return: 条目列表。\n        '
+      str: 'items'
+      str: 'LPTidalSearchState._itemsFromSearchSection.<locals>.<listcomp>'
+
+    def LPTidalSearchState._itemsFromSearchSection.<listcomp>(.0)  line 1257
+      names: isinstance, dict
+
+  def LPTidalSearchState._updateSearchSectionMeta(self, resultKey, sectionData, loadedCount)  line 1259
+    names: _normalizeResultKey, max, int, isinstance, dict, get, _resultLimits, bool, list, len, _resultTotals, _resultOffsets, _resultHasMore
+      str: '\n        更新搜索分类分页元数据。\n\n        :param resultKey: 搜索分类标识。\n        :param sectionData: 分类分页结构。\n        :param loadedCount: 当前已加载数量。\n        :return: None。\n        '
+      str: 'limit'
+      str: 'offset'
+      str: 'totalNumberOfItems'
+      str: 'hasMore'
+
+def _TidalDetailState()  line 1287
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, detailInfoChanged, resultModelsChanged, loadingStateChanged, pagingStateChanged, filterTextChanged, filteredTracksChanged, errorMessageChanged, revisionChanged, str, Optional, QObject, __init__, imageOwnerKey, List, LPTidalListModel, _trackedImageModels, pyqtProperty, Dict, Any, detailInfo, trackList, filteredTracks, int, filteredTrackCount, albumList, singleList, artistList, playlistList, videoList, creditList, reviewInfo, bioInfo, list, bioSegments, bioSource, bool, isLoading, isLoadingMore, hasMore, offset, limit, filterText, errorMessage, revision, setLoading, setLoadingMore, setFilterText, setErrorMessage, clearContent, setDetailData, appendTracks, pyqtSlot, updateTrackVisibleRange, _ensureDetailThumbnail, _scheduleInitialDetailThumbnails, __classcell__
+    str: '_TidalDetailState'
+    str: '详情页状态基类，保存头部信息、分类列表和加载状态。'
+    str: 'cacheKey'
+    str: 'parent'
+    str: '_TidalDetailState.__init__'
+    str: 'return'
+    str: '_TidalDetailState.imageOwnerKey'
+    str: '_TidalDetailState._trackedImageModels'
+    str: 'QVariantMap'
+    str: 'notify'
+    str: '_TidalDetailState.detailInfo'
+    str: '_TidalDetailState.trackList'
+    str: '_TidalDetailState.filteredTracks'
+    str: '_TidalDetailState.filteredTrackCount'
+    str: '_TidalDetailState.albumList'
+    str: '_TidalDetailState.singleList'
+    str: '_TidalDetailState.artistList'
+    str: '_TidalDetailState.playlistList'
+    str: '_TidalDetailState.videoList'
+    str: '_TidalDetailState.creditList'
+    str: '_TidalDetailState.reviewInfo'
+    str: '_TidalDetailState.bioInfo'
+    str: 'QVariantList'
+    str: '_TidalDetailState.bioSegments'
+    str: '_TidalDetailState.bioSource'
+    str: '_TidalDetailState.isLoading'
+    str: '_TidalDetailState.isLoadingMore'
+    str: '_TidalDetailState.hasMore'
+    str: '_TidalDetailState.offset'
+    str: '_TidalDetailState.limit'
+    str: '_TidalDetailState.filterText'
+    str: '_TidalDetailState.errorMessage'
+    str: '_TidalDetailState.revision'
+    str: 'loading'
+    str: 'return'
+    str: '_TidalDetailState.setLoading'
+    str: '_TidalDetailState.setLoadingMore'
+    str: 'text'
+    str: 'return'
+    str: '_TidalDetailState.setFilterText'
+    str: 'message'
+    str: 'return'
+    str: '_TidalDetailState.setErrorMessage'
+    str: '_TidalDetailState.clearContent'
+    str: 'payload'
+    str: 'return'
+    str: '_TidalDetailState.setDetailData'
+    str: '_TidalDetailState.appendTracks'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: '_TidalDetailState.updateTrackVisibleRange'
+    str: 'detailInfo'
+    str: 'return'
+    str: '_TidalDetailState._ensureDetailThumbnail'
+    str: '_TidalDetailState._scheduleInitialDetailThumbnails'
+
+  def _TidalDetailState.__init__(self, cacheKey, parent)  line 1299
+    names: super, __init__, _detailInfo, LPTidalListModel, _trackList, LPTidalSeeAllFilterModel, _filteredTracks, setSourceModel, _albumList, _singleList, _artistList, _playlistList, _videoList, _creditList, _reviewInfo, _bioInfo, _bioSegments, _bioSource, _isLoading, _isLoadingMore, _hasMore, _offset, _limit, _filterText, _errorMessage, _revision
+      str: '\n        初始化详情页状态基类。\n\n        :param cacheKey: 状态缓存键。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+      str: 'itemId'
+      str: 'itemType'
+      str: 'title'
+      str: 'subtitle'
+      str: 'imageUrl'
+      str: 'imagePath'
+      str: 'description'
+      str: 'quality'
+      str: 'review'
+      str: 'type'
+      str: 'title'
+      str: 'text'
+      str: 'bio'
+
+  def _TidalDetailState.imageOwnerKey(self)  line 1340
+    names: cacheKey
+      str: '\n        返回详情页图片请求 owner 后缀。\n\n        :return: 图片 owner 后缀。\n        '
+      str: 'detail:'
+
+  def _TidalDetailState._trackedImageModels(self)  line 1348
+    names: _trackList, _albumList, _singleList, _artistList, _playlistList, _videoList
+      str: '\n        返回详情页持有的图片模型列表。\n\n        :return: 图片模型列表。\n        '
+
+  def _TidalDetailState.detailInfo(self)  line 1363
+    names: dict, _detailInfo
+      str: '\n        返回详情头部信息。\n\n        :return: 详情信息字典。\n        '
+
+  def _TidalDetailState.trackList(self)  line 1372
+    names: _trackList
+      str: '\n        返回曲目列表模型。\n\n        :return: 列表模型对象。\n        '
+
+  def _TidalDetailState.filteredTracks(self)  line 1381
+    names: _filteredTracks
+      str: '\n        返回本地过滤后的曲目模型。\n\n        :return: 过滤模型对象。\n        '
+
+  def _TidalDetailState.filteredTrackCount(self)  line 1390
+    names: _filteredTracks, rowCount
+      str: '\n        返回过滤后的曲目数量。\n\n        :return: 曲目数量。\n        '
+
+  def _TidalDetailState.albumList(self)  line 1399
+    names: _albumList
+      str: '\n        返回专辑列表模型。\n\n        :return: 列表模型对象。\n        '
+
+  def _TidalDetailState.singleList(self)  line 1408
+    names: _singleList
+      str: '\n        返回 EP 与 Single 列表模型。\n\n        :return: 列表模型对象。\n        '
+
+  def _TidalDetailState.artistList(self)  line 1417
+    names: _artistList
+      str: '\n        返回艺人列表模型。\n\n        :return: 列表模型对象。\n        '
+
+  def _TidalDetailState.playlistList(self)  line 1426
+    names: _playlistList
+      str: '\n        返回歌单列表模型。\n\n        :return: 列表模型对象。\n        '
+
+  def _TidalDetailState.videoList(self)  line 1435
+    names: _videoList
+      str: '\n        返回视频列表模型。\n\n        :return: 列表模型对象。\n        '
+
+  def _TidalDetailState.creditList(self)  line 1444
+    names: _creditList
+      str: '\n        返回制作名单列表模型。\n\n        :return: 列表模型对象。\n        '
+
+  def _TidalDetailState.reviewInfo(self)  line 1453
+    names: dict, _reviewInfo
+      str: '\n        返回评论信息。\n\n        :return: 评论字典。\n        '
+
+  def _TidalDetailState.bioInfo(self)  line 1462
+    names: dict, _bioInfo
+      str: '\n        返回简介信息。\n\n        :return: 简介字典。\n        '
+
+  def _TidalDetailState.bioSegments(self)  line 1471
+    names: list, _bioSegments
+      str: '\n        返回简介结构化片段列表。\n\n        :return: 结构化片段列表。\n        '
+
+  def _TidalDetailState.bioSource(self)  line 1480
+    names: str, _bioSource
+      str: '\n        返回简介来源信息。\n\n        :return: 来源字符串。\n        '
+
+  def _TidalDetailState.isLoading(self)  line 1489
+    names: _isLoading
+      str: '\n        返回当前是否加载中。\n\n        :return: 加载中返回 True。\n        '
+
+  def _TidalDetailState.isLoadingMore(self)  line 1498
+    names: _isLoadingMore
+      str: '\n        返回是否正在加载更多曲目。\n\n        :return: 加载中返回 True。\n        '
+
+  def _TidalDetailState.hasMore(self)  line 1507
+    names: _hasMore
+      str: '\n        返回是否还有更多曲目页。\n\n        :return: 有更多返回 True。\n        '
+
+  def _TidalDetailState.offset(self)  line 1516
+    names: _offset
+      str: '\n        返回当前已加载曲目偏移。\n\n        :return: 已加载数量。\n        '
+
+  def _TidalDetailState.limit(self)  line 1525
+    names: _limit
+      str: '\n        返回曲目分页大小。\n\n        :return: 分页大小。\n        '
+
+  def _TidalDetailState.filterText(self)  line 1534
+    names: _filterText
+      str: '\n        返回当前本地过滤文本。\n\n        :return: 过滤文本。\n        '
+
+  def _TidalDetailState.errorMessage(self)  line 1543
+    names: _errorMessage
+      str: '\n        返回错误信息。\n\n        :return: 错误文本。\n        '
+
+  def _TidalDetailState.revision(self)  line 1552
+    names: _revision
+      str: '\n        返回详情页修订号。\n\n        :return: 修订号。\n        '
+
+  def _TidalDetailState.setLoading(self, loading)  line 1561
+    names: bool, _isLoading, loadingStateChanged, emit
+      str: '\n        更新加载状态。\n\n        :param loading: 是否加载中。\n        :return: None。\n        '
+
+  def _TidalDetailState.setLoadingMore(self, loading)  line 1574
+    names: bool, _isLoadingMore, pagingStateChanged, emit
+      str: '\n        更新分页加载状态。\n\n        :param loading: 是否正在加载更多。\n        :return: None。\n        '
+
+  def _TidalDetailState.setFilterText(self, text)  line 1587
+    names: str, _filterText, _filteredTracks, setFilterText, filterTextChanged, emit, filteredTracksChanged
+      str: '\n        更新本地曲目过滤文本。\n\n        :param text: 过滤文本。\n        :return: None。\n        '
+
+  def _TidalDetailState.setErrorMessage(self, message)  line 1602
+    names: str, _errorMessage, errorMessageChanged, emit
+      str: '\n        更新错误信息。\n\n        :param message: 错误文本。\n        :return: None。\n        '
+
+  def _TidalDetailState.clearContent(self)  line 1615
+    names: _detailInfo, _reviewInfo, _bioInfo, _bioSegments, _bioSource, _trackList, clear, _offset, _hasMore, _albumList, _singleList, _artistList, _playlistList, _videoList, _creditList, _revision, detailInfoChanged, emit, resultModelsChanged, filteredTracksChanged, pagingStateChanged, revisionChanged
+      str: '\n        清空详情内容。\n\n        :return: None。\n        '
+
+  def _TidalDetailState.setDetailData(self, payload)  line 1642
+    names: isinstance, dict, get, _ensureDetailThumbnail, str, _detailInfo, strip, detailInfoChanged, emit, _reviewInfo, list, _bioInfo, _bioSegments, _bioSource, _trackList, setItems, len, _offset, int, _limit, bool, _hasMore, _albumList, _singleList, _artistList, _playlistList, _videoList, _creditList, _scheduleInitialDetailThumbnails, _revision, resultModelsChanged, filteredTracksChanged, pagingStateChanged, revisionChanged
+      str: '\n        批量设置详情页数据。\n\n        :param payload: 统一详情数据字典。\n        :return: None。\n        '
+      str: 'detailInfo'
+      str: 'itemId'
+      str: 'imageUrl'
+      str: 'imagePath'
+      str: 'reviewInfo'
+      str: 'bioInfo'
+      str: 'segments'
+      str: 'source'
+      str: 'tracks'
+      str: '_TidalDetailState.setDetailData.<locals>.<listcomp>'
+      str: 'limit'
+      str: 'hasMore'
+      str: 'albums'
+      str: 'singles'
+      str: 'artists'
+      str: 'playlists'
+      str: 'videos'
+      str: 'credits'
+
+    def _TidalDetailState.setDetailData.<listcomp>(.0)  line 1685
+      names: isinstance, dict
+
+  def _TidalDetailState.appendTracks(self, payload)  line 1703
+    names: isinstance, dict, get, _trackList, appendItems, _offset, len, int, _limit, bool, _hasMore, _scheduleVisibleModelThumbnails, max, _revision, resultModelsChanged, emit, filteredTracksChanged, pagingStateChanged, revisionChanged
+      str: '\n        追加详情页曲目分页数据。\n\n        :param payload: 分页结果字典。\n        :return: None。\n        '
+      str: 'tracks'
+      str: '_TidalDetailState.appendTracks.<locals>.<listcomp>'
+      str: 'limit'
+      str: 'hasMore'
+
+    def _TidalDetailState.appendTracks.<listcomp>(.0)  line 1712
+      names: isinstance, dict
+
+  def _TidalDetailState.updateTrackVisibleRange(self, firstIndex, lastIndex)  line 1726
+    names: str, _filterText, strip, _scheduleVisibleModelThumbnails, _trackList, max, count
+      str: '\n        更新曲目可见范围，并触发缩略图预取。\n\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :return: None。\n        '
+
+  def _TidalDetailState._ensureDetailThumbnail(self, detailInfo)  line 1740
+    names: str, get, strip, _image_service, ensureThumbnail, imageOwnerKey
+      str: '\n        通过图片服务为详情头图准备本地缓存。\n\n        :param detailInfo: 详情信息字典。\n        :return: None。\n        '
+      str: 'imageUrl'
+      str: 'visible'
+      str: 'priority'
+      str: 'ownerKey'
+      str: 'imagePath'
+
+  def _TidalDetailState._scheduleInitialDetailThumbnails(self)  line 1758
+    names: _trackedImageModels, _scheduleVisibleModelThumbnails, min, count
+      str: '\n        预取详情页首屏相关图片。\n\n        :return: None。\n        '
+
+def LPTidalAlbumDetailState()  line 1768
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, albumRailSectionsChanged, str, Optional, QObject, __init__, List, LPTidalListModel, _trackedImageModels, pyqtProperty, albumRailSections, pyqtSlot, Dict, Any, sectionInfo, clearContent, setDetailData, _materializeAlbumRailSections, __classcell__
+    str: 'LPTidalAlbumDetailState'
+    str: 'TIDAL 专辑详情状态，负责维护动态专辑横向区块。'
+    str: 'cacheKey'
+    str: 'parent'
+    str: 'LPTidalAlbumDetailState.__init__'
+    str: 'return'
+    str: 'LPTidalAlbumDetailState._trackedImageModels'
+    str: 'notify'
+    str: 'LPTidalAlbumDetailState.albumRailSections'
+    str: 'QVariantMap'
+    str: 'result'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalAlbumDetailState.sectionInfo'
+    str: 'LPTidalAlbumDetailState.clearContent'
+    str: 'payload'
+    str: 'return'
+    str: 'LPTidalAlbumDetailState.setDetailData'
+    str: 'sections'
+    str: 'return'
+    str: 'LPTidalAlbumDetailState._materializeAlbumRailSections'
+
+  def LPTidalAlbumDetailState.__init__(self, cacheKey, parent)  line 1773
+    names: super, __init__, LPTidalSectionListModel, _albumRailSections
+      str: '\n        初始化专辑详情状态。\n\n        :param cacheKey: 状态缓存键。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+
+  def LPTidalAlbumDetailState._trackedImageModels(self)  line 1784
+    names: list, super, _trackedImageModels, _albumRailSections, sectionKeys, itemsModelForSection, isinstance, LPTidalListModel, append
+      str: '\n        返回专辑详情页持有的图片模型列表。\n\n        :return: 图片模型列表。\n        '
+
+  def LPTidalAlbumDetailState.albumRailSections(self)  line 1797
+    names: _albumRailSections
+      str: '\n        返回专辑详情页横向区块模型。\n\n        :return: 区块模型对象。\n        '
+
+  def LPTidalAlbumDetailState.sectionInfo(self, sectionKey)  line 1806
+    names: _albumRailSections, sectionForKey
+      str: '\n        返回指定横向区块的描述字典。\n\n        :param sectionKey: 区块标识。\n        :return: 区块描述字典。\n        '
+
+  def LPTidalAlbumDetailState.clearContent(self)  line 1816
+    names: super, clearContent, _albumRailSections, clear, albumRailSectionsChanged, emit
+      str: '\n        清空专辑详情内容与动态横向区块。\n\n        :return: None。\n        '
+
+  def LPTidalAlbumDetailState.setDetailData(self, payload)  line 1826
+    names: isinstance, dict, pop, super, setDetailData, _albumRailSections, setSections, _materializeAlbumRailSections, _scheduleInitialDetailThumbnails, albumRailSectionsChanged, emit, resultModelsChanged
+      str: '\n        批量设置专辑详情数据，并同步动态横向区块。\n\n        :param payload: 统一详情数据字典。\n        :return: None。\n        '
+      str: 'albumRailSections'
+
+  def LPTidalAlbumDetailState._materializeAlbumRailSections(self, sections)  line 1841
+    names: isinstance, list, dict, str, get, strip, _albumRailSections, itemsModelForSection, LPTidalListModel, setItems, append
+      str: '\n        将区块 payload 转成可供 QML 直接消费的模型列表。\n\n        :param sections: 原始区块 payload。\n        :return: 可供区块模型使用的区块列表。\n        '
+      str: 'sectionKey'
+      str: 'items'
+      str: 'LPTidalAlbumDetailState._materializeAlbumRailSections.<locals>.<listcomp>'
+
+    def LPTidalAlbumDetailState._materializeAlbumRailSections.<listcomp>(.0)  line 1856
+      names: isinstance, dict
+
+def LPTidalArtistDetailState()  line 1869
+  names: __name__, __module__, __qualname__, __doc__, str, Optional, QObject, __init__, Dict, Any, setDetailData, clearContent, pyqtSlot, int, updateDetailSectionVisibleRange, clearDetailSectionVisibleRange, LPTidalListModel, _modelForDetailSection, tuple, List, _splitArtistAlbums, bool, _isSingleOrEpAlbum, __classcell__
+    str: 'LPTidalArtistDetailState'
+    str: 'TIDAL 艺人详情状态，负责拆分专辑与 EP/Single 列表。'
+    str: 'cacheKey'
+    str: 'parent'
+    str: 'LPTidalArtistDetailState.__init__'
+    str: 'payload'
+    str: 'return'
+    str: 'LPTidalArtistDetailState.setDetailData'
+    str: 'return'
+    str: 'LPTidalArtistDetailState.clearContent'
+    str: 'sectionKey'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: 'LPTidalArtistDetailState.updateDetailSectionVisibleRange'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalArtistDetailState.clearDetailSectionVisibleRange'
+    str: 'LPTidalArtistDetailState._modelForDetailSection'
+    str: 'items'
+    str: 'return'
+    str: 'LPTidalArtistDetailState._splitArtistAlbums'
+    str: 'item'
+    str: 'return'
+    str: 'LPTidalArtistDetailState._isSingleOrEpAlbum'
+
+  def LPTidalArtistDetailState.__init__(self, cacheKey, parent)  line 1872
+    names: super, __init__, _detail_section_visible_ranges
+      str: '\n        初始化艺人详情状态。\n\n        :param cacheKey: 状态缓存键。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+
+  def LPTidalArtistDetailState.setDetailData(self, payload)  line 1883
+    names: isinstance, dict, get, list, _splitArtistAlbums, super, setDetailData, _scheduleVisibleModelThumbnails, _singleList, min, count
+      str: '\n        批量设置艺人详情数据，并按发行类型拆分专辑与 EP/Single。\n\n        :param payload: 统一详情数据字典。\n        :return: None。\n        '
+      str: 'albums'
+      str: 'LPTidalArtistDetailState.setDetailData.<locals>.<listcomp>'
+      str: 'singles'
+
+    def LPTidalArtistDetailState.setDetailData.<listcomp>(.0)  line 1891
+      names: isinstance, dict
+
+    def LPTidalArtistDetailState.setDetailData.<listcomp>(.0)  line 1892
+      names: isinstance, dict
+
+  def LPTidalArtistDetailState.clearContent(self)  line 1900
+    names: _detail_section_visible_ranges, super, clearContent
+      str: '\n        清空艺人详情内容和分区可见范围。\n\n        :return: None。\n        '
+
+  def LPTidalArtistDetailState.updateDetailSectionVisibleRange(self, sectionKey, firstIndex, lastIndex)  line 1909
+    names: str, strip, _modelForDetailSection, isinstance, LPTidalListModel, count, _detail_section_visible_ranges, pop, int, TypeError, ValueError, max, min, get, _scheduleVisibleModelThumbnails
+      str: '\n        更新艺人详情分区可见范围，并触发缩略图预取。\n\n        :param sectionKey: 分区标识。\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :return: None。\n        '
+
+  def LPTidalArtistDetailState.clearDetailSectionVisibleRange(self, sectionKey)  line 1941
+    names: str, strip, _detail_section_visible_ranges, pop
+      str: '\n        清理艺人详情分区可见范围。\n\n        :param sectionKey: 分区标识。\n        :return: None。\n        '
+
+  def LPTidalArtistDetailState._modelForDetailSection(self, sectionKey)  line 1953
+    names: str, strip, _trackList, _albumList, _singleList, _artistList
+      str: '\n        返回艺人详情分区对应的列表模型。\n\n        :param sectionKey: 分区标识。\n        :return: 列表模型或 None。\n        '
+      str: 'artistTopTracks'
+      str: 'artistAlbums'
+      str: 'artistSingles'
+      str: 'artistRelated'
+
+  def LPTidalArtistDetailState._splitArtistAlbums(self, items)  line 1971
+    names: isinstance, list, dict, _isSingleOrEpAlbum, append
+      str: '\n        按 TIDAL 返回字段拆分专辑与 EP/Single。\n\n        :param items: 已归一化专辑条目列表。\n        :return: 专辑列表与 EP/Single 列表。\n        '
+
+  def LPTidalArtistDetailState._isSingleOrEpAlbum(self, item)  line 1987
+    names: get, isinstance, dict, str, strip, lower, int, TypeError, ValueError
+      str: '\n        判断专辑条目是否属于 EP 或 Single。\n\n        :param item: 专辑条目。\n        :return: 是 EP 或 Single 返回 True。\n        '
+      str: 'extra'
+      str: 'type'
+      str: 'albumType'
+      str: 'releaseType'
+      str: 'productType'
+      str: 'ep'
+      str: 'singles'
+      str: 'single'
+      str: 'lp'
+      str: 'album'
+      str: 'trackCount'
+
+def LPTidalPlaylistDetailState()  line 2015
+  names: __name__, __module__, __qualname__, __doc__
+    str: 'LPTidalPlaylistDetailState'
+    str: 'TIDAL 歌单详情状态。'
+
+def LPTidalVideoDetailState()  line 2019
+  names: __name__, __module__, __qualname__, __doc__
+    str: 'LPTidalVideoDetailState'
+    str: 'TIDAL 视频详情状态。'
+
+def LPTidalGenreDetailState()  line 2023
+  names: __name__, __module__, __qualname__, __doc__
+    str: 'LPTidalGenreDetailState'
+    str: 'TIDAL 流派或心情详情状态，保存分类歌单、曲目和专辑列表。'
+
+def LPTidalArtistRadioDetailState()  line 2027
+  names: __name__, __module__, __qualname__, __doc__
+    str: 'LPTidalArtistRadioDetailState'
+    str: 'TIDAL 艺人电台详情状态，保存电台曲目列表。'
+
+def LPTidalMixDetailState()  line 2031
+  names: __name__, __module__, __qualname__, __doc__
+    str: 'LPTidalMixDetailState'
+    str: 'TIDAL Mix 详情状态，保存 Mix 曲目列表。'
+
+def LPTidalFavoriteState()  line 2035
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, favoriteIdsChanged, pendingStateChanged, revisionChanged, Optional, QObject, __init__, pyqtProperty, Dict, str, List, favoriteIds, int, revision, bool, setFavoriteIds, setItemFavorite, isFavorite, beginOperation, isLatestOperation, finishOperation, favoriteTypeForItem, clear, float, pendingAge, sweepStaleOperations, _emitFavoriteIdsChanged, _operationKey, _applyPendingDesiredToFavoriteIds, object, _normalizeFavoriteIds, _emptyFavoriteIds, __classcell__
+    str: 'LPTidalFavoriteState'
+    str: 'TIDAL 收藏权威状态，统一保存收藏 ID、请求目标和操作版本。'
+    str: 'parent'
+    str: 'LPTidalFavoriteState.__init__'
+    str: 'QVariantMap'
+    str: 'notify'
+    str: 'return'
+    str: 'LPTidalFavoriteState.favoriteIds'
+    str: 'LPTidalFavoriteState.revision'
+    str: 'favoriteIds'
+    str: 'return'
+    str: 'LPTidalFavoriteState.setFavoriteIds'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'isFavorite'
+    str: 'return'
+    str: 'LPTidalFavoriteState.setItemFavorite'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalFavoriteState.isFavorite'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: 'return'
+    str: 'LPTidalFavoriteState.beginOperation'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'operationId'
+    str: 'return'
+    str: 'LPTidalFavoriteState.isLatestOperation'
+    str: 'LPTidalFavoriteState.finishOperation'
+    str: 'itemType'
+    str: 'return'
+    str: 'LPTidalFavoriteState.favoriteTypeForItem'
+    str: 'LPTidalFavoriteState.clear'
+    str: 'userId'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalFavoriteState.pendingAge'
+    str: 'timeoutSeconds'
+    str: 'return'
+    str: 'LPTidalFavoriteState.sweepStaleOperations'
+    str: 'LPTidalFavoriteState._emitFavoriteIdsChanged'
+    str: 'LPTidalFavoriteState._operationKey'
+    str: 'LPTidalFavoriteState._applyPendingDesiredToFavoriteIds'
+    str: 'LPTidalFavoriteState._normalizeFavoriteIds'
+    str: 'LPTidalFavoriteState._emptyFavoriteIds'
+
+  def LPTidalFavoriteState.__init__(self, parent)  line 2042
+    names: super, __init__, _emptyFavoriteIds, _favoriteIds, _pendingDesired, _pendingStartedAt, _operationIds, _revision
+      str: '\n        初始化收藏权威状态。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+
+  def LPTidalFavoriteState.favoriteIds(self)  line 2057
+    names: _favoriteIds, items
+      str: '\n        返回收藏 ID 集合。\n\n        :return: 收藏 ID 字典。\n        '
+      str: 'LPTidalFavoriteState.favoriteIds.<locals>.<dictcomp>'
+
+    def LPTidalFavoriteState.favoriteIds.<dictcomp>(.0)  line 2064
+      names: list
+
+  def LPTidalFavoriteState.revision(self)  line 2066
+    names: _revision
+      str: '\n        返回收藏状态修订号。\n\n        :return: 修订号。\n        '
+
+  def LPTidalFavoriteState.setFavoriteIds(self, favoriteIds)  line 2075
+    names: _normalizeFavoriteIds, _applyPendingDesiredToFavoriteIds, _favoriteIds, _emitFavoriteIdsChanged
+      str: '\n        用服务端收藏 ID 覆盖权威状态。\n\n        :param favoriteIds: 收藏 ID 字典。\n        :return: 发生变化返回 True。\n        '
+
+  def LPTidalFavoriteState.setItemFavorite(self, itemType, itemId, isFavorite)  line 2090
+    names: favoriteTypeForItem, str, strip, _normalizeFavoriteIds, _favoriteIds, get, bool, insert, list, dict, fromkeys, _emitFavoriteIdsChanged
+      str: '\n        以单个条目为粒度更新收藏状态。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param isFavorite: 目标收藏状态。\n        :return: 发生变化返回 True。\n        '
+      str: 'LPTidalFavoriteState.setItemFavorite.<locals>.<listcomp>'
+
+    def LPTidalFavoriteState.setItemFavorite.<listcomp>(.0)  line 2104
+
+  def LPTidalFavoriteState.isFavorite(self, itemType, itemId)  line 2115
+    names: favoriteTypeForItem, str, strip, _favoriteIds, get
+      str: '\n        判断条目是否已收藏。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 已收藏返回 True。\n        '
+
+  def LPTidalFavoriteState.beginOperation(self, userId, itemType, itemId, desiredFavorite)  line 2129
+    names: _operationKey, int, _operationIds, get, bool, _pendingDesired, time, monotonic, _pendingStartedAt, pendingStateChanged, emit
+      str: '\n        开始一次收藏写操作并返回操作版本号。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param desiredFavorite: 目标收藏状态。\n        :return: 操作版本号。\n        '
+
+  def LPTidalFavoriteState.isLatestOperation(self, userId, itemType, itemId, operationId)  line 2149
+    names: _operationKey, int, _operationIds, get
+      str: '\n        判断回调是否属于当前最新收藏操作。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param operationId: 操作版本号。\n        :return: 是最新操作返回 True。\n        '
+
+  def LPTidalFavoriteState.finishOperation(self, userId, itemType, itemId, operationId)  line 2164
+    names: isLatestOperation, _operationKey, _pendingDesired, pop, _pendingStartedAt, pendingStateChanged, emit
+      str: '\n        结束最新收藏写操作。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param operationId: 操作版本号。\n        :return: 成功结束最新操作返回 True。\n        '
+
+  def LPTidalFavoriteState.favoriteTypeForItem(self, itemType)  line 2182
+    names: str, strip, lower, get
+      str: '\n        将条目类型映射到收藏集合键。\n\n        :param itemType: 条目类型。\n        :return: 收藏集合键；不支持时返回空字符串。\n        '
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'artist'
+      str: 'artists'
+      str: 'album'
+      str: 'albums'
+      str: 'track'
+      str: 'tracks'
+      str: 'playlist'
+      str: 'playlists'
+      str: 'video'
+      str: 'videos'
+
+  def LPTidalFavoriteState.clear(self)  line 2204
+    names: _emptyFavoriteIds, _favoriteIds, _pendingDesired, _pendingStartedAt, _operationIds, _emitFavoriteIdsChanged, pendingStateChanged, emit
+      str: '\n        清空收藏权威状态，登出时调用。\n\n        清空收藏 ID、进行中操作目标和操作版本号，并广播变化信号。\n\n        :return: None。\n        '
+
+  def LPTidalFavoriteState.pendingAge(self, userId, itemType, itemId)  line 2219
+    names: _operationKey, _pendingDesired, _pendingStartedAt, get, max, time, monotonic, float
+      str: '\n        返回指定条目进行中收藏操作的已持续时长。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 已持续秒数；该条目没有进行中操作时返回 None。\n        '
+
+  def LPTidalFavoriteState.sweepStaleOperations(self, timeoutSeconds)  line 2236
+    names: float, TypeError, ValueError, _pendingDesired, time, monotonic, list, keys, pop, _pendingStartedAt, pendingStateChanged, emit, len
+      str: '\n        清理超过指定时长仍无结果的进行中操作。\n\n        :param timeoutSeconds: 悬空判定时长（秒）；非正数时不做清理。\n        :return: 被清理的操作数量。\n        '
+      str: 'LPTidalFavoriteState.sweepStaleOperations.<locals>.<listcomp>'
+
+    def LPTidalFavoriteState.sweepStaleOperations.<listcomp>(.0)  line 2250
+      names: float, _pendingStartedAt, get
+
+  def LPTidalFavoriteState._emitFavoriteIdsChanged(self)  line 2262
+    names: _revision, favoriteIdsChanged, emit, revisionChanged
+      str: '\n        发送收藏 ID 变化信号。\n\n        :return: None。\n        '
+
+  def LPTidalFavoriteState._operationKey(self, userId, itemType, itemId)  line 2272
+    names: str, strip, favoriteTypeForItem
+      str: '\n        生成收藏写操作键。\n\n        :param userId: TIDAL 用户 ID。\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 操作键。\n        '
+      str: ':'
+
+  def LPTidalFavoriteState._applyPendingDesiredToFavoriteIds(self, favoriteIds)  line 2288
+    names: _normalizeFavoriteIds, _pendingDesired, items, str, split, len, get, bool, insert, list, dict, fromkeys
+      str: '\n        将进行中的收藏目标态叠加到服务端收藏 ID。\n\n        :param favoriteIds: 服务端收藏 ID。\n        :return: 叠加 pending 目标态后的收藏 ID。\n        '
+      str: ':'
+      str: 'LPTidalFavoriteState._applyPendingDesiredToFavoriteIds.<locals>.<listcomp>'
+
+    def LPTidalFavoriteState._applyPendingDesiredToFavoriteIds.<listcomp>(.0)  line 2304
+
+  def LPTidalFavoriteState._normalizeFavoriteIds(self, favoriteIds)  line 2310
+    names: isinstance, dict, _emptyFavoriteIds, keys, get
+      str: '\n        将收藏 ID 字典归一化为固定结构。\n\n        :param favoriteIds: 原始收藏 ID 数据。\n        :return: 归一化后的收藏 ID 字典。\n        '
+      str: 'LPTidalFavoriteState._normalizeFavoriteIds.<locals>.<listcomp>'
+
+    def LPTidalFavoriteState._normalizeFavoriteIds.<listcomp>(.0)  line 2320
+      names: str
+
+  def LPTidalFavoriteState._emptyFavoriteIds(self)  line 2323
+      str: '\n        返回空收藏 ID 结构。\n\n        :return: 空收藏 ID 字典。\n        '
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+
+def LPTidalCollectionState()  line 2338
+  names: __name__, __module__, __qualname__, __doc__, CALIBRATED_COVER_FILE_NAME, pyqtSignal, collectionDataChanged, loadingStateChanged, loadedStateChanged, errorMessageChanged, revisionChanged, favoriteIdsChanged, str, Optional, QObject, LPTidalFavoriteState, Path, __init__, List, LPTidalListModel, _trackedImageModels, _forwardFavoriteIdsChanged, pyqtProperty, Dict, Any, subscriptionInfo, userPlaylists, favoriteArtists, favoriteAlbums, favoriteTracks, favoriteVideos, favoriteIds, bool, isLoading, hasLoaded, hasAnyContent, errorMessage, int, revision, setLoading, setHasLoaded, setErrorMessage, setSubscriptionInfo, setCollectionData, _scheduleInitialCollectionThumbnails, syncUserPlaylists, setCalibratedCoverUrl, clearCalibratedCoverUrl, ensureCalibratedCoverUrlsLoaded, _calibrationFilePath, _persistCalibratedCoverUrls, _applyCalibratedCoverUrls, _pruneCalibratedCoverUrls, updateCollectionSectionVisibleRange, collectionModelForSection, _hasAnyContent, clearContent, _removePersistedCalibratedCoverUrls, isFavorite, updateFavoriteIds, favoriteItemsFor, findItem, _favorite_key_for_item_type, __classcell__
+    str: 'LPTidalCollectionState'
+    str: 'TIDAL 我的收藏状态，保存订阅信息、用户歌单和各类收藏列表。'
+    str: 'tidal_playlist_cover_calibration.json'
+    str: 'cacheKey'
+    str: 'parent'
+    str: 'favoriteState'
+    str: 'calibrationFilePath'
+    str: 'LPTidalCollectionState.__init__'
+    str: 'return'
+    str: 'LPTidalCollectionState._trackedImageModels'
+    str: 'LPTidalCollectionState._forwardFavoriteIdsChanged'
+    str: 'QVariantMap'
+    str: 'notify'
+    str: 'LPTidalCollectionState.subscriptionInfo'
+    str: 'LPTidalCollectionState.userPlaylists'
+    str: 'LPTidalCollectionState.favoriteArtists'
+    str: 'LPTidalCollectionState.favoriteAlbums'
+    str: 'LPTidalCollectionState.favoriteTracks'
+    str: 'LPTidalCollectionState.favoriteVideos'
+    str: 'LPTidalCollectionState.favoriteIds'
+    str: 'LPTidalCollectionState.isLoading'
+    str: 'LPTidalCollectionState.hasLoaded'
+    str: 'LPTidalCollectionState.hasAnyContent'
+    str: 'LPTidalCollectionState.errorMessage'
+    str: 'LPTidalCollectionState.revision'
+    str: 'loading'
+    str: 'return'
+    str: 'LPTidalCollectionState.setLoading'
+    str: 'loaded'
+    str: 'return'
+    str: 'LPTidalCollectionState.setHasLoaded'
+    str: 'message'
+    str: 'return'
+    str: 'LPTidalCollectionState.setErrorMessage'
+    str: 'subscriptionInfo'
+    str: 'return'
+    str: 'LPTidalCollectionState.setSubscriptionInfo'
+    str: 'payload'
+    str: 'return'
+    str: 'LPTidalCollectionState.setCollectionData'
+    str: 'LPTidalCollectionState._scheduleInitialCollectionThumbnails'
+    str: 'playlists'
+    str: 'return'
+    str: 'LPTidalCollectionState.syncUserPlaylists'
+    str: 'playlistId'
+    str: 'imageUrl'
+    str: 'return'
+    str: 'LPTidalCollectionState.setCalibratedCoverUrl'
+    str: 'playlistId'
+    str: 'return'
+    str: 'LPTidalCollectionState.clearCalibratedCoverUrl'
+    str: 'userId'
+    str: 'return'
+    str: 'LPTidalCollectionState.ensureCalibratedCoverUrlsLoaded'
+    str: 'LPTidalCollectionState._calibrationFilePath'
+    str: 'LPTidalCollectionState._persistCalibratedCoverUrls'
+    str: 'items'
+    str: 'return'
+    str: 'LPTidalCollectionState._applyCalibratedCoverUrls'
+    str: 'LPTidalCollectionState._pruneCalibratedCoverUrls'
+    str: 'sectionKey'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: 'LPTidalCollectionState.updateCollectionSectionVisibleRange'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalCollectionState.collectionModelForSection'
+    str: 'LPTidalCollectionState._hasAnyContent'
+    str: 'LPTidalCollectionState.clearContent'
+    str: 'LPTidalCollectionState._removePersistedCalibratedCoverUrls'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalCollectionState.isFavorite'
+    str: 'favoriteIds'
+    str: 'return'
+    str: 'LPTidalCollectionState.updateFavoriteIds'
+    str: 'itemType'
+    str: 'return'
+    str: 'LPTidalCollectionState.favoriteItemsFor'
+    str: 'sectionKey'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalCollectionState.findItem'
+    str: 'LPTidalCollectionState._favorite_key_for_item_type'
+
+  def LPTidalCollectionState.__init__(self, cacheKey, parent, favoriteState, calibrationFilePath)  line 2351
+    names: super, __init__, _calibrated_cover_file_path, _calibrated_cover_user_id, _favoriteState, _subscriptionInfo, LPTidalListModel, _userPlaylists, _favoriteArtists, _favoriteAlbums, _favoriteTracks, _favoriteVideos, _favoriteIds, _calibrated_cover_urls, _isLoading, _hasLoaded, _errorMessage, _revision, favoriteIdsChanged, connect, _forwardFavoriteIdsChanged
+      str: '\n        初始化收藏页状态。\n\n        :param cacheKey: 状态缓存键。\n        :param parent: 父级 QObject。\n        :param favoriteState: 收藏权威状态。\n        :param calibrationFilePath: 校准封面持久化文件路径，测试可注入临时路径。\n        :return: None。\n        '
+      str: 'parent'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+
+  def LPTidalCollectionState._trackedImageModels(self)  line 2394
+    names: _userPlaylists, _favoriteArtists, _favoriteAlbums, _favoriteTracks, _favoriteVideos
+      str: '\n        返回收藏页持有的图片模型列表。\n\n        :return: 图片模型列表。\n        '
+
+  def LPTidalCollectionState._forwardFavoriteIdsChanged(self)  line 2408
+    names: favoriteIdsChanged, emit
+      str: '\n        转发收藏权威状态的 ID 变化信号。\n\n        :return: None。\n        '
+
+  def LPTidalCollectionState.subscriptionInfo(self)  line 2416
+    names: dict, _subscriptionInfo
+      str: '\n        返回订阅信息。\n\n        :return: 订阅信息字典。\n        '
+
+  def LPTidalCollectionState.userPlaylists(self)  line 2425
+    names: _userPlaylists
+      str: '\n        返回用户歌单模型。\n\n        :return: 列表模型对象。\n        '
+
+  def LPTidalCollectionState.favoriteArtists(self)  line 2434
+    names: _favoriteArtists
+      str: '\n        返回收藏艺人模型。\n\n        :return: 列表模型对象。\n        '
+
+  def LPTidalCollectionState.favoriteAlbums(self)  line 2443
+    names: _favoriteAlbums
+      str: '\n        返回收藏专辑模型。\n\n        :return: 列表模型对象。\n        '
+
+  def LPTidalCollectionState.favoriteTracks(self)  line 2452
+    names: _favoriteTracks
+      str: '\n        返回收藏曲目模型。\n\n        :return: 列表模型对象。\n        '
+
+  def LPTidalCollectionState.favoriteVideos(self)  line 2461
+    names: _favoriteVideos
+      str: '\n        返回收藏视频模型。\n\n        :return: 列表模型对象。\n        '
+
+  def LPTidalCollectionState.favoriteIds(self)  line 2470
+    names: _favoriteState, favoriteIds, _favoriteIds, items
+      str: '\n        返回收藏 ID 集合。\n\n        :return: 收藏 ID 字典。\n        '
+      str: 'LPTidalCollectionState.favoriteIds.<locals>.<dictcomp>'
+
+    def LPTidalCollectionState.favoriteIds.<dictcomp>(.0)  line 2479
+      names: list
+
+  def LPTidalCollectionState.isLoading(self)  line 2481
+    names: _isLoading
+      str: '\n        返回收藏页是否处于加载中。\n\n        :return: 加载中返回 True。\n        '
+
+  def LPTidalCollectionState.hasLoaded(self)  line 2490
+    names: _hasLoaded
+      str: '\n        返回收藏页是否已完成过一次加载。\n\n        :return: 已完成过加载返回 True。\n        '
+
+  def LPTidalCollectionState.hasAnyContent(self)  line 2499
+    names: _hasAnyContent
+      str: '\n        返回收藏页是否已有任意缓存内容。\n\n        :return: 任一分区存在条目返回 True。\n        '
+
+  def LPTidalCollectionState.errorMessage(self)  line 2508
+    names: _errorMessage
+      str: '\n        返回错误信息。\n\n        :return: 错误文本。\n        '
+
+  def LPTidalCollectionState.revision(self)  line 2517
+    names: _revision
+      str: '\n        返回收藏页修订号。\n\n        :return: 修订号。\n        '
+
+  def LPTidalCollectionState.setLoading(self, loading)  line 2526
+    names: bool, _isLoading, loadingStateChanged, emit
+      str: '\n        更新加载状态。\n\n        :param loading: 是否加载中。\n        :return: None。\n        '
+
+  def LPTidalCollectionState.setHasLoaded(self, loaded)  line 2539
+    names: bool, _hasLoaded, loadedStateChanged, emit
+      str: '\n        更新收藏页加载完成状态。\n\n        :param loaded: 是否已完成过加载。\n        :return: None。\n        '
+
+  def LPTidalCollectionState.setErrorMessage(self, message)  line 2552
+    names: str, _errorMessage, errorMessageChanged, emit
+      str: '\n        更新错误信息。\n\n        :param message: 错误文本。\n        :return: None。\n        '
+
+  def LPTidalCollectionState.setSubscriptionInfo(self, subscriptionInfo)  line 2565
+    names: dict, _subscriptionInfo, collectionDataChanged, emit
+      str: '\n        更新收藏页订阅信息。\n\n        :param subscriptionInfo: 订阅信息。\n        :return: None。\n        '
+
+  def LPTidalCollectionState.setCollectionData(self, payload)  line 2578
+    names: isinstance, dict, get, setSubscriptionInfo, _userPlaylists, syncItemsIncrementally, _applyCalibratedCoverUrls, _favoriteArtists, _favoriteAlbums, _favoriteTracks, _favoriteVideos, _pruneCalibratedCoverUrls, updateFavoriteIds, _revision, collectionDataChanged, emit, revisionChanged, _scheduleInitialCollectionThumbnails, setHasLoaded
+      str: '\n        批量设置收藏页数据。\n\n        :param payload: 归一化后的收藏页数据。\n        :return: None。\n        '
+      str: 'subscriptionInfo'
+      str: 'userPlaylists'
+      str: 'favoriteArtists'
+      str: 'favoriteAlbums'
+      str: 'favoriteTracks'
+      str: 'favoriteVideos'
+      str: 'favoriteIds'
+
+  def LPTidalCollectionState._scheduleInitialCollectionThumbnails(self)  line 2612
+    names: _trackedImageModels, count, _scheduleVisibleModelThumbnails, min
+      str: '\n        预取收藏页各分区首屏图片到本地磁盘缓存。\n\n        :return: None。\n        '
+
+  def LPTidalCollectionState.syncUserPlaylists(self, playlists)  line 2623
+    names: isinstance, list, _userPlaylists, syncItemsIncrementally, _applyCalibratedCoverUrls, _revision, collectionDataChanged, emit, revisionChanged, _pruneCalibratedCoverUrls, count, _scheduleVisibleModelThumbnails, min
+      str: '\n        仅同步收藏页中的用户歌单分区，不影响其他收藏缓存。\n\n        :param playlists: 归一化后的合并歌单列表。\n        :return: None。\n        '
+
+  def LPTidalCollectionState.setCalibratedCoverUrl(self, playlistId, imageUrl)  line 2640
+    names: str, strip, _calibrated_cover_urls, _persistCalibratedCoverUrls
+      str: '\n        记录用户自建歌单经详情接口校准的最新封面 URL。\n\n        :param playlistId: 歌单 UUID。\n        :param imageUrl: 详情接口归一化后的封面 URL。\n        :return: None。\n        '
+
+  def LPTidalCollectionState.clearCalibratedCoverUrl(self, playlistId)  line 2655
+    names: str, strip, _calibrated_cover_urls, pop, _persistCalibratedCoverUrls
+      str: '\n        解除指定自建歌单的校准封面 URL（封面缩略图持续下载失败时调用）。\n\n        :param playlistId: 歌单 UUID。\n        :return: None。\n        '
+
+  def LPTidalCollectionState.ensureCalibratedCoverUrlsLoaded(self, userId)  line 2668
+    names: str, strip, _calibrated_cover_user_id, _calibrated_cover_urls, _calibrationFilePath, exists, open, json, load, Exception, isinstance, dict, get, items
+      str: '\n        按当前用户加载一次持久化的校准封面 URL，避免启动时全部自建歌单被清空。\n\n        :param userId: 当前登录用户 ID。\n        :return: None。\n        '
+      str: 'r'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'LPTidalCollectionState.ensureCalibratedCoverUrlsLoaded.<locals>.<dictcomp>'
+
+    def LPTidalCollectionState.ensureCalibratedCoverUrlsLoaded.<dictcomp>(.0)  line 2691
+      names: str, strip
+
+  def LPTidalCollectionState._calibrationFilePath(self)  line 2697
+    names: _calibrated_cover_file_path, LPClientFramework.LPUtility, cacheDir, Path, CALIBRATED_COVER_FILE_NAME, Exception
+      str: '\n        返回校准封面持久化文件路径，测试注入优先。\n\n        :return: 文件路径；路径不可用时返回 None。\n        '
+      str: 'cacheDir'
+
+  def LPTidalCollectionState._persistCalibratedCoverUrls(self)  line 2712
+    names: _calibrationFilePath, _calibrated_cover_user_id, exists, open, json, load, isinstance, dict, Exception, _calibrated_cover_urls, parent, mkdir, dump
+      str: '\n        将当前用户的校准封面 URL 映射写入本地缓存文件。\n\n        :return: None。\n        '
+      str: 'r'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'parents'
+      str: 'exist_ok'
+      str: 'w'
+      str: 'ensure_ascii'
+      str: 'indent'
+
+  def LPTidalCollectionState._applyCalibratedCoverUrls(self, items)  line 2737
+    names: isinstance, list, dict, str, get, strip, _calibrated_cover_urls, bool, append
+      str: '\n        用详情接口校准的最新封面 URL 覆盖列表接口返回的旧封面 URL。\n\n        用户自建歌单的封面一律以详情接口校准 URL 为准：已校准的使用校准值，\n        未校准的（列表接口在歌单创建后返回的占位 URL 不可信）清空封面，\n        由本地默认封面占位直到详情接口返回。收藏歌单及其他分区不受影响。\n\n        :param items: 归一化后的合并歌单条目列表。\n        :return: 应用校准 URL 后的条目列表副本。\n        '
+      str: 'itemId'
+      str: 'isUserPlaylist'
+      str: 'imageUrl'
+      str: 'imagePath'
+
+  def LPTidalCollectionState._pruneCalibratedCoverUrls(self, items)  line 2761
+    names: isinstance, list, _calibrated_cover_urls, pop, _persistCalibratedCoverUrls
+      str: '\n        清理已不在歌单列表中的校准 URL 映射，避免内存泄漏。\n\n        :param items: 归一化后的合并歌单条目列表。\n        :return: None。\n        '
+      str: 'LPTidalCollectionState._pruneCalibratedCoverUrls.<locals>.<setcomp>'
+      str: 'LPTidalCollectionState._pruneCalibratedCoverUrls.<locals>.<listcomp>'
+
+    def LPTidalCollectionState._pruneCalibratedCoverUrls.<setcomp>(.0)  line 2770
+      names: isinstance, dict, str, get, strip
+        str: 'itemId'
+
+    def LPTidalCollectionState._pruneCalibratedCoverUrls.<listcomp>(.0)  line 2775
+
+  def LPTidalCollectionState.updateCollectionSectionVisibleRange(self, sectionKey, firstIndex, lastIndex)  line 2781
+    names: collectionModelForSection, isinstance, LPTidalListModel, _scheduleVisibleModelThumbnails
+      str: '\n        更新收藏分区可见范围，并触发图片缩略图预取。\n\n        :param sectionKey: 收藏分区标识。\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :return: None。\n        '
+
+  def LPTidalCollectionState.collectionModelForSection(self, sectionKey)  line 2794
+    names: str, strip, _userPlaylists, _favoriteArtists, _favoriteAlbums, _favoriteTracks, _favoriteVideos, get
+      str: '\n        返回收藏分区对应的列表模型。\n\n        :param sectionKey: 收藏分区标识。\n        :return: 列表模型或 None。\n        '
+      str: 'userPlaylists'
+      str: 'favoriteArtists'
+      str: 'favoriteAlbums'
+      str: 'favoriteTracks'
+      str: 'favoriteVideos'
+
+  def LPTidalCollectionState._hasAnyContent(self)  line 2811
+    names: any, _trackedImageModels
+      str: '\n        判断收藏页当前是否已有任意缓存内容。\n\n        :return: 任一分区存在条目返回 True。\n        '
+      str: 'LPTidalCollectionState._hasAnyContent.<locals>.<genexpr>'
+
+    def LPTidalCollectionState._hasAnyContent.<genexpr>(.0)  line 2817
+      names: rowCount
+
+  def LPTidalCollectionState.clearContent(self)  line 2819
+    names: _subscriptionInfo, _userPlaylists, clear, _favoriteArtists, _favoriteAlbums, _favoriteTracks, _favoriteVideos, _calibrated_cover_urls, _removePersistedCalibratedCoverUrls, _calibrated_cover_user_id, updateFavoriteIds, _hasLoaded, _revision, collectionDataChanged, emit, loadedStateChanged, favoriteIdsChanged, revisionChanged
+      str: '\n        清空收藏页内容。\n\n        :return: None。\n        '
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+
+  def LPTidalCollectionState._removePersistedCalibratedCoverUrls(self)  line 2852
+    names: _calibrated_cover_user_id, _calibrationFilePath, exists, open, json, load, Exception, isinstance, dict, pop, parent, mkdir, dump
+      str: '\n        从本地缓存文件中删除当前用户的校准封面 URL 段。\n\n        :return: None。\n        '
+      str: 'r'
+      str: 'utf-8'
+      str: 'encoding'
+      str: 'parents'
+      str: 'exist_ok'
+      str: 'w'
+      str: 'ensure_ascii'
+      str: 'indent'
+
+  def LPTidalCollectionState.isFavorite(self, itemType, itemId)  line 2878
+    names: _favorite_key_for_item_type, str, strip, _favoriteState, isFavorite, _favoriteIds, get
+      str: '\n        判断条目是否已收藏。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 已收藏返回 True。\n        '
+
+  def LPTidalCollectionState.updateFavoriteIds(self, favoriteIds)  line 2894
+    names: isinstance, dict, get, _favoriteState, setFavoriteIds, _favoriteIds, favoriteIdsChanged, emit
+      str: '\n        更新收藏 ID 集合。\n\n        :param favoriteIds: 收藏 ID 字典。\n        :return: 发生变化返回 True。\n        '
+      str: 'LPTidalCollectionState.updateFavoriteIds.<locals>.<listcomp>'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+
+    def LPTidalCollectionState.updateFavoriteIds.<listcomp>(.0)  line 2902
+      names: str
+
+    def LPTidalCollectionState.updateFavoriteIds.<listcomp>(.0)  line 2903
+      names: str
+
+    def LPTidalCollectionState.updateFavoriteIds.<listcomp>(.0)  line 2904
+      names: str
+
+    def LPTidalCollectionState.updateFavoriteIds.<listcomp>(.0)  line 2905
+      names: str
+
+    def LPTidalCollectionState.updateFavoriteIds.<listcomp>(.0)  line 2906
+      names: str
+
+  def LPTidalCollectionState.favoriteItemsFor(self, itemType)  line 2918
+    names: _favorite_key_for_item_type, _favoriteArtists, _favoriteAlbums, _userPlaylists, _favoriteVideos, _favoriteTracks
+      str: '\n        返回指定类型的收藏模型。\n\n        :param itemType: 条目类型。\n        :return: 列表模型对象。\n        '
+      str: 'artists'
+      str: 'albums'
+      str: 'playlists'
+      str: 'videos'
+
+  def LPTidalCollectionState.findItem(self, sectionKey, itemId)  line 2936
+    names: str, strip, _userPlaylists, itemAt, findIndexById, _favoriteArtists, _favoriteAlbums, _favoriteTracks, _favoriteVideos
+      str: '\n        按区块和条目 ID 查找收藏条目。\n\n        :param sectionKey: 区块标识。\n        :param itemId: 条目 ID。\n        :return: 条目字典或 None。\n        '
+      str: 'userPlaylists'
+      str: 'favoriteArtists'
+      str: 'favoriteAlbums'
+      str: 'favoriteTracks'
+      str: 'favoriteVideos'
+
+  def LPTidalCollectionState._favorite_key_for_item_type(self, itemType)  line 2957
+    names: str, strip, lower, get
+      str: '\n        将条目类型映射到收藏集合键。\n\n        :param itemType: 条目类型。\n        :return: 收藏集合键。\n        '
+      str: 'artists'
+      str: 'albums'
+      str: 'tracks'
+      str: 'playlists'
+      str: 'videos'
+      str: 'artist'
+      str: 'artists'
+      str: 'album'
+      str: 'albums'
+      str: 'track'
+      str: 'tracks'
+      str: 'playlist'
+      str: 'playlists'
+      str: 'video'
+      str: 'videos'
+
+def LPTidalSeeAllState()  line 2980
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, descriptorChanged, itemsChanged, filteredItemsChanged, loadingStateChanged, pagingStateChanged, errorMessageChanged, filterTextChanged, viewModeChanged, sortChanged, revisionChanged, str, LPTidalSeeAllDescriptor, Optional, QObject, __init__, imageOwnerKey, List, LPTidalListModel, _trackedImageModels, pyqtProperty, Dict, Any, descriptorInfo, title, itemType, bool, supportsSort, sortOptions, items, filteredItems, int, filteredCount, isLoading, isLoadingMore, hasMore, offset, limit, errorMessage, filterText, viewMode, sortOrder, sortDirection, revision, property, descriptor, replaceDescriptor, setLoading, setLoadingMore, setErrorMessage, setFilterText, setViewMode, setSort, resetPaging, Iterable, setItems, appendItems, clearContent, findItem, removeItem, tuple, _mapFilteredVisibleRangeToSource, pyqtSlot, updateSeeAllVisibleRange, __classcell__
+    str: 'LPTidalSeeAllState'
+    str: 'TIDAL See All 页面状态，保存描述信息、分页列表、过滤和展示模式。'
+    str: 'cacheKey'
+    str: 'descriptor'
+    str: 'parent'
+    str: 'LPTidalSeeAllState.__init__'
+    str: 'return'
+    str: 'LPTidalSeeAllState.imageOwnerKey'
+    str: 'LPTidalSeeAllState._trackedImageModels'
+    str: 'QVariantMap'
+    str: 'notify'
+    str: 'LPTidalSeeAllState.descriptorInfo'
+    str: 'LPTidalSeeAllState.title'
+    str: 'LPTidalSeeAllState.itemType'
+    str: 'LPTidalSeeAllState.supportsSort'
+    str: 'QVariantList'
+    str: 'LPTidalSeeAllState.sortOptions'
+    str: 'LPTidalSeeAllState.items'
+    str: 'LPTidalSeeAllState.filteredItems'
+    str: 'LPTidalSeeAllState.filteredCount'
+    str: 'LPTidalSeeAllState.isLoading'
+    str: 'LPTidalSeeAllState.isLoadingMore'
+    str: 'LPTidalSeeAllState.hasMore'
+    str: 'LPTidalSeeAllState.offset'
+    str: 'LPTidalSeeAllState.limit'
+    str: 'LPTidalSeeAllState.errorMessage'
+    str: 'LPTidalSeeAllState.filterText'
+    str: 'LPTidalSeeAllState.viewMode'
+    str: 'LPTidalSeeAllState.sortOrder'
+    str: 'LPTidalSeeAllState.sortDirection'
+    str: 'LPTidalSeeAllState.revision'
+    str: 'LPTidalSeeAllState.descriptor'
+    str: 'descriptor'
+    str: 'return'
+    str: 'LPTidalSeeAllState.replaceDescriptor'
+    str: 'loading'
+    str: 'return'
+    str: 'LPTidalSeeAllState.setLoading'
+    str: 'LPTidalSeeAllState.setLoadingMore'
+    str: 'message'
+    str: 'return'
+    str: 'LPTidalSeeAllState.setErrorMessage'
+    str: 'text'
+    str: 'return'
+    str: 'LPTidalSeeAllState.setFilterText'
+    str: 'mode'
+    str: 'return'
+    str: 'LPTidalSeeAllState.setViewMode'
+    str: 'order'
+    str: 'direction'
+    str: 'return'
+    str: 'LPTidalSeeAllState.setSort'
+    str: 'LPTidalSeeAllState.resetPaging'
+    str: 'items'
+    str: 'hasMore'
+    str: 'return'
+    str: 'LPTidalSeeAllState.setItems'
+    str: 'LPTidalSeeAllState.appendItems'
+    str: 'LPTidalSeeAllState.clearContent'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalSeeAllState.findItem'
+    str: 'LPTidalSeeAllState.removeItem'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: 'LPTidalSeeAllState._mapFilteredVisibleRangeToSource'
+    str: 'LPTidalSeeAllState.updateSeeAllVisibleRange'
+
+  def LPTidalSeeAllState.__init__(self, cacheKey, descriptor, parent)  line 2994
+    names: super, __init__, _descriptor, LPTidalListModel, _items, LPTidalSeeAllFilterModel, _filteredItems, setSourceModel, _isLoading, _isLoadingMore, _hasMore, _offset, _limit, _errorMessage, _filterText, _viewMode, defaultOrder, _sortOrder, defaultOrderDirection, _sortDirection, _revision
+      str: '\n        初始化 See All 状态。\n\n        :param cacheKey: 状态缓存键。\n        :param descriptor: See All 数据源描述。\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'parent'
+      str: 'grid'
+      str: 'ASC'
+
+  def LPTidalSeeAllState.imageOwnerKey(self)  line 3020
+    names: cacheKey
+      str: '\n        返回 See All 页图片请求 owner 后缀。\n\n        :return: 图片 owner 后缀。\n        '
+      str: 'see_all:'
+
+  def LPTidalSeeAllState._trackedImageModels(self)  line 3028
+    names: _items
+      str: '\n        返回 See All 页持有的图片模型列表。\n\n        :return: 图片模型列表。\n        '
+
+  def LPTidalSeeAllState.descriptorInfo(self)  line 3036
+    names: _descriptor, toMap
+      str: '\n        返回 See All 描述字段。\n\n        :return: 描述字段字典。\n        '
+
+  def LPTidalSeeAllState.title(self)  line 3045
+    names: _descriptor, title
+      str: '\n        返回页面标题。\n\n        :return: 标题文本。\n        '
+
+  def LPTidalSeeAllState.itemType(self)  line 3054
+    names: _descriptor, itemType
+      str: '\n        返回条目类型。\n\n        :return: 条目类型。\n        '
+
+  def LPTidalSeeAllState.supportsSort(self)  line 3063
+    names: _descriptor, supportsSort
+      str: '\n        返回是否支持服务端排序。\n\n        :return: 支持返回 True。\n        '
+
+  def LPTidalSeeAllState.sortOptions(self)  line 3072
+    names: _descriptor, sortOptions
+      str: '\n        返回可用排序选项列表。\n\n        :return: 排序选项列表，每项含 order/direction/label。\n        '
+
+  def LPTidalSeeAllState.items(self)  line 3081
+    names: _items
+      str: '\n        返回完整条目模型。\n\n        :return: 列表模型对象。\n        '
+
+  def LPTidalSeeAllState.filteredItems(self)  line 3090
+    names: _filteredItems
+      str: '\n        返回过滤后的条目模型。\n\n        :return: 过滤模型对象。\n        '
+
+  def LPTidalSeeAllState.filteredCount(self)  line 3099
+    names: _filteredItems, rowCount
+      str: '\n        返回过滤后的条目数量。\n\n        :return: 条目数量。\n        '
+
+  def LPTidalSeeAllState.isLoading(self)  line 3108
+    names: _isLoading
+      str: '\n        返回是否首屏加载中。\n\n        :return: 加载中返回 True。\n        '
+
+  def LPTidalSeeAllState.isLoadingMore(self)  line 3117
+    names: _isLoadingMore
+      str: '\n        返回是否正在加载下一页。\n\n        :return: 加载中返回 True。\n        '
+
+  def LPTidalSeeAllState.hasMore(self)  line 3126
+    names: _hasMore
+      str: '\n        返回是否还有下一页。\n\n        :return: 有下一页返回 True。\n        '
+
+  def LPTidalSeeAllState.offset(self)  line 3135
+    names: _offset
+      str: '\n        返回当前已加载偏移。\n\n        :return: 偏移数量。\n        '
+
+  def LPTidalSeeAllState.limit(self)  line 3144
+    names: _limit
+      str: '\n        返回分页大小。\n\n        :return: 分页大小。\n        '
+
+  def LPTidalSeeAllState.errorMessage(self)  line 3153
+    names: _errorMessage
+      str: '\n        返回错误信息。\n\n        :return: 错误文本。\n        '
+
+  def LPTidalSeeAllState.filterText(self)  line 3162
+    names: _filterText
+      str: '\n        返回本地过滤文本。\n\n        :return: 过滤文本。\n        '
+
+  def LPTidalSeeAllState.viewMode(self)  line 3171
+    names: _viewMode
+      str: '\n        返回当前展示模式。\n\n        :return: `grid` 或 `list`。\n        '
+
+  def LPTidalSeeAllState.sortOrder(self)  line 3180
+    names: _sortOrder
+      str: '\n        返回服务端排序字段。\n\n        :return: 排序字段。\n        '
+
+  def LPTidalSeeAllState.sortDirection(self)  line 3189
+    names: _sortDirection
+      str: '\n        返回服务端排序方向。\n\n        :return: 排序方向。\n        '
+
+  def LPTidalSeeAllState.revision(self)  line 3198
+    names: _revision
+      str: '\n        返回状态修订号。\n\n        :return: 修订号。\n        '
+
+  def LPTidalSeeAllState.descriptor(self)  line 3207
+    names: _descriptor
+      str: '\n        返回描述对象。\n\n        :return: See All 描述对象。\n        '
+
+  def LPTidalSeeAllState.replaceDescriptor(self, descriptor)  line 3216
+    names: _descriptor, defaultOrder, _sortOrder, defaultOrderDirection, _sortDirection, descriptorChanged, emit, sortChanged
+      str: '\n        替换描述对象。\n\n        :param descriptor: 新描述对象。\n        :return: None。\n        '
+      str: 'ASC'
+
+  def LPTidalSeeAllState.setLoading(self, loading)  line 3229
+    names: bool, _isLoading, loadingStateChanged, emit
+      str: '\n        更新首屏加载状态。\n\n        :param loading: 是否加载中。\n        :return: None。\n        '
+
+  def LPTidalSeeAllState.setLoadingMore(self, loading)  line 3242
+    names: bool, _isLoadingMore, pagingStateChanged, emit
+      str: '\n        更新分页加载状态。\n\n        :param loading: 是否加载中。\n        :return: None。\n        '
+
+  def LPTidalSeeAllState.setErrorMessage(self, message)  line 3255
+    names: str, _errorMessage, errorMessageChanged, emit
+      str: '\n        更新错误信息。\n\n        :param message: 错误文本。\n        :return: None。\n        '
+
+  def LPTidalSeeAllState.setFilterText(self, text)  line 3268
+    names: str, _filterText, _filteredItems, setFilterText, filterTextChanged, emit, filteredItemsChanged
+      str: '\n        更新本地过滤文本。\n\n        :param text: 过滤文本。\n        :return: None。\n        '
+
+  def LPTidalSeeAllState.setViewMode(self, mode)  line 3283
+    names: str, strip, lower, _viewMode, viewModeChanged, emit
+      str: '\n        更新展示模式。\n\n        :param mode: `grid` 或 `list`。\n        :return: None。\n        '
+      str: 'grid'
+      str: 'list'
+      str: 'grid'
+
+  def LPTidalSeeAllState.setSort(self, order, direction)  line 3298
+    names: _descriptor, supportsSort, str, defaultOrder, strip, upper, _sortOrder, _sortDirection, sortChanged, emit
+      str: '\n        更新服务端排序配置。\n\n        :param order: 排序字段。\n        :param direction: 排序方向。\n        :return: 发生变化返回 True。\n        '
+      str: 'NAME'
+      str: 'ASC'
+      str: 'ASC'
+      str: 'DESC'
+
+  def LPTidalSeeAllState.resetPaging(self)  line 3319
+    names: _offset, _hasMore, pagingStateChanged, emit
+      str: '\n        重置分页状态。\n\n        :return: None。\n        '
+
+  def LPTidalSeeAllState.setItems(self, items, hasMore)  line 3329
+    names: _items, setItems, len, _offset, bool, _hasMore, _revision, itemsChanged, emit, filteredItemsChanged, pagingStateChanged, revisionChanged
+      str: '\n        替换当前条目列表。\n\n        :param items: 条目列表。\n        :param hasMore: 是否还有下一页。\n        :return: None。\n        '
+      str: 'LPTidalSeeAllState.setItems.<locals>.<listcomp>'
+
+    def LPTidalSeeAllState.setItems.<listcomp>(.0)  line 3337
+      names: isinstance, dict
+
+  def LPTidalSeeAllState.appendItems(self, items, hasMore)  line 3347
+    names: _items, appendItems, _offset, len, bool, _hasMore, _revision, itemsChanged, emit, filteredItemsChanged, pagingStateChanged, revisionChanged
+      str: '\n        追加分页条目。\n\n        :param items: 条目列表。\n        :param hasMore: 是否还有下一页。\n        :return: None。\n        '
+      str: 'LPTidalSeeAllState.appendItems.<locals>.<listcomp>'
+
+    def LPTidalSeeAllState.appendItems.<listcomp>(.0)  line 3355
+      names: isinstance, dict
+
+  def LPTidalSeeAllState.clearContent(self)  line 3366
+    names: _items, clear, _offset, _hasMore, _revision, itemsChanged, emit, filteredItemsChanged, pagingStateChanged, revisionChanged
+      str: '\n        清空页面内容。\n\n        :return: None。\n        '
+
+  def LPTidalSeeAllState.findItem(self, itemId)  line 3381
+    names: _items, itemAt, findIndexById
+      str: '\n        按 ID 查找已加载条目。\n\n        :param itemId: 条目 ID。\n        :return: 条目字典或 None。\n        '
+
+  def LPTidalSeeAllState.removeItem(self, itemId)  line 3390
+    names: _items, removeItem, max, _offset, _revision, itemsChanged, emit, filteredItemsChanged, pagingStateChanged, revisionChanged
+      str: '\n        按 ID 删除已加载条目并同步分页状态。\n\n        :param itemId: 条目 ID。\n        :return: 找到并删除返回 True，否则返回 False。\n        '
+
+  def LPTidalSeeAllState._mapFilteredVisibleRangeToSource(self, firstIndex, lastIndex)  line 3407
+    names: int, TypeError, ValueError, _filteredItems, rowCount, max, min, range, index, mapToSource, isValid, append, row
+      str: '\n        将过滤模型可见范围映射回源模型行范围。\n\n        :param firstIndex: 过滤模型首个可见索引。\n        :param lastIndex: 过滤模型最后一个可见索引。\n        :return: 源模型行范围，无法映射时返回 None。\n        '
+
+  def LPTidalSeeAllState.updateSeeAllVisibleRange(self, firstIndex, lastIndex)  line 3437
+    names: str, _filterText, strip, _mapFilteredVisibleRangeToSource, _scheduleVisibleModelThumbnails, _items
+      str: '\n        更新 See All 可见范围，并触发缩略图预取。\n\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :return: None。\n        '
+
+def LPTidalToastState()  line 3455
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, messageChanged, levelChanged, revisionChanged, Optional, QObject, __init__, pyqtProperty, str, message, level, int, revision, pyqtSlot, showToast, __classcell__
+    str: 'LPTidalToastState'
+    str: 'TIDAL Toast 状态，负责向 QML 暴露短提示内容。'
+    str: 'parent'
+    str: 'LPTidalToastState.__init__'
+    str: 'notify'
+    str: 'return'
+    str: 'LPTidalToastState.message'
+    str: 'LPTidalToastState.level'
+    str: 'LPTidalToastState.revision'
+    str: 'info'
+    str: 'message'
+    str: 'level'
+    str: 'return'
+    str: 'LPTidalToastState.showToast'
+    str: 'info'
+
+  def LPTidalToastState.__init__(self, parent)  line 3462
+    names: super, __init__, _message, _level, _revision
+      str: '\n        初始化 Toast 状态。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'info'
+
+  def LPTidalToastState.message(self)  line 3474
+    names: _message
+      str: '\n        返回当前 Toast 文案。\n\n        :return: Toast 文案。\n        '
+
+  def LPTidalToastState.level(self)  line 3483
+    names: _level
+      str: '\n        返回当前 Toast 级别。\n\n        :return: success、error 或 info。\n        '
+
+  def LPTidalToastState.revision(self)  line 3492
+    names: _revision
+      str: '\n        返回 Toast 修订号，用于重复文案也能触发 QML 展示。\n\n        :return: Toast 修订号。\n        '
+
+  def LPTidalToastState.showToast(self, message, level)  line 3501
+    names: str, strip, _message, _level, _revision, messageChanged, emit, levelChanged, revisionChanged
+      str: '\n        发布一条 Toast 提示。\n\n        :param message: 提示文案。\n        :param level: 提示级别。\n        :return: None。\n        '
+      str: 'info'
+
+def LPTidalStore()  line 3529
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, playingInfoChanged, favoriteRevisionChanged, accountStateChanged, homeStateChanged, searchStateChanged, detailStateChanged, collectionStateChanged, seeAllStateChanged, toastStateChanged, favoriteStateChanged, str, collectionChange, HOME_CACHE_TTL_SECONDS, SUBSCRIPTION_CACHE_TTL_SECONDS, _instance, Optional, __annotations__, QObject, __init__, object, _handleFavoriteCacheProjection, classmethod, instance, pyqtProperty, homeState, searchState, collectionState, favoriteState, toastState, playingTrackId, playingState, playingContextType, playingContextId, int, favoriteRevision, Dict, Any, accountState, playlistManager, setPlayingInfo, setPlayingContext, reconcilePlayingContextQueueName, setFavoriteRevision, bumpFavoriteRevision, notifyCollectionChanged, bool, removeFavoriteFromCollectionSeeAll, removeDeletedUserPlaylistFromSeeAll, syncFavoriteFlagsFromState, float, setAccountState, clearAllUserContent, setSubscriptionInfo, _intValue, _floatValue, activateHomeState, deactivateHomeState, activateSearchState, deactivateSearchState, activateCollectionState, deactivateCollectionState, LPTidalAlbumDetailState, acquireAlbumDetailState, LPTidalArtistDetailState, acquireArtistDetailState, LPTidalPlaylistDetailState, acquirePlaylistDetailState, LPTidalVideoDetailState, acquireVideoDetailState, LPTidalGenreDetailState, acquireGenreDetailState, acquireMoodDetailState, LPTidalArtistRadioDetailState, acquireArtistRadioDetailState, LPTidalMixDetailState, acquireMixDetailState, LPTidalSeeAllDescriptor, LPTidalSeeAllState, acquireSeeAllState, activateDetailState, deactivateDetailState, activateSeeAllState, deactivateSeeAllState, _forwardFavoriteRevisionChanged, _handleFavoriteStateChanged, _emitFavoriteStateChanged, List, LPTidalListModel, _favoriteFlagModels, _syncFavoriteListModel, _syncDetailInfoFavoriteFlags, _emitHomeStateChanged, _emitSearchStateChanged, _emitCollectionStateChanged, _emitSeeAllStateChanged, _acquireDetailState, __classcell__
+    str: 'LPTidalStore'
+    str: 'TIDAL 全局状态单例，统一管理页面状态和跨页共享状态。'
+    str: '_instance'
+    str: 'parent'
+    str: 'LPTidalStore.__init__'
+    str: 'source'
+    str: 'userId'
+    str: 'ids'
+    str: 'return'
+    str: 'LPTidalStore._handleFavoriteCacheProjection'
+    str: 'return'
+    str: 'LPTidalStore.instance'
+    str: 'notify'
+    str: 'LPTidalStore.homeState'
+    str: 'LPTidalStore.searchState'
+    str: 'LPTidalStore.collectionState'
+    str: 'LPTidalStore.favoriteState'
+    str: 'LPTidalStore.toastState'
+    str: 'LPTidalStore.playingTrackId'
+    str: 'LPTidalStore.playingState'
+    str: 'LPTidalStore.playingContextType'
+    str: 'LPTidalStore.playingContextId'
+    str: 'LPTidalStore.favoriteRevision'
+    str: 'QVariantMap'
+    str: 'LPTidalStore.accountState'
+    str: 'constant'
+    str: 'LPTidalStore.playlistManager'
+    str: 'trackId'
+    str: 'playState'
+    str: 'return'
+    str: 'LPTidalStore.setPlayingInfo'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'queueName'
+    str: 'return'
+    str: 'LPTidalStore.setPlayingContext'
+    str: 'queueName'
+    str: 'return'
+    str: 'LPTidalStore.reconcilePlayingContextQueueName'
+    str: 'revision'
+    str: 'return'
+    str: 'LPTidalStore.setFavoriteRevision'
+    str: 'LPTidalStore.bumpFavoriteRevision'
+    str: 'all'
+    str: 'scope'
+    str: 'return'
+    str: 'LPTidalStore.notifyCollectionChanged'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalStore.removeFavoriteFromCollectionSeeAll'
+    str: 'playlistId'
+    str: 'return'
+    str: 'LPTidalStore.removeDeletedUserPlaylistFromSeeAll'
+    str: 'LPTidalStore.syncFavoriteFlagsFromState'
+    str: 'isLoggedIn'
+    str: 'userId'
+    str: 'userName'
+    str: 'subscription'
+    str: 'token'
+    str: 'sessionId'
+    str: 'countryCode'
+    str: 'email'
+    str: 'expiresIn'
+    str: 'tokenUpdatedAt'
+    str: 'tokenExpiresAt'
+    str: 'supportReplayGain'
+    str: 'showAutoplay'
+    str: 'return'
+    str: 'LPTidalStore.setAccountState'
+    str: 'LPTidalStore.clearAllUserContent'
+    str: 'subscription'
+    str: 'return'
+    str: 'LPTidalStore.setSubscriptionInfo'
+    str: 'value'
+    str: 'return'
+    str: 'LPTidalStore._intValue'
+    str: 'LPTidalStore._floatValue'
+    str: 'LPTidalStore.activateHomeState'
+    str: 'LPTidalStore.deactivateHomeState'
+    str: 'LPTidalStore.activateSearchState'
+    str: 'LPTidalStore.deactivateSearchState'
+    str: 'LPTidalStore.activateCollectionState'
+    str: 'LPTidalStore.deactivateCollectionState'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalStore.acquireAlbumDetailState'
+    str: 'LPTidalStore.acquireArtistDetailState'
+    str: 'LPTidalStore.acquirePlaylistDetailState'
+    str: 'LPTidalStore.acquireVideoDetailState'
+    str: 'LPTidalStore.acquireGenreDetailState'
+    str: 'LPTidalStore.acquireMoodDetailState'
+    str: 'LPTidalStore.acquireArtistRadioDetailState'
+    str: 'LPTidalStore.acquireMixDetailState'
+    str: 'descriptor'
+    str: 'return'
+    str: 'LPTidalStore.acquireSeeAllState'
+    str: 'cacheKey'
+    str: 'return'
+    str: 'LPTidalStore.activateDetailState'
+    str: 'LPTidalStore.deactivateDetailState'
+    str: 'LPTidalStore.activateSeeAllState'
+    str: 'LPTidalStore.deactivateSeeAllState'
+    str: 'LPTidalStore._forwardFavoriteRevisionChanged'
+    str: 'LPTidalStore._handleFavoriteStateChanged'
+    str: 'LPTidalStore._emitFavoriteStateChanged'
+    str: 'LPTidalStore._favoriteFlagModels'
+    str: 'model'
+    str: 'return'
+    str: 'LPTidalStore._syncFavoriteListModel'
+    str: 'LPTidalStore._syncDetailInfoFavoriteFlags'
+    str: 'LPTidalStore._emitHomeStateChanged'
+    str: 'LPTidalStore._emitSearchStateChanged'
+    str: 'LPTidalStore._emitCollectionStateChanged'
+    str: 'LPTidalStore._emitSeeAllStateChanged'
+    str: 'prefix'
+    str: 'itemId'
+    str: 'LPTidalStore._acquireDetailState'
+    str: 'all'
+
+  def LPTidalStore.__init__(self, parent)  line 3550
+    names: super, __init__, LPTidalHomeState, _home_state, LPTidalSearchState, _search_state, LPTidalFavoriteState, _favorite_state, LPTidalCollectionState, _collection_state, LPTidalToastState, _toast_state, favoriteRevisionChanged, connect, _forwardFavoriteRevisionChanged, searchTextChanged, _emitHomeStateChanged, sectionDataChanged, featuredCategoriesChanged, isInitialLoadingChanged, searchStateChanged, _emitSearchStateChanged, searchFilterChanged, resultModelsChanged, loadingStateChanged, errorMessageChanged, collectionDataChanged, _emitCollectionStateChanged, loadedStateChanged, revisionChanged, favoriteIdsChanged, _handleFavoriteStateChanged, pendingStateChanged, _emitFavoriteStateChanged, _detail_states, _see_all_states, _playing_track_id, _playing_state, _playing_context_type, _playing_context_id, _playing_context_queue_name, _favorite_revision, _account_state, HOME.StreamService.Tidal.services.LPTidalPlaylistManager, LPTidalPlaylistManager, _playlist_manager, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, setProjectionCallback, _handleFavoriteCacheProjection
+      str: '\n        初始化全局 Store。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'home'
+      str: 'parent'
+      str: 'search'
+      str: 'collection'
+      str: 'parent'
+      str: 'favoriteState'
+      str: 'isLoggedIn'
+      str: 'userId'
+      str: 'userName'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+      str: 'subscription'
+      str: 'subscriptionInfo'
+      str: 'expiresIn'
+      str: 'tokenUpdatedAt'
+      str: 'tokenExpiresAt'
+      str: 'subscriptionFetchedAt'
+      str: 'LPTidalPlaylistManager'
+      str: 'LPFavoriteCacheManager'
+      str: 'Tidal'
+
+  def LPTidalStore._handleFavoriteCacheProjection(self, source, userId, ids)  line 3616
+    names: isinstance, dict, str, _account_state, get, strip, _collection_state, updateFavoriteIds
+      str: '\n        处理 TIDAL 收藏缓存变化，把缓存快照投影到收藏页状态。\n\n        :param source: 音源标识。\n        :param userId: 账号 ID。\n        :param ids: 缓存收藏 ID 字典。\n        :return: None。\n        '
+      str: 'Tidal'
+      str: 'userId'
+
+  def LPTidalStore.instance(cls)  line 3632
+    names: _instance
+      str: '\n        返回全局单例。\n\n        :return: Store 单例。\n        '
+
+  def LPTidalStore.homeState(self)  line 3643
+    names: _home_state, touch
+      str: '\n        返回首页状态对象。\n\n        :return: 首页状态对象。\n        '
+
+  def LPTidalStore.searchState(self)  line 3653
+    names: _search_state, touch
+      str: '返回搜索状态对象。'
+
+  def LPTidalStore.collectionState(self)  line 3659
+    names: _collection_state, touch
+      str: '\n        返回我的收藏状态对象。\n\n        :return: 收藏状态对象。\n        '
+
+  def LPTidalStore.favoriteState(self)  line 3669
+    names: _favorite_state
+      str: '\n        返回收藏权威状态对象。\n\n        :return: 收藏权威状态对象。\n        '
+
+  def LPTidalStore.toastState(self)  line 3678
+    names: _toast_state
+      str: '\n        返回 TIDAL Toast 状态对象。\n\n        :return: Toast 状态对象。\n        '
+
+  def LPTidalStore.playingTrackId(self)  line 3687
+    names: _playing_track_id
+      str: '\n        返回当前播放曲目 ID。\n\n        :return: 曲目 ID。\n        '
+
+  def LPTidalStore.playingState(self)  line 3696
+    names: _playing_state
+      str: '\n        返回当前播放状态。\n\n        :return: 播放状态字符串。\n        '
+
+  def LPTidalStore.playingContextType(self)  line 3705
+    names: _playing_context_type
+      str: '\n        返回当前播放来源类型。\n\n        :return: track、album、playlist 或 mix。\n        '
+
+  def LPTidalStore.playingContextId(self)  line 3714
+    names: _playing_context_id
+      str: '\n        返回当前播放来源 ID。\n\n        :return: 播放来源条目 ID。\n        '
+
+  def LPTidalStore.favoriteRevision(self)  line 3723
+    names: _favorite_revision
+      str: '\n        返回收藏修订号。\n\n        :return: 修订号。\n        '
+
+  def LPTidalStore.accountState(self)  line 3732
+    names: dict, _account_state
+      str: '\n        返回账号状态字典。\n\n        :return: 账号状态字典。\n        '
+
+  def LPTidalStore.playlistManager(self)  line 3741
+    names: _playlist_manager
+      str: '\n        返回 TIDAL 歌单写操作管理器。\n\n        :return: 歌单管理器对象。\n        '
+
+  def LPTidalStore.setPlayingInfo(self, trackId, playState)  line 3750
+    names: str, bool, _playing_context_type, _playing_context_id, _playing_track_id, _playing_state, _playing_context_queue_name, playingInfoChanged, emit
+      str: '\n        更新当前播放曲目和状态。\n\n        :param trackId: 曲目 ID。\n        :param playState: 播放状态。\n        :return: None。\n        '
+      str: 'STOPPED'
+      str: 'NO_MEDIA_PRESENT'
+
+  def LPTidalStore.setPlayingContext(self, itemType, itemId, queueName)  line 3772
+    names: str, strip, lower, _playing_context_type, _playing_context_id, _playing_context_queue_name, playingInfoChanged, emit
+      str: '\n        更新 PC 端发起播放时的来源条目。\n\n        :param itemType: 来源类型。\n        :param itemId: 来源条目 ID。\n        :param queueName: 设备队列名称，用于后续 notify 校正来源。\n        :return: None。\n        '
+
+  def LPTidalStore.reconcilePlayingContextQueueName(self, queueName)  line 3799
+    names: str, strip, _playing_context_id, _playing_context_queue_name, setPlayingContext
+      str: '\n        根据设备队列名称清理已失效的 PC 播放来源。\n\n        :param queueName: 设备 media notify 携带的当前队列名称。\n        :return: None。\n        '
+
+  def LPTidalStore.setFavoriteRevision(self, revision)  line 3813
+    names: int, _favorite_revision, favoriteRevisionChanged, emit
+      str: '\n        设置收藏修订号。\n\n        :param revision: 修订号。\n        :return: None。\n        '
+
+  def LPTidalStore.bumpFavoriteRevision(self)  line 3826
+    names: setFavoriteRevision, _favorite_revision
+      str: '\n        递增收藏修订号。\n\n        :return: None。\n        '
+
+  def LPTidalStore.notifyCollectionChanged(self, scope)  line 3834
+    names: str, strip, collectionChange, emit
+      str: '\n        通知 My Collection 相关数据已发生变更。\n\n        :param scope: 变更范围，`all` 表示整页刷新，`userPlaylists` 表示仅刷新歌单分区。\n        :return: None。\n        '
+      str: 'all'
+
+  def LPTidalStore.removeFavoriteFromCollectionSeeAll(self, itemType, itemId)  line 3844
+    names: str, strip, lower, startswith, split, get, _see_all_states, values, descriptor, getattr, findItem, isinstance, dict, bool, removeItem
+      str: '\n        从已缓存的 Collection See All 中移除指定取消喜欢条目。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 任意 Collection See All 列表发生变化返回 True。\n        '
+      str: 'favorite:'
+      str: ':'
+      str: 'userPlaylists'
+      str: 'favoriteArtists'
+      str: 'favoriteAlbums'
+      str: 'favoriteTracks'
+      str: 'favoriteVideos'
+      str: 'playlist'
+      str: 'artist'
+      str: 'album'
+      str: 'track'
+      str: 'video'
+      str: 'sourceKind'
+      str: 'sectionKey'
+      str: 'collection'
+      str: 'playlist'
+      str: 'isUserPlaylist'
+
+  def LPTidalStore.removeDeletedUserPlaylistFromSeeAll(self, playlistId)  line 3883
+    names: str, strip, _see_all_states, values, descriptor, getattr, lower, isinstance, findItem, dict, removeItem
+      str: '\n        删除自建歌单后，从已缓存的 Collection See All 列表中移除该条目。\n\n        与 removeFavoriteFromCollectionSeeAll 不同：该方法针对的是被删除的自建歌单，\n        不受 isUserPlaylist 保护限制，直接按 ID 移除，避免返回 See All 页后仍显示已删除歌单。\n\n        :param playlistId: 被删除的歌单 ID。\n        :return: 任意 Collection See All 列表发生变化返回 True。\n        '
+      str: 'sourceKind'
+      str: 'sectionKey'
+      str: 'collection'
+      str: 'userPlaylists'
+
+  def LPTidalStore.syncFavoriteFlagsFromState(self)  line 3908
+    names: _favoriteFlagModels, _syncFavoriteListModel, _syncDetailInfoFavoriteFlags, _home_state, bumpFavoriteRevision
+      str: '\n        使用收藏权威状态同步所有已加载模型的 isFavorite 字段。\n\n        :return: 任意模型发生变化返回 True。\n        '
+
+  def LPTidalStore.setAccountState(self, isLoggedIn, userId, userName, subscription, token, sessionId, countryCode, email, expiresIn, tokenUpdatedAt, tokenExpiresAt, supportReplayGain, showAutoplay)  line 3922
+    names: str, strip, dict, _account_state, get, bool, _intValue, _floatValue, time, upper, clearAllUserContent, accountStateChanged, emit
+      str: '\n        更新账号状态。\n\n        :param isLoggedIn: 是否已登录。\n        :param userId: 用户 ID。\n        :param userName: 用户名。\n        :param subscription: 订阅信息。\n        :param token: TIDAL public API token。\n        :param sessionId: TIDAL 用户会话 ID。\n        :param countryCode: 账号国家代码。\n        :param email: 账号邮箱。\n  '
+      str: 'userId'
+      str: 'subscriptionInfo'
+      str: 'subscription'
+      str: 'subscriptionFetchedAt'
+      str: 'isLoggedIn'
+      str: 'userId'
+      str: 'userName'
+      str: 'email'
+      str: 'token'
+      str: 'sessionId'
+      str: 'countryCode'
+      str: 'subscription'
+      str: 'subscriptionInfo'
+      str: 'expiresIn'
+      str: 'tokenUpdatedAt'
+      str: 'tokenExpiresAt'
+      str: 'subscriptionFetchedAt'
+      str: 'supportReplayGain'
+      str: 'showAutoplay'
+      str: 'isLoggedIn'
+
+  def LPTidalStore.clearAllUserContent(self)  line 4001
+    names: _collection_state, clearContent, _home_state, resetHomeCache, _search_state, clearResults, _favorite_state, clear, _detail_states, values, _see_all_states
+      str: '\n        清空全部用户相关业务状态，登出时统一调用。\n\n        覆盖首页、收藏页、搜索、收藏权威态、各详情页和 SeeAll 页缓存，\n        保证账号切换或登出后不残留上一个用户的数据。\n\n        :return: None。\n        '
+
+  def LPTidalStore.setSubscriptionInfo(self, subscription)  line 4021
+    names: dict, _account_state, get, time, _collection_state, setSubscriptionInfo, accountStateChanged, emit
+      str: '\n        更新当前账号订阅展示信息，并记录本次成功拉取时间戳供 TTL 判断。\n\n        :param subscription: 订阅信息。\n        :return: None。\n        '
+      str: 'subscriptionInfo'
+      str: 'subscription'
+      str: 'subscriptionFetchedAt'
+
+  def LPTidalStore._intValue(self, value)  line 4039
+    names: int, float, str, strip, Exception
+      str: '\n        将账号状态数字字段转换为 int。\n\n        :param value: 原始字段值。\n        :return: 可转换时返回整数，否则返回 0。\n        '
+
+  def LPTidalStore._floatValue(self, value)  line 4051
+    names: float, str, strip, Exception
+      str: '\n        将账号状态时间字段转换为 float。\n\n        :param value: 原始字段值。\n        :return: 可转换时返回浮点数，否则返回 0。\n        '
+
+  def LPTidalStore.activateHomeState(self)  line 4063
+    names: _home_state, activate
+      str: '\n        激活首页状态。\n\n        :return: None。\n        '
+
+  def LPTidalStore.deactivateHomeState(self)  line 4071
+    names: _home_state, deactivate
+      str: '\n        失活首页状态。\n\n        :return: None。\n        '
+
+  def LPTidalStore.activateSearchState(self)  line 4079
+    names: _search_state, activate
+      str: '激活搜索状态。'
+
+  def LPTidalStore.deactivateSearchState(self)  line 4083
+    names: _search_state, deactivate
+      str: '失活搜索状态。'
+
+  def LPTidalStore.activateCollectionState(self)  line 4087
+    names: _collection_state, activate
+      str: '\n        激活我的收藏状态。\n\n        :return: None。\n        '
+
+  def LPTidalStore.deactivateCollectionState(self)  line 4095
+    names: _collection_state, deactivate
+      str: '\n        失活我的收藏状态。\n\n        :return: None。\n        '
+
+  def LPTidalStore.acquireAlbumDetailState(self, itemId)  line 4103
+    names: _acquireDetailState, LPTidalAlbumDetailState
+      str: '\n        获取专辑详情状态。\n\n        :param itemId: 专辑 ID。\n        :return: 专辑详情状态对象。\n        '
+      str: 'album'
+
+  def LPTidalStore.acquireArtistDetailState(self, itemId)  line 4112
+    names: _acquireDetailState, LPTidalArtistDetailState
+      str: '\n        获取艺人详情状态。\n\n        :param itemId: 艺人 ID。\n        :return: 艺人详情状态对象。\n        '
+      str: 'artist'
+
+  def LPTidalStore.acquirePlaylistDetailState(self, itemId)  line 4121
+    names: _acquireDetailState, LPTidalPlaylistDetailState
+      str: '\n        获取歌单详情状态。\n\n        :param itemId: 歌单 ID。\n        :return: 歌单详情状态对象。\n        '
+      str: 'playlist'
+
+  def LPTidalStore.acquireVideoDetailState(self, itemId)  line 4130
+    names: _acquireDetailState, LPTidalVideoDetailState
+      str: '\n        获取视频详情状态。\n\n        :param itemId: 视频 ID。\n        :return: 视频详情状态对象。\n        '
+      str: 'video'
+
+  def LPTidalStore.acquireGenreDetailState(self, itemId)  line 4139
+    names: _acquireDetailState, LPTidalGenreDetailState
+      str: '\n        获取流派详情状态。\n\n        :param itemId: 流派路径或 ID。\n        :return: 流派详情状态对象。\n        '
+      str: 'genre'
+
+  def LPTidalStore.acquireMoodDetailState(self, itemId)  line 4148
+    names: _acquireDetailState, LPTidalGenreDetailState
+      str: '\n        获取心情详情状态。\n\n        :param itemId: 心情路径或 ID。\n        :return: 心情详情状态对象。\n        '
+      str: 'mood'
+
+  def LPTidalStore.acquireArtistRadioDetailState(self, itemId)  line 4157
+    names: _acquireDetailState, LPTidalArtistRadioDetailState
+      str: '\n        获取艺人电台详情状态。\n\n        :param itemId: 艺人 ID。\n        :return: 艺人电台详情状态对象。\n        '
+      str: 'artist_radio'
+
+  def LPTidalStore.acquireMixDetailState(self, itemId)  line 4166
+    names: _acquireDetailState, LPTidalMixDetailState
+      str: '\n        获取 Mix 详情状态。\n\n        :param itemId: Mix ID。\n        :return: Mix 详情状态对象。\n        '
+      str: 'mix'
+
+  def LPTidalStore.acquireSeeAllState(self, descriptor)  line 4175
+    names: cacheKey, _see_all_states, get, LPTidalSeeAllState, descriptorChanged, connect, _emitSeeAllStateChanged, itemsChanged, filteredItemsChanged, loadingStateChanged, pagingStateChanged, errorMessageChanged, filterTextChanged, viewModeChanged, sortChanged, revisionChanged, replaceDescriptor, touch
+      str: '\n        获取或创建 See All 状态。\n\n        :param descriptor: See All 数据源描述。\n        :return: See All 状态对象。\n        '
+      str: 'parent'
+
+  def LPTidalStore.activateDetailState(self, cacheKey)  line 4202
+    names: _detail_states, get, str, activate
+      str: '\n        激活指定详情状态。\n\n        :param cacheKey: 状态缓存键。\n        :return: None。\n        '
+
+  def LPTidalStore.deactivateDetailState(self, cacheKey)  line 4213
+    names: _detail_states, get, str, deactivate
+      str: '\n        失活指定详情状态。\n\n        :param cacheKey: 状态缓存键。\n        :return: None。\n        '
+
+  def LPTidalStore.activateSeeAllState(self, cacheKey)  line 4224
+    names: _see_all_states, get, str, activate
+      str: '\n        激活指定 See All 状态。\n\n        :param cacheKey: 状态缓存键。\n        :return: None。\n        '
+
+  def LPTidalStore.deactivateSeeAllState(self, cacheKey)  line 4235
+    names: _see_all_states, get, str, deactivate
+      str: '\n        失活指定 See All 状态。\n\n        :param cacheKey: 状态缓存键。\n        :return: None。\n        '
+
+  def LPTidalStore._forwardFavoriteRevisionChanged(self)  line 4246
+    names: _home_state, favoriteRevision, _favorite_revision, favoriteRevisionChanged, emit
+      str: '\n        转发首页收藏修订号变化。\n\n        :return: None。\n        '
+
+  def LPTidalStore._handleFavoriteStateChanged(self)  line 4255
+    names: syncFavoriteFlagsFromState, _emitFavoriteStateChanged
+      str: '\n        收藏权威状态变化后同步所有页面模型。\n\n        :return: None。\n        '
+
+  def LPTidalStore._emitFavoriteStateChanged(self)  line 4264
+    names: favoriteStateChanged, emit
+      str: '\n        转发收藏权威状态变化。\n\n        :return: None。\n        '
+
+  def LPTidalStore._favoriteFlagModels(self)  line 4272
+    names: set, object, _home_state, _search_state, _collection_state, _trackedImageModels, _detail_states, values, _see_all_states
+      str: '\n        返回所有需要同步收藏状态的已加载列表模型。\n\n        :return: 列表模型集合。\n        '
+      str: 'model'
+      str: 'return'
+      str: 'LPTidalStore._favoriteFlagModels.<locals>.add_model'
+
+    def LPTidalStore._favoriteFlagModels.add_model(model)  line 4281
+      names: isinstance, LPTidalListModel, id, add, append
+        str: '\n            添加未重复的列表模型。\n\n            :param model: 候选模型。\n            :return: None。\n            '
+
+  def LPTidalStore._syncFavoriteListModel(self, model)  line 4307
+    names: list, getattr, isinstance, dict, str, get, strip, lower, _favorite_state, favoriteTypeForItem, isFavorite, bool, updateItem
+      str: '\n        同步单个列表模型中的收藏字段。\n\n        :param model: 列表模型。\n        :return: 发生变化返回 True。\n        '
+      str: '_items'
+      str: 'itemId'
+      str: 'itemType'
+      str: 'isFavorite'
+
+  def LPTidalStore._syncDetailInfoFavoriteFlags(self)  line 4329
+    names: _detail_states, values, getattr, isinstance, dict, str, get, strip, lower, _favorite_state, favoriteTypeForItem, isFavorite, bool, detailInfoChanged, emit, revisionChanged
+      str: '\n        同步详情页头部信息中的收藏字段。\n\n        :return: 发生变化返回 True。\n        '
+      str: '_detailInfo'
+      str: 'itemId'
+      str: 'itemType'
+      str: 'isFavorite'
+
+  def LPTidalStore._emitHomeStateChanged(self)  line 4353
+    names: homeStateChanged, emit
+      str: '\n        转发首页状态变化。\n\n        :return: None。\n        '
+
+  def LPTidalStore._emitSearchStateChanged(self)  line 4361
+    names: searchStateChanged, emit
+      str: '\n        转发搜索状态变化。\n\n        :return: None。\n        '
+
+  def LPTidalStore._emitCollectionStateChanged(self)  line 4369
+    names: collectionStateChanged, emit
+      str: '\n        转发收藏页状态变化。\n\n        :return: None。\n        '
+
+  def LPTidalStore._emitSeeAllStateChanged(self)  line 4377
+    names: seeAllStateChanged, emit
+      str: '\n        转发 See All 状态变化。\n\n        :return: None。\n        '
+
+  def LPTidalStore._acquireDetailState(self, prefix, itemId, stateClass)  line 4385
+    names: str, strip, _detail_states, get, isinstance, touch
+      str: '\n        获取或创建详情状态。\n\n        :param prefix: 状态前缀。\n        :param itemId: 条目 ID。\n        :param stateClass: 状态类。\n        :return: 详情状态对象。\n        '
+      str: '::'
+      str: 'parent'

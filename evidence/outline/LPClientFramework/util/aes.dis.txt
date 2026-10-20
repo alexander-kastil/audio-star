@@ -1,0 +1,356 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (None)
+              4 IMPORT_NAME              0 (base64)
+              6 STORE_NAME               0 (base64)
+
+  2           8 LOAD_CONST               0 (0)
+             10 LOAD_CONST               2 (('AES',))
+             12 IMPORT_NAME              1 (Crypto.Cipher)
+             14 IMPORT_FROM              2 (AES)
+             16 STORE_NAME               2 (AES)
+             18 POP_TOP
+
+  9          20 LOAD_BUILD_CLASS
+             22 LOAD_CONST               3 (<code object AESCipher at 0x000001F324E763A0, file "LPClientFramework\util\aes.py", line 9>)
+             24 LOAD_CONST               4 ('AESCipher')
+             26 MAKE_FUNCTION            0
+             28 LOAD_CONST               4 ('AESCipher')
+             30 LOAD_NAME                3 (object)
+             32 CALL_FUNCTION            3
+             34 STORE_NAME               4 (AESCipher)
+
+104          36 LOAD_NAME                5 (__name__)
+             38 LOAD_CONST               5 ('__main__')
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       64
+
+112          44 LOAD_NAME                4 (AESCipher)
+             46 LOAD_METHOD              6 (encrypt2)
+             48 LOAD_CONST               6 ('FF98F7F4DE2A98B5')
+             50 LOAD_CONST               7 ('QOc59BL8NEGEb7PNh3iyl5DLhQ6Twicd')
+             52 CALL_METHOD              2
+             54 STORE_NAME               7 (ret)
+
+114          56 LOAD_NAME                8 (print)
+             58 LOAD_NAME                7 (ret)
+             60 CALL_FUNCTION            1
+             62 POP_TOP
+        >>   64 LOAD_CONST               1 (None)
+             66 RETURN_VALUE
+
+=== AESCipher ===
+  9           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('AESCipher')
+              6 STORE_NAME               2 (__qualname__)
+
+ 10           8 LOAD_CONST               1 (<code object __init__ at 0x000001F324E76660, file "LPClientFramework\util\aes.py", line 10>)
+             10 LOAD_CONST               2 ('AESCipher.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+
+ 15          16 LOAD_NAME                4 (staticmethod)
+
+ 16          18 LOAD_CONST               3 (<code object encrypt at 0x000001F324E76DF0, file "LPClientFramework\util\aes.py", line 15>)
+             20 LOAD_CONST               4 ('AESCipher.encrypt')
+             22 MAKE_FUNCTION            0
+             24 CALL_FUNCTION            1
+             26 STORE_NAME               5 (encrypt)
+
+ 31          28 LOAD_NAME                4 (staticmethod)
+
+ 32          30 LOAD_NAME                6 (str)
+             32 LOAD_NAME                6 (str)
+             34 LOAD_CONST               5 (('raw', 'return'))
+             36 BUILD_CONST_KEY_MAP      2
+             38 LOAD_CONST               6 (<code object encrypt2 at 0x000001F324E76870, file "LPClientFramework\util\aes.py", line 31>)
+             40 LOAD_CONST               7 ('AESCipher.encrypt2')
+             42 MAKE_FUNCTION            4 (annotations)
+             44 CALL_FUNCTION            1
+             46 STORE_NAME               7 (encrypt2)
+
+ 67          48 LOAD_NAME                4 (staticmethod)
+
+ 68          50 LOAD_CONST               8 (<code object decrypt at 0x000001F324E762F0, file "LPClientFramework\util\aes.py", line 67>)
+             52 LOAD_CONST               9 ('AESCipher.decrypt')
+             54 MAKE_FUNCTION            0
+             56 CALL_FUNCTION            1
+             58 STORE_NAME               8 (decrypt)
+
+ 76          60 LOAD_NAME                4 (staticmethod)
+
+ 77          62 LOAD_NAME                6 (str)
+             64 LOAD_NAME                6 (str)
+             66 LOAD_CONST               5 (('raw', 'return'))
+             68 BUILD_CONST_KEY_MAP      2
+             70 LOAD_CONST              10 (<code object decrypt2 at 0x000001F324E76500, file "LPClientFramework\util\aes.py", line 76>)
+             72 LOAD_CONST              11 ('AESCipher.decrypt2')
+             74 MAKE_FUNCTION            4 (annotations)
+             76 CALL_FUNCTION            1
+             78 STORE_NAME               9 (decrypt2)
+             80 LOAD_CONST              12 (None)
+             82 RETURN_VALUE
+
+=== AESCipher.__init__ ===
+ 13           0 LOAD_CONST               0 (None)
+              2 RETURN_VALUE
+
+=== AESCipher.encrypt ===
+ 17           0 LOAD_GLOBAL              0 (bytes)
+              2 LOAD_CONST               1 (16)
+              4 CALL_FUNCTION            1
+              6 LOAD_METHOD              1 (decode)
+              8 CALL_METHOD              0
+             10 STORE_FAST               2 (iv)
+
+ 18          12 LOAD_GLOBAL              2 (AES)
+             14 LOAD_METHOD              3 (new)
+             16 LOAD_FAST                0 (key)
+             18 LOAD_METHOD              4 (encode)
+             20 LOAD_CONST               2 ('utf8')
+             22 CALL_METHOD              1
+             24 LOAD_GLOBAL              2 (AES)
+             26 LOAD_ATTR                5 (MODE_CBC)
+             28 LOAD_FAST                2 (iv)
+             30 LOAD_METHOD              4 (encode)
+             32 LOAD_CONST               2 ('utf8')
+             34 CALL_METHOD              1
+             36 CALL_METHOD              3
+             38 STORE_FAST               3 (cipher)
+
+ 19          40 LOAD_CONST               1 (16)
+             42 STORE_FAST               4 (length)
+
+ 20          44 LOAD_GLOBAL              6 (len)
+             46 LOAD_FAST                1 (raw)
+             48 LOAD_METHOD              4 (encode)
+             50 LOAD_CONST               3 ('utf-8')
+             52 CALL_METHOD              1
+             54 CALL_FUNCTION            1
+             56 STORE_FAST               5 (count)
+
+ 21          58 LOAD_FAST                5 (count)
+             60 LOAD_FAST                4 (length)
+             62 BINARY_MODULO
+             64 LOAD_CONST               4 (0)
+             66 COMPARE_OP               3 (!=)
+             68 POP_JUMP_IF_FALSE       84
+
+ 22          70 LOAD_FAST                4 (length)
+             72 LOAD_FAST                5 (count)
+             74 LOAD_FAST                4 (length)
+             76 BINARY_MODULO
+             78 BINARY_SUBTRACT
+             80 STORE_FAST               6 (add)
+             82 JUMP_FORWARD             4 (to 88)
+
+ 24     >>   84 LOAD_CONST               4 (0)
+             86 STORE_FAST               6 (add)
+
+ 25     >>   88 LOAD_FAST                1 (raw)
+             90 LOAD_CONST               5 ('\x00')
+             92 LOAD_FAST                6 (add)
+             94 BINARY_MULTIPLY
+             96 BINARY_ADD
+             98 STORE_FAST               1 (raw)
+
+ 27         100 LOAD_FAST                3 (cipher)
+            102 LOAD_METHOD              7 (encrypt)
+            104 LOAD_FAST                1 (raw)
+            106 LOAD_METHOD              4 (encode)
+            108 LOAD_CONST               3 ('utf-8')
+            110 CALL_METHOD              1
+            112 CALL_METHOD              1
+            114 STORE_FAST               7 (encrypted)
+
+ 28         116 LOAD_GLOBAL              8 (base64)
+            118 LOAD_METHOD              9 (b64encode)
+            120 LOAD_FAST                7 (encrypted)
+            122 CALL_METHOD              1
+            124 STORE_FAST               8 (encoded)
+
+ 29         126 LOAD_GLOBAL             10 (str)
+            128 LOAD_FAST                8 (encoded)
+            130 LOAD_CONST               3 ('utf-8')
+            132 CALL_FUNCTION            2
+            134 RETURN_VALUE
+
+=== AESCipher.encrypt2 ===
+ 43           0 LOAD_FAST                0 (key)
+              2 LOAD_METHOD              0 (encode)
+              4 LOAD_CONST               1 ('utf-8')
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (key_bytes)
+
+ 44          10 LOAD_FAST                2 (key_bytes)
+             12 LOAD_CONST               2 (b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+             14 BINARY_ADD
+             16 LOAD_CONST               3 (None)
+             18 LOAD_CONST               4 (16)
+             20 BUILD_SLICE              2
+             22 BINARY_SUBSCR
+             24 STORE_FAST               2 (key_bytes)
+
+ 47          26 LOAD_CONST               2 (b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+             28 STORE_FAST               3 (iv)
+
+ 50          30 LOAD_FAST                1 (raw)
+             32 LOAD_METHOD              0 (encode)
+             34 LOAD_CONST               1 ('utf-8')
+             36 CALL_METHOD              1
+             38 STORE_FAST               4 (data)
+
+ 51          40 LOAD_GLOBAL              1 (len)
+             42 LOAD_FAST                4 (data)
+             44 CALL_FUNCTION            1
+             46 STORE_FAST               5 (data_len)
+
+ 52          48 LOAD_GLOBAL              2 (AES)
+             50 LOAD_ATTR                3 (block_size)
+             52 LOAD_FAST                5 (data_len)
+             54 LOAD_GLOBAL              2 (AES)
+             56 LOAD_ATTR                3 (block_size)
+             58 BINARY_MODULO
+             60 BINARY_SUBTRACT
+             62 STORE_FAST               6 (diff)
+
+ 55          64 LOAD_FAST                6 (diff)
+             66 LOAD_CONST               5 (0)
+             68 COMPARE_OP               4 (>)
+             70 POP_JUMP_IF_FALSE       96
+             72 LOAD_FAST                6 (diff)
+             74 LOAD_GLOBAL              2 (AES)
+             76 LOAD_ATTR                3 (block_size)
+             78 COMPARE_OP               1 (<=)
+             80 POP_JUMP_IF_FALSE       96
+
+ 56          82 LOAD_FAST                4 (data)
+             84 LOAD_CONST               6 (b'\x00')
+             86 LOAD_FAST                6 (diff)
+             88 BINARY_MULTIPLY
+             90 BINARY_ADD
+             92 STORE_FAST               7 (padded)
+             94 JUMP_FORWARD             4 (to 100)
+
+ 58     >>   96 LOAD_FAST                4 (data)
+             98 STORE_FAST               7 (padded)
+
+ 61     >>  100 LOAD_GLOBAL              2 (AES)
+            102 LOAD_METHOD              4 (new)
+            104 LOAD_FAST                2 (key_bytes)
+            106 LOAD_GLOBAL              2 (AES)
+            108 LOAD_ATTR                5 (MODE_CBC)
+            110 LOAD_FAST                3 (iv)
+            112 CALL_METHOD              3
+            114 STORE_FAST               8 (cipher)
+
+ 62         116 LOAD_FAST                8 (cipher)
+            118 LOAD_METHOD              6 (encrypt)
+            120 LOAD_FAST                7 (padded)
+            122 CALL_METHOD              1
+            124 STORE_FAST               9 (encrypted)
+
+ 65         126 LOAD_GLOBAL              7 (base64)
+            128 LOAD_METHOD              8 (b64encode)
+            130 LOAD_FAST                9 (encrypted)
+            132 CALL_METHOD              1
+            134 LOAD_METHOD              9 (decode)
+            136 LOAD_CONST               1 ('utf-8')
+            138 CALL_METHOD              1
+            140 RETURN_VALUE
+
+=== AESCipher.decrypt ===
+ 69           0 LOAD_GLOBAL              0 (bytes)
+              2 LOAD_CONST               1 (16)
+              4 CALL_FUNCTION            1
+              6 LOAD_METHOD              1 (decode)
+              8 CALL_METHOD              0
+             10 STORE_FAST               2 (iv)
+
+ 70          12 LOAD_GLOBAL              2 (base64)
+             14 LOAD_METHOD              3 (b64decode)
+             16 LOAD_FAST                1 (raw)
+             18 CALL_METHOD              1
+             20 STORE_FAST               3 (decryptedBytes)
+
+ 71          22 LOAD_GLOBAL              4 (AES)
+             24 LOAD_METHOD              5 (new)
+             26 LOAD_FAST                0 (key)
+             28 LOAD_METHOD              6 (encode)
+             30 LOAD_CONST               2 ('utf8')
+             32 CALL_METHOD              1
+             34 LOAD_GLOBAL              4 (AES)
+             36 LOAD_ATTR                7 (MODE_CBC)
+             38 LOAD_FAST                2 (iv)
+             40 LOAD_METHOD              6 (encode)
+             42 LOAD_CONST               2 ('utf8')
+             44 CALL_METHOD              1
+             46 CALL_METHOD              3
+             48 STORE_FAST               4 (cipher)
+
+ 73          50 LOAD_FAST                4 (cipher)
+             52 LOAD_METHOD              8 (decrypt)
+             54 LOAD_FAST                3 (decryptedBytes)
+             56 CALL_METHOD              1
+             58 STORE_FAST               5 (decrypted)
+
+ 74          60 LOAD_FAST                5 (decrypted)
+             62 LOAD_METHOD              1 (decode)
+             64 LOAD_CONST               3 ('utf-8')
+             66 LOAD_CONST               4 ('ignore')
+             68 CALL_METHOD              2
+             70 LOAD_METHOD              9 (strip)
+             72 LOAD_CONST               5 ('\x00')
+             74 CALL_METHOD              1
+             76 RETURN_VALUE
+
+=== AESCipher.decrypt2 ===
+ 87           0 LOAD_FAST                0 (key)
+              2 LOAD_METHOD              0 (encode)
+              4 LOAD_CONST               1 ('utf-8')
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (key_bytes)
+
+ 88          10 LOAD_FAST                2 (key_bytes)
+             12 LOAD_CONST               2 (b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+             14 BINARY_ADD
+             16 LOAD_CONST               3 (None)
+             18 LOAD_CONST               4 (16)
+             20 BUILD_SLICE              2
+             22 BINARY_SUBSCR
+             24 STORE_FAST               2 (key_bytes)
+
+ 91          26 LOAD_CONST               2 (b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+             28 STORE_FAST               3 (iv)
+
+ 94          30 LOAD_GLOBAL              1 (base64)
+             32 LOAD_METHOD              2 (b64decode)
+             34 LOAD_FAST                1 (raw)
+             36 CALL_METHOD              1
+             38 STORE_FAST               4 (encrypted)
+
+ 97          40 LOAD_GLOBAL              3 (AES)
+             42 LOAD_METHOD              4 (new)
+             44 LOAD_FAST                2 (key_bytes)
+             46 LOAD_GLOBAL              3 (AES)
+             48 LOAD_ATTR                5 (MODE_CBC)
+             50 LOAD_FAST                3 (iv)
+             52 CALL_METHOD              3
+             54 STORE_FAST               5 (cipher)
+
+ 98          56 LOAD_FAST                5 (cipher)
+             58 LOAD_METHOD              6 (decrypt)
+             60 LOAD_FAST                4 (encrypted)
+             62 CALL_METHOD              1
+             64 STORE_FAST               6 (decrypted)
+
+101          66 LOAD_FAST                6 (decrypted)
+             68 LOAD_METHOD              7 (rstrip)
+             70 LOAD_CONST               5 (b'\x00')
+             72 CALL_METHOD              1
+             74 LOAD_METHOD              8 (decode)
+             76 LOAD_CONST               1 ('utf-8')
+             78 CALL_METHOD              1
+             80 RETURN_VALUE

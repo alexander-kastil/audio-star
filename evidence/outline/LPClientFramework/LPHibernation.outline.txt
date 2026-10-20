@@ -1,0 +1,128 @@
+# module LPClientFramework.LPHibernation
+
+[module] names: __doc__, ctypes, enum, platform, abc, ABC, abstractmethod, LPClientFramework.LPUtility, logger, LPHibernation, IntEnum, WinState, LPWinHibernation, Enum, MacState, LPMacHibernation, LPHibernationManager
+  str: '\n@Time ： 2025/3/11 16:00\n@Auth ： Chris\n@File ：LPNeverSleep.py\n@Desc:\n'
+  str: 'ABC'
+  str: 'abstractmethod'
+  str: 'logger'
+  str: 'LPHibernation'
+  str: 'WinState'
+  str: 'LPWinHibernation'
+  str: 'MacState'
+  str: 'LPMacHibernation'
+  str: 'LPHibernationManager'
+
+def LPHibernation()  line 17
+  names: __name__, __module__, __qualname__, abstractmethod, preventSleep, keepDisplay, restoreState
+    str: 'LPHibernation'
+    str: 'LPHibernation.preventSleep'
+    str: 'LPHibernation.keepDisplay'
+    str: 'preventSleep'
+    str: 'LPHibernation.restoreState'
+    str: 'preventSleep'
+
+  def LPHibernation.preventSleep(self)  line 19
+
+  def LPHibernation.keepDisplay(self)  line 23
+
+  def LPHibernation.restoreState(self, eventType)  line 27
+
+def WinState()  line 33
+  names: __name__, __module__, __qualname__, ES_CONTINUOUS, ES_SYSTEM_REQUIRED, ES_DISPLAY_REQUIRED
+    str: 'WinState'
+
+def LPWinHibernation()  line 39
+  names: __name__, __module__, __qualname__, SYSTEM, __init__, getState, preventSleep, keepDisplay, restoreState, __classcell__
+    str: 'LPWinHibernation'
+    str: 'Windows'
+    str: 'LPWinHibernation.__init__'
+    str: 'LPWinHibernation.getState'
+    str: 'LPWinHibernation.preventSleep'
+    str: 'LPWinHibernation.keepDisplay'
+    str: 'preventSleep'
+    str: 'LPWinHibernation.restoreState'
+    str: 'preventSleep'
+
+  def LPWinHibernation.__init__(self)  line 42
+    names: super, __init__, ctypes, WinDLL, kernel32
+      str: 'kernel32.dll'
+
+  def LPWinHibernation.getState(self)  line 46
+    names: kernel32, SetThreadExecutionState, GetLastError
+
+  def LPWinHibernation.preventSleep(self)  line 51
+    names: kernel32, SetThreadExecutionState, WinState, ES_CONTINUOUS, value, ES_SYSTEM_REQUIRED, logger, debug, hex
+      str: 'win preventSleep result: %s'
+
+  def LPWinHibernation.keepDisplay(self)  line 56
+    names: kernel32, SetThreadExecutionState, WinState, ES_CONTINUOUS, value, ES_SYSTEM_REQUIRED, ES_DISPLAY_REQUIRED, logger, debug, hex
+      str: 'win keepDisplay result: %s'
+
+  def LPWinHibernation.restoreState(self, eventType)  line 63
+    names: kernel32, SetThreadExecutionState, WinState, ES_CONTINUOUS, value, logger, debug, hex
+      str: 'win restoreState result: %s'
+
+def MacState()  line 69
+  names: __name__, __module__, __qualname__, IOPM_ASSERTION_LEVEL_ON, IOPM_ASSERTION_LEVEL_OFF
+    str: 'MacState'
+
+def LPMacHibernation()  line 73
+  names: __name__, __module__, __qualname__, SYSTEM, __init__, _setupIOKitFramework, _stringToCFString, preventSleep, keepDisplay, restoreState, __classcell__
+    str: 'LPMacHibernation'
+    str: 'Darwin'
+    str: 'LPMacHibernation.__init__'
+    str: 'LPMacHibernation._setupIOKitFramework'
+    str: 'LPMacHibernation._stringToCFString'
+    str: 'LPMacHibernation.preventSleep'
+    str: 'LPMacHibernation.keepDisplay'
+    str: 'preventSleep'
+    str: 'LPMacHibernation.restoreState'
+    str: 'preventSleep'
+
+  def LPMacHibernation.__init__(self)  line 76
+    names: super, __init__, ctypes, c_uint32, preventSleepAssertionID, keepDisplayAssertionID, _stringToCFString, preventSleepAssertionType, preventSleepAssertionName, keepDisplayAssertionType, keepDisplayAssertionName, _setupIOKitFramework, IOKit
+      str: 'PreventSystemSleep'
+      str: 'SystemSleep'
+      str: 'PreventUserIdleDisplaySleep'
+      str: 'DisplaySleep'
+
+  def LPMacHibernation._setupIOKitFramework(self)  line 91
+    names: ctypes, cdll, LoadLibrary, c_void_p, c_uint32, POINTER, IOPMAssertionCreateWithName, argtypes, IOPMAssertionRelease
+      str: '/System/Library/Frameworks/IOKit.framework/IOKit'
+
+  def LPMacHibernation._stringToCFString(self, string)  line 104
+    names: objc, CoreFoundation, pyobjc_id, CFStringCreateWithCString, encode, kCFStringEncodingUTF8, nsstring
+      str: 'utf-8'
+
+  def LPMacHibernation.preventSleep(self)  line 110
+    names: logger, debug, IOKit, IOPMAssertionCreateWithName, preventSleepAssertionType, MacState, IOPM_ASSERTION_LEVEL_ON, value, preventSleepAssertionName, ctypes, byref, preventSleepAssertionID
+      str: '===preventSleep==='
+      str: 'mac created power assertion --> preventSleep: status %s, id %s'
+
+  def LPMacHibernation.keepDisplay(self)  line 120
+    names: logger, debug, preventSleep, IOKit, IOPMAssertionCreateWithName, keepDisplayAssertionType, MacState, IOPM_ASSERTION_LEVEL_ON, value, keepDisplayAssertionName, ctypes, byref, preventSleepAssertionID
+      str: '===keepDisplay==='
+      str: 'mac created power assertion --> keepDisplay: status %s, id %s'
+
+  def LPMacHibernation.restoreState(self, eventType)  line 131
+    names: IOKit, IOPMAssertionRelease, preventSleepAssertionID, logger, debug, keepDisplayAssertionID
+      str: 'preventSleep'
+      str: 'mac release power assertion: status %s  eventType %s'
+      str: 'keepDisplay'
+      str: 'mac release power assertion: status ret1 %s  eventType %s'
+      str: 'mac release power assertion: status ret2 %s  eventType %s'
+      str: 'invalid eventType'
+
+def LPHibernationManager()  line 145
+  names: __name__, __module__, __qualname__, __init__, classmethod, instance
+    str: 'LPHibernationManager'
+    str: 'LPHibernationManager.__init__'
+    str: 'LPHibernationManager.instance'
+
+  def LPHibernationManager.__init__(self)  line 147
+
+  def LPHibernationManager.instance(cls)  line 150
+    names: platform, system, LPWinHibernation, LPMacHibernation, logger, debug, Exception
+      str: 'Windows'
+      str: 'Darwin'
+      str: 'LPHibernationManager Unsupported system: '

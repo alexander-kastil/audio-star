@@ -1,0 +1,288 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (('QCoreApplication',))
+              4 IMPORT_NAME              0 (PyQt6.QtCore)
+              6 IMPORT_FROM              1 (QCoreApplication)
+              8 STORE_NAME               1 (QCoreApplication)
+             10 POP_TOP
+
+  3          12 LOAD_CONST               0 (0)
+             14 LOAD_CONST               2 (('LPAudioOutEnum',))
+             16 IMPORT_NAME              2 (LPClientFramework.LPPublicDefine)
+             18 IMPORT_FROM              3 (LPAudioOutEnum)
+             20 STORE_NAME               3 (LPAudioOutEnum)
+             22 POP_TOP
+
+  6          24 LOAD_CONST               3 (<code object makeAudioOutputArray at 0x000001F3253DA920, file "LPClientFramework\LPDeviceAudioOutput.py", line 6>)
+             26 LOAD_CONST               4 ('makeAudioOutputArray')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               4 (makeAudioOutputArray)
+
+ 31          32 LOAD_NAME                1 (QCoreApplication)
+             34 LOAD_METHOD              5 (translate)
+             36 LOAD_CONST               5 ('DeviceSetting')
+             38 LOAD_CONST               6 ('Optical Out')
+             40 CALL_METHOD              2
+
+ 32          42 LOAD_NAME                3 (LPAudioOutEnum)
+             44 LOAD_ATTR                6 (AudioOutput_SPDIF)
+
+ 30          46 LOAD_CONST               7 (('title', 'type'))
+             48 BUILD_CONST_KEY_MAP      2
+
+ 35          50 LOAD_NAME                1 (QCoreApplication)
+             52 LOAD_METHOD              5 (translate)
+             54 LOAD_CONST               5 ('DeviceSetting')
+             56 LOAD_CONST               8 ('Aux Out')
+             58 CALL_METHOD              2
+
+ 36          60 LOAD_NAME                3 (LPAudioOutEnum)
+             62 LOAD_ATTR                7 (AudioOutput_AuxOutDefault)
+
+ 34          64 LOAD_CONST               7 (('title', 'type'))
+             66 BUILD_CONST_KEY_MAP      2
+
+ 39          68 LOAD_NAME                1 (QCoreApplication)
+             70 LOAD_METHOD              5 (translate)
+             72 LOAD_CONST               5 ('DeviceSetting')
+             74 LOAD_CONST               9 ('COAX Out')
+             76 CALL_METHOD              2
+
+ 40          78 LOAD_NAME                3 (LPAudioOutEnum)
+             80 LOAD_ATTR                8 (AudioOutput_COAX)
+
+ 38          82 LOAD_CONST               7 (('title', 'type'))
+             84 BUILD_CONST_KEY_MAP      2
+
+ 43          86 LOAD_NAME                1 (QCoreApplication)
+             88 LOAD_METHOD              5 (translate)
+             90 LOAD_CONST               5 ('DeviceSetting')
+             92 LOAD_CONST              10 ('Headphone Out')
+             94 CALL_METHOD              2
+
+ 44          96 LOAD_NAME                3 (LPAudioOutEnum)
+             98 LOAD_ATTR                9 (AudioOutput_PhoneJack)
+
+ 42         100 LOAD_CONST               7 (('title', 'type'))
+            102 BUILD_CONST_KEY_MAP      2
+
+ 47         104 LOAD_CONST              11 ('HDMI')
+
+ 48         106 LOAD_NAME                3 (LPAudioOutEnum)
+            108 LOAD_ATTR               10 (AudioOutput_HDMI)
+
+ 46         110 LOAD_CONST               7 (('title', 'type'))
+            112 BUILD_CONST_KEY_MAP      2
+
+ 51         114 LOAD_NAME                1 (QCoreApplication)
+            116 LOAD_METHOD              5 (translate)
+            118 LOAD_CONST               5 ('DeviceSetting')
+            120 LOAD_CONST              12 ('Bluetooth')
+            122 CALL_METHOD              2
+
+ 52         124 LOAD_NAME                3 (LPAudioOutEnum)
+            126 LOAD_ATTR               11 (AudioOutput_Bluetooth)
+
+ 50         128 LOAD_CONST               7 (('title', 'type'))
+            130 BUILD_CONST_KEY_MAP      2
+
+ 55         132 LOAD_NAME                1 (QCoreApplication)
+            134 LOAD_METHOD              5 (translate)
+            136 LOAD_CONST               5 ('DeviceSetting')
+            138 LOAD_CONST              13 ('USB Out')
+            140 CALL_METHOD              2
+
+ 56         142 LOAD_NAME                3 (LPAudioOutEnum)
+            144 LOAD_ATTR               12 (AudioOutput_UacCard)
+
+ 54         146 LOAD_CONST               7 (('title', 'type'))
+            148 BUILD_CONST_KEY_MAP      2
+
+ 29         150 LOAD_CONST              14 (('AUDIO_OUTPUT_SPDIF_MODE', 'AUDIO_OUTPUT_AUX_MODE', 'AUDIO_OUTPUT_COAX_MODE', 'AUDIO_OUTPUT_PHONE_JACK_MODE', 'AUDIO_OUTPUT_HDMI_MODE', 'AUDIO_OUTPUT_BT_SOURCE_MODE', 'AUDIO_OUTPUT_UAC_CARD_MODE'))
+            152 BUILD_CONST_KEY_MAP      7
+            154 STORE_NAME              13 (outputInfoTemplate)
+            156 LOAD_CONST              15 (None)
+            158 RETURN_VALUE
+
+=== makeAudioOutputArray ===
+  7           0 LOAD_FAST                0 (device)
+              2 LOAD_ATTR                0 (isWiiMAMP)
+              4 POP_JUMP_IF_FALSE       50
+
+  8           6 LOAD_GLOBAL              1 (QCoreApplication)
+              8 LOAD_METHOD              2 (translate)
+             10 LOAD_CONST               1 ('DeviceSetting')
+             12 LOAD_CONST               2 ('Speaker Out')
+             14 CALL_METHOD              2
+             16 LOAD_GLOBAL              3 (LPAudioOutEnum)
+             18 LOAD_ATTR                4 (AudioOutput_AuxOutDefault)
+             20 LOAD_CONST               3 ('2')
+             22 LOAD_CONST               4 (('title', 'type', 'value'))
+             24 BUILD_CONST_KEY_MAP      3
+
+  9          26 LOAD_GLOBAL              1 (QCoreApplication)
+             28 LOAD_METHOD              2 (translate)
+             30 LOAD_CONST               1 ('DeviceSetting')
+             32 LOAD_CONST               5 ('Bluetooth Out')
+             34 CALL_METHOD              2
+             36 LOAD_GLOBAL              3 (LPAudioOutEnum)
+             38 LOAD_ATTR                5 (AudioOutput_Bluetooth)
+             40 LOAD_CONST               6 ('5')
+             42 LOAD_CONST               4 (('title', 'type', 'value'))
+             44 BUILD_CONST_KEY_MAP      3
+
+  8          46 BUILD_LIST               2
+             48 RETURN_VALUE
+
+ 11     >>   50 LOAD_FAST                0 (device)
+             52 LOAD_ATTR                6 (isWiiMUltra)
+             54 POP_JUMP_IF_FALSE      160
+
+ 12          56 LOAD_GLOBAL              1 (QCoreApplication)
+             58 LOAD_METHOD              2 (translate)
+             60 LOAD_CONST               1 ('DeviceSetting')
+             62 LOAD_CONST               7 ('Line Out')
+             64 CALL_METHOD              2
+             66 LOAD_GLOBAL              3 (LPAudioOutEnum)
+             68 LOAD_ATTR                4 (AudioOutput_AuxOutDefault)
+             70 LOAD_CONST               3 ('2')
+             72 LOAD_CONST               4 (('title', 'type', 'value'))
+             74 BUILD_CONST_KEY_MAP      3
+
+ 13          76 LOAD_GLOBAL              1 (QCoreApplication)
+             78 LOAD_METHOD              2 (translate)
+             80 LOAD_CONST               1 ('DeviceSetting')
+             82 LOAD_CONST               8 ('Optical Out')
+             84 CALL_METHOD              2
+             86 LOAD_GLOBAL              3 (LPAudioOutEnum)
+             88 LOAD_ATTR                7 (AudioOutput_SPDIF)
+             90 LOAD_CONST               9 ('1')
+             92 LOAD_CONST               4 (('title', 'type', 'value'))
+             94 BUILD_CONST_KEY_MAP      3
+
+ 14          96 LOAD_GLOBAL              1 (QCoreApplication)
+             98 LOAD_METHOD              2 (translate)
+            100 LOAD_CONST               1 ('DeviceSetting')
+            102 LOAD_CONST              10 ('COAX Out')
+            104 CALL_METHOD              2
+            106 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            108 LOAD_ATTR                8 (AudioOutput_COAX)
+            110 LOAD_CONST              11 ('3')
+            112 LOAD_CONST               4 (('title', 'type', 'value'))
+            114 BUILD_CONST_KEY_MAP      3
+
+ 15         116 LOAD_GLOBAL              1 (QCoreApplication)
+            118 LOAD_METHOD              2 (translate)
+            120 LOAD_CONST               1 ('DeviceSetting')
+            122 LOAD_CONST              12 ('Headphone Out')
+            124 CALL_METHOD              2
+            126 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            128 LOAD_ATTR                9 (AudioOutput_PhoneJack)
+            130 LOAD_CONST              13 ('4')
+            132 LOAD_CONST               4 (('title', 'type', 'value'))
+            134 BUILD_CONST_KEY_MAP      3
+
+ 16         136 LOAD_GLOBAL              1 (QCoreApplication)
+            138 LOAD_METHOD              2 (translate)
+            140 LOAD_CONST               1 ('DeviceSetting')
+            142 LOAD_CONST               5 ('Bluetooth Out')
+            144 CALL_METHOD              2
+            146 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            148 LOAD_ATTR                5 (AudioOutput_Bluetooth)
+            150 LOAD_CONST               6 ('5')
+            152 LOAD_CONST               4 (('title', 'type', 'value'))
+            154 BUILD_CONST_KEY_MAP      3
+
+ 12         156 BUILD_LIST               5
+            158 RETURN_VALUE
+
+ 18     >>  160 LOAD_FAST                0 (device)
+            162 LOAD_ATTR               10 (isWiiMPro)
+            164 EXTENDED_ARG             0
+            166 POP_JUMP_IF_FALSE      252
+
+ 19         168 LOAD_GLOBAL              1 (QCoreApplication)
+            170 LOAD_METHOD              2 (translate)
+            172 LOAD_CONST               1 ('DeviceSetting')
+            174 LOAD_CONST               7 ('Line Out')
+            176 CALL_METHOD              2
+            178 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            180 LOAD_ATTR                4 (AudioOutput_AuxOutDefault)
+            182 LOAD_CONST               3 ('2')
+            184 LOAD_CONST               4 (('title', 'type', 'value'))
+            186 BUILD_CONST_KEY_MAP      3
+
+ 20         188 LOAD_GLOBAL              1 (QCoreApplication)
+            190 LOAD_METHOD              2 (translate)
+            192 LOAD_CONST               1 ('DeviceSetting')
+            194 LOAD_CONST               8 ('Optical Out')
+            196 CALL_METHOD              2
+            198 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            200 LOAD_ATTR                7 (AudioOutput_SPDIF)
+            202 LOAD_CONST               9 ('1')
+            204 LOAD_CONST               4 (('title', 'type', 'value'))
+            206 BUILD_CONST_KEY_MAP      3
+
+ 21         208 LOAD_GLOBAL              1 (QCoreApplication)
+            210 LOAD_METHOD              2 (translate)
+            212 LOAD_CONST               1 ('DeviceSetting')
+            214 LOAD_CONST              10 ('COAX Out')
+            216 CALL_METHOD              2
+            218 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            220 LOAD_ATTR                8 (AudioOutput_COAX)
+            222 LOAD_CONST              11 ('3')
+            224 LOAD_CONST               4 (('title', 'type', 'value'))
+            226 BUILD_CONST_KEY_MAP      3
+
+ 22         228 LOAD_GLOBAL              1 (QCoreApplication)
+            230 LOAD_METHOD              2 (translate)
+            232 LOAD_CONST               1 ('DeviceSetting')
+            234 LOAD_CONST               5 ('Bluetooth Out')
+            236 CALL_METHOD              2
+            238 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            240 LOAD_ATTR                5 (AudioOutput_Bluetooth)
+            242 LOAD_CONST               6 ('5')
+            244 LOAD_CONST               4 (('title', 'type', 'value'))
+            246 BUILD_CONST_KEY_MAP      3
+
+ 19         248 BUILD_LIST               4
+            250 RETURN_VALUE
+
+ 24     >>  252 LOAD_GLOBAL              1 (QCoreApplication)
+            254 LOAD_METHOD              2 (translate)
+            256 LOAD_CONST               1 ('DeviceSetting')
+            258 LOAD_CONST              14 ('Aux Out')
+            260 CALL_METHOD              2
+            262 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            264 LOAD_ATTR                4 (AudioOutput_AuxOutDefault)
+            266 LOAD_CONST              15 ('AUX')
+            268 LOAD_CONST               4 (('title', 'type', 'value'))
+            270 BUILD_CONST_KEY_MAP      3
+
+ 25         272 LOAD_GLOBAL              1 (QCoreApplication)
+            274 LOAD_METHOD              2 (translate)
+            276 LOAD_CONST               1 ('DeviceSetting')
+            278 LOAD_CONST               8 ('Optical Out')
+            280 CALL_METHOD              2
+            282 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            284 LOAD_ATTR                7 (AudioOutput_SPDIF)
+            286 LOAD_CONST              16 ('SPDIF')
+            288 LOAD_CONST               4 (('title', 'type', 'value'))
+            290 BUILD_CONST_KEY_MAP      3
+
+ 26         292 LOAD_GLOBAL              1 (QCoreApplication)
+            294 LOAD_METHOD              2 (translate)
+            296 LOAD_CONST               1 ('DeviceSetting')
+            298 LOAD_CONST               5 ('Bluetooth Out')
+            300 CALL_METHOD              2
+            302 LOAD_GLOBAL              3 (LPAudioOutEnum)
+            304 LOAD_ATTR                5 (AudioOutput_Bluetooth)
+            306 LOAD_CONST              17 ('BLUETOOTH')
+            308 LOAD_CONST               4 (('title', 'type', 'value'))
+            310 BUILD_CONST_KEY_MAP      3
+
+ 24         312 BUILD_LIST               3
+            314 RETURN_VALUE
+            316 LOAD_CONST               0 (None)
+            318 RETURN_VALUE

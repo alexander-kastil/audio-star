@@ -1,0 +1,752 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (('MediaFile',))
+              4 IMPORT_NAME              0 (mediafile)
+              6 IMPORT_FROM              1 (MediaFile)
+              8 STORE_NAME               1 (MediaFile)
+             10 POP_TOP
+
+  2          12 LOAD_CONST               0 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (os)
+             18 STORE_NAME               2 (os)
+
+  3          20 LOAD_CONST               0 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (hashlib)
+             26 STORE_NAME               3 (hashlib)
+
+  4          28 LOAD_CONST               0 (0)
+             30 LOAD_CONST               3 (('Path',))
+             32 IMPORT_NAME              4 (pathlib)
+             34 IMPORT_FROM              5 (Path)
+             36 STORE_NAME               5 (Path)
+             38 POP_TOP
+
+  5          40 LOAD_CONST               0 (0)
+             42 LOAD_CONST               2 (None)
+             44 IMPORT_NAME              6 (cherrypy)
+             46 STORE_NAME               6 (cherrypy)
+
+  7          48 LOAD_CONST               0 (0)
+             50 LOAD_CONST               4 (('LPUtility',))
+             52 IMPORT_NAME              7 (LPClientFramework)
+             54 IMPORT_FROM              8 (LPUtility)
+             56 STORE_NAME               8 (LPUtility)
+             58 POP_TOP
+
+  8          60 LOAD_CONST               0 (0)
+             62 LOAD_CONST               5 (('logger',))
+             64 IMPORT_NAME              9 (LPClientFramework.LPUtility)
+             66 IMPORT_FROM             10 (logger)
+             68 STORE_NAME              10 (logger)
+             70 POP_TOP
+
+ 11          72 LOAD_CONST               6 (<code object _isAccessibleMusicFilePath at 0x000001F3253A2A80, file "LPClientFramework\LPMediaHttpServer.py", line 11>)
+             74 LOAD_CONST               7 ('_isAccessibleMusicFilePath')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME              11 (_isAccessibleMusicFilePath)
+
+ 23          80 LOAD_BUILD_CLASS
+             82 LOAD_CONST               8 (<code object MediaServerPage at 0x000001F324E69500, file "LPClientFramework\LPMediaHttpServer.py", line 23>)
+             84 LOAD_CONST               9 ('MediaServerPage')
+             86 MAKE_FUNCTION            0
+             88 LOAD_CONST               9 ('MediaServerPage')
+             90 CALL_FUNCTION            2
+             92 STORE_NAME              12 (MediaServerPage)
+             94 LOAD_CONST               2 (None)
+             96 RETURN_VALUE
+
+=== _isAccessibleMusicFilePath ===
+ 20           0 LOAD_GLOBAL              0 (LPUtility)
+              2 LOAD_METHOD              1 (isAccessibleLocalMusicFilePath)
+              4 LOAD_FAST                0 (filePath)
+              6 CALL_METHOD              1
+              8 RETURN_VALUE
+
+=== MediaServerPage ===
+ 23           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('MediaServerPage')
+              6 STORE_NAME               2 (__qualname__)
+
+ 24           8 LOAD_NAME                3 (cherrypy)
+             10 LOAD_ATTR                4 (expose)
+
+ 25          12 LOAD_CONST               1 (<code object index at 0x000001F3253A2EA0, file "LPClientFramework\LPMediaHttpServer.py", line 24>)
+             14 LOAD_CONST               2 ('MediaServerPage.index')
+             16 MAKE_FUNCTION            0
+             18 CALL_FUNCTION            1
+             20 STORE_NAME               5 (index)
+
+ 28          22 LOAD_NAME                3 (cherrypy)
+             24 LOAD_ATTR                4 (expose)
+
+ 29          26 LOAD_CONST               3 (<code object music at 0x000001F324E69450, file "LPClientFramework\LPMediaHttpServer.py", line 28>)
+             28 LOAD_CONST               4 ('MediaServerPage.music')
+             30 MAKE_FUNCTION            0
+             32 CALL_FUNCTION            1
+             34 STORE_NAME               6 (music)
+
+ 84          36 LOAD_NAME                3 (cherrypy)
+             38 LOAD_ATTR                4 (expose)
+
+ 85          40 LOAD_CONST               5 (<code object cover at 0x000001F324E693A0, file "LPClientFramework\LPMediaHttpServer.py", line 84>)
+             42 LOAD_CONST               6 ('MediaServerPage.cover')
+             44 MAKE_FUNCTION            0
+             46 CALL_FUNCTION            1
+             48 STORE_NAME               7 (cover)
+             50 LOAD_CONST               7 (None)
+             52 RETURN_VALUE
+
+=== MediaServerPage.index ===
+ 26           0 LOAD_CONST               1 ('WiiM Home Media Service')
+              2 RETURN_VALUE
+
+=== MediaServerPage.music ===
+ 30           0 LOAD_FAST                1 (path)
+              2 LOAD_CONST               0 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        20
+              8 LOAD_GLOBAL              0 (len)
+             10 LOAD_FAST                1 (path)
+             12 CALL_FUNCTION            1
+             14 LOAD_CONST               1 (0)
+             16 COMPARE_OP               2 (==)
+             18 POP_JUMP_IF_FALSE       32
+
+ 31     >>   20 LOAD_GLOBAL              1 (cherrypy)
+             22 LOAD_METHOD              2 (HTTPError)
+             24 LOAD_CONST               2 (404)
+             26 LOAD_CONST               3 ('File empty')
+             28 CALL_METHOD              2
+             30 RAISE_VARARGS            1
+
+ 33     >>   32 LOAD_CONST               0 (None)
+             34 STORE_FAST               2 (filePath)
+
+ 34          36 SETUP_FINALLY           20 (to 58)
+
+ 35          38 LOAD_GLOBAL              3 (bytes)
+             40 LOAD_METHOD              4 (fromhex)
+             42 LOAD_FAST                1 (path)
+             44 CALL_METHOD              1
+             46 LOAD_METHOD              5 (decode)
+             48 LOAD_CONST               4 ('utf-8')
+             50 CALL_METHOD              1
+             52 STORE_FAST               2 (filePath)
+             54 POP_BLOCK
+             56 JUMP_FORWARD            66 (to 124)
+
+ 36     >>   58 DUP_TOP
+             60 LOAD_GLOBAL              6 (Exception)
+             62 JUMP_IF_NOT_EXC_MATCH   122
+             64 POP_TOP
+             66 STORE_FAST               3 (e)
+             68 POP_TOP
+             70 SETUP_FINALLY           42 (to 114)
+
+ 37          72 LOAD_CONST               5 ('Invalid encode')
+             74 STORE_FAST               4 (reason)
+
+ 38          76 LOAD_GLOBAL              7 (logger)
+             78 LOAD_METHOD              8 (debug)
+             80 LOAD_CONST               6 ('media http server 404 reason: %s')
+             82 LOAD_FAST                4 (reason)
+             84 BINARY_MODULO
+             86 CALL_METHOD              1
+             88 POP_TOP
+
+ 39          90 LOAD_GLOBAL              1 (cherrypy)
+             92 LOAD_METHOD              2 (HTTPError)
+             94 LOAD_CONST               2 (404)
+             96 LOAD_FAST                4 (reason)
+             98 CALL_METHOD              2
+            100 RAISE_VARARGS            1
+            102 POP_BLOCK
+            104 POP_EXCEPT
+            106 LOAD_CONST               0 (None)
+            108 STORE_FAST               3 (e)
+            110 DELETE_FAST              3 (e)
+            112 JUMP_FORWARD            10 (to 124)
+        >>  114 LOAD_CONST               0 (None)
+            116 STORE_FAST               3 (e)
+            118 DELETE_FAST              3 (e)
+            120 RERAISE
+        >>  122 RERAISE
+
+ 41     >>  124 LOAD_GLOBAL              9 (_isAccessibleMusicFilePath)
+            126 LOAD_FAST                2 (filePath)
+            128 CALL_FUNCTION            1
+            130 POP_JUMP_IF_TRUE       166
+
+ 42         132 LOAD_CONST               7 ('Music dir not found: %s')
+            134 LOAD_FAST                2 (filePath)
+            136 BINARY_MODULO
+            138 STORE_FAST               4 (reason)
+
+ 43         140 LOAD_GLOBAL              7 (logger)
+            142 LOAD_METHOD              8 (debug)
+            144 LOAD_CONST               6 ('media http server 404 reason: %s')
+            146 LOAD_FAST                4 (reason)
+            148 BINARY_MODULO
+            150 CALL_METHOD              1
+            152 POP_TOP
+
+ 44         154 LOAD_GLOBAL              1 (cherrypy)
+            156 LOAD_METHOD              2 (HTTPError)
+            158 LOAD_CONST               2 (404)
+            160 LOAD_FAST                4 (reason)
+            162 CALL_METHOD              2
+            164 RAISE_VARARGS            1
+
+ 46     >>  166 LOAD_GLOBAL             10 (os)
+            168 LOAD_ATTR               11 (path)
+            170 LOAD_METHOD             12 (exists)
+            172 LOAD_FAST                2 (filePath)
+            174 CALL_METHOD              1
+            176 POP_JUMP_IF_TRUE       208
+
+ 47         178 LOAD_CONST               8 ('File not exists')
+            180 STORE_FAST               4 (reason)
+
+ 48         182 LOAD_GLOBAL              7 (logger)
+            184 LOAD_METHOD              8 (debug)
+            186 LOAD_CONST               6 ('media http server 404 reason: %s')
+            188 LOAD_FAST                4 (reason)
+            190 BINARY_MODULO
+            192 CALL_METHOD              1
+            194 POP_TOP
+
+ 49         196 LOAD_GLOBAL              1 (cherrypy)
+            198 LOAD_METHOD              2 (HTTPError)
+            200 LOAD_CONST               2 (404)
+            202 LOAD_FAST                4 (reason)
+            204 CALL_METHOD              2
+            206 RAISE_VARARGS            1
+
+ 51     >>  208 LOAD_GLOBAL             13 (Path)
+            210 LOAD_FAST                2 (filePath)
+            212 CALL_FUNCTION            1
+            214 LOAD_ATTR               14 (suffix)
+            216 LOAD_CONST               9 (1)
+            218 LOAD_CONST               0 (None)
+            220 BUILD_SLICE              2
+            222 BINARY_SUBSCR
+            224 LOAD_METHOD             15 (lower)
+            226 CALL_METHOD              0
+            228 LOAD_GLOBAL             16 (LPUtility)
+            230 LOAD_ATTR               17 (musicFileType)
+            232 CONTAINS_OP              1
+            234 EXTENDED_ARG             1
+            236 POP_JUMP_IF_FALSE      268
+
+ 52         238 LOAD_CONST              10 ('Invalid file type')
+            240 STORE_FAST               4 (reason)
+
+ 53         242 LOAD_GLOBAL              7 (logger)
+            244 LOAD_METHOD              8 (debug)
+            246 LOAD_CONST               6 ('media http server 404 reason: %s')
+            248 LOAD_FAST                4 (reason)
+            250 BINARY_MODULO
+            252 CALL_METHOD              1
+            254 POP_TOP
+
+ 54         256 LOAD_GLOBAL              1 (cherrypy)
+            258 LOAD_METHOD              2 (HTTPError)
+            260 LOAD_CONST               2 (404)
+            262 LOAD_FAST                4 (reason)
+            264 CALL_METHOD              2
+            266 RAISE_VARARGS            1
+
+ 57     >>  268 LOAD_GLOBAL              1 (cherrypy)
+            270 LOAD_ATTR               18 (request)
+            272 LOAD_ATTR               19 (headers)
+            274 LOAD_METHOD             20 (get)
+            276 LOAD_CONST              11 ('Range')
+            278 LOAD_CONST               0 (None)
+            280 CALL_METHOD              2
+            282 STORE_FAST               5 (rangeParam)
+
+ 58         284 LOAD_CONST               1 (0)
+            286 STORE_FAST               6 (start)
+
+ 59         288 LOAD_CONST              12 (-1)
+            290 STORE_FAST               7 (end)
+
+ 60         292 LOAD_FAST                5 (rangeParam)
+            294 EXTENDED_ARG             1
+            296 POP_JUMP_IF_FALSE      384
+
+ 61         298 LOAD_FAST                5 (rangeParam)
+            300 LOAD_METHOD             21 (split)
+            302 LOAD_CONST              13 ('=')
+            304 CALL_METHOD              1
+            306 LOAD_CONST               9 (1)
+            308 BINARY_SUBSCR
+            310 LOAD_METHOD             21 (split)
+            312 LOAD_CONST              14 ('-')
+            314 CALL_METHOD              1
+            316 STORE_FAST               8 (ranges)
+
+ 62         318 LOAD_GLOBAL             22 (int)
+            320 LOAD_FAST                8 (ranges)
+            322 LOAD_CONST               1 (0)
+            324 BINARY_SUBSCR
+            326 CALL_FUNCTION            1
+            328 STORE_FAST               6 (start)
+
+ 63         330 LOAD_FAST                8 (ranges)
+            332 LOAD_CONST               9 (1)
+            334 BINARY_SUBSCR
+            336 EXTENDED_ARG             1
+            338 POP_JUMP_IF_FALSE      352
+            340 LOAD_GLOBAL             22 (int)
+            342 LOAD_FAST                8 (ranges)
+            344 LOAD_CONST               9 (1)
+            346 BINARY_SUBSCR
+            348 CALL_FUNCTION            1
+            350 JUMP_FORWARD             2 (to 354)
+        >>  352 LOAD_CONST               0 (None)
+        >>  354 STORE_FAST               9 (endStr)
+
+ 64         356 LOAD_FAST                9 (endStr)
+            358 EXTENDED_ARG             1
+            360 POP_JUMP_IF_FALSE      384
+            362 LOAD_GLOBAL              0 (len)
+            364 LOAD_FAST                9 (endStr)
+            366 CALL_FUNCTION            1
+            368 LOAD_CONST               1 (0)
+            370 COMPARE_OP               4 (>)
+            372 EXTENDED_ARG             1
+            374 POP_JUMP_IF_FALSE      384
+
+ 65         376 LOAD_GLOBAL             22 (int)
+            378 LOAD_FAST                9 (endStr)
+            380 CALL_FUNCTION            1
+            382 STORE_FAST               7 (end)
+
+ 67     >>  384 LOAD_GLOBAL             23 (open)
+            386 LOAD_FAST                2 (filePath)
+            388 LOAD_CONST              15 ('rb')
+            390 CALL_FUNCTION            2
+            392 SETUP_WITH              70 (to 464)
+            394 STORE_FAST              10 (file)
+
+ 68         396 LOAD_FAST               10 (file)
+            398 LOAD_METHOD             24 (read)
+            400 CALL_METHOD              0
+            402 STORE_FAST              11 (data)
+
+ 69         404 LOAD_FAST                7 (end)
+            406 LOAD_CONST               1 (0)
+            408 COMPARE_OP               4 (>)
+            410 EXTENDED_ARG             1
+            412 POP_JUMP_IF_FALSE      428
+
+ 70         414 LOAD_FAST               11 (data)
+            416 LOAD_FAST                6 (start)
+            418 LOAD_FAST                7 (end)
+            420 BUILD_SLICE              2
+            422 BINARY_SUBSCR
+            424 STORE_FAST              11 (data)
+            426 JUMP_FORWARD            22 (to 450)
+
+ 71     >>  428 LOAD_FAST                6 (start)
+            430 LOAD_CONST               1 (0)
+            432 COMPARE_OP               4 (>)
+            434 EXTENDED_ARG             1
+            436 POP_JUMP_IF_FALSE      450
+
+ 72         438 LOAD_FAST               11 (data)
+            440 LOAD_FAST                6 (start)
+            442 LOAD_CONST               0 (None)
+            444 BUILD_SLICE              2
+            446 BINARY_SUBSCR
+            448 STORE_FAST              11 (data)
+        >>  450 POP_BLOCK
+            452 LOAD_CONST               0 (None)
+            454 DUP_TOP
+            456 DUP_TOP
+            458 CALL_FUNCTION            3
+            460 POP_TOP
+            462 JUMP_FORWARD            18 (to 482)
+        >>  464 WITH_EXCEPT_START
+            466 EXTENDED_ARG             1
+            468 POP_JUMP_IF_TRUE       472
+            470 RERAISE
+        >>  472 POP_TOP
+            474 POP_TOP
+            476 POP_TOP
+            478 POP_EXCEPT
+            480 POP_TOP
+
+ 74     >>  482 LOAD_CONST              16 ('audio/mpeg')
+            484 LOAD_GLOBAL              1 (cherrypy)
+            486 LOAD_ATTR               25 (response)
+            488 LOAD_ATTR               19 (headers)
+            490 LOAD_CONST              17 ('Content-Type')
+            492 STORE_SUBSCR
+
+ 75         494 LOAD_GLOBAL             26 (str)
+            496 LOAD_GLOBAL              0 (len)
+            498 LOAD_FAST               11 (data)
+            500 CALL_FUNCTION            1
+            502 CALL_FUNCTION            1
+            504 LOAD_GLOBAL              1 (cherrypy)
+            506 LOAD_ATTR               25 (response)
+            508 LOAD_ATTR               19 (headers)
+            510 LOAD_CONST              18 ('Content-Length')
+            512 STORE_SUBSCR
+
+ 76         514 LOAD_CONST              19 ('bytes')
+            516 LOAD_GLOBAL              1 (cherrypy)
+            518 LOAD_ATTR               25 (response)
+            520 LOAD_ATTR               19 (headers)
+            522 LOAD_CONST              20 ('Accept-Ranges')
+            524 STORE_SUBSCR
+
+ 77         526 LOAD_GLOBAL             10 (os)
+            528 LOAD_ATTR               11 (path)
+            530 LOAD_METHOD             27 (getsize)
+            532 LOAD_FAST                2 (filePath)
+            534 CALL_METHOD              1
+            536 STORE_FAST              12 (fileSize)
+
+ 78         538 LOAD_FAST                7 (end)
+            540 LOAD_CONST               1 (0)
+            542 COMPARE_OP               0 (<)
+            544 EXTENDED_ARG             2
+            546 POP_JUMP_IF_FALSE      552
+
+ 79         548 LOAD_FAST               12 (fileSize)
+            550 STORE_FAST               7 (end)
+
+ 80     >>  552 LOAD_CONST              21 ('bytes ')
+            554 LOAD_FAST                6 (start)
+            556 FORMAT_VALUE             0
+            558 LOAD_CONST              14 ('-')
+            560 LOAD_FAST                7 (end)
+            562 FORMAT_VALUE             0
+            564 LOAD_CONST              22 ('/')
+            566 LOAD_FAST               12 (fileSize)
+            568 FORMAT_VALUE             0
+            570 BUILD_STRING             6
+            572 LOAD_GLOBAL              1 (cherrypy)
+            574 LOAD_ATTR               25 (response)
+            576 LOAD_ATTR               19 (headers)
+            578 LOAD_CONST              23 ('Content-Range')
+            580 STORE_SUBSCR
+
+ 82         582 LOAD_FAST               11 (data)
+            584 RETURN_VALUE
+
+=== MediaServerPage.cover ===
+ 86           0 LOAD_FAST                1 (path)
+              2 LOAD_CONST               0 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        20
+              8 LOAD_GLOBAL              0 (len)
+             10 LOAD_FAST                1 (path)
+             12 CALL_FUNCTION            1
+             14 LOAD_CONST               1 (0)
+             16 COMPARE_OP               2 (==)
+             18 POP_JUMP_IF_FALSE       32
+
+ 87     >>   20 LOAD_GLOBAL              1 (cherrypy)
+             22 LOAD_METHOD              2 (HTTPError)
+             24 LOAD_CONST               2 (404)
+             26 LOAD_CONST               3 ('File empty')
+             28 CALL_METHOD              2
+             30 RAISE_VARARGS            1
+
+ 89     >>   32 LOAD_CONST               0 (None)
+             34 STORE_FAST               2 (filePath)
+
+ 90          36 SETUP_FINALLY           20 (to 58)
+
+ 91          38 LOAD_GLOBAL              3 (bytes)
+             40 LOAD_METHOD              4 (fromhex)
+             42 LOAD_FAST                1 (path)
+             44 CALL_METHOD              1
+             46 LOAD_METHOD              5 (decode)
+             48 LOAD_CONST               4 ('utf-8')
+             50 CALL_METHOD              1
+             52 STORE_FAST               2 (filePath)
+             54 POP_BLOCK
+             56 JUMP_FORWARD            66 (to 124)
+
+ 92     >>   58 DUP_TOP
+             60 LOAD_GLOBAL              6 (Exception)
+             62 JUMP_IF_NOT_EXC_MATCH   122
+             64 POP_TOP
+             66 STORE_FAST               3 (e)
+             68 POP_TOP
+             70 SETUP_FINALLY           42 (to 114)
+
+ 93          72 LOAD_CONST               5 ('Invalid encode')
+             74 STORE_FAST               4 (reason)
+
+ 94          76 LOAD_GLOBAL              7 (logger)
+             78 LOAD_METHOD              8 (debug)
+             80 LOAD_CONST               6 ('media http server 404 reason: %s')
+             82 LOAD_FAST                4 (reason)
+             84 BINARY_MODULO
+             86 CALL_METHOD              1
+             88 POP_TOP
+
+ 95          90 LOAD_GLOBAL              1 (cherrypy)
+             92 LOAD_METHOD              2 (HTTPError)
+             94 LOAD_CONST               2 (404)
+             96 LOAD_FAST                4 (reason)
+             98 CALL_METHOD              2
+            100 RAISE_VARARGS            1
+            102 POP_BLOCK
+            104 POP_EXCEPT
+            106 LOAD_CONST               0 (None)
+            108 STORE_FAST               3 (e)
+            110 DELETE_FAST              3 (e)
+            112 JUMP_FORWARD            10 (to 124)
+        >>  114 LOAD_CONST               0 (None)
+            116 STORE_FAST               3 (e)
+            118 DELETE_FAST              3 (e)
+            120 RERAISE
+        >>  122 RERAISE
+
+ 97     >>  124 LOAD_GLOBAL              9 (_isAccessibleMusicFilePath)
+            126 LOAD_FAST                2 (filePath)
+            128 CALL_FUNCTION            1
+            130 POP_JUMP_IF_TRUE       166
+
+ 98         132 LOAD_CONST               7 ('Music dir not found: %s')
+            134 LOAD_FAST                2 (filePath)
+            136 BINARY_MODULO
+            138 STORE_FAST               4 (reason)
+
+ 99         140 LOAD_GLOBAL              7 (logger)
+            142 LOAD_METHOD              8 (debug)
+            144 LOAD_CONST               6 ('media http server 404 reason: %s')
+            146 LOAD_FAST                4 (reason)
+            148 BINARY_MODULO
+            150 CALL_METHOD              1
+            152 POP_TOP
+
+100         154 LOAD_GLOBAL              1 (cherrypy)
+            156 LOAD_METHOD              2 (HTTPError)
+            158 LOAD_CONST               2 (404)
+            160 LOAD_FAST                4 (reason)
+            162 CALL_METHOD              2
+            164 RAISE_VARARGS            1
+
+102     >>  166 LOAD_GLOBAL             10 (os)
+            168 LOAD_ATTR               11 (path)
+            170 LOAD_METHOD             12 (exists)
+            172 LOAD_FAST                2 (filePath)
+            174 CALL_METHOD              1
+            176 POP_JUMP_IF_TRUE       208
+
+103         178 LOAD_CONST               8 ('File not exists')
+            180 STORE_FAST               4 (reason)
+
+104         182 LOAD_GLOBAL              7 (logger)
+            184 LOAD_METHOD              8 (debug)
+            186 LOAD_CONST               6 ('media http server 404 reason: %s')
+            188 LOAD_FAST                4 (reason)
+            190 BINARY_MODULO
+            192 CALL_METHOD              1
+            194 POP_TOP
+
+105         196 LOAD_GLOBAL              1 (cherrypy)
+            198 LOAD_METHOD              2 (HTTPError)
+            200 LOAD_CONST               2 (404)
+            202 LOAD_FAST                4 (reason)
+            204 CALL_METHOD              2
+            206 RAISE_VARARGS            1
+
+107     >>  208 LOAD_GLOBAL             13 (Path)
+            210 LOAD_FAST                2 (filePath)
+            212 CALL_FUNCTION            1
+            214 LOAD_ATTR               14 (suffix)
+            216 LOAD_CONST               9 (1)
+            218 LOAD_CONST               0 (None)
+            220 BUILD_SLICE              2
+            222 BINARY_SUBSCR
+            224 LOAD_METHOD             15 (lower)
+            226 CALL_METHOD              0
+            228 LOAD_GLOBAL             16 (LPUtility)
+            230 LOAD_ATTR               17 (musicFileType)
+            232 CONTAINS_OP              1
+            234 EXTENDED_ARG             1
+            236 POP_JUMP_IF_FALSE      268
+
+108         238 LOAD_CONST              10 ('Invalid file type')
+            240 STORE_FAST               4 (reason)
+
+109         242 LOAD_GLOBAL              7 (logger)
+            244 LOAD_METHOD              8 (debug)
+            246 LOAD_CONST               6 ('media http server 404 reason: %s')
+            248 LOAD_FAST                4 (reason)
+            250 BINARY_MODULO
+            252 CALL_METHOD              1
+            254 POP_TOP
+
+110         256 LOAD_GLOBAL              1 (cherrypy)
+            258 LOAD_METHOD              2 (HTTPError)
+            260 LOAD_CONST               2 (404)
+            262 LOAD_FAST                4 (reason)
+            264 CALL_METHOD              2
+            266 RAISE_VARARGS            1
+
+113     >>  268 LOAD_GLOBAL             18 (hashlib)
+            270 LOAD_METHOD             19 (md5)
+            272 LOAD_FAST                1 (path)
+            274 LOAD_METHOD             20 (encode)
+            276 LOAD_CONST               4 ('utf-8')
+            278 CALL_METHOD              1
+            280 CALL_METHOD              1
+            282 LOAD_METHOD             21 (hexdigest)
+            284 CALL_METHOD              0
+            286 STORE_FAST               1 (path)
+
+114         288 LOAD_GLOBAL             16 (LPUtility)
+            290 LOAD_ATTR               22 (cacheCoverDir)
+            292 LOAD_FAST                1 (path)
+            294 BINARY_TRUE_DIVIDE
+            296 STORE_FAST               5 (coverPath)
+
+115         298 LOAD_CONST               0 (None)
+            300 STORE_FAST               6 (coverData)
+
+116         302 LOAD_GLOBAL             10 (os)
+            304 LOAD_ATTR               11 (path)
+            306 LOAD_METHOD             12 (exists)
+            308 LOAD_FAST                5 (coverPath)
+            310 CALL_METHOD              1
+            312 EXTENDED_ARG             1
+            314 POP_JUMP_IF_TRUE       438
+
+117         316 LOAD_GLOBAL             23 (MediaFile)
+            318 LOAD_FAST                2 (filePath)
+            320 CALL_FUNCTION            1
+            322 STORE_FAST               7 (file)
+
+118         324 LOAD_FAST                7 (file)
+            326 LOAD_CONST               0 (None)
+            328 IS_OP                    0
+            330 EXTENDED_ARG             1
+            332 POP_JUMP_IF_TRUE       346
+            334 LOAD_FAST                7 (file)
+            336 LOAD_ATTR               24 (art)
+            338 LOAD_CONST               0 (None)
+            340 IS_OP                    0
+            342 EXTENDED_ARG             1
+            344 POP_JUMP_IF_FALSE      376
+
+119     >>  346 LOAD_CONST              11 ('No cover support')
+            348 STORE_FAST               4 (reason)
+
+120         350 LOAD_GLOBAL              7 (logger)
+            352 LOAD_METHOD              8 (debug)
+            354 LOAD_CONST               6 ('media http server 404 reason: %s')
+            356 LOAD_FAST                4 (reason)
+            358 BINARY_MODULO
+            360 CALL_METHOD              1
+            362 POP_TOP
+
+121         364 LOAD_GLOBAL              1 (cherrypy)
+            366 LOAD_METHOD              2 (HTTPError)
+            368 LOAD_CONST               2 (404)
+            370 LOAD_FAST                4 (reason)
+            372 CALL_METHOD              2
+            374 RAISE_VARARGS            1
+
+123     >>  376 LOAD_FAST                7 (file)
+            378 LOAD_ATTR               24 (art)
+            380 STORE_FAST               6 (coverData)
+
+124         382 LOAD_GLOBAL             25 (open)
+            384 LOAD_FAST                5 (coverPath)
+            386 LOAD_CONST              12 ('wb')
+            388 CALL_FUNCTION            2
+            390 SETUP_WITH              26 (to 418)
+            392 STORE_FAST               8 (coverFile)
+
+125         394 LOAD_FAST                8 (coverFile)
+            396 LOAD_METHOD             26 (write)
+            398 LOAD_FAST                6 (coverData)
+            400 CALL_METHOD              1
+            402 POP_TOP
+            404 POP_BLOCK
+            406 LOAD_CONST               0 (None)
+            408 DUP_TOP
+            410 DUP_TOP
+            412 CALL_FUNCTION            3
+            414 POP_TOP
+            416 JUMP_FORWARD            18 (to 436)
+        >>  418 WITH_EXCEPT_START
+            420 EXTENDED_ARG             1
+            422 POP_JUMP_IF_TRUE       426
+            424 RERAISE
+        >>  426 POP_TOP
+            428 POP_TOP
+            430 POP_TOP
+            432 POP_EXCEPT
+            434 POP_TOP
+        >>  436 JUMP_FORWARD            52 (to 490)
+
+127     >>  438 LOAD_GLOBAL             25 (open)
+            440 LOAD_FAST                5 (coverPath)
+            442 LOAD_CONST              13 ('rb')
+            444 CALL_FUNCTION            2
+            446 SETUP_WITH              24 (to 472)
+            448 STORE_FAST               8 (coverFile)
+
+128         450 LOAD_FAST                8 (coverFile)
+            452 LOAD_METHOD             27 (read)
+            454 CALL_METHOD              0
+            456 STORE_FAST               6 (coverData)
+            458 POP_BLOCK
+            460 LOAD_CONST               0 (None)
+            462 DUP_TOP
+            464 DUP_TOP
+            466 CALL_FUNCTION            3
+            468 POP_TOP
+            470 JUMP_FORWARD            18 (to 490)
+        >>  472 WITH_EXCEPT_START
+            474 EXTENDED_ARG             1
+            476 POP_JUMP_IF_TRUE       480
+            478 RERAISE
+        >>  480 POP_TOP
+            482 POP_TOP
+            484 POP_TOP
+            486 POP_EXCEPT
+            488 POP_TOP
+
+130     >>  490 LOAD_CONST              14 ('image/png')
+            492 LOAD_GLOBAL              1 (cherrypy)
+            494 LOAD_ATTR               28 (response)
+            496 LOAD_ATTR               29 (headers)
+            498 LOAD_CONST              15 ('Content-Type')
+            500 STORE_SUBSCR
+
+131         502 LOAD_GLOBAL             30 (str)
+            504 LOAD_GLOBAL              0 (len)
+            506 LOAD_FAST                6 (coverData)
+            508 CALL_FUNCTION            1
+            510 CALL_FUNCTION            1
+            512 LOAD_GLOBAL              1 (cherrypy)
+            514 LOAD_ATTR               28 (response)
+            516 LOAD_ATTR               29 (headers)
+            518 LOAD_CONST              16 ('Content-Length')
+            520 STORE_SUBSCR
+
+132         522 LOAD_CONST              17 ('bytes')
+            524 LOAD_GLOBAL              1 (cherrypy)
+            526 LOAD_ATTR               28 (response)
+            528 LOAD_ATTR               29 (headers)
+            530 LOAD_CONST              18 ('Accept-Ranges')
+            532 STORE_SUBSCR
+
+134         534 LOAD_FAST                6 (coverData)
+            536 RETURN_VALUE

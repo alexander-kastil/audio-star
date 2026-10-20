@@ -1,0 +1,252 @@
+# module beetsplug.lastgenre.__init__
+
+[module] names: __doc__, pylast, codecs, os, yaml, traceback, beets, plugins, ui, config, beets.util, normpath, plurality, library, LastFMNetwork, LASTFM_KEY, LASTFM, WSError, MalformedResponseError, NetworkError, PYLAST_EXCEPTIONS, REPLACE, deduplicate, flatten_tree, find_parents, path, join, dirname, __file__, WHITELIST, C14N_TREE, BeetsPlugin, LastGenrePlugin
+  str: 'Gets genres for imported music based on Last.fm tags.\n\nUses a provided whitelist file to determine which tags are valid genres.\nThe included (default) genre list was originally produced by scraping Wikipedia\nand has been edited to remove some questionable entries.\nThe scraper script used is availabl'
+  str: 'plugins'
+  str: 'ui'
+  str: 'config'
+  str: 'normpath'
+  str: 'plurality'
+  str: 'library'
+  str: 'api_key'
+  str: '‐'
+  str: '-'
+  str: 'deduplicate'
+  str: 'flatten_tree'
+  str: 'find_parents'
+  str: 'genres.txt'
+  str: 'genres-tree.yaml'
+  str: 'LastGenrePlugin'
+
+def deduplicate(seq)  line 50
+  names: set
+    str: 'Remove duplicates from sequence wile preserving order.\n    '
+    str: 'deduplicate.<locals>.<listcomp>'
+
+  def deduplicate.<listcomp>(.0)  line 54
+    names: add
+
+def flatten_tree(elem, path, branches)  line 59
+  names: isinstance, dict, items, flatten_tree, list, append, str
+    str: 'Flatten nested lists/dictionaries into lists of strings\n    (branches).\n    '
+
+def find_parents(candidate, branches)  line 76
+  names: index, lower, list, reversed, ValueError
+    str: 'Find parents genre of a given genre, ordered from the closest to\n    the further parent.\n    '
+
+def LastGenrePlugin()  line 95
+  names: __name__, __module__, __qualname__, __init__, setup, property, sources, _get_depth, _sort_by_depth, _resolve_genres, _format_tag, fetch_genre, _is_allowed, _last_lookup, fetch_album_genre, fetch_album_artist_genre, fetch_artist_genre, fetch_track_genre, _get_genre, commands, imported, _tags_for, __classcell__
+    str: 'LastGenrePlugin'
+    str: 'LastGenrePlugin.__init__'
+    str: 'LastGenrePlugin.setup'
+    str: 'LastGenrePlugin.sources'
+    str: 'LastGenrePlugin._get_depth'
+    str: 'LastGenrePlugin._sort_by_depth'
+    str: 'LastGenrePlugin._resolve_genres'
+    str: 'LastGenrePlugin._format_tag'
+    str: 'LastGenrePlugin.fetch_genre'
+    str: 'LastGenrePlugin._is_allowed'
+    str: 'LastGenrePlugin._last_lookup'
+    str: 'LastGenrePlugin.fetch_album_genre'
+    str: 'LastGenrePlugin.fetch_album_artist_genre'
+    str: 'LastGenrePlugin.fetch_artist_genre'
+    str: 'LastGenrePlugin.fetch_track_genre'
+    str: 'LastGenrePlugin._get_genre'
+    str: 'LastGenrePlugin.commands'
+    str: 'LastGenrePlugin.imported'
+    str: 'LastGenrePlugin._tags_for'
+
+  def LastGenrePlugin.__init__(self)  line 96
+    names: super, __init__, config, add, setup
+      str: 'album'
+      str: ', '
+      str: 'whitelist'
+      str: 'min_weight'
+      str: 'count'
+      str: 'fallback'
+      str: 'canonical'
+      str: 'source'
+      str: 'force'
+      str: 'auto'
+      str: 'separator'
+      str: 'prefer_specific'
+      str: 'title_case'
+
+  def LastGenrePlugin.setup(self)  line 115
+    names: config, imported, import_stages, _genre_cache, set, whitelist, get, WHITELIST, normpath, open, decode, strip, lower, startswith, add, c14n_branches, canonicalize, C14N_TREE, _log, debug, codecs, yaml, safe_load, flatten_tree
+      str: 'Setup plugin from config options\n        '
+      str: 'auto'
+      str: 'whitelist'
+      str: 'rb'
+      str: 'utf-8'
+      str: '#'
+      str: 'canonical'
+      str: 'prefer_specific'
+      str: 'Loading canonicalization tree {0}'
+      str: 'r'
+      str: 'encoding'
+
+  def LastGenrePlugin.sources(self)  line 156
+    names: config, as_choice
+      str: "A tuple of allowed genre sources. May contain 'track',\n        'album', or 'artist.'\n        "
+      str: 'source'
+      str: 'track'
+      str: 'album'
+      str: 'artist'
+      str: 'track'
+      str: 'album'
+      str: 'album'
+      str: 'artist'
+      str: 'artist'
+      str: 'artist'
+
+  def LastGenrePlugin._get_depth(self, tag)  line 169
+    names: enumerate, c14n_branches, index
+      str: 'Find the depth of a tag in the genres tree.\n        '
+
+  def LastGenrePlugin._sort_by_depth(self, tags)  line 179
+    names: sort
+      str: 'Given a list of tags, sort the tags by their depths in the\n        genre tree.\n        '
+      str: 'LastGenrePlugin._sort_by_depth.<locals>.<listcomp>'
+      str: 'reverse'
+
+    def LastGenrePlugin._sort_by_depth.<listcomp>(.0)  line 183
+      names: _get_depth
+
+    def LastGenrePlugin._sort_by_depth.<listcomp>(.0)  line 184
+
+    def LastGenrePlugin._sort_by_depth.<listcomp>(.0)  line 186
+
+  def LastGenrePlugin._resolve_genres(self, tags)  line 188
+    names: config, get, int, canonicalize, whitelist, find_parents, c14n_branches, len, deduplicate, _sort_by_depth, as_str, join
+      str: 'Given a list of strings, return a genre by joining them into a\n        single string and (optionally) canonicalizing each.\n        '
+      str: 'count'
+      str: 'LastGenrePlugin._resolve_genres.<locals>.<listcomp>'
+      str: 'prefer_specific'
+      str: 'separator'
+
+    def LastGenrePlugin._resolve_genres.<listcomp>(.0)  line 203
+      names: _is_allowed
+
+    def LastGenrePlugin._resolve_genres.<listcomp>(.0)  line 224
+      names: _is_allowed, _format_tag
+
+  def LastGenrePlugin._format_tag(self, tag)  line 230
+    names: config, title
+      str: 'title_case'
+
+  def LastGenrePlugin.fetch_genre(self, lastfm_obj)  line 235
+    names: config, get, int, _resolve_genres, _tags_for
+      str: "Return the genre for a pylast entity or None if no suitable genre\n        can be found. Ex. 'Electronic, House, Dance'\n        "
+      str: 'min_weight'
+
+  def LastGenrePlugin._is_allowed(self, genre)  line 242
+    names: whitelist
+      str: 'Determine whether the genre is present in the whitelist,\n        returning a boolean.\n        '
+
+  def LastGenrePlugin._last_lookup(self, entity, method, *args)  line 254
+    names: any, format, join, _genre_cache, REPLACE, items, replace, append, fetch_genre
+      str: 'Get a genre based on the named entity using the callable `method`\n        whose arguments are given in the sequence `args`. The genre lookup\n        is cached based on the entity name and the arguments. Before the\n        lookup, each argument is has some Unicode characters replaced with\n        rou'
+      str: 'LastGenrePlugin._last_lookup.<locals>.<genexpr>'
+      str: '{}.{}'
+      str: '-'
+
+    def LastGenrePlugin._last_lookup.<genexpr>(.0)  line 263
+
+    def LastGenrePlugin._last_lookup.<genexpr>(.0)  line 267
+      names: str
+
+  def LastGenrePlugin.fetch_album_genre(self, obj)  line 281
+    names: _last_lookup, LASTFM, get_album, albumartist, album
+      str: 'Return the album genre for this Item or Album.\n        '
+      str: 'album'
+
+  def LastGenrePlugin.fetch_album_artist_genre(self, obj)  line 288
+    names: _last_lookup, LASTFM, get_artist, albumartist
+      str: 'Return the album artist genre for this Item or Album.\n        '
+      str: 'artist'
+
+  def LastGenrePlugin.fetch_artist_genre(self, item)  line 295
+    names: _last_lookup, LASTFM, get_artist, artist
+      str: 'Returns the track artist genre for this Item.\n        '
+      str: 'artist'
+
+  def LastGenrePlugin.fetch_track_genre(self, obj)  line 302
+    names: _last_lookup, LASTFM, get_track, artist, title
+      str: 'Returns the track genre for this Item.\n        '
+      str: 'track'
+
+  def LastGenrePlugin._get_genre(self, obj)  line 309
+    names: config, _is_allowed, genre, isinstance, library, Item, sources, fetch_track_genre, fetch_album_genre, fetch_artist_genre, albumartist, as_str, fetch_album_artist_genre, items, append, plurality, _resolve_genres, get
+      str: 'Get the genre string for an Album or Item object based on\n        self.sources. Return a `(genre, source)` pair. The\n        prioritization order is:\n            - track (for Items only)\n            - album\n            - artist\n            - original\n            - fallback\n            - None\n       '
+      str: 'force'
+      str: 'keep'
+      str: 'track'
+      str: 'album'
+      str: 'artist'
+      str: 'va_name'
+      str: 'original'
+      str: 'fallback'
+
+  def LastGenrePlugin.commands(self)  line 375
+    names: ui, Subcommand, parser, add_option, set_defaults, func
+      str: 'lastgenre'
+      str: 'fetch genres'
+      str: 'help'
+      str: '-f'
+      str: '--force'
+      str: 'force'
+      str: 'store_true'
+      str: 're-download genre when already present'
+      str: 'dest'
+      str: 'action'
+      str: 'help'
+      str: '-s'
+      str: '--source'
+      str: 'source'
+      str: 'string'
+      str: 'genre source: artist, album, or track'
+      str: 'dest'
+      str: 'type'
+      str: 'help'
+      str: '-A'
+      str: '--items'
+      str: 'store_false'
+      str: 'album'
+      str: 'match items instead of albums'
+      str: 'action'
+      str: 'dest'
+      str: 'help'
+      str: '-a'
+      str: '--albums'
+      str: 'match albums instead of items'
+      str: 'album'
+      str: 'LastGenrePlugin.commands.<locals>.lastgenre_func'
+
+    def LastGenrePlugin.commands.lastgenre_func(lib, opts, args)  line 394
+      names: ui, should_write, config, set_args, album, albums, decargs, _get_genre, genre, _log, info, store, items, sources, try_write, debug
+        str: 'genre for album {0} ({1}): {0.genre}'
+        str: 'track'
+        str: 'genre for track {0} ({1}): {0.genre}'
+        str: 'added last.fm item genre ({0}): {1}'
+
+  def LastGenrePlugin.imported(self, session, task)  line 430
+    names: is_album, album, _get_genre, genre, _log, debug, store, sources, items, item
+      str: 'Event hook called when an import task finishes.'
+      str: 'added last.fm album genre ({0}): {1}'
+      str: 'track'
+      str: 'added last.fm item genre ({0}): {1}'
+
+  def LastGenrePlugin._tags_for(self, obj, min_weight)  line 453
+    names: isinstance, pylast, Album, super, get_top_tags, PYLAST_EXCEPTIONS, _log, debug, Exception, traceback, format_exc, error
+      str: 'Core genre identification routine.\n\n        Given a pylast entity (album or track), return a list of\n        tag names for that entity. Return an empty list if the entity is\n        not found or another error occurs.\n\n        If `min_weight` is specified, tags are filtered by weight.\n        '
+      str: 'last.fm error: {0}'
+      str: '{}'
+      str: 'error in pylast library: {0}'
+      str: 'LastGenrePlugin._tags_for.<locals>.<listcomp>'
+
+    def LastGenrePlugin._tags_for.<listcomp>(.0)  line 481
+      names: int, weight
+
+    def LastGenrePlugin._tags_for.<listcomp>(.0)  line 484
+      names: item, get_name, lower

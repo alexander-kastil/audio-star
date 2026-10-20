@@ -1,0 +1,67 @@
+# module beetsplug.fromfilename
+
+[module] names: __doc__, beets, plugins, beets.util, displayable_path, os, re, PATTERNS, BAD_TITLE_PATTERNS, equal, equal_fields, all_matches, bad_title, apply_matches, BeetsPlugin, FromFilenamePlugin, filename_task
+  str: 'If the title is empty, try to extract track and title from the\nfilename.\n'
+  str: 'plugins'
+  str: 'displayable_path'
+  str: '^(?P<artist>.+)[\\-_](?P<title>.+)[\\-_](?P<tag>.*)$'
+  str: '^(?P<track>\\d+)[\\s.\\-_]+(?P<artist>.+)[\\-_](?P<title>.+)[\\-_](?P<tag>.*)$'
+  str: '^(?P<artist>.+)[\\-_](?P<title>.+)$'
+  str: '^(?P<track>\\d+)[\\s.\\-_]+(?P<artist>.+)[\\-_](?P<title>.+)$'
+  str: '^(?P<title>.+)$'
+  str: '^(?P<track>\\d+)[\\s.\\-_]+(?P<title>.+)$'
+  str: '^(?P<track>\\d+)\\s+(?P<title>.+)$'
+  str: '^(?P<title>.+) by (?P<artist>.+)$'
+  str: '^(?P<track>\\d+).*$'
+  str: '^$'
+  str: 'equal'
+  str: 'equal_fields'
+  str: 'all_matches'
+  str: 'bad_title'
+  str: 'apply_matches'
+  str: 'FromFilenamePlugin'
+  str: 'filename_task'
+
+def equal(seq)  line 45
+  names: len, set
+    str: 'Determine whether a sequence holds identical elements.\n    '
+
+def equal_fields(matchdict, field)  line 51
+  names: equal, values
+    str: 'Do all items in `matchdict`, whose values are dictionaries, have\n    the same value for `field`? (If they do, the field is probably not\n    the title.)\n    '
+    str: 'equal_fields.<locals>.<genexpr>'
+
+  def equal_fields.<genexpr>(.0)  line 56
+
+def all_matches(names, pattern)  line 59
+  names: items, re, match, IGNORECASE, groupdict
+    str: 'If all the filenames in the item/filename mapping match the\n    pattern, return a dictionary mapping the items to dictionaries\n    giving the value for each named subpattern in the match. Otherwise,\n    return None.\n    '
+
+def bad_title(title)  line 78
+  names: BAD_TITLE_PATTERNS, re, match, IGNORECASE
+    str: 'Determine whether a given title is "bad" (empty or otherwise\n    meaningless) and in need of replacement.\n    '
+
+def apply_matches(d)  line 88
+  names: list, values, keys, equal_fields, artist, bad_title, title, str, track, int
+    str: 'Given a mapping from items to field dicts, apply the fields to\n    the objects.\n    '
+    str: 'tag'
+    str: 'artist'
+    str: 'title'
+    str: 'track'
+
+def FromFilenamePlugin()  line 131
+  names: __name__, __module__, __qualname__, __init__, __classcell__
+    str: 'FromFilenamePlugin'
+    str: 'FromFilenamePlugin.__init__'
+
+  def FromFilenamePlugin.__init__(self)  line 132
+    names: super, __init__, register_listener, filename_task
+      str: 'import_task_start'
+
+def filename_task(task, session)  line 137
+  names: is_album, items, item, sum, displayable_path, path, os, splitext, basename, PATTERNS, all_matches, apply_matches
+    str: 'Examine each item in the task to see if we can extract a title\n    from the filename. Try to match all filenames to a number of\n    regexps, starting with the most complex patterns and successively\n    trying less complex patterns. As soon as all filenames match the\n    same regex we can make an edu'
+    str: 'filename_task.<locals>.<genexpr>'
+
+  def filename_task.<genexpr>(.0)  line 148
+    names: bad_title, title

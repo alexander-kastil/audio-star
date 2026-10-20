@@ -1,0 +1,102 @@
+# module LPClientFramework.LPNetworkClient.LPNetworkClient
+
+[module] names: __doc__, enum, threading, requests, requests_cache, LPClientFramework, LPUtility, LPClientFramework.LPNetworkClient.LPTokenProvider, LPTokenProvider, LPClientFramework.LPUtility, logger, Enum, LPRequestErrorType, LPRequestError, LPRequestCommonResult, LPNetworkClient
+  str: '\n@Time ： 2025/7/11 11:37\n@Auth ： Chris\n@File ：LPNetworkClient.py\n@Desc:\n'
+  str: 'LPUtility'
+  str: 'LPTokenProvider'
+  str: 'logger'
+  str: 'LPRequestErrorType'
+  str: 'LPRequestError'
+  str: 'LPRequestCommonResult'
+  str: 'LPNetworkClient'
+
+def LPRequestErrorType()  line 18
+  names: __name__, __module__, __qualname__, LP_Timeout_Error, LP_4xx_Error, LP_Unknown_Error
+    str: 'LPRequestErrorType'
+
+def LPRequestError()  line 24
+  names: __name__, __module__, __qualname__, LPRequestErrorType, str, __init__, __repr__
+    str: 'LPRequestError'
+    str: 'errortype'
+    str: 'message'
+    str: 'LPRequestError.__init__'
+    str: 'LPRequestError.__repr__'
+
+  def LPRequestError.__init__(self, errortype, message)  line 25
+    names: errortype, message
+
+  def LPRequestError.__repr__(self)  line 29
+    names: errortype, message
+      str: '<LPRequestError type='
+      str: ' message='
+      str: '>'
+
+def LPRequestCommonResult()  line 33
+  names: __name__, __module__, __qualname__, LPRequestError, __init__, bool, is_success, __repr__
+    str: 'LPRequestCommonResult'
+    str: 'error'
+    str: 'LPRequestCommonResult.__init__'
+    str: 'return'
+    str: 'LPRequestCommonResult.is_success'
+    str: 'LPRequestCommonResult.__repr__'
+
+  def LPRequestCommonResult.__init__(self, status_code, data, error)  line 34
+    names: status_code, data, error
+
+  def LPRequestCommonResult.is_success(self)  line 39
+    names: logger, debug, status_code, error
+      str: 'status_code='
+      str: ', self.error='
+
+  def LPRequestCommonResult.__repr__(self)  line 43
+    names: status_code, error, data
+      str: '<LPRequestCommonResult status_code='
+      str: ' error='
+      str: ' data='
+      str: '>'
+
+def LPNetworkClient()  line 50
+  names: __name__, __module__, __qualname__, __doc__, _instance, __new__, LPUtility, cacheDir, LPTokenProvider, __init__, getToken, request, get, post, __classcell__
+    str: 'LPNetworkClient'
+    str: '\n    单例\n    '
+    str: 'LPNetworkClient.__new__'
+    str: 'network_request_cache'
+    str: 'tokenProvider'
+    str: 'LPNetworkClient.__init__'
+    str: 'LPNetworkClient.getToken'
+    str: 'LPNetworkClient.request'
+    str: 'LPNetworkClient.get'
+    str: 'LPNetworkClient.post'
+
+  def LPNetworkClient.__new__(cls, *args, **kwargs)  line 56
+    names: _instance, super, __new__, _initialized
+
+  def LPNetworkClient.__init__(self, tokenProvider, cache_name, expire_after)  line 62
+    names: _initialized, str, cacheName, requests_cache, CachedSession, cachedSession, requests, session, tokenProvider, _refreshing_token, threading, Condition, _refresh_cond
+      str: 'memory'
+      str: 'backend'
+      str: 'expire_after'
+
+  def LPNetworkClient.getToken(self)  line 75
+    names: tokenProvider, getToken
+
+  def LPNetworkClient.request(self, method, url, useCache, headers, retry, timeout, **kwargs)  line 80
+    names: print, cachedSession, session, getToken, headers, update, request, status_code, logger, debug, raise_for_status, requests, exceptions, ConnectionError, HTTPError, RuntimeError, Timeout, TimeoutError
+      str: '[DEBUG] Entered request()'
+      str: 'Authorization'
+      str: 'Bearer '
+      str: 'useCache'
+      str: 'headers'
+      str: '[LPNetworkClient] response code 401, try refresh token'
+      str: '网络连接失败：'
+      str: '服务响应异常：'
+      str: '请求超时'
+
+  def LPNetworkClient.get(self, url, useCache, **kwargs)  line 134
+    names: request
+      str: 'GET'
+      str: 'useCache'
+
+  def LPNetworkClient.post(self, url, **kwargs)  line 137
+    names: request
+      str: 'POST'

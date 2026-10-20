@@ -1,0 +1,683 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('Feedback 填写中草稿的跨会话持久化封装。')
+              2 STORE_NAME               0 (__doc__)
+
+  4           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (hashlib)
+             10 STORE_NAME               1 (hashlib)
+
+  5          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (os)
+             18 STORE_NAME               2 (os)
+
+  6          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (shutil)
+             26 STORE_NAME               3 (shutil)
+
+  7          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (time)
+             34 STORE_NAME               4 (time)
+
+  8          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               3 (('Path',))
+             40 IMPORT_NAME              5 (pathlib)
+             42 IMPORT_FROM              6 (Path)
+             44 STORE_NAME               6 (Path)
+             46 POP_TOP
+
+ 11          48 LOAD_BUILD_CLASS
+             50 LOAD_CONST               4 (<code object LPFeedbackDraftStore at 0x000001F3253C45B0, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 11>)
+             52 LOAD_CONST               5 ('LPFeedbackDraftStore')
+             54 MAKE_FUNCTION            0
+             56 LOAD_CONST               5 ('LPFeedbackDraftStore')
+             58 CALL_FUNCTION            2
+             60 STORE_NAME               7 (LPFeedbackDraftStore)
+             62 LOAD_CONST               2 (None)
+             64 RETURN_VALUE
+
+=== LPFeedbackDraftStore ===
+ 11           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeedbackDraftStore')
+              6 STORE_NAME               2 (__qualname__)
+
+ 12           8 LOAD_CONST               1 ('保存反馈弹窗未提交的填写草稿，并维护附件图片副本。\n\n    草稿包含主题/邮箱/描述文本与已选附件（图片副本路径列表）。\n    任意关闭方式不清除草稿，下次打开弹窗可恢复；只有提交成功或用户主动清除时才删除。\n    附件图片在选图时复制到缓存目录 feedback_draft_attachments 下，\n    避免用户移动/删除原图后草稿恢复时引用失效。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+ 20          12 LOAD_CONST               2 ('feedback/draft/subject')
+             14 STORE_NAME               4 (_SUBJECT_KEY)
+
+ 21          16 LOAD_CONST               3 ('feedback/draft/email')
+             18 STORE_NAME               5 (_EMAIL_KEY)
+
+ 22          20 LOAD_CONST               4 ('feedback/draft/description')
+             22 STORE_NAME               6 (_DESCRIPTION_KEY)
+
+ 23          24 LOAD_CONST               5 ('feedback/draft/attachmentPaths')
+             26 STORE_NAME               7 (_ATTACHMENT_PATHS_KEY)
+
+ 24          28 LOAD_CONST               6 ('feedback/draft/updatedAt')
+             30 STORE_NAME               8 (_UPDATED_AT_KEY)
+
+ 26          32 LOAD_NAME                4 (_SUBJECT_KEY)
+
+ 27          34 LOAD_NAME                5 (_EMAIL_KEY)
+
+ 28          36 LOAD_NAME                6 (_DESCRIPTION_KEY)
+
+ 29          38 LOAD_NAME                7 (_ATTACHMENT_PATHS_KEY)
+
+ 30          40 LOAD_NAME                8 (_UPDATED_AT_KEY)
+
+ 25          42 BUILD_TUPLE              5
+             44 STORE_NAME               9 (_KEYS)
+
+ 33          46 LOAD_CONST               7 (<code object __init__ at 0x000001F3253C47C0, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 33>)
+             48 LOAD_CONST               8 ('LPFeedbackDraftStore.__init__')
+             50 MAKE_FUNCTION            0
+             52 STORE_NAME              10 (__init__)
+
+ 49          54 LOAD_CONST               9 (<code object save at 0x000001F3253C4B30, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 49>)
+             56 LOAD_CONST              10 ('LPFeedbackDraftStore.save')
+             58 MAKE_FUNCTION            0
+             60 STORE_NAME              11 (save)
+
+ 74          62 LOAD_CONST              11 (<code object load at 0x000001F3253C4450, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 74>)
+             64 LOAD_CONST              12 ('LPFeedbackDraftStore.load')
+             66 MAKE_FUNCTION            0
+             68 STORE_NAME              12 (load)
+
+100          70 LOAD_CONST              13 (<code object clear at 0x000001F3253C4710, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 100>)
+             72 LOAD_CONST              14 ('LPFeedbackDraftStore.clear')
+             74 MAKE_FUNCTION            0
+             76 STORE_NAME              13 (clear)
+
+115          78 LOAD_CONST              15 (<code object copyAttachment at 0x000001F3253C43A0, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 115>)
+             80 LOAD_CONST              16 ('LPFeedbackDraftStore.copyAttachment')
+             82 MAKE_FUNCTION            0
+             84 STORE_NAME              14 (copyAttachment)
+
+137          86 LOAD_CONST              17 (<code object removeAttachment at 0x000001F3253C4240, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 137>)
+             88 LOAD_CONST              18 ('LPFeedbackDraftStore.removeAttachment')
+             90 MAKE_FUNCTION            0
+             92 STORE_NAME              15 (removeAttachment)
+
+153          94 LOAD_NAME               16 (classmethod)
+
+154          96 LOAD_CONST              23 ((7,))
+             98 LOAD_CONST              20 (<code object cleanupExpired at 0x000001F3253C4D40, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 153>)
+            100 LOAD_CONST              21 ('LPFeedbackDraftStore.cleanupExpired')
+            102 MAKE_FUNCTION            1 (defaults)
+            104 CALL_FUNCTION            1
+            106 STORE_NAME              17 (cleanupExpired)
+            108 LOAD_CONST              22 (None)
+            110 RETURN_VALUE
+
+=== LPFeedbackDraftStore.__init__ ===
+ 43           0 LOAD_FAST                1 (settingsStore)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_settingsStore)
+
+ 44           6 LOAD_GLOBAL              1 (Path)
+              8 LOAD_FAST                2 (attachmentCacheDir)
+             10 CALL_FUNCTION            1
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (_attachmentCacheDir)
+             16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+=== LPFeedbackDraftStore.save ===
+ 60           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F3253C4EA0, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 60>)
+              2 LOAD_CONST               2 ('LPFeedbackDraftStore.save.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                4 (attachmentPaths)
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 BUILD_LIST               0
+        >>   12 GET_ITER
+             14 CALL_FUNCTION            1
+             16 STORE_FAST               5 (normalizedPaths)
+
+ 61          18 LOAD_GLOBAL              0 (any)
+             20 LOAD_CONST               3 (<code object <genexpr> at 0x000001F3253C4660, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 61>)
+             22 LOAD_CONST               4 ('LPFeedbackDraftStore.save.<locals>.<genexpr>')
+             24 MAKE_FUNCTION            0
+             26 LOAD_FAST                1 (subject)
+             28 LOAD_FAST                2 (email)
+             30 LOAD_FAST                3 (description)
+             32 BUILD_TUPLE              3
+             34 GET_ITER
+             36 CALL_FUNCTION            1
+             38 CALL_FUNCTION            1
+             40 STORE_FAST               6 (hasText)
+
+ 62          42 LOAD_FAST                6 (hasText)
+             44 POP_JUMP_IF_TRUE        62
+             46 LOAD_FAST                5 (normalizedPaths)
+             48 POP_JUMP_IF_TRUE        62
+
+ 63          50 LOAD_FAST                0 (self)
+             52 LOAD_METHOD              1 (clear)
+             54 CALL_METHOD              0
+             56 POP_TOP
+
+ 64          58 LOAD_CONST               5 (None)
+             60 RETURN_VALUE
+
+ 65     >>   62 LOAD_FAST                0 (self)
+             64 LOAD_ATTR                2 (_settingsStore)
+             66 LOAD_METHOD              3 (setValue)
+             68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                4 (_SUBJECT_KEY)
+             72 LOAD_GLOBAL              5 (str)
+             74 LOAD_FAST                1 (subject)
+             76 JUMP_IF_TRUE_OR_POP     80
+             78 LOAD_CONST               6 ('')
+        >>   80 CALL_FUNCTION            1
+             82 CALL_METHOD              2
+             84 POP_TOP
+
+ 66          86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                2 (_settingsStore)
+             90 LOAD_METHOD              3 (setValue)
+             92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR                6 (_EMAIL_KEY)
+             96 LOAD_GLOBAL              5 (str)
+             98 LOAD_FAST                2 (email)
+            100 JUMP_IF_TRUE_OR_POP    104
+            102 LOAD_CONST               6 ('')
+        >>  104 CALL_FUNCTION            1
+            106 CALL_METHOD              2
+            108 POP_TOP
+
+ 67         110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR                2 (_settingsStore)
+            114 LOAD_METHOD              3 (setValue)
+            116 LOAD_FAST                0 (self)
+            118 LOAD_ATTR                7 (_DESCRIPTION_KEY)
+            120 LOAD_GLOBAL              5 (str)
+            122 LOAD_FAST                3 (description)
+            124 JUMP_IF_TRUE_OR_POP    128
+            126 LOAD_CONST               6 ('')
+        >>  128 CALL_FUNCTION            1
+            130 CALL_METHOD              2
+            132 POP_TOP
+
+ 68         134 LOAD_FAST                0 (self)
+            136 LOAD_ATTR                2 (_settingsStore)
+            138 LOAD_METHOD              3 (setValue)
+            140 LOAD_FAST                0 (self)
+            142 LOAD_ATTR                8 (_ATTACHMENT_PATHS_KEY)
+            144 LOAD_FAST                5 (normalizedPaths)
+            146 CALL_METHOD              2
+            148 POP_TOP
+
+ 69         150 LOAD_FAST                0 (self)
+            152 LOAD_ATTR                2 (_settingsStore)
+            154 LOAD_METHOD              3 (setValue)
+            156 LOAD_FAST                0 (self)
+            158 LOAD_ATTR                9 (_UPDATED_AT_KEY)
+            160 LOAD_GLOBAL             10 (int)
+            162 LOAD_GLOBAL             11 (time)
+            164 LOAD_METHOD             11 (time)
+            166 CALL_METHOD              0
+            168 CALL_FUNCTION            1
+            170 CALL_METHOD              2
+            172 POP_TOP
+
+ 70         174 LOAD_GLOBAL             12 (getattr)
+            176 LOAD_FAST                0 (self)
+            178 LOAD_ATTR                2 (_settingsStore)
+            180 LOAD_CONST               7 ('sync')
+            182 LOAD_CONST               5 (None)
+            184 CALL_FUNCTION            3
+            186 STORE_FAST               7 (syncMethod)
+
+ 71         188 LOAD_GLOBAL             13 (callable)
+            190 LOAD_FAST                7 (syncMethod)
+            192 CALL_FUNCTION            1
+            194 POP_JUMP_IF_FALSE      202
+
+ 72         196 LOAD_FAST                7 (syncMethod)
+            198 CALL_FUNCTION            0
+            200 POP_TOP
+        >>  202 LOAD_CONST               5 (None)
+            204 RETURN_VALUE
+
+=== LPFeedbackDraftStore.save.<listcomp> ===
+ 60           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                16 (to 22)
+              6 STORE_FAST               1 (path)
+              8 LOAD_FAST                1 (path)
+             10 POP_JUMP_IF_FALSE        4
+             12 LOAD_GLOBAL              0 (str)
+             14 LOAD_FAST                1 (path)
+             16 CALL_FUNCTION            1
+             18 LIST_APPEND              2
+             20 JUMP_ABSOLUTE            4
+        >>   22 RETURN_VALUE
+
+=== LPFeedbackDraftStore.save.<genexpr> ===
+ 61           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                22 (to 26)
+              4 STORE_FAST               1 (value)
+              6 LOAD_GLOBAL              0 (str)
+              8 LOAD_FAST                1 (value)
+             10 JUMP_IF_TRUE_OR_POP     14
+             12 LOAD_CONST               0 ('')
+        >>   14 CALL_FUNCTION            1
+             16 LOAD_METHOD              1 (strip)
+             18 CALL_METHOD              0
+             20 YIELD_VALUE
+             22 POP_TOP
+             24 JUMP_ABSOLUTE            2
+        >>   26 LOAD_CONST               1 (None)
+             28 RETURN_VALUE
+
+=== LPFeedbackDraftStore.load ===
+ 83           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_settingsStore)
+              6 LOAD_METHOD              2 (value)
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                3 (_SUBJECT_KEY)
+             12 LOAD_CONST               1 ('')
+             14 CALL_METHOD              2
+             16 JUMP_IF_TRUE_OR_POP     20
+             18 LOAD_CONST               1 ('')
+        >>   20 CALL_FUNCTION            1
+             22 STORE_FAST               1 (subject)
+
+ 84          24 LOAD_GLOBAL              0 (str)
+             26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                1 (_settingsStore)
+             30 LOAD_METHOD              2 (value)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                4 (_EMAIL_KEY)
+             36 LOAD_CONST               1 ('')
+             38 CALL_METHOD              2
+             40 JUMP_IF_TRUE_OR_POP     44
+             42 LOAD_CONST               1 ('')
+        >>   44 CALL_FUNCTION            1
+             46 STORE_FAST               2 (email)
+
+ 85          48 LOAD_GLOBAL              0 (str)
+             50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                1 (_settingsStore)
+             54 LOAD_METHOD              2 (value)
+             56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                5 (_DESCRIPTION_KEY)
+             60 LOAD_CONST               1 ('')
+             62 CALL_METHOD              2
+             64 JUMP_IF_TRUE_OR_POP     68
+             66 LOAD_CONST               1 ('')
+        >>   68 CALL_FUNCTION            1
+             70 STORE_FAST               3 (description)
+
+ 86          72 LOAD_GLOBAL              6 (list)
+             74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                1 (_settingsStore)
+             78 LOAD_METHOD              2 (value)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                7 (_ATTACHMENT_PATHS_KEY)
+             84 BUILD_LIST               0
+             86 CALL_METHOD              2
+             88 JUMP_IF_TRUE_OR_POP     92
+             90 BUILD_LIST               0
+        >>   92 CALL_FUNCTION            1
+             94 STORE_FAST               4 (attachmentPaths)
+
+ 87          96 LOAD_GLOBAL              8 (int)
+             98 LOAD_FAST                0 (self)
+            100 LOAD_ATTR                1 (_settingsStore)
+            102 LOAD_METHOD              2 (value)
+            104 LOAD_FAST                0 (self)
+            106 LOAD_ATTR                9 (_UPDATED_AT_KEY)
+            108 LOAD_CONST               2 (0)
+            110 CALL_METHOD              2
+            112 JUMP_IF_TRUE_OR_POP    116
+            114 LOAD_CONST               2 (0)
+        >>  116 CALL_FUNCTION            1
+            118 STORE_FAST               5 (updatedAt)
+
+ 88         120 LOAD_GLOBAL             10 (any)
+            122 LOAD_CONST               3 (<code object <genexpr> at 0x000001F3253C4190, file "LPClientFramework\LPFeedback\LPFeedbackDraftStore.py", line 88>)
+            124 LOAD_CONST               4 ('LPFeedbackDraftStore.load.<locals>.<genexpr>')
+            126 MAKE_FUNCTION            0
+            128 LOAD_FAST                1 (subject)
+            130 LOAD_FAST                2 (email)
+            132 LOAD_FAST                3 (description)
+            134 BUILD_TUPLE              3
+            136 GET_ITER
+            138 CALL_FUNCTION            1
+            140 CALL_FUNCTION            1
+            142 POP_JUMP_IF_TRUE       152
+            144 LOAD_FAST                4 (attachmentPaths)
+            146 POP_JUMP_IF_TRUE       152
+
+ 89         148 LOAD_CONST               5 (None)
+            150 RETURN_VALUE
+
+ 90     >>  152 LOAD_FAST                5 (updatedAt)
+            154 POP_JUMP_IF_TRUE       160
+
+ 91         156 LOAD_CONST               5 (None)
+            158 RETURN_VALUE
+
+ 93     >>  160 LOAD_FAST                1 (subject)
+
+ 94         162 LOAD_FAST                2 (email)
+
+ 95         164 LOAD_FAST                3 (description)
+
+ 96         166 LOAD_FAST                4 (attachmentPaths)
+
+ 97         168 LOAD_FAST                5 (updatedAt)
+
+ 92         170 LOAD_CONST               6 (('subject', 'email', 'description', 'attachmentPaths', 'updatedAt'))
+            172 BUILD_CONST_KEY_MAP      5
+            174 RETURN_VALUE
+
+=== LPFeedbackDraftStore.load.<genexpr> ===
+ 88           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (value)
+              6 LOAD_FAST                1 (value)
+              8 LOAD_METHOD              0 (strip)
+             10 CALL_METHOD              0
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== LPFeedbackDraftStore.clear ===
+102           0 LOAD_GLOBAL              0 (list)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_settingsStore)
+              6 LOAD_METHOD              2 (value)
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                3 (_ATTACHMENT_PATHS_KEY)
+             12 BUILD_LIST               0
+             14 CALL_METHOD              2
+             16 JUMP_IF_TRUE_OR_POP     20
+             18 BUILD_LIST               0
+        >>   20 CALL_FUNCTION            1
+             22 STORE_FAST               1 (attachmentPaths)
+
+103          24 LOAD_FAST                1 (attachmentPaths)
+             26 GET_ITER
+        >>   28 FOR_ITER                40 (to 70)
+             30 STORE_FAST               2 (path)
+
+104          32 SETUP_FINALLY           16 (to 50)
+
+105          34 LOAD_GLOBAL              4 (Path)
+             36 LOAD_FAST                2 (path)
+             38 CALL_FUNCTION            1
+             40 LOAD_METHOD              5 (unlink)
+             42 CALL_METHOD              0
+             44 POP_TOP
+             46 POP_BLOCK
+             48 JUMP_ABSOLUTE           28
+
+106     >>   50 DUP_TOP
+             52 LOAD_GLOBAL              6 (OSError)
+             54 JUMP_IF_NOT_EXC_MATCH    66
+             56 POP_TOP
+             58 POP_TOP
+             60 POP_TOP
+
+107          62 POP_EXCEPT
+             64 JUMP_ABSOLUTE           28
+        >>   66 RERAISE
+             68 JUMP_ABSOLUTE           28
+
+108     >>   70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR                7 (_KEYS)
+             74 GET_ITER
+        >>   76 FOR_ITER                16 (to 94)
+             78 STORE_FAST               3 (key)
+
+109          80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                1 (_settingsStore)
+             84 LOAD_METHOD              8 (remove)
+             86 LOAD_FAST                3 (key)
+             88 CALL_METHOD              1
+             90 POP_TOP
+             92 JUMP_ABSOLUTE           76
+
+110     >>   94 LOAD_GLOBAL              9 (shutil)
+             96 LOAD_ATTR               10 (rmtree)
+             98 LOAD_FAST                0 (self)
+            100 LOAD_ATTR               11 (_attachmentCacheDir)
+            102 LOAD_CONST               1 (True)
+            104 LOAD_CONST               2 (('ignore_errors',))
+            106 CALL_FUNCTION_KW         2
+            108 POP_TOP
+            110 LOAD_CONST               3 (None)
+            112 RETURN_VALUE
+
+=== LPFeedbackDraftStore.copyAttachment ===
+126           0 SETUP_FINALLY          136 (to 138)
+
+127           2 LOAD_GLOBAL              0 (hashlib)
+              4 LOAD_METHOD              1 (sha1)
+              6 LOAD_GLOBAL              2 (os)
+              8 LOAD_ATTR                3 (path)
+             10 LOAD_METHOD              4 (realpath)
+             12 LOAD_GLOBAL              5 (str)
+             14 LOAD_FAST                1 (srcPath)
+             16 CALL_FUNCTION            1
+             18 CALL_METHOD              1
+             20 LOAD_METHOD              6 (encode)
+             22 LOAD_CONST               1 ('utf-8')
+             24 CALL_METHOD              1
+             26 CALL_METHOD              1
+             28 LOAD_METHOD              7 (hexdigest)
+             30 CALL_METHOD              0
+             32 LOAD_CONST               2 (None)
+             34 LOAD_CONST               3 (16)
+             36 BUILD_SLICE              2
+             38 BINARY_SUBSCR
+             40 STORE_FAST               2 (digest)
+
+128          42 LOAD_GLOBAL              2 (os)
+             44 LOAD_ATTR                3 (path)
+             46 LOAD_METHOD              8 (splitext)
+             48 LOAD_GLOBAL              5 (str)
+             50 LOAD_FAST                1 (srcPath)
+             52 CALL_FUNCTION            1
+             54 CALL_METHOD              1
+             56 LOAD_CONST               4 (1)
+             58 BINARY_SUBSCR
+             60 LOAD_METHOD              9 (lower)
+             62 CALL_METHOD              0
+             64 JUMP_IF_TRUE_OR_POP     68
+             66 LOAD_CONST               5 ('.img')
+        >>   68 STORE_FAST               3 (suffix)
+
+129          70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR               10 (_attachmentCacheDir)
+             74 LOAD_FAST                2 (digest)
+             76 LOAD_FAST                3 (suffix)
+             78 BINARY_ADD
+             80 BINARY_TRUE_DIVIDE
+             82 STORE_FAST               4 (targetPath)
+
+130          84 LOAD_FAST                4 (targetPath)
+             86 LOAD_METHOD             11 (exists)
+             88 CALL_METHOD              0
+             90 POP_JUMP_IF_TRUE       128
+
+131          92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR               10 (_attachmentCacheDir)
+             96 LOAD_ATTR               12 (mkdir)
+             98 LOAD_CONST               6 (True)
+            100 LOAD_CONST               6 (True)
+            102 LOAD_CONST               7 (('parents', 'exist_ok'))
+            104 CALL_FUNCTION_KW         2
+            106 POP_TOP
+
+132         108 LOAD_GLOBAL             13 (shutil)
+            110 LOAD_METHOD             14 (copyfile)
+            112 LOAD_GLOBAL              5 (str)
+            114 LOAD_FAST                1 (srcPath)
+            116 CALL_FUNCTION            1
+            118 LOAD_GLOBAL              5 (str)
+            120 LOAD_FAST                4 (targetPath)
+            122 CALL_FUNCTION            1
+            124 CALL_METHOD              2
+            126 POP_TOP
+
+133     >>  128 LOAD_GLOBAL              5 (str)
+            130 LOAD_FAST                4 (targetPath)
+            132 CALL_FUNCTION            1
+            134 POP_BLOCK
+            136 RETURN_VALUE
+
+134     >>  138 DUP_TOP
+            140 LOAD_GLOBAL             15 (OSError)
+            142 JUMP_IF_NOT_EXC_MATCH   156
+            144 POP_TOP
+            146 POP_TOP
+            148 POP_TOP
+
+135         150 POP_EXCEPT
+            152 LOAD_CONST               2 (None)
+            154 RETURN_VALUE
+        >>  156 RERAISE
+            158 LOAD_CONST               2 (None)
+            160 RETURN_VALUE
+
+=== LPFeedbackDraftStore.removeAttachment ===
+145           0 SETUP_FINALLY           16 (to 18)
+
+146           2 LOAD_GLOBAL              0 (Path)
+              4 LOAD_FAST                1 (cachedPath)
+              6 CALL_FUNCTION            1
+              8 LOAD_METHOD              1 (unlink)
+             10 CALL_METHOD              0
+             12 POP_TOP
+             14 POP_BLOCK
+             16 JUMP_FORWARD            18 (to 36)
+
+147     >>   18 DUP_TOP
+             20 LOAD_GLOBAL              2 (OSError)
+             22 JUMP_IF_NOT_EXC_MATCH    34
+             24 POP_TOP
+             26 POP_TOP
+             28 POP_TOP
+
+148          30 POP_EXCEPT
+             32 JUMP_FORWARD             2 (to 36)
+        >>   34 RERAISE
+        >>   36 LOAD_CONST               1 (None)
+             38 RETURN_VALUE
+
+=== LPFeedbackDraftStore.cleanupExpired ===
+167           0 LOAD_GLOBAL              0 (int)
+              2 LOAD_FAST                1 (settingsStore)
+              4 LOAD_METHOD              1 (value)
+              6 LOAD_FAST                0 (cls)
+              8 LOAD_ATTR                2 (_UPDATED_AT_KEY)
+             10 LOAD_CONST               1 (0)
+             12 CALL_METHOD              2
+             14 JUMP_IF_TRUE_OR_POP     18
+             16 LOAD_CONST               1 (0)
+        >>   18 CALL_FUNCTION            1
+             20 STORE_FAST               4 (updatedAt)
+
+168          22 LOAD_FAST                4 (updatedAt)
+             24 POP_JUMP_IF_TRUE        30
+
+169          26 LOAD_CONST               2 (None)
+             28 RETURN_VALUE
+
+170     >>   30 LOAD_GLOBAL              0 (int)
+             32 LOAD_GLOBAL              3 (time)
+             34 LOAD_METHOD              3 (time)
+             36 CALL_METHOD              0
+             38 CALL_FUNCTION            1
+             40 LOAD_FAST                4 (updatedAt)
+             42 BINARY_SUBTRACT
+             44 LOAD_GLOBAL              0 (int)
+             46 LOAD_FAST                3 (maxAgeDays)
+             48 CALL_FUNCTION            1
+             50 LOAD_CONST               3 (86400)
+             52 BINARY_MULTIPLY
+             54 COMPARE_OP               1 (<=)
+             56 POP_JUMP_IF_FALSE       62
+
+171          58 LOAD_CONST               2 (None)
+             60 RETURN_VALUE
+
+172     >>   62 LOAD_GLOBAL              4 (list)
+             64 LOAD_FAST                1 (settingsStore)
+             66 LOAD_METHOD              1 (value)
+             68 LOAD_FAST                0 (cls)
+             70 LOAD_ATTR                5 (_ATTACHMENT_PATHS_KEY)
+             72 BUILD_LIST               0
+             74 CALL_METHOD              2
+             76 JUMP_IF_TRUE_OR_POP     80
+             78 BUILD_LIST               0
+        >>   80 CALL_FUNCTION            1
+             82 STORE_FAST               5 (attachmentPaths)
+
+173          84 LOAD_FAST                5 (attachmentPaths)
+             86 GET_ITER
+        >>   88 FOR_ITER                40 (to 130)
+             90 STORE_FAST               6 (path)
+
+174          92 SETUP_FINALLY           16 (to 110)
+
+175          94 LOAD_GLOBAL              6 (Path)
+             96 LOAD_FAST                6 (path)
+             98 CALL_FUNCTION            1
+            100 LOAD_METHOD              7 (unlink)
+            102 CALL_METHOD              0
+            104 POP_TOP
+            106 POP_BLOCK
+            108 JUMP_ABSOLUTE           88
+
+176     >>  110 DUP_TOP
+            112 LOAD_GLOBAL              8 (OSError)
+            114 JUMP_IF_NOT_EXC_MATCH   126
+            116 POP_TOP
+            118 POP_TOP
+            120 POP_TOP
+
+177         122 POP_EXCEPT
+            124 JUMP_ABSOLUTE           88
+        >>  126 RERAISE
+            128 JUMP_ABSOLUTE           88
+
+178     >>  130 LOAD_FAST                0 (cls)
+            132 LOAD_ATTR                9 (_KEYS)
+            134 GET_ITER
+        >>  136 FOR_ITER                14 (to 152)
+            138 STORE_FAST               7 (key)
+
+179         140 LOAD_FAST                1 (settingsStore)
+            142 LOAD_METHOD             10 (remove)
+            144 LOAD_FAST                7 (key)
+            146 CALL_METHOD              1
+            148 POP_TOP
+            150 JUMP_ABSOLUTE          136
+
+180     >>  152 LOAD_GLOBAL             11 (shutil)
+            154 LOAD_ATTR               12 (rmtree)
+            156 LOAD_GLOBAL              6 (Path)
+            158 LOAD_FAST                2 (attachmentCacheDir)
+            160 CALL_FUNCTION            1
+            162 LOAD_CONST               4 (True)
+            164 LOAD_CONST               5 (('ignore_errors',))
+            166 CALL_FUNCTION_KW         2
+            168 POP_TOP
+            170 LOAD_CONST               2 (None)
+            172 RETURN_VALUE

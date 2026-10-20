@@ -1,0 +1,514 @@
+
+=== <module> ===
+  2           0 SETUP_ANNOTATIONS
+              2 LOAD_CONST               0 ('\nTIDAL bio/review 文本 wimpLink 解析器。\n\n将 API 返回的 raw text 中的 [wimpLink ...][/wimpLink] 标签和 <br/> 换行\n转换为结构化片段列表，供 QML 端渲染可点击链接和保留换行。\n')
+              4 STORE_NAME               0 (__doc__)
+
+  9           6 LOAD_CONST               1 (0)
+              8 LOAD_CONST               2 (None)
+             10 IMPORT_NAME              1 (html)
+             12 STORE_NAME               1 (html)
+
+ 10          14 LOAD_CONST               1 (0)
+             16 LOAD_CONST               2 (None)
+             18 IMPORT_NAME              2 (re)
+             20 STORE_NAME               2 (re)
+
+ 11          22 LOAD_CONST               1 (0)
+             24 LOAD_CONST               3 (('Any', 'Dict', 'List'))
+             26 IMPORT_NAME              3 (typing)
+             28 IMPORT_FROM              4 (Any)
+             30 STORE_NAME               4 (Any)
+             32 IMPORT_FROM              5 (Dict)
+             34 STORE_NAME               5 (Dict)
+             36 IMPORT_FROM              6 (List)
+             38 STORE_NAME               6 (List)
+             40 POP_TOP
+
+ 14          42 LOAD_NAME                2 (re)
+             44 LOAD_METHOD              7 (compile)
+
+ 15          46 LOAD_CONST               4 ('\\[wimpLink\\s+(\\w+)=\\"([^\\"]*)\\"\\](.*?)\\[/wimpLink\\]')
+
+ 16          48 LOAD_NAME                2 (re)
+             50 LOAD_ATTR                8 (DOTALL)
+
+ 14          52 CALL_METHOD              2
+             54 STORE_NAME               9 (_WIMP_LINK_RE)
+
+ 21          56 LOAD_CONST               5 ('artist')
+
+ 22          58 LOAD_CONST               6 ('album')
+
+ 23          60 LOAD_CONST               7 ('track')
+
+ 24          62 LOAD_CONST               8 ('video')
+
+ 25          64 LOAD_CONST               9 ('playlist')
+
+ 20          66 LOAD_CONST              10 (('artistId', 'albumId', 'trackId', 'videoId', 'playlistId'))
+             68 BUILD_CONST_KEY_MAP      5
+             70 STORE_NAME              10 (_ATTR_TO_LINK_TYPE)
+             72 LOAD_NAME                5 (Dict)
+             74 LOAD_NAME               11 (str)
+             76 LOAD_NAME               11 (str)
+             78 BUILD_TUPLE              2
+             80 BINARY_SUBSCR
+             82 LOAD_NAME               12 (__annotations__)
+             84 LOAD_CONST              11 ('_ATTR_TO_LINK_TYPE')
+             86 STORE_SUBSCR
+
+ 29          88 LOAD_NAME               11 (str)
+             90 LOAD_NAME               11 (str)
+             92 LOAD_CONST              12 (('raw', 'return'))
+             94 BUILD_CONST_KEY_MAP      2
+             96 LOAD_CONST              13 (<code object _escape_html_text at 0x000001F3253AE5B0, file "StreamService\Tidal\data\LPTidalWimpLinkParser.py", line 29>)
+             98 LOAD_CONST              14 ('_escape_html_text')
+            100 MAKE_FUNCTION            4 (annotations)
+            102 STORE_NAME              13 (_escape_html_text)
+
+ 34         104 LOAD_NAME               11 (str)
+            106 LOAD_NAME                6 (List)
+            108 LOAD_NAME                5 (Dict)
+            110 LOAD_NAME               11 (str)
+            112 LOAD_NAME                4 (Any)
+            114 BUILD_TUPLE              2
+            116 BINARY_SUBSCR
+            118 BINARY_SUBSCR
+            120 LOAD_CONST              12 (('raw', 'return'))
+            122 BUILD_CONST_KEY_MAP      2
+            124 LOAD_CONST              15 (<code object parseBioText at 0x000001F3253AE450, file "StreamService\Tidal\data\LPTidalWimpLinkParser.py", line 34>)
+            126 LOAD_CONST              16 ('parseBioText')
+            128 MAKE_FUNCTION            4 (annotations)
+            130 STORE_NAME              14 (parseBioText)
+
+ 83         132 LOAD_NAME                6 (List)
+            134 LOAD_NAME                5 (Dict)
+            136 LOAD_NAME               11 (str)
+            138 LOAD_NAME                4 (Any)
+            140 BUILD_TUPLE              2
+            142 BINARY_SUBSCR
+            144 BINARY_SUBSCR
+            146 LOAD_NAME               11 (str)
+            148 LOAD_CONST               2 (None)
+            150 LOAD_CONST              17 (('segments', 'text', 'return'))
+            152 BUILD_CONST_KEY_MAP      3
+            154 LOAD_CONST              18 (<code object _append_text_parts at 0x000001F3253C4660, file "StreamService\Tidal\data\LPTidalWimpLinkParser.py", line 83>)
+            156 LOAD_CONST              19 ('_append_text_parts')
+            158 MAKE_FUNCTION            4 (annotations)
+            160 STORE_NAME              15 (_append_text_parts)
+
+ 98         162 LOAD_CONST              27 (('', ''))
+            164 LOAD_NAME                6 (List)
+            166 LOAD_NAME                5 (Dict)
+            168 LOAD_NAME               11 (str)
+            170 LOAD_NAME                4 (Any)
+            172 BUILD_TUPLE              2
+            174 BINARY_SUBSCR
+            176 BINARY_SUBSCR
+            178 LOAD_NAME               11 (str)
+            180 LOAD_NAME               11 (str)
+            182 LOAD_NAME               11 (str)
+            184 LOAD_CONST              21 (('segments', 'linkColor', 'linkHoverColor', 'return'))
+            186 BUILD_CONST_KEY_MAP      4
+            188 LOAD_CONST              22 (<code object segmentsToRichText at 0x000001F3253C4450, file "StreamService\Tidal\data\LPTidalWimpLinkParser.py", line 98>)
+            190 LOAD_CONST              23 ('segmentsToRichText')
+            192 MAKE_FUNCTION            5 (defaults, annotations)
+            194 STORE_NAME              16 (segmentsToRichText)
+
+131         196 LOAD_NAME                6 (List)
+            198 LOAD_NAME                5 (Dict)
+            200 LOAD_NAME               11 (str)
+            202 LOAD_NAME                4 (Any)
+            204 BUILD_TUPLE              2
+            206 BINARY_SUBSCR
+            208 BINARY_SUBSCR
+            210 LOAD_NAME               11 (str)
+            212 LOAD_CONST              24 (('segments', 'return'))
+            214 BUILD_CONST_KEY_MAP      2
+            216 LOAD_CONST              25 (<code object segmentsToPlainText at 0x000001F3253C4B30, file "StreamService\Tidal\data\LPTidalWimpLinkParser.py", line 131>)
+            218 LOAD_CONST              26 ('segmentsToPlainText')
+            220 MAKE_FUNCTION            4 (annotations)
+            222 STORE_NAME              17 (segmentsToPlainText)
+            224 LOAD_CONST               2 (None)
+            226 RETURN_VALUE
+
+=== _escape_html_text ===
+ 31           0 LOAD_GLOBAL              0 (html)
+              2 LOAD_ATTR                1 (escape)
+              4 LOAD_FAST                0 (raw)
+              6 LOAD_CONST               1 (False)
+              8 LOAD_CONST               2 (('quote',))
+             10 CALL_FUNCTION_KW         2
+             12 RETURN_VALUE
+
+=== parseBioText ===
+ 44           0 LOAD_FAST                0 (raw)
+              2 POP_JUMP_IF_TRUE         8
+
+ 45           4 BUILD_LIST               0
+              6 RETURN_VALUE
+
+ 47     >>    8 BUILD_LIST               0
+             10 STORE_FAST               1 (segments)
+
+ 48          12 LOAD_CONST               1 (0)
+             14 STORE_FAST               2 (pos)
+
+ 50          16 LOAD_GLOBAL              0 (_WIMP_LINK_RE)
+             18 LOAD_METHOD              1 (finditer)
+             20 LOAD_FAST                0 (raw)
+             22 CALL_METHOD              1
+             24 GET_ITER
+        >>   26 FOR_ITER               134 (to 162)
+             28 STORE_FAST               3 (m)
+
+ 52          30 LOAD_FAST                0 (raw)
+             32 LOAD_FAST                2 (pos)
+             34 LOAD_FAST                3 (m)
+             36 LOAD_METHOD              2 (start)
+             38 CALL_METHOD              0
+             40 BUILD_SLICE              2
+             42 BINARY_SUBSCR
+             44 STORE_FAST               4 (before)
+
+ 53          46 LOAD_FAST                4 (before)
+             48 POP_JUMP_IF_FALSE       60
+
+ 54          50 LOAD_GLOBAL              3 (_append_text_parts)
+             52 LOAD_FAST                1 (segments)
+             54 LOAD_FAST                4 (before)
+             56 CALL_FUNCTION            2
+             58 POP_TOP
+
+ 56     >>   60 LOAD_FAST                3 (m)
+             62 LOAD_METHOD              4 (group)
+             64 LOAD_CONST               2 (1)
+             66 CALL_METHOD              1
+             68 STORE_FAST               5 (attr_name)
+
+ 57          70 LOAD_FAST                3 (m)
+             72 LOAD_METHOD              4 (group)
+             74 LOAD_CONST               3 (2)
+             76 CALL_METHOD              1
+             78 STORE_FAST               6 (attr_value)
+
+ 58          80 LOAD_FAST                3 (m)
+             82 LOAD_METHOD              4 (group)
+             84 LOAD_CONST               4 (3)
+             86 CALL_METHOD              1
+             88 STORE_FAST               7 (link_text)
+
+ 60          90 LOAD_GLOBAL              5 (_ATTR_TO_LINK_TYPE)
+             92 LOAD_METHOD              6 (get)
+             94 LOAD_FAST                5 (attr_name)
+             96 LOAD_CONST               5 ('')
+             98 CALL_METHOD              2
+            100 STORE_FAST               8 (link_type)
+
+ 61         102 LOAD_FAST                8 (link_type)
+            104 POP_JUMP_IF_FALSE      132
+            106 LOAD_FAST                6 (attr_value)
+            108 POP_JUMP_IF_FALSE      132
+
+ 62         110 LOAD_FAST                1 (segments)
+            112 LOAD_METHOD              7 (append)
+
+ 63         114 LOAD_CONST               6 ('link')
+
+ 64         116 LOAD_FAST                7 (link_text)
+
+ 65         118 LOAD_FAST                8 (link_type)
+
+ 66         120 LOAD_FAST                6 (attr_value)
+
+ 62         122 LOAD_CONST               7 (('type', 'text', 'linkType', 'linkId'))
+            124 BUILD_CONST_KEY_MAP      4
+            126 CALL_METHOD              1
+            128 POP_TOP
+            130 JUMP_FORWARD            20 (to 152)
+
+ 70     >>  132 LOAD_FAST                7 (link_text)
+            134 POP_JUMP_IF_FALSE      152
+
+ 71         136 LOAD_FAST                1 (segments)
+            138 LOAD_METHOD              7 (append)
+            140 LOAD_CONST               8 ('text')
+            142 LOAD_FAST                7 (link_text)
+            144 LOAD_CONST               9 (('type', 'text'))
+            146 BUILD_CONST_KEY_MAP      2
+            148 CALL_METHOD              1
+            150 POP_TOP
+
+ 73     >>  152 LOAD_FAST                3 (m)
+            154 LOAD_METHOD              8 (end)
+            156 CALL_METHOD              0
+            158 STORE_FAST               2 (pos)
+            160 JUMP_ABSOLUTE           26
+
+ 76     >>  162 LOAD_FAST                0 (raw)
+            164 LOAD_FAST                2 (pos)
+            166 LOAD_CONST              10 (None)
+            168 BUILD_SLICE              2
+            170 BINARY_SUBSCR
+            172 STORE_FAST               9 (tail)
+
+ 77         174 LOAD_FAST                9 (tail)
+            176 POP_JUMP_IF_FALSE      188
+
+ 78         178 LOAD_GLOBAL              3 (_append_text_parts)
+            180 LOAD_FAST                1 (segments)
+            182 LOAD_FAST                9 (tail)
+            184 CALL_FUNCTION            2
+            186 POP_TOP
+
+ 80     >>  188 LOAD_FAST                1 (segments)
+            190 RETURN_VALUE
+
+=== _append_text_parts ===
+ 85           0 LOAD_FAST                1 (text)
+              2 LOAD_METHOD              0 (split)
+              4 LOAD_CONST               1 ('<br/>')
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (parts)
+
+ 86          10 LOAD_GLOBAL              1 (enumerate)
+             12 LOAD_FAST                2 (parts)
+             14 CALL_FUNCTION            1
+             16 GET_ITER
+        >>   18 FOR_ITER                94 (to 114)
+             20 UNPACK_SEQUENCE          2
+             22 STORE_FAST               3 (i)
+             24 STORE_FAST               4 (part)
+
+ 87          26 LOAD_FAST                3 (i)
+             28 LOAD_CONST               2 (0)
+             30 COMPARE_OP               4 (>)
+             32 POP_JUMP_IF_FALSE       48
+
+ 88          34 LOAD_FAST                0 (segments)
+             36 LOAD_METHOD              2 (append)
+             38 LOAD_CONST               3 ('type')
+             40 LOAD_CONST               4 ('break')
+             42 BUILD_MAP                1
+             44 CALL_METHOD              1
+             46 POP_TOP
+
+ 89     >>   48 LOAD_FAST                4 (part)
+             50 POP_JUMP_IF_TRUE        54
+
+ 90          52 JUMP_ABSOLUTE           18
+
+ 92     >>   54 LOAD_FAST                0 (segments)
+             56 POP_JUMP_IF_FALSE       96
+             58 LOAD_FAST                0 (segments)
+             60 LOAD_CONST               5 (-1)
+             62 BINARY_SUBSCR
+             64 LOAD_CONST               3 ('type')
+             66 BINARY_SUBSCR
+             68 LOAD_CONST               6 ('text')
+             70 COMPARE_OP               2 (==)
+             72 POP_JUMP_IF_FALSE       96
+
+ 93          74 LOAD_FAST                0 (segments)
+             76 LOAD_CONST               5 (-1)
+             78 BINARY_SUBSCR
+             80 LOAD_CONST               6 ('text')
+             82 DUP_TOP_TWO
+             84 BINARY_SUBSCR
+             86 LOAD_FAST                4 (part)
+             88 INPLACE_ADD
+             90 ROT_THREE
+             92 STORE_SUBSCR
+             94 JUMP_ABSOLUTE           18
+
+ 95     >>   96 LOAD_FAST                0 (segments)
+             98 LOAD_METHOD              2 (append)
+            100 LOAD_CONST               6 ('text')
+            102 LOAD_FAST                4 (part)
+            104 LOAD_CONST               7 (('type', 'text'))
+            106 BUILD_CONST_KEY_MAP      2
+            108 CALL_METHOD              1
+            110 POP_TOP
+            112 JUMP_ABSOLUTE           18
+        >>  114 LOAD_CONST               8 (None)
+            116 RETURN_VALUE
+
+=== segmentsToRichText ===
+107           0 LOAD_CONST               1 ('')
+              2 STORE_FAST               3 (link_style)
+
+108           4 LOAD_FAST                1 (linkColor)
+              6 POP_JUMP_IF_FALSE       24
+
+109           8 LOAD_FAST                3 (link_style)
+             10 LOAD_CONST               2 ('color:')
+             12 LOAD_FAST                1 (linkColor)
+             14 FORMAT_VALUE             0
+             16 LOAD_CONST               3 (';text-decoration:none;')
+             18 BUILD_STRING             3
+             20 INPLACE_ADD
+             22 STORE_FAST               3 (link_style)
+
+110     >>   24 LOAD_FAST                2 (linkHoverColor)
+             26 POP_JUMP_IF_FALSE       28
+
+113     >>   28 BUILD_LIST               0
+             30 STORE_FAST               4 (parts)
+
+114          32 LOAD_FAST                0 (segments)
+             34 GET_ITER
+        >>   36 FOR_ITER               148 (to 186)
+             38 STORE_FAST               5 (seg)
+
+115          40 LOAD_FAST                5 (seg)
+             42 LOAD_CONST               4 ('type')
+             44 BINARY_SUBSCR
+             46 STORE_FAST               6 (t)
+
+116          48 LOAD_FAST                6 (t)
+             50 LOAD_CONST               5 ('text')
+             52 COMPARE_OP               2 (==)
+             54 POP_JUMP_IF_FALSE       76
+
+117          56 LOAD_FAST                4 (parts)
+             58 LOAD_METHOD              0 (append)
+             60 LOAD_GLOBAL              1 (_escape_html_text)
+             62 LOAD_FAST                5 (seg)
+             64 LOAD_CONST               5 ('text')
+             66 BINARY_SUBSCR
+             68 CALL_FUNCTION            1
+             70 CALL_METHOD              1
+             72 POP_TOP
+             74 JUMP_ABSOLUTE           36
+
+118     >>   76 LOAD_FAST                6 (t)
+             78 LOAD_CONST               6 ('link')
+             80 COMPARE_OP               2 (==)
+             82 POP_JUMP_IF_FALSE      166
+
+119          84 LOAD_FAST                5 (seg)
+             86 LOAD_CONST               7 ('linkType')
+             88 BINARY_SUBSCR
+             90 FORMAT_VALUE             0
+             92 LOAD_CONST               8 (':')
+             94 LOAD_FAST                5 (seg)
+             96 LOAD_CONST               9 ('linkId')
+             98 BINARY_SUBSCR
+            100 FORMAT_VALUE             0
+            102 BUILD_STRING             3
+            104 STORE_FAST               7 (href)
+
+120         106 LOAD_FAST                3 (link_style)
+            108 POP_JUMP_IF_FALSE      122
+            110 LOAD_CONST              10 (' style="')
+            112 LOAD_FAST                3 (link_style)
+            114 FORMAT_VALUE             0
+            116 LOAD_CONST              11 ('"')
+            118 BUILD_STRING             3
+            120 JUMP_FORWARD             2 (to 124)
+        >>  122 LOAD_CONST               1 ('')
+        >>  124 STORE_FAST               8 (style_attr)
+
+121         126 LOAD_FAST                4 (parts)
+            128 LOAD_METHOD              0 (append)
+
+122         130 LOAD_CONST              12 ('<a href="')
+            132 LOAD_FAST                7 (href)
+            134 FORMAT_VALUE             0
+            136 LOAD_CONST              11 ('"')
+            138 LOAD_FAST                8 (style_attr)
+            140 FORMAT_VALUE             0
+            142 LOAD_CONST              13 ('>')
+
+123         144 LOAD_GLOBAL              1 (_escape_html_text)
+            146 LOAD_FAST                5 (seg)
+            148 LOAD_CONST               5 ('text')
+            150 BINARY_SUBSCR
+            152 CALL_FUNCTION            1
+
+122         154 FORMAT_VALUE             0
+            156 LOAD_CONST              14 ('</a>')
+            158 BUILD_STRING             7
+
+121         160 CALL_METHOD              1
+            162 POP_TOP
+            164 JUMP_ABSOLUTE           36
+
+126     >>  166 LOAD_FAST                6 (t)
+            168 LOAD_CONST              15 ('break')
+            170 COMPARE_OP               2 (==)
+            172 POP_JUMP_IF_FALSE       36
+
+127         174 LOAD_FAST                4 (parts)
+            176 LOAD_METHOD              0 (append)
+            178 LOAD_CONST              16 ('<br/>')
+            180 CALL_METHOD              1
+            182 POP_TOP
+            184 JUMP_ABSOLUTE           36
+
+128     >>  186 LOAD_CONST               1 ('')
+            188 LOAD_METHOD              2 (join)
+            190 LOAD_FAST                4 (parts)
+            192 CALL_METHOD              1
+            194 RETURN_VALUE
+
+=== segmentsToPlainText ===
+138           0 BUILD_LIST               0
+              2 STORE_FAST               1 (result)
+
+139           4 LOAD_FAST                0 (segments)
+              6 GET_ITER
+        >>    8 FOR_ITER                78 (to 88)
+             10 STORE_FAST               2 (seg)
+
+140          12 LOAD_FAST                2 (seg)
+             14 LOAD_CONST               1 ('type')
+             16 BINARY_SUBSCR
+             18 STORE_FAST               3 (t)
+
+141          20 LOAD_FAST                3 (t)
+             22 LOAD_CONST               2 ('text')
+             24 COMPARE_OP               2 (==)
+             26 POP_JUMP_IF_FALSE       44
+
+142          28 LOAD_FAST                1 (result)
+             30 LOAD_METHOD              0 (append)
+             32 LOAD_FAST                2 (seg)
+             34 LOAD_CONST               2 ('text')
+             36 BINARY_SUBSCR
+             38 CALL_METHOD              1
+             40 POP_TOP
+             42 JUMP_ABSOLUTE            8
+
+143     >>   44 LOAD_FAST                3 (t)
+             46 LOAD_CONST               3 ('link')
+             48 COMPARE_OP               2 (==)
+             50 POP_JUMP_IF_FALSE       68
+
+144          52 LOAD_FAST                1 (result)
+             54 LOAD_METHOD              0 (append)
+             56 LOAD_FAST                2 (seg)
+             58 LOAD_CONST               2 ('text')
+             60 BINARY_SUBSCR
+             62 CALL_METHOD              1
+             64 POP_TOP
+             66 JUMP_ABSOLUTE            8
+
+145     >>   68 LOAD_FAST                3 (t)
+             70 LOAD_CONST               4 ('break')
+             72 COMPARE_OP               2 (==)
+             74 POP_JUMP_IF_FALSE        8
+
+146          76 LOAD_FAST                1 (result)
+             78 LOAD_METHOD              0 (append)
+             80 LOAD_CONST               5 ('\n')
+             82 CALL_METHOD              1
+             84 POP_TOP
+             86 JUMP_ABSOLUTE            8
+
+147     >>   88 LOAD_CONST               6 ('')
+             90 LOAD_METHOD              1 (join)
+             92 LOAD_FAST                1 (result)
+             94 CALL_METHOD              1
+             96 RETURN_VALUE

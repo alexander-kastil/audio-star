@@ -1,0 +1,86 @@
+# module LPClientFramework.util.LPNativeCrashHandler_mac
+
+[module] names: __doc__, os, sys, signal, datetime, _last_traceback_written, _get_crash_dir, _write_signal_marker, _write_python_traceback_mac, _crash_signal_handler, _qt_fatal_message_handler, install_qt_fatal_handler, _install_darwin
+  str: '\n@Time ： 2026/7/14\n@Auth ： AI Assistant\n@File ：LPNativeCrashHandler_mac.py\n@Desc ：macOS 平台原生崩溃处理器实现。\n\n工作原理:\n  macOS 有内置的 CrashReporter 守护进程，任何进程崩溃时系统会自动:\n    1. 生成 .crash 文件到 ~/Library/Logs/DiagnosticReports/\n    2. 包含所有线程调用栈、寄存器、加载的 dylib 列表\n  因此本模块不需要（也不可能）自己生成 .dmp，而是:\n    1. 注册 POSIX 信号处理器，崩溃时写一'
+  str: '_get_crash_dir'
+  str: '_write_signal_marker'
+  str: '_write_python_traceback_mac'
+  str: '_crash_signal_handler'
+  str: '_qt_fatal_message_handler'
+  str: 'install_qt_fatal_handler'
+  str: '_install_darwin'
+
+def _get_crash_dir()  line 45
+  names: os, path, expanduser, makedirs
+    str: '\n    获取崩溃文件存放目录（~/Library/Logs/WiiMHome/crashes/）。\n\n    参数:\n        无\n\n    返回:\n        str: 崩溃目录的绝对路径\n    '
+    str: '~/Library/Logs/WiiMHome/crashes'
+    str: 'exist_ok'
+
+def _write_signal_marker(signum)  line 60
+  names: _get_crash_dir, datetime, now, strftime, os, path, join, signal, SIGSEGV, SIGBUS, SIGILL, SIGFPE, SIGABRT, get, open, write, getpid, Exception
+    str: '\n    写一个 .signo 标记文件，记录崩溃信号编号和进程信息。\n\n    标记文件用于:\n      1. 确认崩溃信号类型（与 .crash 中的 Exception Type 交叉验证）\n      2. 记录精确时间戳（.crash 文件名中的时间可能不够精确）\n      3. 建立与 .traceback.txt 的时间关联\n\n    参数:\n        signum (int): 信号编号（如 11=SIGSEGV）\n\n    返回:\n        str 或 None: 标记文件路径，失败返回 None\n    '
+    str: '%Y%m%d_%H%M%S_%f'
+    str: 'crash_'
+    str: '.signo'
+    str: 'SIGSEGV'
+    str: 'SIGBUS'
+    str: 'SIGILL'
+    str: 'SIGFPE'
+    str: 'SIGABRT'
+    str: 'SIGNAL_'
+    str: 'w'
+    str: 'utf-8'
+    str: 'encoding'
+    str: 'signal='
+    str: ' ('
+    str: ')\n'
+    str: 'pid='
+    str: 'timestamp='
+
+def _write_python_traceback_mac()  line 99
+  names: faulthandler, _get_crash_dir, datetime, now, strftime, os, path, join, open, dump_traceback, Exception
+    str: '\n    将 Python 各线程调用栈写入文本文件。\n\n    参数:\n        无\n\n    返回:\n        str 或 None: traceback 文件路径，失败返回 None\n    '
+    str: '%Y%m%d_%H%M%S_%f'
+    str: 'traceback_'
+    str: '.txt'
+    str: 'w'
+    str: 'utf-8'
+    str: 'encoding'
+    str: 'file'
+    str: 'all_threads'
+
+def _crash_signal_handler(signum, frame)  line 123
+  names: _last_traceback_written, signal, SIG_DFL, _write_signal_marker, _write_python_traceback_mac, Exception
+    str: '\n    macOS 通用崩溃信号处理器。\n\n    在信号处理上下文中只能安全调用 async-signal-safe 的操作。\n    这里的文件 I/O 虽然不完全满足 POSIX 严格要求，但 faulthandler\n    内部采取了相同的策略，且在 macOS 上实际表现稳定。\n\n    处理器执行完后恢复默认信号处理器，让系统 CrashReporter 接管并生成 .crash。\n\n    参数:\n        signum (int): 信号编号\n        frame: 当前栈帧\n\n    返回:\n        无\n    '
+
+def _qt_fatal_message_handler(msg_type, context, message)  line 160
+  names: value, _get_crash_dir, datetime, now, strftime, os, path, join, open, write, file, line, function, category, Exception, PyQt6.QtCore, qFormatLogMessage, sys, stderr, flush
+    str: '\n    Qt 消息处理器：保留标准输出，并在 qFatal() 调用时将上下文写入崩溃目录。\n\n    qFatal() 之后 Qt 会调用 abort()（即 SIGABRT），因此 SIGABRT 处理器会继续执行。\n\n    参数:\n        msg_type (QtMsgType): 消息级别枚举\n        context (QMessageLogContext): 消息上下文（含文件、行号、函数名）\n        message (str): 致命错误的消息文本\n    '
+    str: '%Y%m%d_%H%M%S'
+    str: 'qt_fatal_'
+    str: '.log'
+    str: 'w'
+    str: 'utf-8'
+    str: 'encoding'
+    str: 'QtFatalMsg: '
+    str: '  File: '
+    str: '  Line: '
+    str: '  Function: '
+    str: '  Category: '
+    str: 'qFormatLogMessage'
+
+def install_qt_fatal_handler()  line 200
+  names: PyQt6.QtCore, qInstallMessageHandler, _qt_fatal_message_handler, Exception
+    str: '\n    安装 Qt 的 qInstallMessageHandler，捕获 qFatal() 消息。\n\n    需要在 QApplication 创建之后调用。\n\n    参数:\n        无\n\n    返回:\n        无\n    '
+    str: 'qInstallMessageHandler'
+
+def _install_darwin()  line 219
+  names: getattr, signal, append, _crash_signal_handler, Exception, _get_crash_dir, print
+    str: '\n    macOS 平台崩溃处理器的安装入口。\n\n    注册 SIGSEGV、SIGBUS、SIGILL、SIGFPE、SIGABRT 的信号处理器。\n    仅在 macOS 平台调用。\n\n    参数:\n        无\n\n    返回:\n        无\n    '
+    str: 'SIGSEGV'
+    str: 'SIGBUS'
+    str: 'SIGILL'
+    str: 'SIGFPE'
+    str: 'SIGABRT'
+    str: '[CrashHandler] macOS 崩溃处理器已安装，dump 目录: '
+    str: '[CrashHandler] 系统 .crash 文件位置: ~/Library/Logs/DiagnosticReports/'

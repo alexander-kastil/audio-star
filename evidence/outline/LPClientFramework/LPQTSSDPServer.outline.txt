@@ -1,0 +1,165 @@
+# module LPClientFramework.LPQTSSDPServer
+
+[module] names: PyQt6.QtWidgets, QApplication, PyQt6.QtNetwork, QUdpSocket, QHostAddress, QNetworkInterface, QNetworkDatagram, PyQt6, QtNetwork, PyQt6.QtCore, QRunnable, QThreadPool, random, Random, threading, platform, time, LPClientFramework, LPUtility, LPClientFramework.CacheLog, logger, LPClientFramework.LPUtility, fetchLocalIP, SSDP_PORT, SSDP_ADDR_V4, SSDP_ADDR_V6, validInterfaces, RequestHandler, LPQTSSDPServer
+  str: 'QApplication'
+  str: 'QUdpSocket'
+  str: 'QHostAddress'
+  str: 'QNetworkInterface'
+  str: 'QNetworkDatagram'
+  str: 'QtNetwork'
+  str: 'QRunnable'
+  str: 'QThreadPool'
+  str: 'Random'
+  str: 'LPUtility'
+  str: 'logger'
+  str: 'fetchLocalIP'
+  str: '239.255.255.250'
+  str: '[FF05::C]'
+  str: 'validInterfaces'
+  str: 'RequestHandler'
+  str: 'LPQTSSDPServer'
+
+def validInterfaces()  line 20
+  names: QNetworkInterface, allInterfaces, flags, bool, InterfaceFlag, IsLoopBack, IsPointToPoint, IsRunning, CanMulticast, isValid, append
+    str: '过滤所有可能的interface\n    '
+
+def RequestHandler()  line 46
+  names: __name__, __module__, __qualname__, __init__, run, received_MSEARCH, respond, notify_live_method, notify_bye_method, notify, respond_MSEARCH, send_NOTIFY, received_NOTIFY, http_parse_raw, build_notification_type, headers_join, __classcell__
+    str: 'RequestHandler'
+    str: 'RequestHandler.__init__'
+    str: 'RequestHandler.run'
+    str: 'RequestHandler.received_MSEARCH'
+    str: 'RequestHandler.respond'
+    str: 'RequestHandler.notify_live_method'
+    str: 'RequestHandler.notify_bye_method'
+    str: 'RequestHandler.notify'
+    str: 'RequestHandler.respond_MSEARCH'
+    str: 'RequestHandler.send_NOTIFY'
+    str: 'RequestHandler.received_NOTIFY'
+    str: 'RequestHandler.http_parse_raw'
+    str: 'RequestHandler.build_notification_type'
+    str: 'RequestHandler.headers_join'
+
+  def RequestHandler.__init__(self, datagram, sender_addr, sender_port, ssdpServer)  line 47
+    names: super, __init__, datagram, sender_addr, sender_port, ssdpServer
+
+  def RequestHandler.run(self)  line 54
+    names: http_parse_raw, datagram, received_MSEARCH, sender_addr, sender_port, received_NOTIFY, logger, warning
+      str: 'M-SEARCH'
+      str: 'NOTIFY'
+      str: "[UPnPServer] unhandled Method '%s'"
+
+  def RequestHandler.received_MSEARCH(self, headers, addr)  line 65
+    names: str, strip, int, Exception, logger, warning, LPUtility, fetchLocalIP, toString, setAddress, debug, time, sleep, ssdpServer, rand, randint, respond_MSEARCH
+      str: 'host'
+      str: 'man'
+      str: '"'
+      str: 'mx'
+      str: 'st'
+      str: '[UPnPServer] received invalid message: %s'
+      str: 'ssdp:discover'
+      str: "[UPnPServer] received message where MAN != 'ssdp:discover'"
+      str: 'urn:schemas-upnp-org:service:ContentDirectory:1'
+      str: 'urn:schemas-upnp-org:device:MediaServer:1'
+      str: '127.0.0.1'
+      str: '[UPnPServer] received_MSEARCH: %s'
+
+  def RequestHandler.respond(self, headers, addr)  line 93
+    names: logger, debug, toString, headers_join, QUdpSocket, writeDatagram, encode, Exception, warning
+      str: '[UPnPServer] respond %s:%s'
+      str: 'HTTP/1.1 200 OK\r\n'
+      str: '[UPnPServer] socket.error: %s'
+
+  def RequestHandler.notify_live_method(self)  line 107
+    names: send_NOTIFY, time, sleep
+      str: 'ssdp:alive'
+      str: 'upnp:rootdevice'
+      str: 'urn:schemas-upnp-org:service:ContentDirectory:1'
+      str: 'urn:schemas-upnp-org:device:MediaServer:1'
+
+  def RequestHandler.notify_bye_method(self)  line 117
+    names: send_NOTIFY, time, sleep
+      str: 'ssdp:byebye'
+      str: 'upnp:rootdevice'
+      str: 'urn:schemas-upnp-org:service:ContentDirectory:1'
+      str: 'urn:schemas-upnp-org:device:MediaServer:1'
+
+  def RequestHandler.notify(self, headers, addr)  line 127
+    names: headers_join, validInterfaces, QNetworkDatagram, encode, setInterfaceIndex, index, ssdpServer, socket, writeDatagram, Exception, logger, warning
+      str: 'NOTIFY * HTTP/1.1\r\n'
+      str: '[UPnPServer] socket.error: %s'
+
+  def RequestHandler.respond_MSEARCH(self, st, addr)  line 142
+    names: toString, fetchLocalIP, LPUtility, upnpServerPort, build_notification_type, ssdpServer, uuid, responseExpire, upnpServerStr, bootID, respond
+      str: '127.0.0.1'
+      str: 'http://%s:%d/upnp/DeviceDescription.xml'
+      str: 'max-age = %d'
+      str: '"http://schemas.upnp.org/upnp/1/0/"; ns=01'
+      str: 'CACHE-CONTROL'
+      str: 'EXT'
+      str: 'LOCATION'
+      str: 'SERVER'
+      str: 'ST'
+      str: 'USN'
+      str: 'OPT'
+      str: '01-NLS'
+      str: 'BOOTID.UPNP.ORG'
+
+  def RequestHandler.send_NOTIFY(self, nt, nts)  line 167
+    names: fetchLocalIP, LPUtility, upnpServerPort, build_notification_type, ssdpServer, uuid, SSDP_ADDR_V4, SSDP_PORT, responseExpire, upnpServerStr, bootID, notify, QHostAddress
+      str: 'http://%s:%d/upnp/DeviceDescription.xml'
+      str: '%s:%d'
+      str: 'max-age = %d'
+      str: 'HOST'
+      str: 'CACHE-CONTROL'
+      str: 'LOCATION'
+      str: 'SERVER'
+      str: 'NT'
+      str: 'NTS'
+      str: 'USN'
+      str: 'BOOTID.UPNP.ORG'
+      str: 'CONFIGID.UPNP.ORG'
+
+  def RequestHandler.received_NOTIFY(self, headers, addr)  line 188
+
+  def RequestHandler.http_parse_raw(self, data)  line 193
+    names: split, range, len, int, ValueError, strip, index, lower, get
+      str: ':'
+
+  def RequestHandler.build_notification_type(self, uuid, nt)  line 218
+      str: 'uuid:'
+      str: '::'
+
+  def RequestHandler.headers_join(self, headers)  line 223
+    names: items, str
+      str: ': '
+
+def LPQTSSDPServer()  line 231
+  names: __name__, __module__, __qualname__, __init__, start, sendLiveNotify, receive_message, stop
+    str: 'LPQTSSDPServer'
+    str: 'LPQTSSDPServer.__init__'
+    str: 'LPQTSSDPServer.start'
+    str: 'LPQTSSDPServer.sendLiveNotify'
+    str: 'LPQTSSDPServer.receive_message'
+    str: 'LPQTSSDPServer.stop'
+
+  def LPQTSSDPServer.__init__(self, responseExpire)  line 232
+    names: responseExpire, running, Random, rand, int, time, bootID, LPUtility, pcUUID, uuid, platform, system, release, QApplication, applicationVersion, upnpServerStr, QUdpSocket, socket, QThreadPool, thread_pool
+      str: '%s/%s UPnP/1.0 DLNADOC/1.50 WiiMHome/%s'
+
+  def LPQTSSDPServer.start(self)  line 247
+    names: running, logger, warning, int, time, bootID, debug, socket, bind, QHostAddress, SpecialAddress, AnyIPv4, SSDP_PORT, QtNetwork, QAbstractSocket, BindFlag, ShareAddress, ReuseAddressHint, validInterfaces, joinMulticastGroup, SSDP_ADDR_V4, readyRead, connect, receive_message, liveSwitch, threading, Thread, sendLiveNotify, notifyThread, setDaemon, start
+      str: '[UPnPServer] already running'
+      str: '[UPnPServer] ssdp start listen'
+      str: 'target'
+
+  def LPQTSSDPServer.sendLiveNotify(self)  line 270
+    names: liveSwitch, RequestHandler, notify_live_method, time, sleep, responseExpire
+
+  def LPQTSSDPServer.receive_message(self)  line 282
+    names: socket, hasPendingDatagrams, pendingDatagramSize, readDatagram, decode, RequestHandler, thread_pool, start
+
+  def LPQTSSDPServer.stop(self)  line 295
+    names: logger, debug, running, warning, liveSwitch, bootID, RequestHandler, notify_bye_method, socket, close
+      str: '[UPnPServer] stop'
+      str: '[UPnPServer] already stop'

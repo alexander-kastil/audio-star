@@ -1,0 +1,2639 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/07/09\n@Auth ： feedback\n@File ：LPFeedbackDialogViewController.py\n@Desc: 用户反馈弹窗的 Python 控制器。\n\n职责：\n- 作为 QQuickWidget 宿主，加载并显示 LPFeedbackDialog.qml。\n- 跟随主窗口几何变化同步弹窗覆盖层位置。\n- 收集 QML 表单（主题/邮箱/描述/附件），创建工单后启动一次后台日志上传。\n- 通过 pyqtProperty/pyqtSignal 把提交状态（忙/错误/关闭）回传 QML。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 15           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (os)
+             10 STORE_NAME               1 (os)
+
+ 16          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (platform)
+             18 STORE_NAME               2 (platform)
+
+ 18          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               3 (('QEvent', 'QPoint', 'Qt', 'QTimer', 'QUrl', 'pyqtProperty', 'pyqtSignal', 'pyqtSlot'))
+             24 IMPORT_NAME              3 (PyQt6.QtCore)
+             26 IMPORT_FROM              4 (QEvent)
+             28 STORE_NAME               4 (QEvent)
+             30 IMPORT_FROM              5 (QPoint)
+             32 STORE_NAME               5 (QPoint)
+             34 IMPORT_FROM              6 (Qt)
+             36 STORE_NAME               6 (Qt)
+             38 IMPORT_FROM              7 (QTimer)
+             40 STORE_NAME               7 (QTimer)
+             42 IMPORT_FROM              8 (QUrl)
+             44 STORE_NAME               8 (QUrl)
+             46 IMPORT_FROM              9 (pyqtProperty)
+             48 STORE_NAME               9 (pyqtProperty)
+             50 IMPORT_FROM             10 (pyqtSignal)
+             52 STORE_NAME              10 (pyqtSignal)
+             54 IMPORT_FROM             11 (pyqtSlot)
+             56 STORE_NAME              11 (pyqtSlot)
+             58 POP_TOP
+
+ 28          60 LOAD_CONST               1 (0)
+             62 LOAD_CONST               4 (('QQmlContext',))
+             64 IMPORT_NAME             12 (PyQt6.QtQml)
+             66 IMPORT_FROM             13 (QQmlContext)
+             68 STORE_NAME              13 (QQmlContext)
+             70 POP_TOP
+
+ 29          72 LOAD_CONST               1 (0)
+             74 LOAD_CONST               5 (('QQuickWidget',))
+             76 IMPORT_NAME             14 (PyQt6.QtQuickWidgets)
+             78 IMPORT_FROM             15 (QQuickWidget)
+             80 STORE_NAME              15 (QQuickWidget)
+             82 POP_TOP
+
+ 30          84 LOAD_CONST               1 (0)
+             86 LOAD_CONST               6 (('QApplication', 'QFileDialog', 'QWidget'))
+             88 IMPORT_NAME             16 (PyQt6.QtWidgets)
+             90 IMPORT_FROM             17 (QApplication)
+             92 STORE_NAME              17 (QApplication)
+             94 IMPORT_FROM             18 (QFileDialog)
+             96 STORE_NAME              18 (QFileDialog)
+             98 IMPORT_FROM             19 (QWidget)
+            100 STORE_NAME              19 (QWidget)
+            102 POP_TOP
+
+ 32         104 LOAD_CONST               1 (0)
+            106 LOAD_CONST               2 (None)
+            108 IMPORT_NAME             20 (LPGlobalUI)
+            110 STORE_NAME              20 (LPGlobalUI)
+
+ 33         112 LOAD_CONST               1 (0)
+            114 LOAD_CONST               7 (('Main_Text',))
+            116 IMPORT_NAME             21 (LPClientFramework.LPConfig.LPFontConfig)
+            118 IMPORT_FROM             22 (Main_Text)
+            120 STORE_NAME              22 (Main_Text)
+            122 POP_TOP
+
+ 34         124 LOAD_CONST               1 (0)
+            126 LOAD_CONST               8 (('LPFeedbackDraftStore',))
+            128 IMPORT_NAME             23 (LPClientFramework.LPFeedback.LPFeedbackDraftStore)
+            130 IMPORT_FROM             24 (LPFeedbackDraftStore)
+            132 STORE_NAME              24 (LPFeedbackDraftStore)
+            134 POP_TOP
+
+ 35         136 LOAD_CONST               1 (0)
+            138 LOAD_CONST               9 (('LPFeedbackManager',))
+            140 IMPORT_NAME             25 (LPClientFramework.LPFeedback.LPFeedbackManager)
+            142 IMPORT_FROM             26 (LPFeedbackManager)
+            144 STORE_NAME              26 (LPFeedbackManager)
+            146 POP_TOP
+
+ 36         148 LOAD_CONST               1 (0)
+            150 LOAD_CONST              10 (('LPFeedbackRequest',))
+            152 IMPORT_NAME             27 (LPClientFramework.LPFeedback.LPFeedbackModels)
+            154 IMPORT_FROM             28 (LPFeedbackRequest)
+            156 STORE_NAME              28 (LPFeedbackRequest)
+            158 POP_TOP
+
+ 37         160 LOAD_CONST               1 (0)
+            162 LOAD_CONST              11 (('LPFeedbackPreferences',))
+            164 IMPORT_NAME             29 (LPClientFramework.LPFeedback.LPFeedbackPreferences)
+            166 IMPORT_FROM             30 (LPFeedbackPreferences)
+            168 STORE_NAME              30 (LPFeedbackPreferences)
+            170 POP_TOP
+
+ 38         172 LOAD_CONST               1 (0)
+            174 LOAD_CONST              12 (('appVersion', 'cacheDir', 'logDir', 'pcUUID', 'settings'))
+            176 IMPORT_NAME             31 (LPClientFramework.LPUtility)
+            178 IMPORT_FROM             32 (appVersion)
+            180 STORE_NAME              32 (appVersion)
+            182 IMPORT_FROM             33 (cacheDir)
+            184 STORE_NAME              33 (cacheDir)
+            186 IMPORT_FROM             34 (logDir)
+            188 STORE_NAME              34 (logDir)
+            190 IMPORT_FROM             35 (pcUUID)
+            192 STORE_NAME              35 (pcUUID)
+            194 IMPORT_FROM             36 (settings)
+            196 STORE_NAME              36 (settings)
+            198 POP_TOP
+
+ 39         200 LOAD_CONST               1 (0)
+            202 LOAD_CONST              13 (('logger',))
+            204 IMPORT_NAME             31 (LPClientFramework.LPUtility)
+            206 IMPORT_FROM             37 (logger)
+            208 STORE_NAME              37 (logger)
+            210 POP_TOP
+
+ 42         212 LOAD_BUILD_CLASS
+            214 LOAD_CONST              14 (<code object LPFeedbackDialogViewController at 0x000001F324E692F0, file "Feedback\LPFeedbackDialogViewController.py", line 42>)
+            216 LOAD_CONST              15 ('LPFeedbackDialogViewController')
+            218 MAKE_FUNCTION            0
+            220 LOAD_CONST              15 ('LPFeedbackDialogViewController')
+            222 LOAD_NAME               19 (QWidget)
+            224 CALL_FUNCTION            3
+            226 STORE_NAME              38 (LPFeedbackDialogViewController)
+            228 LOAD_CONST               2 (None)
+            230 RETURN_VALUE
+
+=== LPFeedbackDialogViewController ===
+ 42           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeedbackDialogViewController')
+              6 STORE_NAME               2 (__qualname__)
+
+ 43           8 LOAD_CONST               1 ('用户反馈弹窗控制器。\n\n    以覆盖整个宿主窗口的 QWidget 作为内嵌全屏遮罩层（宿主主窗口的子组件），\n    内嵌 QQuickWidget 渲染全屏半透明遮罩 + 居中的反馈卡片；卡片圆角由 QML 原生处理。\n    通过 setContextProperty("controller", self) 把自身暴露给 QML，QML 调用槽方法提交反馈。\n    ')
+             10 STORE_NAME               3 (__doc__)
+
+ 51          12 LOAD_NAME                4 (pyqtSignal)
+             14 CALL_FUNCTION            0
+             16 STORE_NAME               5 (feedbackBusyChanged)
+
+ 52          18 LOAD_NAME                4 (pyqtSignal)
+             20 CALL_FUNCTION            0
+             22 STORE_NAME               6 (savedEmailChanged)
+
+ 53          24 LOAD_NAME                4 (pyqtSignal)
+             26 CALL_FUNCTION            0
+             28 STORE_NAME               7 (feedbackCloseRequested)
+
+ 54          30 LOAD_NAME                4 (pyqtSignal)
+             32 CALL_FUNCTION            0
+             34 STORE_NAME               8 (attachmentCountChanged)
+
+ 55          36 LOAD_NAME                4 (pyqtSignal)
+             38 CALL_FUNCTION            0
+             40 STORE_NAME               9 (attachmentPreviewUrlsChanged)
+
+ 57          42 LOAD_CONST               2 (540)
+             44 STORE_NAME              10 (_DIALOG_CARD_WIDTH)
+
+ 59          46 LOAD_CONST               3 (5)
+             48 STORE_NAME              11 (_MAX_ATTACHMENT_COUNT)
+
+ 61          50 LOAD_NAME               12 (classmethod)
+
+ 62          52 LOAD_CONST              93 ((None,))
+             54 LOAD_CONST               5 (<code object createForHostWindow at 0x000001F324E60870, file "Feedback\LPFeedbackDialogViewController.py", line 61>)
+             56 LOAD_CONST               6 ('LPFeedbackDialogViewController.createForHostWindow')
+             58 MAKE_FUNCTION            1 (defaults)
+             60 CALL_FUNCTION            1
+             62 STORE_NAME              13 (createForHostWindow)
+
+ 74          64 LOAD_CONST              94 ((None,))
+             66 LOAD_CLOSURE             0 (__class__)
+             68 BUILD_TUPLE              1
+             70 LOAD_CONST               7 (<code object __init__ at 0x000001F3253AE9D0, file "Feedback\LPFeedbackDialogViewController.py", line 74>)
+             72 LOAD_CONST               8 ('LPFeedbackDialogViewController.__init__')
+             74 MAKE_FUNCTION            9 (defaults, closure)
+             76 STORE_NAME              14 (__init__)
+
+135          78 LOAD_CONST               9 (<code object setupUi at 0x000001F3253AE710, file "Feedback\LPFeedbackDialogViewController.py", line 135>)
+             80 LOAD_CONST              10 ('LPFeedbackDialogViewController.setupUi')
+             82 MAKE_FUNCTION            0
+             84 STORE_NAME              15 (setupUi)
+
+166          86 LOAD_CONST              11 (<code object _applyThemeContext at 0x000001F3253AEF50, file "Feedback\LPFeedbackDialogViewController.py", line 166>)
+             88 LOAD_CONST              12 ('LPFeedbackDialogViewController._applyThemeContext')
+             90 MAKE_FUNCTION            0
+             92 STORE_NAME              16 (_applyThemeContext)
+
+182          94 LOAD_CONST              13 (<code object _attachHostWindow at 0x000001F3253AE870, file "Feedback\LPFeedbackDialogViewController.py", line 182>)
+             96 LOAD_CONST              14 ('LPFeedbackDialogViewController._attachHostWindow')
+             98 MAKE_FUNCTION            0
+            100 STORE_NAME              17 (_attachHostWindow)
+
+198         102 LOAD_CONST              15 (<code object _syncToHostGeometry at 0x000001F3253AE920, file "Feedback\LPFeedbackDialogViewController.py", line 198>)
+            104 LOAD_CONST              16 ('LPFeedbackDialogViewController._syncToHostGeometry')
+            106 MAKE_FUNCTION            0
+            108 STORE_NAME              18 (_syncToHostGeometry)
+
+222         110 LOAD_CLOSURE             0 (__class__)
+            112 BUILD_TUPLE              1
+            114 LOAD_CONST              17 (<code object eventFilter at 0x000001F3253AE7C0, file "Feedback\LPFeedbackDialogViewController.py", line 222>)
+            116 LOAD_CONST              18 ('LPFeedbackDialogViewController.eventFilter')
+            118 MAKE_FUNCTION            8 (closure)
+            120 STORE_NAME              19 (eventFilter)
+
+243         122 LOAD_CONST              19 (<code object _onApplicationStateChanged at 0x000001F3253AEC90, file "Feedback\LPFeedbackDialogViewController.py", line 243>)
+            124 LOAD_CONST              20 ('LPFeedbackDialogViewController._onApplicationStateChanged')
+            126 MAKE_FUNCTION            0
+            128 STORE_NAME              20 (_onApplicationStateChanged)
+
+271         130 LOAD_CONST              21 (<code object _bindRootSignals at 0x000001F3253AEEA0, file "Feedback\LPFeedbackDialogViewController.py", line 271>)
+            132 LOAD_CONST              22 ('LPFeedbackDialogViewController._bindRootSignals')
+            134 MAKE_FUNCTION            0
+            136 STORE_NAME              21 (_bindRootSignals)
+
+291         138 LOAD_CONST              23 (<code object _onRootHeightChanged at 0x000001F3253AE190, file "Feedback\LPFeedbackDialogViewController.py", line 291>)
+            140 LOAD_CONST              24 ('LPFeedbackDialogViewController._onRootHeightChanged')
+            142 MAKE_FUNCTION            0
+            144 STORE_NAME              22 (_onRootHeightChanged)
+
+301         146 LOAD_CONST              25 (<code object _onRootVisibleChanged at 0x000001F3253AE030, file "Feedback\LPFeedbackDialogViewController.py", line 301>)
+            148 LOAD_CONST              26 ('LPFeedbackDialogViewController._onRootVisibleChanged')
+            150 MAKE_FUNCTION            0
+            152 STORE_NAME              23 (_onRootVisibleChanged)
+
+314         154 LOAD_CONST              27 (<code object _setRootProperty at 0x000001F3253AE450, file "Feedback\LPFeedbackDialogViewController.py", line 314>)
+            156 LOAD_CONST              28 ('LPFeedbackDialogViewController._setRootProperty')
+            158 MAKE_FUNCTION            0
+            160 STORE_NAME              24 (_setRootProperty)
+
+329         162 LOAD_CONST              29 (<code object openDialog at 0x000001F3253AEB30, file "Feedback\LPFeedbackDialogViewController.py", line 329>)
+            164 LOAD_CONST              30 ('LPFeedbackDialogViewController.openDialog')
+            166 MAKE_FUNCTION            0
+            168 STORE_NAME              25 (openDialog)
+
+340         170 LOAD_CONST              31 (<code object closeDialog at 0x000001F3253AEBE0, file "Feedback\LPFeedbackDialogViewController.py", line 340>)
+            172 LOAD_CONST              32 ('LPFeedbackDialogViewController.closeDialog')
+            174 MAKE_FUNCTION            0
+            176 STORE_NAME              26 (closeDialog)
+
+347         178 LOAD_NAME               27 (pyqtProperty)
+            180 LOAD_NAME               28 (bool)
+            182 LOAD_NAME                5 (feedbackBusyChanged)
+            184 LOAD_CONST              33 (('notify',))
+            186 CALL_FUNCTION_KW         2
+
+348         188 LOAD_CONST              34 (<code object feedbackBusy at 0x000001F3253C43A0, file "Feedback\LPFeedbackDialogViewController.py", line 347>)
+            190 LOAD_CONST              35 ('LPFeedbackDialogViewController.feedbackBusy')
+            192 MAKE_FUNCTION            0
+            194 CALL_FUNCTION            1
+            196 STORE_NAME              29 (feedbackBusy)
+
+352         198 LOAD_NAME               27 (pyqtProperty)
+            200 LOAD_NAME               30 (str)
+            202 LOAD_NAME                6 (savedEmailChanged)
+            204 LOAD_CONST              33 (('notify',))
+            206 CALL_FUNCTION_KW         2
+
+353         208 LOAD_CONST              36 (<code object savedEmail at 0x000001F3253C4500, file "Feedback\LPFeedbackDialogViewController.py", line 352>)
+            210 LOAD_CONST              37 ('LPFeedbackDialogViewController.savedEmail')
+            212 MAKE_FUNCTION            0
+            214 CALL_FUNCTION            1
+            216 STORE_NAME              31 (savedEmail)
+
+357         218 LOAD_NAME               27 (pyqtProperty)
+            220 LOAD_NAME               32 (int)
+            222 LOAD_NAME                8 (attachmentCountChanged)
+            224 LOAD_CONST              33 (('notify',))
+            226 CALL_FUNCTION_KW         2
+
+358         228 LOAD_CONST              38 (<code object attachmentCount at 0x000001F3253C45B0, file "Feedback\LPFeedbackDialogViewController.py", line 357>)
+            230 LOAD_CONST              39 ('LPFeedbackDialogViewController.attachmentCount')
+            232 MAKE_FUNCTION            0
+            234 CALL_FUNCTION            1
+            236 STORE_NAME              33 (attachmentCount)
+
+362         238 LOAD_NAME               27 (pyqtProperty)
+            240 LOAD_CONST              40 ('QStringList')
+            242 LOAD_NAME                9 (attachmentPreviewUrlsChanged)
+            244 LOAD_CONST              33 (('notify',))
+            246 CALL_FUNCTION_KW         2
+
+363         248 LOAD_CONST              41 (<code object attachmentPreviewUrls at 0x000001F3253C4F50, file "Feedback\LPFeedbackDialogViewController.py", line 362>)
+            250 LOAD_CONST              42 ('LPFeedbackDialogViewController.attachmentPreviewUrls')
+            252 MAKE_FUNCTION            0
+            254 CALL_FUNCTION            1
+            256 STORE_NAME              34 (attachmentPreviewUrls)
+
+370         258 LOAD_CONST              43 (<code object _setBusy at 0x000001F3253C4870, file "Feedback\LPFeedbackDialogViewController.py", line 370>)
+            260 LOAD_CONST              44 ('LPFeedbackDialogViewController._setBusy')
+            262 MAKE_FUNCTION            0
+            264 STORE_NAME              35 (_setBusy)
+
+381         266 LOAD_CONST              45 (<code object _showToast at 0x000001F3253C4660, file "Feedback\LPFeedbackDialogViewController.py", line 381>)
+            268 LOAD_CONST              46 ('LPFeedbackDialogViewController._showToast')
+            270 MAKE_FUNCTION            0
+            272 STORE_NAME              36 (_showToast)
+
+391         274 LOAD_CONST              47 (<code object _setAttachmentCount at 0x000001F3253C4710, file "Feedback\LPFeedbackDialogViewController.py", line 391>)
+            276 LOAD_CONST              48 ('LPFeedbackDialogViewController._setAttachmentCount')
+            278 MAKE_FUNCTION            0
+            280 STORE_NAME              37 (_setAttachmentCount)
+
+402         282 LOAD_CONST              49 (<code object _setAttachmentPaths at 0x000001F3253C49D0, file "Feedback\LPFeedbackDialogViewController.py", line 402>)
+            284 LOAD_CONST              50 ('LPFeedbackDialogViewController._setAttachmentPaths')
+            286 MAKE_FUNCTION            0
+            288 STORE_NAME              38 (_setAttachmentPaths)
+
+414         290 LOAD_CONST              51 (<code object _attachmentPathKey at 0x000001F3253C4240, file "Feedback\LPFeedbackDialogViewController.py", line 414>)
+            292 LOAD_CONST              52 ('LPFeedbackDialogViewController._attachmentPathKey')
+            294 MAKE_FUNCTION            0
+            296 STORE_NAME              39 (_attachmentPathKey)
+
+424         298 LOAD_CONST              53 (<code object _deduplicateImageAttachmentPaths at 0x000001F3253C4190, file "Feedback\LPFeedbackDialogViewController.py", line 424>)
+            300 LOAD_CONST              54 ('LPFeedbackDialogViewController._deduplicateImageAttachmentPaths')
+            302 MAKE_FUNCTION            0
+            304 STORE_NAME              40 (_deduplicateImageAttachmentPaths)
+
+442         306 LOAD_CONST              55 (<code object _isImageAttachmentPath at 0x000001F3253C40E0, file "Feedback\LPFeedbackDialogViewController.py", line 442>)
+            308 LOAD_CONST              56 ('LPFeedbackDialogViewController._isImageAttachmentPath')
+            310 MAKE_FUNCTION            0
+            312 STORE_NAME              41 (_isImageAttachmentPath)
+
+456         314 LOAD_NAME               42 (pyqtSlot)
+            316 CALL_FUNCTION            0
+
+457         318 LOAD_CONST              57 (<code object chooseAttachment at 0x000001F3253C4450, file "Feedback\LPFeedbackDialogViewController.py", line 456>)
+            320 LOAD_CONST              58 ('LPFeedbackDialogViewController.chooseAttachment')
+            322 MAKE_FUNCTION            0
+            324 CALL_FUNCTION            1
+            326 STORE_NAME              43 (chooseAttachment)
+
+499         328 LOAD_NAME               42 (pyqtSlot)
+            330 LOAD_NAME               32 (int)
+            332 CALL_FUNCTION            1
+
+500         334 LOAD_CONST              59 (<code object removeAttachmentAt at 0x000001F3253C4A80, file "Feedback\LPFeedbackDialogViewController.py", line 499>)
+            336 LOAD_CONST              60 ('LPFeedbackDialogViewController.removeAttachmentAt')
+            338 MAKE_FUNCTION            0
+            340 CALL_FUNCTION            1
+            342 STORE_NAME              44 (removeAttachmentAt)
+
+516         344 LOAD_NAME               42 (pyqtSlot)
+            346 LOAD_NAME               30 (str)
+            348 LOAD_NAME               30 (str)
+            350 LOAD_NAME               30 (str)
+            352 CALL_FUNCTION            3
+
+517         354 LOAD_CONST              61 (<code object submitFeedback at 0x000001F3253C4920, file "Feedback\LPFeedbackDialogViewController.py", line 516>)
+            356 LOAD_CONST              62 ('LPFeedbackDialogViewController.submitFeedback')
+            358 MAKE_FUNCTION            0
+            360 CALL_FUNCTION            1
+            362 STORE_NAME              45 (submitFeedback)
+
+558         364 LOAD_NAME               42 (pyqtSlot)
+            366 LOAD_NAME               30 (str)
+            368 LOAD_NAME               30 (str)
+            370 LOAD_NAME               30 (str)
+            372 CALL_FUNCTION            3
+
+559         374 LOAD_CONST              63 (<code object saveDraft at 0x000001F3253C4BE0, file "Feedback\LPFeedbackDialogViewController.py", line 558>)
+            376 LOAD_CONST              64 ('LPFeedbackDialogViewController.saveDraft')
+            378 MAKE_FUNCTION            0
+            380 CALL_FUNCTION            1
+            382 STORE_NAME              46 (saveDraft)
+
+572         384 LOAD_CONST              65 (<code object _flushDraftSave at 0x000001F3253C4B30, file "Feedback\LPFeedbackDialogViewController.py", line 572>)
+            386 LOAD_CONST              66 ('LPFeedbackDialogViewController._flushDraftSave')
+            388 MAKE_FUNCTION            0
+            390 STORE_NAME              47 (_flushDraftSave)
+
+585         392 LOAD_NAME               42 (pyqtSlot)
+            394 CALL_FUNCTION            0
+
+586         396 LOAD_CONST              67 (<code object flushDraft at 0x000001F3253C4DF0, file "Feedback\LPFeedbackDialogViewController.py", line 585>)
+            398 LOAD_CONST              68 ('LPFeedbackDialogViewController.flushDraft')
+            400 MAKE_FUNCTION            0
+            402 CALL_FUNCTION            1
+            404 STORE_NAME              48 (flushDraft)
+
+599         406 LOAD_NAME               42 (pyqtSlot)
+            408 CALL_FUNCTION            0
+
+600         410 LOAD_CONST              69 (<code object discardDraft at 0x000001F3253C4C90, file "Feedback\LPFeedbackDialogViewController.py", line 599>)
+            412 LOAD_CONST              70 ('LPFeedbackDialogViewController.discardDraft')
+            414 MAKE_FUNCTION            0
+            416 CALL_FUNCTION            1
+            418 STORE_NAME              49 (discardDraft)
+
+617         420 LOAD_CONST              71 (<code object _persistDraft at 0x000001F3253C4D40, file "Feedback\LPFeedbackDialogViewController.py", line 617>)
+            422 LOAD_CONST              72 ('LPFeedbackDialogViewController._persistDraft')
+            424 MAKE_FUNCTION            0
+            426 STORE_NAME              50 (_persistDraft)
+
+628         428 LOAD_CONST              73 (<code object _persistDraftCore at 0x000001F324E69A80, file "Feedback\LPFeedbackDialogViewController.py", line 628>)
+            430 LOAD_CONST              74 ('LPFeedbackDialogViewController._persistDraftCore')
+            432 MAKE_FUNCTION            0
+            434 STORE_NAME              51 (_persistDraftCore)
+
+645         436 LOAD_NAME               42 (pyqtSlot)
+            438 LOAD_CONST              75 ('QVariant')
+            440 LOAD_CONST              76 (('result',))
+            442 CALL_FUNCTION_KW         1
+
+646         444 LOAD_CONST              77 (<code object restoreDraft at 0x000001F324E69920, file "Feedback\LPFeedbackDialogViewController.py", line 645>)
+            446 LOAD_CONST              78 ('LPFeedbackDialogViewController.restoreDraft')
+            448 MAKE_FUNCTION            0
+            450 CALL_FUNCTION            1
+            452 STORE_NAME              52 (restoreDraft)
+
+668         454 LOAD_CONST              79 (<code object _collectOsVersion at 0x000001F324E69870, file "Feedback\LPFeedbackDialogViewController.py", line 668>)
+            456 LOAD_CONST              80 ('LPFeedbackDialogViewController._collectOsVersion')
+            458 MAKE_FUNCTION            0
+            460 STORE_NAME              53 (_collectOsVersion)
+
+684         462 LOAD_CONST              81 (<code object _collectDeviceName at 0x000001F324E69BE0, file "Feedback\LPFeedbackDialogViewController.py", line 684>)
+            464 LOAD_CONST              82 ('LPFeedbackDialogViewController._collectDeviceName')
+            466 MAKE_FUNCTION            0
+            468 STORE_NAME              54 (_collectDeviceName)
+
+699         470 LOAD_CONST              83 (<code object _collectDeviceNames at 0x000001F324E695B0, file "Feedback\LPFeedbackDialogViewController.py", line 699>)
+            472 LOAD_CONST              84 ('LPFeedbackDialogViewController._collectDeviceNames')
+            474 MAKE_FUNCTION            0
+            476 STORE_NAME              55 (_collectDeviceNames)
+
+724         478 LOAD_CONST              85 (<code object _provideDeviceList at 0x000001F324E699D0, file "Feedback\LPFeedbackDialogViewController.py", line 724>)
+            480 LOAD_CONST              86 ('LPFeedbackDialogViewController._provideDeviceList')
+            482 MAKE_FUNCTION            0
+            484 STORE_NAME              56 (_provideDeviceList)
+
+741         486 LOAD_NAME               42 (pyqtSlot)
+            488 CALL_FUNCTION            0
+
+742         490 LOAD_CONST              87 (<code object _onSubmissionCompleted at 0x000001F324E69710, file "Feedback\LPFeedbackDialogViewController.py", line 741>)
+            492 LOAD_CONST              88 ('LPFeedbackDialogViewController._onSubmissionCompleted')
+            494 MAKE_FUNCTION            0
+            496 CALL_FUNCTION            1
+            498 STORE_NAME              57 (_onSubmissionCompleted)
+
+769         500 LOAD_NAME               42 (pyqtSlot)
+            502 LOAD_NAME               30 (str)
+            504 CALL_FUNCTION            1
+
+770         506 LOAD_CONST              89 (<code object _onSubmissionFailure at 0x000001F324E69EA0, file "Feedback\LPFeedbackDialogViewController.py", line 769>)
+            508 LOAD_CONST              90 ('LPFeedbackDialogViewController._onSubmissionFailure')
+            510 MAKE_FUNCTION            0
+            512 CALL_FUNCTION            1
+            514 STORE_NAME              58 (_onSubmissionFailure)
+
+782         516 LOAD_NAME               42 (pyqtSlot)
+            518 LOAD_NAME               30 (str)
+            520 CALL_FUNCTION            1
+
+783         522 LOAD_CONST              91 (<code object _onUploadFailure at 0x000001F324E69F50, file "Feedback\LPFeedbackDialogViewController.py", line 782>)
+            524 LOAD_CONST              92 ('LPFeedbackDialogViewController._onUploadFailure')
+            526 MAKE_FUNCTION            0
+            528 CALL_FUNCTION            1
+            530 STORE_NAME              59 (_onUploadFailure)
+            532 LOAD_CLOSURE             0 (__class__)
+            534 DUP_TOP
+            536 STORE_NAME              60 (__classcell__)
+            538 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.createForHostWindow ===
+ 70           0 LOAD_FAST                0 (cls)
+              2 LOAD_FAST                1 (parent)
+              4 LOAD_CONST               1 (('parent',))
+              6 CALL_FUNCTION_KW         1
+              8 STORE_FAST               2 (controller)
+
+ 71          10 LOAD_FAST                2 (controller)
+             12 LOAD_METHOD              0 (setupUi)
+             14 CALL_METHOD              0
+             16 POP_TOP
+
+ 72          18 LOAD_FAST                2 (controller)
+             20 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.__init__ ===
+ 80           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 81          12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              2 (setObjectName)
+             16 LOAD_CONST               1 ('feedbackDialogWindow')
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+ 84          22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              3 (setAttribute)
+             26 LOAD_GLOBAL              4 (Qt)
+             28 LOAD_ATTR                5 (WidgetAttribute)
+             30 LOAD_ATTR                6 (WA_StyledBackground)
+             32 LOAD_CONST               2 (False)
+             34 CALL_METHOD              2
+             36 POP_TOP
+
+ 85          38 LOAD_FAST                0 (self)
+             40 LOAD_METHOD              3 (setAttribute)
+             42 LOAD_GLOBAL              4 (Qt)
+             44 LOAD_ATTR                5 (WidgetAttribute)
+             46 LOAD_ATTR                7 (WA_TranslucentBackground)
+             48 LOAD_CONST               3 (True)
+             50 CALL_METHOD              2
+             52 POP_TOP
+
+ 86          54 LOAD_FAST                0 (self)
+             56 LOAD_METHOD              8 (setWindowFlags)
+             58 LOAD_GLOBAL              4 (Qt)
+             60 LOAD_ATTR                9 (WindowType)
+             62 LOAD_ATTR               10 (FramelessWindowHint)
+             64 LOAD_GLOBAL              4 (Qt)
+             66 LOAD_ATTR                9 (WindowType)
+             68 LOAD_ATTR               11 (Tool)
+             70 BINARY_OR
+             72 CALL_METHOD              1
+             74 POP_TOP
+
+ 89          76 LOAD_GLOBAL             12 (platform)
+             78 LOAD_METHOD             13 (system)
+             80 CALL_METHOD              0
+             82 LOAD_CONST               4 ('Darwin')
+             84 COMPARE_OP               2 (==)
+             86 POP_JUMP_IF_FALSE      104
+
+ 90          88 LOAD_FAST                0 (self)
+             90 LOAD_METHOD              3 (setAttribute)
+             92 LOAD_GLOBAL              4 (Qt)
+             94 LOAD_ATTR                5 (WidgetAttribute)
+             96 LOAD_ATTR               14 (WA_MacAlwaysShowToolWindow)
+             98 LOAD_CONST               3 (True)
+            100 CALL_METHOD              2
+            102 POP_TOP
+
+ 93     >>  104 LOAD_CONST               2 (False)
+            106 LOAD_FAST                0 (self)
+            108 STORE_ATTR              15 (_feedbackBusy)
+
+ 94         110 LOAD_GLOBAL             16 (LPFeedbackPreferences)
+            112 LOAD_GLOBAL             17 (settings)
+            114 CALL_FUNCTION            1
+            116 LOAD_FAST                0 (self)
+            118 STORE_ATTR              18 (_feedbackPreferences)
+
+ 95         120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR               18 (_feedbackPreferences)
+            124 LOAD_METHOD             19 (loadEmail)
+            126 CALL_METHOD              0
+            128 LOAD_FAST                0 (self)
+            130 STORE_ATTR              20 (_savedEmail)
+
+ 96         132 LOAD_CONST               5 ('')
+            134 LOAD_FAST                0 (self)
+            136 STORE_ATTR              21 (_pendingEmail)
+
+ 97         138 LOAD_CONST               6 (0)
+            140 LOAD_FAST                0 (self)
+            142 STORE_ATTR              22 (_attachmentCount)
+
+ 98         144 BUILD_LIST               0
+            146 LOAD_FAST                0 (self)
+            148 STORE_ATTR              23 (_attachmentPaths)
+
+102         150 LOAD_GLOBAL             24 (LPFeedbackDraftStore)
+            152 LOAD_GLOBAL             17 (settings)
+            154 LOAD_GLOBAL             25 (cacheDir)
+            156 LOAD_CONST               7 ('feedback_draft_attachments')
+            158 BINARY_TRUE_DIVIDE
+            160 CALL_FUNCTION            2
+            162 LOAD_FAST                0 (self)
+            164 STORE_ATTR              26 (_draftStore)
+
+104         166 LOAD_GLOBAL             27 (QTimer)
+            168 LOAD_FAST                0 (self)
+            170 CALL_FUNCTION            1
+            172 LOAD_FAST                0 (self)
+            174 STORE_ATTR              28 (_draftSaveTimer)
+
+105         176 LOAD_FAST                0 (self)
+            178 LOAD_ATTR               28 (_draftSaveTimer)
+            180 LOAD_METHOD             29 (setSingleShot)
+            182 LOAD_CONST               3 (True)
+            184 CALL_METHOD              1
+            186 POP_TOP
+
+106         188 LOAD_FAST                0 (self)
+            190 LOAD_ATTR               28 (_draftSaveTimer)
+            192 LOAD_METHOD             30 (setInterval)
+            194 LOAD_CONST               8 (400)
+            196 CALL_METHOD              1
+            198 POP_TOP
+
+107         200 LOAD_FAST                0 (self)
+            202 LOAD_ATTR               28 (_draftSaveTimer)
+            204 LOAD_ATTR               31 (timeout)
+            206 LOAD_METHOD             32 (connect)
+            208 LOAD_FAST                0 (self)
+            210 LOAD_ATTR               33 (_flushDraftSave)
+            212 CALL_METHOD              1
+            214 POP_TOP
+
+109         216 LOAD_CONST               9 (None)
+            218 LOAD_FAST                0 (self)
+            220 STORE_ATTR              34 (_pendingDraftText)
+
+112         222 LOAD_CONST               9 (None)
+            224 LOAD_FAST                0 (self)
+            226 STORE_ATTR              35 (_dialogQuickWidget)
+
+113         228 LOAD_CONST               9 (None)
+            230 LOAD_FAST                0 (self)
+            232 STORE_ATTR              36 (_dialogRootObject)
+
+114         234 LOAD_CONST               2 (False)
+            236 LOAD_FAST                0 (self)
+            238 STORE_ATTR              37 (_rootVisibleSignalBound)
+
+115         240 LOAD_CONST               2 (False)
+            242 LOAD_FAST                0 (self)
+            244 STORE_ATTR              38 (_rootHeightSignalBound)
+
+116         246 LOAD_CONST               9 (None)
+            248 LOAD_FAST                0 (self)
+            250 STORE_ATTR              39 (_hostWindow)
+
+117         252 LOAD_FAST                1 (parent)
+            254 LOAD_FAST                0 (self)
+            256 STORE_ATTR              40 (_pendingHostWindow)
+
+118         258 LOAD_CONST               2 (False)
+            260 LOAD_FAST                0 (self)
+            262 STORE_ATTR              41 (_syncingFromHostGeometry)
+
+120         264 LOAD_GLOBAL             42 (LPFeedbackManager)
+
+121         266 LOAD_FAST                0 (self)
+
+122         268 LOAD_FAST                0 (self)
+            270 LOAD_ATTR               43 (_provideDeviceList)
+
+120         272 LOAD_CONST              10 (('parent', 'deviceListProvider'))
+            274 CALL_FUNCTION_KW         2
+            276 LOAD_FAST                0 (self)
+            278 STORE_ATTR              44 (_feedbackManager)
+
+124         280 LOAD_FAST                0 (self)
+            282 LOAD_ATTR               44 (_feedbackManager)
+            284 LOAD_ATTR               45 (submissionCompleted)
+            286 LOAD_METHOD             32 (connect)
+            288 LOAD_FAST                0 (self)
+            290 LOAD_ATTR               46 (_onSubmissionCompleted)
+            292 CALL_METHOD              1
+            294 POP_TOP
+
+125         296 LOAD_FAST                0 (self)
+            298 LOAD_ATTR               44 (_feedbackManager)
+            300 LOAD_ATTR               47 (submissionFailed)
+            302 LOAD_METHOD             32 (connect)
+            304 LOAD_FAST                0 (self)
+            306 LOAD_ATTR               48 (_onSubmissionFailure)
+            308 CALL_METHOD              1
+            310 POP_TOP
+
+126         312 LOAD_FAST                0 (self)
+            314 LOAD_ATTR               44 (_feedbackManager)
+            316 LOAD_ATTR               49 (uploadFailed)
+            318 LOAD_METHOD             32 (connect)
+            320 LOAD_FAST                0 (self)
+            322 LOAD_ATTR               50 (_onUploadFailure)
+            324 CALL_METHOD              1
+            326 POP_TOP
+
+128         328 LOAD_GLOBAL             51 (QApplication)
+            330 LOAD_METHOD             52 (instance)
+            332 CALL_METHOD              0
+            334 STORE_FAST               2 (app)
+
+129         336 LOAD_FAST                2 (app)
+            338 LOAD_CONST               9 (None)
+            340 IS_OP                    1
+            342 EXTENDED_ARG             1
+            344 POP_JUMP_IF_FALSE      360
+
+130         346 LOAD_FAST                2 (app)
+            348 LOAD_ATTR               53 (applicationStateChanged)
+            350 LOAD_METHOD             32 (connect)
+            352 LOAD_FAST                0 (self)
+            354 LOAD_ATTR               54 (_onApplicationStateChanged)
+            356 CALL_METHOD              1
+            358 POP_TOP
+        >>  360 LOAD_CONST               9 (None)
+            362 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.setupUi ===
+137           0 LOAD_GLOBAL              0 (QQuickWidget)
+              2 LOAD_DEREF               0 (self)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               1 (quick)
+
+139           8 LOAD_FAST                1 (quick)
+             10 LOAD_METHOD              1 (setResizeMode)
+             12 LOAD_GLOBAL              0 (QQuickWidget)
+             14 LOAD_ATTR                2 (ResizeMode)
+             16 LOAD_ATTR                3 (SizeRootObjectToView)
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+142          22 LOAD_FAST                1 (quick)
+             24 LOAD_METHOD              4 (setAttribute)
+             26 LOAD_GLOBAL              5 (Qt)
+             28 LOAD_ATTR                6 (WidgetAttribute)
+             30 LOAD_ATTR                7 (WA_StyledBackground)
+             32 LOAD_CONST               1 (False)
+             34 CALL_METHOD              2
+             36 POP_TOP
+
+143          38 LOAD_FAST                1 (quick)
+             40 LOAD_METHOD              4 (setAttribute)
+             42 LOAD_GLOBAL              5 (Qt)
+             44 LOAD_ATTR                6 (WidgetAttribute)
+             46 LOAD_ATTR                8 (WA_TranslucentBackground)
+             48 LOAD_CONST               2 (True)
+             50 CALL_METHOD              2
+             52 POP_TOP
+
+144          54 LOAD_FAST                1 (quick)
+             56 LOAD_METHOD              9 (setClearColor)
+             58 LOAD_GLOBAL              5 (Qt)
+             60 LOAD_ATTR               10 (GlobalColor)
+             62 LOAD_ATTR               11 (transparent)
+             64 CALL_METHOD              1
+             66 POP_TOP
+
+146          68 LOAD_FAST                1 (quick)
+             70 LOAD_METHOD             12 (rootContext)
+             72 CALL_METHOD              0
+             74 STORE_FAST               2 (ctx)
+
+147          76 LOAD_FAST                2 (ctx)
+             78 LOAD_METHOD             13 (setContextProperty)
+             80 LOAD_CONST               3 ('controller')
+             82 LOAD_DEREF               0 (self)
+             84 CALL_METHOD              2
+             86 POP_TOP
+
+149          88 LOAD_DEREF               0 (self)
+             90 LOAD_METHOD             14 (_applyThemeContext)
+             92 LOAD_FAST                2 (ctx)
+             94 CALL_METHOD              1
+             96 POP_TOP
+
+151          98 LOAD_FAST                1 (quick)
+            100 LOAD_METHOD             15 (setSource)
+            102 LOAD_GLOBAL             16 (QUrl)
+            104 LOAD_GLOBAL             17 (LPGlobalUI)
+            106 LOAD_METHOD             18 (qmlPath)
+            108 LOAD_CONST               4 ('Feedback/LPFeedbackDialog.qml')
+            110 CALL_METHOD              1
+            112 CALL_FUNCTION            1
+            114 CALL_METHOD              1
+            116 POP_TOP
+
+152         118 LOAD_FAST                1 (quick)
+            120 LOAD_METHOD             19 (status)
+            122 CALL_METHOD              0
+            124 LOAD_GLOBAL              0 (QQuickWidget)
+            126 LOAD_ATTR               20 (Status)
+            128 LOAD_ATTR               21 (Ready)
+            130 COMPARE_OP               3 (!=)
+            132 POP_JUMP_IF_FALSE      186
+
+153         134 LOAD_GLOBAL             22 (logger)
+            136 LOAD_METHOD             23 (error)
+            138 LOAD_CONST               5 ('FeedbackDialog QML load failed! status: %s')
+            140 LOAD_FAST                1 (quick)
+            142 LOAD_METHOD             19 (status)
+            144 CALL_METHOD              0
+            146 BINARY_MODULO
+            148 CALL_METHOD              1
+            150 POP_TOP
+
+154         152 LOAD_FAST                1 (quick)
+            154 LOAD_METHOD             24 (errors)
+            156 CALL_METHOD              0
+            158 GET_ITER
+        >>  160 FOR_ITER                22 (to 184)
+            162 STORE_FAST               3 (err)
+
+155         164 LOAD_GLOBAL             22 (logger)
+            166 LOAD_METHOD             23 (error)
+            168 LOAD_CONST               6 ('FeedbackDialog QML err: %s')
+            170 LOAD_FAST                3 (err)
+            172 LOAD_METHOD             25 (toString)
+            174 CALL_METHOD              0
+            176 BINARY_MODULO
+            178 CALL_METHOD              1
+            180 POP_TOP
+            182 JUMP_ABSOLUTE          160
+        >>  184 JUMP_FORWARD            10 (to 196)
+
+157     >>  186 LOAD_GLOBAL             22 (logger)
+            188 LOAD_METHOD             26 (debug)
+            190 LOAD_CONST               7 ('FeedbackDialog QML loaded successfully!')
+            192 CALL_METHOD              1
+            194 POP_TOP
+
+159     >>  196 LOAD_FAST                1 (quick)
+            198 LOAD_ATTR               27 (statusChanged)
+            200 LOAD_METHOD             28 (connect)
+            202 LOAD_CLOSURE             0 (self)
+            204 BUILD_TUPLE              1
+            206 LOAD_CONST               8 (<code object <lambda> at 0x000001F3253AE240, file "Feedback\LPFeedbackDialogViewController.py", line 159>)
+            208 LOAD_CONST               9 ('LPFeedbackDialogViewController.setupUi.<locals>.<lambda>')
+            210 MAKE_FUNCTION            8 (closure)
+            212 CALL_METHOD              1
+            214 POP_TOP
+
+161         216 LOAD_FAST                1 (quick)
+            218 LOAD_DEREF               0 (self)
+            220 STORE_ATTR              29 (_dialogQuickWidget)
+
+162         222 LOAD_DEREF               0 (self)
+            224 LOAD_METHOD             30 (_bindRootSignals)
+            226 CALL_METHOD              0
+            228 POP_TOP
+
+163         230 LOAD_DEREF               0 (self)
+            232 LOAD_METHOD             31 (_attachHostWindow)
+            234 LOAD_DEREF               0 (self)
+            236 LOAD_ATTR               32 (_pendingHostWindow)
+            238 CALL_METHOD              1
+            240 POP_TOP
+
+164         242 LOAD_DEREF               0 (self)
+            244 LOAD_METHOD             33 (hide)
+            246 CALL_METHOD              0
+            248 POP_TOP
+            250 LOAD_CONST              10 (None)
+            252 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.setupUi.<lambda> ===
+159           0 LOAD_DEREF               0 (self)
+              2 LOAD_METHOD              0 (_bindRootSignals)
+              4 CALL_METHOD              0
+              6 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._applyThemeContext ===
+172           0 LOAD_FAST                1 (ctx)
+              2 LOAD_METHOD              0 (setContextProperty)
+              4 LOAD_CONST               1 ('themeDialogBackColor')
+              6 LOAD_GLOBAL              1 (LPGlobalUI)
+              8 LOAD_ATTR                2 (THEME_DIALOG_BACK_COLOR_UI)
+             10 CALL_METHOD              2
+             12 POP_TOP
+
+173          14 LOAD_FAST                1 (ctx)
+             16 LOAD_METHOD              0 (setContextProperty)
+             18 LOAD_CONST               2 ('themeButtonBackColor')
+             20 LOAD_GLOBAL              1 (LPGlobalUI)
+             22 LOAD_ATTR                3 (THEME_BUTTON_BACK_COLOR_UI)
+             24 CALL_METHOD              2
+             26 POP_TOP
+
+174          28 LOAD_FAST                1 (ctx)
+             30 LOAD_METHOD              0 (setContextProperty)
+             32 LOAD_CONST               3 ('themeDefaultTextColor')
+             34 LOAD_GLOBAL              1 (LPGlobalUI)
+             36 LOAD_ATTR                4 (THEME_DEFAULT_COLOR)
+             38 CALL_METHOD              2
+             40 POP_TOP
+
+175          42 LOAD_FAST                1 (ctx)
+             44 LOAD_METHOD              0 (setContextProperty)
+             46 LOAD_CONST               4 ('themeLightTextColor')
+             48 LOAD_GLOBAL              1 (LPGlobalUI)
+             50 LOAD_ATTR                5 (THEME_LIGHT_COLOR_UI)
+             52 CALL_METHOD              2
+             54 POP_TOP
+
+177          56 LOAD_FAST                1 (ctx)
+             58 LOAD_METHOD              0 (setContextProperty)
+             60 LOAD_CONST               5 ('feedbackMainTextPointSize')
+             62 LOAD_GLOBAL              6 (float)
+             64 LOAD_GLOBAL              7 (Main_Text)
+             66 CALL_FUNCTION            1
+             68 CALL_METHOD              2
+             70 POP_TOP
+             72 LOAD_CONST               6 (None)
+             74 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._attachHostWindow ===
+188           0 LOAD_FAST                1 (hostWindow)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+189           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+190     >>   12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                0 (_hostWindow)
+             16 LOAD_FAST                1 (hostWindow)
+             18 IS_OP                    0
+             20 POP_JUMP_IF_FALSE       26
+
+191          22 LOAD_CONST               1 (None)
+             24 RETURN_VALUE
+
+192     >>   26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                0 (_hostWindow)
+             30 LOAD_CONST               1 (None)
+             32 IS_OP                    1
+             34 POP_JUMP_IF_FALSE       48
+
+193          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                0 (_hostWindow)
+             40 LOAD_METHOD              1 (removeEventFilter)
+             42 LOAD_FAST                0 (self)
+             44 CALL_METHOD              1
+             46 POP_TOP
+
+194     >>   48 LOAD_FAST                1 (hostWindow)
+             50 LOAD_FAST                0 (self)
+             52 STORE_ATTR               0 (_hostWindow)
+
+195          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                0 (_hostWindow)
+             58 LOAD_METHOD              2 (installEventFilter)
+             60 LOAD_FAST                0 (self)
+             62 CALL_METHOD              1
+             64 POP_TOP
+
+196          66 LOAD_FAST                0 (self)
+             68 LOAD_METHOD              3 (_syncToHostGeometry)
+             70 CALL_METHOD              0
+             72 POP_TOP
+             74 LOAD_CONST               1 (None)
+             76 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._syncToHostGeometry ===
+200           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_hostWindow)
+              4 STORE_FAST               1 (host)
+
+201           6 LOAD_FAST                1 (host)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_FALSE       18
+
+202          14 LOAD_CONST               1 (None)
+             16 RETURN_VALUE
+
+203     >>   18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                1 (_syncingFromHostGeometry)
+             22 POP_JUMP_IF_FALSE       28
+
+204          24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+205     >>   28 LOAD_CONST               2 (True)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               1 (_syncingFromHostGeometry)
+
+206          34 SETUP_FINALLY          134 (to 170)
+
+208          36 LOAD_FAST                1 (host)
+             38 LOAD_METHOD              2 (mapToGlobal)
+             40 LOAD_GLOBAL              3 (QPoint)
+             42 LOAD_CONST               3 (0)
+             44 LOAD_CONST               3 (0)
+             46 CALL_FUNCTION            2
+             48 CALL_METHOD              1
+             50 STORE_FAST               2 (top_left)
+
+209          52 LOAD_FAST                0 (self)
+             54 LOAD_METHOD              4 (setGeometry)
+             56 LOAD_FAST                2 (top_left)
+             58 LOAD_METHOD              5 (x)
+             60 CALL_METHOD              0
+             62 LOAD_FAST                2 (top_left)
+             64 LOAD_METHOD              6 (y)
+             66 CALL_METHOD              0
+             68 LOAD_FAST                1 (host)
+             70 LOAD_METHOD              7 (width)
+             72 CALL_METHOD              0
+             74 LOAD_FAST                1 (host)
+             76 LOAD_METHOD              8 (height)
+             78 CALL_METHOD              0
+             80 CALL_METHOD              4
+             82 POP_TOP
+
+210          84 LOAD_FAST                0 (self)
+             86 LOAD_ATTR                9 (_dialogRootObject)
+             88 STORE_FAST               3 (root)
+
+211          90 LOAD_FAST                3 (root)
+             92 LOAD_CONST               1 (None)
+             94 IS_OP                    0
+             96 POP_JUMP_IF_FALSE      110
+
+212          98 POP_BLOCK
+
+220         100 LOAD_CONST               4 (False)
+            102 LOAD_FAST                0 (self)
+            104 STORE_ATTR               1 (_syncingFromHostGeometry)
+
+212         106 LOAD_CONST               1 (None)
+            108 RETURN_VALUE
+
+214     >>  110 LOAD_GLOBAL             10 (max)
+            112 LOAD_CONST               5 (561)
+            114 LOAD_GLOBAL             11 (int)
+            116 LOAD_FAST                1 (host)
+            118 LOAD_METHOD              8 (height)
+            120 CALL_METHOD              0
+            122 LOAD_CONST               6 (0.95)
+            124 BINARY_MULTIPLY
+            126 CALL_FUNCTION            1
+            128 CALL_FUNCTION            2
+            130 STORE_FAST               4 (max_dialog_height)
+
+215         132 LOAD_FAST                3 (root)
+            134 LOAD_METHOD             12 (setProperty)
+            136 LOAD_CONST               7 ('maxDialogHeight')
+            138 LOAD_FAST                4 (max_dialog_height)
+            140 CALL_METHOD              2
+            142 POP_TOP
+
+218         144 LOAD_FAST                0 (self)
+            146 LOAD_ATTR               13 (_dialogQuickWidget)
+            148 LOAD_METHOD              4 (setGeometry)
+            150 LOAD_FAST                0 (self)
+            152 LOAD_METHOD             14 (rect)
+            154 CALL_METHOD              0
+            156 CALL_METHOD              1
+            158 POP_TOP
+            160 POP_BLOCK
+
+220         162 LOAD_CONST               4 (False)
+            164 LOAD_FAST                0 (self)
+            166 STORE_ATTR               1 (_syncingFromHostGeometry)
+            168 JUMP_FORWARD             8 (to 178)
+        >>  170 LOAD_CONST               4 (False)
+            172 LOAD_FAST                0 (self)
+            174 STORE_ATTR               1 (_syncingFromHostGeometry)
+            176 RERAISE
+        >>  178 LOAD_CONST               1 (None)
+            180 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.eventFilter ===
+231           0 LOAD_FAST                1 (watched)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                0 (_hostWindow)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE      138
+             10 LOAD_FAST                2 (event)
+             12 LOAD_CONST               1 (None)
+             14 IS_OP                    1
+             16 POP_JUMP_IF_FALSE      138
+
+232          18 LOAD_FAST                2 (event)
+             20 LOAD_METHOD              1 (type)
+             22 CALL_METHOD              0
+             24 STORE_FAST               3 (et)
+
+233          26 LOAD_FAST                3 (et)
+             28 LOAD_GLOBAL              2 (QEvent)
+             30 LOAD_ATTR                3 (Type)
+             32 LOAD_ATTR                4 (Resize)
+             34 LOAD_GLOBAL              2 (QEvent)
+             36 LOAD_ATTR                3 (Type)
+             38 LOAD_ATTR                5 (Move)
+             40 LOAD_GLOBAL              2 (QEvent)
+             42 LOAD_ATTR                3 (Type)
+             44 LOAD_ATTR                6 (Show)
+             46 BUILD_TUPLE              3
+             48 CONTAINS_OP              0
+             50 POP_JUMP_IF_FALSE       62
+
+234          52 LOAD_FAST                0 (self)
+             54 LOAD_METHOD              7 (_syncToHostGeometry)
+             56 CALL_METHOD              0
+             58 POP_TOP
+             60 JUMP_FORWARD            76 (to 138)
+
+235     >>   62 LOAD_FAST                3 (et)
+             64 LOAD_GLOBAL              2 (QEvent)
+             66 LOAD_ATTR                3 (Type)
+             68 LOAD_ATTR                8 (Hide)
+             70 LOAD_GLOBAL              2 (QEvent)
+             72 LOAD_ATTR                3 (Type)
+             74 LOAD_ATTR                9 (Close)
+             76 BUILD_TUPLE              2
+             78 CONTAINS_OP              0
+             80 POP_JUMP_IF_FALSE      100
+
+236          82 LOAD_FAST                0 (self)
+             84 LOAD_METHOD             10 (closeDialog)
+             86 CALL_METHOD              0
+             88 POP_TOP
+
+237          90 LOAD_FAST                0 (self)
+             92 LOAD_METHOD             11 (hide)
+             94 CALL_METHOD              0
+             96 POP_TOP
+             98 JUMP_FORWARD            38 (to 138)
+
+238     >>  100 LOAD_FAST                3 (et)
+            102 LOAD_GLOBAL              2 (QEvent)
+            104 LOAD_ATTR                3 (Type)
+            106 LOAD_ATTR               12 (WindowStateChange)
+            108 COMPARE_OP               2 (==)
+            110 POP_JUMP_IF_FALSE      138
+            112 LOAD_FAST                0 (self)
+            114 LOAD_ATTR                0 (_hostWindow)
+            116 LOAD_METHOD             13 (isMinimized)
+            118 CALL_METHOD              0
+            120 POP_JUMP_IF_FALSE      138
+
+239         122 LOAD_FAST                0 (self)
+            124 LOAD_METHOD             10 (closeDialog)
+            126 CALL_METHOD              0
+            128 POP_TOP
+
+240         130 LOAD_FAST                0 (self)
+            132 LOAD_METHOD             11 (hide)
+            134 CALL_METHOD              0
+            136 POP_TOP
+
+241     >>  138 LOAD_GLOBAL             14 (super)
+            140 CALL_FUNCTION            0
+            142 LOAD_METHOD             15 (eventFilter)
+            144 LOAD_FAST                1 (watched)
+            146 LOAD_FAST                2 (event)
+            148 CALL_METHOD              2
+            150 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._onApplicationStateChanged ===
+249           0 LOAD_FAST                1 (state)
+              2 LOAD_GLOBAL              0 (Qt)
+              4 LOAD_ATTR                1 (ApplicationState)
+              6 LOAD_ATTR                2 (ApplicationActive)
+              8 COMPARE_OP               3 (!=)
+             10 POP_JUMP_IF_FALSE       16
+
+250          12 LOAD_CONST               1 (None)
+             14 RETURN_VALUE
+
+251     >>   16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                3 (_dialogRootObject)
+             20 STORE_FAST               2 (root)
+
+252          22 LOAD_FAST                2 (root)
+             24 LOAD_CONST               1 (None)
+             26 IS_OP                    0
+             28 POP_JUMP_IF_TRUE        44
+             30 LOAD_GLOBAL              4 (bool)
+             32 LOAD_FAST                2 (root)
+             34 LOAD_METHOD              5 (property)
+             36 LOAD_CONST               2 ('visible')
+             38 CALL_METHOD              1
+             40 CALL_FUNCTION            1
+             42 POP_JUMP_IF_TRUE        48
+
+253     >>   44 LOAD_CONST               1 (None)
+             46 RETURN_VALUE
+
+254     >>   48 LOAD_FAST                0 (self)
+             50 LOAD_METHOD              6 (_syncToHostGeometry)
+             52 CALL_METHOD              0
+             54 POP_TOP
+
+255          56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                7 (_hostWindow)
+             60 STORE_FAST               3 (host)
+
+256          62 LOAD_FAST                3 (host)
+             64 LOAD_CONST               1 (None)
+             66 IS_OP                    1
+             68 POP_JUMP_IF_FALSE       86
+
+257          70 LOAD_FAST                3 (host)
+             72 LOAD_METHOD              8 (raise_)
+             74 CALL_METHOD              0
+             76 POP_TOP
+
+258          78 LOAD_FAST                3 (host)
+             80 LOAD_METHOD              9 (update)
+             82 CALL_METHOD              0
+             84 POP_TOP
+
+261     >>   86 LOAD_FAST                0 (self)
+             88 LOAD_METHOD             10 (isVisible)
+             90 CALL_METHOD              0
+             92 POP_JUMP_IF_TRUE       102
+
+262          94 LOAD_FAST                0 (self)
+             96 LOAD_METHOD             11 (show)
+             98 CALL_METHOD              0
+            100 POP_TOP
+
+263     >>  102 LOAD_FAST                0 (self)
+            104 LOAD_METHOD              8 (raise_)
+            106 CALL_METHOD              0
+            108 POP_TOP
+
+264         110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR               12 (_dialogQuickWidget)
+            114 LOAD_CONST               1 (None)
+            116 IS_OP                    1
+            118 POP_JUMP_IF_FALSE      130
+
+265         120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR               12 (_dialogQuickWidget)
+            124 LOAD_METHOD              9 (update)
+            126 CALL_METHOD              0
+            128 POP_TOP
+
+266     >>  130 LOAD_FAST                0 (self)
+            132 LOAD_METHOD              9 (update)
+            134 CALL_METHOD              0
+            136 POP_TOP
+            138 LOAD_CONST               1 (None)
+            140 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._bindRootSignals ===
+273           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_dialogQuickWidget)
+              4 STORE_FAST               1 (quick)
+
+274           6 LOAD_FAST                1 (quick)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_TRUE        30
+             14 LOAD_FAST                1 (quick)
+             16 LOAD_METHOD              1 (status)
+             18 CALL_METHOD              0
+             20 LOAD_GLOBAL              2 (QQuickWidget)
+             22 LOAD_ATTR                3 (Status)
+             24 LOAD_ATTR                4 (Ready)
+             26 COMPARE_OP               3 (!=)
+             28 POP_JUMP_IF_FALSE       34
+
+275     >>   30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+276     >>   34 LOAD_FAST                1 (quick)
+             36 LOAD_METHOD              5 (rootObject)
+             38 CALL_METHOD              0
+             40 STORE_FAST               2 (root)
+
+277          42 LOAD_FAST                2 (root)
+             44 LOAD_CONST               1 (None)
+             46 IS_OP                    0
+             48 POP_JUMP_IF_FALSE       54
+
+278          50 LOAD_CONST               1 (None)
+             52 RETURN_VALUE
+
+279     >>   54 LOAD_FAST                2 (root)
+             56 LOAD_FAST                0 (self)
+             58 STORE_ATTR               6 (_dialogRootObject)
+
+280          60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                7 (_rootVisibleSignalBound)
+             64 POP_JUMP_IF_TRUE       100
+
+281          66 LOAD_GLOBAL              8 (getattr)
+             68 LOAD_FAST                2 (root)
+             70 LOAD_CONST               2 ('visibleChanged')
+             72 LOAD_CONST               1 (None)
+             74 CALL_FUNCTION            3
+             76 STORE_FAST               3 (visible_changed)
+
+282          78 LOAD_FAST                3 (visible_changed)
+             80 POP_JUMP_IF_FALSE       94
+
+283          82 LOAD_FAST                3 (visible_changed)
+             84 LOAD_METHOD              9 (connect)
+             86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR               10 (_onRootVisibleChanged)
+             90 CALL_METHOD              1
+             92 POP_TOP
+
+284     >>   94 LOAD_CONST               3 (True)
+             96 LOAD_FAST                0 (self)
+             98 STORE_ATTR               7 (_rootVisibleSignalBound)
+
+285     >>  100 LOAD_FAST                0 (self)
+            102 LOAD_ATTR               11 (_rootHeightSignalBound)
+            104 POP_JUMP_IF_TRUE       140
+
+286         106 LOAD_GLOBAL              8 (getattr)
+            108 LOAD_FAST                2 (root)
+            110 LOAD_CONST               4 ('dialogCardHeightChanged')
+            112 LOAD_CONST               1 (None)
+            114 CALL_FUNCTION            3
+            116 STORE_FAST               4 (dialog_height_changed)
+
+287         118 LOAD_FAST                4 (dialog_height_changed)
+            120 POP_JUMP_IF_FALSE      134
+
+288         122 LOAD_FAST                4 (dialog_height_changed)
+            124 LOAD_METHOD              9 (connect)
+            126 LOAD_FAST                0 (self)
+            128 LOAD_ATTR               12 (_onRootHeightChanged)
+            130 CALL_METHOD              1
+            132 POP_TOP
+
+289     >>  134 LOAD_CONST               3 (True)
+            136 LOAD_FAST                0 (self)
+            138 STORE_ATTR              11 (_rootHeightSignalBound)
+        >>  140 LOAD_CONST               1 (None)
+            142 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._onRootHeightChanged ===
+299           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_syncToHostGeometry)
+              4 CALL_METHOD              0
+              6 POP_TOP
+              8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._onRootVisibleChanged ===
+303           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_dialogRootObject)
+              4 STORE_FAST               1 (root)
+
+304           6 LOAD_FAST                1 (root)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_FALSE       18
+
+305          14 LOAD_CONST               1 (None)
+             16 RETURN_VALUE
+
+306     >>   18 LOAD_GLOBAL              1 (bool)
+             20 LOAD_FAST                1 (root)
+             22 LOAD_METHOD              2 (property)
+             24 LOAD_CONST               2 ('visible')
+             26 CALL_METHOD              1
+             28 CALL_FUNCTION            1
+             30 POP_JUMP_IF_FALSE       68
+
+307          32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              3 (_syncToHostGeometry)
+             36 CALL_METHOD              0
+             38 POP_TOP
+
+308          40 LOAD_FAST                0 (self)
+             42 LOAD_METHOD              4 (isVisible)
+             44 CALL_METHOD              0
+             46 POP_JUMP_IF_TRUE        56
+
+309          48 LOAD_FAST                0 (self)
+             50 LOAD_METHOD              5 (show)
+             52 CALL_METHOD              0
+             54 POP_TOP
+
+310     >>   56 LOAD_FAST                0 (self)
+             58 LOAD_METHOD              6 (raise_)
+             60 CALL_METHOD              0
+             62 POP_TOP
+
+311          64 LOAD_CONST               1 (None)
+             66 RETURN_VALUE
+
+312     >>   68 LOAD_FAST                0 (self)
+             70 LOAD_METHOD              7 (hide)
+             72 CALL_METHOD              0
+             74 POP_TOP
+             76 LOAD_CONST               1 (None)
+             78 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._setRootProperty ===
+321           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_dialogRootObject)
+              4 STORE_FAST               3 (root)
+
+322           6 LOAD_FAST                3 (root)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_FALSE       18
+
+323          14 LOAD_CONST               1 (None)
+             16 RETURN_VALUE
+
+324     >>   18 LOAD_FAST                3 (root)
+             20 LOAD_METHOD              1 (setProperty)
+             22 LOAD_FAST                1 (key)
+             24 LOAD_FAST                2 (value)
+             26 CALL_METHOD              2
+             28 POP_TOP
+             30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.openDialog ===
+331           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_syncToHostGeometry)
+              4 CALL_METHOD              0
+              6 POP_TOP
+
+332           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_dialogRootObject)
+             12 LOAD_CONST               1 (None)
+             14 IS_OP                    0
+             16 POP_JUMP_IF_FALSE       22
+
+333          18 LOAD_CONST               1 (None)
+             20 RETURN_VALUE
+
+334     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              2 (_setRootProperty)
+             26 LOAD_CONST               2 ('visible')
+             28 LOAD_CONST               3 (True)
+             30 CALL_METHOD              2
+             32 POP_TOP
+
+335          34 LOAD_FAST                0 (self)
+             36 LOAD_METHOD              0 (_syncToHostGeometry)
+             38 CALL_METHOD              0
+             40 POP_TOP
+
+336          42 LOAD_FAST                0 (self)
+             44 LOAD_METHOD              3 (isVisible)
+             46 CALL_METHOD              0
+             48 POP_JUMP_IF_TRUE        58
+
+337          50 LOAD_FAST                0 (self)
+             52 LOAD_METHOD              4 (show)
+             54 CALL_METHOD              0
+             56 POP_TOP
+
+338     >>   58 LOAD_FAST                0 (self)
+             60 LOAD_METHOD              5 (raise_)
+             62 CALL_METHOD              0
+             64 POP_TOP
+             66 LOAD_CONST               1 (None)
+             68 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.closeDialog ===
+342           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_setRootProperty)
+              4 LOAD_CONST               1 ('visible')
+              6 LOAD_CONST               2 (False)
+              8 CALL_METHOD              2
+             10 POP_TOP
+             12 LOAD_CONST               3 (None)
+             14 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.feedbackBusy ===
+350           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_feedbackBusy)
+              4 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.savedEmail ===
+355           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_savedEmail)
+              4 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.attachmentCount ===
+360           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_attachmentCount)
+              4 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.attachmentPreviewUrls ===
+365           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F3253C47C0, file "Feedback\LPFeedbackDialogViewController.py", line 365>)
+              2 LOAD_CONST               2 ('LPFeedbackDialogViewController.attachmentPreviewUrls.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                0 (_attachmentPaths)
+             10 GET_ITER
+             12 CALL_FUNCTION            1
+             14 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.attachmentPreviewUrls.<listcomp> ===
+365           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (path)
+              8 LOAD_GLOBAL              0 (QUrl)
+             10 LOAD_METHOD              1 (fromLocalFile)
+             12 LOAD_FAST                1 (path)
+             14 CALL_METHOD              1
+             16 LOAD_METHOD              2 (toString)
+             18 CALL_METHOD              0
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._setBusy ===
+376           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_feedbackBusy)
+              4 LOAD_FAST                1 (busy)
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE       14
+
+377          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+378     >>   14 LOAD_FAST                1 (busy)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               0 (_feedbackBusy)
+
+379          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                1 (feedbackBusyChanged)
+             24 LOAD_METHOD              2 (emit)
+             26 CALL_METHOD              0
+             28 POP_TOP
+             30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._showToast ===
+389           0 LOAD_GLOBAL              0 (LPGlobalUI)
+              2 LOAD_ATTR                1 (toast)
+              4 LOAD_ATTR                2 (showToast)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              3 (tr)
+             10 LOAD_FAST                1 (message)
+             12 CALL_METHOD              1
+             14 LOAD_FAST                0 (self)
+             16 LOAD_CONST               1 (5000)
+             18 LOAD_CONST               2 (('timeout',))
+             20 CALL_FUNCTION_KW         3
+             22 POP_TOP
+             24 LOAD_CONST               3 (None)
+             26 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._setAttachmentCount ===
+397           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_attachmentCount)
+              4 LOAD_FAST                1 (count)
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE       14
+
+398          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+399     >>   14 LOAD_FAST                1 (count)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               0 (_attachmentCount)
+
+400          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                1 (attachmentCountChanged)
+             24 LOAD_METHOD              2 (emit)
+             26 CALL_METHOD              0
+             28 POP_TOP
+             30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._setAttachmentPaths ===
+410           0 LOAD_GLOBAL              0 (list)
+              2 LOAD_FAST                1 (paths)
+              4 CALL_FUNCTION            1
+              6 LOAD_FAST                0 (self)
+              8 STORE_ATTR               1 (_attachmentPaths)
+
+411          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              2 (_setAttachmentCount)
+             14 LOAD_GLOBAL              3 (len)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                1 (_attachmentPaths)
+             20 CALL_FUNCTION            1
+             22 CALL_METHOD              1
+             24 POP_TOP
+
+412          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                4 (attachmentPreviewUrlsChanged)
+             30 LOAD_METHOD              5 (emit)
+             32 CALL_METHOD              0
+             34 POP_TOP
+             36 LOAD_CONST               1 (None)
+             38 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._attachmentPathKey ===
+422           0 LOAD_GLOBAL              0 (os)
+              2 LOAD_ATTR                1 (path)
+              4 LOAD_METHOD              2 (normcase)
+              6 LOAD_GLOBAL              0 (os)
+              8 LOAD_ATTR                1 (path)
+             10 LOAD_METHOD              3 (realpath)
+             12 LOAD_FAST                1 (path)
+             14 CALL_METHOD              1
+             16 CALL_METHOD              1
+             18 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._deduplicateImageAttachmentPaths ===
+432           0 BUILD_LIST               0
+              2 STORE_FAST               2 (deduplicatedPaths)
+
+433           4 LOAD_GLOBAL              0 (set)
+              6 CALL_FUNCTION            0
+              8 STORE_FAST               3 (seenPathKeys)
+
+434          10 LOAD_FAST                1 (paths)
+             12 GET_ITER
+        >>   14 FOR_ITER                44 (to 60)
+             16 STORE_FAST               4 (path)
+
+435          18 LOAD_FAST                0 (self)
+             20 LOAD_METHOD              1 (_attachmentPathKey)
+             22 LOAD_FAST                4 (path)
+             24 CALL_METHOD              1
+             26 STORE_FAST               5 (pathKey)
+
+436          28 LOAD_FAST                5 (pathKey)
+             30 LOAD_FAST                3 (seenPathKeys)
+             32 CONTAINS_OP              0
+             34 POP_JUMP_IF_FALSE       38
+
+437          36 JUMP_ABSOLUTE           14
+
+438     >>   38 LOAD_FAST                3 (seenPathKeys)
+             40 LOAD_METHOD              2 (add)
+             42 LOAD_FAST                5 (pathKey)
+             44 CALL_METHOD              1
+             46 POP_TOP
+
+439          48 LOAD_FAST                2 (deduplicatedPaths)
+             50 LOAD_METHOD              3 (append)
+             52 LOAD_FAST                4 (path)
+             54 CALL_METHOD              1
+             56 POP_TOP
+             58 JUMP_ABSOLUTE           14
+
+440     >>   60 LOAD_FAST                2 (deduplicatedPaths)
+             62 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._isImageAttachmentPath ===
+450           0 LOAD_CONST               1 (('.png', '.jpg', '.jpeg', '.bmp', '.gif', '.webp'))
+              2 STORE_FAST               2 (imageSuffixes)
+
+451           4 LOAD_GLOBAL              0 (str)
+              6 LOAD_FAST                1 (path)
+              8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (lower)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (endswith)
+             16 LOAD_FAST                2 (imageSuffixes)
+             18 CALL_METHOD              1
+             20 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.chooseAttachment ===
+468           0 LOAD_DEREF               0 (self)
+              2 LOAD_ATTR                0 (_MAX_ATTACHMENT_COUNT)
+              4 LOAD_GLOBAL              1 (len)
+              6 LOAD_DEREF               0 (self)
+              8 LOAD_ATTR                2 (_attachmentPaths)
+             10 CALL_FUNCTION            1
+             12 BINARY_SUBTRACT
+             14 STORE_FAST               1 (remainCount)
+
+469          16 LOAD_FAST                1 (remainCount)
+             18 LOAD_CONST               1 (0)
+             20 COMPARE_OP               1 (<=)
+             22 POP_JUMP_IF_FALSE       38
+
+470          24 LOAD_DEREF               0 (self)
+             26 LOAD_METHOD              3 (_showToast)
+             28 LOAD_CONST               2 ('Maximum 5 images allowed.')
+             30 CALL_METHOD              1
+             32 POP_TOP
+
+471          34 LOAD_CONST               3 (None)
+             36 RETURN_VALUE
+
+472     >>   38 LOAD_GLOBAL              4 (QFileDialog)
+             40 LOAD_METHOD              5 (getOpenFileNames)
+
+473          42 LOAD_DEREF               0 (self)
+
+474          44 LOAD_DEREF               0 (self)
+             46 LOAD_METHOD              6 (tr)
+             48 LOAD_CONST               4 ('Select Images')
+             50 CALL_METHOD              1
+
+475          52 LOAD_CONST               5 ('')
+
+476          54 LOAD_DEREF               0 (self)
+             56 LOAD_METHOD              6 (tr)
+             58 LOAD_CONST               6 ('Images (*.png *.jpg *.jpeg *.bmp *.gif *.webp)')
+             60 CALL_METHOD              1
+
+472          62 CALL_METHOD              4
+             64 UNPACK_SEQUENCE          2
+             66 STORE_FAST               2 (filePaths)
+             68 STORE_FAST               3 (_)
+
+478          70 LOAD_FAST                2 (filePaths)
+             72 POP_JUMP_IF_TRUE        78
+
+479          74 LOAD_CONST               3 (None)
+             76 RETURN_VALUE
+
+480     >>   78 LOAD_CLOSURE             0 (self)
+             80 BUILD_TUPLE              1
+             82 LOAD_CONST               7 (<code object <listcomp> at 0x000001F3253C4030, file "Feedback\LPFeedbackDialogViewController.py", line 480>)
+             84 LOAD_CONST               8 ('LPFeedbackDialogViewController.chooseAttachment.<locals>.<listcomp>')
+             86 MAKE_FUNCTION            8 (closure)
+             88 LOAD_FAST                2 (filePaths)
+             90 GET_ITER
+             92 CALL_FUNCTION            1
+             94 STORE_FAST               4 (imagePaths)
+
+481          96 LOAD_FAST                4 (imagePaths)
+             98 POP_JUMP_IF_TRUE       114
+
+482         100 LOAD_DEREF               0 (self)
+            102 LOAD_METHOD              3 (_showToast)
+            104 LOAD_CONST               9 ('Please select image files only.')
+            106 CALL_METHOD              1
+            108 POP_TOP
+
+483         110 LOAD_CONST               3 (None)
+            112 RETURN_VALUE
+
+484     >>  114 LOAD_GLOBAL              1 (len)
+            116 LOAD_FAST                4 (imagePaths)
+            118 CALL_FUNCTION            1
+            120 LOAD_FAST                1 (remainCount)
+            122 COMPARE_OP               4 (>)
+            124 POP_JUMP_IF_FALSE      136
+
+485         126 LOAD_DEREF               0 (self)
+            128 LOAD_METHOD              3 (_showToast)
+            130 LOAD_CONST              10 ('Only the first 5 images can be attached.')
+            132 CALL_METHOD              1
+            134 POP_TOP
+
+488     >>  136 BUILD_LIST               0
+            138 STORE_FAST               5 (newPaths)
+
+489         140 LOAD_FAST                4 (imagePaths)
+            142 LOAD_CONST               3 (None)
+            144 LOAD_FAST                1 (remainCount)
+            146 BUILD_SLICE              2
+            148 BINARY_SUBSCR
+            150 GET_ITER
+        >>  152 FOR_ITER                34 (to 188)
+            154 STORE_FAST               6 (path)
+
+490         156 LOAD_DEREF               0 (self)
+            158 LOAD_ATTR                7 (_draftStore)
+            160 LOAD_METHOD              8 (copyAttachment)
+            162 LOAD_FAST                6 (path)
+            164 CALL_METHOD              1
+            166 STORE_FAST               7 (cachedPath)
+
+491         168 LOAD_FAST                5 (newPaths)
+            170 LOAD_METHOD              9 (append)
+            172 LOAD_FAST                7 (cachedPath)
+            174 POP_JUMP_IF_FALSE      180
+            176 LOAD_FAST                7 (cachedPath)
+            178 JUMP_FORWARD             2 (to 182)
+        >>  180 LOAD_FAST                6 (path)
+        >>  182 CALL_METHOD              1
+            184 POP_TOP
+            186 JUMP_ABSOLUTE          152
+
+492     >>  188 LOAD_DEREF               0 (self)
+            190 LOAD_METHOD             10 (_deduplicateImageAttachmentPaths)
+
+493         192 LOAD_DEREF               0 (self)
+            194 LOAD_ATTR                2 (_attachmentPaths)
+            196 LOAD_FAST                5 (newPaths)
+            198 BINARY_ADD
+
+492         200 CALL_METHOD              1
+            202 STORE_FAST               8 (deduplicatedPaths)
+
+495         204 LOAD_DEREF               0 (self)
+            206 LOAD_METHOD             11 (_setAttachmentPaths)
+            208 LOAD_FAST                8 (deduplicatedPaths)
+            210 CALL_METHOD              1
+            212 POP_TOP
+
+496         214 LOAD_DEREF               0 (self)
+            216 LOAD_METHOD             12 (_persistDraft)
+            218 CALL_METHOD              0
+            220 POP_TOP
+
+497         222 LOAD_GLOBAL             13 (logger)
+            224 LOAD_METHOD             14 (info)
+            226 LOAD_CONST              11 ('[Feedback] attachment selected: count=%d')
+            228 LOAD_GLOBAL              1 (len)
+            230 LOAD_DEREF               0 (self)
+            232 LOAD_ATTR                2 (_attachmentPaths)
+            234 CALL_FUNCTION            1
+            236 BINARY_MODULO
+            238 CALL_METHOD              1
+            240 POP_TOP
+            242 LOAD_CONST               3 (None)
+            244 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.chooseAttachment.<listcomp> ===
+480           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (path)
+              8 LOAD_DEREF               0 (self)
+             10 LOAD_METHOD              0 (_isImageAttachmentPath)
+             12 LOAD_FAST                1 (path)
+             14 CALL_METHOD              1
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_FAST                1 (path)
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.removeAttachmentAt ===
+506           0 LOAD_FAST                1 (index)
+              2 LOAD_CONST               1 (0)
+              4 COMPARE_OP               0 (<)
+              6 POP_JUMP_IF_TRUE        22
+              8 LOAD_FAST                1 (index)
+             10 LOAD_GLOBAL              0 (len)
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                1 (_attachmentPaths)
+             16 CALL_FUNCTION            1
+             18 COMPARE_OP               5 (>=)
+             20 POP_JUMP_IF_FALSE       26
+
+507     >>   22 LOAD_CONST               2 (None)
+             24 RETURN_VALUE
+
+508     >>   26 LOAD_GLOBAL              2 (list)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                1 (_attachmentPaths)
+             32 CALL_FUNCTION            1
+             34 STORE_FAST               2 (paths)
+
+509          36 LOAD_FAST                2 (paths)
+             38 LOAD_METHOD              3 (pop)
+             40 LOAD_FAST                1 (index)
+             42 CALL_METHOD              1
+             44 STORE_FAST               3 (removedPath)
+
+510          46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              4 (_setAttachmentPaths)
+             50 LOAD_FAST                2 (paths)
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+512          56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                5 (_draftStore)
+             60 LOAD_METHOD              6 (removeAttachment)
+             62 LOAD_FAST                3 (removedPath)
+             64 CALL_METHOD              1
+             66 POP_TOP
+
+513          68 LOAD_FAST                0 (self)
+             70 LOAD_METHOD              7 (_persistDraft)
+             72 CALL_METHOD              0
+             74 POP_TOP
+
+514          76 LOAD_GLOBAL              8 (logger)
+             78 LOAD_METHOD              9 (info)
+             80 LOAD_CONST               3 ('[Feedback] attachment removed: index=%d path=%s')
+             82 LOAD_FAST                1 (index)
+             84 LOAD_FAST                3 (removedPath)
+             86 BUILD_TUPLE              2
+             88 BINARY_MODULO
+             90 CALL_METHOD              1
+             92 POP_TOP
+             94 LOAD_CONST               2 (None)
+             96 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.submitFeedback ===
+528           0 LOAD_FAST                3 (description)
+              2 LOAD_METHOD              0 (strip)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        22
+
+529           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (_showToast)
+             12 LOAD_CONST               1 ('Please enter a description.')
+             14 CALL_METHOD              1
+             16 POP_TOP
+
+530          18 LOAD_CONST               2 (None)
+             20 RETURN_VALUE
+
+532     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              2 (_setBusy)
+             26 LOAD_CONST               3 (True)
+             28 CALL_METHOD              1
+             30 POP_TOP
+
+534          32 LOAD_GLOBAL              3 (LPGlobalUI)
+             34 LOAD_ATTR                4 (currentDevice)
+             36 STORE_FAST               4 (currentDevice)
+
+535          38 LOAD_GLOBAL              5 (str)
+             40 LOAD_GLOBAL              6 (getattr)
+             42 LOAD_FAST                4 (currentDevice)
+             44 LOAD_CONST               4 ('uuid')
+             46 LOAD_CONST               5 ('')
+             48 CALL_FUNCTION            3
+             50 JUMP_IF_TRUE_OR_POP     54
+             52 LOAD_CONST               6 ('unknow')
+        >>   54 CALL_FUNCTION            1
+             56 STORE_FAST               5 (deviceUuid)
+
+536          58 LOAD_GLOBAL              7 (LPFeedbackRequest)
+
+537          60 LOAD_FAST                1 (subject)
+             62 LOAD_METHOD              0 (strip)
+             64 CALL_METHOD              0
+
+538          66 LOAD_FAST                2 (email)
+             68 LOAD_METHOD              0 (strip)
+             70 CALL_METHOD              0
+
+539          72 LOAD_FAST                3 (description)
+             74 LOAD_METHOD              0 (strip)
+             76 CALL_METHOD              0
+
+540          78 LOAD_GLOBAL              8 (list)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                9 (_attachmentPaths)
+             84 CALL_FUNCTION            1
+
+541          86 LOAD_GLOBAL              5 (str)
+             88 LOAD_GLOBAL             10 (appVersion)
+             90 CALL_FUNCTION            1
+
+542          92 LOAD_GLOBAL             11 (platform)
+             94 LOAD_METHOD             12 (system)
+             96 CALL_METHOD              0
+
+543          98 LOAD_GLOBAL             13 (pcUUID)
+            100 CALL_FUNCTION            0
+
+544         102 LOAD_FAST                5 (deviceUuid)
+
+545         104 LOAD_GLOBAL              5 (str)
+            106 LOAD_GLOBAL             14 (logDir)
+            108 CALL_FUNCTION            1
+
+546         110 LOAD_CONST               7 ('FeedbackDebug')
+
+547         112 LOAD_FAST                0 (self)
+            114 LOAD_METHOD             15 (_collectOsVersion)
+            116 CALL_METHOD              0
+
+548         118 LOAD_FAST                0 (self)
+            120 LOAD_METHOD             16 (_collectDeviceName)
+            122 CALL_METHOD              0
+
+549         124 LOAD_GLOBAL              5 (str)
+            126 LOAD_GLOBAL              6 (getattr)
+            128 LOAD_FAST                4 (currentDevice)
+            130 LOAD_CONST               8 ('name')
+            132 LOAD_CONST               5 ('')
+            134 CALL_FUNCTION            3
+            136 JUMP_IF_TRUE_OR_POP    140
+            138 LOAD_CONST               5 ('')
+        >>  140 CALL_FUNCTION            1
+
+550         142 LOAD_FAST                0 (self)
+            144 LOAD_METHOD             17 (_collectDeviceNames)
+            146 CALL_METHOD              0
+
+536         148 LOAD_CONST               9 (('subject', 'email', 'description', 'attachmentPaths', 'appVersion', 'platformName', 'appUuid', 'deviceUuid', 'logDirectory', 'feedbackType', 'osVersion', 'deviceName', 'currentDeviceName', 'deviceList'))
+            150 CALL_FUNCTION_KW        14
+            152 STORE_FAST               6 (request)
+
+552         154 LOAD_FAST                6 (request)
+            156 LOAD_ATTR               18 (email)
+            158 LOAD_FAST                0 (self)
+            160 STORE_ATTR              19 (_pendingEmail)
+
+553         162 LOAD_FAST                0 (self)
+            164 LOAD_ATTR               20 (_feedbackManager)
+            166 LOAD_METHOD             21 (submit)
+            168 LOAD_FAST                6 (request)
+            170 CALL_METHOD              1
+            172 POP_TOP
+            174 LOAD_CONST               2 (None)
+            176 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.saveDraft ===
+569           0 LOAD_FAST                1 (subject)
+              2 LOAD_FAST                2 (email)
+              4 LOAD_FAST                3 (description)
+              6 BUILD_TUPLE              3
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               0 (_pendingDraftText)
+
+570          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                1 (_draftSaveTimer)
+             16 LOAD_METHOD              2 (start)
+             18 CALL_METHOD              0
+             20 POP_TOP
+             22 LOAD_CONST               1 (None)
+             24 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._flushDraftSave ===
+580           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_pendingDraftText)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       14
+
+581          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+582     >>   14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                0 (_pendingDraftText)
+             18 UNPACK_SEQUENCE          3
+             20 STORE_FAST               1 (subject)
+             22 STORE_FAST               2 (email)
+             24 STORE_FAST               3 (description)
+
+583          26 LOAD_FAST                0 (self)
+             28 LOAD_METHOD              1 (_persistDraftCore)
+             30 LOAD_FAST                1 (subject)
+             32 LOAD_FAST                2 (email)
+             34 LOAD_FAST                3 (description)
+             36 CALL_METHOD              3
+             38 POP_TOP
+             40 LOAD_CONST               1 (None)
+             42 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.flushDraft ===
+594           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_pendingDraftText)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    1
+              8 POP_JUMP_IF_FALSE       36
+
+595          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_pendingDraftText)
+             14 UNPACK_SEQUENCE          3
+             16 STORE_FAST               1 (subject)
+             18 STORE_FAST               2 (email)
+             20 STORE_FAST               3 (description)
+
+596          22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              1 (_persistDraftCore)
+             26 LOAD_FAST                1 (subject)
+             28 LOAD_FAST                2 (email)
+             30 LOAD_FAST                3 (description)
+             32 CALL_METHOD              3
+             34 POP_TOP
+
+597     >>   36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                2 (_draftSaveTimer)
+             40 LOAD_METHOD              3 (stop)
+             42 CALL_METHOD              0
+             44 POP_TOP
+             46 LOAD_CONST               1 (None)
+             48 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.discardDraft ===
+611           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_draftSaveTimer)
+              4 LOAD_METHOD              1 (stop)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+612          10 LOAD_CONST               1 (None)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (_pendingDraftText)
+
+613          16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                3 (_draftStore)
+             20 LOAD_METHOD              4 (clear)
+             22 CALL_METHOD              0
+             24 POP_TOP
+
+614          26 LOAD_FAST                0 (self)
+             28 LOAD_METHOD              5 (_setAttachmentPaths)
+             30 BUILD_LIST               0
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+615          36 LOAD_GLOBAL              6 (logger)
+             38 LOAD_METHOD              7 (info)
+             40 LOAD_CONST               2 ('[Feedback] draft discarded by manual close')
+             42 CALL_METHOD              1
+             44 POP_TOP
+             46 LOAD_CONST               1 (None)
+             48 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._persistDraft ===
+625           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_pendingDraftText)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 (('', '', ''))
+        >>    8 UNPACK_SEQUENCE          3
+             10 STORE_FAST               1 (subject)
+             12 STORE_FAST               2 (email)
+             14 STORE_FAST               3 (description)
+
+626          16 LOAD_FAST                0 (self)
+             18 LOAD_METHOD              1 (_persistDraftCore)
+             20 LOAD_FAST                1 (subject)
+             22 LOAD_FAST                2 (email)
+             24 LOAD_FAST                3 (description)
+             26 CALL_METHOD              3
+             28 POP_TOP
+             30 LOAD_CONST               2 (None)
+             32 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._persistDraftCore ===
+638           0 LOAD_GLOBAL              0 (bool)
+              2 LOAD_FAST                1 (subject)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 LOAD_METHOD              1 (strip)
+             10 CALL_METHOD              0
+             12 CALL_FUNCTION            1
+             14 JUMP_IF_TRUE_OR_POP     30
+             16 LOAD_GLOBAL              0 (bool)
+             18 LOAD_FAST                3 (description)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 LOAD_METHOD              1 (strip)
+             26 CALL_METHOD              0
+             28 CALL_FUNCTION            1
+        >>   30 STORE_FAST               4 (hasCustomText)
+
+639          32 LOAD_FAST                2 (email)
+             34 JUMP_IF_TRUE_OR_POP     38
+             36 LOAD_CONST               1 ('')
+        >>   38 LOAD_METHOD              1 (strip)
+             40 CALL_METHOD              0
+             42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                2 (_savedEmail)
+             46 JUMP_IF_TRUE_OR_POP     50
+             48 LOAD_CONST               1 ('')
+        >>   50 LOAD_METHOD              1 (strip)
+             52 CALL_METHOD              0
+             54 COMPARE_OP               3 (!=)
+             56 STORE_FAST               5 (emailChanged)
+
+640          58 LOAD_FAST                4 (hasCustomText)
+             60 POP_JUMP_IF_TRUE        86
+             62 LOAD_FAST                5 (emailChanged)
+             64 POP_JUMP_IF_TRUE        86
+             66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR                3 (_attachmentPaths)
+             70 POP_JUMP_IF_TRUE        86
+
+641          72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR                4 (_draftStore)
+             76 LOAD_METHOD              5 (clear)
+             78 CALL_METHOD              0
+             80 POP_TOP
+
+642          82 LOAD_CONST               2 (None)
+             84 RETURN_VALUE
+
+643     >>   86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                4 (_draftStore)
+             90 LOAD_METHOD              6 (save)
+             92 LOAD_FAST                1 (subject)
+             94 LOAD_FAST                2 (email)
+             96 LOAD_FAST                3 (description)
+             98 LOAD_GLOBAL              7 (list)
+            100 LOAD_FAST                0 (self)
+            102 LOAD_ATTR                3 (_attachmentPaths)
+            104 CALL_FUNCTION            1
+            106 CALL_METHOD              4
+            108 POP_TOP
+            110 LOAD_CONST               2 (None)
+            112 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.restoreDraft ===
+656           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_draftStore)
+              4 LOAD_METHOD              1 (load)
+              6 CALL_METHOD              0
+              8 STORE_FAST               1 (record)
+
+657          10 LOAD_FAST                1 (record)
+             12 LOAD_CONST               1 (None)
+             14 IS_OP                    0
+             16 POP_JUMP_IF_FALSE       32
+
+658          18 LOAD_FAST                0 (self)
+             20 LOAD_METHOD              2 (_setAttachmentPaths)
+             22 BUILD_LIST               0
+             24 CALL_METHOD              1
+             26 POP_TOP
+
+659          28 LOAD_CONST               1 (None)
+             30 RETURN_VALUE
+
+660     >>   32 LOAD_CONST               2 (<code object <listcomp> at 0x000001F324E69DF0, file "Feedback\LPFeedbackDialogViewController.py", line 660>)
+             34 LOAD_CONST               3 ('LPFeedbackDialogViewController.restoreDraft.<locals>.<listcomp>')
+             36 MAKE_FUNCTION            0
+             38 LOAD_FAST                1 (record)
+             40 LOAD_METHOD              3 (get)
+             42 LOAD_CONST               4 ('attachmentPaths')
+             44 BUILD_LIST               0
+             46 CALL_METHOD              2
+             48 GET_ITER
+             50 CALL_FUNCTION            1
+             52 STORE_FAST               2 (restoredPaths)
+
+661          54 LOAD_FAST                0 (self)
+             56 LOAD_METHOD              2 (_setAttachmentPaths)
+             58 LOAD_FAST                2 (restoredPaths)
+             60 CALL_METHOD              1
+             62 POP_TOP
+
+663          64 LOAD_FAST                1 (record)
+             66 LOAD_METHOD              3 (get)
+             68 LOAD_CONST               5 ('subject')
+             70 LOAD_CONST               6 ('')
+             72 CALL_METHOD              2
+
+664          74 LOAD_FAST                1 (record)
+             76 LOAD_METHOD              3 (get)
+             78 LOAD_CONST               7 ('email')
+             80 LOAD_CONST               6 ('')
+             82 CALL_METHOD              2
+
+665          84 LOAD_FAST                1 (record)
+             86 LOAD_METHOD              3 (get)
+             88 LOAD_CONST               8 ('description')
+             90 LOAD_CONST               6 ('')
+             92 CALL_METHOD              2
+
+662          94 LOAD_CONST               9 (('subject', 'email', 'description'))
+             96 BUILD_CONST_KEY_MAP      3
+             98 RETURN_VALUE
+
+=== LPFeedbackDialogViewController.restoreDraft.<listcomp> ===
+660           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                20 (to 26)
+              6 STORE_FAST               1 (path)
+              8 LOAD_GLOBAL              0 (os)
+             10 LOAD_ATTR                1 (path)
+             12 LOAD_METHOD              2 (isfile)
+             14 LOAD_FAST                1 (path)
+             16 CALL_METHOD              1
+             18 POP_JUMP_IF_FALSE        4
+             20 LOAD_FAST                1 (path)
+             22 LIST_APPEND              2
+             24 JUMP_ABSOLUTE            4
+        >>   26 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._collectOsVersion ===
+676           0 SETUP_FINALLY           38 (to 40)
+
+677           2 LOAD_GLOBAL              0 (platform)
+              4 LOAD_METHOD              1 (release)
+              6 CALL_METHOD              0
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 LOAD_CONST               1 ('')
+        >>   12 STORE_FAST               1 (release)
+
+678          14 LOAD_GLOBAL              0 (platform)
+             16 LOAD_METHOD              2 (version)
+             18 CALL_METHOD              0
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 STORE_FAST               2 (version)
+
+680          26 LOAD_FAST                1 (release)
+             28 JUMP_IF_TRUE_OR_POP     36
+             30 LOAD_FAST                2 (version)
+             32 JUMP_IF_TRUE_OR_POP     36
+             34 LOAD_CONST               1 ('')
+        >>   36 POP_BLOCK
+             38 RETURN_VALUE
+
+681     >>   40 DUP_TOP
+             42 LOAD_GLOBAL              3 (Exception)
+             44 JUMP_IF_NOT_EXC_MATCH    58
+             46 POP_TOP
+             48 POP_TOP
+             50 POP_TOP
+
+682          52 POP_EXCEPT
+             54 LOAD_CONST               1 ('')
+             56 RETURN_VALUE
+        >>   58 RERAISE
+             60 LOAD_CONST               2 (None)
+             62 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._collectDeviceName ===
+692           0 SETUP_FINALLY           42 (to 44)
+
+693           2 LOAD_GLOBAL              0 (platform)
+              4 LOAD_METHOD              1 (system)
+              6 CALL_METHOD              0
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 LOAD_CONST               1 ('')
+        >>   12 STORE_FAST               1 (system)
+
+694          14 LOAD_GLOBAL              0 (platform)
+             16 LOAD_METHOD              2 (node)
+             18 CALL_METHOD              0
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 STORE_FAST               2 (node)
+
+695          26 LOAD_CONST               2 ('%s %s')
+             28 LOAD_FAST                1 (system)
+             30 LOAD_FAST                2 (node)
+             32 BUILD_TUPLE              2
+             34 BINARY_MODULO
+             36 LOAD_METHOD              3 (strip)
+             38 CALL_METHOD              0
+             40 POP_BLOCK
+             42 RETURN_VALUE
+
+696     >>   44 DUP_TOP
+             46 LOAD_GLOBAL              4 (Exception)
+             48 JUMP_IF_NOT_EXC_MATCH    62
+             50 POP_TOP
+             52 POP_TOP
+             54 POP_TOP
+
+697          56 POP_EXCEPT
+             58 LOAD_CONST               1 ('')
+             60 RETURN_VALUE
+        >>   62 RERAISE
+             64 LOAD_CONST               3 (None)
+             66 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._collectDeviceNames ===
+707           0 SETUP_FINALLY          112 (to 114)
+
+708           2 LOAD_GLOBAL              0 (getattr)
+              4 LOAD_GLOBAL              1 (LPGlobalUI)
+              6 LOAD_CONST               1 ('deviceManager')
+              8 LOAD_CONST               2 (None)
+             10 CALL_FUNCTION            3
+             12 STORE_FAST               1 (deviceManager)
+
+709          14 LOAD_FAST                1 (deviceManager)
+             16 LOAD_CONST               2 (None)
+             18 IS_OP                    0
+             20 POP_JUMP_IF_FALSE       28
+
+710          22 BUILD_LIST               0
+             24 POP_BLOCK
+             26 RETURN_VALUE
+
+711     >>   28 LOAD_FAST                1 (deviceManager)
+             30 LOAD_ATTR                2 (deviceList)
+             32 JUMP_IF_TRUE_OR_POP     36
+             34 BUILD_LIST               0
+        >>   36 STORE_FAST               2 (deviceList)
+
+712          38 BUILD_LIST               0
+             40 STORE_FAST               3 (pairs)
+
+713          42 LOAD_FAST                2 (deviceList)
+             44 GET_ITER
+        >>   46 FOR_ITER                60 (to 108)
+             48 STORE_FAST               4 (device)
+
+714          50 LOAD_GLOBAL              0 (getattr)
+             52 LOAD_FAST                4 (device)
+             54 LOAD_CONST               3 ('name')
+             56 LOAD_CONST               2 (None)
+             58 CALL_FUNCTION            3
+             60 STORE_FAST               5 (name)
+
+715          62 LOAD_FAST                5 (name)
+             64 POP_JUMP_IF_TRUE        68
+
+716          66 JUMP_ABSOLUTE           46
+
+717     >>   68 LOAD_GLOBAL              3 (str)
+             70 LOAD_GLOBAL              0 (getattr)
+             72 LOAD_FAST                4 (device)
+             74 LOAD_CONST               4 ('uuid')
+             76 LOAD_CONST               5 ('')
+             78 CALL_FUNCTION            3
+             80 JUMP_IF_TRUE_OR_POP     84
+             82 LOAD_CONST               5 ('')
+        >>   84 CALL_FUNCTION            1
+             86 STORE_FAST               6 (deviceUuid)
+
+718          88 LOAD_FAST                3 (pairs)
+             90 LOAD_METHOD              4 (append)
+             92 LOAD_GLOBAL              3 (str)
+             94 LOAD_FAST                5 (name)
+             96 CALL_FUNCTION            1
+             98 LOAD_FAST                6 (deviceUuid)
+            100 BUILD_TUPLE              2
+            102 CALL_METHOD              1
+            104 POP_TOP
+            106 JUMP_ABSOLUTE           46
+
+719     >>  108 LOAD_FAST                3 (pairs)
+            110 POP_BLOCK
+            112 RETURN_VALUE
+
+720     >>  114 DUP_TOP
+            116 LOAD_GLOBAL              5 (Exception)
+            118 JUMP_IF_NOT_EXC_MATCH   166
+            120 POP_TOP
+            122 STORE_FAST               7 (error)
+            124 POP_TOP
+            126 SETUP_FINALLY           30 (to 158)
+
+721         128 LOAD_GLOBAL              6 (logger)
+            130 LOAD_METHOD              7 (warning)
+            132 LOAD_CONST               6 ('[Feedback] collect device list failed: %s')
+            134 LOAD_FAST                7 (error)
+            136 BINARY_MODULO
+            138 CALL_METHOD              1
+            140 POP_TOP
+
+722         142 BUILD_LIST               0
+            144 POP_BLOCK
+            146 ROT_FOUR
+            148 POP_EXCEPT
+            150 LOAD_CONST               2 (None)
+            152 STORE_FAST               7 (error)
+            154 DELETE_FAST              7 (error)
+            156 RETURN_VALUE
+        >>  158 LOAD_CONST               2 (None)
+            160 STORE_FAST               7 (error)
+            162 DELETE_FAST              7 (error)
+            164 RERAISE
+        >>  166 RERAISE
+            168 LOAD_CONST               2 (None)
+            170 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._provideDeviceList ===
+732           0 SETUP_FINALLY           42 (to 44)
+
+733           2 LOAD_GLOBAL              0 (getattr)
+              4 LOAD_GLOBAL              1 (LPGlobalUI)
+              6 LOAD_CONST               1 ('deviceManager')
+              8 LOAD_CONST               2 (None)
+             10 CALL_FUNCTION            3
+             12 STORE_FAST               1 (deviceManager)
+
+734          14 LOAD_FAST                1 (deviceManager)
+             16 LOAD_CONST               2 (None)
+             18 IS_OP                    0
+             20 POP_JUMP_IF_FALSE       28
+
+735          22 BUILD_LIST               0
+             24 POP_BLOCK
+             26 RETURN_VALUE
+
+736     >>   28 LOAD_GLOBAL              2 (list)
+             30 LOAD_FAST                1 (deviceManager)
+             32 LOAD_ATTR                3 (deviceList)
+             34 JUMP_IF_TRUE_OR_POP     38
+             36 BUILD_LIST               0
+        >>   38 CALL_FUNCTION            1
+             40 POP_BLOCK
+             42 RETURN_VALUE
+
+737     >>   44 DUP_TOP
+             46 LOAD_GLOBAL              4 (Exception)
+             48 JUMP_IF_NOT_EXC_MATCH    96
+             50 POP_TOP
+             52 STORE_FAST               2 (error)
+             54 POP_TOP
+             56 SETUP_FINALLY           30 (to 88)
+
+738          58 LOAD_GLOBAL              5 (logger)
+             60 LOAD_METHOD              6 (warning)
+             62 LOAD_CONST               3 ('[Feedback] provide device list failed: %s')
+             64 LOAD_FAST                2 (error)
+             66 BINARY_MODULO
+             68 CALL_METHOD              1
+             70 POP_TOP
+
+739          72 BUILD_LIST               0
+             74 POP_BLOCK
+             76 ROT_FOUR
+             78 POP_EXCEPT
+             80 LOAD_CONST               2 (None)
+             82 STORE_FAST               2 (error)
+             84 DELETE_FAST              2 (error)
+             86 RETURN_VALUE
+        >>   88 LOAD_CONST               2 (None)
+             90 STORE_FAST               2 (error)
+             92 DELETE_FAST              2 (error)
+             94 RERAISE
+        >>   96 RERAISE
+             98 LOAD_CONST               2 (None)
+            100 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._onSubmissionCompleted ===
+750           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_pendingEmail)
+              4 STORE_FAST               1 (submittedEmail)
+
+751           6 LOAD_CONST               1 ('')
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               0 (_pendingEmail)
+
+752          12 SETUP_FINALLY           42 (to 56)
+
+753          14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                1 (_feedbackPreferences)
+             18 LOAD_METHOD              2 (saveEmail)
+             20 LOAD_FAST                1 (submittedEmail)
+             22 CALL_METHOD              1
+             24 STORE_FAST               2 (savedEmail)
+
+754          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                3 (_savedEmail)
+             30 LOAD_FAST                2 (savedEmail)
+             32 COMPARE_OP               3 (!=)
+             34 POP_JUMP_IF_FALSE       52
+
+755          36 LOAD_FAST                2 (savedEmail)
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               3 (_savedEmail)
+
+756          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                4 (savedEmailChanged)
+             46 LOAD_METHOD              5 (emit)
+             48 CALL_METHOD              0
+             50 POP_TOP
+        >>   52 POP_BLOCK
+             54 JUMP_FORWARD            50 (to 106)
+
+757     >>   56 DUP_TOP
+             58 LOAD_GLOBAL              6 (Exception)
+             60 JUMP_IF_NOT_EXC_MATCH   104
+             62 POP_TOP
+             64 STORE_FAST               3 (error)
+             66 POP_TOP
+             68 SETUP_FINALLY           26 (to 96)
+
+758          70 LOAD_GLOBAL              7 (logger)
+             72 LOAD_METHOD              8 (warning)
+             74 LOAD_CONST               2 ('[Feedback] save email preference failed: %s')
+             76 LOAD_FAST                3 (error)
+             78 BINARY_MODULO
+             80 CALL_METHOD              1
+             82 POP_TOP
+             84 POP_BLOCK
+             86 POP_EXCEPT
+             88 LOAD_CONST               3 (None)
+             90 STORE_FAST               3 (error)
+             92 DELETE_FAST              3 (error)
+             94 JUMP_FORWARD            10 (to 106)
+        >>   96 LOAD_CONST               3 (None)
+             98 STORE_FAST               3 (error)
+            100 DELETE_FAST              3 (error)
+            102 RERAISE
+        >>  104 RERAISE
+
+760     >>  106 LOAD_FAST                0 (self)
+            108 LOAD_ATTR                9 (_draftSaveTimer)
+            110 LOAD_METHOD             10 (stop)
+            112 CALL_METHOD              0
+            114 POP_TOP
+
+761         116 LOAD_CONST               3 (None)
+            118 LOAD_FAST                0 (self)
+            120 STORE_ATTR              11 (_pendingDraftText)
+
+762         122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR               12 (_draftStore)
+            126 LOAD_METHOD             13 (clear)
+            128 CALL_METHOD              0
+            130 POP_TOP
+
+763         132 LOAD_FAST                0 (self)
+            134 LOAD_METHOD             14 (_setBusy)
+            136 LOAD_CONST               4 (False)
+            138 CALL_METHOD              1
+            140 POP_TOP
+
+764         142 LOAD_FAST                0 (self)
+            144 LOAD_METHOD             15 (_setAttachmentPaths)
+            146 BUILD_LIST               0
+            148 CALL_METHOD              1
+            150 POP_TOP
+
+766         152 LOAD_FAST                0 (self)
+            154 LOAD_METHOD             16 (_showToast)
+            156 LOAD_CONST               5 ('Feedback submitted successfully.')
+            158 CALL_METHOD              1
+            160 POP_TOP
+
+767         162 LOAD_FAST                0 (self)
+            164 LOAD_ATTR               17 (feedbackCloseRequested)
+            166 LOAD_METHOD              5 (emit)
+            168 CALL_METHOD              0
+            170 POP_TOP
+            172 LOAD_CONST               3 (None)
+            174 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._onSubmissionFailure ===
+778           0 LOAD_CONST               1 ('')
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_pendingEmail)
+
+779           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (_setBusy)
+             10 LOAD_CONST               2 (False)
+             12 CALL_METHOD              1
+             14 POP_TOP
+
+780          16 LOAD_FAST                0 (self)
+             18 LOAD_METHOD              2 (_showToast)
+             20 LOAD_FAST                1 (message)
+             22 CALL_METHOD              1
+             24 POP_TOP
+             26 LOAD_CONST               3 (None)
+             28 RETURN_VALUE
+
+=== LPFeedbackDialogViewController._onUploadFailure ===
+791           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_setBusy)
+              4 LOAD_CONST               1 (False)
+              6 CALL_METHOD              1
+              8 POP_TOP
+
+792          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (_showToast)
+             14 LOAD_FAST                1 (message)
+             16 CALL_METHOD              1
+             18 POP_TOP
+             20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE

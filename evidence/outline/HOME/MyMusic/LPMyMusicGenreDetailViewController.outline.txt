@@ -1,0 +1,273 @@
+# module HOME.MyMusic.LPMyMusicGenreDetailViewController
+
+[module] names: string, Template, PyQt6.QtCore, pyqtSignal, Qt, QEvent, QCoreApplication, PyQt6.QtGui, QPixmap, QMovie, PyQt6.QtWidgets, PyQt6, QtCore, QtGui, QtWidgets, LPGlobalUI, HOME.LPSuperTableView, LPSuperTableDelegate, HOME.MyMusic.LPMyMusicAlbumDetailViewController, LPMyMusicAlbumDetailViewController, HOME.MyMusic.LPMyMusicAlbumDetailViewController_ui, Ui_mymusicAlbumDetailViewWidget, HOME.MyMusic.LPMyMusicArtistDetailViewController, LPMyMusicArtistDetailViewController, HOME.MyMusic.LPMyMusicArtistDetailViewController_ui, Ui_mymusicArtistDetailViewWidget, HOME.MyMusic.LPTrackImageLoadHelper, LPTrackImageLoadHelper, LPClientFramework, LPStreamServiceManager, LPUtility, LPBeetsWrapper, LPClientFramework.LPConfig, LPUIPath, LPClientFramework.LPConfig.LPFontConfig, MyMusic_Title, MyMusic_Subtitle, LPClientFramework.LPMusicLibrary, LPRecentlyManager, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPClientFramework.LPUtility, logger, filterArray, QProxyStyle, ProxyStyle, QAbstractTableModel, LPMyMusicTracksTableModel, LPMyMusicTrackTableDelegate, QWidget, LPMyMusicGenreDetailViewController
+  str: 'Template'
+  str: 'pyqtSignal'
+  str: 'Qt'
+  str: 'QEvent'
+  str: 'QCoreApplication'
+  str: 'QPixmap'
+  str: 'QMovie'
+  str: '*'
+  str: 'QtCore'
+  str: 'QtGui'
+  str: 'QtWidgets'
+  str: 'LPSuperTableDelegate'
+  str: 'LPMyMusicAlbumDetailViewController'
+  str: 'Ui_mymusicAlbumDetailViewWidget'
+  str: 'LPMyMusicArtistDetailViewController'
+  str: 'Ui_mymusicArtistDetailViewWidget'
+  str: 'LPTrackImageLoadHelper'
+  str: 'LPStreamServiceManager'
+  str: 'LPUtility'
+  str: 'LPBeetsWrapper'
+  str: 'LPUIPath'
+  str: 'MyMusic_Title'
+  str: 'MyMusic_Subtitle'
+  str: 'LPRecentlyManager'
+  str: 'LPHeaderType'
+  str: 'logger'
+  str: 'ProxyStyle'
+  str: 'LPMyMusicTracksTableModel'
+  str: 'LPMyMusicTrackTableDelegate'
+  str: 'LPMyMusicGenreDetailViewController'
+
+def ProxyStyle()  line 26
+  names: __name__, __module__, __qualname__, __doc__, drawControl, __classcell__
+    str: 'ProxyStyle'
+    str: '表头排序样式代理：隐藏第一列排序箭头。'
+    str: 'ProxyStyle.drawControl'
+
+  def ProxyStyle.drawControl(self, ctl, opt, qp, widget)  line 29
+    names: QStyle, ControlElement, CE_HeaderSection, orientation, QtCore, Qt, Orientation, Horizontal, section, parent, property, QStyleOptionHeader, SortIndicator, None_, sortIndicator, super, drawControl
+      str: '\n        自定义绘制表头控件，屏蔽指定列排序图标。\n\n        参数:\n            ctl (QStyle.ControlElement): 当前绘制的控件类型。\n            opt (QStyleOption): 当前样式选项。\n            qp (QPainter): 当前绘制器。\n            widget (QWidget | None): 当前目标控件。\n        返回:\n            无\n        '
+      str: 'hideSortIndicatorColumn'
+
+def LPMyMusicTracksTableModel()  line 48
+  names: __name__, __module__, __qualname__, __doc__, __init__, QtCore, Qt, ItemDataRole, DisplayRole, headerData, rowCount, columnCount, data, sort, attachView, shutdown, _imageUrlForRow, _handleRowImageReady, __classcell__
+    str: 'LPMyMusicTracksTableModel'
+    str: '流派详情曲目表格模型：负责曲目展示和可见区优先封面加载。'
+    str: 'LPMyMusicTracksTableModel.__init__'
+    str: 'LPMyMusicTracksTableModel.headerData'
+    str: 'LPMyMusicTracksTableModel.rowCount'
+    str: 'LPMyMusicTracksTableModel.columnCount'
+    str: 'LPMyMusicTracksTableModel.data'
+    str: 'LPMyMusicTracksTableModel.sort'
+    str: 'LPMyMusicTracksTableModel.attachView'
+    str: 'LPMyMusicTracksTableModel.shutdown'
+    str: 'LPMyMusicTracksTableModel._imageUrlForRow'
+    str: 'LPMyMusicTracksTableModel._handleRowImageReady'
+
+  def LPMyMusicTracksTableModel.__init__(self, playList, genreDict, parent)  line 51
+    names: super, LPMyMusicTracksTableModel, __init__, genreDict, playList, list, _data, LPTrackImageLoadHelper, _imageUrlForRow, rowCount, LPUtility, trackImageLoadHelper, rowImageReadySignal, connect, _handleRowImageReady
+      str: '\n        初始化流派详情曲目表格模型。\n\n        参数:\n            playList (object): 当前流派曲目播放列表。\n            genreDict (dict): 当前流派信息字典。\n            parent (QObject | None): Qt 父对象。\n        返回:\n            无\n        '
+      str: 'parent'
+
+  def LPMyMusicTracksTableModel.headerData(self, section, orientation, role)  line 70
+    names: filterArray, append, QtCore, Qt, Orientation, Horizontal, ItemDataRole, DisplayRole, super, headerData
+      str: '\n        返回表头文案。\n\n        参数:\n            section (int): 表头索引。\n            orientation (Qt.Orientation): 表头方向。\n            role (Qt.ItemDataRole): 数据角色。\n        返回:\n            object: 表头展示文本或基类返回值。\n        '
+      str: 'title'
+
+  def LPMyMusicTracksTableModel.rowCount(self, parent)  line 90
+    names: len, _data
+      str: '\n        返回模型行数。\n\n        参数:\n            parent (QModelIndex | None): 父级索引。\n        返回:\n            int: 当前行数。\n        '
+
+  def LPMyMusicTracksTableModel.columnCount(self, parent)  line 101
+    names: rowCount
+      str: '\n        返回模型列数。\n\n        参数:\n            parent (QModelIndex | None): 父级索引。\n        返回:\n            int: 当前列数。\n        '
+
+  def LPMyMusicTracksTableModel.data(self, index, role)  line 112
+    names: row, column, rowCount, columnCount, QtCore, Qt, ItemDataRole, DisplayRole, _data, LPStreamServiceManager, isCurrentPlayItem, LPGlobalUI, currentDevice, trackName, trackImage, trackArtist, albumName, trackDuration
+      str: '\n        返回指定单元格的展示数据。\n\n        参数:\n            index (QModelIndex): 目标索引。\n            role (Qt.ItemDataRole): 数据角色。\n        返回:\n            object: 当前单元格展示元组或 `None`。\n        '
+      str: '%s'
+      str: 'index'
+      str: 'artist'
+      str: 'album'
+      str: 'LPMyMusicTracksTableModel.data.<locals>._formatSeconds'
+      str: 'duration'
+
+    def LPMyMusicTracksTableModel.data._formatSeconds(seconds)  line 142
+        str: '%d:%02d:%02d'
+        str: '%d:%02d'
+
+  def LPMyMusicTracksTableModel.sort(self, column, order)  line 160
+    names: filterArray, layoutAboutToBeChanged, emit, LPBeetsWrapper, queryTracks, QtCore, Qt, SortOrder, DescendingOrder, genreDict, playList, list, _data, layoutChanged, trackImageLoadHelper, refreshVisibleRows
+      str: '\n        按指定列重排流派曲目，并刷新当前可见区封面优先级。\n\n        参数:\n            column (int): 目标排序列。\n            order (Qt.SortOrder): 排序方向。\n        返回:\n            无\n        '
+      str: 'id'
+      str: 'genre'
+      str: 'sortBy'
+      str: 'desc'
+      str: 'genre'
+      str: 'strict'
+
+  def LPMyMusicTracksTableModel.attachView(self, view)  line 181
+    names: trackImageLoadHelper, attachView
+      str: '\n        绑定表格视图，以便按可见区域调度封面加载。\n\n        参数:\n            view (QTableView): 当前绑定的表格视图。\n        返回:\n            无\n        '
+
+  def LPMyMusicTracksTableModel.shutdown(self)  line 192
+    names: trackImageLoadHelper, shutdown
+      str: '\n        停止模型内部封面加载任务。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPMyMusicTracksTableModel._imageUrlForRow(self, row)  line 203
+    names: rowCount, _data, trackImage
+      str: '\n        返回指定行的封面地址。\n\n        参数:\n            row (int): 目标行号。\n        返回:\n            str: 当前行封面地址；不存在时返回空字符串。\n        '
+
+  def LPMyMusicTracksTableModel._handleRowImageReady(self, row)  line 217
+    names: rowCount, index, dataChanged, emit
+      str: '\n        在封面缓存完成后刷新指定行的图片列。\n\n        参数:\n            row (int): 需要刷新的行号。\n        返回:\n            无\n        '
+
+def LPMyMusicTrackTableDelegate()  line 234
+  names: __name__, __module__, __qualname__, __init__, paint, helpEvent, update_view, cleanup_table_view, __classcell__
+    str: 'LPMyMusicTrackTableDelegate'
+    str: 'LPMyMusicTrackTableDelegate.__init__'
+    str: 'LPMyMusicTrackTableDelegate.paint'
+    str: 'LPMyMusicTrackTableDelegate.helpEvent'
+    str: 'LPMyMusicTrackTableDelegate.update_view'
+    str: 'LPMyMusicTrackTableDelegate.cleanup_table_view'
+
+  def LPMyMusicTrackTableDelegate.__init__(self, parent)  line 235
+    names: super, __init__, table_view, QMovie, LPGlobalUI, imagePath, play_movie, destroyed, connect, cleanup_table_view, start, frameChanged, update_view
+      str: 'dark_playing.gif'
+
+  def LPMyMusicTrackTableDelegate.paint(self, painter, option, index)  line 245
+    names: super, paint, data, setPen, LPGlobalUI, THEME_HIGH_HIGH_COLOR, THEME_DEFAULT_COLOR, rect, column, QtCore, QRect, x, y, width, height, QtGui, QFont, setUnderline, setFont, fontMetrics, elidedText, Qt, TextElideMode, ElideRight, drawText, AlignmentFlag, AlignLeft, AlignVCenter, QIcon, len, LPUtility, getCachedPixmapWithUrl, addPixmap, QPixmap, imagePath, currentDevice, mediaInfo, playState, play_movie, currentPixmap, drawPixmap, boundingRect, styleObject, lastCursorPos, cursor, CursorShape, PointingHandCursor, lastCursorActionIndex, setCursor, ArrowCursor
+      str: 'miniBar/trackDefault.png'
+      str: 'PLAYING'
+      str: 'dark_pause.png'
+
+  def LPMyMusicTrackTableDelegate.helpEvent(self, event, view, option, index)  line 338
+    names: type, QtCore, QEvent, Type, ToolTip, data, len, rect, width, column, QtGui, QFontMetrics, font, elidedText, Qt, TextElideMode, ElideRight, QtWidgets, QToolTip, showText, globalPos, hideText, super, helpEvent
+      str: '\n        处理单元格悬停事件：文本被省略时显示完整内容提示。\n\n        参数:\n            event (QEvent): 悬停事件对象。\n            view (QWidget): 事件所属视图。\n            option (QStyleOptionViewItem): 单元格样式选项。\n            index (QModelIndex): 当前单元格索引。\n        返回:\n            bool: 事件处理结果。\n        '
+
+  def LPMyMusicTrackTableDelegate.update_view(self)  line 375
+    names: table_view, viewport, update
+
+  def LPMyMusicTrackTableDelegate.cleanup_table_view(self)  line 379
+    names: play_movie, stop
+
+def LPMyMusicGenreDetailViewController()  line 383
+  names: __name__, __module__, __qualname__, pyqtSignal, updateDeviceInfoSignal, object, updateLibSignal, __init__, _createTableModel, _replaceTableModel, setupUi, viewWillAppear, viewWillDisappear, changeEvent, _libUpdateMethod, _updateDeviceInfo, deviceInfoUpdate, itemClick, itemDoubleClick, __classcell__
+    str: 'LPMyMusicGenreDetailViewController'
+    str: 'LPMyMusicGenreDetailViewController.__init__'
+    str: 'LPMyMusicGenreDetailViewController._createTableModel'
+    str: 'LPMyMusicGenreDetailViewController._replaceTableModel'
+    str: 'LPMyMusicGenreDetailViewController.setupUi'
+    str: 'LPMyMusicGenreDetailViewController.viewWillAppear'
+    str: 'LPMyMusicGenreDetailViewController.viewWillDisappear'
+    str: 'LPMyMusicGenreDetailViewController.changeEvent'
+    str: 'LPMyMusicGenreDetailViewController._libUpdateMethod'
+    str: 'LPMyMusicGenreDetailViewController._updateDeviceInfo'
+    str: 'LPMyMusicGenreDetailViewController.deviceInfoUpdate'
+    str: 'LPMyMusicGenreDetailViewController.itemClick'
+    str: 'LPMyMusicGenreDetailViewController.itemDoubleClick'
+
+  def LPMyMusicGenreDetailViewController.__init__(self, genreDict)  line 387
+    names: super, LPMyMusicGenreDetailViewController, __init__, genreDict, updateDeviceInfoSignal, connect, _updateDeviceInfo, updateLibSignal
+      str: '\n        初始化流派详情页面控制器。\n\n        参数:\n            genreDict (dict): 当前流派信息字典。\n        返回:\n            无\n        '
+      str: 'LPMyMusicGenreDetailViewController.__init__.<locals>._updateLib'
+
+    def LPMyMusicGenreDetailViewController.__init__._updateLib()  line 402
+      names: LPBeetsWrapper, queryTracks, genreDict, _createTableModel, _replaceTableModel
+        str: 'genre'
+        str: 'genre'
+        str: 'strict'
+
+  def LPMyMusicGenreDetailViewController._createTableModel(self, playList)  line 409
+    names: LPMyMusicTracksTableModel, genreDict
+      str: '\n        创建流派详情页使用的曲目表格模型。\n\n        参数:\n            playList (object): 目标播放列表对象。\n        返回:\n            LPMyMusicTracksTableModel: 初始化完成的表格模型。\n        '
+
+  def LPMyMusicGenreDetailViewController._replaceTableModel(self, model)  line 420
+    names: tableView, model, setModel, getattr, callable, setParent, deleteLater, attachView, setColumnWidth
+      str: '\n        替换流派详情表格模型，并安全释放旧模型资源。\n\n        参数:\n            model (LPMyMusicTracksTableModel): 新的表格模型对象。\n        返回:\n            无\n        '
+      str: 'shutdown'
+
+  def LPMyMusicGenreDetailViewController.setupUi(self, ui)  line 444
+    names: getattr, super, callable, setupUi, Template, setStyleSheet, substitute, MyMusic_Title, MyMusic_Subtitle, titleLabel, setText, genreDict, subLabel, QCoreApplication, translate, LPUtility, coverImageForLocalPath, append, len, QtGui, QIcon, addPixmap, coverImageView1, setIcon, coverImageView2, coverImageView3, coverImageView4, coverImagesFrame, show, coverImageView, hide, QPixmap, LPGlobalUI, imagePath, setStyle, ProxyStyle, tableView, style, setProperty, horizontalHeader, setSortIndicatorShown, verticalScrollBar, setSingleStep, doubleClicked, connect, itemDoubleClick, clicked, itemClick, setSortingEnabled, setupUI, filterArray, LPBeetsWrapper, queryTracks, _createTableModel, _replaceTableModel, setDefaultAlignment, QtCore, Qt, AlignmentFlag, AlignLeft, AlignVCenter, setItemDelegate, LPMyMusicTrackTableDelegate
+      str: '\n        构建流派详情页控件并绑定交互逻辑。\n\n        参数:\n            ui (QWidget): 已加载的 UI 宿主对象。\n        返回:\n            无\n        '
+      str: 'setupUi'
+      str: '\n                QLabel#titleLabel {\n                    font-size: ${titeFontSize}pt;\n                }\n                QLabel#subLabel {\n                    font-size: ${subTiteFontSize}pt;\n                }\n        '
+      str: 'titeFontSize'
+      str: 'subTiteFontSize'
+      str: 'genre'
+      str: 'Genre'
+      str: 'path'
+      str: 'miniBar/trackDefault.png'
+      str: 'hideSortIndicatorColumn'
+      str: 'id'
+      str: '#'
+      str: 'id'
+      str: 'title'
+      str: 'title'
+      str: 'GenreDetail'
+      str: 'Track'
+      str: 'artist'
+      str: 'Artist'
+      str: 'album'
+      str: 'Album'
+      str: 'length'
+      str: 'Duration'
+      str: 'genre'
+      str: 'strict'
+
+  def LPMyMusicGenreDetailViewController.viewWillAppear(self)  line 529
+    names: LPUtility, registerDeviceInfoChanged, addNotificationObserver, _libUpdateMethod
+      str: '\n        页面即将显示时注册设备和库更新监听。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'LibUpdateNotify'
+
+  def LPMyMusicGenreDetailViewController.viewWillDisappear(self)  line 541
+    names: LPUtility, removeNotificationObserver, _libUpdateMethod, deRegisterDeviceInfoChanged
+      str: '\n        页面即将隐藏时注销设备和库更新监听。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'LibUpdateNotify'
+
+  def LPMyMusicGenreDetailViewController.changeEvent(self, event)  line 554
+    names: type, QEvent, Type, LanguageChange, subLabel, setText, QCoreApplication, translate, filterArray, super, LPMyMusicGenreDetailViewController, changeEvent
+      str: 'Genre'
+      str: 'id'
+      str: '#'
+      str: 'id'
+      str: 'title'
+      str: 'title'
+      str: 'GenreDetail'
+      str: 'Track'
+      str: 'artist'
+      str: 'Artist'
+      str: 'album'
+      str: 'Album'
+      str: 'length'
+      str: 'Duration'
+
+  def LPMyMusicGenreDetailViewController._libUpdateMethod(self, params)  line 571
+    names: updateLibSignal, emit
+      str: '\n        处理本地库更新通知并触发表格模型重建。\n\n        参数:\n            params (object): 通知携带参数。\n        返回:\n            无\n        '
+
+  def LPMyMusicGenreDetailViewController._updateDeviceInfo(self)  line 582
+    names: tableView, viewport, update
+      str: '\n        刷新当前表格视口中的播放状态展示。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPMyMusicGenreDetailViewController.deviceInfoUpdate(self, device, infoType, detail)  line 593
+    names: uuid, LPGlobalUI, currentDevice, get, updateDeviceInfoSignal, emit, tableView, update
+      str: 'trackId'
+      str: 'playState'
+
+  def LPMyMusicGenreDetailViewController.itemClick(self, index)  line 604
+    names: tableView, lastCursorActionIndex, data, model, _data, row, LPBeetsWrapper, queryTrackArtists, trackArtist, len, LPGlobalUI, navigationManager, push, loadUI, LPUIPath, MyMusicArtistDetailViewControllerUI, Ui_mymusicArtistDetailViewWidget, LPMyMusicArtistDetailViewController, albumartist, albumName, localPath, MyMusicAlbumDetailViewControllerUI, Ui_mymusicAlbumDetailViewWidget, LPMyMusicAlbumDetailViewController
+      str: 'artist'
+      str: 'artistdetail'
+      str: 'album'
+      str: 'artist'
+      str: 'album'
+      str: 'path'
+      str: 'albumdetail'
+
+  def LPMyMusicGenreDetailViewController.itemDoubleClick(self, index)  line 632
+    names: LPGlobalUI, currentDevice, logger, error, tableView, model, playList, list, row, index, genreDict, header, headTitle, LPHeaderType, LP_HEADER_TYPE_COLLECTION, headType, headId, fastPlay
+      str: 'error, no device found'
+      str: 'LPMyMusicGenreDetailViewController.itemDoubleClick.<locals>.playFinishMethod'
+      str: 'genre'
+      str: 'MyMusic Genre'
+
+    def LPMyMusicGenreDetailViewController.itemDoubleClick.playFinishMethod(result)  line 642
+      names: logger, debug, trackName, LPRecentlyManager, instance, addRecentlyPlayedWithMusicList
+        str: 'Mymusic genre %s play result: %s'
+        str: 'openMore'
+        str: 'canNavigate'

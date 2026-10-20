@@ -1,0 +1,85 @@
+# module LPCommonWidgets.dialog.LPConfirmDialogHost
+
+[module] names: __doc__, pathlib, Path, typing, Callable, Optional, PyQt6.QtCore, QMetaObject, Qt, QUrl, pyqtSignal, PyQt6.QtQuickWidgets, QQuickWidget, PyQt6.QtWidgets, QDialog, QVBoxLayout, LPGlobalUI, LPClientFramework.LPUtility, logger, LPConfirmDialogHost
+  str: '\n通用 QML 确认/提示弹窗宿主，通过 app 级 QDialog + QQuickWidget 实现整窗覆盖。\n'
+  str: 'Path'
+  str: 'Callable'
+  str: 'Optional'
+  str: 'QMetaObject'
+  str: 'Qt'
+  str: 'QUrl'
+  str: 'pyqtSignal'
+  str: 'QQuickWidget'
+  str: 'QDialog'
+  str: 'QVBoxLayout'
+  str: 'logger'
+  str: 'LPConfirmDialogHost'
+
+def LPConfirmDialogHost()  line 17
+  names: __name__, __module__, __qualname__, __doc__, _instance, Optional, __annotations__, pyqtSignal, confirmed, cancelled, object, __init__, classmethod, instance, str, bool, Callable, showDialog, _resizeToContent, _on_qml_confirmed, _on_qml_cancelled, __classcell__
+    str: 'LPConfirmDialogHost'
+    str: '通用 QML 确认/提示弹窗宿主，负责整窗显示层与信号回传。'
+    str: '_instance'
+    str: 'parent'
+    str: 'LPConfirmDialogHost.__init__'
+    str: 'return'
+    str: 'LPConfirmDialogHost.instance'
+    str: 'OK'
+    str: 'Cancel'
+    str: 'title'
+    str: 'message'
+    str: 'confirmText'
+    str: 'cancelText'
+    str: 'showCancel'
+    str: 'confirmButtonColor'
+    str: 'onConfirmed'
+    str: 'onCancelled'
+    str: 'return'
+    str: 'LPConfirmDialogHost.showDialog'
+    str: 'LPConfirmDialogHost._resizeToContent'
+    str: 'LPConfirmDialogHost._on_qml_confirmed'
+    str: 'LPConfirmDialogHost._on_qml_cancelled'
+    str: 'OK'
+    str: 'Cancel'
+
+  def LPConfirmDialogHost.__init__(self, parent)  line 27
+    names: super, __init__, _on_confirmed_callback, _on_cancelled_callback, setModal, setWindowTitle, setWindowFlags, Qt, WindowType, Dialog, FramelessWindowHint, NoDropShadowWindowHint, setAttribute, WidgetAttribute, WA_TranslucentBackground, resize, QVBoxLayout, setContentsMargins, QQuickWidget, _quick_widget, setResizeMode, ResizeMode, SizeRootObjectToView, setClearColor, GlobalColor, transparent, Path, __file__, resolve, parents, exists, setSource, QUrl, fromLocalFile, str, status, Status, Ready, errors, logger, error, toString, addWidget, rootObject, confirmed, connect, _on_qml_confirmed, cancelled, _on_qml_cancelled, contentHeightChanged, _resizeToContent
+      str: '\n        初始化确认弹窗宿主并加载通用 QML 组件。\n\n        :param parent: 父级窗口，默认由 instance() 传入主窗口。\n        :return: None。\n        '
+      str: 'Confirm'
+      str: 'resources'
+      str: 'qml'
+      str: 'common'
+      str: 'LPConfirmDialog.qml'
+      str: 'qrc:/qml/common/LPConfirmDialog.qml'
+      str: '[QML] LPConfirmDialog load failed: %s'
+
+  def LPConfirmDialogHost.instance(cls)  line 77
+    names: _instance, getattr, LPGlobalUI
+      str: '\n        返回确认弹窗宿主单例。\n\n        :return: 宿主实例。\n        '
+      str: 'mainWindow'
+
+  def LPConfirmDialogHost.showDialog(self, title, message, confirmText, cancelText, showCancel, confirmButtonColor, onConfirmed, onCancelled)  line 89
+    names: _quick_widget, rootObject, logger, error, _on_confirmed_callback, _on_cancelled_callback, setProperty, str, bool, strip, QMetaObject, invokeMethod, Qt, ConnectionType, QueuedConnection, super, show, raise_, activateWindow
+      str: '\n        弹出确认/提示弹窗，设置文案后打开 QML Popup 并显示 QDialog。\n\n        :param title: 弹窗标题。\n        :param message: 弹窗消息内容。\n        :param confirmText: 确定按钮文字。\n        :param cancelText: 取消按钮文字。\n        :param showCancel: 是否显示取消按钮，false 时为单按钮提示模式。\n        :param confirmButtonColor: 确定按钮底色，非空时覆盖默认值，空时恢复默认。\n      '
+      str: '[QML] LPConfirmDialog root object is not ready'
+      str: 'title'
+      str: 'message'
+      str: 'confirmText'
+      str: 'cancelText'
+      str: 'showCancelButton'
+      str: 'confirmButtonColor'
+      str: '#4F59F7'
+      str: 'open'
+
+  def LPConfirmDialogHost._resizeToContent(self)  line 134
+    names: _quick_widget, rootObject, float, property, min, max, int, resize
+      str: '\n        根据 QML 弹窗内容高度调整宿主窗口，避免长消息被裁切。\n\n        :return: None。\n        '
+      str: 'contentHeight'
+
+  def LPConfirmDialogHost._on_qml_confirmed(self)  line 149
+    names: hide, _on_confirmed_callback, _on_cancelled_callback, confirmed, emit
+      str: '\n        处理 QML 确定信号：隐藏弹窗、发 confirmed 信号并执行可选回调。\n\n        :return: None。\n        '
+
+  def LPConfirmDialogHost._on_qml_cancelled(self)  line 163
+    names: hide, _on_cancelled_callback, _on_confirmed_callback, cancelled, emit
+      str: '\n        处理 QML 取消信号：隐藏弹窗、发 cancelled 信号并执行可选回调。\n\n        :return: None。\n        '

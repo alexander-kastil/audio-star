@@ -1,0 +1,144 @@
+# module HOME.StreamService.Tidal.controllers.details.LPTidalPlaylistDetailViewController
+
+[module] names: __doc__, typing, Optional, PyQt6.QtCore, pyqtSlot, PyQt6.QtGui, QPixmapCache, PyQt6.QtWidgets, QWidget, HOME.StreamService.Tidal.controllers.base.LPTidalDetailViewControllerBase, LPTidalDetailViewControllerBase, HOME.StreamService.Tidal.services.LPTidalRequestScheduler, LPTidalRequest, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, LPClientFramework.LPConfig, LPUIPath, LPGlobalUI, LPTidalPlaylistDetailViewController
+  str: '\nTIDAL 歌单详情页控制器。\n'
+  str: 'Optional'
+  str: 'pyqtSlot'
+  str: 'QPixmapCache'
+  str: 'QWidget'
+  str: 'LPTidalDetailViewControllerBase'
+  str: 'LPTidalRequest'
+  str: 'LPTidalStore'
+  str: 'LPUIPath'
+  str: 'LPTidalPlaylistDetailViewController'
+
+def LPTidalPlaylistDetailViewController()  line 19
+  names: __name__, __module__, __qualname__, __doc__, PAGE_LIMIT, str, Optional, QWidget, __init__, _fetchDetailData, viewWillDisappear, pyqtSlot, setPlaylistFilterText, loadMorePlaylistItems, int, updatePlaylistVisibleRange, object, _handlePlaylistItemsResult, openAddToPlaylist, deleteCurrentPlaylist, onShowDeletePlaylistConfirm, updateCurrentPlaylist, removeTrackFromCurrentPlaylist, bool, _onPlaylistMutationFinished, __classcell__
+    str: 'LPTidalPlaylistDetailViewController'
+    str: 'TIDAL 歌单详情页，负责加载歌单信息和曲目列表。'
+    str: 'itemId'
+    str: 'parent'
+    str: 'LPTidalPlaylistDetailViewController.__init__'
+    str: 'LPTidalPlaylistDetailViewController._fetchDetailData'
+    str: 'return'
+    str: 'LPTidalPlaylistDetailViewController.viewWillDisappear'
+    str: 'text'
+    str: 'return'
+    str: 'LPTidalPlaylistDetailViewController.setPlaylistFilterText'
+    str: 'LPTidalPlaylistDetailViewController.loadMorePlaylistItems'
+    str: 'firstIndex'
+    str: 'lastIndex'
+    str: 'return'
+    str: 'LPTidalPlaylistDetailViewController.updatePlaylistVisibleRange'
+    str: 'result'
+    str: 'return'
+    str: 'LPTidalPlaylistDetailViewController._handlePlaylistItemsResult'
+    str: 'trackId'
+    str: 'trackTitle'
+    str: 'return'
+    str: 'LPTidalPlaylistDetailViewController.openAddToPlaylist'
+    str: 'LPTidalPlaylistDetailViewController.deleteCurrentPlaylist'
+    str: 'LPTidalPlaylistDetailViewController.onShowDeletePlaylistConfirm'
+    str: 'title'
+    str: 'description'
+    str: 'return'
+    str: 'LPTidalPlaylistDetailViewController.updateCurrentPlaylist'
+    str: 'playlistIndex'
+    str: 'return'
+    str: 'LPTidalPlaylistDetailViewController.removeTrackFromCurrentPlaylist'
+    str: 'success'
+    str: 'action'
+    str: 'playlistId'
+    str: 'return'
+    str: 'LPTidalPlaylistDetailViewController._onPlaylistMutationFinished'
+
+  def LPTidalPlaylistDetailViewController.__init__(self, itemId, parent)  line 24
+    names: LPTidalStore, instance, playlistManager, _playlist_manager, playlistMutationFinished, connect, _onPlaylistMutationFinished, super, __init__, acquirePlaylistDetailState, LPUIPath, TidalPlaylistDetailQML
+      str: '\n        初始化歌单详情页。\n\n        :param itemId: 歌单 ID。\n        :param parent: 父级 QWidget。\n        :return: None。\n        '
+      str: 'playlist'
+      str: 'pages/TidalPlaylistDetail.qml'
+      str: 'tidalPlaylistDetailState'
+      str: 'itemId'
+      str: 'itemType'
+      str: 'state'
+      str: 'qmlPath'
+      str: 'qmlFileName'
+      str: 'specificContextName'
+      str: 'parent'
+
+  def LPTidalPlaylistDetailViewController._fetchDetailData(self)  line 45
+    names: _provider, loadPlaylistDetail, _item_id, PAGE_LIMIT
+      str: '\n        拉取歌单详情数据。\n\n        :return: 请求结果字典。\n        '
+      str: 'offset'
+      str: 'limit'
+
+  def LPTidalPlaylistDetailViewController.viewWillDisappear(self)  line 53
+    names: super, viewWillDisappear, QPixmapCache, clear
+      str: '\n        歌单详情页即将隐藏时清理资源。在基类清理基础上额外清空 QPixmapCache，\n        释放虚拟化列表已加载的 QML 图片纹理缓存，缓解多图片页面内存累积。\n\n        :return: None。\n        '
+
+  def LPTidalPlaylistDetailViewController.setPlaylistFilterText(self, text)  line 64
+    names: _state, setFilterText
+      str: '\n        设置歌单当前已加载曲目的本地过滤文本。\n\n        :param text: 过滤文本。\n        :return: None。\n        '
+
+  def LPTidalPlaylistDetailViewController.loadMorePlaylistItems(self)  line 74
+    names: _state, isLoading, isLoadingMore, hasMore, setLoadingMore, offset, LPTidalRequest, _item_id, _request_tag, _handlePlaylistItemsResult, _ensure_scheduler, enqueue
+      str: '\n        加载下一页歌单曲目。\n\n        :return: None。\n        '
+      str: 'playlist_items::'
+      str: '::'
+      str: 'LPTidalPlaylistDetailViewController.loadMorePlaylistItems.<locals>.<lambda>'
+      str: 'key'
+      str: 'tag'
+      str: 'task'
+      str: 'callback'
+      str: 'priority'
+
+    def LPTidalPlaylistDetailViewController.loadMorePlaylistItems.<lambda>()  line 88
+      names: _provider, loadPlaylistItems, _item_id, PAGE_LIMIT
+        str: 'offset'
+        str: 'limit'
+        str: 'skipCache'
+
+  def LPTidalPlaylistDetailViewController.updatePlaylistVisibleRange(self, firstIndex, lastIndex)  line 98
+    names: _state, updateTrackVisibleRange
+      str: '\n        更新歌单曲目可见范围。\n\n        :param firstIndex: 首个可见索引。\n        :param lastIndex: 最后一个可见索引。\n        :return: None。\n        '
+
+  def LPTidalPlaylistDetailViewController._handlePlaylistItemsResult(self, result)  line 109
+    names: _state, setLoadingMore, isinstance, dict, bool, get, setErrorMessage, appendTracks
+      str: '\n        处理歌单曲目分页请求结果。\n\n        :param result: 请求结果。\n        :return: None。\n        '
+      str: 'success'
+      str: 'Load more failed. Please try again.'
+      str: 'data'
+
+  def LPTidalPlaylistDetailViewController.openAddToPlaylist(self, trackId, trackTitle)  line 123
+    names: _playlist_manager, openGlobalAddToPlaylist
+      str: '\n        打开 Add-to-playlist 对话框。\n\n        :param trackId: 曲目 ID。\n        :param trackTitle: 曲目标题。\n        :return: None。\n        '
+
+  def LPTidalPlaylistDetailViewController.deleteCurrentPlaylist(self)  line 134
+    names: _state, detailInfo, _playlist_manager, isUserOwnedPlaylist, deleteUserPlaylist, _item_id, _store, removeDeletedUserPlaylistFromSeeAll, LPGlobalUI, getTopWidget, navigationManager, pop
+      str: '\n        删除当前用户自建歌单。\n\n        :return: None。\n        '
+
+  def LPTidalPlaylistDetailViewController.onShowDeletePlaylistConfirm(self)  line 153
+    names: _state, detailInfo, _playlist_manager, isUserOwnedPlaylist, HOME.StreamService.Tidal.widgets.LPTidalConfirmDialogHost, LPTidalConfirmDialogHost, instance, deleteCurrentPlaylist, _on_confirm_callback, show, LPGlobalUI, THEME_ACCENT_COLOR, name
+      str: '\n        通过 app 级 QDialog 宿主弹出删除歌单确认弹窗，确认后删除当前歌单。\n\n        :return: None。\n        '
+      str: 'LPTidalConfirmDialogHost'
+      str: 'Delete Playlist'
+      str: 'Are you sure you want to delete this playlist? This action cannot be undone.'
+      str: 'Delete'
+      str: 'Cancel'
+
+  def LPTidalPlaylistDetailViewController.updateCurrentPlaylist(self, title, description)  line 175
+    names: _state, detailInfo, _playlist_manager, isUserOwnedPlaylist, updatePlaylistMetadata, _item_id, reload
+      str: '\n        更新当前用户自建歌单元数据。\n\n        :param title: 歌单标题。\n        :param description: 歌单描述。\n        :return: None。\n        '
+
+  def LPTidalPlaylistDetailViewController.removeTrackFromCurrentPlaylist(self, playlistIndex)  line 190
+    names: _state, detailInfo, _playlist_manager, isUserOwnedPlaylist, removeTrackFromPlaylist, _item_id, int, reload
+      str: '\n        从当前用户自建歌单移除曲目。\n\n        :param playlistIndex: 歌单内索引。\n        :return: None。\n        '
+
+  def LPTidalPlaylistDetailViewController._onPlaylistMutationFinished(self, success, action, playlistId)  line 204
+    names: str, strip, _item_id, _playlist_manager, refreshCollectionAfterMutation, reload
+      str: '\n        歌单写操作完成后的详情页刷新回调。\n\n        :param success: 是否成功。\n        :param action: 操作类型。\n        :param playlistId: 本次写操作的目标歌单 ID。\n        :return: None。\n        '
+      str: 'delete'
+      str: 'update'
+      str: 'batch_add'
+      str: 'add'
+      str: 'remove'

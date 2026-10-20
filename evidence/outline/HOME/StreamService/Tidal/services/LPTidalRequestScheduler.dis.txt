@@ -1,0 +1,1719 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL 异步请求调度器。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (queue)
+             10 STORE_NAME               1 (queue)
+
+  7          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (threading)
+             18 STORE_NAME               2 (threading)
+
+  8          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (logging)
+             26 STORE_NAME               3 (logging)
+
+  9          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (time)
+             34 STORE_NAME               4 (time)
+
+ 10          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               3 (('dataclass', 'field'))
+             40 IMPORT_NAME              5 (dataclasses)
+             42 IMPORT_FROM              6 (dataclass)
+             44 STORE_NAME               6 (dataclass)
+             46 IMPORT_FROM              7 (field)
+             48 STORE_NAME               7 (field)
+             50 POP_TOP
+
+ 11          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               4 (('count',))
+             56 IMPORT_NAME              8 (itertools)
+             58 IMPORT_FROM              9 (count)
+             60 STORE_NAME               9 (count)
+             62 POP_TOP
+
+ 12          64 LOAD_CONST               1 (0)
+             66 LOAD_CONST               5 (('Any', 'Callable', 'Dict', 'List', 'Optional'))
+             68 IMPORT_NAME             10 (typing)
+             70 IMPORT_FROM             11 (Any)
+             72 STORE_NAME              11 (Any)
+             74 IMPORT_FROM             12 (Callable)
+             76 STORE_NAME              12 (Callable)
+             78 IMPORT_FROM             13 (Dict)
+             80 STORE_NAME              13 (Dict)
+             82 IMPORT_FROM             14 (List)
+             84 STORE_NAME              14 (List)
+             86 IMPORT_FROM             15 (Optional)
+             88 STORE_NAME              15 (Optional)
+             90 POP_TOP
+
+ 14          92 LOAD_CONST               1 (0)
+             94 LOAD_CONST               6 (('QObject', 'pyqtSignal', 'pyqtSlot'))
+             96 IMPORT_NAME             16 (PyQt6.QtCore)
+             98 IMPORT_FROM             17 (QObject)
+            100 STORE_NAME              17 (QObject)
+            102 IMPORT_FROM             18 (pyqtSignal)
+            104 STORE_NAME              18 (pyqtSignal)
+            106 IMPORT_FROM             19 (pyqtSlot)
+            108 STORE_NAME              19 (pyqtSlot)
+            110 POP_TOP
+
+ 16         112 LOAD_NAME                3 (logging)
+            114 LOAD_METHOD             20 (getLogger)
+            116 LOAD_CONST               7 ('linkplay')
+            118 CALL_METHOD              1
+            120 STORE_NAME              21 (logger)
+
+ 19         122 LOAD_NAME                6 (dataclass)
+
+ 20         124 LOAD_BUILD_CLASS
+            126 LOAD_CONST               8 (<code object LPTidalRequest at 0x000001F3253C4EA0, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 19>)
+            128 LOAD_CONST               9 ('LPTidalRequest')
+            130 MAKE_FUNCTION            0
+            132 LOAD_CONST               9 ('LPTidalRequest')
+            134 CALL_FUNCTION            2
+            136 CALL_FUNCTION            1
+            138 STORE_NAME              22 (LPTidalRequest)
+
+ 29         140 LOAD_NAME                6 (dataclass)
+
+ 30         142 LOAD_BUILD_CLASS
+            144 LOAD_CONST              10 (<code object _ScheduledJob at 0x000001F3253C4A80, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 29>)
+            146 LOAD_CONST              11 ('_ScheduledJob')
+            148 MAKE_FUNCTION            0
+            150 LOAD_CONST              11 ('_ScheduledJob')
+            152 CALL_FUNCTION            2
+            154 CALL_FUNCTION            1
+            156 STORE_NAME              23 (_ScheduledJob)
+
+ 41         158 LOAD_BUILD_CLASS
+            160 LOAD_CONST              12 (<code object LPTidalRequestScheduler at 0x000001F3253C43A0, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 41>)
+            162 LOAD_CONST              13 ('LPTidalRequestScheduler')
+            164 MAKE_FUNCTION            0
+            166 LOAD_CONST              13 ('LPTidalRequestScheduler')
+            168 LOAD_NAME               17 (QObject)
+            170 CALL_FUNCTION            3
+            172 STORE_NAME              24 (LPTidalRequestScheduler)
+            174 LOAD_CONST               2 (None)
+            176 RETURN_VALUE
+
+=== LPTidalRequest ===
+ 19           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalRequest')
+              6 STORE_NAME               2 (__qualname__)
+              8 SETUP_ANNOTATIONS
+
+ 21          10 LOAD_CONST               1 ('TIDAL 调度请求对象。')
+             12 STORE_NAME               3 (__doc__)
+
+ 23          14 LOAD_NAME                4 (str)
+             16 LOAD_NAME                5 (__annotations__)
+             18 LOAD_CONST               2 ('key')
+             20 STORE_SUBSCR
+
+ 24          22 LOAD_NAME                6 (Callable)
+             24 BUILD_LIST               0
+             26 LOAD_NAME                7 (Any)
+             28 BUILD_TUPLE              2
+             30 BINARY_SUBSCR
+             32 LOAD_NAME                5 (__annotations__)
+             34 LOAD_CONST               3 ('task')
+             36 STORE_SUBSCR
+
+ 25          38 LOAD_CONST               4 (None)
+             40 STORE_NAME               8 (callback)
+             42 LOAD_NAME                9 (Optional)
+             44 LOAD_NAME                6 (Callable)
+             46 LOAD_NAME                7 (Any)
+             48 BUILD_LIST               1
+             50 LOAD_CONST               4 (None)
+             52 BUILD_TUPLE              2
+             54 BINARY_SUBSCR
+             56 BINARY_SUBSCR
+             58 LOAD_NAME                5 (__annotations__)
+             60 LOAD_CONST               5 ('callback')
+             62 STORE_SUBSCR
+
+ 26          64 LOAD_CONST               6 ('')
+             66 STORE_NAME              10 (tag)
+             68 LOAD_NAME                4 (str)
+             70 LOAD_NAME                5 (__annotations__)
+             72 LOAD_CONST               7 ('tag')
+             74 STORE_SUBSCR
+             76 LOAD_CONST               4 (None)
+             78 RETURN_VALUE
+
+=== _ScheduledJob ===
+ 29           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('_ScheduledJob')
+              6 STORE_NAME               2 (__qualname__)
+              8 SETUP_ANNOTATIONS
+
+ 31          10 LOAD_CONST               1 ('内部排队任务对象。')
+             12 STORE_NAME               3 (__doc__)
+
+ 33          14 LOAD_NAME                4 (LPTidalRequest)
+             16 LOAD_NAME                5 (__annotations__)
+             18 LOAD_CONST               2 ('request')
+             20 STORE_SUBSCR
+
+ 34          22 LOAD_NAME                6 (int)
+             24 LOAD_NAME                5 (__annotations__)
+             26 LOAD_CONST               3 ('priority')
+             28 STORE_SUBSCR
+
+ 35          30 LOAD_CONST               4 (0)
+             32 STORE_NAME               7 (generation)
+             34 LOAD_NAME                6 (int)
+             36 LOAD_NAME                5 (__annotations__)
+             38 LOAD_CONST               5 ('generation')
+             40 STORE_SUBSCR
+
+ 36          42 LOAD_CONST               6 (False)
+             44 STORE_NAME               8 (started)
+             46 LOAD_NAME                9 (bool)
+             48 LOAD_NAME                5 (__annotations__)
+             50 LOAD_CONST               7 ('started')
+             52 STORE_SUBSCR
+
+ 37          54 LOAD_NAME               10 (field)
+             56 LOAD_NAME               11 (list)
+             58 LOAD_CONST               8 (('default_factory',))
+             60 CALL_FUNCTION_KW         1
+             62 STORE_NAME              12 (callbacks)
+             64 LOAD_NAME               13 (List)
+             66 LOAD_NAME               14 (Callable)
+             68 LOAD_NAME               15 (Any)
+             70 BUILD_LIST               1
+             72 LOAD_CONST               9 (None)
+             74 BUILD_TUPLE              2
+             76 BINARY_SUBSCR
+             78 BINARY_SUBSCR
+             80 LOAD_NAME                5 (__annotations__)
+             82 LOAD_CONST              10 ('callbacks')
+             84 STORE_SUBSCR
+
+ 38          86 LOAD_NAME               10 (field)
+             88 LOAD_NAME               16 (time)
+             90 LOAD_ATTR               17 (monotonic)
+             92 LOAD_CONST               8 (('default_factory',))
+             94 CALL_FUNCTION_KW         1
+             96 STORE_NAME              18 (enqueuedAt)
+             98 LOAD_NAME               19 (float)
+            100 LOAD_NAME                5 (__annotations__)
+            102 LOAD_CONST              11 ('enqueuedAt')
+            104 STORE_SUBSCR
+            106 LOAD_CONST               9 (None)
+            108 RETURN_VALUE
+
+=== LPTidalRequestScheduler ===
+ 41           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalRequestScheduler')
+              6 STORE_NAME               2 (__qualname__)
+
+ 42           8 LOAD_CONST               1 ('优先级异步请求调度器，支持入队、取消和并发控制。')
+             10 STORE_NAME               3 (__doc__)
+
+ 44          12 LOAD_NAME                4 (pyqtSignal)
+             14 LOAD_NAME                5 (str)
+             16 LOAD_NAME                6 (object)
+             18 CALL_FUNCTION            2
+             20 STORE_NAME               7 (_deliveryReady)
+
+ 45          22 LOAD_CONST               2 ('__tidal_scheduler_stop__')
+             24 STORE_NAME               8 (_STOP_JOB_KEY)
+
+ 46          26 LOAD_CONST               3 (16)
+             28 STORE_NAME               9 (MAIN_THREAD_WARN_MS)
+
+ 48          30 LOAD_CONST              37 ((None, 3))
+             32 LOAD_NAME               10 (Optional)
+             34 LOAD_NAME               11 (QObject)
+             36 BINARY_SUBSCR
+             38 LOAD_NAME               12 (int)
+             40 LOAD_CONST               6 (('parent', 'maxWorkers'))
+             42 BUILD_CONST_KEY_MAP      2
+             44 LOAD_CLOSURE             0 (__class__)
+             46 BUILD_TUPLE              1
+             48 LOAD_CONST               7 (<code object __init__ at 0x000001F3253C4B30, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 48>)
+             50 LOAD_CONST               8 ('LPTidalRequestScheduler.__init__')
+             52 MAKE_FUNCTION           13 (defaults, annotations, closure)
+             54 STORE_NAME              13 (__init__)
+
+ 69          56 LOAD_NAME               14 (property)
+
+ 70          58 LOAD_NAME               15 (bool)
+             60 LOAD_CONST               9 (('return',))
+             62 BUILD_CONST_KEY_MAP      1
+             64 LOAD_CONST              10 (<code object isShutdown at 0x000001F3253C4660, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 69>)
+             66 LOAD_CONST              11 ('LPTidalRequestScheduler.isShutdown')
+             68 MAKE_FUNCTION            4 (annotations)
+             70 CALL_FUNCTION            1
+             72 STORE_NAME              16 (isShutdown)
+
+ 78          74 LOAD_CONST               4 (None)
+             76 LOAD_CONST               9 (('return',))
+             78 BUILD_CONST_KEY_MAP      1
+             80 LOAD_CONST              12 (<code object _start_workers at 0x000001F3253C4BE0, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 78>)
+             82 LOAD_CONST              13 ('LPTidalRequestScheduler._start_workers')
+             84 MAKE_FUNCTION            4 (annotations)
+             86 STORE_NAME              17 (_start_workers)
+
+ 91          88 LOAD_CONST              38 ((False, 0.2))
+             90 LOAD_NAME               15 (bool)
+             92 LOAD_NAME               18 (float)
+             94 LOAD_CONST               4 (None)
+             96 LOAD_CONST              16 (('wait', 'timeout', 'return'))
+             98 BUILD_CONST_KEY_MAP      3
+            100 LOAD_CONST              17 (<code object shutdown at 0x000001F3253C4190, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 91>)
+            102 LOAD_CONST              18 ('LPTidalRequestScheduler.shutdown')
+            104 MAKE_FUNCTION            5 (defaults, annotations)
+            106 STORE_NAME              19 (shutdown)
+
+121         108 LOAD_CONST              39 ((0,))
+            110 LOAD_NAME               20 (LPTidalRequest)
+            112 LOAD_NAME               12 (int)
+            114 LOAD_CONST               4 (None)
+            116 LOAD_CONST              20 (('request', 'priority', 'return'))
+            118 BUILD_CONST_KEY_MAP      3
+            120 LOAD_CONST              21 (<code object enqueue at 0x000001F3253C4710, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 121>)
+            122 LOAD_CONST              22 ('LPTidalRequestScheduler.enqueue')
+            124 MAKE_FUNCTION            5 (defaults, annotations)
+            126 STORE_NAME              21 (enqueue)
+
+155         128 LOAD_NAME                5 (str)
+            130 LOAD_CONST               4 (None)
+            132 LOAD_CONST              23 (('tag', 'return'))
+            134 BUILD_CONST_KEY_MAP      2
+            136 LOAD_CONST              24 (<code object cancelByTag at 0x000001F3253C45B0, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 155>)
+            138 LOAD_CONST              25 ('LPTidalRequestScheduler.cancelByTag')
+            140 MAKE_FUNCTION            4 (annotations)
+            142 STORE_NAME              22 (cancelByTag)
+
+176         144 LOAD_NAME               12 (int)
+            146 LOAD_CONST               4 (None)
+            148 LOAD_CONST              26 (('maxWorkers', 'return'))
+            150 BUILD_CONST_KEY_MAP      2
+            152 LOAD_CONST              27 (<code object setConcurrency at 0x000001F3253C4F50, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 176>)
+            154 LOAD_CONST              28 ('LPTidalRequestScheduler.setConcurrency')
+            156 MAKE_FUNCTION            4 (annotations)
+            158 STORE_NAME              23 (setConcurrency)
+
+192         160 LOAD_NAME               24 (_ScheduledJob)
+            162 LOAD_CONST               4 (None)
+            164 LOAD_CONST              29 (('job', 'return'))
+            166 BUILD_CONST_KEY_MAP      2
+            168 LOAD_CONST              30 (<code object _enqueue_locked at 0x000001F3253C4030, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 192>)
+            170 LOAD_CONST              31 ('LPTidalRequestScheduler._enqueue_locked')
+            172 MAKE_FUNCTION            4 (annotations)
+            174 STORE_NAME              25 (_enqueue_locked)
+
+201         176 LOAD_CONST               4 (None)
+            178 LOAD_CONST               9 (('return',))
+            180 BUILD_CONST_KEY_MAP      1
+            182 LOAD_CONST              32 (<code object _worker_loop at 0x000001F3253C4C90, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 201>)
+            184 LOAD_CONST              33 ('LPTidalRequestScheduler._worker_loop')
+            186 MAKE_FUNCTION            4 (annotations)
+            188 STORE_NAME              26 (_worker_loop)
+
+273         190 LOAD_NAME               27 (pyqtSlot)
+            192 LOAD_NAME                5 (str)
+            194 LOAD_NAME                6 (object)
+            196 CALL_FUNCTION            2
+
+274         198 LOAD_NAME                5 (str)
+            200 LOAD_NAME                6 (object)
+            202 LOAD_CONST               4 (None)
+            204 LOAD_CONST              34 (('jobKey', 'payloadBundle', 'return'))
+            206 BUILD_CONST_KEY_MAP      3
+            208 LOAD_CONST              35 (<code object _dispatchDelivery at 0x000001F3253C40E0, file "StreamService\Tidal\services\LPTidalRequestScheduler.py", line 273>)
+            210 LOAD_CONST              36 ('LPTidalRequestScheduler._dispatchDelivery')
+            212 MAKE_FUNCTION            4 (annotations)
+            214 CALL_FUNCTION            1
+            216 STORE_NAME              28 (_dispatchDelivery)
+            218 LOAD_CLOSURE             0 (__class__)
+            220 DUP_TOP
+            222 STORE_NAME              29 (__classcell__)
+            224 RETURN_VALUE
+
+=== LPTidalRequestScheduler.__init__ ===
+ 56           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 57          12 LOAD_GLOBAL              2 (threading)
+             14 LOAD_METHOD              3 (RLock)
+             16 CALL_METHOD              0
+             18 LOAD_FAST                0 (self)
+             20 STORE_ATTR               4 (_lock)
+
+ 58          22 LOAD_GLOBAL              5 (queue)
+             24 LOAD_METHOD              6 (PriorityQueue)
+             26 CALL_METHOD              0
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               7 (_queue)
+
+ 59          32 BUILD_MAP                0
+             34 LOAD_FAST                0 (self)
+             36 STORE_ATTR               8 (_jobs)
+
+ 60          38 BUILD_MAP                0
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               9 (_tag_map)
+
+ 61          44 LOAD_GLOBAL             10 (count)
+             46 CALL_FUNCTION            0
+             48 LOAD_FAST                0 (self)
+             50 STORE_ATTR              11 (_sequence)
+
+ 62          52 BUILD_LIST               0
+             54 LOAD_FAST                0 (self)
+             56 STORE_ATTR              12 (_workers)
+
+ 63          58 LOAD_GLOBAL             13 (max)
+             60 LOAD_CONST               1 (1)
+             62 LOAD_GLOBAL             14 (int)
+             64 LOAD_FAST                2 (maxWorkers)
+             66 CALL_FUNCTION            1
+             68 CALL_FUNCTION            2
+             70 LOAD_FAST                0 (self)
+             72 STORE_ATTR              15 (_max_workers)
+
+ 64          74 LOAD_CONST               2 (0)
+             76 LOAD_FAST                0 (self)
+             78 STORE_ATTR              16 (_active_jobs)
+
+ 65          80 LOAD_CONST               3 (False)
+             82 LOAD_FAST                0 (self)
+             84 STORE_ATTR              17 (_closed)
+
+ 66          86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR               18 (_deliveryReady)
+             90 LOAD_METHOD             19 (connect)
+             92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR               20 (_dispatchDelivery)
+             96 CALL_METHOD              1
+             98 POP_TOP
+
+ 67         100 LOAD_FAST                0 (self)
+            102 LOAD_METHOD             21 (_start_workers)
+            104 CALL_METHOD              0
+            106 POP_TOP
+            108 LOAD_CONST               4 (None)
+            110 RETURN_VALUE
+
+=== LPTidalRequestScheduler.isShutdown ===
+ 76           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_closed)
+              4 RETURN_VALUE
+
+=== LPTidalRequestScheduler._start_workers ===
+ 84           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_closed)
+              4 POP_JUMP_IF_FALSE       10
+
+ 85           6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+ 86     >>   10 LOAD_GLOBAL              1 (range)
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (_max_workers)
+             16 CALL_FUNCTION            1
+             18 GET_ITER
+        >>   20 FOR_ITER                48 (to 70)
+             22 STORE_FAST               1 (index)
+
+ 87          24 LOAD_GLOBAL              3 (threading)
+             26 LOAD_ATTR                4 (Thread)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                5 (_worker_loop)
+             32 LOAD_CONST               2 ('TidalScheduler-')
+             34 LOAD_FAST                1 (index)
+             36 FORMAT_VALUE             0
+             38 BUILD_STRING             2
+             40 LOAD_CONST               3 (True)
+             42 LOAD_CONST               4 (('target', 'name', 'daemon'))
+             44 CALL_FUNCTION_KW         3
+             46 STORE_FAST               2 (worker)
+
+ 88          48 LOAD_FAST                2 (worker)
+             50 LOAD_METHOD              6 (start)
+             52 CALL_METHOD              0
+             54 POP_TOP
+
+ 89          56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                7 (_workers)
+             60 LOAD_METHOD              8 (append)
+             62 LOAD_FAST                2 (worker)
+             64 CALL_METHOD              1
+             66 POP_TOP
+             68 JUMP_ABSOLUTE           20
+        >>   70 LOAD_CONST               1 (None)
+             72 RETURN_VALUE
+
+=== LPTidalRequestScheduler.shutdown ===
+ 99           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              80 (to 86)
+              6 POP_TOP
+
+100           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_closed)
+             12 POP_JUMP_IF_FALSE       30
+
+101          14 POP_BLOCK
+             16 LOAD_CONST               1 (None)
+             18 DUP_TOP
+             20 DUP_TOP
+             22 CALL_FUNCTION            3
+             24 POP_TOP
+             26 LOAD_CONST               1 (None)
+             28 RETURN_VALUE
+
+102     >>   30 LOAD_CONST               2 (True)
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               1 (_closed)
+
+103          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                2 (_jobs)
+             40 LOAD_METHOD              3 (clear)
+             42 CALL_METHOD              0
+             44 POP_TOP
+
+104          46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                4 (_tag_map)
+             50 LOAD_METHOD              3 (clear)
+             52 CALL_METHOD              0
+             54 POP_TOP
+
+105          56 LOAD_GLOBAL              5 (list)
+             58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                6 (_workers)
+             62 CALL_FUNCTION            1
+             64 STORE_FAST               3 (workers)
+
+106          66 BUILD_LIST               0
+             68 LOAD_FAST                0 (self)
+             70 STORE_ATTR               6 (_workers)
+             72 POP_BLOCK
+             74 LOAD_CONST               1 (None)
+             76 DUP_TOP
+             78 DUP_TOP
+             80 CALL_FUNCTION            3
+             82 POP_TOP
+             84 JUMP_FORWARD            16 (to 102)
+        >>   86 WITH_EXCEPT_START
+             88 POP_JUMP_IF_TRUE        92
+             90 RERAISE
+        >>   92 POP_TOP
+             94 POP_TOP
+             96 POP_TOP
+             98 POP_EXCEPT
+            100 POP_TOP
+
+108     >>  102 LOAD_FAST                3 (workers)
+            104 GET_ITER
+        >>  106 FOR_ITER                32 (to 140)
+            108 STORE_FAST               4 (_)
+
+109         110 LOAD_FAST                0 (self)
+            112 LOAD_ATTR                7 (_queue)
+            114 LOAD_METHOD              8 (put)
+            116 LOAD_CONST               3 (-1000000000)
+            118 LOAD_GLOBAL              9 (next)
+            120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR               10 (_sequence)
+            124 CALL_FUNCTION            1
+            126 LOAD_FAST                0 (self)
+            128 LOAD_ATTR               11 (_STOP_JOB_KEY)
+            130 LOAD_CONST               4 (-1)
+            132 BUILD_TUPLE              4
+            134 CALL_METHOD              1
+            136 POP_TOP
+            138 JUMP_ABSOLUTE          106
+
+111     >>  140 LOAD_FAST                1 (wait)
+            142 POP_JUMP_IF_TRUE       148
+
+112         144 LOAD_CONST               1 (None)
+            146 RETURN_VALUE
+
+114     >>  148 LOAD_GLOBAL             12 (threading)
+            150 LOAD_METHOD             13 (current_thread)
+            152 CALL_METHOD              0
+            154 STORE_FAST               5 (current_thread)
+
+115         156 LOAD_GLOBAL             14 (max)
+            158 LOAD_CONST               5 (0.0)
+            160 LOAD_GLOBAL             15 (float)
+            162 LOAD_FAST                2 (timeout)
+            164 CALL_FUNCTION            1
+            166 CALL_FUNCTION            2
+            168 STORE_FAST               6 (join_timeout)
+
+116         170 LOAD_FAST                3 (workers)
+            172 GET_ITER
+        >>  174 FOR_ITER                24 (to 200)
+            176 STORE_FAST               7 (worker)
+
+117         178 LOAD_FAST                7 (worker)
+            180 LOAD_FAST                5 (current_thread)
+            182 IS_OP                    0
+            184 POP_JUMP_IF_FALSE      188
+
+118         186 JUMP_ABSOLUTE          174
+
+119     >>  188 LOAD_FAST                7 (worker)
+            190 LOAD_METHOD             16 (join)
+            192 LOAD_FAST                6 (join_timeout)
+            194 CALL_METHOD              1
+            196 POP_TOP
+            198 JUMP_ABSOLUTE          174
+        >>  200 LOAD_CONST               1 (None)
+            202 RETURN_VALUE
+
+=== LPTidalRequestScheduler.enqueue ===
+129           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (request)
+              4 LOAD_GLOBAL              1 (LPTidalRequest)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+130          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+131     >>   14 LOAD_GLOBAL              2 (str)
+             16 LOAD_FAST                1 (request)
+             18 LOAD_ATTR                3 (key)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               2 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              4 (strip)
+             28 CALL_METHOD              0
+             30 STORE_FAST               3 (job_key)
+
+132          32 LOAD_FAST                3 (job_key)
+             34 POP_JUMP_IF_TRUE        40
+
+133          36 LOAD_CONST               1 (None)
+             38 RETURN_VALUE
+
+134     >>   40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                5 (_lock)
+             44 SETUP_WITH             242 (to 288)
+             46 POP_TOP
+
+135          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                6 (_closed)
+             52 POP_JUMP_IF_FALSE       70
+
+136          54 POP_BLOCK
+             56 LOAD_CONST               1 (None)
+             58 DUP_TOP
+             60 DUP_TOP
+             62 CALL_FUNCTION            3
+             64 POP_TOP
+             66 LOAD_CONST               1 (None)
+             68 RETURN_VALUE
+
+137     >>   70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR                7 (_jobs)
+             74 LOAD_METHOD              8 (get)
+             76 LOAD_FAST                3 (job_key)
+             78 CALL_METHOD              1
+             80 STORE_FAST               4 (job)
+
+138          82 LOAD_FAST                4 (job)
+             84 LOAD_CONST               1 (None)
+             86 IS_OP                    0
+             88 POP_JUMP_IF_FALSE      196
+
+139          90 LOAD_GLOBAL              9 (_ScheduledJob)
+             92 LOAD_FAST                1 (request)
+             94 LOAD_GLOBAL             10 (int)
+             96 LOAD_FAST                2 (priority)
+             98 CALL_FUNCTION            1
+            100 LOAD_CONST               3 (('request', 'priority'))
+            102 CALL_FUNCTION_KW         2
+            104 STORE_FAST               4 (job)
+
+140         106 LOAD_FAST                1 (request)
+            108 LOAD_ATTR               11 (callback)
+            110 LOAD_CONST               1 (None)
+            112 IS_OP                    1
+            114 POP_JUMP_IF_FALSE      130
+
+141         116 LOAD_FAST                4 (job)
+            118 LOAD_ATTR               12 (callbacks)
+            120 LOAD_METHOD             13 (append)
+            122 LOAD_FAST                1 (request)
+            124 LOAD_ATTR               11 (callback)
+            126 CALL_METHOD              1
+            128 POP_TOP
+
+142     >>  130 LOAD_FAST                4 (job)
+            132 LOAD_FAST                0 (self)
+            134 LOAD_ATTR                7 (_jobs)
+            136 LOAD_FAST                3 (job_key)
+            138 STORE_SUBSCR
+
+143         140 LOAD_FAST                1 (request)
+            142 LOAD_ATTR               14 (tag)
+            144 POP_JUMP_IF_FALSE      170
+
+144         146 LOAD_FAST                0 (self)
+            148 LOAD_ATTR               15 (_tag_map)
+            150 LOAD_METHOD             16 (setdefault)
+            152 LOAD_FAST                1 (request)
+            154 LOAD_ATTR               14 (tag)
+            156 LOAD_GLOBAL             17 (set)
+            158 CALL_FUNCTION            0
+            160 CALL_METHOD              2
+            162 LOAD_METHOD             18 (add)
+            164 LOAD_FAST                3 (job_key)
+            166 CALL_METHOD              1
+            168 POP_TOP
+
+145     >>  170 LOAD_FAST                0 (self)
+            172 LOAD_METHOD             19 (_enqueue_locked)
+            174 LOAD_FAST                4 (job)
+            176 CALL_METHOD              1
+            178 POP_TOP
+
+146         180 POP_BLOCK
+            182 LOAD_CONST               1 (None)
+            184 DUP_TOP
+            186 DUP_TOP
+            188 CALL_FUNCTION            3
+            190 POP_TOP
+            192 LOAD_CONST               1 (None)
+            194 RETURN_VALUE
+
+147     >>  196 LOAD_FAST                1 (request)
+            198 LOAD_ATTR               11 (callback)
+            200 LOAD_CONST               1 (None)
+            202 IS_OP                    1
+            204 POP_JUMP_IF_FALSE      216
+
+149         206 LOAD_FAST                1 (request)
+            208 LOAD_ATTR               11 (callback)
+            210 BUILD_LIST               1
+            212 LOAD_FAST                4 (job)
+            214 STORE_ATTR              12 (callbacks)
+
+150     >>  216 LOAD_GLOBAL             10 (int)
+            218 LOAD_FAST                2 (priority)
+            220 CALL_FUNCTION            1
+            222 LOAD_FAST                4 (job)
+            224 LOAD_ATTR               20 (priority)
+            226 COMPARE_OP               0 (<)
+            228 EXTENDED_ARG             1
+            230 POP_JUMP_IF_FALSE      274
+            232 LOAD_FAST                4 (job)
+            234 LOAD_ATTR               21 (started)
+            236 EXTENDED_ARG             1
+            238 POP_JUMP_IF_TRUE       274
+
+151         240 LOAD_GLOBAL             10 (int)
+            242 LOAD_FAST                2 (priority)
+            244 CALL_FUNCTION            1
+            246 LOAD_FAST                4 (job)
+            248 STORE_ATTR              20 (priority)
+
+152         250 LOAD_FAST                4 (job)
+            252 DUP_TOP
+            254 LOAD_ATTR               22 (generation)
+            256 LOAD_CONST               4 (1)
+            258 INPLACE_ADD
+            260 ROT_TWO
+            262 STORE_ATTR              22 (generation)
+
+153         264 LOAD_FAST                0 (self)
+            266 LOAD_METHOD             19 (_enqueue_locked)
+            268 LOAD_FAST                4 (job)
+            270 CALL_METHOD              1
+            272 POP_TOP
+        >>  274 POP_BLOCK
+            276 LOAD_CONST               1 (None)
+            278 DUP_TOP
+            280 DUP_TOP
+            282 CALL_FUNCTION            3
+            284 POP_TOP
+            286 JUMP_FORWARD            18 (to 306)
+        >>  288 WITH_EXCEPT_START
+            290 EXTENDED_ARG             1
+            292 POP_JUMP_IF_TRUE       296
+            294 RERAISE
+        >>  296 POP_TOP
+            298 POP_TOP
+            300 POP_TOP
+            302 POP_EXCEPT
+            304 POP_TOP
+        >>  306 LOAD_CONST               1 (None)
+            308 RETURN_VALUE
+
+=== LPTidalRequestScheduler.cancelByTag ===
+162           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (tag)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               2 (normalized)
+
+163          16 LOAD_FAST                2 (normalized)
+             18 POP_JUMP_IF_TRUE        24
+
+164          20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+165     >>   24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (_lock)
+             28 SETUP_WITH             120 (to 150)
+             30 POP_TOP
+
+166          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_closed)
+             36 POP_JUMP_IF_FALSE       54
+
+167          38 POP_BLOCK
+             40 LOAD_CONST               2 (None)
+             42 DUP_TOP
+             44 DUP_TOP
+             46 CALL_FUNCTION            3
+             48 POP_TOP
+             50 LOAD_CONST               2 (None)
+             52 RETURN_VALUE
+
+168     >>   54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                4 (_tag_map)
+             58 LOAD_METHOD              5 (pop)
+             60 LOAD_FAST                2 (normalized)
+             62 LOAD_GLOBAL              6 (set)
+             64 CALL_FUNCTION            0
+             66 CALL_METHOD              2
+             68 STORE_FAST               3 (job_keys)
+
+169          70 LOAD_FAST                3 (job_keys)
+             72 GET_ITER
+        >>   74 FOR_ITER                60 (to 136)
+             76 STORE_FAST               4 (job_key)
+
+170          78 LOAD_FAST                0 (self)
+             80 LOAD_ATTR                7 (_jobs)
+             82 LOAD_METHOD              8 (get)
+             84 LOAD_FAST                4 (job_key)
+             86 CALL_METHOD              1
+             88 STORE_FAST               5 (job)
+
+171          90 LOAD_FAST                5 (job)
+             92 LOAD_CONST               2 (None)
+             94 IS_OP                    0
+             96 POP_JUMP_IF_TRUE        74
+             98 LOAD_FAST                5 (job)
+            100 LOAD_ATTR                9 (started)
+            102 POP_JUMP_IF_FALSE      106
+
+172         104 JUMP_ABSOLUTE           74
+
+173     >>  106 LOAD_FAST                5 (job)
+            108 DUP_TOP
+            110 LOAD_ATTR               10 (generation)
+            112 LOAD_CONST               3 (1)
+            114 INPLACE_ADD
+            116 ROT_TWO
+            118 STORE_ATTR              10 (generation)
+
+174         120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR                7 (_jobs)
+            124 LOAD_METHOD              5 (pop)
+            126 LOAD_FAST                4 (job_key)
+            128 LOAD_CONST               2 (None)
+            130 CALL_METHOD              2
+            132 POP_TOP
+            134 JUMP_ABSOLUTE           74
+        >>  136 POP_BLOCK
+            138 LOAD_CONST               2 (None)
+            140 DUP_TOP
+            142 DUP_TOP
+            144 CALL_FUNCTION            3
+            146 POP_TOP
+            148 JUMP_FORWARD            16 (to 166)
+        >>  150 WITH_EXCEPT_START
+            152 POP_JUMP_IF_TRUE       156
+            154 RERAISE
+        >>  156 POP_TOP
+            158 POP_TOP
+            160 POP_TOP
+            162 POP_EXCEPT
+            164 POP_TOP
+        >>  166 LOAD_CONST               2 (None)
+            168 RETURN_VALUE
+
+=== LPTidalRequestScheduler.setConcurrency ===
+183           0 LOAD_GLOBAL              0 (max)
+              2 LOAD_CONST               1 (1)
+              4 LOAD_GLOBAL              1 (int)
+              6 LOAD_FAST                1 (maxWorkers)
+              8 CALL_FUNCTION            1
+             10 CALL_FUNCTION            2
+             12 STORE_FAST               2 (target)
+
+184          14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (_closed)
+             18 POP_JUMP_IF_FALSE       24
+
+185          20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+186     >>   24 LOAD_FAST                2 (target)
+             26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                3 (_max_workers)
+             30 COMPARE_OP               1 (<=)
+             32 POP_JUMP_IF_FALSE       44
+
+187          34 LOAD_FAST                2 (target)
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               3 (_max_workers)
+
+188          40 LOAD_CONST               2 (None)
+             42 RETURN_VALUE
+
+189     >>   44 LOAD_FAST                2 (target)
+             46 LOAD_FAST                0 (self)
+             48 STORE_ATTR               3 (_max_workers)
+
+190          50 LOAD_FAST                0 (self)
+             52 LOAD_METHOD              4 (_start_workers)
+             54 CALL_METHOD              0
+             56 POP_TOP
+             58 LOAD_CONST               2 (None)
+             60 RETURN_VALUE
+
+=== LPTidalRequestScheduler._enqueue_locked ===
+199           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_queue)
+              4 LOAD_METHOD              1 (put)
+              6 LOAD_FAST                1 (job)
+              8 LOAD_ATTR                2 (priority)
+             10 LOAD_GLOBAL              3 (next)
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                4 (_sequence)
+             16 CALL_FUNCTION            1
+             18 LOAD_FAST                1 (job)
+             20 LOAD_ATTR                5 (request)
+             22 LOAD_ATTR                6 (key)
+             24 LOAD_FAST                1 (job)
+             26 LOAD_ATTR                7 (generation)
+             28 BUILD_TUPLE              4
+             30 CALL_METHOD              1
+             32 POP_TOP
+             34 LOAD_CONST               1 (None)
+             36 RETURN_VALUE
+
+=== LPTidalRequestScheduler._worker_loop ===
+208     >>    0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_queue)
+              4 LOAD_METHOD              1 (get)
+              6 CALL_METHOD              0
+              8 UNPACK_SEQUENCE          4
+             10 STORE_FAST               1 (priority)
+             12 STORE_FAST               2 (_)
+             14 STORE_FAST               3 (job_key)
+             16 STORE_FAST               4 (generation)
+
+209          18 EXTENDED_ARG             2
+             20 SETUP_FINALLY          738 (to 760)
+
+210          22 LOAD_FAST                3 (job_key)
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (_STOP_JOB_KEY)
+             28 COMPARE_OP               2 (==)
+             30 POP_JUMP_IF_FALSE       48
+
+211          32 POP_BLOCK
+
+271          34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                0 (_queue)
+             38 LOAD_METHOD              3 (task_done)
+             40 CALL_METHOD              0
+             42 POP_TOP
+
+211          44 EXTENDED_ARG             3
+             46 JUMP_ABSOLUTE          774
+
+212     >>   48 LOAD_CONST               1 (None)
+             50 STORE_FAST               5 (job)
+
+213          52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                4 (_lock)
+             56 SETUP_WITH             242 (to 300)
+             58 POP_TOP
+
+214          60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                5 (_closed)
+             64 POP_JUMP_IF_FALSE       92
+
+215          66 POP_BLOCK
+             68 LOAD_CONST               1 (None)
+             70 DUP_TOP
+             72 DUP_TOP
+             74 CALL_FUNCTION            3
+             76 POP_TOP
+             78 POP_BLOCK
+
+271          80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                0 (_queue)
+             84 LOAD_METHOD              3 (task_done)
+             86 CALL_METHOD              0
+             88 POP_TOP
+
+215          90 JUMP_ABSOLUTE            0
+
+216     >>   92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR                6 (_jobs)
+             96 LOAD_METHOD              1 (get)
+             98 LOAD_FAST                3 (job_key)
+            100 CALL_METHOD              1
+            102 STORE_FAST               6 (current)
+
+217         104 LOAD_FAST                6 (current)
+            106 LOAD_CONST               1 (None)
+            108 IS_OP                    0
+            110 POP_JUMP_IF_FALSE      138
+
+218         112 POP_BLOCK
+            114 LOAD_CONST               1 (None)
+            116 DUP_TOP
+            118 DUP_TOP
+            120 CALL_FUNCTION            3
+            122 POP_TOP
+            124 POP_BLOCK
+
+271         126 LOAD_FAST                0 (self)
+            128 LOAD_ATTR                0 (_queue)
+            130 LOAD_METHOD              3 (task_done)
+            132 CALL_METHOD              0
+            134 POP_TOP
+
+218         136 JUMP_ABSOLUTE            0
+
+219     >>  138 LOAD_FAST                6 (current)
+            140 LOAD_ATTR                7 (started)
+            142 POP_JUMP_IF_FALSE      170
+
+220         144 POP_BLOCK
+            146 LOAD_CONST               1 (None)
+            148 DUP_TOP
+            150 DUP_TOP
+            152 CALL_FUNCTION            3
+            154 POP_TOP
+            156 POP_BLOCK
+
+271         158 LOAD_FAST                0 (self)
+            160 LOAD_ATTR                0 (_queue)
+            162 LOAD_METHOD              3 (task_done)
+            164 CALL_METHOD              0
+            166 POP_TOP
+
+220         168 JUMP_ABSOLUTE            0
+
+221     >>  170 LOAD_FAST                6 (current)
+            172 LOAD_ATTR                8 (generation)
+            174 LOAD_FAST                4 (generation)
+            176 COMPARE_OP               3 (!=)
+            178 POP_JUMP_IF_FALSE      206
+
+222         180 POP_BLOCK
+            182 LOAD_CONST               1 (None)
+            184 DUP_TOP
+            186 DUP_TOP
+            188 CALL_FUNCTION            3
+            190 POP_TOP
+            192 POP_BLOCK
+
+271         194 LOAD_FAST                0 (self)
+            196 LOAD_ATTR                0 (_queue)
+            198 LOAD_METHOD              3 (task_done)
+            200 CALL_METHOD              0
+            202 POP_TOP
+
+222         204 JUMP_ABSOLUTE            0
+
+223     >>  206 LOAD_FAST                6 (current)
+            208 LOAD_ATTR                9 (priority)
+            210 LOAD_GLOBAL             10 (int)
+            212 LOAD_FAST                1 (priority)
+            214 CALL_FUNCTION            1
+            216 COMPARE_OP               3 (!=)
+            218 POP_JUMP_IF_FALSE      246
+
+224         220 POP_BLOCK
+            222 LOAD_CONST               1 (None)
+            224 DUP_TOP
+            226 DUP_TOP
+            228 CALL_FUNCTION            3
+            230 POP_TOP
+            232 POP_BLOCK
+
+271         234 LOAD_FAST                0 (self)
+            236 LOAD_ATTR                0 (_queue)
+            238 LOAD_METHOD              3 (task_done)
+            240 CALL_METHOD              0
+            242 POP_TOP
+
+224         244 JUMP_ABSOLUTE            0
+
+225     >>  246 LOAD_CONST               2 (True)
+            248 LOAD_FAST                6 (current)
+            250 STORE_ATTR               7 (started)
+
+226         252 LOAD_FAST                0 (self)
+            254 DUP_TOP
+            256 LOAD_ATTR               11 (_active_jobs)
+            258 LOAD_CONST               3 (1)
+            260 INPLACE_ADD
+            262 ROT_TWO
+            264 STORE_ATTR              11 (_active_jobs)
+
+227         266 LOAD_FAST                0 (self)
+            268 LOAD_ATTR               11 (_active_jobs)
+            270 STORE_FAST               7 (active_at_start)
+
+228         272 LOAD_GLOBAL             12 (len)
+            274 LOAD_FAST                0 (self)
+            276 LOAD_ATTR                6 (_jobs)
+            278 CALL_FUNCTION            1
+            280 STORE_FAST               8 (pending_at_start)
+
+229         282 LOAD_FAST                6 (current)
+            284 STORE_FAST               5 (job)
+            286 POP_BLOCK
+            288 LOAD_CONST               1 (None)
+            290 DUP_TOP
+            292 DUP_TOP
+            294 CALL_FUNCTION            3
+            296 POP_TOP
+            298 JUMP_FORWARD            18 (to 318)
+        >>  300 WITH_EXCEPT_START
+            302 EXTENDED_ARG             1
+            304 POP_JUMP_IF_TRUE       308
+            306 RERAISE
+        >>  308 POP_TOP
+            310 POP_TOP
+            312 POP_TOP
+            314 POP_EXCEPT
+            316 POP_TOP
+
+230     >>  318 LOAD_FAST                5 (job)
+            320 LOAD_CONST               1 (None)
+            322 IS_OP                    0
+            324 EXTENDED_ARG             1
+            326 POP_JUMP_IF_FALSE      342
+
+231         328 POP_BLOCK
+
+271         330 LOAD_FAST                0 (self)
+            332 LOAD_ATTR                0 (_queue)
+            334 LOAD_METHOD              3 (task_done)
+            336 CALL_METHOD              0
+            338 POP_TOP
+
+231         340 JUMP_ABSOLUTE            0
+
+232     >>  342 LOAD_GLOBAL             13 (time)
+            344 LOAD_METHOD             14 (monotonic)
+            346 CALL_METHOD              0
+            348 STORE_FAST               9 (started_at)
+
+233         350 LOAD_GLOBAL             10 (int)
+            352 LOAD_FAST                9 (started_at)
+            354 LOAD_FAST                5 (job)
+            356 LOAD_ATTR               15 (enqueuedAt)
+            358 BINARY_SUBTRACT
+            360 LOAD_CONST               4 (1000)
+            362 BINARY_MULTIPLY
+            364 CALL_FUNCTION            1
+            366 STORE_FAST              10 (queue_wait_ms)
+
+234         368 LOAD_FAST                0 (self)
+            370 LOAD_ATTR                0 (_queue)
+            372 LOAD_METHOD             16 (qsize)
+            374 CALL_METHOD              0
+            376 STORE_FAST              11 (queue_depth_at_start)
+
+235         378 SETUP_FINALLY           14 (to 394)
+
+236         380 LOAD_FAST                5 (job)
+            382 LOAD_ATTR               17 (request)
+            384 LOAD_METHOD             18 (task)
+            386 CALL_METHOD              0
+            388 STORE_FAST              12 (payload)
+            390 POP_BLOCK
+            392 JUMP_FORWARD            64 (to 458)
+
+237     >>  394 DUP_TOP
+            396 LOAD_GLOBAL             19 (Exception)
+            398 EXTENDED_ARG             1
+            400 JUMP_IF_NOT_EXC_MATCH   456
+            402 POP_TOP
+            404 STORE_FAST              13 (exc)
+            406 POP_TOP
+            408 SETUP_FINALLY           38 (to 448)
+
+238         410 LOAD_GLOBAL             20 (logger)
+            412 LOAD_METHOD             21 (warning)
+            414 LOAD_CONST               5 ('[TidalScheduler] job=')
+            416 LOAD_FAST                3 (job_key)
+            418 FORMAT_VALUE             0
+            420 LOAD_CONST               6 (' failed: ')
+            422 LOAD_FAST               13 (exc)
+            424 FORMAT_VALUE             0
+            426 BUILD_STRING             4
+            428 CALL_METHOD              1
+            430 POP_TOP
+
+239         432 LOAD_FAST               13 (exc)
+            434 STORE_FAST              12 (payload)
+            436 POP_BLOCK
+            438 POP_EXCEPT
+            440 LOAD_CONST               1 (None)
+            442 STORE_FAST              13 (exc)
+            444 DELETE_FAST             13 (exc)
+            446 JUMP_FORWARD            10 (to 458)
+        >>  448 LOAD_CONST               1 (None)
+            450 STORE_FAST              13 (exc)
+            452 DELETE_FAST             13 (exc)
+            454 RERAISE
+        >>  456 RERAISE
+
+240     >>  458 LOAD_GLOBAL             13 (time)
+            460 LOAD_METHOD             14 (monotonic)
+            462 CALL_METHOD              0
+            464 STORE_FAST              14 (worker_finished_at)
+
+241         466 LOAD_GLOBAL             10 (int)
+            468 LOAD_FAST               14 (worker_finished_at)
+            470 LOAD_FAST                9 (started_at)
+            472 BINARY_SUBTRACT
+            474 LOAD_CONST               4 (1000)
+            476 BINARY_MULTIPLY
+            478 CALL_FUNCTION            1
+            480 STORE_FAST              15 (worker_elapsed_ms)
+
+242         482 BUILD_LIST               0
+            484 STORE_FAST              16 (callbacks)
+
+243         486 LOAD_FAST                0 (self)
+            488 LOAD_ATTR                4 (_lock)
+            490 SETUP_WITH             188 (to 680)
+            492 POP_TOP
+
+244         494 LOAD_GLOBAL             22 (max)
+            496 LOAD_CONST               7 (0)
+            498 LOAD_FAST                0 (self)
+            500 LOAD_ATTR               11 (_active_jobs)
+            502 LOAD_CONST               3 (1)
+            504 BINARY_SUBTRACT
+            506 CALL_FUNCTION            2
+            508 LOAD_FAST                0 (self)
+            510 STORE_ATTR              11 (_active_jobs)
+
+245         512 LOAD_FAST                0 (self)
+            514 LOAD_ATTR                5 (_closed)
+            516 EXTENDED_ARG             2
+            518 POP_JUMP_IF_FALSE      546
+
+246         520 POP_BLOCK
+            522 LOAD_CONST               1 (None)
+            524 DUP_TOP
+            526 DUP_TOP
+            528 CALL_FUNCTION            3
+            530 POP_TOP
+            532 POP_BLOCK
+
+271         534 LOAD_FAST                0 (self)
+            536 LOAD_ATTR                0 (_queue)
+            538 LOAD_METHOD              3 (task_done)
+            540 CALL_METHOD              0
+            542 POP_TOP
+
+246         544 JUMP_ABSOLUTE            0
+
+247     >>  546 LOAD_FAST                0 (self)
+            548 LOAD_ATTR                6 (_jobs)
+            550 LOAD_METHOD             23 (pop)
+            552 LOAD_FAST                3 (job_key)
+            554 LOAD_CONST               1 (None)
+            556 CALL_METHOD              2
+            558 STORE_FAST               6 (current)
+
+248         560 LOAD_FAST                6 (current)
+            562 LOAD_CONST               1 (None)
+            564 IS_OP                    1
+            566 EXTENDED_ARG             2
+            568 POP_JUMP_IF_FALSE      650
+
+249         570 LOAD_GLOBAL             24 (list)
+            572 LOAD_FAST                6 (current)
+            574 LOAD_ATTR               25 (callbacks)
+            576 CALL_FUNCTION            1
+            578 STORE_FAST              16 (callbacks)
+
+250         580 LOAD_FAST                6 (current)
+            582 LOAD_ATTR               17 (request)
+            584 LOAD_ATTR               26 (tag)
+            586 EXTENDED_ARG             2
+            588 POP_JUMP_IF_FALSE      650
+
+251         590 LOAD_FAST                0 (self)
+            592 LOAD_ATTR               27 (_tag_map)
+            594 LOAD_METHOD              1 (get)
+            596 LOAD_FAST                6 (current)
+            598 LOAD_ATTR               17 (request)
+            600 LOAD_ATTR               26 (tag)
+            602 CALL_METHOD              1
+            604 STORE_FAST              17 (tag_jobs)
+
+252         606 LOAD_FAST               17 (tag_jobs)
+            608 LOAD_CONST               1 (None)
+            610 IS_OP                    1
+            612 EXTENDED_ARG             2
+            614 POP_JUMP_IF_FALSE      650
+
+253         616 LOAD_FAST               17 (tag_jobs)
+            618 LOAD_METHOD             28 (discard)
+            620 LOAD_FAST                3 (job_key)
+            622 CALL_METHOD              1
+            624 POP_TOP
+
+254         626 LOAD_FAST               17 (tag_jobs)
+            628 EXTENDED_ARG             2
+            630 POP_JUMP_IF_TRUE       650
+
+255         632 LOAD_FAST                0 (self)
+            634 LOAD_ATTR               27 (_tag_map)
+            636 LOAD_METHOD             23 (pop)
+            638 LOAD_FAST                6 (current)
+            640 LOAD_ATTR               17 (request)
+            642 LOAD_ATTR               26 (tag)
+            644 LOAD_CONST               1 (None)
+            646 CALL_METHOD              2
+            648 POP_TOP
+
+256     >>  650 LOAD_GLOBAL             12 (len)
+            652 LOAD_FAST                0 (self)
+            654 LOAD_ATTR                6 (_jobs)
+            656 CALL_FUNCTION            1
+            658 STORE_FAST              18 (pending_at_finish)
+
+257         660 LOAD_FAST                0 (self)
+            662 LOAD_ATTR               11 (_active_jobs)
+            664 STORE_FAST              19 (active_at_finish)
+            666 POP_BLOCK
+            668 LOAD_CONST               1 (None)
+            670 DUP_TOP
+            672 DUP_TOP
+            674 CALL_FUNCTION            3
+            676 POP_TOP
+            678 JUMP_FORWARD            18 (to 698)
+        >>  680 WITH_EXCEPT_START
+            682 EXTENDED_ARG             2
+            684 POP_JUMP_IF_TRUE       688
+            686 RERAISE
+        >>  688 POP_TOP
+            690 POP_TOP
+            692 POP_TOP
+            694 POP_EXCEPT
+            696 POP_TOP
+
+258     >>  698 LOAD_FAST               16 (callbacks)
+            700 EXTENDED_ARG             2
+            702 POP_JUMP_IF_FALSE      746
+
+260         704 LOAD_FAST               14 (worker_finished_at)
+
+261         706 LOAD_FAST               10 (queue_wait_ms)
+
+262         708 LOAD_FAST               15 (worker_elapsed_ms)
+
+263         710 LOAD_FAST               11 (queue_depth_at_start)
+
+264         712 LOAD_FAST                8 (pending_at_start)
+
+265         714 LOAD_FAST               18 (pending_at_finish)
+
+266         716 LOAD_FAST                7 (active_at_start)
+
+267         718 LOAD_FAST               19 (active_at_finish)
+
+259         720 LOAD_CONST               8 (('workerFinishedAt', 'queueWaitMs', 'workerElapsedMs', 'queueDepthAtStart', 'pendingAtStart', 'pendingAtFinish', 'activeAtStart', 'activeAtFinish'))
+            722 BUILD_CONST_KEY_MAP      8
+            724 STORE_FAST              20 (metrics)
+
+269         726 LOAD_FAST                0 (self)
+            728 LOAD_ATTR               29 (_deliveryReady)
+            730 LOAD_METHOD             30 (emit)
+            732 LOAD_FAST                3 (job_key)
+            734 LOAD_FAST               16 (callbacks)
+            736 LOAD_FAST               12 (payload)
+            738 LOAD_FAST               20 (metrics)
+            740 BUILD_TUPLE              3
+            742 CALL_METHOD              2
+            744 POP_TOP
+        >>  746 POP_BLOCK
+
+271         748 LOAD_FAST                0 (self)
+            750 LOAD_ATTR                0 (_queue)
+            752 LOAD_METHOD              3 (task_done)
+            754 CALL_METHOD              0
+            756 POP_TOP
+            758 JUMP_ABSOLUTE            0
+        >>  760 LOAD_FAST                0 (self)
+            762 LOAD_ATTR                0 (_queue)
+            764 LOAD_METHOD              3 (task_done)
+            766 CALL_METHOD              0
+            768 POP_TOP
+            770 RERAISE
+            772 JUMP_ABSOLUTE            0
+        >>  774 LOAD_CONST               1 (None)
+            776 RETURN_VALUE
+
+=== LPTidalRequestScheduler._dispatchDelivery ===
+282           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_closed)
+              4 POP_JUMP_IF_FALSE       10
+
+283           6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+284     >>   10 BUILD_LIST               0
+             12 STORE_FAST               3 (callbacks)
+
+285          14 LOAD_CONST               1 (None)
+             16 STORE_FAST               4 (payload)
+
+286          18 BUILD_MAP                0
+             20 STORE_FAST               5 (metrics)
+
+287          22 LOAD_GLOBAL              1 (isinstance)
+             24 LOAD_FAST                2 (payloadBundle)
+             26 LOAD_GLOBAL              2 (tuple)
+             28 CALL_FUNCTION            2
+             30 POP_JUMP_IF_FALSE      108
+             32 LOAD_GLOBAL              3 (len)
+             34 LOAD_FAST                2 (payloadBundle)
+             36 CALL_FUNCTION            1
+             38 LOAD_CONST               2 (frozenset({2, 3}))
+             40 CONTAINS_OP              0
+             42 POP_JUMP_IF_FALSE      108
+
+288          44 LOAD_GLOBAL              1 (isinstance)
+             46 LOAD_FAST                2 (payloadBundle)
+             48 LOAD_CONST               3 (0)
+             50 BINARY_SUBSCR
+             52 LOAD_GLOBAL              4 (list)
+             54 CALL_FUNCTION            2
+             56 POP_JUMP_IF_FALSE       66
+
+289          58 LOAD_FAST                2 (payloadBundle)
+             60 LOAD_CONST               3 (0)
+             62 BINARY_SUBSCR
+             64 STORE_FAST               3 (callbacks)
+
+290     >>   66 LOAD_FAST                2 (payloadBundle)
+             68 LOAD_CONST               4 (1)
+             70 BINARY_SUBSCR
+             72 STORE_FAST               4 (payload)
+
+291          74 LOAD_GLOBAL              3 (len)
+             76 LOAD_FAST                2 (payloadBundle)
+             78 CALL_FUNCTION            1
+             80 LOAD_CONST               5 (3)
+             82 COMPARE_OP               2 (==)
+             84 POP_JUMP_IF_FALSE      108
+             86 LOAD_GLOBAL              1 (isinstance)
+             88 LOAD_FAST                2 (payloadBundle)
+             90 LOAD_CONST               6 (2)
+             92 BINARY_SUBSCR
+             94 LOAD_GLOBAL              5 (dict)
+             96 CALL_FUNCTION            2
+             98 POP_JUMP_IF_FALSE      108
+
+292         100 LOAD_FAST                2 (payloadBundle)
+            102 LOAD_CONST               6 (2)
+            104 BINARY_SUBSCR
+            106 STORE_FAST               5 (metrics)
+
+293     >>  108 LOAD_GLOBAL              6 (time)
+            110 LOAD_METHOD              7 (monotonic)
+            112 CALL_METHOD              0
+            114 STORE_FAST               6 (dispatch_started_at)
+
+294         116 LOAD_GLOBAL              8 (float)
+            118 LOAD_FAST                5 (metrics)
+            120 LOAD_METHOD              9 (get)
+            122 LOAD_CONST               7 ('workerFinishedAt')
+            124 LOAD_FAST                6 (dispatch_started_at)
+            126 CALL_METHOD              2
+            128 JUMP_IF_TRUE_OR_POP    132
+            130 LOAD_FAST                6 (dispatch_started_at)
+        >>  132 CALL_FUNCTION            1
+            134 STORE_FAST               7 (worker_finished_at)
+
+295         136 LOAD_GLOBAL             10 (int)
+            138 LOAD_GLOBAL             11 (max)
+            140 LOAD_CONST               8 (0.0)
+            142 LOAD_FAST                6 (dispatch_started_at)
+            144 LOAD_FAST                7 (worker_finished_at)
+            146 BINARY_SUBTRACT
+            148 CALL_FUNCTION            2
+            150 LOAD_CONST               9 (1000)
+            152 BINARY_MULTIPLY
+            154 CALL_FUNCTION            1
+            156 STORE_FAST               8 (delivery_wait_ms)
+
+296         158 BUILD_LIST               0
+            160 STORE_FAST               9 (callback_elapsed_values)
+
+297         162 LOAD_FAST                3 (callbacks)
+            164 GET_ITER
+        >>  166 FOR_ITER               156 (to 324)
+            168 STORE_FAST              10 (callback)
+
+298         170 LOAD_GLOBAL             12 (callable)
+            172 LOAD_FAST               10 (callback)
+            174 CALL_FUNCTION            1
+            176 POP_JUMP_IF_TRUE       180
+
+299         178 JUMP_ABSOLUTE          166
+
+300     >>  180 LOAD_GLOBAL              6 (time)
+            182 LOAD_METHOD              7 (monotonic)
+            184 CALL_METHOD              0
+            186 STORE_FAST              11 (callback_started_at)
+
+301         188 SETUP_FINALLY          104 (to 294)
+            190 SETUP_FINALLY           12 (to 204)
+
+302         192 LOAD_FAST               10 (callback)
+            194 LOAD_FAST                4 (payload)
+            196 CALL_FUNCTION            1
+            198 POP_TOP
+            200 POP_BLOCK
+            202 JUMP_FORWARD            60 (to 264)
+
+303     >>  204 DUP_TOP
+            206 LOAD_GLOBAL             13 (Exception)
+            208 EXTENDED_ARG             1
+            210 JUMP_IF_NOT_EXC_MATCH   262
+            212 POP_TOP
+            214 STORE_FAST              12 (exc)
+            216 POP_TOP
+            218 SETUP_FINALLY           34 (to 254)
+
+304         220 LOAD_GLOBAL             14 (logger)
+            222 LOAD_METHOD             15 (warning)
+            224 LOAD_CONST              10 ('[TidalScheduler] delivery failed job=')
+            226 LOAD_FAST                1 (jobKey)
+            228 FORMAT_VALUE             0
+            230 LOAD_CONST              11 (', error=')
+            232 LOAD_FAST               12 (exc)
+            234 FORMAT_VALUE             0
+            236 BUILD_STRING             4
+            238 CALL_METHOD              1
+            240 POP_TOP
+            242 POP_BLOCK
+            244 POP_EXCEPT
+            246 LOAD_CONST               1 (None)
+            248 STORE_FAST              12 (exc)
+            250 DELETE_FAST             12 (exc)
+            252 JUMP_FORWARD            10 (to 264)
+        >>  254 LOAD_CONST               1 (None)
+            256 STORE_FAST              12 (exc)
+            258 DELETE_FAST             12 (exc)
+            260 RERAISE
+        >>  262 RERAISE
+        >>  264 POP_BLOCK
+
+306         266 LOAD_FAST                9 (callback_elapsed_values)
+            268 LOAD_METHOD             16 (append)
+            270 LOAD_GLOBAL             10 (int)
+            272 LOAD_GLOBAL              6 (time)
+            274 LOAD_METHOD              7 (monotonic)
+            276 CALL_METHOD              0
+            278 LOAD_FAST               11 (callback_started_at)
+            280 BINARY_SUBTRACT
+            282 LOAD_CONST               9 (1000)
+            284 BINARY_MULTIPLY
+            286 CALL_FUNCTION            1
+            288 CALL_METHOD              1
+            290 POP_TOP
+            292 JUMP_ABSOLUTE          166
+        >>  294 LOAD_FAST                9 (callback_elapsed_values)
+            296 LOAD_METHOD             16 (append)
+            298 LOAD_GLOBAL             10 (int)
+            300 LOAD_GLOBAL              6 (time)
+            302 LOAD_METHOD              7 (monotonic)
+            304 CALL_METHOD              0
+            306 LOAD_FAST               11 (callback_started_at)
+            308 BINARY_SUBTRACT
+            310 LOAD_CONST               9 (1000)
+            312 BINARY_MULTIPLY
+            314 CALL_FUNCTION            1
+            316 CALL_METHOD              1
+            318 POP_TOP
+            320 RERAISE
+            322 JUMP_ABSOLUTE          166
+
+307     >>  324 LOAD_GLOBAL             10 (int)
+            326 LOAD_GLOBAL              6 (time)
+            328 LOAD_METHOD              7 (monotonic)
+            330 CALL_METHOD              0
+            332 LOAD_FAST                6 (dispatch_started_at)
+            334 BINARY_SUBTRACT
+            336 LOAD_CONST               9 (1000)
+            338 BINARY_MULTIPLY
+            340 CALL_FUNCTION            1
+            342 STORE_FAST              13 (dispatch_elapsed_ms)
+
+308         344 LOAD_GLOBAL             11 (max)
+            346 LOAD_FAST                9 (callback_elapsed_values)
+            348 LOAD_CONST               3 (0)
+            350 LOAD_CONST              12 (('default',))
+            352 CALL_FUNCTION_KW         2
+            354 STORE_FAST              14 (callback_max_ms)
+
+309         356 LOAD_GLOBAL             11 (max)
+            358 LOAD_FAST                8 (delivery_wait_ms)
+            360 LOAD_FAST               13 (dispatch_elapsed_ms)
+            362 LOAD_FAST               14 (callback_max_ms)
+            364 CALL_FUNCTION            3
+            366 LOAD_FAST                0 (self)
+            368 LOAD_ATTR               17 (MAIN_THREAD_WARN_MS)
+            370 COMPARE_OP               5 (>=)
+            372 EXTENDED_ARG             1
+            374 POP_JUMP_IF_FALSE      382
+            376 LOAD_GLOBAL             14 (logger)
+            378 LOAD_ATTR               15 (warning)
+            380 JUMP_FORWARD             4 (to 386)
+        >>  382 LOAD_GLOBAL             14 (logger)
+            384 LOAD_ATTR               18 (debug)
+        >>  386 STORE_FAST              15 (log_method)
+
+310         388 LOAD_FAST               15 (log_method)
+
+311         390 LOAD_CONST              13 ('[TidalScheduler][Perf] job=%s queue_wait_ms=%s worker_ms=%s delivery_wait_ms=%s callback_ms=%s callback_max_ms=%s callback_count=%s queue_depth=%s pending_start=%s pending_finish=%s active_start=%s active_finish=%s')
+
+312         392 LOAD_GLOBAL             19 (str)
+            394 LOAD_FAST                1 (jobKey)
+            396 EXTENDED_ARG             1
+            398 JUMP_IF_TRUE_OR_POP    402
+            400 LOAD_CONST              14 ('')
+        >>  402 CALL_FUNCTION            1
+
+313         404 LOAD_GLOBAL             10 (int)
+            406 LOAD_FAST                5 (metrics)
+            408 LOAD_METHOD              9 (get)
+            410 LOAD_CONST              15 ('queueWaitMs')
+            412 LOAD_CONST               3 (0)
+            414 CALL_METHOD              2
+            416 EXTENDED_ARG             1
+            418 JUMP_IF_TRUE_OR_POP    422
+            420 LOAD_CONST               3 (0)
+        >>  422 CALL_FUNCTION            1
+
+314         424 LOAD_GLOBAL             10 (int)
+            426 LOAD_FAST                5 (metrics)
+            428 LOAD_METHOD              9 (get)
+            430 LOAD_CONST              16 ('workerElapsedMs')
+            432 LOAD_CONST               3 (0)
+            434 CALL_METHOD              2
+            436 EXTENDED_ARG             1
+            438 JUMP_IF_TRUE_OR_POP    442
+            440 LOAD_CONST               3 (0)
+        >>  442 CALL_FUNCTION            1
+
+315         444 LOAD_FAST                8 (delivery_wait_ms)
+
+316         446 LOAD_FAST               13 (dispatch_elapsed_ms)
+
+317         448 LOAD_FAST               14 (callback_max_ms)
+
+318         450 LOAD_GLOBAL              3 (len)
+            452 LOAD_FAST                9 (callback_elapsed_values)
+            454 CALL_FUNCTION            1
+
+319         456 LOAD_GLOBAL             10 (int)
+            458 LOAD_FAST                5 (metrics)
+            460 LOAD_METHOD              9 (get)
+            462 LOAD_CONST              17 ('queueDepthAtStart')
+            464 LOAD_CONST               3 (0)
+            466 CALL_METHOD              2
+            468 EXTENDED_ARG             1
+            470 JUMP_IF_TRUE_OR_POP    474
+            472 LOAD_CONST               3 (0)
+        >>  474 CALL_FUNCTION            1
+
+320         476 LOAD_GLOBAL             10 (int)
+            478 LOAD_FAST                5 (metrics)
+            480 LOAD_METHOD              9 (get)
+            482 LOAD_CONST              18 ('pendingAtStart')
+            484 LOAD_CONST               3 (0)
+            486 CALL_METHOD              2
+            488 EXTENDED_ARG             1
+            490 JUMP_IF_TRUE_OR_POP    494
+            492 LOAD_CONST               3 (0)
+        >>  494 CALL_FUNCTION            1
+
+321         496 LOAD_GLOBAL             10 (int)
+            498 LOAD_FAST                5 (metrics)
+            500 LOAD_METHOD              9 (get)
+            502 LOAD_CONST              19 ('pendingAtFinish')
+            504 LOAD_CONST               3 (0)
+            506 CALL_METHOD              2
+            508 EXTENDED_ARG             2
+            510 JUMP_IF_TRUE_OR_POP    514
+            512 LOAD_CONST               3 (0)
+        >>  514 CALL_FUNCTION            1
+
+322         516 LOAD_GLOBAL             10 (int)
+            518 LOAD_FAST                5 (metrics)
+            520 LOAD_METHOD              9 (get)
+            522 LOAD_CONST              20 ('activeAtStart')
+            524 LOAD_CONST               3 (0)
+            526 CALL_METHOD              2
+            528 EXTENDED_ARG             2
+            530 JUMP_IF_TRUE_OR_POP    534
+            532 LOAD_CONST               3 (0)
+        >>  534 CALL_FUNCTION            1
+
+323         536 LOAD_GLOBAL             10 (int)
+            538 LOAD_FAST                5 (metrics)
+            540 LOAD_METHOD              9 (get)
+            542 LOAD_CONST              21 ('activeAtFinish')
+            544 LOAD_CONST               3 (0)
+            546 CALL_METHOD              2
+            548 EXTENDED_ARG             2
+            550 JUMP_IF_TRUE_OR_POP    554
+            552 LOAD_CONST               3 (0)
+        >>  554 CALL_FUNCTION            1
+
+310         556 CALL_FUNCTION           13
+            558 POP_TOP
+            560 LOAD_CONST               1 (None)
+            562 RETURN_VALUE

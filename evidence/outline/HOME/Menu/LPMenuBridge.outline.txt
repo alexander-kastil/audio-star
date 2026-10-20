@@ -1,0 +1,31 @@
+# module HOME.Menu.LPMenuBridge
+
+[module] names: __doc__, _MacMenuActionBridgeClass, ensureMacMenuActionBridgeClass
+  str: 'macOS 原生菜单动作桥接。\n\n将从 WiiMHome.py 中拆分出的 LPMacMenuActionBridge 桥接类迁移至此，\n负责把 macOS 原生应用菜单(About/Check for Updates/Send Feedback)的点击\n转发到持有该桥接对象的委托（菜单控制器）。\n'
+  str: 'ensureMacMenuActionBridgeClass'
+
+def ensureMacMenuActionBridgeClass()  line 12
+  names: _MacMenuActionBridgeClass, objc, Foundation, NSObject, Exception
+    str: '\n    创建并缓存 macOS 原生菜单动作桥接类。\n\n    参数:\n        无\n    返回:\n        object: 原生菜单桥接类；若当前环境无法加载 PyObjC，则返回 None\n    '
+    str: 'NSObject'
+    str: 'LPMacMenuActionBridge'
+
+  def ensureMacMenuActionBridgeClass.LPMacMenuActionBridge()  line 31
+    names: __name__, __module__, __qualname__, __doc__, initWithOwner_, signature, handleCheckForUpdates_, handleSendFeedback_
+      str: 'ensureMacMenuActionBridgeClass.<locals>.LPMacMenuActionBridge'
+      str: '将 macOS 原生菜单动作转发到菜单控制器的桥接类。'
+      str: 'ensureMacMenuActionBridgeClass.<locals>.LPMacMenuActionBridge.initWithOwner_'
+      str: 'ensureMacMenuActionBridgeClass.<locals>.LPMacMenuActionBridge.handleCheckForUpdates_'
+      str: 'ensureMacMenuActionBridgeClass.<locals>.LPMacMenuActionBridge.handleSendFeedback_'
+
+    def ensureMacMenuActionBridgeClass.LPMacMenuActionBridge.initWithOwner_(self, owner)  line 34
+      names: super, init, _owner
+        str: '\n            初始化菜单桥接对象。\n\n            参数:\n                owner (object): 提供 checkForUpdates/openFeedback 动作的委托对象\n            返回:\n                object: 初始化后的桥接对象\n            '
+
+    def ensureMacMenuActionBridgeClass.LPMacMenuActionBridge.handleCheckForUpdates_(self, sender)  line 50
+      names: _owner, checkForUpdates
+        str: '\n            处理原生“检查更新”菜单点击事件。\n\n            参数:\n                sender (object): 原生菜单发送者\n            返回:\n                无\n            '
+
+    def ensureMacMenuActionBridgeClass.LPMacMenuActionBridge.handleSendFeedback_(self, sender)  line 65
+      names: _owner, openFeedback
+        str: '\n            处理原生“发送反馈”菜单点击事件。\n\n            参数:\n                sender (object): 原生菜单发送者\n            返回:\n                无\n            '

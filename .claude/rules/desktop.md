@@ -1,0 +1,26 @@
+---
+paths:
+  - "src/audio-start/AudioStar.Desktop/**"
+  - "src/audio-start/AudioStar.Setup/**"
+---
+
+# Audio Star desktop (src/audio-start/AudioStar.Desktop)
+
+- Owner agent: `wpf-expert`. Libraries behind the UI (`AudioStar.Core`, `Speakers`, `Devices`, `Library`, `Sources`) go to `dotnet-expert`.
+- Stack: WPF on `net10.0-windows`, Fluent theme (`ThemeMode=System`), Generic Host, CommunityToolkit.Mvvm. Software rendering by default; `AUDIOSTAR_HARDWARE_RENDER=1` enables the GPU.
+- Restart is allowed at any time (owner, 2026-10-19): stop `AudioStar.exe`, `dotnet build src/audio-start/AudioStar.Desktop/AudioStar.Desktop.csproj`, start `src/audio-start/AudioStar.Desktop/bin/Debug/net10.0-windows/AudioStar.exe`. Restarting interrupts what the speaker plays.
+- Tests: run `AudioStar.Speakers.Tests`, `Devices.Tests`, `Library.Tests` and `Sources.Tests` one by one; `dotnet test AudioStar.slnx` also builds the MSI and leaves the Desktop `bin` stale.
+- Theme tokens: the `App*Brush` resources set in `Services/ThemeService.cs` for light and dark (`AppAccentBrush`, `AppAccentSoftBrush`, `AppAccentHoverBrush`, `AppAccentTextBrush`, `AppStrokeBrush`, `AppHoverBrush`, `AppSelectedBrush`, `AppCardBrush`, `AppSubtleTextBrush`).
+- Shared styles: `Resources/Styles.xaml`. The implicit `Button` style is `AccentButton` (blue, white text, min width 100, no per-button padding); icon, transport and card buttons use `IconButton`, `PlayButton`, `CardButton`. Implicit `ScrollBar` (4 px blue thumb, 10 px hit area) and `ToolTip` (card style) styles; `HairlineSplitter` for every divider.
+- Shared layout resources in `Styles.xaml`: `PageMargin` and `PageMarginRoomy` for every page grid, `ScrollGutter` (plus `ScrollGutterBelow10`, `ScrollGutterBelow14`) to put a scroller's bar inside the right margin; `TrackListItem` with `TrackTitle`, `TrackSubtle`, `TrackDivider`, `TrackHeader` for track lists; `SettingsGrid` (`res:AdaptiveGrid`), `SettingsColumns` (`res:ColumnFlow`, the masonry panel in `Resources/ColumnFlow.cs`), `SettingCell`, `FieldLabel`, `SectionHeading`, `SectionRule` for settings pages; `AccentIconButton` for the blue Music folders icons only; `NowPlayingTitle`, `NowPlayingArtist`, `NowPlayingAlbum`. A style's `BasedOn` base must be declared above it in the file. Which page uses what: `.claude/rules/view-reference.md`.
+- Reference view: the YouTube page; its layout, components and the corrections behind them are in `.claude/rules/view-reference.md`. Other views adopt it when restyled.
+- Owner's look: blue marks actions and now playing (playing track row solid accent with white text, playing playlist card a thin accent border). No hint lines under a page title. Dividers are 1 px hairlines. Tooltips show a cell's full text only when it is trimmed (`Resources/Interaction.cs`, `FullTextToolTip`).
+- Track list (`Views/SourceView.xaml`): own `ListViewItem` template; Title and Artist widths are star `GridLength` properties on `SourceViewModel`, bound TwoWay in the header and OneWay in the rows; # and Artist toggle from the right-click menu.
+- UIA handles: sidebar buttons by Name ("YouTube", "App settings"), playlist cards by HelpText (the playlist title), the "Playlist URL" box by automation name, track rows as `ListItem`, the player bar's "Open now playing" cover button by HelpText (its Name is empty). Find the window among `RootElement` children by process id and Name "Audio Star"; `MainWindowHandle` can be a tooltip popup.
+- Sidebar service rows: the switch is a sibling of the row's nav button in a `Grid` (UIA Name "Connect" or "Reconnect"), and `MainViewModel.SortServices` moves connected services to the top on every status change.
+- Sign-in popup (`Views/WebSignInWindow.cs`, WebView2): a top-level window named "Sign in to SoundCloud", "Sign in to Spotify" or "Set up Spotify" (the app setup, with an instructions strip, a "Value to copy" box and a Copy button above the page). Open it by invoking a service's sidebar switch only while its Name is "Connect" (when on, the switch disconnects, and Spotify's Disconnect deletes the owner's stored refresh token); dismiss it with `WindowPattern.Close`; never type credentials.
+- Display: the owner's screen runs at 150 percent; divide screenshot pixels by 1.5 for DIPs.
+- Now playing: the speaker reports `TrackURI` `http://<pc>:22545/stream/<sourceId>/<trackId>`; `SourceViewModel.PlayingTrackId` parses it.
+- Installer: `dotnet build src/audio-start/AudioStar.Setup/AudioStar.Setup.wixproj -c Release` writes `setup/AudioStar.msi` (per-machine, firewall rules, autostart option writing HKCU Run `AudioStar` = `"<exe>" --autostart`).
+- Version: `<Version>` in `src/audio-start/AudioStar.Desktop/AudioStar.Desktop.csproj` and the `AppVersion` default in `AudioStar.Setup.wixproj`, kept equal and bumped semantically before every MSI build.
+- Installer screens: `StartDlg` (fresh install) shows `Assets/start.bmp`; `ExitDialog` and `UserExit` show `Assets/exit.bmp` through `Strings.en-us.wxl`; `FatalError`, the patch `WelcomeDlg` and `PrepareDlg` keep `dialog.bmp`. Both new bitmaps are rendered at twice 96 dpi with their copy painted in, so a wording change is a re-render (`render-msi-bitmap.ps1`, global `dotnet-conventions`). Their warm comic look: `tasks/lessons.md`.

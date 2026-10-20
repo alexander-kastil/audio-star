@@ -1,0 +1,331 @@
+# module LPClientFramework.LPDeviceManager.LPGroupManager
+
+[module] names: __doc__, enum, json, threading, time, uuid, RLock, PyQt6.QtCore, QObject, pyqtSlot, LPGlobalUI, LPClientFramework, LPPublicDefine, LPUtility, LPClientFramework.LPDeviceManager.LPDeviceGroupManager, LPDeviceGroupManager, LPClientFramework.LPDeviceManager.LPDeviceNodeManager, LPDeviceNodeManager, LPClientFramework.LPDeviceManager.LPGroup, LPGroupObject, LPGroupType_Temp, LPClientFramework.LPUtility, logger, MEDIATYPE_LINEIN, MEDIATYPE_BLUETOOTH, MEDIATYPE_EXTERNAL_USB, MEDIATYPE_USB_DAC, MEDIATYPE_EXTERNAL_TF, MEDIATYPE_OPTICAL, MEDIATYPE_OPTICAL2, MEDIATYPE_AIRPLAY, MEDIATYPE_CO_AXIAL, MEDIATYPE_CO_AXIAL2, MEDIATYPE_HDMI, MEDIATYPE_PHONO, UnsupportedChangeMusicMediaType, _diagnose_device_summary, _diagnose_group_summary, Enum, LPNewGroupEditType, LPGroupManager
+  str: '\n@Time ： 2026/3/17 15:44\n@Auth ： Chris\n@File ：LPGroupManager.py\n@Desc: Group manager singleton\n'
+  str: 'RLock'
+  str: 'QObject'
+  str: 'pyqtSlot'
+  str: 'LPPublicDefine'
+  str: 'LPUtility'
+  str: 'LPDeviceGroupManager'
+  str: 'LPDeviceNodeManager'
+  str: 'LPGroupObject'
+  str: 'LPGroupType_Temp'
+  str: 'logger'
+  str: '_diagnose_device_summary'
+  str: '_diagnose_group_summary'
+  str: 'LPNewGroupEditType'
+  str: 'LPGroupManager'
+
+def _diagnose_device_summary(device)  line 39
+  names: getattr, list, isinstance, dict, get, LPUtility, pureUUID, append
+    str: '生成设备分组诊断摘要。\n\n    Args:\n        device (object): 设备对象。\n\n    Returns:\n        dict: 设备名称、uuid、roomState、masterID 和 slaveUuids。\n    '
+    str: 'groupInfo'
+    str: 'slaveList'
+    str: 'uuid'
+    str: 'name'
+    str: 'roomState'
+    str: 'masterID'
+    str: 'name'
+    str: 'uuid'
+    str: 'roomState'
+    str: 'masterID'
+    str: 'slaveUuids'
+
+def _diagnose_group_summary(group)  line 69
+  names: list, getattr, isinstance, dict, get, LPUtility, pureUUID, append, bool, _diagnose_device_summary
+    str: '生成命名组诊断摘要。\n\n    Args:\n        group (object): 命名组对象。\n\n    Returns:\n        dict: 命名组 id、名称、active 和成员 uuid 摘要。\n    '
+    str: 'slaveList'
+    str: 'uuid'
+    str: 'groupId'
+    str: 'groupName'
+    str: 'active'
+    str: 'masterDevice'
+    str: 'groupId'
+    str: 'groupName'
+    str: 'active'
+    str: 'master'
+    str: 'slaveUuids'
+
+def LPNewGroupEditType()  line 98
+  names: __name__, __module__, __qualname__, NoChange, SendFailed, CheckSuccess, CheckFailed
+    str: 'LPNewGroupEditType'
+
+def LPGroupManager()  line 106
+  names: __name__, __module__, __qualname__, _instance, RLock, _instanceLock, __new__, __init__, classmethod, instance, result, getActiveGroupWithDevice, supportNewGroup, _groupWithGroupId, editGroupResult, formattedNameWithRoomName, fullNameWithRoomName, operateGroup, addGroup, editGroup, changeGroupActiveStatus, checkDeviceMultiResult, _onlineExpectedSlaveList, _uuidListsMatch, _matchCurrentSlaveState, getSlaveList, switchCurrentGroup, ungroup, _dealSingleSelectedDevice, checkIfNoChanges, canChangeMusic, changeMusicFromDevice, _transferMusic, sortGroupList, __classcell__
+    str: 'LPGroupManager'
+    str: 'LPGroupManager.__new__'
+    str: 'LPGroupManager.__init__'
+    str: 'LPGroupManager.instance'
+    str: 'LPGroupManager.result'
+    str: 'LPGroupManager.getActiveGroupWithDevice'
+    str: 'LPGroupManager.supportNewGroup'
+    str: 'LPGroupManager._groupWithGroupId'
+    str: 'LPGroupManager.editGroupResult'
+    str: 'LPGroupManager.formattedNameWithRoomName'
+    str: 'LPGroupManager.fullNameWithRoomName'
+    str: 'LPGroupManager.operateGroup'
+    str: 'LPGroupManager.addGroup'
+    str: 'LPGroupManager.editGroup'
+    str: 'LPGroupManager.changeGroupActiveStatus'
+    str: 'LPGroupManager.checkDeviceMultiResult'
+    str: 'LPGroupManager._onlineExpectedSlaveList'
+    str: 'LPGroupManager._uuidListsMatch'
+    str: 'LPGroupManager._matchCurrentSlaveState'
+    str: 'LPGroupManager.getSlaveList'
+    str: 'LPGroupManager.switchCurrentGroup'
+    str: 'LPGroupManager.ungroup'
+    str: 'LPGroupManager._dealSingleSelectedDevice'
+    str: 'LPGroupManager.checkIfNoChanges'
+    str: 'LPGroupManager.canChangeMusic'
+    str: 'LPGroupManager.changeMusicFromDevice'
+    str: 'LPGroupManager._transferMusic'
+    str: 'LPGroupManager.sortGroupList'
+
+  def LPGroupManager.__new__(cls, *args, **kwargs)  line 110
+    names: _instance, _instanceLock, super, __new__
+
+  def LPGroupManager.__init__(self)  line 117
+    names: getattr, LPDeviceNodeManager, instance, nodeMgr, LPDeviceGroupManager, deviceGroupManager, _initialized
+      str: '_initialized'
+
+  def LPGroupManager.instance(cls)  line 124
+
+  def LPGroupManager.result(self, editType, group)  line 128
+      str: 'editType'
+      str: 'newObj'
+      str: 'firstDevice'
+
+  def LPGroupManager.getActiveGroupWithDevice(self, device)  line 135
+    names: deviceGroupManager, getActiveGroupWithDevice
+
+  def LPGroupManager.supportNewGroup(self, targetDevice, selectGroup, selectDevicesList)  line 139
+    names: logger, debug, _diagnose_device_summary, list, getattr, all, supportNewGroup
+      str: '[group-diagnose][debug][supportNewGroup] target=%s selectGroup=%s selected=%s targetSupport=%s selectedSupport=%s'
+      str: 'LPGroupManager.supportNewGroup.<locals>.<listcomp>'
+      str: 'supportNewGroup'
+      str: 'LPGroupManager.supportNewGroup.<locals>.<genexpr>'
+
+    def LPGroupManager.supportNewGroup.<listcomp>(.0)  line 145
+      names: _diagnose_device_summary
+
+    def LPGroupManager.supportNewGroup.<listcomp>(.0)  line 147
+      names: _diagnose_device_summary, getattr
+        str: 'supportNewGroup'
+        str: 'device'
+        str: 'supportNewGroup'
+
+    def LPGroupManager.supportNewGroup.<genexpr>(.0)  line 156
+      names: supportNewGroup
+
+  def LPGroupManager._groupWithGroupId(self, groupId)  line 159
+    names: str, logger, debug, deviceGroupManager, sortGroupList, getattr, _diagnose_group_summary
+      str: '[group-diagnose][debug][groupWithGroupId.skip] reason=empty'
+      str: 'groupId'
+      str: '[group-diagnose][debug][groupWithGroupId.hit] groupId=%s group=%s'
+      str: '[group-diagnose][debug][groupWithGroupId.miss] groupId=%s candidates=%s'
+      str: 'LPGroupManager._groupWithGroupId.<locals>.<listcomp>'
+
+    def LPGroupManager._groupWithGroupId.<listcomp>(.0)  line 178
+      names: _diagnose_group_summary
+
+  def LPGroupManager.editGroupResult(self, currentNamedGroup, currentEditDevice, selectedDevices, selectGroupId)  line 182
+    names: logger, debug, _diagnose_group_summary, _diagnose_device_summary, list, getattr, active, changeGroupActiveStatus, result, LPNewGroupEditType, NoChange, _groupWithGroupId, groupInfo, nodeMgr, findRawDeviceByUuid, slaveList, len, _dealSingleSelectedDevice, checkIfNoChanges, formattedNameWithRoomName, name, fullNameWithRoomName, str, uuid, uuid4, upper, operateGroup
+      str: '[group-diagnose][editGroupResult.enter] currentNamedGroup=%s currentEditDevice=%s selectedDevices=%s selectGroupId=%s'
+      str: 'LPGroupManager.editGroupResult.<locals>.<listcomp>'
+      str: '[group manager] groupActiveToNO=%s'
+      str: 'name'
+      str: '[group-diagnose][editGroupResult.branch] branch=deactivateNamedGroup group=%s'
+      str: '[group-diagnose][editGroupResult.branch] branch=noSelectedNoCurrentGroup'
+      str: '[group-diagnose][editGroupResult.branch] branch=switchNamedGroup targetGroup=%s firstDevice=%s'
+      str: 'roomState'
+      str: 'slave'
+      str: 'masterID'
+      str: '[group-diagnose][debug][editGroupResult.switchNamedGroup.oldMaster] firstDevice=%s oldMaster=%s'
+      str: '[group-diagnose][editGroupResult.branch] branch=singleSelected firstDevice=%s'
+      str: 'group_id'
+      str: 'group_name'
+      str: 'fullName'
+      str: 'slavelist'
+      str: '[group-diagnose][editGroupResult.branch] branch=createTempGroup master=%s payload=%s'
+
+    def LPGroupManager.editGroupResult.<listcomp>(.0)  line 187
+      names: _diagnose_device_summary
+
+    def LPGroupManager.editGroupResult.<listcomp>(.0)  line 250
+      names: ip, name, uuid
+        str: 'ip'
+        str: 'name'
+        str: 'uuid'
+
+  def LPGroupManager.formattedNameWithRoomName(self, roomName, slaveCount)  line 269
+    names: int, len
+      str: ' +'
+      str: '...'
+
+  def LPGroupManager.fullNameWithRoomName(self, roomName, slaveCount)  line 284
+    names: int
+      str: '生成 UI 展示用完整组名，不添加协议截断省略号。\n\n        Args:\n            roomName (str): 主设备名称。\n            slaveCount (int): 从设备数量。\n\n        Returns:\n            str: 完整组名，例如 `Living Room +2`。\n        '
+      str: ' +'
+
+  def LPGroupManager.operateGroup(self, currentEditGroup, masterDevice, bodyDict)  line 299
+    names: deviceGroupManager, ensureDeviceGroupsFetched, logger, debug, _diagnose_group_summary, _diagnose_device_summary, result, LPNewGroupEditType, SendFailed, getDeviceGroupWithDeviceId, uuid, getTempGroup, copy, updateGroupObject, editGroup, createGroupObjectWithDict, LPGroupType_Temp, addGroup
+      str: '[group-diagnose][debug][operateGroup.fail] reason=refreshDeviceGroupsFailed currentEditGroup=%s master=%s body=%s'
+      str: '[group-diagnose][debug][operateGroup.enter] currentEditGroup=%s master=%s hasDeviceGroupObj=%s tempObj=%s body=%s'
+      str: '[group-diagnose][debug][operateGroup.branch] branch=editTempGroup newObj=%s'
+      str: '[group-diagnose][debug][operateGroup.branch] branch=addTempGroup newObj=%s'
+
+  def LPGroupManager.addGroup(self, groupObj)  line 339
+    names: logger, debug, groupName, slaveList, _diagnose_group_summary, deviceGroupManager, addGroup, result, LPNewGroupEditType, SendFailed, active, changeGroupActiveStatus
+      str: '[group manager addGroup] groupName=%s slaveList=%s'
+      str: '[group-diagnose][debug][addGroup.enter] group=%s'
+      str: '[group-diagnose][debug][addGroup.fail] reason=addGroupSendFailed group=%s'
+      str: '[group-diagnose][debug][addGroup.result] group=%s result=%s'
+
+  def LPGroupManager.editGroup(self, groupObj)  line 363
+    names: logger, debug, groupName, bool, active, _diagnose_group_summary, deviceGroupManager, updateGroup, result, LPNewGroupEditType, SendFailed, changeGroupActiveStatus, switchCurrentGroup, checkDeviceMultiResult
+      str: '[editGroup] updateGroup groupName='
+      str: '[group-diagnose][debug][editGroup.enter] group=%s needActive=%s'
+      str: '[group-diagnose][debug][editGroup.fail] reason=updateGroupSendFailed group=%s'
+      str: '[group-diagnose][debug][editGroup.fail] reason=switchCurrentGroupFailed group=%s'
+
+  def LPGroupManager.changeGroupActiveStatus(self, groupObj, active)  line 392
+    names: logger, debug, _diagnose_group_summary, switchCurrentGroup, result, LPNewGroupEditType, SendFailed, checkDeviceMultiResult
+      str: '[group-diagnose][changeGroupActiveStatus.enter] group=%s active=%s'
+
+  def LPGroupManager.checkDeviceMultiResult(self, groupObj, active)  line 402
+    names: masterDevice, result, LPNewGroupEditType, CheckFailed, logger, debug, getattr, _diagnose_device_summary, _diagnose_group_summary, _onlineExpectedSlaveList, time, monotonic, _matchCurrentSlaveState, CheckSuccess, sleep, name, getSlaveList
+      str: '阻塞check, 返回result'
+      str: '[checkDeviceMultiResult]masterDevice=%s slaveList=%s active=%s'
+      str: 'name'
+      str: 'slaveList'
+      str: '[group-diagnose][checkDeviceMultiResult.enter] device=%s group=%s active=%s expectedOnline=%s'
+      str: '[group-diagnose][debug][checkDeviceMultiResult.attempt] attempt=%s matched=%s device=%s group=%s active=%s'
+      str: '[group-diagnose][checkDeviceMultiResult.match] attempt=%s device=%s active=%s'
+      str: '[checkDeviceMultiResult]masterDevice='
+      str: ' matchCurrentSlaveState time out!'
+      str: '[group-diagnose][debug][checkDeviceMultiResult.timeout] device=%s group=%s active=%s'
+
+  def LPGroupManager._onlineExpectedSlaveList(self, groupObj)  line 461
+    names: set, list, getattr, LPUtility, pureUUID, get, nodeMgr, findRawDeviceByUuid, add, isinstance, dict, append
+      str: '\n        基于 named group 定义生成当前在线的期望从设备列表。\n\n        Args:\n            groupObj: 当前参与校验的组对象。\n\n        Returns:\n            仅包含当前在线从设备的字典列表，用于与设备实时组态做一致性比较。\n        '
+      str: 'slaveList'
+      str: 'uuid'
+
+  def LPGroupManager._uuidListsMatch(self, currentArray, expectedArray)  line 487
+    names: sorted, logger, debug, len
+      str: '\n        比较两个成员列表的 uuid 是否完全一致。\n\n        Args:\n            currentArray: 当前设备上报的成员列表。\n            expectedArray: 期望成员列表。\n\n        Returns:\n            两边规范化后的 uuid 集合完全一致时返回 True。\n        '
+      str: 'LPGroupManager._uuidListsMatch.<locals>.<genexpr>'
+      str: '[_uuidArrayEqual] not currentList or not expectedList: length lhs = '
+      str: ' rhs='
+      str: '[group manager] current uuids=%s expected uuids=%s'
+
+    def LPGroupManager._uuidListsMatch.<genexpr>(.0)  line 498
+      names: LPUtility, pureUUID, get, lower
+        str: 'uuid'
+
+    def LPGroupManager._uuidListsMatch.<genexpr>(.0)  line 503
+      names: LPUtility, pureUUID, get, lower
+        str: 'uuid'
+
+  def LPGroupManager._matchCurrentSlaveState(self, device, groupObj, active)  line 514
+    names: logger, debug, name, refreshMultiroomState, Exception, warning, getattr, groupInfo, len, _diagnose_device_summary, list, _onlineExpectedSlaveList, _uuidListsMatch
+      str: '[_matchCurrentSlaveState] device='
+      str: ' enter'
+      str: '[_matchCurrentSlaveState] refreshMultiroomState during edit failed for '
+      str: ': '
+      str: 'slaveList'
+      str: '[group-diagnose][_matchCurrentSlaveState] device=%s active=%s currentSlaveUuids=%s matched=%s'
+      str: 'LPGroupManager._matchCurrentSlaveState.<locals>.<listcomp>'
+      str: '[group-diagnose][_matchCurrentSlaveState] device=%s active=%s current=%s expected=%s matched=%s'
+
+    def LPGroupManager._matchCurrentSlaveState.<listcomp>(.0)  line 528
+      names: LPUtility, pureUUID, isinstance, dict, get, getattr
+        str: 'uuid'
+
+  def LPGroupManager.getSlaveList(self, groupObj, active)  line 547
+    names: masterDevice, logger, debug, _diagnose_group_summary, getSlaveList, _diagnose_device_summary, get, json, loads, Exception, warning, getattr, _onlineExpectedSlaveList, _uuidListsMatch, list, groupInfo, slaveList
+      str: 'common http阻塞获取SlaveList'
+      str: '[group-diagnose][debug][groupManager.getSlaveList.skip] reason=noMaster group=%s active=%s'
+      str: '[group-diagnose][groupManager.getSlaveList] device=%s active=%s status=%s body=%s'
+      str: 'status_code'
+      str: 'body'
+      str: '{}'
+      str: '[device dashboard] parse getSlaveList failed for %s: %s'
+      str: 'name'
+      str: 'slave_list'
+      str: '[group-diagnose][debug][groupManager.getSlaveList.compare] device=%s active=%s current=%s expected=%s matched=%s'
+
+  def LPGroupManager.switchCurrentGroup(self, groupObj, active)  line 595
+    names: masterDevice, logger, debug, _diagnose_group_summary, groupId, slaveList, get, append, groupName, getattr, _diagnose_device_summary, setCurrentNameGroup
+      str: '阻塞set command'
+      str: '[group-diagnose][debug][switchCurrentGroup.skip] reason=noMaster group=%s active=%s'
+      str: 'group_id'
+      str: '-1'
+      str: 'uuid'
+      str: 'ip'
+      str: 'ipv4'
+      str: 'groupFullName'
+      str: 'group_id'
+      str: 'group_name'
+      str: 'fullName'
+      str: 'slavelist'
+      str: '[group-diagnose][debug][switchCurrentGroup.send] device=%s active=%s group=%s payload=%s'
+      str: 'status_code'
+      str: '[group-diagnose][switchCurrentGroup] device=%s active=%s payload=%s status=%s body=%s success=%s'
+      str: 'body'
+
+  def LPGroupManager.ungroup(self, masterDevice, retry)  line 657
+    names: logger, debug, _diagnose_device_summary, ungroup, get
+      str: '[group-diagnose][debug][ungroup.skip] reason=noMaster retry=%s'
+      str: '[group-diagnose][debug][ungroup.send] master=%s retry=%s'
+      str: 'status_code'
+      str: '[group-diagnose][ungroup] master=%s retry=%s status=%s body=%s success=%s'
+      str: 'body'
+      str: 'retry'
+
+  def LPGroupManager._dealSingleSelectedDevice(self, currentEditGroup, currentEditDevice, singleDevice)  line 686
+    names: groupInfo, roomState, slaveList, logger, debug, _diagnose_group_summary, _diagnose_device_summary, bool, name, len, nodeMgr, findRawDeviceByUuid, masterID, result, LPNewGroupEditType, SendFailed, ungroup, deviceGroupManager, createGroupObjectWithDict, LPGroupType_Temp, checkDeviceMultiResult, uuid, NoChange, CheckSuccess
+      str: '如果这台firstDevice\n        1、当前是组态设备（它自己带从机，或它本身是slave）：\n        先确定真正的master\n       （若firstDevice是slave，就用masterID找master）。\n        对master发Ungroup。\n        成功后构造一个“空slaveList”的临时组对象，调用\n        checkDeviceMultiResult(..., False)\n        校验是否真解组成功。\n        失败就返回SendFailed。\n\n        2、如果这台设备本来就不是组态：\n   '
+      str: 'slave'
+      str: '[group-diagnose][_dealSingleSelectedDevice.enter] currentEditGroup=%s currentEditDevice=%s singleDevice=%s isGroupedDevice=%s'
+      str: '[_dealSingleSelectedDevice device: '
+      str: ' isGroupedDevice, roomState: '
+      str: '], slaveList length: '
+      str: '[group-diagnose][debug][_dealSingleSelectedDevice.resolveMaster] singleDevice=%s masterID=%s masterDevice=%s'
+      str: '[group-diagnose][debug][_dealSingleSelectedDevice.fail] reason=masterMissing singleDevice=%s currentEditGroup=%s'
+      str: 'retry'
+      str: '[group-diagnose][debug][_dealSingleSelectedDevice.fail] reason=ungroupSendFailed master=%s singleDevice=%s'
+      str: 'group_id'
+      str: 'group_name'
+      str: 'slavelist'
+      str: '[group-diagnose][debug][_dealSingleSelectedDevice.checkEmptyGroup] master=%s emptyGroup=%s'
+      str: ' is not GroupedDevice'
+
+  def LPGroupManager.checkIfNoChanges(self, selectedDevices)  line 769
+
+  def LPGroupManager.canChangeMusic(self, currentEditDevice, firstDevice)  line 776
+    names: uuid, LPUtility, checkHasMusicSelected, mediaInfo, mediaType, UnsupportedChangeMusicMediaType
+
+  def LPGroupManager.changeMusicFromDevice(self, fromDevice, toDevice, block)  line 789
+    names: _transferMusic, callable
+
+  def LPGroupManager._transferMusic(self, fromDevice, toDevice)  line 795
+    names: upnpPost, get, getattr, threading, Event, fastPlay, wait, Exception, logger, warning
+      str: 'BrowseQueue'
+      str: 'QueueName'
+      str: 'CurrentQueue'
+      str: 'musicList'
+      str: 'list'
+      str: 'ok'
+      str: 'LPGroupManager._transferMusic.<locals>._finish'
+      str: '[group manager] transfer music failed fromDevice: '
+      str: ',  toDevice: '
+      str: ', error: '
+
+    def LPGroupManager._transferMusic._finish(success)  line 807
+      names: bool, set
+        str: 'ok'
+
+  def LPGroupManager.sortGroupList(self)  line 818
+    names: deviceGroupManager, sortGroupList

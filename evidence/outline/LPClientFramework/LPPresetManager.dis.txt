@@ -1,0 +1,457 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/4/15 18:50\n@Auth ： Chris\n@File ：LPPresetManager.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (copy)
+             10 STORE_NAME               1 (copy)
+
+  9          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('escape',))
+             16 IMPORT_NAME              2 (xml.sax.saxutils)
+             18 IMPORT_FROM              3 (escape)
+             20 STORE_NAME               3 (escape)
+             22 POP_TOP
+
+ 11          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('BeautifulSoup',))
+             28 IMPORT_NAME              4 (bs4)
+             30 IMPORT_FROM              5 (BeautifulSoup)
+             32 STORE_NAME               5 (BeautifulSoup)
+             34 POP_TOP
+
+ 13          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              6 (LPGlobalUI)
+             42 STORE_NAME               6 (LPGlobalUI)
+
+ 14          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               5 (('logger',))
+             48 IMPORT_NAME              7 (LPClientFramework.LPUtility)
+             50 IMPORT_FROM              8 (logger)
+             52 STORE_NAME               8 (logger)
+             54 POP_TOP
+
+ 17          56 LOAD_BUILD_CLASS
+             58 LOAD_CONST               6 (<code object PresetManager at 0x000001F3253CEDF0, file "LPClientFramework\LPPresetManager.py", line 17>)
+             60 LOAD_CONST               7 ('PresetManager')
+             62 MAKE_FUNCTION            0
+             64 LOAD_CONST               7 ('PresetManager')
+             66 CALL_FUNCTION            2
+             68 STORE_NAME               9 (PresetManager)
+             70 LOAD_CONST               2 (None)
+             72 RETURN_VALUE
+
+=== PresetManager ===
+ 17           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('PresetManager')
+              6 STORE_NAME               2 (__qualname__)
+
+ 18           8 LOAD_CONST               1 (<code object __init__ at 0x000001F3253A2EA0, file "LPClientFramework\LPPresetManager.py", line 18>)
+             10 LOAD_CONST               2 ('PresetManager.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+
+ 21          16 LOAD_CONST               3 (<code object getKeyMapping at 0x000001F3253A2B30, file "LPClientFramework\LPPresetManager.py", line 21>)
+             18 LOAD_CONST               4 ('PresetManager.getKeyMapping')
+             20 MAKE_FUNCTION            0
+             22 STORE_NAME               4 (getKeyMapping)
+
+ 24          24 LOAD_CONST              19 ((None,))
+             26 LOAD_CONST               6 (<code object backupQueue at 0x000001F3253A2DF0, file "LPClientFramework\LPPresetManager.py", line 24>)
+             28 LOAD_CONST               7 ('PresetManager.backupQueue')
+             30 MAKE_FUNCTION            1 (defaults)
+             32 STORE_NAME               5 (backupQueue)
+
+ 32          34 LOAD_CONST               8 (<code object replaceKeyMappingXml at 0x000001F3253A2920, file "LPClientFramework\LPPresetManager.py", line 32>)
+             36 LOAD_CONST               9 ('PresetManager.replaceKeyMappingXml')
+             38 MAKE_FUNCTION            0
+             40 STORE_NAME               6 (replaceKeyMappingXml)
+
+ 68          42 LOAD_NAME                7 (int)
+             44 LOAD_CONST              10 (('maxNumber',))
+             46 BUILD_CONST_KEY_MAP      1
+             48 LOAD_CONST              11 (<code object buildKeyBlock at 0x000001F3253A2BE0, file "LPClientFramework\LPPresetManager.py", line 68>)
+             50 LOAD_CONST              12 ('PresetManager.buildKeyBlock')
+             52 MAKE_FUNCTION            4 (annotations)
+             54 STORE_NAME               8 (buildKeyBlock)
+
+ 81          56 LOAD_NAME                7 (int)
+             58 LOAD_CONST              10 (('maxNumber',))
+             60 BUILD_CONST_KEY_MAP      1
+             62 LOAD_CONST              13 (<code object insertKeyBlock at 0x000001F3253CEB30, file "LPClientFramework\LPPresetManager.py", line 81>)
+             64 LOAD_CONST              14 ('PresetManager.insertKeyBlock')
+             66 MAKE_FUNCTION            4 (annotations)
+             68 STORE_NAME               9 (insertKeyBlock)
+
+ 94          70 LOAD_CONST              15 (<code object setKeyMapping at 0x000001F3253CE240, file "LPClientFramework\LPPresetManager.py", line 94>)
+             72 LOAD_CONST              16 ('PresetManager.setKeyMapping')
+             74 MAKE_FUNCTION            0
+             76 STORE_NAME              10 (setKeyMapping)
+
+101          78 LOAD_CONST              17 (<code object getPlayList at 0x000001F3253CED40, file "LPClientFramework\LPPresetManager.py", line 101>)
+             80 LOAD_CONST              18 ('PresetManager.getPlayList')
+             82 MAKE_FUNCTION            0
+             84 STORE_NAME              11 (getPlayList)
+             86 LOAD_CONST               5 (None)
+             88 RETURN_VALUE
+
+=== PresetManager.__init__ ===
+ 19           0 LOAD_GLOBAL              0 (LPGlobalUI)
+              2 LOAD_ATTR                1 (currentDevice)
+              4 LOAD_FAST                0 (self)
+              6 STORE_ATTR               2 (device)
+              8 LOAD_CONST               0 (None)
+             10 RETURN_VALUE
+
+=== PresetManager.getKeyMapping ===
+ 22           0 LOAD_FAST                1 (device)
+              2 LOAD_METHOD              0 (asyncUpnpPost)
+              4 LOAD_CONST               1 ('GetKeyMapping')
+              6 BUILD_MAP                0
+              8 LOAD_FAST                2 (callback)
+             10 CALL_METHOD              3
+             12 POP_TOP
+             14 LOAD_CONST               0 (None)
+             16 RETURN_VALUE
+
+=== PresetManager.backupQueue ===
+ 25           0 LOAD_FAST                2 (streamService)
+              2 LOAD_ATTR                0 (backupXml)
+              4 LOAD_FAST                3 (playList)
+              6 LOAD_FAST                4 (listName)
+              8 LOAD_FAST                5 (playSection)
+             10 LOAD_CONST               1 (('playSection',))
+             12 CALL_FUNCTION_KW         3
+             14 STORE_FAST               6 (backupXml)
+
+ 26          16 LOAD_FAST                6 (backupXml)
+             18 POP_JUMP_IF_FALSE       54
+
+ 27          20 LOAD_FAST                1 (device)
+             22 LOAD_METHOD              1 (upnpPost)
+             24 LOAD_CONST               2 ('BackUpQueue')
+             26 LOAD_CONST               3 ('QueueContext')
+             28 LOAD_FAST                6 (backupXml)
+             30 BUILD_MAP                1
+             32 CALL_METHOD              2
+             34 STORE_FAST               7 (response)
+
+ 28          36 LOAD_FAST                7 (response)
+             38 LOAD_METHOD              2 (get)
+             40 LOAD_CONST               4 ('status_code')
+             42 CALL_METHOD              1
+             44 LOAD_CONST               5 (200)
+             46 COMPARE_OP               2 (==)
+             48 POP_JUMP_IF_FALSE       54
+
+ 29          50 LOAD_CONST               6 (True)
+             52 RETURN_VALUE
+
+ 30     >>   54 LOAD_CONST               7 (False)
+             56 RETURN_VALUE
+
+=== PresetManager.replaceKeyMappingXml ===
+ 36           0 SETUP_FINALLY          190 (to 192)
+
+ 37           2 LOAD_FAST                3 (keyMappingXmlObj)
+              4 LOAD_METHOD              0 (find)
+              6 LOAD_CONST               1 ('MaxNumber')
+              8 CALL_METHOD              1
+             10 LOAD_ATTR                1 (text)
+             12 POP_JUMP_IF_FALSE       30
+             14 LOAD_GLOBAL              2 (int)
+             16 LOAD_FAST                3 (keyMappingXmlObj)
+             18 LOAD_METHOD              0 (find)
+             20 LOAD_CONST               1 ('MaxNumber')
+             22 CALL_METHOD              1
+             24 LOAD_ATTR                1 (text)
+             26 CALL_FUNCTION            1
+             28 JUMP_FORWARD             2 (to 32)
+        >>   30 LOAD_CONST               2 (0)
+        >>   32 STORE_FAST               4 (MaxNumber)
+
+ 38          34 LOAD_FAST                4 (MaxNumber)
+             36 POP_JUMP_IF_TRUE        54
+
+ 39          38 LOAD_FAST                0 (self)
+             40 LOAD_METHOD              3 (insertKeyBlock)
+             42 LOAD_FAST                3 (keyMappingXmlObj)
+             44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                4 (device)
+             48 LOAD_ATTR                5 (presetNum)
+             50 CALL_METHOD              2
+             52 STORE_FAST               3 (keyMappingXmlObj)
+
+ 40     >>   54 LOAD_FAST                3 (keyMappingXmlObj)
+             56 LOAD_METHOD              0 (find)
+             58 LOAD_CONST               3 ('Key')
+             60 LOAD_GLOBAL              6 (str)
+             62 LOAD_FAST                1 (index)
+             64 CALL_FUNCTION            1
+             66 BINARY_ADD
+             68 CALL_METHOD              1
+             70 STORE_FAST               5 (itemToReplace)
+
+ 42          72 LOAD_FAST                5 (itemToReplace)
+             74 LOAD_METHOD              7 (clear)
+             76 CALL_METHOD              0
+             78 POP_TOP
+
+ 45          80 LOAD_CONST               4 ('<container>')
+             82 LOAD_FAST                2 (replaceItemXml)
+             84 FORMAT_VALUE             0
+             86 LOAD_CONST               5 ('</container>')
+             88 BUILD_STRING             3
+             90 STORE_FAST               6 (wrappedXML)
+
+ 46          92 LOAD_GLOBAL              8 (BeautifulSoup)
+             94 LOAD_FAST                6 (wrappedXML)
+             96 LOAD_CONST               6 ('xml')
+             98 CALL_FUNCTION            2
+            100 STORE_FAST               7 (soup)
+
+ 47         102 LOAD_FAST                7 (soup)
+            104 LOAD_METHOD              0 (find)
+            106 LOAD_CONST               7 ('container')
+            108 CALL_METHOD              1
+            110 STORE_FAST               8 (container)
+
+ 48         112 LOAD_FAST                8 (container)
+            114 LOAD_ATTR                9 (contents)
+            116 STORE_FAST               9 (contents)
+
+ 50         118 LOAD_FAST                9 (contents)
+            120 GET_ITER
+        >>  122 FOR_ITER                20 (to 144)
+            124 STORE_FAST              10 (content)
+
+ 51         126 LOAD_FAST                5 (itemToReplace)
+            128 LOAD_METHOD             10 (append)
+            130 LOAD_GLOBAL             11 (copy)
+            132 LOAD_METHOD             11 (copy)
+            134 LOAD_FAST               10 (content)
+            136 CALL_METHOD              1
+            138 CALL_METHOD              1
+            140 POP_TOP
+            142 JUMP_ABSOLUTE          122
+
+ 55     >>  144 LOAD_FAST                3 (keyMappingXmlObj)
+            146 LOAD_METHOD             12 (find_all)
+            148 LOAD_CONST               8 ('Metadata')
+            150 CALL_METHOD              1
+            152 STORE_FAST              11 (metadata_tags)
+
+ 58         154 LOAD_FAST               11 (metadata_tags)
+            156 GET_ITER
+        >>  158 FOR_ITER                26 (to 186)
+            160 STORE_FAST              12 (metadata)
+
+ 59         162 LOAD_FAST               12 (metadata)
+            164 LOAD_METHOD             13 (decode_contents)
+            166 CALL_METHOD              0
+            168 STORE_FAST              13 (childrenContent)
+
+ 60         170 LOAD_GLOBAL             14 (escape)
+            172 LOAD_FAST               13 (childrenContent)
+            174 CALL_FUNCTION            1
+            176 STORE_FAST              14 (escapedContent)
+
+ 61         178 LOAD_FAST               14 (escapedContent)
+            180 LOAD_FAST               12 (metadata)
+            182 STORE_ATTR              15 (string)
+            184 JUMP_ABSOLUTE          158
+
+ 63     >>  186 LOAD_FAST                3 (keyMappingXmlObj)
+            188 POP_BLOCK
+            190 RETURN_VALUE
+
+ 64     >>  192 DUP_TOP
+            194 LOAD_GLOBAL             16 (Exception)
+            196 EXTENDED_ARG             1
+            198 JUMP_IF_NOT_EXC_MATCH   258
+            200 POP_TOP
+            202 STORE_FAST              15 (e)
+            204 POP_TOP
+            206 SETUP_FINALLY           42 (to 250)
+
+ 65         208 LOAD_GLOBAL             17 (logger)
+            210 LOAD_METHOD             18 (error)
+            212 LOAD_CONST               9 ('replaceXml error ')
+            214 LOAD_FAST               15 (e)
+            216 FORMAT_VALUE             0
+            218 LOAD_CONST              10 (': index--')
+            220 LOAD_FAST                1 (index)
+            222 FORMAT_VALUE             0
+            224 LOAD_CONST              11 (', xml: ')
+            226 LOAD_FAST                2 (replaceItemXml)
+            228 FORMAT_VALUE             0
+            230 BUILD_STRING             6
+            232 CALL_METHOD              1
+            234 POP_TOP
+
+ 66         236 POP_BLOCK
+            238 POP_EXCEPT
+            240 LOAD_CONST              12 (None)
+            242 STORE_FAST              15 (e)
+            244 DELETE_FAST             15 (e)
+            246 LOAD_CONST              12 (None)
+            248 RETURN_VALUE
+        >>  250 LOAD_CONST              12 (None)
+            252 STORE_FAST              15 (e)
+            254 DELETE_FAST             15 (e)
+            256 RERAISE
+        >>  258 RERAISE
+            260 LOAD_CONST              12 (None)
+            262 RETURN_VALUE
+
+=== PresetManager.buildKeyBlock ===
+ 69           0 LOAD_GLOBAL              0 (BeautifulSoup)
+              2 LOAD_CONST               1 ('')
+              4 LOAD_CONST               2 ('xml')
+              6 CALL_FUNCTION            2
+              8 STORE_FAST               2 (tmp)
+
+ 70          10 BUILD_LIST               0
+             12 STORE_FAST               3 (keys)
+
+ 72          14 LOAD_GLOBAL              1 (range)
+             16 LOAD_FAST                1 (maxNumber)
+             18 LOAD_CONST               3 (1)
+             20 BINARY_ADD
+             22 CALL_FUNCTION            1
+             24 GET_ITER
+        >>   26 FOR_ITER                56 (to 84)
+             28 STORE_FAST               4 (i)
+
+ 73          30 LOAD_FAST                2 (tmp)
+             32 LOAD_METHOD              2 (new_tag)
+             34 LOAD_CONST               4 ('Key')
+             36 LOAD_FAST                4 (i)
+             38 FORMAT_VALUE             0
+             40 BUILD_STRING             2
+             42 CALL_METHOD              1
+             44 STORE_FAST               5 (key)
+
+ 74          46 LOAD_FAST                2 (tmp)
+             48 LOAD_METHOD              2 (new_tag)
+             50 LOAD_CONST               5 ('RoutineId')
+             52 CALL_METHOD              1
+             54 STORE_FAST               6 (routine)
+
+ 75          56 LOAD_CONST               6 ('Empty')
+             58 LOAD_FAST                6 (routine)
+             60 STORE_ATTR               3 (string)
+
+ 76          62 LOAD_FAST                5 (key)
+             64 LOAD_METHOD              4 (append)
+             66 LOAD_FAST                6 (routine)
+             68 CALL_METHOD              1
+             70 POP_TOP
+
+ 77          72 LOAD_FAST                3 (keys)
+             74 LOAD_METHOD              4 (append)
+             76 LOAD_FAST                5 (key)
+             78 CALL_METHOD              1
+             80 POP_TOP
+             82 JUMP_ABSOLUTE           26
+
+ 79     >>   84 LOAD_FAST                3 (keys)
+             86 RETURN_VALUE
+
+=== PresetManager.insertKeyBlock ===
+ 82           0 LOAD_FAST                1 (keyMappingXmlObj)
+              2 LOAD_METHOD              0 (find)
+              4 LOAD_CONST               1 ('KeyList')
+              6 CALL_METHOD              1
+              8 STORE_FAST               3 (keyListTag)
+
+ 83          10 LOAD_FAST                3 (keyListTag)
+             12 LOAD_METHOD              0 (find)
+             14 LOAD_CONST               2 ('MaxNumber')
+             16 CALL_METHOD              1
+             18 STORE_FAST               4 (maxTag)
+
+ 84          20 LOAD_GLOBAL              1 (str)
+             22 LOAD_FAST                2 (maxNumber)
+             24 CALL_FUNCTION            1
+             26 LOAD_FAST                4 (maxTag)
+             28 STORE_ATTR               2 (string)
+
+ 86          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              3 (buildKeyBlock)
+             34 LOAD_FAST                2 (maxNumber)
+             36 CALL_METHOD              1
+             38 STORE_FAST               5 (keyBlock)
+
+ 88          40 LOAD_GLOBAL              4 (reversed)
+             42 LOAD_FAST                5 (keyBlock)
+             44 CALL_FUNCTION            1
+             46 GET_ITER
+        >>   48 FOR_ITER                14 (to 64)
+             50 STORE_FAST               6 (key)
+
+ 89          52 LOAD_FAST                4 (maxTag)
+             54 LOAD_METHOD              5 (insert_after)
+             56 LOAD_FAST                6 (key)
+             58 CALL_METHOD              1
+             60 POP_TOP
+             62 JUMP_ABSOLUTE           48
+
+ 91     >>   64 LOAD_FAST                1 (keyMappingXmlObj)
+             66 RETURN_VALUE
+
+=== PresetManager.setKeyMapping ===
+ 95           0 LOAD_FAST                1 (device)
+              2 LOAD_METHOD              0 (upnpPost)
+              4 LOAD_CONST               1 ('SetKeyMapping')
+              6 LOAD_CONST               2 ('QueueContext')
+              8 LOAD_FAST                2 (setKeyMappingXml)
+             10 BUILD_MAP                1
+             12 CALL_METHOD              2
+             14 STORE_FAST               3 (response)
+
+ 97          16 LOAD_FAST                3 (response)
+             18 LOAD_METHOD              1 (get)
+             20 LOAD_CONST               3 ('status_code')
+             22 CALL_METHOD              1
+             24 LOAD_CONST               4 (200)
+             26 COMPARE_OP               2 (==)
+             28 POP_JUMP_IF_FALSE       34
+
+ 98          30 LOAD_CONST               5 (True)
+             32 RETURN_VALUE
+
+ 99     >>   34 LOAD_CONST               6 (False)
+             36 RETURN_VALUE
+
+=== PresetManager.getPlayList ===
+107           0 LOAD_FAST                1 (device)
+              2 LOAD_METHOD              0 (upnpPost)
+              4 LOAD_CONST               1 ('BrowseQueue')
+              6 LOAD_CONST               2 ('QueueName')
+              8 LOAD_CONST               3 ('CurrentQueue')
+             10 BUILD_MAP                1
+             12 CALL_METHOD              2
+             14 STORE_FAST               2 (response)
+
+108          16 LOAD_FAST                2 (response)
+             18 LOAD_CONST               4 (None)
+             20 IS_OP                    0
+             22 POP_JUMP_IF_FALSE       28
+
+109          24 LOAD_CONST               4 (None)
+             26 RETURN_VALUE
+
+110     >>   28 LOAD_FAST                2 (response)
+             30 LOAD_METHOD              1 (get)
+             32 LOAD_CONST               5 ('musicList')
+             34 LOAD_CONST               4 (None)
+             36 CALL_METHOD              2
+             38 STORE_FAST               3 (playList)
+
+113          40 LOAD_FAST                3 (playList)
+             42 RETURN_VALUE

@@ -1,0 +1,3708 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nmacOS Sparkle 更新管理模块。\n\n该模块负责：\n1. 加载 Sparkle.framework；\n2. 初始化 Sparkle Updater Controller；\n3. 根据架构选择 appcast feed；\n4. 提供自动检查与手动检查更新入口。\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 11           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+ 12          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (os)
+             18 STORE_NAME               2 (os)
+
+ 13          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (platform)
+             26 STORE_NAME               3 (platform)
+
+ 14          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               2 (None)
+             32 IMPORT_NAME              4 (sys)
+             34 STORE_NAME               4 (sys)
+
+ 15          36 LOAD_CONST               1 (0)
+             38 LOAD_CONST               2 (None)
+             40 IMPORT_NAME              5 (logging)
+             42 STORE_NAME               5 (logging)
+
+ 16          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               2 (None)
+             48 IMPORT_NAME              6 (threading)
+             50 STORE_NAME               6 (threading)
+
+ 17          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               2 (None)
+             56 IMPORT_NAME              7 (xml.etree.ElementTree)
+             58 IMPORT_FROM              8 (etree)
+             60 ROT_TWO
+             62 POP_TOP
+             64 IMPORT_FROM              9 (ElementTree)
+             66 STORE_NAME              10 (ET)
+             68 POP_TOP
+
+ 18          70 LOAD_CONST               1 (0)
+             72 LOAD_CONST               3 (('Path',))
+             74 IMPORT_NAME             11 (pathlib)
+             76 IMPORT_FROM             12 (Path)
+             78 STORE_NAME              12 (Path)
+             80 POP_TOP
+
+ 20          82 LOAD_CONST               1 (0)
+             84 LOAD_CONST               2 (None)
+             86 IMPORT_NAME             13 (requests)
+             88 STORE_NAME              13 (requests)
+
+ 22          90 LOAD_NAME                5 (logging)
+             92 LOAD_METHOD             14 (getLogger)
+             94 LOAD_CONST               4 ('linkplay')
+             96 CALL_METHOD              1
+             98 STORE_NAME              15 (logger)
+
+ 24         100 LOAD_CONST               2 (None)
+            102 STORE_GLOBAL            16 (_SparkleUpdaterDelegateClass)
+
+ 27         104 LOAD_CONST               5 (<code object _ensureSparkleDelegateClasses at 0x000001F3253A2B30, file "LPClientFramework\LPMacSparkleUpdater.py", line 27>)
+            106 LOAD_CONST               6 ('_ensureSparkleDelegateClasses')
+            108 MAKE_FUNCTION            0
+            110 STORE_NAME              17 (_ensureSparkleDelegateClasses)
+
+383         112 LOAD_BUILD_CLASS
+            114 LOAD_CONST               7 (<code object LPMacSparkleUpdater at 0x000001F3253AE9D0, file "LPClientFramework\LPMacSparkleUpdater.py", line 383>)
+            116 LOAD_CONST               8 ('LPMacSparkleUpdater')
+            118 MAKE_FUNCTION            0
+            120 LOAD_CONST               8 ('LPMacSparkleUpdater')
+            122 CALL_FUNCTION            2
+            124 STORE_NAME              18 (LPMacSparkleUpdater)
+            126 LOAD_CONST               2 (None)
+            128 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses ===
+ 38           0 LOAD_GLOBAL              0 (_SparkleUpdaterDelegateClass)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    1
+              6 POP_JUMP_IF_FALSE       12
+
+ 39           8 LOAD_GLOBAL              0 (_SparkleUpdaterDelegateClass)
+             10 RETURN_VALUE
+
+ 41     >>   12 LOAD_CONST               2 (0)
+             14 LOAD_CONST               1 (None)
+             16 IMPORT_NAME              1 (objc)
+             18 STORE_DEREF              1 (objc)
+
+ 42          20 LOAD_CONST               2 (0)
+             22 LOAD_CONST               3 (('NSObject',))
+             24 IMPORT_NAME              2 (Foundation)
+             26 IMPORT_FROM              3 (NSObject)
+             28 STORE_FAST               0 (NSObject)
+             30 POP_TOP
+
+ 45          32 LOAD_BUILD_CLASS
+             34 LOAD_CLOSURE             0 (LPSparkleUpdaterDelegate)
+             36 LOAD_CLOSURE             1 (objc)
+             38 BUILD_TUPLE              2
+             40 LOAD_CONST               4 (<code object LPSparkleUpdaterDelegate at 0x000001F3253A2DF0, file "LPClientFramework\LPMacSparkleUpdater.py", line 45>)
+             42 LOAD_CONST               5 ('LPSparkleUpdaterDelegate')
+             44 MAKE_FUNCTION            8 (closure)
+             46 LOAD_CONST               5 ('LPSparkleUpdaterDelegate')
+             48 LOAD_FAST                0 (NSObject)
+             50 CALL_FUNCTION            3
+             52 STORE_DEREF              0 (LPSparkleUpdaterDelegate)
+
+378          54 LOAD_DEREF               0 (LPSparkleUpdaterDelegate)
+             56 STORE_GLOBAL             0 (_SparkleUpdaterDelegateClass)
+
+379          58 LOAD_GLOBAL              0 (_SparkleUpdaterDelegateClass)
+             60 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate ===
+ 45           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate')
+              6 STORE_NAME               2 (__qualname__)
+
+ 46           8 LOAD_CONST               1 ('Sparkle updater delegate 桥接类。')
+             10 STORE_NAME               3 (__doc__)
+
+ 48          12 LOAD_CLOSURE             0 (LPSparkleUpdaterDelegate)
+             14 LOAD_CLOSURE             1 (objc)
+             16 BUILD_TUPLE              2
+             18 LOAD_CONST               2 (<code object initWithOwner_ at 0x000001F3253DA190, file "LPClientFramework\LPMacSparkleUpdater.py", line 48>)
+             20 LOAD_CONST               3 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.initWithOwner_')
+             22 MAKE_FUNCTION            8 (closure)
+             24 STORE_NAME               4 (initWithOwner_)
+
+ 63          26 LOAD_CONST               4 (<code object updater_didFindValidUpdate_ at 0x000001F3253DA660, file "LPClientFramework\LPMacSparkleUpdater.py", line 63>)
+             28 LOAD_CONST               5 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didFindValidUpdate_')
+             30 MAKE_FUNCTION            0
+             32 STORE_NAME               5 (updater_didFindValidUpdate_)
+
+ 93          34 LOAD_CONST               6 (<code object updater_willDownloadUpdate_withRequest_ at 0x000001F3253DA710, file "LPClientFramework\LPMacSparkleUpdater.py", line 93>)
+             36 LOAD_CONST               7 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_willDownloadUpdate_withRequest_')
+             38 MAKE_FUNCTION            0
+             40 STORE_NAME               6 (updater_willDownloadUpdate_withRequest_)
+
+118          42 LOAD_CONST               8 (<code object updater_didDownloadUpdate_ at 0x000001F3253DA450, file "LPClientFramework\LPMacSparkleUpdater.py", line 118>)
+             44 LOAD_CONST               9 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didDownloadUpdate_')
+             46 MAKE_FUNCTION            0
+             48 STORE_NAME               7 (updater_didDownloadUpdate_)
+
+142          50 LOAD_CONST              10 (<code object updater_failedToDownloadUpdate_error_ at 0x000001F3253DAA80, file "LPClientFramework\LPMacSparkleUpdater.py", line 142>)
+             52 LOAD_CONST              11 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_failedToDownloadUpdate_error_')
+             54 MAKE_FUNCTION            0
+             56 STORE_NAME               8 (updater_failedToDownloadUpdate_error_)
+
+176          58 LOAD_CONST              12 (<code object userDidCancelDownload_ at 0x000001F3253DA3A0, file "LPClientFramework\LPMacSparkleUpdater.py", line 176>)
+             60 LOAD_CONST              13 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.userDidCancelDownload_')
+             62 MAKE_FUNCTION            0
+             64 STORE_NAME               9 (userDidCancelDownload_)
+
+199          66 LOAD_CONST              14 (<code object updater_willInstallUpdate_ at 0x000001F3253DA5B0, file "LPClientFramework\LPMacSparkleUpdater.py", line 199>)
+             68 LOAD_CONST              15 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_willInstallUpdate_')
+             70 MAKE_FUNCTION            0
+             72 STORE_NAME              10 (updater_willInstallUpdate_)
+
+223          74 LOAD_CONST              16 (<code object updater_willInstallUpdateOnQuit_immediateInstallationBlock_ at 0x000001F3253DA7C0, file "LPClientFramework\LPMacSparkleUpdater.py", line 223>)
+             76 LOAD_CONST              17 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_willInstallUpdateOnQuit_immediateInstallationBlock_')
+             78 MAKE_FUNCTION            0
+             80 STORE_NAME              11 (updater_willInstallUpdateOnQuit_immediateInstallationBlock_)
+
+249          82 LOAD_CONST              18 (<code object updaterDidNotFindUpdate_ at 0x000001F3253DA870, file "LPClientFramework\LPMacSparkleUpdater.py", line 249>)
+             84 LOAD_CONST              19 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updaterDidNotFindUpdate_')
+             86 MAKE_FUNCTION            0
+             88 STORE_NAME              12 (updaterDidNotFindUpdate_)
+
+269          90 LOAD_CONST              20 (<code object updater_didNotFindUpdateWithLatestAppcastItem_hostToLatestAppcastItemComparisonResult_background_ at 0x000001F3253DA9D0, file "LPClientFramework\LPMacSparkleUpdater.py", line 269>)
+             92 LOAD_CONST              21 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didNotFindUpdateWithLatestAppcastItem_hostToLatestAppcastItemComparisonResult_background_')
+             94 MAKE_FUNCTION            0
+             96 STORE_NAME              13 (updater_didNotFindUpdateWithLatestAppcastItem_hostToLatestAppcastItemComparisonResult_background_)
+
+306          98 LOAD_CONST              22 (<code object updaterDidNotFindUpdate_error_ at 0x000001F3253B0240, file "LPClientFramework\LPMacSparkleUpdater.py", line 306>)
+            100 LOAD_CONST              23 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updaterDidNotFindUpdate_error_')
+            102 MAKE_FUNCTION            0
+            104 STORE_NAME              14 (updaterDidNotFindUpdate_error_)
+
+344         106 LOAD_CONST              24 (<code object updater_didFinishLoadingAppcast_ at 0x000001F3253A27C0, file "LPClientFramework\LPMacSparkleUpdater.py", line 344>)
+            108 LOAD_CONST              25 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didFinishLoadingAppcast_')
+            110 MAKE_FUNCTION            0
+            112 STORE_NAME              15 (updater_didFinishLoadingAppcast_)
+
+360         114 LOAD_CONST              26 (<code object updater_didFinishUpdateCycleForUpdateCheck_error_ at 0x000001F3253A2190, file "LPClientFramework\LPMacSparkleUpdater.py", line 360>)
+            116 LOAD_CONST              27 ('_ensureSparkleDelegateClasses.<locals>.LPSparkleUpdaterDelegate.updater_didFinishUpdateCycleForUpdateCheck_error_')
+            118 MAKE_FUNCTION            0
+            120 STORE_NAME              16 (updater_didFinishUpdateCycleForUpdateCheck_error_)
+            122 LOAD_CONST              28 (None)
+            124 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.initWithOwner_ ===
+ 57           0 LOAD_DEREF               1 (objc)
+              2 LOAD_METHOD              0 (super)
+              4 LOAD_DEREF               0 (LPSparkleUpdaterDelegate)
+              6 LOAD_FAST                0 (self)
+              8 CALL_METHOD              2
+             10 LOAD_METHOD              1 (init)
+             12 CALL_METHOD              0
+             14 STORE_FAST               0 (self)
+
+ 58          16 LOAD_FAST                0 (self)
+             18 LOAD_CONST               1 (None)
+             20 IS_OP                    0
+             22 POP_JUMP_IF_FALSE       28
+
+ 59          24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+ 60     >>   28 LOAD_FAST                1 (owner)
+             30 LOAD_FAST                0 (self)
+             32 STORE_ATTR               2 (_owner)
+
+ 61          34 LOAD_FAST                0 (self)
+             36 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didFindValidUpdate_ ===
+ 73           0 LOAD_CONST               1 (None)
+              2 STORE_FAST               3 (version_string)
+
+ 74           4 SETUP_FINALLY           34 (to 40)
+
+ 75           6 LOAD_GLOBAL              0 (getattr)
+              8 LOAD_FAST                2 (item)
+             10 LOAD_CONST               2 ('displayVersionString')
+             12 LOAD_CONST               1 (None)
+             14 CALL_FUNCTION            3
+             16 STORE_FAST               4 (version_attr)
+
+ 76          18 LOAD_GLOBAL              1 (callable)
+             20 LOAD_FAST                4 (version_attr)
+             22 CALL_FUNCTION            1
+             24 POP_JUMP_IF_FALSE       32
+             26 LOAD_FAST                4 (version_attr)
+             28 CALL_FUNCTION            0
+             30 JUMP_FORWARD             2 (to 34)
+        >>   32 LOAD_FAST                4 (version_attr)
+        >>   34 STORE_FAST               3 (version_string)
+             36 POP_BLOCK
+             38 JUMP_FORWARD            22 (to 62)
+
+ 77     >>   40 DUP_TOP
+             42 LOAD_GLOBAL              2 (Exception)
+             44 JUMP_IF_NOT_EXC_MATCH    60
+             46 POP_TOP
+             48 POP_TOP
+             50 POP_TOP
+
+ 78          52 LOAD_CONST               1 (None)
+             54 STORE_FAST               3 (version_string)
+             56 POP_EXCEPT
+             58 JUMP_FORWARD             2 (to 62)
+        >>   60 RERAISE
+
+ 80     >>   62 LOAD_GLOBAL              3 (logger)
+             64 LOAD_METHOD              4 (info)
+
+ 81          66 LOAD_CONST               3 ('[sparkle.delegate] didFindValidUpdate updater=%s version=%s')
+
+ 82          68 LOAD_GLOBAL              5 (type)
+             70 LOAD_FAST                1 (updater)
+             72 CALL_FUNCTION            1
+             74 LOAD_ATTR                6 (__name__)
+
+ 83          76 LOAD_FAST                3 (version_string)
+
+ 80          78 CALL_METHOD              3
+             80 POP_TOP
+
+ 85          82 LOAD_FAST                0 (self)
+             84 LOAD_ATTR                7 (_owner)
+             86 LOAD_ATTR                8 (_setLastCheckDetail)
+
+ 86          88 LOAD_CONST               4 ('found')
+
+ 87          90 LOAD_CONST               5 ('sparkle_delegate')
+
+ 88          92 LOAD_FAST                3 (version_string)
+
+ 89          94 LOAD_FAST                0 (self)
+             96 LOAD_ATTR                7 (_owner)
+             98 LOAD_METHOD              9 (_currentAppVersion)
+            100 CALL_METHOD              0
+
+ 85         102 LOAD_CONST               6 (('resultKind', 'source', 'latestVersion', 'currentVersion'))
+            104 CALL_FUNCTION_KW         4
+            106 STORE_FAST               5 (detail)
+
+ 91         108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR                7 (_owner)
+            112 LOAD_METHOD             10 (notifyUpdateFound)
+            114 LOAD_FAST                5 (detail)
+            116 CALL_METHOD              1
+            118 POP_TOP
+            120 LOAD_CONST               1 (None)
+            122 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_willDownloadUpdate_withRequest_ ===
+104           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_owner)
+              4 LOAD_METHOD              1 (_extractDisplayVersionFromItem)
+              6 LOAD_FAST                2 (item)
+              8 CALL_METHOD              1
+             10 STORE_FAST               4 (version_string)
+
+105          12 LOAD_GLOBAL              2 (logger)
+             14 LOAD_METHOD              3 (info)
+
+106          16 LOAD_CONST               1 ('[sparkle.delegate] willDownloadUpdate updater=%s version=%s')
+
+107          18 LOAD_GLOBAL              4 (type)
+             20 LOAD_FAST                1 (updater)
+             22 CALL_FUNCTION            1
+             24 LOAD_ATTR                5 (__name__)
+
+108          26 LOAD_FAST                4 (version_string)
+
+105          28 CALL_METHOD              3
+             30 POP_TOP
+
+110          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                0 (_owner)
+             36 LOAD_ATTR                6 (_setLastCheckDetail)
+
+111          38 LOAD_CONST               2 ('found')
+
+112          40 LOAD_CONST               3 ('sparkle_delegate_download_start')
+
+113          42 LOAD_FAST                4 (version_string)
+
+114          44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                0 (_owner)
+             48 LOAD_METHOD              7 (_currentAppVersion)
+             50 CALL_METHOD              0
+
+110          52 LOAD_CONST               4 (('resultKind', 'source', 'latestVersion', 'currentVersion'))
+             54 CALL_FUNCTION_KW         4
+             56 STORE_FAST               5 (detail)
+
+116          58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                0 (_owner)
+             62 LOAD_METHOD              8 (notifyDownloadLifecycle)
+             64 LOAD_CONST               5 ('download_started')
+             66 LOAD_FAST                5 (detail)
+             68 CALL_METHOD              2
+             70 POP_TOP
+             72 LOAD_CONST               6 (None)
+             74 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didDownloadUpdate_ ===
+128           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_owner)
+              4 LOAD_METHOD              1 (_extractDisplayVersionFromItem)
+              6 LOAD_FAST                2 (item)
+              8 CALL_METHOD              1
+             10 STORE_FAST               3 (version_string)
+
+129          12 LOAD_GLOBAL              2 (logger)
+             14 LOAD_METHOD              3 (info)
+
+130          16 LOAD_CONST               1 ('[sparkle.delegate] didDownloadUpdate updater=%s version=%s')
+
+131          18 LOAD_GLOBAL              4 (type)
+             20 LOAD_FAST                1 (updater)
+             22 CALL_FUNCTION            1
+             24 LOAD_ATTR                5 (__name__)
+
+132          26 LOAD_FAST                3 (version_string)
+
+129          28 CALL_METHOD              3
+             30 POP_TOP
+
+134          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                0 (_owner)
+             36 LOAD_ATTR                6 (_setLastCheckDetail)
+
+135          38 LOAD_CONST               2 ('found')
+
+136          40 LOAD_CONST               3 ('sparkle_delegate_download_success')
+
+137          42 LOAD_FAST                3 (version_string)
+
+138          44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                0 (_owner)
+             48 LOAD_METHOD              7 (_currentAppVersion)
+             50 CALL_METHOD              0
+
+134          52 LOAD_CONST               4 (('resultKind', 'source', 'latestVersion', 'currentVersion'))
+             54 CALL_FUNCTION_KW         4
+             56 STORE_FAST               4 (detail)
+
+140          58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                0 (_owner)
+             62 LOAD_METHOD              8 (notifyDownloadLifecycle)
+             64 LOAD_CONST               5 ('download_succeeded')
+             66 LOAD_FAST                4 (detail)
+             68 CALL_METHOD              2
+             70 POP_TOP
+             72 LOAD_CONST               6 (None)
+             74 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_failedToDownloadUpdate_error_ ===
+153           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_owner)
+              4 LOAD_METHOD              1 (_extractDisplayVersionFromItem)
+              6 LOAD_FAST                2 (item)
+              8 CALL_METHOD              1
+             10 STORE_FAST               4 (version_string)
+
+154          12 LOAD_GLOBAL              2 (str)
+             14 LOAD_FAST                3 (error)
+             16 JUMP_IF_TRUE_OR_POP     20
+             18 LOAD_CONST               1 ('')
+        >>   20 CALL_FUNCTION            1
+             22 STORE_FAST               5 (error_message)
+
+155          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                0 (_owner)
+             28 LOAD_METHOD              3 (_extractNSErrorCode)
+             30 LOAD_FAST                3 (error)
+             32 CALL_METHOD              1
+             34 STORE_FAST               6 (error_code)
+
+156          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                0 (_owner)
+             40 LOAD_METHOD              4 (_classifyCheckError)
+             42 LOAD_FAST                5 (error_message)
+             44 CALL_METHOD              1
+             46 STORE_FAST               7 (error_category)
+
+157          48 LOAD_GLOBAL              5 (logger)
+             50 LOAD_METHOD              6 (warning)
+
+158          52 LOAD_CONST               2 ('[sparkle.delegate] failedToDownloadUpdate updater=%s version=%s error=%s code=%s category=%s')
+
+159          54 LOAD_GLOBAL              7 (type)
+             56 LOAD_FAST                1 (updater)
+             58 CALL_FUNCTION            1
+             60 LOAD_ATTR                8 (__name__)
+
+160          62 LOAD_FAST                4 (version_string)
+
+161          64 LOAD_FAST                5 (error_message)
+
+162          66 LOAD_FAST                6 (error_code)
+
+163          68 LOAD_FAST                7 (error_category)
+
+157          70 CALL_METHOD              6
+             72 POP_TOP
+
+165          74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                0 (_owner)
+             78 LOAD_ATTR                9 (_setLastCheckDetail)
+
+166          80 LOAD_CONST               3 ('error')
+
+167          82 LOAD_CONST               4 ('sparkle_delegate_download_failed')
+
+168          84 LOAD_FAST                4 (version_string)
+
+169          86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                0 (_owner)
+             90 LOAD_METHOD             10 (_currentAppVersion)
+             92 CALL_METHOD              0
+
+170          94 LOAD_FAST                7 (error_category)
+
+171          96 LOAD_FAST                6 (error_code)
+
+172          98 LOAD_FAST                5 (error_message)
+
+165         100 LOAD_CONST               5 (('resultKind', 'source', 'latestVersion', 'currentVersion', 'errorCategory', 'errorCode', 'errorMessage'))
+            102 CALL_FUNCTION_KW         7
+            104 STORE_FAST               8 (detail)
+
+174         106 LOAD_FAST                0 (self)
+            108 LOAD_ATTR                0 (_owner)
+            110 LOAD_METHOD             11 (notifyDownloadLifecycle)
+            112 LOAD_CONST               6 ('download_failed')
+            114 LOAD_FAST                8 (detail)
+            116 CALL_METHOD              2
+            118 POP_TOP
+            120 LOAD_CONST               7 (None)
+            122 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.userDidCancelDownload_ ===
+185           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+
+186           4 LOAD_CONST               1 ('[sparkle.delegate] userDidCancelDownload updater=%s')
+
+187           6 LOAD_GLOBAL              2 (type)
+              8 LOAD_FAST                1 (updater)
+             10 CALL_FUNCTION            1
+             12 LOAD_ATTR                3 (__name__)
+
+185          14 CALL_METHOD              2
+             16 POP_TOP
+
+189          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                4 (_owner)
+             22 LOAD_ATTR                5 (_setLastCheckDetail)
+
+190          24 LOAD_CONST               2 ('error')
+
+191          26 LOAD_CONST               3 ('sparkle_delegate_download_cancelled')
+
+192          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                4 (_owner)
+             32 LOAD_METHOD              6 (_currentAppVersion)
+             34 CALL_METHOD              0
+
+193          36 LOAD_CONST               4 ('user_cancelled')
+
+194          38 LOAD_CONST               5 ('')
+
+195          40 LOAD_CONST               6 ('user cancelled download')
+
+189          42 LOAD_CONST               7 (('resultKind', 'source', 'currentVersion', 'errorCategory', 'errorCode', 'errorMessage'))
+             44 CALL_FUNCTION_KW         6
+             46 STORE_FAST               2 (detail)
+
+197          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                4 (_owner)
+             52 LOAD_METHOD              7 (notifyDownloadLifecycle)
+             54 LOAD_CONST               8 ('download_cancelled')
+             56 LOAD_FAST                2 (detail)
+             58 CALL_METHOD              2
+             60 POP_TOP
+             62 LOAD_CONST               9 (None)
+             64 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_willInstallUpdate_ ===
+209           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_owner)
+              4 LOAD_METHOD              1 (_extractDisplayVersionFromItem)
+              6 LOAD_FAST                2 (item)
+              8 CALL_METHOD              1
+             10 STORE_FAST               3 (version_string)
+
+210          12 LOAD_GLOBAL              2 (logger)
+             14 LOAD_METHOD              3 (info)
+
+211          16 LOAD_CONST               1 ('[sparkle.delegate] willInstallUpdate updater=%s version=%s')
+
+212          18 LOAD_GLOBAL              4 (type)
+             20 LOAD_FAST                1 (updater)
+             22 CALL_FUNCTION            1
+             24 LOAD_ATTR                5 (__name__)
+
+213          26 LOAD_FAST                3 (version_string)
+
+210          28 CALL_METHOD              3
+             30 POP_TOP
+
+215          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                0 (_owner)
+             36 LOAD_ATTR                6 (_setLastCheckDetail)
+
+216          38 LOAD_CONST               2 ('found')
+
+217          40 LOAD_CONST               3 ('sparkle_delegate_install')
+
+218          42 LOAD_FAST                3 (version_string)
+
+219          44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                0 (_owner)
+             48 LOAD_METHOD              7 (_currentAppVersion)
+             50 CALL_METHOD              0
+
+215          52 LOAD_CONST               4 (('resultKind', 'source', 'latestVersion', 'currentVersion'))
+             54 CALL_FUNCTION_KW         4
+             56 STORE_FAST               4 (detail)
+
+221          58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                0 (_owner)
+             62 LOAD_METHOD              8 (notifyInstallWillStart)
+             64 LOAD_FAST                4 (detail)
+             66 CALL_METHOD              1
+             68 POP_TOP
+             70 LOAD_CONST               5 (None)
+             72 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_willInstallUpdateOnQuit_immediateInstallationBlock_ ===
+234           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_owner)
+              4 LOAD_METHOD              1 (_extractDisplayVersionFromItem)
+              6 LOAD_FAST                2 (item)
+              8 CALL_METHOD              1
+             10 STORE_FAST               4 (version_string)
+
+235          12 LOAD_GLOBAL              2 (logger)
+             14 LOAD_METHOD              3 (info)
+
+236          16 LOAD_CONST               1 ('[sparkle.delegate] willInstallUpdateOnQuit updater=%s version=%s')
+
+237          18 LOAD_GLOBAL              4 (type)
+             20 LOAD_FAST                1 (updater)
+             22 CALL_FUNCTION            1
+             24 LOAD_ATTR                5 (__name__)
+
+238          26 LOAD_FAST                4 (version_string)
+
+235          28 CALL_METHOD              3
+             30 POP_TOP
+
+240          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                0 (_owner)
+             36 LOAD_ATTR                6 (_setLastCheckDetail)
+
+241          38 LOAD_CONST               2 ('found')
+
+242          40 LOAD_CONST               3 ('sparkle_delegate_install_on_quit')
+
+243          42 LOAD_FAST                4 (version_string)
+
+244          44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                0 (_owner)
+             48 LOAD_METHOD              7 (_currentAppVersion)
+             50 CALL_METHOD              0
+
+240          52 LOAD_CONST               4 (('resultKind', 'source', 'latestVersion', 'currentVersion'))
+             54 CALL_FUNCTION_KW         4
+             56 STORE_FAST               5 (detail)
+
+246          58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                0 (_owner)
+             62 LOAD_METHOD              8 (notifyInstallWillStart)
+             64 LOAD_FAST                5 (detail)
+             66 CALL_METHOD              1
+             68 POP_TOP
+
+247          70 LOAD_CONST               5 (False)
+             72 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updaterDidNotFindUpdate_ ===
+258           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+
+259           4 LOAD_CONST               1 ('[sparkle.delegate] updaterDidNotFindUpdate updater=%s')
+
+260           6 LOAD_GLOBAL              2 (type)
+              8 LOAD_FAST                1 (updater)
+             10 CALL_FUNCTION            1
+             12 LOAD_ATTR                3 (__name__)
+
+258          14 CALL_METHOD              2
+             16 POP_TOP
+
+262          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                4 (_owner)
+             22 LOAD_ATTR                5 (_setLastCheckDetail)
+
+263          24 LOAD_CONST               2 ('no_update')
+
+264          26 LOAD_CONST               3 ('sparkle_delegate')
+
+265          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                4 (_owner)
+             32 LOAD_METHOD              6 (_currentAppVersion)
+             34 CALL_METHOD              0
+
+262          36 LOAD_CONST               4 (('resultKind', 'source', 'currentVersion'))
+             38 CALL_FUNCTION_KW         3
+             40 STORE_FAST               2 (detail)
+
+267          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                4 (_owner)
+             46 LOAD_METHOD              7 (notifyNoUpdateFound)
+             48 LOAD_FAST                2 (detail)
+             50 CALL_METHOD              1
+             52 POP_TOP
+             54 LOAD_CONST               5 (None)
+             56 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didNotFindUpdateWithLatestAppcastItem_hostToLatestAppcastItemComparisonResult_background_ ===
+283           0 LOAD_CONST               1 (None)
+              2 STORE_FAST               5 (version_string)
+
+284           4 SETUP_FINALLY           34 (to 40)
+
+285           6 LOAD_GLOBAL              0 (getattr)
+              8 LOAD_FAST                2 (appcastItem)
+             10 LOAD_CONST               2 ('displayVersionString')
+             12 LOAD_CONST               1 (None)
+             14 CALL_FUNCTION            3
+             16 STORE_FAST               6 (version_attr)
+
+286          18 LOAD_GLOBAL              1 (callable)
+             20 LOAD_FAST                6 (version_attr)
+             22 CALL_FUNCTION            1
+             24 POP_JUMP_IF_FALSE       32
+             26 LOAD_FAST                6 (version_attr)
+             28 CALL_FUNCTION            0
+             30 JUMP_FORWARD             2 (to 34)
+        >>   32 LOAD_FAST                6 (version_attr)
+        >>   34 STORE_FAST               5 (version_string)
+             36 POP_BLOCK
+             38 JUMP_FORWARD            22 (to 62)
+
+287     >>   40 DUP_TOP
+             42 LOAD_GLOBAL              2 (Exception)
+             44 JUMP_IF_NOT_EXC_MATCH    60
+             46 POP_TOP
+             48 POP_TOP
+             50 POP_TOP
+
+288          52 LOAD_CONST               1 (None)
+             54 STORE_FAST               5 (version_string)
+             56 POP_EXCEPT
+             58 JUMP_FORWARD             2 (to 62)
+        >>   60 RERAISE
+
+290     >>   62 LOAD_GLOBAL              3 (logger)
+             64 LOAD_METHOD              4 (info)
+
+291          66 LOAD_CONST               3 ('[sparkle.delegate] no update found updater=%s latest_version=%s comparison=%s background=%s')
+
+292          68 LOAD_GLOBAL              5 (type)
+             70 LOAD_FAST                1 (updater)
+             72 CALL_FUNCTION            1
+             74 LOAD_ATTR                6 (__name__)
+
+293          76 LOAD_FAST                5 (version_string)
+
+294          78 LOAD_FAST                3 (comparisonResult)
+
+295          80 LOAD_FAST                4 (background)
+
+290          82 CALL_METHOD              5
+             84 POP_TOP
+
+297          86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                7 (_owner)
+             90 LOAD_ATTR                8 (_setLastCheckDetail)
+
+298          92 LOAD_CONST               4 ('no_update')
+
+299          94 LOAD_CONST               5 ('sparkle_delegate')
+
+300          96 LOAD_FAST                5 (version_string)
+
+301          98 LOAD_FAST                0 (self)
+            100 LOAD_ATTR                7 (_owner)
+            102 LOAD_METHOD              9 (_currentAppVersion)
+            104 CALL_METHOD              0
+
+302         106 LOAD_FAST                3 (comparisonResult)
+
+297         108 LOAD_CONST               6 (('resultKind', 'source', 'latestVersion', 'currentVersion', 'compareResult'))
+            110 CALL_FUNCTION_KW         5
+            112 STORE_FAST               7 (detail)
+
+304         114 LOAD_FAST                0 (self)
+            116 LOAD_ATTR                7 (_owner)
+            118 LOAD_METHOD             10 (notifyNoUpdateFound)
+            120 LOAD_FAST                7 (detail)
+            122 CALL_METHOD              1
+            124 POP_TOP
+            126 LOAD_CONST               1 (None)
+            128 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updaterDidNotFindUpdate_error_ ===
+316           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                2 (error)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               3 (error_desc)
+
+317           8 LOAD_CONST               1 ('You’re up to date!')
+             10 LOAD_FAST                3 (error_desc)
+             12 CONTAINS_OP              0
+             14 POP_JUMP_IF_TRUE        24
+             16 LOAD_CONST               2 ("You're up to date!")
+             18 LOAD_FAST                3 (error_desc)
+             20 CONTAINS_OP              0
+             22 POP_JUMP_IF_FALSE       72
+
+318     >>   24 LOAD_GLOBAL              1 (logger)
+             26 LOAD_METHOD              2 (info)
+
+319          28 LOAD_CONST               3 ('[sparkle.delegate] no update found updater=%s detail=%s')
+
+320          30 LOAD_GLOBAL              3 (type)
+             32 LOAD_FAST                1 (updater)
+             34 CALL_FUNCTION            1
+             36 LOAD_ATTR                4 (__name__)
+
+321          38 LOAD_FAST                3 (error_desc)
+
+318          40 CALL_METHOD              3
+             42 POP_TOP
+
+323          44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                5 (_owner)
+             48 LOAD_ATTR                6 (_setLastCheckDetail)
+
+324          50 LOAD_CONST               4 ('no_update')
+
+325          52 LOAD_CONST               5 ('sparkle_delegate')
+
+326          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                5 (_owner)
+             58 LOAD_METHOD              7 (_currentAppVersion)
+             60 CALL_METHOD              0
+
+327          62 LOAD_FAST                3 (error_desc)
+
+323          64 LOAD_CONST               6 (('resultKind', 'source', 'currentVersion', 'errorMessage'))
+             66 CALL_FUNCTION_KW         4
+             68 STORE_FAST               4 (detail)
+             70 JUMP_FORWARD            48 (to 120)
+
+330     >>   72 LOAD_GLOBAL              1 (logger)
+             74 LOAD_METHOD              8 (warning)
+
+331          76 LOAD_CONST               7 ('[sparkle.delegate] update cycle finished with non-fatal no-update error updater=%s error=%s')
+
+332          78 LOAD_GLOBAL              3 (type)
+             80 LOAD_FAST                1 (updater)
+             82 CALL_FUNCTION            1
+             84 LOAD_ATTR                4 (__name__)
+
+333          86 LOAD_FAST                3 (error_desc)
+
+330          88 CALL_METHOD              3
+             90 POP_TOP
+
+335          92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR                5 (_owner)
+             96 LOAD_ATTR                6 (_setLastCheckDetail)
+
+336          98 LOAD_CONST               8 ('error')
+
+337         100 LOAD_CONST               5 ('sparkle_delegate')
+
+338         102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                5 (_owner)
+            106 LOAD_METHOD              7 (_currentAppVersion)
+            108 CALL_METHOD              0
+
+339         110 LOAD_CONST               9 ('updater_sdk')
+
+340         112 LOAD_FAST                3 (error_desc)
+
+335         114 LOAD_CONST              10 (('resultKind', 'source', 'currentVersion', 'errorCategory', 'errorMessage'))
+            116 CALL_FUNCTION_KW         5
+            118 STORE_FAST               4 (detail)
+
+342     >>  120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR                5 (_owner)
+            124 LOAD_METHOD              9 (notifyNoUpdateFound)
+            126 LOAD_FAST                4 (detail)
+            128 CALL_METHOD              1
+            130 POP_TOP
+            132 LOAD_CONST              11 (None)
+            134 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didFinishLoadingAppcast_ ===
+354           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+
+355           4 LOAD_CONST               1 ('[sparkle.delegate] didFinishLoadingAppcast updater=%s appcast=%s')
+
+356           6 LOAD_GLOBAL              2 (type)
+              8 LOAD_FAST                1 (updater)
+             10 CALL_FUNCTION            1
+             12 LOAD_ATTR                3 (__name__)
+
+357          14 LOAD_GLOBAL              2 (type)
+             16 LOAD_FAST                2 (appcast)
+             18 CALL_FUNCTION            1
+             20 LOAD_ATTR                3 (__name__)
+
+354          22 CALL_METHOD              3
+             24 POP_TOP
+             26 LOAD_CONST               2 (None)
+             28 RETURN_VALUE
+
+=== _ensureSparkleDelegateClasses.LPSparkleUpdaterDelegate.updater_didFinishUpdateCycleForUpdateCheck_error_ ===
+371           0 LOAD_GLOBAL              0 (logger)
+              2 LOAD_METHOD              1 (info)
+
+372           4 LOAD_CONST               1 ('[sparkle.delegate] didFinishUpdateCycle updater=%s updateCheck=%s error=%s')
+
+373           6 LOAD_GLOBAL              2 (type)
+              8 LOAD_FAST                1 (updater)
+             10 CALL_FUNCTION            1
+             12 LOAD_ATTR                3 (__name__)
+
+374          14 LOAD_FAST                2 (updateCheck)
+
+375          16 LOAD_FAST                3 (error)
+
+371          18 CALL_METHOD              4
+             20 POP_TOP
+             22 LOAD_CONST               2 (None)
+             24 RETURN_VALUE
+
+=== LPMacSparkleUpdater ===
+ 383           0 LOAD_NAME                0 (__name__)
+               2 STORE_NAME               1 (__module__)
+               4 LOAD_CONST               0 ('LPMacSparkleUpdater')
+               6 STORE_NAME               2 (__qualname__)
+
+ 384           8 LOAD_CONST               1 ('封装 Sparkle 更新流程，提供初始化和触发检查更新能力。')
+              10 STORE_NAME               3 (__doc__)
+
+ 386          12 LOAD_CONST               2 (<code object __init__ at 0x000001F3253A2920, file "LPClientFramework\LPMacSparkleUpdater.py", line 386>)
+              14 LOAD_CONST               3 ('LPMacSparkleUpdater.__init__')
+              16 MAKE_FUNCTION            0
+              18 STORE_NAME               4 (__init__)
+
+ 419          20 LOAD_CONST               4 (<code object _loadConfig at 0x000001F3253A2BE0, file "LPClientFramework\LPMacSparkleUpdater.py", line 419>)
+              22 LOAD_CONST               5 ('LPMacSparkleUpdater._loadConfig')
+              24 MAKE_FUNCTION            0
+              26 STORE_NAME               5 (_loadConfig)
+
+ 451          28 LOAD_CONST               6 (<code object _sparkleConfig at 0x000001F3253A2F50, file "LPClientFramework\LPMacSparkleUpdater.py", line 451>)
+              30 LOAD_CONST               7 ('LPMacSparkleUpdater._sparkleConfig')
+              32 MAKE_FUNCTION            0
+              34 STORE_NAME               6 (_sparkleConfig)
+
+ 462          36 LOAD_CONST               8 (<code object _frameworkCandidates at 0x000001F3253A2D40, file "LPClientFramework\LPMacSparkleUpdater.py", line 462>)
+              38 LOAD_CONST               9 ('LPMacSparkleUpdater._frameworkCandidates')
+              40 MAKE_FUNCTION            0
+              42 STORE_NAME               7 (_frameworkCandidates)
+
+ 496          44 LOAD_CONST              10 (<code object _loadSparkleBundle at 0x000001F324E69C90, file "LPClientFramework\LPMacSparkleUpdater.py", line 496>)
+              46 LOAD_CONST              11 ('LPMacSparkleUpdater._loadSparkleBundle')
+              48 MAKE_FUNCTION            0
+              50 STORE_NAME               8 (_loadSparkleBundle)
+
+ 530          52 LOAD_CONST              71 ((None,))
+              54 LOAD_CONST              13 (<code object _initUpdaterController at 0x000001F324E69240, file "LPClientFramework\LPMacSparkleUpdater.py", line 530>)
+              56 LOAD_CONST              14 ('LPMacSparkleUpdater._initUpdaterController')
+              58 MAKE_FUNCTION            1 (defaults)
+              60 STORE_NAME               9 (_initUpdaterController)
+
+ 562          62 LOAD_CONST              15 (<code object resolveFeedURL at 0x000001F324E69B30, file "LPClientFramework\LPMacSparkleUpdater.py", line 562>)
+              64 LOAD_CONST              16 ('LPMacSparkleUpdater.resolveFeedURL')
+              66 MAKE_FUNCTION            0
+              68 STORE_NAME              10 (resolveFeedURL)
+
+ 580          70 LOAD_CONST              17 (<code object setTemporaryFeedURL at 0x000001F324E69EA0, file "LPClientFramework\LPMacSparkleUpdater.py", line 580>)
+              72 LOAD_CONST              18 ('LPMacSparkleUpdater.setTemporaryFeedURL')
+              74 MAKE_FUNCTION            0
+              76 STORE_NAME              11 (setTemporaryFeedURL)
+
+ 591          78 LOAD_CONST              19 (<code object clearTemporaryFeedURL at 0x000001F324E69BE0, file "LPClientFramework\LPMacSparkleUpdater.py", line 591>)
+              80 LOAD_CONST              20 ('LPMacSparkleUpdater.clearTemporaryFeedURL')
+              82 MAKE_FUNCTION            0
+              84 STORE_NAME              12 (clearTemporaryFeedURL)
+
+ 602          86 LOAD_CONST              21 (<code object applyCurrentFeedURL at 0x000001F324E69190, file "LPClientFramework\LPMacSparkleUpdater.py", line 602>)
+              88 LOAD_CONST              22 ('LPMacSparkleUpdater.applyCurrentFeedURL')
+              90 MAKE_FUNCTION            0
+              92 STORE_NAME              13 (applyCurrentFeedURL)
+
+ 651          94 LOAD_CONST              23 (<code object initUpdater at 0x000001F324E69F50, file "LPClientFramework\LPMacSparkleUpdater.py", line 651>)
+              96 LOAD_CONST              24 ('LPMacSparkleUpdater.initUpdater')
+              98 MAKE_FUNCTION            0
+             100 STORE_NAME              14 (initUpdater)
+
+ 724         102 LOAD_CONST              25 (<code object isReady at 0x000001F324E69030, file "LPClientFramework\LPMacSparkleUpdater.py", line 724>)
+             104 LOAD_CONST              26 ('LPMacSparkleUpdater.isReady')
+             106 MAKE_FUNCTION            0
+             108 STORE_NAME              15 (isReady)
+
+ 735         110 LOAD_CONST              27 (<code object ensureReady at 0x000001F324E69660, file "LPClientFramework\LPMacSparkleUpdater.py", line 735>)
+             112 LOAD_CONST              28 ('LPMacSparkleUpdater.ensureReady')
+             114 MAKE_FUNCTION            0
+             116 STORE_NAME              16 (ensureReady)
+
+ 755         118 LOAD_CONST              29 (<code object startAutomaticChecks at 0x000001F324E69A80, file "LPClientFramework\LPMacSparkleUpdater.py", line 755>)
+             120 LOAD_CONST              30 ('LPMacSparkleUpdater.startAutomaticChecks')
+             122 MAKE_FUNCTION            0
+             124 STORE_NAME              17 (startAutomaticChecks)
+
+ 775         126 LOAD_CONST              31 (<code object triggerBackgroundCheck at 0x000001F324E699D0, file "LPClientFramework\LPMacSparkleUpdater.py", line 775>)
+             128 LOAD_CONST              32 ('LPMacSparkleUpdater.triggerBackgroundCheck')
+             130 MAKE_FUNCTION            0
+             132 STORE_NAME              18 (triggerBackgroundCheck)
+
+ 806         134 LOAD_CONST              33 (<code object isBackgroundCheckRunning at 0x000001F324E69DF0, file "LPClientFramework\LPMacSparkleUpdater.py", line 806>)
+             136 LOAD_CONST              34 ('LPMacSparkleUpdater.isBackgroundCheckRunning')
+             138 MAKE_FUNCTION            0
+             140 STORE_NAME              19 (isBackgroundCheckRunning)
+
+ 817         142 LOAD_CONST              35 (<code object _runBackgroundAppcastProbe at 0x000001F3253CEF50, file "LPClientFramework\LPMacSparkleUpdater.py", line 817>)
+             144 LOAD_CONST              36 ('LPMacSparkleUpdater._runBackgroundAppcastProbe')
+             146 MAKE_FUNCTION            0
+             148 STORE_NAME              20 (_runBackgroundAppcastProbe)
+
+ 879         150 LOAD_CONST              37 (<code object _fetchLatestVersionFromAppcast at 0x000001F3253CE710, file "LPClientFramework\LPMacSparkleUpdater.py", line 879>)
+             152 LOAD_CONST              38 ('LPMacSparkleUpdater._fetchLatestVersionFromAppcast')
+             154 MAKE_FUNCTION            0
+             156 STORE_NAME              21 (_fetchLatestVersionFromAppcast)
+
+ 921         158 LOAD_CONST              39 (<code object _currentAppVersion at 0x000001F3253CE5B0, file "LPClientFramework\LPMacSparkleUpdater.py", line 921>)
+             160 LOAD_CONST              40 ('LPMacSparkleUpdater._currentAppVersion')
+             162 MAKE_FUNCTION            0
+             164 STORE_NAME              22 (_currentAppVersion)
+
+ 937         166 LOAD_CONST              41 (<code object _extractDisplayVersionFromItem at 0x000001F3253CE2F0, file "LPClientFramework\LPMacSparkleUpdater.py", line 937>)
+             168 LOAD_CONST              42 ('LPMacSparkleUpdater._extractDisplayVersionFromItem')
+             170 MAKE_FUNCTION            0
+             172 STORE_NAME              23 (_extractDisplayVersionFromItem)
+
+ 960         174 LOAD_CONST              43 (<code object _extractNSErrorCode at 0x000001F3253CE660, file "LPClientFramework\LPMacSparkleUpdater.py", line 960>)
+             176 LOAD_CONST              44 ('LPMacSparkleUpdater._extractNSErrorCode')
+             178 MAKE_FUNCTION            0
+             180 STORE_NAME              24 (_extractNSErrorCode)
+
+ 981         182 LOAD_CONST              45 (<code object _compareVersions at 0x000001F3253CEB30, file "LPClientFramework\LPMacSparkleUpdater.py", line 981>)
+             184 LOAD_CONST              46 ('LPMacSparkleUpdater._compareVersions')
+             186 MAKE_FUNCTION            0
+             188 STORE_NAME              25 (_compareVersions)
+
+1016         190 LOAD_CONST              47 (<code object _safeInvokeResultCallback at 0x000001F3253CE500, file "LPClientFramework\LPMacSparkleUpdater.py", line 1016>)
+             192 LOAD_CONST              48 ('LPMacSparkleUpdater._safeInvokeResultCallback')
+             194 MAKE_FUNCTION            0
+             196 STORE_NAME              26 (_safeInvokeResultCallback)
+
+1034         198 LOAD_CONST              49 (<code object _classifyCheckError at 0x000001F3253CEDF0, file "LPClientFramework\LPMacSparkleUpdater.py", line 1034>)
+             200 LOAD_CONST              50 ('LPMacSparkleUpdater._classifyCheckError')
+             202 MAKE_FUNCTION            0
+             204 STORE_NAME              27 (_classifyCheckError)
+
+1057         206 LOAD_CONST              72 ((None, None, None, None, None, None))
+             208 LOAD_CONST              51 (<code object _setLastCheckDetail at 0x000001F3253CE870, file "LPClientFramework\LPMacSparkleUpdater.py", line 1057>)
+             210 LOAD_CONST              52 ('LPMacSparkleUpdater._setLastCheckDetail')
+             212 MAKE_FUNCTION            1 (defaults)
+             214 STORE_NAME              28 (_setLastCheckDetail)
+
+1096         216 LOAD_CONST              53 (<code object getLastCheckDetail at 0x000001F3253CE7C0, file "LPClientFramework\LPMacSparkleUpdater.py", line 1096>)
+             218 LOAD_CONST              54 ('LPMacSparkleUpdater.getLastCheckDetail')
+             220 MAKE_FUNCTION            0
+             222 STORE_NAME              29 (getLastCheckDetail)
+
+1107         224 LOAD_CONST              55 (<code object setUpdateFoundCallback at 0x000001F3253CEBE0, file "LPClientFramework\LPMacSparkleUpdater.py", line 1107>)
+             226 LOAD_CONST              56 ('LPMacSparkleUpdater.setUpdateFoundCallback')
+             228 MAKE_FUNCTION            0
+             230 STORE_NAME              30 (setUpdateFoundCallback)
+
+1126         232 LOAD_CONST              57 (<code object setInstallWillStartCallback at 0x000001F3253CE0E0, file "LPClientFramework\LPMacSparkleUpdater.py", line 1126>)
+             234 LOAD_CONST              58 ('LPMacSparkleUpdater.setInstallWillStartCallback')
+             236 MAKE_FUNCTION            0
+             238 STORE_NAME              31 (setInstallWillStartCallback)
+
+1141         240 LOAD_CONST              59 (<code object setDownloadLifecycleCallback at 0x000001F3253AE710, file "LPClientFramework\LPMacSparkleUpdater.py", line 1141>)
+             242 LOAD_CONST              60 ('LPMacSparkleUpdater.setDownloadLifecycleCallback')
+             244 MAKE_FUNCTION            0
+             246 STORE_NAME              32 (setDownloadLifecycleCallback)
+
+1156         248 LOAD_CONST              73 ((None,))
+             250 LOAD_CONST              61 (<code object notifyInstallWillStart at 0x000001F3253AE2F0, file "LPClientFramework\LPMacSparkleUpdater.py", line 1156>)
+             252 LOAD_CONST              62 ('LPMacSparkleUpdater.notifyInstallWillStart')
+             254 MAKE_FUNCTION            1 (defaults)
+             256 STORE_NAME              33 (notifyInstallWillStart)
+
+1173         258 LOAD_CONST              74 ((None,))
+             260 LOAD_CONST              63 (<code object notifyDownloadLifecycle at 0x000001F3253AEC90, file "LPClientFramework\LPMacSparkleUpdater.py", line 1173>)
+             262 LOAD_CONST              64 ('LPMacSparkleUpdater.notifyDownloadLifecycle')
+             264 MAKE_FUNCTION            1 (defaults)
+             266 STORE_NAME              34 (notifyDownloadLifecycle)
+
+1198         268 LOAD_CONST              75 ((None,))
+             270 LOAD_CONST              65 (<code object notifyUpdateFound at 0x000001F3253AED40, file "LPClientFramework\LPMacSparkleUpdater.py", line 1198>)
+             272 LOAD_CONST              66 ('LPMacSparkleUpdater.notifyUpdateFound')
+             274 MAKE_FUNCTION            1 (defaults)
+             276 STORE_NAME              35 (notifyUpdateFound)
+
+1215         278 LOAD_CONST              76 ((None,))
+             280 LOAD_CONST              67 (<code object notifyNoUpdateFound at 0x000001F3253AE030, file "LPClientFramework\LPMacSparkleUpdater.py", line 1215>)
+             282 LOAD_CONST              68 ('LPMacSparkleUpdater.notifyNoUpdateFound')
+             284 MAKE_FUNCTION            1 (defaults)
+             286 STORE_NAME              36 (notifyNoUpdateFound)
+
+1232         288 LOAD_CONST              69 (<code object checkForUpdatesManually at 0x000001F3253AEEA0, file "LPClientFramework\LPMacSparkleUpdater.py", line 1232>)
+             290 LOAD_CONST              70 ('LPMacSparkleUpdater.checkForUpdatesManually')
+             292 MAKE_FUNCTION            0
+             294 STORE_NAME              37 (checkForUpdatesManually)
+             296 LOAD_CONST              12 (None)
+             298 RETURN_VALUE
+
+=== LPMacSparkleUpdater.__init__ ===
+395           0 LOAD_CONST               1 (None)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_objc)
+
+396           6 LOAD_CONST               1 (None)
+              8 LOAD_FAST                0 (self)
+             10 STORE_ATTR               1 (_updater_controller)
+
+397          12 LOAD_CONST               1 (None)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_updater)
+
+398          18 LOAD_CONST               1 (None)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (_updater_delegate)
+
+399          24 LOAD_CONST               2 (False)
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (_sparkle_loaded)
+
+400          30 LOAD_CONST               2 (False)
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               5 (_ready)
+
+401          36 LOAD_FAST                0 (self)
+             38 LOAD_METHOD              6 (_loadConfig)
+             40 CALL_METHOD              0
+             42 LOAD_FAST                0 (self)
+             44 STORE_ATTR               7 (_config)
+
+402          46 LOAD_CONST               1 (None)
+             48 LOAD_FAST                0 (self)
+             50 STORE_ATTR               8 (_backgroundCheckThread)
+
+405          52 LOAD_CONST               1 (None)
+             54 LOAD_FAST                0 (self)
+             56 STORE_ATTR               9 (_onUpdateFoundCallback)
+
+407          58 LOAD_CONST               1 (None)
+             60 LOAD_FAST                0 (self)
+             62 STORE_ATTR              10 (_onNoUpdateFoundCallback)
+
+409          64 LOAD_CONST               1 (None)
+             66 LOAD_FAST                0 (self)
+             68 STORE_ATTR              11 (_onInstallWillStartCallback)
+
+411          70 LOAD_CONST               1 (None)
+             72 LOAD_FAST                0 (self)
+             74 STORE_ATTR              12 (_onDownloadLifecycleCallback)
+
+413          76 LOAD_CONST               2 (False)
+             78 LOAD_FAST                0 (self)
+             80 STORE_ATTR              13 (_result_bridge_enabled)
+
+415          82 BUILD_MAP                0
+             84 LOAD_FAST                0 (self)
+             86 STORE_ATTR              14 (_lastCheckDetail)
+
+417          88 LOAD_CONST               3 ('')
+             90 LOAD_FAST                0 (self)
+             92 STORE_ATTR              15 (_temporaryFeedURL)
+             94 LOAD_CONST               1 (None)
+             96 RETURN_VALUE
+
+=== LPMacSparkleUpdater._loadConfig ===
+428           0 LOAD_GLOBAL              0 (hasattr)
+              2 LOAD_GLOBAL              1 (sys)
+              4 LOAD_CONST               1 ('_MEIPASS')
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       30
+
+429          10 LOAD_GLOBAL              2 (Path)
+             12 LOAD_GLOBAL              1 (sys)
+             14 LOAD_ATTR                3 (_MEIPASS)
+             16 CALL_FUNCTION            1
+             18 LOAD_CONST               2 ('data')
+             20 BINARY_TRUE_DIVIDE
+             22 LOAD_CONST               3 ('config.json')
+             24 BINARY_TRUE_DIVIDE
+             26 STORE_FAST               1 (config_path)
+             28 JUMP_FORWARD           100 (to 130)
+
+431     >>   30 LOAD_GLOBAL              2 (Path)
+             32 LOAD_GLOBAL              4 (__file__)
+             34 CALL_FUNCTION            1
+             36 LOAD_METHOD              5 (resolve)
+             38 CALL_METHOD              0
+             40 LOAD_ATTR                6 (parent)
+             42 LOAD_ATTR                6 (parent)
+             44 STORE_FAST               2 (repo_root)
+
+433          46 LOAD_FAST                2 (repo_root)
+             48 LOAD_CONST               4 ('HOME')
+             50 BINARY_TRUE_DIVIDE
+             52 LOAD_CONST               2 ('data')
+             54 BINARY_TRUE_DIVIDE
+             56 LOAD_CONST               3 ('config.json')
+             58 BINARY_TRUE_DIVIDE
+
+434          60 LOAD_GLOBAL              2 (Path)
+             62 LOAD_GLOBAL              4 (__file__)
+             64 CALL_FUNCTION            1
+             66 LOAD_METHOD              5 (resolve)
+             68 CALL_METHOD              0
+             70 LOAD_ATTR                6 (parent)
+             72 LOAD_CONST               2 ('data')
+             74 BINARY_TRUE_DIVIDE
+             76 LOAD_CONST               3 ('config.json')
+             78 BINARY_TRUE_DIVIDE
+
+432          80 BUILD_LIST               2
+             82 STORE_FAST               3 (candidates)
+
+436          84 LOAD_CONST               5 (None)
+             86 STORE_FAST               1 (config_path)
+
+437          88 LOAD_FAST                3 (candidates)
+             90 GET_ITER
+        >>   92 FOR_ITER                20 (to 114)
+             94 STORE_FAST               4 (candidate)
+
+438          96 LOAD_FAST                4 (candidate)
+             98 LOAD_METHOD              7 (is_file)
+            100 CALL_METHOD              0
+            102 POP_JUMP_IF_FALSE       92
+
+439         104 LOAD_FAST                4 (candidate)
+            106 STORE_FAST               1 (config_path)
+
+440         108 POP_TOP
+            110 JUMP_ABSOLUTE          114
+            112 JUMP_ABSOLUTE           92
+
+441     >>  114 LOAD_FAST                1 (config_path)
+            116 LOAD_CONST               5 (None)
+            118 IS_OP                    0
+            120 POP_JUMP_IF_FALSE      130
+
+442         122 LOAD_FAST                3 (candidates)
+            124 LOAD_CONST               6 (0)
+            126 BINARY_SUBSCR
+            128 STORE_FAST               1 (config_path)
+
+444     >>  130 SETUP_FINALLY           68 (to 200)
+
+445         132 LOAD_GLOBAL              8 (open)
+            134 LOAD_FAST                1 (config_path)
+            136 LOAD_CONST               7 ('r')
+            138 LOAD_CONST               8 ('utf-8')
+            140 LOAD_CONST               9 ('ignore')
+            142 LOAD_CONST              10 (('encoding', 'errors'))
+            144 CALL_FUNCTION_KW         4
+            146 SETUP_WITH              32 (to 180)
+            148 STORE_FAST               5 (config_file)
+
+446         150 LOAD_GLOBAL              9 (json)
+            152 LOAD_METHOD             10 (loads)
+            154 LOAD_FAST                5 (config_file)
+            156 LOAD_METHOD             11 (read)
+            158 CALL_METHOD              0
+            160 CALL_METHOD              1
+            162 POP_BLOCK
+            164 ROT_TWO
+            166 LOAD_CONST               5 (None)
+            168 DUP_TOP
+            170 DUP_TOP
+            172 CALL_FUNCTION            3
+            174 POP_TOP
+            176 POP_BLOCK
+            178 RETURN_VALUE
+        >>  180 WITH_EXCEPT_START
+            182 POP_JUMP_IF_TRUE       186
+            184 RERAISE
+        >>  186 POP_TOP
+            188 POP_TOP
+            190 POP_TOP
+            192 POP_EXCEPT
+            194 POP_TOP
+            196 POP_BLOCK
+            198 JUMP_FORWARD            58 (to 258)
+
+447     >>  200 DUP_TOP
+            202 LOAD_GLOBAL             12 (Exception)
+            204 EXTENDED_ARG             1
+            206 JUMP_IF_NOT_EXC_MATCH   256
+            208 POP_TOP
+            210 STORE_FAST               6 (error)
+            212 POP_TOP
+            214 SETUP_FINALLY           32 (to 248)
+
+448         216 LOAD_GLOBAL             13 (logger)
+            218 LOAD_METHOD             14 (warning)
+            220 LOAD_CONST              11 ('[sparkle] 加载配置失败: ')
+            222 LOAD_FAST                6 (error)
+            224 FORMAT_VALUE             0
+            226 BUILD_STRING             2
+            228 CALL_METHOD              1
+            230 POP_TOP
+
+449         232 BUILD_MAP                0
+            234 POP_BLOCK
+            236 ROT_FOUR
+            238 POP_EXCEPT
+            240 LOAD_CONST               5 (None)
+            242 STORE_FAST               6 (error)
+            244 DELETE_FAST              6 (error)
+            246 RETURN_VALUE
+        >>  248 LOAD_CONST               5 (None)
+            250 STORE_FAST               6 (error)
+            252 DELETE_FAST              6 (error)
+            254 RERAISE
+        >>  256 RERAISE
+        >>  258 LOAD_CONST               5 (None)
+            260 RETURN_VALUE
+
+=== LPMacSparkleUpdater._sparkleConfig ===
+460           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_config)
+              4 LOAD_METHOD              1 (get)
+              6 LOAD_CONST               1 ('sparkle')
+              8 BUILD_MAP                0
+             10 CALL_METHOD              2
+             12 RETURN_VALUE
+
+=== LPMacSparkleUpdater._frameworkCandidates ===
+471           0 BUILD_LIST               0
+              2 STORE_FAST               1 (candidates)
+
+473           4 LOAD_GLOBAL              0 (os)
+              6 LOAD_ATTR                1 (environ)
+              8 LOAD_METHOD              2 (get)
+             10 LOAD_CONST               1 ('SPARKLE_FRAMEWORK_PATH')
+             12 LOAD_CONST               2 ('')
+             14 CALL_METHOD              2
+             16 LOAD_METHOD              3 (strip)
+             18 CALL_METHOD              0
+             20 STORE_FAST               2 (env_path)
+
+474          22 LOAD_FAST                2 (env_path)
+             24 POP_JUMP_IF_FALSE       36
+
+475          26 LOAD_FAST                1 (candidates)
+             28 LOAD_METHOD              4 (append)
+             30 LOAD_FAST                2 (env_path)
+             32 CALL_METHOD              1
+             34 POP_TOP
+
+477     >>   36 LOAD_CONST               3 (None)
+             38 STORE_FAST               3 (frameworks_dir)
+
+478          40 SETUP_FINALLY           28 (to 70)
+
+479          42 LOAD_CONST               4 (0)
+             44 LOAD_CONST               5 (('NSBundle',))
+             46 IMPORT_NAME              5 (Foundation)
+             48 IMPORT_FROM              6 (NSBundle)
+             50 STORE_FAST               4 (NSBundle)
+             52 POP_TOP
+
+480          54 LOAD_FAST                4 (NSBundle)
+             56 LOAD_METHOD              7 (mainBundle)
+             58 CALL_METHOD              0
+             60 LOAD_METHOD              8 (privateFrameworksPath)
+             62 CALL_METHOD              0
+             64 STORE_FAST               3 (frameworks_dir)
+             66 POP_BLOCK
+             68 JUMP_FORWARD            52 (to 122)
+
+481     >>   70 DUP_TOP
+             72 LOAD_GLOBAL              9 (Exception)
+             74 JUMP_IF_NOT_EXC_MATCH   120
+             76 POP_TOP
+             78 STORE_FAST               5 (error)
+             80 POP_TOP
+             82 SETUP_FINALLY           28 (to 112)
+
+482          84 LOAD_GLOBAL             10 (logger)
+             86 LOAD_METHOD             11 (warning)
+             88 LOAD_CONST               6 ('[sparkle] 读取 bundle 框架路径失败: ')
+             90 LOAD_FAST                5 (error)
+             92 FORMAT_VALUE             0
+             94 BUILD_STRING             2
+             96 CALL_METHOD              1
+             98 POP_TOP
+            100 POP_BLOCK
+            102 POP_EXCEPT
+            104 LOAD_CONST               3 (None)
+            106 STORE_FAST               5 (error)
+            108 DELETE_FAST              5 (error)
+            110 JUMP_FORWARD            10 (to 122)
+        >>  112 LOAD_CONST               3 (None)
+            114 STORE_FAST               5 (error)
+            116 DELETE_FAST              5 (error)
+            118 RERAISE
+        >>  120 RERAISE
+
+484     >>  122 LOAD_FAST                3 (frameworks_dir)
+            124 POP_JUMP_IF_FALSE      146
+
+485         126 LOAD_FAST                1 (candidates)
+            128 LOAD_METHOD              4 (append)
+            130 LOAD_GLOBAL              0 (os)
+            132 LOAD_ATTR               12 (path)
+            134 LOAD_METHOD             13 (join)
+            136 LOAD_FAST                3 (frameworks_dir)
+            138 LOAD_CONST               7 ('Sparkle.framework')
+            140 CALL_METHOD              2
+            142 CALL_METHOD              1
+            144 POP_TOP
+
+487     >>  146 LOAD_FAST                1 (candidates)
+            148 LOAD_METHOD              4 (append)
+            150 LOAD_CONST               8 ('/Library/Frameworks/Sparkle.framework')
+            152 CALL_METHOD              1
+            154 POP_TOP
+
+490         156 BUILD_LIST               0
+            158 STORE_FAST               6 (unique_candidates)
+
+491         160 LOAD_FAST                1 (candidates)
+            162 GET_ITER
+        >>  164 FOR_ITER                22 (to 188)
+            166 STORE_FAST               7 (item)
+
+492         168 LOAD_FAST                7 (item)
+            170 LOAD_FAST                6 (unique_candidates)
+            172 CONTAINS_OP              1
+            174 POP_JUMP_IF_FALSE      164
+
+493         176 LOAD_FAST                6 (unique_candidates)
+            178 LOAD_METHOD              4 (append)
+            180 LOAD_FAST                7 (item)
+            182 CALL_METHOD              1
+            184 POP_TOP
+            186 JUMP_ABSOLUTE          164
+
+494     >>  188 LOAD_FAST                6 (unique_candidates)
+            190 RETURN_VALUE
+
+=== LPMacSparkleUpdater._loadSparkleBundle ===
+505           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_sparkle_loaded)
+              4 POP_JUMP_IF_FALSE       10
+
+506           6 LOAD_CONST               1 (True)
+              8 RETURN_VALUE
+
+508     >>   10 SETUP_FINALLY           18 (to 30)
+
+509          12 LOAD_CONST               2 (0)
+             14 LOAD_CONST               3 (None)
+             16 IMPORT_NAME              1 (objc)
+             18 STORE_FAST               1 (objc)
+
+510          20 LOAD_FAST                1 (objc)
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               2 (_objc)
+             26 POP_BLOCK
+             28 JUMP_FORWARD            54 (to 84)
+
+511     >>   30 DUP_TOP
+             32 LOAD_GLOBAL              3 (Exception)
+             34 JUMP_IF_NOT_EXC_MATCH    82
+             36 POP_TOP
+             38 STORE_FAST               2 (error)
+             40 POP_TOP
+             42 SETUP_FINALLY           30 (to 74)
+
+512          44 LOAD_GLOBAL              4 (logger)
+             46 LOAD_METHOD              5 (warning)
+             48 LOAD_CONST               4 ('[sparkle] 导入 objc 失败: ')
+             50 LOAD_FAST                2 (error)
+             52 FORMAT_VALUE             0
+             54 BUILD_STRING             2
+             56 CALL_METHOD              1
+             58 POP_TOP
+
+513          60 POP_BLOCK
+             62 POP_EXCEPT
+             64 LOAD_CONST               3 (None)
+             66 STORE_FAST               2 (error)
+             68 DELETE_FAST              2 (error)
+             70 LOAD_CONST               5 (False)
+             72 RETURN_VALUE
+        >>   74 LOAD_CONST               3 (None)
+             76 STORE_FAST               2 (error)
+             78 DELETE_FAST              2 (error)
+             80 RERAISE
+        >>   82 RERAISE
+
+515     >>   84 LOAD_FAST                0 (self)
+             86 LOAD_METHOD              6 (_frameworkCandidates)
+             88 CALL_METHOD              0
+             90 GET_ITER
+        >>   92 FOR_ITER               128 (to 222)
+             94 STORE_FAST               3 (bundle_path)
+
+516          96 LOAD_GLOBAL              7 (os)
+             98 LOAD_ATTR                8 (path)
+            100 LOAD_METHOD              9 (exists)
+            102 LOAD_FAST                3 (bundle_path)
+            104 CALL_METHOD              1
+            106 POP_JUMP_IF_TRUE       110
+
+517         108 JUMP_ABSOLUTE           92
+
+519     >>  110 SETUP_FINALLY           50 (to 162)
+
+520         112 LOAD_FAST                0 (self)
+            114 LOAD_ATTR                2 (_objc)
+            116 LOAD_ATTR               10 (loadBundle)
+            118 LOAD_CONST               6 ('Sparkle')
+            120 LOAD_GLOBAL             11 (globals)
+            122 CALL_FUNCTION            0
+            124 LOAD_FAST                3 (bundle_path)
+            126 LOAD_CONST               7 (('bundle_path',))
+            128 CALL_FUNCTION_KW         3
+            130 POP_TOP
+
+521         132 LOAD_CONST               1 (True)
+            134 LOAD_FAST                0 (self)
+            136 STORE_ATTR               0 (_sparkle_loaded)
+
+522         138 LOAD_GLOBAL              4 (logger)
+            140 LOAD_METHOD             12 (info)
+            142 LOAD_CONST               8 ('[sparkle] framework 加载成功: ')
+            144 LOAD_FAST                3 (bundle_path)
+            146 FORMAT_VALUE             0
+            148 BUILD_STRING             2
+            150 CALL_METHOD              1
+            152 POP_TOP
+
+523         154 POP_BLOCK
+            156 POP_TOP
+            158 LOAD_CONST               1 (True)
+            160 RETURN_VALUE
+
+524     >>  162 DUP_TOP
+            164 LOAD_GLOBAL              3 (Exception)
+            166 JUMP_IF_NOT_EXC_MATCH   218
+            168 POP_TOP
+            170 STORE_FAST               2 (error)
+            172 POP_TOP
+            174 SETUP_FINALLY           34 (to 210)
+
+525         176 LOAD_GLOBAL              4 (logger)
+            178 LOAD_METHOD              5 (warning)
+            180 LOAD_CONST               9 ('[sparkle] framework 加载失败: ')
+            182 LOAD_FAST                3 (bundle_path)
+            184 FORMAT_VALUE             0
+            186 LOAD_CONST              10 (', error: ')
+            188 LOAD_FAST                2 (error)
+            190 FORMAT_VALUE             0
+            192 BUILD_STRING             4
+            194 CALL_METHOD              1
+            196 POP_TOP
+            198 POP_BLOCK
+            200 POP_EXCEPT
+            202 LOAD_CONST               3 (None)
+            204 STORE_FAST               2 (error)
+            206 DELETE_FAST              2 (error)
+            208 JUMP_ABSOLUTE           92
+        >>  210 LOAD_CONST               3 (None)
+            212 STORE_FAST               2 (error)
+            214 DELETE_FAST              2 (error)
+            216 RERAISE
+        >>  218 RERAISE
+            220 JUMP_ABSOLUTE           92
+
+527     >>  222 LOAD_GLOBAL              4 (logger)
+            224 LOAD_METHOD              5 (warning)
+            226 LOAD_CONST              11 ('[sparkle] 未找到可用的 Sparkle.framework')
+            228 CALL_METHOD              1
+            230 POP_TOP
+
+528         232 LOAD_CONST               5 (False)
+            234 RETURN_VALUE
+
+=== LPMacSparkleUpdater._initUpdaterController ===
+540           0 LOAD_FAST                1 (controller_class)
+              2 LOAD_METHOD              0 (alloc)
+              4 CALL_METHOD              0
+              6 STORE_FAST               3 (controller)
+
+542           8 LOAD_CONST               1 ('initWithStartingUpdater_updaterDelegate_userDriverDelegate_')
+             10 LOAD_CONST               2 (False)
+             12 LOAD_FAST                2 (updater_delegate)
+             14 LOAD_CONST               3 (None)
+             16 BUILD_TUPLE              3
+             18 BUILD_TUPLE              2
+
+543          20 LOAD_CONST               1 ('initWithStartingUpdater_updaterDelegate_userDriverDelegate_')
+             22 LOAD_CONST               4 (True)
+             24 LOAD_FAST                2 (updater_delegate)
+             26 LOAD_CONST               3 (None)
+             28 BUILD_TUPLE              3
+             30 BUILD_TUPLE              2
+
+544          32 LOAD_CONST               5 ('initWithUpdaterDelegate_userDriverDelegate_')
+             34 LOAD_FAST                2 (updater_delegate)
+             36 LOAD_CONST               3 (None)
+             38 BUILD_TUPLE              2
+             40 BUILD_TUPLE              2
+
+545          42 LOAD_CONST               6 (('init', ()))
+
+541          44 BUILD_LIST               4
+             46 STORE_FAST               4 (init_variants)
+
+548          48 LOAD_FAST                4 (init_variants)
+             50 GET_ITER
+        >>   52 FOR_ITER               120 (to 174)
+             54 UNPACK_SEQUENCE          2
+             56 STORE_FAST               5 (method_name)
+             58 STORE_FAST               6 (method_args)
+
+549          60 LOAD_GLOBAL              1 (getattr)
+             62 LOAD_FAST                3 (controller)
+             64 LOAD_FAST                5 (method_name)
+             66 LOAD_CONST               3 (None)
+             68 CALL_FUNCTION            3
+             70 STORE_FAST               7 (method)
+
+550          72 LOAD_GLOBAL              2 (callable)
+             74 LOAD_FAST                7 (method)
+             76 CALL_FUNCTION            1
+             78 POP_JUMP_IF_TRUE        82
+
+551          80 JUMP_ABSOLUTE           52
+
+553     >>   82 SETUP_FINALLY           30 (to 114)
+
+554          84 LOAD_FAST                7 (method)
+             86 LOAD_FAST                6 (method_args)
+             88 CALL_FUNCTION_EX         0
+             90 STORE_FAST               8 (result)
+
+555          92 LOAD_FAST                8 (result)
+             94 LOAD_CONST               3 (None)
+             96 IS_OP                    1
+             98 POP_JUMP_IF_FALSE      110
+
+556         100 LOAD_FAST                8 (result)
+            102 POP_BLOCK
+            104 ROT_TWO
+            106 POP_TOP
+            108 RETURN_VALUE
+        >>  110 POP_BLOCK
+            112 JUMP_ABSOLUTE           52
+
+557     >>  114 DUP_TOP
+            116 LOAD_GLOBAL              3 (Exception)
+            118 JUMP_IF_NOT_EXC_MATCH   170
+            120 POP_TOP
+            122 STORE_FAST               9 (error)
+            124 POP_TOP
+            126 SETUP_FINALLY           34 (to 162)
+
+558         128 LOAD_GLOBAL              4 (logger)
+            130 LOAD_METHOD              5 (warning)
+            132 LOAD_CONST               7 ('[sparkle] 初始化方法失败 ')
+            134 LOAD_FAST                5 (method_name)
+            136 FORMAT_VALUE             0
+            138 LOAD_CONST               8 (': ')
+            140 LOAD_FAST                9 (error)
+            142 FORMAT_VALUE             0
+            144 BUILD_STRING             4
+            146 CALL_METHOD              1
+            148 POP_TOP
+            150 POP_BLOCK
+            152 POP_EXCEPT
+            154 LOAD_CONST               3 (None)
+            156 STORE_FAST               9 (error)
+            158 DELETE_FAST              9 (error)
+            160 JUMP_ABSOLUTE           52
+        >>  162 LOAD_CONST               3 (None)
+            164 STORE_FAST               9 (error)
+            166 DELETE_FAST              9 (error)
+            168 RERAISE
+        >>  170 RERAISE
+            172 JUMP_ABSOLUTE           52
+
+560     >>  174 LOAD_CONST               3 (None)
+            176 RETURN_VALUE
+
+=== LPMacSparkleUpdater.resolveFeedURL ===
+571           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_temporaryFeedURL)
+              6 JUMP_IF_TRUE_OR_POP     10
+              8 LOAD_CONST               1 ('')
+        >>   10 CALL_FUNCTION            1
+             12 LOAD_METHOD              2 (strip)
+             14 CALL_METHOD              0
+             16 STORE_FAST               1 (temporary_feed)
+
+572          18 LOAD_FAST                1 (temporary_feed)
+             20 POP_JUMP_IF_FALSE       26
+
+573          22 LOAD_FAST                1 (temporary_feed)
+             24 RETURN_VALUE
+
+575     >>   26 LOAD_GLOBAL              3 (platform)
+             28 LOAD_METHOD              4 (machine)
+             30 CALL_METHOD              0
+             32 LOAD_METHOD              5 (lower)
+             34 CALL_METHOD              0
+             36 STORE_FAST               2 (machine)
+
+576          38 LOAD_FAST                2 (machine)
+             40 LOAD_CONST               2 (('x86_64', 'amd64'))
+             42 CONTAINS_OP              0
+             44 POP_JUMP_IF_FALSE       50
+
+577          46 LOAD_CONST               3 ('https://assets.wiimhome.com/appexe/appcast-beta-mac-x86_64.xml')
+             48 RETURN_VALUE
+
+578     >>   50 LOAD_CONST               4 ('https://assets.wiimhome.com/appexe/appcast-beta-mac-arm64.xml')
+             52 RETURN_VALUE
+
+=== LPMacSparkleUpdater.setTemporaryFeedURL ===
+589           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (feedURL)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_temporaryFeedURL)
+             18 LOAD_CONST               2 (None)
+             20 RETURN_VALUE
+
+=== LPMacSparkleUpdater.clearTemporaryFeedURL ===
+600           0 LOAD_CONST               1 ('')
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_temporaryFeedURL)
+              6 LOAD_CONST               2 (None)
+              8 RETURN_VALUE
+
+=== LPMacSparkleUpdater.applyCurrentFeedURL ===
+611           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_METHOD              1 (resolveFeedURL)
+              6 CALL_METHOD              0
+              8 JUMP_IF_TRUE_OR_POP     12
+             10 LOAD_CONST               1 ('')
+        >>   12 CALL_FUNCTION            1
+             14 LOAD_METHOD              2 (strip)
+             16 CALL_METHOD              0
+             18 STORE_FAST               1 (feed_url)
+
+612          20 LOAD_FAST                1 (feed_url)
+             22 POP_JUMP_IF_TRUE        36
+
+614          24 LOAD_CONST               2 (False)
+
+615          26 LOAD_CONST               3 ('feed URL unavailable')
+
+616          28 LOAD_CONST               1 ('')
+
+613          30 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+             32 BUILD_CONST_KEY_MAP      3
+             34 RETURN_VALUE
+
+619     >>   36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                3 (_updater)
+             40 LOAD_CONST               5 (None)
+             42 IS_OP                    0
+             44 POP_JUMP_IF_FALSE       58
+
+621          46 LOAD_CONST               2 (False)
+
+622          48 LOAD_CONST               6 ('sparkle updater unavailable')
+
+623          50 LOAD_FAST                1 (feed_url)
+
+620          52 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+             54 BUILD_CONST_KEY_MAP      3
+             56 RETURN_VALUE
+
+626     >>   58 LOAD_GLOBAL              4 (getattr)
+             60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                3 (_updater)
+             64 LOAD_CONST               7 ('setFeedURL_')
+             66 LOAD_CONST               5 (None)
+             68 CALL_FUNCTION            3
+             70 STORE_FAST               2 (set_feed_method)
+
+627          72 LOAD_GLOBAL              5 (callable)
+             74 LOAD_FAST                2 (set_feed_method)
+             76 CALL_FUNCTION            1
+             78 POP_JUMP_IF_TRUE        92
+
+629          80 LOAD_CONST               2 (False)
+
+630          82 LOAD_CONST               8 ('setFeedURL_ unsupported')
+
+631          84 LOAD_FAST                1 (feed_url)
+
+628          86 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+             88 BUILD_CONST_KEY_MAP      3
+             90 RETURN_VALUE
+
+634     >>   92 SETUP_FINALLY           52 (to 146)
+
+635          94 LOAD_CONST               9 (0)
+             96 LOAD_CONST              10 (('NSURL',))
+             98 IMPORT_NAME              6 (Foundation)
+            100 IMPORT_FROM              7 (NSURL)
+            102 STORE_FAST               3 (NSURL)
+            104 POP_TOP
+
+636         106 LOAD_FAST                2 (set_feed_method)
+            108 LOAD_FAST                3 (NSURL)
+            110 LOAD_METHOD              8 (URLWithString_)
+            112 LOAD_FAST                1 (feed_url)
+            114 CALL_METHOD              1
+            116 CALL_FUNCTION            1
+            118 POP_TOP
+
+637         120 LOAD_GLOBAL              9 (logger)
+            122 LOAD_METHOD             10 (info)
+            124 LOAD_CONST              11 ('[sparkle] 已应用 feed URL: %s')
+            126 LOAD_FAST                1 (feed_url)
+            128 CALL_METHOD              2
+            130 POP_TOP
+
+639         132 LOAD_CONST              12 (True)
+
+640         134 LOAD_CONST              13 ('ok')
+
+641         136 LOAD_FAST                1 (feed_url)
+
+638         138 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+            140 BUILD_CONST_KEY_MAP      3
+            142 POP_BLOCK
+            144 RETURN_VALUE
+
+643     >>  146 DUP_TOP
+            148 LOAD_GLOBAL             11 (Exception)
+            150 JUMP_IF_NOT_EXC_MATCH   208
+            152 POP_TOP
+            154 STORE_FAST               4 (error)
+            156 POP_TOP
+            158 SETUP_FINALLY           40 (to 200)
+
+644         160 LOAD_GLOBAL              9 (logger)
+            162 LOAD_METHOD             12 (warning)
+            164 LOAD_CONST              14 ('[sparkle] 应用 feed URL 失败: %s')
+            166 LOAD_FAST                4 (error)
+            168 CALL_METHOD              2
+            170 POP_TOP
+
+646         172 LOAD_CONST               2 (False)
+
+647         174 LOAD_GLOBAL              0 (str)
+            176 LOAD_FAST                4 (error)
+            178 CALL_FUNCTION            1
+
+648         180 LOAD_FAST                1 (feed_url)
+
+645         182 LOAD_CONST               4 (('ok', 'message', 'feed_url'))
+            184 BUILD_CONST_KEY_MAP      3
+            186 POP_BLOCK
+            188 ROT_FOUR
+            190 POP_EXCEPT
+            192 LOAD_CONST               5 (None)
+            194 STORE_FAST               4 (error)
+            196 DELETE_FAST              4 (error)
+            198 RETURN_VALUE
+        >>  200 LOAD_CONST               5 (None)
+            202 STORE_FAST               4 (error)
+            204 DELETE_FAST              4 (error)
+            206 RERAISE
+        >>  208 RERAISE
+            210 LOAD_CONST               5 (None)
+            212 RETURN_VALUE
+
+=== LPMacSparkleUpdater.initUpdater ===
+660           0 LOAD_GLOBAL              0 (platform)
+              2 LOAD_METHOD              1 (system)
+              4 CALL_METHOD              0
+              6 LOAD_CONST               1 ('Darwin')
+              8 COMPARE_OP               3 (!=)
+             10 POP_JUMP_IF_FALSE       26
+
+661          12 LOAD_GLOBAL              2 (logger)
+             14 LOAD_METHOD              3 (info)
+             16 LOAD_CONST               2 ('[sparkle] 非 macOS 平台，跳过初始化')
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+662          22 LOAD_CONST               3 (False)
+             24 RETURN_VALUE
+
+664     >>   26 LOAD_FAST                0 (self)
+             28 LOAD_METHOD              4 (_sparkleConfig)
+             30 CALL_METHOD              0
+             32 STORE_FAST               1 (sparkle_config)
+
+665          34 LOAD_FAST                1 (sparkle_config)
+             36 LOAD_METHOD              5 (get)
+             38 LOAD_CONST               4 ('enabled')
+             40 LOAD_CONST               5 (True)
+             42 CALL_METHOD              2
+             44 LOAD_CONST               5 (True)
+             46 IS_OP                    1
+             48 POP_JUMP_IF_FALSE       64
+
+666          50 LOAD_GLOBAL              2 (logger)
+             52 LOAD_METHOD              3 (info)
+             54 LOAD_CONST               6 ('[sparkle] 配置关闭，跳过初始化')
+             56 CALL_METHOD              1
+             58 POP_TOP
+
+667          60 LOAD_CONST               3 (False)
+             62 RETURN_VALUE
+
+669     >>   64 LOAD_FAST                0 (self)
+             66 LOAD_METHOD              6 (_loadSparkleBundle)
+             68 CALL_METHOD              0
+             70 POP_JUMP_IF_TRUE        76
+
+670          72 LOAD_CONST               3 (False)
+             74 RETURN_VALUE
+
+672     >>   76 EXTENDED_ARG             1
+             78 SETUP_FINALLY          346 (to 426)
+
+673          80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                7 (_objc)
+             84 LOAD_METHOD              8 (lookUpClass)
+             86 LOAD_CONST               7 ('SPUStandardUpdaterController')
+             88 CALL_METHOD              1
+             90 STORE_FAST               2 (controller_class)
+
+674          92 LOAD_GLOBAL              9 (_ensureSparkleDelegateClasses)
+             94 CALL_FUNCTION            0
+             96 STORE_FAST               3 (delegate_class)
+
+675          98 LOAD_FAST                3 (delegate_class)
+            100 LOAD_CONST               8 (None)
+            102 IS_OP                    1
+            104 POP_JUMP_IF_FALSE      124
+
+676         106 LOAD_FAST                3 (delegate_class)
+            108 LOAD_METHOD             10 (alloc)
+            110 CALL_METHOD              0
+            112 LOAD_METHOD             11 (initWithOwner_)
+            114 LOAD_FAST                0 (self)
+            116 CALL_METHOD              1
+            118 LOAD_FAST                0 (self)
+            120 STORE_ATTR              12 (_updater_delegate)
+            122 JUMP_FORWARD             6 (to 130)
+
+678     >>  124 LOAD_CONST               8 (None)
+            126 LOAD_FAST                0 (self)
+            128 STORE_ATTR              12 (_updater_delegate)
+
+680     >>  130 LOAD_FAST                0 (self)
+            132 LOAD_METHOD             13 (_initUpdaterController)
+            134 LOAD_FAST                2 (controller_class)
+            136 LOAD_FAST                0 (self)
+            138 LOAD_ATTR               12 (_updater_delegate)
+            140 CALL_METHOD              2
+            142 LOAD_FAST                0 (self)
+            144 STORE_ATTR              14 (_updater_controller)
+
+681         146 LOAD_FAST                0 (self)
+            148 LOAD_ATTR               14 (_updater_controller)
+            150 LOAD_CONST               8 (None)
+            152 IS_OP                    0
+            154 POP_JUMP_IF_FALSE      172
+
+682         156 LOAD_GLOBAL              2 (logger)
+            158 LOAD_METHOD             15 (warning)
+            160 LOAD_CONST               9 ('[sparkle] 初始化 SPUStandardUpdaterController 失败')
+            162 CALL_METHOD              1
+            164 POP_TOP
+
+683         166 POP_BLOCK
+            168 LOAD_CONST               3 (False)
+            170 RETURN_VALUE
+
+685     >>  172 LOAD_GLOBAL             16 (getattr)
+            174 LOAD_FAST                0 (self)
+            176 LOAD_ATTR               14 (_updater_controller)
+            178 LOAD_CONST              10 ('updater')
+            180 LOAD_CONST               8 (None)
+            182 CALL_FUNCTION            3
+            184 STORE_FAST               4 (updater_method)
+
+686         186 LOAD_GLOBAL             17 (callable)
+            188 LOAD_FAST                4 (updater_method)
+            190 CALL_FUNCTION            1
+            192 POP_JUMP_IF_FALSE      200
+            194 LOAD_FAST                4 (updater_method)
+            196 CALL_FUNCTION            0
+            198 JUMP_FORWARD             2 (to 202)
+        >>  200 LOAD_CONST               8 (None)
+        >>  202 LOAD_FAST                0 (self)
+            204 STORE_ATTR              18 (_updater)
+
+687         206 LOAD_FAST                0 (self)
+            208 LOAD_ATTR               18 (_updater)
+            210 LOAD_CONST               8 (None)
+            212 IS_OP                    0
+            214 POP_JUMP_IF_FALSE      232
+
+688         216 LOAD_GLOBAL              2 (logger)
+            218 LOAD_METHOD             15 (warning)
+            220 LOAD_CONST              11 ('[sparkle] 获取 updater 失败')
+            222 CALL_METHOD              1
+            224 POP_TOP
+
+689         226 POP_BLOCK
+            228 LOAD_CONST               3 (False)
+            230 RETURN_VALUE
+
+691     >>  232 LOAD_GLOBAL              2 (logger)
+            234 LOAD_METHOD              3 (info)
+
+692         236 LOAD_CONST              12 ('[sparkle] updater ready controller=%s updater=%s result_bridge_enabled=%s')
+
+693         238 LOAD_GLOBAL             19 (type)
+            240 LOAD_FAST                0 (self)
+            242 LOAD_ATTR               14 (_updater_controller)
+            244 CALL_FUNCTION            1
+            246 LOAD_ATTR               20 (__name__)
+
+694         248 LOAD_GLOBAL             19 (type)
+            250 LOAD_FAST                0 (self)
+            252 LOAD_ATTR               18 (_updater)
+            254 CALL_FUNCTION            1
+            256 LOAD_ATTR               20 (__name__)
+
+695         258 LOAD_FAST                0 (self)
+            260 LOAD_ATTR               21 (_result_bridge_enabled)
+
+691         262 CALL_METHOD              4
+            264 POP_TOP
+
+698         266 LOAD_GLOBAL             16 (getattr)
+            268 LOAD_FAST                0 (self)
+            270 LOAD_ATTR               18 (_updater)
+            272 LOAD_CONST              13 ('setAutomaticallyChecksForUpdates_')
+            274 LOAD_CONST               8 (None)
+            276 CALL_FUNCTION            3
+            278 STORE_FAST               5 (auto_check_method)
+
+699         280 LOAD_GLOBAL             17 (callable)
+            282 LOAD_FAST                5 (auto_check_method)
+            284 CALL_FUNCTION            1
+            286 EXTENDED_ARG             1
+            288 POP_JUMP_IF_FALSE      308
+
+700         290 LOAD_FAST                5 (auto_check_method)
+            292 LOAD_CONST               3 (False)
+            294 CALL_FUNCTION            1
+            296 POP_TOP
+
+701         298 LOAD_GLOBAL              2 (logger)
+            300 LOAD_METHOD              3 (info)
+            302 LOAD_CONST              14 ('[sparkle] automaticallyChecksForUpdates overridden to False')
+            304 CALL_METHOD              1
+            306 POP_TOP
+
+703     >>  308 LOAD_FAST                0 (self)
+            310 LOAD_METHOD             22 (applyCurrentFeedURL)
+            312 CALL_METHOD              0
+            314 STORE_FAST               6 (apply_result)
+
+704         316 LOAD_GLOBAL             23 (bool)
+            318 LOAD_FAST                6 (apply_result)
+            320 LOAD_METHOD              5 (get)
+            322 LOAD_CONST              15 ('ok')
+            324 CALL_METHOD              1
+            326 CALL_FUNCTION            1
+            328 EXTENDED_ARG             1
+            330 POP_JUMP_IF_TRUE       362
+
+705         332 LOAD_GLOBAL              2 (logger)
+            334 LOAD_METHOD             15 (warning)
+
+706         336 LOAD_CONST              16 ('[sparkle] 初始化阶段设置 feed 失败: %s')
+
+707         338 LOAD_GLOBAL             24 (str)
+            340 LOAD_FAST                6 (apply_result)
+            342 LOAD_METHOD              5 (get)
+            344 LOAD_CONST              17 ('message')
+            346 LOAD_CONST              18 ('')
+            348 CALL_METHOD              2
+            350 EXTENDED_ARG             1
+            352 JUMP_IF_TRUE_OR_POP    356
+            354 LOAD_CONST              19 ('unknown')
+        >>  356 CALL_FUNCTION            1
+
+705         358 CALL_METHOD              2
+            360 POP_TOP
+
+710     >>  362 LOAD_GLOBAL             16 (getattr)
+            364 LOAD_FAST                0 (self)
+            366 LOAD_ATTR               14 (_updater_controller)
+            368 LOAD_CONST              20 ('startUpdater')
+            370 LOAD_CONST               8 (None)
+            372 CALL_FUNCTION            3
+            374 STORE_FAST               7 (start_updater_method)
+
+711         376 LOAD_GLOBAL             17 (callable)
+            378 LOAD_FAST                7 (start_updater_method)
+            380 CALL_FUNCTION            1
+            382 EXTENDED_ARG             1
+            384 POP_JUMP_IF_FALSE      404
+
+712         386 LOAD_FAST                7 (start_updater_method)
+            388 CALL_FUNCTION            0
+            390 POP_TOP
+
+713         392 LOAD_GLOBAL              2 (logger)
+            394 LOAD_METHOD              3 (info)
+            396 LOAD_CONST              21 ('[sparkle] updater controller startUpdater invoked explicitly')
+            398 CALL_METHOD              1
+            400 POP_TOP
+            402 JUMP_FORWARD            10 (to 414)
+
+715     >>  404 LOAD_GLOBAL              2 (logger)
+            406 LOAD_METHOD             15 (warning)
+            408 LOAD_CONST              22 ('[sparkle] updater controller does not support startUpdater')
+            410 CALL_METHOD              1
+            412 POP_TOP
+
+717     >>  414 LOAD_CONST               5 (True)
+            416 LOAD_FAST                0 (self)
+            418 STORE_ATTR              25 (_ready)
+
+718         420 POP_BLOCK
+            422 LOAD_CONST               5 (True)
+            424 RETURN_VALUE
+
+719     >>  426 DUP_TOP
+            428 LOAD_GLOBAL             26 (Exception)
+            430 EXTENDED_ARG             1
+            432 JUMP_IF_NOT_EXC_MATCH   486
+            434 POP_TOP
+            436 STORE_FAST               8 (error)
+            438 POP_TOP
+            440 SETUP_FINALLY           36 (to 478)
+
+720         442 LOAD_GLOBAL              2 (logger)
+            444 LOAD_METHOD             15 (warning)
+            446 LOAD_CONST              23 ('[sparkle] 初始化失败: ')
+            448 LOAD_FAST                8 (error)
+            450 FORMAT_VALUE             0
+            452 BUILD_STRING             2
+            454 CALL_METHOD              1
+            456 POP_TOP
+
+721         458 LOAD_CONST               3 (False)
+            460 LOAD_FAST                0 (self)
+            462 STORE_ATTR              25 (_ready)
+
+722         464 POP_BLOCK
+            466 POP_EXCEPT
+            468 LOAD_CONST               8 (None)
+            470 STORE_FAST               8 (error)
+            472 DELETE_FAST              8 (error)
+            474 LOAD_CONST               3 (False)
+            476 RETURN_VALUE
+        >>  478 LOAD_CONST               8 (None)
+            480 STORE_FAST               8 (error)
+            482 DELETE_FAST              8 (error)
+            484 RERAISE
+        >>  486 RERAISE
+            488 LOAD_CONST               8 (None)
+            490 RETURN_VALUE
+
+=== LPMacSparkleUpdater.isReady ===
+733           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_ready)
+              4 LOAD_CONST               1 (True)
+              6 IS_OP                    0
+              8 RETURN_VALUE
+
+=== LPMacSparkleUpdater.ensureReady ===
+744           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (isReady)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_FALSE       12
+
+745           8 LOAD_CONST               1 (True)
+             10 RETURN_VALUE
+
+746     >>   12 LOAD_GLOBAL              1 (logger)
+             14 LOAD_METHOD              2 (info)
+             16 LOAD_CONST               2 ('[sparkle] ensureReady: 更新器不可用，尝试重新初始化')
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+747          22 LOAD_CONST               3 (False)
+             24 LOAD_FAST                0 (self)
+             26 STORE_ATTR               3 (_ready)
+
+748          28 LOAD_FAST                0 (self)
+             30 LOAD_METHOD              4 (initUpdater)
+             32 CALL_METHOD              0
+             34 STORE_FAST               1 (result)
+
+749          36 LOAD_FAST                1 (result)
+             38 POP_JUMP_IF_FALSE       52
+
+750          40 LOAD_GLOBAL              1 (logger)
+             42 LOAD_METHOD              2 (info)
+             44 LOAD_CONST               4 ('[sparkle] ensureReady: 重新初始化成功')
+             46 CALL_METHOD              1
+             48 POP_TOP
+             50 JUMP_FORWARD            10 (to 62)
+
+752     >>   52 LOAD_GLOBAL              1 (logger)
+             54 LOAD_METHOD              5 (warning)
+             56 LOAD_CONST               5 ('[sparkle] ensureReady: 重新初始化失败')
+             58 CALL_METHOD              1
+             60 POP_TOP
+
+753     >>   62 LOAD_FAST                1 (result)
+             64 RETURN_VALUE
+
+=== LPMacSparkleUpdater.startAutomaticChecks ===
+764           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (isReady)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        22
+
+765           8 LOAD_GLOBAL              1 (logger)
+             10 LOAD_METHOD              2 (warning)
+             12 LOAD_CONST               1 ('[sparkle] 未就绪，跳过自动检查')
+             14 CALL_METHOD              1
+             16 POP_TOP
+
+766          18 LOAD_CONST               2 (None)
+             20 RETURN_VALUE
+
+768     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              3 (_sparkleConfig)
+             26 CALL_METHOD              0
+             28 LOAD_METHOD              4 (get)
+             30 LOAD_CONST               3 ('auto_check')
+             32 LOAD_CONST               4 (True)
+             34 CALL_METHOD              2
+             36 STORE_FAST               1 (auto_check)
+
+769          38 LOAD_FAST                1 (auto_check)
+             40 LOAD_CONST               4 (True)
+             42 IS_OP                    1
+             44 POP_JUMP_IF_FALSE       60
+
+770          46 LOAD_GLOBAL              1 (logger)
+             48 LOAD_METHOD              5 (info)
+             50 LOAD_CONST               5 ('[sparkle] auto_check 已关闭')
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+771          56 LOAD_CONST               2 (None)
+             58 RETURN_VALUE
+
+773     >>   60 LOAD_FAST                0 (self)
+             62 LOAD_METHOD              6 (triggerBackgroundCheck)
+             64 CALL_METHOD              0
+             66 POP_TOP
+             68 LOAD_CONST               2 (None)
+             70 RETURN_VALUE
+
+=== LPMacSparkleUpdater.triggerBackgroundCheck ===
+784           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (isReady)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        22
+
+785           8 LOAD_GLOBAL              1 (logger)
+             10 LOAD_METHOD              2 (warning)
+             12 LOAD_CONST               1 ('[sparkle] 未就绪，无法触发后台检查更新')
+             14 CALL_METHOD              1
+             16 POP_TOP
+
+786          18 LOAD_CONST               2 (False)
+             20 RETURN_VALUE
+
+788     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                3 (_backgroundCheckThread)
+             26 LOAD_CONST               3 (None)
+             28 IS_OP                    1
+             30 POP_JUMP_IF_FALSE       56
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_backgroundCheckThread)
+             36 LOAD_METHOD              4 (is_alive)
+             38 CALL_METHOD              0
+             40 POP_JUMP_IF_FALSE       56
+
+789          42 LOAD_GLOBAL              1 (logger)
+             44 LOAD_METHOD              5 (info)
+             46 LOAD_CONST               4 ('[sparkle] 后台 appcast 检测仍在进行，跳过重复触发')
+             48 CALL_METHOD              1
+             50 POP_TOP
+
+790          52 LOAD_CONST               2 (False)
+             54 RETURN_VALUE
+
+792     >>   56 LOAD_GLOBAL              1 (logger)
+             58 LOAD_METHOD              5 (info)
+
+793          60 LOAD_CONST               5 ('[sparkle] background check invoking python appcast probe callback_registered(found=%s, not_found=%s)')
+
+794          62 LOAD_GLOBAL              6 (callable)
+             64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                7 (_onUpdateFoundCallback)
+             68 CALL_FUNCTION            1
+
+795          70 LOAD_GLOBAL              6 (callable)
+             72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR                8 (_onNoUpdateFoundCallback)
+             76 CALL_FUNCTION            1
+
+792          78 CALL_METHOD              3
+             80 POP_TOP
+
+797          82 LOAD_GLOBAL              9 (threading)
+             84 LOAD_ATTR               10 (Thread)
+
+798          86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR               11 (_runBackgroundAppcastProbe)
+
+799          90 LOAD_CONST               6 ('sparkle-appcast-probe')
+
+800          92 LOAD_CONST               7 (True)
+
+797          94 LOAD_CONST               8 (('target', 'name', 'daemon'))
+             96 CALL_FUNCTION_KW         3
+             98 LOAD_FAST                0 (self)
+            100 STORE_ATTR               3 (_backgroundCheckThread)
+
+802         102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                3 (_backgroundCheckThread)
+            106 LOAD_METHOD             12 (start)
+            108 CALL_METHOD              0
+            110 POP_TOP
+
+803         112 LOAD_GLOBAL              1 (logger)
+            114 LOAD_METHOD              5 (info)
+            116 LOAD_CONST               9 ('[sparkle] 已触发自动检查更新')
+            118 CALL_METHOD              1
+            120 POP_TOP
+
+804         122 LOAD_CONST               7 (True)
+            124 RETURN_VALUE
+
+=== LPMacSparkleUpdater.isBackgroundCheckRunning ===
+815           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_backgroundCheckThread)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    1
+              8 JUMP_IF_FALSE_OR_POP    18
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                0 (_backgroundCheckThread)
+             14 LOAD_METHOD              1 (is_alive)
+             16 CALL_METHOD              0
+        >>   18 RETURN_VALUE
+
+=== LPMacSparkleUpdater._runBackgroundAppcastProbe ===
+826           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (resolveFeedURL)
+              4 CALL_METHOD              0
+              6 STORE_FAST               1 (feed_url)
+
+827           8 LOAD_FAST                1 (feed_url)
+             10 POP_JUMP_IF_TRUE        60
+
+828          12 LOAD_GLOBAL              1 (logger)
+             14 LOAD_METHOD              2 (warning)
+             16 LOAD_CONST               1 ('[sparkle] background probe skipped: feed URL unavailable')
+             18 CALL_METHOD              1
+             20 POP_TOP
+
+829          22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                3 (_setLastCheckDetail)
+
+830          26 LOAD_CONST               2 ('error')
+
+831          28 LOAD_CONST               3 ('sparkle_probe')
+
+832          30 LOAD_FAST                0 (self)
+             32 LOAD_METHOD              4 (_currentAppVersion)
+             34 CALL_METHOD              0
+
+833          36 LOAD_CONST               4 ('feed_unreachable')
+
+834          38 LOAD_CONST               5 ('feed URL unavailable')
+
+829          40 LOAD_CONST               6 (('resultKind', 'source', 'currentVersion', 'errorCategory', 'errorMessage'))
+             42 CALL_FUNCTION_KW         5
+             44 STORE_FAST               2 (detail)
+
+836          46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              5 (notifyNoUpdateFound)
+             50 LOAD_FAST                2 (detail)
+             52 CALL_METHOD              1
+             54 POP_TOP
+
+837          56 LOAD_CONST               7 (None)
+             58 RETURN_VALUE
+
+839     >>   60 SETUP_FINALLY          120 (to 182)
+
+840          62 LOAD_FAST                0 (self)
+             64 LOAD_METHOD              6 (_fetchLatestVersionFromAppcast)
+             66 LOAD_FAST                1 (feed_url)
+             68 CALL_METHOD              1
+             70 STORE_FAST               3 (latest_version)
+
+841          72 LOAD_FAST                0 (self)
+             74 LOAD_METHOD              4 (_currentAppVersion)
+             76 CALL_METHOD              0
+             78 STORE_FAST               4 (current_version)
+
+842          80 LOAD_FAST                0 (self)
+             82 LOAD_METHOD              7 (_compareVersions)
+             84 LOAD_FAST                3 (latest_version)
+             86 LOAD_FAST                4 (current_version)
+             88 CALL_METHOD              2
+             90 STORE_FAST               5 (compare_result)
+
+843          92 LOAD_GLOBAL              1 (logger)
+             94 LOAD_METHOD              8 (info)
+
+844          96 LOAD_CONST               8 ('[sparkle.probe] latest_version=%s current_version=%s compare=%s')
+
+845          98 LOAD_FAST                3 (latest_version)
+
+846         100 LOAD_FAST                4 (current_version)
+
+847         102 LOAD_FAST                5 (compare_result)
+
+843         104 CALL_METHOD              4
+            106 POP_TOP
+
+849         108 LOAD_FAST                5 (compare_result)
+            110 LOAD_CONST               9 (0)
+            112 COMPARE_OP               4 (>)
+            114 POP_JUMP_IF_FALSE      148
+
+850         116 LOAD_FAST                0 (self)
+            118 LOAD_ATTR                3 (_setLastCheckDetail)
+
+851         120 LOAD_CONST              10 ('found')
+
+852         122 LOAD_CONST               3 ('sparkle_probe')
+
+853         124 LOAD_FAST                3 (latest_version)
+
+854         126 LOAD_FAST                4 (current_version)
+
+855         128 LOAD_FAST                5 (compare_result)
+
+850         130 LOAD_CONST              11 (('resultKind', 'source', 'latestVersion', 'currentVersion', 'compareResult'))
+            132 CALL_FUNCTION_KW         5
+            134 STORE_FAST               2 (detail)
+
+857         136 LOAD_FAST                0 (self)
+            138 LOAD_METHOD              9 (notifyUpdateFound)
+            140 LOAD_FAST                2 (detail)
+            142 CALL_METHOD              1
+            144 POP_TOP
+            146 JUMP_FORWARD            30 (to 178)
+
+859     >>  148 LOAD_FAST                0 (self)
+            150 LOAD_ATTR                3 (_setLastCheckDetail)
+
+860         152 LOAD_CONST              12 ('no_update')
+
+861         154 LOAD_CONST               3 ('sparkle_probe')
+
+862         156 LOAD_FAST                3 (latest_version)
+
+863         158 LOAD_FAST                4 (current_version)
+
+864         160 LOAD_FAST                5 (compare_result)
+
+859         162 LOAD_CONST              11 (('resultKind', 'source', 'latestVersion', 'currentVersion', 'compareResult'))
+            164 CALL_FUNCTION_KW         5
+            166 STORE_FAST               2 (detail)
+
+866         168 LOAD_FAST                0 (self)
+            170 LOAD_METHOD              5 (notifyNoUpdateFound)
+            172 LOAD_FAST                2 (detail)
+            174 CALL_METHOD              1
+            176 POP_TOP
+        >>  178 POP_BLOCK
+            180 JUMP_FORWARD            98 (to 280)
+
+867     >>  182 DUP_TOP
+            184 LOAD_GLOBAL             10 (Exception)
+            186 EXTENDED_ARG             1
+            188 JUMP_IF_NOT_EXC_MATCH   278
+            190 POP_TOP
+            192 STORE_FAST               6 (error)
+            194 POP_TOP
+            196 SETUP_FINALLY           72 (to 270)
+
+868         198 LOAD_GLOBAL              1 (logger)
+            200 LOAD_METHOD              2 (warning)
+            202 LOAD_CONST              13 ('[sparkle.probe] background appcast probe failed: %s')
+            204 LOAD_FAST                6 (error)
+            206 CALL_METHOD              2
+            208 POP_TOP
+
+869         210 LOAD_GLOBAL             11 (str)
+            212 LOAD_FAST                6 (error)
+            214 CALL_FUNCTION            1
+            216 STORE_FAST               7 (error_message)
+
+870         218 LOAD_FAST                0 (self)
+            220 LOAD_ATTR                3 (_setLastCheckDetail)
+
+871         222 LOAD_CONST               2 ('error')
+
+872         224 LOAD_CONST               3 ('sparkle_probe')
+
+873         226 LOAD_FAST                0 (self)
+            228 LOAD_METHOD              4 (_currentAppVersion)
+            230 CALL_METHOD              0
+
+874         232 LOAD_FAST                0 (self)
+            234 LOAD_METHOD             12 (_classifyCheckError)
+            236 LOAD_FAST                7 (error_message)
+            238 CALL_METHOD              1
+
+875         240 LOAD_FAST                7 (error_message)
+
+870         242 LOAD_CONST               6 (('resultKind', 'source', 'currentVersion', 'errorCategory', 'errorMessage'))
+            244 CALL_FUNCTION_KW         5
+            246 STORE_FAST               2 (detail)
+
+877         248 LOAD_FAST                0 (self)
+            250 LOAD_METHOD              5 (notifyNoUpdateFound)
+            252 LOAD_FAST                2 (detail)
+            254 CALL_METHOD              1
+            256 POP_TOP
+            258 POP_BLOCK
+            260 POP_EXCEPT
+            262 LOAD_CONST               7 (None)
+            264 STORE_FAST               6 (error)
+            266 DELETE_FAST              6 (error)
+            268 JUMP_FORWARD            10 (to 280)
+        >>  270 LOAD_CONST               7 (None)
+            272 STORE_FAST               6 (error)
+            274 DELETE_FAST              6 (error)
+            276 RERAISE
+        >>  278 RERAISE
+        >>  280 LOAD_CONST               7 (None)
+            282 RETURN_VALUE
+
+=== LPMacSparkleUpdater._fetchLatestVersionFromAppcast ===
+888           0 LOAD_GLOBAL              0 (requests)
+              2 LOAD_ATTR                1 (get)
+              4 LOAD_FAST                1 (feed_url)
+              6 LOAD_CONST               1 (10)
+              8 LOAD_CONST               2 (('timeout',))
+             10 CALL_FUNCTION_KW         2
+             12 STORE_FAST               2 (response)
+
+889          14 LOAD_FAST                2 (response)
+             16 LOAD_METHOD              2 (raise_for_status)
+             18 CALL_METHOD              0
+             20 POP_TOP
+
+890          22 LOAD_GLOBAL              3 (ET)
+             24 LOAD_METHOD              4 (fromstring)
+             26 LOAD_FAST                2 (response)
+             28 LOAD_ATTR                5 (content)
+             30 CALL_METHOD              1
+             32 STORE_FAST               3 (root)
+
+891          34 LOAD_CONST               3 ('sparkle')
+             36 LOAD_CONST               4 ('http://www.andymatuschak.org/xml-namespaces/sparkle')
+             38 BUILD_MAP                1
+             40 STORE_FAST               4 (sparkle_ns)
+
+893          42 LOAD_CONST               5 (None)
+             44 STORE_FAST               5 (latest_version)
+
+894          46 LOAD_FAST                3 (root)
+             48 LOAD_METHOD              6 (findall)
+             50 LOAD_CONST               6 ('.//item')
+             52 CALL_METHOD              1
+             54 GET_ITER
+        >>   56 FOR_ITER               132 (to 190)
+             58 STORE_FAST               6 (item)
+
+895          60 LOAD_CONST               5 (None)
+             62 STORE_FAST               7 (candidate)
+
+896          64 LOAD_FAST                6 (item)
+             66 LOAD_ATTR                7 (findtext)
+             68 LOAD_CONST               7 ('sparkle:shortVersionString')
+             70 LOAD_FAST                4 (sparkle_ns)
+             72 LOAD_CONST               8 (('namespaces',))
+             74 CALL_FUNCTION_KW         2
+             76 STORE_FAST               8 (short_version)
+
+897          78 LOAD_FAST                8 (short_version)
+             80 POP_JUMP_IF_FALSE       90
+
+898          82 LOAD_FAST                8 (short_version)
+             84 LOAD_METHOD              8 (strip)
+             86 CALL_METHOD              0
+             88 STORE_FAST               7 (candidate)
+
+900     >>   90 LOAD_FAST                7 (candidate)
+             92 POP_JUMP_IF_TRUE       154
+
+901          94 LOAD_FAST                6 (item)
+             96 LOAD_METHOD              9 (find)
+             98 LOAD_CONST               9 ('enclosure')
+            100 CALL_METHOD              1
+            102 STORE_FAST               9 (enclosure)
+
+902         104 LOAD_FAST                9 (enclosure)
+            106 LOAD_CONST               5 (None)
+            108 IS_OP                    1
+            110 POP_JUMP_IF_FALSE      154
+
+904         112 LOAD_FAST                9 (enclosure)
+            114 LOAD_ATTR               10 (attrib)
+            116 LOAD_METHOD              1 (get)
+            118 LOAD_CONST              10 ('{http://www.andymatuschak.org/xml-namespaces/sparkle}shortVersionString')
+            120 CALL_METHOD              1
+            122 JUMP_IF_TRUE_OR_POP    134
+
+905         124 LOAD_FAST                9 (enclosure)
+            126 LOAD_ATTR               10 (attrib)
+            128 LOAD_METHOD              1 (get)
+            130 LOAD_CONST              11 ('{http://www.andymatuschak.org/xml-namespaces/sparkle}version')
+            132 CALL_METHOD              1
+
+903     >>  134 STORE_FAST               7 (candidate)
+
+907         136 LOAD_GLOBAL             11 (isinstance)
+            138 LOAD_FAST                7 (candidate)
+            140 LOAD_GLOBAL             12 (str)
+            142 CALL_FUNCTION            2
+            144 POP_JUMP_IF_FALSE      154
+
+908         146 LOAD_FAST                7 (candidate)
+            148 LOAD_METHOD              8 (strip)
+            150 CALL_METHOD              0
+            152 STORE_FAST               7 (candidate)
+
+910     >>  154 LOAD_FAST                7 (candidate)
+            156 POP_JUMP_IF_TRUE       160
+
+911         158 JUMP_ABSOLUTE           56
+
+913     >>  160 LOAD_FAST                5 (latest_version)
+            162 LOAD_CONST               5 (None)
+            164 IS_OP                    0
+            166 POP_JUMP_IF_TRUE       184
+            168 LOAD_FAST                0 (self)
+            170 LOAD_METHOD             13 (_compareVersions)
+            172 LOAD_FAST                7 (candidate)
+            174 LOAD_FAST                5 (latest_version)
+            176 CALL_METHOD              2
+            178 LOAD_CONST              12 (0)
+            180 COMPARE_OP               4 (>)
+            182 POP_JUMP_IF_FALSE       56
+
+914     >>  184 LOAD_FAST                7 (candidate)
+            186 STORE_FAST               5 (latest_version)
+            188 JUMP_ABSOLUTE           56
+
+916     >>  190 LOAD_FAST                5 (latest_version)
+            192 POP_JUMP_IF_TRUE       202
+
+917         194 LOAD_GLOBAL             14 (ValueError)
+            196 LOAD_CONST              13 ('no valid version found in appcast')
+            198 CALL_FUNCTION            1
+            200 RAISE_VARARGS            1
+
+919     >>  202 LOAD_FAST                5 (latest_version)
+            204 RETURN_VALUE
+
+=== LPMacSparkleUpdater._currentAppVersion ===
+930           0 SETUP_FINALLY           34 (to 36)
+
+931           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (('LPUtility',))
+              6 IMPORT_NAME              0 (LPClientFramework)
+              8 IMPORT_FROM              1 (LPUtility)
+             10 STORE_FAST               1 (LPUtility)
+             12 POP_TOP
+
+933          14 LOAD_GLOBAL              2 (str)
+             16 LOAD_GLOBAL              3 (getattr)
+             18 LOAD_FAST                1 (LPUtility)
+             20 LOAD_CONST               3 ('appVersion')
+             22 LOAD_CONST               4 ('')
+             24 CALL_FUNCTION            3
+             26 JUMP_IF_TRUE_OR_POP     30
+             28 LOAD_CONST               4 ('')
+        >>   30 CALL_FUNCTION            1
+             32 POP_BLOCK
+             34 RETURN_VALUE
+
+934     >>   36 DUP_TOP
+             38 LOAD_GLOBAL              4 (Exception)
+             40 JUMP_IF_NOT_EXC_MATCH    54
+             42 POP_TOP
+             44 POP_TOP
+             46 POP_TOP
+
+935          48 POP_EXCEPT
+             50 LOAD_CONST               4 ('')
+             52 RETURN_VALUE
+        >>   54 RERAISE
+             56 LOAD_CONST               5 (None)
+             58 RETURN_VALUE
+
+=== LPMacSparkleUpdater._extractDisplayVersionFromItem ===
+946           0 LOAD_FAST                1 (appcastItem)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+947           8 LOAD_CONST               2 ('')
+             10 RETURN_VALUE
+
+949     >>   12 LOAD_CONST               2 ('')
+             14 STORE_FAST               2 (version_string)
+
+950          16 SETUP_FINALLY           34 (to 52)
+
+951          18 LOAD_GLOBAL              0 (getattr)
+             20 LOAD_FAST                1 (appcastItem)
+             22 LOAD_CONST               3 ('displayVersionString')
+             24 LOAD_CONST               1 (None)
+             26 CALL_FUNCTION            3
+             28 STORE_FAST               3 (version_attr)
+
+952          30 LOAD_GLOBAL              1 (callable)
+             32 LOAD_FAST                3 (version_attr)
+             34 CALL_FUNCTION            1
+             36 POP_JUMP_IF_FALSE       44
+             38 LOAD_FAST                3 (version_attr)
+             40 CALL_FUNCTION            0
+             42 JUMP_FORWARD             2 (to 46)
+        >>   44 LOAD_FAST                3 (version_attr)
+        >>   46 STORE_FAST               2 (version_string)
+             48 POP_BLOCK
+             50 JUMP_FORWARD            22 (to 74)
+
+953     >>   52 DUP_TOP
+             54 LOAD_GLOBAL              2 (Exception)
+             56 JUMP_IF_NOT_EXC_MATCH    72
+             58 POP_TOP
+             60 POP_TOP
+             62 POP_TOP
+
+954          64 LOAD_CONST               2 ('')
+             66 STORE_FAST               2 (version_string)
+             68 POP_EXCEPT
+             70 JUMP_FORWARD             2 (to 74)
+        >>   72 RERAISE
+
+956     >>   74 LOAD_FAST                2 (version_string)
+             76 LOAD_CONST               1 (None)
+             78 IS_OP                    0
+             80 POP_JUMP_IF_FALSE       86
+
+957          82 LOAD_CONST               2 ('')
+             84 RETURN_VALUE
+
+958     >>   86 LOAD_GLOBAL              3 (str)
+             88 LOAD_FAST                2 (version_string)
+             90 CALL_FUNCTION            1
+             92 LOAD_METHOD              4 (strip)
+             94 CALL_METHOD              0
+             96 RETURN_VALUE
+
+=== LPMacSparkleUpdater._extractNSErrorCode ===
+969           0 LOAD_FAST                1 (errorObject)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+970           8 LOAD_CONST               2 ('')
+             10 RETURN_VALUE
+
+972     >>   12 SETUP_FINALLY           54 (to 68)
+
+973          14 LOAD_GLOBAL              0 (getattr)
+             16 LOAD_FAST                1 (errorObject)
+             18 LOAD_CONST               3 ('code')
+             20 LOAD_CONST               1 (None)
+             22 CALL_FUNCTION            3
+             24 STORE_FAST               2 (code_attr)
+
+974          26 LOAD_GLOBAL              1 (callable)
+             28 LOAD_FAST                2 (code_attr)
+             30 CALL_FUNCTION            1
+             32 POP_JUMP_IF_FALSE       40
+             34 LOAD_FAST                2 (code_attr)
+             36 CALL_FUNCTION            0
+             38 JUMP_FORWARD             2 (to 42)
+        >>   40 LOAD_FAST                2 (code_attr)
+        >>   42 STORE_FAST               3 (code_value)
+
+975          44 LOAD_FAST                3 (code_value)
+             46 LOAD_CONST               1 (None)
+             48 IS_OP                    0
+             50 POP_JUMP_IF_FALSE       58
+
+976          52 POP_BLOCK
+             54 LOAD_CONST               2 ('')
+             56 RETURN_VALUE
+
+977     >>   58 LOAD_GLOBAL              2 (str)
+             60 LOAD_FAST                3 (code_value)
+             62 CALL_FUNCTION            1
+             64 POP_BLOCK
+             66 RETURN_VALUE
+
+978     >>   68 DUP_TOP
+             70 LOAD_GLOBAL              3 (Exception)
+             72 JUMP_IF_NOT_EXC_MATCH    86
+             74 POP_TOP
+             76 POP_TOP
+             78 POP_TOP
+
+979          80 POP_EXCEPT
+             82 LOAD_CONST               2 ('')
+             84 RETURN_VALUE
+        >>   86 RERAISE
+             88 LOAD_CONST               1 (None)
+             90 RETURN_VALUE
+
+=== LPMacSparkleUpdater._compareVersions ===
+ 991           0 LOAD_CONST               1 (<code object _normalize at 0x000001F3253CE240, file "LPClientFramework\LPMacSparkleUpdater.py", line 991>)
+               2 LOAD_CONST               2 ('LPMacSparkleUpdater._compareVersions.<locals>._normalize')
+               4 MAKE_FUNCTION            0
+               6 STORE_FAST               3 (_normalize)
+
+1004           8 LOAD_FAST                3 (_normalize)
+              10 LOAD_FAST                1 (leftVersion)
+              12 CALL_FUNCTION            1
+              14 STORE_FAST               4 (left_parts)
+
+1005          16 LOAD_FAST                3 (_normalize)
+              18 LOAD_FAST                2 (rightVersion)
+              20 CALL_FUNCTION            1
+              22 STORE_FAST               5 (right_parts)
+
+1006          24 LOAD_GLOBAL              0 (max)
+              26 LOAD_GLOBAL              1 (len)
+              28 LOAD_FAST                4 (left_parts)
+              30 CALL_FUNCTION            1
+              32 LOAD_GLOBAL              1 (len)
+              34 LOAD_FAST                5 (right_parts)
+              36 CALL_FUNCTION            1
+              38 CALL_FUNCTION            2
+              40 STORE_FAST               6 (max_len)
+
+1007          42 LOAD_FAST                4 (left_parts)
+              44 LOAD_METHOD              2 (extend)
+              46 LOAD_CONST               3 (0)
+              48 BUILD_LIST               1
+              50 LOAD_FAST                6 (max_len)
+              52 LOAD_GLOBAL              1 (len)
+              54 LOAD_FAST                4 (left_parts)
+              56 CALL_FUNCTION            1
+              58 BINARY_SUBTRACT
+              60 BINARY_MULTIPLY
+              62 CALL_METHOD              1
+              64 POP_TOP
+
+1008          66 LOAD_FAST                5 (right_parts)
+              68 LOAD_METHOD              2 (extend)
+              70 LOAD_CONST               3 (0)
+              72 BUILD_LIST               1
+              74 LOAD_FAST                6 (max_len)
+              76 LOAD_GLOBAL              1 (len)
+              78 LOAD_FAST                5 (right_parts)
+              80 CALL_FUNCTION            1
+              82 BINARY_SUBTRACT
+              84 BINARY_MULTIPLY
+              86 CALL_METHOD              1
+              88 POP_TOP
+
+1010          90 LOAD_FAST                4 (left_parts)
+              92 LOAD_FAST                5 (right_parts)
+              94 COMPARE_OP               4 (>)
+              96 POP_JUMP_IF_FALSE      102
+
+1011          98 LOAD_CONST               4 (1)
+             100 RETURN_VALUE
+
+1012     >>  102 LOAD_FAST                4 (left_parts)
+             104 LOAD_FAST                5 (right_parts)
+             106 COMPARE_OP               0 (<)
+             108 POP_JUMP_IF_FALSE      114
+
+1013         110 LOAD_CONST               5 (-1)
+             112 RETURN_VALUE
+
+1014     >>  114 LOAD_CONST               3 (0)
+             116 RETURN_VALUE
+
+=== LPMacSparkleUpdater._compareVersions._normalize ===
+ 992           0 BUILD_LIST               0
+               2 STORE_FAST               1 (parts)
+
+ 993           4 LOAD_GLOBAL              0 (str)
+               6 LOAD_FAST                0 (version_text)
+               8 JUMP_IF_TRUE_OR_POP     12
+              10 LOAD_CONST               1 ('')
+         >>   12 CALL_FUNCTION            1
+              14 LOAD_METHOD              1 (replace)
+              16 LOAD_CONST               2 ('-')
+              18 LOAD_CONST               3 ('.')
+              20 CALL_METHOD              2
+              22 LOAD_METHOD              2 (split)
+              24 LOAD_CONST               3 ('.')
+              26 CALL_METHOD              1
+              28 GET_ITER
+         >>   30 FOR_ITER               102 (to 134)
+              32 STORE_FAST               2 (token)
+
+ 994          34 LOAD_FAST                2 (token)
+              36 LOAD_METHOD              3 (strip)
+              38 CALL_METHOD              0
+              40 STORE_FAST               2 (token)
+
+ 995          42 LOAD_FAST                2 (token)
+              44 LOAD_CONST               1 ('')
+              46 COMPARE_OP               2 (==)
+              48 POP_JUMP_IF_FALSE       52
+
+ 996          50 JUMP_ABSOLUTE           30
+
+ 997     >>   52 SETUP_FINALLY           18 (to 72)
+
+ 998          54 LOAD_FAST                1 (parts)
+              56 LOAD_METHOD              4 (append)
+              58 LOAD_GLOBAL              5 (int)
+              60 LOAD_FAST                2 (token)
+              62 CALL_FUNCTION            1
+              64 CALL_METHOD              1
+              66 POP_TOP
+              68 POP_BLOCK
+              70 JUMP_ABSOLUTE           30
+
+ 999     >>   72 DUP_TOP
+              74 LOAD_GLOBAL              6 (ValueError)
+              76 JUMP_IF_NOT_EXC_MATCH   130
+              78 POP_TOP
+              80 POP_TOP
+              82 POP_TOP
+
+1000          84 LOAD_CONST               1 ('')
+              86 LOAD_METHOD              7 (join)
+              88 LOAD_CONST               4 (<code object <genexpr> at 0x000001F3253CED40, file "LPClientFramework\LPMacSparkleUpdater.py", line 1000>)
+              90 LOAD_CONST               5 ('LPMacSparkleUpdater._compareVersions.<locals>._normalize.<locals>.<genexpr>')
+              92 MAKE_FUNCTION            0
+              94 LOAD_FAST                2 (token)
+              96 GET_ITER
+              98 CALL_FUNCTION            1
+             100 CALL_METHOD              1
+             102 STORE_FAST               3 (number)
+
+1001         104 LOAD_FAST                1 (parts)
+             106 LOAD_METHOD              4 (append)
+             108 LOAD_FAST                3 (number)
+             110 POP_JUMP_IF_FALSE      120
+             112 LOAD_GLOBAL              5 (int)
+             114 LOAD_FAST                3 (number)
+             116 CALL_FUNCTION            1
+             118 JUMP_FORWARD             2 (to 122)
+         >>  120 LOAD_CONST               6 (0)
+         >>  122 CALL_METHOD              1
+             124 POP_TOP
+             126 POP_EXCEPT
+             128 JUMP_ABSOLUTE           30
+         >>  130 RERAISE
+             132 JUMP_ABSOLUTE           30
+
+1002     >>  134 LOAD_FAST                1 (parts)
+             136 RETURN_VALUE
+
+=== LPMacSparkleUpdater._compareVersions._normalize.<genexpr> ===
+1000           0 LOAD_FAST                0 (.0)
+         >>    2 FOR_ITER                18 (to 22)
+               4 STORE_FAST               1 (ch)
+               6 LOAD_FAST                1 (ch)
+               8 LOAD_METHOD              0 (isdigit)
+              10 CALL_METHOD              0
+              12 POP_JUMP_IF_FALSE        2
+              14 LOAD_FAST                1 (ch)
+              16 YIELD_VALUE
+              18 POP_TOP
+              20 JUMP_ABSOLUTE            2
+         >>   22 LOAD_CONST               0 (None)
+              24 RETURN_VALUE
+
+=== LPMacSparkleUpdater._safeInvokeResultCallback ===
+1026           0 LOAD_GLOBAL              0 (callable)
+               2 LOAD_FAST                1 (callback)
+               4 CALL_FUNCTION            1
+               6 POP_JUMP_IF_TRUE        12
+
+1027           8 LOAD_CONST               1 (None)
+              10 RETURN_VALUE
+
+1029     >>   12 SETUP_FINALLY           12 (to 26)
+
+1030          14 LOAD_FAST                1 (callback)
+              16 LOAD_FAST                2 (detail)
+              18 CALL_FUNCTION            1
+              20 POP_TOP
+              22 POP_BLOCK
+              24 JUMP_FORWARD            24 (to 50)
+
+1031     >>   26 DUP_TOP
+              28 LOAD_GLOBAL              1 (TypeError)
+              30 JUMP_IF_NOT_EXC_MATCH    48
+              32 POP_TOP
+              34 POP_TOP
+              36 POP_TOP
+
+1032          38 LOAD_FAST                1 (callback)
+              40 CALL_FUNCTION            0
+              42 POP_TOP
+              44 POP_EXCEPT
+              46 JUMP_FORWARD             2 (to 50)
+         >>   48 RERAISE
+         >>   50 LOAD_CONST               1 (None)
+              52 RETURN_VALUE
+
+=== LPMacSparkleUpdater._classifyCheckError ===
+1043           0 LOAD_GLOBAL              0 (str)
+               2 LOAD_FAST                1 (errorMessage)
+               4 JUMP_IF_TRUE_OR_POP      8
+               6 LOAD_CONST               1 ('')
+         >>    8 CALL_FUNCTION            1
+              10 LOAD_METHOD              1 (lower)
+              12 CALL_METHOD              0
+              14 STORE_DEREF              0 (message)
+
+1044          16 LOAD_DEREF               0 (message)
+              18 POP_JUMP_IF_TRUE        24
+
+1045          20 LOAD_CONST               2 ('unknown')
+              22 RETURN_VALUE
+
+1047     >>   24 LOAD_GLOBAL              2 (any)
+              26 LOAD_CLOSURE             0 (message)
+              28 BUILD_TUPLE              1
+              30 LOAD_CONST               3 (<code object <genexpr> at 0x000001F3253CE450, file "LPClientFramework\LPMacSparkleUpdater.py", line 1047>)
+              32 LOAD_CONST               4 ('LPMacSparkleUpdater._classifyCheckError.<locals>.<genexpr>')
+              34 MAKE_FUNCTION            8 (closure)
+              36 LOAD_CONST               5 (('timeout', 'timed out'))
+              38 GET_ITER
+              40 CALL_FUNCTION            1
+              42 CALL_FUNCTION            1
+              44 POP_JUMP_IF_FALSE       50
+
+1048          46 LOAD_CONST               6 ('download_timeout')
+              48 RETURN_VALUE
+
+1049     >>   50 LOAD_GLOBAL              2 (any)
+              52 LOAD_CLOSURE             0 (message)
+              54 BUILD_TUPLE              1
+              56 LOAD_CONST               7 (<code object <genexpr> at 0x000001F3253CE3A0, file "LPClientFramework\LPMacSparkleUpdater.py", line 1049>)
+              58 LOAD_CONST               4 ('LPMacSparkleUpdater._classifyCheckError.<locals>.<genexpr>')
+              60 MAKE_FUNCTION            8 (closure)
+              62 LOAD_CONST               8 (('dns', 'socket', 'connection', 'ssl', 'tls', 'refused', 'unreachable'))
+              64 GET_ITER
+              66 CALL_FUNCTION            1
+              68 CALL_FUNCTION            1
+              70 POP_JUMP_IF_FALSE       76
+
+1050          72 LOAD_CONST               9 ('network')
+              74 RETURN_VALUE
+
+1051     >>   76 LOAD_GLOBAL              2 (any)
+              78 LOAD_CLOSURE             0 (message)
+              80 BUILD_TUPLE              1
+              82 LOAD_CONST              10 (<code object <genexpr> at 0x000001F3253CE9D0, file "LPClientFramework\LPMacSparkleUpdater.py", line 1051>)
+              84 LOAD_CONST               4 ('LPMacSparkleUpdater._classifyCheckError.<locals>.<genexpr>')
+              86 MAKE_FUNCTION            8 (closure)
+              88 LOAD_CONST              11 (('http', '404', '403', '500', '503'))
+              90 GET_ITER
+              92 CALL_FUNCTION            1
+              94 CALL_FUNCTION            1
+              96 POP_JUMP_IF_FALSE      102
+
+1052          98 LOAD_CONST              12 ('feed_unreachable')
+             100 RETURN_VALUE
+
+1053     >>  102 LOAD_GLOBAL              2 (any)
+             104 LOAD_CLOSURE             0 (message)
+             106 BUILD_TUPLE              1
+             108 LOAD_CONST              13 (<code object <genexpr> at 0x000001F3253CE920, file "LPClientFramework\LPMacSparkleUpdater.py", line 1053>)
+             110 LOAD_CONST               4 ('LPMacSparkleUpdater._classifyCheckError.<locals>.<genexpr>')
+             112 MAKE_FUNCTION            8 (closure)
+             114 LOAD_CONST              14 (('xml', 'parse', 'malformed', 'appcast'))
+             116 GET_ITER
+             118 CALL_FUNCTION            1
+             120 CALL_FUNCTION            1
+             122 POP_JUMP_IF_FALSE      128
+
+1054         124 LOAD_CONST              15 ('feed_parse')
+             126 RETURN_VALUE
+
+1055     >>  128 LOAD_CONST               2 ('unknown')
+             130 RETURN_VALUE
+
+=== LPMacSparkleUpdater._classifyCheckError.<genexpr> ===
+1047           0 LOAD_FAST                0 (.0)
+         >>    2 FOR_ITER                14 (to 18)
+               4 STORE_FAST               1 (token)
+               6 LOAD_FAST                1 (token)
+               8 LOAD_DEREF               0 (message)
+              10 CONTAINS_OP              0
+              12 YIELD_VALUE
+              14 POP_TOP
+              16 JUMP_ABSOLUTE            2
+         >>   18 LOAD_CONST               0 (None)
+              20 RETURN_VALUE
+
+=== LPMacSparkleUpdater._classifyCheckError.<genexpr> ===
+1049           0 LOAD_FAST                0 (.0)
+         >>    2 FOR_ITER                14 (to 18)
+               4 STORE_FAST               1 (token)
+               6 LOAD_FAST                1 (token)
+               8 LOAD_DEREF               0 (message)
+              10 CONTAINS_OP              0
+              12 YIELD_VALUE
+              14 POP_TOP
+              16 JUMP_ABSOLUTE            2
+         >>   18 LOAD_CONST               0 (None)
+              20 RETURN_VALUE
+
+=== LPMacSparkleUpdater._classifyCheckError.<genexpr> ===
+1051           0 LOAD_FAST                0 (.0)
+         >>    2 FOR_ITER                14 (to 18)
+               4 STORE_FAST               1 (token)
+               6 LOAD_FAST                1 (token)
+               8 LOAD_DEREF               0 (message)
+              10 CONTAINS_OP              0
+              12 YIELD_VALUE
+              14 POP_TOP
+              16 JUMP_ABSOLUTE            2
+         >>   18 LOAD_CONST               0 (None)
+              20 RETURN_VALUE
+
+=== LPMacSparkleUpdater._classifyCheckError.<genexpr> ===
+1053           0 LOAD_FAST                0 (.0)
+         >>    2 FOR_ITER                14 (to 18)
+               4 STORE_FAST               1 (token)
+               6 LOAD_FAST                1 (token)
+               8 LOAD_DEREF               0 (message)
+              10 CONTAINS_OP              0
+              12 YIELD_VALUE
+              14 POP_TOP
+              16 JUMP_ABSOLUTE            2
+         >>   18 LOAD_CONST               0 (None)
+              20 RETURN_VALUE
+
+=== LPMacSparkleUpdater._setLastCheckDetail ===
+1084           0 LOAD_GLOBAL              0 (str)
+               2 LOAD_FAST                1 (resultKind)
+               4 JUMP_IF_TRUE_OR_POP      8
+               6 LOAD_CONST               1 ('unknown')
+         >>    8 CALL_FUNCTION            1
+
+1085          10 LOAD_GLOBAL              0 (str)
+              12 LOAD_FAST                2 (source)
+              14 JUMP_IF_TRUE_OR_POP     18
+              16 LOAD_CONST               2 ('sparkle')
+         >>   18 CALL_FUNCTION            1
+
+1086          20 LOAD_FAST                3 (latestVersion)
+              22 LOAD_CONST               3 (None)
+              24 IS_OP                    0
+              26 POP_JUMP_IF_FALSE       32
+              28 LOAD_CONST               4 ('')
+              30 JUMP_FORWARD             6 (to 38)
+         >>   32 LOAD_GLOBAL              0 (str)
+              34 LOAD_FAST                3 (latestVersion)
+              36 CALL_FUNCTION            1
+
+1087     >>   38 LOAD_FAST                4 (currentVersion)
+              40 LOAD_CONST               3 (None)
+              42 IS_OP                    0
+              44 POP_JUMP_IF_FALSE       50
+              46 LOAD_CONST               4 ('')
+              48 JUMP_FORWARD             6 (to 56)
+         >>   50 LOAD_GLOBAL              0 (str)
+              52 LOAD_FAST                4 (currentVersion)
+              54 CALL_FUNCTION            1
+
+1088     >>   56 LOAD_FAST                5 (compareResult)
+
+1089          58 LOAD_FAST                6 (errorCategory)
+              60 LOAD_CONST               3 (None)
+              62 IS_OP                    0
+              64 POP_JUMP_IF_FALSE       70
+              66 LOAD_CONST               4 ('')
+              68 JUMP_FORWARD             6 (to 76)
+         >>   70 LOAD_GLOBAL              0 (str)
+              72 LOAD_FAST                6 (errorCategory)
+              74 CALL_FUNCTION            1
+
+1090     >>   76 LOAD_FAST                7 (errorCode)
+              78 LOAD_CONST               3 (None)
+              80 IS_OP                    0
+              82 POP_JUMP_IF_FALSE       88
+              84 LOAD_CONST               4 ('')
+              86 JUMP_FORWARD             6 (to 94)
+         >>   88 LOAD_GLOBAL              0 (str)
+              90 LOAD_FAST                7 (errorCode)
+              92 CALL_FUNCTION            1
+
+1091     >>   94 LOAD_FAST                8 (errorMessage)
+              96 LOAD_CONST               3 (None)
+              98 IS_OP                    0
+             100 POP_JUMP_IF_FALSE      106
+             102 LOAD_CONST               4 ('')
+             104 JUMP_FORWARD             6 (to 112)
+         >>  106 LOAD_GLOBAL              0 (str)
+             108 LOAD_FAST                8 (errorMessage)
+             110 CALL_FUNCTION            1
+
+1083     >>  112 LOAD_CONST               5 (('result_kind', 'source', 'latest_version', 'current_version', 'compare_result', 'error_category', 'error_code', 'error_message'))
+             114 BUILD_CONST_KEY_MAP      8
+             116 STORE_FAST               9 (detail)
+
+1093         118 LOAD_FAST                9 (detail)
+             120 LOAD_FAST                0 (self)
+             122 STORE_ATTR               1 (_lastCheckDetail)
+
+1094         124 LOAD_GLOBAL              2 (dict)
+             126 LOAD_FAST                9 (detail)
+             128 CALL_FUNCTION            1
+             130 RETURN_VALUE
+
+=== LPMacSparkleUpdater.getLastCheckDetail ===
+1105           0 LOAD_GLOBAL              0 (dict)
+               2 LOAD_FAST                0 (self)
+               4 LOAD_ATTR                1 (_lastCheckDetail)
+               6 CALL_FUNCTION            1
+               8 RETURN_VALUE
+
+=== LPMacSparkleUpdater.setUpdateFoundCallback ===
+1117           0 LOAD_FAST                1 (onUpdateFound)
+               2 LOAD_FAST                0 (self)
+               4 STORE_ATTR               0 (_onUpdateFoundCallback)
+
+1118           6 LOAD_FAST                2 (onNoUpdateFound)
+               8 LOAD_FAST                0 (self)
+              10 STORE_ATTR               1 (_onNoUpdateFoundCallback)
+
+1119          12 LOAD_GLOBAL              2 (logger)
+              14 LOAD_METHOD              3 (info)
+
+1120          16 LOAD_CONST               1 ('[sparkle] update result callbacks registered found=%s not_found=%s result_bridge_enabled=%s')
+
+1121          18 LOAD_GLOBAL              4 (callable)
+              20 LOAD_FAST                1 (onUpdateFound)
+              22 CALL_FUNCTION            1
+
+1122          24 LOAD_GLOBAL              4 (callable)
+              26 LOAD_FAST                2 (onNoUpdateFound)
+              28 CALL_FUNCTION            1
+
+1123          30 LOAD_FAST                0 (self)
+              32 LOAD_ATTR                5 (_result_bridge_enabled)
+
+1119          34 CALL_METHOD              4
+              36 POP_TOP
+              38 LOAD_CONST               2 (None)
+              40 RETURN_VALUE
+
+=== LPMacSparkleUpdater.setInstallWillStartCallback ===
+1135           0 LOAD_FAST                1 (onInstallWillStart)
+               2 LOAD_FAST                0 (self)
+               4 STORE_ATTR               0 (_onInstallWillStartCallback)
+
+1136           6 LOAD_GLOBAL              1 (logger)
+               8 LOAD_METHOD              2 (info)
+
+1137          10 LOAD_CONST               1 ('[sparkle] install-start callback registered enabled=%s')
+
+1138          12 LOAD_GLOBAL              3 (callable)
+              14 LOAD_FAST                1 (onInstallWillStart)
+              16 CALL_FUNCTION            1
+
+1136          18 CALL_METHOD              2
+              20 POP_TOP
+              22 LOAD_CONST               2 (None)
+              24 RETURN_VALUE
+
+=== LPMacSparkleUpdater.setDownloadLifecycleCallback ===
+1150           0 LOAD_FAST                1 (onDownloadLifecycle)
+               2 LOAD_FAST                0 (self)
+               4 STORE_ATTR               0 (_onDownloadLifecycleCallback)
+
+1151           6 LOAD_GLOBAL              1 (logger)
+               8 LOAD_METHOD              2 (info)
+
+1152          10 LOAD_CONST               1 ('[sparkle] download-lifecycle callback registered enabled=%s')
+
+1153          12 LOAD_GLOBAL              3 (callable)
+              14 LOAD_FAST                1 (onDownloadLifecycle)
+              16 CALL_FUNCTION            1
+
+1151          18 CALL_METHOD              2
+              20 POP_TOP
+              22 LOAD_CONST               2 (None)
+              24 RETURN_VALUE
+
+=== LPMacSparkleUpdater.notifyInstallWillStart ===
+1165           0 LOAD_GLOBAL              0 (logger)
+               2 LOAD_METHOD              1 (info)
+               4 LOAD_CONST               1 ('[sparkle] notifyInstallWillStart called')
+               6 CALL_METHOD              1
+               8 POP_TOP
+
+1166          10 LOAD_GLOBAL              2 (isinstance)
+              12 LOAD_FAST                1 (detail)
+              14 LOAD_GLOBAL              3 (dict)
+              16 CALL_FUNCTION            2
+              18 POP_JUMP_IF_FALSE       24
+              20 LOAD_FAST                1 (detail)
+              22 JUMP_FORWARD             6 (to 30)
+         >>   24 LOAD_FAST                0 (self)
+              26 LOAD_METHOD              4 (getLastCheckDetail)
+              28 CALL_METHOD              0
+         >>   30 STORE_FAST               2 (callback_detail)
+
+1167          32 LOAD_GLOBAL              5 (callable)
+              34 LOAD_FAST                0 (self)
+              36 LOAD_ATTR                6 (_onInstallWillStartCallback)
+              38 CALL_FUNCTION            1
+              40 POP_JUMP_IF_FALSE      110
+
+1168          42 SETUP_FINALLY           18 (to 62)
+
+1169          44 LOAD_FAST                0 (self)
+              46 LOAD_METHOD              7 (_safeInvokeResultCallback)
+              48 LOAD_FAST                0 (self)
+              50 LOAD_ATTR                6 (_onInstallWillStartCallback)
+              52 LOAD_FAST                2 (callback_detail)
+              54 CALL_METHOD              2
+              56 POP_TOP
+              58 POP_BLOCK
+              60 JUMP_FORWARD            48 (to 110)
+
+1170     >>   62 DUP_TOP
+              64 LOAD_GLOBAL              8 (Exception)
+              66 JUMP_IF_NOT_EXC_MATCH   108
+              68 POP_TOP
+              70 STORE_FAST               3 (error)
+              72 POP_TOP
+              74 SETUP_FINALLY           24 (to 100)
+
+1171          76 LOAD_GLOBAL              0 (logger)
+              78 LOAD_METHOD              9 (warning)
+              80 LOAD_CONST               2 ('[sparkle] onInstallWillStartCallback failed: %s')
+              82 LOAD_FAST                3 (error)
+              84 CALL_METHOD              2
+              86 POP_TOP
+              88 POP_BLOCK
+              90 POP_EXCEPT
+              92 LOAD_CONST               3 (None)
+              94 STORE_FAST               3 (error)
+              96 DELETE_FAST              3 (error)
+              98 JUMP_FORWARD            10 (to 110)
+         >>  100 LOAD_CONST               3 (None)
+             102 STORE_FAST               3 (error)
+             104 DELETE_FAST              3 (error)
+             106 RERAISE
+         >>  108 RERAISE
+         >>  110 LOAD_CONST               3 (None)
+             112 RETURN_VALUE
+
+=== LPMacSparkleUpdater.notifyDownloadLifecycle ===
+1183           0 LOAD_GLOBAL              0 (str)
+               2 LOAD_FAST                1 (lifecycleStage)
+               4 JUMP_IF_TRUE_OR_POP      8
+               6 LOAD_CONST               1 ('')
+         >>    8 CALL_FUNCTION            1
+              10 LOAD_METHOD              1 (strip)
+              12 CALL_METHOD              0
+              14 STORE_FAST               3 (stage)
+
+1184          16 LOAD_GLOBAL              2 (isinstance)
+              18 LOAD_FAST                2 (detail)
+              20 LOAD_GLOBAL              3 (dict)
+              22 CALL_FUNCTION            2
+              24 POP_JUMP_IF_FALSE       30
+              26 LOAD_FAST                2 (detail)
+              28 JUMP_FORWARD             6 (to 36)
+         >>   30 LOAD_FAST                0 (self)
+              32 LOAD_METHOD              4 (getLastCheckDetail)
+              34 CALL_METHOD              0
+         >>   36 STORE_FAST               4 (callback_detail)
+
+1185          38 LOAD_GLOBAL              3 (dict)
+              40 LOAD_FAST                4 (callback_detail)
+              42 CALL_FUNCTION            1
+              44 STORE_FAST               4 (callback_detail)
+
+1186          46 LOAD_FAST                3 (stage)
+              48 LOAD_FAST                4 (callback_detail)
+              50 LOAD_CONST               2 ('lifecycle_stage')
+              52 STORE_SUBSCR
+
+1187          54 LOAD_GLOBAL              5 (logger)
+              56 LOAD_METHOD              6 (info)
+
+1188          58 LOAD_CONST               3 ('[sparkle] notifyDownloadLifecycle stage=%s detail=%s')
+
+1189          60 LOAD_FAST                3 (stage)
+
+1190          62 LOAD_FAST                4 (callback_detail)
+
+1187          64 CALL_METHOD              3
+              66 POP_TOP
+
+1192          68 LOAD_GLOBAL              7 (callable)
+              70 LOAD_FAST                0 (self)
+              72 LOAD_ATTR                8 (_onDownloadLifecycleCallback)
+              74 CALL_FUNCTION            1
+              76 POP_JUMP_IF_FALSE      146
+
+1193          78 SETUP_FINALLY           18 (to 98)
+
+1194          80 LOAD_FAST                0 (self)
+              82 LOAD_METHOD              9 (_safeInvokeResultCallback)
+              84 LOAD_FAST                0 (self)
+              86 LOAD_ATTR                8 (_onDownloadLifecycleCallback)
+              88 LOAD_FAST                4 (callback_detail)
+              90 CALL_METHOD              2
+              92 POP_TOP
+              94 POP_BLOCK
+              96 JUMP_FORWARD            48 (to 146)
+
+1195     >>   98 DUP_TOP
+             100 LOAD_GLOBAL             10 (Exception)
+             102 JUMP_IF_NOT_EXC_MATCH   144
+             104 POP_TOP
+             106 STORE_FAST               5 (error)
+             108 POP_TOP
+             110 SETUP_FINALLY           24 (to 136)
+
+1196         112 LOAD_GLOBAL              5 (logger)
+             114 LOAD_METHOD             11 (warning)
+             116 LOAD_CONST               4 ('[sparkle] onDownloadLifecycleCallback failed: %s')
+             118 LOAD_FAST                5 (error)
+             120 CALL_METHOD              2
+             122 POP_TOP
+             124 POP_BLOCK
+             126 POP_EXCEPT
+             128 LOAD_CONST               5 (None)
+             130 STORE_FAST               5 (error)
+             132 DELETE_FAST              5 (error)
+             134 JUMP_FORWARD            10 (to 146)
+         >>  136 LOAD_CONST               5 (None)
+             138 STORE_FAST               5 (error)
+             140 DELETE_FAST              5 (error)
+             142 RERAISE
+         >>  144 RERAISE
+         >>  146 LOAD_CONST               5 (None)
+             148 RETURN_VALUE
+
+=== LPMacSparkleUpdater.notifyUpdateFound ===
+1207           0 LOAD_GLOBAL              0 (logger)
+               2 LOAD_METHOD              1 (info)
+               4 LOAD_CONST               1 ('[sparkle] notifyUpdateFound called')
+               6 CALL_METHOD              1
+               8 POP_TOP
+
+1208          10 LOAD_GLOBAL              2 (isinstance)
+              12 LOAD_FAST                1 (detail)
+              14 LOAD_GLOBAL              3 (dict)
+              16 CALL_FUNCTION            2
+              18 POP_JUMP_IF_FALSE       24
+              20 LOAD_FAST                1 (detail)
+              22 JUMP_FORWARD             6 (to 30)
+         >>   24 LOAD_FAST                0 (self)
+              26 LOAD_METHOD              4 (getLastCheckDetail)
+              28 CALL_METHOD              0
+         >>   30 STORE_FAST               2 (callback_detail)
+
+1209          32 LOAD_GLOBAL              5 (callable)
+              34 LOAD_FAST                0 (self)
+              36 LOAD_ATTR                6 (_onUpdateFoundCallback)
+              38 CALL_FUNCTION            1
+              40 POP_JUMP_IF_FALSE      110
+
+1210          42 SETUP_FINALLY           18 (to 62)
+
+1211          44 LOAD_FAST                0 (self)
+              46 LOAD_METHOD              7 (_safeInvokeResultCallback)
+              48 LOAD_FAST                0 (self)
+              50 LOAD_ATTR                6 (_onUpdateFoundCallback)
+              52 LOAD_FAST                2 (callback_detail)
+              54 CALL_METHOD              2
+              56 POP_TOP
+              58 POP_BLOCK
+              60 JUMP_FORWARD            48 (to 110)
+
+1212     >>   62 DUP_TOP
+              64 LOAD_GLOBAL              8 (Exception)
+              66 JUMP_IF_NOT_EXC_MATCH   108
+              68 POP_TOP
+              70 STORE_FAST               3 (error)
+              72 POP_TOP
+              74 SETUP_FINALLY           24 (to 100)
+
+1213          76 LOAD_GLOBAL              0 (logger)
+              78 LOAD_METHOD              9 (warning)
+              80 LOAD_CONST               2 ('[sparkle] onUpdateFoundCallback failed: %s')
+              82 LOAD_FAST                3 (error)
+              84 CALL_METHOD              2
+              86 POP_TOP
+              88 POP_BLOCK
+              90 POP_EXCEPT
+              92 LOAD_CONST               3 (None)
+              94 STORE_FAST               3 (error)
+              96 DELETE_FAST              3 (error)
+              98 JUMP_FORWARD            10 (to 110)
+         >>  100 LOAD_CONST               3 (None)
+             102 STORE_FAST               3 (error)
+             104 DELETE_FAST              3 (error)
+             106 RERAISE
+         >>  108 RERAISE
+         >>  110 LOAD_CONST               3 (None)
+             112 RETURN_VALUE
+
+=== LPMacSparkleUpdater.notifyNoUpdateFound ===
+1224           0 LOAD_GLOBAL              0 (logger)
+               2 LOAD_METHOD              1 (info)
+               4 LOAD_CONST               1 ('[sparkle] notifyNoUpdateFound called')
+               6 CALL_METHOD              1
+               8 POP_TOP
+
+1225          10 LOAD_GLOBAL              2 (isinstance)
+              12 LOAD_FAST                1 (detail)
+              14 LOAD_GLOBAL              3 (dict)
+              16 CALL_FUNCTION            2
+              18 POP_JUMP_IF_FALSE       24
+              20 LOAD_FAST                1 (detail)
+              22 JUMP_FORWARD             6 (to 30)
+         >>   24 LOAD_FAST                0 (self)
+              26 LOAD_METHOD              4 (getLastCheckDetail)
+              28 CALL_METHOD              0
+         >>   30 STORE_FAST               2 (callback_detail)
+
+1226          32 LOAD_GLOBAL              5 (callable)
+              34 LOAD_FAST                0 (self)
+              36 LOAD_ATTR                6 (_onNoUpdateFoundCallback)
+              38 CALL_FUNCTION            1
+              40 POP_JUMP_IF_FALSE      110
+
+1227          42 SETUP_FINALLY           18 (to 62)
+
+1228          44 LOAD_FAST                0 (self)
+              46 LOAD_METHOD              7 (_safeInvokeResultCallback)
+              48 LOAD_FAST                0 (self)
+              50 LOAD_ATTR                6 (_onNoUpdateFoundCallback)
+              52 LOAD_FAST                2 (callback_detail)
+              54 CALL_METHOD              2
+              56 POP_TOP
+              58 POP_BLOCK
+              60 JUMP_FORWARD            48 (to 110)
+
+1229     >>   62 DUP_TOP
+              64 LOAD_GLOBAL              8 (Exception)
+              66 JUMP_IF_NOT_EXC_MATCH   108
+              68 POP_TOP
+              70 STORE_FAST               3 (error)
+              72 POP_TOP
+              74 SETUP_FINALLY           24 (to 100)
+
+1230          76 LOAD_GLOBAL              0 (logger)
+              78 LOAD_METHOD              9 (warning)
+              80 LOAD_CONST               2 ('[sparkle] onNoUpdateFoundCallback failed: %s')
+              82 LOAD_FAST                3 (error)
+              84 CALL_METHOD              2
+              86 POP_TOP
+              88 POP_BLOCK
+              90 POP_EXCEPT
+              92 LOAD_CONST               3 (None)
+              94 STORE_FAST               3 (error)
+              96 DELETE_FAST              3 (error)
+              98 JUMP_FORWARD            10 (to 110)
+         >>  100 LOAD_CONST               3 (None)
+             102 STORE_FAST               3 (error)
+             104 DELETE_FAST              3 (error)
+             106 RERAISE
+         >>  108 RERAISE
+         >>  110 LOAD_CONST               3 (None)
+             112 RETURN_VALUE
+
+=== LPMacSparkleUpdater.checkForUpdatesManually ===
+1241           0 LOAD_FAST                0 (self)
+               2 LOAD_METHOD              0 (isReady)
+               4 CALL_METHOD              0
+               6 POP_JUMP_IF_TRUE        22
+
+1242           8 LOAD_GLOBAL              1 (logger)
+              10 LOAD_METHOD              2 (warning)
+              12 LOAD_CONST               1 ('[sparkle] 未就绪，无法手动检查更新')
+              14 CALL_METHOD              1
+              16 POP_TOP
+
+1243          18 LOAD_CONST               2 (False)
+              20 RETURN_VALUE
+
+1245     >>   22 LOAD_FAST                0 (self)
+              24 LOAD_ATTR                3 (_updater)
+              26 LOAD_FAST                0 (self)
+              28 LOAD_ATTR                4 (_updater_controller)
+              30 BUILD_TUPLE              2
+              32 GET_ITER
+         >>   34 FOR_ITER               116 (to 152)
+              36 STORE_FAST               1 (target)
+
+1246          38 LOAD_FAST                1 (target)
+              40 LOAD_CONST               3 (None)
+              42 IS_OP                    0
+              44 POP_JUMP_IF_FALSE       48
+
+1247          46 JUMP_ABSOLUTE           34
+
+1249     >>   48 LOAD_GLOBAL              5 (getattr)
+              50 LOAD_FAST                1 (target)
+              52 LOAD_CONST               4 ('checkForUpdates_')
+              54 LOAD_CONST               3 (None)
+              56 CALL_FUNCTION            3
+              58 STORE_FAST               2 (method)
+
+1250          60 LOAD_GLOBAL              6 (callable)
+              62 LOAD_FAST                2 (method)
+              64 CALL_FUNCTION            1
+              66 POP_JUMP_IF_TRUE        70
+
+1251          68 JUMP_ABSOLUTE           34
+
+1253     >>   70 SETUP_FINALLY           26 (to 98)
+
+1254          72 LOAD_FAST                2 (method)
+              74 LOAD_CONST               3 (None)
+              76 CALL_FUNCTION            1
+              78 POP_TOP
+
+1255          80 LOAD_GLOBAL              1 (logger)
+              82 LOAD_METHOD              7 (info)
+              84 LOAD_CONST               5 ('[sparkle] 已触发手动检查更新')
+              86 CALL_METHOD              1
+              88 POP_TOP
+
+1256          90 POP_BLOCK
+              92 POP_TOP
+              94 LOAD_CONST               6 (True)
+              96 RETURN_VALUE
+
+1257     >>   98 DUP_TOP
+             100 LOAD_GLOBAL              8 (Exception)
+             102 JUMP_IF_NOT_EXC_MATCH   148
+             104 POP_TOP
+             106 STORE_FAST               3 (error)
+             108 POP_TOP
+             110 SETUP_FINALLY           28 (to 140)
+
+1258         112 LOAD_GLOBAL              1 (logger)
+             114 LOAD_METHOD              2 (warning)
+             116 LOAD_CONST               7 ('[sparkle] 手动检查方法失败: ')
+             118 LOAD_FAST                3 (error)
+             120 FORMAT_VALUE             0
+             122 BUILD_STRING             2
+             124 CALL_METHOD              1
+             126 POP_TOP
+             128 POP_BLOCK
+             130 POP_EXCEPT
+             132 LOAD_CONST               3 (None)
+             134 STORE_FAST               3 (error)
+             136 DELETE_FAST              3 (error)
+             138 JUMP_ABSOLUTE           34
+         >>  140 LOAD_CONST               3 (None)
+             142 STORE_FAST               3 (error)
+             144 DELETE_FAST              3 (error)
+             146 RERAISE
+         >>  148 RERAISE
+             150 JUMP_ABSOLUTE           34
+
+1260     >>  152 LOAD_GLOBAL              1 (logger)
+             154 LOAD_METHOD              2 (warning)
+             156 LOAD_CONST               8 ('[sparkle] 当前对象不支持手动检查更新方法')
+             158 CALL_METHOD              1
+             160 POP_TOP
+
+1261         162 LOAD_CONST               2 (False)
+             164 RETURN_VALUE

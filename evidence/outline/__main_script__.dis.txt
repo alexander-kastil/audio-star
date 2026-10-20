@@ -1,0 +1,359 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2024/11/25 16:10\n@Auth ： Chris\n@File ：main.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (os)
+             10 STORE_NAME               1 (os)
+
+  9          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (platform)
+             18 STORE_NAME               2 (platform)
+
+ 10          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (sys)
+             26 STORE_NAME               3 (sys)
+
+ 13          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('install_native_crash_handler',))
+             32 IMPORT_NAME              4 (LPClientFramework.util.LPNativeCrashHandler)
+             34 IMPORT_FROM              5 (install_native_crash_handler)
+             36 STORE_NAME               5 (install_native_crash_handler)
+             38 POP_TOP
+
+ 14          40 LOAD_NAME                5 (install_native_crash_handler)
+             42 CALL_FUNCTION            0
+             44 POP_TOP
+
+ 17          46 LOAD_CONST               1 (0)
+             48 LOAD_CONST               2 (None)
+             50 IMPORT_NAME              6 (faulthandler)
+             52 STORE_NAME               6 (faulthandler)
+
+ 18          54 LOAD_CONST               1 (0)
+             56 LOAD_CONST               4 (('get_crash_dir',))
+             58 IMPORT_NAME              4 (LPClientFramework.util.LPNativeCrashHandler)
+             60 IMPORT_FROM              7 (get_crash_dir)
+             62 STORE_NAME               8 (_get_crash_dir)
+             64 POP_TOP
+
+ 19          66 LOAD_NAME                8 (_get_crash_dir)
+             68 CALL_FUNCTION            0
+             70 STORE_NAME               9 (_crash_faulthandler_dir)
+
+ 20          72 LOAD_NAME                1 (os)
+             74 LOAD_ATTR               10 (path)
+             76 LOAD_METHOD             11 (join)
+             78 LOAD_NAME                9 (_crash_faulthandler_dir)
+             80 LOAD_CONST               5 ('crash_faulthandler.log')
+             82 CALL_METHOD              2
+             84 STORE_NAME              12 (_crash_faulthandler_path)
+
+ 21          86 LOAD_NAME               13 (open)
+             88 LOAD_NAME               12 (_crash_faulthandler_path)
+             90 LOAD_CONST               6 ('a')
+             92 LOAD_CONST               7 ('utf-8')
+             94 LOAD_CONST               8 (('encoding',))
+             96 CALL_FUNCTION_KW         3
+             98 STORE_NAME              14 (_crash_faulthandler_file)
+
+ 22         100 LOAD_NAME                6 (faulthandler)
+            102 LOAD_ATTR               15 (enable)
+            104 LOAD_NAME               14 (_crash_faulthandler_file)
+            106 LOAD_CONST               9 (True)
+            108 LOAD_CONST              10 (('file', 'all_threads'))
+            110 CALL_FUNCTION_KW         2
+            112 POP_TOP
+
+ 27         114 SETUP_FINALLY           12 (to 128)
+
+ 28         116 LOAD_CONST               1 (0)
+            118 LOAD_CONST               2 (None)
+            120 IMPORT_NAME             16 (resources.app_rc)
+            122 STORE_NAME              17 (resources)
+            124 POP_BLOCK
+            126 JUMP_FORWARD            50 (to 178)
+
+ 29     >>  128 DUP_TOP
+            130 LOAD_NAME               18 (ModuleNotFoundError)
+            132 JUMP_IF_NOT_EXC_MATCH   176
+            134 POP_TOP
+            136 STORE_NAME              19 (e)
+            138 POP_TOP
+            140 SETUP_FINALLY           26 (to 168)
+
+ 30         142 LOAD_NAME               20 (print)
+            144 LOAD_CONST              11 ('[resource] failed to import resources.app_rc: ')
+            146 LOAD_NAME               19 (e)
+            148 FORMAT_VALUE             0
+            150 BUILD_STRING             2
+            152 CALL_FUNCTION            1
+            154 POP_TOP
+            156 POP_BLOCK
+            158 POP_EXCEPT
+            160 LOAD_CONST               2 (None)
+            162 STORE_NAME              19 (e)
+            164 DELETE_NAME             19 (e)
+            166 JUMP_FORWARD            10 (to 178)
+        >>  168 LOAD_CONST               2 (None)
+            170 STORE_NAME              19 (e)
+            172 DELETE_NAME             19 (e)
+            174 RERAISE
+        >>  176 RERAISE
+
+ 31     >>  178 LOAD_CONST               1 (0)
+            180 LOAD_CONST              12 (('LPApplication',))
+            182 IMPORT_NAME             21 (HOME.LPApplication)
+            184 IMPORT_FROM             22 (LPApplication)
+            186 STORE_NAME              22 (LPApplication)
+            188 POP_TOP
+
+ 32         190 LOAD_CONST               1 (0)
+            192 LOAD_CONST              13 (('setupUI',))
+            194 IMPORT_NAME             23 (HOME.WiiMHome)
+            196 IMPORT_FROM             24 (setupUI)
+            198 STORE_NAME              24 (setupUI)
+            200 POP_TOP
+
+ 33         202 LOAD_CONST               1 (0)
+            204 LOAD_CONST              14 (('LPSingletonAppManager',))
+            206 IMPORT_NAME             25 (LPClientFramework.LPSingletonAppManager)
+            208 IMPORT_FROM             26 (LPSingletonAppManager)
+            210 STORE_NAME              26 (LPSingletonAppManager)
+            212 POP_TOP
+
+ 34         214 LOAD_CONST               1 (0)
+            216 LOAD_CONST              15 (('LPUriHandler',))
+            218 IMPORT_NAME             27 (LPClientFramework.util)
+            220 IMPORT_FROM             28 (LPUriHandler)
+            222 STORE_NAME              28 (LPUriHandler)
+            224 POP_TOP
+
+ 35         226 LOAD_CONST               1 (0)
+            228 LOAD_CONST              16 (('LPExceptionHandler', 'configureCrashDumper'))
+            230 IMPORT_NAME             29 (LPClientFramework.util.LPExceptionHandler)
+            232 IMPORT_FROM             30 (LPExceptionHandler)
+            234 STORE_NAME              30 (LPExceptionHandler)
+            236 IMPORT_FROM             31 (configureCrashDumper)
+            238 STORE_NAME              31 (configureCrashDumper)
+            240 POP_TOP
+
+ 36         242 LOAD_CONST               1 (0)
+            244 LOAD_CONST              17 (('LPCrashDumper',))
+            246 IMPORT_NAME             32 (LPClientFramework.util.LPCrashDumper)
+            248 IMPORT_FROM             33 (LPCrashDumper)
+            250 STORE_NAME              33 (LPCrashDumper)
+            252 POP_TOP
+
+ 37         254 LOAD_CONST               1 (0)
+            256 LOAD_CONST              18 (('cacheDir', 'appVersion', 'bundleId'))
+            258 IMPORT_NAME             34 (LPClientFramework.LPUtility)
+            260 IMPORT_FROM             35 (cacheDir)
+            262 STORE_NAME              35 (cacheDir)
+            264 IMPORT_FROM             36 (appVersion)
+            266 STORE_NAME              36 (appVersion)
+            268 IMPORT_FROM             37 (bundleId)
+            270 STORE_NAME              37 (bundleId)
+            272 POP_TOP
+
+ 40         274 LOAD_CONST              19 (<code object main at 0x000001F324E69240, file "main.py", line 40>)
+            276 LOAD_CONST              20 ('main')
+            278 MAKE_FUNCTION            0
+            280 STORE_NAME              38 (main)
+
+ 73         282 LOAD_NAME               39 (__name__)
+            284 LOAD_CONST              21 ('__main__')
+            286 COMPARE_OP               2 (==)
+            288 EXTENDED_ARG             1
+            290 POP_JUMP_IF_FALSE      332
+
+ 75         292 LOAD_NAME               31 (configureCrashDumper)
+
+ 76         294 LOAD_NAME               33 (LPCrashDumper)
+
+ 77         296 LOAD_NAME               40 (str)
+            298 LOAD_NAME               35 (cacheDir)
+            300 LOAD_CONST              22 ('crash')
+            302 BINARY_TRUE_DIVIDE
+            304 CALL_FUNCTION            1
+
+ 78         306 LOAD_NAME               36 (appVersion)
+
+ 79         308 LOAD_NAME               37 (bundleId)
+
+ 76         310 LOAD_CONST              23 (('appVersion', 'bundleId'))
+            312 CALL_FUNCTION_KW         3
+
+ 75         314 CALL_FUNCTION            1
+            316 POP_TOP
+
+ 82         318 LOAD_NAME               30 (LPExceptionHandler)
+            320 LOAD_ATTR               41 (globalHandler)
+            322 LOAD_NAME                3 (sys)
+            324 STORE_ATTR              42 (excepthook)
+
+ 83         326 LOAD_NAME               38 (main)
+            328 CALL_FUNCTION            0
+            330 POP_TOP
+        >>  332 LOAD_CONST               2 (None)
+            334 RETURN_VALUE
+
+=== main ===
+ 41           0 LOAD_CONST               1 ('Fusion')
+              2 LOAD_GLOBAL              0 (os)
+              4 LOAD_ATTR                1 (environ)
+              6 LOAD_CONST               2 ('QT_QUICK_CONTROLS_STYLE')
+              8 STORE_SUBSCR
+
+ 42          10 LOAD_CONST               3 ('opengl')
+             12 LOAD_GLOBAL              0 (os)
+             14 LOAD_ATTR                1 (environ)
+             16 LOAD_CONST               4 ('QSG_RHI_BACKEND')
+             18 STORE_SUBSCR
+
+ 43          20 LOAD_GLOBAL              2 (LPApplication)
+             22 LOAD_METHOD              3 (get)
+             24 BUILD_LIST               0
+             26 CALL_METHOD              1
+             28 STORE_FAST               0 (app)
+
+ 46          30 LOAD_GLOBAL              4 (platform)
+             32 LOAD_METHOD              5 (system)
+             34 CALL_METHOD              0
+             36 LOAD_CONST               5 ('Windows')
+             38 COMPARE_OP               2 (==)
+             40 POP_JUMP_IF_FALSE       56
+
+ 47          42 LOAD_CONST               6 (0)
+             44 LOAD_CONST               7 (('install_qt_fatal_handler',))
+             46 IMPORT_NAME              6 (LPClientFramework.util.LPNativeCrashHandler_win)
+             48 IMPORT_FROM              7 (install_qt_fatal_handler)
+             50 STORE_FAST               1 (_install_qt_fatal_handler)
+             52 POP_TOP
+             54 JUMP_FORWARD            34 (to 90)
+
+ 48     >>   56 LOAD_GLOBAL              4 (platform)
+             58 LOAD_METHOD              5 (system)
+             60 CALL_METHOD              0
+             62 LOAD_CONST               8 ('Darwin')
+             64 COMPARE_OP               2 (==)
+             66 POP_JUMP_IF_FALSE       82
+
+ 49          68 LOAD_CONST               6 (0)
+             70 LOAD_CONST               7 (('install_qt_fatal_handler',))
+             72 IMPORT_NAME              8 (LPClientFramework.util.LPNativeCrashHandler_mac)
+             74 IMPORT_FROM              7 (install_qt_fatal_handler)
+             76 STORE_FAST               1 (_install_qt_fatal_handler)
+             78 POP_TOP
+             80 JUMP_FORWARD             8 (to 90)
+
+ 51     >>   82 LOAD_CONST               9 (<code object <lambda> at 0x000001F3253A2A80, file "main.py", line 51>)
+             84 LOAD_CONST              10 ('main.<locals>.<lambda>')
+             86 MAKE_FUNCTION            0
+             88 STORE_FAST               1 (_install_qt_fatal_handler)
+
+ 52     >>   90 LOAD_FAST                1 (_install_qt_fatal_handler)
+             92 CALL_FUNCTION            0
+             94 POP_TOP
+
+ 53          96 LOAD_GLOBAL              4 (platform)
+             98 LOAD_METHOD              5 (system)
+            100 CALL_METHOD              0
+            102 LOAD_CONST               8 ('Darwin')
+            104 COMPARE_OP               2 (==)
+            106 POP_JUMP_IF_FALSE      118
+
+ 54         108 LOAD_FAST                0 (app)
+            110 LOAD_METHOD              9 (setQuitOnLastWindowClosed)
+            112 LOAD_CONST              11 (False)
+            114 CALL_METHOD              1
+            116 POP_TOP
+
+ 56     >>  118 LOAD_GLOBAL              4 (platform)
+            120 LOAD_METHOD              5 (system)
+            122 CALL_METHOD              0
+            124 LOAD_CONST               5 ('Windows')
+            126 COMPARE_OP               2 (==)
+            128 POP_JUMP_IF_FALSE      232
+
+ 57         130 LOAD_GLOBAL             10 (len)
+            132 LOAD_GLOBAL             11 (sys)
+            134 LOAD_ATTR               12 (argv)
+            136 CALL_FUNCTION            1
+            138 LOAD_CONST              12 (1)
+            140 COMPARE_OP               4 (>)
+            142 POP_JUMP_IF_FALSE      154
+            144 LOAD_GLOBAL             11 (sys)
+            146 LOAD_ATTR               12 (argv)
+            148 LOAD_CONST              12 (1)
+            150 BINARY_SUBSCR
+            152 JUMP_FORWARD             2 (to 156)
+        >>  154 LOAD_CONST               0 (None)
+        >>  156 STORE_FAST               2 (uri)
+
+ 59         158 LOAD_GLOBAL             13 (LPSingletonAppManager)
+            160 CALL_FUNCTION            0
+            162 STORE_FAST               3 (instance)
+
+ 60         164 LOAD_FAST                3 (instance)
+            166 LOAD_METHOD             14 (is_running)
+            168 CALL_METHOD              0
+            170 POP_JUMP_IF_FALSE      194
+
+ 61         172 LOAD_FAST                3 (instance)
+            174 LOAD_METHOD             15 (sendMsgToPrimary)
+            176 LOAD_FAST                2 (uri)
+            178 CALL_METHOD              1
+            180 POP_TOP
+
+ 62         182 LOAD_GLOBAL             11 (sys)
+            184 LOAD_METHOD             16 (exit)
+            186 LOAD_CONST               6 (0)
+            188 CALL_METHOD              1
+            190 POP_TOP
+            192 JUMP_ABSOLUTE          254
+
+ 64     >>  194 LOAD_FAST                3 (instance)
+            196 LOAD_ATTR               17 (messageReceived)
+            198 LOAD_METHOD             18 (connect)
+            200 LOAD_GLOBAL             19 (LPUriHandler)
+            202 LOAD_ATTR               20 (handlerUri)
+            204 CALL_METHOD              1
+            206 POP_TOP
+
+ 65         208 LOAD_GLOBAL             21 (setupUI)
+            210 LOAD_FAST                0 (app)
+            212 CALL_FUNCTION            1
+            214 POP_TOP
+
+ 66         216 LOAD_GLOBAL             11 (sys)
+            218 LOAD_METHOD             16 (exit)
+            220 LOAD_FAST                0 (app)
+            222 LOAD_METHOD             22 (exec)
+            224 CALL_METHOD              0
+            226 CALL_METHOD              1
+            228 POP_TOP
+            230 JUMP_FORWARD            22 (to 254)
+
+ 69     >>  232 LOAD_GLOBAL             21 (setupUI)
+            234 LOAD_FAST                0 (app)
+            236 CALL_FUNCTION            1
+            238 POP_TOP
+
+ 70         240 LOAD_GLOBAL             11 (sys)
+            242 LOAD_METHOD             16 (exit)
+            244 LOAD_FAST                0 (app)
+            246 LOAD_METHOD             22 (exec)
+            248 CALL_METHOD              0
+            250 CALL_METHOD              1
+            252 POP_TOP
+        >>  254 LOAD_CONST               0 (None)
+            256 RETURN_VALUE
+
+=== main.<lambda> ===
+ 51           0 LOAD_CONST               0 (None)
+              2 RETURN_VALUE

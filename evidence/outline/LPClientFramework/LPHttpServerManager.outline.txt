@@ -1,0 +1,64 @@
+# module LPClientFramework.LPHttpServerManager
+
+[module] names: cherrypy, portend, random, dispatch, cherrypy._cpserver, Server, LPClientFramework, LPUtility, LPClientFramework.LPMediaHttpServer, MediaServerPage, LPClientFramework.LPOAuthHttpServer, OAuthServerPage, LPClientFramework.LPUPnPHttpServer, UPnPServerPage, LPClientFramework.LPUtility, logger, Root, bindServer, disableAutoreloader, start, str, stop, startOne
+  str: 'dispatch'
+  str: 'Server'
+  str: 'LPUtility'
+  str: 'MediaServerPage'
+  str: 'OAuthServerPage'
+  str: 'UPnPServerPage'
+  str: 'logger'
+  str: 'Root'
+  str: 'bindServer'
+  str: 'disableAutoreloader'
+  str: 'start'
+  str: 'name'
+  str: 'stop'
+  str: 'startOne'
+
+def Root()  line 14
+  names: __name__, __module__, __qualname__, __init__
+    str: 'Root'
+    str: 'Root.__init__'
+
+  def Root.__init__(self)  line 15
+    names: UPnPServerPage, upnp, MediaServerPage, media, OAuthServerPage, auth
+
+def bindServer(port)  line 20
+  names: Server, socket_host, portend, free, Exception, random, randint, socket_port, subscribe
+    str: '0.0.0.0'
+    str: 'timeout'
+
+def disableAutoreloader()  line 35
+  names: cherrypy, config, update, engine, autoreload, unsubscribe, Exception, logger, warning
+    str: '关闭 CherryPy 源码自动重载。\n\n    参数:\n        无。\n    返回:\n        无。\n    '
+    str: 'engine.autoreload.on'
+    str: '[http] Disable CherryPy autoreloader failed: %s'
+
+def start()  line 50
+  names: disableAutoreloader, LPUtility, upnpServerPort, mediaServerPort, oauthServerPort, dispatch, VirtualHost, cherrypy, tree, mount, Root, server, unsubscribe, bindServer, upnpServer, logger, info, fetchLocalIP, mediaServer, oauthServer, engine, signals, subscribe, config, update, start
+    str: '启动 UPnP、媒体和 OAuth HTTP 服务。\n\n    参数:\n        无。\n    返回:\n        无。\n    '
+    str: 'localhost:'
+    str: '/'
+    str: 'request.dispatch'
+    str: '/upnp'
+    str: '/media'
+    str: '/auth'
+    str: '[http] Start UPnP content directory service %s:%d'
+    str: '[http] Start Media server: %d'
+    str: '[http] Start Oauth server: %d'
+    str: 'engine.autoreload.on'
+    str: 'server.shutdown_timeout'
+
+def stop(name)  line 92
+  names: LPUtility, upnpServer, stop, mediaServer, oauthServer, Exception, logger, error
+    str: '\n    name: None upnp media\n    '
+    str: 'upnp'
+    str: 'media'
+    str: 'stop else error'
+
+def startOne(name)  line 110
+  names: LPUtility, upnpServer, start, mediaServer, Exception, logger, error
+    str: 'upnp'
+    str: 'media'
+    str: 'start else error'

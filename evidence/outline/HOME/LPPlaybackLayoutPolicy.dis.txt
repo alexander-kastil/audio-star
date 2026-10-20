@@ -1,0 +1,95 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n播放相关界面布局策略。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('LPPlayListSource',))
+              8 IMPORT_NAME              1 (LPClientFramework.LPPlayList.LPPlayList)
+             10 IMPORT_FROM              2 (LPPlayListSource)
+             12 STORE_NAME               2 (LPPlayListSource)
+             14 POP_TOP
+
+  7          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('isQueueSupportedMediaType',))
+             20 IMPORT_NAME              3 (LPClientFramework.LPQueueManager)
+             22 IMPORT_FROM              4 (isQueueSupportedMediaType)
+             24 STORE_NAME               4 (isQueueSupportedMediaType)
+             26 POP_TOP
+
+ 11          28 LOAD_NAME                2 (LPPlayListSource)
+             30 LOAD_ATTR                5 (WiiMRadio)
+             32 LOAD_ATTR                6 (value)
+
+  9          34 BUILD_SET                1
+             36 STORE_NAME               7 (COMPACT_PLAYVIEW_SOURCES)
+
+ 16          38 LOAD_NAME                2 (LPPlayListSource)
+             40 LOAD_ATTR                8 (Soundtrack)
+             42 LOAD_ATTR                6 (value)
+
+ 14          44 BUILD_SET                1
+             46 STORE_NAME               9 (COMPACT_PLAYVIEW_EXCLUDED_SOURCES)
+
+ 20          48 LOAD_NAME               10 (bool)
+             50 LOAD_CONST               4 (('return',))
+             52 BUILD_CONST_KEY_MAP      1
+             54 LOAD_CONST               5 (<code object useCompactPlayViewLayout at 0x000001F324E60870, file "LPPlaybackLayoutPolicy.py", line 20>)
+             56 LOAD_CONST               6 ('useCompactPlayViewLayout')
+             58 MAKE_FUNCTION            4 (annotations)
+             60 STORE_NAME              11 (useCompactPlayViewLayout)
+             62 LOAD_CONST               7 (None)
+             64 RETURN_VALUE
+
+=== useCompactPlayViewLayout ===
+ 27           0 LOAD_FAST                0 (device)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        18
+              8 LOAD_FAST                0 (device)
+             10 LOAD_ATTR                0 (mediaInfo)
+             12 LOAD_CONST               1 (None)
+             14 IS_OP                    0
+             16 POP_JUMP_IF_FALSE       22
+
+ 28     >>   18 LOAD_CONST               2 (False)
+             20 RETURN_VALUE
+
+ 30     >>   22 LOAD_FAST                0 (device)
+             24 LOAD_ATTR                0 (mediaInfo)
+             26 STORE_FAST               1 (mediaInfo)
+
+ 31          28 LOAD_GLOBAL              1 (getattr)
+             30 LOAD_FAST                1 (mediaInfo)
+             32 LOAD_CONST               3 ('trackSource')
+             34 LOAD_CONST               1 (None)
+             36 CALL_FUNCTION            3
+             38 STORE_FAST               2 (trackSource)
+
+ 32          40 LOAD_FAST                2 (trackSource)
+             42 LOAD_GLOBAL              2 (COMPACT_PLAYVIEW_EXCLUDED_SOURCES)
+             44 CONTAINS_OP              0
+             46 POP_JUMP_IF_FALSE       52
+
+ 33          48 LOAD_CONST               2 (False)
+             50 RETURN_VALUE
+
+ 36     >>   52 LOAD_GLOBAL              3 (isQueueSupportedMediaType)
+             54 LOAD_FAST                1 (mediaInfo)
+             56 LOAD_ATTR                4 (mediaType)
+             58 CALL_FUNCTION            1
+             60 POP_JUMP_IF_TRUE        66
+
+ 37          62 LOAD_CONST               4 (True)
+             64 RETURN_VALUE
+
+ 41     >>   66 LOAD_FAST                2 (trackSource)
+             68 LOAD_GLOBAL              5 (COMPACT_PLAYVIEW_SOURCES)
+             70 CONTAINS_OP              0
+             72 POP_JUMP_IF_FALSE       78
+
+ 42          74 LOAD_CONST               4 (True)
+             76 RETURN_VALUE
+
+ 44     >>   78 LOAD_CONST               2 (False)
+             80 RETURN_VALUE

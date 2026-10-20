@@ -1,0 +1,1236 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nMusic Library 的 SQLite 持久化层。\n\n当前主要服务于 Recently Played：把账号、目录、播放项分别落到 ``LibAccount`` / ``LibMusicList`` / ``LibMusicItem``\n三张表，并提供按目录读写、去重裁剪、删除等能力。\n\n约束（与文档一致）：\n- Recently 使用的目录标识：``directoryName = "recently"``，``directoryType = "favorite"``\n- 整个 Recently 目录最多保留 ``RECENTLY_MAX_COUNT`` 条\n- ``checkDuplicate`` 为真时，会先删除同目录、同账号、同 trackId 的旧记录\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 14           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+ 15          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (threading)
+             18 STORE_NAME               2 (threading)
+
+ 16          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               3 (('datetime',))
+             24 IMPORT_NAME              3 (datetime)
+             26 IMPORT_FROM              3 (datetime)
+             28 STORE_NAME               3 (datetime)
+             30 POP_TOP
+
+ 18          32 LOAD_CONST               1 (0)
+             34 LOAD_CONST               4 (('LPMusicDatabase',))
+             36 IMPORT_NAME              4 (LPClientFramework)
+             38 IMPORT_FROM              5 (LPMusicDatabase)
+             40 STORE_NAME               5 (LPMusicDatabase)
+             42 POP_TOP
+
+ 19          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               5 (('logger',))
+             48 IMPORT_NAME              6 (LPClientFramework.LPUtility)
+             50 IMPORT_FROM              7 (logger)
+             52 STORE_NAME               7 (logger)
+             54 POP_TOP
+
+ 23          56 LOAD_CONST               6 ('recently')
+             58 STORE_NAME               8 (RECENTLY_DIRECTORY_NAME)
+
+ 24          60 LOAD_CONST               7 ('favorite')
+             62 STORE_NAME               9 (RECENTLY_DIRECTORY_TYPE)
+
+ 27          64 LOAD_CONST               8 (500)
+             66 STORE_NAME              10 (RECENTLY_MAX_COUNT)
+
+ 30          68 LOAD_BUILD_CLASS
+             70 LOAD_CONST               9 (<code object LPMusicLibraryDBManager at 0x000001F3253C47C0, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 30>)
+             72 LOAD_CONST              10 ('LPMusicLibraryDBManager')
+             74 MAKE_FUNCTION            0
+             76 LOAD_CONST              10 ('LPMusicLibraryDBManager')
+             78 LOAD_NAME               11 (object)
+             80 CALL_FUNCTION            3
+             82 STORE_NAME              12 (LPMusicLibraryDBManager)
+             84 LOAD_CONST               2 (None)
+             86 RETURN_VALUE
+
+=== LPMusicLibraryDBManager ===
+ 30           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPMusicLibraryDBManager')
+              6 STORE_NAME               2 (__qualname__)
+
+ 31           8 LOAD_CONST               1 ('Music Library 的单例 DB 管理器，封装 SQLite 读写与线程锁。')
+             10 STORE_NAME               3 (__doc__)
+
+ 33          12 LOAD_CONST               2 (None)
+             14 STORE_NAME               4 (_instance)
+
+ 34          16 LOAD_NAME                5 (threading)
+             18 LOAD_METHOD              6 (Lock)
+             20 CALL_METHOD              0
+             22 STORE_NAME               7 (_instanceLock)
+
+ 36          24 LOAD_CONST               3 (<code object __init__ at 0x000001F3253A27C0, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 36>)
+             26 LOAD_CONST               4 ('LPMusicLibraryDBManager.__init__')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               8 (__init__)
+
+ 42          32 LOAD_CONST               5 (<code object databasePath at 0x000001F3253A2DF0, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 42>)
+             34 LOAD_CONST               6 ('LPMusicLibraryDBManager.databasePath')
+             36 MAKE_FUNCTION            0
+             38 STORE_NAME               9 (databasePath)
+
+ 52          40 LOAD_NAME               10 (classmethod)
+
+ 53          42 LOAD_CONST               7 (<code object instance at 0x000001F3253A2F50, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 52>)
+             44 LOAD_CONST               8 ('LPMusicLibraryDBManager.instance')
+             46 MAKE_FUNCTION            0
+             48 CALL_FUNCTION            1
+             50 STORE_NAME              11 (instance)
+
+ 64          52 LOAD_CONST               9 (<code object _connect at 0x000001F3253A2BE0, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 64>)
+             54 LOAD_CONST              10 ('LPMusicLibraryDBManager._connect')
+             56 MAKE_FUNCTION            0
+             58 STORE_NAME              12 (_connect)
+
+ 74          60 LOAD_CONST              11 (<code object _initDb at 0x000001F3253A2D40, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 74>)
+             62 LOAD_CONST              12 ('LPMusicLibraryDBManager._initDb')
+             64 MAKE_FUNCTION            0
+             66 STORE_NAME              13 (_initDb)
+
+144          68 LOAD_CONST              26 ((None, None))
+             70 LOAD_CONST              13 (<code object ensureDirectory at 0x000001F3253A2B30, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 144>)
+             72 LOAD_CONST              14 ('LPMusicLibraryDBManager.ensureDirectory')
+             74 MAKE_FUNCTION            1 (defaults)
+             76 STORE_NAME              14 (ensureDirectory)
+
+169          78 LOAD_CONST              15 (<code object upsertAccount at 0x000001F3253A2920, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 169>)
+             80 LOAD_CONST              16 ('LPMusicLibraryDBManager.upsertAccount')
+             82 MAKE_FUNCTION            0
+             84 STORE_NAME              15 (upsertAccount)
+
+202          86 LOAD_NAME               16 (staticmethod)
+
+203          88 LOAD_CONST              17 (<code object _nowTimestamp at 0x000001F3253C43A0, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 202>)
+             90 LOAD_CONST              18 ('LPMusicLibraryDBManager._nowTimestamp')
+             92 MAKE_FUNCTION            0
+             94 CALL_FUNCTION            1
+             96 STORE_NAME              17 (_nowTimestamp)
+
+206          98 LOAD_CONST              19 (<code object addRecentlyItem at 0x000001F3253C4920, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 206>)
+            100 LOAD_CONST              20 ('LPMusicLibraryDBManager.addRecentlyItem')
+            102 MAKE_FUNCTION            0
+            104 STORE_NAME              18 (addRecentlyItem)
+
+293         106 LOAD_CONST              27 ((200,))
+            108 LOAD_CONST              22 (<code object getRecentlyItems at 0x000001F3253C4660, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 293>)
+            110 LOAD_CONST              23 ('LPMusicLibraryDBManager.getRecentlyItems')
+            112 MAKE_FUNCTION            1 (defaults)
+            114 STORE_NAME              19 (getRecentlyItems)
+
+348         116 LOAD_CONST              24 (<code object deleteRecentlyItems at 0x000001F3253C4500, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 348>)
+            118 LOAD_CONST              25 ('LPMusicLibraryDBManager.deleteRecentlyItems')
+            120 MAKE_FUNCTION            0
+            122 STORE_NAME              20 (deleteRecentlyItems)
+            124 LOAD_CONST               2 (None)
+            126 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.__init__ ===
+ 38           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_GLOBAL              1 (LPMusicDatabase)
+              4 LOAD_METHOD              2 (databasePath)
+              6 CALL_METHOD              0
+              8 CALL_FUNCTION            1
+             10 LOAD_FAST                0 (self)
+             12 STORE_ATTR               3 (_dbPath)
+
+ 39          14 LOAD_GLOBAL              4 (threading)
+             16 LOAD_METHOD              5 (RLock)
+             18 CALL_METHOD              0
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               6 (_lock)
+
+ 40          24 LOAD_FAST                0 (self)
+             26 LOAD_METHOD              7 (_initDb)
+             28 CALL_METHOD              0
+             30 POP_TOP
+             32 LOAD_CONST               0 (None)
+             34 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.databasePath ===
+ 50           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_dbPath)
+              4 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.instance ===
+ 54           0 LOAD_FAST                0 (cls)
+              2 LOAD_ATTR                0 (_instance)
+              4 LOAD_CONST               0 (None)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       66
+
+ 55          10 LOAD_FAST                0 (cls)
+             12 LOAD_ATTR                1 (_instanceLock)
+             14 SETUP_WITH              34 (to 50)
+             16 POP_TOP
+
+ 56          18 LOAD_FAST                0 (cls)
+             20 LOAD_ATTR                0 (_instance)
+             22 LOAD_CONST               0 (None)
+             24 IS_OP                    0
+             26 POP_JUMP_IF_FALSE       36
+
+ 57          28 LOAD_FAST                0 (cls)
+             30 CALL_FUNCTION            0
+             32 LOAD_FAST                0 (cls)
+             34 STORE_ATTR               0 (_instance)
+        >>   36 POP_BLOCK
+             38 LOAD_CONST               0 (None)
+             40 DUP_TOP
+             42 DUP_TOP
+             44 CALL_FUNCTION            3
+             46 POP_TOP
+             48 JUMP_FORWARD            16 (to 66)
+        >>   50 WITH_EXCEPT_START
+             52 POP_JUMP_IF_TRUE        56
+             54 RERAISE
+        >>   56 POP_TOP
+             58 POP_TOP
+             60 POP_TOP
+             62 POP_EXCEPT
+             64 POP_TOP
+
+ 58     >>   66 LOAD_FAST                0 (cls)
+             68 LOAD_ATTR                0 (_instance)
+             70 RETURN_VALUE
+
+=== LPMusicLibraryDBManager._connect ===
+ 72           0 LOAD_GLOBAL              0 (LPMusicDatabase)
+              2 LOAD_METHOD              1 (connect)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                2 (_dbPath)
+              8 CALL_METHOD              1
+             10 RETURN_VALUE
+
+=== LPMusicLibraryDBManager._initDb ===
+ 75           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH             180 (to 186)
+              6 POP_TOP
+
+ 76           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (_connect)
+             12 CALL_METHOD              0
+             14 STORE_FAST               1 (conn)
+
+ 77          16 SETUP_FINALLY          144 (to 162)
+             18 SETUP_FINALLY           80 (to 100)
+
+ 78          20 LOAD_FAST                1 (conn)
+             22 LOAD_METHOD              2 (cursor)
+             24 CALL_METHOD              0
+             26 STORE_FAST               2 (cur)
+
+ 79          28 LOAD_FAST                2 (cur)
+             30 LOAD_METHOD              3 (execute)
+
+ 80          32 LOAD_CONST               1 ('\n                    CREATE TABLE IF NOT EXISTS LibAccount (\n                        accountId TEXT PRIMARY KEY,\n                        source TEXT,\n                        userId TEXT,\n                        userName TEXT,\n                        token TEXT,\n                        refreshToken TEXT,\n                        detail TEXT\n                    )\n                    ')
+
+ 79          34 CALL_METHOD              1
+             36 POP_TOP
+
+ 92          38 LOAD_FAST                2 (cur)
+             40 LOAD_METHOD              3 (execute)
+
+ 93          42 LOAD_CONST               2 ('\n                    CREATE TABLE IF NOT EXISTS LibMusicList (\n                        directoryId TEXT PRIMARY KEY,\n                        directoryName TEXT,\n                        directoryType TEXT,\n                        accountId TEXT,\n                        source TEXT\n                    )\n                    ')
+
+ 92          44 CALL_METHOD              1
+             46 POP_TOP
+
+103          48 LOAD_FAST                2 (cur)
+             50 LOAD_METHOD              3 (execute)
+
+104          52 LOAD_CONST               3 ('\n                    CREATE TABLE IF NOT EXISTS LibMusicItem (\n                        itemId TEXT PRIMARY KEY,\n                        directoryId TEXT,\n                        directoryName TEXT,\n                        directoryType TEXT,\n                        accountId TEXT,\n                        source TEXT,\n                        trackName TEXT,\n                        trackId TEXT,\n                        trackImage TEXT,\n                        trackArtist TEXT,\n                        typeValue INTEGER,\n                        openMore INTEGER,\n                        canNavigate INTEGER,\n                        checkDuplicate INTEGER,\n                        detail TEXT,\n                        createTime INTEGER\n                    )\n                    ')
+
+103          54 CALL_METHOD              1
+             56 POP_TOP
+
+125          58 LOAD_FAST                2 (cur)
+             60 LOAD_METHOD              3 (execute)
+
+126          62 LOAD_CONST               4 ('CREATE INDEX IF NOT EXISTS idx_item_directory ON LibMusicItem(directoryId)')
+
+125          64 CALL_METHOD              1
+             66 POP_TOP
+
+128          68 LOAD_FAST                2 (cur)
+             70 LOAD_METHOD              3 (execute)
+
+129          72 LOAD_CONST               5 ('CREATE INDEX IF NOT EXISTS idx_item_account_track ON LibMusicItem(directoryId, accountId, trackId)')
+
+128          74 CALL_METHOD              1
+             76 POP_TOP
+
+131          78 LOAD_FAST                2 (cur)
+             80 LOAD_METHOD              3 (execute)
+
+132          82 LOAD_CONST               6 ('CREATE INDEX IF NOT EXISTS idx_item_create_time ON LibMusicItem(directoryId, createTime DESC)')
+
+131          84 CALL_METHOD              1
+             86 POP_TOP
+
+134          88 LOAD_FAST                1 (conn)
+             90 LOAD_METHOD              4 (commit)
+             92 CALL_METHOD              0
+             94 POP_TOP
+             96 POP_BLOCK
+             98 JUMP_FORWARD            50 (to 150)
+
+135     >>  100 DUP_TOP
+            102 LOAD_GLOBAL              5 (Exception)
+            104 JUMP_IF_NOT_EXC_MATCH   148
+            106 POP_TOP
+            108 STORE_FAST               3 (e)
+            110 POP_TOP
+            112 SETUP_FINALLY           26 (to 140)
+
+136         114 LOAD_GLOBAL              6 (logger)
+            116 LOAD_METHOD              7 (error)
+            118 LOAD_CONST               7 ('[MusicLibraryDB] initDb failed: %s')
+            120 LOAD_FAST                3 (e)
+            122 BINARY_MODULO
+            124 CALL_METHOD              1
+            126 POP_TOP
+            128 POP_BLOCK
+            130 POP_EXCEPT
+            132 LOAD_CONST               0 (None)
+            134 STORE_FAST               3 (e)
+            136 DELETE_FAST              3 (e)
+            138 JUMP_FORWARD            10 (to 150)
+        >>  140 LOAD_CONST               0 (None)
+            142 STORE_FAST               3 (e)
+            144 DELETE_FAST              3 (e)
+            146 RERAISE
+        >>  148 RERAISE
+        >>  150 POP_BLOCK
+
+138         152 LOAD_FAST                1 (conn)
+            154 LOAD_METHOD              8 (close)
+            156 CALL_METHOD              0
+            158 POP_TOP
+            160 JUMP_FORWARD            10 (to 172)
+        >>  162 LOAD_FAST                1 (conn)
+            164 LOAD_METHOD              8 (close)
+            166 CALL_METHOD              0
+            168 POP_TOP
+            170 RERAISE
+        >>  172 POP_BLOCK
+            174 LOAD_CONST               0 (None)
+            176 DUP_TOP
+            178 DUP_TOP
+            180 CALL_FUNCTION            3
+            182 POP_TOP
+            184 JUMP_FORWARD            16 (to 202)
+        >>  186 WITH_EXCEPT_START
+            188 POP_JUMP_IF_TRUE       192
+            190 RERAISE
+        >>  192 POP_TOP
+            194 POP_TOP
+            196 POP_TOP
+            198 POP_EXCEPT
+            200 POP_TOP
+        >>  202 LOAD_CONST               0 (None)
+            204 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.ensureDirectory ===
+150           0 LOAD_FAST                1 (directoryName)
+              2 STORE_FAST               5 (directoryId)
+
+151           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                0 (_lock)
+              8 SETUP_WITH             134 (to 144)
+             10 POP_TOP
+
+152          12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              1 (_connect)
+             16 CALL_METHOD              0
+             18 STORE_FAST               6 (conn)
+
+153          20 SETUP_FINALLY           98 (to 120)
+             22 SETUP_FINALLY           34 (to 58)
+
+154          24 LOAD_FAST                6 (conn)
+             26 LOAD_METHOD              2 (execute)
+
+155          28 LOAD_CONST               1 ('\n                    INSERT OR IGNORE INTO LibMusicList\n                    (directoryId, directoryName, directoryType, accountId, source)\n                    VALUES (?, ?, ?, ?, ?)\n                    ')
+
+160          30 LOAD_FAST                5 (directoryId)
+             32 LOAD_FAST                1 (directoryName)
+             34 LOAD_FAST                2 (directoryType)
+             36 LOAD_FAST                3 (accountId)
+             38 LOAD_FAST                4 (source)
+             40 BUILD_TUPLE              5
+
+154          42 CALL_METHOD              2
+             44 POP_TOP
+
+162          46 LOAD_FAST                6 (conn)
+             48 LOAD_METHOD              3 (commit)
+             50 CALL_METHOD              0
+             52 POP_TOP
+             54 POP_BLOCK
+             56 JUMP_FORWARD            50 (to 108)
+
+163     >>   58 DUP_TOP
+             60 LOAD_GLOBAL              4 (Exception)
+             62 JUMP_IF_NOT_EXC_MATCH   106
+             64 POP_TOP
+             66 STORE_FAST               7 (e)
+             68 POP_TOP
+             70 SETUP_FINALLY           26 (to 98)
+
+164          72 LOAD_GLOBAL              5 (logger)
+             74 LOAD_METHOD              6 (error)
+             76 LOAD_CONST               2 ('[MusicLibraryDB] ensureDirectory failed: %s')
+             78 LOAD_FAST                7 (e)
+             80 BINARY_MODULO
+             82 CALL_METHOD              1
+             84 POP_TOP
+             86 POP_BLOCK
+             88 POP_EXCEPT
+             90 LOAD_CONST               3 (None)
+             92 STORE_FAST               7 (e)
+             94 DELETE_FAST              7 (e)
+             96 JUMP_FORWARD            10 (to 108)
+        >>   98 LOAD_CONST               3 (None)
+            100 STORE_FAST               7 (e)
+            102 DELETE_FAST              7 (e)
+            104 RERAISE
+        >>  106 RERAISE
+        >>  108 POP_BLOCK
+
+166         110 LOAD_FAST                6 (conn)
+            112 LOAD_METHOD              7 (close)
+            114 CALL_METHOD              0
+            116 POP_TOP
+            118 JUMP_FORWARD            10 (to 130)
+        >>  120 LOAD_FAST                6 (conn)
+            122 LOAD_METHOD              7 (close)
+            124 CALL_METHOD              0
+            126 POP_TOP
+            128 RERAISE
+        >>  130 POP_BLOCK
+            132 LOAD_CONST               3 (None)
+            134 DUP_TOP
+            136 DUP_TOP
+            138 CALL_FUNCTION            3
+            140 POP_TOP
+            142 JUMP_FORWARD            16 (to 160)
+        >>  144 WITH_EXCEPT_START
+            146 POP_JUMP_IF_TRUE       150
+            148 RERAISE
+        >>  150 POP_TOP
+            152 POP_TOP
+            154 POP_TOP
+            156 POP_EXCEPT
+            158 POP_TOP
+
+167     >>  160 LOAD_FAST                5 (directoryId)
+            162 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.upsertAccount ===
+171           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (accountDict)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_FALSE       20
+             10 LOAD_FAST                1 (accountDict)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_CONST               1 ('accountId')
+             16 CALL_METHOD              1
+             18 POP_JUMP_IF_TRUE        24
+
+172     >>   20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+173     >>   24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                3 (_lock)
+             28 SETUP_WITH             194 (to 224)
+             30 POP_TOP
+
+174          32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              4 (_connect)
+             36 CALL_METHOD              0
+             38 STORE_FAST               2 (conn)
+
+175          40 SETUP_FINALLY          158 (to 200)
+             42 SETUP_FINALLY           94 (to 138)
+
+176          44 LOAD_FAST                2 (conn)
+             46 LOAD_METHOD              5 (execute)
+
+177          48 LOAD_CONST               3 ('\n                    INSERT OR REPLACE INTO LibAccount\n                    (accountId, source, userId, userName, token, refreshToken, detail)\n                    VALUES (?, ?, ?, ?, ?, ?, ?)\n                    ')
+
+183          50 LOAD_FAST                1 (accountDict)
+             52 LOAD_METHOD              2 (get)
+             54 LOAD_CONST               1 ('accountId')
+             56 CALL_METHOD              1
+
+184          58 LOAD_FAST                1 (accountDict)
+             60 LOAD_METHOD              2 (get)
+             62 LOAD_CONST               4 ('source')
+             64 CALL_METHOD              1
+
+185          66 LOAD_FAST                1 (accountDict)
+             68 LOAD_METHOD              2 (get)
+             70 LOAD_CONST               5 ('userId')
+             72 CALL_METHOD              1
+
+186          74 LOAD_FAST                1 (accountDict)
+             76 LOAD_METHOD              2 (get)
+             78 LOAD_CONST               6 ('userName')
+             80 CALL_METHOD              1
+
+187          82 LOAD_FAST                1 (accountDict)
+             84 LOAD_METHOD              2 (get)
+             86 LOAD_CONST               7 ('token')
+             88 CALL_METHOD              1
+
+188          90 LOAD_FAST                1 (accountDict)
+             92 LOAD_METHOD              2 (get)
+             94 LOAD_CONST               8 ('refreshToken')
+             96 CALL_METHOD              1
+
+189          98 LOAD_GLOBAL              6 (json)
+            100 LOAD_ATTR                7 (dumps)
+            102 LOAD_FAST                1 (accountDict)
+            104 LOAD_METHOD              2 (get)
+            106 LOAD_CONST               9 ('detail')
+            108 CALL_METHOD              1
+            110 JUMP_IF_TRUE_OR_POP    114
+            112 BUILD_MAP                0
+        >>  114 LOAD_CONST              10 (False)
+            116 LOAD_CONST              11 (('ensure_ascii',))
+            118 CALL_FUNCTION_KW         2
+
+182         120 BUILD_TUPLE              7
+
+176         122 CALL_METHOD              2
+            124 POP_TOP
+
+192         126 LOAD_FAST                2 (conn)
+            128 LOAD_METHOD              8 (commit)
+            130 CALL_METHOD              0
+            132 POP_TOP
+            134 POP_BLOCK
+            136 JUMP_FORWARD            50 (to 188)
+
+193     >>  138 DUP_TOP
+            140 LOAD_GLOBAL              9 (Exception)
+            142 JUMP_IF_NOT_EXC_MATCH   186
+            144 POP_TOP
+            146 STORE_FAST               3 (e)
+            148 POP_TOP
+            150 SETUP_FINALLY           26 (to 178)
+
+194         152 LOAD_GLOBAL             10 (logger)
+            154 LOAD_METHOD             11 (error)
+            156 LOAD_CONST              12 ('[MusicLibraryDB] upsertAccount failed: %s')
+            158 LOAD_FAST                3 (e)
+            160 BINARY_MODULO
+            162 CALL_METHOD              1
+            164 POP_TOP
+            166 POP_BLOCK
+            168 POP_EXCEPT
+            170 LOAD_CONST               2 (None)
+            172 STORE_FAST               3 (e)
+            174 DELETE_FAST              3 (e)
+            176 JUMP_FORWARD            10 (to 188)
+        >>  178 LOAD_CONST               2 (None)
+            180 STORE_FAST               3 (e)
+            182 DELETE_FAST              3 (e)
+            184 RERAISE
+        >>  186 RERAISE
+        >>  188 POP_BLOCK
+
+196         190 LOAD_FAST                2 (conn)
+            192 LOAD_METHOD             12 (close)
+            194 CALL_METHOD              0
+            196 POP_TOP
+            198 JUMP_FORWARD            10 (to 210)
+        >>  200 LOAD_FAST                2 (conn)
+            202 LOAD_METHOD             12 (close)
+            204 CALL_METHOD              0
+            206 POP_TOP
+            208 RERAISE
+        >>  210 POP_BLOCK
+            212 LOAD_CONST               2 (None)
+            214 DUP_TOP
+            216 DUP_TOP
+            218 CALL_FUNCTION            3
+            220 POP_TOP
+            222 JUMP_FORWARD            16 (to 240)
+        >>  224 WITH_EXCEPT_START
+            226 POP_JUMP_IF_TRUE       230
+            228 RERAISE
+        >>  230 POP_TOP
+            232 POP_TOP
+            234 POP_TOP
+            236 POP_EXCEPT
+            238 POP_TOP
+        >>  240 LOAD_CONST               2 (None)
+            242 RETURN_VALUE
+
+=== LPMusicLibraryDBManager._nowTimestamp ===
+204           0 LOAD_GLOBAL              0 (int)
+              2 LOAD_GLOBAL              1 (datetime)
+              4 LOAD_METHOD              2 (now)
+              6 CALL_METHOD              0
+              8 LOAD_METHOD              3 (timestamp)
+             10 CALL_METHOD              0
+             12 CALL_FUNCTION            1
+             14 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.addRecentlyItem ===
+214           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                4 (itemDict)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+215          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+217     >>   14 LOAD_FAST                4 (itemDict)
+             16 LOAD_METHOD              2 (get)
+             18 LOAD_CONST               2 ('itemId')
+             20 CALL_METHOD              1
+             22 STORE_FAST               5 (itemId)
+
+218          24 LOAD_FAST                5 (itemId)
+             26 POP_JUMP_IF_TRUE        62
+
+219          28 LOAD_CONST               3 ('%s_%s_%s')
+
+220          30 LOAD_FAST                1 (directoryId)
+
+221          32 LOAD_FAST                4 (itemDict)
+             34 LOAD_METHOD              2 (get)
+             36 LOAD_CONST               4 ('accountId')
+             38 CALL_METHOD              1
+             40 JUMP_IF_TRUE_OR_POP     44
+             42 LOAD_CONST               5 ('')
+
+222     >>   44 LOAD_FAST                4 (itemDict)
+             46 LOAD_METHOD              2 (get)
+             48 LOAD_CONST               6 ('trackId')
+             50 CALL_METHOD              1
+             52 JUMP_IF_TRUE_OR_POP     56
+             54 LOAD_CONST               5 ('')
+
+219     >>   56 BUILD_TUPLE              3
+             58 BINARY_MODULO
+             60 STORE_FAST               5 (itemId)
+
+225     >>   62 LOAD_FAST                4 (itemDict)
+             64 LOAD_METHOD              2 (get)
+             66 LOAD_CONST               7 ('createTime')
+             68 CALL_METHOD              1
+             70 JUMP_IF_TRUE_OR_POP     78
+             72 LOAD_FAST                0 (self)
+             74 LOAD_METHOD              3 (_nowTimestamp)
+             76 CALL_METHOD              0
+        >>   78 STORE_FAST               6 (createTime)
+
+226          80 LOAD_GLOBAL              4 (json)
+             82 LOAD_ATTR                5 (dumps)
+             84 LOAD_FAST                4 (itemDict)
+             86 LOAD_METHOD              2 (get)
+             88 LOAD_CONST               8 ('detail')
+             90 CALL_METHOD              1
+             92 JUMP_IF_TRUE_OR_POP     96
+             94 BUILD_MAP                0
+        >>   96 LOAD_CONST               9 (False)
+             98 LOAD_CONST              10 (('ensure_ascii',))
+            100 CALL_FUNCTION_KW         2
+            102 STORE_FAST               7 (detailStr)
+
+228         104 LOAD_FAST                0 (self)
+            106 LOAD_ATTR                6 (_lock)
+            108 EXTENDED_ARG             1
+            110 SETUP_WITH             374 (to 486)
+            112 POP_TOP
+
+229         114 LOAD_FAST                0 (self)
+            116 LOAD_METHOD              7 (_connect)
+            118 CALL_METHOD              0
+            120 STORE_FAST               8 (conn)
+
+230         122 EXTENDED_ARG             1
+            124 SETUP_FINALLY          336 (to 462)
+            126 SETUP_FINALLY          246 (to 374)
+
+231         128 LOAD_FAST                8 (conn)
+            130 LOAD_METHOD              8 (cursor)
+            132 CALL_METHOD              0
+            134 STORE_FAST               9 (cur)
+
+234         136 LOAD_FAST                4 (itemDict)
+            138 LOAD_METHOD              2 (get)
+            140 LOAD_CONST              11 ('checkDuplicate')
+            142 CALL_METHOD              1
+            144 POP_JUMP_IF_FALSE      176
+
+235         146 LOAD_FAST                9 (cur)
+            148 LOAD_METHOD              9 (execute)
+
+236         150 LOAD_CONST              12 ('\n                        DELETE FROM LibMusicItem\n                        WHERE directoryId = ? AND accountId = ? AND trackId = ?\n                        ')
+
+240         152 LOAD_FAST                1 (directoryId)
+            154 LOAD_FAST                4 (itemDict)
+            156 LOAD_METHOD              2 (get)
+            158 LOAD_CONST               4 ('accountId')
+            160 CALL_METHOD              1
+            162 LOAD_FAST                4 (itemDict)
+            164 LOAD_METHOD              2 (get)
+            166 LOAD_CONST               6 ('trackId')
+            168 CALL_METHOD              1
+            170 BUILD_TUPLE              3
+
+235         172 CALL_METHOD              2
+            174 POP_TOP
+
+243     >>  176 LOAD_FAST                9 (cur)
+            178 LOAD_METHOD              9 (execute)
+
+244         180 LOAD_CONST              13 ('\n                    INSERT OR REPLACE INTO LibMusicItem\n                    (itemId, directoryId, directoryName, directoryType, accountId, source,\n                     trackName, trackId, trackImage, trackArtist, typeValue,\n                     openMore, canNavigate, checkDuplicate, detail, createTime)\n                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n                    ')
+
+252         182 LOAD_FAST                5 (itemId)
+
+253         184 LOAD_FAST                1 (directoryId)
+
+254         186 LOAD_FAST                2 (directoryName)
+
+255         188 LOAD_FAST                3 (directoryType)
+
+256         190 LOAD_FAST                4 (itemDict)
+            192 LOAD_METHOD              2 (get)
+            194 LOAD_CONST               4 ('accountId')
+            196 CALL_METHOD              1
+
+257         198 LOAD_FAST                4 (itemDict)
+            200 LOAD_METHOD              2 (get)
+            202 LOAD_CONST              14 ('source')
+            204 CALL_METHOD              1
+
+258         206 LOAD_FAST                4 (itemDict)
+            208 LOAD_METHOD              2 (get)
+            210 LOAD_CONST              15 ('trackName')
+            212 CALL_METHOD              1
+
+259         214 LOAD_FAST                4 (itemDict)
+            216 LOAD_METHOD              2 (get)
+            218 LOAD_CONST               6 ('trackId')
+            220 CALL_METHOD              1
+
+260         222 LOAD_FAST                4 (itemDict)
+            224 LOAD_METHOD              2 (get)
+            226 LOAD_CONST              16 ('trackImage')
+            228 CALL_METHOD              1
+
+261         230 LOAD_FAST                4 (itemDict)
+            232 LOAD_METHOD              2 (get)
+            234 LOAD_CONST              17 ('trackArtist')
+            236 CALL_METHOD              1
+
+262         238 LOAD_GLOBAL             10 (int)
+            240 LOAD_FAST                4 (itemDict)
+            242 LOAD_METHOD              2 (get)
+            244 LOAD_CONST              18 ('typeValue')
+            246 CALL_METHOD              1
+            248 JUMP_IF_TRUE_OR_POP    252
+            250 LOAD_CONST              19 (0)
+        >>  252 CALL_FUNCTION            1
+
+263         254 LOAD_FAST                4 (itemDict)
+            256 LOAD_METHOD              2 (get)
+            258 LOAD_CONST              20 ('openMore')
+            260 CALL_METHOD              1
+            262 EXTENDED_ARG             1
+            264 POP_JUMP_IF_FALSE      270
+            266 LOAD_CONST              21 (1)
+            268 JUMP_FORWARD             2 (to 272)
+        >>  270 LOAD_CONST              19 (0)
+
+264     >>  272 LOAD_FAST                4 (itemDict)
+            274 LOAD_METHOD              2 (get)
+            276 LOAD_CONST              22 ('canNavigate')
+            278 CALL_METHOD              1
+            280 EXTENDED_ARG             1
+            282 POP_JUMP_IF_FALSE      288
+            284 LOAD_CONST              21 (1)
+            286 JUMP_FORWARD             2 (to 290)
+        >>  288 LOAD_CONST              19 (0)
+
+265     >>  290 LOAD_FAST                4 (itemDict)
+            292 LOAD_METHOD              2 (get)
+            294 LOAD_CONST              11 ('checkDuplicate')
+            296 CALL_METHOD              1
+            298 EXTENDED_ARG             1
+            300 POP_JUMP_IF_FALSE      306
+            302 LOAD_CONST              21 (1)
+            304 JUMP_FORWARD             2 (to 308)
+        >>  306 LOAD_CONST              19 (0)
+
+266     >>  308 LOAD_FAST                7 (detailStr)
+
+267         310 LOAD_FAST                6 (createTime)
+
+251         312 BUILD_TUPLE             16
+
+243         314 CALL_METHOD              2
+            316 POP_TOP
+
+272         318 LOAD_FAST                9 (cur)
+            320 LOAD_METHOD              9 (execute)
+
+273         322 LOAD_CONST              23 ('\n                    DELETE FROM LibMusicItem\n                    WHERE directoryId = ? AND itemId NOT IN (\n                        SELECT itemId FROM LibMusicItem\n                        WHERE directoryId = ?\n                        ORDER BY createTime DESC\n                        LIMIT ?\n                    )\n                    ')
+
+282         324 LOAD_FAST                1 (directoryId)
+            326 LOAD_FAST                1 (directoryId)
+            328 LOAD_GLOBAL             11 (RECENTLY_MAX_COUNT)
+            330 BUILD_TUPLE              3
+
+272         332 CALL_METHOD              2
+            334 POP_TOP
+
+285         336 LOAD_FAST                8 (conn)
+            338 LOAD_METHOD             12 (commit)
+            340 CALL_METHOD              0
+            342 POP_TOP
+
+286         344 LOAD_FAST                5 (itemId)
+            346 POP_BLOCK
+            348 POP_BLOCK
+
+291         350 LOAD_FAST                8 (conn)
+            352 LOAD_METHOD             13 (close)
+            354 CALL_METHOD              0
+            356 POP_TOP
+
+286         358 POP_BLOCK
+            360 ROT_TWO
+            362 LOAD_CONST               1 (None)
+            364 DUP_TOP
+            366 DUP_TOP
+            368 CALL_FUNCTION            3
+            370 POP_TOP
+            372 RETURN_VALUE
+
+287     >>  374 DUP_TOP
+            376 LOAD_GLOBAL             14 (Exception)
+            378 EXTENDED_ARG             1
+            380 JUMP_IF_NOT_EXC_MATCH   448
+            382 POP_TOP
+            384 STORE_FAST              10 (e)
+            386 POP_TOP
+            388 SETUP_FINALLY           50 (to 440)
+
+288         390 LOAD_GLOBAL             15 (logger)
+            392 LOAD_METHOD             16 (error)
+            394 LOAD_CONST              24 ('[MusicLibraryDB] addRecentlyItem failed: %s')
+            396 LOAD_FAST               10 (e)
+            398 BINARY_MODULO
+            400 CALL_METHOD              1
+            402 POP_TOP
+
+289         404 POP_BLOCK
+            406 POP_EXCEPT
+            408 LOAD_CONST               1 (None)
+            410 STORE_FAST              10 (e)
+            412 DELETE_FAST             10 (e)
+            414 POP_BLOCK
+
+291         416 LOAD_FAST                8 (conn)
+            418 LOAD_METHOD             13 (close)
+            420 CALL_METHOD              0
+            422 POP_TOP
+
+289         424 POP_BLOCK
+            426 LOAD_CONST               1 (None)
+            428 DUP_TOP
+            430 DUP_TOP
+            432 CALL_FUNCTION            3
+            434 POP_TOP
+            436 LOAD_CONST               1 (None)
+            438 RETURN_VALUE
+        >>  440 LOAD_CONST               1 (None)
+            442 STORE_FAST              10 (e)
+            444 DELETE_FAST             10 (e)
+            446 RERAISE
+        >>  448 RERAISE
+            450 POP_BLOCK
+
+291         452 LOAD_FAST                8 (conn)
+            454 LOAD_METHOD             13 (close)
+            456 CALL_METHOD              0
+            458 POP_TOP
+            460 JUMP_FORWARD            10 (to 472)
+        >>  462 LOAD_FAST                8 (conn)
+            464 LOAD_METHOD             13 (close)
+            466 CALL_METHOD              0
+            468 POP_TOP
+            470 RERAISE
+        >>  472 POP_BLOCK
+            474 LOAD_CONST               1 (None)
+            476 DUP_TOP
+            478 DUP_TOP
+            480 CALL_FUNCTION            3
+            482 POP_TOP
+            484 JUMP_FORWARD            18 (to 504)
+        >>  486 WITH_EXCEPT_START
+            488 EXTENDED_ARG             1
+            490 POP_JUMP_IF_TRUE       494
+            492 RERAISE
+        >>  494 POP_TOP
+            496 POP_TOP
+            498 POP_TOP
+            500 POP_EXCEPT
+            502 POP_TOP
+        >>  504 LOAD_CONST               1 (None)
+            506 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.getRecentlyItems ===
+304           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH             176 (to 182)
+              6 POP_TOP
+
+305           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (_connect)
+             12 CALL_METHOD              0
+             14 STORE_FAST               3 (conn)
+
+306          16 SETUP_FINALLY          140 (to 158)
+             18 SETUP_FINALLY           72 (to 92)
+
+307          20 LOAD_FAST                3 (conn)
+             22 LOAD_METHOD              2 (cursor)
+             24 CALL_METHOD              0
+             26 STORE_FAST               4 (cur)
+
+308          28 LOAD_FAST                2 (limit)
+             30 LOAD_CONST               1 (None)
+             32 IS_OP                    0
+             34 POP_JUMP_IF_TRUE        44
+             36 LOAD_FAST                2 (limit)
+             38 LOAD_CONST               2 (0)
+             40 COMPARE_OP               0 (<)
+             42 POP_JUMP_IF_FALSE       60
+
+309     >>   44 LOAD_FAST                4 (cur)
+             46 LOAD_METHOD              3 (execute)
+
+310          48 LOAD_CONST               3 ('\n                        SELECT * FROM LibMusicItem\n                        WHERE directoryId = ?\n                        ORDER BY createTime DESC\n                        ')
+
+315          50 LOAD_FAST                1 (directoryId)
+             52 BUILD_TUPLE              1
+
+309          54 CALL_METHOD              2
+             56 POP_TOP
+             58 JUMP_FORWARD            20 (to 80)
+
+318     >>   60 LOAD_FAST                4 (cur)
+             62 LOAD_METHOD              3 (execute)
+
+319          64 LOAD_CONST               4 ('\n                        SELECT * FROM LibMusicItem\n                        WHERE directoryId = ?\n                        ORDER BY createTime DESC\n                        LIMIT ?\n                        ')
+
+325          66 LOAD_FAST                1 (directoryId)
+             68 LOAD_GLOBAL              4 (int)
+             70 LOAD_FAST                2 (limit)
+             72 CALL_FUNCTION            1
+             74 BUILD_TUPLE              2
+
+318          76 CALL_METHOD              2
+             78 POP_TOP
+
+327     >>   80 LOAD_FAST                4 (cur)
+             82 LOAD_METHOD              5 (fetchall)
+             84 CALL_METHOD              0
+             86 STORE_FAST               5 (rows)
+             88 POP_BLOCK
+             90 JUMP_FORWARD            54 (to 146)
+
+328     >>   92 DUP_TOP
+             94 LOAD_GLOBAL              6 (Exception)
+             96 JUMP_IF_NOT_EXC_MATCH   144
+             98 POP_TOP
+            100 STORE_FAST               6 (e)
+            102 POP_TOP
+            104 SETUP_FINALLY           30 (to 136)
+
+329         106 LOAD_GLOBAL              7 (logger)
+            108 LOAD_METHOD              8 (error)
+            110 LOAD_CONST               5 ('[MusicLibraryDB] getRecentlyItems failed: %s')
+            112 LOAD_FAST                6 (e)
+            114 BINARY_MODULO
+            116 CALL_METHOD              1
+            118 POP_TOP
+
+330         120 BUILD_LIST               0
+            122 STORE_FAST               5 (rows)
+            124 POP_BLOCK
+            126 POP_EXCEPT
+            128 LOAD_CONST               1 (None)
+            130 STORE_FAST               6 (e)
+            132 DELETE_FAST              6 (e)
+            134 JUMP_FORWARD            10 (to 146)
+        >>  136 LOAD_CONST               1 (None)
+            138 STORE_FAST               6 (e)
+            140 DELETE_FAST              6 (e)
+            142 RERAISE
+        >>  144 RERAISE
+        >>  146 POP_BLOCK
+
+332         148 LOAD_FAST                3 (conn)
+            150 LOAD_METHOD              9 (close)
+            152 CALL_METHOD              0
+            154 POP_TOP
+            156 JUMP_FORWARD            10 (to 168)
+        >>  158 LOAD_FAST                3 (conn)
+            160 LOAD_METHOD              9 (close)
+            162 CALL_METHOD              0
+            164 POP_TOP
+            166 RERAISE
+        >>  168 POP_BLOCK
+            170 LOAD_CONST               1 (None)
+            172 DUP_TOP
+            174 DUP_TOP
+            176 CALL_FUNCTION            3
+            178 POP_TOP
+            180 JUMP_FORWARD            16 (to 198)
+        >>  182 WITH_EXCEPT_START
+            184 POP_JUMP_IF_TRUE       188
+            186 RERAISE
+        >>  188 POP_TOP
+            190 POP_TOP
+            192 POP_TOP
+            194 POP_EXCEPT
+            196 POP_TOP
+
+334     >>  198 BUILD_LIST               0
+            200 STORE_FAST               7 (items)
+
+335         202 LOAD_FAST                5 (rows)
+            204 GET_ITER
+        >>  206 FOR_ITER               120 (to 328)
+            208 STORE_FAST               8 (row)
+
+336         210 LOAD_GLOBAL             10 (dict)
+            212 LOAD_FAST                8 (row)
+            214 CALL_FUNCTION            1
+            216 STORE_FAST               9 (item)
+
+337         218 LOAD_FAST                9 (item)
+            220 LOAD_METHOD             11 (get)
+            222 LOAD_CONST               6 ('detail')
+            224 CALL_METHOD              1
+            226 STORE_FAST              10 (detailStr)
+
+338         228 LOAD_GLOBAL             12 (isinstance)
+            230 LOAD_FAST               10 (detailStr)
+            232 LOAD_GLOBAL             13 (str)
+            234 CALL_FUNCTION            2
+            236 EXTENDED_ARG             1
+            238 POP_JUMP_IF_FALSE      296
+            240 LOAD_FAST               10 (detailStr)
+            242 EXTENDED_ARG             1
+            244 POP_JUMP_IF_FALSE      296
+
+339         246 SETUP_FINALLY           18 (to 266)
+
+340         248 LOAD_GLOBAL             14 (json)
+            250 LOAD_METHOD             15 (loads)
+            252 LOAD_FAST               10 (detailStr)
+            254 CALL_METHOD              1
+            256 LOAD_FAST                9 (item)
+            258 LOAD_CONST               6 ('detail')
+            260 STORE_SUBSCR
+            262 POP_BLOCK
+            264 JUMP_FORWARD            28 (to 294)
+
+341     >>  266 DUP_TOP
+            268 LOAD_GLOBAL              6 (Exception)
+            270 EXTENDED_ARG             1
+            272 JUMP_IF_NOT_EXC_MATCH   292
+            274 POP_TOP
+            276 POP_TOP
+            278 POP_TOP
+
+342         280 BUILD_MAP                0
+            282 LOAD_FAST                9 (item)
+            284 LOAD_CONST               6 ('detail')
+            286 STORE_SUBSCR
+            288 POP_EXCEPT
+            290 JUMP_FORWARD             2 (to 294)
+        >>  292 RERAISE
+        >>  294 JUMP_FORWARD            20 (to 316)
+
+344     >>  296 LOAD_FAST                9 (item)
+            298 LOAD_METHOD             11 (get)
+            300 LOAD_CONST               6 ('detail')
+            302 CALL_METHOD              1
+            304 EXTENDED_ARG             1
+            306 JUMP_IF_TRUE_OR_POP    310
+            308 BUILD_MAP                0
+        >>  310 LOAD_FAST                9 (item)
+            312 LOAD_CONST               6 ('detail')
+            314 STORE_SUBSCR
+
+345     >>  316 LOAD_FAST                7 (items)
+            318 LOAD_METHOD             16 (append)
+            320 LOAD_FAST                9 (item)
+            322 CALL_METHOD              1
+            324 POP_TOP
+            326 JUMP_ABSOLUTE          206
+
+346     >>  328 LOAD_FAST                7 (items)
+            330 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.deleteRecentlyItems ===
+350           0 LOAD_FAST                2 (itemIds)
+              2 POP_JUMP_IF_TRUE         8
+
+351           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+352     >>    8 LOAD_CONST               2 (<code object <listcomp> at 0x000001F3253C4B30, file "LPClientFramework\LPMusicLibrary\LPMusicLibraryDBManager.py", line 352>)
+             10 LOAD_CONST               3 ('LPMusicLibraryDBManager.deleteRecentlyItems.<locals>.<listcomp>')
+             12 MAKE_FUNCTION            0
+             14 LOAD_FAST                2 (itemIds)
+             16 GET_ITER
+             18 CALL_FUNCTION            1
+             20 STORE_FAST               3 (itemIdList)
+
+353          22 LOAD_FAST                3 (itemIdList)
+             24 POP_JUMP_IF_TRUE        30
+
+354          26 LOAD_CONST               1 (None)
+             28 RETURN_VALUE
+
+355     >>   30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                0 (_lock)
+             34 SETUP_WITH             158 (to 194)
+             36 POP_TOP
+
+356          38 LOAD_FAST                0 (self)
+             40 LOAD_METHOD              1 (_connect)
+             42 CALL_METHOD              0
+             44 STORE_FAST               4 (conn)
+
+357          46 SETUP_FINALLY          122 (to 170)
+             48 SETUP_FINALLY           58 (to 108)
+
+358          50 LOAD_CONST               4 (',')
+             52 LOAD_METHOD              2 (join)
+             54 LOAD_CONST               5 ('?')
+             56 BUILD_LIST               1
+             58 LOAD_GLOBAL              3 (len)
+             60 LOAD_FAST                3 (itemIdList)
+             62 CALL_FUNCTION            1
+             64 BINARY_MULTIPLY
+             66 CALL_METHOD              1
+             68 STORE_FAST               5 (placeholders)
+
+359          70 LOAD_FAST                4 (conn)
+             72 LOAD_METHOD              4 (execute)
+
+360          74 LOAD_CONST               6 ('DELETE FROM LibMusicItem WHERE directoryId = ? AND itemId IN (%s)')
+             76 LOAD_FAST                5 (placeholders)
+             78 BINARY_MODULO
+
+361          80 LOAD_FAST                1 (directoryId)
+             82 BUILD_LIST               1
+             84 LOAD_GLOBAL              5 (list)
+             86 LOAD_FAST                3 (itemIdList)
+             88 CALL_FUNCTION            1
+             90 BINARY_ADD
+
+359          92 CALL_METHOD              2
+             94 POP_TOP
+
+363          96 LOAD_FAST                4 (conn)
+             98 LOAD_METHOD              6 (commit)
+            100 CALL_METHOD              0
+            102 POP_TOP
+            104 POP_BLOCK
+            106 JUMP_FORWARD            50 (to 158)
+
+364     >>  108 DUP_TOP
+            110 LOAD_GLOBAL              7 (Exception)
+            112 JUMP_IF_NOT_EXC_MATCH   156
+            114 POP_TOP
+            116 STORE_FAST               6 (e)
+            118 POP_TOP
+            120 SETUP_FINALLY           26 (to 148)
+
+365         122 LOAD_GLOBAL              8 (logger)
+            124 LOAD_METHOD              9 (error)
+            126 LOAD_CONST               7 ('[MusicLibraryDB] deleteRecentlyItems failed: %s')
+            128 LOAD_FAST                6 (e)
+            130 BINARY_MODULO
+            132 CALL_METHOD              1
+            134 POP_TOP
+            136 POP_BLOCK
+            138 POP_EXCEPT
+            140 LOAD_CONST               1 (None)
+            142 STORE_FAST               6 (e)
+            144 DELETE_FAST              6 (e)
+            146 JUMP_FORWARD            10 (to 158)
+        >>  148 LOAD_CONST               1 (None)
+            150 STORE_FAST               6 (e)
+            152 DELETE_FAST              6 (e)
+            154 RERAISE
+        >>  156 RERAISE
+        >>  158 POP_BLOCK
+
+367         160 LOAD_FAST                4 (conn)
+            162 LOAD_METHOD             10 (close)
+            164 CALL_METHOD              0
+            166 POP_TOP
+            168 JUMP_FORWARD            10 (to 180)
+        >>  170 LOAD_FAST                4 (conn)
+            172 LOAD_METHOD             10 (close)
+            174 CALL_METHOD              0
+            176 POP_TOP
+            178 RERAISE
+        >>  180 POP_BLOCK
+            182 LOAD_CONST               1 (None)
+            184 DUP_TOP
+            186 DUP_TOP
+            188 CALL_FUNCTION            3
+            190 POP_TOP
+            192 JUMP_FORWARD            16 (to 210)
+        >>  194 WITH_EXCEPT_START
+            196 POP_JUMP_IF_TRUE       200
+            198 RERAISE
+        >>  200 POP_TOP
+            202 POP_TOP
+            204 POP_TOP
+            206 POP_EXCEPT
+            208 POP_TOP
+        >>  210 LOAD_CONST               1 (None)
+            212 RETURN_VALUE
+
+=== LPMusicLibraryDBManager.deleteRecentlyItems.<listcomp> ===
+352           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                12 (to 18)
+              6 STORE_FAST               1 (itemId)
+              8 LOAD_FAST                1 (itemId)
+             10 POP_JUMP_IF_FALSE        4
+             12 LOAD_FAST                1 (itemId)
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            4
+        >>   18 RETURN_VALUE

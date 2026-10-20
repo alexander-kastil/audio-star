@@ -1,0 +1,582 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (('QCoreApplication',))
+              4 IMPORT_NAME              0 (PyQt6.QtCore)
+              6 IMPORT_FROM              1 (QCoreApplication)
+              8 STORE_NAME               1 (QCoreApplication)
+             10 POP_TOP
+
+  3          12 LOAD_CONST               0 (0)
+             14 LOAD_CONST               2 (('LPPublicDefine',))
+             16 IMPORT_NAME              2 (LPClientFramework)
+             18 IMPORT_FROM              3 (LPPublicDefine)
+             20 STORE_NAME               3 (LPPublicDefine)
+             22 POP_TOP
+
+  4          24 LOAD_CONST               0 (0)
+             26 LOAD_CONST               3 (('LPAudioInputEnum',))
+             28 IMPORT_NAME              4 (LPClientFramework.LPPublicDefine)
+             30 IMPORT_FROM              5 (LPAudioInputEnum)
+             32 STORE_NAME               5 (LPAudioInputEnum)
+             34 POP_TOP
+
+  7          36 LOAD_CONST               4 (<code object audioInputTemplateForDevice at 0x000001F324E89F50, file "LPClientFramework\LPDeviceAudioInput.py", line 7>)
+             38 LOAD_CONST               5 ('audioInputTemplateForDevice')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               6 (audioInputTemplateForDevice)
+
+ 50          44 LOAD_CONST               6 (<code object makeAudioInputArray at 0x000001F324E75920, file "LPClientFramework\LPDeviceAudioInput.py", line 50>)
+             46 LOAD_CONST               7 ('makeAudioInputArray')
+             48 MAKE_FUNCTION            0
+             50 STORE_NAME               7 (makeAudioInputArray)
+             52 LOAD_CONST               8 (None)
+             54 RETURN_VALUE
+
+=== audioInputTemplateForDevice ===
+  8           0 LOAD_FAST                0 (device)
+              2 LOAD_ATTR                0 (isWiiMAMP)
+              4 POP_JUMP_IF_FALSE      130
+
+  9           6 LOAD_GLOBAL              1 (LPAudioInputEnum)
+              8 LOAD_ATTR                2 (plm_wifi)
+             10 LOAD_GLOBAL              3 (QCoreApplication)
+             12 LOAD_METHOD              4 (translate)
+             14 LOAD_CONST               1 ('AudioInput')
+             16 LOAD_CONST               2 ('Wi-Fi')
+             18 CALL_METHOD              2
+             20 LOAD_CONST               3 ('wifi')
+             22 LOAD_GLOBAL              5 (LPPublicDefine)
+             24 LOAD_ATTR                6 (MEDIATYPE_UNKNOWN)
+             26 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+             28 BUILD_CONST_KEY_MAP      3
+
+ 10          30 LOAD_GLOBAL              1 (LPAudioInputEnum)
+             32 LOAD_ATTR                7 (plm_bluetooth)
+             34 LOAD_GLOBAL              3 (QCoreApplication)
+             36 LOAD_METHOD              4 (translate)
+             38 LOAD_CONST               1 ('AudioInput')
+             40 LOAD_CONST               5 ('Bluetooth')
+             42 CALL_METHOD              2
+             44 LOAD_CONST               6 ('bluetooth')
+             46 LOAD_GLOBAL              5 (LPPublicDefine)
+             48 LOAD_ATTR                8 (MEDIATYPE_BLUETOOTH)
+             50 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+             52 BUILD_CONST_KEY_MAP      3
+
+ 11          54 LOAD_GLOBAL              1 (LPAudioInputEnum)
+             56 LOAD_ATTR                9 (plm_optical)
+             58 LOAD_GLOBAL              3 (QCoreApplication)
+             60 LOAD_METHOD              4 (translate)
+             62 LOAD_CONST               1 ('AudioInput')
+             64 LOAD_CONST               7 ('Optical In')
+             66 CALL_METHOD              2
+             68 LOAD_CONST               8 ('optical')
+             70 LOAD_GLOBAL              5 (LPPublicDefine)
+             72 LOAD_ATTR               10 (MEDIATYPE_OPTICAL)
+             74 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+             76 BUILD_CONST_KEY_MAP      3
+
+ 12          78 LOAD_GLOBAL              1 (LPAudioInputEnum)
+             80 LOAD_ATTR               11 (plm_linein)
+             82 LOAD_GLOBAL              3 (QCoreApplication)
+             84 LOAD_METHOD              4 (translate)
+             86 LOAD_CONST               1 ('AudioInput')
+             88 LOAD_CONST               9 ('Line In')
+             90 CALL_METHOD              2
+             92 LOAD_CONST              10 ('line-in')
+             94 LOAD_GLOBAL              5 (LPPublicDefine)
+             96 LOAD_ATTR               12 (MEDIATYPE_LINEIN)
+             98 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            100 BUILD_CONST_KEY_MAP      3
+
+ 13         102 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            104 LOAD_ATTR               13 (plm_hdmi)
+            106 LOAD_GLOBAL              3 (QCoreApplication)
+            108 LOAD_METHOD              4 (translate)
+            110 LOAD_CONST               1 ('AudioInput')
+            112 LOAD_CONST              11 ('TV')
+            114 CALL_METHOD              2
+            116 LOAD_CONST              12 ('HDMI')
+            118 LOAD_GLOBAL              5 (LPPublicDefine)
+            120 LOAD_ATTR               14 (MEDIATYPE_HDMI)
+            122 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            124 BUILD_CONST_KEY_MAP      3
+
+  9         126 BUILD_MAP                5
+            128 RETURN_VALUE
+
+ 15     >>  130 LOAD_FAST                0 (device)
+            132 LOAD_ATTR               15 (isWiiMUltra)
+            134 EXTENDED_ARG             1
+            136 POP_JUMP_IF_FALSE      286
+
+ 16         138 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            140 LOAD_ATTR                2 (plm_wifi)
+            142 LOAD_GLOBAL              3 (QCoreApplication)
+            144 LOAD_METHOD              4 (translate)
+            146 LOAD_CONST               1 ('AudioInput')
+            148 LOAD_CONST               2 ('Wi-Fi')
+            150 CALL_METHOD              2
+            152 LOAD_CONST               3 ('wifi')
+            154 LOAD_GLOBAL              5 (LPPublicDefine)
+            156 LOAD_ATTR                6 (MEDIATYPE_UNKNOWN)
+            158 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            160 BUILD_CONST_KEY_MAP      3
+
+ 17         162 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            164 LOAD_ATTR                7 (plm_bluetooth)
+            166 LOAD_GLOBAL              3 (QCoreApplication)
+            168 LOAD_METHOD              4 (translate)
+            170 LOAD_CONST               1 ('AudioInput')
+            172 LOAD_CONST               5 ('Bluetooth')
+            174 CALL_METHOD              2
+            176 LOAD_CONST               6 ('bluetooth')
+            178 LOAD_GLOBAL              5 (LPPublicDefine)
+            180 LOAD_ATTR                8 (MEDIATYPE_BLUETOOTH)
+            182 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            184 BUILD_CONST_KEY_MAP      3
+
+ 18         186 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            188 LOAD_ATTR                9 (plm_optical)
+            190 LOAD_GLOBAL              3 (QCoreApplication)
+            192 LOAD_METHOD              4 (translate)
+            194 LOAD_CONST               1 ('AudioInput')
+            196 LOAD_CONST               7 ('Optical In')
+            198 CALL_METHOD              2
+            200 LOAD_CONST               8 ('optical')
+            202 LOAD_GLOBAL              5 (LPPublicDefine)
+            204 LOAD_ATTR               10 (MEDIATYPE_OPTICAL)
+            206 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            208 BUILD_CONST_KEY_MAP      3
+
+ 19         210 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            212 LOAD_ATTR               11 (plm_linein)
+            214 LOAD_GLOBAL              3 (QCoreApplication)
+            216 LOAD_METHOD              4 (translate)
+            218 LOAD_CONST               1 ('AudioInput')
+            220 LOAD_CONST               9 ('Line In')
+            222 CALL_METHOD              2
+            224 LOAD_CONST              10 ('line-in')
+            226 LOAD_GLOBAL              5 (LPPublicDefine)
+            228 LOAD_ATTR               12 (MEDIATYPE_LINEIN)
+            230 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            232 BUILD_CONST_KEY_MAP      3
+
+ 20         234 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            236 LOAD_ATTR               13 (plm_hdmi)
+            238 LOAD_GLOBAL              3 (QCoreApplication)
+            240 LOAD_METHOD              4 (translate)
+            242 LOAD_CONST               1 ('AudioInput')
+            244 LOAD_CONST              11 ('TV')
+            246 CALL_METHOD              2
+            248 LOAD_CONST              12 ('HDMI')
+            250 LOAD_GLOBAL              5 (LPPublicDefine)
+            252 LOAD_ATTR               14 (MEDIATYPE_HDMI)
+            254 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            256 BUILD_CONST_KEY_MAP      3
+
+ 21         258 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            260 LOAD_ATTR               16 (plm_phono)
+            262 LOAD_GLOBAL              3 (QCoreApplication)
+            264 LOAD_METHOD              4 (translate)
+            266 LOAD_CONST               1 ('AudioInput')
+            268 LOAD_CONST              13 ('PHONO')
+            270 CALL_METHOD              2
+            272 LOAD_CONST              14 ('phono')
+            274 LOAD_GLOBAL              5 (LPPublicDefine)
+            276 LOAD_ATTR               17 (MEDIATYPE_PHONO)
+            278 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            280 BUILD_CONST_KEY_MAP      3
+
+ 16         282 BUILD_MAP                6
+            284 RETURN_VALUE
+
+ 24     >>  286 LOAD_FAST                0 (device)
+            288 LOAD_ATTR               18 (isWiiMPro)
+            290 EXTENDED_ARG             1
+            292 POP_JUMP_IF_FALSE      392
+
+ 25         294 LOAD_CONST              15 (10001)
+            296 LOAD_GLOBAL              3 (QCoreApplication)
+            298 LOAD_METHOD              4 (translate)
+            300 LOAD_CONST               1 ('AudioInput')
+            302 LOAD_CONST               2 ('Wi-Fi')
+            304 CALL_METHOD              2
+            306 LOAD_CONST               3 ('wifi')
+            308 LOAD_GLOBAL              5 (LPPublicDefine)
+            310 LOAD_ATTR                6 (MEDIATYPE_UNKNOWN)
+            312 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            314 BUILD_CONST_KEY_MAP      3
+
+ 26         316 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            318 LOAD_ATTR                7 (plm_bluetooth)
+            320 LOAD_GLOBAL              3 (QCoreApplication)
+            322 LOAD_METHOD              4 (translate)
+            324 LOAD_CONST               1 ('AudioInput')
+            326 LOAD_CONST               5 ('Bluetooth')
+            328 CALL_METHOD              2
+            330 LOAD_CONST               6 ('bluetooth')
+            332 LOAD_GLOBAL              5 (LPPublicDefine)
+            334 LOAD_ATTR                8 (MEDIATYPE_BLUETOOTH)
+            336 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            338 BUILD_CONST_KEY_MAP      3
+
+ 27         340 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            342 LOAD_ATTR                9 (plm_optical)
+            344 LOAD_GLOBAL              3 (QCoreApplication)
+            346 LOAD_METHOD              4 (translate)
+            348 LOAD_CONST               1 ('AudioInput')
+            350 LOAD_CONST               7 ('Optical In')
+            352 CALL_METHOD              2
+            354 LOAD_CONST               8 ('optical')
+            356 LOAD_GLOBAL              5 (LPPublicDefine)
+            358 LOAD_ATTR               10 (MEDIATYPE_OPTICAL)
+            360 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            362 BUILD_CONST_KEY_MAP      3
+
+ 28         364 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            366 LOAD_ATTR               11 (plm_linein)
+            368 LOAD_GLOBAL              3 (QCoreApplication)
+            370 LOAD_METHOD              4 (translate)
+            372 LOAD_CONST               1 ('AudioInput')
+            374 LOAD_CONST               9 ('Line In')
+            376 CALL_METHOD              2
+            378 LOAD_CONST              10 ('line-in')
+            380 LOAD_GLOBAL              5 (LPPublicDefine)
+            382 LOAD_ATTR               12 (MEDIATYPE_LINEIN)
+            384 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            386 BUILD_CONST_KEY_MAP      3
+
+ 25         388 BUILD_MAP                4
+            390 RETURN_VALUE
+
+ 32     >>  392 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            394 LOAD_ATTR                7 (plm_bluetooth)
+            396 LOAD_GLOBAL              3 (QCoreApplication)
+            398 LOAD_METHOD              4 (translate)
+            400 LOAD_CONST               1 ('AudioInput')
+            402 LOAD_CONST               5 ('Bluetooth')
+            404 CALL_METHOD              2
+            406 LOAD_CONST               6 ('bluetooth')
+            408 LOAD_GLOBAL              5 (LPPublicDefine)
+            410 LOAD_ATTR                8 (MEDIATYPE_BLUETOOTH)
+            412 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            414 BUILD_CONST_KEY_MAP      3
+
+ 33         416 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            418 LOAD_ATTR               19 (plm_usb)
+            420 LOAD_GLOBAL              3 (QCoreApplication)
+            422 LOAD_METHOD              4 (translate)
+            424 LOAD_CONST               1 ('AudioInput')
+            426 LOAD_CONST              16 ('USB Devices')
+            428 CALL_METHOD              2
+            430 LOAD_CONST              17 ('udisk')
+            432 LOAD_GLOBAL              5 (LPPublicDefine)
+            434 LOAD_ATTR               20 (MEDIATYPE_EXTERNAL_USB)
+            436 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            438 BUILD_CONST_KEY_MAP      3
+
+ 34         440 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            442 LOAD_ATTR               21 (plm_tf)
+            444 LOAD_GLOBAL              3 (QCoreApplication)
+            446 LOAD_METHOD              4 (translate)
+            448 LOAD_CONST               1 ('AudioInput')
+            450 LOAD_CONST              18 ('TF Card')
+            452 CALL_METHOD              2
+            454 LOAD_CONST              19 ('TFCard')
+            456 LOAD_GLOBAL              5 (LPPublicDefine)
+            458 LOAD_ATTR               22 (MEDIATYPE_LOCALLIST_TF)
+            460 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            462 BUILD_CONST_KEY_MAP      3
+
+ 35         464 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            466 LOAD_ATTR               23 (plm_xlr)
+            468 LOAD_GLOBAL              3 (QCoreApplication)
+            470 LOAD_METHOD              4 (translate)
+            472 LOAD_CONST               1 ('AudioInput')
+            474 LOAD_CONST              20 ('XLR')
+            476 CALL_METHOD              2
+            478 LOAD_CONST              20 ('XLR')
+            480 LOAD_GLOBAL              5 (LPPublicDefine)
+            482 LOAD_ATTR               24 (MEDIATYPE_XLR)
+            484 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            486 BUILD_CONST_KEY_MAP      3
+
+ 36         488 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            490 LOAD_ATTR               11 (plm_linein)
+            492 LOAD_GLOBAL              3 (QCoreApplication)
+            494 LOAD_METHOD              4 (translate)
+            496 LOAD_CONST               1 ('AudioInput')
+            498 LOAD_CONST              21 ('Aux In')
+            500 CALL_METHOD              2
+            502 LOAD_CONST              10 ('line-in')
+            504 LOAD_GLOBAL              5 (LPPublicDefine)
+            506 LOAD_ATTR               12 (MEDIATYPE_LINEIN)
+            508 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            510 BUILD_CONST_KEY_MAP      3
+
+ 37         512 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            514 LOAD_ATTR               25 (plm_linein2)
+            516 LOAD_GLOBAL              3 (QCoreApplication)
+            518 LOAD_METHOD              4 (translate)
+            520 LOAD_CONST               1 ('AudioInput')
+            522 LOAD_CONST              22 ('Aux')
+            524 CALL_METHOD              2
+            526 LOAD_CONST              10 ('line-in')
+            528 LOAD_GLOBAL              5 (LPPublicDefine)
+            530 LOAD_ATTR               26 (MEDIATYPE_LINEIN2)
+            532 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            534 BUILD_CONST_KEY_MAP      3
+
+ 38         536 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            538 LOAD_ATTR               27 (plm_radio)
+            540 LOAD_GLOBAL              3 (QCoreApplication)
+            542 LOAD_METHOD              4 (translate)
+            544 LOAD_CONST               1 ('AudioInput')
+            546 LOAD_CONST              23 ('Radio')
+            548 CALL_METHOD              2
+            550 LOAD_CONST              24 ('FM')
+            552 LOAD_GLOBAL              5 (LPPublicDefine)
+            554 LOAD_ATTR               28 (MEDIATYPE_RADIO)
+            556 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            558 BUILD_CONST_KEY_MAP      3
+
+ 39         560 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            562 LOAD_ATTR               29 (plm_rca)
+            564 LOAD_GLOBAL              3 (QCoreApplication)
+            566 LOAD_METHOD              4 (translate)
+            568 LOAD_CONST               1 ('AudioInput')
+            570 LOAD_CONST              25 ('Stereo out')
+            572 CALL_METHOD              2
+            574 LOAD_CONST              26 ('RCA')
+            576 LOAD_GLOBAL              5 (LPPublicDefine)
+            578 LOAD_ATTR               30 (MEDIATYPE_RCA)
+            580 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            582 BUILD_CONST_KEY_MAP      3
+
+ 40         584 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            586 LOAD_ATTR                9 (plm_optical)
+            588 LOAD_GLOBAL              3 (QCoreApplication)
+            590 LOAD_METHOD              4 (translate)
+            592 LOAD_CONST               1 ('AudioInput')
+            594 LOAD_CONST              27 ('Optical')
+            596 CALL_METHOD              2
+            598 LOAD_CONST               8 ('optical')
+            600 LOAD_GLOBAL              5 (LPPublicDefine)
+            602 LOAD_ATTR               10 (MEDIATYPE_OPTICAL)
+            604 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            606 BUILD_CONST_KEY_MAP      3
+
+ 41         608 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            610 LOAD_ATTR               13 (plm_hdmi)
+            612 LOAD_GLOBAL              3 (QCoreApplication)
+            614 LOAD_METHOD              4 (translate)
+            616 LOAD_CONST               1 ('AudioInput')
+            618 LOAD_CONST              11 ('TV')
+            620 CALL_METHOD              2
+            622 LOAD_CONST              12 ('HDMI')
+            624 LOAD_GLOBAL              5 (LPPublicDefine)
+            626 LOAD_ATTR               14 (MEDIATYPE_HDMI)
+            628 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            630 BUILD_CONST_KEY_MAP      3
+
+ 42         632 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            634 LOAD_ATTR               31 (plm_coaxial)
+            636 LOAD_GLOBAL              3 (QCoreApplication)
+            638 LOAD_METHOD              4 (translate)
+            640 LOAD_CONST               1 ('AudioInput')
+            642 LOAD_CONST              28 ('CO-AXIAL')
+            644 CALL_METHOD              2
+            646 LOAD_CONST              29 ('co-axial')
+            648 LOAD_GLOBAL              5 (LPPublicDefine)
+            650 LOAD_ATTR               32 (MEDIATYPE_CO_AXIAL)
+            652 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            654 BUILD_CONST_KEY_MAP      3
+
+ 43         656 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            658 LOAD_ATTR                2 (plm_wifi)
+            660 LOAD_GLOBAL              3 (QCoreApplication)
+            662 LOAD_METHOD              4 (translate)
+            664 LOAD_CONST               1 ('AudioInput')
+            666 LOAD_CONST               2 ('Wi-Fi')
+            668 CALL_METHOD              2
+            670 LOAD_CONST               3 ('wifi')
+            672 LOAD_GLOBAL              5 (LPPublicDefine)
+            674 LOAD_ATTR                6 (MEDIATYPE_UNKNOWN)
+            676 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            678 BUILD_CONST_KEY_MAP      3
+
+ 44         680 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            682 LOAD_ATTR               33 (plm_extern_bt)
+            684 LOAD_GLOBAL              3 (QCoreApplication)
+            686 LOAD_METHOD              4 (translate)
+            688 LOAD_CONST               1 ('AudioInput')
+            690 LOAD_CONST               5 ('Bluetooth')
+            692 CALL_METHOD              2
+            694 LOAD_CONST              30 ('extern_bluetooth')
+            696 LOAD_GLOBAL              5 (LPPublicDefine)
+            698 LOAD_ATTR                8 (MEDIATYPE_BLUETOOTH)
+            700 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            702 BUILD_CONST_KEY_MAP      3
+
+ 45         704 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            706 LOAD_ATTR               34 (plm_pc_usb)
+            708 LOAD_GLOBAL              3 (QCoreApplication)
+            710 LOAD_METHOD              4 (translate)
+            712 LOAD_CONST               1 ('AudioInput')
+            714 LOAD_CONST              31 ('USBDAC')
+            716 CALL_METHOD              2
+            718 LOAD_CONST              32 ('PCUSB')
+            720 LOAD_GLOBAL              5 (LPPublicDefine)
+            722 LOAD_ATTR               20 (MEDIATYPE_EXTERNAL_USB)
+            724 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            726 BUILD_CONST_KEY_MAP      3
+
+ 46         728 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            730 LOAD_ATTR               16 (plm_phono)
+            732 LOAD_GLOBAL              3 (QCoreApplication)
+            734 LOAD_METHOD              4 (translate)
+            736 LOAD_CONST               1 ('AudioInput')
+            738 LOAD_CONST              13 ('PHONO')
+            740 CALL_METHOD              2
+            742 LOAD_CONST              14 ('phono')
+            744 LOAD_GLOBAL              5 (LPPublicDefine)
+            746 LOAD_ATTR               17 (MEDIATYPE_PHONO)
+            748 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            750 BUILD_CONST_KEY_MAP      3
+
+ 47         752 LOAD_GLOBAL              1 (LPAudioInputEnum)
+            754 LOAD_ATTR               35 (plm_arc)
+            756 LOAD_GLOBAL              3 (QCoreApplication)
+            758 LOAD_METHOD              4 (translate)
+            760 LOAD_CONST               1 ('AudioInput')
+            762 LOAD_CONST              33 ('ARC')
+            764 CALL_METHOD              2
+            766 LOAD_CONST              34 ('arc')
+            768 LOAD_GLOBAL              5 (LPPublicDefine)
+            770 LOAD_ATTR               36 (MEDIATYPE_ARC)
+            772 LOAD_CONST               4 (('title', 'mode', 'mediaType'))
+            774 BUILD_CONST_KEY_MAP      3
+
+ 31         776 BUILD_MAP               16
+            778 RETURN_VALUE
+
+=== makeAudioInputArray ===
+ 52           0 LOAD_GLOBAL              0 (LPAudioInputEnum)
+              2 LOAD_ATTR                1 (plm_wifi)
+
+ 53           4 LOAD_GLOBAL              0 (LPAudioInputEnum)
+              6 LOAD_ATTR                2 (plm_bluetooth)
+
+ 54           8 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             10 LOAD_ATTR                3 (plm_linein)
+
+ 55          12 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             14 LOAD_ATTR                4 (plm_usb)
+
+ 56          16 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             18 LOAD_ATTR                5 (plm_extern_bt)
+
+ 57          20 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             22 LOAD_ATTR                6 (plm_pc_usb)
+
+ 58          24 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             26 LOAD_ATTR                7 (plm_tf)
+
+ 59          28 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             30 LOAD_ATTR                8 (plm_xlr)
+
+ 60          32 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             34 LOAD_ATTR                9 (plm_rca)
+
+ 61          36 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             38 LOAD_ATTR               10 (plm_radio)
+
+ 62          40 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             42 LOAD_ATTR               11 (plm_linein2)
+
+ 63          44 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             46 LOAD_ATTR               12 (plm_optical)
+
+ 64          48 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             50 LOAD_ATTR               13 (plm_hdmi)
+
+ 65          52 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             54 LOAD_ATTR               14 (plm_coaxial)
+
+ 66          56 LOAD_GLOBAL              0 (LPAudioInputEnum)
+             58 LOAD_ATTR               15 (plm_phono)
+
+ 51          60 BUILD_LIST              15
+             62 STORE_FAST               1 (keyArray)
+
+ 69          64 BUILD_LIST               0
+             66 STORE_FAST               2 (retArray)
+
+ 70          68 LOAD_FAST                1 (keyArray)
+             70 GET_ITER
+        >>   72 FOR_ITER               100 (to 174)
+             74 STORE_FAST               3 (key)
+
+ 71          76 LOAD_FAST                0 (device)
+             78 LOAD_METHOD             16 (supportPLM)
+             80 LOAD_FAST                3 (key)
+             82 CALL_METHOD              1
+             84 POP_JUMP_IF_FALSE       96
+
+ 72          86 LOAD_FAST                2 (retArray)
+             88 LOAD_METHOD             17 (append)
+             90 LOAD_FAST                3 (key)
+             92 CALL_METHOD              1
+             94 POP_TOP
+
+ 74     >>   96 LOAD_FAST                3 (key)
+             98 LOAD_GLOBAL              0 (LPAudioInputEnum)
+            100 LOAD_ATTR                7 (plm_tf)
+            102 COMPARE_OP               2 (==)
+            104 POP_JUMP_IF_FALSE      124
+
+ 75         106 LOAD_FAST                0 (device)
+            108 LOAD_ATTR               18 (hasTF)
+            110 POP_JUMP_IF_FALSE      172
+
+ 76         112 LOAD_FAST                2 (retArray)
+            114 LOAD_METHOD             17 (append)
+            116 LOAD_FAST                3 (key)
+            118 CALL_METHOD              1
+            120 POP_TOP
+            122 JUMP_ABSOLUTE           72
+
+ 77     >>  124 LOAD_FAST                3 (key)
+            126 LOAD_GLOBAL              0 (LPAudioInputEnum)
+            128 LOAD_ATTR                4 (plm_usb)
+            130 COMPARE_OP               2 (==)
+            132 POP_JUMP_IF_FALSE      152
+
+ 78         134 LOAD_FAST                0 (device)
+            136 LOAD_ATTR               19 (hasUsb)
+            138 POP_JUMP_IF_FALSE      172
+
+ 79         140 LOAD_FAST                2 (retArray)
+            142 LOAD_METHOD             17 (append)
+            144 LOAD_FAST                3 (key)
+            146 CALL_METHOD              1
+            148 POP_TOP
+            150 JUMP_ABSOLUTE           72
+
+ 80     >>  152 LOAD_FAST                3 (key)
+            154 LOAD_GLOBAL              0 (LPAudioInputEnum)
+            156 LOAD_ATTR                1 (plm_wifi)
+            158 COMPARE_OP               2 (==)
+            160 POP_JUMP_IF_FALSE       72
+
+ 81         162 LOAD_FAST                2 (retArray)
+            164 LOAD_METHOD             17 (append)
+            166 LOAD_FAST                3 (key)
+            168 CALL_METHOD              1
+            170 POP_TOP
+        >>  172 JUMP_ABSOLUTE           72
+
+ 83     >>  174 LOAD_FAST                2 (retArray)
+            176 RETURN_VALUE

@@ -1,0 +1,89 @@
+# module HOME.StreamService.Tidal.data.LPTidalWimpLinkParser
+
+[module] names: __doc__, html, re, typing, Any, Dict, List, compile, DOTALL, _WIMP_LINK_RE, _ATTR_TO_LINK_TYPE, str, __annotations__, _escape_html_text, parseBioText, _append_text_parts, segmentsToRichText, segmentsToPlainText
+  str: '\nTIDAL bio/review 文本 wimpLink 解析器。\n\n将 API 返回的 raw text 中的 [wimpLink ...][/wimpLink] 标签和 <br/> 换行\n转换为结构化片段列表，供 QML 端渲染可点击链接和保留换行。\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'List'
+  str: '\\[wimpLink\\s+(\\w+)=\\"([^\\"]*)\\"\\](.*?)\\[/wimpLink\\]'
+  str: 'artist'
+  str: 'album'
+  str: 'track'
+  str: 'video'
+  str: 'playlist'
+  str: 'artistId'
+  str: 'albumId'
+  str: 'trackId'
+  str: 'videoId'
+  str: 'playlistId'
+  str: '_ATTR_TO_LINK_TYPE'
+  str: 'raw'
+  str: 'return'
+  str: '_escape_html_text'
+  str: 'parseBioText'
+  str: 'segments'
+  str: 'text'
+  str: 'return'
+  str: '_append_text_parts'
+  str: 'segments'
+  str: 'linkColor'
+  str: 'linkHoverColor'
+  str: 'return'
+  str: 'segmentsToRichText'
+  str: 'segments'
+  str: 'return'
+  str: 'segmentsToPlainText'
+
+def _escape_html_text(raw)  line 29
+  names: html, escape
+    str: '转义文本中的 HTML 特殊字符，但不影响已有的 <br/> 和 <a> 标签。'
+    str: 'quote'
+
+def parseBioText(raw)  line 34
+  names: _WIMP_LINK_RE, finditer, start, _append_text_parts, group, _ATTR_TO_LINK_TYPE, get, append, end
+    str: '\n    解析 TIDAL bio text 中的 wimpLink 标签和 <br/> 换行。\n\n    :param raw: API 返回的原始 bio text。\n    :return: 结构化片段列表，每个片段为 dict:\n             - {"type": "text", "text": "..."}   — 纯文本\n             - {"type": "link", "text": "...", "linkType": "artist|album|...", "linkId": "..."}  — 可点击链接\n             - {"type'
+    str: 'link'
+    str: 'type'
+    str: 'text'
+    str: 'linkType'
+    str: 'linkId'
+    str: 'text'
+    str: 'type'
+    str: 'text'
+
+def _append_text_parts(segments, text)  line 83
+  names: split, enumerate, append
+    str: '将一段纯文本按 <br/> 拆分并追加到 segments，自动合并相邻 text 片段。'
+    str: '<br/>'
+    str: 'type'
+    str: 'break'
+    str: 'text'
+    str: 'type'
+    str: 'text'
+
+def segmentsToRichText(segments, linkColor, linkHoverColor)  line 98
+  names: append, _escape_html_text, join
+    str: '\n    将结构化 segments 转换为 QML RichText HTML 字符串。\n\n    :param segments: parseBioText 的返回结果。\n    :param linkColor: 链接文字颜色 (CSS 值), 空则使用 QML 继承色。\n    :param linkHoverColor: hover 链接文字颜色 (CSS 值), 空则不变色。\n    :return: HTML 字符串，可直接赋值给 Text { textFormat: Text.RichText }。\n    '
+    str: 'color:'
+    str: ';text-decoration:none;'
+    str: 'type'
+    str: 'text'
+    str: 'link'
+    str: 'linkType'
+    str: ':'
+    str: 'linkId'
+    str: ' style="'
+    str: '"'
+    str: '<a href="'
+    str: '>'
+    str: '</a>'
+    str: 'break'
+    str: '<br/>'
+
+def segmentsToPlainText(segments)  line 131
+  names: append, join
+    str: '\n    将结构化 segments 转换为纯文本字符串。\n\n    :param segments: parseBioText 的返回结果。\n    :return: 纯文本字符串。\n    '
+    str: 'type'
+    str: 'text'
+    str: 'link'
+    str: 'break'

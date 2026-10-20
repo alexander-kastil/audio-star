@@ -1,0 +1,828 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL 图片缓存服务 adapter。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (hashlib)
+             10 STORE_NAME               1 (hashlib)
+
+  7          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (logging)
+             18 STORE_NAME               2 (logging)
+
+  8          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (threading)
+             26 STORE_NAME               3 (threading)
+
+  9          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('Path',))
+             32 IMPORT_NAME              4 (pathlib)
+             34 IMPORT_FROM              5 (Path)
+             36 STORE_NAME               5 (Path)
+             38 POP_TOP
+
+ 10          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               4 (('Optional', 'Set'))
+             44 IMPORT_NAME              6 (typing)
+             46 IMPORT_FROM              7 (Optional)
+             48 STORE_NAME               7 (Optional)
+             50 IMPORT_FROM              8 (Set)
+             52 STORE_NAME               8 (Set)
+             54 POP_TOP
+
+ 12          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               5 (('QObject', 'QUrl', 'pyqtSignal'))
+             60 IMPORT_NAME              9 (PyQt6.QtCore)
+             62 IMPORT_FROM             10 (QObject)
+             64 STORE_NAME              10 (QObject)
+             66 IMPORT_FROM             11 (QUrl)
+             68 STORE_NAME              11 (QUrl)
+             70 IMPORT_FROM             12 (pyqtSignal)
+             72 STORE_NAME              12 (pyqtSignal)
+             74 POP_TOP
+
+ 14          76 LOAD_CONST               1 (0)
+             78 LOAD_CONST               6 (('LPGlobalQmlImageService',))
+             80 IMPORT_NAME             13 (LPClientFramework.LPImageService.LPGlobalQmlImageService)
+             82 IMPORT_FROM             14 (LPGlobalQmlImageService)
+             84 STORE_NAME              14 (LPGlobalQmlImageService)
+             86 POP_TOP
+
+ 15          88 LOAD_CONST               1 (0)
+             90 LOAD_CONST               7 (('TIDAL_COVER_320_PROFILE', 'imageProfile'))
+             92 IMPORT_NAME             15 (LPClientFramework.LPImageService.LPImageProfiles)
+             94 IMPORT_FROM             16 (TIDAL_COVER_320_PROFILE)
+             96 STORE_NAME              16 (TIDAL_COVER_320_PROFILE)
+             98 IMPORT_FROM             17 (imageProfile)
+            100 STORE_NAME              17 (imageProfile)
+            102 POP_TOP
+
+ 17         104 LOAD_NAME                2 (logging)
+            106 LOAD_METHOD             18 (getLogger)
+            108 LOAD_CONST               8 ('linkplay')
+            110 CALL_METHOD              1
+            112 STORE_NAME              19 (logger)
+
+ 21         114 LOAD_BUILD_CLASS
+            116 LOAD_CONST               9 (<code object LPTidalImageService at 0x000001F3253CE870, file "StreamService\Tidal\services\LPTidalImageService.py", line 21>)
+            118 LOAD_CONST              10 ('LPTidalImageService')
+            120 MAKE_FUNCTION            0
+            122 LOAD_CONST              10 ('LPTidalImageService')
+            124 LOAD_NAME               10 (QObject)
+            126 CALL_FUNCTION            3
+            128 STORE_NAME              20 (LPTidalImageService)
+            130 LOAD_CONST               2 (None)
+            132 RETURN_VALUE
+
+=== LPTidalImageService ===
+ 21           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalImageService')
+              6 STORE_NAME               2 (__qualname__)
+              8 SETUP_ANNOTATIONS
+
+ 22          10 LOAD_NAME                3 (pyqtSignal)
+             12 LOAD_NAME                4 (str)
+             14 LOAD_NAME                4 (str)
+             16 CALL_FUNCTION            2
+             18 STORE_NAME               5 (thumbnailReady)
+
+ 23          20 LOAD_NAME                3 (pyqtSignal)
+             22 LOAD_NAME                4 (str)
+             24 LOAD_NAME                6 (object)
+             26 CALL_FUNCTION            2
+             28 STORE_NAME               7 (thumbnailFailed)
+
+ 25          30 LOAD_CONST               1 (320)
+             32 STORE_NAME               8 (THUMBNAIL_SIZE)
+
+ 26          34 LOAD_CONST               2 (604800)
+             36 STORE_NAME               9 (CACHE_TTL_SECONDS)
+
+ 27          38 LOAD_CONST               3 (60)
+             40 STORE_NAME              10 (FAILURE_RETRY_SECONDS)
+
+ 29          42 LOAD_CONST               4 (None)
+             44 STORE_NAME              11 (_instance)
+             46 LOAD_NAME               12 (Optional)
+             48 LOAD_CONST               0 ('LPTidalImageService')
+             50 BINARY_SUBSCR
+             52 LOAD_NAME               13 (__annotations__)
+             54 LOAD_CONST               5 ('_instance')
+             56 STORE_SUBSCR
+
+ 30          58 LOAD_NAME               14 (threading)
+             60 LOAD_METHOD             15 (Lock)
+             62 CALL_METHOD              0
+             64 STORE_NAME              16 (_instance_lock)
+
+ 32          66 LOAD_CONST              46 ((None,))
+             68 LOAD_NAME               12 (Optional)
+             70 LOAD_NAME               17 (QObject)
+             72 BINARY_SUBSCR
+             74 LOAD_CONST               6 (('parent',))
+             76 BUILD_CONST_KEY_MAP      1
+             78 LOAD_CLOSURE             0 (__class__)
+             80 BUILD_TUPLE              1
+             82 LOAD_CONST               7 (<code object __init__ at 0x000001F3253C4A80, file "StreamService\Tidal\services\LPTidalImageService.py", line 32>)
+             84 LOAD_CONST               8 ('LPTidalImageService.__init__')
+             86 MAKE_FUNCTION           13 (defaults, annotations, closure)
+             88 STORE_NAME              18 (__init__)
+
+ 53          90 LOAD_NAME               19 (classmethod)
+
+ 54          92 LOAD_CONST               0 ('LPTidalImageService')
+             94 LOAD_CONST               9 (('return',))
+             96 BUILD_CONST_KEY_MAP      1
+             98 LOAD_CONST              10 (<code object instance at 0x000001F3253C4B30, file "StreamService\Tidal\services\LPTidalImageService.py", line 53>)
+            100 LOAD_CONST              11 ('LPTidalImageService.instance')
+            102 MAKE_FUNCTION            4 (annotations)
+            104 CALL_FUNCTION            1
+            106 STORE_NAME              20 (instance)
+
+ 65         108 LOAD_CONST               4 (None)
+            110 LOAD_CONST               9 (('return',))
+            112 BUILD_CONST_KEY_MAP      1
+            114 LOAD_CONST              12 (<code object cancelPendingAndClear at 0x000001F3253C47C0, file "StreamService\Tidal\services\LPTidalImageService.py", line 65>)
+            116 LOAD_CONST              13 ('LPTidalImageService.cancelPendingAndClear')
+            118 MAKE_FUNCTION            4 (annotations)
+            120 STORE_NAME              21 (cancelPendingAndClear)
+
+ 81         122 LOAD_NAME                4 (str)
+            124 LOAD_CONST               4 (None)
+            126 LOAD_CONST              14 (('ownerKey', 'return'))
+            128 BUILD_CONST_KEY_MAP      2
+            130 LOAD_CONST              15 (<code object cancelOwner at 0x000001F3253C4660, file "StreamService\Tidal\services\LPTidalImageService.py", line 81>)
+            132 LOAD_CONST              16 ('LPTidalImageService.cancelOwner')
+            134 MAKE_FUNCTION            4 (annotations)
+            136 STORE_NAME              22 (cancelOwner)
+
+ 93         138 LOAD_CONST              47 (('preload', ''))
+            140 LOAD_NAME                4 (str)
+            142 LOAD_NAME                4 (str)
+            144 LOAD_NAME                4 (str)
+            146 LOAD_NAME                4 (str)
+            148 LOAD_CONST              19 (('imageUrl', 'priority', 'ownerKey', 'return'))
+            150 BUILD_CONST_KEY_MAP      4
+            152 LOAD_CONST              20 (<code object ensureThumbnail at 0x000001F3253C4190, file "StreamService\Tidal\services\LPTidalImageService.py", line 93>)
+            154 LOAD_CONST              21 ('LPTidalImageService.ensureThumbnail')
+            156 MAKE_FUNCTION            5 (defaults, annotations)
+            158 STORE_NAME              23 (ensureThumbnail)
+
+112         160 LOAD_NAME                4 (str)
+            162 LOAD_NAME                4 (str)
+            164 LOAD_CONST              22 (('imageUrl', 'return'))
+            166 BUILD_CONST_KEY_MAP      2
+            168 LOAD_CONST              23 (<code object thumbnailPath at 0x000001F3253C4710, file "StreamService\Tidal\services\LPTidalImageService.py", line 112>)
+            170 LOAD_CONST              24 ('LPTidalImageService.thumbnailPath')
+            172 MAKE_FUNCTION            4 (annotations)
+            174 STORE_NAME              24 (thumbnailPath)
+
+121         176 LOAD_NAME                4 (str)
+            178 LOAD_NAME                4 (str)
+            180 LOAD_CONST               4 (None)
+            182 LOAD_CONST              25 (('itemId', 'imageUrl', 'return'))
+            184 BUILD_CONST_KEY_MAP      3
+            186 LOAD_CONST              26 (<code object requestThumbnail at 0x000001F3253C45B0, file "StreamService\Tidal\services\LPTidalImageService.py", line 121>)
+            188 LOAD_CONST              27 ('LPTidalImageService.requestThumbnail')
+            190 MAKE_FUNCTION            4 (annotations)
+            192 STORE_NAME              25 (requestThumbnail)
+
+137         194 LOAD_NAME                4 (str)
+            196 LOAD_CONST               4 (None)
+            198 LOAD_CONST              28 (('itemId', 'return'))
+            200 BUILD_CONST_KEY_MAP      2
+            202 LOAD_CONST              29 (<code object cancelRequest at 0x000001F3253CE7C0, file "StreamService\Tidal\services\LPTidalImageService.py", line 137>)
+            204 LOAD_CONST              30 ('LPTidalImageService.cancelRequest')
+            206 MAKE_FUNCTION            4 (annotations)
+            208 STORE_NAME              26 (cancelRequest)
+
+150         210 LOAD_NAME                4 (str)
+            212 LOAD_NAME                4 (str)
+            214 LOAD_NAME               27 (Path)
+            216 LOAD_CONST              25 (('itemId', 'imageUrl', 'return'))
+            218 BUILD_CONST_KEY_MAP      3
+            220 LOAD_CONST              31 (<code object _resolve_cache_path at 0x000001F3253CE030, file "StreamService\Tidal\services\LPTidalImageService.py", line 150>)
+            222 LOAD_CONST              32 ('LPTidalImageService._resolve_cache_path')
+            224 MAKE_FUNCTION            4 (annotations)
+            226 STORE_NAME              28 (_resolve_cache_path)
+
+161         228 LOAD_NAME                4 (str)
+            230 LOAD_NAME               27 (Path)
+            232 LOAD_CONST              22 (('imageUrl', 'return'))
+            234 BUILD_CONST_KEY_MAP      2
+            236 LOAD_CONST              33 (<code object _cache_file_path at 0x000001F3253CE920, file "StreamService\Tidal\services\LPTidalImageService.py", line 161>)
+            238 LOAD_CONST              34 ('LPTidalImageService._cache_file_path')
+            240 MAKE_FUNCTION            4 (annotations)
+            242 STORE_NAME              29 (_cache_file_path)
+
+172         244 LOAD_NAME               27 (Path)
+            246 LOAD_NAME                4 (str)
+            248 LOAD_CONST              35 (('localPath', 'return'))
+            250 BUILD_CONST_KEY_MAP      2
+            252 LOAD_CONST              36 (<code object _file_url at 0x000001F3253CE3A0, file "StreamService\Tidal\services\LPTidalImageService.py", line 172>)
+            254 LOAD_CONST              37 ('LPTidalImageService._file_url')
+            256 MAKE_FUNCTION            4 (annotations)
+            258 STORE_NAME              30 (_file_url)
+
+181         260 LOAD_CONST              48 (('',))
+            262 LOAD_NAME                4 (str)
+            264 LOAD_NAME                4 (str)
+            266 LOAD_CONST              14 (('ownerKey', 'return'))
+            268 BUILD_CONST_KEY_MAP      2
+            270 LOAD_CONST              38 (<code object _owner_key_locked at 0x000001F3253CEB30, file "StreamService\Tidal\services\LPTidalImageService.py", line 181>)
+            272 LOAD_CONST              39 ('LPTidalImageService._owner_key_locked')
+            274 MAKE_FUNCTION            5 (defaults, annotations)
+            276 STORE_NAME              31 (_owner_key_locked)
+
+196         278 LOAD_NAME                4 (str)
+            280 LOAD_NAME                4 (str)
+            282 LOAD_NAME                4 (str)
+            284 LOAD_CONST               4 (None)
+            286 LOAD_CONST              40 (('imageUrl', 'imagePath', 'profile', 'return'))
+            288 BUILD_CONST_KEY_MAP      4
+            290 LOAD_CONST              41 (<code object _handleGlobalThumbnailReady at 0x000001F3253CE0E0, file "StreamService\Tidal\services\LPTidalImageService.py", line 196>)
+            292 LOAD_CONST              42 ('LPTidalImageService._handleGlobalThumbnailReady')
+            294 MAKE_FUNCTION            4 (annotations)
+            296 STORE_NAME              32 (_handleGlobalThumbnailReady)
+
+209         298 LOAD_NAME                4 (str)
+            300 LOAD_NAME                4 (str)
+            302 LOAD_NAME                6 (object)
+            304 LOAD_CONST               4 (None)
+            306 LOAD_CONST              43 (('imageUrl', 'profile', 'error', 'return'))
+            308 BUILD_CONST_KEY_MAP      4
+            310 LOAD_CONST              44 (<code object _handleGlobalThumbnailFailed at 0x000001F3253CE500, file "StreamService\Tidal\services\LPTidalImageService.py", line 209>)
+            312 LOAD_CONST              45 ('LPTidalImageService._handleGlobalThumbnailFailed')
+            314 MAKE_FUNCTION            4 (annotations)
+            316 STORE_NAME              33 (_handleGlobalThumbnailFailed)
+            318 LOAD_CLOSURE             0 (__class__)
+            320 DUP_TOP
+            322 STORE_NAME              34 (__classcell__)
+            324 RETURN_VALUE
+
+=== LPTidalImageService.__init__ ===
+ 39           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 40          12 LOAD_GLOBAL              2 (TIDAL_COVER_320_PROFILE)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               3 (_profile)
+
+ 41          18 LOAD_CONST               1 (0)
+             20 LOAD_CONST               2 (('cacheCoverDir',))
+             22 IMPORT_NAME              4 (LPClientFramework.LPUtility)
+             24 IMPORT_FROM              5 (cacheCoverDir)
+             26 STORE_FAST               2 (cacheCoverDir)
+             28 POP_TOP
+
+ 43          30 LOAD_GLOBAL              6 (Path)
+             32 LOAD_FAST                2 (cacheCoverDir)
+             34 CALL_FUNCTION            1
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               7 (_cache_dir)
+
+ 44          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                7 (_cache_dir)
+             44 LOAD_ATTR                8 (mkdir)
+             46 LOAD_CONST               3 (True)
+             48 LOAD_CONST               3 (True)
+             50 LOAD_CONST               4 (('parents', 'exist_ok'))
+             52 CALL_FUNCTION_KW         2
+             54 POP_TOP
+
+ 45          56 LOAD_GLOBAL              9 (set)
+             58 CALL_FUNCTION            0
+             60 LOAD_FAST                0 (self)
+             62 STORE_ATTR              10 (_cancelled)
+
+ 46          64 LOAD_GLOBAL             11 (threading)
+             66 LOAD_METHOD             12 (RLock)
+             68 CALL_METHOD              0
+             70 LOAD_FAST                0 (self)
+             72 STORE_ATTR              13 (_lock)
+
+ 47          74 LOAD_CONST               1 (0)
+             76 LOAD_FAST                0 (self)
+             78 STORE_ATTR              14 (_owner_generation)
+
+ 48          80 LOAD_GLOBAL              9 (set)
+             82 CALL_FUNCTION            0
+             84 LOAD_FAST                0 (self)
+             86 STORE_ATTR              15 (_known_owner_keys)
+
+ 49          88 LOAD_GLOBAL             16 (LPGlobalQmlImageService)
+             90 LOAD_METHOD             17 (instance)
+             92 CALL_METHOD              0
+             94 LOAD_FAST                0 (self)
+             96 STORE_ATTR              18 (_image_service)
+
+ 50          98 LOAD_FAST                0 (self)
+            100 LOAD_ATTR               18 (_image_service)
+            102 LOAD_ATTR               19 (thumbnailReady)
+            104 LOAD_METHOD             20 (connect)
+            106 LOAD_FAST                0 (self)
+            108 LOAD_ATTR               21 (_handleGlobalThumbnailReady)
+            110 CALL_METHOD              1
+            112 POP_TOP
+
+ 51         114 LOAD_FAST                0 (self)
+            116 LOAD_ATTR               18 (_image_service)
+            118 LOAD_ATTR               22 (thumbnailFailed)
+            120 LOAD_METHOD             20 (connect)
+            122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR               23 (_handleGlobalThumbnailFailed)
+            126 CALL_METHOD              1
+            128 POP_TOP
+            130 LOAD_CONST               5 (None)
+            132 RETURN_VALUE
+
+=== LPTidalImageService.instance ===
+ 60           0 LOAD_FAST                0 (cls)
+              2 LOAD_ATTR                0 (_instance_lock)
+              4 SETUP_WITH              34 (to 40)
+              6 POP_TOP
+
+ 61           8 LOAD_FAST                0 (cls)
+             10 LOAD_ATTR                1 (_instance)
+             12 LOAD_CONST               1 (None)
+             14 IS_OP                    0
+             16 POP_JUMP_IF_FALSE       26
+
+ 62          18 LOAD_FAST                0 (cls)
+             20 CALL_FUNCTION            0
+             22 LOAD_FAST                0 (cls)
+             24 STORE_ATTR               1 (_instance)
+        >>   26 POP_BLOCK
+             28 LOAD_CONST               1 (None)
+             30 DUP_TOP
+             32 DUP_TOP
+             34 CALL_FUNCTION            3
+             36 POP_TOP
+             38 JUMP_FORWARD            16 (to 56)
+        >>   40 WITH_EXCEPT_START
+             42 POP_JUMP_IF_TRUE        46
+             44 RERAISE
+        >>   46 POP_TOP
+             48 POP_TOP
+             50 POP_TOP
+             52 POP_EXCEPT
+             54 POP_TOP
+
+ 63     >>   56 LOAD_FAST                0 (cls)
+             58 LOAD_ATTR                1 (_instance)
+             60 RETURN_VALUE
+
+=== LPTidalImageService.cancelPendingAndClear ===
+ 71           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              68 (to 74)
+              6 POP_TOP
+
+ 72           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (_owner_key_locked)
+             12 CALL_METHOD              0
+             14 STORE_FAST               1 (old_owner)
+
+ 73          16 LOAD_GLOBAL              2 (set)
+             18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (_known_owner_keys)
+             22 CALL_FUNCTION            1
+             24 STORE_FAST               2 (old_known_owners)
+
+ 74          26 LOAD_FAST                0 (self)
+             28 DUP_TOP
+             30 LOAD_ATTR                4 (_owner_generation)
+             32 LOAD_CONST               1 (1)
+             34 INPLACE_ADD
+             36 ROT_TWO
+             38 STORE_ATTR               4 (_owner_generation)
+
+ 75          40 LOAD_FAST                0 (self)
+             42 LOAD_ATTR                3 (_known_owner_keys)
+             44 LOAD_METHOD              5 (clear)
+             46 CALL_METHOD              0
+             48 POP_TOP
+
+ 76          50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                6 (_cancelled)
+             54 LOAD_METHOD              5 (clear)
+             56 CALL_METHOD              0
+             58 POP_TOP
+             60 POP_BLOCK
+             62 LOAD_CONST               2 (None)
+             64 DUP_TOP
+             66 DUP_TOP
+             68 CALL_FUNCTION            3
+             70 POP_TOP
+             72 JUMP_FORWARD            16 (to 90)
+        >>   74 WITH_EXCEPT_START
+             76 POP_JUMP_IF_TRUE        80
+             78 RERAISE
+        >>   80 POP_TOP
+             82 POP_TOP
+             84 POP_TOP
+             86 POP_EXCEPT
+             88 POP_TOP
+
+ 77     >>   90 LOAD_GLOBAL              7 (sorted)
+             92 LOAD_FAST                2 (old_known_owners)
+             94 LOAD_FAST                1 (old_owner)
+             96 BUILD_SET                1
+             98 BINARY_OR
+            100 CALL_FUNCTION            1
+            102 GET_ITER
+        >>  104 FOR_ITER                16 (to 122)
+            106 STORE_FAST               3 (owner_key)
+
+ 78         108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR                8 (_image_service)
+            112 LOAD_METHOD              9 (cancelOwner)
+            114 LOAD_FAST                3 (owner_key)
+            116 CALL_METHOD              1
+            118 POP_TOP
+            120 JUMP_ABSOLUTE          104
+
+ 79     >>  122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR                8 (_image_service)
+            126 LOAD_ATTR               10 (clearFailure)
+            128 LOAD_FAST                0 (self)
+            130 LOAD_ATTR               11 (_profile)
+            132 LOAD_CONST               3 (('profile',))
+            134 CALL_FUNCTION_KW         1
+            136 POP_TOP
+            138 LOAD_CONST               2 (None)
+            140 RETURN_VALUE
+
+=== LPTidalImageService.cancelOwner ===
+ 88           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              38 (to 44)
+              6 POP_TOP
+
+ 89           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (_owner_key_locked)
+             12 LOAD_FAST                1 (ownerKey)
+             14 CALL_METHOD              1
+             16 STORE_FAST               2 (owner)
+
+ 90          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                2 (_known_owner_keys)
+             22 LOAD_METHOD              3 (add)
+             24 LOAD_FAST                2 (owner)
+             26 CALL_METHOD              1
+             28 POP_TOP
+             30 POP_BLOCK
+             32 LOAD_CONST               1 (None)
+             34 DUP_TOP
+             36 DUP_TOP
+             38 CALL_FUNCTION            3
+             40 POP_TOP
+             42 JUMP_FORWARD            16 (to 60)
+        >>   44 WITH_EXCEPT_START
+             46 POP_JUMP_IF_TRUE        50
+             48 RERAISE
+        >>   50 POP_TOP
+             52 POP_TOP
+             54 POP_TOP
+             56 POP_EXCEPT
+             58 POP_TOP
+
+ 91     >>   60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                4 (_image_service)
+             64 LOAD_METHOD              5 (cancelOwner)
+             66 LOAD_FAST                2 (owner)
+             68 CALL_METHOD              1
+             70 POP_TOP
+             72 LOAD_CONST               1 (None)
+             74 RETURN_VALUE
+
+=== LPTidalImageService.ensureThumbnail ===
+102           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              38 (to 44)
+              6 POP_TOP
+
+103           8 LOAD_FAST                0 (self)
+             10 LOAD_METHOD              1 (_owner_key_locked)
+             12 LOAD_FAST                3 (ownerKey)
+             14 CALL_METHOD              1
+             16 STORE_FAST               4 (owner)
+
+104          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                2 (_known_owner_keys)
+             22 LOAD_METHOD              3 (add)
+             24 LOAD_FAST                4 (owner)
+             26 CALL_METHOD              1
+             28 POP_TOP
+             30 POP_BLOCK
+             32 LOAD_CONST               1 (None)
+             34 DUP_TOP
+             36 DUP_TOP
+             38 CALL_FUNCTION            3
+             40 POP_TOP
+             42 JUMP_FORWARD            16 (to 60)
+        >>   44 WITH_EXCEPT_START
+             46 POP_JUMP_IF_TRUE        50
+             48 RERAISE
+        >>   50 POP_TOP
+             52 POP_TOP
+             54 POP_TOP
+             56 POP_EXCEPT
+             58 POP_TOP
+
+105     >>   60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                4 (_image_service)
+             64 LOAD_ATTR                5 (ensureThumbnail)
+
+106          66 LOAD_FAST                1 (imageUrl)
+
+107          68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                6 (_profile)
+
+108          72 LOAD_FAST                2 (priority)
+
+109          74 LOAD_FAST                4 (owner)
+
+105          76 LOAD_CONST               2 (('priority', 'ownerKey'))
+             78 CALL_FUNCTION_KW         4
+             80 RETURN_VALUE
+
+=== LPTidalImageService.thumbnailPath ===
+119           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_image_service)
+              4 LOAD_METHOD              1 (thumbnailPath)
+              6 LOAD_FAST                1 (imageUrl)
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                2 (_profile)
+             12 CALL_METHOD              2
+             14 RETURN_VALUE
+
+=== LPTidalImageService.requestThumbnail ===
+129           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (itemId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               3 (key)
+
+130          16 LOAD_GLOBAL              0 (str)
+             18 LOAD_FAST                2 (imageUrl)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              1 (strip)
+             28 CALL_METHOD              0
+             30 STORE_FAST               4 (url)
+
+131          32 LOAD_FAST                3 (key)
+             34 POP_JUMP_IF_FALSE       40
+             36 LOAD_FAST                4 (url)
+             38 POP_JUMP_IF_TRUE        44
+
+132     >>   40 LOAD_CONST               2 (None)
+             42 RETURN_VALUE
+
+133     >>   44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                2 (ensureThumbnail)
+             48 LOAD_FAST                4 (url)
+             50 LOAD_CONST               3 ('visible')
+             52 LOAD_CONST               4 (('priority',))
+             54 CALL_FUNCTION_KW         2
+             56 STORE_FAST               5 (path)
+
+134          58 LOAD_FAST                5 (path)
+             60 POP_JUMP_IF_FALSE       76
+
+135          62 LOAD_FAST                0 (self)
+             64 LOAD_ATTR                3 (thumbnailReady)
+             66 LOAD_METHOD              4 (emit)
+             68 LOAD_FAST                4 (url)
+             70 LOAD_FAST                5 (path)
+             72 CALL_METHOD              2
+             74 POP_TOP
+        >>   76 LOAD_CONST               2 (None)
+             78 RETURN_VALUE
+
+=== LPTidalImageService.cancelRequest ===
+144           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (itemId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               2 (key)
+
+145          16 LOAD_FAST                2 (key)
+             18 POP_JUMP_IF_TRUE        24
+
+146          20 LOAD_CONST               2 (None)
+             22 RETURN_VALUE
+
+147     >>   24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (_lock)
+             28 SETUP_WITH              28 (to 58)
+             30 POP_TOP
+
+148          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_cancelled)
+             36 LOAD_METHOD              4 (add)
+             38 LOAD_FAST                2 (key)
+             40 CALL_METHOD              1
+             42 POP_TOP
+             44 POP_BLOCK
+             46 LOAD_CONST               2 (None)
+             48 DUP_TOP
+             50 DUP_TOP
+             52 CALL_FUNCTION            3
+             54 POP_TOP
+             56 JUMP_FORWARD            16 (to 74)
+        >>   58 WITH_EXCEPT_START
+             60 POP_JUMP_IF_TRUE        64
+             62 RERAISE
+        >>   64 POP_TOP
+             66 POP_TOP
+             68 POP_TOP
+             70 POP_EXCEPT
+             72 POP_TOP
+        >>   74 LOAD_CONST               2 (None)
+             76 RETURN_VALUE
+
+=== LPTidalImageService._resolve_cache_path ===
+158           0 LOAD_FAST                1 (itemId)
+              2 STORE_FAST               3 (_)
+
+159           4 LOAD_FAST                0 (self)
+              6 LOAD_METHOD              0 (_cache_file_path)
+              8 LOAD_FAST                2 (imageUrl)
+             10 CALL_METHOD              1
+             12 RETURN_VALUE
+
+=== LPTidalImageService._cache_file_path ===
+168           0 LOAD_GLOBAL              0 (imageProfile)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_profile)
+              6 CALL_FUNCTION            1
+              8 STORE_FAST               2 (profile)
+
+169          10 LOAD_GLOBAL              2 (hashlib)
+             12 LOAD_METHOD              3 (md5)
+             14 LOAD_GLOBAL              4 (str)
+             16 LOAD_FAST                1 (imageUrl)
+             18 JUMP_IF_TRUE_OR_POP     22
+             20 LOAD_CONST               1 ('')
+        >>   22 CALL_FUNCTION            1
+             24 LOAD_METHOD              5 (strip)
+             26 CALL_METHOD              0
+             28 LOAD_METHOD              6 (encode)
+             30 LOAD_CONST               2 ('utf-8')
+             32 CALL_METHOD              1
+             34 CALL_METHOD              1
+             36 LOAD_METHOD              7 (hexdigest)
+             38 CALL_METHOD              0
+             40 STORE_FAST               3 (cache_id)
+
+170          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                8 (_cache_dir)
+             46 LOAD_FAST                2 (profile)
+             48 LOAD_ATTR                9 (name)
+             50 FORMAT_VALUE             0
+             52 LOAD_CONST               3 ('_')
+             54 LOAD_FAST                3 (cache_id)
+             56 FORMAT_VALUE             0
+             58 LOAD_CONST               3 ('_')
+             60 LOAD_FAST                2 (profile)
+             62 LOAD_ATTR               10 (size)
+             64 FORMAT_VALUE             0
+             66 LOAD_CONST               4 ('.png')
+             68 BUILD_STRING             6
+             70 BINARY_TRUE_DIVIDE
+             72 RETURN_VALUE
+
+=== LPTidalImageService._file_url ===
+179           0 LOAD_GLOBAL              0 (bytes)
+              2 LOAD_GLOBAL              1 (QUrl)
+              4 LOAD_METHOD              2 (fromLocalFile)
+              6 LOAD_GLOBAL              3 (str)
+              8 LOAD_FAST                1 (localPath)
+             10 CALL_FUNCTION            1
+             12 CALL_METHOD              1
+             14 LOAD_METHOD              4 (toEncoded)
+             16 CALL_METHOD              0
+             18 CALL_FUNCTION            1
+             20 LOAD_METHOD              5 (decode)
+             22 LOAD_CONST               1 ('utf-8')
+             24 CALL_METHOD              1
+             26 RETURN_VALUE
+
+=== LPTidalImageService._owner_key_locked ===
+188           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (ownerKey)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               2 (normalized_owner)
+
+189          16 LOAD_FAST                2 (normalized_owner)
+             18 LOAD_METHOD              2 (startswith)
+             20 LOAD_CONST               2 ('tidal:')
+             22 CALL_METHOD              1
+             24 POP_JUMP_IF_FALSE       30
+
+190          26 LOAD_FAST                2 (normalized_owner)
+             28 RETURN_VALUE
+
+191     >>   30 LOAD_CONST               2 ('tidal:')
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_owner_generation)
+             36 FORMAT_VALUE             0
+             38 BUILD_STRING             2
+             40 STORE_FAST               3 (session_owner)
+
+192          42 LOAD_FAST                2 (normalized_owner)
+             44 POP_JUMP_IF_TRUE        50
+
+193          46 LOAD_FAST                3 (session_owner)
+             48 RETURN_VALUE
+
+194     >>   50 LOAD_FAST                3 (session_owner)
+             52 FORMAT_VALUE             0
+             54 LOAD_CONST               3 (':')
+             56 LOAD_FAST                2 (normalized_owner)
+             58 FORMAT_VALUE             0
+             60 BUILD_STRING             3
+             62 RETURN_VALUE
+
+=== LPTidalImageService._handleGlobalThumbnailReady ===
+205           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                3 (profile)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (_profile)
+             18 COMPARE_OP               3 (!=)
+             20 POP_JUMP_IF_FALSE       26
+
+206          22 LOAD_CONST               2 (None)
+             24 RETURN_VALUE
+
+207     >>   26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                3 (thumbnailReady)
+             30 LOAD_METHOD              4 (emit)
+             32 LOAD_FAST                1 (imageUrl)
+             34 LOAD_FAST                2 (imagePath)
+             36 CALL_METHOD              2
+             38 POP_TOP
+             40 LOAD_CONST               2 (None)
+             42 RETURN_VALUE
+
+=== LPTidalImageService._handleGlobalThumbnailFailed ===
+218           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                2 (profile)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (_profile)
+             18 COMPARE_OP               3 (!=)
+             20 POP_JUMP_IF_FALSE       26
+
+219          22 LOAD_CONST               2 (None)
+             24 RETURN_VALUE
+
+220     >>   26 LOAD_GLOBAL              3 (logger)
+             28 LOAD_METHOD              4 (debug)
+             30 LOAD_CONST               3 ('[TidalImageService][CacheTrace] failure profile=%s url=%s error=%s')
+             32 LOAD_FAST                2 (profile)
+             34 LOAD_FAST                1 (imageUrl)
+             36 LOAD_FAST                3 (error)
+             38 CALL_METHOD              4
+             40 POP_TOP
+
+221          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                5 (thumbnailFailed)
+             46 LOAD_METHOD              6 (emit)
+             48 LOAD_FAST                1 (imageUrl)
+             50 LOAD_FAST                3 (error)
+             52 CALL_METHOD              2
+             54 POP_TOP
+             56 LOAD_CONST               2 (None)
+             58 RETURN_VALUE

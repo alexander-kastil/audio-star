@@ -1,0 +1,1081 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nWiiMRadio 音源服务。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  5           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (json)
+             10 STORE_NAME               1 (json)
+
+  6          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (threading)
+             18 STORE_NAME               2 (threading)
+
+  8          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (LPGlobalUI)
+             26 STORE_NAME               3 (LPGlobalUI)
+
+  9          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('LPPublicDefine',))
+             32 IMPORT_NAME              4 (LPClientFramework)
+             34 IMPORT_FROM              5 (LPPublicDefine)
+             36 STORE_NAME               5 (LPPublicDefine)
+             38 POP_TOP
+
+ 10          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               4 (('WIIMRADIO_LOCAL_USER_ID',))
+             44 IMPORT_NAME              6 (LPClientFramework.LPFavoriteCacheManager)
+             46 IMPORT_FROM              7 (WIIMRADIO_LOCAL_USER_ID)
+             48 STORE_NAME               7 (WIIMRADIO_LOCAL_USER_ID)
+             50 POP_TOP
+
+ 11          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               5 (('LPRecentlyManager', 'LPRecentlyPlayListCodec'))
+             56 IMPORT_NAME              8 (LPClientFramework.LPMusicLibrary)
+             58 IMPORT_FROM              9 (LPRecentlyManager)
+             60 STORE_NAME               9 (LPRecentlyManager)
+             62 IMPORT_FROM             10 (LPRecentlyPlayListCodec)
+             64 STORE_NAME              10 (LPRecentlyPlayListCodec)
+             66 POP_TOP
+
+ 12          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               6 (('LPWiiMRadioPlayHeader', 'LPWiiMRadioPlayItem', 'LPWiiMRadioPlayList'))
+             72 IMPORT_NAME             11 (LPClientFramework.LPPlayList.LPWiiMRadioPlayList)
+             74 IMPORT_FROM             12 (LPWiiMRadioPlayHeader)
+             76 STORE_NAME              12 (LPWiiMRadioPlayHeader)
+             78 IMPORT_FROM             13 (LPWiiMRadioPlayItem)
+             80 STORE_NAME              13 (LPWiiMRadioPlayItem)
+             82 IMPORT_FROM             14 (LPWiiMRadioPlayList)
+             84 STORE_NAME              14 (LPWiiMRadioPlayList)
+             86 POP_TOP
+
+ 17          88 LOAD_CONST               1 (0)
+             90 LOAD_CONST               7 (('LPStreamService',))
+             92 IMPORT_NAME             15 (LPClientFramework.LPStreamServiceManager)
+             94 IMPORT_FROM             16 (LPStreamService)
+             96 STORE_NAME              16 (LPStreamService)
+             98 POP_TOP
+
+ 18         100 LOAD_CONST               1 (0)
+            102 LOAD_CONST               8 (('logger',))
+            104 IMPORT_NAME             17 (LPClientFramework.LPUtility)
+            106 IMPORT_FROM             18 (logger)
+            108 STORE_NAME              18 (logger)
+            110 POP_TOP
+
+ 21         112 LOAD_CONST               9 ('{"prev": {"enabled": false},"next": {"enabled": false},"loop": {"enabled": false}, "shuffle": {"enabled": false}, "seek": {"enabled": false}}')
+            114 STORE_NAME              19 (WIIMRADIO_DEFAULT_GUI_BEHAVIOR)
+
+ 24         116 LOAD_BUILD_CLASS
+            118 LOAD_CONST              10 (<code object LPWiiMRadioStreamService at 0x000001F324E69030, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 24>)
+            120 LOAD_CONST              11 ('LPWiiMRadioStreamService')
+            122 MAKE_FUNCTION            0
+            124 LOAD_CONST              11 ('LPWiiMRadioStreamService')
+            126 LOAD_NAME               16 (LPStreamService)
+            128 CALL_FUNCTION            3
+            130 STORE_NAME              20 (LPWiiMRadioStreamService)
+            132 LOAD_CONST               2 (None)
+            134 RETURN_VALUE
+
+=== LPWiiMRadioStreamService ===
+ 24           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPWiiMRadioStreamService')
+              6 STORE_NAME               2 (__qualname__)
+
+ 25           8 LOAD_CONST               1 ('WiiMRadio 音源服务，负责播放态写入与设备能力解析。')
+             10 STORE_NAME               3 (__doc__)
+
+ 27          12 LOAD_CONST               2 (<code object streamGuiBehavior at 0x000001F324E693A0, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 27>)
+             14 LOAD_CONST               3 ('LPWiiMRadioStreamService.streamGuiBehavior')
+             16 MAKE_FUNCTION            0
+             18 STORE_NAME               4 (streamGuiBehavior)
+
+ 49          20 LOAD_CONST               4 (<code object guiCan at 0x000001F324E690E0, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 49>)
+             22 LOAD_CONST               5 ('LPWiiMRadioStreamService.guiCan')
+             24 MAKE_FUNCTION            0
+             26 STORE_NAME               5 (guiCan)
+
+ 67          28 LOAD_CONST              29 ((None,))
+             30 LOAD_NAME                6 (dict)
+             32 LOAD_CONST               7 (('detailDict',))
+             34 BUILD_CONST_KEY_MAP      1
+             36 LOAD_CONST               8 (<code object recentlyDidSelect at 0x000001F324E69BE0, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 67>)
+             38 LOAD_CONST               9 ('LPWiiMRadioStreamService.recentlyDidSelect')
+             40 MAKE_FUNCTION            5 (defaults, annotations)
+             42 STORE_NAME               7 (recentlyDidSelect)
+
+114          44 LOAD_CONST              30 ((None,))
+             46 LOAD_NAME                6 (dict)
+             48 LOAD_CONST               7 (('detailDict',))
+             50 BUILD_CONST_KEY_MAP      1
+             52 LOAD_CONST              10 (<code object playRecently at 0x000001F324E69450, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 114>)
+             54 LOAD_CONST              11 ('LPWiiMRadioStreamService.playRecently')
+             56 MAKE_FUNCTION            5 (defaults, annotations)
+             58 STORE_NAME               8 (playRecently)
+
+127          60 LOAD_NAME                6 (dict)
+             62 LOAD_CONST               7 (('detailDict',))
+             64 BUILD_CONST_KEY_MAP      1
+             66 LOAD_CONST              12 (<code object _playListFromRecentlyDetail at 0x000001F324E69920, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 127>)
+             68 LOAD_CONST              13 ('LPWiiMRadioStreamService._playListFromRecentlyDetail')
+             70 MAKE_FUNCTION            4 (annotations)
+             72 STORE_NAME               9 (_playListFromRecentlyDetail)
+
+149          74 LOAD_NAME               10 (str)
+             76 LOAD_NAME               10 (str)
+             78 LOAD_NAME               11 (bool)
+             80 LOAD_CONST              14 (('itemType', 'itemId', 'return'))
+             82 BUILD_CONST_KEY_MAP      3
+             84 LOAD_CONST              15 (<code object canFavorite at 0x000001F324E69C90, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 149>)
+             86 LOAD_CONST              16 ('LPWiiMRadioStreamService.canFavorite')
+             88 MAKE_FUNCTION            4 (annotations)
+             90 STORE_NAME              12 (canFavorite)
+
+161          92 LOAD_NAME               10 (str)
+             94 LOAD_NAME               10 (str)
+             96 LOAD_CONST              17 (('itemType', 'itemId'))
+             98 BUILD_CONST_KEY_MAP      2
+            100 LOAD_CONST              18 (<code object favoriteState at 0x000001F324E69240, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 161>)
+            102 LOAD_CONST              19 ('LPWiiMRadioStreamService.favoriteState')
+            104 MAKE_FUNCTION            4 (annotations)
+            106 STORE_NAME              13 (favoriteState)
+
+189         108 LOAD_CONST              31 ((None, None))
+            110 LOAD_NAME               10 (str)
+            112 LOAD_NAME               10 (str)
+            114 LOAD_NAME               11 (bool)
+            116 LOAD_CONST               6 (None)
+            118 LOAD_CONST              20 (('itemType', 'itemId', 'desiredFavorite', 'return'))
+            120 BUILD_CONST_KEY_MAP      4
+            122 LOAD_CONST              21 (<code object setFavorite at 0x000001F324E699D0, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 189>)
+            124 LOAD_CONST              22 ('LPWiiMRadioStreamService.setFavorite')
+            126 MAKE_FUNCTION            5 (defaults, annotations)
+            128 STORE_NAME              14 (setFavorite)
+
+225         130 LOAD_NAME                6 (dict)
+            132 LOAD_CONST               7 (('detailDict',))
+            134 BUILD_CONST_KEY_MAP      1
+            136 LOAD_CONST              23 (<code object recentlyFavoriteTarget at 0x000001F324E69DF0, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 225>)
+            138 LOAD_CONST              24 ('LPWiiMRadioStreamService.recentlyFavoriteTarget')
+            140 MAKE_FUNCTION            4 (annotations)
+            142 STORE_NAME              15 (recentlyFavoriteTarget)
+
+239         144 LOAD_NAME                6 (dict)
+            146 LOAD_CONST               7 (('detailDict',))
+            148 BUILD_CONST_KEY_MAP      1
+            150 LOAD_CONST              25 (<code object recentlyFavoriteItemData at 0x000001F324E69EA0, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 239>)
+            152 LOAD_CONST              26 ('LPWiiMRadioStreamService.recentlyFavoriteItemData')
+            154 MAKE_FUNCTION            4 (annotations)
+            156 STORE_NAME              16 (recentlyFavoriteItemData)
+
+273         158 LOAD_CONST              32 ((None,))
+            160 LOAD_CONST              27 (<code object updateMediaInfoWithItem at 0x000001F324E69710, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 273>)
+            162 LOAD_CONST              28 ('LPWiiMRadioStreamService.updateMediaInfoWithItem')
+            164 MAKE_FUNCTION            1 (defaults)
+            166 STORE_NAME              17 (updateMediaInfoWithItem)
+            168 LOAD_CONST               6 (None)
+            170 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.streamGuiBehavior ===
+ 34           0 LOAD_GLOBAL              0 (json)
+              2 LOAD_METHOD              1 (loads)
+              4 LOAD_GLOBAL              2 (WIIMRADIO_DEFAULT_GUI_BEHAVIOR)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (behavior)
+
+ 35          10 LOAD_FAST                1 (device)
+             12 LOAD_ATTR                3 (mediaInfo)
+             14 LOAD_ATTR                4 (guiBehavior)
+             16 STORE_FAST               3 (behaviorStr)
+
+ 37          18 LOAD_FAST                3 (behaviorStr)
+             20 POP_JUMP_IF_FALSE      130
+
+ 38          22 SETUP_FINALLY           88 (to 112)
+
+ 39          24 LOAD_GLOBAL              0 (json)
+             26 LOAD_METHOD              1 (loads)
+             28 LOAD_FAST                3 (behaviorStr)
+             30 CALL_METHOD              1
+             32 STORE_FAST               4 (deviceBehavior)
+
+ 40          34 LOAD_GLOBAL              5 (isinstance)
+             36 LOAD_FAST                4 (deviceBehavior)
+             38 LOAD_GLOBAL              6 (dict)
+             40 CALL_FUNCTION            2
+             42 POP_JUMP_IF_FALSE      108
+
+ 41          44 LOAD_FAST                4 (deviceBehavior)
+             46 LOAD_METHOD              7 (items)
+             48 CALL_METHOD              0
+             50 GET_ITER
+        >>   52 FOR_ITER                54 (to 108)
+             54 UNPACK_SEQUENCE          2
+             56 STORE_FAST               5 (key)
+             58 STORE_FAST               6 (value)
+
+ 42          60 LOAD_FAST                5 (key)
+             62 LOAD_FAST                2 (behavior)
+             64 LOAD_METHOD              8 (keys)
+             66 CALL_METHOD              0
+             68 CONTAINS_OP              0
+             70 POP_JUMP_IF_FALSE       52
+             72 LOAD_GLOBAL              5 (isinstance)
+             74 LOAD_FAST                6 (value)
+             76 LOAD_GLOBAL              6 (dict)
+             78 CALL_FUNCTION            2
+             80 POP_JUMP_IF_FALSE       52
+
+ 43          82 LOAD_CONST               1 ('enabled')
+             84 LOAD_GLOBAL              9 (bool)
+             86 LOAD_FAST                6 (value)
+             88 LOAD_METHOD             10 (get)
+             90 LOAD_CONST               1 ('enabled')
+             92 LOAD_CONST               2 (False)
+             94 CALL_METHOD              2
+             96 CALL_FUNCTION            1
+             98 BUILD_MAP                1
+            100 LOAD_FAST                2 (behavior)
+            102 LOAD_FAST                5 (key)
+            104 STORE_SUBSCR
+            106 JUMP_ABSOLUTE           52
+        >>  108 POP_BLOCK
+            110 JUMP_FORWARD            18 (to 130)
+
+ 44     >>  112 DUP_TOP
+            114 LOAD_GLOBAL             11 (Exception)
+            116 JUMP_IF_NOT_EXC_MATCH   128
+            118 POP_TOP
+            120 POP_TOP
+            122 POP_TOP
+
+ 45         124 POP_EXCEPT
+            126 JUMP_FORWARD             2 (to 130)
+        >>  128 RERAISE
+
+ 47     >>  130 LOAD_FAST                2 (behavior)
+            132 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.guiCan ===
+ 57           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (streamGuiBehavior)
+              4 LOAD_FAST                1 (device)
+              6 CALL_METHOD              1
+              8 STORE_FAST               3 (behavior)
+
+ 58          10 LOAD_FAST                3 (behavior)
+             12 POP_JUMP_IF_FALSE       42
+
+ 59          14 LOAD_FAST                2 (key)
+             16 LOAD_FAST                3 (behavior)
+             18 LOAD_METHOD              1 (keys)
+             20 CALL_METHOD              0
+             22 CONTAINS_OP              0
+             24 POP_JUMP_IF_FALSE       42
+             26 LOAD_FAST                3 (behavior)
+             28 LOAD_FAST                2 (key)
+             30 BINARY_SUBSCR
+             32 LOAD_CONST               1 ('enabled')
+             34 BINARY_SUBSCR
+             36 POP_JUMP_IF_TRUE        42
+
+ 60          38 LOAD_CONST               2 (False)
+             40 RETURN_VALUE
+
+ 61     >>   42 LOAD_CONST               3 (True)
+             44 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.recentlyDidSelect ===
+ 78           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_playListFromRecentlyDetail)
+              4 LOAD_FAST                1 (detailDict)
+              6 CALL_METHOD              1
+              8 STORE_DEREF              2 (playList)
+
+ 79          10 LOAD_DEREF               2 (playList)
+             12 LOAD_CONST               1 (None)
+             14 IS_OP                    0
+             16 POP_JUMP_IF_FALSE       32
+
+ 80          18 LOAD_GLOBAL              1 (logger)
+             20 LOAD_METHOD              2 (debug)
+             22 LOAD_CONST               2 ('[WiiMRadio] recentlyDidSelect ignore because playList is invalid')
+             24 CALL_METHOD              1
+             26 POP_TOP
+
+ 81          28 LOAD_CONST               3 (False)
+             30 RETURN_VALUE
+
+ 83     >>   32 LOAD_GLOBAL              3 (LPGlobalUI)
+             34 LOAD_ATTR                4 (currentDevice)
+             36 STORE_DEREF              0 (device)
+
+ 84          38 LOAD_DEREF               0 (device)
+             40 POP_JUMP_IF_TRUE        56
+
+ 85          42 LOAD_GLOBAL              1 (logger)
+             44 LOAD_METHOD              2 (debug)
+             46 LOAD_CONST               4 ('[WiiMRadio] recentlyDidSelect ignore because currentDevice is empty')
+             48 CALL_METHOD              1
+             50 POP_TOP
+
+ 86          52 LOAD_CONST               3 (False)
+             54 RETURN_VALUE
+
+ 88     >>   56 SETUP_FINALLY           12 (to 70)
+
+ 89          58 LOAD_DEREF               2 (playList)
+             60 LOAD_METHOD              5 (generateXML)
+             62 CALL_METHOD              0
+             64 STORE_DEREF              3 (xml)
+             66 POP_BLOCK
+             68 JUMP_FORWARD            52 (to 122)
+
+ 90     >>   70 DUP_TOP
+             72 LOAD_GLOBAL              6 (Exception)
+             74 JUMP_IF_NOT_EXC_MATCH   120
+             76 POP_TOP
+             78 STORE_FAST               3 (e)
+             80 POP_TOP
+             82 SETUP_FINALLY           28 (to 112)
+
+ 91          84 LOAD_GLOBAL              1 (logger)
+             86 LOAD_METHOD              7 (error)
+             88 LOAD_CONST               5 ('[WiiMRadio] recentlyDidSelect generate xml failed: %s')
+             90 LOAD_FAST                3 (e)
+             92 BINARY_MODULO
+             94 CALL_METHOD              1
+             96 POP_TOP
+
+ 92          98 POP_BLOCK
+            100 POP_EXCEPT
+            102 LOAD_CONST               1 (None)
+            104 STORE_FAST               3 (e)
+            106 DELETE_FAST              3 (e)
+            108 LOAD_CONST               3 (False)
+            110 RETURN_VALUE
+        >>  112 LOAD_CONST               1 (None)
+            114 STORE_FAST               3 (e)
+            116 DELETE_FAST              3 (e)
+            118 RERAISE
+        >>  120 RERAISE
+
+ 94     >>  122 LOAD_DEREF               2 (playList)
+            124 LOAD_ATTR                8 (list)
+            126 POP_JUMP_IF_FALSE      138
+            128 LOAD_DEREF               2 (playList)
+            130 LOAD_ATTR                8 (list)
+            132 LOAD_CONST               6 (0)
+            134 BINARY_SUBSCR
+            136 JUMP_FORWARD             2 (to 140)
+        >>  138 LOAD_CONST               1 (None)
+        >>  140 STORE_DEREF              1 (playItem)
+
+ 97         142 LOAD_DEREF               0 (device)
+            144 LOAD_ATTR                9 (deviceStreamServiceManager)
+            146 LOAD_METHOD             10 (updateMediaInfoForSource)
+            148 LOAD_DEREF               0 (device)
+            150 LOAD_FAST                0 (self)
+            152 LOAD_ATTR               11 (source)
+            154 LOAD_DEREF               1 (playItem)
+            156 LOAD_DEREF               2 (playList)
+            158 LOAD_ATTR               12 (header)
+            160 CALL_METHOD              4
+            162 POP_TOP
+
+ 98         164 LOAD_DEREF               0 (device)
+            166 LOAD_METHOD             13 (guardMediaInfoRollback)
+            168 CALL_METHOD              0
+            170 POP_TOP
+
+100         172 LOAD_CLOSURE             0 (device)
+            174 LOAD_CLOSURE             1 (playItem)
+            176 LOAD_CLOSURE             2 (playList)
+            178 LOAD_CLOSURE             3 (xml)
+            180 BUILD_TUPLE              4
+            182 LOAD_CONST               7 (<code object _playRecently at 0x000001F324E692F0, file "LPClientFramework\LPStreamServiceDir\LPWiiMRadioStreamService.py", line 100>)
+            184 LOAD_CONST               8 ('LPWiiMRadioStreamService.recentlyDidSelect.<locals>._playRecently')
+            186 MAKE_FUNCTION            8 (closure)
+            188 STORE_FAST               4 (_playRecently)
+
+111         190 LOAD_GLOBAL             14 (threading)
+            192 LOAD_ATTR               15 (Thread)
+            194 LOAD_FAST                4 (_playRecently)
+            196 LOAD_CONST               9 (True)
+            198 LOAD_CONST              10 (('target', 'daemon'))
+            200 CALL_FUNCTION_KW         2
+            202 LOAD_METHOD             16 (start)
+            204 CALL_METHOD              0
+            206 POP_TOP
+
+112         208 LOAD_CONST               9 (True)
+            210 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.recentlyDidSelect._playRecently ===
+101           0 LOAD_DEREF               0 (device)
+              2 LOAD_METHOD              0 (upnpPost)
+              4 LOAD_CONST               1 ('CreateQueue')
+              6 LOAD_CONST               2 ('QueueContext')
+              8 LOAD_DEREF               3 (xml)
+             10 BUILD_MAP                1
+             12 CALL_METHOD              2
+             14 STORE_FAST               0 (response)
+
+102          16 LOAD_FAST                0 (response)
+             18 POP_JUMP_IF_FALSE       92
+             20 LOAD_FAST                0 (response)
+             22 LOAD_METHOD              1 (get)
+             24 LOAD_CONST               3 ('error')
+             26 CALL_METHOD              1
+             28 POP_JUMP_IF_TRUE        92
+             30 LOAD_FAST                0 (response)
+             32 LOAD_METHOD              1 (get)
+             34 LOAD_CONST               4 ('status_code')
+             36 LOAD_CONST               5 (0)
+             38 CALL_METHOD              2
+             40 LOAD_CONST               6 (200)
+             42 COMPARE_OP               2 (==)
+             44 POP_JUMP_IF_FALSE       92
+
+103          46 LOAD_GLOBAL              2 (logger)
+             48 LOAD_METHOD              3 (debug)
+             50 LOAD_CONST               7 ('[WiiMRadio] recentlyDidSelect play success title=%s')
+             52 LOAD_GLOBAL              4 (getattr)
+             54 LOAD_DEREF               1 (playItem)
+             56 LOAD_CONST               8 ('trackName')
+             58 LOAD_CONST               9 ('')
+             60 CALL_FUNCTION            3
+             62 BINARY_MODULO
+             64 CALL_METHOD              1
+             66 POP_TOP
+
+104          68 LOAD_GLOBAL              5 (LPRecentlyManager)
+             70 LOAD_METHOD              6 (instance)
+             72 CALL_METHOD              0
+             74 LOAD_METHOD              7 (addRecentlyPlayedWithMusicList)
+             76 LOAD_DEREF               2 (playList)
+
+105          78 LOAD_CONST              10 (True)
+
+106          80 LOAD_CONST              11 (False)
+
+104          82 LOAD_CONST              12 (('openMore', 'canNavigate'))
+             84 BUILD_CONST_KEY_MAP      2
+             86 CALL_METHOD              2
+             88 POP_TOP
+             90 JUMP_FORWARD            22 (to 114)
+
+109     >>   92 LOAD_GLOBAL              2 (logger)
+             94 LOAD_METHOD              3 (debug)
+             96 LOAD_CONST              13 ('[WiiMRadio] recentlyDidSelect play failed title=%s')
+             98 LOAD_GLOBAL              4 (getattr)
+            100 LOAD_DEREF               1 (playItem)
+            102 LOAD_CONST               8 ('trackName')
+            104 LOAD_CONST               9 ('')
+            106 CALL_FUNCTION            3
+            108 BINARY_MODULO
+            110 CALL_METHOD              1
+            112 POP_TOP
+        >>  114 LOAD_CONST               0 (None)
+            116 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.playRecently ===
+125           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (recentlyDidSelect)
+              4 LOAD_FAST                1 (detailDict)
+              6 LOAD_FAST                2 (baseController)
+              8 CALL_METHOD              2
+             10 RETURN_VALUE
+
+=== LPWiiMRadioStreamService._playListFromRecentlyDetail ===
+137           0 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+              2 LOAD_METHOD              1 (playListFromDetail)
+
+138           4 LOAD_FAST                1 (detailDict)
+
+139           6 LOAD_GLOBAL              2 (LPWiiMRadioPlayList)
+
+140           8 LOAD_GLOBAL              3 (LPWiiMRadioPlayHeader)
+
+141          10 LOAD_GLOBAL              4 (LPWiiMRadioPlayItem)
+
+142          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                5 (source)
+
+137          16 CALL_METHOD              5
+             18 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.canFavorite ===
+157           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (itemType)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               3 (normalized_type)
+
+158          20 LOAD_GLOBAL              0 (str)
+             22 LOAD_FAST                2 (itemId)
+             24 JUMP_IF_TRUE_OR_POP     28
+             26 LOAD_CONST               1 ('')
+        >>   28 CALL_FUNCTION            1
+             30 LOAD_METHOD              1 (strip)
+             32 CALL_METHOD              0
+             34 STORE_FAST               4 (normalized_id)
+
+159          36 LOAD_FAST                3 (normalized_type)
+             38 LOAD_CONST               2 ('station')
+             40 COMPARE_OP               2 (==)
+             42 JUMP_IF_FALSE_OR_POP    50
+             44 LOAD_GLOBAL              3 (bool)
+             46 LOAD_FAST                4 (normalized_id)
+             48 CALL_FUNCTION            1
+        >>   50 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.favoriteState ===
+169           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (itemType)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               3 (normalized_type)
+
+170          20 LOAD_GLOBAL              0 (str)
+             22 LOAD_FAST                2 (itemId)
+             24 JUMP_IF_TRUE_OR_POP     28
+             26 LOAD_CONST               1 ('')
+        >>   28 CALL_FUNCTION            1
+             30 LOAD_METHOD              1 (strip)
+             32 CALL_METHOD              0
+             34 STORE_FAST               4 (normalized_id)
+
+171          36 LOAD_FAST                3 (normalized_type)
+             38 LOAD_CONST               2 ('station')
+             40 COMPARE_OP               3 (!=)
+             42 POP_JUMP_IF_TRUE        48
+             44 LOAD_FAST                4 (normalized_id)
+             46 POP_JUMP_IF_TRUE        52
+
+172     >>   48 LOAD_CONST               3 (None)
+             50 RETURN_VALUE
+
+173     >>   52 SETUP_FINALLY           54 (to 108)
+
+174          54 LOAD_CONST               4 (0)
+             56 LOAD_CONST               5 (('ensureLoaded',))
+             58 IMPORT_NAME              3 (HOME.StreamService.WiiMRadio.utils.LPWiiMRadioFavoriteStorage)
+             60 IMPORT_FROM              4 (ensureLoaded)
+             62 STORE_FAST               5 (ensureLoaded)
+             64 POP_TOP
+
+176          66 LOAD_FAST                5 (ensureLoaded)
+             68 CALL_FUNCTION            0
+             70 POP_TOP
+
+177          72 LOAD_CONST               4 (0)
+             74 LOAD_CONST               6 (('LPFavoriteCacheManager',))
+             76 IMPORT_NAME              5 (LPClientFramework.LPFavoriteCacheManager)
+             78 IMPORT_FROM              6 (LPFavoriteCacheManager)
+             80 STORE_FAST               6 (LPFavoriteCacheManager)
+             82 POP_TOP
+
+179          84 LOAD_FAST                6 (LPFavoriteCacheManager)
+             86 LOAD_METHOD              7 (instance)
+             88 CALL_METHOD              0
+             90 LOAD_METHOD              8 (isFavorite)
+
+180          92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR                9 (source)
+
+181          96 LOAD_GLOBAL             10 (WIIMRADIO_LOCAL_USER_ID)
+
+182          98 LOAD_CONST               2 ('station')
+
+183         100 LOAD_FAST                4 (normalized_id)
+
+179         102 CALL_METHOD              4
+            104 POP_BLOCK
+            106 RETURN_VALUE
+
+185     >>  108 DUP_TOP
+            110 LOAD_GLOBAL             11 (Exception)
+            112 JUMP_IF_NOT_EXC_MATCH   158
+            114 POP_TOP
+            116 STORE_FAST               7 (exc)
+            118 POP_TOP
+            120 SETUP_FINALLY           28 (to 150)
+
+186         122 LOAD_GLOBAL             12 (logger)
+            124 LOAD_METHOD             13 (warning)
+            126 LOAD_CONST               7 ('[WiiMRadio] favoriteState failed stationId=%s error=%s')
+            128 LOAD_FAST                4 (normalized_id)
+            130 LOAD_FAST                7 (exc)
+            132 CALL_METHOD              3
+            134 POP_TOP
+
+187         136 POP_BLOCK
+            138 POP_EXCEPT
+            140 LOAD_CONST               3 (None)
+            142 STORE_FAST               7 (exc)
+            144 DELETE_FAST              7 (exc)
+            146 LOAD_CONST               3 (None)
+            148 RETURN_VALUE
+        >>  150 LOAD_CONST               3 (None)
+            152 STORE_FAST               7 (exc)
+            154 DELETE_FAST              7 (exc)
+            156 RERAISE
+        >>  158 RERAISE
+            160 LOAD_CONST               3 (None)
+            162 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.setFavorite ===
+200           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (itemType)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 LOAD_METHOD              2 (lower)
+             16 CALL_METHOD              0
+             18 STORE_FAST               6 (normalized_type)
+
+201          20 LOAD_GLOBAL              0 (str)
+             22 LOAD_FAST                2 (itemId)
+             24 JUMP_IF_TRUE_OR_POP     28
+             26 LOAD_CONST               1 ('')
+        >>   28 CALL_FUNCTION            1
+             30 LOAD_METHOD              1 (strip)
+             32 CALL_METHOD              0
+             34 STORE_FAST               7 (normalized_id)
+
+203          36 LOAD_CONST               2 (False)
+
+204          38 LOAD_CONST               3 ('invalid_target')
+
+205          40 LOAD_FAST                1 (itemType)
+
+206          42 LOAD_FAST                2 (itemId)
+
+207          44 LOAD_GLOBAL              3 (bool)
+             46 LOAD_FAST                3 (desiredFavorite)
+             48 CALL_FUNCTION            1
+
+202          50 LOAD_CONST               4 (('success', 'error', 'itemType', 'itemId', 'desiredFavorite'))
+             52 BUILD_CONST_KEY_MAP      5
+             54 STORE_FAST               8 (result)
+
+209          56 LOAD_FAST                6 (normalized_type)
+             58 LOAD_CONST               5 ('station')
+             60 COMPARE_OP               3 (!=)
+             62 POP_JUMP_IF_TRUE        68
+             64 LOAD_FAST                7 (normalized_id)
+             66 POP_JUMP_IF_TRUE        92
+
+210     >>   68 LOAD_FAST                4 (callback)
+             70 LOAD_CONST               6 (None)
+             72 IS_OP                    1
+             74 POP_JUMP_IF_FALSE       88
+
+211          76 LOAD_FAST                4 (callback)
+             78 LOAD_GLOBAL              4 (dict)
+             80 LOAD_FAST                8 (result)
+             82 CALL_FUNCTION            1
+             84 CALL_FUNCTION            1
+             86 POP_TOP
+
+212     >>   88 LOAD_CONST               6 (None)
+             90 RETURN_VALUE
+
+213     >>   92 SETUP_FINALLY           56 (to 150)
+
+214          94 LOAD_CONST               7 (0)
+             96 LOAD_CONST               8 (('applyFavoriteChange',))
+             98 IMPORT_NAME              5 (HOME.StreamService.WiiMRadio.utils.LPWiiMRadioFavoriteStorage)
+            100 IMPORT_FROM              6 (applyFavoriteChange)
+            102 STORE_FAST               9 (applyFavoriteChange)
+            104 POP_TOP
+
+216         106 LOAD_FAST                9 (applyFavoriteChange)
+            108 LOAD_FAST                7 (normalized_id)
+            110 LOAD_GLOBAL              3 (bool)
+            112 LOAD_FAST                3 (desiredFavorite)
+            114 CALL_FUNCTION            1
+            116 LOAD_FAST                5 (itemData)
+            118 CALL_FUNCTION            3
+            120 STORE_FAST              10 (success)
+
+217         122 LOAD_FAST               10 (success)
+            124 LOAD_FAST                8 (result)
+            126 LOAD_CONST               9 ('success')
+            128 STORE_SUBSCR
+
+218         130 LOAD_FAST               10 (success)
+            132 POP_JUMP_IF_FALSE      138
+            134 LOAD_CONST               1 ('')
+            136 JUMP_FORWARD             2 (to 140)
+        >>  138 LOAD_CONST               3 ('invalid_target')
+        >>  140 LOAD_FAST                8 (result)
+            142 LOAD_CONST              10 ('error')
+            144 STORE_SUBSCR
+            146 POP_BLOCK
+            148 JUMP_FORWARD            58 (to 208)
+
+219     >>  150 DUP_TOP
+            152 LOAD_GLOBAL              7 (Exception)
+            154 JUMP_IF_NOT_EXC_MATCH   206
+            156 POP_TOP
+            158 STORE_FAST              11 (exc)
+            160 POP_TOP
+            162 SETUP_FINALLY           34 (to 198)
+
+220         164 LOAD_GLOBAL              8 (logger)
+            166 LOAD_METHOD              9 (warning)
+            168 LOAD_CONST              11 ('[WiiMRadio] setFavorite failed stationId=%s error=%s')
+            170 LOAD_FAST                7 (normalized_id)
+            172 LOAD_FAST               11 (exc)
+            174 CALL_METHOD              3
+            176 POP_TOP
+
+221         178 LOAD_CONST              12 ('request_failed')
+            180 LOAD_FAST                8 (result)
+            182 LOAD_CONST              10 ('error')
+            184 STORE_SUBSCR
+            186 POP_BLOCK
+            188 POP_EXCEPT
+            190 LOAD_CONST               6 (None)
+            192 STORE_FAST              11 (exc)
+            194 DELETE_FAST             11 (exc)
+            196 JUMP_FORWARD            10 (to 208)
+        >>  198 LOAD_CONST               6 (None)
+            200 STORE_FAST              11 (exc)
+            202 DELETE_FAST             11 (exc)
+            204 RERAISE
+        >>  206 RERAISE
+
+222     >>  208 LOAD_FAST                4 (callback)
+            210 LOAD_CONST               6 (None)
+            212 IS_OP                    1
+            214 POP_JUMP_IF_FALSE      228
+
+223         216 LOAD_FAST                4 (callback)
+            218 LOAD_GLOBAL              4 (dict)
+            220 LOAD_FAST                8 (result)
+            222 CALL_FUNCTION            1
+            224 CALL_FUNCTION            1
+            226 POP_TOP
+        >>  228 LOAD_CONST               6 (None)
+            230 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.recentlyFavoriteTarget ===
+232           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_playListFromRecentlyDetail)
+              4 LOAD_FAST                1 (detailDict)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (play_list)
+
+233          10 LOAD_FAST                2 (play_list)
+             12 LOAD_CONST               1 (None)
+             14 IS_OP                    0
+             16 POP_JUMP_IF_TRUE        24
+             18 LOAD_FAST                2 (play_list)
+             20 LOAD_ATTR                1 (list)
+             22 POP_JUMP_IF_TRUE        28
+
+234     >>   24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+235     >>   28 LOAD_GLOBAL              2 (LPRecentlyPlayListCodec)
+             30 LOAD_METHOD              3 (currentItemFromPlayList)
+             32 LOAD_FAST                2 (play_list)
+             34 CALL_METHOD              1
+             36 JUMP_IF_TRUE_OR_POP     46
+             38 LOAD_FAST                2 (play_list)
+             40 LOAD_ATTR                1 (list)
+             42 LOAD_CONST               2 (0)
+             44 BINARY_SUBSCR
+        >>   46 STORE_FAST               3 (current_item)
+
+236          48 LOAD_GLOBAL              4 (str)
+             50 LOAD_GLOBAL              5 (getattr)
+             52 LOAD_FAST                3 (current_item)
+             54 LOAD_CONST               3 ('trackId')
+             56 LOAD_CONST               4 ('')
+             58 CALL_FUNCTION            3
+             60 JUMP_IF_TRUE_OR_POP     64
+             62 LOAD_CONST               4 ('')
+        >>   64 CALL_FUNCTION            1
+             66 LOAD_METHOD              6 (strip)
+             68 CALL_METHOD              0
+             70 STORE_FAST               4 (station_id)
+
+237          72 LOAD_FAST                4 (station_id)
+             74 POP_JUMP_IF_FALSE       84
+             76 LOAD_CONST               5 ('station')
+             78 LOAD_FAST                4 (station_id)
+             80 BUILD_TUPLE              2
+             82 RETURN_VALUE
+        >>   84 LOAD_CONST               1 (None)
+             86 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.recentlyFavoriteItemData ===
+246           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_playListFromRecentlyDetail)
+              4 LOAD_FAST                1 (detailDict)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (play_list)
+
+247          10 LOAD_FAST                2 (play_list)
+             12 LOAD_CONST               1 (None)
+             14 IS_OP                    0
+             16 POP_JUMP_IF_TRUE        24
+             18 LOAD_FAST                2 (play_list)
+             20 LOAD_ATTR                1 (list)
+             22 POP_JUMP_IF_TRUE        28
+
+248     >>   24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+249     >>   28 LOAD_FAST                2 (play_list)
+             30 LOAD_ATTR                2 (header)
+             32 STORE_FAST               3 (header)
+
+250          34 LOAD_GLOBAL              3 (LPRecentlyPlayListCodec)
+             36 LOAD_METHOD              4 (currentItemFromPlayList)
+             38 LOAD_FAST                2 (play_list)
+             40 CALL_METHOD              1
+             42 JUMP_IF_TRUE_OR_POP     52
+             44 LOAD_FAST                2 (play_list)
+             46 LOAD_ATTR                1 (list)
+             48 LOAD_CONST               2 (0)
+             50 BINARY_SUBSCR
+        >>   52 STORE_FAST               4 (current_item)
+
+251          54 LOAD_GLOBAL              5 (str)
+             56 LOAD_GLOBAL              6 (getattr)
+             58 LOAD_FAST                4 (current_item)
+             60 LOAD_CONST               3 ('trackId')
+             62 LOAD_CONST               4 ('')
+             64 CALL_FUNCTION            3
+             66 JUMP_IF_TRUE_OR_POP     70
+             68 LOAD_CONST               4 ('')
+        >>   70 CALL_FUNCTION            1
+             72 LOAD_METHOD              7 (strip)
+             74 CALL_METHOD              0
+             76 STORE_FAST               5 (station_id)
+
+252          78 LOAD_FAST                5 (station_id)
+             80 POP_JUMP_IF_TRUE        86
+
+253          82 LOAD_CONST               1 (None)
+             84 RETURN_VALUE
+
+254     >>   86 LOAD_GLOBAL              5 (str)
+
+255          88 LOAD_GLOBAL              6 (getattr)
+             90 LOAD_FAST                4 (current_item)
+             92 LOAD_CONST               5 ('itemName')
+             94 LOAD_CONST               1 (None)
+             96 CALL_FUNCTION            3
+             98 JUMP_IF_TRUE_OR_POP    126
+
+256         100 LOAD_GLOBAL              6 (getattr)
+            102 LOAD_FAST                4 (current_item)
+            104 LOAD_CONST               6 ('trackName')
+            106 LOAD_CONST               1 (None)
+            108 CALL_FUNCTION            3
+
+255         110 JUMP_IF_TRUE_OR_POP    126
+
+257         112 LOAD_GLOBAL              6 (getattr)
+            114 LOAD_FAST                3 (header)
+            116 LOAD_CONST               7 ('headTitle')
+            118 LOAD_CONST               4 ('')
+            120 CALL_FUNCTION            3
+
+255         122 JUMP_IF_TRUE_OR_POP    126
+
+258         124 LOAD_CONST               4 ('')
+
+254     >>  126 CALL_FUNCTION            1
+            128 LOAD_METHOD              7 (strip)
+            130 CALL_METHOD              0
+            132 STORE_FAST               6 (name)
+
+260         134 LOAD_GLOBAL              5 (str)
+
+261         136 LOAD_GLOBAL              6 (getattr)
+            138 LOAD_FAST                4 (current_item)
+            140 LOAD_CONST               8 ('trackImage')
+            142 LOAD_CONST               1 (None)
+            144 CALL_FUNCTION            3
+            146 JUMP_IF_TRUE_OR_POP    162
+
+262         148 LOAD_GLOBAL              6 (getattr)
+            150 LOAD_FAST                3 (header)
+            152 LOAD_CONST               9 ('imageUrl')
+            154 LOAD_CONST               4 ('')
+            156 CALL_FUNCTION            3
+
+261         158 JUMP_IF_TRUE_OR_POP    162
+
+263         160 LOAD_CONST               4 ('')
+
+260     >>  162 CALL_FUNCTION            1
+            164 LOAD_METHOD              7 (strip)
+            166 CALL_METHOD              0
+            168 STORE_FAST               7 (favicon)
+
+265         170 LOAD_GLOBAL              5 (str)
+            172 LOAD_GLOBAL              6 (getattr)
+            174 LOAD_FAST                4 (current_item)
+            176 LOAD_CONST              10 ('trackUrl')
+            178 LOAD_CONST               4 ('')
+            180 CALL_FUNCTION            3
+            182 JUMP_IF_TRUE_OR_POP    186
+            184 LOAD_CONST               4 ('')
+        >>  186 CALL_FUNCTION            1
+            188 LOAD_METHOD              7 (strip)
+            190 CALL_METHOD              0
+            192 STORE_FAST               8 (stream_url)
+
+267         194 LOAD_FAST                5 (station_id)
+
+268         196 LOAD_FAST                6 (name)
+
+269         198 LOAD_FAST                7 (favicon)
+
+270         200 LOAD_FAST                8 (stream_url)
+
+266         202 LOAD_CONST              11 (('stationId', 'name', 'favicon', 'streamUrl'))
+            204 BUILD_CONST_KEY_MAP      4
+            206 RETURN_VALUE
+
+=== LPWiiMRadioStreamService.updateMediaInfoWithItem ===
+282           0 LOAD_FAST                3 (header)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    1
+              6 POP_JUMP_IF_FALSE       20
+              8 LOAD_GLOBAL              0 (getattr)
+             10 LOAD_FAST                3 (header)
+             12 LOAD_CONST               2 ('mediaType')
+             14 LOAD_CONST               1 (None)
+             16 CALL_FUNCTION            3
+             18 JUMP_FORWARD             2 (to 22)
+        >>   20 LOAD_CONST               1 (None)
+        >>   22 STORE_FAST               4 (mediaType)
+
+283          24 LOAD_GLOBAL              0 (getattr)
+             26 LOAD_FAST                2 (item)
+             28 LOAD_CONST               3 ('itemName')
+             30 LOAD_CONST               1 (None)
+             32 CALL_FUNCTION            3
+             34 STORE_FAST               5 (itemName)
+
+284          36 LOAD_FAST                5 (itemName)
+             38 POP_JUMP_IF_TRUE        60
+             40 LOAD_FAST                3 (header)
+             42 LOAD_CONST               1 (None)
+             44 IS_OP                    1
+             46 POP_JUMP_IF_FALSE       60
+
+285          48 LOAD_GLOBAL              0 (getattr)
+             50 LOAD_FAST                3 (header)
+             52 LOAD_CONST               4 ('headTitle')
+             54 LOAD_CONST               1 (None)
+             56 CALL_FUNCTION            3
+             58 STORE_FAST               5 (itemName)
+
+286     >>   60 LOAD_FAST                5 (itemName)
+             62 POP_JUMP_IF_TRUE        76
+
+287          64 LOAD_GLOBAL              0 (getattr)
+             66 LOAD_FAST                2 (item)
+             68 LOAD_CONST               5 ('trackName')
+             70 LOAD_CONST               1 (None)
+             72 CALL_FUNCTION            3
+             74 STORE_FAST               5 (itemName)
+
+290     >>   76 LOAD_FAST                2 (item)
+             78 LOAD_ATTR                1 (trackId)
+             80 POP_JUMP_IF_FALSE       88
+             82 LOAD_FAST                2 (item)
+             84 LOAD_ATTR                1 (trackId)
+             86 JUMP_FORWARD             2 (to 90)
+        >>   88 LOAD_CONST               1 (None)
+
+291     >>   90 LOAD_FAST                2 (item)
+             92 LOAD_ATTR                1 (trackId)
+             94 POP_JUMP_IF_FALSE      102
+             96 LOAD_FAST                2 (item)
+             98 LOAD_ATTR                1 (trackId)
+            100 JUMP_FORWARD             2 (to 104)
+        >>  102 LOAD_CONST               1 (None)
+
+292     >>  104 LOAD_FAST                4 (mediaType)
+            106 JUMP_IF_TRUE_OR_POP    112
+            108 LOAD_GLOBAL              2 (LPPublicDefine)
+            110 LOAD_ATTR                3 (MEDIATYPE_RADIO)
+
+293     >>  112 LOAD_CONST               6 ('TRANSITIONING')
+
+294         114 LOAD_FAST                2 (item)
+            116 LOAD_ATTR                4 (trackImage)
+
+295         118 LOAD_FAST                2 (item)
+            120 LOAD_ATTR                5 (trackName)
+            122 POP_JUMP_IF_FALSE      130
+            124 LOAD_FAST                2 (item)
+            126 LOAD_ATTR                5 (trackName)
+            128 JUMP_FORWARD             2 (to 132)
+        >>  130 LOAD_CONST               1 (None)
+
+296     >>  132 LOAD_FAST                2 (item)
+            134 LOAD_ATTR                6 (trackArtist)
+            136 POP_JUMP_IF_FALSE      144
+            138 LOAD_FAST                2 (item)
+            140 LOAD_ATTR                6 (trackArtist)
+            142 JUMP_FORWARD             2 (to 146)
+        >>  144 LOAD_CONST               1 (None)
+
+297     >>  146 LOAD_FAST                5 (itemName)
+
+298         148 LOAD_GLOBAL              7 (WIIMRADIO_DEFAULT_GUI_BEHAVIOR)
+
+299         150 LOAD_CONST               7 ('00:00:00')
+
+300         152 LOAD_CONST               7 ('00:00:00')
+
+301         154 LOAD_FAST                0 (self)
+            156 LOAD_ATTR                8 (source)
+
+302         158 LOAD_FAST                1 (device)
+            160 LOAD_ATTR                9 (mediaInfo)
+            162 LOAD_ATTR               10 (volume)
+
+303         164 LOAD_FAST                1 (device)
+            166 LOAD_ATTR                9 (mediaInfo)
+            168 LOAD_ATTR               11 (loopMode)
+
+289         170 LOAD_CONST               8 (('trackId', 'itemId', 'mediaType', 'playState', 'artworkUri', 'trackName', 'artist', 'itemName', 'guiBehavior', 'duration', 'progress', 'trackSource', 'volume', 'loopMode'))
+            172 BUILD_CONST_KEY_MAP     14
+            174 STORE_FAST               6 (mediaInfo)
+
+306         176 LOAD_FAST                1 (device)
+            178 LOAD_METHOD             12 (setMediaInfo)
+            180 LOAD_FAST                6 (mediaInfo)
+            182 CALL_METHOD              1
+            184 POP_TOP
+            186 LOAD_CONST               1 (None)
+            188 RETURN_VALUE

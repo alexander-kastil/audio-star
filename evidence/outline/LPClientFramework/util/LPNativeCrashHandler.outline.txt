@@ -1,0 +1,49 @@
+# module LPClientFramework.util.LPNativeCrashHandler
+
+[module] names: __doc__, os, sys, datetime, install_native_crash_handler, get_crash_dir, generate_crash_timestamp, _write_python_traceback_simple
+  str: '\n@Time ： 2026/7/14\n@Auth ： AI Assistant\n@File ：LPNativeCrashHandler.py\n@Desc ：跨平台原生崩溃捕获模块，提供统一入口 install_native_crash_handler()。\n        Windows   : UEF + MiniDumpWriteDump 生成 .dmp\n        macOS     : POSIX 信号处理器 + 依赖系统 CrashReporter 生成 .crash\n        共用      : faulthandler 输出 Python traceback、qInst'
+  str: 'install_native_crash_handler'
+  str: 'get_crash_dir'
+  str: 'generate_crash_timestamp'
+  str: '_write_python_traceback_simple'
+
+def install_native_crash_handler()  line 17
+  names: sys, platform, LPClientFramework.util.LPNativeCrashHandler_win, _install_win32, LPClientFramework.util.LPNativeCrashHandler_mac, _install_darwin
+    str: '\n    安装原生崩溃处理器（跨平台统一入口）。\n\n    在 main.py 最前端调用此函数，内部按操作系统分派到对应实现。\n\n    参数:\n        无\n\n    返回:\n        无\n    '
+    str: 'win32'
+    str: '_install_win32'
+    str: 'darwin'
+    str: '_install_darwin'
+
+def get_crash_dir()  line 38
+  names: sys, platform, os, environ, get, path, expanduser, join, makedirs
+    str: '\n    获取崩溃文件存放目录，不存在时自动创建。\n\n    参数:\n        无\n\n    返回:\n        str: 崩溃文件目录的绝对路径。\n        Windows : %APPDATA%/WiiMHome/crashes/\n        macOS   : ~/Library/Logs/WiiMHome/crashes/\n        Linux   : ~/.local/share/WiiMHome/crashes/\n    '
+    str: 'win32'
+    str: 'APPDATA'
+    str: '~'
+    str: 'darwin'
+    str: '~/Library/Logs'
+    str: 'XDG_DATA_HOME'
+    str: '~/.local/share'
+    str: 'WiiMHome'
+    str: 'crashes'
+    str: 'exist_ok'
+
+def generate_crash_timestamp()  line 62
+  names: datetime, now, strftime
+    str: '\n    生成带时间戳的字符串，用于崩溃文件名命名。\n\n    参数:\n        无\n\n    返回:\n        str: 格式为 20260714_115230_123456（含微秒）的时间戳字符串\n    '
+    str: '%Y%m%d_%H%M%S_%f'
+
+def _write_python_traceback_simple(dump_path)  line 75
+  names: faulthandler, get_crash_dir, replace, generate_crash_timestamp, os, path, join, open, dump_traceback, Exception
+    str: '\n    将 Python 各线程调用栈写入文本文件，便于快速定位问题。\n\n    参数:\n        dump_path (str, optional): 关联的 .dmp 文件路径，用于命名。\n                                   为 None 时使用独立时间戳命名。\n\n    返回:\n        str 或 None: 生成的 traceback 文件路径，失败时返回 None\n    '
+    str: '.dmp'
+    str: '.traceback.txt'
+    str: '.signo'
+    str: 'traceback_'
+    str: '.txt'
+    str: 'w'
+    str: 'utf-8'
+    str: 'encoding'
+    str: 'file'
+    str: 'all_threads'

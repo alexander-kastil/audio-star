@@ -1,0 +1,316 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (None)
+              4 IMPORT_NAME              0 (requests)
+              6 STORE_NAME               0 (requests)
+
+  2           8 LOAD_CONST               0 (0)
+             10 LOAD_CONST               1 (None)
+             12 IMPORT_NAME              1 (html)
+             14 STORE_NAME               1 (html)
+
+  3          16 LOAD_CONST               0 (0)
+             18 LOAD_CONST               2 (('escape',))
+             20 IMPORT_NAME              2 (xml.sax.saxutils)
+             22 IMPORT_FROM              3 (escape)
+             24 STORE_NAME               3 (escape)
+             26 POP_TOP
+
+  4          28 LOAD_CONST               0 (0)
+             30 LOAD_CONST               3 (('BeautifulSoup',))
+             32 IMPORT_NAME              4 (bs4)
+             34 IMPORT_FROM              5 (BeautifulSoup)
+             36 STORE_NAME               5 (BeautifulSoup)
+             38 POP_TOP
+
+  6          40 LOAD_CONST               0 (0)
+             42 LOAD_CONST               4 (('logger',))
+             44 IMPORT_NAME              6 (LPClientFramework.LPUtility)
+             46 IMPORT_FROM              7 (logger)
+             48 STORE_NAME               7 (logger)
+             50 POP_TOP
+
+  9          52 LOAD_CONST              16 ((15,))
+             54 LOAD_CONST               6 (<code object upnpPost at 0x000001F3253DA3A0, file "LPClientFramework\UPnPTool.py", line 9>)
+             56 LOAD_CONST               7 ('upnpPost')
+             58 MAKE_FUNCTION            1 (defaults)
+             60 STORE_NAME               8 (upnpPost)
+
+ 56          62 LOAD_NAME                9 (__name__)
+             64 LOAD_CONST               8 ('__main__')
+             66 COMPARE_OP               2 (==)
+             68 POP_JUMP_IF_FALSE       98
+
+ 57          70 LOAD_NAME               10 (print)
+             72 LOAD_NAME                8 (upnpPost)
+             74 LOAD_CONST               9 ('http://192.168.50.64:59152/upnp/control/rendercontrol1')
+             76 LOAD_CONST              10 ('RenderingControl:1')
+             78 LOAD_CONST              11 ('GetChannel')
+             80 LOAD_CONST              12 ('0')
+             82 LOAD_CONST              13 ('Master')
+             84 LOAD_CONST              14 (('InstanceID', 'Channel'))
+             86 BUILD_CONST_KEY_MAP      2
+             88 LOAD_CONST              15 ('CurrentChannel')
+             90 BUILD_LIST               1
+             92 CALL_FUNCTION            5
+             94 CALL_FUNCTION            1
+             96 POP_TOP
+        >>   98 LOAD_CONST               1 (None)
+            100 RETURN_VALUE
+
+=== upnpPost ===
+ 10           0 LOAD_CONST               1 ('urn:schemas-upnp-org:service:%s')
+              2 LOAD_FAST                1 (service)
+              4 BINARY_MODULO
+              6 STORE_FAST               6 (serviceStr)
+
+ 11           8 LOAD_FAST                1 (service)
+             10 LOAD_CONST               2 ('PlayQueue:1')
+             12 COMPARE_OP               2 (==)
+             14 POP_JUMP_IF_FALSE       24
+
+ 12          16 LOAD_CONST               3 ('urn:schemas-wiimu-com:service:%s')
+             18 LOAD_FAST                1 (service)
+             20 BINARY_MODULO
+             22 STORE_FAST               6 (serviceStr)
+
+ 14     >>   24 LOAD_CONST               4 ('text/xml; charset="utf-8"')
+
+ 15          26 LOAD_CONST               5 ('"%s#%s"')
+             28 LOAD_FAST                6 (serviceStr)
+             30 LOAD_FAST                2 (method)
+             32 BUILD_TUPLE              2
+             34 BINARY_MODULO
+
+ 14          36 LOAD_CONST               6 (('Content-Type', 'SOAPACTION'))
+             38 BUILD_CONST_KEY_MAP      2
+             40 STORE_FAST               7 (headers)
+
+ 17          42 LOAD_CONST               7 ('')
+             44 STORE_FAST               8 (paramXML)
+
+ 18          46 LOAD_FAST                3 (inParams)
+             48 LOAD_METHOD              0 (items)
+             50 CALL_METHOD              0
+             52 GET_ITER
+        >>   54 FOR_ITER                50 (to 106)
+             56 UNPACK_SEQUENCE          2
+             58 STORE_FAST               9 (key)
+             60 STORE_FAST              10 (value)
+
+ 19          62 LOAD_GLOBAL              1 (type)
+             64 LOAD_FAST               10 (value)
+             66 CALL_FUNCTION            1
+             68 LOAD_GLOBAL              2 (str)
+             70 COMPARE_OP               3 (!=)
+             72 POP_JUMP_IF_FALSE       82
+
+ 20          74 LOAD_GLOBAL              2 (str)
+             76 LOAD_FAST               10 (value)
+             78 CALL_FUNCTION            1
+             80 STORE_FAST              10 (value)
+
+ 22     >>   82 LOAD_FAST                8 (paramXML)
+             84 LOAD_CONST               8 ('<%s>%s</%s>')
+             86 LOAD_FAST                9 (key)
+             88 LOAD_GLOBAL              3 (escape)
+             90 LOAD_FAST               10 (value)
+             92 CALL_FUNCTION            1
+             94 LOAD_FAST                9 (key)
+             96 BUILD_TUPLE              3
+             98 BINARY_MODULO
+            100 INPLACE_ADD
+            102 STORE_FAST               8 (paramXML)
+            104 JUMP_ABSOLUTE           54
+
+ 24     >>  106 LOAD_CONST               9 ('<?xml version="1.0" encoding="utf-8"?><s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><u:%s xmlns:u="%s">%s</u:%s></s:Body></s:Envelope>')
+            108 LOAD_FAST                2 (method)
+            110 LOAD_FAST                6 (serviceStr)
+            112 LOAD_FAST                8 (paramXML)
+            114 LOAD_FAST                2 (method)
+            116 BUILD_TUPLE              4
+            118 BINARY_MODULO
+            120 STORE_FAST              11 (data)
+
+ 26         122 SETUP_FINALLY           36 (to 160)
+
+ 27         124 LOAD_GLOBAL              4 (requests)
+            126 LOAD_METHOD              5 (Session)
+            128 CALL_METHOD              0
+            130 STORE_FAST              12 (s)
+
+ 28         132 LOAD_FAST               12 (s)
+            134 LOAD_ATTR                6 (post)
+            136 LOAD_FAST                0 (url)
+            138 LOAD_FAST                7 (headers)
+            140 LOAD_FAST               11 (data)
+            142 LOAD_METHOD              7 (encode)
+            144 LOAD_CONST              10 ('utf-8')
+            146 CALL_METHOD              1
+            148 LOAD_FAST                5 (timeout)
+            150 LOAD_CONST              11 (('headers', 'data', 'timeout'))
+            152 CALL_FUNCTION_KW         4
+            154 STORE_FAST              13 (response)
+            156 POP_BLOCK
+            158 JUMP_FORWARD           148 (to 308)
+
+ 29     >>  160 DUP_TOP
+            162 LOAD_GLOBAL              4 (requests)
+            164 LOAD_ATTR                8 (exceptions)
+            166 LOAD_ATTR                9 (Timeout)
+            168 JUMP_IF_NOT_EXC_MATCH   234
+            170 POP_TOP
+            172 STORE_FAST              14 (e)
+            174 POP_TOP
+            176 SETUP_FINALLY           48 (to 226)
+
+ 30         178 LOAD_GLOBAL             10 (logger)
+            180 LOAD_METHOD             11 (warning)
+            182 LOAD_CONST              12 ('UPnP exception: url:%s, %s, %s, e:%s')
+            184 LOAD_FAST                0 (url)
+            186 LOAD_FAST                2 (method)
+            188 LOAD_FAST               11 (data)
+            190 LOAD_FAST               14 (e)
+            192 BUILD_TUPLE              4
+            194 BINARY_MODULO
+            196 CALL_METHOD              1
+            198 POP_TOP
+
+ 31         200 LOAD_CONST              13 (-2)
+            202 LOAD_CONST              14 ('%s')
+            204 LOAD_FAST               14 (e)
+            206 BINARY_MODULO
+            208 LOAD_CONST              15 (('status_code', 'error'))
+            210 BUILD_CONST_KEY_MAP      2
+            212 POP_BLOCK
+            214 ROT_FOUR
+            216 POP_EXCEPT
+            218 LOAD_CONST               0 (None)
+            220 STORE_FAST              14 (e)
+            222 DELETE_FAST             14 (e)
+            224 RETURN_VALUE
+        >>  226 LOAD_CONST               0 (None)
+            228 STORE_FAST              14 (e)
+            230 DELETE_FAST             14 (e)
+            232 RERAISE
+
+ 32     >>  234 DUP_TOP
+            236 LOAD_GLOBAL             12 (Exception)
+            238 EXTENDED_ARG             1
+            240 JUMP_IF_NOT_EXC_MATCH   306
+            242 POP_TOP
+            244 STORE_FAST              14 (e)
+            246 POP_TOP
+            248 SETUP_FINALLY           48 (to 298)
+
+ 33         250 LOAD_GLOBAL             10 (logger)
+            252 LOAD_METHOD             11 (warning)
+            254 LOAD_CONST              12 ('UPnP exception: url:%s, %s, %s, e:%s')
+            256 LOAD_FAST                0 (url)
+            258 LOAD_FAST                2 (method)
+            260 LOAD_FAST               11 (data)
+            262 LOAD_FAST               14 (e)
+            264 BUILD_TUPLE              4
+            266 BINARY_MODULO
+            268 CALL_METHOD              1
+            270 POP_TOP
+
+ 34         272 LOAD_CONST              16 (-1)
+            274 LOAD_CONST              14 ('%s')
+            276 LOAD_FAST               14 (e)
+            278 BINARY_MODULO
+            280 LOAD_CONST              15 (('status_code', 'error'))
+            282 BUILD_CONST_KEY_MAP      2
+            284 POP_BLOCK
+            286 ROT_FOUR
+            288 POP_EXCEPT
+            290 LOAD_CONST               0 (None)
+            292 STORE_FAST              14 (e)
+            294 DELETE_FAST             14 (e)
+            296 RETURN_VALUE
+        >>  298 LOAD_CONST               0 (None)
+            300 STORE_FAST              14 (e)
+            302 DELETE_FAST             14 (e)
+            304 RERAISE
+        >>  306 RERAISE
+
+ 36     >>  308 LOAD_FAST               13 (response)
+            310 LOAD_ATTR               13 (status_code)
+            312 LOAD_CONST              17 (200)
+            314 COMPARE_OP               3 (!=)
+            316 EXTENDED_ARG             1
+            318 POP_JUMP_IF_FALSE      356
+
+ 37         320 LOAD_GLOBAL             10 (logger)
+            322 LOAD_METHOD             11 (warning)
+            324 LOAD_CONST              18 ('UPnP failed: url:%s, %s, %s, %s')
+            326 LOAD_FAST                0 (url)
+            328 LOAD_FAST                2 (method)
+            330 LOAD_FAST               11 (data)
+            332 LOAD_FAST               13 (response)
+            334 BUILD_TUPLE              4
+            336 BINARY_MODULO
+            338 CALL_METHOD              1
+            340 POP_TOP
+
+ 38         342 LOAD_FAST               13 (response)
+            344 LOAD_ATTR               13 (status_code)
+            346 LOAD_FAST               13 (response)
+            348 LOAD_ATTR               13 (status_code)
+            350 LOAD_CONST              15 (('status_code', 'error'))
+            352 BUILD_CONST_KEY_MAP      2
+            354 RETURN_VALUE
+
+ 40     >>  356 LOAD_GLOBAL             14 (BeautifulSoup)
+            358 LOAD_FAST               13 (response)
+            360 LOAD_ATTR               15 (text)
+            362 LOAD_CONST              19 ('xml')
+            364 CALL_FUNCTION            2
+            366 STORE_FAST              15 (parsedData)
+
+ 42         368 BUILD_MAP                0
+            370 STORE_FAST              16 (retDict)
+
+ 43         372 LOAD_FAST                4 (outParams)
+            374 LOAD_CONST               0 (None)
+            376 IS_OP                    1
+            378 EXTENDED_ARG             1
+            380 POP_JUMP_IF_FALSE      430
+
+ 44         382 LOAD_FAST                4 (outParams)
+            384 GET_ITER
+        >>  386 FOR_ITER                42 (to 430)
+            388 STORE_FAST              17 (param)
+
+ 45         390 LOAD_FAST               15 (parsedData)
+            392 LOAD_METHOD             16 (find)
+            394 LOAD_FAST               17 (param)
+            396 CALL_METHOD              1
+            398 STORE_FAST              18 (item)
+
+ 46         400 LOAD_FAST               18 (item)
+            402 EXTENDED_ARG             1
+            404 POP_JUMP_IF_TRUE       416
+
+ 47         406 LOAD_CONST               7 ('')
+            408 LOAD_FAST               16 (retDict)
+            410 LOAD_FAST               17 (param)
+            412 STORE_SUBSCR
+            414 JUMP_FORWARD            10 (to 426)
+
+ 49     >>  416 LOAD_FAST               18 (item)
+            418 LOAD_ATTR               15 (text)
+            420 LOAD_FAST               16 (retDict)
+            422 LOAD_FAST               17 (param)
+            424 STORE_SUBSCR
+        >>  426 EXTENDED_ARG             1
+            428 JUMP_ABSOLUTE          386
+
+ 51     >>  430 LOAD_CONST              17 (200)
+            432 LOAD_FAST               16 (retDict)
+            434 LOAD_CONST              20 ('status_code')
+            436 STORE_SUBSCR
+
+ 53         438 LOAD_FAST               16 (retDict)
+            440 RETURN_VALUE

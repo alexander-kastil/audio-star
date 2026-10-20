@@ -1,0 +1,214 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('使用 STS 临时凭证上传 Feedback ZIP 到 S3。')
+              2 STORE_NAME               0 (__doc__)
+
+  4           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('quote',))
+              8 IMPORT_NAME              1 (urllib.parse)
+             10 IMPORT_FROM              2 (quote)
+             12 STORE_NAME               2 (quote)
+             14 POP_TOP
+
+  6          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (None)
+             20 IMPORT_NAME              3 (requests)
+             22 STORE_NAME               3 (requests)
+
+  8          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               4 (('LPSigV4Signer',))
+             28 IMPORT_NAME              4 (LPClientFramework.LPFeedback.LPSigV4Signer)
+             30 IMPORT_FROM              5 (LPSigV4Signer)
+             32 STORE_NAME               5 (LPSigV4Signer)
+             34 POP_TOP
+
+ 11          36 LOAD_BUILD_CLASS
+             38 LOAD_CONST               5 (<code object LPFeedbackS3Uploader at 0x000001F3253DA9D0, file "LPClientFramework\LPFeedback\LPFeedbackS3Uploader.py", line 11>)
+             40 LOAD_CONST               6 ('LPFeedbackS3Uploader')
+             42 MAKE_FUNCTION            0
+             44 LOAD_CONST               6 ('LPFeedbackS3Uploader')
+             46 CALL_FUNCTION            2
+             48 STORE_NAME               6 (LPFeedbackS3Uploader)
+             50 LOAD_CONST               3 (None)
+             52 RETURN_VALUE
+
+=== LPFeedbackS3Uploader ===
+ 11           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPFeedbackS3Uploader')
+              6 STORE_NAME               2 (__qualname__)
+
+ 12           8 LOAD_CONST               1 ('对单个 ZIP 执行签名后的 S3 PUT，不含重试与队列逻辑。')
+             10 STORE_NAME               3 (__doc__)
+
+ 14          12 LOAD_CONST               7 ((None,))
+             14 LOAD_CONST               3 (<code object __init__ at 0x000001F3253DA5B0, file "LPClientFramework\LPFeedback\LPFeedbackS3Uploader.py", line 14>)
+             16 LOAD_CONST               4 ('LPFeedbackS3Uploader.__init__')
+             18 MAKE_FUNCTION            1 (defaults)
+             20 STORE_NAME               4 (__init__)
+
+ 24          22 LOAD_CONST               8 ((None,))
+             24 LOAD_CONST               5 (<code object upload at 0x000001F3253DAA80, file "LPClientFramework\LPFeedback\LPFeedbackS3Uploader.py", line 24>)
+             26 LOAD_CONST               6 ('LPFeedbackS3Uploader.upload')
+             28 MAKE_FUNCTION            1 (defaults)
+             30 STORE_NAME               5 (upload)
+             32 LOAD_CONST               2 (None)
+             34 RETURN_VALUE
+
+=== LPFeedbackS3Uploader.__init__ ===
+ 22           0 LOAD_FAST                1 (session)
+              2 JUMP_IF_TRUE_OR_POP     10
+              4 LOAD_GLOBAL              0 (requests)
+              6 LOAD_METHOD              1 (Session)
+              8 CALL_METHOD              0
+        >>   10 LOAD_FAST                0 (self)
+             12 STORE_ATTR               2 (_session)
+             14 LOAD_CONST               1 (None)
+             16 RETURN_VALUE
+
+=== LPFeedbackS3Uploader.upload ===
+ 34           0 LOAD_GLOBAL              0 (open)
+              2 LOAD_FAST                1 (archivePath)
+              4 LOAD_CONST               1 ('rb')
+              6 CALL_FUNCTION            2
+              8 SETUP_WITH              24 (to 34)
+             10 STORE_FAST               4 (archiveFile)
+
+ 35          12 LOAD_FAST                4 (archiveFile)
+             14 LOAD_METHOD              1 (read)
+             16 CALL_METHOD              0
+             18 STORE_FAST               5 (archiveBytes)
+             20 POP_BLOCK
+             22 LOAD_CONST               2 (None)
+             24 DUP_TOP
+             26 DUP_TOP
+             28 CALL_FUNCTION            3
+             30 POP_TOP
+             32 JUMP_FORWARD            16 (to 50)
+        >>   34 WITH_EXCEPT_START
+             36 POP_JUMP_IF_TRUE        40
+             38 RERAISE
+        >>   40 POP_TOP
+             42 POP_TOP
+             44 POP_TOP
+             46 POP_EXCEPT
+             48 POP_TOP
+
+ 36     >>   50 LOAD_CONST               3 ('/')
+             52 LOAD_METHOD              2 (join)
+             54 LOAD_CONST               4 (<code object <genexpr> at 0x000001F3253DA450, file "LPClientFramework\LPFeedback\LPFeedbackS3Uploader.py", line 36>)
+             56 LOAD_CONST               5 ('LPFeedbackS3Uploader.upload.<locals>.<genexpr>')
+             58 MAKE_FUNCTION            0
+             60 LOAD_FAST                2 (credential)
+             62 LOAD_ATTR                3 (fileKey)
+             64 LOAD_METHOD              4 (split)
+             66 LOAD_CONST               3 ('/')
+             68 CALL_METHOD              1
+             70 GET_ITER
+             72 CALL_FUNCTION            1
+             74 CALL_METHOD              1
+             76 STORE_FAST               6 (objectKey)
+
+ 37          78 LOAD_CONST               6 ('https://%s.s3.%s.amazonaws.com/%s')
+
+ 38          80 LOAD_FAST                2 (credential)
+             82 LOAD_ATTR                5 (bucketName)
+
+ 39          84 LOAD_FAST                2 (credential)
+             86 LOAD_ATTR                6 (bucketRegion)
+
+ 40          88 LOAD_FAST                6 (objectKey)
+
+ 37          90 BUILD_TUPLE              3
+             92 BINARY_MODULO
+             94 STORE_FAST               7 (uploadUrl)
+
+ 42          96 LOAD_CONST               7 ('Content-Type')
+             98 LOAD_CONST               8 ('application/zip')
+            100 BUILD_MAP                1
+            102 STORE_FAST               8 (extraHeaders)
+
+ 43         104 LOAD_FAST                3 (metadata)
+            106 JUMP_IF_TRUE_OR_POP    110
+            108 BUILD_MAP                0
+        >>  110 LOAD_METHOD              7 (items)
+            112 CALL_METHOD              0
+            114 GET_ITER
+        >>  116 FOR_ITER                28 (to 146)
+            118 UNPACK_SEQUENCE          2
+            120 STORE_FAST               9 (key)
+            122 STORE_FAST              10 (value)
+
+ 44         124 LOAD_GLOBAL              8 (str)
+            126 LOAD_FAST               10 (value)
+            128 CALL_FUNCTION            1
+            130 LOAD_FAST                8 (extraHeaders)
+            132 LOAD_CONST               9 ('x-amz-meta-')
+            134 LOAD_GLOBAL              8 (str)
+            136 LOAD_FAST                9 (key)
+            138 CALL_FUNCTION            1
+            140 BINARY_ADD
+            142 STORE_SUBSCR
+            144 JUMP_ABSOLUTE          116
+
+ 45     >>  146 LOAD_GLOBAL              9 (LPSigV4Signer)
+            148 LOAD_ATTR               10 (sign)
+
+ 46         150 LOAD_CONST              10 ('PUT')
+
+ 47         152 LOAD_FAST                7 (uploadUrl)
+
+ 48         154 LOAD_FAST                5 (archiveBytes)
+
+ 49         156 LOAD_FAST                2 (credential)
+            158 LOAD_ATTR               11 (accessKey)
+
+ 50         160 LOAD_FAST                2 (credential)
+            162 LOAD_ATTR               12 (secretKey)
+
+ 51         164 LOAD_FAST                2 (credential)
+            166 LOAD_ATTR                6 (bucketRegion)
+
+ 52         168 LOAD_CONST              11 ('s3')
+
+ 53         170 LOAD_FAST                2 (credential)
+            172 LOAD_ATTR               13 (sessionToken)
+
+ 54         174 LOAD_FAST                8 (extraHeaders)
+
+ 45         176 LOAD_CONST              12 (('method', 'url', 'body', 'accessKey', 'secretKey', 'region', 'service', 'sessionToken', 'extraHeaders'))
+            178 CALL_FUNCTION_KW         9
+            180 STORE_FAST              11 (signedHeaders)
+
+ 56         182 LOAD_FAST                0 (self)
+            184 LOAD_ATTR               14 (_session)
+            186 LOAD_ATTR               15 (put)
+            188 LOAD_FAST                7 (uploadUrl)
+            190 LOAD_FAST                5 (archiveBytes)
+            192 LOAD_FAST               11 (signedHeaders)
+            194 LOAD_CONST              13 (60)
+            196 LOAD_CONST              14 (('data', 'headers', 'timeout'))
+            198 CALL_FUNCTION_KW         4
+            200 STORE_FAST              12 (response)
+
+ 57         202 LOAD_FAST               12 (response)
+            204 LOAD_METHOD             16 (raise_for_status)
+            206 CALL_METHOD              0
+            208 POP_TOP
+            210 LOAD_CONST               2 (None)
+            212 RETURN_VALUE
+
+=== LPFeedbackS3Uploader.upload.<genexpr> ===
+ 36           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                18 (to 22)
+              4 STORE_FAST               1 (segment)
+              6 LOAD_GLOBAL              0 (quote)
+              8 LOAD_FAST                1 (segment)
+             10 LOAD_CONST               0 ('')
+             12 LOAD_CONST               1 (('safe',))
+             14 CALL_FUNCTION_KW         2
+             16 YIELD_VALUE
+             18 POP_TOP
+             20 JUMP_ABSOLUTE            2
+        >>   22 LOAD_CONST               2 (None)
+             24 RETURN_VALUE

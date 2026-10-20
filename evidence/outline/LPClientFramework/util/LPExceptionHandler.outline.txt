@@ -1,0 +1,26 @@
+# module LPClientFramework.util.LPExceptionHandler
+
+[module] names: __doc__, traceback, LPClientFramework.LPUtility, logger, _crashDumper, configureCrashDumper, LPExceptionHandler
+  str: '\n@Time ： 2025/2/8 16:04\n@Auth ： Chris\n@File ：LPExceptionHandler.py\n@Desc: 全局未处理异常处理器。\n\n既把异常写入应用日志，又（若注入了 LPCrashDumper）落盘成独立 crash 文件，\n供 feedback 日志包打包上传。crash 落盘器由 configureCrashDumper 在应用启动时注入。\n'
+  str: 'logger'
+  str: 'configureCrashDumper'
+  str: 'LPExceptionHandler'
+
+def configureCrashDumper(dumper)  line 20
+  names: _crashDumper
+    str: '\n    注入 LPCrashDumper 实例（应用启动时调用一次）。\n\n    参数:\n        dumper (LPCrashDumper|None): crash 落盘器实例；传 None 可关闭落盘。\n    返回:\n        None。\n    '
+
+def LPExceptionHandler()  line 33
+  names: __name__, __module__, __qualname__, __doc__, __init__, staticmethod, globalHandler
+    str: 'LPExceptionHandler'
+    str: '全局异常处理器（作为 sys.excepthook 使用）。'
+    str: 'LPExceptionHandler.__init__'
+    str: 'LPExceptionHandler.globalHandler'
+
+  def LPExceptionHandler.__init__(self)  line 36
+
+  def LPExceptionHandler.globalHandler(exc_type, exc_value, exc_traceback)  line 39
+    names: join, traceback, format_exception, logger, error, _crashDumper, dump, Exception
+      str: '\n        全局未处理异常钩子：写日志 + 落盘 crash 文件。\n\n        参数:\n            exc_type: 异常类型。\n            exc_value: 异常值。\n            exc_traceback: 异常 traceback。\n        返回:\n            None。\n        '
+      str: '=======[Global Exception Capture] Error Occurred ======'
+      str: '[ExceptionHandler] crash dump failed: %s'

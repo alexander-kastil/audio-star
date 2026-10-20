@@ -1,0 +1,125 @@
+# module HOME.StreamService.Tidal.services.LPTidalCollectionSortPreference
+
+[module] names: __doc__, typing, Dict, List, Optional, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPUtility, logger, LPTidalCollectionSortPreference
+  str: '\nTIDAL Collection 排序偏好服务。\n'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'LPUtility'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'LPTidalCollectionSortPreference'
+
+def LPTidalCollectionSortPreference()  line 13
+  names: __name__, __module__, __qualname__, __doc__, PREFERENCE_PREFIX, DEFAULT_ORDER, DEFAULT_DIRECTION, SORT_OPTIONS_BY_SECTION, Dict, str, List, __annotations__, classmethod, preferenceKey, sortOptions, Optional, matchedSortOption, defaultSort, readSort, sortForSection, sortPreferencesForUser, bool, saveSort
+    str: 'LPTidalCollectionSortPreference'
+    str: '负责维护 TIDAL Collection 各分区排序选项和本地偏好。'
+    str: 'collectionSeeAllSort'
+    str: 'DATE'
+    str: 'DESC'
+    str: 'Date Added'
+    str: 'order'
+    str: 'direction'
+    str: 'label'
+    str: 'NAME'
+    str: 'ASC'
+    str: 'Name A-Z'
+    str: 'Name Z-A'
+    str: 'ARTIST'
+    str: 'Artist A-Z'
+    str: 'Artist Z-A'
+    str: 'RELEASE_DATE'
+    str: 'Release Date'
+    str: 'ALBUM'
+    str: 'Album A-Z'
+    str: 'Album Z-A'
+    str: 'userPlaylists'
+    str: 'favoriteArtists'
+    str: 'favoriteAlbums'
+    str: 'favoriteTracks'
+    str: 'favoriteVideos'
+    str: 'SORT_OPTIONS_BY_SECTION'
+    str: 'sectionKey'
+    str: 'return'
+    str: 'LPTidalCollectionSortPreference.preferenceKey'
+    str: 'LPTidalCollectionSortPreference.sortOptions'
+    str: 'sectionKey'
+    str: 'order'
+    str: 'direction'
+    str: 'return'
+    str: 'LPTidalCollectionSortPreference.matchedSortOption'
+    str: 'LPTidalCollectionSortPreference.defaultSort'
+    str: 'sectionKey'
+    str: 'userId'
+    str: 'return'
+    str: 'LPTidalCollectionSortPreference.readSort'
+    str: 'LPTidalCollectionSortPreference.sortForSection'
+    str: 'userId'
+    str: 'return'
+    str: 'LPTidalCollectionSortPreference.sortPreferencesForUser'
+    str: 'sectionKey'
+    str: 'userId'
+    str: 'order'
+    str: 'direction'
+    str: 'return'
+    str: 'LPTidalCollectionSortPreference.saveSort'
+
+  def LPTidalCollectionSortPreference.preferenceKey(cls, sectionKey)  line 56
+    names: str, strip, PREFERENCE_PREFIX
+      str: '\n        返回收藏排序偏好键。\n\n        :param sectionKey: 收藏 section 标识。\n        :return: QSettings 键名。\n        '
+      str: ':'
+
+  def LPTidalCollectionSortPreference.sortOptions(cls, sectionKey)  line 67
+    names: str, strip, SORT_OPTIONS_BY_SECTION, get
+      str: '\n        返回指定收藏 section 支持的排序选项。\n\n        :param sectionKey: 收藏 section 标识。\n        :return: 排序选项列表。\n        '
+      str: 'LPTidalCollectionSortPreference.sortOptions.<locals>.<listcomp>'
+
+    def LPTidalCollectionSortPreference.sortOptions.<listcomp>(.0)  line 76
+      names: dict
+
+  def LPTidalCollectionSortPreference.matchedSortOption(cls, sectionKey, order, direction)  line 78
+    names: str, strip, upper, SORT_OPTIONS_BY_SECTION, get
+      str: '\n        校验并返回收藏 section 支持的排序选项。\n\n        :param sectionKey: 收藏 section 标识。\n        :param order: 排序字段。\n        :param direction: 排序方向。\n        :return: 匹配的排序选项，未匹配返回 None。\n        '
+      str: 'ASC'
+      str: 'DESC'
+      str: 'order'
+      str: 'direction'
+      str: 'order'
+      str: 'direction'
+
+  def LPTidalCollectionSortPreference.defaultSort(cls, sectionKey)  line 100
+    names: matchedSortOption, DEFAULT_ORDER, DEFAULT_DIRECTION
+      str: '\n        返回指定收藏 section 的默认排序。\n\n        :param sectionKey: 收藏 section 标识。\n        :return: 包含 order 和 direction 的排序字典。\n        '
+      str: 'order'
+      str: 'direction'
+
+  def LPTidalCollectionSortPreference.readSort(cls, sectionKey, userId)  line 113
+    names: str, strip, getattr, LPUtility, beginGroup, LPPlayListSource, Tidal, value, preferenceKey, Exception, logger, debug, endGroup, split, matchedSortOption
+      str: '\n        读取收藏 section 排序偏好。\n\n        :param sectionKey: 收藏 section 标识。\n        :param userId: TIDAL 用户 ID。\n        :return: 有效排序配置，未保存或无效返回 None。\n        '
+      str: 'settings'
+      str: '/'
+      str: '[TIDAL] read collection sort failed section=%s error=%s'
+      str: ':'
+
+  def LPTidalCollectionSortPreference.sortForSection(cls, sectionKey, userId)  line 147
+    names: readSort, defaultSort
+      str: '\n        返回指定收藏 section 应用的排序。\n\n        :param sectionKey: 收藏 section 标识。\n        :param userId: TIDAL 用户 ID。\n        :return: 保存排序或默认排序。\n        '
+
+  def LPTidalCollectionSortPreference.sortPreferencesForUser(cls, userId)  line 158
+    names: str, strip, SORT_OPTIONS_BY_SECTION, keys
+      str: '\n        返回当前用户所有收藏 section 的有效排序。\n\n        :param userId: TIDAL 用户 ID。\n        :return: 以 sectionKey 为键的排序字典。\n        '
+      str: 'LPTidalCollectionSortPreference.sortPreferencesForUser.<locals>.<dictcomp>'
+
+    def LPTidalCollectionSortPreference.sortPreferencesForUser.<dictcomp>(.0)  line 167
+      names: sortForSection
+
+  def LPTidalCollectionSortPreference.saveSort(cls, sectionKey, userId, order, direction)  line 172
+    names: str, strip, matchedSortOption, getattr, LPUtility, beginGroup, LPPlayListSource, Tidal, value, get, setValue, preferenceKey, hasattr, sync, endGroup, Exception, logger, debug
+      str: '\n        保存收藏 section 排序偏好。\n\n        :param sectionKey: 收藏 section 标识。\n        :param userId: TIDAL 用户 ID。\n        :param order: 排序字段。\n        :param direction: 排序方向。\n        :return: 保存成功返回 True。\n        '
+      str: 'settings'
+      str: '/'
+      str: 'order'
+      str: ':'
+      str: 'direction'
+      str: 'sync'
+      str: '[TIDAL] save collection sort failed section=%s error=%s'

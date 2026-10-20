@@ -1,0 +1,3116 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL 播放列表和账号模型。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('escape',))
+              8 IMPORT_NAME              1 (html)
+             10 IMPORT_FROM              2 (escape)
+             12 STORE_NAME               2 (escape)
+             14 POP_TOP
+
+  7          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('Any', 'Dict', 'Iterable', 'Optional', 'Tuple'))
+             20 IMPORT_NAME              3 (typing)
+             22 IMPORT_FROM              4 (Any)
+             24 STORE_NAME               4 (Any)
+             26 IMPORT_FROM              5 (Dict)
+             28 STORE_NAME               5 (Dict)
+             30 IMPORT_FROM              6 (Iterable)
+             32 STORE_NAME               6 (Iterable)
+             34 IMPORT_FROM              7 (Optional)
+             36 STORE_NAME               7 (Optional)
+             38 IMPORT_FROM              8 (Tuple)
+             40 STORE_NAME               8 (Tuple)
+             42 POP_TOP
+
+  9          44 LOAD_CONST               1 (0)
+             46 LOAD_CONST               4 (('LPUtility',))
+             48 IMPORT_NAME              9 (LPClientFramework)
+             50 IMPORT_FROM             10 (LPUtility)
+             52 STORE_NAME              10 (LPUtility)
+             54 POP_TOP
+
+ 10          56 LOAD_CONST               1 (0)
+             58 LOAD_CONST               5 (('LPAccount', 'LPHeaderType', 'LPPlayHeader', 'LPPlayItem', 'LPPlayListSource', 'LPPlayMusicList'))
+             60 IMPORT_NAME             11 (LPClientFramework.LPPlayList.LPPlayList)
+             62 IMPORT_FROM             12 (LPAccount)
+             64 STORE_NAME              12 (LPAccount)
+             66 IMPORT_FROM             13 (LPHeaderType)
+             68 STORE_NAME              13 (LPHeaderType)
+             70 IMPORT_FROM             14 (LPPlayHeader)
+             72 STORE_NAME              14 (LPPlayHeader)
+             74 IMPORT_FROM             15 (LPPlayItem)
+             76 STORE_NAME              15 (LPPlayItem)
+             78 IMPORT_FROM             16 (LPPlayListSource)
+             80 STORE_NAME              16 (LPPlayListSource)
+             82 IMPORT_FROM             17 (LPPlayMusicList)
+             84 STORE_NAME              17 (LPPlayMusicList)
+             86 POP_TOP
+
+ 20          88 LOAD_CONST               6 (3)
+             90 STORE_NAME              18 (TIDAL_DEFAULT_QUALITY)
+
+ 21          92 LOAD_CONST               7 (2)
+             94 STORE_NAME              19 (TIDAL_FALLBACK_QUALITY)
+
+ 23          96 LOAD_CONST               8 ('Low (96 kbps)')
+
+ 24          98 LOAD_CONST               9 ('Low (320 kbps)')
+
+ 25         100 LOAD_CONST              10 ('High')
+
+ 26         102 LOAD_CONST              11 ('Max')
+
+ 22         104 LOAD_CONST              12 ((0, 1, 2, 3))
+            106 BUILD_CONST_KEY_MAP      4
+            108 STORE_NAME              20 (TIDAL_QUALITY_LABELS)
+
+ 29         110 LOAD_CONST              13 ('Disabled')
+
+ 30         112 LOAD_CONST              14 ('Track Gain')
+
+ 31         114 LOAD_CONST              15 ('Album Gain')
+
+ 28         116 LOAD_CONST              16 ((0, 1, 2))
+            118 BUILD_CONST_KEY_MAP      3
+            120 STORE_NAME              21 (TIDAL_REPLAY_GAIN_LABELS)
+
+ 34         122 LOAD_CONST              17 ('0')
+            124 LOAD_CONST              18 ('')
+            126 LOAD_CONST              19 (('enable', 'type'))
+            128 BUILD_CONST_KEY_MAP      2
+
+ 35         130 LOAD_CONST              20 ('1')
+            132 LOAD_CONST              17 ('0')
+            134 LOAD_CONST              19 (('enable', 'type'))
+            136 BUILD_CONST_KEY_MAP      2
+
+ 36         138 LOAD_CONST              20 ('1')
+            140 LOAD_CONST              20 ('1')
+            142 LOAD_CONST              19 (('enable', 'type'))
+            144 BUILD_CONST_KEY_MAP      2
+
+ 33         146 LOAD_CONST              16 ((0, 1, 2))
+            148 BUILD_CONST_KEY_MAP      3
+            150 STORE_NAME              22 (TIDAL_REPLAY_GAIN_XML_MAP)
+
+ 42         152 LOAD_CONST              21 ('tidalFavoriteTracks')
+            154 STORE_NAME              23 (TIDAL_FAVORITE_TRACKS_ID)
+
+ 47         156 LOAD_CONST              22 ('TIDAL Favorite Tracks')
+            158 STORE_NAME              24 (TIDAL_FAVORITE_TRACKS_TITLE)
+
+ 51         160 LOAD_CONST              23 ('favoriteTracks')
+            162 STORE_NAME              25 (TIDAL_FAVORITE_TRACKS_SECTION_KEY)
+
+ 54         164 LOAD_CONST              24 ('see_all')
+            166 STORE_NAME              26 (TIDAL_RECENTLY_NAVIGATION_SEE_ALL)
+
+ 59         168 LOAD_NAME               27 (frozenset)
+
+ 60         170 LOAD_NAME               23 (TIDAL_FAVORITE_TRACKS_ID)
+
+ 61         172 LOAD_NAME               25 (TIDAL_FAVORITE_TRACKS_SECTION_KEY)
+
+ 62         174 LOAD_CONST              25 ('rising-new-tracks')
+
+ 59         176 BUILD_SET                3
+            178 CALL_FUNCTION            1
+            180 STORE_NAME              28 (TIDAL_RECENTLY_SEE_ALL_SECTION_KEYS)
+
+ 67         182 LOAD_NAME               27 (frozenset)
+            184 LOAD_CONST              26 ('collection')
+            186 LOAD_CONST              27 ('song')
+            188 BUILD_SET                2
+            190 CALL_FUNCTION            1
+            192 STORE_NAME              29 (TIDAL_RECENTLY_SEE_ALL_STREAM_TYPES)
+
+ 70         194 LOAD_NAME               30 (object)
+            196 LOAD_NAME               31 (str)
+            198 LOAD_CONST              28 (('quality', 'return'))
+            200 BUILD_CONST_KEY_MAP      2
+            202 LOAD_CONST              29 (<code object tidalQualityLabel at 0x000001F3253C4920, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 70>)
+            204 LOAD_CONST              30 ('tidalQualityLabel')
+            206 MAKE_FUNCTION            4 (annotations)
+            208 STORE_NAME              32 (tidalQualityLabel)
+
+ 81         210 LOAD_NAME               33 (bool)
+            212 LOAD_NAME               34 (list)
+            214 LOAD_NAME               35 (tuple)
+            216 LOAD_NAME               36 (int)
+            218 LOAD_NAME               31 (str)
+            220 BUILD_TUPLE              2
+            222 BINARY_SUBSCR
+            224 BINARY_SUBSCR
+            226 LOAD_CONST              31 (('maxSupported', 'return'))
+            228 BUILD_CONST_KEY_MAP      2
+            230 LOAD_CONST              32 (<code object tidalQualityOptions at 0x000001F3253C4240, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 81>)
+            232 LOAD_CONST              33 ('tidalQualityOptions')
+            234 MAKE_FUNCTION            4 (annotations)
+            236 STORE_NAME              37 (tidalQualityOptions)
+
+ 92         238 LOAD_NAME               30 (object)
+            240 LOAD_NAME               33 (bool)
+            242 LOAD_NAME               36 (int)
+            244 LOAD_CONST              34 (('quality', 'maxSupported', 'return'))
+            246 BUILD_CONST_KEY_MAP      3
+            248 LOAD_CONST              35 (<code object tidalNormalizeQualityValue at 0x000001F3253C4D40, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 92>)
+            250 LOAD_CONST              36 ('tidalNormalizeQualityValue')
+            252 MAKE_FUNCTION            4 (annotations)
+            254 STORE_NAME              38 (tidalNormalizeQualityValue)
+
+111         256 LOAD_NAME               30 (object)
+            258 LOAD_NAME               31 (str)
+            260 LOAD_CONST              37 (('value', 'return'))
+            262 BUILD_CONST_KEY_MAP      2
+            264 LOAD_CONST              38 (<code object tidalReplayGainLabel at 0x000001F3253C43A0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 111>)
+            266 LOAD_CONST              39 ('tidalReplayGainLabel')
+            268 MAKE_FUNCTION            4 (annotations)
+            270 STORE_NAME              39 (tidalReplayGainLabel)
+
+122         272 LOAD_NAME               30 (object)
+            274 LOAD_NAME               36 (int)
+            276 LOAD_CONST              40 (('label', 'return'))
+            278 BUILD_CONST_KEY_MAP      2
+            280 LOAD_CONST              41 (<code object tidalReplayGainValueForLabel at 0x000001F3253C4450, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 122>)
+            282 LOAD_CONST              42 ('tidalReplayGainValueForLabel')
+            284 MAKE_FUNCTION            4 (annotations)
+            286 STORE_NAME              40 (tidalReplayGainValueForLabel)
+
+136         288 LOAD_NAME               30 (object)
+            290 LOAD_NAME               36 (int)
+            292 LOAD_CONST              37 (('value', 'return'))
+            294 BUILD_CONST_KEY_MAP      2
+            296 LOAD_CONST              43 (<code object tidalNormalizeReplayGainValue at 0x000001F3253C47C0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 136>)
+            298 LOAD_CONST              44 ('tidalNormalizeReplayGainValue')
+            300 MAKE_FUNCTION            4 (annotations)
+            302 STORE_NAME              41 (tidalNormalizeReplayGainValue)
+
+152         304 LOAD_NAME               30 (object)
+            306 LOAD_NAME               33 (bool)
+            308 LOAD_NAME               36 (int)
+            310 LOAD_CONST              45 (('userId', 'maxSupported', 'return'))
+            312 BUILD_CONST_KEY_MAP      3
+            314 LOAD_CONST              46 (<code object tidalReadLocalQualityValue at 0x000001F3253C4500, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 152>)
+            316 LOAD_CONST              47 ('tidalReadLocalQualityValue')
+            318 MAKE_FUNCTION            4 (annotations)
+            320 STORE_NAME              42 (tidalReadLocalQualityValue)
+
+173         322 LOAD_NAME               30 (object)
+            324 LOAD_NAME               30 (object)
+            326 LOAD_NAME               33 (bool)
+            328 LOAD_NAME               36 (int)
+            330 LOAD_CONST              48 (('userId', 'quality', 'maxSupported', 'return'))
+            332 BUILD_CONST_KEY_MAP      4
+            334 LOAD_CONST              49 (<code object tidalSaveLocalQualityValue at 0x000001F324E693A0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 173>)
+            336 LOAD_CONST              50 ('tidalSaveLocalQualityValue')
+            338 MAKE_FUNCTION            4 (annotations)
+            340 STORE_NAME              43 (tidalSaveLocalQualityValue)
+
+198         342 LOAD_NAME               30 (object)
+            344 LOAD_NAME               36 (int)
+            346 LOAD_CONST              51 (('userId', 'return'))
+            348 BUILD_CONST_KEY_MAP      2
+            350 LOAD_CONST              52 (<code object tidalReadLocalReplayGainValue at 0x000001F324E69710, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 198>)
+            352 LOAD_CONST              53 ('tidalReadLocalReplayGainValue')
+            354 MAKE_FUNCTION            4 (annotations)
+            356 STORE_NAME              44 (tidalReadLocalReplayGainValue)
+
+218         358 LOAD_NAME               30 (object)
+            360 LOAD_NAME               30 (object)
+            362 LOAD_NAME               36 (int)
+            364 LOAD_CONST              54 (('userId', 'replayGain', 'return'))
+            366 BUILD_CONST_KEY_MAP      3
+            368 LOAD_CONST              55 (<code object tidalSaveLocalReplayGainValue at 0x000001F324E69190, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 218>)
+            370 LOAD_CONST              56 ('tidalSaveLocalReplayGainValue')
+            372 MAKE_FUNCTION            4 (annotations)
+            374 STORE_NAME              45 (tidalSaveLocalReplayGainValue)
+
+242         376 LOAD_NAME               30 (object)
+            378 LOAD_NAME                5 (Dict)
+            380 LOAD_NAME               31 (str)
+            382 LOAD_NAME                4 (Any)
+            384 BUILD_TUPLE              2
+            386 BINARY_SUBSCR
+            388 LOAD_CONST              57 (('subscription', 'return'))
+            390 BUILD_CONST_KEY_MAP      2
+            392 LOAD_CONST              58 (<code object tidalSubscriptionExtra at 0x000001F324E69EA0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 242>)
+            394 LOAD_CONST              59 ('tidalSubscriptionExtra')
+            396 MAKE_FUNCTION            4 (annotations)
+            398 STORE_NAME              46 (tidalSubscriptionExtra)
+
+257         400 LOAD_NAME               30 (object)
+            402 LOAD_NAME               33 (bool)
+            404 LOAD_CONST              57 (('subscription', 'return'))
+            406 BUILD_CONST_KEY_MAP      2
+            408 LOAD_CONST              60 (<code object tidalSubscriptionSupportsMax at 0x000001F324E69BE0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 257>)
+            410 LOAD_CONST              61 ('tidalSubscriptionSupportsMax')
+            412 MAKE_FUNCTION            4 (annotations)
+            414 STORE_NAME              47 (tidalSubscriptionSupportsMax)
+
+269         416 LOAD_NAME               30 (object)
+            418 LOAD_NAME               31 (str)
+            420 LOAD_CONST              57 (('subscription', 'return'))
+            422 BUILD_CONST_KEY_MAP      2
+            424 LOAD_CONST              62 (<code object tidalSubscriptionLabel at 0x000001F324E69030, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 269>)
+            426 LOAD_CONST              63 ('tidalSubscriptionLabel')
+            428 MAKE_FUNCTION            4 (annotations)
+            430 STORE_NAME              48 (tidalSubscriptionLabel)
+
+288         432 LOAD_NAME               30 (object)
+            434 LOAD_NAME               31 (str)
+            436 LOAD_CONST              64 (('playList', 'return'))
+            438 BUILD_CONST_KEY_MAP      2
+            440 LOAD_CONST              65 (<code object tidalRecentlySeeAllSectionKey at 0x000001F324E690E0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 288>)
+            442 LOAD_CONST              66 ('tidalRecentlySeeAllSectionKey')
+            444 MAKE_FUNCTION            4 (annotations)
+            446 STORE_NAME              49 (tidalRecentlySeeAllSectionKey)
+
+318         448 LOAD_NAME               30 (object)
+            450 LOAD_NAME                7 (Optional)
+            452 LOAD_NAME               31 (str)
+            454 BINARY_SUBSCR
+            456 LOAD_CONST              64 (('playList', 'return'))
+            458 BUILD_CONST_KEY_MAP      2
+            460 LOAD_CONST              67 (<code object tidalRecentlyNavigationType at 0x000001F324E695B0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 318>)
+            462 LOAD_CONST              68 ('tidalRecentlyNavigationType')
+            464 MAKE_FUNCTION            4 (annotations)
+            466 STORE_NAME              50 (tidalRecentlyNavigationType)
+
+371         468 LOAD_NAME               30 (object)
+            470 LOAD_NAME               30 (object)
+            472 LOAD_NAME                8 (Tuple)
+            474 LOAD_NAME               31 (str)
+            476 LOAD_NAME               31 (str)
+            478 BUILD_TUPLE              2
+            480 BINARY_SUBSCR
+            482 LOAD_CONST              69 (('playList', 'playItem', 'return'))
+            484 BUILD_CONST_KEY_MAP      3
+            486 LOAD_CONST              70 (<code object tidalPlayingContextForPlaylist at 0x000001F324E69450, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 371>)
+            488 LOAD_CONST              71 ('tidalPlayingContextForPlaylist')
+            490 MAKE_FUNCTION            4 (annotations)
+            492 STORE_NAME              51 (tidalPlayingContextForPlaylist)
+
+398         494 LOAD_BUILD_CLASS
+            496 LOAD_CONST              72 (<code object LPTidalAccount at 0x000001F324E692F0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 398>)
+            498 LOAD_CONST              73 ('LPTidalAccount')
+            500 MAKE_FUNCTION            0
+            502 LOAD_CONST              73 ('LPTidalAccount')
+            504 LOAD_NAME               12 (LPAccount)
+            506 CALL_FUNCTION            3
+            508 STORE_NAME              52 (LPTidalAccount)
+
+423         510 LOAD_BUILD_CLASS
+            512 LOAD_CONST              74 (<code object LPTidalPlayHeader at 0x000001F324E69920, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 423>)
+            514 LOAD_CONST              75 ('LPTidalPlayHeader')
+            516 MAKE_FUNCTION            0
+            518 LOAD_CONST              75 ('LPTidalPlayHeader')
+            520 LOAD_NAME               14 (LPPlayHeader)
+            522 CALL_FUNCTION            3
+            524 STORE_NAME              53 (LPTidalPlayHeader)
+
+471         526 LOAD_BUILD_CLASS
+            528 LOAD_CONST              76 (<code object LPTidalPlayItem at 0x000001F324E69DF0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 471>)
+            530 LOAD_CONST              77 ('LPTidalPlayItem')
+            532 MAKE_FUNCTION            0
+            534 LOAD_CONST              77 ('LPTidalPlayItem')
+            536 LOAD_NAME               15 (LPPlayItem)
+            538 CALL_FUNCTION            3
+            540 STORE_NAME              54 (LPTidalPlayItem)
+
+489         542 LOAD_BUILD_CLASS
+            544 LOAD_CONST              78 (<code object LPTidalPlayList at 0x000001F324E769D0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 489>)
+            546 LOAD_CONST              79 ('LPTidalPlayList')
+            548 MAKE_FUNCTION            0
+            550 LOAD_CONST              79 ('LPTidalPlayList')
+            552 LOAD_NAME               17 (LPPlayMusicList)
+            554 CALL_FUNCTION            3
+            556 STORE_NAME              55 (LPTidalPlayList)
+            558 LOAD_CONST              80 (None)
+            560 RETURN_VALUE
+
+=== tidalQualityLabel ===
+ 77           0 LOAD_GLOBAL              0 (tidalNormalizeQualityValue)
+              2 LOAD_FAST                0 (quality)
+              4 LOAD_CONST               1 (True)
+              6 CALL_FUNCTION            2
+              8 STORE_FAST               1 (normalized)
+
+ 78          10 LOAD_GLOBAL              1 (TIDAL_QUALITY_LABELS)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_FAST                1 (normalized)
+             16 LOAD_GLOBAL              1 (TIDAL_QUALITY_LABELS)
+             18 LOAD_GLOBAL              3 (TIDAL_FALLBACK_QUALITY)
+             20 BINARY_SUBSCR
+             22 CALL_METHOD              2
+             24 RETURN_VALUE
+
+=== tidalQualityOptions ===
+ 88           0 LOAD_GLOBAL              0 (bool)
+              2 LOAD_FAST                0 (maxSupported)
+              4 CALL_FUNCTION            1
+              6 POP_JUMP_IF_FALSE       16
+              8 BUILD_LIST               0
+             10 LOAD_CONST               1 ((0, 1, 2, 3))
+             12 LIST_EXTEND              1
+             14 JUMP_FORWARD             6 (to 22)
+        >>   16 BUILD_LIST               0
+             18 LOAD_CONST               2 ((0, 1, 2))
+             20 LIST_EXTEND              1
+        >>   22 STORE_FAST               1 (values)
+
+ 89          24 LOAD_CONST               3 (<code object <listcomp> at 0x000001F3253C4B30, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 89>)
+             26 LOAD_CONST               4 ('tidalQualityOptions.<locals>.<listcomp>')
+             28 MAKE_FUNCTION            0
+             30 LOAD_FAST                1 (values)
+             32 GET_ITER
+             34 CALL_FUNCTION            1
+             36 RETURN_VALUE
+
+=== tidalQualityOptions.<listcomp> ===
+ 89           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                16 (to 22)
+              6 STORE_FAST               1 (value)
+              8 LOAD_FAST                1 (value)
+             10 LOAD_GLOBAL              0 (TIDAL_QUALITY_LABELS)
+             12 LOAD_FAST                1 (value)
+             14 BINARY_SUBSCR
+             16 BUILD_TUPLE              2
+             18 LIST_APPEND              2
+             20 JUMP_ABSOLUTE            4
+        >>   22 RETURN_VALUE
+
+=== tidalNormalizeQualityValue ===
+100           0 SETUP_FINALLY           20 (to 22)
+
+101           2 LOAD_GLOBAL              0 (int)
+              4 LOAD_GLOBAL              1 (str)
+              6 LOAD_FAST                0 (quality)
+              8 CALL_FUNCTION            1
+             10 LOAD_METHOD              2 (strip)
+             12 CALL_METHOD              0
+             14 CALL_FUNCTION            1
+             16 STORE_FAST               2 (value)
+             18 POP_BLOCK
+             20 JUMP_FORWARD            22 (to 44)
+
+102     >>   22 DUP_TOP
+             24 LOAD_GLOBAL              3 (Exception)
+             26 JUMP_IF_NOT_EXC_MATCH    42
+             28 POP_TOP
+             30 POP_TOP
+             32 POP_TOP
+
+103          34 LOAD_GLOBAL              4 (TIDAL_DEFAULT_QUALITY)
+             36 STORE_FAST               2 (value)
+             38 POP_EXCEPT
+             40 JUMP_FORWARD             2 (to 44)
+        >>   42 RERAISE
+
+104     >>   44 LOAD_FAST                2 (value)
+             46 LOAD_GLOBAL              5 (TIDAL_QUALITY_LABELS)
+             48 CONTAINS_OP              1
+             50 POP_JUMP_IF_FALSE       56
+
+105          52 LOAD_GLOBAL              4 (TIDAL_DEFAULT_QUALITY)
+             54 STORE_FAST               2 (value)
+
+106     >>   56 LOAD_FAST                2 (value)
+             58 LOAD_GLOBAL              4 (TIDAL_DEFAULT_QUALITY)
+             60 COMPARE_OP               5 (>=)
+             62 POP_JUMP_IF_FALSE       76
+             64 LOAD_GLOBAL              6 (bool)
+             66 LOAD_FAST                1 (maxSupported)
+             68 CALL_FUNCTION            1
+             70 POP_JUMP_IF_TRUE        76
+
+107          72 LOAD_GLOBAL              7 (TIDAL_FALLBACK_QUALITY)
+             74 RETURN_VALUE
+
+108     >>   76 LOAD_FAST                2 (value)
+             78 RETURN_VALUE
+
+=== tidalReplayGainLabel ===
+118           0 LOAD_GLOBAL              0 (tidalNormalizeReplayGainValue)
+              2 LOAD_FAST                0 (value)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               1 (normalized)
+
+119           8 LOAD_GLOBAL              1 (TIDAL_REPLAY_GAIN_LABELS)
+             10 LOAD_METHOD              2 (get)
+             12 LOAD_FAST                1 (normalized)
+             14 LOAD_GLOBAL              1 (TIDAL_REPLAY_GAIN_LABELS)
+             16 LOAD_CONST               1 (0)
+             18 BINARY_SUBSCR
+             20 CALL_METHOD              2
+             22 RETURN_VALUE
+
+=== tidalReplayGainValueForLabel ===
+129           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (label)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               1 (normalized_label)
+
+130          16 LOAD_GLOBAL              2 (TIDAL_REPLAY_GAIN_LABELS)
+             18 LOAD_METHOD              3 (items)
+             20 CALL_METHOD              0
+             22 GET_ITER
+        >>   24 FOR_ITER                24 (to 50)
+             26 UNPACK_SEQUENCE          2
+             28 STORE_FAST               2 (value)
+             30 STORE_FAST               3 (text)
+
+131          32 LOAD_FAST                1 (normalized_label)
+             34 LOAD_FAST                3 (text)
+             36 COMPARE_OP               2 (==)
+             38 POP_JUMP_IF_FALSE       24
+
+132          40 LOAD_FAST                2 (value)
+             42 ROT_TWO
+             44 POP_TOP
+             46 RETURN_VALUE
+             48 JUMP_ABSOLUTE           24
+
+133     >>   50 LOAD_CONST               2 (0)
+             52 RETURN_VALUE
+
+=== tidalNormalizeReplayGainValue ===
+143           0 SETUP_FINALLY           20 (to 22)
+
+144           2 LOAD_GLOBAL              0 (int)
+              4 LOAD_GLOBAL              1 (str)
+              6 LOAD_FAST                0 (value)
+              8 CALL_FUNCTION            1
+             10 LOAD_METHOD              2 (strip)
+             12 CALL_METHOD              0
+             14 CALL_FUNCTION            1
+             16 STORE_FAST               1 (normalized)
+             18 POP_BLOCK
+             20 JUMP_FORWARD            22 (to 44)
+
+145     >>   22 DUP_TOP
+             24 LOAD_GLOBAL              3 (Exception)
+             26 JUMP_IF_NOT_EXC_MATCH    42
+             28 POP_TOP
+             30 POP_TOP
+             32 POP_TOP
+
+146          34 LOAD_CONST               1 (0)
+             36 STORE_FAST               1 (normalized)
+             38 POP_EXCEPT
+             40 JUMP_FORWARD             2 (to 44)
+        >>   42 RERAISE
+
+147     >>   44 LOAD_FAST                1 (normalized)
+             46 LOAD_GLOBAL              4 (TIDAL_REPLAY_GAIN_LABELS)
+             48 CONTAINS_OP              1
+             50 POP_JUMP_IF_FALSE       56
+
+148          52 LOAD_CONST               1 (0)
+             54 RETURN_VALUE
+
+149     >>   56 LOAD_FAST                1 (normalized)
+             58 RETURN_VALUE
+
+=== tidalReadLocalQualityValue ===
+160           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPUtility)
+              4 LOAD_CONST               1 ('settings')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               2 (settings)
+
+161          12 LOAD_GLOBAL              2 (str)
+             14 LOAD_FAST                0 (userId)
+             16 JUMP_IF_TRUE_OR_POP     20
+             18 LOAD_CONST               3 ('')
+        >>   20 CALL_FUNCTION            1
+             22 LOAD_METHOD              3 (strip)
+             24 CALL_METHOD              0
+             26 STORE_FAST               3 (normalized_user_id)
+
+162          28 LOAD_FAST                2 (settings)
+             30 LOAD_CONST               2 (None)
+             32 IS_OP                    0
+             34 POP_JUMP_IF_TRUE        40
+             36 LOAD_FAST                3 (normalized_user_id)
+             38 POP_JUMP_IF_TRUE        50
+
+163     >>   40 LOAD_GLOBAL              4 (tidalNormalizeQualityValue)
+             42 LOAD_CONST               2 (None)
+             44 LOAD_FAST                1 (maxSupported)
+             46 CALL_FUNCTION            2
+             48 RETURN_VALUE
+
+164     >>   50 SETUP_FINALLY           48 (to 100)
+
+165          52 LOAD_FAST                2 (settings)
+             54 LOAD_METHOD              5 (beginGroup)
+             56 LOAD_GLOBAL              6 (LPPlayListSource)
+             58 LOAD_ATTR                7 (Tidal)
+             60 LOAD_ATTR                8 (value)
+             62 FORMAT_VALUE             0
+             64 LOAD_CONST               4 ('/')
+             66 LOAD_FAST                3 (normalized_user_id)
+             68 FORMAT_VALUE             0
+             70 BUILD_STRING             3
+             72 CALL_METHOD              1
+             74 POP_TOP
+
+166          76 LOAD_FAST                2 (settings)
+             78 LOAD_METHOD              8 (value)
+             80 LOAD_CONST               5 ('quality')
+             82 LOAD_CONST               2 (None)
+             84 CALL_METHOD              2
+             86 STORE_FAST               4 (raw_quality)
+
+167          88 LOAD_FAST                2 (settings)
+             90 LOAD_METHOD              9 (endGroup)
+             92 CALL_METHOD              0
+             94 POP_TOP
+             96 POP_BLOCK
+             98 JUMP_FORWARD            22 (to 122)
+
+168     >>  100 DUP_TOP
+            102 LOAD_GLOBAL             10 (Exception)
+            104 JUMP_IF_NOT_EXC_MATCH   120
+            106 POP_TOP
+            108 POP_TOP
+            110 POP_TOP
+
+169         112 LOAD_CONST               2 (None)
+            114 STORE_FAST               4 (raw_quality)
+            116 POP_EXCEPT
+            118 JUMP_FORWARD             2 (to 122)
+        >>  120 RERAISE
+
+170     >>  122 LOAD_GLOBAL              4 (tidalNormalizeQualityValue)
+            124 LOAD_FAST                4 (raw_quality)
+            126 LOAD_FAST                1 (maxSupported)
+            128 CALL_FUNCTION            2
+            130 RETURN_VALUE
+
+=== tidalSaveLocalQualityValue ===
+182           0 LOAD_GLOBAL              0 (tidalNormalizeQualityValue)
+              2 LOAD_FAST                1 (quality)
+              4 LOAD_FAST                2 (maxSupported)
+              6 CALL_FUNCTION            2
+              8 STORE_FAST               3 (normalized_quality)
+
+183          10 LOAD_GLOBAL              1 (getattr)
+             12 LOAD_GLOBAL              2 (LPUtility)
+             14 LOAD_CONST               1 ('settings')
+             16 LOAD_CONST               2 (None)
+             18 CALL_FUNCTION            3
+             20 STORE_FAST               4 (settings)
+
+184          22 LOAD_GLOBAL              3 (str)
+             24 LOAD_FAST                0 (userId)
+             26 JUMP_IF_TRUE_OR_POP     30
+             28 LOAD_CONST               3 ('')
+        >>   30 CALL_FUNCTION            1
+             32 LOAD_METHOD              4 (strip)
+             34 CALL_METHOD              0
+             36 STORE_FAST               5 (normalized_user_id)
+
+185          38 LOAD_FAST                4 (settings)
+             40 LOAD_CONST               2 (None)
+             42 IS_OP                    0
+             44 POP_JUMP_IF_TRUE        50
+             46 LOAD_FAST                5 (normalized_user_id)
+             48 POP_JUMP_IF_TRUE        54
+
+186     >>   50 LOAD_FAST                3 (normalized_quality)
+             52 RETURN_VALUE
+
+187     >>   54 SETUP_FINALLY           70 (to 126)
+
+188          56 LOAD_FAST                4 (settings)
+             58 LOAD_METHOD              5 (beginGroup)
+             60 LOAD_GLOBAL              6 (LPPlayListSource)
+             62 LOAD_ATTR                7 (Tidal)
+             64 LOAD_ATTR                8 (value)
+             66 FORMAT_VALUE             0
+             68 LOAD_CONST               4 ('/')
+             70 LOAD_FAST                5 (normalized_user_id)
+             72 FORMAT_VALUE             0
+             74 BUILD_STRING             3
+             76 CALL_METHOD              1
+             78 POP_TOP
+
+189          80 LOAD_FAST                4 (settings)
+             82 LOAD_METHOD              9 (setValue)
+             84 LOAD_CONST               5 ('quality')
+             86 LOAD_GLOBAL             10 (int)
+             88 LOAD_FAST                3 (normalized_quality)
+             90 CALL_FUNCTION            1
+             92 CALL_METHOD              2
+             94 POP_TOP
+
+190          96 LOAD_FAST                4 (settings)
+             98 LOAD_METHOD             11 (endGroup)
+            100 CALL_METHOD              0
+            102 POP_TOP
+
+191         104 LOAD_GLOBAL             12 (hasattr)
+            106 LOAD_FAST                4 (settings)
+            108 LOAD_CONST               6 ('sync')
+            110 CALL_FUNCTION            2
+            112 POP_JUMP_IF_FALSE      122
+
+192         114 LOAD_FAST                4 (settings)
+            116 LOAD_METHOD             13 (sync)
+            118 CALL_METHOD              0
+            120 POP_TOP
+        >>  122 POP_BLOCK
+            124 JUMP_FORWARD            18 (to 144)
+
+193     >>  126 DUP_TOP
+            128 LOAD_GLOBAL             14 (Exception)
+            130 JUMP_IF_NOT_EXC_MATCH   142
+            132 POP_TOP
+            134 POP_TOP
+            136 POP_TOP
+
+194         138 POP_EXCEPT
+            140 JUMP_FORWARD             2 (to 144)
+        >>  142 RERAISE
+
+195     >>  144 LOAD_FAST                3 (normalized_quality)
+            146 RETURN_VALUE
+
+=== tidalReadLocalReplayGainValue ===
+205           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPUtility)
+              4 LOAD_CONST               1 ('settings')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               1 (settings)
+
+206          12 LOAD_GLOBAL              2 (str)
+             14 LOAD_FAST                0 (userId)
+             16 JUMP_IF_TRUE_OR_POP     20
+             18 LOAD_CONST               3 ('')
+        >>   20 CALL_FUNCTION            1
+             22 LOAD_METHOD              3 (strip)
+             24 CALL_METHOD              0
+             26 STORE_FAST               2 (normalized_user_id)
+
+207          28 LOAD_FAST                1 (settings)
+             30 LOAD_CONST               2 (None)
+             32 IS_OP                    0
+             34 POP_JUMP_IF_TRUE        40
+             36 LOAD_FAST                2 (normalized_user_id)
+             38 POP_JUMP_IF_TRUE        44
+
+208     >>   40 LOAD_CONST               4 (0)
+             42 RETURN_VALUE
+
+209     >>   44 SETUP_FINALLY           48 (to 94)
+
+210          46 LOAD_FAST                1 (settings)
+             48 LOAD_METHOD              4 (beginGroup)
+             50 LOAD_GLOBAL              5 (LPPlayListSource)
+             52 LOAD_ATTR                6 (Tidal)
+             54 LOAD_ATTR                7 (value)
+             56 FORMAT_VALUE             0
+             58 LOAD_CONST               5 ('/')
+             60 LOAD_FAST                2 (normalized_user_id)
+             62 FORMAT_VALUE             0
+             64 BUILD_STRING             3
+             66 CALL_METHOD              1
+             68 POP_TOP
+
+211          70 LOAD_FAST                1 (settings)
+             72 LOAD_METHOD              7 (value)
+             74 LOAD_CONST               6 ('replayGain')
+             76 LOAD_CONST               2 (None)
+             78 CALL_METHOD              2
+             80 STORE_FAST               3 (raw_value)
+
+212          82 LOAD_FAST                1 (settings)
+             84 LOAD_METHOD              8 (endGroup)
+             86 CALL_METHOD              0
+             88 POP_TOP
+             90 POP_BLOCK
+             92 JUMP_FORWARD            22 (to 116)
+
+213     >>   94 DUP_TOP
+             96 LOAD_GLOBAL              9 (Exception)
+             98 JUMP_IF_NOT_EXC_MATCH   114
+            100 POP_TOP
+            102 POP_TOP
+            104 POP_TOP
+
+214         106 LOAD_CONST               2 (None)
+            108 STORE_FAST               3 (raw_value)
+            110 POP_EXCEPT
+            112 JUMP_FORWARD             2 (to 116)
+        >>  114 RERAISE
+
+215     >>  116 LOAD_GLOBAL             10 (tidalNormalizeReplayGainValue)
+            118 LOAD_FAST                3 (raw_value)
+            120 CALL_FUNCTION            1
+            122 RETURN_VALUE
+
+=== tidalSaveLocalReplayGainValue ===
+226           0 LOAD_GLOBAL              0 (tidalNormalizeReplayGainValue)
+              2 LOAD_FAST                1 (replayGain)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               2 (normalized_replay_gain)
+
+227           8 LOAD_GLOBAL              1 (getattr)
+             10 LOAD_GLOBAL              2 (LPUtility)
+             12 LOAD_CONST               1 ('settings')
+             14 LOAD_CONST               2 (None)
+             16 CALL_FUNCTION            3
+             18 STORE_FAST               3 (settings)
+
+228          20 LOAD_GLOBAL              3 (str)
+             22 LOAD_FAST                0 (userId)
+             24 JUMP_IF_TRUE_OR_POP     28
+             26 LOAD_CONST               3 ('')
+        >>   28 CALL_FUNCTION            1
+             30 LOAD_METHOD              4 (strip)
+             32 CALL_METHOD              0
+             34 STORE_FAST               4 (normalized_user_id)
+
+229          36 LOAD_FAST                3 (settings)
+             38 LOAD_CONST               2 (None)
+             40 IS_OP                    0
+             42 POP_JUMP_IF_TRUE        48
+             44 LOAD_FAST                4 (normalized_user_id)
+             46 POP_JUMP_IF_TRUE        52
+
+230     >>   48 LOAD_FAST                2 (normalized_replay_gain)
+             50 RETURN_VALUE
+
+231     >>   52 SETUP_FINALLY           70 (to 124)
+
+232          54 LOAD_FAST                3 (settings)
+             56 LOAD_METHOD              5 (beginGroup)
+             58 LOAD_GLOBAL              6 (LPPlayListSource)
+             60 LOAD_ATTR                7 (Tidal)
+             62 LOAD_ATTR                8 (value)
+             64 FORMAT_VALUE             0
+             66 LOAD_CONST               4 ('/')
+             68 LOAD_FAST                4 (normalized_user_id)
+             70 FORMAT_VALUE             0
+             72 BUILD_STRING             3
+             74 CALL_METHOD              1
+             76 POP_TOP
+
+233          78 LOAD_FAST                3 (settings)
+             80 LOAD_METHOD              9 (setValue)
+             82 LOAD_CONST               5 ('replayGain')
+             84 LOAD_GLOBAL             10 (int)
+             86 LOAD_FAST                2 (normalized_replay_gain)
+             88 CALL_FUNCTION            1
+             90 CALL_METHOD              2
+             92 POP_TOP
+
+234          94 LOAD_FAST                3 (settings)
+             96 LOAD_METHOD             11 (endGroup)
+             98 CALL_METHOD              0
+            100 POP_TOP
+
+235         102 LOAD_GLOBAL             12 (hasattr)
+            104 LOAD_FAST                3 (settings)
+            106 LOAD_CONST               6 ('sync')
+            108 CALL_FUNCTION            2
+            110 POP_JUMP_IF_FALSE      120
+
+236         112 LOAD_FAST                3 (settings)
+            114 LOAD_METHOD             13 (sync)
+            116 CALL_METHOD              0
+            118 POP_TOP
+        >>  120 POP_BLOCK
+            122 JUMP_FORWARD            18 (to 142)
+
+237     >>  124 DUP_TOP
+            126 LOAD_GLOBAL             14 (Exception)
+            128 JUMP_IF_NOT_EXC_MATCH   140
+            130 POP_TOP
+            132 POP_TOP
+            134 POP_TOP
+
+238         136 POP_EXCEPT
+            138 JUMP_FORWARD             2 (to 142)
+        >>  140 RERAISE
+
+239     >>  142 LOAD_FAST                2 (normalized_replay_gain)
+            144 RETURN_VALUE
+
+=== tidalSubscriptionExtra ===
+249           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (subscription)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+250          10 BUILD_MAP                0
+             12 RETURN_VALUE
+
+251     >>   14 LOAD_FAST                0 (subscription)
+             16 LOAD_METHOD              2 (get)
+             18 LOAD_CONST               1 ('extra')
+             20 BUILD_MAP                0
+             22 CALL_METHOD              2
+             24 STORE_FAST               1 (extra)
+
+252          26 LOAD_GLOBAL              0 (isinstance)
+             28 LOAD_FAST                1 (extra)
+             30 LOAD_GLOBAL              1 (dict)
+             32 CALL_FUNCTION            2
+             34 POP_JUMP_IF_FALSE       44
+
+253          36 LOAD_GLOBAL              1 (dict)
+             38 LOAD_FAST                1 (extra)
+             40 CALL_FUNCTION            1
+             42 RETURN_VALUE
+
+254     >>   44 BUILD_MAP                0
+             46 RETURN_VALUE
+
+=== tidalSubscriptionSupportsMax ===
+264           0 LOAD_GLOBAL              0 (tidalSubscriptionExtra)
+              2 LOAD_FAST                0 (subscription)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               1 (extra)
+
+265           8 LOAD_GLOBAL              1 (str)
+             10 LOAD_FAST                1 (extra)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_CONST               1 ('highestSoundQuality')
+             16 LOAD_CONST               2 ('')
+             18 CALL_METHOD              2
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               2 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              3 (strip)
+             28 CALL_METHOD              0
+             30 LOAD_METHOD              4 (upper)
+             32 CALL_METHOD              0
+             34 STORE_FAST               2 (quality)
+
+266          36 LOAD_FAST                2 (quality)
+             38 LOAD_CONST               3 ('HI_RES')
+             40 COMPARE_OP               2 (==)
+             42 RETURN_VALUE
+
+=== tidalSubscriptionLabel ===
+276           0 LOAD_GLOBAL              0 (tidalSubscriptionExtra)
+              2 LOAD_FAST                0 (subscription)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               1 (extra)
+
+277           8 LOAD_FAST                1 (extra)
+             10 LOAD_METHOD              1 (get)
+             12 LOAD_CONST               1 ('premiumAccess')
+             14 LOAD_CONST               2 (None)
+             16 CALL_METHOD              2
+             18 STORE_FAST               2 (premium_access)
+
+278          20 LOAD_FAST                2 (premium_access)
+             22 LOAD_CONST               3 (False)
+             24 IS_OP                    0
+             26 POP_JUMP_IF_FALSE       32
+
+279          28 LOAD_CONST               4 ('Free')
+             30 RETURN_VALUE
+
+280     >>   32 LOAD_FAST                2 (premium_access)
+             34 LOAD_CONST               5 (True)
+             36 IS_OP                    0
+             38 POP_JUMP_IF_FALSE       44
+
+281          40 LOAD_CONST               6 ('TIDAL Streaming Service')
+             42 RETURN_VALUE
+
+282     >>   44 LOAD_GLOBAL              2 (isinstance)
+             46 LOAD_FAST                0 (subscription)
+             48 LOAD_GLOBAL              3 (str)
+             50 CALL_FUNCTION            2
+             52 POP_JUMP_IF_FALSE       66
+
+283          54 LOAD_FAST                0 (subscription)
+             56 LOAD_METHOD              4 (strip)
+             58 CALL_METHOD              0
+             60 JUMP_IF_TRUE_OR_POP     64
+             62 LOAD_CONST               7 ('--')
+        >>   64 RETURN_VALUE
+
+284     >>   66 LOAD_GLOBAL              2 (isinstance)
+             68 LOAD_FAST                0 (subscription)
+             70 LOAD_GLOBAL              5 (dict)
+             72 CALL_FUNCTION            2
+             74 POP_JUMP_IF_FALSE      100
+             76 LOAD_GLOBAL              3 (str)
+             78 LOAD_FAST                0 (subscription)
+             80 LOAD_METHOD              1 (get)
+             82 LOAD_CONST               8 ('title')
+             84 LOAD_CONST               9 ('')
+             86 CALL_METHOD              2
+             88 JUMP_IF_TRUE_OR_POP     92
+             90 LOAD_CONST               9 ('')
+        >>   92 CALL_FUNCTION            1
+             94 LOAD_METHOD              4 (strip)
+             96 CALL_METHOD              0
+             98 JUMP_FORWARD             2 (to 102)
+        >>  100 LOAD_CONST               9 ('')
+        >>  102 STORE_FAST               3 (title)
+
+285         104 LOAD_FAST                3 (title)
+            106 JUMP_IF_TRUE_OR_POP    110
+            108 LOAD_CONST               7 ('--')
+        >>  110 RETURN_VALUE
+
+=== tidalRecentlySeeAllSectionKey ===
+299           0 LOAD_FAST                0 (playList)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        24
+              8 LOAD_GLOBAL              0 (getattr)
+             10 LOAD_FAST                0 (playList)
+             12 LOAD_CONST               2 ('header')
+             14 LOAD_CONST               1 (None)
+             16 CALL_FUNCTION            3
+             18 LOAD_CONST               1 (None)
+             20 IS_OP                    0
+             22 POP_JUMP_IF_FALSE       28
+
+300     >>   24 LOAD_CONST               3 ('')
+             26 RETURN_VALUE
+
+302     >>   28 LOAD_FAST                0 (playList)
+             30 LOAD_ATTR                1 (header)
+             32 STORE_FAST               1 (header)
+
+305          34 LOAD_GLOBAL              2 (str)
+             36 LOAD_GLOBAL              0 (getattr)
+             38 LOAD_FAST                1 (header)
+             40 LOAD_CONST               4 ('streamType')
+             42 LOAD_CONST               3 ('')
+             44 CALL_FUNCTION            3
+             46 JUMP_IF_TRUE_OR_POP     50
+             48 LOAD_CONST               3 ('')
+        >>   50 CALL_FUNCTION            1
+             52 LOAD_METHOD              3 (strip)
+             54 CALL_METHOD              0
+             56 LOAD_METHOD              4 (lower)
+             58 CALL_METHOD              0
+             60 STORE_FAST               2 (stream_type)
+
+306          62 LOAD_FAST                2 (stream_type)
+             64 LOAD_GLOBAL              5 (TIDAL_RECENTLY_SEE_ALL_STREAM_TYPES)
+             66 CONTAINS_OP              1
+             68 POP_JUMP_IF_FALSE       74
+
+307          70 LOAD_CONST               3 ('')
+             72 RETURN_VALUE
+
+308     >>   74 LOAD_GLOBAL              2 (str)
+             76 LOAD_GLOBAL              0 (getattr)
+             78 LOAD_FAST                1 (header)
+             80 LOAD_CONST               5 ('headId')
+             82 LOAD_CONST               3 ('')
+             84 CALL_FUNCTION            3
+             86 JUMP_IF_TRUE_OR_POP    102
+             88 LOAD_GLOBAL              0 (getattr)
+             90 LOAD_FAST                1 (header)
+             92 LOAD_CONST               6 ('streamId')
+             94 LOAD_CONST               3 ('')
+             96 CALL_FUNCTION            3
+             98 JUMP_IF_TRUE_OR_POP    102
+            100 LOAD_CONST               3 ('')
+        >>  102 CALL_FUNCTION            1
+            104 LOAD_METHOD              3 (strip)
+            106 CALL_METHOD              0
+            108 STORE_FAST               3 (section_key)
+
+309         110 LOAD_FAST                3 (section_key)
+            112 POP_JUMP_IF_TRUE       118
+
+310         114 LOAD_CONST               3 ('')
+            116 RETURN_VALUE
+
+311     >>  118 LOAD_FAST                3 (section_key)
+            120 LOAD_GLOBAL              6 (TIDAL_RECENTLY_SEE_ALL_SECTION_KEYS)
+            122 CONTAINS_OP              0
+            124 POP_JUMP_IF_FALSE      130
+
+312         126 LOAD_FAST                3 (section_key)
+            128 RETURN_VALUE
+
+313     >>  130 LOAD_FAST                3 (section_key)
+            132 LOAD_METHOD              7 (startswith)
+            134 LOAD_CONST               7 ('featured-')
+            136 CALL_METHOD              1
+            138 POP_JUMP_IF_FALSE      154
+            140 LOAD_FAST                3 (section_key)
+            142 LOAD_METHOD              8 (endswith)
+            144 LOAD_CONST               8 ('-tracks')
+            146 CALL_METHOD              1
+            148 POP_JUMP_IF_FALSE      154
+
+314         150 LOAD_FAST                3 (section_key)
+            152 RETURN_VALUE
+
+315     >>  154 LOAD_CONST               3 ('')
+            156 RETURN_VALUE
+
+=== tidalRecentlyNavigationType ===
+326           0 LOAD_FAST                0 (playList)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        24
+              8 LOAD_GLOBAL              0 (getattr)
+             10 LOAD_FAST                0 (playList)
+             12 LOAD_CONST               2 ('header')
+             14 LOAD_CONST               1 (None)
+             16 CALL_FUNCTION            3
+             18 LOAD_CONST               1 (None)
+             20 IS_OP                    0
+             22 POP_JUMP_IF_FALSE       28
+
+327     >>   24 LOAD_CONST               1 (None)
+             26 RETURN_VALUE
+
+329     >>   28 LOAD_GLOBAL              1 (tidalRecentlySeeAllSectionKey)
+             30 LOAD_FAST                0 (playList)
+             32 CALL_FUNCTION            1
+             34 POP_JUMP_IF_FALSE       40
+
+330          36 LOAD_GLOBAL              2 (TIDAL_RECENTLY_NAVIGATION_SEE_ALL)
+             38 RETURN_VALUE
+
+332     >>   40 LOAD_FAST                0 (playList)
+             42 LOAD_ATTR                3 (header)
+             44 STORE_FAST               1 (header)
+
+333          46 LOAD_GLOBAL              0 (getattr)
+             48 LOAD_FAST                0 (playList)
+             50 LOAD_CONST               3 ('list')
+             52 LOAD_CONST               1 (None)
+             54 CALL_FUNCTION            3
+             56 JUMP_IF_TRUE_OR_POP     60
+             58 BUILD_LIST               0
+        >>   60 STORE_FAST               2 (items)
+
+334          62 LOAD_GLOBAL              0 (getattr)
+             64 LOAD_FAST                0 (playList)
+             66 LOAD_CONST               4 ('index')
+             68 LOAD_CONST               5 (0)
+             70 CALL_FUNCTION            3
+             72 JUMP_IF_TRUE_OR_POP     76
+             74 LOAD_CONST               5 (0)
+        >>   76 STORE_FAST               3 (index)
+
+335          78 SETUP_FINALLY           12 (to 92)
+
+336          80 LOAD_GLOBAL              4 (int)
+             82 LOAD_FAST                3 (index)
+             84 CALL_FUNCTION            1
+             86 STORE_FAST               3 (index)
+             88 POP_BLOCK
+             90 JUMP_FORWARD            26 (to 118)
+
+337     >>   92 DUP_TOP
+             94 LOAD_GLOBAL              5 (TypeError)
+             96 LOAD_GLOBAL              6 (ValueError)
+             98 BUILD_TUPLE              2
+            100 JUMP_IF_NOT_EXC_MATCH   116
+            102 POP_TOP
+            104 POP_TOP
+            106 POP_TOP
+
+338         108 LOAD_CONST               5 (0)
+            110 STORE_FAST               3 (index)
+            112 POP_EXCEPT
+            114 JUMP_FORWARD             2 (to 118)
+        >>  116 RERAISE
+
+339     >>  118 LOAD_FAST                2 (items)
+            120 POP_JUMP_IF_FALSE      158
+            122 LOAD_CONST               5 (0)
+            124 LOAD_FAST                3 (index)
+            126 DUP_TOP
+            128 ROT_THREE
+            130 COMPARE_OP               1 (<=)
+            132 POP_JUMP_IF_FALSE      146
+            134 LOAD_GLOBAL              7 (len)
+            136 LOAD_FAST                2 (items)
+            138 CALL_FUNCTION            1
+            140 COMPARE_OP               0 (<)
+            142 POP_JUMP_IF_FALSE      158
+            144 JUMP_FORWARD             4 (to 150)
+        >>  146 POP_TOP
+            148 JUMP_FORWARD             8 (to 158)
+        >>  150 LOAD_FAST                2 (items)
+            152 LOAD_FAST                3 (index)
+            154 BINARY_SUBSCR
+            156 JUMP_FORWARD             2 (to 160)
+        >>  158 LOAD_CONST               1 (None)
+        >>  160 STORE_FAST               4 (current_item)
+
+341         162 LOAD_GLOBAL              8 (str)
+            164 LOAD_GLOBAL              0 (getattr)
+            166 LOAD_FAST                1 (header)
+            168 LOAD_CONST               6 ('searchUrl')
+            170 LOAD_CONST               7 ('')
+            172 CALL_FUNCTION            3
+            174 JUMP_IF_TRUE_OR_POP    178
+            176 LOAD_CONST               7 ('')
+        >>  178 CALL_FUNCTION            1
+            180 LOAD_METHOD              9 (strip)
+            182 CALL_METHOD              0
+            184 STORE_FAST               5 (search_url)
+
+342         186 LOAD_GLOBAL              8 (str)
+            188 LOAD_GLOBAL              0 (getattr)
+            190 LOAD_FAST                1 (header)
+            192 LOAD_CONST               8 ('streamId')
+            194 LOAD_CONST               7 ('')
+            196 CALL_FUNCTION            3
+            198 JUMP_IF_TRUE_OR_POP    214
+            200 LOAD_GLOBAL              0 (getattr)
+            202 LOAD_FAST                1 (header)
+            204 LOAD_CONST               9 ('headId')
+            206 LOAD_CONST               7 ('')
+            208 CALL_FUNCTION            3
+            210 JUMP_IF_TRUE_OR_POP    214
+            212 LOAD_CONST               7 ('')
+        >>  214 CALL_FUNCTION            1
+            216 LOAD_METHOD              9 (strip)
+            218 CALL_METHOD              0
+            220 STORE_FAST               6 (context_id)
+
+344         222 LOAD_CONST              10 ('/moods/')
+            224 LOAD_FAST                5 (search_url)
+            226 CONTAINS_OP              0
+            228 POP_JUMP_IF_FALSE      242
+
+345         230 LOAD_FAST                6 (context_id)
+            232 POP_JUMP_IF_FALSE      238
+            234 LOAD_CONST              11 ('mood')
+            236 RETURN_VALUE
+        >>  238 LOAD_CONST               1 (None)
+            240 RETURN_VALUE
+
+346     >>  242 LOAD_CONST              12 ('/genres/')
+            244 LOAD_FAST                5 (search_url)
+            246 CONTAINS_OP              0
+            248 EXTENDED_ARG             1
+            250 POP_JUMP_IF_FALSE      266
+
+347         252 LOAD_FAST                6 (context_id)
+            254 EXTENDED_ARG             1
+            256 POP_JUMP_IF_FALSE      262
+            258 LOAD_CONST              13 ('genre')
+            260 RETURN_VALUE
+        >>  262 LOAD_CONST               1 (None)
+            264 RETURN_VALUE
+
+348     >>  266 LOAD_CONST              14 ('/mixes/')
+            268 LOAD_FAST                5 (search_url)
+            270 CONTAINS_OP              0
+            272 EXTENDED_ARG             1
+            274 POP_JUMP_IF_FALSE      290
+
+349         276 LOAD_FAST                6 (context_id)
+            278 EXTENDED_ARG             1
+            280 POP_JUMP_IF_FALSE      286
+            282 LOAD_CONST              15 ('mix')
+            284 RETURN_VALUE
+        >>  286 LOAD_CONST               1 (None)
+            288 RETURN_VALUE
+
+350     >>  290 LOAD_CONST              16 ('/playlists/')
+            292 LOAD_FAST                5 (search_url)
+            294 CONTAINS_OP              0
+            296 EXTENDED_ARG             1
+            298 POP_JUMP_IF_FALSE      314
+
+351         300 LOAD_FAST                6 (context_id)
+            302 EXTENDED_ARG             1
+            304 POP_JUMP_IF_FALSE      310
+            306 LOAD_CONST              17 ('playlist')
+            308 RETURN_VALUE
+        >>  310 LOAD_CONST               1 (None)
+            312 RETURN_VALUE
+
+352     >>  314 LOAD_CONST              18 ('/artists/')
+            316 LOAD_FAST                5 (search_url)
+            318 CONTAINS_OP              0
+            320 EXTENDED_ARG             1
+            322 POP_JUMP_IF_FALSE      362
+
+353         324 LOAD_CONST              19 ('/radio')
+            326 LOAD_FAST                5 (search_url)
+            328 CONTAINS_OP              0
+            330 EXTENDED_ARG             1
+            332 POP_JUMP_IF_FALSE      348
+
+354         334 LOAD_FAST                6 (context_id)
+            336 EXTENDED_ARG             1
+            338 POP_JUMP_IF_FALSE      344
+            340 LOAD_CONST              20 ('artist_radio')
+            342 RETURN_VALUE
+        >>  344 LOAD_CONST               1 (None)
+            346 RETURN_VALUE
+
+355     >>  348 LOAD_FAST                6 (context_id)
+            350 EXTENDED_ARG             1
+            352 POP_JUMP_IF_FALSE      358
+            354 LOAD_CONST              21 ('artist')
+            356 RETURN_VALUE
+        >>  358 LOAD_CONST               1 (None)
+            360 RETURN_VALUE
+
+357     >>  362 LOAD_GLOBAL              8 (str)
+            364 LOAD_GLOBAL              0 (getattr)
+            366 LOAD_FAST                1 (header)
+            368 LOAD_CONST              22 ('streamType')
+            370 LOAD_CONST               7 ('')
+            372 CALL_FUNCTION            3
+            374 EXTENDED_ARG             1
+            376 JUMP_IF_TRUE_OR_POP    380
+            378 LOAD_CONST               7 ('')
+        >>  380 CALL_FUNCTION            1
+            382 LOAD_METHOD              9 (strip)
+            384 CALL_METHOD              0
+            386 LOAD_METHOD             10 (lower)
+            388 CALL_METHOD              0
+            390 STORE_FAST               7 (stream_type)
+
+358         392 LOAD_CONST              23 ('/albums/')
+            394 LOAD_FAST                5 (search_url)
+            396 CONTAINS_OP              0
+            398 EXTENDED_ARG             1
+            400 POP_JUMP_IF_TRUE       412
+            402 LOAD_FAST                7 (stream_type)
+            404 LOAD_CONST              24 ('album')
+            406 COMPARE_OP               2 (==)
+            408 EXTENDED_ARG             1
+            410 POP_JUMP_IF_FALSE      472
+
+359     >>  412 LOAD_FAST                6 (context_id)
+            414 STORE_FAST               8 (album_id)
+
+360         416 LOAD_FAST                8 (album_id)
+            418 EXTENDED_ARG             1
+            420 POP_JUMP_IF_TRUE       458
+            422 LOAD_FAST                4 (current_item)
+            424 LOAD_CONST               1 (None)
+            426 IS_OP                    1
+            428 EXTENDED_ARG             1
+            430 POP_JUMP_IF_FALSE      458
+
+361         432 LOAD_GLOBAL              8 (str)
+            434 LOAD_GLOBAL              0 (getattr)
+            436 LOAD_FAST                4 (current_item)
+            438 LOAD_CONST              25 ('albumId')
+            440 LOAD_CONST               7 ('')
+            442 CALL_FUNCTION            3
+            444 EXTENDED_ARG             1
+            446 JUMP_IF_TRUE_OR_POP    450
+            448 LOAD_CONST               7 ('')
+        >>  450 CALL_FUNCTION            1
+            452 LOAD_METHOD              9 (strip)
+            454 CALL_METHOD              0
+            456 STORE_FAST               8 (album_id)
+
+362     >>  458 LOAD_FAST                8 (album_id)
+            460 EXTENDED_ARG             1
+            462 POP_JUMP_IF_FALSE      468
+            464 LOAD_CONST              24 ('album')
+            466 RETURN_VALUE
+        >>  468 LOAD_CONST               1 (None)
+            470 RETURN_VALUE
+
+363     >>  472 LOAD_FAST                7 (stream_type)
+            474 LOAD_CONST              21 ('artist')
+            476 COMPARE_OP               2 (==)
+            478 EXTENDED_ARG             2
+            480 POP_JUMP_IF_FALSE      542
+
+364         482 LOAD_FAST                6 (context_id)
+            484 STORE_FAST               9 (artist_id)
+
+365         486 LOAD_FAST                9 (artist_id)
+            488 EXTENDED_ARG             2
+            490 POP_JUMP_IF_TRUE       528
+            492 LOAD_FAST                4 (current_item)
+            494 LOAD_CONST               1 (None)
+            496 IS_OP                    1
+            498 EXTENDED_ARG             2
+            500 POP_JUMP_IF_FALSE      528
+
+366         502 LOAD_GLOBAL              8 (str)
+            504 LOAD_GLOBAL              0 (getattr)
+            506 LOAD_FAST                4 (current_item)
+            508 LOAD_CONST              26 ('artistId')
+            510 LOAD_CONST               7 ('')
+            512 CALL_FUNCTION            3
+            514 EXTENDED_ARG             2
+            516 JUMP_IF_TRUE_OR_POP    520
+            518 LOAD_CONST               7 ('')
+        >>  520 CALL_FUNCTION            1
+            522 LOAD_METHOD              9 (strip)
+            524 CALL_METHOD              0
+            526 STORE_FAST               9 (artist_id)
+
+367     >>  528 LOAD_FAST                9 (artist_id)
+            530 EXTENDED_ARG             2
+            532 POP_JUMP_IF_FALSE      538
+            534 LOAD_CONST              21 ('artist')
+            536 RETURN_VALUE
+        >>  538 LOAD_CONST               1 (None)
+            540 RETURN_VALUE
+
+368     >>  542 LOAD_CONST               1 (None)
+            544 RETURN_VALUE
+
+=== tidalPlayingContextForPlaylist ===
+379           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_FAST                0 (playList)
+              4 LOAD_CONST               1 ('header')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               2 (header)
+
+380          12 LOAD_FAST                2 (header)
+             14 LOAD_CONST               2 (None)
+             16 IS_OP                    0
+             18 POP_JUMP_IF_FALSE       24
+
+381          20 LOAD_CONST               3 (('', ''))
+             22 RETURN_VALUE
+
+382     >>   24 LOAD_GLOBAL              1 (str)
+             26 LOAD_GLOBAL              0 (getattr)
+             28 LOAD_FAST                2 (header)
+             30 LOAD_CONST               4 ('searchUrl')
+             32 LOAD_CONST               5 ('')
+             34 CALL_FUNCTION            3
+             36 JUMP_IF_TRUE_OR_POP     40
+             38 LOAD_CONST               5 ('')
+        >>   40 CALL_FUNCTION            1
+             42 LOAD_METHOD              2 (strip)
+             44 CALL_METHOD              0
+             46 STORE_FAST               3 (search_url)
+
+383          48 LOAD_GLOBAL              1 (str)
+             50 LOAD_GLOBAL              0 (getattr)
+             52 LOAD_FAST                2 (header)
+             54 LOAD_CONST               6 ('streamType')
+             56 LOAD_CONST               5 ('')
+             58 CALL_FUNCTION            3
+             60 JUMP_IF_TRUE_OR_POP     64
+             62 LOAD_CONST               5 ('')
+        >>   64 CALL_FUNCTION            1
+             66 LOAD_METHOD              2 (strip)
+             68 CALL_METHOD              0
+             70 LOAD_METHOD              3 (lower)
+             72 CALL_METHOD              0
+             74 STORE_FAST               4 (stream_type)
+
+384          76 LOAD_GLOBAL              1 (str)
+             78 LOAD_GLOBAL              0 (getattr)
+             80 LOAD_FAST                2 (header)
+             82 LOAD_CONST               7 ('streamId')
+             84 LOAD_CONST               5 ('')
+             86 CALL_FUNCTION            3
+             88 JUMP_IF_TRUE_OR_POP    104
+             90 LOAD_GLOBAL              0 (getattr)
+             92 LOAD_FAST                2 (header)
+             94 LOAD_CONST               8 ('headId')
+             96 LOAD_CONST               5 ('')
+             98 CALL_FUNCTION            3
+            100 JUMP_IF_TRUE_OR_POP    104
+            102 LOAD_CONST               5 ('')
+        >>  104 CALL_FUNCTION            1
+            106 LOAD_METHOD              2 (strip)
+            108 CALL_METHOD              0
+            110 STORE_FAST               5 (context_id)
+
+385         112 LOAD_CONST               9 ('/mixes/')
+            114 LOAD_FAST                3 (search_url)
+            116 CONTAINS_OP              0
+            118 POP_JUMP_IF_FALSE      132
+            120 LOAD_FAST                5 (context_id)
+            122 POP_JUMP_IF_FALSE      132
+
+386         124 LOAD_CONST              10 ('mix')
+            126 LOAD_FAST                5 (context_id)
+            128 BUILD_TUPLE              2
+            130 RETURN_VALUE
+
+387     >>  132 LOAD_CONST              11 ('/playlists/')
+            134 LOAD_FAST                3 (search_url)
+            136 CONTAINS_OP              0
+            138 POP_JUMP_IF_FALSE      152
+            140 LOAD_FAST                5 (context_id)
+            142 POP_JUMP_IF_FALSE      152
+
+388         144 LOAD_CONST              12 ('playlist')
+            146 LOAD_FAST                5 (context_id)
+            148 BUILD_TUPLE              2
+            150 RETURN_VALUE
+
+389     >>  152 LOAD_CONST              13 ('/albums/')
+            154 LOAD_FAST                3 (search_url)
+            156 CONTAINS_OP              0
+            158 POP_JUMP_IF_FALSE      172
+            160 LOAD_FAST                5 (context_id)
+            162 POP_JUMP_IF_FALSE      172
+
+390         164 LOAD_CONST              14 ('album')
+            166 LOAD_FAST                5 (context_id)
+            168 BUILD_TUPLE              2
+            170 RETURN_VALUE
+
+391     >>  172 LOAD_FAST                4 (stream_type)
+            174 LOAD_CONST              14 ('album')
+            176 COMPARE_OP               2 (==)
+            178 POP_JUMP_IF_FALSE      192
+            180 LOAD_FAST                5 (context_id)
+            182 POP_JUMP_IF_FALSE      192
+
+392         184 LOAD_CONST              14 ('album')
+            186 LOAD_FAST                5 (context_id)
+            188 BUILD_TUPLE              2
+            190 RETURN_VALUE
+
+393     >>  192 LOAD_FAST                4 (stream_type)
+            194 LOAD_CONST              15 ('song')
+            196 COMPARE_OP               2 (==)
+            198 POP_JUMP_IF_FALSE      228
+
+394         200 LOAD_CONST              16 ('track')
+            202 LOAD_GLOBAL              1 (str)
+            204 LOAD_GLOBAL              0 (getattr)
+            206 LOAD_FAST                1 (playItem)
+            208 LOAD_CONST              17 ('trackId')
+            210 LOAD_CONST               5 ('')
+            212 CALL_FUNCTION            3
+            214 JUMP_IF_TRUE_OR_POP    218
+            216 LOAD_CONST               5 ('')
+        >>  218 CALL_FUNCTION            1
+            220 LOAD_METHOD              2 (strip)
+            222 CALL_METHOD              0
+            224 BUILD_TUPLE              2
+            226 RETURN_VALUE
+
+395     >>  228 LOAD_CONST               3 (('', ''))
+            230 RETURN_VALUE
+
+=== LPTidalAccount ===
+398           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalAccount')
+              6 STORE_NAME               2 (__qualname__)
+
+399           8 LOAD_CONST               1 ('TIDAL 账号对象，保存从设备返回的用户信息和访问令牌。')
+             10 STORE_NAME               3 (__doc__)
+
+401          12 LOAD_CLOSURE             0 (__class__)
+             14 BUILD_TUPLE              1
+             16 LOAD_CONST               2 (<code object __init__ at 0x000001F324E69C90, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 401>)
+             18 LOAD_CONST               3 ('LPTidalAccount.__init__')
+             20 MAKE_FUNCTION            8 (closure)
+             22 STORE_NAME               4 (__init__)
+             24 LOAD_CLOSURE             0 (__class__)
+             26 DUP_TOP
+             28 STORE_NAME               5 (__classcell__)
+             30 RETURN_VALUE
+
+=== LPTidalAccount.__init__ ===
+408           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+409          10 LOAD_GLOBAL              2 (LPPlayListSource)
+             12 LOAD_ATTR                3 (Tidal)
+             14 LOAD_ATTR                4 (value)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               5 (source)
+
+410          20 LOAD_CONST               1 ('')
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               6 (email)
+
+411          26 LOAD_CONST               1 ('')
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               7 (countryCode)
+
+412          32 LOAD_CONST               1 ('')
+             34 LOAD_FAST                0 (self)
+             36 STORE_ATTR               8 (sessionId)
+
+413          38 LOAD_CONST               2 (0)
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               9 (expiresIn)
+
+414          44 LOAD_CONST               3 (0.0)
+             46 LOAD_FAST                0 (self)
+             48 STORE_ATTR              10 (tokenUpdatedAt)
+
+415          50 LOAD_CONST               3 (0.0)
+             52 LOAD_FAST                0 (self)
+             54 STORE_ATTR              11 (tokenExpiresAt)
+
+416          56 BUILD_MAP                0
+             58 LOAD_FAST                0 (self)
+             60 STORE_ATTR              12 (subscription)
+
+417          62 BUILD_MAP                0
+             64 LOAD_FAST                0 (self)
+             66 STORE_ATTR              13 (credential)
+
+418          68 BUILD_MAP                0
+             70 LOAD_FAST                0 (self)
+             72 STORE_ATTR              14 (rawUserInfo)
+
+419          74 LOAD_CONST               4 (False)
+             76 LOAD_FAST                0 (self)
+             78 STORE_ATTR              15 (supportReplayGain)
+
+420          80 LOAD_CONST               4 (False)
+             82 LOAD_FAST                0 (self)
+             84 STORE_ATTR              16 (showAutoplay)
+             86 LOAD_CONST               5 (None)
+             88 RETURN_VALUE
+
+=== LPTidalPlayHeader ===
+423           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalPlayHeader')
+              6 STORE_NAME               2 (__qualname__)
+
+424           8 LOAD_CONST               1 ('TIDAL 播放列表头信息，保存设备队列推送所需的列表上下文。')
+             10 STORE_NAME               3 (__doc__)
+
+426          12 LOAD_CLOSURE             0 (__class__)
+             14 BUILD_TUPLE              1
+             16 LOAD_CONST               2 (<code object __init__ at 0x000001F324E69240, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 426>)
+             18 LOAD_CONST               3 ('LPTidalPlayHeader.__init__')
+             20 MAKE_FUNCTION            8 (closure)
+             22 STORE_NAME               4 (__init__)
+
+445          24 LOAD_NAME                5 (str)
+             26 LOAD_CONST               4 (('return',))
+             28 BUILD_CONST_KEY_MAP      1
+             30 LOAD_CONST               5 (<code object streamTypeForHeader at 0x000001F324E699D0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 445>)
+             32 LOAD_CONST               6 ('LPTidalPlayHeader.streamTypeForHeader')
+             34 MAKE_FUNCTION            4 (annotations)
+             36 STORE_NAME               6 (streamTypeForHeader)
+             38 LOAD_CLOSURE             0 (__class__)
+             40 DUP_TOP
+             42 STORE_NAME               7 (__classcell__)
+             44 RETURN_VALUE
+
+=== LPTidalPlayHeader.__init__ ===
+433           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+434          10 LOAD_GLOBAL              2 (LPPlayListSource)
+             12 LOAD_ATTR                3 (Tidal)
+             14 LOAD_ATTR                4 (value)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               5 (mediaSource)
+
+435          20 LOAD_CONST               1 ('songlist')
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               6 (contentType)
+
+436          26 LOAD_CONST               2 ('')
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               7 (userId)
+
+437          32 LOAD_CONST               3 ('playlist')
+             34 LOAD_FAST                0 (self)
+             36 STORE_ATTR               8 (streamType)
+
+438          38 LOAD_CONST               2 ('')
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               9 (streamId)
+
+439          44 LOAD_CONST               2 ('')
+             46 LOAD_FAST                0 (self)
+             48 STORE_ATTR              10 (showName)
+
+440          50 LOAD_CONST               2 ('')
+             52 LOAD_FAST                0 (self)
+             54 STORE_ATTR              11 (requestQuality)
+
+443          56 LOAD_CONST               4 (False)
+             58 LOAD_FAST                0 (self)
+             60 STORE_ATTR              12 (recentlyIsUserPlaylist)
+             62 LOAD_CONST               5 (None)
+             64 RETURN_VALUE
+
+=== LPTidalPlayHeader.streamTypeForHeader ===
+452           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (streamType)
+              4 POP_JUMP_IF_FALSE       16
+
+453           6 LOAD_GLOBAL              1 (str)
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (streamType)
+             12 CALL_FUNCTION            1
+             14 RETURN_VALUE
+
+454     >>   16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                2 (headType)
+             20 LOAD_GLOBAL              3 (LPHeaderType)
+             22 LOAD_ATTR                4 (LP_HEADER_TYPE_ALBUM)
+             24 COMPARE_OP               2 (==)
+             26 POP_JUMP_IF_FALSE       32
+
+455          28 LOAD_CONST               1 ('album')
+             30 RETURN_VALUE
+
+456     >>   32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                2 (headType)
+             36 LOAD_GLOBAL              3 (LPHeaderType)
+             38 LOAD_ATTR                5 (LP_HEADER_TYPE_ARTIST)
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       48
+
+457          44 LOAD_CONST               2 ('artist')
+             46 RETURN_VALUE
+
+458     >>   48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                2 (headType)
+             52 LOAD_GLOBAL              3 (LPHeaderType)
+             54 LOAD_ATTR                6 (LP_HEADER_TYPE_STATION)
+             56 COMPARE_OP               2 (==)
+             58 POP_JUMP_IF_FALSE       64
+
+459          60 LOAD_CONST               3 ('station')
+             62 RETURN_VALUE
+
+460     >>   64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                2 (headType)
+             68 LOAD_GLOBAL              3 (LPHeaderType)
+             70 LOAD_ATTR                7 (LP_HEADER_TYPE_SONG)
+             72 COMPARE_OP               2 (==)
+             74 POP_JUMP_IF_FALSE       80
+
+461          76 LOAD_CONST               4 ('song')
+             78 RETURN_VALUE
+
+462     >>   80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                2 (headType)
+             84 LOAD_GLOBAL              3 (LPHeaderType)
+             86 LOAD_ATTR                8 (LP_HEADER_TYPE_PODCAST)
+             88 COMPARE_OP               2 (==)
+             90 POP_JUMP_IF_FALSE       96
+
+463          92 LOAD_CONST               5 ('podcast')
+             94 RETURN_VALUE
+
+464     >>   96 LOAD_FAST                0 (self)
+             98 LOAD_ATTR                2 (headType)
+            100 LOAD_GLOBAL              3 (LPHeaderType)
+            102 LOAD_ATTR                9 (LP_HEADER_TYPE_SHOW)
+            104 COMPARE_OP               2 (==)
+            106 POP_JUMP_IF_FALSE      112
+
+465         108 LOAD_CONST               6 ('show')
+            110 RETURN_VALUE
+
+466     >>  112 LOAD_FAST                0 (self)
+            114 LOAD_ATTR                2 (headType)
+            116 LOAD_GLOBAL              3 (LPHeaderType)
+            118 LOAD_ATTR               10 (LP_HEADER_TYPE_EPISODE)
+            120 COMPARE_OP               2 (==)
+            122 POP_JUMP_IF_FALSE      128
+
+467         124 LOAD_CONST               7 ('episode')
+            126 RETURN_VALUE
+
+468     >>  128 LOAD_CONST               8 ('playlist')
+            130 RETURN_VALUE
+
+=== LPTidalPlayItem ===
+471           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalPlayItem')
+              6 STORE_NAME               2 (__qualname__)
+
+472           8 LOAD_CONST               1 ('TIDAL 单曲播放条目，保存设备队列和 metadata 所需的曲目信息。')
+             10 STORE_NAME               3 (__doc__)
+
+474          12 LOAD_CLOSURE             0 (__class__)
+             14 BUILD_TUPLE              1
+             16 LOAD_CONST               2 (<code object __init__ at 0x000001F324E69870, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 474>)
+             18 LOAD_CONST               3 ('LPTidalPlayItem.__init__')
+             20 MAKE_FUNCTION            8 (closure)
+             22 STORE_NAME               4 (__init__)
+             24 LOAD_CLOSURE             0 (__class__)
+             26 DUP_TOP
+             28 STORE_NAME               5 (__classcell__)
+             30 RETURN_VALUE
+
+=== LPTidalPlayItem.__init__ ===
+481           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+482          10 LOAD_GLOBAL              2 (LPPlayListSource)
+             12 LOAD_ATTR                3 (Tidal)
+             14 LOAD_ATTR                4 (value)
+             16 LOAD_FAST                0 (self)
+             18 STORE_ATTR               5 (trackSource)
+
+483          20 LOAD_CONST               1 ('')
+             22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               6 (searchUrl)
+
+484          26 LOAD_CONST               2 (0)
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               7 (startIndex)
+
+485          32 LOAD_CONST               3 (False)
+             34 LOAD_FAST                0 (self)
+             36 STORE_ATTR               8 (isExplicit)
+
+486          38 LOAD_CONST               4 (True)
+             40 LOAD_FAST                0 (self)
+             42 STORE_ATTR               9 (allowStreaming)
+             44 LOAD_CONST               5 (None)
+             46 RETURN_VALUE
+
+=== LPTidalPlayList ===
+489           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalPlayList')
+              6 STORE_NAME               2 (__qualname__)
+
+490           8 LOAD_CONST               1 ('TIDAL 播放列表，生成设备 CreateQueue 队列 XML。')
+             10 STORE_NAME               3 (__doc__)
+
+493          12 LOAD_CONST               2 ('HIGH')
+
+494          14 LOAD_CONST               3 ('LOSSLESS')
+
+495          16 LOAD_CONST               4 ('HI_RES')
+
+492          18 LOAD_CONST               5 ((1, 2, 3))
+             20 BUILD_CONST_KEY_MAP      3
+             22 STORE_NAME               4 (QUALITY_MAP)
+
+498          24 LOAD_CONST              39 ((None,))
+             26 LOAD_NAME                5 (Optional)
+             28 LOAD_NAME                6 (object)
+             30 BINARY_SUBSCR
+             32 LOAD_NAME                7 (str)
+             34 LOAD_CONST               7 (('startPlayIndex', 'return'))
+             36 BUILD_CONST_KEY_MAP      2
+             38 LOAD_CONST               8 (<code object generateXML at 0x000001F324E69500, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 498>)
+             40 LOAD_CONST               9 ('LPTidalPlayList.generateXML')
+             42 MAKE_FUNCTION            5 (defaults, annotations)
+             44 STORE_NAME               8 (generateXML)
+
+556          46 LOAD_NAME                7 (str)
+             48 LOAD_NAME                7 (str)
+             50 LOAD_CONST              10 (('listName', 'return'))
+             52 BUILD_CONST_KEY_MAP      2
+             54 LOAD_CONST              11 (<code object generateBackupQueueXML at 0x000001F324E767C0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 556>)
+             56 LOAD_CONST              12 ('LPTidalPlayList.generateBackupQueueXML')
+             58 MAKE_FUNCTION            4 (annotations)
+             60 STORE_NAME               9 (generateBackupQueueXML)
+
+586          62 LOAD_NAME                7 (str)
+             64 LOAD_NAME                7 (str)
+             66 LOAD_CONST              13 (('name', 'return'))
+             68 BUILD_CONST_KEY_MAP      2
+             70 LOAD_CONST              14 (<code object generateSetKeyMappingXML at 0x000001F324E76D40, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 586>)
+             72 LOAD_CONST              15 ('LPTidalPlayList.generateSetKeyMappingXML')
+             74 MAKE_FUNCTION            4 (annotations)
+             76 STORE_NAME              10 (generateSetKeyMappingXML)
+
+603          78 LOAD_NAME                7 (str)
+             80 LOAD_CONST              16 (('return',))
+             82 BUILD_CONST_KEY_MAP      1
+             84 LOAD_CONST              17 (<code object getRequestQualityStr at 0x000001F324E76DF0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 603>)
+             86 LOAD_CONST              18 ('LPTidalPlayList.getRequestQualityStr')
+             88 MAKE_FUNCTION            4 (annotations)
+             90 STORE_NAME              11 (getRequestQualityStr)
+
+613          92 LOAD_NAME               12 (int)
+             94 LOAD_CONST              16 (('return',))
+             96 BUILD_CONST_KEY_MAP      1
+             98 LOAD_CONST              19 (<code object _localQualityValue at 0x000001F324E76660, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 613>)
+            100 LOAD_CONST              20 ('LPTidalPlayList._localQualityValue')
+            102 MAKE_FUNCTION            4 (annotations)
+            104 STORE_NAME              13 (_localQualityValue)
+
+632         106 LOAD_NAME               12 (int)
+            108 LOAD_CONST              16 (('return',))
+            110 BUILD_CONST_KEY_MAP      1
+            112 LOAD_CONST              21 (<code object _localReplayGainValue at 0x000001F324E76500, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 632>)
+            114 LOAD_CONST              22 ('LPTidalPlayList._localReplayGainValue')
+            116 MAKE_FUNCTION            4 (annotations)
+            118 STORE_NAME              14 (_localReplayGainValue)
+
+642         120 LOAD_NAME               15 (Dict)
+            122 LOAD_NAME                7 (str)
+            124 LOAD_NAME                7 (str)
+            126 BUILD_TUPLE              2
+            128 BINARY_SUBSCR
+            130 LOAD_CONST              16 (('return',))
+            132 BUILD_CONST_KEY_MAP      1
+            134 LOAD_CONST              23 (<code object _replayGainXmlState at 0x000001F324E763A0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 642>)
+            136 LOAD_CONST              24 ('LPTidalPlayList._replayGainXmlState')
+            138 MAKE_FUNCTION            4 (annotations)
+            140 STORE_NAME              16 (_replayGainXmlState)
+
+652         142 LOAD_NAME               17 (bool)
+            144 LOAD_CONST              16 (('return',))
+            146 BUILD_CONST_KEY_MAP      1
+            148 LOAD_CONST              25 (<code object _supportsMaxQuality at 0x000001F324E76190, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 652>)
+            150 LOAD_CONST              26 ('LPTidalPlayList._supportsMaxQuality')
+            152 MAKE_FUNCTION            4 (annotations)
+            154 STORE_NAME              18 (_supportsMaxQuality)
+
+671         156 LOAD_NAME                5 (Optional)
+            158 LOAD_NAME               19 (LPTidalPlayHeader)
+            160 BINARY_SUBSCR
+            162 LOAD_NAME                7 (str)
+            164 LOAD_CONST              27 (('header', 'return'))
+            166 BUILD_CONST_KEY_MAP      2
+            168 LOAD_CONST              28 (<code object _userId at 0x000001F324E76240, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 671>)
+            170 LOAD_CONST              29 ('LPTidalPlayList._userId')
+            172 MAKE_FUNCTION            4 (annotations)
+            174 STORE_NAME              20 (_userId)
+
+684         176 LOAD_NAME               19 (LPTidalPlayHeader)
+            178 LOAD_NAME               21 (LPTidalPlayItem)
+            180 LOAD_NAME                7 (str)
+            182 LOAD_CONST              30 (('header', 'item', 'return'))
+            184 BUILD_CONST_KEY_MAP      3
+            186 LOAD_CONST              31 (<code object _buildMetadata at 0x000001F324E76A80, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 684>)
+            188 LOAD_CONST              32 ('LPTidalPlayList._buildMetadata')
+            190 MAKE_FUNCTION            4 (annotations)
+            192 STORE_NAME              22 (_buildMetadata)
+
+715         194 LOAD_NAME                6 (object)
+            196 LOAD_NAME               12 (int)
+            198 LOAD_CONST              33 (('duration', 'return'))
+            200 BUILD_CONST_KEY_MAP      2
+            202 LOAD_CONST              34 (<code object _durationValue at 0x000001F324E765B0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 715>)
+            204 LOAD_CONST              35 ('LPTidalPlayList._durationValue')
+            206 MAKE_FUNCTION            4 (annotations)
+            208 STORE_NAME              23 (_durationValue)
+
+727         210 LOAD_NAME               24 (Iterable)
+            212 LOAD_NAME               21 (LPTidalPlayItem)
+            214 BINARY_SUBSCR
+            216 LOAD_CONST               6 (None)
+            218 LOAD_CONST              36 (('items', 'return'))
+            220 BUILD_CONST_KEY_MAP      2
+            222 LOAD_CONST              37 (<code object extendFromItems at 0x000001F324E76B30, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 727>)
+            224 LOAD_CONST              38 ('LPTidalPlayList.extendFromItems')
+            226 MAKE_FUNCTION            4 (annotations)
+            228 STORE_NAME              25 (extendFromItems)
+            230 LOAD_CONST               6 (None)
+            232 RETURN_VALUE
+
+=== LPTidalPlayList.generateXML ===
+505           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (header)
+              6 LOAD_GLOBAL              2 (LPTidalPlayHeader)
+              8 CALL_FUNCTION            2
+             10 POP_JUMP_IF_FALSE       18
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                1 (header)
+             16 JUMP_FORWARD             4 (to 22)
+        >>   18 LOAD_GLOBAL              2 (LPTidalPlayHeader)
+             20 CALL_FUNCTION            0
+        >>   22 STORE_FAST               2 (header)
+
+506          24 LOAD_CONST               1 (<code object <listcomp> at 0x000001F324E69B30, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 506>)
+             26 LOAD_CONST               2 ('LPTidalPlayList.generateXML.<locals>.<listcomp>')
+             28 MAKE_FUNCTION            0
+             30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                3 (list)
+             34 JUMP_IF_TRUE_OR_POP     38
+             36 BUILD_LIST               0
+        >>   38 GET_ITER
+             40 CALL_FUNCTION            1
+             42 STORE_FAST               3 (items)
+
+507          44 LOAD_GLOBAL              4 (bool)
+             46 LOAD_GLOBAL              5 (str)
+             48 LOAD_FAST                2 (header)
+             50 LOAD_ATTR                6 (searchUrl)
+             52 JUMP_IF_TRUE_OR_POP     56
+             54 LOAD_CONST               3 ('')
+        >>   56 CALL_FUNCTION            1
+             58 LOAD_METHOD              7 (strip)
+             60 CALL_METHOD              0
+             62 CALL_FUNCTION            1
+             64 STORE_FAST               4 (has_search_url)
+
+508          66 LOAD_FAST                0 (self)
+             68 LOAD_METHOD              8 (_userId)
+             70 LOAD_FAST                2 (header)
+             72 CALL_METHOD              1
+             74 STORE_FAST               5 (user_id)
+
+509          76 LOAD_FAST                2 (header)
+             78 LOAD_ATTR                9 (streamId)
+             80 JUMP_IF_TRUE_OR_POP    104
+             82 LOAD_FAST                2 (header)
+             84 LOAD_ATTR               10 (headId)
+             86 JUMP_IF_TRUE_OR_POP    104
+             88 LOAD_FAST                3 (items)
+             90 POP_JUMP_IF_FALSE      102
+             92 LOAD_FAST                3 (items)
+             94 LOAD_CONST               4 (0)
+             96 BINARY_SUBSCR
+             98 LOAD_ATTR               11 (trackId)
+            100 JUMP_FORWARD             2 (to 104)
+        >>  102 LOAD_CONST               3 ('')
+        >>  104 STORE_FAST               6 (stream_id)
+
+510         106 LOAD_GLOBAL              5 (str)
+            108 LOAD_FAST                6 (stream_id)
+            110 JUMP_IF_TRUE_OR_POP    114
+            112 LOAD_CONST               3 ('')
+        >>  114 CALL_FUNCTION            1
+            116 LOAD_METHOD             12 (startswith)
+            118 LOAD_CONST               5 ('TIDAL SEARCH')
+            120 CALL_METHOD              1
+            122 STORE_FAST               7 (is_search_queue)
+
+511         124 LOAD_FAST                2 (header)
+            126 LOAD_ATTR               13 (showName)
+            128 JUMP_IF_TRUE_OR_POP    138
+            130 LOAD_FAST                2 (header)
+            132 LOAD_ATTR               14 (headTitle)
+            134 JUMP_IF_TRUE_OR_POP    138
+            136 LOAD_CONST               3 ('')
+        >>  138 STORE_FAST               8 (show_name)
+
+512         140 LOAD_FAST                2 (header)
+            142 LOAD_ATTR               15 (requestQuality)
+            144 JUMP_IF_TRUE_OR_POP    152
+            146 LOAD_FAST                0 (self)
+            148 LOAD_METHOD             16 (getRequestQualityStr)
+            150 CALL_METHOD              0
+        >>  152 STORE_FAST               9 (request_quality)
+
+514         154 LOAD_CONST               6 ('<?xml version="1.0" ?><PlayList>')
+            156 STORE_FAST              10 (xml)
+
+515         158 LOAD_FAST               10 (xml)
+            160 LOAD_CONST               7 ('<ListName>%s</ListName>')
+            162 LOAD_GLOBAL             17 (escape)
+            164 LOAD_FAST                2 (header)
+            166 LOAD_ATTR               14 (headTitle)
+            168 JUMP_IF_TRUE_OR_POP    172
+            170 LOAD_CONST               3 ('')
+        >>  172 CALL_FUNCTION            1
+            174 BINARY_MODULO
+            176 INPLACE_ADD
+            178 STORE_FAST              10 (xml)
+
+516         180 LOAD_FAST               10 (xml)
+            182 LOAD_CONST               8 ('<ListInfo>')
+            184 INPLACE_ADD
+            186 STORE_FAST              10 (xml)
+
+517         188 LOAD_FAST               10 (xml)
+            190 LOAD_CONST               9 ('<SourceName>%s</SourceName>')
+            192 LOAD_GLOBAL             17 (escape)
+            194 LOAD_FAST                2 (header)
+            196 LOAD_ATTR               18 (mediaSource)
+            198 JUMP_IF_TRUE_OR_POP    206
+            200 LOAD_GLOBAL             19 (LPPlayListSource)
+            202 LOAD_ATTR               20 (Tidal)
+            204 LOAD_ATTR               21 (value)
+        >>  206 CALL_FUNCTION            1
+            208 BINARY_MODULO
+            210 INPLACE_ADD
+            212 STORE_FAST              10 (xml)
+
+518         214 LOAD_FAST                4 (has_search_url)
+            216 POP_JUMP_IF_FALSE      246
+            218 LOAD_FAST                7 (is_search_queue)
+            220 POP_JUMP_IF_TRUE       246
+
+519         222 LOAD_FAST               10 (xml)
+            224 LOAD_CONST              10 ('<SearchUrl>%s</SearchUrl>')
+            226 LOAD_GLOBAL             17 (escape)
+            228 LOAD_FAST                2 (header)
+            230 LOAD_ATTR                6 (searchUrl)
+            232 JUMP_IF_TRUE_OR_POP    236
+            234 LOAD_CONST               3 ('')
+        >>  236 CALL_FUNCTION            1
+            238 BINARY_MODULO
+            240 INPLACE_ADD
+            242 STORE_FAST              10 (xml)
+            244 JUMP_FORWARD            16 (to 262)
+
+521     >>  246 LOAD_FAST               10 (xml)
+            248 LOAD_CONST              11 ('<TrackNumber>%d</TrackNumber>')
+            250 LOAD_GLOBAL             22 (len)
+            252 LOAD_FAST                3 (items)
+            254 CALL_FUNCTION            1
+            256 BINARY_MODULO
+            258 INPLACE_ADD
+            260 STORE_FAST              10 (xml)
+
+522     >>  262 LOAD_FAST                5 (user_id)
+            264 EXTENDED_ARG             1
+            266 POP_JUMP_IF_FALSE      284
+
+523         268 LOAD_FAST               10 (xml)
+            270 LOAD_CONST              12 ('<UserId>%s</UserId>')
+            272 LOAD_GLOBAL             17 (escape)
+            274 LOAD_FAST                5 (user_id)
+            276 CALL_FUNCTION            1
+            278 BINARY_MODULO
+            280 INPLACE_ADD
+            282 STORE_FAST              10 (xml)
+
+524     >>  284 LOAD_FAST               10 (xml)
+            286 LOAD_CONST              13 ('<PicUrl>%s</PicUrl>')
+            288 LOAD_GLOBAL             17 (escape)
+            290 LOAD_FAST                2 (header)
+            292 LOAD_ATTR               23 (imageUrl)
+            294 EXTENDED_ARG             1
+            296 JUMP_IF_TRUE_OR_POP    310
+            298 LOAD_FAST                0 (self)
+            300 LOAD_METHOD             24 (getPicUrl)
+            302 CALL_METHOD              0
+            304 EXTENDED_ARG             1
+            306 JUMP_IF_TRUE_OR_POP    310
+            308 LOAD_CONST               3 ('')
+        >>  310 CALL_FUNCTION            1
+            312 BINARY_MODULO
+            314 INPLACE_ADD
+            316 STORE_FAST              10 (xml)
+
+525         318 LOAD_FAST               10 (xml)
+            320 LOAD_CONST              14 ('<StreamType>%s</StreamType>')
+            322 LOAD_GLOBAL             17 (escape)
+            324 LOAD_FAST                2 (header)
+            326 LOAD_METHOD             25 (streamTypeForHeader)
+            328 CALL_METHOD              0
+            330 CALL_FUNCTION            1
+            332 BINARY_MODULO
+            334 INPLACE_ADD
+            336 STORE_FAST              10 (xml)
+
+526         338 LOAD_FAST               10 (xml)
+            340 LOAD_CONST              15 ('<StreamId>%s</StreamId>')
+            342 LOAD_GLOBAL             17 (escape)
+            344 LOAD_GLOBAL              5 (str)
+            346 LOAD_FAST                6 (stream_id)
+            348 EXTENDED_ARG             1
+            350 JUMP_IF_TRUE_OR_POP    354
+            352 LOAD_CONST               3 ('')
+        >>  354 CALL_FUNCTION            1
+            356 CALL_FUNCTION            1
+            358 BINARY_MODULO
+            360 INPLACE_ADD
+            362 STORE_FAST              10 (xml)
+
+527         364 LOAD_FAST               10 (xml)
+            366 LOAD_CONST              16 ('<ShowName>%s</ShowName>')
+            368 LOAD_GLOBAL             17 (escape)
+            370 LOAD_GLOBAL              5 (str)
+            372 LOAD_FAST                8 (show_name)
+            374 EXTENDED_ARG             1
+            376 JUMP_IF_TRUE_OR_POP    380
+            378 LOAD_CONST               3 ('')
+        >>  380 CALL_FUNCTION            1
+            382 CALL_FUNCTION            1
+            384 BINARY_MODULO
+            386 INPLACE_ADD
+            388 STORE_FAST              10 (xml)
+
+528         390 LOAD_FAST               10 (xml)
+            392 LOAD_CONST              17 ('<ContentType>%s</ContentType>')
+            394 LOAD_GLOBAL             17 (escape)
+            396 LOAD_FAST                2 (header)
+            398 LOAD_ATTR               26 (contentType)
+            400 EXTENDED_ARG             1
+            402 JUMP_IF_TRUE_OR_POP    406
+            404 LOAD_CONST              18 ('songlist')
+        >>  406 CALL_FUNCTION            1
+            408 BINARY_MODULO
+            410 INPLACE_ADD
+            412 STORE_FAST              10 (xml)
+
+529         414 LOAD_FAST               10 (xml)
+            416 LOAD_CONST              19 ('<requestQuality>%s</requestQuality>')
+            418 LOAD_GLOBAL             17 (escape)
+            420 LOAD_FAST                9 (request_quality)
+            422 EXTENDED_ARG             1
+            424 JUMP_IF_TRUE_OR_POP    428
+            426 LOAD_CONST               3 ('')
+        >>  428 CALL_FUNCTION            1
+            430 BINARY_MODULO
+            432 INPLACE_ADD
+            434 STORE_FAST              10 (xml)
+
+530         436 LOAD_FAST                0 (self)
+            438 LOAD_METHOD             27 (_replayGainXmlState)
+            440 CALL_METHOD              0
+            442 STORE_FAST              11 (replay_gain_xml)
+
+531         444 LOAD_FAST               11 (replay_gain_xml)
+            446 LOAD_METHOD             28 (get)
+            448 LOAD_CONST              20 ('enable')
+            450 LOAD_CONST               3 ('')
+            452 CALL_METHOD              2
+            454 LOAD_CONST               3 ('')
+            456 COMPARE_OP               3 (!=)
+            458 EXTENDED_ARG             1
+            460 POP_JUMP_IF_FALSE      486
+
+532         462 LOAD_FAST               10 (xml)
+            464 LOAD_CONST              21 ('<EnableReplayGain>%s</EnableReplayGain>')
+            466 LOAD_GLOBAL             17 (escape)
+            468 LOAD_FAST               11 (replay_gain_xml)
+            470 LOAD_METHOD             28 (get)
+            472 LOAD_CONST              20 ('enable')
+            474 LOAD_CONST               3 ('')
+            476 CALL_METHOD              2
+            478 CALL_FUNCTION            1
+            480 BINARY_MODULO
+            482 INPLACE_ADD
+            484 STORE_FAST              10 (xml)
+
+533     >>  486 LOAD_FAST               11 (replay_gain_xml)
+            488 LOAD_METHOD             28 (get)
+            490 LOAD_CONST              22 ('type')
+            492 LOAD_CONST               3 ('')
+            494 CALL_METHOD              2
+            496 LOAD_CONST               3 ('')
+            498 COMPARE_OP               3 (!=)
+            500 EXTENDED_ARG             2
+            502 POP_JUMP_IF_FALSE      528
+
+534         504 LOAD_FAST               10 (xml)
+            506 LOAD_CONST              23 ('<ReplayGainType>%s</ReplayGainType>')
+            508 LOAD_GLOBAL             17 (escape)
+            510 LOAD_FAST               11 (replay_gain_xml)
+            512 LOAD_METHOD             28 (get)
+            514 LOAD_CONST              22 ('type')
+            516 LOAD_CONST               3 ('')
+            518 CALL_METHOD              2
+            520 CALL_FUNCTION            1
+            522 BINARY_MODULO
+            524 INPLACE_ADD
+            526 STORE_FAST              10 (xml)
+
+535     >>  528 LOAD_FAST               10 (xml)
+            530 LOAD_CONST              24 ('<StartPlayIndex>%s</StartPlayIndex>')
+            532 LOAD_GLOBAL             17 (escape)
+            534 LOAD_GLOBAL              5 (str)
+            536 LOAD_FAST                1 (startPlayIndex)
+            538 EXTENDED_ARG             2
+            540 JUMP_IF_TRUE_OR_POP    544
+            542 LOAD_CONST               3 ('')
+        >>  544 CALL_FUNCTION            1
+            546 CALL_FUNCTION            1
+            548 BINARY_MODULO
+            550 INPLACE_ADD
+            552 STORE_FAST              10 (xml)
+
+536         554 LOAD_FAST               10 (xml)
+            556 LOAD_CONST              25 ('</ListInfo>')
+            558 INPLACE_ADD
+            560 STORE_FAST              10 (xml)
+
+537         562 LOAD_CONST              26 (<code object <listcomp> at 0x000001F324E697C0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 537>)
+            564 LOAD_CONST               2 ('LPTidalPlayList.generateXML.<locals>.<listcomp>')
+            566 MAKE_FUNCTION            0
+
+539         568 LOAD_FAST                3 (items)
+
+537         570 GET_ITER
+            572 CALL_FUNCTION            1
+            574 STORE_FAST              12 (inline_search_items)
+
+542         576 LOAD_FAST                7 (is_search_queue)
+            578 EXTENDED_ARG             2
+            580 JUMP_IF_TRUE_OR_POP    596
+            582 LOAD_FAST                4 (has_search_url)
+            584 UNARY_NOT
+            586 EXTENDED_ARG             2
+            588 JUMP_IF_TRUE_OR_POP    596
+            590 LOAD_GLOBAL              4 (bool)
+            592 LOAD_FAST               12 (inline_search_items)
+            594 CALL_FUNCTION            1
+        >>  596 STORE_FAST              13 (should_emit_tracks)
+
+543         598 LOAD_FAST               10 (xml)
+            600 LOAD_CONST              27 ('<Tracks>')
+            602 INPLACE_ADD
+            604 STORE_FAST              10 (xml)
+
+544         606 LOAD_FAST               13 (should_emit_tracks)
+            608 EXTENDED_ARG             3
+            610 POP_JUMP_IF_FALSE      776
+
+545         612 LOAD_GLOBAL             29 (enumerate)
+            614 LOAD_FAST                3 (items)
+            616 LOAD_CONST              28 (1)
+            618 LOAD_CONST              29 (('start',))
+            620 CALL_FUNCTION_KW         2
+            622 GET_ITER
+        >>  624 FOR_ITER               150 (to 776)
+            626 UNPACK_SEQUENCE          2
+            628 STORE_FAST              14 (index)
+            630 STORE_FAST              15 (item)
+
+546         632 LOAD_FAST                0 (self)
+            634 LOAD_METHOD             30 (_buildMetadata)
+            636 LOAD_FAST                2 (header)
+            638 LOAD_FAST               15 (item)
+            640 CALL_METHOD              2
+            642 STORE_FAST              16 (metadata)
+
+547         644 LOAD_FAST               10 (xml)
+            646 LOAD_CONST              30 ('<Track%d>')
+            648 LOAD_FAST               14 (index)
+            650 BINARY_MODULO
+            652 INPLACE_ADD
+            654 STORE_FAST              10 (xml)
+
+548         656 LOAD_FAST               10 (xml)
+            658 LOAD_CONST              31 ('<Source>%s</Source>')
+            660 LOAD_GLOBAL             17 (escape)
+            662 LOAD_FAST               15 (item)
+            664 LOAD_ATTR               31 (trackSource)
+            666 EXTENDED_ARG             2
+            668 JUMP_IF_TRUE_OR_POP    684
+            670 LOAD_FAST                2 (header)
+            672 LOAD_ATTR               18 (mediaSource)
+            674 EXTENDED_ARG             2
+            676 JUMP_IF_TRUE_OR_POP    684
+            678 LOAD_GLOBAL             19 (LPPlayListSource)
+            680 LOAD_ATTR               20 (Tidal)
+            682 LOAD_ATTR               21 (value)
+        >>  684 CALL_FUNCTION            1
+            686 BINARY_MODULO
+            688 INPLACE_ADD
+            690 STORE_FAST              10 (xml)
+
+549         692 LOAD_FAST               10 (xml)
+            694 LOAD_CONST              32 ('<Id>%s</Id>')
+            696 LOAD_GLOBAL             17 (escape)
+            698 LOAD_GLOBAL              5 (str)
+            700 LOAD_FAST               15 (item)
+            702 LOAD_ATTR               11 (trackId)
+            704 EXTENDED_ARG             2
+            706 JUMP_IF_TRUE_OR_POP    710
+            708 LOAD_CONST               3 ('')
+        >>  710 CALL_FUNCTION            1
+            712 CALL_FUNCTION            1
+            714 BINARY_MODULO
+            716 INPLACE_ADD
+            718 STORE_FAST              10 (xml)
+
+550         720 LOAD_FAST               10 (xml)
+            722 LOAD_CONST              33 ('<URL>%s</URL>')
+            724 LOAD_GLOBAL             17 (escape)
+            726 LOAD_FAST               15 (item)
+            728 LOAD_ATTR               32 (trackUrl)
+            730 EXTENDED_ARG             2
+            732 JUMP_IF_TRUE_OR_POP    736
+            734 LOAD_CONST               3 ('')
+        >>  736 CALL_FUNCTION            1
+            738 BINARY_MODULO
+            740 INPLACE_ADD
+            742 STORE_FAST              10 (xml)
+
+551         744 LOAD_FAST               10 (xml)
+            746 LOAD_CONST              34 ('<Metadata>%s</Metadata>')
+            748 LOAD_GLOBAL             17 (escape)
+            750 LOAD_FAST               16 (metadata)
+            752 CALL_FUNCTION            1
+            754 BINARY_MODULO
+            756 INPLACE_ADD
+            758 STORE_FAST              10 (xml)
+
+552         760 LOAD_FAST               10 (xml)
+            762 LOAD_CONST              35 ('</Track%d>')
+            764 LOAD_FAST               14 (index)
+            766 BINARY_MODULO
+            768 INPLACE_ADD
+            770 STORE_FAST              10 (xml)
+            772 EXTENDED_ARG             2
+            774 JUMP_ABSOLUTE          624
+
+553     >>  776 LOAD_FAST               10 (xml)
+            778 LOAD_CONST              36 ('</Tracks></PlayList>')
+            780 INPLACE_ADD
+            782 STORE_FAST              10 (xml)
+
+554         784 LOAD_FAST               10 (xml)
+            786 RETURN_VALUE
+
+=== LPTidalPlayList.generateXML.<listcomp> ===
+506           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_GLOBAL              1 (LPTidalPlayItem)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_FAST                1 (item)
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE
+
+=== LPTidalPlayList.generateXML.<listcomp> ===
+537           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                32 (to 38)
+
+539           6 STORE_FAST               1 (item)
+
+540           8 LOAD_GLOBAL              0 (str)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_ATTR                1 (trackUrl)
+             14 JUMP_IF_TRUE_OR_POP     18
+             16 LOAD_CONST               0 ('')
+        >>   18 CALL_FUNCTION            1
+             20 LOAD_METHOD              2 (strip)
+             22 CALL_METHOD              0
+             24 LOAD_METHOD              3 (startswith)
+             26 LOAD_CONST               1 ('wiimu_search://')
+             28 CALL_METHOD              1
+             30 POP_JUMP_IF_FALSE        4
+
+538          32 LOAD_FAST                1 (item)
+             34 LIST_APPEND              2
+             36 JUMP_ABSOLUTE            4
+        >>   38 RETURN_VALUE
+
+=== LPTidalPlayList.generateBackupQueueXML ===
+563           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (header)
+              6 LOAD_GLOBAL              2 (LPTidalPlayHeader)
+              8 CALL_FUNCTION            2
+             10 POP_JUMP_IF_FALSE       18
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                1 (header)
+             16 JUMP_FORWARD             4 (to 22)
+        >>   18 LOAD_GLOBAL              2 (LPTidalPlayHeader)
+             20 CALL_FUNCTION            0
+        >>   22 STORE_FAST               2 (header)
+
+564          24 LOAD_FAST                0 (self)
+             26 LOAD_METHOD              3 (_userId)
+             28 LOAD_FAST                2 (header)
+             30 CALL_METHOD              1
+             32 STORE_FAST               3 (user_id)
+
+565          34 LOAD_FAST                2 (header)
+             36 LOAD_ATTR                4 (streamId)
+             38 JUMP_IF_TRUE_OR_POP     44
+             40 LOAD_FAST                2 (header)
+             42 LOAD_ATTR                5 (headId)
+        >>   44 STORE_FAST               4 (stream_id)
+
+566          46 LOAD_FAST                2 (header)
+             48 LOAD_ATTR                6 (showName)
+             50 JUMP_IF_TRUE_OR_POP     60
+             52 LOAD_FAST                2 (header)
+             54 LOAD_ATTR                7 (headTitle)
+             56 JUMP_IF_TRUE_OR_POP     60
+             58 LOAD_CONST               1 ('')
+        >>   60 STORE_FAST               5 (show_name)
+
+567          62 LOAD_FAST                2 (header)
+             64 LOAD_ATTR                8 (requestQuality)
+             66 JUMP_IF_TRUE_OR_POP     74
+             68 LOAD_FAST                0 (self)
+             70 LOAD_METHOD              9 (getRequestQualityStr)
+             72 CALL_METHOD              0
+        >>   74 STORE_FAST               6 (request_quality)
+
+569          76 LOAD_CONST               2 ('<?xml version="1.0"?><PlayList>')
+             78 STORE_FAST               7 (xml)
+
+570          80 LOAD_FAST                7 (xml)
+             82 LOAD_CONST               3 ('<ListName>%s</ListName>')
+             84 LOAD_GLOBAL             10 (escape)
+             86 LOAD_GLOBAL             11 (str)
+             88 LOAD_FAST                1 (listName)
+             90 JUMP_IF_TRUE_OR_POP     94
+             92 LOAD_CONST               1 ('')
+        >>   94 CALL_FUNCTION            1
+             96 CALL_FUNCTION            1
+             98 BINARY_MODULO
+            100 INPLACE_ADD
+            102 STORE_FAST               7 (xml)
+
+571         104 LOAD_FAST                7 (xml)
+            106 LOAD_CONST               4 ('<ListInfo>')
+            108 INPLACE_ADD
+            110 STORE_FAST               7 (xml)
+
+572         112 LOAD_FAST                7 (xml)
+            114 LOAD_CONST               5 ('<SourceName>%s</SourceName>')
+            116 LOAD_GLOBAL             10 (escape)
+            118 LOAD_FAST                2 (header)
+            120 LOAD_ATTR               12 (mediaSource)
+            122 JUMP_IF_TRUE_OR_POP    130
+            124 LOAD_GLOBAL             13 (LPPlayListSource)
+            126 LOAD_ATTR               14 (Tidal)
+            128 LOAD_ATTR               15 (value)
+        >>  130 CALL_FUNCTION            1
+            132 BINARY_MODULO
+            134 INPLACE_ADD
+            136 STORE_FAST               7 (xml)
+
+573         138 LOAD_FAST                7 (xml)
+            140 LOAD_CONST               6 ('<SearchUrl>%s</SearchUrl>')
+            142 LOAD_GLOBAL             10 (escape)
+            144 LOAD_FAST                2 (header)
+            146 LOAD_ATTR               16 (searchUrl)
+            148 JUMP_IF_TRUE_OR_POP    152
+            150 LOAD_CONST               1 ('')
+        >>  152 CALL_FUNCTION            1
+            154 BINARY_MODULO
+            156 INPLACE_ADD
+            158 STORE_FAST               7 (xml)
+
+574         160 LOAD_FAST                3 (user_id)
+            162 POP_JUMP_IF_FALSE      180
+
+575         164 LOAD_FAST                7 (xml)
+            166 LOAD_CONST               7 ('<UserId>%s</UserId>')
+            168 LOAD_GLOBAL             10 (escape)
+            170 LOAD_FAST                3 (user_id)
+            172 CALL_FUNCTION            1
+            174 BINARY_MODULO
+            176 INPLACE_ADD
+            178 STORE_FAST               7 (xml)
+
+576     >>  180 LOAD_FAST                7 (xml)
+            182 LOAD_CONST               8 ('<PicUrl>%s</PicUrl>')
+            184 LOAD_GLOBAL             10 (escape)
+            186 LOAD_FAST                2 (header)
+            188 LOAD_ATTR               17 (imageUrl)
+            190 JUMP_IF_TRUE_OR_POP    202
+            192 LOAD_FAST                0 (self)
+            194 LOAD_METHOD             18 (getPicUrl)
+            196 CALL_METHOD              0
+            198 JUMP_IF_TRUE_OR_POP    202
+            200 LOAD_CONST               1 ('')
+        >>  202 CALL_FUNCTION            1
+            204 BINARY_MODULO
+            206 INPLACE_ADD
+            208 STORE_FAST               7 (xml)
+
+577         210 LOAD_FAST                7 (xml)
+            212 LOAD_CONST               9 ('<StreamType>%s</StreamType>')
+            214 LOAD_GLOBAL             10 (escape)
+            216 LOAD_FAST                2 (header)
+            218 LOAD_METHOD             19 (streamTypeForHeader)
+            220 CALL_METHOD              0
+            222 CALL_FUNCTION            1
+            224 BINARY_MODULO
+            226 INPLACE_ADD
+            228 STORE_FAST               7 (xml)
+
+578         230 LOAD_FAST                7 (xml)
+            232 LOAD_CONST              10 ('<StreamId>%s</StreamId>')
+            234 LOAD_GLOBAL             10 (escape)
+            236 LOAD_GLOBAL             11 (str)
+            238 LOAD_FAST                4 (stream_id)
+            240 JUMP_IF_TRUE_OR_POP    244
+            242 LOAD_CONST               1 ('')
+        >>  244 CALL_FUNCTION            1
+            246 CALL_FUNCTION            1
+            248 BINARY_MODULO
+            250 INPLACE_ADD
+            252 STORE_FAST               7 (xml)
+
+579         254 LOAD_FAST                7 (xml)
+            256 LOAD_CONST              11 ('<ShowName>%s</ShowName>')
+            258 LOAD_GLOBAL             10 (escape)
+            260 LOAD_GLOBAL             11 (str)
+            262 LOAD_FAST                5 (show_name)
+            264 EXTENDED_ARG             1
+            266 JUMP_IF_TRUE_OR_POP    270
+            268 LOAD_CONST               1 ('')
+        >>  270 CALL_FUNCTION            1
+            272 CALL_FUNCTION            1
+            274 BINARY_MODULO
+            276 INPLACE_ADD
+            278 STORE_FAST               7 (xml)
+
+580         280 LOAD_FAST                7 (xml)
+            282 LOAD_CONST              12 ('<ContentType>%s</ContentType>')
+            284 LOAD_GLOBAL             10 (escape)
+            286 LOAD_FAST                2 (header)
+            288 LOAD_ATTR               20 (contentType)
+            290 EXTENDED_ARG             1
+            292 JUMP_IF_TRUE_OR_POP    296
+            294 LOAD_CONST              13 ('songlist')
+        >>  296 CALL_FUNCTION            1
+            298 BINARY_MODULO
+            300 INPLACE_ADD
+            302 STORE_FAST               7 (xml)
+
+581         304 LOAD_FAST                7 (xml)
+            306 LOAD_CONST              14 ('<requestQuality>%s</requestQuality>')
+            308 LOAD_GLOBAL             10 (escape)
+            310 LOAD_FAST                6 (request_quality)
+            312 EXTENDED_ARG             1
+            314 JUMP_IF_TRUE_OR_POP    318
+            316 LOAD_CONST               1 ('')
+        >>  318 CALL_FUNCTION            1
+            320 BINARY_MODULO
+            322 INPLACE_ADD
+            324 STORE_FAST               7 (xml)
+
+582         326 LOAD_FAST                7 (xml)
+            328 LOAD_CONST              15 ('</ListInfo>')
+            330 INPLACE_ADD
+            332 STORE_FAST               7 (xml)
+
+583         334 LOAD_FAST                7 (xml)
+            336 LOAD_CONST              16 ('</PlayList>')
+            338 INPLACE_ADD
+            340 STORE_FAST               7 (xml)
+
+584         342 LOAD_FAST                7 (xml)
+            344 RETURN_VALUE
+
+=== LPTidalPlayList.generateSetKeyMappingXML ===
+593           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (header)
+              6 LOAD_GLOBAL              2 (LPTidalPlayHeader)
+              8 CALL_FUNCTION            2
+             10 POP_JUMP_IF_FALSE       18
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                1 (header)
+             16 JUMP_FORWARD             4 (to 22)
+        >>   18 LOAD_GLOBAL              2 (LPTidalPlayHeader)
+             20 CALL_FUNCTION            0
+        >>   22 STORE_FAST               2 (header)
+
+594          24 LOAD_CONST               1 ('<Name>%s</Name>')
+             26 LOAD_GLOBAL              3 (escape)
+             28 LOAD_GLOBAL              4 (str)
+             30 LOAD_FAST                1 (name)
+             32 JUMP_IF_TRUE_OR_POP     36
+             34 LOAD_CONST               2 ('')
+        >>   36 CALL_FUNCTION            1
+             38 CALL_FUNCTION            1
+             40 BINARY_MODULO
+             42 STORE_FAST               3 (xml)
+
+595          44 LOAD_FAST                3 (xml)
+             46 LOAD_CONST               3 ('<Source>%s</Source>')
+             48 LOAD_GLOBAL              3 (escape)
+             50 LOAD_FAST                2 (header)
+             52 LOAD_ATTR                5 (mediaSource)
+             54 JUMP_IF_TRUE_OR_POP     62
+             56 LOAD_GLOBAL              6 (LPPlayListSource)
+             58 LOAD_ATTR                7 (Tidal)
+             60 LOAD_ATTR                8 (value)
+        >>   62 CALL_FUNCTION            1
+             64 BINARY_MODULO
+             66 INPLACE_ADD
+             68 STORE_FAST               3 (xml)
+
+596          70 LOAD_FAST                3 (xml)
+             72 LOAD_CONST               4 ('<ContentType>%s</ContentType>')
+             74 LOAD_GLOBAL              3 (escape)
+             76 LOAD_FAST                2 (header)
+             78 LOAD_ATTR                9 (contentType)
+             80 JUMP_IF_TRUE_OR_POP     84
+             82 LOAD_CONST               5 ('songlist')
+        >>   84 CALL_FUNCTION            1
+             86 BINARY_MODULO
+             88 INPLACE_ADD
+             90 STORE_FAST               3 (xml)
+
+597          92 LOAD_FAST                3 (xml)
+             94 LOAD_CONST               6 ('<PicUrl>%s</PicUrl>')
+             96 LOAD_GLOBAL              3 (escape)
+             98 LOAD_FAST                2 (header)
+            100 LOAD_ATTR               10 (imageUrl)
+            102 JUMP_IF_TRUE_OR_POP    114
+            104 LOAD_FAST                0 (self)
+            106 LOAD_METHOD             11 (getPicUrl)
+            108 CALL_METHOD              0
+            110 JUMP_IF_TRUE_OR_POP    114
+            112 LOAD_CONST               2 ('')
+        >>  114 CALL_FUNCTION            1
+            116 BINARY_MODULO
+            118 INPLACE_ADD
+            120 STORE_FAST               3 (xml)
+
+598         122 LOAD_FAST                3 (xml)
+            124 LOAD_CONST               7 ('<RoutineId>Empty</RoutineId>')
+            126 INPLACE_ADD
+            128 STORE_FAST               3 (xml)
+
+599         130 LOAD_FAST                3 (xml)
+            132 LOAD_CONST               8 ('<Loop>0</Loop>')
+            134 INPLACE_ADD
+            136 STORE_FAST               3 (xml)
+
+600         138 LOAD_FAST                3 (xml)
+            140 LOAD_CONST               9 ('<Shuffle>0</Shuffle>')
+            142 INPLACE_ADD
+            144 STORE_FAST               3 (xml)
+
+601         146 LOAD_FAST                3 (xml)
+            148 RETURN_VALUE
+
+=== LPTidalPlayList.getRequestQualityStr ===
+610           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_localQualityValue)
+              4 CALL_METHOD              0
+              6 STORE_FAST               1 (quality)
+
+611           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (QUALITY_MAP)
+             12 LOAD_METHOD              2 (get)
+             14 LOAD_FAST                1 (quality)
+             16 LOAD_CONST               1 ('LOW')
+             18 CALL_METHOD              2
+             20 RETURN_VALUE
+
+=== LPTidalPlayList._localQualityValue ===
+620           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_GLOBAL              1 (LPUtility)
+              4 LOAD_CONST               1 ('settings')
+              6 LOAD_CONST               2 (None)
+              8 CALL_FUNCTION            3
+             10 STORE_FAST               1 (settings)
+
+621          12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              2 (_userId)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                3 (header)
+             20 CALL_METHOD              1
+             22 STORE_FAST               2 (user_id)
+
+622          24 LOAD_FAST                1 (settings)
+             26 LOAD_CONST               2 (None)
+             28 IS_OP                    0
+             30 POP_JUMP_IF_TRUE        36
+             32 LOAD_FAST                2 (user_id)
+             34 POP_JUMP_IF_TRUE        50
+
+623     >>   36 LOAD_GLOBAL              4 (tidalNormalizeQualityValue)
+             38 LOAD_CONST               2 (None)
+             40 LOAD_FAST                0 (self)
+             42 LOAD_METHOD              5 (_supportsMaxQuality)
+             44 CALL_METHOD              0
+             46 CALL_FUNCTION            2
+             48 RETURN_VALUE
+
+624     >>   50 SETUP_FINALLY           48 (to 100)
+
+625          52 LOAD_FAST                1 (settings)
+             54 LOAD_METHOD              6 (beginGroup)
+             56 LOAD_GLOBAL              7 (LPPlayListSource)
+             58 LOAD_ATTR                8 (Tidal)
+             60 LOAD_ATTR                9 (value)
+             62 FORMAT_VALUE             0
+             64 LOAD_CONST               3 ('/')
+             66 LOAD_FAST                2 (user_id)
+             68 FORMAT_VALUE             0
+             70 BUILD_STRING             3
+             72 CALL_METHOD              1
+             74 POP_TOP
+
+626          76 LOAD_FAST                1 (settings)
+             78 LOAD_METHOD              9 (value)
+             80 LOAD_CONST               4 ('quality')
+             82 LOAD_CONST               2 (None)
+             84 CALL_METHOD              2
+             86 STORE_FAST               3 (raw_quality)
+
+627          88 LOAD_FAST                1 (settings)
+             90 LOAD_METHOD             10 (endGroup)
+             92 CALL_METHOD              0
+             94 POP_TOP
+             96 POP_BLOCK
+             98 JUMP_FORWARD            22 (to 122)
+
+628     >>  100 DUP_TOP
+            102 LOAD_GLOBAL             11 (Exception)
+            104 JUMP_IF_NOT_EXC_MATCH   120
+            106 POP_TOP
+            108 POP_TOP
+            110 POP_TOP
+
+629         112 LOAD_CONST               2 (None)
+            114 STORE_FAST               3 (raw_quality)
+            116 POP_EXCEPT
+            118 JUMP_FORWARD             2 (to 122)
+        >>  120 RERAISE
+
+630     >>  122 LOAD_GLOBAL              4 (tidalNormalizeQualityValue)
+            124 LOAD_FAST                3 (raw_quality)
+            126 LOAD_FAST                0 (self)
+            128 LOAD_METHOD              5 (_supportsMaxQuality)
+            130 CALL_METHOD              0
+            132 CALL_FUNCTION            2
+            134 RETURN_VALUE
+
+=== LPTidalPlayList._localReplayGainValue ===
+639           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_userId)
+              4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                1 (header)
+              8 CALL_METHOD              1
+             10 STORE_FAST               1 (user_id)
+
+640          12 LOAD_GLOBAL              2 (tidalReadLocalReplayGainValue)
+             14 LOAD_FAST                1 (user_id)
+             16 CALL_FUNCTION            1
+             18 RETURN_VALUE
+
+=== LPTidalPlayList._replayGainXmlState ===
+649           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_localReplayGainValue)
+              4 CALL_METHOD              0
+              6 STORE_FAST               1 (replay_gain)
+
+650           8 LOAD_GLOBAL              1 (dict)
+             10 LOAD_GLOBAL              2 (TIDAL_REPLAY_GAIN_XML_MAP)
+             12 LOAD_METHOD              3 (get)
+             14 LOAD_FAST                1 (replay_gain)
+             16 LOAD_GLOBAL              2 (TIDAL_REPLAY_GAIN_XML_MAP)
+             18 LOAD_CONST               1 (0)
+             20 BINARY_SUBSCR
+             22 CALL_METHOD              2
+             24 CALL_FUNCTION            1
+             26 RETURN_VALUE
+
+=== LPTidalPlayList._supportsMaxQuality ===
+659           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (account)
+              6 LOAD_CONST               1 ('subscription')
+              8 BUILD_MAP                0
+             10 CALL_FUNCTION            3
+             12 STORE_FAST               1 (account_subscription)
+
+660          14 LOAD_GLOBAL              2 (tidalSubscriptionSupportsMax)
+             16 LOAD_FAST                1 (account_subscription)
+             18 CALL_FUNCTION            1
+             20 POP_JUMP_IF_FALSE       26
+
+661          22 LOAD_CONST               2 (True)
+             24 RETURN_VALUE
+
+662     >>   26 SETUP_FINALLY           52 (to 80)
+
+663          28 LOAD_CONST               3 (0)
+             30 LOAD_CONST               4 (('LPTidalStore',))
+             32 IMPORT_NAME              3 (HOME.StreamService.Tidal.state.LPTidalStore)
+             34 IMPORT_FROM              4 (LPTidalStore)
+             36 STORE_FAST               2 (LPTidalStore)
+             38 POP_TOP
+
+665          40 LOAD_FAST                2 (LPTidalStore)
+             42 LOAD_METHOD              5 (instance)
+             44 CALL_METHOD              0
+             46 LOAD_ATTR                6 (accountState)
+             48 STORE_FAST               3 (account_state)
+
+666          50 LOAD_FAST                3 (account_state)
+             52 LOAD_METHOD              7 (get)
+             54 LOAD_CONST               5 ('subscriptionInfo')
+             56 CALL_METHOD              1
+             58 JUMP_IF_TRUE_OR_POP     68
+             60 LOAD_FAST                3 (account_state)
+             62 LOAD_METHOD              7 (get)
+             64 LOAD_CONST               1 ('subscription')
+             66 CALL_METHOD              1
+        >>   68 STORE_FAST               4 (subscription)
+
+667          70 LOAD_GLOBAL              2 (tidalSubscriptionSupportsMax)
+             72 LOAD_FAST                4 (subscription)
+             74 CALL_FUNCTION            1
+             76 POP_BLOCK
+             78 RETURN_VALUE
+
+668     >>   80 DUP_TOP
+             82 LOAD_GLOBAL              8 (Exception)
+             84 JUMP_IF_NOT_EXC_MATCH    98
+             86 POP_TOP
+             88 POP_TOP
+             90 POP_TOP
+
+669          92 POP_EXCEPT
+             94 LOAD_CONST               6 (False)
+             96 RETURN_VALUE
+        >>   98 RERAISE
+            100 LOAD_CONST               7 (None)
+            102 RETURN_VALUE
+
+=== LPTidalPlayList._userId ===
+678           0 LOAD_GLOBAL              0 (getattr)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (account)
+              6 LOAD_CONST               1 ('userId')
+              8 LOAD_CONST               2 (None)
+             10 CALL_FUNCTION            3
+             12 STORE_FAST               2 (account_user_id)
+
+679          14 LOAD_FAST                2 (account_user_id)
+             16 POP_JUMP_IF_FALSE       26
+
+680          18 LOAD_GLOBAL              2 (str)
+             20 LOAD_FAST                2 (account_user_id)
+             22 CALL_FUNCTION            1
+             24 RETURN_VALUE
+
+681     >>   26 LOAD_GLOBAL              0 (getattr)
+             28 LOAD_FAST                1 (header)
+             30 LOAD_CONST               1 ('userId')
+             32 LOAD_CONST               2 (None)
+             34 CALL_FUNCTION            3
+             36 STORE_FAST               3 (header_user_id)
+
+682          38 LOAD_GLOBAL              2 (str)
+             40 LOAD_FAST                3 (header_user_id)
+             42 JUMP_IF_TRUE_OR_POP     46
+             44 LOAD_CONST               3 ('')
+        >>   46 CALL_FUNCTION            1
+             48 RETURN_VALUE
+
+=== LPTidalPlayList._buildMetadata ===
+693           0 LOAD_CONST               1 ('<DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:song="www.linkplay.com/song/" xmlns:custom="www.linkplay.com/custom/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><upnp:class>object.item.audioItem.musicTrack</upnp:class><item id="%s">')
+
+700           2 LOAD_GLOBAL              0 (escape)
+              4 LOAD_GLOBAL              1 (str)
+              6 LOAD_FAST                1 (header)
+              8 LOAD_ATTR                2 (headId)
+             10 JUMP_IF_TRUE_OR_POP     20
+             12 LOAD_FAST                1 (header)
+             14 LOAD_ATTR                3 (streamId)
+             16 JUMP_IF_TRUE_OR_POP     20
+             18 LOAD_CONST               2 ('')
+        >>   20 CALL_FUNCTION            1
+             22 CALL_FUNCTION            1
+
+692          24 BINARY_MODULO
+             26 STORE_FAST               3 (meta)
+
+701          28 LOAD_FAST                3 (meta)
+             30 LOAD_CONST               3 ('<song:id>%s</song:id>')
+             32 LOAD_GLOBAL              0 (escape)
+             34 LOAD_GLOBAL              1 (str)
+             36 LOAD_FAST                2 (item)
+             38 LOAD_ATTR                4 (trackId)
+             40 JUMP_IF_TRUE_OR_POP     44
+             42 LOAD_CONST               2 ('')
+        >>   44 CALL_FUNCTION            1
+             46 CALL_FUNCTION            1
+             48 BINARY_MODULO
+             50 INPLACE_ADD
+             52 STORE_FAST               3 (meta)
+
+702          54 LOAD_FAST                3 (meta)
+             56 LOAD_CONST               4 ('<song:singerid>%s</song:singerid>')
+             58 LOAD_GLOBAL              0 (escape)
+             60 LOAD_GLOBAL              1 (str)
+             62 LOAD_FAST                2 (item)
+             64 LOAD_ATTR                5 (artistId)
+             66 JUMP_IF_TRUE_OR_POP     70
+             68 LOAD_CONST               2 ('')
+        >>   70 CALL_FUNCTION            1
+             72 CALL_FUNCTION            1
+             74 BINARY_MODULO
+             76 INPLACE_ADD
+             78 STORE_FAST               3 (meta)
+
+703          80 LOAD_FAST                3 (meta)
+             82 LOAD_CONST               5 ('<song:albumid>%s</song:albumid>')
+             84 LOAD_GLOBAL              0 (escape)
+             86 LOAD_GLOBAL              1 (str)
+             88 LOAD_FAST                2 (item)
+             90 LOAD_ATTR                6 (albumId)
+             92 JUMP_IF_TRUE_OR_POP     96
+             94 LOAD_CONST               2 ('')
+        >>   96 CALL_FUNCTION            1
+             98 CALL_FUNCTION            1
+            100 BINARY_MODULO
+            102 INPLACE_ADD
+            104 STORE_FAST               3 (meta)
+
+704         106 LOAD_FAST                3 (meta)
+
+705         108 LOAD_CONST               6 ('<res protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;" duration="%d">%s</res>')
+
+707         110 LOAD_FAST                0 (self)
+            112 LOAD_METHOD              7 (_durationValue)
+            114 LOAD_FAST                2 (item)
+            116 LOAD_ATTR                8 (trackDuration)
+            118 LOAD_CONST               7 (1000)
+            120 BINARY_MULTIPLY
+            122 CALL_METHOD              1
+            124 LOAD_GLOBAL              0 (escape)
+            126 LOAD_FAST                2 (item)
+            128 LOAD_ATTR                9 (trackUrl)
+            130 JUMP_IF_TRUE_OR_POP    140
+            132 LOAD_FAST                1 (header)
+            134 LOAD_ATTR               10 (searchUrl)
+            136 JUMP_IF_TRUE_OR_POP    140
+            138 LOAD_CONST               2 ('')
+        >>  140 CALL_FUNCTION            1
+            142 BUILD_TUPLE              2
+
+704         144 BINARY_MODULO
+            146 INPLACE_ADD
+            148 STORE_FAST               3 (meta)
+
+708         150 LOAD_FAST                3 (meta)
+            152 LOAD_CONST               8 ('<dc:title>%s</dc:title>')
+            154 LOAD_GLOBAL              0 (escape)
+            156 LOAD_FAST                2 (item)
+            158 LOAD_ATTR               11 (trackName)
+            160 JUMP_IF_TRUE_OR_POP    164
+            162 LOAD_CONST               2 ('')
+        >>  164 CALL_FUNCTION            1
+            166 BINARY_MODULO
+            168 INPLACE_ADD
+            170 STORE_FAST               3 (meta)
+
+709         172 LOAD_FAST                3 (meta)
+            174 LOAD_CONST               9 ('<upnp:artist>%s</upnp:artist>')
+            176 LOAD_GLOBAL              0 (escape)
+            178 LOAD_FAST                2 (item)
+            180 LOAD_ATTR               12 (trackArtist)
+            182 JUMP_IF_TRUE_OR_POP    186
+            184 LOAD_CONST               2 ('')
+        >>  186 CALL_FUNCTION            1
+            188 BINARY_MODULO
+            190 INPLACE_ADD
+            192 STORE_FAST               3 (meta)
+
+710         194 LOAD_FAST                3 (meta)
+            196 LOAD_CONST              10 ('<upnp:album>%s</upnp:album>')
+            198 LOAD_GLOBAL              0 (escape)
+            200 LOAD_FAST                2 (item)
+            202 LOAD_ATTR               13 (albumName)
+            204 JUMP_IF_TRUE_OR_POP    208
+            206 LOAD_CONST               2 ('')
+        >>  208 CALL_FUNCTION            1
+            210 BINARY_MODULO
+            212 INPLACE_ADD
+            214 STORE_FAST               3 (meta)
+
+711         216 LOAD_FAST                3 (meta)
+            218 LOAD_CONST              11 ('<upnp:albumArtURI>%s</upnp:albumArtURI>')
+            220 LOAD_GLOBAL              0 (escape)
+            222 LOAD_FAST                2 (item)
+            224 LOAD_ATTR               14 (trackImage)
+            226 JUMP_IF_TRUE_OR_POP    230
+            228 LOAD_CONST               2 ('')
+        >>  230 CALL_FUNCTION            1
+            232 BINARY_MODULO
+            234 INPLACE_ADD
+            236 STORE_FAST               3 (meta)
+
+712         238 LOAD_FAST                3 (meta)
+            240 LOAD_CONST              12 ('</item></DIDL-Lite>')
+            242 INPLACE_ADD
+            244 STORE_FAST               3 (meta)
+
+713         246 LOAD_FAST                3 (meta)
+            248 RETURN_VALUE
+
+=== LPTidalPlayList._durationValue ===
+722           0 SETUP_FINALLY           26 (to 28)
+
+723           2 LOAD_GLOBAL              0 (int)
+              4 LOAD_GLOBAL              1 (float)
+              6 LOAD_GLOBAL              2 (str)
+              8 LOAD_FAST                1 (duration)
+             10 JUMP_IF_TRUE_OR_POP     14
+             12 LOAD_CONST               1 ('0')
+        >>   14 CALL_FUNCTION            1
+             16 LOAD_METHOD              3 (strip)
+             18 CALL_METHOD              0
+             20 CALL_FUNCTION            1
+             22 CALL_FUNCTION            1
+             24 POP_BLOCK
+             26 RETURN_VALUE
+
+724     >>   28 DUP_TOP
+             30 LOAD_GLOBAL              4 (Exception)
+             32 JUMP_IF_NOT_EXC_MATCH    46
+             34 POP_TOP
+             36 POP_TOP
+             38 POP_TOP
+
+725          40 POP_EXCEPT
+             42 LOAD_CONST               2 (0)
+             44 RETURN_VALUE
+        >>   46 RERAISE
+             48 LOAD_CONST               3 (None)
+             50 RETURN_VALUE
+
+=== LPTidalPlayList.extendFromItems ===
+734           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (list)
+              4 LOAD_METHOD              1 (extend)
+              6 LOAD_CONST               1 (<code object <listcomp> at 0x000001F324E76BE0, file "LPClientFramework\LPPlayList\LPTidalPlayList.py", line 734>)
+              8 LOAD_CONST               2 ('LPTidalPlayList.extendFromItems.<locals>.<listcomp>')
+             10 MAKE_FUNCTION            0
+             12 LOAD_FAST                1 (items)
+             14 GET_ITER
+             16 CALL_FUNCTION            1
+             18 CALL_METHOD              1
+             20 POP_TOP
+             22 LOAD_CONST               3 (None)
+             24 RETURN_VALUE
+
+=== LPTidalPlayList.extendFromItems.<listcomp> ===
+734           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_GLOBAL              1 (LPTidalPlayItem)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_FAST                1 (item)
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE

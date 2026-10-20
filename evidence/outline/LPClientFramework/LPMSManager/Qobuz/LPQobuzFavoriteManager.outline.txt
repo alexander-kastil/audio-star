@@ -1,0 +1,105 @@
+# module LPClientFramework.LPMSManager.Qobuz.LPQobuzFavoriteManager
+
+[module] names: __doc__, time, PyQt6.QtCore, QObject, pyqtSignal, LPGlobalUI, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPPlayListSource, LPClientFramework.LPUtility, logger, LPQobuzFavoriteManager
+  str: '\n@Time ： 2025/8/19 17:45\n@Auth ： Chris\n@File ：LPQobuzFavoriteManager.py\n@Desc:\n'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'LPHeaderType'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'LPQobuzFavoriteManager'
+
+def LPQobuzFavoriteManager()  line 17
+  names: __name__, __module__, __qualname__, pyqtSignal, favLoadSignal, __init__, _registerCacheProjection, _onCacheChanged, initFavIds, changeFav, getFavIds, onPlaylistLoad, onFavLoaded, __classcell__
+    str: 'LPQobuzFavoriteManager'
+    str: 'LPQobuzFavoriteManager.__init__'
+    str: 'LPQobuzFavoriteManager._registerCacheProjection'
+    str: 'LPQobuzFavoriteManager._onCacheChanged'
+    str: 'LPQobuzFavoriteManager.initFavIds'
+    str: 'LPQobuzFavoriteManager.changeFav'
+    str: 'LPQobuzFavoriteManager.getFavIds'
+    str: 'LPQobuzFavoriteManager.onPlaylistLoad'
+    str: 'LPQobuzFavoriteManager.onFavLoaded'
+
+  def LPQobuzFavoriteManager.__init__(self, parent)  line 21
+    names: super, __init__, qobuz, libCacheMgr, libPlaylistLoadedSignal, connect, onPlaylistLoad, favIds, playlistIds, favLoadSignal, onFavLoaded, _registerCacheProjection
+
+  def LPQobuzFavoriteManager._registerCacheProjection(self)  line 36
+    names: LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, setProjectionCallback, _onCacheChanged
+      str: '注册 Qobuz 收藏缓存投影回调，缓存变化时同步 favIds/playlistIds。'
+      str: 'LPFavoriteCacheManager'
+      str: 'Qobuz'
+
+  def LPQobuzFavoriteManager._onCacheChanged(self, source, userId, ids)  line 41
+    names: qobuz, currentAccount, str, getattr, strip, items, favIds, set, get, playlistIds, favLoadSignal, emit
+      str: '缓存变化回调：与当前账号一致时刷新投影并通知页面。'
+      str: 'Qobuz'
+      str: 'userId'
+      str: 'LPQobuzFavoriteManager._onCacheChanged.<locals>.<dictcomp>'
+      str: 'playlists'
+
+    def LPQobuzFavoriteManager._onCacheChanged.<dictcomp>(.0)  line 49
+      names: set
+        str: 'tracks'
+        str: 'albums'
+        str: 'artists'
+
+  def LPQobuzFavoriteManager.initFavIds(self)  line 58
+    names: qobuz, currentAccount, str, getattr, strip, LPClientFramework.LPFavoriteSyncCoordinator, LPFavoriteSyncCoordinator, instance, requestSync
+      str: '按账号请求收藏缓存同步，TTL 内复用本地数据。'
+      str: 'userId'
+      str: 'LPFavoriteSyncCoordinator'
+      str: 'Qobuz'
+      str: 'force'
+
+  def LPQobuzFavoriteManager.changeFav(self, changeType, headType, favId)  line 69
+    names: LPHeaderType, LP_HEADER_TYPE_SONG, favIds, set, get, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_ARTIST, playlistIds, add, discard, qobuz, currentAccount, str, getattr, strip, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, applyLocalChange
+      str: '本地投影与缓存同步单条收藏变更。'
+      str: 'tracks'
+      str: 'albums'
+      str: 'artists'
+      str: 'tracks'
+      str: 'albums'
+      str: 'artists'
+      str: 'playlists'
+      str: 'add'
+      str: 'userId'
+      str: 'LPFavoriteCacheManager'
+      str: 'Qobuz'
+
+  def LPQobuzFavoriteManager.getFavIds(self, headType)  line 106
+    names: LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, qobuz, currentAccount, str, getattr, strip, LPGlobalUI, accountForSource, LPHeaderType, LP_HEADER_TYPE_SONG, LP_HEADER_TYPE_ALBUM, LP_HEADER_TYPE_ARTIST, instance, favoriteIds, set
+      str: '从本地缓存查询指定类型收藏 ID；未就绪返回 None。'
+      str: 'LPFavoriteCacheManager'
+      str: 'userId'
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'Qobuz'
+      str: 'tracks'
+      str: 'albums'
+      str: 'artists'
+      str: 'playlists'
+
+  def LPQobuzFavoriteManager.onPlaylistLoad(self)  line 135
+    names: qobuz, currentAccount, dataBinding, getattr, set, playlistIds, str, strip, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, snapshot, applyServerSnapshot
+      str: '歌单库加载完成后，用当前全集替换缓存中的歌单收藏 ID。'
+      str: 'My Playlists'
+      str: 'playList'
+      str: 'list'
+      str: 'LPQobuzFavoriteManager.onPlaylistLoad.<locals>.<listcomp>'
+      str: 'userId'
+      str: 'LPFavoriteCacheManager'
+      str: 'Qobuz'
+      str: 'playlists'
+
+    def LPQobuzFavoriteManager.onPlaylistLoad.<listcomp>(.0)  line 141
+      names: trackId
+
+    def LPQobuzFavoriteManager.onPlaylistLoad.<listcomp>(.0)  line 148
+      names: str
+
+  def LPQobuzFavoriteManager.onFavLoaded(self)  line 153
+    names: logger, debug, LPGlobalUI, getTopWidget, hasattr, source, LPPlayListSource, Qobuz, value, onFavIdsLoaded
+      str: 'onFavLoaded==='
+      str: 'source'
+      str: 'onFavIdsLoaded'

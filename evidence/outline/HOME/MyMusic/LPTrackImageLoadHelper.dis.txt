@@ -1,0 +1,1572 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (None)
+              4 IMPORT_NAME              0 (queue)
+              6 STORE_NAME               0 (queue)
+
+  2           8 LOAD_CONST               0 (0)
+             10 LOAD_CONST               1 (None)
+             12 IMPORT_NAME              1 (threading)
+             14 STORE_NAME               1 (threading)
+
+  4          16 LOAD_CONST               0 (0)
+             18 LOAD_CONST               2 (('QtCore',))
+             20 IMPORT_NAME              2 (PyQt6)
+             22 IMPORT_FROM              3 (QtCore)
+             24 STORE_NAME               3 (QtCore)
+             26 POP_TOP
+
+  7          28 LOAD_NAME                1 (threading)
+             30 LOAD_METHOD              4 (Lock)
+             32 CALL_METHOD              0
+             34 STORE_NAME               5 (_sharedTrackImageLoaderLock)
+
+  8          36 LOAD_CONST               1 (None)
+             38 STORE_GLOBAL             6 (_sharedTrackImageLoader)
+
+  9          40 LOAD_NAME                1 (threading)
+             42 LOAD_METHOD              4 (Lock)
+             44 CALL_METHOD              0
+             46 STORE_NAME               7 (_trackImageHelperRegistryLock)
+
+ 10          48 BUILD_MAP                0
+             50 STORE_NAME               8 (_trackImageHelperRegistry)
+
+ 11          52 LOAD_CONST               3 (1)
+             54 STORE_GLOBAL             9 (_nextTrackImageHelperToken)
+
+ 14          56 LOAD_CONST               4 (<code object _registerTrackImageHelper at 0x000001F3253C4190, file "MyMusic\LPTrackImageLoadHelper.py", line 14>)
+             58 LOAD_CONST               5 ('_registerTrackImageHelper')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME              10 (_registerTrackImageHelper)
+
+ 32          64 LOAD_CONST               6 (<code object _unregisterTrackImageHelper at 0x000001F3253C4710, file "MyMusic\LPTrackImageLoadHelper.py", line 32>)
+             66 LOAD_CONST               7 ('_unregisterTrackImageHelper')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME              11 (_unregisterTrackImageHelper)
+
+ 45          72 LOAD_CONST               8 (<code object _getRegisteredTrackImageHelper at 0x000001F3253C4F50, file "MyMusic\LPTrackImageLoadHelper.py", line 45>)
+             74 LOAD_CONST               9 ('_getRegisteredTrackImageHelper')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME              12 (_getRegisteredTrackImageHelper)
+
+ 58          80 LOAD_CONST              10 (<code object _getSharedTrackImageLoader at 0x000001F3253C47C0, file "MyMusic\LPTrackImageLoadHelper.py", line 58>)
+             82 LOAD_CONST              11 ('_getSharedTrackImageLoader')
+             84 MAKE_FUNCTION            0
+             86 STORE_NAME              13 (_getSharedTrackImageLoader)
+
+ 76          88 LOAD_BUILD_CLASS
+             90 LOAD_CONST              12 (<code object _LPTrackImageDispatchBridge at 0x000001F3253C4450, file "MyMusic\LPTrackImageLoadHelper.py", line 76>)
+             92 LOAD_CONST              13 ('_LPTrackImageDispatchBridge')
+             94 MAKE_FUNCTION            0
+             96 LOAD_CONST              13 ('_LPTrackImageDispatchBridge')
+             98 LOAD_NAME                3 (QtCore)
+            100 LOAD_ATTR               14 (QObject)
+            102 CALL_FUNCTION            3
+            104 STORE_NAME              15 (_LPTrackImageDispatchBridge)
+
+115         106 LOAD_BUILD_CLASS
+            108 LOAD_CONST              14 (<code object _LPSharedTrackImageLoader at 0x000001F3253C4C90, file "MyMusic\LPTrackImageLoadHelper.py", line 115>)
+            110 LOAD_CONST              15 ('_LPSharedTrackImageLoader')
+            112 MAKE_FUNCTION            0
+            114 LOAD_CONST              15 ('_LPSharedTrackImageLoader')
+            116 LOAD_NAME               16 (object)
+            118 CALL_FUNCTION            3
+            120 STORE_NAME              17 (_LPSharedTrackImageLoader)
+
+209         122 LOAD_BUILD_CLASS
+            124 LOAD_CONST              16 (<code object LPTrackImageLoadHelper at 0x000001F324E69A80, file "MyMusic\LPTrackImageLoadHelper.py", line 209>)
+            126 LOAD_CONST              17 ('LPTrackImageLoadHelper')
+            128 MAKE_FUNCTION            0
+            130 LOAD_CONST              17 ('LPTrackImageLoadHelper')
+            132 LOAD_NAME                3 (QtCore)
+            134 LOAD_ATTR               14 (QObject)
+            136 CALL_FUNCTION            3
+            138 STORE_NAME              18 (LPTrackImageLoadHelper)
+            140 LOAD_CONST               1 (None)
+            142 RETURN_VALUE
+
+=== _registerTrackImageHelper ===
+ 25           0 LOAD_GLOBAL              0 (_trackImageHelperRegistryLock)
+              2 SETUP_WITH              40 (to 44)
+              4 POP_TOP
+
+ 26           6 LOAD_GLOBAL              1 (_nextTrackImageHelperToken)
+              8 STORE_FAST               1 (helperToken)
+
+ 27          10 LOAD_GLOBAL              1 (_nextTrackImageHelperToken)
+             12 LOAD_CONST               1 (1)
+             14 INPLACE_ADD
+             16 STORE_GLOBAL             1 (_nextTrackImageHelperToken)
+
+ 28          18 LOAD_FAST                0 (helper)
+             20 LOAD_GLOBAL              2 (_trackImageHelperRegistry)
+             22 LOAD_FAST                1 (helperToken)
+             24 STORE_SUBSCR
+
+ 29          26 LOAD_FAST                1 (helperToken)
+             28 POP_BLOCK
+             30 ROT_TWO
+             32 LOAD_CONST               2 (None)
+             34 DUP_TOP
+             36 DUP_TOP
+             38 CALL_FUNCTION            3
+             40 POP_TOP
+             42 RETURN_VALUE
+        >>   44 WITH_EXCEPT_START
+             46 POP_JUMP_IF_TRUE        50
+             48 RERAISE
+        >>   50 POP_TOP
+             52 POP_TOP
+             54 POP_TOP
+             56 POP_EXCEPT
+             58 POP_TOP
+             60 LOAD_CONST               2 (None)
+             62 RETURN_VALUE
+
+=== _unregisterTrackImageHelper ===
+ 41           0 LOAD_GLOBAL              0 (_trackImageHelperRegistryLock)
+              2 SETUP_WITH              28 (to 32)
+              4 POP_TOP
+
+ 42           6 LOAD_GLOBAL              1 (_trackImageHelperRegistry)
+              8 LOAD_METHOD              2 (pop)
+             10 LOAD_FAST                0 (helperToken)
+             12 LOAD_CONST               1 (None)
+             14 CALL_METHOD              2
+             16 POP_TOP
+             18 POP_BLOCK
+             20 LOAD_CONST               1 (None)
+             22 DUP_TOP
+             24 DUP_TOP
+             26 CALL_FUNCTION            3
+             28 POP_TOP
+             30 JUMP_FORWARD            16 (to 48)
+        >>   32 WITH_EXCEPT_START
+             34 POP_JUMP_IF_TRUE        38
+             36 RERAISE
+        >>   38 POP_TOP
+             40 POP_TOP
+             42 POP_TOP
+             44 POP_EXCEPT
+             46 POP_TOP
+        >>   48 LOAD_CONST               1 (None)
+             50 RETURN_VALUE
+
+=== _getRegisteredTrackImageHelper ===
+ 54           0 LOAD_GLOBAL              0 (_trackImageHelperRegistryLock)
+              2 SETUP_WITH              26 (to 30)
+              4 POP_TOP
+
+ 55           6 LOAD_GLOBAL              1 (_trackImageHelperRegistry)
+              8 LOAD_METHOD              2 (get)
+             10 LOAD_FAST                0 (helperToken)
+             12 CALL_METHOD              1
+             14 POP_BLOCK
+             16 ROT_TWO
+             18 LOAD_CONST               1 (None)
+             20 DUP_TOP
+             22 DUP_TOP
+             24 CALL_FUNCTION            3
+             26 POP_TOP
+             28 RETURN_VALUE
+        >>   30 WITH_EXCEPT_START
+             32 POP_JUMP_IF_TRUE        36
+             34 RERAISE
+        >>   36 POP_TOP
+             38 POP_TOP
+             40 POP_TOP
+             42 POP_EXCEPT
+             44 POP_TOP
+             46 LOAD_CONST               1 (None)
+             48 RETURN_VALUE
+
+=== _getSharedTrackImageLoader ===
+ 69           0 LOAD_GLOBAL              0 (_sharedTrackImageLoaderLock)
+              2 SETUP_WITH              34 (to 38)
+              4 POP_TOP
+
+ 70           6 LOAD_GLOBAL              1 (_sharedTrackImageLoader)
+              8 LOAD_CONST               1 (None)
+             10 IS_OP                    0
+             12 POP_JUMP_IF_FALSE       20
+
+ 71          14 LOAD_GLOBAL              2 (_LPSharedTrackImageLoader)
+             16 CALL_FUNCTION            0
+             18 STORE_GLOBAL             1 (_sharedTrackImageLoader)
+
+ 72     >>   20 LOAD_GLOBAL              1 (_sharedTrackImageLoader)
+             22 POP_BLOCK
+             24 ROT_TWO
+             26 LOAD_CONST               1 (None)
+             28 DUP_TOP
+             30 DUP_TOP
+             32 CALL_FUNCTION            3
+             34 POP_TOP
+             36 RETURN_VALUE
+        >>   38 WITH_EXCEPT_START
+             40 POP_JUMP_IF_TRUE        44
+             42 RERAISE
+        >>   44 POP_TOP
+             46 POP_TOP
+             48 POP_TOP
+             50 POP_EXCEPT
+             52 POP_TOP
+             54 LOAD_CONST               1 (None)
+             56 RETURN_VALUE
+
+=== _LPTrackImageDispatchBridge ===
+ 76           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('_LPTrackImageDispatchBridge')
+              6 STORE_NAME               2 (__qualname__)
+
+ 77           8 LOAD_NAME                3 (QtCore)
+             10 LOAD_METHOD              4 (pyqtSignal)
+             12 LOAD_NAME                5 (int)
+             14 LOAD_NAME                5 (int)
+             16 LOAD_NAME                5 (int)
+             18 LOAD_NAME                6 (str)
+             20 CALL_METHOD              4
+             22 STORE_NAME               7 (taskFinishedSignal)
+
+ 79          24 LOAD_CLOSURE             0 (__class__)
+             26 BUILD_TUPLE              1
+             28 LOAD_CONST               1 (<code object __init__ at 0x000001F3253C4500, file "MyMusic\LPTrackImageLoadHelper.py", line 79>)
+             30 LOAD_CONST               2 ('_LPTrackImageDispatchBridge.__init__')
+             32 MAKE_FUNCTION            8 (closure)
+             34 STORE_NAME               8 (__init__)
+
+ 94          36 LOAD_NAME                3 (QtCore)
+             38 LOAD_METHOD              9 (pyqtSlot)
+             40 LOAD_NAME                5 (int)
+             42 LOAD_NAME                5 (int)
+             44 LOAD_NAME                5 (int)
+             46 LOAD_NAME                6 (str)
+             48 CALL_METHOD              4
+
+ 95          50 LOAD_CONST               3 (<code object _dispatchTaskFinished at 0x000001F3253C4A80, file "MyMusic\LPTrackImageLoadHelper.py", line 94>)
+             52 LOAD_CONST               4 ('_LPTrackImageDispatchBridge._dispatchTaskFinished')
+             54 MAKE_FUNCTION            0
+             56 CALL_FUNCTION            1
+             58 STORE_NAME              10 (_dispatchTaskFinished)
+             60 LOAD_CLOSURE             0 (__class__)
+             62 DUP_TOP
+             64 STORE_NAME              11 (__classcell__)
+             66 RETURN_VALUE
+
+=== _LPTrackImageDispatchBridge.__init__ ===
+ 88           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 89          10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                2 (taskFinishedSignal)
+             14 LOAD_METHOD              3 (connect)
+
+ 90          16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                4 (_dispatchTaskFinished)
+
+ 91          20 LOAD_GLOBAL              5 (QtCore)
+             22 LOAD_ATTR                6 (Qt)
+             24 LOAD_ATTR                7 (ConnectionType)
+             26 LOAD_ATTR                8 (QueuedConnection)
+
+ 89          28 CALL_METHOD              2
+             30 POP_TOP
+             32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+=== _LPTrackImageDispatchBridge._dispatchTaskFinished ===
+107           0 LOAD_GLOBAL              0 (_getRegisteredTrackImageHelper)
+              2 LOAD_FAST                1 (helperToken)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               5 (helper)
+
+108           8 LOAD_FAST                5 (helper)
+             10 LOAD_CONST               1 (None)
+             12 IS_OP                    0
+             14 POP_JUMP_IF_FALSE       20
+
+109          16 LOAD_CONST               1 (None)
+             18 RETURN_VALUE
+
+111     >>   20 LOAD_FAST                5 (helper)
+             22 LOAD_METHOD              1 (_handleSharedImageReady)
+             24 LOAD_FAST                2 (generation)
+             26 LOAD_FAST                3 (row)
+             28 LOAD_FAST                4 (imageUrl)
+             30 CALL_METHOD              3
+             32 POP_TOP
+             34 LOAD_CONST               1 (None)
+             36 RETURN_VALUE
+
+=== _LPSharedTrackImageLoader ===
+115           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('_LPSharedTrackImageLoader')
+              6 STORE_NAME               2 (__qualname__)
+
+116           8 LOAD_CONST               1 (<code object __init__ at 0x000001F3253C4030, file "MyMusic\LPTrackImageLoadHelper.py", line 116>)
+             10 LOAD_CONST               2 ('_LPSharedTrackImageLoader.__init__')
+             12 MAKE_FUNCTION            0
+             14 STORE_NAME               3 (__init__)
+
+134          16 LOAD_CONST               3 (<code object submit at 0x000001F3253C40E0, file "MyMusic\LPTrackImageLoadHelper.py", line 134>)
+             18 LOAD_CONST               4 ('_LPSharedTrackImageLoader.submit')
+             20 MAKE_FUNCTION            0
+             22 STORE_NAME               4 (submit)
+
+160          24 LOAD_CONST               5 (<code object _workerLoop at 0x000001F3253C4660, file "MyMusic\LPTrackImageLoadHelper.py", line 160>)
+             26 LOAD_CONST               6 ('_LPSharedTrackImageLoader._workerLoop')
+             28 MAKE_FUNCTION            0
+             30 STORE_NAME               5 (_workerLoop)
+             32 LOAD_CONST               7 (None)
+             34 RETURN_VALUE
+
+=== _LPSharedTrackImageLoader.__init__ ===
+125           0 LOAD_GLOBAL              0 (_LPTrackImageDispatchBridge)
+              2 CALL_FUNCTION            0
+              4 LOAD_FAST                0 (self)
+              6 STORE_ATTR               1 (_dispatchBridge)
+
+126           8 LOAD_GLOBAL              2 (queue)
+             10 LOAD_METHOD              3 (Queue)
+             12 CALL_METHOD              0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               4 (_taskQueue)
+
+127          18 LOAD_GLOBAL              5 (threading)
+             20 LOAD_ATTR                6 (Thread)
+
+128          22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                7 (_workerLoop)
+
+129          26 LOAD_CONST               1 ('LPSharedTrackImageLoader')
+
+130          28 LOAD_CONST               2 (True)
+
+127          30 LOAD_CONST               3 (('target', 'name', 'daemon'))
+             32 CALL_FUNCTION_KW         3
+             34 LOAD_FAST                0 (self)
+             36 STORE_ATTR               8 (_workerThread)
+
+132          38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                8 (_workerThread)
+             42 LOAD_METHOD              9 (start)
+             44 CALL_METHOD              0
+             46 POP_TOP
+             48 LOAD_CONST               4 (None)
+             50 RETURN_VALUE
+
+=== _LPSharedTrackImageLoader.submit ===
+148           0 LOAD_FAST                4 (imageUrl)
+              2 POP_JUMP_IF_TRUE         8
+
+149           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+151     >>    8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                0 (_taskQueue)
+             12 LOAD_METHOD              1 (put)
+
+152          14 LOAD_FAST                1 (helperToken)
+
+153          16 LOAD_FAST                2 (generation)
+
+154          18 LOAD_FAST                3 (row)
+
+155          20 LOAD_FAST                4 (imageUrl)
+
+156          22 LOAD_FAST                5 (cacheSize)
+
+157          24 LOAD_FAST                6 (utilityModule)
+
+151          26 LOAD_CONST               2 (('helperToken', 'generation', 'row', 'imageUrl', 'cacheSize', 'utilityModule'))
+             28 BUILD_CONST_KEY_MAP      6
+             30 CALL_METHOD              1
+             32 POP_TOP
+             34 LOAD_CONST               1 (None)
+             36 RETURN_VALUE
+
+=== _LPSharedTrackImageLoader._workerLoop ===
+170     >>    0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_taskQueue)
+              4 LOAD_METHOD              1 (get)
+              6 CALL_METHOD              0
+              8 STORE_FAST               1 (task)
+
+171          10 EXTENDED_ARG             1
+             12 SETUP_FINALLY          280 (to 294)
+
+172          14 LOAD_FAST                1 (task)
+             16 LOAD_METHOD              1 (get)
+             18 LOAD_CONST               1 ('helperToken')
+             20 CALL_METHOD              1
+             22 STORE_FAST               2 (helperToken)
+
+173          24 LOAD_FAST                1 (task)
+             26 LOAD_METHOD              1 (get)
+             28 LOAD_CONST               2 ('generation')
+             30 LOAD_CONST               3 (0)
+             32 CALL_METHOD              2
+             34 STORE_FAST               3 (generation)
+
+174          36 LOAD_FAST                1 (task)
+             38 LOAD_METHOD              1 (get)
+             40 LOAD_CONST               4 ('row')
+             42 LOAD_CONST               5 (-1)
+             44 CALL_METHOD              2
+             46 STORE_FAST               4 (row)
+
+175          48 LOAD_FAST                1 (task)
+             50 LOAD_METHOD              1 (get)
+             52 LOAD_CONST               6 ('imageUrl')
+             54 LOAD_CONST               7 ('')
+             56 CALL_METHOD              2
+             58 STORE_FAST               5 (imageUrl)
+
+176          60 LOAD_FAST                1 (task)
+             62 LOAD_METHOD              1 (get)
+             64 LOAD_CONST               8 ('utilityModule')
+             66 CALL_METHOD              1
+             68 STORE_FAST               6 (utilityModule)
+
+177          70 LOAD_FAST                1 (task)
+             72 LOAD_METHOD              1 (get)
+             74 LOAD_CONST               9 ('cacheSize')
+             76 LOAD_CONST               3 (0)
+             78 CALL_METHOD              2
+             80 STORE_FAST               7 (cacheSize)
+
+178          82 LOAD_GLOBAL              2 (_getRegisteredTrackImageHelper)
+             84 LOAD_FAST                2 (helperToken)
+             86 CALL_FUNCTION            1
+             88 STORE_FAST               8 (helper)
+
+180          90 LOAD_FAST                8 (helper)
+             92 LOAD_CONST              10 (None)
+             94 IS_OP                    0
+             96 POP_JUMP_IF_FALSE      112
+
+181          98 POP_BLOCK
+
+205         100 LOAD_FAST                0 (self)
+            102 LOAD_ATTR                0 (_taskQueue)
+            104 LOAD_METHOD              3 (task_done)
+            106 CALL_METHOD              0
+            108 POP_TOP
+
+181         110 JUMP_ABSOLUTE            0
+
+183     >>  112 LOAD_FAST                8 (helper)
+            114 LOAD_METHOD              4 (_isBackgroundTaskStillValid)
+            116 LOAD_FAST                3 (generation)
+            118 LOAD_FAST                4 (row)
+            120 LOAD_FAST                5 (imageUrl)
+            122 CALL_METHOD              3
+            124 POP_JUMP_IF_TRUE       140
+
+184         126 POP_BLOCK
+
+205         128 LOAD_FAST                0 (self)
+            130 LOAD_ATTR                0 (_taskQueue)
+            132 LOAD_METHOD              3 (task_done)
+            134 CALL_METHOD              0
+            136 POP_TOP
+
+184         138 JUMP_ABSOLUTE            0
+
+186     >>  140 LOAD_FAST                6 (utilityModule)
+            142 LOAD_METHOD              5 (getCachedPixmapWithUrl)
+            144 LOAD_FAST                5 (imageUrl)
+            146 LOAD_FAST                7 (cacheSize)
+            148 CALL_METHOD              2
+            150 LOAD_CONST              10 (None)
+            152 IS_OP                    0
+            154 POP_JUMP_IF_FALSE      200
+
+187         156 LOAD_FAST                6 (utilityModule)
+            158 LOAD_METHOD              6 (fetchUrlQPixmap)
+            160 LOAD_FAST                5 (imageUrl)
+            162 LOAD_CONST              11 (False)
+            164 LOAD_FAST                7 (cacheSize)
+            166 CALL_METHOD              3
+            168 STORE_FAST               9 (respDict)
+
+188         170 LOAD_FAST                9 (respDict)
+            172 LOAD_METHOD              1 (get)
+            174 LOAD_CONST              12 ('image')
+            176 LOAD_CONST              10 (None)
+            178 CALL_METHOD              2
+            180 LOAD_CONST              10 (None)
+            182 IS_OP                    0
+            184 POP_JUMP_IF_FALSE      200
+
+189         186 POP_BLOCK
+
+205         188 LOAD_FAST                0 (self)
+            190 LOAD_ATTR                0 (_taskQueue)
+            192 LOAD_METHOD              3 (task_done)
+            194 CALL_METHOD              0
+            196 POP_TOP
+
+189         198 JUMP_ABSOLUTE            0
+
+191     >>  200 LOAD_GLOBAL              2 (_getRegisteredTrackImageHelper)
+            202 LOAD_FAST                2 (helperToken)
+            204 CALL_FUNCTION            1
+            206 STORE_FAST               8 (helper)
+
+192         208 LOAD_FAST                8 (helper)
+            210 LOAD_CONST              10 (None)
+            212 IS_OP                    0
+            214 POP_JUMP_IF_FALSE      230
+
+193         216 POP_BLOCK
+
+205         218 LOAD_FAST                0 (self)
+            220 LOAD_ATTR                0 (_taskQueue)
+            222 LOAD_METHOD              3 (task_done)
+            224 CALL_METHOD              0
+            226 POP_TOP
+
+193         228 JUMP_ABSOLUTE            0
+
+195     >>  230 LOAD_FAST                8 (helper)
+            232 LOAD_METHOD              4 (_isBackgroundTaskStillValid)
+            234 LOAD_FAST                3 (generation)
+            236 LOAD_FAST                4 (row)
+            238 LOAD_FAST                5 (imageUrl)
+            240 CALL_METHOD              3
+            242 EXTENDED_ARG             1
+            244 POP_JUMP_IF_TRUE       260
+
+196         246 POP_BLOCK
+
+205         248 LOAD_FAST                0 (self)
+            250 LOAD_ATTR                0 (_taskQueue)
+            252 LOAD_METHOD              3 (task_done)
+            254 CALL_METHOD              0
+            256 POP_TOP
+
+196         258 JUMP_ABSOLUTE            0
+
+198     >>  260 LOAD_FAST                0 (self)
+            262 LOAD_ATTR                7 (_dispatchBridge)
+            264 LOAD_ATTR                8 (taskFinishedSignal)
+            266 LOAD_METHOD              9 (emit)
+
+199         268 LOAD_FAST                2 (helperToken)
+
+200         270 LOAD_FAST                3 (generation)
+
+201         272 LOAD_FAST                4 (row)
+
+202         274 LOAD_FAST                5 (imageUrl)
+
+198         276 CALL_METHOD              4
+            278 POP_TOP
+            280 POP_BLOCK
+
+205         282 LOAD_FAST                0 (self)
+            284 LOAD_ATTR                0 (_taskQueue)
+            286 LOAD_METHOD              3 (task_done)
+            288 CALL_METHOD              0
+            290 POP_TOP
+            292 JUMP_ABSOLUTE            0
+        >>  294 LOAD_FAST                0 (self)
+            296 LOAD_ATTR                0 (_taskQueue)
+            298 LOAD_METHOD              3 (task_done)
+            300 CALL_METHOD              0
+            302 POP_TOP
+            304 RERAISE
+            306 JUMP_ABSOLUTE            0
+            308 LOAD_CONST              10 (None)
+            310 RETURN_VALUE
+
+=== LPTrackImageLoadHelper ===
+209           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTrackImageLoadHelper')
+              6 STORE_NAME               2 (__qualname__)
+
+210           8 LOAD_NAME                3 (QtCore)
+             10 LOAD_METHOD              4 (pyqtSignal)
+             12 LOAD_NAME                5 (int)
+             14 CALL_METHOD              1
+             16 STORE_NAME               6 (rowImageReadySignal)
+
+212          18 LOAD_CONST              30 ((45, 4, None))
+             20 LOAD_CLOSURE             0 (__class__)
+             22 BUILD_TUPLE              1
+             24 LOAD_CONST               4 (<code object __init__ at 0x000001F3253C45B0, file "MyMusic\LPTrackImageLoadHelper.py", line 212>)
+             26 LOAD_CONST               5 ('LPTrackImageLoadHelper.__init__')
+             28 MAKE_FUNCTION            9 (defaults, closure)
+             30 STORE_NAME               7 (__init__)
+
+242          32 LOAD_CONST               6 (<code object attachView at 0x000001F3253C4EA0, file "MyMusic\LPTrackImageLoadHelper.py", line 242>)
+             34 LOAD_CONST               7 ('LPTrackImageLoadHelper.attachView')
+             36 MAKE_FUNCTION            0
+             38 STORE_NAME               8 (attachView)
+
+266          40 LOAD_CONST               8 (<code object refreshVisibleRows at 0x000001F3253C4D40, file "MyMusic\LPTrackImageLoadHelper.py", line 266>)
+             42 LOAD_CONST               9 ('LPTrackImageLoadHelper.refreshVisibleRows')
+             44 MAKE_FUNCTION            0
+             46 STORE_NAME               9 (refreshVisibleRows)
+
+284          48 LOAD_CONST              10 (<code object shutdown at 0x000001F3253C4DF0, file "MyMusic\LPTrackImageLoadHelper.py", line 284>)
+             50 LOAD_CONST              11 ('LPTrackImageLoadHelper.shutdown')
+             52 MAKE_FUNCTION            0
+             54 STORE_NAME              10 (shutdown)
+
+310          56 LOAD_CONST              12 (<code object _disconnectViewSignals at 0x000001F324E60DF0, file "MyMusic\LPTrackImageLoadHelper.py", line 310>)
+             58 LOAD_CONST              13 ('LPTrackImageLoadHelper._disconnectViewSignals')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME              11 (_disconnectViewSignals)
+
+329          64 LOAD_CONST              14 (<code object _onVisibleRowsChanged at 0x000001F324E690E0, file "MyMusic\LPTrackImageLoadHelper.py", line 329>)
+             66 LOAD_CONST              15 ('LPTrackImageLoadHelper._onVisibleRowsChanged')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME              12 (_onVisibleRowsChanged)
+
+353          72 LOAD_CONST              16 (<code object _submitPendingTasks at 0x000001F324E692F0, file "MyMusic\LPTrackImageLoadHelper.py", line 353>)
+             74 LOAD_CONST              17 ('LPTrackImageLoadHelper._submitPendingTasks')
+             76 MAKE_FUNCTION            0
+             78 STORE_NAME              13 (_submitPendingTasks)
+
+373          80 LOAD_CONST              18 (<code object _handleSharedImageReady at 0x000001F324E69660, file "MyMusic\LPTrackImageLoadHelper.py", line 373>)
+             82 LOAD_CONST              19 ('LPTrackImageLoadHelper._handleSharedImageReady')
+             84 MAKE_FUNCTION            0
+             86 STORE_NAME              14 (_handleSharedImageReady)
+
+397          88 LOAD_CONST              20 (<code object _shouldNotifyRow at 0x000001F324E693A0, file "MyMusic\LPTrackImageLoadHelper.py", line 397>)
+             90 LOAD_CONST              21 ('LPTrackImageLoadHelper._shouldNotifyRow')
+             92 MAKE_FUNCTION            0
+             94 STORE_NAME              15 (_shouldNotifyRow)
+
+419          96 LOAD_CONST              22 (<code object _isBackgroundTaskStillValid at 0x000001F324E69240, file "MyMusic\LPTrackImageLoadHelper.py", line 419>)
+             98 LOAD_CONST              23 ('LPTrackImageLoadHelper._isBackgroundTaskStillValid')
+            100 MAKE_FUNCTION            0
+            102 STORE_NAME              16 (_isBackgroundTaskStillValid)
+
+444         104 LOAD_CONST              24 (<code object _buildPendingTasks at 0x000001F324E697C0, file "MyMusic\LPTrackImageLoadHelper.py", line 444>)
+            106 LOAD_CONST              25 ('LPTrackImageLoadHelper._buildPendingTasks')
+            108 MAKE_FUNCTION            0
+            110 STORE_NAME              17 (_buildPendingTasks)
+
+480         112 LOAD_CONST              26 (<code object _normalizeVisibleRange at 0x000001F324E69870, file "MyMusic\LPTrackImageLoadHelper.py", line 480>)
+            114 LOAD_CONST              27 ('LPTrackImageLoadHelper._normalizeVisibleRange')
+            116 MAKE_FUNCTION            0
+            118 STORE_NAME              18 (_normalizeVisibleRange)
+
+504         120 LOAD_CONST              28 (<code object _buildPriorityRows at 0x000001F324E69920, file "MyMusic\LPTrackImageLoadHelper.py", line 504>)
+            122 LOAD_CONST              29 ('LPTrackImageLoadHelper._buildPriorityRows')
+            124 MAKE_FUNCTION            0
+            126 STORE_NAME              19 (_buildPriorityRows)
+            128 LOAD_CLOSURE             0 (__class__)
+            130 DUP_TOP
+            132 STORE_NAME              20 (__classcell__)
+            134 RETURN_VALUE
+
+=== LPTrackImageLoadHelper.__init__ ===
+226           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                6 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+227          12 LOAD_FAST                1 (imageUrlProvider)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_imageUrlProvider)
+
+228          18 LOAD_FAST                2 (rowCountProvider)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (_rowCountProvider)
+
+229          24 LOAD_FAST                3 (utilityModule)
+             26 LOAD_FAST                0 (self)
+             28 STORE_ATTR               4 (_utilityModule)
+
+230          30 LOAD_FAST                4 (cacheSize)
+             32 LOAD_FAST                0 (self)
+             34 STORE_ATTR               5 (_cacheSize)
+
+231          36 LOAD_FAST                5 (prefetchRows)
+             38 LOAD_FAST                0 (self)
+             40 STORE_ATTR               6 (_prefetchRows)
+
+233          42 LOAD_CONST               1 (None)
+             44 LOAD_FAST                0 (self)
+             46 STORE_ATTR               7 (_view)
+
+234          48 LOAD_CONST               2 ((-1, -1))
+             50 LOAD_FAST                0 (self)
+             52 STORE_ATTR               8 (_visibleRange)
+
+235          54 LOAD_GLOBAL              9 (set)
+             56 CALL_FUNCTION            0
+             58 LOAD_FAST                0 (self)
+             60 STORE_ATTR              10 (_pendingTaskSet)
+
+236          62 LOAD_CONST               3 (0)
+             64 LOAD_FAST                0 (self)
+             66 STORE_ATTR              11 (_generation)
+
+237          68 LOAD_CONST               4 (False)
+             70 LOAD_FAST                0 (self)
+             72 STORE_ATTR              12 (_isShutdown)
+
+238          74 LOAD_GLOBAL             13 (_registerTrackImageHelper)
+             76 LOAD_FAST                0 (self)
+             78 CALL_FUNCTION            1
+             80 LOAD_FAST                0 (self)
+             82 STORE_ATTR              14 (_helperToken)
+
+240          84 LOAD_GLOBAL             15 (threading)
+             86 LOAD_METHOD             16 (RLock)
+             88 CALL_METHOD              0
+             90 LOAD_FAST                0 (self)
+             92 STORE_ATTR              17 (_lock)
+             94 LOAD_CONST               1 (None)
+             96 RETURN_VALUE
+
+=== LPTrackImageLoadHelper.attachView ===
+251           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_view)
+              4 LOAD_FAST                1 (view)
+              6 IS_OP                    0
+              8 POP_JUMP_IF_FALSE       22
+
+252          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (refreshVisibleRows)
+             14 CALL_METHOD              0
+             16 POP_TOP
+
+253          18 LOAD_CONST               1 (None)
+             20 RETURN_VALUE
+
+255     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                0 (_view)
+             26 LOAD_CONST               1 (None)
+             28 IS_OP                    1
+             30 POP_JUMP_IF_FALSE       44
+
+256          32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              2 (_disconnectViewSignals)
+             36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                0 (_view)
+             40 CALL_METHOD              1
+             42 POP_TOP
+
+258     >>   44 LOAD_FAST                1 (view)
+             46 LOAD_FAST                0 (self)
+             48 STORE_ATTR               0 (_view)
+
+259          50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                0 (_view)
+             54 LOAD_CONST               1 (None)
+             56 IS_OP                    0
+             58 POP_JUMP_IF_FALSE       64
+
+260          60 LOAD_CONST               1 (None)
+             62 RETURN_VALUE
+
+262     >>   64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                0 (_view)
+             68 LOAD_ATTR                3 (visibleRowsChanged)
+             70 LOAD_METHOD              4 (connect)
+             72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR                5 (_onVisibleRowsChanged)
+             76 CALL_METHOD              1
+             78 POP_TOP
+
+263          80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                0 (_view)
+             84 LOAD_ATTR                6 (destroyed)
+             86 LOAD_METHOD              4 (connect)
+             88 LOAD_FAST                0 (self)
+             90 LOAD_ATTR                7 (shutdown)
+             92 CALL_METHOD              1
+             94 POP_TOP
+
+264          96 LOAD_FAST                0 (self)
+             98 LOAD_METHOD              1 (refreshVisibleRows)
+            100 CALL_METHOD              0
+            102 POP_TOP
+            104 LOAD_CONST               1 (None)
+            106 RETURN_VALUE
+
+=== LPTrackImageLoadHelper.refreshVisibleRows ===
+275           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_view)
+              4 LOAD_CONST               1 (None)
+              6 IS_OP                    1
+              8 POP_JUMP_IF_FALSE       44
+
+276          10 LOAD_GLOBAL              1 (getattr)
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                0 (_view)
+             16 LOAD_CONST               2 ('emitVisibleRowsChanged')
+             18 LOAD_CONST               1 (None)
+             20 CALL_FUNCTION            3
+             22 STORE_FAST               1 (emitMethod)
+
+277          24 LOAD_GLOBAL              2 (callable)
+             26 LOAD_FAST                1 (emitMethod)
+             28 CALL_FUNCTION            1
+             30 POP_JUMP_IF_FALSE       44
+
+278          32 LOAD_FAST                1 (emitMethod)
+             34 LOAD_CONST               3 (True)
+             36 CALL_FUNCTION            1
+             38 POP_TOP
+
+279          40 LOAD_CONST               1 (None)
+             42 RETURN_VALUE
+
+281     >>   44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                3 (_visibleRange)
+             48 UNPACK_SEQUENCE          2
+             50 STORE_FAST               2 (firstRow)
+             52 STORE_FAST               3 (lastRow)
+
+282          54 LOAD_FAST                0 (self)
+             56 LOAD_METHOD              4 (_onVisibleRowsChanged)
+             58 LOAD_FAST                2 (firstRow)
+             60 LOAD_FAST                3 (lastRow)
+             62 CALL_METHOD              2
+             64 POP_TOP
+             66 LOAD_CONST               1 (None)
+             68 RETURN_VALUE
+
+=== LPTrackImageLoadHelper.shutdown ===
+293           0 LOAD_CONST               1 (None)
+              2 STORE_FAST               1 (view)
+
+294           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                0 (_lock)
+              8 SETUP_WITH              86 (to 96)
+             10 POP_TOP
+
+295          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                1 (_isShutdown)
+             16 POP_JUMP_IF_FALSE       34
+
+296          18 POP_BLOCK
+             20 LOAD_CONST               1 (None)
+             22 DUP_TOP
+             24 DUP_TOP
+             26 CALL_FUNCTION            3
+             28 POP_TOP
+             30 LOAD_CONST               1 (None)
+             32 RETURN_VALUE
+
+298     >>   34 LOAD_CONST               2 (True)
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               1 (_isShutdown)
+
+299          40 LOAD_FAST                0 (self)
+             42 DUP_TOP
+             44 LOAD_ATTR                2 (_generation)
+             46 LOAD_CONST               3 (1)
+             48 INPLACE_ADD
+             50 ROT_TWO
+             52 STORE_ATTR               2 (_generation)
+
+300          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                3 (_pendingTaskSet)
+             58 LOAD_METHOD              4 (clear)
+             60 CALL_METHOD              0
+             62 POP_TOP
+
+301          64 LOAD_CONST               4 ((-1, -1))
+             66 LOAD_FAST                0 (self)
+             68 STORE_ATTR               5 (_visibleRange)
+
+302          70 LOAD_FAST                0 (self)
+             72 LOAD_ATTR                6 (_view)
+             74 STORE_FAST               1 (view)
+
+303          76 LOAD_CONST               1 (None)
+             78 LOAD_FAST                0 (self)
+             80 STORE_ATTR               6 (_view)
+             82 POP_BLOCK
+             84 LOAD_CONST               1 (None)
+             86 DUP_TOP
+             88 DUP_TOP
+             90 CALL_FUNCTION            3
+             92 POP_TOP
+             94 JUMP_FORWARD            16 (to 112)
+        >>   96 WITH_EXCEPT_START
+             98 POP_JUMP_IF_TRUE       102
+            100 RERAISE
+        >>  102 POP_TOP
+            104 POP_TOP
+            106 POP_TOP
+            108 POP_EXCEPT
+            110 POP_TOP
+
+305     >>  112 LOAD_GLOBAL              7 (_unregisterTrackImageHelper)
+            114 LOAD_FAST                0 (self)
+            116 LOAD_ATTR                8 (_helperToken)
+            118 CALL_FUNCTION            1
+            120 POP_TOP
+
+307         122 LOAD_FAST                1 (view)
+            124 LOAD_CONST               1 (None)
+            126 IS_OP                    1
+            128 POP_JUMP_IF_FALSE      140
+
+308         130 LOAD_FAST                0 (self)
+            132 LOAD_METHOD              9 (_disconnectViewSignals)
+            134 LOAD_FAST                1 (view)
+            136 CALL_METHOD              1
+            138 POP_TOP
+        >>  140 LOAD_CONST               1 (None)
+            142 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._disconnectViewSignals ===
+319           0 SETUP_FINALLY           18 (to 20)
+
+320           2 LOAD_FAST                1 (view)
+              4 LOAD_ATTR                0 (visibleRowsChanged)
+              6 LOAD_METHOD              1 (disconnect)
+              8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                2 (_onVisibleRowsChanged)
+             12 CALL_METHOD              1
+             14 POP_TOP
+             16 POP_BLOCK
+             18 JUMP_FORWARD            18 (to 38)
+
+321     >>   20 DUP_TOP
+             22 LOAD_GLOBAL              3 (Exception)
+             24 JUMP_IF_NOT_EXC_MATCH    36
+             26 POP_TOP
+             28 POP_TOP
+             30 POP_TOP
+
+322          32 POP_EXCEPT
+             34 JUMP_FORWARD             2 (to 38)
+        >>   36 RERAISE
+
+324     >>   38 SETUP_FINALLY           18 (to 58)
+
+325          40 LOAD_FAST                1 (view)
+             42 LOAD_ATTR                4 (destroyed)
+             44 LOAD_METHOD              1 (disconnect)
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                5 (shutdown)
+             50 CALL_METHOD              1
+             52 POP_TOP
+             54 POP_BLOCK
+             56 JUMP_FORWARD            18 (to 76)
+
+326     >>   58 DUP_TOP
+             60 LOAD_GLOBAL              3 (Exception)
+             62 JUMP_IF_NOT_EXC_MATCH    74
+             64 POP_TOP
+             66 POP_TOP
+             68 POP_TOP
+
+327          70 POP_EXCEPT
+             72 JUMP_FORWARD             2 (to 76)
+        >>   74 RERAISE
+        >>   76 LOAD_CONST               1 (None)
+             78 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._onVisibleRowsChanged ===
+339           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              98 (to 104)
+              6 POP_TOP
+
+340           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_isShutdown)
+             12 POP_JUMP_IF_FALSE       30
+
+341          14 POP_BLOCK
+             16 LOAD_CONST               1 (None)
+             18 DUP_TOP
+             20 DUP_TOP
+             22 CALL_FUNCTION            3
+             24 POP_TOP
+             26 LOAD_CONST               1 (None)
+             28 RETURN_VALUE
+
+343     >>   30 LOAD_FAST                1 (firstRow)
+             32 LOAD_FAST                2 (lastRow)
+             34 BUILD_TUPLE              2
+             36 LOAD_FAST                0 (self)
+             38 STORE_ATTR               2 (_visibleRange)
+
+344          40 LOAD_FAST                0 (self)
+             42 DUP_TOP
+             44 LOAD_ATTR                3 (_generation)
+             46 LOAD_CONST               2 (1)
+             48 INPLACE_ADD
+             50 ROT_TWO
+             52 STORE_ATTR               3 (_generation)
+
+345          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                3 (_generation)
+             58 STORE_FAST               3 (generation)
+
+346          60 LOAD_FAST                0 (self)
+             62 LOAD_METHOD              4 (_buildPendingTasks)
+             64 LOAD_FAST                3 (generation)
+             66 LOAD_FAST                1 (firstRow)
+             68 LOAD_FAST                2 (lastRow)
+             70 CALL_METHOD              3
+             72 STORE_FAST               4 (pendingTasks)
+
+347          74 LOAD_CONST               3 (<code object <setcomp> at 0x000001F324E69500, file "MyMusic\LPTrackImageLoadHelper.py", line 347>)
+             76 LOAD_CONST               4 ('LPTrackImageLoadHelper._onVisibleRowsChanged.<locals>.<setcomp>')
+             78 MAKE_FUNCTION            0
+
+348          80 LOAD_FAST                4 (pendingTasks)
+
+347          82 GET_ITER
+             84 CALL_FUNCTION            1
+             86 LOAD_FAST                0 (self)
+             88 STORE_ATTR               5 (_pendingTaskSet)
+             90 POP_BLOCK
+             92 LOAD_CONST               1 (None)
+             94 DUP_TOP
+             96 DUP_TOP
+             98 CALL_FUNCTION            3
+            100 POP_TOP
+            102 JUMP_FORWARD            16 (to 120)
+        >>  104 WITH_EXCEPT_START
+            106 POP_JUMP_IF_TRUE       110
+            108 RERAISE
+        >>  110 POP_TOP
+            112 POP_TOP
+            114 POP_TOP
+            116 POP_EXCEPT
+            118 POP_TOP
+
+351     >>  120 LOAD_FAST                0 (self)
+            122 LOAD_METHOD              6 (_submitPendingTasks)
+            124 LOAD_FAST                4 (pendingTasks)
+            126 CALL_METHOD              1
+            128 POP_TOP
+            130 LOAD_CONST               1 (None)
+            132 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._onVisibleRowsChanged.<setcomp> ===
+347           0 BUILD_SET                0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 24)
+
+348           6 UNPACK_SEQUENCE          3
+              8 STORE_FAST               1 (_)
+             10 STORE_FAST               2 (row)
+             12 STORE_FAST               3 (imageUrl)
+             14 LOAD_FAST                2 (row)
+             16 LOAD_FAST                3 (imageUrl)
+             18 BUILD_TUPLE              2
+             20 SET_ADD                  2
+             22 JUMP_ABSOLUTE            4
+        >>   24 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._submitPendingTasks ===
+362           0 LOAD_GLOBAL              0 (_getSharedTrackImageLoader)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               2 (loader)
+
+363           6 LOAD_FAST                1 (pendingTasks)
+              8 GET_ITER
+        >>   10 FOR_ITER                36 (to 48)
+             12 UNPACK_SEQUENCE          3
+             14 STORE_FAST               3 (generation)
+             16 STORE_FAST               4 (row)
+             18 STORE_FAST               5 (imageUrl)
+
+364          20 LOAD_FAST                2 (loader)
+             22 LOAD_METHOD              1 (submit)
+
+365          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (_helperToken)
+
+366          28 LOAD_FAST                3 (generation)
+
+367          30 LOAD_FAST                4 (row)
+
+368          32 LOAD_FAST                5 (imageUrl)
+
+369          34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                3 (_cacheSize)
+
+370          38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                4 (_utilityModule)
+
+364          42 CALL_METHOD              6
+             44 POP_TOP
+             46 JUMP_ABSOLUTE           10
+        >>   48 LOAD_CONST               1 (None)
+             50 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._handleSharedImageReady ===
+384           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              94 (to 100)
+              6 POP_TOP
+
+385           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_isShutdown)
+             12 POP_JUMP_IF_TRUE        24
+             14 LOAD_FAST                1 (generation)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                2 (_generation)
+             20 COMPARE_OP               3 (!=)
+             22 POP_JUMP_IF_FALSE       40
+
+386     >>   24 POP_BLOCK
+             26 LOAD_CONST               1 (None)
+             28 DUP_TOP
+             30 DUP_TOP
+             32 CALL_FUNCTION            3
+             34 POP_TOP
+             36 LOAD_CONST               1 (None)
+             38 RETURN_VALUE
+
+388     >>   40 LOAD_FAST                2 (row)
+             42 LOAD_FAST                3 (imageUrl)
+             44 BUILD_TUPLE              2
+             46 STORE_FAST               4 (taskKey)
+
+389          48 LOAD_FAST                4 (taskKey)
+             50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                3 (_pendingTaskSet)
+             54 CONTAINS_OP              1
+             56 POP_JUMP_IF_FALSE       74
+
+390          58 POP_BLOCK
+             60 LOAD_CONST               1 (None)
+             62 DUP_TOP
+             64 DUP_TOP
+             66 CALL_FUNCTION            3
+             68 POP_TOP
+             70 LOAD_CONST               1 (None)
+             72 RETURN_VALUE
+
+392     >>   74 LOAD_FAST                0 (self)
+             76 LOAD_ATTR                3 (_pendingTaskSet)
+             78 LOAD_METHOD              4 (discard)
+             80 LOAD_FAST                4 (taskKey)
+             82 CALL_METHOD              1
+             84 POP_TOP
+             86 POP_BLOCK
+             88 LOAD_CONST               1 (None)
+             90 DUP_TOP
+             92 DUP_TOP
+             94 CALL_FUNCTION            3
+             96 POP_TOP
+             98 JUMP_FORWARD            16 (to 116)
+        >>  100 WITH_EXCEPT_START
+            102 POP_JUMP_IF_TRUE       106
+            104 RERAISE
+        >>  106 POP_TOP
+            108 POP_TOP
+            110 POP_TOP
+            112 POP_EXCEPT
+            114 POP_TOP
+
+394     >>  116 LOAD_FAST                0 (self)
+            118 LOAD_METHOD              5 (_shouldNotifyRow)
+            120 LOAD_FAST                1 (generation)
+            122 LOAD_FAST                2 (row)
+            124 LOAD_FAST                3 (imageUrl)
+            126 CALL_METHOD              3
+            128 POP_JUMP_IF_FALSE      142
+
+395         130 LOAD_FAST                0 (self)
+            132 LOAD_ATTR                6 (rowImageReadySignal)
+            134 LOAD_METHOD              7 (emit)
+            136 LOAD_FAST                2 (row)
+            138 CALL_METHOD              1
+            140 POP_TOP
+        >>  142 LOAD_CONST               1 (None)
+            144 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._shouldNotifyRow ===
+408           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              48 (to 54)
+              6 POP_TOP
+
+409           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_isShutdown)
+             12 POP_JUMP_IF_TRUE        24
+             14 LOAD_FAST                1 (generation)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                2 (_generation)
+             20 COMPARE_OP               3 (!=)
+             22 POP_JUMP_IF_FALSE       40
+
+410     >>   24 POP_BLOCK
+             26 LOAD_CONST               1 (None)
+             28 DUP_TOP
+             30 DUP_TOP
+             32 CALL_FUNCTION            3
+             34 POP_TOP
+             36 LOAD_CONST               2 (False)
+             38 RETURN_VALUE
+        >>   40 POP_BLOCK
+             42 LOAD_CONST               1 (None)
+             44 DUP_TOP
+             46 DUP_TOP
+             48 CALL_FUNCTION            3
+             50 POP_TOP
+             52 JUMP_FORWARD            16 (to 70)
+        >>   54 WITH_EXCEPT_START
+             56 POP_JUMP_IF_TRUE        60
+             58 RERAISE
+        >>   60 POP_TOP
+             62 POP_TOP
+             64 POP_TOP
+             66 POP_EXCEPT
+             68 POP_TOP
+
+412     >>   70 LOAD_FAST                0 (self)
+             72 LOAD_METHOD              3 (_rowCountProvider)
+             74 CALL_METHOD              0
+             76 STORE_FAST               4 (totalRows)
+
+413          78 LOAD_FAST                2 (row)
+             80 LOAD_CONST               3 (0)
+             82 COMPARE_OP               0 (<)
+             84 POP_JUMP_IF_TRUE        94
+             86 LOAD_FAST                2 (row)
+             88 LOAD_FAST                4 (totalRows)
+             90 COMPARE_OP               5 (>=)
+             92 POP_JUMP_IF_FALSE       98
+
+414     >>   94 LOAD_CONST               2 (False)
+             96 RETURN_VALUE
+
+416     >>   98 LOAD_FAST                0 (self)
+            100 LOAD_METHOD              4 (_imageUrlProvider)
+            102 LOAD_FAST                2 (row)
+            104 CALL_METHOD              1
+            106 STORE_FAST               5 (latestUrl)
+
+417         108 LOAD_FAST                5 (latestUrl)
+            110 LOAD_FAST                3 (imageUrl)
+            112 COMPARE_OP               2 (==)
+            114 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._isBackgroundTaskStillValid ===
+430           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_lock)
+              4 SETUP_WITH              78 (to 84)
+              6 POP_TOP
+
+431           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (_isShutdown)
+             12 POP_JUMP_IF_TRUE        24
+             14 LOAD_FAST                1 (generation)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                2 (_generation)
+             20 COMPARE_OP               3 (!=)
+             22 POP_JUMP_IF_FALSE       40
+
+432     >>   24 POP_BLOCK
+             26 LOAD_CONST               1 (None)
+             28 DUP_TOP
+             30 DUP_TOP
+             32 CALL_FUNCTION            3
+             34 POP_TOP
+             36 LOAD_CONST               2 (False)
+             38 RETURN_VALUE
+
+434     >>   40 LOAD_FAST                2 (row)
+             42 LOAD_FAST                3 (imageUrl)
+             44 BUILD_TUPLE              2
+             46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                3 (_pendingTaskSet)
+             50 CONTAINS_OP              1
+             52 POP_JUMP_IF_FALSE       70
+
+435          54 POP_BLOCK
+             56 LOAD_CONST               1 (None)
+             58 DUP_TOP
+             60 DUP_TOP
+             62 CALL_FUNCTION            3
+             64 POP_TOP
+             66 LOAD_CONST               2 (False)
+             68 RETURN_VALUE
+        >>   70 POP_BLOCK
+             72 LOAD_CONST               1 (None)
+             74 DUP_TOP
+             76 DUP_TOP
+             78 CALL_FUNCTION            3
+             80 POP_TOP
+             82 JUMP_FORWARD            16 (to 100)
+        >>   84 WITH_EXCEPT_START
+             86 POP_JUMP_IF_TRUE        90
+             88 RERAISE
+        >>   90 POP_TOP
+             92 POP_TOP
+             94 POP_TOP
+             96 POP_EXCEPT
+             98 POP_TOP
+
+437     >>  100 LOAD_FAST                0 (self)
+            102 LOAD_METHOD              4 (_rowCountProvider)
+            104 CALL_METHOD              0
+            106 STORE_FAST               4 (totalRows)
+
+438         108 LOAD_FAST                2 (row)
+            110 LOAD_CONST               3 (0)
+            112 COMPARE_OP               0 (<)
+            114 POP_JUMP_IF_TRUE       124
+            116 LOAD_FAST                2 (row)
+            118 LOAD_FAST                4 (totalRows)
+            120 COMPARE_OP               5 (>=)
+            122 POP_JUMP_IF_FALSE      128
+
+439     >>  124 LOAD_CONST               2 (False)
+            126 RETURN_VALUE
+
+441     >>  128 LOAD_FAST                0 (self)
+            130 LOAD_METHOD              5 (_imageUrlProvider)
+            132 LOAD_FAST                2 (row)
+            134 CALL_METHOD              1
+            136 STORE_FAST               5 (latestUrl)
+
+442         138 LOAD_FAST                5 (latestUrl)
+            140 LOAD_FAST                3 (imageUrl)
+            142 COMPARE_OP               2 (==)
+            144 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._buildPendingTasks ===
+455           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (_rowCountProvider)
+              4 CALL_METHOD              0
+              6 STORE_FAST               4 (totalRows)
+
+456           8 LOAD_FAST                4 (totalRows)
+             10 LOAD_CONST               1 (0)
+             12 COMPARE_OP               1 (<=)
+             14 POP_JUMP_IF_FALSE       20
+
+457          16 BUILD_LIST               0
+             18 RETURN_VALUE
+
+459     >>   20 LOAD_FAST                0 (self)
+             22 LOAD_METHOD              1 (_normalizeVisibleRange)
+             24 LOAD_FAST                4 (totalRows)
+             26 LOAD_FAST                2 (firstRow)
+             28 LOAD_FAST                3 (lastRow)
+             30 CALL_METHOD              3
+             32 UNPACK_SEQUENCE          2
+             34 STORE_FAST               2 (firstRow)
+             36 STORE_FAST               3 (lastRow)
+
+460          38 LOAD_FAST                0 (self)
+             40 LOAD_METHOD              2 (_buildPriorityRows)
+             42 LOAD_FAST                4 (totalRows)
+             44 LOAD_FAST                2 (firstRow)
+             46 LOAD_FAST                3 (lastRow)
+             48 CALL_METHOD              3
+             50 STORE_FAST               5 (priorityRows)
+
+462          52 BUILD_LIST               0
+             54 STORE_FAST               6 (tasks)
+
+463          56 LOAD_GLOBAL              3 (set)
+             58 CALL_FUNCTION            0
+             60 STORE_FAST               7 (seenRows)
+
+464          62 LOAD_FAST                5 (priorityRows)
+             64 GET_ITER
+        >>   66 FOR_ITER                78 (to 146)
+             68 STORE_FAST               8 (row)
+
+465          70 LOAD_FAST                8 (row)
+             72 LOAD_FAST                7 (seenRows)
+             74 CONTAINS_OP              0
+             76 POP_JUMP_IF_FALSE       80
+
+466          78 JUMP_ABSOLUTE           66
+
+468     >>   80 LOAD_FAST                7 (seenRows)
+             82 LOAD_METHOD              4 (add)
+             84 LOAD_FAST                8 (row)
+             86 CALL_METHOD              1
+             88 POP_TOP
+
+469          90 LOAD_FAST                0 (self)
+             92 LOAD_METHOD              5 (_imageUrlProvider)
+             94 LOAD_FAST                8 (row)
+             96 CALL_METHOD              1
+             98 STORE_FAST               9 (imageUrl)
+
+470         100 LOAD_FAST                9 (imageUrl)
+            102 POP_JUMP_IF_TRUE       106
+
+471         104 JUMP_ABSOLUTE           66
+
+473     >>  106 LOAD_FAST                0 (self)
+            108 LOAD_ATTR                6 (_utilityModule)
+            110 LOAD_METHOD              7 (getCachedPixmapWithUrl)
+            112 LOAD_FAST                9 (imageUrl)
+            114 LOAD_FAST                0 (self)
+            116 LOAD_ATTR                8 (_cacheSize)
+            118 CALL_METHOD              2
+            120 LOAD_CONST               2 (None)
+            122 IS_OP                    1
+            124 POP_JUMP_IF_FALSE      128
+
+474         126 JUMP_ABSOLUTE           66
+
+476     >>  128 LOAD_FAST                6 (tasks)
+            130 LOAD_METHOD              9 (append)
+            132 LOAD_FAST                1 (generation)
+            134 LOAD_FAST                8 (row)
+            136 LOAD_FAST                9 (imageUrl)
+            138 BUILD_TUPLE              3
+            140 CALL_METHOD              1
+            142 POP_TOP
+            144 JUMP_ABSOLUTE           66
+
+478     >>  146 LOAD_FAST                6 (tasks)
+            148 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._normalizeVisibleRange ===
+491           0 LOAD_FAST                2 (firstRow)
+              2 LOAD_CONST               1 (0)
+              4 COMPARE_OP               0 (<)
+              6 POP_JUMP_IF_FALSE       38
+              8 LOAD_FAST                3 (lastRow)
+             10 LOAD_CONST               1 (0)
+             12 COMPARE_OP               0 (<)
+             14 POP_JUMP_IF_FALSE       38
+
+492          16 LOAD_CONST               1 (0)
+             18 STORE_FAST               2 (firstRow)
+
+493          20 LOAD_GLOBAL              0 (min)
+             22 LOAD_FAST                1 (totalRows)
+             24 LOAD_CONST               2 (1)
+             26 BINARY_SUBTRACT
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                1 (_prefetchRows)
+             32 CALL_FUNCTION            2
+             34 STORE_FAST               3 (lastRow)
+             36 JUMP_FORWARD            40 (to 78)
+
+495     >>   38 LOAD_FAST                2 (firstRow)
+             40 LOAD_CONST               1 (0)
+             42 COMPARE_OP               0 (<)
+             44 POP_JUMP_IF_FALSE       56
+
+496          46 LOAD_GLOBAL              2 (max)
+             48 LOAD_CONST               1 (0)
+             50 LOAD_FAST                3 (lastRow)
+             52 CALL_FUNCTION            2
+             54 STORE_FAST               2 (firstRow)
+
+497     >>   56 LOAD_FAST                3 (lastRow)
+             58 LOAD_CONST               1 (0)
+             60 COMPARE_OP               0 (<)
+             62 POP_JUMP_IF_FALSE       78
+
+498          64 LOAD_GLOBAL              0 (min)
+             66 LOAD_FAST                1 (totalRows)
+             68 LOAD_CONST               2 (1)
+             70 BINARY_SUBTRACT
+             72 LOAD_FAST                2 (firstRow)
+             74 CALL_FUNCTION            2
+             76 STORE_FAST               3 (lastRow)
+
+500     >>   78 LOAD_GLOBAL              2 (max)
+             80 LOAD_CONST               1 (0)
+             82 LOAD_GLOBAL              0 (min)
+             84 LOAD_FAST                2 (firstRow)
+             86 LOAD_FAST                1 (totalRows)
+             88 LOAD_CONST               2 (1)
+             90 BINARY_SUBTRACT
+             92 CALL_FUNCTION            2
+             94 CALL_FUNCTION            2
+             96 STORE_FAST               2 (firstRow)
+
+501          98 LOAD_GLOBAL              2 (max)
+            100 LOAD_FAST                2 (firstRow)
+            102 LOAD_GLOBAL              0 (min)
+            104 LOAD_FAST                3 (lastRow)
+            106 LOAD_FAST                1 (totalRows)
+            108 LOAD_CONST               2 (1)
+            110 BINARY_SUBTRACT
+            112 CALL_FUNCTION            2
+            114 CALL_FUNCTION            2
+            116 STORE_FAST               3 (lastRow)
+
+502         118 LOAD_FAST                2 (firstRow)
+            120 LOAD_FAST                3 (lastRow)
+            122 BUILD_TUPLE              2
+            124 RETURN_VALUE
+
+=== LPTrackImageLoadHelper._buildPriorityRows ===
+515           0 LOAD_GLOBAL              0 (list)
+              2 LOAD_GLOBAL              1 (range)
+              4 LOAD_FAST                2 (firstRow)
+              6 LOAD_FAST                3 (lastRow)
+              8 LOAD_CONST               1 (1)
+             10 BINARY_ADD
+             12 CALL_FUNCTION            2
+             14 CALL_FUNCTION            1
+             16 STORE_FAST               4 (rows)
+
+517          18 LOAD_GLOBAL              1 (range)
+             20 LOAD_CONST               1 (1)
+             22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                2 (_prefetchRows)
+             26 LOAD_CONST               1 (1)
+             28 BINARY_ADD
+             30 CALL_FUNCTION            2
+             32 GET_ITER
+        >>   34 FOR_ITER                56 (to 92)
+             36 STORE_FAST               5 (offset)
+
+518          38 LOAD_FAST                2 (firstRow)
+             40 LOAD_FAST                5 (offset)
+             42 BINARY_SUBTRACT
+             44 STORE_FAST               6 (beforeRow)
+
+519          46 LOAD_FAST                3 (lastRow)
+             48 LOAD_FAST                5 (offset)
+             50 BINARY_ADD
+             52 STORE_FAST               7 (afterRow)
+
+521          54 LOAD_FAST                6 (beforeRow)
+             56 LOAD_CONST               2 (0)
+             58 COMPARE_OP               5 (>=)
+             60 POP_JUMP_IF_FALSE       72
+
+522          62 LOAD_FAST                4 (rows)
+             64 LOAD_METHOD              3 (append)
+             66 LOAD_FAST                6 (beforeRow)
+             68 CALL_METHOD              1
+             70 POP_TOP
+
+524     >>   72 LOAD_FAST                7 (afterRow)
+             74 LOAD_FAST                1 (totalRows)
+             76 COMPARE_OP               0 (<)
+             78 POP_JUMP_IF_FALSE       34
+
+525          80 LOAD_FAST                4 (rows)
+             82 LOAD_METHOD              3 (append)
+             84 LOAD_FAST                7 (afterRow)
+             86 CALL_METHOD              1
+             88 POP_TOP
+             90 JUMP_ABSOLUTE           34
+
+527     >>   92 LOAD_FAST                4 (rows)
+             94 RETURN_VALUE

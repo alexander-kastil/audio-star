@@ -1,0 +1,950 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2025/11/17 13:40\n@Auth ： Chris\n@File ：LPSideBarMyLibraryViewController.py\n@Desc:\n')
+              2 STORE_NAME               0 (__doc__)
+
+  8           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Template',))
+              8 IMPORT_NAME              1 (string)
+             10 IMPORT_FROM              2 (Template)
+             12 STORE_NAME               2 (Template)
+             14 POP_TOP
+
+  9          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('pyqtSignal', 'QObject', 'QCoreApplication', 'QEvent', 'QPropertyAnimation', 'QEasingCurve', 'Qt'))
+             20 IMPORT_NAME              3 (PyQt6.QtCore)
+             22 IMPORT_FROM              4 (pyqtSignal)
+             24 STORE_NAME               4 (pyqtSignal)
+             26 IMPORT_FROM              5 (QObject)
+             28 STORE_NAME               5 (QObject)
+             30 IMPORT_FROM              6 (QCoreApplication)
+             32 STORE_NAME               6 (QCoreApplication)
+             34 IMPORT_FROM              7 (QEvent)
+             36 STORE_NAME               7 (QEvent)
+             38 IMPORT_FROM              8 (QPropertyAnimation)
+             40 STORE_NAME               8 (QPropertyAnimation)
+             42 IMPORT_FROM              9 (QEasingCurve)
+             44 STORE_NAME               9 (QEasingCurve)
+             46 IMPORT_FROM             10 (Qt)
+             48 STORE_NAME              10 (Qt)
+             50 POP_TOP
+
+ 10          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               4 (('QColor', 'QIcon'))
+             56 IMPORT_NAME             11 (PyQt6.QtGui)
+             58 IMPORT_FROM             12 (QColor)
+             60 STORE_NAME              12 (QColor)
+             62 IMPORT_FROM             13 (QIcon)
+             64 STORE_NAME              13 (QIcon)
+             66 POP_TOP
+
+ 12          68 LOAD_CONST               1 (0)
+             70 LOAD_CONST               5 (None)
+             72 IMPORT_NAME             14 (LPGlobalUI)
+             74 STORE_NAME              14 (LPGlobalUI)
+
+ 13          76 LOAD_CONST               1 (0)
+             78 LOAD_CONST               6 (('LPWaitingSpinner',))
+             80 IMPORT_NAME             15 (HOME.LPWaitingSpinner)
+             82 IMPORT_FROM             16 (LPWaitingSpinner)
+             84 STORE_NAME              16 (LPWaitingSpinner)
+             86 POP_TOP
+
+ 14          88 LOAD_CONST               1 (0)
+             90 LOAD_CONST               7 (('LPSideBarListModel', 'LPSideBarListDelegate'))
+             92 IMPORT_NAME             17 (HOME.SideBar.LPSideBarListView)
+             94 IMPORT_FROM             18 (LPSideBarListModel)
+             96 STORE_NAME              18 (LPSideBarListModel)
+             98 IMPORT_FROM             19 (LPSideBarListDelegate)
+            100 STORE_NAME              19 (LPSideBarListDelegate)
+            102 POP_TOP
+
+ 15         104 LOAD_CONST               1 (0)
+            106 LOAD_CONST               8 (('LPUtility',))
+            108 IMPORT_NAME             20 (LPClientFramework)
+            110 IMPORT_FROM             21 (LPUtility)
+            112 STORE_NAME              21 (LPUtility)
+            114 POP_TOP
+
+ 16         116 LOAD_CONST               1 (0)
+            118 LOAD_CONST               9 (('Min_Text',))
+            120 IMPORT_NAME             22 (LPClientFramework.LPConfig.LPFontConfig)
+            122 IMPORT_FROM             23 (Min_Text)
+            124 STORE_NAME              23 (Min_Text)
+            126 POP_TOP
+
+ 17         128 LOAD_CONST               1 (0)
+            130 LOAD_CONST              10 (('LPButtonEventFilter',))
+            132 IMPORT_NAME             24 (LPClientFramework.LPEventFilter.ButtonEventFilter.LPButtonEventFilter)
+            134 IMPORT_FROM             25 (LPButtonEventFilter)
+            136 STORE_NAME              25 (LPButtonEventFilter)
+            138 POP_TOP
+
+ 18         140 LOAD_CONST               1 (0)
+            142 LOAD_CONST              11 (('logger',))
+            144 IMPORT_NAME             26 (LPClientFramework.LPUtility)
+            146 IMPORT_FROM             27 (logger)
+            148 STORE_NAME              27 (logger)
+            150 POP_TOP
+
+ 21         152 LOAD_BUILD_CLASS
+            154 LOAD_CONST              12 (<code object LPSideBarMyLibraryViewController at 0x000001F3253CE920, file "SideBar\LPSideBarMyLibraryViewController.py", line 21>)
+            156 LOAD_CONST              13 ('LPSideBarMyLibraryViewController')
+            158 MAKE_FUNCTION            0
+            160 LOAD_CONST              13 ('LPSideBarMyLibraryViewController')
+            162 LOAD_NAME                5 (QObject)
+            164 CALL_FUNCTION            3
+            166 STORE_NAME              28 (LPSideBarMyLibraryViewController)
+            168 LOAD_CONST               5 (None)
+            170 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController ===
+ 21           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPSideBarMyLibraryViewController')
+              6 STORE_NAME               2 (__qualname__)
+
+ 23           8 LOAD_NAME                3 (pyqtSignal)
+             10 LOAD_NAME                4 (object)
+             12 CALL_FUNCTION            1
+             14 STORE_NAME               5 (updateCurrentSelectSignal)
+
+ 24          16 LOAD_NAME                3 (pyqtSignal)
+             18 LOAD_NAME                4 (object)
+             20 CALL_FUNCTION            1
+             22 STORE_NAME               6 (showLoadingButtonSignal)
+
+ 28          24 LOAD_CONST               1 ('albums_lib')
+
+ 29          26 LOAD_CONST               2 ('artists_lib')
+
+ 30          28 LOAD_CONST               3 ('genres_lib')
+
+ 31          30 LOAD_CONST               4 ('folders_lib')
+
+ 32          32 LOAD_CONST               4 ('folders_lib')
+
+ 27          34 LOAD_CONST               5 (('albumdetail', 'artistdetail', 'genredetail', 'mymusic', 'mymusicsettings'))
+             36 BUILD_CONST_KEY_MAP      5
+             38 STORE_NAME               7 (DETAIL_ID_TO_SIDEBAR_ID)
+
+ 35          40 LOAD_CLOSURE             0 (__class__)
+             42 BUILD_TUPLE              1
+             44 LOAD_CONST               6 (<code object __init__ at 0x000001F3253AEC90, file "SideBar\LPSideBarMyLibraryViewController.py", line 35>)
+             46 LOAD_CONST               7 ('LPSideBarMyLibraryViewController.__init__')
+             48 MAKE_FUNCTION            8 (closure)
+             50 STORE_NAME               8 (__init__)
+
+104          52 LOAD_CONST               8 (<code object changeEvent at 0x000001F3253AE660, file "SideBar\LPSideBarMyLibraryViewController.py", line 104>)
+             54 LOAD_CONST               9 ('LPSideBarMyLibraryViewController.changeEvent')
+             56 MAKE_FUNCTION            0
+             58 STORE_NAME               9 (changeEvent)
+
+114          60 LOAD_NAME               10 (bool)
+             62 LOAD_CONST              10 (('collapsed',))
+             64 BUILD_CONST_KEY_MAP      1
+             66 LOAD_CONST              11 (<code object toggleCollapse at 0x000001F3253AE920, file "SideBar\LPSideBarMyLibraryViewController.py", line 114>)
+             68 LOAD_CONST              12 ('LPSideBarMyLibraryViewController.toggleCollapse')
+             70 MAKE_FUNCTION            4 (annotations)
+             72 STORE_NAME              11 (toggleCollapse)
+
+146          74 LOAD_CONST              13 (<code object onAnimFinished at 0x000001F324E699D0, file "SideBar\LPSideBarMyLibraryViewController.py", line 146>)
+             76 LOAD_CONST              14 ('LPSideBarMyLibraryViewController.onAnimFinished')
+             78 MAKE_FUNCTION            0
+             80 STORE_NAME              12 (onAnimFinished)
+
+154          82 LOAD_CONST              15 (<code object _showLoadingButton at 0x000001F324E69450, file "SideBar\LPSideBarMyLibraryViewController.py", line 154>)
+             84 LOAD_CONST              16 ('LPSideBarMyLibraryViewController._showLoadingButton')
+             86 MAKE_FUNCTION            0
+             88 STORE_NAME              13 (_showLoadingButton)
+
+183          90 LOAD_CONST              17 (<code object showLoadingButton at 0x000001F3253CE9D0, file "SideBar\LPSideBarMyLibraryViewController.py", line 183>)
+             92 LOAD_CONST              18 ('LPSideBarMyLibraryViewController.showLoadingButton')
+             94 MAKE_FUNCTION            0
+             96 STORE_NAME              14 (showLoadingButton)
+
+187          98 LOAD_CONST              19 (<code object loadingButtonPressed at 0x000001F3253CE870, file "SideBar\LPSideBarMyLibraryViewController.py", line 187>)
+            100 LOAD_CONST              20 ('LPSideBarMyLibraryViewController.loadingButtonPressed')
+            102 MAKE_FUNCTION            0
+            104 STORE_NAME              15 (loadingButtonPressed)
+
+190         106 LOAD_CONST              21 (<code object updateCurrentSelect at 0x000001F3253CE5B0, file "SideBar\LPSideBarMyLibraryViewController.py", line 190>)
+            108 LOAD_CONST              22 ('LPSideBarMyLibraryViewController.updateCurrentSelect')
+            110 MAKE_FUNCTION            0
+            112 STORE_NAME              16 (updateCurrentSelect)
+
+210         114 LOAD_CONST              23 (<code object itemSelect at 0x000001F3253CE7C0, file "SideBar\LPSideBarMyLibraryViewController.py", line 210>)
+            116 LOAD_CONST              24 ('LPSideBarMyLibraryViewController.itemSelect')
+            118 MAKE_FUNCTION            0
+            120 STORE_NAME              17 (itemSelect)
+            122 LOAD_CLOSURE             0 (__class__)
+            124 DUP_TOP
+            126 STORE_NAME              18 (__classcell__)
+            128 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController.__init__ ===
+ 37           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 39          10 LOAD_CONST               0 (None)
+             12 LOAD_FAST                0 (self)
+             14 STORE_ATTR               2 (loadingSpinner)
+
+ 42          16 LOAD_CONST               1 ('genres_lib')
+             18 LOAD_CONST               2 ('sidebar/genres_lib.png')
+             20 LOAD_GLOBAL              3 (QCoreApplication)
+             22 LOAD_METHOD              4 (translate)
+             24 LOAD_CONST               3 ('SideBarLib')
+             26 LOAD_CONST               4 ('Genres')
+             28 CALL_METHOD              2
+             30 LOAD_CONST               5 (('id', 'icon', 'title'))
+             32 BUILD_CONST_KEY_MAP      3
+
+ 43          34 LOAD_CONST               6 ('albums_lib')
+             36 LOAD_CONST               7 ('sidebar/albums_lib.png')
+             38 LOAD_GLOBAL              3 (QCoreApplication)
+             40 LOAD_METHOD              4 (translate)
+             42 LOAD_CONST               3 ('SideBarLib')
+             44 LOAD_CONST               8 ('Albums')
+             46 CALL_METHOD              2
+             48 LOAD_CONST               5 (('id', 'icon', 'title'))
+             50 BUILD_CONST_KEY_MAP      3
+
+ 44          52 LOAD_CONST               9 ('artists_lib')
+             54 LOAD_CONST              10 ('sidebar/artists_lib.png')
+             56 LOAD_GLOBAL              3 (QCoreApplication)
+             58 LOAD_METHOD              4 (translate)
+             60 LOAD_CONST               3 ('SideBarLib')
+             62 LOAD_CONST              11 ('Artists')
+             64 CALL_METHOD              2
+             66 LOAD_CONST               5 (('id', 'icon', 'title'))
+             68 BUILD_CONST_KEY_MAP      3
+
+ 45          70 LOAD_CONST              12 ('tracks_lib')
+             72 LOAD_CONST              13 ('sidebar/tracks_lib.png')
+             74 LOAD_GLOBAL              3 (QCoreApplication)
+             76 LOAD_METHOD              4 (translate)
+             78 LOAD_CONST               3 ('SideBarLib')
+             80 LOAD_CONST              14 ('Tracks')
+             82 CALL_METHOD              2
+             84 LOAD_CONST               5 (('id', 'icon', 'title'))
+             86 BUILD_CONST_KEY_MAP      3
+
+ 46          88 LOAD_CONST              15 ('folders_lib')
+             90 LOAD_CONST              16 ('sidebar/folders_lib.png')
+             92 LOAD_GLOBAL              3 (QCoreApplication)
+             94 LOAD_METHOD              4 (translate)
+             96 LOAD_CONST               3 ('SideBarLib')
+             98 LOAD_CONST              17 ('Folders')
+            100 CALL_METHOD              2
+            102 LOAD_CONST               5 (('id', 'icon', 'title'))
+            104 BUILD_CONST_KEY_MAP      3
+
+ 41         106 BUILD_LIST               5
+            108 LOAD_FAST                0 (self)
+            110 STORE_ATTR               5 (dataArray)
+
+ 49         112 LOAD_FAST                2 (libSelectMethod)
+            114 LOAD_FAST                0 (self)
+            116 STORE_ATTR               6 (libSelectMethod)
+
+ 50         118 LOAD_FAST                3 (showImportWaitingDialogMethod)
+            120 LOAD_FAST                0 (self)
+            122 STORE_ATTR               7 (showImportWaitingDialogMethod)
+
+ 52         124 LOAD_FAST                1 (mainUI)
+            126 LOAD_ATTR                8 (myLibraryListView)
+            128 LOAD_FAST                0 (self)
+            130 STORE_ATTR               9 (libList)
+
+ 53         132 LOAD_GLOBAL             10 (LPSideBarListModel)
+            134 LOAD_FAST                0 (self)
+            136 LOAD_ATTR                5 (dataArray)
+            138 LOAD_FAST                0 (self)
+            140 LOAD_ATTR                9 (libList)
+            142 CALL_FUNCTION            2
+            144 STORE_FAST               4 (model)
+
+ 54         146 LOAD_GLOBAL             11 (LPSideBarListDelegate)
+            148 LOAD_FAST                0 (self)
+            150 LOAD_ATTR                9 (libList)
+            152 CALL_FUNCTION            1
+            154 STORE_FAST               5 (delegate)
+
+ 55         156 LOAD_FAST                0 (self)
+            158 LOAD_ATTR                9 (libList)
+            160 LOAD_METHOD             12 (setModel)
+            162 LOAD_FAST                4 (model)
+            164 CALL_METHOD              1
+            166 POP_TOP
+
+ 56         168 LOAD_FAST                0 (self)
+            170 LOAD_ATTR                9 (libList)
+            172 LOAD_METHOD             13 (setItemDelegate)
+            174 LOAD_FAST                5 (delegate)
+            176 CALL_METHOD              1
+            178 POP_TOP
+
+ 57         180 LOAD_FAST                0 (self)
+            182 LOAD_ATTR                9 (libList)
+            184 LOAD_ATTR               14 (clicked)
+            186 LOAD_METHOD             15 (connect)
+            188 LOAD_FAST                0 (self)
+            190 LOAD_ATTR               16 (itemSelect)
+            192 CALL_METHOD              1
+            194 POP_TOP
+
+ 59         196 LOAD_FAST                1 (mainUI)
+            198 LOAD_ATTR               17 (myLibraryCollapseButton)
+            200 LOAD_FAST                0 (self)
+            202 STORE_ATTR              18 (collapseButton)
+
+ 60         204 LOAD_FAST                0 (self)
+            206 LOAD_ATTR               18 (collapseButton)
+            208 LOAD_METHOD             19 (setCheckable)
+            210 LOAD_CONST              18 (True)
+            212 CALL_METHOD              1
+            214 POP_TOP
+
+ 61         216 LOAD_FAST                0 (self)
+            218 LOAD_ATTR               18 (collapseButton)
+            220 LOAD_METHOD             20 (setChecked)
+            222 LOAD_CONST              19 (False)
+            224 CALL_METHOD              1
+            226 POP_TOP
+
+ 63         228 LOAD_GLOBAL             21 (LPUtility)
+            230 LOAD_METHOD             22 (tintImage)
+            232 LOAD_GLOBAL             23 (LPGlobalUI)
+            234 LOAD_METHOD             24 (imagePath)
+            236 LOAD_CONST              20 ('arrow_up.png')
+            238 CALL_METHOD              1
+            240 LOAD_GLOBAL             23 (LPGlobalUI)
+            242 LOAD_ATTR               25 (THEME_DISABLE_COLOR)
+            244 CALL_METHOD              2
+            246 LOAD_FAST                0 (self)
+            248 STORE_ATTR              26 (collapseButtonUpDefaultImage)
+
+ 64         250 LOAD_GLOBAL             21 (LPUtility)
+            252 LOAD_METHOD             22 (tintImage)
+            254 LOAD_GLOBAL             23 (LPGlobalUI)
+            256 LOAD_METHOD             24 (imagePath)
+            258 LOAD_CONST              21 ('arrow_down.png')
+            260 CALL_METHOD              1
+            262 LOAD_GLOBAL             23 (LPGlobalUI)
+            264 LOAD_ATTR               25 (THEME_DISABLE_COLOR)
+            266 CALL_METHOD              2
+            268 LOAD_FAST                0 (self)
+            270 STORE_ATTR              27 (collapseButtonDownDefaultImage)
+
+ 65         272 LOAD_GLOBAL             28 (LPButtonEventFilter)
+            274 LOAD_FAST                0 (self)
+            276 LOAD_ATTR               18 (collapseButton)
+            278 LOAD_GLOBAL             29 (QIcon)
+            280 LOAD_FAST                0 (self)
+            282 LOAD_ATTR               26 (collapseButtonUpDefaultImage)
+            284 CALL_FUNCTION            1
+
+ 66         286 LOAD_GLOBAL             29 (QIcon)
+            288 LOAD_GLOBAL             23 (LPGlobalUI)
+            290 LOAD_METHOD             24 (imagePath)
+            292 LOAD_CONST              20 ('arrow_up.png')
+            294 CALL_METHOD              1
+            296 CALL_FUNCTION            1
+
+ 67         298 LOAD_GLOBAL             29 (QIcon)
+            300 LOAD_GLOBAL             23 (LPGlobalUI)
+            302 LOAD_METHOD             24 (imagePath)
+            304 LOAD_CONST              20 ('arrow_up.png')
+            306 CALL_METHOD              1
+            308 CALL_FUNCTION            1
+            310 LOAD_CONST              22 ('image')
+
+ 65         312 CALL_FUNCTION            5
+            314 POP_TOP
+
+ 69         316 LOAD_GLOBAL             30 (QPropertyAnimation)
+            318 LOAD_FAST                0 (self)
+            320 LOAD_ATTR                9 (libList)
+            322 LOAD_CONST              23 (b'maximumHeight')
+            324 CALL_FUNCTION            2
+            326 LOAD_FAST                0 (self)
+            328 STORE_ATTR              31 (anim)
+
+ 70         330 LOAD_FAST                0 (self)
+            332 LOAD_ATTR               31 (anim)
+            334 LOAD_METHOD             32 (setDuration)
+            336 LOAD_CONST              24 (200)
+            338 CALL_METHOD              1
+            340 POP_TOP
+
+ 71         342 LOAD_FAST                0 (self)
+            344 LOAD_ATTR               31 (anim)
+            346 LOAD_METHOD             33 (setEasingCurve)
+            348 LOAD_GLOBAL             34 (QEasingCurve)
+            350 LOAD_ATTR               35 (Type)
+            352 LOAD_ATTR               36 (InOutQuad)
+            354 CALL_METHOD              1
+            356 POP_TOP
+
+ 72         358 LOAD_FAST                0 (self)
+            360 LOAD_ATTR               31 (anim)
+            362 LOAD_ATTR               37 (finished)
+            364 LOAD_METHOD             15 (connect)
+            366 LOAD_FAST                0 (self)
+            368 LOAD_ATTR               38 (onAnimFinished)
+            370 CALL_METHOD              1
+            372 POP_TOP
+
+ 73         374 LOAD_FAST                0 (self)
+            376 LOAD_ATTR               18 (collapseButton)
+            378 LOAD_ATTR               39 (toggled)
+            380 LOAD_METHOD             15 (connect)
+            382 LOAD_FAST                0 (self)
+            384 LOAD_ATTR               40 (toggleCollapse)
+            386 CALL_METHOD              1
+            388 POP_TOP
+
+ 76         390 LOAD_FAST                0 (self)
+            392 LOAD_ATTR               41 (showLoadingButtonSignal)
+            394 LOAD_METHOD             15 (connect)
+            396 LOAD_FAST                0 (self)
+            398 LOAD_ATTR               42 (_showLoadingButton)
+            400 CALL_METHOD              1
+            402 POP_TOP
+
+ 77         404 LOAD_FAST                1 (mainUI)
+            406 LOAD_ATTR               43 (myLibraryLoadingButton)
+            408 LOAD_FAST                0 (self)
+            410 STORE_ATTR              44 (loadingButton)
+
+ 78         412 LOAD_FAST                0 (self)
+            414 LOAD_ATTR               44 (loadingButton)
+            416 LOAD_METHOD             45 (setEnabled)
+            418 LOAD_CONST              19 (False)
+            420 CALL_METHOD              1
+            422 POP_TOP
+
+ 79         424 LOAD_FAST                0 (self)
+            426 LOAD_ATTR               44 (loadingButton)
+            428 LOAD_ATTR               14 (clicked)
+            430 LOAD_METHOD             15 (connect)
+            432 LOAD_FAST                0 (self)
+            434 LOAD_ATTR               46 (loadingButtonPressed)
+            436 CALL_METHOD              1
+            438 POP_TOP
+
+ 81         440 LOAD_FAST                1 (mainUI)
+            442 LOAD_ATTR               47 (myLibraryTitleLabel)
+            444 LOAD_FAST                0 (self)
+            446 STORE_ATTR              47 (myLibraryTitleLabel)
+
+ 82         448 LOAD_FAST                0 (self)
+            450 LOAD_ATTR               47 (myLibraryTitleLabel)
+            452 LOAD_METHOD             48 (setText)
+            454 LOAD_GLOBAL              3 (QCoreApplication)
+            456 LOAD_METHOD              4 (translate)
+            458 LOAD_CONST              25 ('SiderBar')
+            460 LOAD_CONST              26 ('My Library')
+            462 CALL_METHOD              2
+            464 CALL_METHOD              1
+            466 POP_TOP
+
+ 84         468 LOAD_FAST                1 (mainUI)
+            470 LOAD_ATTR               49 (myLibrarySectionFrame)
+            472 LOAD_FAST                0 (self)
+            474 STORE_ATTR              49 (myLibrarySectionFrame)
+
+ 85         476 LOAD_GLOBAL             50 (Template)
+            478 LOAD_CONST              27 ('\n                QFrame {\n                    background: transparent;\n                    border:none;\n                }\n                QLabel#myLibraryTitleLabel {\n                    color: ${titleColor};\n                    font-size: ${myLibraryTitleLabelFontSize}pt;\n                }\n                ')
+            480 CALL_FUNCTION            1
+            482 STORE_FAST               6 (stylesheetTemplate)
+
+ 95         484 LOAD_FAST                0 (self)
+            486 LOAD_ATTR               49 (myLibrarySectionFrame)
+            488 LOAD_METHOD             51 (setStyleSheet)
+            490 LOAD_FAST                6 (stylesheetTemplate)
+            492 LOAD_ATTR               52 (substitute)
+
+ 96         494 LOAD_GLOBAL             23 (LPGlobalUI)
+            496 LOAD_ATTR               53 (QSS_THEME_LIGHT_COLOR_UI)
+
+ 97         498 LOAD_GLOBAL             54 (Min_Text)
+            500 FORMAT_VALUE             0
+
+ 95         502 LOAD_CONST              28 (('titleColor', 'myLibraryTitleLabelFontSize'))
+            504 CALL_FUNCTION_KW         2
+            506 CALL_METHOD              1
+            508 POP_TOP
+
+100         510 LOAD_FAST                0 (self)
+            512 LOAD_ATTR                9 (libList)
+            514 LOAD_METHOD             55 (maximumHeight)
+            516 CALL_METHOD              0
+            518 LOAD_FAST                0 (self)
+            520 STORE_ATTR              56 (listHeight)
+
+101         522 LOAD_FAST                0 (self)
+            524 LOAD_ATTR               57 (updateCurrentSelectSignal)
+            526 LOAD_METHOD             15 (connect)
+            528 LOAD_FAST                0 (self)
+            530 LOAD_ATTR               58 (updateCurrentSelect)
+            532 CALL_METHOD              1
+            534 POP_TOP
+            536 LOAD_CONST               0 (None)
+            538 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController.changeEvent ===
+105           0 LOAD_FAST                1 (event)
+              2 LOAD_METHOD              0 (type)
+              4 CALL_METHOD              0
+              6 LOAD_GLOBAL              1 (QEvent)
+              8 LOAD_ATTR                2 (Type)
+             10 LOAD_ATTR                3 (LanguageChange)
+             12 COMPARE_OP               2 (==)
+             14 POP_JUMP_IF_FALSE      112
+
+107          16 LOAD_CONST               1 ('genres_lib')
+             18 LOAD_CONST               2 ('sidebar/genres_lib.png')
+             20 LOAD_GLOBAL              4 (QCoreApplication)
+             22 LOAD_METHOD              5 (translate)
+             24 LOAD_CONST               3 ('SideBarLib')
+             26 LOAD_CONST               4 ('Genres')
+             28 CALL_METHOD              2
+             30 LOAD_CONST               5 (('id', 'icon', 'title'))
+             32 BUILD_CONST_KEY_MAP      3
+
+108          34 LOAD_CONST               6 ('albums_lib')
+             36 LOAD_CONST               7 ('sidebar/albums_lib.png')
+             38 LOAD_GLOBAL              4 (QCoreApplication)
+             40 LOAD_METHOD              5 (translate)
+             42 LOAD_CONST               3 ('SideBarLib')
+             44 LOAD_CONST               8 ('Albums')
+             46 CALL_METHOD              2
+             48 LOAD_CONST               5 (('id', 'icon', 'title'))
+             50 BUILD_CONST_KEY_MAP      3
+
+109          52 LOAD_CONST               9 ('artists_lib')
+             54 LOAD_CONST              10 ('sidebar/artists_lib.png')
+             56 LOAD_GLOBAL              4 (QCoreApplication)
+             58 LOAD_METHOD              5 (translate)
+             60 LOAD_CONST               3 ('SideBarLib')
+             62 LOAD_CONST              11 ('Artists')
+             64 CALL_METHOD              2
+             66 LOAD_CONST               5 (('id', 'icon', 'title'))
+             68 BUILD_CONST_KEY_MAP      3
+
+110          70 LOAD_CONST              12 ('tracks_lib')
+             72 LOAD_CONST              13 ('sidebar/tracks_lib.png')
+             74 LOAD_GLOBAL              4 (QCoreApplication)
+             76 LOAD_METHOD              5 (translate)
+             78 LOAD_CONST               3 ('SideBarLib')
+             80 LOAD_CONST              14 ('Tracks')
+             82 CALL_METHOD              2
+             84 LOAD_CONST               5 (('id', 'icon', 'title'))
+             86 BUILD_CONST_KEY_MAP      3
+
+111          88 LOAD_CONST              15 ('folders_lib')
+             90 LOAD_CONST              16 ('sidebar/folders_lib.png')
+             92 LOAD_GLOBAL              4 (QCoreApplication)
+             94 LOAD_METHOD              5 (translate)
+             96 LOAD_CONST               3 ('SideBarLib')
+             98 LOAD_CONST              17 ('Folders')
+            100 CALL_METHOD              2
+            102 LOAD_CONST               5 (('id', 'icon', 'title'))
+            104 BUILD_CONST_KEY_MAP      3
+
+106         106 BUILD_LIST               5
+            108 LOAD_FAST                0 (self)
+            110 STORE_ATTR               6 (dataArray)
+        >>  112 LOAD_CONST               0 (None)
+            114 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController.toggleCollapse ===
+115           0 LOAD_FAST                1 (collapsed)
+              2 POP_JUMP_IF_FALSE       50
+
+116           4 LOAD_GLOBAL              0 (LPButtonEventFilter)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                1 (collapseButton)
+             10 LOAD_GLOBAL              2 (QIcon)
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                3 (collapseButtonDownDefaultImage)
+             16 CALL_FUNCTION            1
+
+117          18 LOAD_GLOBAL              2 (QIcon)
+             20 LOAD_GLOBAL              4 (LPGlobalUI)
+             22 LOAD_METHOD              5 (imagePath)
+             24 LOAD_CONST               1 ('arrow_down.png')
+             26 CALL_METHOD              1
+             28 CALL_FUNCTION            1
+
+118          30 LOAD_GLOBAL              2 (QIcon)
+             32 LOAD_GLOBAL              4 (LPGlobalUI)
+             34 LOAD_METHOD              5 (imagePath)
+             36 LOAD_CONST               1 ('arrow_down.png')
+             38 CALL_METHOD              1
+             40 CALL_FUNCTION            1
+             42 LOAD_CONST               2 ('image')
+
+116          44 CALL_FUNCTION            5
+             46 POP_TOP
+             48 JUMP_FORWARD            44 (to 94)
+
+120     >>   50 LOAD_GLOBAL              0 (LPButtonEventFilter)
+             52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                1 (collapseButton)
+             56 LOAD_GLOBAL              2 (QIcon)
+             58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                6 (collapseButtonUpDefaultImage)
+             62 CALL_FUNCTION            1
+
+121          64 LOAD_GLOBAL              2 (QIcon)
+             66 LOAD_GLOBAL              4 (LPGlobalUI)
+             68 LOAD_METHOD              5 (imagePath)
+             70 LOAD_CONST               3 ('arrow_up.png')
+             72 CALL_METHOD              1
+             74 CALL_FUNCTION            1
+
+122          76 LOAD_GLOBAL              2 (QIcon)
+             78 LOAD_GLOBAL              4 (LPGlobalUI)
+             80 LOAD_METHOD              5 (imagePath)
+             82 LOAD_CONST               3 ('arrow_up.png')
+             84 CALL_METHOD              1
+             86 CALL_FUNCTION            1
+             88 LOAD_CONST               2 ('image')
+
+120          90 CALL_FUNCTION            5
+             92 POP_TOP
+
+124     >>   94 LOAD_FAST                0 (self)
+             96 LOAD_ATTR                7 (libList)
+             98 STORE_FAST               2 (w)
+
+125         100 LOAD_FAST                2 (w)
+            102 LOAD_METHOD              8 (height)
+            104 CALL_METHOD              0
+            106 STORE_FAST               3 (cur)
+
+126         108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR                9 (listHeight)
+            112 STORE_FAST               4 (full)
+
+128         114 LOAD_GLOBAL             10 (logger)
+            116 LOAD_METHOD             11 (debug)
+            118 LOAD_CONST               4 ('cur = ')
+            120 LOAD_FAST                3 (cur)
+            122 FORMAT_VALUE             0
+            124 BUILD_STRING             2
+            126 CALL_METHOD              1
+            128 POP_TOP
+
+129         130 LOAD_GLOBAL             10 (logger)
+            132 LOAD_METHOD             11 (debug)
+            134 LOAD_CONST               5 ('full = ')
+            136 LOAD_FAST                4 (full)
+            138 FORMAT_VALUE             0
+            140 BUILD_STRING             2
+            142 CALL_METHOD              1
+            144 POP_TOP
+
+132         146 LOAD_FAST                0 (self)
+            148 LOAD_ATTR               12 (anim)
+            150 LOAD_METHOD             13 (stop)
+            152 CALL_METHOD              0
+            154 POP_TOP
+
+133         156 LOAD_FAST                1 (collapsed)
+            158 POP_JUMP_IF_FALSE      198
+
+135         160 LOAD_FAST                0 (self)
+            162 LOAD_ATTR                7 (libList)
+            164 LOAD_METHOD             14 (setMinimumHeight)
+            166 LOAD_CONST               6 (0)
+            168 CALL_METHOD              1
+            170 POP_TOP
+
+136         172 LOAD_FAST                0 (self)
+            174 LOAD_ATTR               12 (anim)
+            176 LOAD_METHOD             15 (setStartValue)
+            178 LOAD_FAST                3 (cur)
+            180 CALL_METHOD              1
+            182 POP_TOP
+
+137         184 LOAD_FAST                0 (self)
+            186 LOAD_ATTR               12 (anim)
+            188 LOAD_METHOD             16 (setEndValue)
+            190 LOAD_CONST               6 (0)
+            192 CALL_METHOD              1
+            194 POP_TOP
+            196 JUMP_FORWARD            24 (to 222)
+
+140     >>  198 LOAD_FAST                0 (self)
+            200 LOAD_ATTR               12 (anim)
+            202 LOAD_METHOD             15 (setStartValue)
+            204 LOAD_FAST                3 (cur)
+            206 CALL_METHOD              1
+            208 POP_TOP
+
+141         210 LOAD_FAST                0 (self)
+            212 LOAD_ATTR               12 (anim)
+            214 LOAD_METHOD             16 (setEndValue)
+            216 LOAD_FAST                4 (full)
+            218 CALL_METHOD              1
+            220 POP_TOP
+
+143     >>  222 LOAD_FAST                0 (self)
+            224 LOAD_ATTR               12 (anim)
+            226 LOAD_METHOD             17 (start)
+            228 CALL_METHOD              0
+            230 POP_TOP
+            232 LOAD_CONST               0 (None)
+            234 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController.onAnimFinished ===
+147           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (libList)
+              4 STORE_FAST               1 (w)
+
+148           6 LOAD_FAST                1 (w)
+              8 LOAD_METHOD              1 (height)
+             10 CALL_METHOD              0
+             12 STORE_FAST               2 (cur)
+
+149          14 LOAD_FAST                2 (cur)
+             16 LOAD_CONST               1 (0)
+             18 COMPARE_OP               2 (==)
+             20 POP_JUMP_IF_FALSE       36
+
+150          22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                0 (libList)
+             26 LOAD_METHOD              2 (setMinimumHeight)
+             28 LOAD_CONST               1 (0)
+             30 CALL_METHOD              1
+             32 POP_TOP
+             34 JUMP_FORWARD            14 (to 50)
+
+152     >>   36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                0 (libList)
+             40 LOAD_METHOD              2 (setMinimumHeight)
+             42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                3 (listHeight)
+             46 CALL_METHOD              1
+             48 POP_TOP
+        >>   50 LOAD_CONST               0 (None)
+             52 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController._showLoadingButton ===
+155           0 LOAD_FAST                1 (show)
+              2 POP_JUMP_IF_FALSE      120
+
+156           4 LOAD_FAST                0 (self)
+              6 LOAD_ATTR                0 (loadingButton)
+              8 LOAD_METHOD              1 (show)
+             10 CALL_METHOD              0
+             12 POP_TOP
+
+157          14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                0 (loadingButton)
+             18 LOAD_METHOD              2 (setEnabled)
+             20 LOAD_CONST               1 (True)
+             22 CALL_METHOD              1
+             24 POP_TOP
+
+158          26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                0 (loadingButton)
+             30 LOAD_METHOD              3 (setCursor)
+             32 LOAD_GLOBAL              4 (Qt)
+             34 LOAD_ATTR                5 (CursorShape)
+             36 LOAD_ATTR                6 (PointingHandCursor)
+             38 CALL_METHOD              1
+             40 POP_TOP
+
+160          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                7 (loadingSpinner)
+             46 LOAD_CONST               0 (None)
+             48 IS_OP                    0
+             50 POP_JUMP_IF_FALSE       90
+
+161          52 LOAD_GLOBAL              8 (LPWaitingSpinner)
+
+162          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                0 (loadingButton)
+
+163          58 LOAD_CONST               2 (30.0)
+
+164          60 LOAD_CONST               3 (40.0)
+
+165          62 LOAD_CONST               4 (6)
+
+166          64 LOAD_CONST               5 (50)
+
+167          66 LOAD_CONST               6 (3)
+
+168          68 LOAD_CONST               7 (1)
+
+169          70 LOAD_CONST               8 (1.5)
+
+170          72 LOAD_GLOBAL              9 (QColor)
+             74 LOAD_CONST               9 (255)
+             76 LOAD_CONST               9 (255)
+             78 LOAD_CONST               9 (255)
+             80 CALL_FUNCTION            3
+
+161          82 LOAD_CONST              10 (('roundness', 'fade', 'radius', 'lines', 'line_length', 'line_width', 'speed', 'color'))
+             84 CALL_FUNCTION_KW         9
+             86 LOAD_FAST                0 (self)
+             88 STORE_ATTR               7 (loadingSpinner)
+
+173     >>   90 LOAD_FAST                0 (self)
+             92 LOAD_ATTR                7 (loadingSpinner)
+             94 LOAD_ATTR               10 (is_spinning)
+             96 POP_JUMP_IF_TRUE       166
+
+174          98 LOAD_FAST                0 (self)
+            100 LOAD_ATTR                7 (loadingSpinner)
+            102 LOAD_METHOD              1 (show)
+            104 CALL_METHOD              0
+            106 POP_TOP
+
+175         108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR                7 (loadingSpinner)
+            112 LOAD_METHOD             11 (start)
+            114 CALL_METHOD              0
+            116 POP_TOP
+            118 JUMP_FORWARD            46 (to 166)
+
+177     >>  120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR                0 (loadingButton)
+            124 LOAD_METHOD             12 (hide)
+            126 CALL_METHOD              0
+            128 POP_TOP
+
+178         130 LOAD_FAST                0 (self)
+            132 LOAD_ATTR                0 (loadingButton)
+            134 LOAD_METHOD              2 (setEnabled)
+            136 LOAD_CONST              11 (False)
+            138 CALL_METHOD              1
+            140 POP_TOP
+
+179         142 LOAD_FAST                0 (self)
+            144 LOAD_ATTR                7 (loadingSpinner)
+            146 POP_JUMP_IF_FALSE      166
+            148 LOAD_FAST                0 (self)
+            150 LOAD_ATTR                7 (loadingSpinner)
+            152 LOAD_ATTR               10 (is_spinning)
+            154 POP_JUMP_IF_FALSE      166
+
+180         156 LOAD_FAST                0 (self)
+            158 LOAD_ATTR                7 (loadingSpinner)
+            160 LOAD_METHOD             13 (stop)
+            162 CALL_METHOD              0
+            164 POP_TOP
+        >>  166 LOAD_CONST               0 (None)
+            168 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController.showLoadingButton ===
+184           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (showLoadingButtonSignal)
+              4 LOAD_METHOD              1 (emit)
+              6 LOAD_FAST                1 (show)
+              8 CALL_METHOD              1
+             10 POP_TOP
+             12 LOAD_CONST               0 (None)
+             14 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController.loadingButtonPressed ===
+188           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (showImportWaitingDialogMethod)
+              4 CALL_METHOD              0
+              6 POP_TOP
+              8 LOAD_CONST               0 (None)
+             10 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController.updateCurrentSelect ===
+200           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (DETAIL_ID_TO_SIDEBAR_ID)
+              4 LOAD_METHOD              1 (get)
+              6 LOAD_FAST                1 (itemId)
+              8 LOAD_FAST                1 (itemId)
+             10 CALL_METHOD              2
+             12 STORE_FAST               2 (normalizedItemId)
+
+201          14 LOAD_GLOBAL              2 (enumerate)
+             16 LOAD_FAST                0 (self)
+             18 LOAD_ATTR                3 (dataArray)
+             20 CALL_FUNCTION            1
+             22 GET_ITER
+        >>   24 FOR_ITER                60 (to 86)
+             26 UNPACK_SEQUENCE          2
+             28 STORE_FAST               3 (row)
+             30 STORE_FAST               4 (itemDict)
+
+202          32 LOAD_FAST                4 (itemDict)
+             34 LOAD_CONST               1 ('id')
+             36 BINARY_SUBSCR
+             38 LOAD_FAST                2 (normalizedItemId)
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       24
+
+203          44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                4 (libList)
+             48 LOAD_METHOD              5 (model)
+             50 CALL_METHOD              0
+             52 STORE_FAST               5 (model)
+
+204          54 LOAD_FAST                5 (model)
+             56 LOAD_METHOD              6 (index)
+             58 LOAD_FAST                3 (row)
+             60 LOAD_CONST               2 (0)
+             62 CALL_METHOD              2
+             64 STORE_FAST               6 (index)
+
+205          66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR                4 (libList)
+             70 LOAD_METHOD              7 (setCurrentIndex)
+             72 LOAD_FAST                6 (index)
+             74 CALL_METHOD              1
+             76 POP_TOP
+
+206          78 POP_TOP
+             80 LOAD_CONST               3 (None)
+             82 RETURN_VALUE
+             84 JUMP_ABSOLUTE           24
+
+208     >>   86 LOAD_FAST                0 (self)
+             88 LOAD_ATTR                4 (libList)
+             90 LOAD_METHOD              8 (clearSelection)
+             92 CALL_METHOD              0
+             94 POP_TOP
+             96 LOAD_CONST               3 (None)
+             98 RETURN_VALUE
+
+=== LPSideBarMyLibraryViewController.itemSelect ===
+211           0 LOAD_FAST                1 (item)
+              2 LOAD_METHOD              0 (row)
+              4 CALL_METHOD              0
+              6 STORE_FAST               2 (selectedIndex)
+
+213           8 LOAD_FAST                0 (self)
+             10 LOAD_ATTR                1 (dataArray)
+             12 LOAD_FAST                2 (selectedIndex)
+             14 BINARY_SUBSCR
+             16 STORE_FAST               3 (dataDict)
+
+215          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                2 (libSelectMethod)
+             22 POP_JUMP_IF_FALSE       38
+
+216          24 LOAD_FAST                0 (self)
+             26 LOAD_METHOD              2 (libSelectMethod)
+             28 LOAD_FAST                3 (dataDict)
+             30 LOAD_CONST               1 ('id')
+             32 BINARY_SUBSCR
+             34 CALL_METHOD              1
+             36 POP_TOP
+        >>   38 LOAD_CONST               0 (None)
+             40 RETURN_VALUE

@@ -1,0 +1,38 @@
+# module LPClientFramework.LPCloudDeviceState
+
+[module] names: __doc__, hashlib, random, string, time, requests, LPClientFramework.LPUtility, logger, QUERY_DEVICE_STATE_V2_URL, _CLOUD_APP_ID, _CLOUD_ACCESS_KEY, _CLOUD_SECRET_KEY, _signedHeaders, queryDeviceStateV2
+  str: '\n云端设备状态查询模块。\n\n封装 queryDeviceStateV2 接口（对齐 iOS LPOOBECaseManager.requestCloudInfo）：\n- 地址: https://cloud-api-us.linkplay.com/v1/rest/api/queryDeviceStateV2\n- 鉴权: 请求需携带 accessKey/timestamp/nonce/sign/appId 签名头（与 iOS\n  LPCloudRequest、PC LPAuthenticatedRequestClient 同一算法）；不带签名头的\n  裸 POST 会被网关以 403（identi'
+  str: 'logger'
+  str: 'https://cloud-api-us.linkplay.com/v1/rest/api/queryDeviceStateV2'
+  str: '<redacted>'
+  str: '<redacted>'
+  str: '<redacted>'
+  str: '_signedHeaders'
+  str: 'queryDeviceStateV2'
+
+def _signedHeaders()  line 37
+  names: str, int, time, join, random, choices, string, ascii_letters, digits, hashlib, sha256, _CLOUD_ACCESS_KEY, _CLOUD_APP_ID, encode, hexdigest, _CLOUD_SECRET_KEY, upper
+    str: '\n    构造云端接口签名请求头（算法对齐 iOS LPCloudRequest / PC LPAuthenticatedRequestClient）。\n\n    规则: appId = sha256(accessKey + appId) 小写；\n          sign = sha256(secretKey + 按字母序拼接的参数串) 大写。\n\n    参数:\n        无。\n    返回:\n        dict: 含 accessKey / timestamp / nonce / sign / appId 的请求头。\n    '
+    str: 'k'
+    str: 'utf-8'
+    str: 'accessKey=%s&appId=%s&nonce=%s&timestamp=%s&secretKey=%s'
+    str: 'application/json'
+    str: 'Content-Type'
+    str: 'accessKey'
+    str: 'timestamp'
+    str: 'nonce'
+    str: 'sign'
+    str: 'appId'
+
+def queryDeviceStateV2(deviceUid, timeout)  line 67
+  names: requests, post, QUERY_DEVICE_STATE_V2_URL, _signedHeaders, ok, logger, warning, status_code, json, get, isinstance, dict, Exception
+    str: '\n    查询云端设备影子状态（queryDeviceStateV2）。\n\n    参数:\n        deviceUid (str): 设备短 UUID（24 位 hex，即 PC 端 SSDP 设备记录键）。\n        timeout (int): 请求超时秒数。\n    返回:\n        dict | None: 云端设备状态（响应顶层 result）；请求失败、超时或\n        返回结构不符合预期时返回 None（调用方按降级处理，置 cloud_online=false）。\n    '
+    str: 'deviceUid'
+    str: 'json'
+    str: 'headers'
+    str: 'timeout'
+    str: '[cloudDeviceState] queryDeviceStateV2 http %d for %s'
+    str: '***'
+    str: 'result'
+    str: '[cloudDeviceState] queryDeviceStateV2 empty result for %s'
+    str: '[cloudDeviceState] queryDeviceStateV2 exception: %s'

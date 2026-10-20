@@ -1,0 +1,112 @@
+# module HOME.Menu.LPMenuBarController
+
+[module] names: __doc__, platform, PyQt6.QtCore, QObject, QTimer, PyQt6.QtGui, QAction, PyQt6.QtWidgets, QMenu, LPGlobalUI, HOME.LPAboutViewController, LPAboutViewController, HOME.LPAboutViewController_ui, Ui_aboutViewWidget, HOME.Menu.LPMenuBridge, ensureMacMenuActionBridgeClass, LPClientFramework.LPConfig, LPUIPath, LPClientFramework.LPUtility, logger, LPMenuBarController
+  str: '主菜单栏与 macOS 原生应用菜单控制器。\n\n将从 WiiMHome.py 中拆分出的菜单栏相关代码迁移至此，职责包括：\n- QMenuBar（Play/Pause、Check for Updates、About 菜单）的构建；\n- macOS 原生应用菜单（About/Check for Updates/Send Feedback）的注入与位置校正；\n- Sparkle “Check for Updates” 菜单项可用性状态同步。\n'
+  str: 'QObject'
+  str: 'QTimer'
+  str: 'QAction'
+  str: 'QMenu'
+  str: 'LPAboutViewController'
+  str: 'Ui_aboutViewWidget'
+  str: 'ensureMacMenuActionBridgeClass'
+  str: 'LPUIPath'
+  str: 'logger'
+  str: 'LPMenuBarController'
+
+def LPMenuBarController()  line 24
+  names: __name__, __module__, __qualname__, __doc__, __init__, checkForUpdates, openFeedback, setupMenuBar, refreshSparkleMenuState, _refreshMacNativeSparkleMenuState, ensureMacNativeSparkleMenuItem, ensureMacNativeFeedbackMenuItem, __classcell__
+    str: 'LPMenuBarController'
+    str: '主菜单栏 + macOS 原生应用菜单控制器。'
+    str: 'LPMenuBarController.__init__'
+    str: 'LPMenuBarController.checkForUpdates'
+    str: 'LPMenuBarController.openFeedback'
+    str: 'LPMenuBarController.setupMenuBar'
+    str: 'LPMenuBarController.refreshSparkleMenuState'
+    str: 'LPMenuBarController._refreshMacNativeSparkleMenuState'
+    str: 'LPMenuBarController.ensureMacNativeSparkleMenuItem'
+    str: 'LPMenuBarController.ensureMacNativeFeedbackMenuItem'
+
+  def LPMenuBarController.__init__(self, owner, isUpdateReady, onCheckForUpdates, onOpenFeedback)  line 27
+    names: super, __init__, owner, _isUpdateReady, _onCheckForUpdates, _onOpenFeedback, checkForUpdatesAction, _macMenuActionBridge
+      str: '初始化主菜单栏控制器。\n\n        参数:\n            owner (QMainWindow): 主窗口实例，提供 menuBar()/action_playpause 等 UI 部件。\n            isUpdateReady (callable): 返回更新器是否就绪的可调用对象。\n            onCheckForUpdates (callable): 触发手动检查更新的回调。\n            onOpenFeedback (callable): 打开反馈对话框的回调。\n        返回:\n            无。\n        '
+
+  def LPMenuBarController.checkForUpdates(self)  line 48
+    names: _onCheckForUpdates
+      str: '桥接动作委托：触发手动检查更新。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPMenuBarController.openFeedback(self)  line 59
+    names: _onOpenFeedback
+      str: '桥接动作委托：打开反馈对话框。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPMenuBarController.setupMenuBar(self)  line 72
+    names: owner, action_playpause, triggered, connect, platform, system, menuBar, hide, QAction, checkForUpdatesAction, setEnabled, _isUpdateReady, _onCheckForUpdates, refreshSparkleMenuState, QTimer, singleShot, ensureMacNativeSparkleMenuItem, ensureMacNativeFeedbackMenuItem, QMenu, addAction, addMenu
+      str: '\n        初始化主菜单栏动作。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'LPMenuBarController.setupMenuBar.<locals>._playPauseAction'
+      str: 'Windows'
+      str: 'Darwin'
+      str: 'Check for Updates'
+      str: 'LPMenuBarController.setupMenuBar.<locals>._showAboutDialog'
+      str: 'About'
+      str: 'About MyApp'
+
+    def LPMenuBarController.setupMenuBar._playPauseAction()  line 82
+      names: LPGlobalUI, currentDevice, mediaInfo, playState, updateMediaInfo, asyncUpnpPost
+        str: 'PLAYING'
+        str: 'playState'
+        str: 'PAUSED_PLAYBACK'
+        str: 'Pause'
+        str: 'Play'
+
+    def LPMenuBarController.setupMenuBar._showAboutDialog()  line 108
+      names: LPGlobalUI, loadUI, LPUIPath, AboutViewControllerUI, Ui_aboutViewWidget, LPAboutViewController, setParent, mainWindow, setGeometry, size, width, height, show
+
+  def LPMenuBarController.refreshSparkleMenuState(self)  line 131
+    names: platform, system, _isUpdateReady, checkForUpdatesAction, setEnabled, _refreshMacNativeSparkleMenuState
+      str: '\n        刷新 macOS "Check for Updates" 菜单项可用性。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'Darwin'
+
+  def LPMenuBarController._refreshMacNativeSparkleMenuState(self, isReady)  line 148
+    names: platform, system, AppKit, NSApp, Exception, mainMenu, numberOfItems, itemAtIndex_, submenu, range, str, title, setEnabled_, bool
+      str: '\n        同步 macOS 原生应用菜单中的“检查更新”菜单项可用性。\n\n        参数:\n            isReady (bool): 当前 Sparkle 更新器是否可用\n        返回:\n            无\n        '
+      str: 'Darwin'
+      str: 'NSApp'
+      str: 'Check for Updates...'
+
+  def LPMenuBarController.ensureMacNativeSparkleMenuItem(self)  line 192
+    names: platform, system, checkForUpdatesAction, AppKit, NSApp, NSMenuItem, Exception, logger, warning, mainMenu, numberOfItems, itemAtIndex_, submenu, range, str, title, startswith, append, removeItem_, ensureMacMenuActionBridgeClass, _macMenuActionBridge, alloc, initWithOwner_, initWithTitle_action_keyEquivalent_, setTarget_, setEnabled_, isEnabled, insertItem_atIndex_, info, indexOfItem_
+      str: '\n        确保 macOS 原生应用菜单中存在“检查更新”菜单项，并将其固定在 About 项之后。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'Darwin'
+      str: 'NSApp'
+      str: 'NSMenuItem'
+      str: '[mac.menu] 导入原生菜单依赖失败: %s'
+      str: '[mac.menu] NSApp 不可用，跳过菜单注入'
+      str: '[mac.menu] 原生主菜单不存在，跳过菜单注入'
+      str: '[mac.menu] 未找到应用菜单入口，跳过菜单注入'
+      str: '[mac.menu] 应用菜单子菜单不存在，跳过菜单注入'
+      str: 'About '
+      str: 'Check for Updates...'
+      str: '[mac.menu] 未找到 About 菜单项，跳过菜单注入'
+      str: '[mac.menu] 无法创建原生菜单桥接类，跳过菜单注入'
+      str: 'handleCheckForUpdates:'
+      str: '[mac.menu] 已注入原生 Check for Updates 菜单项 index=%s'
+      str: '[mac.menu] 已调整原生 Check for Updates 菜单项位置 index=%s'
+
+  def LPMenuBarController.ensureMacNativeFeedbackMenuItem(self)  line 289
+    names: platform, system, AppKit, NSApp, NSMenuItem, Exception, logger, warning, mainMenu, numberOfItems, itemAtIndex_, submenu, range, str, title, startswith, append, removeItem_, ensureMacMenuActionBridgeClass, _macMenuActionBridge, alloc, initWithOwner_, initWithTitle_action_keyEquivalent_, setTarget_, insertItem_atIndex_, info, indexOfItem_
+      str: '\n        确保 macOS 原生应用菜单中存在 “Send Feedback” 菜单项，并固定在 “Check for Updates...” 之后。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'Darwin'
+      str: 'NSApp'
+      str: 'NSMenuItem'
+      str: '[mac.menu] 导入原生菜单依赖失败: %s'
+      str: '[mac.menu] NSApp 不可用，跳过 Send Feedback 菜单注入'
+      str: '[mac.menu] 原生主菜单不存在，跳过 Send Feedback 菜单注入'
+      str: '[mac.menu] 未找到应用菜单入口，跳过 Send Feedback 菜单注入'
+      str: '[mac.menu] 应用菜单子菜单不存在，跳过 Send Feedback 菜单注入'
+      str: 'About '
+      str: 'Check for Updates...'
+      str: 'Send Feedback'
+      str: '[mac.menu] 未找到 About / Check for Updates 菜单项，跳过 Send Feedback 菜单注入'
+      str: '[mac.menu] 无法创建原生菜单桥接类，跳过 Send Feedback 菜单注入'
+      str: 'handleSendFeedback:'
+      str: '[mac.menu] 已注入原生 Send Feedback 菜单项 index=%s'
+      str: '[mac.menu] 已调整原生 Send Feedback 菜单项位置 index=%s'

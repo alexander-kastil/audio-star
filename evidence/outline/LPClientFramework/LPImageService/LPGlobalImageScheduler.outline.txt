@@ -1,0 +1,172 @@
+# module LPClientFramework.LPImageService.LPGlobalImageScheduler
+
+[module] names: __doc__, itertools, logging, queue, threading, typing, Any, Callable, Dict, List, Optional, PyQt6.QtCore, QObject, pyqtSignal, pyqtSlot, getLogger, logger, _LPGlobalImageScheduledJob, _LPGlobalImageWorkerPool, LPGlobalImageScheduler
+  str: '\n全局图片请求调度器。\n'
+  str: 'Any'
+  str: 'Callable'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'linkplay'
+  str: '_LPGlobalImageScheduledJob'
+  str: '_LPGlobalImageWorkerPool'
+  str: 'LPGlobalImageScheduler'
+
+def _LPGlobalImageScheduledJob()  line 18
+  names: __name__, __module__, __qualname__, str, Callable, Any, int, Optional, __init__
+    str: '_LPGlobalImageScheduledJob'
+    str: 'key'
+    str: 'task'
+    str: 'priorityRank'
+    str: 'callback'
+    str: 'return'
+    str: '_LPGlobalImageScheduledJob.__init__'
+
+  def _LPGlobalImageScheduledJob.__init__(self, key, task, priorityRank, callback)  line 19
+    names: str, strip, key, task, int, priorityRank, callbacks, generation, started
+      str: '\n        初始化图片调度任务。\n\n        :param key: 任务唯一键。\n        :param task: 实际执行函数。\n        :param priorityRank: 优先级序号，值越小优先级越高。\n        :param callback: 完成后的订阅回调。\n        :return: None。\n        '
+
+def _LPGlobalImageWorkerPool()  line 44
+  names: __name__, __module__, __qualname__, str, int, Callable, List, Any, __init__, Optional, submit, Dict, stats, _LPGlobalImageScheduledJob, _enqueue, _worker_loop
+    str: '_LPGlobalImageWorkerPool'
+    str: 'name'
+    str: 'workerCount'
+    str: 'deliveryHandler'
+    str: 'return'
+    str: '_LPGlobalImageWorkerPool.__init__'
+    str: 'jobKey'
+    str: 'task'
+    str: 'callback'
+    str: 'priorityRank'
+    str: 'return'
+    str: '_LPGlobalImageWorkerPool.submit'
+    str: 'return'
+    str: '_LPGlobalImageWorkerPool.stats'
+    str: 'job'
+    str: 'return'
+    str: '_LPGlobalImageWorkerPool._enqueue'
+    str: '_LPGlobalImageWorkerPool._worker_loop'
+
+  def _LPGlobalImageWorkerPool.__init__(self, name, workerCount, deliveryHandler)  line 45
+    names: str, strip, _name, max, int, _worker_count, _delivery_handler, threading, RLock, _lock, queue, PriorityQueue, _queue, _jobs, itertools, count, _sequence, _threads, _submitted_count, _deduplicated_count, _promoted_count, _completed_count, _failed_count, range, Thread, _worker_loop, start, append
+      str: '\n        初始化固定工作池。\n\n        :param name: 工作池名称。\n        :param workerCount: 固定 worker 数量。\n        :param deliveryHandler: 完成后投递回主线程的函数。\n        :return: None。\n        '
+      str: 'GlobalImage-'
+      str: '-'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+
+  def _LPGlobalImageWorkerPool.submit(self, jobKey, task, callback, priorityRank)  line 82
+    names: str, strip, _lock, _jobs, get, _LPGlobalImageScheduledJob, _submitted_count, _enqueue, _deduplicated_count, callbacks, append, started, int, priorityRank, generation, _promoted_count
+      str: '\n        提交任务到工作池，重复 key 只追加回调并按需提升优先级。\n\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 完成后的订阅回调。\n        :param priorityRank: 优先级序号。\n        :return: None。\n        '
+
+  def _LPGlobalImageWorkerPool.stats(self)  line 120
+    names: _lock, _worker_count, len, _jobs, _queue, qsize, _submitted_count, _deduplicated_count, _promoted_count, _completed_count, _failed_count
+      str: '\n        返回工作池调试统计。\n\n        :param: 无。\n        :return: 统计字典。\n        '
+      str: 'workerCount'
+      str: 'pending'
+      str: 'queueLength'
+      str: 'submitted'
+      str: 'deduplicated'
+      str: 'promoted'
+      str: 'completed'
+      str: 'failed'
+
+  def _LPGlobalImageWorkerPool._enqueue(self, job)  line 139
+    names: _queue, put, priorityRank, next, _sequence, key, generation
+      str: '\n        将任务按当前优先级压入队列。\n\n        :param job: 调度任务。\n        :return: None。\n        '
+
+  def _LPGlobalImageWorkerPool._worker_loop(self)  line 148
+    names: _queue, get, _lock, _jobs, task_done, started, int, generation, priorityRank, task, Exception, logger, warning, _name, pop, list, callbacks, isinstance, _failed_count, _completed_count, _delivery_handler
+      str: '\n        后台 worker 主循环。\n\n        :param: 无。\n        :return: None。\n        '
+      str: '[GlobalImageScheduler] pool='
+      str: ' job='
+      str: ' failed: '
+
+def LPGlobalImageScheduler()  line 197
+  names: __name__, __module__, __qualname__, pyqtSignal, str, object, _jobDeliveryReady, PRIORITY_VISIBLE, PRIORITY_PRELOAD, PRIORITY_BACKGROUND, _PRIORITY_RANKS, _instance, Optional, __annotations__, threading, Lock, _instance_lock, QObject, __init__, classmethod, instance, Callable, Any, submitImageDownloadTask, submitImageDecodeTask, Dict, int, stats, _submit, _priority_rank, List, _enqueue_delivery, pyqtSlot, _dispatch_delivery, __classcell__
+    str: 'LPGlobalImageScheduler'
+    str: 'visible'
+    str: 'preload'
+    str: 'background'
+    str: '_instance'
+    str: 'parent'
+    str: 'LPGlobalImageScheduler.__init__'
+    str: 'return'
+    str: 'LPGlobalImageScheduler.instance'
+    str: 'jobKey'
+    str: 'task'
+    str: 'callback'
+    str: 'priority'
+    str: 'return'
+    str: 'LPGlobalImageScheduler.submitImageDownloadTask'
+    str: 'LPGlobalImageScheduler.submitImageDecodeTask'
+    str: 'LPGlobalImageScheduler.stats'
+    str: 'poolName'
+    str: 'jobKey'
+    str: 'task'
+    str: 'callback'
+    str: 'priority'
+    str: 'return'
+    str: 'LPGlobalImageScheduler._submit'
+    str: 'priority'
+    str: 'return'
+    str: 'LPGlobalImageScheduler._priority_rank'
+    str: 'poolName'
+    str: 'jobKey'
+    str: 'callbacks'
+    str: 'payload'
+    str: 'return'
+    str: 'LPGlobalImageScheduler._enqueue_delivery'
+    str: 'LPGlobalImageScheduler._dispatch_delivery'
+
+  def LPGlobalImageScheduler.__init__(self, parent)  line 213
+    names: super, __init__, _LPGlobalImageWorkerPool, _enqueue_delivery, _pools, _jobDeliveryReady, connect, _dispatch_delivery
+      str: '\n        初始化全局图片调度器。\n\n        :param parent: 父级 QObject。\n        :return: None。\n        '
+      str: 'image_download'
+      str: 'image_decode'
+      str: 'image_download'
+      str: 'image_decode'
+
+  def LPGlobalImageScheduler.instance(cls)  line 227
+    names: _instance_lock, _instance
+      str: '\n        返回全局图片调度器单例。\n\n        :param: 无。\n        :return: 调度器单例。\n        '
+
+  def LPGlobalImageScheduler.submitImageDownloadTask(self, jobKey, task, callback, priority)  line 240
+    names: _submit
+      str: '\n        提交图片下载任务。\n\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 完成回调。\n        :param priority: 优先级字符串。\n        :return: None。\n        '
+      str: 'image_download'
+
+  def LPGlobalImageScheduler.submitImageDecodeTask(self, jobKey, task, callback, priority)  line 258
+    names: _submit
+      str: '\n        提交图片解码任务。\n\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 完成回调。\n        :param priority: 优先级字符串。\n        :return: None。\n        '
+      str: 'image_decode'
+
+  def LPGlobalImageScheduler.stats(self)  line 276
+    names: _pools, items
+      str: '\n        返回调试统计。\n\n        :param: 无。\n        :return: 按工作池分组的统计字典。\n        '
+      str: 'LPGlobalImageScheduler.stats.<locals>.<dictcomp>'
+
+    def LPGlobalImageScheduler.stats.<dictcomp>(.0)  line 283
+      names: stats
+
+  def LPGlobalImageScheduler._submit(self, poolName, jobKey, task, callback, priority)  line 285
+    names: _pools, get, str, strip, submit, _priority_rank
+      str: '\n        向指定工作池提交任务。\n\n        :param poolName: 工作池名称。\n        :param jobKey: 任务唯一键。\n        :param task: 实际执行函数。\n        :param callback: 完成回调。\n        :param priority: 优先级字符串。\n        :return: None。\n        '
+
+  def LPGlobalImageScheduler._priority_rank(self, priority)  line 308
+    names: str, PRIORITY_BACKGROUND, strip, lower, int, _PRIORITY_RANKS, get
+      str: '\n        将优先级字符串转换为排序值。\n\n        :param priority: 优先级字符串。\n        :return: 排序值。\n        '
+
+  def LPGlobalImageScheduler._enqueue_delivery(self, poolName, jobKey, callbacks, payload)  line 318
+    names: _jobDeliveryReady, emit
+      str: '\n        将后台结果切回主线程。\n\n        :param poolName: 工作池名称。\n        :param jobKey: 任务唯一键。\n        :param callbacks: 订阅回调列表。\n        :param payload: 执行结果。\n        :return: None。\n        '
+
+  def LPGlobalImageScheduler._dispatch_delivery(self, poolName, jobKey, callbacks, payload)  line 336
+    names: isinstance, list, callable, Exception, logger, warning
+      str: '\n        在主线程依次投递订阅回调。\n\n        :param poolName: 工作池名称。\n        :param jobKey: 任务唯一键。\n        :param callbacks: 订阅回调列表。\n        :param payload: 执行结果。\n        :return: None。\n        '
+      str: '[GlobalImageScheduler] dispatch failed job='
+      str: ', error='

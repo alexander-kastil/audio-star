@@ -1,0 +1,950 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nRecently Played 的播放列表快照编解码层。\n\n负责把 ``detail["playList"]`` 在「具体音源的播放列表对象」和「可落盘的字典」之间互转。\n所有音源恢复播放上下文时都走这里，统一处理对象属性映射、headType 还原、index 归一化和缺失字段补默认值。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  9           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('headerTypeValue', 'headerTypeEnum', 'LP_HEADER_TYPE_VALUE_MAP', 'LPHeaderType'))
+              8 IMPORT_NAME              1 (LPClientFramework.LPPlayList.LPPlayList)
+             10 IMPORT_FROM              2 (headerTypeValue)
+             12 STORE_NAME               2 (headerTypeValue)
+             14 IMPORT_FROM              3 (headerTypeEnum)
+             16 STORE_NAME               3 (headerTypeEnum)
+             18 IMPORT_FROM              4 (LP_HEADER_TYPE_VALUE_MAP)
+             20 STORE_NAME               4 (LP_HEADER_TYPE_VALUE_MAP)
+             22 IMPORT_FROM              5 (LPHeaderType)
+             24 STORE_NAME               5 (LPHeaderType)
+             26 POP_TOP
+
+ 15          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('applyDictToObject', 'logger'))
+             32 IMPORT_NAME              6 (LPClientFramework.LPUtility)
+             34 IMPORT_FROM              7 (applyDictToObject)
+             36 STORE_NAME               7 (applyDictToObject)
+             38 IMPORT_FROM              8 (logger)
+             40 STORE_NAME               8 (logger)
+             42 POP_TOP
+
+ 18          44 LOAD_BUILD_CLASS
+             46 LOAD_CONST               4 (<code object LPRecentlyPlayListCodec at 0x000001F3253A2190, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 18>)
+             48 LOAD_CONST               5 ('LPRecentlyPlayListCodec')
+             50 MAKE_FUNCTION            0
+             52 LOAD_CONST               5 ('LPRecentlyPlayListCodec')
+             54 LOAD_NAME                9 (object)
+             56 CALL_FUNCTION            3
+             58 STORE_NAME              10 (LPRecentlyPlayListCodec)
+             60 LOAD_CONST               6 (None)
+             62 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec ===
+ 18           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPRecentlyPlayListCodec')
+              6 STORE_NAME               2 (__qualname__)
+
+ 19           8 LOAD_CONST               1 ('Recently 播放列表快照的编解码器，全部为静态方法，无需实例化。')
+             10 STORE_NAME               3 (__doc__)
+
+ 25          12 LOAD_NAME                4 (staticmethod)
+
+ 26          14 LOAD_CONST               2 (<code object _toStorableValue at 0x000001F3253C47C0, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 25>)
+             16 LOAD_CONST               3 ('LPRecentlyPlayListCodec._toStorableValue')
+             18 MAKE_FUNCTION            0
+             20 CALL_FUNCTION            1
+             22 STORE_NAME               5 (_toStorableValue)
+
+ 42          24 LOAD_NAME                4 (staticmethod)
+
+ 43          26 LOAD_CONST              23 ((None,))
+             28 LOAD_CONST               5 (<code object _objectToDict at 0x000001F3253C4660, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 42>)
+             30 LOAD_CONST               6 ('LPRecentlyPlayListCodec._objectToDict')
+             32 MAKE_FUNCTION            1 (defaults)
+             34 CALL_FUNCTION            1
+             36 STORE_NAME               6 (_objectToDict)
+
+ 64          38 LOAD_NAME                4 (staticmethod)
+
+ 65          40 LOAD_CONST              24 ((None, None))
+             42 LOAD_CONST               7 (<code object playListToDetail at 0x000001F3253A2EA0, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 64>)
+             44 LOAD_CONST               8 ('LPRecentlyPlayListCodec.playListToDetail')
+             46 MAKE_FUNCTION            1 (defaults)
+             48 CALL_FUNCTION            1
+             50 STORE_NAME               7 (playListToDetail)
+
+111          52 LOAD_NAME                4 (staticmethod)
+
+112          54 LOAD_CONST              25 ((None,))
+             56 LOAD_CONST               9 (<code object _dictToObject at 0x000001F3253A27C0, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 111>)
+             58 LOAD_CONST              10 ('LPRecentlyPlayListCodec._dictToObject')
+             60 MAKE_FUNCTION            1 (defaults)
+             62 CALL_FUNCTION            1
+             64 STORE_NAME               8 (_dictToObject)
+
+116          66 LOAD_NAME                4 (staticmethod)
+
+117          68 LOAD_CONST              11 (<code object _restoreHeader at 0x000001F3253A2DF0, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 116>)
+             70 LOAD_CONST              12 ('LPRecentlyPlayListCodec._restoreHeader')
+             72 MAKE_FUNCTION            0
+             74 CALL_FUNCTION            1
+             76 STORE_NAME               9 (_restoreHeader)
+
+125          78 LOAD_NAME                4 (staticmethod)
+
+126          80 LOAD_CONST              13 (<code object _restoreItem at 0x000001F3253A2F50, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 125>)
+             82 LOAD_CONST              14 ('LPRecentlyPlayListCodec._restoreItem')
+             84 MAKE_FUNCTION            0
+             86 CALL_FUNCTION            1
+             88 STORE_NAME              10 (_restoreItem)
+
+133          90 LOAD_NAME                4 (staticmethod)
+
+134          92 LOAD_CONST              26 ((None,))
+             94 LOAD_CONST              15 (<code object _restoreAccount at 0x000001F3253A2BE0, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 133>)
+             96 LOAD_CONST              16 ('LPRecentlyPlayListCodec._restoreAccount')
+             98 MAKE_FUNCTION            1 (defaults)
+            100 CALL_FUNCTION            1
+            102 STORE_NAME              11 (_restoreAccount)
+
+146         104 LOAD_NAME                4 (staticmethod)
+
+147         106 LOAD_CONST              27 ((None, None, None, None, None))
+            108 LOAD_CONST              17 (<code object playListFromDetail at 0x000001F3253A2D40, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 146>)
+            110 LOAD_CONST              18 ('LPRecentlyPlayListCodec.playListFromDetail')
+            112 MAKE_FUNCTION            1 (defaults)
+            114 CALL_FUNCTION            1
+            116 STORE_NAME              12 (playListFromDetail)
+
+227         118 LOAD_NAME                4 (staticmethod)
+
+228         120 LOAD_CONST              19 (<code object currentItemFromPlayList at 0x000001F3253A2B30, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 227>)
+            122 LOAD_CONST              20 ('LPRecentlyPlayListCodec.currentItemFromPlayList')
+            124 MAKE_FUNCTION            0
+            126 CALL_FUNCTION            1
+            128 STORE_NAME              13 (currentItemFromPlayList)
+
+249         130 LOAD_NAME                4 (staticmethod)
+
+250         132 LOAD_CONST              28 ((None,))
+            134 LOAD_CONST              21 (<code object showValue at 0x000001F3253A2920, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 249>)
+            136 LOAD_CONST              22 ('LPRecentlyPlayListCodec.showValue')
+            138 MAKE_FUNCTION            1 (defaults)
+            140 CALL_FUNCTION            1
+            142 STORE_NAME              14 (showValue)
+            144 LOAD_CONST               4 (None)
+            146 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec._toStorableValue ===
+ 34           0 LOAD_FAST                0 (value)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        26
+              8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                0 (value)
+             12 LOAD_GLOBAL              1 (bool)
+             14 LOAD_GLOBAL              2 (int)
+             16 LOAD_GLOBAL              3 (float)
+             18 LOAD_GLOBAL              4 (str)
+             20 BUILD_TUPLE              4
+             22 CALL_FUNCTION            2
+             24 POP_JUMP_IF_FALSE       30
+
+ 35     >>   26 LOAD_FAST                0 (value)
+             28 RETURN_VALUE
+
+ 36     >>   30 LOAD_GLOBAL              0 (isinstance)
+             32 LOAD_FAST                0 (value)
+             34 LOAD_GLOBAL              5 (dict)
+             36 CALL_FUNCTION            2
+             38 POP_JUMP_IF_FALSE       58
+
+ 37          40 LOAD_CONST               2 (<code object <dictcomp> at 0x000001F3253C4500, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 37>)
+             42 LOAD_CONST               3 ('LPRecentlyPlayListCodec._toStorableValue.<locals>.<dictcomp>')
+             44 MAKE_FUNCTION            0
+             46 LOAD_FAST                0 (value)
+             48 LOAD_METHOD              6 (items)
+             50 CALL_METHOD              0
+             52 GET_ITER
+             54 CALL_FUNCTION            1
+             56 RETURN_VALUE
+
+ 38     >>   58 LOAD_GLOBAL              0 (isinstance)
+             60 LOAD_FAST                0 (value)
+             62 LOAD_GLOBAL              7 (list)
+             64 LOAD_GLOBAL              8 (tuple)
+             66 BUILD_TUPLE              2
+             68 CALL_FUNCTION            2
+             70 POP_JUMP_IF_FALSE       86
+
+ 39          72 LOAD_CONST               4 (<code object <listcomp> at 0x000001F3253C4B30, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 39>)
+             74 LOAD_CONST               5 ('LPRecentlyPlayListCodec._toStorableValue.<locals>.<listcomp>')
+             76 MAKE_FUNCTION            0
+             78 LOAD_FAST                0 (value)
+             80 GET_ITER
+             82 CALL_FUNCTION            1
+             84 RETURN_VALUE
+
+ 40     >>   86 LOAD_CONST               1 (None)
+             88 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec._toStorableValue.<dictcomp> ===
+ 37           0 BUILD_MAP                0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                20 (to 26)
+              6 UNPACK_SEQUENCE          2
+              8 STORE_FAST               1 (k)
+             10 STORE_FAST               2 (v)
+             12 LOAD_FAST                1 (k)
+             14 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+             16 LOAD_METHOD              1 (_toStorableValue)
+             18 LOAD_FAST                2 (v)
+             20 CALL_METHOD              1
+             22 MAP_ADD                  2
+             24 JUMP_ABSOLUTE            4
+        >>   26 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec._toStorableValue.<listcomp> ===
+ 39           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                14 (to 20)
+              6 STORE_FAST               1 (v)
+              8 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+             10 LOAD_METHOD              1 (_toStorableValue)
+             12 LOAD_FAST                1 (v)
+             14 CALL_METHOD              1
+             16 LIST_APPEND              2
+             18 JUMP_ABSOLUTE            4
+        >>   20 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec._objectToDict ===
+ 45           0 LOAD_FAST                0 (obj)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+ 46           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+ 47     >>   12 LOAD_GLOBAL              0 (set)
+             14 LOAD_FAST                1 (excludeKeys)
+             16 JUMP_IF_TRUE_OR_POP     20
+             18 BUILD_LIST               0
+        >>   20 CALL_FUNCTION            1
+             22 STORE_FAST               2 (excludeKeySet)
+
+ 48          24 BUILD_MAP                0
+             26 STORE_FAST               3 (result)
+
+ 49          28 LOAD_GLOBAL              1 (vars)
+             30 LOAD_FAST                0 (obj)
+             32 CALL_FUNCTION            1
+             34 LOAD_METHOD              2 (items)
+             36 CALL_METHOD              0
+             38 GET_ITER
+        >>   40 FOR_ITER                92 (to 134)
+             42 UNPACK_SEQUENCE          2
+             44 STORE_FAST               4 (key)
+             46 STORE_FAST               5 (value)
+
+ 50          48 LOAD_FAST                4 (key)
+             50 LOAD_METHOD              3 (startswith)
+             52 LOAD_CONST               2 ('_')
+             54 CALL_METHOD              1
+             56 POP_JUMP_IF_FALSE       60
+
+ 51          58 JUMP_ABSOLUTE           40
+
+ 52     >>   60 LOAD_FAST                4 (key)
+             62 LOAD_FAST                2 (excludeKeySet)
+             64 CONTAINS_OP              0
+             66 POP_JUMP_IF_FALSE       70
+
+ 53          68 JUMP_ABSOLUTE           40
+
+ 55     >>   70 LOAD_GLOBAL              4 (callable)
+             72 LOAD_FAST                5 (value)
+             74 CALL_FUNCTION            1
+             76 POP_JUMP_IF_FALSE       80
+
+ 56          78 JUMP_ABSOLUTE           40
+
+ 58     >>   80 LOAD_GLOBAL              5 (LPRecentlyPlayListCodec)
+             82 LOAD_METHOD              6 (_toStorableValue)
+             84 LOAD_FAST                5 (value)
+             86 CALL_METHOD              1
+             88 STORE_FAST               6 (stored)
+
+ 59          90 LOAD_FAST                6 (stored)
+             92 LOAD_CONST               1 (None)
+             94 IS_OP                    0
+             96 POP_JUMP_IF_FALSE      124
+             98 LOAD_FAST                5 (value)
+            100 LOAD_CONST               1 (None)
+            102 IS_OP                    1
+            104 POP_JUMP_IF_FALSE      124
+            106 LOAD_GLOBAL              7 (isinstance)
+            108 LOAD_FAST                5 (value)
+            110 LOAD_GLOBAL              8 (dict)
+            112 LOAD_GLOBAL              9 (list)
+            114 LOAD_GLOBAL             10 (tuple)
+            116 BUILD_TUPLE              3
+            118 CALL_FUNCTION            2
+            120 POP_JUMP_IF_TRUE       124
+
+ 60         122 JUMP_ABSOLUTE           40
+
+ 61     >>  124 LOAD_FAST                6 (stored)
+            126 LOAD_FAST                3 (result)
+            128 LOAD_FAST                4 (key)
+            130 STORE_SUBSCR
+            132 JUMP_ABSOLUTE           40
+
+ 62     >>  134 LOAD_FAST                3 (result)
+            136 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec.playListToDetail ===
+ 77           0 LOAD_FAST                0 (playList)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_FALSE       12
+
+ 78           8 BUILD_MAP                0
+             10 RETURN_VALUE
+
+ 81     >>   12 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+             14 LOAD_METHOD              1 (_objectToDict)
+             16 LOAD_GLOBAL              2 (getattr)
+             18 LOAD_FAST                0 (playList)
+             20 LOAD_CONST               2 ('header')
+             22 LOAD_CONST               1 (None)
+             24 CALL_FUNCTION            3
+             26 CALL_METHOD              1
+
+ 82          28 LOAD_CONST               3 (<code object <listcomp> at 0x000001F3253C4D40, file "LPClientFramework\LPMusicLibrary\LPRecentlyPlayListCodec.py", line 82>)
+             30 LOAD_CONST               4 ('LPRecentlyPlayListCodec.playListToDetail.<locals>.<listcomp>')
+             32 MAKE_FUNCTION            0
+
+ 84          34 LOAD_GLOBAL              2 (getattr)
+             36 LOAD_FAST                0 (playList)
+             38 LOAD_CONST               5 ('list')
+             40 LOAD_CONST               1 (None)
+             42 CALL_FUNCTION            3
+             44 JUMP_IF_TRUE_OR_POP     48
+             46 BUILD_LIST               0
+
+ 82     >>   48 GET_ITER
+             50 CALL_FUNCTION            1
+
+ 86          52 LOAD_GLOBAL              2 (getattr)
+             54 LOAD_FAST                0 (playList)
+             56 LOAD_CONST               6 ('index')
+             58 LOAD_CONST               7 (0)
+             60 CALL_FUNCTION            3
+             62 JUMP_IF_TRUE_OR_POP     66
+             64 LOAD_CONST               7 (0)
+
+ 80     >>   66 LOAD_CONST               8 (('header', 'list', 'index'))
+             68 BUILD_CONST_KEY_MAP      3
+             70 STORE_FAST               3 (playListDict)
+
+ 89          72 LOAD_GLOBAL              2 (getattr)
+             74 LOAD_FAST                0 (playList)
+             76 LOAD_CONST               2 ('header')
+             78 LOAD_CONST               1 (None)
+             80 CALL_FUNCTION            3
+             82 STORE_FAST               4 (header)
+
+ 90          84 LOAD_FAST                4 (header)
+             86 LOAD_CONST               1 (None)
+             88 IS_OP                    1
+             90 POP_JUMP_IF_FALSE      116
+
+ 92          92 LOAD_GLOBAL              3 (headerTypeValue)
+             94 LOAD_GLOBAL              2 (getattr)
+             96 LOAD_FAST                4 (header)
+             98 LOAD_CONST               9 ('headType')
+            100 LOAD_CONST               7 (0)
+            102 CALL_FUNCTION            3
+            104 CALL_FUNCTION            1
+            106 LOAD_FAST                3 (playListDict)
+            108 LOAD_CONST               2 ('header')
+            110 BINARY_SUBSCR
+            112 LOAD_CONST               9 ('headType')
+            114 STORE_SUBSCR
+
+ 94     >>  116 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+            118 LOAD_METHOD              1 (_objectToDict)
+            120 LOAD_GLOBAL              2 (getattr)
+            122 LOAD_FAST                0 (playList)
+            124 LOAD_CONST              10 ('account')
+            126 LOAD_CONST               1 (None)
+            128 CALL_FUNCTION            3
+            130 CALL_METHOD              1
+            132 STORE_FAST               5 (accountDict)
+
+ 97         134 LOAD_FAST                3 (playListDict)
+
+ 98         136 LOAD_FAST                1 (showDict)
+            138 POP_JUMP_IF_FALSE      148
+            140 LOAD_GLOBAL              4 (dict)
+            142 LOAD_FAST                1 (showDict)
+            144 CALL_FUNCTION            1
+            146 JUMP_FORWARD             2 (to 150)
+        >>  148 BUILD_MAP                0
+
+ 99     >>  150 LOAD_FAST                5 (accountDict)
+
+ 96         152 LOAD_CONST              11 (('playList', 'show', 'account'))
+            154 BUILD_CONST_KEY_MAP      3
+            156 STORE_FAST               6 (detail)
+
+102         158 LOAD_FAST                2 (extra)
+            160 POP_JUMP_IF_FALSE      182
+            162 LOAD_GLOBAL              5 (isinstance)
+            164 LOAD_FAST                2 (extra)
+            166 LOAD_GLOBAL              4 (dict)
+            168 CALL_FUNCTION            2
+            170 POP_JUMP_IF_FALSE      182
+
+103         172 LOAD_FAST                6 (detail)
+            174 LOAD_METHOD              6 (update)
+            176 LOAD_FAST                2 (extra)
+            178 CALL_METHOD              1
+            180 POP_TOP
+
+105     >>  182 LOAD_FAST                6 (detail)
+            184 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec.playListToDetail.<listcomp> ===
+ 82           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                14 (to 20)
+
+ 84           6 STORE_FAST               1 (item)
+
+ 83           8 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+             10 LOAD_METHOD              1 (_objectToDict)
+             12 LOAD_FAST                1 (item)
+             14 CALL_METHOD              1
+             16 LIST_APPEND              2
+             18 JUMP_ABSOLUTE            4
+        >>   20 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec._dictToObject ===
+114           0 LOAD_GLOBAL              0 (applyDictToObject)
+              2 LOAD_FAST                0 (target)
+              4 LOAD_FAST                1 (valueDict)
+              6 LOAD_FAST                2 (excludeKeys)
+              8 CALL_FUNCTION            3
+             10 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec._restoreHeader ===
+118           0 LOAD_FAST                1 (headerClass)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               3 (header)
+
+119           6 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+              8 LOAD_METHOD              1 (_dictToObject)
+             10 LOAD_FAST                3 (header)
+             12 LOAD_FAST                0 (headerDict)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+120          18 LOAD_GLOBAL              2 (headerTypeEnum)
+             20 LOAD_GLOBAL              3 (getattr)
+             22 LOAD_FAST                3 (header)
+             24 LOAD_CONST               1 ('headType')
+             26 LOAD_CONST               2 (0)
+             28 CALL_FUNCTION            3
+             30 CALL_FUNCTION            1
+             32 LOAD_FAST                3 (header)
+             34 STORE_ATTR               4 (headType)
+
+121          36 LOAD_GLOBAL              3 (getattr)
+             38 LOAD_FAST                3 (header)
+             40 LOAD_CONST               3 ('mediaSource')
+             42 LOAD_CONST               0 (None)
+             44 CALL_FUNCTION            3
+             46 POP_JUMP_IF_TRUE        54
+
+122          48 LOAD_FAST                2 (source)
+             50 LOAD_FAST                3 (header)
+             52 STORE_ATTR               5 (mediaSource)
+
+123     >>   54 LOAD_FAST                3 (header)
+             56 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec._restoreItem ===
+127           0 LOAD_FAST                1 (itemClass)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               3 (item)
+
+128           6 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+              8 LOAD_METHOD              1 (_dictToObject)
+             10 LOAD_FAST                3 (item)
+             12 LOAD_FAST                0 (itemDict)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+129          18 LOAD_GLOBAL              2 (getattr)
+             20 LOAD_FAST                3 (item)
+             22 LOAD_CONST               1 ('trackSource')
+             24 LOAD_CONST               0 (None)
+             26 CALL_FUNCTION            3
+             28 POP_JUMP_IF_TRUE        36
+
+130          30 LOAD_FAST                2 (source)
+             32 LOAD_FAST                3 (item)
+             34 STORE_ATTR               3 (trackSource)
+
+131     >>   36 LOAD_FAST                3 (item)
+             38 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec._restoreAccount ===
+135           0 LOAD_FAST                1 (accountClass)
+              2 CALL_FUNCTION            0
+              4 STORE_FAST               4 (account)
+
+136           6 LOAD_GLOBAL              0 (LPRecentlyPlayListCodec)
+              8 LOAD_METHOD              1 (_dictToObject)
+             10 LOAD_FAST                4 (account)
+             12 LOAD_FAST                0 (accountDict)
+             14 CALL_METHOD              2
+             16 POP_TOP
+
+137          18 LOAD_GLOBAL              2 (getattr)
+             20 LOAD_FAST                4 (account)
+             22 LOAD_CONST               1 ('source')
+             24 LOAD_CONST               0 (None)
+             26 CALL_FUNCTION            3
+             28 POP_JUMP_IF_TRUE        36
+
+138          30 LOAD_FAST                2 (source)
+             32 LOAD_FAST                4 (account)
+             34 STORE_ATTR               3 (source)
+
+139     >>   36 LOAD_GLOBAL              4 (callable)
+             38 LOAD_FAST                3 (normalizeAccount)
+             40 CALL_FUNCTION            1
+             42 POP_JUMP_IF_FALSE      108
+
+140          44 SETUP_FINALLY           12 (to 58)
+
+141          46 LOAD_FAST                3 (normalizeAccount)
+             48 LOAD_FAST                4 (account)
+             50 CALL_FUNCTION            1
+             52 STORE_FAST               4 (account)
+             54 POP_BLOCK
+             56 JUMP_FORWARD            50 (to 108)
+
+142     >>   58 DUP_TOP
+             60 LOAD_GLOBAL              5 (Exception)
+             62 JUMP_IF_NOT_EXC_MATCH   106
+             64 POP_TOP
+             66 STORE_FAST               5 (e)
+             68 POP_TOP
+             70 SETUP_FINALLY           26 (to 98)
+
+143          72 LOAD_GLOBAL              6 (logger)
+             74 LOAD_METHOD              7 (warning)
+             76 LOAD_CONST               2 ('[RecentlyCodec] normalizeAccount failed: %s')
+             78 LOAD_FAST                5 (e)
+             80 BINARY_MODULO
+             82 CALL_METHOD              1
+             84 POP_TOP
+             86 POP_BLOCK
+             88 POP_EXCEPT
+             90 LOAD_CONST               0 (None)
+             92 STORE_FAST               5 (e)
+             94 DELETE_FAST              5 (e)
+             96 JUMP_FORWARD            10 (to 108)
+        >>   98 LOAD_CONST               0 (None)
+            100 STORE_FAST               5 (e)
+            102 DELETE_FAST              5 (e)
+            104 RERAISE
+        >>  106 RERAISE
+
+144     >>  108 LOAD_FAST                4 (account)
+            110 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec.playListFromDetail ===
+175           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (detailDict)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+176          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+178     >>   14 LOAD_FAST                0 (detailDict)
+             16 LOAD_METHOD              2 (get)
+             18 LOAD_CONST               2 ('playList')
+             20 CALL_METHOD              1
+             22 STORE_FAST              10 (playListDict)
+
+179          24 LOAD_GLOBAL              0 (isinstance)
+             26 LOAD_FAST               10 (playListDict)
+             28 LOAD_GLOBAL              1 (dict)
+             30 CALL_FUNCTION            2
+             32 POP_JUMP_IF_TRUE        38
+
+180          34 LOAD_CONST               1 (None)
+             36 RETURN_VALUE
+
+182     >>   38 LOAD_FAST                1 (playListClass)
+             40 CALL_FUNCTION            0
+             42 STORE_FAST              11 (playList)
+
+184          44 LOAD_FAST               10 (playListDict)
+             46 LOAD_METHOD              2 (get)
+             48 LOAD_CONST               3 ('header')
+             50 CALL_METHOD              1
+             52 STORE_FAST              12 (headerDict)
+
+185          54 LOAD_GLOBAL              0 (isinstance)
+             56 LOAD_FAST               12 (headerDict)
+             58 LOAD_GLOBAL              1 (dict)
+             60 CALL_FUNCTION            2
+             62 POP_JUMP_IF_FALSE      156
+
+186          64 LOAD_GLOBAL              3 (LPRecentlyPlayListCodec)
+             66 LOAD_METHOD              4 (_restoreHeader)
+             68 LOAD_FAST               12 (headerDict)
+             70 LOAD_FAST                2 (headerClass)
+             72 LOAD_FAST                4 (source)
+             74 CALL_METHOD              3
+             76 LOAD_FAST               11 (playList)
+             78 STORE_ATTR               5 (header)
+
+187          80 LOAD_GLOBAL              6 (callable)
+             82 LOAD_FAST                7 (normalizeHeader)
+             84 CALL_FUNCTION            1
+             86 POP_JUMP_IF_FALSE      156
+
+188          88 SETUP_FINALLY           16 (to 106)
+
+189          90 LOAD_FAST                7 (normalizeHeader)
+             92 LOAD_FAST               11 (playList)
+             94 LOAD_ATTR                5 (header)
+             96 CALL_FUNCTION            1
+             98 LOAD_FAST               11 (playList)
+            100 STORE_ATTR               5 (header)
+            102 POP_BLOCK
+            104 JUMP_FORWARD            50 (to 156)
+
+190     >>  106 DUP_TOP
+            108 LOAD_GLOBAL              7 (Exception)
+            110 JUMP_IF_NOT_EXC_MATCH   154
+            112 POP_TOP
+            114 STORE_FAST              13 (e)
+            116 POP_TOP
+            118 SETUP_FINALLY           26 (to 146)
+
+191         120 LOAD_GLOBAL              8 (logger)
+            122 LOAD_METHOD              9 (warning)
+            124 LOAD_CONST               4 ('[RecentlyCodec] normalizeHeader failed: %s')
+            126 LOAD_FAST               13 (e)
+            128 BINARY_MODULO
+            130 CALL_METHOD              1
+            132 POP_TOP
+            134 POP_BLOCK
+            136 POP_EXCEPT
+            138 LOAD_CONST               1 (None)
+            140 STORE_FAST              13 (e)
+            142 DELETE_FAST             13 (e)
+            144 JUMP_FORWARD            10 (to 156)
+        >>  146 LOAD_CONST               1 (None)
+            148 STORE_FAST              13 (e)
+            150 DELETE_FAST             13 (e)
+            152 RERAISE
+        >>  154 RERAISE
+
+193     >>  156 LOAD_FAST               10 (playListDict)
+            158 LOAD_METHOD              2 (get)
+            160 LOAD_CONST               5 ('list')
+            162 CALL_METHOD              1
+            164 STORE_FAST              14 (itemDictList)
+
+194         166 LOAD_GLOBAL              0 (isinstance)
+            168 LOAD_FAST               14 (itemDictList)
+            170 LOAD_GLOBAL             10 (list)
+            172 CALL_FUNCTION            2
+            174 EXTENDED_ARG             1
+            176 POP_JUMP_IF_FALSE      310
+
+195         178 BUILD_LIST               0
+            180 STORE_FAST              15 (restoredItems)
+
+196         182 LOAD_FAST               14 (itemDictList)
+            184 GET_ITER
+        >>  186 FOR_ITER               116 (to 304)
+            188 STORE_FAST              16 (itemDict)
+
+197         190 LOAD_GLOBAL              0 (isinstance)
+            192 LOAD_FAST               16 (itemDict)
+            194 LOAD_GLOBAL              1 (dict)
+            196 CALL_FUNCTION            2
+            198 POP_JUMP_IF_TRUE       202
+
+198         200 JUMP_ABSOLUTE          186
+
+199     >>  202 LOAD_GLOBAL              3 (LPRecentlyPlayListCodec)
+            204 LOAD_METHOD             11 (_restoreItem)
+            206 LOAD_FAST               16 (itemDict)
+            208 LOAD_FAST                3 (itemClass)
+            210 LOAD_FAST                4 (source)
+            212 CALL_METHOD              3
+            214 STORE_FAST              17 (item)
+
+200         216 LOAD_GLOBAL              6 (callable)
+            218 LOAD_FAST                9 (normalizeItem)
+            220 CALL_FUNCTION            1
+            222 EXTENDED_ARG             1
+            224 POP_JUMP_IF_FALSE      292
+
+201         226 SETUP_FINALLY           12 (to 240)
+
+202         228 LOAD_FAST                9 (normalizeItem)
+            230 LOAD_FAST               17 (item)
+            232 CALL_FUNCTION            1
+            234 STORE_FAST              17 (item)
+            236 POP_BLOCK
+            238 JUMP_FORWARD            52 (to 292)
+
+203     >>  240 DUP_TOP
+            242 LOAD_GLOBAL              7 (Exception)
+            244 EXTENDED_ARG             1
+            246 JUMP_IF_NOT_EXC_MATCH   290
+            248 POP_TOP
+            250 STORE_FAST              13 (e)
+            252 POP_TOP
+            254 SETUP_FINALLY           26 (to 282)
+
+204         256 LOAD_GLOBAL              8 (logger)
+            258 LOAD_METHOD              9 (warning)
+            260 LOAD_CONST               6 ('[RecentlyCodec] normalizeItem failed: %s')
+            262 LOAD_FAST               13 (e)
+            264 BINARY_MODULO
+            266 CALL_METHOD              1
+            268 POP_TOP
+            270 POP_BLOCK
+            272 POP_EXCEPT
+            274 LOAD_CONST               1 (None)
+            276 STORE_FAST              13 (e)
+            278 DELETE_FAST             13 (e)
+            280 JUMP_FORWARD            10 (to 292)
+        >>  282 LOAD_CONST               1 (None)
+            284 STORE_FAST              13 (e)
+            286 DELETE_FAST             13 (e)
+            288 RERAISE
+        >>  290 RERAISE
+
+205     >>  292 LOAD_FAST               15 (restoredItems)
+            294 LOAD_METHOD             12 (append)
+            296 LOAD_FAST               17 (item)
+            298 CALL_METHOD              1
+            300 POP_TOP
+            302 JUMP_ABSOLUTE          186
+
+206     >>  304 LOAD_FAST               15 (restoredItems)
+            306 LOAD_FAST               11 (playList)
+            308 STORE_ATTR              10 (list)
+
+209     >>  310 LOAD_FAST               10 (playListDict)
+            312 LOAD_METHOD              2 (get)
+            314 LOAD_CONST               7 ('index')
+            316 LOAD_CONST               8 (0)
+            318 CALL_METHOD              2
+            320 STORE_FAST              18 (index)
+
+210         322 SETUP_FINALLY           26 (to 350)
+
+211         324 LOAD_FAST               18 (index)
+            326 LOAD_CONST               1 (None)
+            328 IS_OP                    1
+            330 EXTENDED_ARG             1
+            332 POP_JUMP_IF_FALSE      342
+            334 LOAD_GLOBAL             13 (int)
+            336 LOAD_FAST               18 (index)
+            338 CALL_FUNCTION            1
+            340 JUMP_FORWARD             2 (to 344)
+        >>  342 LOAD_CONST               8 (0)
+        >>  344 STORE_FAST              18 (index)
+            346 POP_BLOCK
+            348 JUMP_FORWARD            28 (to 378)
+
+212     >>  350 DUP_TOP
+            352 LOAD_GLOBAL             14 (TypeError)
+            354 LOAD_GLOBAL             15 (ValueError)
+            356 BUILD_TUPLE              2
+            358 EXTENDED_ARG             1
+            360 JUMP_IF_NOT_EXC_MATCH   376
+            362 POP_TOP
+            364 POP_TOP
+            366 POP_TOP
+
+213         368 LOAD_CONST               8 (0)
+            370 STORE_FAST              18 (index)
+            372 POP_EXCEPT
+            374 JUMP_FORWARD             2 (to 378)
+        >>  376 RERAISE
+
+214     >>  378 LOAD_FAST               18 (index)
+            380 LOAD_CONST               8 (0)
+            382 COMPARE_OP               0 (<)
+            384 EXTENDED_ARG             1
+            386 POP_JUMP_IF_TRUE       412
+            388 LOAD_FAST               11 (playList)
+            390 LOAD_ATTR               10 (list)
+            392 EXTENDED_ARG             1
+            394 POP_JUMP_IF_FALSE      416
+            396 LOAD_FAST               18 (index)
+            398 LOAD_GLOBAL             16 (len)
+            400 LOAD_FAST               11 (playList)
+            402 LOAD_ATTR               10 (list)
+            404 CALL_FUNCTION            1
+            406 COMPARE_OP               5 (>=)
+            408 EXTENDED_ARG             1
+            410 POP_JUMP_IF_FALSE      416
+
+215     >>  412 LOAD_CONST               8 (0)
+            414 STORE_FAST              18 (index)
+
+216     >>  416 LOAD_FAST               18 (index)
+            418 LOAD_FAST               11 (playList)
+            420 STORE_ATTR              17 (index)
+
+218         422 LOAD_FAST                5 (accountClass)
+            424 LOAD_CONST               1 (None)
+            426 IS_OP                    1
+            428 EXTENDED_ARG             1
+            430 POP_JUMP_IF_FALSE      472
+
+219         432 LOAD_FAST                0 (detailDict)
+            434 LOAD_METHOD              2 (get)
+            436 LOAD_CONST               9 ('account')
+            438 CALL_METHOD              1
+            440 STORE_FAST              19 (accountDict)
+
+220         442 LOAD_GLOBAL              0 (isinstance)
+            444 LOAD_FAST               19 (accountDict)
+            446 LOAD_GLOBAL              1 (dict)
+            448 CALL_FUNCTION            2
+            450 EXTENDED_ARG             1
+            452 POP_JUMP_IF_FALSE      472
+
+221         454 LOAD_GLOBAL              3 (LPRecentlyPlayListCodec)
+            456 LOAD_METHOD             18 (_restoreAccount)
+
+222         458 LOAD_FAST               19 (accountDict)
+            460 LOAD_FAST                5 (accountClass)
+            462 LOAD_FAST                4 (source)
+            464 LOAD_FAST                8 (normalizeAccount)
+
+221         466 CALL_METHOD              4
+            468 LOAD_FAST               11 (playList)
+            470 STORE_ATTR              19 (account)
+
+225     >>  472 LOAD_FAST               11 (playList)
+            474 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec.currentItemFromPlayList ===
+238           0 LOAD_FAST                0 (playList)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        20
+              8 LOAD_GLOBAL              0 (getattr)
+             10 LOAD_FAST                0 (playList)
+             12 LOAD_CONST               2 ('list')
+             14 LOAD_CONST               1 (None)
+             16 CALL_FUNCTION            3
+             18 POP_JUMP_IF_TRUE        24
+
+239     >>   20 LOAD_CONST               1 (None)
+             22 RETURN_VALUE
+
+240     >>   24 LOAD_GLOBAL              0 (getattr)
+             26 LOAD_FAST                0 (playList)
+             28 LOAD_CONST               3 ('index')
+             30 LOAD_CONST               4 (0)
+             32 CALL_FUNCTION            3
+             34 JUMP_IF_TRUE_OR_POP     38
+             36 LOAD_CONST               4 (0)
+        >>   38 STORE_FAST               1 (index)
+
+241          40 SETUP_FINALLY           12 (to 54)
+
+242          42 LOAD_GLOBAL              1 (int)
+             44 LOAD_FAST                1 (index)
+             46 CALL_FUNCTION            1
+             48 STORE_FAST               1 (index)
+             50 POP_BLOCK
+             52 JUMP_FORWARD            26 (to 80)
+
+243     >>   54 DUP_TOP
+             56 LOAD_GLOBAL              2 (TypeError)
+             58 LOAD_GLOBAL              3 (ValueError)
+             60 BUILD_TUPLE              2
+             62 JUMP_IF_NOT_EXC_MATCH    78
+             64 POP_TOP
+             66 POP_TOP
+             68 POP_TOP
+
+244          70 LOAD_CONST               4 (0)
+             72 STORE_FAST               1 (index)
+             74 POP_EXCEPT
+             76 JUMP_FORWARD             2 (to 80)
+        >>   78 RERAISE
+
+245     >>   80 LOAD_FAST                1 (index)
+             82 LOAD_CONST               4 (0)
+             84 COMPARE_OP               0 (<)
+             86 POP_JUMP_IF_TRUE       102
+             88 LOAD_FAST                1 (index)
+             90 LOAD_GLOBAL              4 (len)
+             92 LOAD_FAST                0 (playList)
+             94 LOAD_ATTR                5 (list)
+             96 CALL_FUNCTION            1
+             98 COMPARE_OP               5 (>=)
+            100 POP_JUMP_IF_FALSE      106
+
+246     >>  102 LOAD_CONST               4 (0)
+            104 STORE_FAST               1 (index)
+
+247     >>  106 LOAD_FAST                0 (playList)
+            108 LOAD_ATTR                5 (list)
+            110 LOAD_FAST                1 (index)
+            112 BINARY_SUBSCR
+            114 RETURN_VALUE
+
+=== LPRecentlyPlayListCodec.showValue ===
+262           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                0 (detailDict)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+263          10 LOAD_FAST                2 (default)
+             12 RETURN_VALUE
+
+264     >>   14 LOAD_FAST                0 (detailDict)
+             16 LOAD_METHOD              2 (get)
+             18 LOAD_CONST               1 ('show')
+             20 CALL_METHOD              1
+             22 STORE_FAST               3 (showDict)
+
+265          24 LOAD_GLOBAL              0 (isinstance)
+             26 LOAD_FAST                3 (showDict)
+             28 LOAD_GLOBAL              1 (dict)
+             30 CALL_FUNCTION            2
+             32 POP_JUMP_IF_TRUE        38
+
+266          34 LOAD_FAST                2 (default)
+             36 RETURN_VALUE
+
+267     >>   38 LOAD_FAST                3 (showDict)
+             40 LOAD_METHOD              2 (get)
+             42 LOAD_FAST                1 (key)
+             44 LOAD_FAST                2 (default)
+             46 CALL_METHOD              2
+             48 RETURN_VALUE

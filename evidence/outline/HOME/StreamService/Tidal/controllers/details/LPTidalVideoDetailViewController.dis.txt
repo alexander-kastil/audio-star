@@ -1,0 +1,125 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL 视频详情页控制器。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Optional',))
+              8 IMPORT_NAME              1 (typing)
+             10 IMPORT_FROM              2 (Optional)
+             12 STORE_NAME               2 (Optional)
+             14 POP_TOP
+
+  8          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('QWidget',))
+             20 IMPORT_NAME              3 (PyQt6.QtWidgets)
+             22 IMPORT_FROM              4 (QWidget)
+             24 STORE_NAME               4 (QWidget)
+             26 POP_TOP
+
+ 10          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               4 (('LPTidalDetailViewControllerBase',))
+             32 IMPORT_NAME              5 (HOME.StreamService.Tidal.controllers.base.LPTidalDetailViewControllerBase)
+             34 IMPORT_FROM              6 (LPTidalDetailViewControllerBase)
+             36 STORE_NAME               6 (LPTidalDetailViewControllerBase)
+             38 POP_TOP
+
+ 11          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               5 (('LPTidalStore',))
+             44 IMPORT_NAME              7 (HOME.StreamService.Tidal.state.LPTidalStore)
+             46 IMPORT_FROM              8 (LPTidalStore)
+             48 STORE_NAME               8 (LPTidalStore)
+             50 POP_TOP
+
+ 12          52 LOAD_CONST               1 (0)
+             54 LOAD_CONST               6 (('LPUIPath',))
+             56 IMPORT_NAME              9 (LPClientFramework.LPConfig)
+             58 IMPORT_FROM             10 (LPUIPath)
+             60 STORE_NAME              10 (LPUIPath)
+             62 POP_TOP
+
+ 15          64 LOAD_BUILD_CLASS
+             66 LOAD_CONST               7 (<code object LPTidalVideoDetailViewController at 0x000001F3253C4BE0, file "StreamService\Tidal\controllers\details\LPTidalVideoDetailViewController.py", line 15>)
+             68 LOAD_CONST               8 ('LPTidalVideoDetailViewController')
+             70 MAKE_FUNCTION            0
+             72 LOAD_CONST               8 ('LPTidalVideoDetailViewController')
+             74 LOAD_NAME                6 (LPTidalDetailViewControllerBase)
+             76 CALL_FUNCTION            3
+             78 STORE_NAME              11 (LPTidalVideoDetailViewController)
+             80 LOAD_CONST               9 (None)
+             82 RETURN_VALUE
+
+=== LPTidalVideoDetailViewController ===
+ 15           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalVideoDetailViewController')
+              6 STORE_NAME               2 (__qualname__)
+
+ 16           8 LOAD_CONST               1 ('TIDAL 视频详情页，负责加载视频信息和推荐视频。')
+             10 STORE_NAME               3 (__doc__)
+
+ 18          12 LOAD_CONST               8 ((None,))
+             14 LOAD_NAME                4 (str)
+             16 LOAD_NAME                5 (Optional)
+             18 LOAD_NAME                6 (QWidget)
+             20 BINARY_SUBSCR
+             22 LOAD_CONST               3 (('itemId', 'parent'))
+             24 BUILD_CONST_KEY_MAP      2
+             26 LOAD_CLOSURE             0 (__class__)
+             28 BUILD_TUPLE              1
+             30 LOAD_CONST               4 (<code object __init__ at 0x000001F3253AEB30, file "StreamService\Tidal\controllers\details\LPTidalVideoDetailViewController.py", line 18>)
+             32 LOAD_CONST               5 ('LPTidalVideoDetailViewController.__init__')
+             34 MAKE_FUNCTION           13 (defaults, annotations, closure)
+             36 STORE_NAME               7 (__init__)
+
+ 37          38 LOAD_CONST               6 (<code object _fetchDetailData at 0x000001F3253AE450, file "StreamService\Tidal\controllers\details\LPTidalVideoDetailViewController.py", line 37>)
+             40 LOAD_CONST               7 ('LPTidalVideoDetailViewController._fetchDetailData')
+             42 MAKE_FUNCTION            0
+             44 STORE_NAME               8 (_fetchDetailData)
+             46 LOAD_CLOSURE             0 (__class__)
+             48 DUP_TOP
+             50 STORE_NAME               9 (__classcell__)
+             52 RETURN_VALUE
+
+=== LPTidalVideoDetailViewController.__init__ ===
+ 26           0 LOAD_GLOBAL              0 (LPTidalStore)
+              2 LOAD_METHOD              1 (instance)
+              4 CALL_METHOD              0
+              6 STORE_FAST               3 (store)
+
+ 27           8 LOAD_GLOBAL              2 (super)
+             10 CALL_FUNCTION            0
+             12 LOAD_ATTR                3 (__init__)
+
+ 28          14 LOAD_FAST                1 (itemId)
+
+ 29          16 LOAD_CONST               1 ('video')
+
+ 30          18 LOAD_FAST                3 (store)
+             20 LOAD_METHOD              4 (acquireVideoDetailState)
+             22 LOAD_FAST                1 (itemId)
+             24 CALL_METHOD              1
+
+ 31          26 LOAD_GLOBAL              5 (LPUIPath)
+             28 LOAD_ATTR                6 (TidalVideoDetailQML)
+
+ 32          30 LOAD_CONST               2 ('pages/TidalVideoDetail.qml')
+
+ 33          32 LOAD_CONST               3 ('tidalVideoDetailState')
+
+ 34          34 LOAD_FAST                2 (parent)
+
+ 27          36 LOAD_CONST               4 (('itemId', 'itemType', 'state', 'qmlPath', 'qmlFileName', 'specificContextName', 'parent'))
+             38 CALL_FUNCTION_KW         7
+             40 POP_TOP
+             42 LOAD_CONST               5 (None)
+             44 RETURN_VALUE
+
+=== LPTidalVideoDetailViewController._fetchDetailData ===
+ 43           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_provider)
+              4 LOAD_METHOD              1 (loadVideoDetail)
+              6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                2 (_item_id)
+             10 CALL_METHOD              1
+             12 RETURN_VALUE

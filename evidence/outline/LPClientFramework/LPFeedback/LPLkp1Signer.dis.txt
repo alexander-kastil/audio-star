@@ -1,0 +1,329 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('Linkplay STS 接口使用的 LKP1-HMAC-SHA256 签名器。')
+              2 STORE_NAME               0 (__doc__)
+
+  4           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (datetime)
+             10 STORE_NAME               1 (datetime)
+
+  5          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               2 (None)
+             16 IMPORT_NAME              2 (hashlib)
+             18 STORE_NAME               2 (hashlib)
+
+  6          20 LOAD_CONST               1 (0)
+             22 LOAD_CONST               2 (None)
+             24 IMPORT_NAME              3 (hmac)
+             26 STORE_NAME               3 (hmac)
+
+  7          28 LOAD_CONST               1 (0)
+             30 LOAD_CONST               3 (('quote_plus', 'urlparse'))
+             32 IMPORT_NAME              4 (urllib.parse)
+             34 IMPORT_FROM              5 (quote_plus)
+             36 STORE_NAME               5 (quote_plus)
+             38 IMPORT_FROM              6 (urlparse)
+             40 STORE_NAME               6 (urlparse)
+             42 POP_TOP
+
+ 10          44 LOAD_BUILD_CLASS
+             46 LOAD_CONST               4 (<code object LPLkp1Signer at 0x000001F3253DA660, file "LPClientFramework\LPFeedback\LPLkp1Signer.py", line 10>)
+             48 LOAD_CONST               5 ('LPLkp1Signer')
+             50 MAKE_FUNCTION            0
+             52 LOAD_CONST               5 ('LPLkp1Signer')
+             54 CALL_FUNCTION            2
+             56 STORE_NAME               7 (LPLkp1Signer)
+             58 LOAD_CONST               2 (None)
+             60 RETURN_VALUE
+
+=== LPLkp1Signer ===
+ 10           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPLkp1Signer')
+              6 STORE_NAME               2 (__qualname__)
+
+ 11           8 LOAD_CONST               1 ('按 Android LinkPlayInterceptor 规则构造 STS 请求头。')
+             10 STORE_NAME               3 (__doc__)
+
+ 13          12 LOAD_NAME                4 (staticmethod)
+
+ 14          14 LOAD_CONST               9 ((None,))
+             16 LOAD_CONST               3 (<code object sign at 0x000001F3253DABE0, file "LPClientFramework\LPFeedback\LPLkp1Signer.py", line 13>)
+             18 LOAD_CONST               4 ('LPLkp1Signer.sign')
+             20 MAKE_FUNCTION            1 (defaults)
+             22 CALL_FUNCTION            1
+             24 STORE_NAME               5 (sign)
+
+ 77          26 LOAD_NAME                4 (staticmethod)
+
+ 78          28 LOAD_CONST               5 (<code object _signingKey at 0x000001F3253DA870, file "LPClientFramework\LPFeedback\LPLkp1Signer.py", line 77>)
+             30 LOAD_CONST               6 ('LPLkp1Signer._signingKey')
+             32 MAKE_FUNCTION            0
+             34 CALL_FUNCTION            1
+             36 STORE_NAME               6 (_signingKey)
+
+ 94          38 LOAD_NAME                4 (staticmethod)
+
+ 95          40 LOAD_CONST               7 (<code object _hmac at 0x000001F3253DA3A0, file "LPClientFramework\LPFeedback\LPLkp1Signer.py", line 94>)
+             42 LOAD_CONST               8 ('LPLkp1Signer._hmac')
+             44 MAKE_FUNCTION            0
+             46 CALL_FUNCTION            1
+             48 STORE_NAME               7 (_hmac)
+             50 LOAD_CONST               2 (None)
+             52 RETURN_VALUE
+
+=== LPLkp1Signer.sign ===
+ 28           0 LOAD_GLOBAL              0 (urlparse)
+              2 LOAD_FAST                1 (url)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               7 (parsedUrl)
+
+ 29           8 LOAD_FAST                6 (now)
+             10 JUMP_IF_TRUE_OR_POP     26
+             12 LOAD_GLOBAL              1 (datetime)
+             14 LOAD_ATTR                1 (datetime)
+             16 LOAD_METHOD              2 (now)
+             18 LOAD_GLOBAL              1 (datetime)
+             20 LOAD_ATTR                3 (timezone)
+             22 LOAD_ATTR                4 (utc)
+             24 CALL_METHOD              1
+        >>   26 STORE_FAST               8 (timestamp)
+
+ 30          28 LOAD_FAST                8 (timestamp)
+             30 LOAD_ATTR                5 (tzinfo)
+             32 LOAD_CONST               1 (None)
+             34 IS_OP                    0
+             36 POP_JUMP_IF_FALSE       54
+
+ 31          38 LOAD_FAST                8 (timestamp)
+             40 LOAD_ATTR                6 (replace)
+             42 LOAD_GLOBAL              1 (datetime)
+             44 LOAD_ATTR                3 (timezone)
+             46 LOAD_ATTR                4 (utc)
+             48 LOAD_CONST               2 (('tzinfo',))
+             50 CALL_FUNCTION_KW         1
+             52 STORE_FAST               8 (timestamp)
+
+ 32     >>   54 LOAD_FAST                8 (timestamp)
+             56 LOAD_METHOD              7 (astimezone)
+             58 LOAD_GLOBAL              1 (datetime)
+             60 LOAD_ATTR                3 (timezone)
+             62 LOAD_ATTR                4 (utc)
+             64 CALL_METHOD              1
+             66 STORE_FAST               8 (timestamp)
+
+ 33          68 LOAD_FAST                8 (timestamp)
+             70 LOAD_METHOD              8 (strftime)
+             72 LOAD_CONST               3 ('%Y%m%dT%H%M%SZ')
+             74 CALL_METHOD              1
+             76 STORE_FAST               9 (linkplayDate)
+
+ 34          78 LOAD_FAST                8 (timestamp)
+             80 LOAD_METHOD              8 (strftime)
+             82 LOAD_CONST               4 ('%Y%m%d')
+             84 CALL_METHOD              1
+             86 STORE_FAST              10 (dateStamp)
+
+ 35          88 LOAD_GLOBAL              9 (quote_plus)
+             90 LOAD_GLOBAL             10 (str)
+             92 LOAD_FAST                5 (project)
+             94 CALL_FUNCTION            1
+             96 CALL_FUNCTION            1
+             98 STORE_FAST              11 (projectHeader)
+
+ 36         100 LOAD_FAST                7 (parsedUrl)
+            102 LOAD_ATTR               11 (netloc)
+            104 STORE_FAST              12 (host)
+
+ 37         106 LOAD_FAST                7 (parsedUrl)
+            108 LOAD_ATTR               12 (path)
+            110 JUMP_IF_TRUE_OR_POP    114
+            112 LOAD_CONST               5 ('/')
+        >>  114 STORE_FAST              13 (canonicalUri)
+
+ 38         116 LOAD_GLOBAL             13 (hashlib)
+            118 LOAD_METHOD             14 (sha256)
+            120 LOAD_FAST                2 (body)
+            122 JUMP_IF_TRUE_OR_POP    126
+            124 LOAD_CONST               6 (b'')
+        >>  126 CALL_METHOD              1
+            128 LOAD_METHOD             15 (hexdigest)
+            130 CALL_METHOD              0
+            132 STORE_FAST              14 (payloadHash)
+
+ 40         134 LOAD_CONST               7 ('host:%s\nx-linkplay-date:%s\nx-linkplay-origin:%s\nx-linkplay-project:%s\nx-linkplay-uuid:%s\n')
+
+ 45         136 LOAD_FAST               12 (host)
+            138 LOAD_FAST                9 (linkplayDate)
+            140 LOAD_FAST                4 (origin)
+            142 LOAD_FAST               11 (projectHeader)
+            144 LOAD_FAST                3 (uuid)
+            146 BUILD_TUPLE              5
+
+ 39         148 BINARY_MODULO
+            150 STORE_FAST              15 (canonicalHeaders)
+
+ 46         152 LOAD_CONST               8 ('host;x-linkplay-date;x-linkplay-origin;x-linkplay-project;x-linkplay-uuid')
+            154 STORE_FAST              16 (signedHeaders)
+
+ 47         156 LOAD_CONST               9 ('\n')
+            158 LOAD_METHOD             16 (join)
+
+ 48         160 LOAD_GLOBAL             10 (str)
+            162 LOAD_FAST                0 (method)
+            164 CALL_FUNCTION            1
+            166 LOAD_METHOD             17 (upper)
+            168 CALL_METHOD              0
+
+ 49         170 LOAD_FAST               13 (canonicalUri)
+
+ 50         172 LOAD_CONST              10 ('')
+
+ 51         174 LOAD_FAST               15 (canonicalHeaders)
+
+ 52         176 LOAD_FAST               16 (signedHeaders)
+
+ 53         178 LOAD_FAST               14 (payloadHash)
+
+ 47         180 BUILD_LIST               6
+            182 CALL_METHOD              1
+            184 STORE_FAST              17 (canonicalRequest)
+
+ 55         186 LOAD_CONST              11 ('%s/%s/%s/linkplay_request')
+            188 LOAD_FAST               10 (dateStamp)
+            190 LOAD_FAST                4 (origin)
+            192 LOAD_FAST               11 (projectHeader)
+            194 BUILD_TUPLE              3
+            196 BINARY_MODULO
+            198 STORE_FAST              18 (credentialScope)
+
+ 56         200 LOAD_CONST               9 ('\n')
+            202 LOAD_METHOD             16 (join)
+
+ 57         204 LOAD_CONST              12 ('LKP1-HMAC-SHA256')
+
+ 58         206 LOAD_FAST                9 (linkplayDate)
+
+ 59         208 LOAD_FAST               18 (credentialScope)
+
+ 60         210 LOAD_GLOBAL             13 (hashlib)
+            212 LOAD_METHOD             14 (sha256)
+            214 LOAD_FAST               17 (canonicalRequest)
+            216 LOAD_METHOD             18 (encode)
+            218 LOAD_CONST              13 ('utf-8')
+            220 CALL_METHOD              1
+            222 CALL_METHOD              1
+            224 LOAD_METHOD             15 (hexdigest)
+            226 CALL_METHOD              0
+
+ 56         228 BUILD_LIST               4
+            230 CALL_METHOD              1
+            232 STORE_FAST              19 (stringToSign)
+
+ 62         234 LOAD_GLOBAL             19 (LPLkp1Signer)
+            236 LOAD_METHOD             20 (_signingKey)
+            238 LOAD_GLOBAL             10 (str)
+            240 LOAD_FAST                3 (uuid)
+            242 CALL_FUNCTION            1
+            244 LOAD_FAST               10 (dateStamp)
+            246 LOAD_GLOBAL             10 (str)
+            248 LOAD_FAST                4 (origin)
+            250 CALL_FUNCTION            1
+            252 LOAD_FAST               11 (projectHeader)
+            254 CALL_METHOD              4
+            256 STORE_FAST              20 (signingKey)
+
+ 63         258 LOAD_GLOBAL             21 (hmac)
+            260 LOAD_METHOD             22 (new)
+            262 LOAD_FAST               20 (signingKey)
+            264 LOAD_FAST               19 (stringToSign)
+            266 LOAD_METHOD             18 (encode)
+            268 LOAD_CONST              13 ('utf-8')
+            270 CALL_METHOD              1
+            272 LOAD_GLOBAL             13 (hashlib)
+            274 LOAD_ATTR               14 (sha256)
+            276 CALL_METHOD              3
+            278 LOAD_METHOD             15 (hexdigest)
+            280 CALL_METHOD              0
+            282 STORE_FAST              21 (signature)
+
+ 65         284 LOAD_CONST              14 ('LKP1-HMAC-SHA256 Credential=linkplay/%s, SignedHeaders=%s, Signature=%s')
+
+ 66         286 LOAD_FAST               18 (credentialScope)
+            288 LOAD_FAST               16 (signedHeaders)
+            290 LOAD_FAST               21 (signature)
+            292 BUILD_TUPLE              3
+
+ 65         294 BINARY_MODULO
+
+ 64         296 STORE_FAST              22 (authorization)
+
+ 69         298 LOAD_FAST                9 (linkplayDate)
+
+ 70         300 LOAD_GLOBAL             10 (str)
+            302 LOAD_FAST                3 (uuid)
+            304 CALL_FUNCTION            1
+
+ 71         306 LOAD_FAST               11 (projectHeader)
+
+ 72         308 LOAD_GLOBAL             10 (str)
+            310 LOAD_FAST                4 (origin)
+            312 CALL_FUNCTION            1
+
+ 73         314 LOAD_FAST               14 (payloadHash)
+
+ 74         316 LOAD_FAST               22 (authorization)
+
+ 68         318 LOAD_CONST              15 (('X-Linkplay-Date', 'X-Linkplay-Uuid', 'X-Linkplay-Project', 'X-Linkplay-Origin', 'X-Linkplay-Content', 'Authorization'))
+            320 BUILD_CONST_KEY_MAP      6
+            322 RETURN_VALUE
+
+=== LPLkp1Signer._signingKey ===
+ 89           0 LOAD_GLOBAL              0 (LPLkp1Signer)
+              2 LOAD_METHOD              1 (_hmac)
+              4 LOAD_CONST               1 ('LKP1')
+              6 LOAD_FAST                0 (uuid)
+              8 BINARY_ADD
+             10 LOAD_METHOD              2 (encode)
+             12 LOAD_CONST               2 ('utf-8')
+             14 CALL_METHOD              1
+             16 LOAD_FAST                1 (dateStamp)
+             18 CALL_METHOD              2
+             20 STORE_FAST               4 (dateKey)
+
+ 90          22 LOAD_GLOBAL              0 (LPLkp1Signer)
+             24 LOAD_METHOD              1 (_hmac)
+             26 LOAD_FAST                4 (dateKey)
+             28 LOAD_FAST                2 (origin)
+             30 CALL_METHOD              2
+             32 STORE_FAST               5 (originKey)
+
+ 91          34 LOAD_GLOBAL              0 (LPLkp1Signer)
+             36 LOAD_METHOD              1 (_hmac)
+             38 LOAD_FAST                5 (originKey)
+             40 LOAD_FAST                3 (project)
+             42 CALL_METHOD              2
+             44 STORE_FAST               6 (projectKey)
+
+ 92          46 LOAD_GLOBAL              0 (LPLkp1Signer)
+             48 LOAD_METHOD              1 (_hmac)
+             50 LOAD_FAST                6 (projectKey)
+             52 LOAD_CONST               3 ('linkplay_request')
+             54 CALL_METHOD              2
+             56 RETURN_VALUE
+
+=== LPLkp1Signer._hmac ===
+104           0 LOAD_GLOBAL              0 (hmac)
+              2 LOAD_METHOD              1 (new)
+              4 LOAD_FAST                0 (key)
+              6 LOAD_FAST                1 (message)
+              8 LOAD_METHOD              2 (encode)
+             10 LOAD_CONST               1 ('utf-8')
+             12 CALL_METHOD              1
+             14 LOAD_GLOBAL              3 (hashlib)
+             16 LOAD_ATTR                4 (sha256)
+             18 CALL_METHOD              3
+             20 LOAD_METHOD              5 (digest)
+             22 CALL_METHOD              0
+             24 RETURN_VALUE

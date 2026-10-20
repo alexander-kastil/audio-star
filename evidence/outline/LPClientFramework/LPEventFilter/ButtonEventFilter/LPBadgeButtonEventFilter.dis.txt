@@ -1,0 +1,420 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (('QEvent', 'QSize'))
+              4 IMPORT_NAME              0 (PyQt6.QtCore)
+              6 IMPORT_FROM              1 (QEvent)
+              8 STORE_NAME               1 (QEvent)
+             10 IMPORT_FROM              2 (QSize)
+             12 STORE_NAME               2 (QSize)
+             14 POP_TOP
+
+  2          16 LOAD_CONST               0 (0)
+             18 LOAD_CONST               2 (('QPushButton', 'QToolButton'))
+             20 IMPORT_NAME              3 (PyQt6.QtWidgets)
+             22 IMPORT_FROM              4 (QPushButton)
+             24 STORE_NAME               4 (QPushButton)
+             26 IMPORT_FROM              5 (QToolButton)
+             28 STORE_NAME               5 (QToolButton)
+             30 POP_TOP
+
+  4          32 LOAD_CONST               0 (0)
+             34 LOAD_CONST               3 (('LPSingleEventFilter',))
+             36 IMPORT_NAME              6 (LPClientFramework.LPEventFilter.LPSingleEventFilter)
+             38 IMPORT_FROM              7 (LPSingleEventFilter)
+             40 STORE_NAME               7 (LPSingleEventFilter)
+             42 POP_TOP
+
+  7          44 LOAD_BUILD_CLASS
+             46 LOAD_CONST               4 (<code object LPBadgeButtonEventFilter at 0x000001F3253C4710, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPBadgeButtonEventFilter.py", line 7>)
+             48 LOAD_CONST               5 ('LPBadgeButtonEventFilter')
+             50 MAKE_FUNCTION            0
+             52 LOAD_CONST               5 ('LPBadgeButtonEventFilter')
+             54 LOAD_NAME                7 (LPSingleEventFilter)
+             56 CALL_FUNCTION            3
+             58 STORE_NAME               8 (LPBadgeButtonEventFilter)
+             60 LOAD_CONST               6 (None)
+             62 RETURN_VALUE
+
+=== LPBadgeButtonEventFilter ===
+  7           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPBadgeButtonEventFilter')
+              6 STORE_NAME               2 (__qualname__)
+
+  8           8 LOAD_CONST               6 ((None,))
+             10 LOAD_CLOSURE             0 (__class__)
+             12 BUILD_TUPLE              1
+             14 LOAD_CONST               2 (<code object __init__ at 0x000001F3253C4EA0, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPBadgeButtonEventFilter.py", line 8>)
+             16 LOAD_CONST               3 ('LPBadgeButtonEventFilter.__init__')
+             18 MAKE_FUNCTION            9 (defaults, closure)
+             20 STORE_NAME               3 (__init__)
+
+ 40          22 LOAD_CLOSURE             0 (__class__)
+             24 BUILD_TUPLE              1
+             26 LOAD_CONST               4 (<code object eventFilter at 0x000001F3253C4660, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPBadgeButtonEventFilter.py", line 40>)
+             28 LOAD_CONST               5 ('LPBadgeButtonEventFilter.eventFilter')
+             30 MAKE_FUNCTION            8 (closure)
+             32 STORE_NAME               4 (eventFilter)
+             34 LOAD_CLOSURE             0 (__class__)
+             36 DUP_TOP
+             38 STORE_NAME               5 (__classcell__)
+             40 RETURN_VALUE
+
+=== LPBadgeButtonEventFilter.__init__ ===
+  9           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (widget)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 11          12 LOAD_FAST                1 (widget)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (button)
+
+ 12          18 LOAD_FAST                5 (tipStr)
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               3 (tipStr)
+
+ 14          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                2 (button)
+             28 LOAD_METHOD              4 (underMouse)
+             30 CALL_METHOD              0
+             32 POP_JUMP_IF_FALSE       52
+             34 LOAD_FAST                3 (hoverImage)
+             36 POP_JUMP_IF_FALSE       52
+
+ 15          38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                2 (button)
+             42 LOAD_METHOD              5 (setIcon)
+             44 LOAD_FAST                3 (hoverImage)
+             46 CALL_METHOD              1
+             48 POP_TOP
+             50 JUMP_FORWARD            12 (to 64)
+
+ 24     >>   52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                2 (button)
+             56 LOAD_METHOD              5 (setIcon)
+             58 LOAD_FAST                2 (defaultImage)
+             60 CALL_METHOD              1
+             62 POP_TOP
+
+ 33     >>   64 LOAD_FAST                2 (defaultImage)
+             66 LOAD_FAST                0 (self)
+             68 STORE_ATTR               6 (defaultImage)
+
+ 34          70 LOAD_FAST                3 (hoverImage)
+             72 LOAD_FAST                0 (self)
+             74 STORE_ATTR               7 (hoverImage)
+
+ 35          76 LOAD_FAST                4 (pressImage)
+             78 LOAD_FAST                0 (self)
+             80 STORE_ATTR               8 (pressImage)
+
+ 37          82 LOAD_FAST                5 (tipStr)
+             84 LOAD_CONST               0 (None)
+             86 IS_OP                    1
+             88 POP_JUMP_IF_FALSE      102
+
+ 38          90 LOAD_FAST                0 (self)
+             92 LOAD_ATTR                2 (button)
+             94 LOAD_METHOD              9 (setToolTip)
+             96 LOAD_FAST                5 (tipStr)
+             98 CALL_METHOD              1
+            100 POP_TOP
+        >>  102 LOAD_CONST               0 (None)
+            104 RETURN_VALUE
+
+=== LPBadgeButtonEventFilter.eventFilter ===
+ 41           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (button)
+              4 LOAD_METHOD              1 (isEnabled)
+              6 CALL_METHOD              0
+              8 EXTENDED_ARG             1
+             10 POP_JUMP_IF_FALSE      502
+
+ 42          12 LOAD_FAST                2 (event)
+             14 LOAD_METHOD              2 (type)
+             16 CALL_METHOD              0
+             18 LOAD_GLOBAL              3 (QEvent)
+             20 LOAD_ATTR                4 (Type)
+             22 LOAD_ATTR                5 (Enter)
+             24 COMPARE_OP               2 (==)
+             26 POP_JUMP_IF_FALSE      126
+
+ 43          28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                0 (button)
+             32 LOAD_METHOD              6 (setIcon)
+             34 LOAD_FAST                0 (self)
+             36 LOAD_ATTR                7 (hoverImage)
+             38 CALL_METHOD              1
+             40 POP_TOP
+
+ 44          42 LOAD_GLOBAL              8 (hasattr)
+             44 LOAD_FAST                0 (self)
+             46 LOAD_ATTR                0 (button)
+             48 LOAD_CONST               1 ('badge')
+             50 CALL_FUNCTION            2
+             52 POP_JUMP_IF_FALSE      122
+             54 LOAD_GLOBAL              9 (isinstance)
+             56 LOAD_FAST                0 (self)
+             58 LOAD_ATTR                0 (button)
+             60 LOAD_ATTR               10 (badge)
+             62 LOAD_GLOBAL             11 (QToolButton)
+             64 CALL_FUNCTION            2
+             66 POP_JUMP_IF_FALSE      122
+             68 LOAD_FAST                0 (self)
+             70 LOAD_ATTR                0 (button)
+             72 LOAD_ATTR               10 (badge)
+             74 LOAD_METHOD             12 (isVisible)
+             76 CALL_METHOD              0
+             78 POP_JUMP_IF_FALSE      122
+             80 LOAD_GLOBAL              8 (hasattr)
+             82 LOAD_FAST                0 (self)
+             84 LOAD_ATTR                0 (button)
+             86 LOAD_ATTR               10 (badge)
+             88 LOAD_CONST               2 ('hoverImage')
+             90 CALL_FUNCTION            2
+             92 POP_JUMP_IF_FALSE      122
+
+ 45          94 LOAD_FAST                0 (self)
+             96 LOAD_ATTR                0 (button)
+             98 LOAD_ATTR               10 (badge)
+            100 LOAD_ATTR                7 (hoverImage)
+            102 STORE_FAST               3 (badgeHoverImage)
+
+ 46         104 LOAD_FAST                3 (badgeHoverImage)
+            106 POP_JUMP_IF_FALSE      122
+
+ 47         108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR                0 (button)
+            112 LOAD_ATTR               10 (badge)
+            114 LOAD_METHOD              6 (setIcon)
+            116 LOAD_FAST                3 (badgeHoverImage)
+            118 CALL_METHOD              1
+            120 POP_TOP
+
+ 49     >>  122 LOAD_CONST               3 (True)
+            124 RETURN_VALUE
+
+ 50     >>  126 LOAD_FAST                2 (event)
+            128 LOAD_METHOD              2 (type)
+            130 CALL_METHOD              0
+            132 LOAD_GLOBAL              3 (QEvent)
+            134 LOAD_ATTR                4 (Type)
+            136 LOAD_ATTR               13 (Leave)
+            138 COMPARE_OP               2 (==)
+            140 POP_JUMP_IF_FALSE      240
+
+ 51         142 LOAD_FAST                0 (self)
+            144 LOAD_ATTR                0 (button)
+            146 LOAD_METHOD              6 (setIcon)
+            148 LOAD_FAST                0 (self)
+            150 LOAD_ATTR               14 (defaultImage)
+            152 CALL_METHOD              1
+            154 POP_TOP
+
+ 52         156 LOAD_GLOBAL              8 (hasattr)
+            158 LOAD_FAST                0 (self)
+            160 LOAD_ATTR                0 (button)
+            162 LOAD_CONST               1 ('badge')
+            164 CALL_FUNCTION            2
+            166 POP_JUMP_IF_FALSE      236
+            168 LOAD_GLOBAL              9 (isinstance)
+            170 LOAD_FAST                0 (self)
+            172 LOAD_ATTR                0 (button)
+            174 LOAD_ATTR               10 (badge)
+            176 LOAD_GLOBAL             11 (QToolButton)
+            178 CALL_FUNCTION            2
+            180 POP_JUMP_IF_FALSE      236
+            182 LOAD_FAST                0 (self)
+            184 LOAD_ATTR                0 (button)
+            186 LOAD_ATTR               10 (badge)
+            188 LOAD_METHOD             12 (isVisible)
+            190 CALL_METHOD              0
+            192 POP_JUMP_IF_FALSE      236
+            194 LOAD_GLOBAL              8 (hasattr)
+            196 LOAD_FAST                0 (self)
+            198 LOAD_ATTR                0 (button)
+            200 LOAD_ATTR               10 (badge)
+            202 LOAD_CONST               4 ('defaultImage')
+            204 CALL_FUNCTION            2
+            206 POP_JUMP_IF_FALSE      236
+
+ 53         208 LOAD_FAST                0 (self)
+            210 LOAD_ATTR                0 (button)
+            212 LOAD_ATTR               10 (badge)
+            214 LOAD_ATTR               14 (defaultImage)
+            216 STORE_FAST               4 (badgeDefaultImage)
+
+ 54         218 LOAD_FAST                4 (badgeDefaultImage)
+            220 POP_JUMP_IF_FALSE      236
+
+ 55         222 LOAD_FAST                0 (self)
+            224 LOAD_ATTR                0 (button)
+            226 LOAD_ATTR               10 (badge)
+            228 LOAD_METHOD              6 (setIcon)
+            230 LOAD_FAST                4 (badgeDefaultImage)
+            232 CALL_METHOD              1
+            234 POP_TOP
+
+ 56     >>  236 LOAD_CONST               3 (True)
+            238 RETURN_VALUE
+
+ 57     >>  240 LOAD_FAST                2 (event)
+            242 LOAD_METHOD              2 (type)
+            244 CALL_METHOD              0
+            246 LOAD_GLOBAL              3 (QEvent)
+            248 LOAD_ATTR                4 (Type)
+            250 LOAD_ATTR               15 (MouseButtonPress)
+            252 COMPARE_OP               2 (==)
+            254 EXTENDED_ARG             1
+            256 POP_JUMP_IF_FALSE      372
+
+ 58         258 LOAD_FAST                0 (self)
+            260 LOAD_ATTR               16 (pressImage)
+            262 EXTENDED_ARG             1
+            264 POP_JUMP_IF_FALSE      502
+
+ 59         266 LOAD_FAST                0 (self)
+            268 LOAD_ATTR                0 (button)
+            270 LOAD_METHOD              6 (setIcon)
+            272 LOAD_FAST                0 (self)
+            274 LOAD_ATTR               16 (pressImage)
+            276 CALL_METHOD              1
+            278 POP_TOP
+
+ 60         280 LOAD_GLOBAL              8 (hasattr)
+            282 LOAD_FAST                0 (self)
+            284 LOAD_ATTR                0 (button)
+            286 LOAD_CONST               1 ('badge')
+            288 CALL_FUNCTION            2
+            290 EXTENDED_ARG             1
+            292 POP_JUMP_IF_FALSE      502
+            294 LOAD_GLOBAL              9 (isinstance)
+            296 LOAD_FAST                0 (self)
+            298 LOAD_ATTR                0 (button)
+            300 LOAD_ATTR               10 (badge)
+            302 LOAD_GLOBAL             11 (QToolButton)
+            304 CALL_FUNCTION            2
+            306 EXTENDED_ARG             1
+            308 POP_JUMP_IF_FALSE      502
+            310 LOAD_FAST                0 (self)
+            312 LOAD_ATTR                0 (button)
+            314 LOAD_ATTR               10 (badge)
+            316 LOAD_METHOD             12 (isVisible)
+            318 CALL_METHOD              0
+            320 EXTENDED_ARG             1
+            322 POP_JUMP_IF_FALSE      502
+            324 LOAD_GLOBAL              8 (hasattr)
+
+ 61         326 LOAD_FAST                0 (self)
+            328 LOAD_ATTR                0 (button)
+            330 LOAD_ATTR               10 (badge)
+            332 LOAD_CONST               5 ('pressImage')
+
+ 60         334 CALL_FUNCTION            2
+            336 EXTENDED_ARG             1
+            338 POP_JUMP_IF_FALSE      502
+
+ 62         340 LOAD_FAST                0 (self)
+            342 LOAD_ATTR                0 (button)
+            344 LOAD_ATTR               10 (badge)
+            346 LOAD_ATTR               16 (pressImage)
+            348 STORE_FAST               5 (badgePressImage)
+
+ 63         350 LOAD_FAST                5 (badgePressImage)
+            352 EXTENDED_ARG             1
+            354 POP_JUMP_IF_FALSE      502
+
+ 64         356 LOAD_FAST                0 (self)
+            358 LOAD_ATTR                0 (button)
+            360 LOAD_ATTR               10 (badge)
+            362 LOAD_METHOD              6 (setIcon)
+            364 LOAD_FAST                5 (badgePressImage)
+            366 CALL_METHOD              1
+            368 POP_TOP
+            370 JUMP_FORWARD           130 (to 502)
+
+ 65     >>  372 LOAD_FAST                2 (event)
+            374 LOAD_METHOD              2 (type)
+            376 CALL_METHOD              0
+            378 LOAD_GLOBAL              3 (QEvent)
+            380 LOAD_ATTR                4 (Type)
+            382 LOAD_ATTR               17 (MouseButtonRelease)
+            384 COMPARE_OP               2 (==)
+            386 EXTENDED_ARG             1
+            388 POP_JUMP_IF_FALSE      502
+
+ 66         390 LOAD_FAST                0 (self)
+            392 LOAD_ATTR                7 (hoverImage)
+            394 EXTENDED_ARG             1
+            396 POP_JUMP_IF_FALSE      502
+
+ 67         398 LOAD_FAST                0 (self)
+            400 LOAD_ATTR                0 (button)
+            402 LOAD_METHOD              6 (setIcon)
+            404 LOAD_FAST                0 (self)
+            406 LOAD_ATTR                7 (hoverImage)
+            408 CALL_METHOD              1
+            410 POP_TOP
+
+ 68         412 LOAD_GLOBAL              8 (hasattr)
+            414 LOAD_FAST                0 (self)
+            416 LOAD_ATTR                0 (button)
+            418 LOAD_CONST               1 ('badge')
+            420 CALL_FUNCTION            2
+            422 EXTENDED_ARG             1
+            424 POP_JUMP_IF_FALSE      502
+            426 LOAD_GLOBAL              9 (isinstance)
+            428 LOAD_FAST                0 (self)
+            430 LOAD_ATTR                0 (button)
+            432 LOAD_ATTR               10 (badge)
+            434 LOAD_GLOBAL             11 (QToolButton)
+            436 CALL_FUNCTION            2
+            438 EXTENDED_ARG             1
+            440 POP_JUMP_IF_FALSE      502
+            442 LOAD_FAST                0 (self)
+            444 LOAD_ATTR                0 (button)
+            446 LOAD_ATTR               10 (badge)
+            448 LOAD_METHOD             12 (isVisible)
+            450 CALL_METHOD              0
+            452 EXTENDED_ARG             1
+            454 POP_JUMP_IF_FALSE      502
+            456 LOAD_GLOBAL              8 (hasattr)
+
+ 69         458 LOAD_FAST                0 (self)
+            460 LOAD_ATTR                0 (button)
+            462 LOAD_ATTR               10 (badge)
+            464 LOAD_CONST               2 ('hoverImage')
+
+ 68         466 CALL_FUNCTION            2
+            468 EXTENDED_ARG             1
+            470 POP_JUMP_IF_FALSE      502
+
+ 70         472 LOAD_FAST                0 (self)
+            474 LOAD_ATTR                0 (button)
+            476 LOAD_ATTR               10 (badge)
+            478 LOAD_ATTR                7 (hoverImage)
+            480 STORE_FAST               3 (badgeHoverImage)
+
+ 71         482 LOAD_FAST                3 (badgeHoverImage)
+            484 EXTENDED_ARG             1
+            486 POP_JUMP_IF_FALSE      502
+
+ 72         488 LOAD_FAST                0 (self)
+            490 LOAD_ATTR                0 (button)
+            492 LOAD_ATTR               10 (badge)
+            494 LOAD_METHOD              6 (setIcon)
+            496 LOAD_FAST                3 (badgeHoverImage)
+            498 CALL_METHOD              1
+            500 POP_TOP
+
+ 76     >>  502 LOAD_GLOBAL             18 (super)
+            504 CALL_FUNCTION            0
+            506 LOAD_METHOD             19 (eventFilter)
+            508 LOAD_FAST                1 (obj)
+            510 LOAD_FAST                2 (event)
+            512 CALL_METHOD              2
+            514 RETURN_VALUE

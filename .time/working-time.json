@@ -1,0 +1,815 @@
+{
+  "repo": "audio-star",
+  "origin": "",
+  "sessions": [
+    {
+      "date": "2026-10-19",
+      "from": "11:35",
+      "to": "13:14",
+      "sessionId": "8e097470-b398-46fa-bccf-3495bd60b6fa",
+      "branch": "",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "wiim-home-feature-map.md",
+        "src/audio-start/AudioStar.Core/Speakers.cs",
+        "src/audio-start/AudioStar.Speakers/SpeakerController.cs",
+        "src/audio-start/AudioStar.Library/Media/StreamEndpoint.cs",
+        "src/audio-start/AudioStar.Sources/YtDlp/YtDlpPlaylistSource.cs"
+      ],
+      "mechanism": {
+        "takes": "a vendor's frozen desktop controller app, the owner's network speakers, and personal playlists from video and music services",
+        "does": "recovers the vendor protocol from the app's bytecode, then drives the speakers over UPnP and their HTTP API from a PC app that resolves each track lazily through a local stream proxy and hands the speaker a queue",
+        "returns": "a protocol map with observed versus inferred evidence, and a desktop controller that plays the owner's lists on any speaker or group"
+      },
+      "portsAsIs": [
+        "frozen Python app extraction and decompile method",
+        "UPnP speaker control and queue building",
+        "lazy stream proxy with range passthrough",
+        "project-per-area parallel build with a fixed contract"
+      ],
+      "perCustomer": [
+        "the speaker vendor's command set",
+        "the streaming accounts and their sign-in"
+      ],
+      "evidence": [
+        "wiim-home-feature-map.md",
+        "evidence/reports/",
+        "tests: 302 of 303 passing at first integration, fixed to all passing",
+        "live: speaker fetched and played a test tone served by the PC"
+      ],
+      "toolchain": {
+        "skills": [
+          "windows-app-reverse-engineering",
+          "reverse-engineer-anything",
+          "dotnet-conventions",
+          "report-plugin:report",
+          "learn-loop-plugin:claude-learn",
+          "claude-learn-harvest",
+          "claude-learn-worktime",
+          "track-time"
+        ],
+        "mcpServers": [
+          "subagent-delegation-plugin"
+        ],
+        "agents": [
+          "subagent-delegation-plugin:fact-gatherer",
+          "dotnet-expert",
+          "fork"
+        ]
+      },
+      "industry": "consumer audio and home media",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "13:14",
+      "to": "13:31",
+      "sessionId": "8e097470-b398-46fa-bccf-3495bd60b6fa",
+      "branch": "",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Speakers/SpeakerController.cs",
+        "src/audio-start/AudioStar.Speakers/Playback/FastPlayPlanner.cs"
+      ],
+      "mechanism": {
+        "takes": "the first build of the PC speaker controller and the owner's live speaker",
+        "does": "plays a long playlist through the stream proxy, makes the queue append survive the speaker dropping connections, and checks radio, a transcoded set and every settings page live",
+        "returns": "a verified first version and a cleaned-up test setup"
+      },
+      "portsAsIs": [
+        "chunked queue append with delay and one retry"
+      ],
+      "perCustomer": [
+        "the speaker firmware's connection limits"
+      ],
+      "evidence": [
+        "200-track queue confirmed on the speaker",
+        "tests: 302 passing"
+      ],
+      "toolchain": {
+        "skills": [
+          "learn-loop-plugin:claude-learn",
+          "report-plugin:report"
+        ],
+        "mcpServers": [],
+        "agents": [
+          "fork"
+        ]
+      },
+      "industry": "consumer audio and home media",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "17:19",
+      "to": "18:17",
+      "sessionId": "8e097470-b398-46fa-bccf-3495bd60b6fa",
+      "branch": "",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Sources/YtDlp/JsonPlaylistCache.cs",
+        "src/audio-start/AudioStar.Sources/YtDlp/YtDlpPlaylistSource.cs",
+        "src/audio-start/AudioStar.Setup/Package.wxs",
+        "src/audio-start/AudioStar.Desktop/Services/Autostart.cs",
+        "src/audio-start/AudioStar.Desktop/Services/TrayService.cs",
+        "src/audio-start/AudioStar.Desktop/Resources/AdaptiveGrid.cs",
+        "src/audio-start/AudioStar.Desktop/ViewModels/SourceViewModel.cs"
+      ],
+      "mechanism": {
+        "takes": "playlists the owner pasted by link, and the stream address the speaker reports for its current track",
+        "does": "keeps each added playlist's header and tracks on disk and refreshes them in the background so opening and starting a list no longer waits for the extractor, plays exactly the list on screen, marks the track the speaker is playing, and packages the app as a per-machine installer with firewall rules and a start-with-Windows option that launches into the tray",
+        "returns": "a desktop controller that opens a list instantly and starts it in about a second, plus an installer"
+      },
+      "portsAsIs": [
+        "stale-while-revalidate playlist cache keyed by source and playlist",
+        "installer with firewall rules and an autostart option shared by installer, app and tray",
+        "now-playing match from the renderer's track address",
+        "card grid that adds a column only when every card keeps its minimum width"
+      ],
+      "perCustomer": [
+        "the speaker protocol",
+        "the music sources and their extractor"
+      ],
+      "evidence": [
+        "tests: 313 passing across four test projects",
+        "cached open 0.13 s and play queued 1.1 s, about 20 s before",
+        "start with --autostart showed no window, a second launch opened it",
+        "MSI admin extract held the app under Program Files"
+      ],
+      "toolchain": {
+        "skills": [
+          "report-plugin:report",
+          "ui-ux-pro-max",
+          "learn-loop-plugin:claude-learn",
+          "claude-learn-harvest",
+          "claude-learn-worktime",
+          "track-time",
+          "dotnet-conventions"
+        ],
+        "mcpServers": [],
+        "agents": [
+          "dotnet-expert",
+          "subagent-delegation-plugin:fact-gatherer",
+          "fork"
+        ]
+      },
+      "industry": "consumer audio and home media",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "18:17",
+      "to": "18:33",
+      "sessionId": "8e097470-b398-46fa-bccf-3495bd60b6fa",
+      "branch": "",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Desktop/Views/SourceView.xaml",
+        "src/audio-start/AudioStar.Desktop/ViewModels/SourceViewModel.cs",
+        "src/audio-start/AudioStar.Desktop/Resources/Styles.xaml",
+        "src/audio-start/AudioStar.Desktop/Resources/Interaction.cs",
+        "src/audio-start/AudioStar.Desktop/Services/ThemeService.cs",
+        "CLAUDE.md"
+      ],
+      "mechanism": {
+        "takes": "a playlist's track list and the owner's column, divider, hover and scrollbar preferences",
+        "does": "renders the tracks as a column grid with a header whose divider resizes every row, lets a right-click show or hide columns, keeps the playing row readable on hover through its own row template, shows a cell's full text only when it is cut off, and gives the whole app one thin accent scrollbar and one tooltip style; also writes the repository guide for later coding sessions",
+        "returns": "a track list with resizable, hideable columns and consistent hairline, hover, tooltip and scrollbar styling"
+      },
+      "portsAsIs": [
+        "list header and rows sharing star column widths through one view model",
+        "hairline splitter template with a wide hit area",
+        "tooltip that opens only when the text is trimmed",
+        "app-wide thin scrollbar style"
+      ],
+      "perCustomer": [
+        "the owner's colours and the track columns"
+      ],
+      "evidence": [
+        "screenshots: header and row dividers aligned, playing row solid accent, blue 4 px scrollbars on the track list and settings page",
+        "hover, drag and right-click states not seen on screen (no real input)"
+      ],
+      "toolchain": {
+        "skills": [
+          "ui-ux-pro-max",
+          "report-plugin:report",
+          "learn-loop-plugin:claude-learn",
+          "claude-learn-harvest",
+          "claude-learn-worktime",
+          "track-time",
+          "dotnet-conventions"
+        ],
+        "mcpServers": [],
+        "agents": [
+          "fork"
+        ]
+      },
+      "industry": "consumer audio and home media",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "17:52",
+      "to": "18:37",
+      "sessionId": "2a2e0bbd-bcba-4120-87dc-5fe897cd05a2",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Desktop/ViewModels/MainViewModel.cs",
+        "src/audio-start/AudioStar.Desktop/Views/MainWindow.xaml",
+        "src/audio-start/AudioStar.Desktop/Resources/Styles.xaml",
+        "src/audio-start/AudioStar.Core/Sources.cs",
+        "src/audio-start/AudioStar.Sources/Spotify/SpotifySource.cs",
+        "src/audio-start/AudioStar.Desktop/Views/SourceView.xaml",
+        "src/audio-start/AudioStar.Desktop/ViewModels/SourceViewModel.cs"
+      ],
+      "mechanism": {
+        "takes": "the connection state of every connected music service and the owner's clicks in the sidebar",
+        "does": "connects every service quietly at app start without any sign-in prompt, shows each service's state as a switch in its sidebar row that is green only when connected and disabled while connecting, toggles the connection from that switch or a right-click menu, and keeps an open service page in step by reloading on connect and clearing on disconnect",
+        "returns": "a sidebar that tells at a glance which services are usable before the first click, and a playlist link box with its label as hint text"
+      },
+      "portsAsIs": [
+        "silent background connect at startup with an interactive path kept for the user's click",
+        "a status switch that is both indicator and action, driven only by the confirmed state",
+        "hint-text overlay for an input without placeholder support"
+      ],
+      "perCustomer": [
+        "the list of services and their sign-in rules"
+      ],
+      "evidence": [
+        "screenshots after restart: YouTube switch green and on, Spotify and SoundCloud grey and off while not set up",
+        "solution build 0 warnings 0 errors",
+        "right-click menu not exercised on screen"
+      ],
+      "toolchain": {
+        "skills": [
+          "learn-loop-plugin:claude-learn",
+          "claude-learn-worktime",
+          "track-time",
+          "dotnet-conventions"
+        ],
+        "mcpServers": [
+          "worktime-mcp"
+        ],
+        "agents": [
+          "fork"
+        ]
+      },
+      "industry": "home audio",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "18:52",
+      "to": "19:27",
+      "sessionId": "92857556-ddc3-42ba-8d77-659b50444221",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Core/WebSignIn.cs",
+        "src/audio-start/AudioStar.Desktop/Services/WebSignInService.cs",
+        "src/audio-start/AudioStar.Desktop/Views/WebSignInWindow.cs",
+        "src/audio-start/AudioStar.Sources/SoundCloud/SoundCloudSession.cs",
+        "src/audio-start/AudioStar.Sources/SoundCloud/SoundCloudTokenStore.cs",
+        "src/audio-start/AudioStar.Sources/YtDlp/YtDlpRedaction.cs",
+        "src/audio-start/AudioStar.Sources/Spotify/SpotifyAuth.cs"
+      ],
+      "mechanism": {
+        "takes": "a click on Connect for a web service whose account the desktop app needs, plus the user's own sign-in typed into an embedded browser window",
+        "does": "opens the service's normal sign-in page inside the app, finishes either when the site sets its session cookie or when the OAuth redirect is reached (cancelling that navigation instead of running a local listener), stores the resulting token encrypted for the current Windows user, hands it to the downloader process with the secret masked in every log, reads the signed-in account to show its name, and on disconnect deletes the token and that site's cookies from the embedded browser profile",
+        "returns": "a connected service showing the account name, private playlists and full-length streams available to playback, and a startup path that reconnects from the stored token without ever showing a window"
+      },
+      "portsAsIs": [
+        "embedded-browser sign-in that completes on a cookie or on a redirect, behind a UI-free interface",
+        "per-user encrypted token store with silent reconnect at startup",
+        "secret redaction in a child process's error output before logging",
+        "sign-out that clears one site's cookies without showing a window"
+      ],
+      "perCustomer": [
+        "which services are signed in and their cookie names or redirect URIs",
+        "how each service's token is passed to its downloader or API"
+      ],
+      "evidence": [
+        "src/audio-start/AudioStar.Sources.Tests/SoundCloudAuthTests.cs",
+        "tests: 86 of 86 passed in AudioStar.Sources.Tests",
+        "live check: SoundCloud sign-in popup opened from the sidebar switch through UI Automation, captured with PrintWindow, full card visible without horizontal scroll, closing it left the status unchanged",
+        "not verified: token capture after a real sign-in, the Spotify redirect, sign-out"
+      ],
+      "toolchain": {
+        "skills": [
+          "report-plugin:report",
+          "learn-loop-plugin:claude-learn",
+          "learn-loop-harvest-plugin:claude-learn-harvest",
+          "learn-loop-worktime-plugin:claude-learn-worktime",
+          "learn-loop-worktime-plugin:track-time",
+          "dotnet-conventions"
+        ],
+        "mcpServers": [
+          "subagent-delegation-plugin"
+        ],
+        "agents": [
+          "subagent-delegation-plugin:fact-gatherer",
+          "dotnet-expert",
+          "wpf-expert",
+          "fork"
+        ]
+      },
+      "industry": "home audio",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "18:59",
+      "to": "19:16",
+      "sessionId": "1e5f6921-0cd4-4513-9512-eb7a2d50412d",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [],
+      "mechanism": {
+        "takes": "a one-line style brief for a product's first screen and the owner's reactions to each draft",
+        "does": "drafts the screen as an interactive design canvas, has a comic illustration generated to the owner's description of the audience, and iterates the look and copy until the owner accepts it",
+        "returns": "an accepted setup-screen mockup with its illustration in wide and portrait crops"
+      },
+      "portsAsIs": [
+        "design canvas mockup with working checkbox and buttons",
+        "generated comic illustration sized for a wide and a portrait panel"
+      ],
+      "perCustomer": [
+        "the owner's taste and the brand gold",
+        "the copy about the product's music sources"
+      ],
+      "evidence": [
+        "design canvas https://claude.ai/artifact/4JfBepk3xpPmpEmopDxakg",
+        "three drafts, the third accepted by the owner"
+      ],
+      "toolchain": {
+        "skills": [
+          "report-plugin:report"
+        ],
+        "mcpServers": [
+          "claude_ai_Media_Creator"
+        ],
+        "agents": [
+          "image-producer"
+        ]
+      },
+      "industry": "consumer audio and home media",
+      "status": "Designed, not built",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "19:16",
+      "to": "20:04",
+      "sessionId": "1e5f6921-0cd4-4513-9512-eb7a2d50412d",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Setup/UI.wxs",
+        "src/audio-start/AudioStar.Setup/Strings.en-us.wxl",
+        "src/audio-start/AudioStar.Setup/Assets/start.bmp",
+        "src/audio-start/AudioStar.Setup/Assets/exit.bmp"
+      ],
+      "mechanism": {
+        "takes": "an accepted screen mockup and a Windows Installer package with stock dialogs",
+        "does": "renders the mockup's scene and copy into high-resolution dialog bitmaps from an HTML page, replaces the welcome and options dialogs with one picture dialog that keeps a native checkbox and an elevated Install button, and points only the finish and cancelled dialogs at a second picture while error and patch dialogs keep the stock one",
+        "returns": "a signed MSI whose first, finish and cancelled screens carry the brand illustration, sharp at 150 percent scaling"
+      },
+      "portsAsIs": [
+        "picture-first MSI dialog with native controls in the bottom strip",
+        "per-dialog bitmap override through localization strings",
+        "HTML to 2x MSI bitmap render script"
+      ],
+      "perCustomer": [
+        "the illustration and copy",
+        "the autostart option"
+      ],
+      "evidence": [
+        "msiexec first screen captured at 150 percent and cancelled through UI Automation",
+        "cancelled screen captured live; finish screen checked from the MSI Control and Binary tables only",
+        "render-msi-bitmap.ps1 re-render pixel-identical to start.bmp and exit.bmp"
+      ],
+      "toolchain": {
+        "skills": [
+          "report-plugin:report",
+          "dotnet-conventions",
+          "learn-loop-plugin:claude-learn",
+          "claude-learn-harvest",
+          "claude-learn-worktime",
+          "track-time"
+        ],
+        "mcpServers": [],
+        "agents": [
+          "wpf-expert",
+          "fork"
+        ]
+      },
+      "industry": "consumer audio and home media",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "18:40",
+      "to": "20:08",
+      "sessionId": "7fdb8d49-806d-403b-ab44-4fa0f1484726",
+      "branch": "master",
+      "commits": [
+        "2cd5031"
+      ],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Desktop/Resources/Styles.xaml",
+        "src/audio-start/AudioStar.Desktop/Resources/ColumnFlow.cs",
+        "src/audio-start/AudioStar.Desktop/Resources/Interaction.cs",
+        "src/audio-start/AudioStar.Desktop/Views/SourceView.xaml",
+        "src/audio-start/AudioStar.Desktop/Views/MyMusicView.xaml",
+        "src/audio-start/AudioStar.Desktop/Views/HomeShareView.xaml",
+        "src/audio-start/AudioStar.Desktop/Views/RadioView.xaml",
+        "src/audio-start/AudioStar.Desktop/Views/DashboardView.xaml",
+        "src/audio-start/AudioStar.Desktop/Views/DeviceSettingsView.xaml",
+        "src/audio-start/AudioStar.Desktop/Views/AppSettingsView.xaml",
+        "src/audio-start/AudioStar.Desktop/Views/NowPlayingView.xaml",
+        "src/audio-start/AudioStar.Desktop/ViewModels/MyMusicViewModel.cs",
+        ".claude/rules/view-reference.md"
+      ],
+      "mechanism": {
+        "takes": "one approved reference screen of a desktop app and the app's other screens, grouped by how close their structure is to the reference",
+        "does": "carries the reference's shared styles (row template, column headers, full-width input rows, adaptive card grids, one page margin with the scrollbar inside it) to the similar screens directly, proposes a layout for the structurally different ones (settings forms in two responsive columns with a masonry panel, a now-playing screen without duplicate controls) and builds them after approval, verifying every screen through UI Automation and measured screenshots",
+        "returns": "a consistent desktop UI with equal margins, before and after screenshots per screen, and a growing written reference of accepted and rejected design choices"
+      },
+      "portsAsIs": [
+        "reference-screen rollout with A/B/C grouping and proposal-first for different structures",
+        "masonry two-column settings panel",
+        "scrollbar-inside-margin gutter resource",
+        "screenshot margin measurement and before/after compare scripts"
+      ],
+      "perCustomer": [
+        "the reference screen and the owner's design corrections",
+        "the app's screens and data"
+      ],
+      "evidence": [
+        "PrintWindow before and after shots of every page at 1920 and 1470 wide",
+        "wpf-shot-gaps.ps1: left and right gaps 42 px on every page except two icon-edged pages"
+      ],
+      "toolchain": {
+        "skills": [
+          "ui-ux-pro-max",
+          "report-plugin:report",
+          "dotnet-conventions",
+          "learn-loop-plugin:claude-learn",
+          "claude-learn-harvest",
+          "claude-learn-worktime",
+          "track-time"
+        ],
+        "mcpServers": [],
+        "agents": [
+          "wpf-expert",
+          "fork"
+        ]
+      },
+      "industry": "consumer audio and home media",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "20:37",
+      "to": "20:59",
+      "sessionId": "85aac605-1888-4241-9c74-b82638ec3380",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Core/WebSignIn.cs",
+        "src/audio-start/AudioStar.Desktop/Views/WebSignInWindow.cs",
+        "src/audio-start/AudioStar.Sources/Spotify/SpotifyAuth.cs",
+        "src/audio-start/AudioStar.Sources/Spotify/SpotifySource.cs",
+        "src/audio-start/AudioStar.Desktop/ViewModels/MainViewModel.cs",
+        "src/audio-start/AudioStar.Desktop/Views/MainWindow.xaml"
+      ],
+      "mechanism": {
+        "takes": "a sign-in that needs an OAuth client ID the user has not created yet, and a sidebar of services with on/off state",
+        "does": "opens the provider's create-app page in an embedded browser with an instructions strip and a copy box for the redirect URI, reads the new client ID from the page address (single-page history navigation included), saves it and continues straight into the PKCE sign-in; every failed connect reports its reason, and the service rows re-sort live with connected ones first",
+        "returns": "a configured and signed-in service from one click, or a visible reason why not"
+      },
+      "portsAsIs": [
+        "in-popup prerequisite setup with address capture",
+        "instructions strip with copy-to-clipboard above an embedded browser",
+        "live on/off sorting of a settings or service list"
+      ],
+      "perCustomer": [
+        "the provider's create-app page and the address pattern of its app page",
+        "the redirect URI"
+      ],
+      "evidence": [
+        "tests: Sources.Tests 88 of 88, 2 new setup tests",
+        "live: setup popup captured, client ID saved, sign-in completed; Web API answered 403 without Premium",
+        "live: sidebar order YouTube, SoundCloud, Spotify after startup"
+      ],
+      "toolchain": {
+        "skills": [
+          "learn-loop-plugin:claude-learn",
+          "dotnet-conventions",
+          "claude-learn-worktime",
+          "track-time"
+        ],
+        "mcpServers": [
+          "subagent-delegation-plugin"
+        ],
+        "agents": [
+          "wpf-expert",
+          "dotnet-expert",
+          "fork"
+        ]
+      },
+      "industry": "consumer audio, desktop media control",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-19",
+      "from": "20:34",
+      "to": "21:34",
+      "sessionId": "2ce36245-9037-424f-b90e-1fe179b606c4",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Sources/SoundCloud/SoundCloudApi.cs",
+        "src/audio-start/AudioStar.Sources/SoundCloud/SoundCloudSession.cs",
+        "src/audio-start/AudioStar.Sources/SoundCloud/SoundCloudSource.cs",
+        "src/audio-start/AudioStar.Library/Media/WavStream.cs",
+        "src/audio-start/AudioStar.Library/Media/StreamEndpoint.cs",
+        "src/audio-start/AudioStar.Desktop/Views/SourceView.xaml",
+        "src/audio-start/AudioStar.Desktop/Resources/VirtualizingAdaptiveGrid.cs"
+      ],
+      "mechanism": {
+        "takes": "a music service whose playlist listing carries only titles, an adaptive (HLS) audio stream with no fixed length, and a network renderer that seeks by HTTP byte range",
+        "does": "fills covers, artist and duration from the service's web API in batches, serves the transcoded stream as uncompressed WAV with an exact computed length and maps each byte-range request to a time offset for the transcoder, adds a listening-history playlist, retries a flaky account read, and offers a virtualized card view of any track list",
+        "returns": "playlists with covers and times, a renderer that shows the track length and seeks anywhere, and a list or card view switchable per session"
+      },
+      "portsAsIs": [
+        "seekable byte-range proxy for transcoded live-format audio to DLNA renderers",
+        "batched metadata enrichment over a flat listing",
+        "virtualizing adaptive card grid for WPF lists"
+      ],
+      "perCustomer": [
+        "the music service's web API and its artwork size suffixes",
+        "the renderer's seek behaviour"
+      ],
+      "evidence": [
+        "tests: 105 Sources, 68 Library passed",
+        "live 2026-10-19: speaker reported totlen 4458703 ms, seek to 30:00 buffered about 10 s then played",
+        "tasks/lessons.md"
+      ],
+      "toolchain": {
+        "skills": [
+          "claude-in-chrome",
+          "report",
+          "claude-learn",
+          "dotnet-conventions",
+          "track-time",
+          "claude-learn-worktime",
+          "claude-learn-harvest"
+        ],
+        "mcpServers": [
+          "claude-in-chrome"
+        ],
+        "agents": [
+          "subagent-delegation-plugin:fact-gatherer",
+          "dotnet-expert",
+          "wpf-expert",
+          "fork"
+        ]
+      },
+      "industry": "consumer home audio",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-20",
+      "from": "09:47",
+      "to": "10:04",
+      "sessionId": "af681acc-60b5-4af7-acea-5a08aa4c8781",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "src/audio-start/AudioStar.Desktop/Views/MiniBar.xaml",
+        "src/audio-start/AudioStar.Desktop/AudioStar.Desktop.csproj",
+        "src/audio-start/AudioStar.Setup/AudioStar.Setup.wixproj",
+        "src/audio-start/AudioStar.Setup/Package.wxs"
+      ],
+      "mechanism": {
+        "takes": "a rebuilt Windows installer package for a desktop app and the machine it is installed on",
+        "does": "carries one semantic version from the app project into the installer so every rebuilt package removes all earlier installs of the product, and compares the installed product against its build through the uninstall registry and file hashes",
+        "returns": "a single current installation and a current, stale, duplicate or not-installed verdict"
+      },
+      "portsAsIs": [
+        "semantic version bump before every installer build",
+        "installed-versus-build check without querying Windows Installer"
+      ],
+      "perCustomer": [
+        "product name",
+        "install folder",
+        "publish folder"
+      ],
+      "evidence": [
+        "installed products after the 1.1.0 install: 1, both stale 1.0.0 registrations removed",
+        "installed-versus-build check: 406 files compared, 0 differing, verdict current",
+        "player bar shows a two-line title in full in a PrintWindow capture of the running app"
+      ],
+      "toolchain": {
+        "skills": [
+          "claude-learn",
+          "report",
+          "dotnet-conventions",
+          "claude-learn-harvest",
+          "claude-learn-worktime",
+          "track-time"
+        ],
+        "mcpServers": [],
+        "agents": [
+          "wpf-expert",
+          "fork"
+        ]
+      },
+      "industry": "consumer home audio",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-20",
+      "from": "10:02",
+      "to": "10:37",
+      "sessionId": "af681acc-60b5-4af7-acea-5a08aa4c8781",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "assets/audio-star.png",
+        "readme.md"
+      ],
+      "mechanism": {
+        "takes": "a raw screenshot of a desktop app window with border, rounded corners and other windows around it",
+        "does": "finds the window edges from pixel profiles, crops inside the border, makes the pixels outside the rounded corners transparent with an anti-aliased curve in the corner's own background colour, and proves every other pixel unchanged",
+        "returns": "a transparent-corner PNG that sits cleanly on light and dark pages, plus a magnified corner check sheet"
+      },
+      "portsAsIs": [
+        "window screenshot crop with transparent rounded corners",
+        "edge profile that suggests the crop box"
+      ],
+      "perCustomer": [
+        "the screenshot",
+        "the corner radius at the display scale"
+      ],
+      "evidence": [
+        "crop script reproduced the shipped image byte for byte: 136 corner pixels changed, every other pixel identical",
+        "corner sheet checked on white and black with no fringe"
+      ],
+      "toolchain": {
+        "skills": [
+          "claude-learn",
+          "report",
+          "optimize-images",
+          "claude-learn-harvest",
+          "claude-learn-worktime",
+          "track-time"
+        ],
+        "mcpServers": [],
+        "agents": [
+          "image-producer",
+          "fork"
+        ]
+      },
+      "industry": "consumer home audio",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-20",
+      "from": "09:54",
+      "to": "10:38",
+      "sessionId": "4acc57e5-12f2-4dc6-bdf6-8df26401bd15",
+      "branch": "master",
+      "commits": [
+        "1320b84"
+      ],
+      "surfaces": [
+        "audio-star"
+      ],
+      "files": [
+        "evidence/decompiled/LPClientFramework/LPTLSTool.py",
+        "evidence/pyinstaller/carchive/PYZ-00.pyz",
+        "tasks/lessons.md"
+      ],
+      "mechanism": {
+        "takes": "a reverse-engineering evidence tree (decompiled Python, disassembly listings, bytecode and the packed archive) and a git history about to be made public",
+        "does": "derives the vendor's secret constants from the decompiled source, finds every copy across text, bytecode and compressed archive entries, redacts them so bytecode and archives still parse, rebuilds the history as one clean root commit without touching the working tree, and force-pushes it with a lease",
+        "returns": "a repository whose every blob scans clean, with the old history replaced on the remote"
+      },
+      "portsAsIs": [
+        "secret scan across decompiled, bytecode and packed-archive forms",
+        "same-length redaction that keeps bytecode and archives valid",
+        "worktree-safe history squash with a lease-guarded force push"
+      ],
+      "perCustomer": [
+        "the constant names that hold secrets",
+        "the commit the history restarts from"
+      ],
+      "evidence": [
+        "evidence-secrets.py verify: with_secrets=0 on the rewritten master, 25 on the old tip",
+        "redaction reproduced on a copy of the old tree: 25 files, 87 hits, 19 byte-identical and 6 eol-only against the hand run",
+        "origin/master has 2 commits after the force push"
+      ],
+      "toolchain": {
+        "skills": [
+          "git-history-ops",
+          "windows-app-reverse-engineering",
+          "context-engineering",
+          "claude-learn",
+          "report",
+          "claude-learn-harvest",
+          "claude-learn-worktime",
+          "track-time"
+        ],
+        "mcpServers": [],
+        "agents": [
+          "fork"
+        ]
+      },
+      "industry": "consumer home audio",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    }
+  ]
+}

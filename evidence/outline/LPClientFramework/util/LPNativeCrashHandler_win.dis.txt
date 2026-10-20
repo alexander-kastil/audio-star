@@ -1,0 +1,1432 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\n@Time ： 2026/7/14\n@Auth ： AI Assistant\n@File ：LPNativeCrashHandler_win.py\n@Desc ：Windows 平台原生崩溃处理器实现。\n\n工作原理:\n  1. 通过 kernel32.SetUnhandledExceptionFilter 注册顶层未处理异常过滤器，\n     只在 SEH 异常最终无人处理、进程即将退出时获得通知。\n  2. 回调中调用 dbghelp.MiniDumpWriteDump 生成 .dmp 小型转储。\n  3. 同时调用 faulthandler.dump_traceback 输出 Python 线程栈帧。\n  4. 注册 SIGABRT 信号处理器，用于捕获 abort() / qFatal() 场景。\n\n捕获范围:\n  - Access Violation (c0000005): 空指针/野指针/缓冲区溢出\n  - Stack Overflow  (c00000fd): 无限递归（C 层）\n  - Integer Division by Zero (c0000094)\n  - Illegal Instruction (c000001d)\n  - abort() / qFatal() / pure virtual call → SIGABRT\n\n无法捕获:\n  - 已被应用或第三方库处理的第一机会异常\n  - TerminateProcess() 直接杀进程\n  - 外部 kill / 任务管理器结束进程\n  - 系统蓝屏 / 断电 / OOM\n')
+              2 STORE_NAME               0 (__doc__)
+
+ 29           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (None)
+              8 IMPORT_NAME              1 (ctypes)
+             10 STORE_NAME               1 (ctypes)
+
+ 30          12 LOAD_CONST               1 (0)
+             14 LOAD_CONST               3 (('wintypes',))
+             16 IMPORT_NAME              1 (ctypes)
+             18 IMPORT_FROM              2 (wintypes)
+             20 STORE_NAME               2 (wintypes)
+             22 POP_TOP
+
+ 31          24 LOAD_CONST               1 (0)
+             26 LOAD_CONST               2 (None)
+             28 IMPORT_NAME              3 (os)
+             30 STORE_NAME               3 (os)
+
+ 32          32 LOAD_CONST               1 (0)
+             34 LOAD_CONST               2 (None)
+             36 IMPORT_NAME              4 (sys)
+             38 STORE_NAME               4 (sys)
+
+ 33          40 LOAD_CONST               1 (0)
+             42 LOAD_CONST               2 (None)
+             44 IMPORT_NAME              5 (signal)
+             46 STORE_NAME               5 (signal)
+
+ 34          48 LOAD_CONST               1 (0)
+             50 LOAD_CONST               2 (None)
+             52 IMPORT_NAME              6 (datetime)
+             54 STORE_NAME               6 (datetime)
+
+ 37          56 LOAD_CONST               1 (0)
+             58 STORE_NAME               7 (MiniDumpNormal)
+
+ 38          60 LOAD_CONST               1 (0)
+             62 STORE_NAME               8 (EXCEPTION_CONTINUE_SEARCH)
+
+ 41          64 LOAD_NAME                9 (getattr)
+             66 LOAD_NAME                1 (ctypes)
+             68 LOAD_CONST               4 ('WINFUNCTYPE')
+             70 LOAD_NAME                1 (ctypes)
+             72 LOAD_ATTR               10 (CFUNCTYPE)
+             74 CALL_FUNCTION            3
+             76 STORE_NAME              11 (_CALLBACK_FACTORY)
+
+ 42          78 LOAD_NAME               11 (_CALLBACK_FACTORY)
+             80 LOAD_NAME                2 (wintypes)
+             82 LOAD_ATTR               12 (LONG)
+             84 LOAD_NAME                1 (ctypes)
+             86 LOAD_ATTR               13 (c_void_p)
+             88 CALL_FUNCTION            2
+             90 STORE_NAME              14 (_TOP_LEVEL_EXCEPTION_FILTER_TYPE)
+
+ 45          92 LOAD_BUILD_CLASS
+             94 LOAD_CONST               5 (<code object _MINIDUMP_EXCEPTION_INFORMATION at 0x000001F324E76920, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 45>)
+             96 LOAD_CONST               6 ('_MINIDUMP_EXCEPTION_INFORMATION')
+             98 MAKE_FUNCTION            0
+            100 LOAD_CONST               6 ('_MINIDUMP_EXCEPTION_INFORMATION')
+            102 LOAD_NAME                1 (ctypes)
+            104 LOAD_ATTR               15 (Structure)
+            106 CALL_FUNCTION            3
+            108 STORE_NAME              16 (_MINIDUMP_EXCEPTION_INFORMATION)
+
+ 54         110 LOAD_CONST               2 (None)
+            112 STORE_GLOBAL            17 (_kernel32)
+
+ 55         114 LOAD_CONST               2 (None)
+            116 STORE_GLOBAL            18 (_dbghelp)
+
+ 56         118 LOAD_CONST               2 (None)
+            120 STORE_GLOBAL            19 (_previous_unhandled_filter_ref)
+
+ 57         122 LOAD_CONST               7 (False)
+            124 STORE_GLOBAL            20 (_unhandled_filter_installed)
+
+ 58         126 LOAD_CONST               7 (False)
+            128 STORE_GLOBAL            21 (_dump_in_progress)
+
+ 61         130 LOAD_CONST               8 (<code object _configure_winapi at 0x000001F324E76DF0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 61>)
+            132 LOAD_CONST               9 ('_configure_winapi')
+            134 MAKE_FUNCTION            0
+            136 STORE_NAME              22 (_configure_winapi)
+
+ 94         138 LOAD_CONST              10 (<code object _get_winapi at 0x000001F324E76240, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 94>)
+            140 LOAD_CONST              11 ('_get_winapi')
+            142 MAKE_FUNCTION            0
+            144 STORE_NAME              23 (_get_winapi)
+
+111         146 LOAD_CONST              12 (<code object _get_native_file_handle at 0x000001F324E76500, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 111>)
+            148 LOAD_CONST              13 ('_get_native_file_handle')
+            150 MAKE_FUNCTION            0
+            152 STORE_NAME              24 (_get_native_file_handle)
+
+124         154 LOAD_CONST              14 (<code object _get_last_error at 0x000001F324E76A80, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 124>)
+            156 LOAD_CONST              15 ('_get_last_error')
+            158 MAKE_FUNCTION            0
+            160 STORE_NAME              25 (_get_last_error)
+
+136         162 LOAD_CONST              16 (<code object _format_windows_error at 0x000001F324E76870, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 136>)
+            164 LOAD_CONST              17 ('_format_windows_error')
+            166 MAKE_FUNCTION            0
+            168 STORE_NAME              26 (_format_windows_error)
+
+154         170 LOAD_CONST              18 (<code object _report_crash_handler_error at 0x000001F324E76BE0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 154>)
+            172 LOAD_CONST              19 ('_report_crash_handler_error')
+            174 MAKE_FUNCTION            0
+            176 STORE_NAME              27 (_report_crash_handler_error)
+
+175         178 LOAD_CONST              20 (<code object _remove_failed_dump at 0x000001F324E762F0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 175>)
+            180 LOAD_CONST              21 ('_remove_failed_dump')
+            182 MAKE_FUNCTION            0
+            184 STORE_NAME              28 (_remove_failed_dump)
+
+194         186 LOAD_CONST              22 (<code object _get_crash_dir at 0x000001F324E76C90, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 194>)
+            188 LOAD_CONST              23 ('_get_crash_dir')
+            190 MAKE_FUNCTION            0
+            192 STORE_NAME              29 (_get_crash_dir)
+
+210         194 LOAD_CONST              46 (('crash', 'dmp'))
+            196 LOAD_CONST              26 (<code object _generate_crash_filename at 0x000001F3253DA5B0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 210>)
+            198 LOAD_CONST              27 ('_generate_crash_filename')
+            200 MAKE_FUNCTION            1 (defaults)
+            202 STORE_NAME              30 (_generate_crash_filename)
+
+226         204 LOAD_CONST              28 (<code object _write_python_traceback_to_file at 0x000001F3253DA870, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 226>)
+            206 LOAD_CONST              29 ('_write_python_traceback_to_file')
+            208 MAKE_FUNCTION            0
+            210 STORE_NAME              31 (_write_python_traceback_to_file)
+
+245         212 LOAD_CONST              30 (<code object _try_write_minidump at 0x000001F3253DA2F0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 245>)
+            214 LOAD_CONST              31 ('_try_write_minidump')
+            216 MAKE_FUNCTION            0
+            218 STORE_NAME              32 (_try_write_minidump)
+
+278         220 LOAD_CONST              47 ((None,))
+            222 LOAD_CONST              32 (<code object _write_minidump at 0x000001F3253DA920, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 278>)
+            224 LOAD_CONST              33 ('_write_minidump')
+            226 MAKE_FUNCTION            1 (defaults)
+            228 STORE_NAME              33 (_write_minidump)
+
+350         230 LOAD_CONST              34 (<code object _unhandled_filter_impl at 0x000001F3253DA7C0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 350>)
+            232 LOAD_CONST              35 ('_unhandled_filter_impl')
+            234 MAKE_FUNCTION            0
+            236 STORE_NAME              34 (_unhandled_filter_impl)
+
+372         238 LOAD_NAME               14 (_TOP_LEVEL_EXCEPTION_FILTER_TYPE)
+            240 LOAD_NAME               34 (_unhandled_filter_impl)
+            242 CALL_FUNCTION            1
+            244 STORE_NAME              35 (_unhandled_filter_ref)
+
+377         246 LOAD_CONST              36 (<code object _sigabrt_handler at 0x000001F3253DA450, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 377>)
+            248 LOAD_CONST              37 ('_sigabrt_handler')
+            250 MAKE_FUNCTION            0
+            252 STORE_NAME              36 (_sigabrt_handler)
+
+401         254 LOAD_CONST              38 (<code object _qt_fatal_message_handler at 0x000001F3253DABE0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 401>)
+            256 LOAD_CONST              39 ('_qt_fatal_message_handler')
+            258 MAKE_FUNCTION            0
+            260 STORE_NAME              37 (_qt_fatal_message_handler)
+
+442         262 LOAD_CONST              40 (<code object install_qt_fatal_handler at 0x000001F3253DA3A0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 442>)
+            264 LOAD_CONST              41 ('install_qt_fatal_handler')
+            266 MAKE_FUNCTION            0
+            268 STORE_NAME              38 (install_qt_fatal_handler)
+
+461         270 LOAD_CONST              42 (<code object _install_unhandled_exception_filter at 0x000001F3253DA660, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 461>)
+            272 LOAD_CONST              43 ('_install_unhandled_exception_filter')
+            274 MAKE_FUNCTION            0
+            276 STORE_NAME              39 (_install_unhandled_exception_filter)
+
+483         278 LOAD_CONST              44 (<code object _install_win32 at 0x000001F3253A2EA0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 483>)
+            280 LOAD_CONST              45 ('_install_win32')
+            282 MAKE_FUNCTION            0
+            284 STORE_NAME              40 (_install_win32)
+            286 LOAD_CONST               2 (None)
+            288 RETURN_VALUE
+
+=== _MINIDUMP_EXCEPTION_INFORMATION ===
+ 45           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('_MINIDUMP_EXCEPTION_INFORMATION')
+              6 STORE_NAME               2 (__qualname__)
+
+ 46           8 LOAD_CONST               1 ('描述 MiniDumpWriteDump 所需异常上下文。')
+             10 STORE_NAME               3 (__doc__)
+
+ 48          12 LOAD_CONST               2 ('ThreadId')
+             14 LOAD_NAME                4 (wintypes)
+             16 LOAD_ATTR                5 (DWORD)
+             18 BUILD_TUPLE              2
+
+ 49          20 LOAD_CONST               3 ('ExceptionPointers')
+             22 LOAD_NAME                6 (ctypes)
+             24 LOAD_ATTR                7 (c_void_p)
+             26 BUILD_TUPLE              2
+
+ 50          28 LOAD_CONST               4 ('ClientPointers')
+             30 LOAD_NAME                4 (wintypes)
+             32 LOAD_ATTR                8 (BOOL)
+             34 BUILD_TUPLE              2
+
+ 47          36 BUILD_LIST               3
+             38 STORE_NAME               9 (_fields_)
+             40 LOAD_CONST               5 (None)
+             42 RETURN_VALUE
+
+=== _configure_winapi ===
+ 71           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (kernel32)
+              4 LOAD_ATTR                0 (GetCurrentProcess)
+              6 STORE_ATTR               1 (argtypes)
+
+ 72           8 LOAD_GLOBAL              2 (wintypes)
+             10 LOAD_ATTR                3 (HANDLE)
+             12 LOAD_FAST                0 (kernel32)
+             14 LOAD_ATTR                0 (GetCurrentProcess)
+             16 STORE_ATTR               4 (restype)
+
+ 73          18 BUILD_LIST               0
+             20 LOAD_FAST                0 (kernel32)
+             22 LOAD_ATTR                5 (GetCurrentProcessId)
+             24 STORE_ATTR               1 (argtypes)
+
+ 74          26 LOAD_GLOBAL              2 (wintypes)
+             28 LOAD_ATTR                6 (DWORD)
+             30 LOAD_FAST                0 (kernel32)
+             32 LOAD_ATTR                5 (GetCurrentProcessId)
+             34 STORE_ATTR               4 (restype)
+
+ 75          36 BUILD_LIST               0
+             38 LOAD_FAST                0 (kernel32)
+             40 LOAD_ATTR                7 (GetCurrentThreadId)
+             42 STORE_ATTR               1 (argtypes)
+
+ 76          44 LOAD_GLOBAL              2 (wintypes)
+             46 LOAD_ATTR                6 (DWORD)
+             48 LOAD_FAST                0 (kernel32)
+             50 LOAD_ATTR                7 (GetCurrentThreadId)
+             52 STORE_ATTR               4 (restype)
+
+ 77          54 LOAD_GLOBAL              8 (_TOP_LEVEL_EXCEPTION_FILTER_TYPE)
+             56 BUILD_LIST               1
+             58 LOAD_FAST                0 (kernel32)
+             60 LOAD_ATTR                9 (SetUnhandledExceptionFilter)
+             62 STORE_ATTR               1 (argtypes)
+
+ 78          64 LOAD_GLOBAL             10 (ctypes)
+             66 LOAD_ATTR               11 (c_void_p)
+             68 LOAD_FAST                0 (kernel32)
+             70 LOAD_ATTR                9 (SetUnhandledExceptionFilter)
+             72 STORE_ATTR               4 (restype)
+
+ 79          74 LOAD_GLOBAL              2 (wintypes)
+             76 LOAD_ATTR               12 (LPCWSTR)
+             78 BUILD_LIST               1
+             80 LOAD_FAST                0 (kernel32)
+             82 LOAD_ATTR               13 (OutputDebugStringW)
+             84 STORE_ATTR               1 (argtypes)
+
+ 80          86 LOAD_CONST               1 (None)
+             88 LOAD_FAST                0 (kernel32)
+             90 LOAD_ATTR               13 (OutputDebugStringW)
+             92 STORE_ATTR               4 (restype)
+
+ 83          94 LOAD_GLOBAL              2 (wintypes)
+             96 LOAD_ATTR                3 (HANDLE)
+
+ 84          98 LOAD_GLOBAL              2 (wintypes)
+            100 LOAD_ATTR                6 (DWORD)
+
+ 85         102 LOAD_GLOBAL              2 (wintypes)
+            104 LOAD_ATTR                3 (HANDLE)
+
+ 86         106 LOAD_GLOBAL              2 (wintypes)
+            108 LOAD_ATTR                6 (DWORD)
+
+ 87         110 LOAD_GLOBAL             10 (ctypes)
+            112 LOAD_METHOD             14 (POINTER)
+            114 LOAD_GLOBAL             15 (_MINIDUMP_EXCEPTION_INFORMATION)
+            116 CALL_METHOD              1
+
+ 88         118 LOAD_GLOBAL             10 (ctypes)
+            120 LOAD_ATTR               11 (c_void_p)
+
+ 89         122 LOAD_GLOBAL             10 (ctypes)
+            124 LOAD_ATTR               11 (c_void_p)
+
+ 82         126 BUILD_LIST               7
+            128 LOAD_FAST                1 (dbghelp)
+            130 LOAD_ATTR               16 (MiniDumpWriteDump)
+            132 STORE_ATTR               1 (argtypes)
+
+ 91         134 LOAD_GLOBAL              2 (wintypes)
+            136 LOAD_ATTR               17 (BOOL)
+            138 LOAD_FAST                1 (dbghelp)
+            140 LOAD_ATTR               16 (MiniDumpWriteDump)
+            142 STORE_ATTR               4 (restype)
+            144 LOAD_CONST               1 (None)
+            146 RETURN_VALUE
+
+=== _get_winapi ===
+104           0 LOAD_GLOBAL              0 (_kernel32)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        16
+              8 LOAD_GLOBAL              1 (_dbghelp)
+             10 LOAD_CONST               1 (None)
+             12 IS_OP                    0
+             14 POP_JUMP_IF_FALSE       54
+
+105     >>   16 LOAD_GLOBAL              2 (ctypes)
+             18 LOAD_ATTR                3 (WinDLL)
+             20 LOAD_CONST               2 ('kernel32')
+             22 LOAD_CONST               3 (True)
+             24 LOAD_CONST               4 (('use_last_error',))
+             26 CALL_FUNCTION_KW         2
+             28 STORE_GLOBAL             0 (_kernel32)
+
+106          30 LOAD_GLOBAL              2 (ctypes)
+             32 LOAD_ATTR                3 (WinDLL)
+             34 LOAD_CONST               5 ('dbghelp')
+             36 LOAD_CONST               3 (True)
+             38 LOAD_CONST               4 (('use_last_error',))
+             40 CALL_FUNCTION_KW         2
+             42 STORE_GLOBAL             1 (_dbghelp)
+
+107          44 LOAD_GLOBAL              4 (_configure_winapi)
+             46 LOAD_GLOBAL              0 (_kernel32)
+             48 LOAD_GLOBAL              1 (_dbghelp)
+             50 CALL_FUNCTION            2
+             52 POP_TOP
+
+108     >>   54 LOAD_GLOBAL              0 (_kernel32)
+             56 LOAD_GLOBAL              1 (_dbghelp)
+             58 BUILD_TUPLE              2
+             60 RETURN_VALUE
+
+=== _get_native_file_handle ===
+120           0 LOAD_CONST               1 (0)
+              2 LOAD_CONST               2 (None)
+              4 IMPORT_NAME              0 (msvcrt)
+              6 STORE_FAST               1 (msvcrt)
+
+121           8 LOAD_FAST                1 (msvcrt)
+             10 LOAD_METHOD              1 (get_osfhandle)
+             12 LOAD_FAST                0 (dump_file)
+             14 LOAD_METHOD              2 (fileno)
+             16 CALL_METHOD              0
+             18 CALL_METHOD              1
+             20 RETURN_VALUE
+
+=== _get_last_error ===
+133           0 LOAD_GLOBAL              0 (ctypes)
+              2 LOAD_METHOD              1 (get_last_error)
+              4 CALL_METHOD              0
+              6 RETURN_VALUE
+
+=== _format_windows_error ===
+145           0 LOAD_FAST                0 (error_code)
+              2 LOAD_CONST               1 (4294967295)
+              4 BINARY_AND
+              6 STORE_FAST               1 (unsigned_code)
+
+146           8 LOAD_FAST                1 (unsigned_code)
+             10 LOAD_CONST               2 (4294901760)
+             12 BINARY_AND
+             14 LOAD_CONST               3 (2147942400)
+             16 COMPARE_OP               2 (==)
+             18 POP_JUMP_IF_FALSE       52
+
+147          20 LOAD_FAST                1 (unsigned_code)
+             22 LOAD_CONST               4 (65535)
+             24 BINARY_AND
+             26 STORE_FAST               2 (win32_code)
+
+148          28 LOAD_FAST                0 (error_code)
+             30 FORMAT_VALUE             0
+             32 LOAD_CONST               5 (' (HRESULT 0x')
+             34 LOAD_FAST                1 (unsigned_code)
+             36 LOAD_CONST               6 ('08X')
+             38 FORMAT_VALUE             4 (with format)
+             40 LOAD_CONST               7 (', Win32 ')
+             42 LOAD_FAST                2 (win32_code)
+             44 FORMAT_VALUE             0
+             46 LOAD_CONST               8 (')')
+             48 BUILD_STRING             6
+             50 RETURN_VALUE
+
+149     >>   52 LOAD_FAST                0 (error_code)
+             54 LOAD_CONST               9 (0)
+             56 COMPARE_OP               0 (<)
+             58 POP_JUMP_IF_TRUE        68
+             60 LOAD_FAST                1 (unsigned_code)
+             62 LOAD_CONST               4 (65535)
+             64 COMPARE_OP               4 (>)
+             66 POP_JUMP_IF_FALSE       86
+
+150     >>   68 LOAD_FAST                0 (error_code)
+             70 FORMAT_VALUE             0
+             72 LOAD_CONST              10 (' (0x')
+             74 LOAD_FAST                1 (unsigned_code)
+             76 LOAD_CONST               6 ('08X')
+             78 FORMAT_VALUE             4 (with format)
+             80 LOAD_CONST               8 (')')
+             82 BUILD_STRING             4
+             84 RETURN_VALUE
+
+151     >>   86 LOAD_GLOBAL              0 (str)
+             88 LOAD_FAST                0 (error_code)
+             90 CALL_FUNCTION            1
+             92 RETURN_VALUE
+
+=== _report_crash_handler_error ===
+163           0 LOAD_CONST               1 ('[CrashHandler] ')
+              2 LOAD_FAST                0 (message)
+              4 FORMAT_VALUE             0
+              6 BUILD_STRING             2
+              8 STORE_FAST               1 (text)
+
+164          10 SETUP_FINALLY           20 (to 32)
+
+165          12 LOAD_GLOBAL              0 (print)
+             14 LOAD_FAST                1 (text)
+             16 LOAD_GLOBAL              1 (sys)
+             18 LOAD_ATTR                2 (stderr)
+             20 LOAD_CONST               2 (True)
+             22 LOAD_CONST               3 (('file', 'flush'))
+             24 CALL_FUNCTION_KW         3
+             26 POP_TOP
+             28 POP_BLOCK
+             30 JUMP_FORWARD            18 (to 50)
+
+166     >>   32 DUP_TOP
+             34 LOAD_GLOBAL              3 (Exception)
+             36 JUMP_IF_NOT_EXC_MATCH    48
+             38 POP_TOP
+             40 POP_TOP
+             42 POP_TOP
+
+167          44 POP_EXCEPT
+             46 JUMP_FORWARD             2 (to 50)
+        >>   48 RERAISE
+
+168     >>   50 SETUP_FINALLY           24 (to 76)
+
+169          52 LOAD_GLOBAL              4 (_get_winapi)
+             54 CALL_FUNCTION            0
+             56 UNPACK_SEQUENCE          2
+             58 STORE_FAST               2 (kernel32)
+             60 STORE_FAST               3 (_)
+
+170          62 LOAD_FAST                2 (kernel32)
+             64 LOAD_METHOD              5 (OutputDebugStringW)
+             66 LOAD_FAST                1 (text)
+             68 CALL_METHOD              1
+             70 POP_TOP
+             72 POP_BLOCK
+             74 JUMP_FORWARD            18 (to 94)
+
+171     >>   76 DUP_TOP
+             78 LOAD_GLOBAL              3 (Exception)
+             80 JUMP_IF_NOT_EXC_MATCH    92
+             82 POP_TOP
+             84 POP_TOP
+             86 POP_TOP
+
+172          88 POP_EXCEPT
+             90 JUMP_FORWARD             2 (to 94)
+        >>   92 RERAISE
+        >>   94 LOAD_CONST               4 (None)
+             96 RETURN_VALUE
+
+=== _remove_failed_dump ===
+184           0 LOAD_FAST                0 (dump_path)
+              2 POP_JUMP_IF_TRUE         8
+
+185           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+186     >>    8 SETUP_FINALLY           14 (to 24)
+
+187          10 LOAD_GLOBAL              0 (os)
+             12 LOAD_METHOD              1 (remove)
+             14 LOAD_FAST                0 (dump_path)
+             16 CALL_METHOD              1
+             18 POP_TOP
+             20 POP_BLOCK
+             22 JUMP_FORWARD            72 (to 96)
+
+188     >>   24 DUP_TOP
+             26 LOAD_GLOBAL              2 (FileNotFoundError)
+             28 JUMP_IF_NOT_EXC_MATCH    40
+             30 POP_TOP
+             32 POP_TOP
+             34 POP_TOP
+
+189          36 POP_EXCEPT
+             38 JUMP_FORWARD            56 (to 96)
+
+190     >>   40 DUP_TOP
+             42 LOAD_GLOBAL              3 (Exception)
+             44 JUMP_IF_NOT_EXC_MATCH    94
+             46 POP_TOP
+             48 STORE_FAST               1 (exc)
+             50 POP_TOP
+             52 SETUP_FINALLY           32 (to 86)
+
+191          54 LOAD_GLOBAL              4 (_report_crash_handler_error)
+             56 LOAD_CONST               2 ('无法删除失败的 dump ')
+             58 LOAD_FAST                0 (dump_path)
+             60 FORMAT_VALUE             0
+             62 LOAD_CONST               3 (': ')
+             64 LOAD_FAST                1 (exc)
+             66 FORMAT_VALUE             2 (repr)
+             68 BUILD_STRING             4
+             70 CALL_FUNCTION            1
+             72 POP_TOP
+             74 POP_BLOCK
+             76 POP_EXCEPT
+             78 LOAD_CONST               1 (None)
+             80 STORE_FAST               1 (exc)
+             82 DELETE_FAST              1 (exc)
+             84 JUMP_FORWARD            10 (to 96)
+        >>   86 LOAD_CONST               1 (None)
+             88 STORE_FAST               1 (exc)
+             90 DELETE_FAST              1 (exc)
+             92 RERAISE
+        >>   94 RERAISE
+        >>   96 LOAD_CONST               1 (None)
+             98 RETURN_VALUE
+
+=== _get_crash_dir ===
+204           0 LOAD_GLOBAL              0 (os)
+              2 LOAD_ATTR                1 (environ)
+              4 LOAD_METHOD              2 (get)
+              6 LOAD_CONST               1 ('APPDATA')
+              8 LOAD_GLOBAL              0 (os)
+             10 LOAD_ATTR                3 (path)
+             12 LOAD_METHOD              4 (expanduser)
+             14 LOAD_CONST               2 ('~')
+             16 CALL_METHOD              1
+             18 CALL_METHOD              2
+             20 STORE_FAST               0 (appdata)
+
+205          22 LOAD_GLOBAL              0 (os)
+             24 LOAD_ATTR                3 (path)
+             26 LOAD_METHOD              5 (join)
+             28 LOAD_FAST                0 (appdata)
+             30 LOAD_CONST               3 ('WiiMHome')
+             32 LOAD_CONST               4 ('crashes')
+             34 CALL_METHOD              3
+             36 STORE_FAST               1 (crash_dir)
+
+206          38 LOAD_GLOBAL              0 (os)
+             40 LOAD_ATTR                6 (makedirs)
+             42 LOAD_FAST                1 (crash_dir)
+             44 LOAD_CONST               5 (True)
+             46 LOAD_CONST               6 (('exist_ok',))
+             48 CALL_FUNCTION_KW         2
+             50 POP_TOP
+
+207          52 LOAD_FAST                1 (crash_dir)
+             54 RETURN_VALUE
+
+=== _generate_crash_filename ===
+221           0 LOAD_GLOBAL              0 (datetime)
+              2 LOAD_ATTR                0 (datetime)
+              4 LOAD_METHOD              1 (now)
+              6 CALL_METHOD              0
+              8 LOAD_METHOD              2 (strftime)
+             10 LOAD_CONST               1 ('%Y%m%d_%H%M%S_%f')
+             12 CALL_METHOD              1
+             14 STORE_FAST               2 (ts)
+
+222          16 LOAD_GLOBAL              3 (_get_crash_dir)
+             18 CALL_FUNCTION            0
+             20 STORE_FAST               3 (crash_dir)
+
+223          22 LOAD_GLOBAL              4 (os)
+             24 LOAD_ATTR                5 (path)
+             26 LOAD_METHOD              6 (join)
+             28 LOAD_FAST                3 (crash_dir)
+             30 LOAD_FAST                0 (prefix)
+             32 FORMAT_VALUE             0
+             34 LOAD_CONST               2 ('_')
+             36 LOAD_FAST                2 (ts)
+             38 FORMAT_VALUE             0
+             40 LOAD_CONST               3 ('.')
+             42 LOAD_FAST                1 (ext)
+             44 FORMAT_VALUE             0
+             46 BUILD_STRING             5
+             48 CALL_METHOD              2
+             50 RETURN_VALUE
+
+=== _write_python_traceback_to_file ===
+236           0 SETUP_FINALLY           84 (to 86)
+
+237           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (None)
+              6 IMPORT_NAME              0 (faulthandler)
+              8 STORE_FAST               1 (faulthandler)
+
+238          10 LOAD_FAST                0 (dump_path)
+             12 LOAD_METHOD              1 (replace)
+             14 LOAD_CONST               3 ('.dmp')
+             16 LOAD_CONST               4 ('.traceback.txt')
+             18 CALL_METHOD              2
+             20 STORE_FAST               2 (tb_path)
+
+239          22 LOAD_GLOBAL              2 (open)
+             24 LOAD_FAST                2 (tb_path)
+             26 LOAD_CONST               5 ('w')
+             28 LOAD_CONST               6 ('utf-8')
+             30 LOAD_CONST               7 (('encoding',))
+             32 CALL_FUNCTION_KW         3
+             34 SETUP_WITH              30 (to 66)
+             36 STORE_FAST               3 (tb_f)
+
+240          38 LOAD_FAST                1 (faulthandler)
+             40 LOAD_ATTR                3 (dump_traceback)
+             42 LOAD_FAST                3 (tb_f)
+             44 LOAD_CONST               8 (True)
+             46 LOAD_CONST               9 (('file', 'all_threads'))
+             48 CALL_FUNCTION_KW         2
+             50 POP_TOP
+             52 POP_BLOCK
+             54 LOAD_CONST               2 (None)
+             56 DUP_TOP
+             58 DUP_TOP
+             60 CALL_FUNCTION            3
+             62 POP_TOP
+             64 JUMP_FORWARD            16 (to 82)
+        >>   66 WITH_EXCEPT_START
+             68 POP_JUMP_IF_TRUE        72
+             70 RERAISE
+        >>   72 POP_TOP
+             74 POP_TOP
+             76 POP_TOP
+             78 POP_EXCEPT
+             80 POP_TOP
+        >>   82 POP_BLOCK
+             84 JUMP_FORWARD            18 (to 104)
+
+241     >>   86 DUP_TOP
+             88 LOAD_GLOBAL              4 (Exception)
+             90 JUMP_IF_NOT_EXC_MATCH   102
+             92 POP_TOP
+             94 POP_TOP
+             96 POP_TOP
+
+242          98 POP_EXCEPT
+            100 JUMP_FORWARD             2 (to 104)
+        >>  102 RERAISE
+        >>  104 LOAD_CONST               2 (None)
+            106 RETURN_VALUE
+
+=== _try_write_minidump ===
+260           0 LOAD_GLOBAL              0 (open)
+              2 LOAD_FAST                2 (dump_path)
+              4 LOAD_CONST               1 ('wb')
+              6 LOAD_CONST               2 (0)
+              8 LOAD_CONST               3 (('buffering',))
+             10 CALL_FUNCTION_KW         3
+             12 SETUP_WITH             106 (to 120)
+             14 STORE_FAST               4 (dump_file)
+
+261          16 LOAD_GLOBAL              1 (_get_native_file_handle)
+             18 LOAD_FAST                4 (dump_file)
+             20 CALL_FUNCTION            1
+             22 STORE_FAST               5 (native_handle)
+
+262          24 LOAD_FAST                5 (native_handle)
+             26 LOAD_CONST               4 (-1)
+             28 COMPARE_OP               2 (==)
+             30 POP_JUMP_IF_FALSE       40
+
+263          32 LOAD_GLOBAL              2 (OSError)
+             34 LOAD_CONST               5 ('msvcrt.get_osfhandle 返回无效句柄')
+             36 CALL_FUNCTION            1
+             38 RAISE_VARARGS            1
+
+264     >>   40 LOAD_FAST                1 (dbghelp)
+             42 LOAD_METHOD              3 (MiniDumpWriteDump)
+
+265          44 LOAD_FAST                0 (kernel32)
+             46 LOAD_METHOD              4 (GetCurrentProcess)
+             48 CALL_METHOD              0
+
+266          50 LOAD_FAST                0 (kernel32)
+             52 LOAD_METHOD              5 (GetCurrentProcessId)
+             54 CALL_METHOD              0
+
+267          56 LOAD_GLOBAL              6 (wintypes)
+             58 LOAD_METHOD              7 (HANDLE)
+             60 LOAD_FAST                5 (native_handle)
+             62 CALL_METHOD              1
+
+268          64 LOAD_GLOBAL              8 (MiniDumpNormal)
+
+269          66 LOAD_FAST                3 (exc_info_ref)
+
+270          68 LOAD_CONST               6 (None)
+
+271          70 LOAD_CONST               6 (None)
+
+264          72 CALL_METHOD              7
+             74 STORE_FAST               6 (result)
+
+273          76 LOAD_FAST                6 (result)
+             78 POP_JUMP_IF_FALSE       96
+
+274          80 POP_BLOCK
+             82 LOAD_CONST               6 (None)
+             84 DUP_TOP
+             86 DUP_TOP
+             88 CALL_FUNCTION            3
+             90 POP_TOP
+             92 LOAD_CONST               7 ((True, 0))
+             94 RETURN_VALUE
+
+275     >>   96 LOAD_CONST               8 (False)
+             98 LOAD_GLOBAL              9 (_get_last_error)
+            100 CALL_FUNCTION            0
+            102 BUILD_TUPLE              2
+            104 POP_BLOCK
+            106 ROT_TWO
+            108 LOAD_CONST               6 (None)
+            110 DUP_TOP
+            112 DUP_TOP
+            114 CALL_FUNCTION            3
+            116 POP_TOP
+            118 RETURN_VALUE
+        >>  120 WITH_EXCEPT_START
+            122 POP_JUMP_IF_TRUE       126
+            124 RERAISE
+        >>  126 POP_TOP
+            128 POP_TOP
+            130 POP_TOP
+            132 POP_EXCEPT
+            134 POP_TOP
+            136 LOAD_CONST               6 (None)
+            138 RETURN_VALUE
+
+=== _write_minidump ===
+289           0 LOAD_GLOBAL              0 (_dump_in_progress)
+              2 POP_JUMP_IF_FALSE        8
+
+290           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+292     >>    8 LOAD_CONST               2 (True)
+             10 STORE_GLOBAL             0 (_dump_in_progress)
+
+293          12 LOAD_CONST               1 (None)
+             14 STORE_FAST               1 (dump_path)
+
+294          16 EXTENDED_ARG             1
+             18 SETUP_FINALLY          374 (to 394)
+             20 EXTENDED_ARG             1
+             22 SETUP_FINALLY          294 (to 318)
+
+295          24 LOAD_GLOBAL              1 (_get_winapi)
+             26 CALL_FUNCTION            0
+             28 UNPACK_SEQUENCE          2
+             30 STORE_FAST               2 (kernel32)
+             32 STORE_FAST               3 (dbghelp)
+
+296          34 LOAD_GLOBAL              2 (_generate_crash_filename)
+             36 LOAD_CONST               3 ('crash')
+             38 LOAD_CONST               4 ('dmp')
+             40 LOAD_CONST               5 (('prefix', 'ext'))
+             42 CALL_FUNCTION_KW         2
+             44 STORE_FAST               1 (dump_path)
+
+298          46 LOAD_CONST               1 (None)
+             48 STORE_FAST               4 (exc_info)
+
+299          50 LOAD_CONST               1 (None)
+             52 STORE_FAST               5 (exc_info_ref)
+
+300          54 LOAD_FAST                0 (exc_pointers_ptr)
+             56 LOAD_CONST               1 (None)
+             58 IS_OP                    1
+             60 POP_JUMP_IF_FALSE      100
+
+301          62 LOAD_GLOBAL              3 (_MINIDUMP_EXCEPTION_INFORMATION)
+             64 CALL_FUNCTION            0
+             66 STORE_FAST               4 (exc_info)
+
+302          68 LOAD_FAST                2 (kernel32)
+             70 LOAD_METHOD              4 (GetCurrentThreadId)
+             72 CALL_METHOD              0
+             74 LOAD_FAST                4 (exc_info)
+             76 STORE_ATTR               5 (ThreadId)
+
+303          78 LOAD_FAST                0 (exc_pointers_ptr)
+             80 LOAD_FAST                4 (exc_info)
+             82 STORE_ATTR               6 (ExceptionPointers)
+
+304          84 LOAD_CONST               6 (False)
+             86 LOAD_FAST                4 (exc_info)
+             88 STORE_ATTR               7 (ClientPointers)
+
+305          90 LOAD_GLOBAL              8 (ctypes)
+             92 LOAD_METHOD              9 (byref)
+             94 LOAD_FAST                4 (exc_info)
+             96 CALL_METHOD              1
+             98 STORE_FAST               5 (exc_info_ref)
+
+307     >>  100 BUILD_LIST               0
+            102 STORE_FAST               6 (failures)
+
+308         104 LOAD_CONST               7 ('带异常上下文')
+            106 LOAD_FAST                5 (exc_info_ref)
+            108 BUILD_TUPLE              2
+            110 BUILD_LIST               1
+            112 STORE_FAST               7 (attempts)
+
+309         114 LOAD_FAST                5 (exc_info_ref)
+            116 LOAD_CONST               1 (None)
+            118 IS_OP                    1
+            120 POP_JUMP_IF_FALSE      132
+
+310         122 LOAD_FAST                7 (attempts)
+            124 LOAD_METHOD             10 (append)
+            126 LOAD_CONST               8 (('不带异常上下文', None))
+            128 CALL_METHOD              1
+            130 POP_TOP
+
+312     >>  132 LOAD_FAST                7 (attempts)
+            134 GET_ITER
+        >>  136 FOR_ITER               120 (to 258)
+            138 UNPACK_SEQUENCE          2
+            140 STORE_FAST               8 (attempt_name)
+            142 STORE_FAST               9 (attempt_exc_info_ref)
+
+313         144 LOAD_GLOBAL             11 (_try_write_minidump)
+
+314         146 LOAD_FAST                2 (kernel32)
+
+315         148 LOAD_FAST                3 (dbghelp)
+
+316         150 LOAD_FAST                1 (dump_path)
+
+317         152 LOAD_FAST                9 (attempt_exc_info_ref)
+
+313         154 CALL_FUNCTION            4
+            156 UNPACK_SEQUENCE          2
+            158 STORE_FAST              10 (result)
+            160 STORE_FAST              11 (error_code)
+
+319         162 LOAD_FAST               10 (result)
+            164 POP_JUMP_IF_FALSE      242
+
+320         166 LOAD_FAST                6 (failures)
+            168 POP_JUMP_IF_FALSE      218
+
+321         170 LOAD_FAST                6 (failures)
+            172 LOAD_CONST               9 (0)
+            174 BINARY_SUBSCR
+            176 UNPACK_SEQUENCE          2
+            178 STORE_FAST              12 (first_name)
+            180 STORE_FAST              13 (first_error)
+
+322         182 LOAD_GLOBAL             12 (_report_crash_handler_error)
+
+323         184 LOAD_CONST              10 ('MiniDumpWriteDump ')
+            186 LOAD_FAST               12 (first_name)
+            188 FORMAT_VALUE             0
+            190 LOAD_CONST              11 ('失败: ')
+
+324         192 LOAD_GLOBAL             13 (_format_windows_error)
+            194 LOAD_FAST               13 (first_error)
+            196 CALL_FUNCTION            1
+
+323         198 FORMAT_VALUE             0
+            200 LOAD_CONST              12 ('；')
+
+325         202 LOAD_FAST                8 (attempt_name)
+
+323         204 FORMAT_VALUE             0
+            206 LOAD_CONST              13 ('的 MiniDumpNormal 降级成功，路径: ')
+
+325         208 LOAD_FAST                1 (dump_path)
+
+323         210 FORMAT_VALUE             0
+            212 BUILD_STRING             8
+
+322         214 CALL_FUNCTION            1
+            216 POP_TOP
+
+327     >>  218 LOAD_GLOBAL             14 (_write_python_traceback_to_file)
+            220 LOAD_FAST                1 (dump_path)
+            222 CALL_FUNCTION            1
+            224 POP_TOP
+
+328         226 LOAD_FAST                1 (dump_path)
+            228 ROT_TWO
+            230 POP_TOP
+            232 POP_BLOCK
+            234 POP_BLOCK
+
+345         236 LOAD_CONST               6 (False)
+            238 STORE_GLOBAL             0 (_dump_in_progress)
+
+328         240 RETURN_VALUE
+
+329     >>  242 LOAD_FAST                6 (failures)
+            244 LOAD_METHOD             10 (append)
+            246 LOAD_FAST                8 (attempt_name)
+            248 LOAD_FAST               11 (error_code)
+            250 BUILD_TUPLE              2
+            252 CALL_METHOD              1
+            254 POP_TOP
+            256 JUMP_ABSOLUTE          136
+
+331     >>  258 LOAD_GLOBAL             15 (_remove_failed_dump)
+            260 LOAD_FAST                1 (dump_path)
+            262 CALL_FUNCTION            1
+            264 POP_TOP
+
+332         266 LOAD_CONST              12 ('；')
+            268 LOAD_METHOD             16 (join)
+            270 LOAD_CONST              14 (<code object <genexpr> at 0x000001F3253DA9D0, file "LPClientFramework\util\LPNativeCrashHandler_win.py", line 332>)
+            272 LOAD_CONST              15 ('_write_minidump.<locals>.<genexpr>')
+            274 MAKE_FUNCTION            0
+
+334         276 LOAD_FAST                6 (failures)
+
+332         278 GET_ITER
+            280 CALL_FUNCTION            1
+            282 CALL_METHOD              1
+            284 STORE_FAST              14 (failure_text)
+
+336         286 LOAD_GLOBAL             12 (_report_crash_handler_error)
+
+337         288 LOAD_CONST              16 ('MiniDumpWriteDump 全部失败，')
+            290 LOAD_FAST               14 (failure_text)
+            292 FORMAT_VALUE             0
+            294 LOAD_CONST              17 ('，路径: ')
+            296 LOAD_FAST                1 (dump_path)
+            298 FORMAT_VALUE             0
+            300 BUILD_STRING             4
+
+336         302 CALL_FUNCTION            1
+            304 POP_TOP
+
+339         306 POP_BLOCK
+            308 POP_BLOCK
+
+345         310 LOAD_CONST               6 (False)
+            312 STORE_GLOBAL             0 (_dump_in_progress)
+
+339         314 LOAD_CONST               1 (None)
+            316 RETURN_VALUE
+
+340     >>  318 DUP_TOP
+            320 LOAD_GLOBAL             17 (Exception)
+            322 EXTENDED_ARG             1
+            324 JUMP_IF_NOT_EXC_MATCH   384
+            326 POP_TOP
+            328 STORE_FAST              15 (exc)
+            330 POP_TOP
+            332 SETUP_FINALLY           42 (to 376)
+
+341         334 LOAD_GLOBAL             15 (_remove_failed_dump)
+            336 LOAD_FAST                1 (dump_path)
+            338 CALL_FUNCTION            1
+            340 POP_TOP
+
+342         342 LOAD_GLOBAL             12 (_report_crash_handler_error)
+            344 LOAD_CONST              18 ('生成 minidump 异常: ')
+            346 LOAD_FAST               15 (exc)
+            348 FORMAT_VALUE             2 (repr)
+            350 BUILD_STRING             2
+            352 CALL_FUNCTION            1
+            354 POP_TOP
+
+343         356 POP_BLOCK
+            358 POP_EXCEPT
+            360 LOAD_CONST               1 (None)
+            362 STORE_FAST              15 (exc)
+            364 DELETE_FAST             15 (exc)
+            366 POP_BLOCK
+
+345         368 LOAD_CONST               6 (False)
+            370 STORE_GLOBAL             0 (_dump_in_progress)
+
+343         372 LOAD_CONST               1 (None)
+            374 RETURN_VALUE
+        >>  376 LOAD_CONST               1 (None)
+            378 STORE_FAST              15 (exc)
+            380 DELETE_FAST             15 (exc)
+            382 RERAISE
+        >>  384 RERAISE
+            386 POP_BLOCK
+
+345         388 LOAD_CONST               6 (False)
+            390 STORE_GLOBAL             0 (_dump_in_progress)
+            392 JUMP_FORWARD             6 (to 400)
+        >>  394 LOAD_CONST               6 (False)
+            396 STORE_GLOBAL             0 (_dump_in_progress)
+            398 RERAISE
+        >>  400 LOAD_CONST               1 (None)
+            402 RETURN_VALUE
+
+=== _write_minidump.<genexpr> ===
+332           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                28 (to 32)
+
+334           4 UNPACK_SEQUENCE          2
+              6 STORE_FAST               1 (name)
+              8 STORE_FAST               2 (error_code)
+
+333          10 LOAD_FAST                1 (name)
+             12 FORMAT_VALUE             0
+             14 LOAD_CONST               0 (': ')
+             16 LOAD_GLOBAL              0 (_format_windows_error)
+             18 LOAD_FAST                2 (error_code)
+             20 CALL_FUNCTION            1
+             22 FORMAT_VALUE             0
+             24 BUILD_STRING             3
+             26 YIELD_VALUE
+             28 POP_TOP
+             30 JUMP_ABSOLUTE            2
+        >>   32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+=== _unhandled_filter_impl ===
+360           0 LOAD_GLOBAL              0 (_write_minidump)
+              2 LOAD_FAST                0 (exc_pointers_ptr)
+              4 CALL_FUNCTION            1
+              6 POP_TOP
+
+362           8 LOAD_GLOBAL              1 (_previous_unhandled_filter_ref)
+             10 STORE_FAST               1 (previous_filter)
+
+363          12 LOAD_FAST                1 (previous_filter)
+             14 LOAD_CONST               1 (None)
+             16 IS_OP                    1
+             18 POP_JUMP_IF_FALSE       82
+
+364          20 SETUP_FINALLY           10 (to 32)
+
+365          22 LOAD_FAST                1 (previous_filter)
+             24 LOAD_FAST                0 (exc_pointers_ptr)
+             26 CALL_FUNCTION            1
+             28 POP_BLOCK
+             30 RETURN_VALUE
+
+366     >>   32 DUP_TOP
+             34 LOAD_GLOBAL              2 (Exception)
+             36 JUMP_IF_NOT_EXC_MATCH    80
+             38 POP_TOP
+             40 STORE_FAST               2 (exc)
+             42 POP_TOP
+             44 SETUP_FINALLY           26 (to 72)
+
+367          46 LOAD_GLOBAL              3 (_report_crash_handler_error)
+             48 LOAD_CONST               2 ('调用既有未处理异常过滤器失败: ')
+             50 LOAD_FAST                2 (exc)
+             52 FORMAT_VALUE             2 (repr)
+             54 BUILD_STRING             2
+             56 CALL_FUNCTION            1
+             58 POP_TOP
+             60 POP_BLOCK
+             62 POP_EXCEPT
+             64 LOAD_CONST               1 (None)
+             66 STORE_FAST               2 (exc)
+             68 DELETE_FAST              2 (exc)
+             70 JUMP_FORWARD            10 (to 82)
+        >>   72 LOAD_CONST               1 (None)
+             74 STORE_FAST               2 (exc)
+             76 DELETE_FAST              2 (exc)
+             78 RERAISE
+        >>   80 RERAISE
+
+368     >>   82 LOAD_GLOBAL              4 (EXCEPTION_CONTINUE_SEARCH)
+             84 RETURN_VALUE
+
+=== _sigabrt_handler ===
+392           0 SETUP_FINALLY           12 (to 14)
+
+393           2 LOAD_GLOBAL              0 (_write_minidump)
+              4 LOAD_CONST               1 (None)
+              6 CALL_FUNCTION            1
+              8 POP_TOP
+             10 POP_BLOCK
+             12 JUMP_FORWARD            18 (to 32)
+
+394     >>   14 DUP_TOP
+             16 LOAD_GLOBAL              1 (Exception)
+             18 JUMP_IF_NOT_EXC_MATCH    30
+             20 POP_TOP
+             22 POP_TOP
+             24 POP_TOP
+
+395          26 POP_EXCEPT
+             28 JUMP_FORWARD             2 (to 32)
+        >>   30 RERAISE
+
+396     >>   32 LOAD_GLOBAL              2 (signal)
+             34 LOAD_METHOD              2 (signal)
+             36 LOAD_GLOBAL              2 (signal)
+             38 LOAD_ATTR                3 (SIGABRT)
+             40 LOAD_GLOBAL              2 (signal)
+             42 LOAD_ATTR                4 (SIG_DFL)
+             44 CALL_METHOD              2
+             46 POP_TOP
+             48 LOAD_CONST               1 (None)
+             50 RETURN_VALUE
+
+=== _qt_fatal_message_handler ===
+413           0 LOAD_FAST                0 (msg_type)
+              2 LOAD_ATTR                0 (value)
+              4 LOAD_CONST               1 (3)
+              6 COMPARE_OP               2 (==)
+              8 POP_JUMP_IF_FALSE      222
+
+414          10 SETUP_FINALLY          192 (to 204)
+
+415          12 LOAD_GLOBAL              1 (_get_crash_dir)
+             14 CALL_FUNCTION            0
+             16 STORE_FAST               3 (crash_dir)
+
+416          18 LOAD_GLOBAL              2 (datetime)
+             20 LOAD_ATTR                2 (datetime)
+             22 LOAD_METHOD              3 (now)
+             24 CALL_METHOD              0
+             26 LOAD_METHOD              4 (strftime)
+             28 LOAD_CONST               2 ('%Y%m%d_%H%M%S')
+             30 CALL_METHOD              1
+             32 STORE_FAST               4 (ts)
+
+417          34 LOAD_GLOBAL              5 (os)
+             36 LOAD_ATTR                6 (path)
+             38 LOAD_METHOD              7 (join)
+             40 LOAD_FAST                3 (crash_dir)
+             42 LOAD_CONST               3 ('qt_fatal_')
+             44 LOAD_FAST                4 (ts)
+             46 FORMAT_VALUE             0
+             48 LOAD_CONST               4 ('.log')
+             50 BUILD_STRING             3
+             52 CALL_METHOD              2
+             54 STORE_FAST               5 (log_path)
+
+418          56 LOAD_GLOBAL              8 (open)
+             58 LOAD_FAST                5 (log_path)
+             60 LOAD_CONST               5 ('w')
+             62 LOAD_CONST               6 ('utf-8')
+             64 LOAD_CONST               7 (('encoding',))
+             66 CALL_FUNCTION_KW         3
+             68 SETUP_WITH             114 (to 184)
+             70 STORE_FAST               6 (f)
+
+419          72 LOAD_FAST                6 (f)
+             74 LOAD_METHOD              9 (write)
+             76 LOAD_CONST               8 ('QtFatalMsg: ')
+             78 LOAD_FAST                2 (message)
+             80 FORMAT_VALUE             0
+             82 LOAD_CONST               9 ('\n')
+             84 BUILD_STRING             3
+             86 CALL_METHOD              1
+             88 POP_TOP
+
+420          90 LOAD_FAST                6 (f)
+             92 LOAD_METHOD              9 (write)
+             94 LOAD_CONST              10 ('  File: ')
+             96 LOAD_FAST                1 (context)
+             98 LOAD_ATTR               10 (file)
+            100 FORMAT_VALUE             0
+            102 LOAD_CONST               9 ('\n')
+            104 BUILD_STRING             3
+            106 CALL_METHOD              1
+            108 POP_TOP
+
+421         110 LOAD_FAST                6 (f)
+            112 LOAD_METHOD              9 (write)
+            114 LOAD_CONST              11 ('  Line: ')
+            116 LOAD_FAST                1 (context)
+            118 LOAD_ATTR               11 (line)
+            120 FORMAT_VALUE             0
+            122 LOAD_CONST               9 ('\n')
+            124 BUILD_STRING             3
+            126 CALL_METHOD              1
+            128 POP_TOP
+
+422         130 LOAD_FAST                6 (f)
+            132 LOAD_METHOD              9 (write)
+            134 LOAD_CONST              12 ('  Function: ')
+            136 LOAD_FAST                1 (context)
+            138 LOAD_ATTR               12 (function)
+            140 FORMAT_VALUE             0
+            142 LOAD_CONST               9 ('\n')
+            144 BUILD_STRING             3
+            146 CALL_METHOD              1
+            148 POP_TOP
+
+423         150 LOAD_FAST                6 (f)
+            152 LOAD_METHOD              9 (write)
+            154 LOAD_CONST              13 ('  Category: ')
+            156 LOAD_FAST                1 (context)
+            158 LOAD_ATTR               13 (category)
+            160 FORMAT_VALUE             0
+            162 LOAD_CONST               9 ('\n')
+            164 BUILD_STRING             3
+            166 CALL_METHOD              1
+            168 POP_TOP
+            170 POP_BLOCK
+            172 LOAD_CONST              14 (None)
+            174 DUP_TOP
+            176 DUP_TOP
+            178 CALL_FUNCTION            3
+            180 POP_TOP
+            182 JUMP_FORWARD            16 (to 200)
+        >>  184 WITH_EXCEPT_START
+            186 POP_JUMP_IF_TRUE       190
+            188 RERAISE
+        >>  190 POP_TOP
+            192 POP_TOP
+            194 POP_TOP
+            196 POP_EXCEPT
+            198 POP_TOP
+        >>  200 POP_BLOCK
+            202 JUMP_FORWARD            18 (to 222)
+
+424     >>  204 DUP_TOP
+            206 LOAD_GLOBAL             14 (Exception)
+            208 JUMP_IF_NOT_EXC_MATCH   220
+            210 POP_TOP
+            212 POP_TOP
+            214 POP_TOP
+
+425         216 POP_EXCEPT
+            218 JUMP_FORWARD             2 (to 222)
+        >>  220 RERAISE
+
+428     >>  222 SETUP_FINALLY           28 (to 252)
+
+429         224 LOAD_CONST              15 (0)
+            226 LOAD_CONST              16 (('qFormatLogMessage',))
+            228 IMPORT_NAME             15 (PyQt6.QtCore)
+            230 IMPORT_FROM             16 (qFormatLogMessage)
+            232 STORE_FAST               7 (qFormatLogMessage)
+            234 POP_TOP
+
+430         236 LOAD_FAST                7 (qFormatLogMessage)
+            238 LOAD_FAST                0 (msg_type)
+            240 LOAD_FAST                1 (context)
+            242 LOAD_FAST                2 (message)
+            244 CALL_FUNCTION            3
+            246 STORE_FAST               8 (formatted_message)
+            248 POP_BLOCK
+            250 JUMP_FORWARD            24 (to 276)
+
+431     >>  252 DUP_TOP
+            254 LOAD_GLOBAL             14 (Exception)
+            256 EXTENDED_ARG             1
+            258 JUMP_IF_NOT_EXC_MATCH   274
+            260 POP_TOP
+            262 POP_TOP
+            264 POP_TOP
+
+432         266 LOAD_FAST                2 (message)
+            268 STORE_FAST               8 (formatted_message)
+            270 POP_EXCEPT
+            272 JUMP_FORWARD             2 (to 276)
+        >>  274 RERAISE
+
+433     >>  276 SETUP_FINALLY           32 (to 310)
+
+434         278 LOAD_GLOBAL             17 (sys)
+            280 LOAD_ATTR               18 (stderr)
+            282 LOAD_METHOD              9 (write)
+            284 LOAD_FAST                8 (formatted_message)
+            286 FORMAT_VALUE             0
+            288 LOAD_CONST               9 ('\n')
+            290 BUILD_STRING             2
+            292 CALL_METHOD              1
+            294 POP_TOP
+
+435         296 LOAD_GLOBAL             17 (sys)
+            298 LOAD_ATTR               18 (stderr)
+            300 LOAD_METHOD             19 (flush)
+            302 CALL_METHOD              0
+            304 POP_TOP
+            306 POP_BLOCK
+            308 JUMP_FORWARD            20 (to 330)
+
+436     >>  310 DUP_TOP
+            312 LOAD_GLOBAL             14 (Exception)
+            314 EXTENDED_ARG             1
+            316 JUMP_IF_NOT_EXC_MATCH   328
+            318 POP_TOP
+            320 POP_TOP
+            322 POP_TOP
+
+437         324 POP_EXCEPT
+            326 JUMP_FORWARD             2 (to 330)
+        >>  328 RERAISE
+        >>  330 LOAD_CONST              14 (None)
+            332 RETURN_VALUE
+
+=== install_qt_fatal_handler ===
+454           0 SETUP_FINALLY           24 (to 26)
+
+455           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (('qInstallMessageHandler',))
+              6 IMPORT_NAME              0 (PyQt6.QtCore)
+              8 IMPORT_FROM              1 (qInstallMessageHandler)
+             10 STORE_FAST               0 (qInstallMessageHandler)
+             12 POP_TOP
+
+456          14 LOAD_FAST                0 (qInstallMessageHandler)
+             16 LOAD_GLOBAL              2 (_qt_fatal_message_handler)
+             18 CALL_FUNCTION            1
+             20 POP_TOP
+             22 POP_BLOCK
+             24 JUMP_FORWARD            18 (to 44)
+
+457     >>   26 DUP_TOP
+             28 LOAD_GLOBAL              3 (Exception)
+             30 JUMP_IF_NOT_EXC_MATCH    42
+             32 POP_TOP
+             34 POP_TOP
+             36 POP_TOP
+
+458          38 POP_EXCEPT
+             40 JUMP_FORWARD             2 (to 44)
+        >>   42 RERAISE
+        >>   44 LOAD_CONST               3 (None)
+             46 RETURN_VALUE
+
+=== _install_unhandled_exception_filter ===
+471           0 LOAD_GLOBAL              0 (_unhandled_filter_installed)
+              2 POP_JUMP_IF_FALSE        8
+
+472           4 LOAD_CONST               1 (None)
+              6 RETURN_VALUE
+
+474     >>    8 LOAD_GLOBAL              1 (_get_winapi)
+             10 CALL_FUNCTION            0
+             12 UNPACK_SEQUENCE          2
+             14 STORE_FAST               0 (kernel32)
+             16 STORE_FAST               1 (_)
+
+475          18 LOAD_FAST                0 (kernel32)
+             20 LOAD_METHOD              2 (SetUnhandledExceptionFilter)
+             22 LOAD_GLOBAL              3 (_unhandled_filter_ref)
+             24 CALL_METHOD              1
+             26 STORE_FAST               2 (previous_filter)
+
+476          28 LOAD_GLOBAL              4 (ctypes)
+             30 LOAD_METHOD              5 (cast)
+             32 LOAD_GLOBAL              3 (_unhandled_filter_ref)
+             34 LOAD_GLOBAL              4 (ctypes)
+             36 LOAD_ATTR                6 (c_void_p)
+             38 CALL_METHOD              2
+             40 LOAD_ATTR                7 (value)
+             42 STORE_FAST               3 (current_address)
+
+477          44 LOAD_GLOBAL              8 (getattr)
+             46 LOAD_FAST                2 (previous_filter)
+             48 LOAD_CONST               2 ('value')
+             50 LOAD_FAST                2 (previous_filter)
+             52 CALL_FUNCTION            3
+             54 STORE_FAST               4 (previous_address)
+
+478          56 LOAD_FAST                4 (previous_address)
+             58 POP_JUMP_IF_FALSE       76
+             60 LOAD_FAST                4 (previous_address)
+             62 LOAD_FAST                3 (current_address)
+             64 COMPARE_OP               3 (!=)
+             66 POP_JUMP_IF_FALSE       76
+
+479          68 LOAD_GLOBAL              9 (_TOP_LEVEL_EXCEPTION_FILTER_TYPE)
+             70 LOAD_FAST                4 (previous_address)
+             72 CALL_FUNCTION            1
+             74 STORE_GLOBAL            10 (_previous_unhandled_filter_ref)
+
+480     >>   76 LOAD_CONST               3 (True)
+             78 STORE_GLOBAL             0 (_unhandled_filter_installed)
+             80 LOAD_CONST               1 (None)
+             82 RETURN_VALUE
+
+=== _install_win32 ===
+492           0 LOAD_GLOBAL              0 (_install_unhandled_exception_filter)
+              2 CALL_FUNCTION            0
+              4 POP_TOP
+
+494           6 SETUP_FINALLY           18 (to 26)
+
+495           8 LOAD_GLOBAL              1 (signal)
+             10 LOAD_METHOD              1 (signal)
+             12 LOAD_GLOBAL              1 (signal)
+             14 LOAD_ATTR                2 (SIGABRT)
+             16 LOAD_GLOBAL              3 (_sigabrt_handler)
+             18 CALL_METHOD              2
+             20 POP_TOP
+             22 POP_BLOCK
+             24 JUMP_FORWARD            18 (to 44)
+
+496     >>   26 DUP_TOP
+             28 LOAD_GLOBAL              4 (Exception)
+             30 JUMP_IF_NOT_EXC_MATCH    42
+             32 POP_TOP
+             34 POP_TOP
+             36 POP_TOP
+
+497          38 POP_EXCEPT
+             40 JUMP_FORWARD             2 (to 44)
+        >>   42 RERAISE
+
+499     >>   44 LOAD_GLOBAL              5 (_get_crash_dir)
+             46 CALL_FUNCTION            0
+             48 STORE_FAST               0 (crash_dir)
+
+501          50 LOAD_GLOBAL              6 (print)
+             52 LOAD_CONST               1 ('[CrashHandler] Windows 未处理异常过滤器已安装，dump 目录: ')
+             54 LOAD_FAST                0 (crash_dir)
+             56 FORMAT_VALUE             0
+             58 BUILD_STRING             2
+             60 CALL_FUNCTION            1
+             62 POP_TOP
+             64 LOAD_CONST               2 (None)
+             66 RETURN_VALUE

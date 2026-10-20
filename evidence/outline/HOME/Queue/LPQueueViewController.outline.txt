@@ -1,0 +1,288 @@
+# module HOME.Queue.LPQueueViewController
+
+[module] names: distutils.version, LooseVersion, string, Template, LPGlobalUI, PyQt6.QtCore, pyqtSignal, Qt, QEvent, QCoreApplication, pyqtSlot, QMimeData, QModelIndex, QSize, QTimer, QPoint, PyQt6.QtWidgets, PyQt6, QtCore, QtGui, QtWidgets, PyQt6.QtGui, QStandardItemModel, QStandardItem, QAction, QPen, QColor, QPixmap, QIcon, QMovie, QCursor, enum, Enum, threading, queue, time, HOME.LPSuperTableView, LPSuperTableDelegate, HOME.Queue.LPQueueListView, LPQueueListView, LPClientFramework, LPUtility, LPStreamServiceManager, LPClientFramework.LPConfig.LPFontConfig, DEFAULT, Table_Subtitle, StackWidget_Title, LPClientFramework.LPEventFilter.ButtonEventFilter.LPButtonEventFilter, LPButtonEventFilter, LPClientFramework.LPFeature, LPFeatureCanUtils, LPClientFramework.LPMediaInfo, LPLoopMode, LPClientFramework.LPMenu.LPActionGroup, ACTION_QUEUE_GROUP, LPClientFramework.LPMenu.LPContextMenuManager, ContextMenuManager, LPClientFramework.LPQueueManager, LPQueueState, LPClientFramework.LPUtility, logger, LPCommonWidgets.dialog.LPDialog, LPDialog, filterArray, QAbstractTableModel, LPQueueTableModel, LPQueueTableDelegate, LPQueueViewController
+  str: 'LooseVersion'
+  str: 'Template'
+  str: 'pyqtSignal'
+  str: 'Qt'
+  str: 'QEvent'
+  str: 'QCoreApplication'
+  str: 'pyqtSlot'
+  str: 'QMimeData'
+  str: 'QModelIndex'
+  str: 'QSize'
+  str: 'QTimer'
+  str: 'QPoint'
+  str: '*'
+  str: 'QtCore'
+  str: 'QtGui'
+  str: 'QtWidgets'
+  str: 'QStandardItemModel'
+  str: 'QStandardItem'
+  str: 'QAction'
+  str: 'QPen'
+  str: 'QColor'
+  str: 'QPixmap'
+  str: 'QIcon'
+  str: 'QMovie'
+  str: 'QCursor'
+  str: 'Enum'
+  str: 'LPSuperTableDelegate'
+  str: 'LPQueueListView'
+  str: 'LPUtility'
+  str: 'LPStreamServiceManager'
+  str: 'DEFAULT'
+  str: 'Table_Subtitle'
+  str: 'StackWidget_Title'
+  str: 'LPButtonEventFilter'
+  str: 'LPFeatureCanUtils'
+  str: 'LPLoopMode'
+  str: 'ACTION_QUEUE_GROUP'
+  str: 'ContextMenuManager'
+  str: 'LPQueueState'
+  str: 'logger'
+  str: 'LPDialog'
+  str: 'LPQueueTableModel'
+  str: 'LPQueueTableDelegate'
+  str: 'LPQueueViewController'
+
+def LPQueueTableModel()  line 30
+  names: __name__, __module__, __qualname__, __init__, QtCore, Qt, ItemDataRole, DisplayRole, headerData, rowCount, columnCount, data, flags, moveRow, removeRow, __classcell__
+    str: 'LPQueueTableModel'
+    str: 'LPQueueTableModel.__init__'
+    str: 'LPQueueTableModel.headerData'
+    str: 'LPQueueTableModel.rowCount'
+    str: 'LPQueueTableModel.columnCount'
+    str: 'LPQueueTableModel.data'
+    str: 'LPQueueTableModel.flags'
+    str: 'LPQueueTableModel.moveRow'
+    str: 'LPQueueTableModel.removeRow'
+
+  def LPQueueTableModel.__init__(self, playList, parent)  line 31
+    names: super, LPQueueTableModel, __init__, playList, list, _data, queue, Queue, trackImageQueue, fetchImageThread
+
+  def LPQueueTableModel.headerData(self, section, orientation, role)  line 39
+    names: filterArray, append, QtCore, Qt, Orientation, Horizontal, ItemDataRole, DisplayRole, super, headerData
+      str: 'title'
+
+  def LPQueueTableModel.rowCount(self, parent)  line 49
+    names: len, _data
+
+  def LPQueueTableModel.columnCount(self, parent)  line 52
+    names: rowCount
+
+  def LPQueueTableModel.data(self, index, role)  line 55
+    names: row, column, rowCount, columnCount, QtCore, Qt, ItemDataRole, DisplayRole, _data, playList, index, trackImage, len, LPUtility, getCachedPixmapWithUrl, trackImageQueue, put, fetchImageThread, threading, Thread, start, LPStreamServiceManager, streamServiceForSource, trackSource, LPTrackMoreViewControllerCanViewArtist, header, trackName, trackArtist, LPTrackMoreViewControllerCanViewAlbum, albumName
+      str: '%s'
+      str: 'index'
+      str: 'index'
+      str: 'type'
+      str: 'currentPlay'
+      str: 'LPQueueTableModel.data.<locals>._fetchImageMethod'
+      str: 'value'
+      str: 'index'
+      str: 'target'
+      str: 'daemon'
+      str: 'artist'
+      str: 'trackName'
+      str: 'trackImage'
+      str: 'trackArtist'
+      str: 'canViewArtist'
+      str: 'type'
+      str: 'currentPlay'
+      str: 'album'
+      str: 'albumName'
+      str: 'canViewAlbum'
+      str: 'type'
+      str: 'currentPlay'
+
+    def LPQueueTableModel.data._fetchImageMethod()  line 77
+      names: trackImageQueue, empty, time, sleep, get, LPUtility, fetchUrlQPixmap, dataChanged, emit, task_done
+        str: 'value'
+        str: 'index'
+        str: 'image'
+
+  def LPQueueTableModel.flags(self, index)  line 127
+    names: super, flags, LPFeatureCanUtils, canQueueMoveDelete, LPGlobalUI, currentDevice, Qt, ItemFlag, ItemIsDragEnabled, ItemIsDropEnabled
+
+  def LPQueueTableModel.moveRow(self, sourceParent, sourceRow, destinationParent, destinationChild)  line 138
+    names: logger, debug, beginRemoveRows, QModelIndex, _data, endRemoveRows, beginInsertRows, insert, endInsertRows
+      str: '单行'
+      str: 'LPQueueTableModel moveRow start'
+      str: 'LPQueueTableModel moveRow end'
+
+  def LPQueueTableModel.removeRow(self, row, parent)  line 159
+    names: len, _data, beginRemoveRows, QModelIndex, endRemoveRows, playList, index
+
+def LPQueueTableDelegate()  line 172
+  names: __name__, __module__, __qualname__, __init__, paint, update_view, cleanup_table_view, __classcell__
+    str: 'LPQueueTableDelegate'
+    str: 'LPQueueTableDelegate.__init__'
+    str: 'LPQueueTableDelegate.paint'
+    str: 'LPQueueTableDelegate.update_view'
+    str: 'LPQueueTableDelegate.cleanup_table_view'
+
+  def LPQueueTableDelegate.__init__(self, table_view)  line 173
+    names: super, __init__, table_view, QMovie, LPGlobalUI, imagePath, play_movie, destroyed, connect, cleanup_table_view, start, frameChanged, update_view, can_animate
+      str: 'dark_playing.gif'
+
+  def LPQueueTableDelegate.paint(self, painter, option, index)  line 185
+    names: super, paint, data, row, table_view, drop_row, save, QPen, QColor, Qt, PenStyle, SolidLine, setPen, drop_position, rect, top, bottom, drawLine, left, right, restore, column, QtCore, QRect, x, y, width, height, QtGui, QFont, setPointSizeF, DEFAULT, setFont, LPGlobalUI, THEME_HIGH_HIGH_COLOR, THEME_DEFAULT_COLOR, drawText, AlignmentFlag, AlignLeft, AlignVCenter, QIcon, len, LPUtility, getCachedPixmapWithUrl, addPixmap, QPixmap, imagePath, currentDevice, mediaInfo, playState, play_movie, currentPixmap, drawPixmap, setPointSize, Table_Subtitle, state, QStyle, StateFlag, State_Selected, State_MouseOver, THEME_DISABLE_COLOR, boundingRect, styleObject, lastCursorPos, setUnderline, cursor, CursorShape, PointingHandCursor, lastCursorActionIndex, setCursor, ArrowCursor
+      str: 'green'
+      str: 'above'
+      str: 'currentPlay'
+      str: 'index'
+      str: 'trackImage'
+      str: 'miniBar/trackDefault.png'
+      str: 'PLAYING'
+      str: 'dark_pause.png'
+      str: 'trackName'
+      str: 'canViewArtist'
+      str: 'trackArtist'
+      str: 'canViewAlbum'
+      str: 'albumName'
+
+  def LPQueueTableDelegate.update_view(self)  line 333
+    names: table_view, viewport, update
+
+  def LPQueueTableDelegate.cleanup_table_view(self)  line 339
+    names: play_movie, stop
+
+def LPQueueViewController()  line 342
+  names: __name__, __module__, __qualname__, pyqtSignal, updateUISignal, updateDeviceInfoSignal, __init__, pyqtSlot, change_status, queue_lock_slot, reset_timer, setupUi, QPoint, show_context_menu_event, deleteButtonPressed, clear_queue, update_tracks_num_label, viewWillAppear, viewWillDisappear, changeEvent, updateUI, deviceInfoUpdate, _updateDeviceInfo, _updateUI, itemClick, itemDoubleClick, __classcell__
+    str: 'LPQueueViewController'
+    str: 'LPQueueViewController.__init__'
+    str: 'LPQueueViewController.change_status'
+    str: 'LPQueueViewController.queue_lock_slot'
+    str: 'LPQueueViewController.reset_timer'
+    str: 'LPQueueViewController.setupUi'
+    str: 'LPQueueViewController.show_context_menu_event'
+    str: 'LPQueueViewController.deleteButtonPressed'
+    str: 'LPQueueViewController.clear_queue'
+    str: 'LPQueueViewController.update_tracks_num_label'
+    str: 'LPQueueViewController.viewWillAppear'
+    str: 'LPQueueViewController.viewWillDisappear'
+    str: 'LPQueueViewController.changeEvent'
+    str: 'LPQueueViewController.updateUI'
+    str: 'LPQueueViewController.deviceInfoUpdate'
+    str: 'LPQueueViewController._updateDeviceInfo'
+    str: 'LPQueueViewController._updateUI'
+    str: 'LPQueueViewController.itemClick'
+    str: 'LPQueueViewController.itemDoubleClick'
+
+  def LPQueueViewController.__init__(self)  line 346
+    names: super, LPQueueViewController, __init__, firstTimeEnterQueue, updateUISignal, connect, _updateUI, updateDeviceInfoSignal, _updateDeviceInfo, ContextMenuManager, context_menu_mgr, queue_lock, QTimer, delay_timer, setInterval, timeout, change_status, model
+
+  def LPQueueViewController.change_status(self)  line 367
+    names: delay_timer, stop, queue_lock, logger, debug, LPGlobalUI, currentDevice, queueManager, requestQueue
+      str: 'timing for 5 seconds have stopped!'
+
+  def LPQueueViewController.queue_lock_slot(self)  line 375
+    names: queue_lock, reset_timer
+
+  def LPQueueViewController.reset_timer(self)  line 381
+    names: logger, debug, delay_timer, start
+      str: 'start timing for 5 seconds'
+
+  def LPQueueViewController.setupUi(self)  line 388
+    names: LPGlobalUI, currentDevice, queueManager, requestQueue
+
+  def LPQueueViewController.show_context_menu_event(self, pos)  line 443
+    names: tableView, indexAt, isValid, model, playList, list, row, logger, debug, trackName, data, get, str, LPFeatureCanUtils, canQueueMoveDelete, LPGlobalUI, currentDevice, is_preloading, get_preloading_row, ACTION_QUEUE_GROUP, copy, pop, len, context_menu_mgr, init, QCursor, pos, show_menu, clear_actions
+      str: 'play_item === '
+      str: 'currentPlay'
+      str: 'is_play === '
+      str: 'is_preload == '
+      str: 'ACTION_DELETE_FROM_QUEUE'
+
+  def LPQueueViewController.deleteButtonPressed(self)  line 480
+    names: QCoreApplication, translate, LPDialog, tableView, exec, queue_lock, clear_queue, logger, debug
+      str: 'Queue'
+      str: 'Clear Queue'
+      str: 'Are you sure you want to clear the Queue?'
+      str: 'Cancel'
+      str: 'Clear'
+      str: 'cancel clear queue'
+
+  def LPQueueViewController.clear_queue(self)  line 495
+    names: LPGlobalUI, currentDevice, asyncUpnpPost
+      str: 'LPQueueViewController.clear_queue.<locals>.finishMethod'
+      str: 'DeleteQueue'
+      str: 'QueueName'
+      str: 'CurrentQueue'
+
+    def LPQueueViewController.clear_queue.finishMethod(result)  line 496
+      names: logger, debug
+        str: 'delete CurrentQueue result: %s'
+        str: 'delete CurrentQueue success!'
+
+  def LPQueueViewController.update_tracks_num_label(self)  line 505
+    names: logger, debug, model, rowCount, numLabel, setText, QCoreApplication, translate
+      str: 'queue removed, update tracks num'
+      str: '[update_tracks_num_label] row_count='
+      str: 'Queue'
+      str: '%n tracks'
+
+  def LPQueueViewController.viewWillAppear(self)  line 513
+    names: LPUtility, registerDeviceInfoChanged, updateUI, LPGlobalUI, currentDevice
+
+  def LPQueueViewController.viewWillDisappear(self)  line 519
+    names: LPUtility, deRegisterDeviceInfoChanged
+
+  def LPQueueViewController.changeEvent(self, event)  line 523
+    names: type, QEvent, Type, LanguageChange, QCoreApplication, translate, filterArray, super, LPQueueViewController, changeEvent
+      str: 'id'
+      str: '#'
+      str: 'id'
+      str: 'title'
+      str: 'title'
+      str: 'Queue'
+      str: 'Track'
+      str: 'album'
+      str: 'Album'
+
+  def LPQueueViewController.updateUI(self, device)  line 534
+    names: LPGlobalUI, currentDevice, uuid, queueManager, requestQueue, updateUISignal, emit
+
+  def LPQueueViewController.deviceInfoUpdate(self, device, infoType, detail)  line 541
+    names: queue_lock, uuid, LPGlobalUI, currentDevice, updateUISignal, emit, get, updateDeviceInfoSignal, threading, Timer, start, tableView, update
+      str: 'queue'
+      str: 'trackId'
+      str: 'queueName'
+      str: 'LPQueueViewController.deviceInfoUpdate.<locals>.<lambda>'
+      str: 'playState'
+
+    def LPQueueViewController.deviceInfoUpdate.<lambda>()  line 552
+      names: LPGlobalUI, currentDevice, queueManager, requestQueue
+
+  def LPQueueViewController._updateDeviceInfo(self)  line 559
+    names: tableView, reset_cursor, LPGlobalUI, currentDevice, queueManager, playList, LPQueueTableModel, setModel, setColumnWidth, width
+
+  def LPQueueViewController._updateUI(self)  line 571
+    names: LPGlobalUI, currentDevice, queueManager, playList, LPQueueTableModel, tableView, model, setModel, rowsInserted, connect, update_tracks_num_label, rowsRemoved, logger, debug, rowCount, numLabel, show, setColumnWidth, width, firstTimeEnterQueue, index, scrollTo, QtWidgets, QAbstractItemView, ScrollHint, PositionAtTop
+      str: '[_updateUI] row_count='
+
+  def LPQueueViewController.itemClick(self, index)  line 619
+    names: tableView, lastCursorActionIndex, data, model, _data, playList, header, row, LPStreamServiceManager, streamServiceForSource, trackSource, LPTrackMoreViewControllerCanViewArtist, LPTrackMoreViewControllerCanViewAlbum
+      str: 'type'
+      str: 'artist'
+      str: 'LPQueueViewController.itemClick.<locals>._callback'
+      str: 'album'
+
+    def LPQueueViewController.itemClick._callback(canView, artistItem)  line 632
+      names: LPTrackMoreViewControllerViewArtist
+        str: 'LPQueueViewController.itemClick.<locals>._callback.<locals>._viewCallback'
+
+      def LPQueueViewController.itemClick._callback._viewCallback(viewController)  line 636
+        names: type, LPGlobalUI, getTopWidget, navigationManager, pop, detailNavigationItemId, push
+          str: 'artist'
+
+    def LPQueueViewController.itemClick._callback(canView, albumItem)  line 654
+      names: LPTrackMoreViewControllerViewAlbum
+        str: 'LPQueueViewController.itemClick.<locals>._callback.<locals>._viewCallback'
+
+      def LPQueueViewController.itemClick._callback._viewCallback(viewController)  line 658
+        names: type, LPGlobalUI, getTopWidget, navigationManager, pop, detailNavigationItemId, push
+          str: 'album'
+
+  def LPQueueViewController.itemDoubleClick(self, index)  line 674

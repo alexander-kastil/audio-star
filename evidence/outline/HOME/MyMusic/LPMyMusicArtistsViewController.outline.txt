@@ -1,0 +1,297 @@
+# module HOME.MyMusic.LPMyMusicArtistsViewController
+
+[module] names: string, Template, hashlib, queue, threading, PyQt6.QtCore, pyqtSignal, Qt, QEvent, QCoreApplication, PyQt6.QtWidgets, PyQt6, QtCore, QtGui, QtWidgets, PyQt6.QtGui, QAction, LPGlobalUI, HOME, LPMyMusicViewController, HOME.LPMyMusicViewController_ui, Ui_mymusicViewWidget, HOME.MyMusic.LPMyMusicArtistDetailViewController, LPMyMusicArtistDetailViewController, HOME.MyMusic.LPMyMusicArtistDetailViewController_ui, Ui_mymusicArtistDetailViewWidget, HOME.MyMusic.LPTrackImageLoadHelper, LPTrackImageLoadHelper, LPClientFramework, LPUtility, LPBeetsWrapper, LPClientFramework.LPConfig, LPUIPath, LPClientFramework.LPConfig.LPFontConfig, ItemCard_Title, ItemCard_Subtitle, StackWidget_Title, LPClientFramework.LPMusicLibrary, LPRecentlyManager, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPClientFramework.LPUtility, logger, ARTIST_CARD_COVER_SIZE, ARTIST_CARD_PREFETCH_ROWS, QAbstractListModel, LPMyMusicArtistsListModel, QStyledItemDelegate, LPMyMusicArtistDelegate, QWidget, LPMyMusicArtistsViewController
+  str: 'Template'
+  str: 'pyqtSignal'
+  str: 'Qt'
+  str: 'QEvent'
+  str: 'QCoreApplication'
+  str: '*'
+  str: 'QtCore'
+  str: 'QtGui'
+  str: 'QtWidgets'
+  str: 'QAction'
+  str: 'LPMyMusicViewController'
+  str: 'Ui_mymusicViewWidget'
+  str: 'LPMyMusicArtistDetailViewController'
+  str: 'Ui_mymusicArtistDetailViewWidget'
+  str: 'LPTrackImageLoadHelper'
+  str: 'LPUtility'
+  str: 'LPBeetsWrapper'
+  str: 'LPUIPath'
+  str: 'ItemCard_Title'
+  str: 'ItemCard_Subtitle'
+  str: 'StackWidget_Title'
+  str: 'LPRecentlyManager'
+  str: 'LPHeaderType'
+  str: 'logger'
+  str: 'LPMyMusicArtistsListModel'
+  str: 'LPMyMusicArtistDelegate'
+  str: 'LPMyMusicArtistsViewController'
+
+def LPMyMusicArtistsListModel()  line 33
+  names: __name__, __module__, __qualname__, QtCore, pyqtSignal, int, object, artistInfoResolvedSignal, __init__, rowCount, Qt, ItemDataRole, DisplayRole, data, attachView, refreshVisibleRows, shutdown, _disconnectViewSignals, _onVisibleRowsChanged, _buildPendingArtistInfoRows, _normalizeVisibleRange, _buildPriorityRows, _artistInfoWorkerLoop, _isArtistInfoTaskStillValid, pyqtSlot, _handleArtistInfoResolved, _imageUrlForRow, _handleRowImageReady, __classcell__
+    str: 'LPMyMusicArtistsListModel'
+    str: 'LPMyMusicArtistsListModel.__init__'
+    str: 'LPMyMusicArtistsListModel.rowCount'
+    str: 'LPMyMusicArtistsListModel.data'
+    str: 'LPMyMusicArtistsListModel.attachView'
+    str: 'LPMyMusicArtistsListModel.refreshVisibleRows'
+    str: 'LPMyMusicArtistsListModel.shutdown'
+    str: 'LPMyMusicArtistsListModel._disconnectViewSignals'
+    str: 'LPMyMusicArtistsListModel._onVisibleRowsChanged'
+    str: 'LPMyMusicArtistsListModel._buildPendingArtistInfoRows'
+    str: 'LPMyMusicArtistsListModel._normalizeVisibleRange'
+    str: 'LPMyMusicArtistsListModel._buildPriorityRows'
+    str: 'LPMyMusicArtistsListModel._artistInfoWorkerLoop'
+    str: 'LPMyMusicArtistsListModel._isArtistInfoTaskStillValid'
+    str: 'LPMyMusicArtistsListModel._handleArtistInfoResolved'
+    str: 'LPMyMusicArtistsListModel._imageUrlForRow'
+    str: 'LPMyMusicArtistsListModel._handleRowImageReady'
+
+  def LPMyMusicArtistsListModel.__init__(self, data, parent)  line 36
+    names: super, LPMyMusicArtistsListModel, __init__, _data, _view, _generation, _isShutdown, set, _pendingArtistInfoRows, threading, RLock, _lock, LPTrackImageLoadHelper, _imageUrlForRow, rowCount, LPUtility, ARTIST_CARD_COVER_SIZE, ARTIST_CARD_PREFETCH_ROWS, trackImageLoadHelper, rowImageReadySignal, connect, _handleRowImageReady, artistInfoResolvedSignal, _handleArtistInfoResolved, QtCore, Qt, ConnectionType, QueuedConnection, queue, Queue, _artistInfoQueue, Thread, _artistInfoWorkerLoop, _artistInfoThread, start
+      str: '\n        初始化艺人卡片模型，并建立可见区驱动的头像解析与下载协调器。\n\n        参数:\n            data (list[dict]): 艺人数据数组。\n            parent (QObject | None): Qt 父对象。\n        返回:\n            无\n        '
+      str: 'cacheSize'
+      str: 'prefetchRows'
+      str: 'parent'
+      str: 'LPMyMusicArtistsInfoLoader'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+
+  def LPMyMusicArtistsListModel.rowCount(self, parent)  line 77
+    names: len, _data
+      str: '\n        返回当前模型中的艺人数。\n\n        参数:\n            parent (QModelIndex | None): Qt 父索引。\n        返回:\n            int: 当前模型行数。\n        '
+
+  def LPMyMusicArtistsListModel.data(self, index, role)  line 88
+    names: row, rowCount, Qt, ItemDataRole, DisplayRole, _data
+      str: '\n        返回指定索引的展示数据，不再在这里触发后台副作用。\n\n        参数:\n            index (QModelIndex): 目标索引。\n            role (Qt.ItemDataRole): 请求的数据角色。\n        返回:\n            object | None: 展示角色返回艺人字典，其余情况返回 None。\n        '
+
+  def LPMyMusicArtistsListModel.attachView(self, view)  line 107
+    names: _view, refreshVisibleRows, _disconnectViewSignals, trackImageLoadHelper, attachView, visibleRowsChanged, connect, _onVisibleRowsChanged, destroyed, shutdown
+      str: '\n        绑定列表视图，并开始按可见区调度头像解析与下载。\n\n        参数:\n            view (QListView | None): 需要绑定的列表视图。\n        返回:\n            无\n        '
+
+  def LPMyMusicArtistsListModel.refreshVisibleRows(self)  line 132
+    names: _view, getattr, callable, _onVisibleRowsChanged, trackImageLoadHelper, refreshVisibleRows
+      str: '\n        按当前视图状态重新构建头像解析与下载任务。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'emitVisibleRowsChanged'
+
+  def LPMyMusicArtistsListModel.shutdown(self)  line 150
+    names: _lock, _isShutdown, _generation, _pendingArtistInfoRows, clear, _view, trackImageLoadHelper, shutdown, _disconnectViewSignals, _artistInfoQueue, put
+      str: '\n        立即停止当前模型的后台任务，并断开与视图的绑定。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPMyMusicArtistsListModel._disconnectViewSignals(self, view)  line 177
+    names: visibleRowsChanged, disconnect, _onVisibleRowsChanged, Exception, destroyed, shutdown
+      str: '\n        断开列表视图与当前模型的可见区信号连接。\n\n        参数:\n            view (QListView): 需要断开的列表视图。\n        返回:\n            无\n        '
+
+  def LPMyMusicArtistsListModel._onVisibleRowsChanged(self, firstRow, lastRow)  line 196
+    names: _lock, _isShutdown, _generation, _buildPendingArtistInfoRows, set, _pendingArtistInfoRows, _data, append, get, _artistInfoQueue, put
+      str: '\n        处理可见区变化，并为缺少头像地址的可见行提交解析任务。\n\n        参数:\n            firstRow (int): 当前可见首索引。\n            lastRow (int): 当前可见末索引。\n        返回:\n            无\n        '
+      str: 'artist'
+      str: 'mb_artistid'
+      str: 'generation'
+      str: 'row'
+      str: 'artist'
+      str: 'mb_artistid'
+
+  def LPMyMusicArtistsListModel._buildPendingArtistInfoRows(self, firstRow, lastRow)  line 228
+    names: rowCount, _normalizeVisibleRange, set, _buildPriorityRows, add, _data, get, append
+      str: '\n        按可见区和预取窗口挑选需要解析头像地址的艺人行。\n\n        参数:\n            firstRow (int): 当前可见首索引。\n            lastRow (int): 当前可见末索引。\n        返回:\n            list[int]: 需要解析头像地址的行号数组。\n        '
+      str: 'avatar_url'
+
+  def LPMyMusicArtistsListModel._normalizeVisibleRange(self, totalRows, firstRow, lastRow)  line 260
+    names: min, ARTIST_CARD_PREFETCH_ROWS, max
+      str: '\n        归一化当前可见区范围，确保索引始终合法。\n\n        参数:\n            totalRows (int): 当前模型总行数。\n            firstRow (int): 原始可见首索引。\n            lastRow (int): 原始可见末索引。\n        返回:\n            tuple[int, int]: 归一化后的首尾索引。\n        '
+
+  def LPMyMusicArtistsListModel._buildPriorityRows(self, totalRows, firstRow, lastRow)  line 284
+    names: list, range, ARTIST_CARD_PREFETCH_ROWS, append
+      str: '\n        根据当前可见区和预取规则生成优先级行序列。\n\n        参数:\n            totalRows (int): 当前模型总行数。\n            firstRow (int): 当前可见首索引。\n            lastRow (int): 当前可见末索引。\n        返回:\n            list[int]: 按优先级排序的行号数组。\n        '
+
+  def LPMyMusicArtistsListModel._artistInfoWorkerLoop(self)  line 309
+    names: _artistInfoQueue, get, task_done, _isArtistInfoTaskStillValid, LPBeetsWrapper, fetchMusicBrainzArtworkUrl, fetchMusicBrainzArtistInfo, artistInfoResolvedSignal, emit
+      str: '\n        后台解析艺人头像地址，并把结果回投到 Qt 主线程。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'generation'
+      str: 'row'
+      str: 'artist'
+      str: 'mb_artistid'
+      str: 'avatar_url'
+
+  def LPMyMusicArtistsListModel._isArtistInfoTaskStillValid(self, generation, row, artistName, mbArtistId)  line 343
+    names: _lock, _isShutdown, _generation, _pendingArtistInfoRows, rowCount, _data, get
+      str: '\n        判断头像地址解析任务在后台线程中是否仍然有效。\n\n        参数:\n            generation (int): 任务批次号。\n            row (int): 目标行号。\n            artistName (str | None): 当前任务艺人名。\n            mbArtistId (str | None): 当前任务 MusicBrainz ID。\n        返回:\n            bool: 任务仍应继续执行时返回 True，否则返回 False。\n        '
+      str: 'artist'
+      str: 'mb_artistid'
+      str: 'avatar_url'
+
+  def LPMyMusicArtistsListModel._handleArtistInfoResolved(self, generation, row, artistName, mbArtistId, avatarUrl)  line 375
+    names: _lock, _isShutdown, _generation, _pendingArtistInfoRows, discard, rowCount, _data, get, index, dataChanged, emit, trackImageLoadHelper, refreshVisibleRows
+      str: '\n        在主线程中回写头像地址解析结果，并触发可见区缩略图下载。\n\n        参数:\n            generation (int): 任务批次号。\n            row (int): 目标行号。\n            artistName (str | None): 当前任务艺人名。\n            mbArtistId (str | None): 当前任务 MusicBrainz ID。\n            avatarUrl (str | None): 解析得到的头像地址。\n        返回:\n            无\n      '
+      str: 'artist'
+      str: 'mb_artistid'
+      str: 'avatar_url'
+      str: 'na'
+
+  def LPMyMusicArtistsListModel._imageUrlForRow(self, row)  line 423
+    names: rowCount, _data, get
+      str: '\n        返回指定行当前可用于下载头像缩略图的地址。\n\n        参数:\n            row (int): 目标行号。\n        返回:\n            str: 可下载地址；不存在时返回空字符串。\n        '
+      str: 'avatar_url'
+      str: 'na'
+
+  def LPMyMusicArtistsListModel._handleRowImageReady(self, row)  line 440
+    names: rowCount, index, dataChanged, emit
+      str: '\n        在头像缩略图下载完成后刷新对应卡片。\n\n        参数:\n            row (int): 需要刷新的行号。\n        返回:\n            无\n        '
+
+def LPMyMusicArtistDelegate()  line 456
+  names: __name__, __module__, __qualname__, QtCore, pyqtSignal, object, mouseClicked, __init__, sizeHint, editorEvent, _roundedPixmapCacheKey, _pixmapForArtist, paint, __classcell__
+    str: 'LPMyMusicArtistDelegate'
+    str: 'LPMyMusicArtistDelegate.__init__'
+    str: 'LPMyMusicArtistDelegate.sizeHint'
+    str: 'LPMyMusicArtistDelegate.editorEvent'
+    str: 'LPMyMusicArtistDelegate._roundedPixmapCacheKey'
+    str: 'LPMyMusicArtistDelegate._pixmapForArtist'
+    str: 'LPMyMusicArtistDelegate.paint'
+
+  def LPMyMusicArtistDelegate.__init__(self, parent)  line 459
+    names: super, __init__, LPUtility, roundCornerImage, QtGui, QPixmap, LPGlobalUI, imagePath, ARTIST_CARD_COVER_SIZE, _defaultArtistPixmap
+      str: '\n        初始化艺人卡片绘制代理，并预构建默认头像。\n\n        参数:\n            parent (QObject | None): Qt 父对象。\n        返回:\n            无\n        '
+      str: 'defaultArtist.png'
+
+  def LPMyMusicArtistDelegate.sizeHint(self, option, index)  line 474
+    names: super, sizeHint, QtCore, QSize
+      str: '\n        返回艺人卡片的固定尺寸。\n\n        参数:\n            option (QStyleOptionViewItem): Qt 样式选项。\n            index (QModelIndex): 当前索引。\n        返回:\n            QSize: 当前卡片尺寸。\n        '
+
+  def LPMyMusicArtistDelegate.editorEvent(self, event, model, option, index)  line 490
+    names: rect, QtCore, QRect, x, y, type, QEvent, Type, MouseButtonPress, contains, pos, mouseClicked, emit, super, editorEvent
+      str: 'play'
+      str: 'enter'
+
+  def LPMyMusicArtistDelegate._roundedPixmapCacheKey(self, avatarUrl)  line 502
+    names: hashlib, md5, encode, hexdigest, ARTIST_CARD_COVER_SIZE
+      str: '\n        生成艺人卡片圆角头像的缓存键。\n\n        参数:\n            avatarUrl (str): 艺人头像地址。\n        返回:\n            str: 当前圆角头像缓存键。\n        '
+      str: 'utf-8'
+      str: 'artist_card_round_%s_%d'
+
+  def LPMyMusicArtistDelegate._pixmapForArtist(self, avatarUrl)  line 514
+    names: _defaultArtistPixmap, _roundedPixmapCacheKey, LPUtility, imageCache, find, getCachedPixmapWithUrl, ARTIST_CARD_COVER_SIZE, roundCornerImage, update
+      str: '\n        获取用于当前艺人卡片的圆角缩略图。\n\n        参数:\n            avatarUrl (str | None): 艺人头像地址。\n        返回:\n            QPixmap: 可直接绘制的圆角头像。\n        '
+      str: 'na'
+
+  def LPMyMusicArtistDelegate.paint(self, painter, option, index)  line 540
+    names: data, rect, styleObject, QtGui, QBrush, setStyle, Qt, BrushStyle, SolidPattern, state, QStyle, StateFlag, State_MouseOver, setColor, LPGlobalUI, THEME_TABLE_HOVER_BACK_COLOR, THEME_ITEM_BACK_COLOR, QtCore, QRect, x, y, QPainterPath, addRoundedRect, QRectF, fillPath, _pixmapForArtist, get, QIcon, addPixmap, paint, width, height, QColor, QPixmap, imagePath, lastCursorPos, contains, setPen, THEME_DEFAULT_COLOR, QFont, setPointSizeF, ItemCard_Title, setBold, setFont, QFontMetrics, elidedText, TextElideMode, ElideRight, drawText, AlignmentFlag, AlignLeft, AlignTop, QCoreApplication, translate, THEME_LIGHT_COLOR, ItemCard_Subtitle, TextFlag, TextWordWrap, setCursor, QCursor, CursorShape, PointingHandCursor, ArrowCursor
+      str: 'avatar_url'
+      str: 'miniBar/play.png'
+      str: 'artist'
+      str: 'Artists'
+      str: 'Artist'
+
+def LPMyMusicArtistsViewController()  line 619
+  names: __name__, __module__, __qualname__, pyqtSignal, object, updateLibSignal, __init__, setupUi, _replaceListModel, viewWillAppear, viewWillDisappear, changeEvent, updateUI, _libUpdateMethod, itemClick, searchFieldChanged, filterIndexChanged, __classcell__
+    str: 'LPMyMusicArtistsViewController'
+    str: 'LPMyMusicArtistsViewController.__init__'
+    str: 'LPMyMusicArtistsViewController.setupUi'
+    str: 'LPMyMusicArtistsViewController._replaceListModel'
+    str: 'LPMyMusicArtistsViewController.viewWillAppear'
+    str: 'LPMyMusicArtistsViewController.viewWillDisappear'
+    str: 'LPMyMusicArtistsViewController.changeEvent'
+    str: 'LPMyMusicArtistsViewController.updateUI'
+    str: 'LPMyMusicArtistsViewController._libUpdateMethod'
+    str: 'LPMyMusicArtistsViewController.itemClick'
+    str: 'LPMyMusicArtistsViewController.searchFieldChanged'
+    str: 'LPMyMusicArtistsViewController.filterIndexChanged'
+
+  def LPMyMusicArtistsViewController.__init__(self, showImportWaitingDialogMethod, updateImportWaitingDialogMethod)  line 622
+    names: super, LPMyMusicArtistsViewController, __init__, QCoreApplication, translate, filterArray, showImportWaitingDialogMethod, updateImportWaitingDialogMethod, updateLibSignal, connect
+      str: 'artist'
+      str: 'Artists'
+      str: 'AlphaBetical'
+      str: 'id'
+      str: 'title'
+      str: 'albumcount'
+      str: 'Album Count'
+      str: 'LPMyMusicArtistsViewController.__init__.<locals>._updateLib'
+
+    def LPMyMusicArtistsViewController.__init__._updateLib()  line 634
+      names: searchFieldClearAction, setVisible, searchField, setText, LPBeetsWrapper, queryAlbumArtists, filterArray, LPMyMusicArtistsListModel, _replaceListModel
+        str: 'id'
+
+  def LPMyMusicArtistsViewController.setupUi(self, ui)  line 645
+    names: getattr, super, callable, setupUi, addButton, setStyleSheet, LPGlobalUI, THEME_BUTTON_BACK_COLOR, name, THEME_BUTTON_HOVER_BACK_COLOR, setCursor, QtCore, Qt, CursorShape, PointingHandCursor, clicked, connect, searchField, textChanged, searchFieldChanged, QAction, searchFieldClearAction, setIcon, QtGui, QIcon, imagePath, addAction, QLineEdit, ActionPosition, TrailingPosition, triggered, setVisible, filterBox, setupUI, filterArray, append, addItems, currentIndexChanged, filterIndexChanged, listView, verticalScrollBar, setSingleStep, LPBeetsWrapper, queryAlbumArtists, LPMyMusicArtistsListModel, _replaceListModel, LPMyMusicArtistDelegate, mouseClicked, itemClick, setItemDelegate, Template, substitute, StackWidget_Title
+      str: 'setupUi'
+      str: '\nQPushButton {\ncolor: white;\nborder-radius : 13;\nborder : 0px;\nbackground-color: %s\n}\n\nQPushButton:hover {\ncolor: white;\nborder-radius : 13;\nborder : 0px;\nbackground-color: %s\n}        '
+      str: 'LPMyMusicArtistsViewController.setupUi.<locals>.<lambda>'
+      str: 'clear'
+      str: 'search_close.png'
+      str: 'title'
+      str: 'id'
+      str: 'sortBy'
+      str: '\n                QLabel#titleLabel {\n                    font-size: ${stackWidgetTiteFontSize}pt;\n                }\n                LPLineEdit {\n                    background-color: rgb(31, 31, 31); \n                    color: white; \n                    padding: 5px; \n                    border-ra'
+      str: 'stackWidgetTiteFontSize'
+
+    def LPMyMusicArtistsViewController.setupUi.<lambda>()  line 666
+      names: LPGlobalUI, navigationManager, push, loadUI, LPUIPath, MyMusicViewControllerUI, Ui_mymusicViewWidget, LPMyMusicViewController, showImportWaitingDialogMethod, updateImportWaitingDialogMethod
+        str: 'mymusic'
+
+    def LPMyMusicArtistsViewController.setupUi.<lambda>()  line 674
+      names: searchField, clear
+
+  def LPMyMusicArtistsViewController._replaceListModel(self, model)  line 712
+    names: listView, model, setModel, getattr, callable, setParent, deleteLater, attachView
+      str: '\n        替换 Artists 页面列表模型，并安全释放旧模型后台资源。\n\n        参数:\n            model (LPMyMusicArtistsListModel): 新的艺人列表模型。\n        返回:\n            无\n        '
+      str: 'shutdown'
+
+  def LPMyMusicArtistsViewController.viewWillAppear(self)  line 736
+    names: updateUI, LPGlobalUI, currentDevice, LPUtility, addNotificationObserver, _libUpdateMethod
+      str: 'LibUpdateNotify'
+
+  def LPMyMusicArtistsViewController.viewWillDisappear(self)  line 740
+    names: LPUtility, removeNotificationObserver, _libUpdateMethod
+      str: 'LibUpdateNotify'
+
+  def LPMyMusicArtistsViewController.changeEvent(self, event)  line 743
+    names: type, QEvent, Type, LanguageChange, noteLabel, setText, QCoreApplication, translate, filterArray, filterBox, clear, append, addItems, super, LPMyMusicArtistsViewController, changeEvent
+      str: 'Artists'
+      str: 'Add some music to start experiencing WiiM Home!'
+      str: 'artist'
+      str: 'AlphaBetical'
+      str: 'id'
+      str: 'title'
+      str: 'albumcount'
+      str: 'Album Count'
+      str: 'title'
+
+  def LPMyMusicArtistsViewController.updateUI(self, device)  line 762
+    names: listView, model, _data, len, noteLabel, setText, QCoreApplication, translate, stackedWidget, setCurrentIndex, filterBox, hide, searchField, show
+      str: 'Artists'
+      str: 'Add some music to start experiencing WiiM Home!'
+
+  def LPMyMusicArtistsViewController._libUpdateMethod(self, params)  line 775
+    names: updateLibSignal, emit
+
+  def LPMyMusicArtistsViewController.itemClick(self, index, clickType)  line 778
+    names: data, get, LPBeetsWrapper, queryTracks, LPGlobalUI, currentDevice, logger, error, header, headTitle, LPHeaderType, LP_HEADER_TYPE_ARTIST, headType, imageUrl, headId, fastPlay, navigationManager, push, loadUI, LPUIPath, MyMusicArtistDetailViewControllerUI, Ui_mymusicArtistDetailViewWidget, LPMyMusicArtistDetailViewController
+      str: 'artist'
+      str: 'play'
+      str: 'artist'
+      str: 'strict'
+      str: 'error, no device found'
+      str: 'LPMyMusicArtistsViewController.itemClick.<locals>.playFinishMethod'
+      str: 'MyMusic Artist'
+      str: 'avatar_url'
+      str: 'mb_artistid'
+      str: 'enter'
+      str: 'artistdetail'
+
+    def LPMyMusicArtistsViewController.itemClick.playFinishMethod(result)  line 790
+      names: logger, debug, LPRecentlyManager, instance, addRecentlyPlayedWithMusicList
+        str: 'Mymusic artist %s play result: %s'
+        str: 'openMore'
+        str: 'canNavigate'
+
+  def LPMyMusicArtistsViewController.searchFieldChanged(self, text)  line 813
+    names: searchFieldClearAction, setVisible, len, filterArray, filterBox, currentIndex, LPBeetsWrapper, queryAlbumArtists, LPMyMusicArtistsListModel, _replaceListModel
+      str: 'id'
+
+  def LPMyMusicArtistsViewController.filterIndexChanged(self, index)  line 824
+    names: filterArray, LPBeetsWrapper, queryAlbumArtists, searchField, text, LPMyMusicArtistsListModel, _replaceListModel
+      str: 'id'

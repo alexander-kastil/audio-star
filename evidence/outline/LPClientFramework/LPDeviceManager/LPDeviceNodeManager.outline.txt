@@ -1,0 +1,273 @@
+# module LPClientFramework.LPDeviceManager.LPDeviceNodeManager
+
+[module] names: __doc__, __future__, annotations, concurrent.futures, ThreadPoolExecutor, threading, RLock, typing, Dict, List, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPDevice, LPDevice, LPClientFramework.LPDeviceManager.LPDeviceGroupManager, LPDeviceGroupManager, LPClientFramework.LPUtility, logger, logAcctBifurcate, _raw_uuid, _diagnose_device_ref, _diagnose_named_groups, LPDeviceDisplayGroup, LPDeviceNodeManager
+  str: '\n@Time ： 2026/3/12 18:48\n@Auth ： Chris\n@File ：LPDeviceNodeManager.py\n@Desc:\n'
+  str: 'annotations'
+  str: 'ThreadPoolExecutor'
+  str: 'RLock'
+  str: 'Dict'
+  str: 'List'
+  str: 'LPUtility'
+  str: 'LPDevice'
+  str: 'LPDeviceGroupManager'
+  str: 'logger'
+  str: 'logAcctBifurcate'
+  str: 'str'
+  str: 'return'
+  str: '_raw_uuid'
+  str: '_diagnose_device_ref'
+  str: '_diagnose_named_groups'
+  str: 'LPDeviceDisplayGroup'
+  str: 'LPDeviceNodeManager'
+
+def _raw_uuid(raw_uuid)  line 21
+  names: LPUtility, pureUUID
+
+def _diagnose_device_ref(device)  line 25
+  names: getattr, _raw_uuid, list
+    str: '生成设备引用诊断摘要。\n\n    Args:\n        device (object): 设备对象。\n\n    Returns:\n        dict: 设备名称、uuid 和当前组态字段摘要。\n    '
+    str: 'groupInfo'
+    str: 'name'
+    str: 'uuid'
+    str: 'roomState'
+    str: 'masterID'
+    str: '_diagnose_device_ref.<locals>.<listcomp>'
+    str: 'slaveList'
+    str: 'name'
+    str: 'uuid'
+    str: 'roomState'
+    str: 'masterID'
+    str: 'slaveUuids'
+
+  def _diagnose_device_ref.<listcomp>(.0)  line 42
+    names: _raw_uuid, isinstance, dict, get, getattr
+      str: 'uuid'
+
+def _diagnose_named_groups(groups)  line 50
+  names: list, append, getattr, bool, _raw_uuid
+    str: '生成命名组 active 诊断摘要。\n\n    Args:\n        groups (list): 命名组对象数组。\n\n    Returns:\n        list: 命名组摘要数组。\n    '
+    str: 'groupId'
+    str: 'groupName'
+    str: 'active'
+    str: 'masterDevice'
+    str: 'uuid'
+    str: '_diagnose_named_groups.<locals>.<listcomp>'
+    str: 'slaveList'
+    str: 'groupId'
+    str: 'groupName'
+    str: 'active'
+    str: 'masterUuid'
+    str: 'slaveUuids'
+
+  def _diagnose_named_groups.<listcomp>(.0)  line 66
+    names: _raw_uuid, isinstance, dict, get, getattr
+      str: 'uuid'
+
+def LPDeviceDisplayGroup()  line 75
+  names: __name__, __module__, __qualname__, __init__
+    str: 'LPDeviceDisplayGroup'
+    str: 'LPDeviceDisplayGroup.__init__'
+
+  def LPDeviceDisplayGroup.__init__(self, masterDevice, onlineSlaveList)  line 77
+    names: masterDevice, list, onlineSlaveList
+
+def LPDeviceNodeManager()  line 82
+  names: __name__, __module__, __qualname__, _instance, RLock, _instanceLock, __new__, __init__, classmethod, instance, _syncChildStateFromMasterSlaveList, deviceInfoUpdate, _handleNamedGroupNotify, appendDeviceOrderByName, deviceOnline, dealDeviceOnline, _asyncMakeGroupWithDevice, _updateDeviceGroupTitles, _memberUuidFromGroupItem, _buildOwnerMembers, getRawDevicesSnapshot, _buildDashboardSections, updateShowGroups, removeRawDevice, clearRawDevices, getActiveMemberUuidsWithDeviceId, findRawDeviceByUuid, findRawDevicesByUuidList, clearNameGroup, __classcell__
+    str: 'LPDeviceNodeManager'
+    str: 'LPDeviceNodeManager.__new__'
+    str: 'LPDeviceNodeManager.__init__'
+    str: 'LPDeviceNodeManager.instance'
+    str: 'LPDeviceNodeManager._syncChildStateFromMasterSlaveList'
+    str: 'LPDeviceNodeManager.deviceInfoUpdate'
+    str: 'LPDeviceNodeManager._handleNamedGroupNotify'
+    str: 'LPDeviceNodeManager.appendDeviceOrderByName'
+    str: 'LPDevice'
+    str: 'onlineDevice'
+    str: 'LPDeviceNodeManager.deviceOnline'
+    str: 'LPDeviceNodeManager.dealDeviceOnline'
+    str: 'LPDeviceNodeManager._asyncMakeGroupWithDevice'
+    str: 'LPDeviceNodeManager._updateDeviceGroupTitles'
+    str: 'LPDeviceNodeManager._memberUuidFromGroupItem'
+    str: 'LPDeviceNodeManager._buildOwnerMembers'
+    str: 'LPDeviceNodeManager.getRawDevicesSnapshot'
+    str: 'LPDeviceNodeManager._buildDashboardSections'
+    str: 'LPDeviceNodeManager.updateShowGroups'
+    str: 'LPDeviceNodeManager.removeRawDevice'
+    str: 'LPDeviceNodeManager.clearRawDevices'
+    str: 'LPDeviceNodeManager.getActiveMemberUuidsWithDeviceId'
+    str: 'LPDeviceNodeManager.findRawDeviceByUuid'
+    str: 'LPDeviceNodeManager.findRawDevicesByUuidList'
+    str: 'LPDeviceNodeManager.clearNameGroup'
+
+  def LPDeviceNodeManager.__new__(cls, *args, **kwargs)  line 86
+    names: _instance, _instanceLock, super, __new__
+
+  def LPDeviceNodeManager.__init__(self)  line 93
+    names: getattr, RLock, _lock, LPUtility, registerDeviceInfoChanged, ThreadPoolExecutor, _executor, LPDeviceGroupManager, instance, deviceGroupMgr, _rawDevices, _initialized
+      str: '_initialized'
+      str: 'node-group'
+      str: 'max_workers'
+      str: 'thread_name_prefix'
+
+  def LPDeviceNodeManager.instance(cls)  line 103
+
+  def LPDeviceNodeManager._syncChildStateFromMasterSlaveList(self, detail)  line 107
+    names: get, isinstance, dict, str, lower, getattr, findRawDeviceByUuid, list, getRawDevicesSnapshot, logger, debug, _diagnose_device_ref, _raw_uuid, sorted, roomState, uuid, masterID, len
+      str: 'slaveAction'
+      str: 'action'
+      str: 'master'
+      str: 'slaveId'
+      str: 'rm'
+      str: 'add'
+      str: 'groupInfo'
+      str: 'LPDeviceNodeManager._syncChildStateFromMasterSlaveList.<locals>.<setcomp>'
+      str: 'slaveList'
+      str: 'LPDeviceNodeManager._syncChildStateFromMasterSlaveList.<locals>.<listcomp>'
+      str: '[group-diagnose][_syncChildStateFromMasterSlaveList.enter] action=%s master=%s targetSlaveId=%s memberIds=%s before=%s'
+      str: 'masterID'
+      str: 'uuid'
+      str: 'slave'
+      str: '[node manager] sync slaveAction action=%s master=%s slave=%s childCount=%s'
+      str: 'name'
+      str: '[group-diagnose][_syncChildStateFromMasterSlaveList.exit] action=%s changed=%s master=%s slave=%s after=%s'
+
+    def LPDeviceNodeManager._syncChildStateFromMasterSlaveList.<setcomp>(.0)  line 124
+      names: _memberUuidFromGroupItem
+
+    def LPDeviceNodeManager._syncChildStateFromMasterSlaveList.<listcomp>(.0)  line 128
+      names: _diagnose_device_ref
+
+    def LPDeviceNodeManager._syncChildStateFromMasterSlaveList.<listcomp>(.0)  line 134
+
+    def LPDeviceNodeManager._syncChildStateFromMasterSlaveList.<listcomp>(.0)  line 186
+      names: _diagnose_device_ref
+
+  def LPDeviceNodeManager.deviceInfoUpdate(self, device, infoType, detail)  line 190
+    names: _syncChildStateFromMasterSlaveList, updateShowGroups, _handleNamedGroupNotify
+      str: 'multiRoom'
+      str: 'slaveAction'
+      str: 'lpmrm'
+
+  def LPDeviceNodeManager._handleNamedGroupNotify(self, device, body)  line 202
+    names: isinstance, dict, str, get, getattr, deviceGroupMgr, _bucket, currentDeviceGroups, logger, debug, _diagnose_named_groups, bool, readyGroupWithDevice, updateShowGroups, updateGroupActive
+      str: 'group_relationship_changed'
+      str: 'group_id'
+      str: 'uuid'
+      str: 'create'
+      str: '[group-diagnose][_handleNamedGroupNotify.enter] device=%s uuid=%s relationChanged=%s groupId=%s body=%s activeBefore=%s'
+      str: 'name'
+      str: '1'
+      str: '[node manager] lpmrm relationship changed device=%s'
+      str: '[group-diagnose][_handleNamedGroupNotify.relationshipChanged] device=%s uuid=%s changed=%s activeAfter=%s'
+      str: '[node manager] lpmrm active changed device=%s groupId=%s changed=%s'
+      str: '[group-diagnose][_handleNamedGroupNotify.activeChanged] device=%s uuid=%s groupId=%s changed=%s activeAfter=%s'
+
+  def LPDeviceNodeManager.appendDeviceOrderByName(self, targetList, obj)  line 264
+    names: _raw_uuid, getattr, lower, enumerate, pop, len, insert
+      str: 'uuid'
+      str: 'name'
+
+  def LPDeviceNodeManager.deviceOnline(self, onlineDevice)  line 287
+    names: _lock, appendDeviceOrderByName, _rawDevices, dealDeviceOnline
+
+  def LPDeviceNodeManager.dealDeviceOnline(self, onlineDevice)  line 298
+    names: _asyncMakeGroupWithDevice
+
+  def LPDeviceNodeManager._asyncMakeGroupWithDevice(self, onlineDevice)  line 301
+    names: _executor, submit, add_done_callback
+      str: 'LPDeviceNodeManager._asyncMakeGroupWithDevice.<locals>.worker'
+      str: 'LPDeviceNodeManager._asyncMakeGroupWithDevice.<locals>.cb'
+
+    def LPDeviceNodeManager._asyncMakeGroupWithDevice.worker(target_device)  line 302
+      names: logger, debug, getattr, deviceGroupMgr, makeGroupWithDevice
+        str: '[group-diagnose][_asyncMakeGroupWithDevice.worker] device=%s uuid=%s'
+        str: 'name'
+        str: 'uuid'
+
+    def LPDeviceNodeManager._asyncMakeGroupWithDevice.cb(future)  line 310
+      names: bool, result, Exception, logger, warning, getattr, deviceGroupMgr, _bucket, currentDeviceGroups, debug, _diagnose_named_groups, updateShowGroups
+        str: '[node manager] makeGroupWithDevice failed for %s: %s'
+        str: 'name'
+        str: 'uuid'
+        str: 'create'
+        str: '[group-diagnose][_asyncMakeGroupWithDevice.callback] device=%s uuid=%s changed=%s groups=%s'
+        str: '[node manager] named group changed for %s'
+
+  def LPDeviceNodeManager._updateDeviceGroupTitles(self, rawDeviceMap)  line 336
+    names: deviceGroupMgr, updateDeviceGroupTitles
+
+  def LPDeviceNodeManager._memberUuidFromGroupItem(self, item)  line 339
+    names: isinstance, dict, _raw_uuid, get, getattr
+      str: 'uuid'
+
+  def LPDeviceNodeManager._buildOwnerMembers(self, rawDeviceMap)  line 346
+    names: items, getattr, setdefault, set, list, _memberUuidFromGroupItem, append, add, str, _raw_uuid, isWiiMSub
+      str: 'groupInfo'
+      str: 'slaveList'
+      str: 'roomState'
+      str: 'slave'
+      str: 'masterID'
+
+  def LPDeviceNodeManager.getRawDevicesSnapshot(self)  line 382
+    names: _lock, list, _rawDevices
+
+  def LPDeviceNodeManager._buildDashboardSections(self)  line 386
+    names: getRawDevicesSnapshot, _updateDeviceGroupTitles, _buildOwnerMembers, items, _raw_uuid, getattr, get, append, LPDeviceDisplayGroup
+      str: 'LPDeviceNodeManager._buildDashboardSections.<locals>.<dictcomp>'
+      str: 'uuid'
+      str: 'LPDeviceNodeManager._buildDashboardSections.<locals>.<listcomp>'
+      str: 'masterDevice'
+      str: 'onlineSlaveList'
+      str: 'rawDevices'
+      str: 'singleDevices'
+      str: 'groupProjections'
+      str: 'ownerMembers'
+      str: 'slaveOwnerMap'
+
+    def LPDeviceNodeManager._buildDashboardSections.<dictcomp>(.0)  line 388
+      names: uuid
+
+    def LPDeviceNodeManager._buildDashboardSections.<listcomp>(.0)  line 410
+
+  def LPDeviceNodeManager.updateShowGroups(self)  line 428
+    names: _buildDashboardSections, LPGlobalUI, signalBus, DeviceDashboardProjectionChanged, emit, list, get, append, _diagnose_device_ref, getattr, logger, debug, len
+      str: 'groupProjections'
+      str: 'masterDevice'
+      str: 'LPDeviceNodeManager.updateShowGroups.<locals>.<listcomp>'
+      str: 'onlineSlaveList'
+      str: 'master'
+      str: 'members'
+      str: '[group-diagnose][updateShowGroups] rawCount=%s groupCount=%s singleCount=%s groups=%s singles=%s ownerMembers=%s slaveOwnerMap=%s'
+      str: 'rawDevices'
+      str: 'singleDevices'
+      str: 'ownerMembers'
+      str: 'slaveOwnerMap'
+
+    def LPDeviceNodeManager.updateShowGroups.<listcomp>(.0)  line 435
+      names: _diagnose_device_ref
+
+    def LPDeviceNodeManager.updateShowGroups.<listcomp>(.0)  line 443
+      names: _diagnose_device_ref
+
+  def LPDeviceNodeManager.removeRawDevice(self, deviceUuid)  line 449
+    names: _raw_uuid, _lock, enumerate, _rawDevices, getattr, pop
+      str: 'uuid'
+
+  def LPDeviceNodeManager.clearRawDevices(self, emitProjection)  line 462
+    names: _lock, _rawDevices, clear, updateShowGroups
+
+  def LPDeviceNodeManager.getActiveMemberUuidsWithDeviceId(self, deviceUuid)  line 469
+    names: _raw_uuid, updateShowGroups, get, list, append, logger, debug
+      str: 'ownerMembers'
+      str: 'slaveOwnerMap'
+      str: '[group-diagnose][getActiveMemberUuidsWithDeviceId] target=%s owner=%s result=%s ownerMembers=%s slaveOwnerMap=%s'
+
+  def LPDeviceNodeManager.findRawDeviceByUuid(self, uuid)  line 495
+    names: _raw_uuid, lower, _rawDevices, getattr
+      str: 'uuid'
+
+  def LPDeviceNodeManager.findRawDevicesByUuidList(self, uuidList)  line 506
+    names: set, _raw_uuid, findRawDeviceByUuid, append, add
+
+  def LPDeviceNodeManager.clearNameGroup(self)  line 523
+    names: deviceGroupMgr, clearNameGroup

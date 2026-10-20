@@ -1,0 +1,81 @@
+# module HOME.StreamService.Tidal.config.LPTidalImageConfig
+
+[module] names: __doc__, enum, Enum, typing, Any, LPTidalImageSize, LPTidalImageUseCase, LIST_THUMBNAIL, SIZE_320, CARD_COVER, DETAIL_COVER, SIZE_640, HERO_BACKGROUND, ARTIST_AVATAR, TABLE_ROW, DIALOG_THUMBNAIL, _USE_CASE_SIZE_MAP, tidalNormalizeImageSize, tidalImageSizeForUseCase, str, tidalImageSizeForItemField, buildTidalImageUrl
+  str: '\nTIDAL 图片尺寸与使用场景配置。\n'
+  str: 'Enum'
+  str: 'Any'
+  str: 'LPTidalImageSize'
+  str: 'LPTidalImageUseCase'
+  str: 'size'
+  str: 'fallback'
+  str: 'return'
+  str: 'tidalNormalizeImageSize'
+  str: 'useCase'
+  str: 'return'
+  str: 'tidalImageSizeForUseCase'
+  str: 'itemType'
+  str: 'fieldKey'
+  str: 'return'
+  str: 'tidalImageSizeForItemField'
+  str: 'imageId'
+  str: 'size'
+  str: 'return'
+  str: 'buildTidalImageUrl'
+
+def LPTidalImageSize()  line 10
+  names: __name__, __module__, __qualname__, __doc__, SIZE_160, SIZE_320, SIZE_480, SIZE_640, SIZE_750, SIZE_1280
+    str: 'LPTidalImageSize'
+    str: 'TIDAL CDN 图片尺寸枚举，限定可请求的远端资源尺寸。'
+    str: '160x160'
+    str: '320x320'
+    str: '480x480'
+    str: '640x640'
+    str: '750x750'
+    str: '1280x1280'
+
+def LPTidalImageUseCase()  line 21
+  names: __name__, __module__, __qualname__, __doc__, LIST_THUMBNAIL, CARD_COVER, DETAIL_COVER, HERO_BACKGROUND, ARTIST_AVATAR, TABLE_ROW, DIALOG_THUMBNAIL
+    str: 'LPTidalImageUseCase'
+    str: 'TIDAL 图片使用场景枚举，统一约束远端尺寸与 QML 解码尺寸。'
+    str: 'list_thumbnail'
+    str: 'card_cover'
+    str: 'detail_cover'
+    str: 'hero_background'
+    str: 'artist_avatar'
+    str: 'table_row'
+    str: 'dialog_thumbnail'
+
+def tidalNormalizeImageSize(size, fallback)  line 44
+  names: isinstance, LPTidalImageSize, str, strip, value, name
+    str: '\n    将任意尺寸输入归一化为受支持的 TIDAL 图片尺寸。\n\n    :param size: 尺寸枚举或尺寸字符串。\n    :param fallback: 尺寸非法时使用的兜底枚举。\n    :return: 合法的 TIDAL 图片尺寸枚举。\n    '
+
+def tidalImageSizeForUseCase(useCase)  line 61
+  names: isinstance, LPTidalImageUseCase, str, strip, value, name, _USE_CASE_SIZE_MAP, get, LPTidalImageSize, SIZE_640
+    str: '\n    按使用场景返回推荐的 TIDAL 远端图片尺寸。\n\n    :param useCase: 使用场景枚举或字符串。\n    :return: 推荐图片尺寸枚举。\n    '
+
+def tidalImageSizeForItemField(itemType, fieldKey)  line 79
+  names: str, strip, lower, LPTidalImageSize, SIZE_320, SIZE_640
+    str: '\n    按 TIDAL 条目类型和图片字段返回推荐 CDN 尺寸。\n\n    :param itemType: 条目类型，例如 album、track、artist、playlist。\n    :param fieldKey: 命中的图片字段名。\n    :return: 推荐图片尺寸枚举。\n    '
+    str: 'artist'
+    str: 'picture'
+    str: 'selectedAlbumCoverFallback'
+    str: 'category'
+    str: 'mix'
+    str: 'playlist'
+    str: 'video'
+    str: 'mood'
+    str: 'genre'
+    str: 'album'
+    str: 'track'
+
+def buildTidalImageUrl(imageId, size)  line 102
+  names: str, strip, startswith, replace, tidalNormalizeImageSize, value
+    str: '\n    按 TIDAL 图片资源规则构造 CDN 地址。\n\n    :param imageId: 图片 UUID 或完整图片地址。\n    :param size: 目标尺寸枚举或尺寸字符串。\n    :return: 可访问的 TIDAL 图片地址。\n    '
+    str: 'http://'
+    str: 'https://'
+    str: 'file://'
+    str: 'qrc:/'
+    str: '-'
+    str: '/'
+    str: 'https://resources.tidal.com/images/'
+    str: '.jpg'

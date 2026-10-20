@@ -1,0 +1,329 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (('*',))
+              4 IMPORT_NAME              0 (PyQt6.QtWidgets)
+              6 IMPORT_STAR
+
+  2           8 LOAD_CONST               0 (0)
+             10 LOAD_CONST               2 (('QColor',))
+             12 IMPORT_NAME              1 (PyQt6.QtGui)
+             14 IMPORT_FROM              2 (QColor)
+             16 STORE_NAME               2 (QColor)
+             18 POP_TOP
+
+  3          20 LOAD_CONST               0 (0)
+             22 LOAD_CONST               3 (('pyqtSignal', 'QEvent'))
+             24 IMPORT_NAME              3 (PyQt6.QtCore)
+             26 IMPORT_FROM              4 (pyqtSignal)
+             28 STORE_NAME               4 (pyqtSignal)
+             30 IMPORT_FROM              5 (QEvent)
+             32 STORE_NAME               5 (QEvent)
+             34 POP_TOP
+
+  4          36 LOAD_CONST               0 (0)
+             38 LOAD_CONST               4 (None)
+             40 IMPORT_NAME              6 (LPGlobalUI)
+             42 STORE_NAME               6 (LPGlobalUI)
+
+  6          44 LOAD_BUILD_CLASS
+             46 LOAD_CONST               5 (<code object LPSuperTableWidgetDelegate at 0x000001F3253C22F0, file "LPSuperTableWidget.py", line 6>)
+             48 LOAD_CONST               6 ('LPSuperTableWidgetDelegate')
+             50 MAKE_FUNCTION            0
+             52 LOAD_CONST               6 ('LPSuperTableWidgetDelegate')
+             54 LOAD_NAME                7 (QStyledItemDelegate)
+             56 CALL_FUNCTION            3
+             58 STORE_NAME               8 (LPSuperTableWidgetDelegate)
+
+ 29          60 LOAD_BUILD_CLASS
+             62 LOAD_CONST               7 (<code object LPSuperTableWidget at 0x000001F3253C2500, file "LPSuperTableWidget.py", line 29>)
+             64 LOAD_CONST               8 ('LPSuperTableWidget')
+             66 MAKE_FUNCTION            0
+             68 LOAD_CONST               8 ('LPSuperTableWidget')
+             70 LOAD_NAME                9 (QTableWidget)
+             72 CALL_FUNCTION            3
+             74 STORE_NAME              10 (LPSuperTableWidget)
+             76 LOAD_CONST               4 (None)
+             78 RETURN_VALUE
+
+=== LPSuperTableWidgetDelegate ===
+  6           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPSuperTableWidgetDelegate')
+              6 STORE_NAME               2 (__qualname__)
+
+  7           8 LOAD_CONST              10 ((None,))
+             10 LOAD_CLOSURE             0 (__class__)
+             12 BUILD_TUPLE              1
+             14 LOAD_CONST               2 (<code object __init__ at 0x000001F3253C2660, file "LPSuperTableWidget.py", line 7>)
+             16 LOAD_CONST               3 ('LPSuperTableWidgetDelegate.__init__')
+             18 MAKE_FUNCTION            9 (defaults, closure)
+             20 STORE_NAME               3 (__init__)
+
+ 11          22 LOAD_CONST               4 (<code object onHoverIndexChanged at 0x000001F3253C29D0, file "LPSuperTableWidget.py", line 11>)
+             24 LOAD_CONST               5 ('LPSuperTableWidgetDelegate.onHoverIndexChanged')
+             26 MAKE_FUNCTION            0
+             28 STORE_NAME               4 (onHoverIndexChanged)
+
+ 14          30 LOAD_CONST               6 (<code object onLeaveTableEvent at 0x000001F3253C2A80, file "LPSuperTableWidget.py", line 14>)
+             32 LOAD_CONST               7 ('LPSuperTableWidgetDelegate.onLeaveTableEvent')
+             34 MAKE_FUNCTION            0
+             36 STORE_NAME               5 (onLeaveTableEvent)
+
+ 17          38 LOAD_CLOSURE             0 (__class__)
+             40 BUILD_TUPLE              1
+             42 LOAD_CONST               8 (<code object paint at 0x000001F3253C20E0, file "LPSuperTableWidget.py", line 17>)
+             44 LOAD_CONST               9 ('LPSuperTableWidgetDelegate.paint')
+             46 MAKE_FUNCTION            8 (closure)
+             48 STORE_NAME               6 (paint)
+             50 LOAD_CLOSURE             0 (__class__)
+             52 DUP_TOP
+             54 STORE_NAME               7 (__classcell__)
+             56 RETURN_VALUE
+
+=== LPSuperTableWidgetDelegate.__init__ ===
+  8           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+  9          12 LOAD_CONST               1 (-1)
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (hovered_row)
+             18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== LPSuperTableWidgetDelegate.onHoverIndexChanged ===
+ 12           0 LOAD_FAST                1 (item)
+              2 LOAD_METHOD              0 (row)
+              4 CALL_METHOD              0
+              6 LOAD_FAST                0 (self)
+              8 STORE_ATTR               1 (hovered_row)
+             10 LOAD_CONST               0 (None)
+             12 RETURN_VALUE
+
+=== LPSuperTableWidgetDelegate.onLeaveTableEvent ===
+ 15           0 LOAD_CONST               1 (-1)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (hovered_row)
+              6 LOAD_CONST               0 (None)
+              8 RETURN_VALUE
+
+=== LPSuperTableWidgetDelegate.paint ===
+ 18           0 LOAD_FAST                2 (option)
+              2 STORE_FAST               4 (opt)
+
+ 19           4 LOAD_FAST                3 (index)
+              6 LOAD_METHOD              0 (row)
+              8 CALL_METHOD              0
+             10 LOAD_FAST                0 (self)
+             12 LOAD_ATTR                1 (hovered_row)
+             14 COMPARE_OP               2 (==)
+             16 POP_JUMP_IF_FALSE       38
+
+ 20          18 LOAD_FAST                4 (opt)
+             20 DUP_TOP
+             22 LOAD_ATTR                2 (state)
+             24 LOAD_GLOBAL              3 (QStyle)
+             26 LOAD_ATTR                4 (StateFlag)
+             28 LOAD_ATTR                5 (State_MouseOver)
+             30 INPLACE_OR
+             32 ROT_TWO
+             34 STORE_ATTR               2 (state)
+             36 JUMP_FORWARD            20 (to 58)
+
+ 22     >>   38 LOAD_FAST                4 (opt)
+             40 DUP_TOP
+             42 LOAD_ATTR                2 (state)
+             44 LOAD_GLOBAL              3 (QStyle)
+             46 LOAD_ATTR                4 (StateFlag)
+             48 LOAD_ATTR                5 (State_MouseOver)
+             50 UNARY_INVERT
+             52 INPLACE_AND
+             54 ROT_TWO
+             56 STORE_ATTR               2 (state)
+
+ 24     >>   58 LOAD_FAST                3 (index)
+             60 LOAD_METHOD              0 (row)
+             62 CALL_METHOD              0
+             64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                1 (hovered_row)
+             68 COMPARE_OP               2 (==)
+             70 POP_JUMP_IF_FALSE       88
+
+ 25          72 LOAD_FAST                1 (painter)
+             74 LOAD_METHOD              6 (fillRect)
+             76 LOAD_FAST                2 (option)
+             78 LOAD_ATTR                7 (rect)
+             80 LOAD_GLOBAL              8 (LPGlobalUI)
+             82 LOAD_ATTR                9 (THEME_DISABLE_COLOR)
+             84 CALL_METHOD              2
+             86 POP_TOP
+
+ 26     >>   88 LOAD_GLOBAL             10 (super)
+             90 CALL_FUNCTION            0
+             92 LOAD_METHOD             11 (paint)
+             94 LOAD_FAST                1 (painter)
+             96 LOAD_FAST                4 (opt)
+             98 LOAD_FAST                3 (index)
+            100 CALL_METHOD              3
+            102 POP_TOP
+            104 LOAD_CONST               0 (None)
+            106 RETURN_VALUE
+
+=== LPSuperTableWidget ===
+ 29           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPSuperTableWidget')
+              6 STORE_NAME               2 (__qualname__)
+
+ 30           8 LOAD_NAME                3 (pyqtSignal)
+             10 LOAD_NAME                4 (object)
+             12 CALL_FUNCTION            1
+             14 STORE_NAME               5 (hoverIndexChanged)
+
+ 31          16 LOAD_NAME                3 (pyqtSignal)
+             18 CALL_FUNCTION            0
+             20 STORE_NAME               6 (leaveTableEvent)
+
+ 33          22 LOAD_CONST              10 ((None,))
+             24 LOAD_CLOSURE             0 (__class__)
+             26 BUILD_TUPLE              1
+             28 LOAD_CONST               2 (<code object __init__ at 0x000001F3253C2240, file "LPSuperTableWidget.py", line 33>)
+             30 LOAD_CONST               3 ('LPSuperTableWidget.__init__')
+             32 MAKE_FUNCTION            9 (defaults, closure)
+             34 STORE_NAME               7 (__init__)
+
+ 37          36 LOAD_CONST               4 (<code object mouseMoveEvent at 0x000001F3253C2190, file "LPSuperTableWidget.py", line 37>)
+             38 LOAD_CONST               5 ('LPSuperTableWidget.mouseMoveEvent')
+             40 MAKE_FUNCTION            0
+             42 STORE_NAME               8 (mouseMoveEvent)
+
+ 42          44 LOAD_CONST               6 (<code object leaveEvent at 0x000001F3253C2450, file "LPSuperTableWidget.py", line 42>)
+             46 LOAD_CONST               7 ('LPSuperTableWidget.leaveEvent')
+             48 MAKE_FUNCTION            0
+             50 STORE_NAME               9 (leaveEvent)
+
+ 49          52 LOAD_CLOSURE             0 (__class__)
+             54 BUILD_TUPLE              1
+             56 LOAD_CONST               8 (<code object eventFilter at 0x000001F3253C23A0, file "LPSuperTableWidget.py", line 49>)
+             58 LOAD_CONST               9 ('LPSuperTableWidget.eventFilter')
+             60 MAKE_FUNCTION            8 (closure)
+             62 STORE_NAME              10 (eventFilter)
+             64 LOAD_CLOSURE             0 (__class__)
+             66 DUP_TOP
+             68 STORE_NAME              11 (__classcell__)
+             70 RETURN_VALUE
+
+=== LPSuperTableWidget.__init__ ===
+ 34           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 35          12 LOAD_FAST                0 (self)
+             14 LOAD_METHOD              2 (setMouseTracking)
+             16 LOAD_CONST               1 (True)
+             18 CALL_METHOD              1
+             20 POP_TOP
+             22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPSuperTableWidget.mouseMoveEvent ===
+ 39           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (indexAt)
+              4 LOAD_FAST                1 (event)
+              6 LOAD_METHOD              1 (pos)
+              8 CALL_METHOD              0
+             10 CALL_METHOD              1
+             12 STORE_FAST               2 (index)
+
+ 40          14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (hoverIndexChanged)
+             18 LOAD_METHOD              3 (emit)
+             20 LOAD_FAST                2 (index)
+             22 CALL_METHOD              1
+             24 POP_TOP
+             26 LOAD_CONST               0 (None)
+             28 RETURN_VALUE
+
+=== LPSuperTableWidget.leaveEvent ===
+ 44           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (leaveTableEvent)
+              4 LOAD_METHOD              1 (emit)
+              6 CALL_METHOD              0
+              8 POP_TOP
+
+ 45          10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              2 (viewport)
+             14 CALL_METHOD              0
+             16 LOAD_METHOD              3 (update)
+             18 CALL_METHOD              0
+             20 POP_TOP
+             22 LOAD_CONST               0 (None)
+             24 RETURN_VALUE
+
+=== LPSuperTableWidget.eventFilter ===
+ 50           0 LOAD_FAST                2 (event)
+              2 LOAD_METHOD              0 (type)
+              4 CALL_METHOD              0
+              6 LOAD_GLOBAL              1 (QEvent)
+              8 LOAD_ATTR                2 (Type)
+             10 LOAD_ATTR                3 (Enter)
+             12 COMPARE_OP               2 (==)
+             14 POP_JUMP_IF_FALSE       46
+
+ 51          16 LOAD_FAST                0 (self)
+             18 LOAD_METHOD              4 (indexAt)
+             20 LOAD_FAST                1 (source)
+             22 LOAD_METHOD              5 (pos)
+             24 CALL_METHOD              0
+             26 CALL_METHOD              1
+             28 STORE_FAST               3 (index)
+
+ 52          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                6 (hoverIndexChanged)
+             34 LOAD_METHOD              7 (emit)
+             36 LOAD_FAST                3 (index)
+             38 CALL_METHOD              1
+             40 POP_TOP
+
+ 53          42 LOAD_CONST               1 (True)
+             44 RETURN_VALUE
+
+ 54     >>   46 LOAD_FAST                2 (event)
+             48 LOAD_METHOD              0 (type)
+             50 CALL_METHOD              0
+             52 LOAD_GLOBAL              1 (QEvent)
+             54 LOAD_ATTR                2 (Type)
+             56 LOAD_ATTR                8 (Leave)
+             58 COMPARE_OP               2 (==)
+             60 POP_JUMP_IF_FALSE       88
+
+ 55          62 LOAD_FAST                0 (self)
+             64 LOAD_ATTR                9 (leaveTableEvent)
+             66 LOAD_METHOD              7 (emit)
+             68 CALL_METHOD              0
+             70 POP_TOP
+
+ 56          72 LOAD_FAST                0 (self)
+             74 LOAD_METHOD             10 (viewport)
+             76 CALL_METHOD              0
+             78 LOAD_METHOD             11 (update)
+             80 CALL_METHOD              0
+             82 POP_TOP
+
+ 57          84 LOAD_CONST               1 (True)
+             86 RETURN_VALUE
+
+ 58     >>   88 LOAD_GLOBAL             12 (super)
+             90 CALL_FUNCTION            0
+             92 LOAD_METHOD             13 (eventFilter)
+             94 LOAD_FAST                1 (source)
+             96 LOAD_FAST                2 (event)
+             98 CALL_METHOD              2
+            100 RETURN_VALUE

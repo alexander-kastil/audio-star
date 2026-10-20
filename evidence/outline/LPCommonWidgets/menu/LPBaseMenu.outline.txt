@@ -1,0 +1,109 @@
+# module LPCommonWidgets.menu.LPBaseMenu
+
+[module] names: __doc__, sys, PyQt6.QtCore, Qt, QSize, pyqtSlot, QPoint, QRect, PyQt6.QtGui, QIcon, QColor, QPixmap, PyQt6.QtWidgets, QMenu, QHBoxLayout, QGraphicsDropShadowEffect, QListWidgetItem, QApplication, QWidgetAction, QSizePolicy, LPGlobalUI, LPClientFramework.CacheLog, logger, LPCommonWidgets.menu.LPBaseActionListWidget, BaseActionListWidget, BaseMenu, __name__, app, menu, show, exit, exec
+  str: '\n@Time ： 2024/11/21 18:58\n@Auth ： Chris\n@File ：LPBaseMenu.py\n@Desc: 基础的圆角menu。自带QMenu有阴影和边框，设置圆角无效，需设置属性去掉阴影和边框才行。\n'
+  str: 'Qt'
+  str: 'QSize'
+  str: 'pyqtSlot'
+  str: 'QPoint'
+  str: 'QRect'
+  str: 'QIcon'
+  str: 'QColor'
+  str: 'QPixmap'
+  str: 'QMenu'
+  str: 'QHBoxLayout'
+  str: 'QGraphicsDropShadowEffect'
+  str: 'QListWidgetItem'
+  str: 'QApplication'
+  str: 'QWidgetAction'
+  str: 'QSizePolicy'
+  str: 'logger'
+  str: 'BaseActionListWidget'
+  str: 'BaseMenu'
+  str: '__main__'
+
+def BaseMenu()  line 20
+  names: __name__, __module__, __qualname__, __init__, _init_widgets, _on_item_clicked, QColor, _set_shadow_effect, _adjust_size, _adjust_item_size, _create_icon, _create_action_item, pyqtSlot, _on_action_changed, _remove_item, _hide_menu, mousePressEvent, add_action, insert_action, remove_action, add_actions, clear, exec_, __classcell__
+    str: 'BaseMenu'
+    str: 'BaseMenu.__init__'
+    str: 'BaseMenu._init_widgets'
+    str: 'BaseMenu._on_item_clicked'
+    str: 'BaseMenu._set_shadow_effect'
+    str: 'BaseMenu._adjust_size'
+    str: 'BaseMenu._adjust_item_size'
+    str: 'BaseMenu._create_icon'
+    str: 'BaseMenu._create_action_item'
+    str: 'BaseMenu._on_action_changed'
+    str: 'BaseMenu._remove_item'
+    str: 'BaseMenu._hide_menu'
+    str: 'BaseMenu.mousePressEvent'
+    str: 'BaseMenu.add_action'
+    str: 'BaseMenu.insert_action'
+    str: 'BaseMenu.remove_action'
+    str: 'BaseMenu.add_actions'
+    str: 'BaseMenu.clear'
+    str: 'BaseMenu.exec_'
+
+  def BaseMenu.__init__(self, parent)  line 22
+    names: super, __init__, parent, _actions, item_height, QHBoxLayout, h_BoxLayout, BaseActionListWidget, view, _init_widgets
+
+  def BaseMenu._init_widgets(self)  line 38
+    names: setWindowFlags, Qt, WindowType, Popup, FramelessWindowHint, NoDropShadowWindowHint, setAttribute, WidgetAttribute, WA_TranslucentBackground, setStyleSheet, setMouseTracking, h_BoxLayout, addWidget, view, AlignmentFlag, AlignCenter, setContentsMargins, itemClicked, connect, _on_item_clicked
+      str: '\n            QMenu {\n                background-color: transparent;\n                border: none;\n            }\n        '
+
+  def BaseMenu._on_item_clicked(self, item)  line 68
+    names: data, Qt, ItemDataRole, UserRole, _actions, logger, error, text, _hide_menu, debug, trigger
+      str: ' not in action list!'
+      str: ' trigger!'
+
+  def BaseMenu._set_shadow_effect(self, blur_radius, offset, color)  line 79
+    names: QGraphicsDropShadowEffect, view, setBlurRadius, setOffset, setColor, setGraphicsEffect
+      str: 'QGraphicsDropShadowEffect 为控件添加阴影'
+
+  def BaseMenu._adjust_size(self)  line 90
+    names: layout, contentsMargins, left, view, width, right, top, height, bottom, setFixedSize
+
+  def BaseMenu._adjust_item_size(self, item, action)  line 96
+    names: setText, text, view, fontMetrics, horizontalAdvance, setSizeHint, QSize, item_height
+
+  def BaseMenu._create_icon(self, action)  line 106
+    names: QIcon, icon
+
+  def BaseMenu._create_action_item(self, action, before)  line 110
+    names: _actions, append, super, addAction, index, insertAction, logger, error, QListWidgetItem, _create_icon, text, _adjust_item_size, setData, Qt, ItemDataRole, UserRole, setProperty, changed, connect, _on_action_changed
+      str: 'before not in action list'
+      str: 'item'
+
+  def BaseMenu._on_action_changed(self)  line 130
+    names: view, adjust_size, _adjust_size
+
+  def BaseMenu._remove_item(self, item)  line 138
+    names: view, take_item, row, setData, Qt, ItemDataRole, UserRole, itemWidget, deleteLater
+
+  def BaseMenu._hide_menu(self, is_hide_auto)  line 148
+    names: view, clearSelection, close
+
+  def BaseMenu.mousePressEvent(self, event)  line 153
+    names: childAt, pos, view, isAncestorOf, _hide_menu
+
+  def BaseMenu.add_action(self, action)  line 160
+    names: _create_action_item, view, add_item, _adjust_size
+
+  def BaseMenu.insert_action(self, action, before)  line 165
+    names: _actions, property, view, row, _create_action_item, insert_item, _adjust_size
+      str: 'item'
+
+  def BaseMenu.remove_action(self, action)  line 179
+    names: _actions, property, remove, setProperty, _remove_item, super, removeAction
+      str: 'item'
+
+  def BaseMenu.add_actions(self, actions)  line 197
+    names: add_action
+
+  def BaseMenu.clear(self)  line 202
+    names: _actions, removeAction
+
+  def BaseMenu.exec_(self, mouse_pos)  line 206
+    names: sizeHint, logger, debug, x, y, width, height, exec
+      str: 'mouse_pos === x %d y %d'
+      str: 'menu_size === width %d height %d'

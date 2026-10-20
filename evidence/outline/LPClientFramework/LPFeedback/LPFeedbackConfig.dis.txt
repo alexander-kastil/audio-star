@@ -1,0 +1,147 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('PC Feedback 的发布配置占位定义。\n\n真实 Freshdesk 凭证由发布负责人替换这些占位值；真实 AES 密钥不得提交到源码。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  7           4 LOAD_CONST               1 ('https://freshdesk.linkplay.com/apiv1/freshdesk/wiim')
+              6 STORE_NAME               1 (FRESHDESK_API_HOST)
+
+  8           8 LOAD_CONST               2 ('https://wiim.freshdesk.com')
+             10 STORE_NAME               2 (FRESHDESK_WEB_HOST)
+
+  9          12 LOAD_CONST               3 ('<redacted>')
+             14 STORE_NAME               3 (FRESHDESK_APP_ID)
+
+ 10          16 LOAD_CONST               4 ('<redacted>')
+             18 STORE_NAME               4 (FRESHDESK_ACCESS_KEY)
+
+ 11          20 LOAD_CONST               5 ('<redacted>')
+             22 STORE_NAME               5 (FRESHDESK_SECRET_KEY)
+
+ 12          24 LOAD_CONST               6 ('https://api.linkplay.com/datav3/log/feedbackUpload')
+             26 STORE_NAME               6 (STS_ENDPOINT)
+
+ 13          28 LOAD_CONST               7 ('pc')
+             30 STORE_NAME               7 (STS_ORIGIN)
+
+ 14          32 LOAD_CONST               8 ('WiiMHome')
+             34 STORE_NAME               8 (STS_PROJECT)
+
+ 15          36 LOAD_CONST               9 ('<redacted>')
+             38 STORE_NAME               9 (FEEDBACK_AES_KEY)
+
+ 17          40 LOAD_CONST              10 ('FeedbackDebug')
+             42 STORE_NAME              10 (FEEDBACK_TYPE_DEBUG)
+
+ 19          44 LOAD_CONST              11 ('wiimlogs@linkplay.com')
+             46 STORE_NAME              11 (FEEDBACK_DEFAULT_RECEIVER)
+
+ 22          48 LOAD_CONST              12 (<code object isPlaceholder at 0x000001F3253C4F50, file "LPClientFramework\LPFeedback\LPFeedbackConfig.py", line 22>)
+             50 LOAD_CONST              13 ('isPlaceholder')
+             52 MAKE_FUNCTION            0
+             54 STORE_NAME              12 (isPlaceholder)
+
+ 36          56 LOAD_CONST              14 (<code object requireFreshdeskCredentials at 0x000001F3253C4A80, file "LPClientFramework\LPFeedback\LPFeedbackConfig.py", line 36>)
+             58 LOAD_CONST              15 ('requireFreshdeskCredentials')
+             60 MAKE_FUNCTION            0
+             62 STORE_NAME              13 (requireFreshdeskCredentials)
+
+ 52          64 LOAD_CONST              16 (<code object requireAesKey at 0x000001F3253C4870, file "LPClientFramework\LPFeedback\LPFeedbackConfig.py", line 52>)
+             66 LOAD_CONST              17 ('requireAesKey')
+             68 MAKE_FUNCTION            0
+             70 STORE_NAME              14 (requireAesKey)
+             72 LOAD_CONST              18 (None)
+             74 RETURN_VALUE
+
+=== isPlaceholder ===
+ 30           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                0 (value)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               1 (normalizedValue)
+
+ 31          16 LOAD_FAST                1 (normalizedValue)
+             18 UNARY_NOT
+             20 JUMP_IF_TRUE_OR_POP     40
+
+ 32          22 LOAD_FAST                1 (normalizedValue)
+             24 LOAD_METHOD              2 (startswith)
+             26 LOAD_CONST               2 ('__')
+             28 CALL_METHOD              1
+             30 JUMP_IF_FALSE_OR_POP    40
+             32 LOAD_FAST                1 (normalizedValue)
+             34 LOAD_METHOD              3 (endswith)
+             36 LOAD_CONST               2 ('__')
+             38 CALL_METHOD              1
+
+ 31     >>   40 RETURN_VALUE
+
+=== requireFreshdeskCredentials ===
+ 46           0 LOAD_GLOBAL              0 (FRESHDESK_APP_ID)
+              2 LOAD_GLOBAL              1 (FRESHDESK_ACCESS_KEY)
+              4 LOAD_GLOBAL              2 (FRESHDESK_SECRET_KEY)
+              6 BUILD_TUPLE              3
+              8 STORE_FAST               0 (values)
+
+ 47          10 LOAD_GLOBAL              3 (any)
+             12 LOAD_CONST               1 (<code object <genexpr> at 0x000001F3253C4500, file "LPClientFramework\LPFeedback\LPFeedbackConfig.py", line 47>)
+             14 LOAD_CONST               2 ('requireFreshdeskCredentials.<locals>.<genexpr>')
+             16 MAKE_FUNCTION            0
+             18 LOAD_FAST                0 (values)
+             20 GET_ITER
+             22 CALL_FUNCTION            1
+             24 CALL_FUNCTION            1
+             26 POP_JUMP_IF_FALSE       36
+
+ 48          28 LOAD_GLOBAL              4 (RuntimeError)
+             30 LOAD_CONST               3 ('Feedback service is not configured.')
+             32 CALL_FUNCTION            1
+             34 RAISE_VARARGS            1
+
+ 49     >>   36 LOAD_FAST                0 (values)
+             38 RETURN_VALUE
+
+=== requireFreshdeskCredentials.<genexpr> ===
+ 47           0 LOAD_FAST                0 (.0)
+        >>    2 FOR_ITER                14 (to 18)
+              4 STORE_FAST               1 (value)
+              6 LOAD_GLOBAL              0 (isPlaceholder)
+              8 LOAD_FAST                1 (value)
+             10 CALL_FUNCTION            1
+             12 YIELD_VALUE
+             14 POP_TOP
+             16 JUMP_ABSOLUTE            2
+        >>   18 LOAD_CONST               0 (None)
+             20 RETURN_VALUE
+
+=== requireAesKey ===
+ 62           0 LOAD_GLOBAL              0 (isPlaceholder)
+              2 LOAD_GLOBAL              1 (FEEDBACK_AES_KEY)
+              4 CALL_FUNCTION            1
+              6 POP_JUMP_IF_FALSE       16
+
+ 63           8 LOAD_GLOBAL              2 (RuntimeError)
+             10 LOAD_CONST               1 ('Feedback log encryption is not configured.')
+             12 CALL_FUNCTION            1
+             14 RAISE_VARARGS            1
+
+ 64     >>   16 LOAD_GLOBAL              3 (len)
+             18 LOAD_GLOBAL              1 (FEEDBACK_AES_KEY)
+             20 LOAD_METHOD              4 (encode)
+             22 LOAD_CONST               2 ('utf-8')
+             24 CALL_METHOD              1
+             26 CALL_FUNCTION            1
+             28 LOAD_CONST               3 (16)
+             30 COMPARE_OP               3 (!=)
+             32 POP_JUMP_IF_FALSE       42
+
+ 65          34 LOAD_GLOBAL              2 (RuntimeError)
+             36 LOAD_CONST               4 ('Feedback log encryption key must be 16 bytes.')
+             38 CALL_FUNCTION            1
+             40 RAISE_VARARGS            1
+
+ 66     >>   42 LOAD_GLOBAL              1 (FEEDBACK_AES_KEY)
+             44 RETURN_VALUE

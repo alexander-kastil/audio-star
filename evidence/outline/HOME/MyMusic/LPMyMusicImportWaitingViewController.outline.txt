@@ -1,0 +1,94 @@
+# module HOME.MyMusic.LPMyMusicImportWaitingViewController
+
+[module] names: PyQt6.QtWidgets, QWidget, QDialog, QGraphicsBlurEffect, PyQt6.QtCore, pyqtSignal, Qt, QCoreApplication, PyQt6.QtGui, QPainter, QColor, QIcon, LPGlobalUI, HOME.LPWaitingSpinner, LPWaitingSpinner, LPClientFramework.LPBeetsWrapper, LPBeetsWrapperImportStatus, LIBRARY_TASK_KIND_MANUAL_IMPORT, LIBRARY_TASK_KIND_STARTUP_IMPORT, LPMyMusicImportWaitingViewController
+  str: 'QWidget'
+  str: 'QDialog'
+  str: 'QGraphicsBlurEffect'
+  str: 'pyqtSignal'
+  str: 'Qt'
+  str: 'QCoreApplication'
+  str: 'QPainter'
+  str: 'QColor'
+  str: 'QIcon'
+  str: 'LPWaitingSpinner'
+  str: 'LPBeetsWrapperImportStatus'
+  str: 'LIBRARY_TASK_KIND_MANUAL_IMPORT'
+  str: 'LIBRARY_TASK_KIND_STARTUP_IMPORT'
+  str: 'LPMyMusicImportWaitingViewController'
+
+def LPMyMusicImportWaitingViewController()  line 14
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, object, updateUISignal, cancelImportSignal, __init__, setupUi, mousePressEvent, show, _ensureLoadingSpinnerRunning, _handleDoneButtonClicked, _noteTextForKind, _updateUI, updateDialogUI, __classcell__
+    str: 'LPMyMusicImportWaitingViewController'
+    str: '显示本地音乐后台任务进度与完成状态的等待弹窗。'
+    str: 'LPMyMusicImportWaitingViewController.__init__'
+    str: 'LPMyMusicImportWaitingViewController.setupUi'
+    str: 'LPMyMusicImportWaitingViewController.mousePressEvent'
+    str: 'LPMyMusicImportWaitingViewController.show'
+    str: 'LPMyMusicImportWaitingViewController._ensureLoadingSpinnerRunning'
+    str: 'LPMyMusicImportWaitingViewController._handleDoneButtonClicked'
+    str: 'LPMyMusicImportWaitingViewController._noteTextForKind'
+    str: 'LPMyMusicImportWaitingViewController._updateUI'
+    str: 'LPMyMusicImportWaitingViewController.updateDialogUI'
+
+  def LPMyMusicImportWaitingViewController.__init__(self)  line 20
+    names: super, LPMyMusicImportWaitingViewController, __init__, loadingSpinner, lastProgress, currentKind, currentStatus, updateUISignal, connect, _updateUI
+      str: '\n        初始化等待弹窗控制器。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+
+  def LPMyMusicImportWaitingViewController.setupUi(self, ui)  line 38
+    names: getattr, super, callable, setupUi, setStyleSheet, dialogFrame, doneButton, LPGlobalUI, THEME_BUTTON_HOVER_BACK_COLOR, name, setCursor, Qt, CursorShape, PointingHandCursor, clicked, connect, _handleDoneButtonClicked, markFinishImageView, setIcon, QIcon, imagePath, progressBar
+      str: '\n        初始化等待弹窗界面样式与交互。\n\n        参数:\n            ui: Qt Designer 生成的界面对象。\n        返回:\n            无。\n        '
+      str: 'setupUi'
+      str: '\n        QFrame#contentFrame{\n        background-color: rgba(0, 0, 0, 30)\n        }\n        '
+      str: '\n        QFrame#dialogFrame{\n        background-color: rgba(0, 0, 0, 255);\n        border-radius : 15;\n        border : 0px\n        }\n        '
+      str: '\nQPushButton {\ncolor: white;\nborder-radius : 13;\nborder : 0px;\nbackground-color: %s\n}\n}        '
+      str: 'checkmark.png'
+      str: '\n        QProgressBar {\n        width: 2px;\n        border: 1px;\n        border-width: 2px;\n        border-radius: 2px;\n        background-color: white;\n }\n        QProgressBar::chunk {\n        border-radius: 2px;\n        background-color: %s\n }\n        '
+
+  def LPMyMusicImportWaitingViewController.mousePressEvent(self, event)  line 94
+    names: super, mousePressEvent, dialogFrame, underMouse, hide
+      str: '\n        点击遮罩区域时关闭等待弹窗。\n\n        参数:\n            event: 鼠标事件对象。\n        返回:\n            无。\n        '
+
+  def LPMyMusicImportWaitingViewController.show(self)  line 108
+    names: super, show, doneFrame, hide, markFinishImageView, progressFrame, progressBar, setRange, loadingSpinner, LPWaitingSpinner, markWidget, QColor, is_spinning, start
+      str: '\n        显示等待弹窗并重置初始视觉状态。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+      str: 'roundness'
+      str: 'fade'
+      str: 'radius'
+      str: 'lines'
+      str: 'line_length'
+      str: 'line_width'
+      str: 'speed'
+      str: 'color'
+
+  def LPMyMusicImportWaitingViewController._ensureLoadingSpinnerRunning(self)  line 145
+    names: loadingSpinner, is_spinning, show, start
+      str: '\n        确保等待动画处于运行状态。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+
+  def LPMyMusicImportWaitingViewController._handleDoneButtonClicked(self)  line 161
+    names: currentStatus, LPBeetsWrapperImportStatus, preparing, importing, currentKind, LIBRARY_TASK_KIND_MANUAL_IMPORT, cancelImportSignal, emit, hide
+      str: '\n        根据当前状态处理等待弹窗底部按钮点击。\n\n        参数:\n            无。\n        返回:\n            无。\n        '
+
+  def LPMyMusicImportWaitingViewController._noteTextForKind(self, kind, status, total, processed)  line 179
+    names: LIBRARY_TASK_KIND_MANUAL_IMPORT, LPBeetsWrapperImportStatus, preparing, QCoreApplication, translate, importing, cancelling, canceled, LIBRARY_TASK_KIND_STARTUP_IMPORT
+      str: '\n        根据任务类型与阶段生成等待弹窗文案。\n\n        参数:\n            kind (str): 任务类型。\n            status (LPBeetsWrapperImportStatus): 当前阶段状态。\n            total (int): 总文件数。\n            processed (int): 已处理文件数。\n        返回:\n            str: 展示文案。\n        '
+      str: 'MyMusicImportWaiting'
+      str: 'Adding music to library: Preparing...'
+      str: 'Adding music to library: Of %d tracks, %d added'
+      str: 'Canceling import: Of %d tracks, %d added'
+      str: 'Import canceled: Of %d tracks, %d remain in library'
+      str: 'Updating music library: Preparing...'
+      str: 'Updating music library: Of %d tracks, %d added'
+      str: 'Music library update: Complete'
+      str: 'Adding music to library: Complete'
+
+  def LPMyMusicImportWaitingViewController._updateUI(self, kind, status, total, processed)  line 231
+    names: currentKind, currentStatus, noteLabel, setText, _noteTextForKind, LPBeetsWrapperImportStatus, preparing, _ensureLoadingSpinnerRunning, doneFrame, show, doneButton, QCoreApplication, translate, LIBRARY_TASK_KIND_MANUAL_IMPORT, setEnabled, progressFrame, hide, markFinishImageView, lastProgress, progressBar, setValue, importing, int, max, min, cancelling, setVisible, finish, loadingSpinner, is_spinning, stop
+      str: '\n        刷新等待弹窗内容。\n\n        参数:\n            kind (str): 任务类型。\n            status (LPBeetsWrapperImportStatus): 当前阶段状态。\n            total (int): 总文件数。\n            processed (int): 已处理文件数。\n        返回:\n            无。\n        '
+      str: 'MyMusicImportWaiting'
+      str: 'Cancel'
+      str: 'Close'
+      str: 'Done'
+
+  def LPMyMusicImportWaitingViewController.updateDialogUI(self, kind, status, total, processed)  line 295
+    names: updateUISignal, emit
+      str: '\n        从外部线程安全地提交等待弹窗状态更新。\n\n        参数:\n            kind (str): 任务类型。\n            status (LPBeetsWrapperImportStatus): 当前阶段状态。\n            total (int): 总文件数。\n            processed (int): 已处理文件数。\n        返回:\n            无。\n        '

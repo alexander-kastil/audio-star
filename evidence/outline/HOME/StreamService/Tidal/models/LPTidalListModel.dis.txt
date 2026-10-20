@@ -1,0 +1,1817 @@
+
+=== <module> ===
+  2           0 LOAD_CONST               0 ('\nTIDAL 通用列表模型。\n')
+              2 STORE_NAME               0 (__doc__)
+
+  6           4 LOAD_CONST               1 (0)
+              6 LOAD_CONST               2 (('Any', 'Dict', 'Iterable', 'List', 'Optional'))
+              8 IMPORT_NAME              1 (typing)
+             10 IMPORT_FROM              2 (Any)
+             12 STORE_NAME               2 (Any)
+             14 IMPORT_FROM              3 (Dict)
+             16 STORE_NAME               3 (Dict)
+             18 IMPORT_FROM              4 (Iterable)
+             20 STORE_NAME               4 (Iterable)
+             22 IMPORT_FROM              5 (List)
+             24 STORE_NAME               5 (List)
+             26 IMPORT_FROM              6 (Optional)
+             28 STORE_NAME               6 (Optional)
+             30 POP_TOP
+
+  8          32 LOAD_CONST               1 (0)
+             34 LOAD_CONST               3 (('QAbstractListModel', 'QModelIndex', 'QObject', 'Qt', 'pyqtSlot'))
+             36 IMPORT_NAME              7 (PyQt6.QtCore)
+             38 IMPORT_FROM              8 (QAbstractListModel)
+             40 STORE_NAME               8 (QAbstractListModel)
+             42 IMPORT_FROM              9 (QModelIndex)
+             44 STORE_NAME               9 (QModelIndex)
+             46 IMPORT_FROM             10 (QObject)
+             48 STORE_NAME              10 (QObject)
+             50 IMPORT_FROM             11 (Qt)
+             52 STORE_NAME              11 (Qt)
+             54 IMPORT_FROM             12 (pyqtSlot)
+             56 STORE_NAME              12 (pyqtSlot)
+             58 POP_TOP
+
+ 11          60 LOAD_BUILD_CLASS
+             62 LOAD_CONST               4 (<code object LPTidalListModel at 0x000001F3253CE3A0, file "StreamService\Tidal\models\LPTidalListModel.py", line 11>)
+             64 LOAD_CONST               5 ('LPTidalListModel')
+             66 MAKE_FUNCTION            0
+             68 LOAD_CONST               5 ('LPTidalListModel')
+             70 LOAD_NAME                8 (QAbstractListModel)
+             72 CALL_FUNCTION            3
+             74 STORE_NAME              13 (LPTidalListModel)
+             76 LOAD_CONST               6 (None)
+             78 RETURN_VALUE
+
+=== LPTidalListModel ===
+ 11           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPTidalListModel')
+              6 STORE_NAME               2 (__qualname__)
+
+ 12           8 LOAD_CONST               1 ('TIDAL 通用列表模型，承载卡片、曲目、歌单等结构化条目。')
+             10 STORE_NAME               3 (__doc__)
+
+ 14          12 LOAD_NAME                4 (int)
+             14 LOAD_NAME                5 (Qt)
+             16 LOAD_ATTR                6 (ItemDataRole)
+             18 LOAD_ATTR                7 (UserRole)
+             20 CALL_FUNCTION            1
+             22 LOAD_CONST               2 (1)
+             24 BINARY_ADD
+             26 STORE_NAME               8 (ITEM_ID_ROLE)
+
+ 15          28 LOAD_NAME                8 (ITEM_ID_ROLE)
+             30 LOAD_CONST               2 (1)
+             32 BINARY_ADD
+             34 STORE_NAME               9 (ITEM_TYPE_ROLE)
+
+ 16          36 LOAD_NAME                8 (ITEM_ID_ROLE)
+             38 LOAD_CONST               3 (2)
+             40 BINARY_ADD
+             42 STORE_NAME              10 (TITLE_ROLE)
+
+ 17          44 LOAD_NAME                8 (ITEM_ID_ROLE)
+             46 LOAD_CONST               4 (3)
+             48 BINARY_ADD
+             50 STORE_NAME              11 (SUBTITLE_ROLE)
+
+ 18          52 LOAD_NAME                8 (ITEM_ID_ROLE)
+             54 LOAD_CONST               5 (4)
+             56 BINARY_ADD
+             58 STORE_NAME              12 (IMAGE_URL_ROLE)
+
+ 19          60 LOAD_NAME                8 (ITEM_ID_ROLE)
+             62 LOAD_CONST               6 (5)
+             64 BINARY_ADD
+             66 STORE_NAME              13 (IMAGE_PATH_ROLE)
+
+ 20          68 LOAD_NAME                8 (ITEM_ID_ROLE)
+             70 LOAD_CONST               7 (6)
+             72 BINARY_ADD
+             74 STORE_NAME              14 (TRACK_COUNT_ROLE)
+
+ 21          76 LOAD_NAME                8 (ITEM_ID_ROLE)
+             78 LOAD_CONST               8 (7)
+             80 BINARY_ADD
+             82 STORE_NAME              15 (DURATION_ROLE)
+
+ 22          84 LOAD_NAME                8 (ITEM_ID_ROLE)
+             86 LOAD_CONST               9 (8)
+             88 BINARY_ADD
+             90 STORE_NAME              16 (IS_FAVORITE_ROLE)
+
+ 23          92 LOAD_NAME                8 (ITEM_ID_ROLE)
+             94 LOAD_CONST              10 (9)
+             96 BINARY_ADD
+             98 STORE_NAME              17 (ARTIST_NAME_ROLE)
+
+ 24         100 LOAD_NAME                8 (ITEM_ID_ROLE)
+            102 LOAD_CONST              11 (10)
+            104 BINARY_ADD
+            106 STORE_NAME              18 (ALBUM_NAME_ROLE)
+
+ 25         108 LOAD_NAME                8 (ITEM_ID_ROLE)
+            110 LOAD_CONST              12 (11)
+            112 BINARY_ADD
+            114 STORE_NAME              19 (YEAR_ROLE)
+
+ 26         116 LOAD_NAME                8 (ITEM_ID_ROLE)
+            118 LOAD_CONST              13 (12)
+            120 BINARY_ADD
+            122 STORE_NAME              20 (SECTION_KEY_ROLE)
+
+ 27         124 LOAD_NAME                8 (ITEM_ID_ROLE)
+            126 LOAD_CONST              14 (13)
+            128 BINARY_ADD
+            130 STORE_NAME              21 (EXTRA_ROLE)
+
+ 28         132 LOAD_NAME                8 (ITEM_ID_ROLE)
+            134 LOAD_CONST              15 (14)
+            136 BINARY_ADD
+            138 STORE_NAME              22 (IS_EXPLICIT_ROLE)
+
+ 29         140 LOAD_NAME                8 (ITEM_ID_ROLE)
+            142 LOAD_CONST              16 (15)
+            144 BINARY_ADD
+            146 STORE_NAME              23 (ARTISTS_ROLE)
+
+ 30         148 LOAD_NAME                8 (ITEM_ID_ROLE)
+            150 LOAD_CONST              17 (16)
+            152 BINARY_ADD
+            154 STORE_NAME              24 (ALBUM_ID_ROLE)
+
+ 31         156 LOAD_NAME                8 (ITEM_ID_ROLE)
+            158 LOAD_CONST              18 (17)
+            160 BINARY_ADD
+            162 STORE_NAME              25 (ARTIST_ID_ROLE)
+
+ 32         164 LOAD_NAME                8 (ITEM_ID_ROLE)
+            166 LOAD_CONST              19 (18)
+            168 BINARY_ADD
+            170 STORE_NAME              26 (PLAYLIST_INDEX_ROLE)
+
+ 33         172 LOAD_NAME                8 (ITEM_ID_ROLE)
+            174 LOAD_CONST              20 (19)
+            176 BINARY_ADD
+            178 STORE_NAME              27 (IS_USER_PLAYLIST_ROLE)
+
+ 35         180 LOAD_NAME                8 (ITEM_ID_ROLE)
+            182 LOAD_CONST              21 (20)
+            184 BINARY_ADD
+            186 STORE_NAME              28 (ALLOW_STREAMING_ROLE)
+
+ 37         188 LOAD_CONST              67 ((None,))
+            190 LOAD_NAME               29 (Optional)
+            192 LOAD_NAME               30 (QObject)
+            194 BINARY_SUBSCR
+            196 LOAD_CONST              23 (('parent',))
+            198 BUILD_CONST_KEY_MAP      1
+            200 LOAD_CLOSURE             0 (__class__)
+            202 BUILD_TUPLE              1
+            204 LOAD_CONST              24 (<code object __init__ at 0x000001F3253AE870, file "StreamService\Tidal\models\LPTidalListModel.py", line 37>)
+            206 LOAD_CONST              25 ('LPTidalListModel.__init__')
+            208 MAKE_FUNCTION           13 (defaults, annotations, closure)
+            210 STORE_NAME              31 (__init__)
+
+ 47         212 LOAD_NAME               32 (QModelIndex)
+            214 CALL_FUNCTION            0
+            216 BUILD_TUPLE              1
+            218 LOAD_NAME               32 (QModelIndex)
+            220 LOAD_NAME                4 (int)
+            222 LOAD_CONST              26 (('parent', 'return'))
+            224 BUILD_CONST_KEY_MAP      2
+            226 LOAD_CONST              27 (<code object rowCount at 0x000001F3253AE450, file "StreamService\Tidal\models\LPTidalListModel.py", line 47>)
+            228 LOAD_CONST              28 ('LPTidalListModel.rowCount')
+            230 MAKE_FUNCTION            5 (defaults, annotations)
+            232 STORE_NAME              33 (rowCount)
+
+ 58         234 LOAD_NAME                4 (int)
+            236 LOAD_NAME                5 (Qt)
+            238 LOAD_ATTR                6 (ItemDataRole)
+            240 LOAD_ATTR               34 (DisplayRole)
+            242 CALL_FUNCTION            1
+            244 BUILD_TUPLE              1
+            246 LOAD_NAME               32 (QModelIndex)
+            248 LOAD_NAME                4 (int)
+            250 LOAD_NAME               35 (Any)
+            252 LOAD_CONST              29 (('index', 'role', 'return'))
+            254 BUILD_CONST_KEY_MAP      3
+            256 LOAD_CONST              30 (<code object data at 0x000001F3253AE9D0, file "StreamService\Tidal\models\LPTidalListModel.py", line 58>)
+            258 LOAD_CONST              31 ('LPTidalListModel.data')
+            260 MAKE_FUNCTION            5 (defaults, annotations)
+            262 STORE_NAME              36 (data)
+
+122         264 LOAD_NAME               37 (Dict)
+            266 LOAD_NAME                4 (int)
+            268 LOAD_NAME               38 (bytes)
+            270 BUILD_TUPLE              2
+            272 BINARY_SUBSCR
+            274 LOAD_CONST              32 (('return',))
+            276 BUILD_CONST_KEY_MAP      1
+            278 LOAD_CONST              33 (<code object roleNames at 0x000001F3253C4A80, file "StreamService\Tidal\models\LPTidalListModel.py", line 122>)
+            280 LOAD_CONST              34 ('LPTidalListModel.roleNames')
+            282 MAKE_FUNCTION            4 (annotations)
+            284 STORE_NAME              39 (roleNames)
+
+152         286 LOAD_CONST              22 (None)
+            288 LOAD_CONST              32 (('return',))
+            290 BUILD_CONST_KEY_MAP      1
+            292 LOAD_CONST              35 (<code object clear at 0x000001F3253C4660, file "StreamService\Tidal\models\LPTidalListModel.py", line 152>)
+            294 LOAD_CONST              36 ('LPTidalListModel.clear')
+            296 MAKE_FUNCTION            4 (annotations)
+            298 STORE_NAME              40 (clear)
+
+164         300 LOAD_NAME               41 (Iterable)
+            302 LOAD_NAME               37 (Dict)
+            304 LOAD_NAME               42 (str)
+            306 LOAD_NAME               35 (Any)
+            308 BUILD_TUPLE              2
+            310 BINARY_SUBSCR
+            312 BINARY_SUBSCR
+            314 LOAD_CONST              22 (None)
+            316 LOAD_CONST              37 (('items', 'return'))
+            318 BUILD_CONST_KEY_MAP      2
+            320 LOAD_CONST              38 (<code object setItems at 0x000001F3253C47C0, file "StreamService\Tidal\models\LPTidalListModel.py", line 164>)
+            322 LOAD_CONST              39 ('LPTidalListModel.setItems')
+            324 MAKE_FUNCTION            4 (annotations)
+            326 STORE_NAME              43 (setItems)
+
+195         328 LOAD_NAME               41 (Iterable)
+            330 LOAD_NAME               37 (Dict)
+            332 LOAD_NAME               42 (str)
+            334 LOAD_NAME               35 (Any)
+            336 BUILD_TUPLE              2
+            338 BINARY_SUBSCR
+            340 BINARY_SUBSCR
+            342 LOAD_NAME               44 (bool)
+            344 LOAD_CONST              37 (('items', 'return'))
+            346 BUILD_CONST_KEY_MAP      2
+            348 LOAD_CONST              40 (<code object syncItemsIncrementally at 0x000001F3253C4190, file "StreamService\Tidal\models\LPTidalListModel.py", line 195>)
+            350 LOAD_CONST              41 ('LPTidalListModel.syncItemsIncrementally')
+            352 MAKE_FUNCTION            4 (annotations)
+            354 STORE_NAME              45 (syncItemsIncrementally)
+
+234         356 LOAD_NAME               41 (Iterable)
+            358 LOAD_NAME               37 (Dict)
+            360 LOAD_NAME               42 (str)
+            362 LOAD_NAME               35 (Any)
+            364 BUILD_TUPLE              2
+            366 BINARY_SUBSCR
+            368 BINARY_SUBSCR
+            370 LOAD_CONST              22 (None)
+            372 LOAD_CONST              37 (('items', 'return'))
+            374 BUILD_CONST_KEY_MAP      2
+            376 LOAD_CONST              42 (<code object appendItems at 0x000001F3253C4F50, file "StreamService\Tidal\models\LPTidalListModel.py", line 234>)
+            378 LOAD_CONST              43 ('LPTidalListModel.appendItems')
+            380 MAKE_FUNCTION            4 (annotations)
+            382 STORE_NAME              46 (appendItems)
+
+250         384 LOAD_NAME                4 (int)
+            386 LOAD_NAME               29 (Optional)
+            388 LOAD_NAME               37 (Dict)
+            390 LOAD_NAME               42 (str)
+            392 LOAD_NAME               35 (Any)
+            394 BUILD_TUPLE              2
+            396 BINARY_SUBSCR
+            398 BINARY_SUBSCR
+            400 LOAD_CONST              44 (('row', 'return'))
+            402 BUILD_CONST_KEY_MAP      2
+            404 LOAD_CONST              45 (<code object itemAt at 0x000001F3253C4870, file "StreamService\Tidal\models\LPTidalListModel.py", line 250>)
+            406 LOAD_CONST              46 ('LPTidalListModel.itemAt')
+            408 MAKE_FUNCTION            4 (annotations)
+            410 STORE_NAME              47 (itemAt)
+
+261         412 LOAD_NAME               48 (pyqtSlot)
+            414 LOAD_NAME                4 (int)
+            416 LOAD_CONST              47 (('result',))
+            418 CALL_FUNCTION_KW         1
+
+262         420 LOAD_NAME                4 (int)
+            422 LOAD_CONST              32 (('return',))
+            424 BUILD_CONST_KEY_MAP      1
+            426 LOAD_CONST              48 (<code object count at 0x000001F3253C4C90, file "StreamService\Tidal\models\LPTidalListModel.py", line 261>)
+            428 LOAD_CONST              49 ('LPTidalListModel.count')
+            430 MAKE_FUNCTION            4 (annotations)
+            432 CALL_FUNCTION            1
+            434 STORE_NAME              49 (count)
+
+270         436 LOAD_NAME               48 (pyqtSlot)
+            438 LOAD_NAME                4 (int)
+            440 LOAD_CONST              50 ('QVariantMap')
+            442 LOAD_CONST              47 (('result',))
+            444 CALL_FUNCTION_KW         2
+
+271         446 LOAD_NAME                4 (int)
+            448 LOAD_NAME               37 (Dict)
+            450 LOAD_NAME               42 (str)
+            452 LOAD_NAME               35 (Any)
+            454 BUILD_TUPLE              2
+            456 BINARY_SUBSCR
+            458 LOAD_CONST              44 (('row', 'return'))
+            460 BUILD_CONST_KEY_MAP      2
+            462 LOAD_CONST              51 (<code object itemMapAt at 0x000001F3253C40E0, file "StreamService\Tidal\models\LPTidalListModel.py", line 270>)
+            464 LOAD_CONST              52 ('LPTidalListModel.itemMapAt')
+            466 MAKE_FUNCTION            4 (annotations)
+            468 CALL_FUNCTION            1
+            470 STORE_NAME              50 (itemMapAt)
+
+281         472 LOAD_NAME               42 (str)
+            474 LOAD_NAME                4 (int)
+            476 LOAD_CONST              53 (('itemId', 'return'))
+            478 BUILD_CONST_KEY_MAP      2
+            480 LOAD_CONST              54 (<code object findIndexById at 0x000001F3253C4D40, file "StreamService\Tidal\models\LPTidalListModel.py", line 281>)
+            482 LOAD_CONST              55 ('LPTidalListModel.findIndexById')
+            484 MAKE_FUNCTION            4 (annotations)
+            486 STORE_NAME              51 (findIndexById)
+
+296         488 LOAD_NAME               42 (str)
+            490 LOAD_NAME               37 (Dict)
+            492 LOAD_NAME               42 (str)
+            494 LOAD_NAME               35 (Any)
+            496 BUILD_TUPLE              2
+            498 BINARY_SUBSCR
+            500 LOAD_NAME               44 (bool)
+            502 LOAD_CONST              56 (('itemId', 'changes', 'return'))
+            504 BUILD_CONST_KEY_MAP      3
+            506 LOAD_CONST              57 (<code object updateItem at 0x000001F3253C43A0, file "StreamService\Tidal\models\LPTidalListModel.py", line 296>)
+            508 LOAD_CONST              58 ('LPTidalListModel.updateItem')
+            510 MAKE_FUNCTION            4 (annotations)
+            512 STORE_NAME              52 (updateItem)
+
+312         514 LOAD_NAME               42 (str)
+            516 LOAD_NAME               44 (bool)
+            518 LOAD_CONST              53 (('itemId', 'return'))
+            520 BUILD_CONST_KEY_MAP      2
+            522 LOAD_CONST              59 (<code object removeItem at 0x000001F3253C4DF0, file "StreamService\Tidal\models\LPTidalListModel.py", line 312>)
+            524 LOAD_CONST              60 ('LPTidalListModel.removeItem')
+            526 MAKE_FUNCTION            4 (annotations)
+            528 STORE_NAME              53 (removeItem)
+
+327         530 LOAD_NAME               42 (str)
+            532 LOAD_NAME               42 (str)
+            534 LOAD_NAME               44 (bool)
+            536 LOAD_CONST              61 (('imageUrl', 'imagePath', 'return'))
+            538 BUILD_CONST_KEY_MAP      3
+            540 LOAD_CONST              62 (<code object updateImagePathByUrl at 0x000001F3253C49D0, file "StreamService\Tidal\models\LPTidalListModel.py", line 327>)
+            542 LOAD_CONST              63 ('LPTidalListModel.updateImagePathByUrl')
+            544 MAKE_FUNCTION            4 (annotations)
+            546 STORE_NAME              54 (updateImagePathByUrl)
+
+353         548 LOAD_NAME               37 (Dict)
+            550 LOAD_NAME               42 (str)
+            552 LOAD_NAME               35 (Any)
+            554 BUILD_TUPLE              2
+            556 BINARY_SUBSCR
+            558 LOAD_CONST              22 (None)
+            560 LOAD_CONST              64 (('item', 'return'))
+            562 BUILD_CONST_KEY_MAP      2
+            564 LOAD_CONST              65 (<code object upsertItem at 0x000001F3253CE7C0, file "StreamService\Tidal\models\LPTidalListModel.py", line 353>)
+            566 LOAD_CONST              66 ('LPTidalListModel.upsertItem')
+            568 MAKE_FUNCTION            4 (annotations)
+            570 STORE_NAME              55 (upsertItem)
+            572 LOAD_CLOSURE             0 (__class__)
+            574 DUP_TOP
+            576 STORE_NAME              56 (__classcell__)
+            578 RETURN_VALUE
+
+=== LPTidalListModel.__init__ ===
+ 44           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (parent)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 45          12 BUILD_LIST               0
+             14 LOAD_FAST                0 (self)
+             16 STORE_ATTR               2 (_items)
+             18 LOAD_CONST               1 (None)
+             20 RETURN_VALUE
+
+=== LPTidalListModel.rowCount ===
+ 54           0 LOAD_FAST                1 (parent)
+              2 LOAD_METHOD              0 (isValid)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_FALSE       12
+
+ 55           8 LOAD_CONST               1 (0)
+             10 RETURN_VALUE
+
+ 56     >>   12 LOAD_GLOBAL              1 (len)
+             14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                2 (_items)
+             18 CALL_FUNCTION            1
+             20 RETURN_VALUE
+
+=== LPTidalListModel.data ===
+ 66           0 LOAD_FAST                1 (index)
+              2 LOAD_METHOD              0 (isValid)
+              4 CALL_METHOD              0
+              6 POP_JUMP_IF_TRUE        12
+
+ 67           8 LOAD_CONST               1 (None)
+             10 RETURN_VALUE
+
+ 68     >>   12 LOAD_FAST                1 (index)
+             14 LOAD_METHOD              1 (row)
+             16 CALL_METHOD              0
+             18 STORE_FAST               3 (row)
+
+ 69          20 LOAD_FAST                3 (row)
+             22 LOAD_CONST               2 (0)
+             24 COMPARE_OP               0 (<)
+             26 POP_JUMP_IF_TRUE        42
+             28 LOAD_FAST                3 (row)
+             30 LOAD_GLOBAL              2 (len)
+             32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (_items)
+             36 CALL_FUNCTION            1
+             38 COMPARE_OP               5 (>=)
+             40 POP_JUMP_IF_FALSE       46
+
+ 70     >>   42 LOAD_CONST               1 (None)
+             44 RETURN_VALUE
+
+ 71     >>   46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                3 (_items)
+             50 LOAD_FAST                3 (row)
+             52 BINARY_SUBSCR
+             54 STORE_FAST               4 (item)
+
+ 72          56 LOAD_FAST                2 (role)
+             58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                4 (ITEM_ID_ROLE)
+             62 COMPARE_OP               2 (==)
+             64 POP_JUMP_IF_FALSE       78
+
+ 73          66 LOAD_FAST                4 (item)
+             68 LOAD_METHOD              5 (get)
+             70 LOAD_CONST               3 ('itemId')
+             72 LOAD_CONST               4 ('')
+             74 CALL_METHOD              2
+             76 RETURN_VALUE
+
+ 74     >>   78 LOAD_FAST                2 (role)
+             80 LOAD_FAST                0 (self)
+             82 LOAD_ATTR                6 (ITEM_TYPE_ROLE)
+             84 COMPARE_OP               2 (==)
+             86 POP_JUMP_IF_FALSE      100
+
+ 75          88 LOAD_FAST                4 (item)
+             90 LOAD_METHOD              5 (get)
+             92 LOAD_CONST               5 ('itemType')
+             94 LOAD_CONST               4 ('')
+             96 CALL_METHOD              2
+             98 RETURN_VALUE
+
+ 76     >>  100 LOAD_FAST                2 (role)
+            102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR                7 (TITLE_ROLE)
+            106 COMPARE_OP               2 (==)
+            108 POP_JUMP_IF_FALSE      122
+
+ 77         110 LOAD_FAST                4 (item)
+            112 LOAD_METHOD              5 (get)
+            114 LOAD_CONST               6 ('title')
+            116 LOAD_CONST               4 ('')
+            118 CALL_METHOD              2
+            120 RETURN_VALUE
+
+ 78     >>  122 LOAD_FAST                2 (role)
+            124 LOAD_FAST                0 (self)
+            126 LOAD_ATTR                8 (SUBTITLE_ROLE)
+            128 COMPARE_OP               2 (==)
+            130 POP_JUMP_IF_FALSE      144
+
+ 79         132 LOAD_FAST                4 (item)
+            134 LOAD_METHOD              5 (get)
+            136 LOAD_CONST               7 ('subtitle')
+            138 LOAD_CONST               4 ('')
+            140 CALL_METHOD              2
+            142 RETURN_VALUE
+
+ 80     >>  144 LOAD_FAST                2 (role)
+            146 LOAD_FAST                0 (self)
+            148 LOAD_ATTR                9 (IMAGE_URL_ROLE)
+            150 COMPARE_OP               2 (==)
+            152 POP_JUMP_IF_FALSE      166
+
+ 81         154 LOAD_FAST                4 (item)
+            156 LOAD_METHOD              5 (get)
+            158 LOAD_CONST               8 ('imageUrl')
+            160 LOAD_CONST               4 ('')
+            162 CALL_METHOD              2
+            164 RETURN_VALUE
+
+ 82     >>  166 LOAD_FAST                2 (role)
+            168 LOAD_FAST                0 (self)
+            170 LOAD_ATTR               10 (IMAGE_PATH_ROLE)
+            172 COMPARE_OP               2 (==)
+            174 POP_JUMP_IF_FALSE      188
+
+ 83         176 LOAD_FAST                4 (item)
+            178 LOAD_METHOD              5 (get)
+            180 LOAD_CONST               9 ('imagePath')
+            182 LOAD_CONST               4 ('')
+            184 CALL_METHOD              2
+            186 RETURN_VALUE
+
+ 84     >>  188 LOAD_FAST                2 (role)
+            190 LOAD_FAST                0 (self)
+            192 LOAD_ATTR               11 (TRACK_COUNT_ROLE)
+            194 COMPARE_OP               2 (==)
+            196 POP_JUMP_IF_FALSE      218
+
+ 85         198 LOAD_GLOBAL             12 (int)
+            200 LOAD_FAST                4 (item)
+            202 LOAD_METHOD              5 (get)
+            204 LOAD_CONST              10 ('trackCount')
+            206 LOAD_CONST               2 (0)
+            208 CALL_METHOD              2
+            210 JUMP_IF_TRUE_OR_POP    214
+            212 LOAD_CONST               2 (0)
+        >>  214 CALL_FUNCTION            1
+            216 RETURN_VALUE
+
+ 86     >>  218 LOAD_FAST                2 (role)
+            220 LOAD_FAST                0 (self)
+            222 LOAD_ATTR               13 (DURATION_ROLE)
+            224 COMPARE_OP               2 (==)
+            226 POP_JUMP_IF_FALSE      240
+
+ 87         228 LOAD_FAST                4 (item)
+            230 LOAD_METHOD              5 (get)
+            232 LOAD_CONST              11 ('duration')
+            234 LOAD_CONST               4 ('')
+            236 CALL_METHOD              2
+            238 RETURN_VALUE
+
+ 88     >>  240 LOAD_FAST                2 (role)
+            242 LOAD_FAST                0 (self)
+            244 LOAD_ATTR               14 (IS_FAVORITE_ROLE)
+            246 COMPARE_OP               2 (==)
+            248 EXTENDED_ARG             1
+            250 POP_JUMP_IF_FALSE      268
+
+ 89         252 LOAD_GLOBAL             15 (bool)
+            254 LOAD_FAST                4 (item)
+            256 LOAD_METHOD              5 (get)
+            258 LOAD_CONST              12 ('isFavorite')
+            260 LOAD_CONST              13 (False)
+            262 CALL_METHOD              2
+            264 CALL_FUNCTION            1
+            266 RETURN_VALUE
+
+ 90     >>  268 LOAD_FAST                2 (role)
+            270 LOAD_FAST                0 (self)
+            272 LOAD_ATTR               16 (ARTIST_NAME_ROLE)
+            274 COMPARE_OP               2 (==)
+            276 EXTENDED_ARG             1
+            278 POP_JUMP_IF_FALSE      292
+
+ 91         280 LOAD_FAST                4 (item)
+            282 LOAD_METHOD              5 (get)
+            284 LOAD_CONST              14 ('artistName')
+            286 LOAD_CONST               4 ('')
+            288 CALL_METHOD              2
+            290 RETURN_VALUE
+
+ 92     >>  292 LOAD_FAST                2 (role)
+            294 LOAD_FAST                0 (self)
+            296 LOAD_ATTR               17 (ALBUM_NAME_ROLE)
+            298 COMPARE_OP               2 (==)
+            300 EXTENDED_ARG             1
+            302 POP_JUMP_IF_FALSE      316
+
+ 93         304 LOAD_FAST                4 (item)
+            306 LOAD_METHOD              5 (get)
+            308 LOAD_CONST              15 ('albumName')
+            310 LOAD_CONST               4 ('')
+            312 CALL_METHOD              2
+            314 RETURN_VALUE
+
+ 94     >>  316 LOAD_FAST                2 (role)
+            318 LOAD_FAST                0 (self)
+            320 LOAD_ATTR               18 (YEAR_ROLE)
+            322 COMPARE_OP               2 (==)
+            324 EXTENDED_ARG             1
+            326 POP_JUMP_IF_FALSE      340
+
+ 95         328 LOAD_FAST                4 (item)
+            330 LOAD_METHOD              5 (get)
+            332 LOAD_CONST              16 ('year')
+            334 LOAD_CONST               4 ('')
+            336 CALL_METHOD              2
+            338 RETURN_VALUE
+
+ 96     >>  340 LOAD_FAST                2 (role)
+            342 LOAD_FAST                0 (self)
+            344 LOAD_ATTR               19 (SECTION_KEY_ROLE)
+            346 COMPARE_OP               2 (==)
+            348 EXTENDED_ARG             1
+            350 POP_JUMP_IF_FALSE      364
+
+ 97         352 LOAD_FAST                4 (item)
+            354 LOAD_METHOD              5 (get)
+            356 LOAD_CONST              17 ('sectionKey')
+            358 LOAD_CONST               4 ('')
+            360 CALL_METHOD              2
+            362 RETURN_VALUE
+
+ 98     >>  364 LOAD_FAST                2 (role)
+            366 LOAD_FAST                0 (self)
+            368 LOAD_ATTR               20 (EXTRA_ROLE)
+            370 COMPARE_OP               2 (==)
+            372 EXTENDED_ARG             1
+            374 POP_JUMP_IF_FALSE      380
+
+ 99         376 LOAD_FAST                4 (item)
+            378 RETURN_VALUE
+
+100     >>  380 LOAD_FAST                2 (role)
+            382 LOAD_FAST                0 (self)
+            384 LOAD_ATTR               21 (IS_EXPLICIT_ROLE)
+            386 COMPARE_OP               2 (==)
+            388 EXTENDED_ARG             1
+            390 POP_JUMP_IF_FALSE      408
+
+101         392 LOAD_GLOBAL             15 (bool)
+            394 LOAD_FAST                4 (item)
+            396 LOAD_METHOD              5 (get)
+            398 LOAD_CONST              18 ('isExplicit')
+            400 LOAD_CONST              13 (False)
+            402 CALL_METHOD              2
+            404 CALL_FUNCTION            1
+            406 RETURN_VALUE
+
+102     >>  408 LOAD_FAST                2 (role)
+            410 LOAD_FAST                0 (self)
+            412 LOAD_ATTR               22 (ARTISTS_ROLE)
+            414 COMPARE_OP               2 (==)
+            416 EXTENDED_ARG             1
+            418 POP_JUMP_IF_FALSE      452
+
+103         420 LOAD_FAST                4 (item)
+            422 LOAD_METHOD              5 (get)
+            424 LOAD_CONST              19 ('artists')
+            426 BUILD_LIST               0
+            428 CALL_METHOD              2
+            430 STORE_FAST               5 (artists)
+
+104         432 LOAD_GLOBAL             23 (isinstance)
+            434 LOAD_FAST                5 (artists)
+            436 LOAD_GLOBAL             24 (list)
+            438 CALL_FUNCTION            2
+            440 EXTENDED_ARG             1
+            442 POP_JUMP_IF_FALSE      448
+            444 LOAD_FAST                5 (artists)
+            446 RETURN_VALUE
+        >>  448 BUILD_LIST               0
+            450 RETURN_VALUE
+
+105     >>  452 LOAD_FAST                2 (role)
+            454 LOAD_FAST                0 (self)
+            456 LOAD_ATTR               25 (ALBUM_ID_ROLE)
+            458 COMPARE_OP               2 (==)
+            460 EXTENDED_ARG             1
+            462 POP_JUMP_IF_FALSE      476
+
+106         464 LOAD_FAST                4 (item)
+            466 LOAD_METHOD              5 (get)
+            468 LOAD_CONST              20 ('albumId')
+            470 LOAD_CONST               4 ('')
+            472 CALL_METHOD              2
+            474 RETURN_VALUE
+
+107     >>  476 LOAD_FAST                2 (role)
+            478 LOAD_FAST                0 (self)
+            480 LOAD_ATTR               26 (ARTIST_ID_ROLE)
+            482 COMPARE_OP               2 (==)
+            484 EXTENDED_ARG             1
+            486 POP_JUMP_IF_FALSE      500
+
+108         488 LOAD_FAST                4 (item)
+            490 LOAD_METHOD              5 (get)
+            492 LOAD_CONST              21 ('artistId')
+            494 LOAD_CONST               4 ('')
+            496 CALL_METHOD              2
+            498 RETURN_VALUE
+
+109     >>  500 LOAD_FAST                2 (role)
+            502 LOAD_FAST                0 (self)
+            504 LOAD_ATTR               27 (PLAYLIST_INDEX_ROLE)
+            506 COMPARE_OP               2 (==)
+            508 EXTENDED_ARG             2
+            510 POP_JUMP_IF_FALSE      604
+
+110         512 LOAD_CONST              22 ('playlistIndex')
+            514 LOAD_FAST                4 (item)
+            516 CONTAINS_OP              0
+            518 EXTENDED_ARG             2
+            520 POP_JUMP_IF_FALSE      544
+
+111         522 LOAD_GLOBAL             12 (int)
+            524 LOAD_FAST                4 (item)
+            526 LOAD_METHOD              5 (get)
+            528 LOAD_CONST              22 ('playlistIndex')
+            530 LOAD_CONST               2 (0)
+            532 CALL_METHOD              2
+            534 EXTENDED_ARG             2
+            536 JUMP_IF_TRUE_OR_POP    540
+            538 LOAD_CONST               2 (0)
+        >>  540 CALL_FUNCTION            1
+            542 RETURN_VALUE
+
+112     >>  544 LOAD_FAST                4 (item)
+            546 LOAD_METHOD              5 (get)
+            548 LOAD_CONST              23 ('extra')
+            550 BUILD_MAP                0
+            552 CALL_METHOD              2
+            554 STORE_FAST               6 (extra)
+
+113         556 LOAD_GLOBAL             23 (isinstance)
+            558 LOAD_FAST                6 (extra)
+            560 LOAD_GLOBAL             28 (dict)
+            562 CALL_FUNCTION            2
+            564 EXTENDED_ARG             2
+            566 POP_JUMP_IF_FALSE      600
+            568 LOAD_CONST              22 ('playlistIndex')
+            570 LOAD_FAST                6 (extra)
+            572 CONTAINS_OP              0
+            574 EXTENDED_ARG             2
+            576 POP_JUMP_IF_FALSE      600
+
+114         578 LOAD_GLOBAL             12 (int)
+            580 LOAD_FAST                6 (extra)
+            582 LOAD_METHOD              5 (get)
+            584 LOAD_CONST              22 ('playlistIndex')
+            586 LOAD_CONST               2 (0)
+            588 CALL_METHOD              2
+            590 EXTENDED_ARG             2
+            592 JUMP_IF_TRUE_OR_POP    596
+            594 LOAD_CONST               2 (0)
+        >>  596 CALL_FUNCTION            1
+            598 RETURN_VALUE
+
+115     >>  600 LOAD_CONST              24 (-1)
+            602 RETURN_VALUE
+
+116     >>  604 LOAD_FAST                2 (role)
+            606 LOAD_FAST                0 (self)
+            608 LOAD_ATTR               29 (IS_USER_PLAYLIST_ROLE)
+            610 COMPARE_OP               2 (==)
+            612 EXTENDED_ARG             2
+            614 POP_JUMP_IF_FALSE      632
+
+117         616 LOAD_GLOBAL             15 (bool)
+            618 LOAD_FAST                4 (item)
+            620 LOAD_METHOD              5 (get)
+            622 LOAD_CONST              25 ('isUserPlaylist')
+            624 LOAD_CONST              13 (False)
+            626 CALL_METHOD              2
+            628 CALL_FUNCTION            1
+            630 RETURN_VALUE
+
+118     >>  632 LOAD_FAST                2 (role)
+            634 LOAD_FAST                0 (self)
+            636 LOAD_ATTR               30 (ALLOW_STREAMING_ROLE)
+            638 COMPARE_OP               2 (==)
+            640 EXTENDED_ARG             2
+            642 POP_JUMP_IF_FALSE      660
+
+119         644 LOAD_GLOBAL             15 (bool)
+            646 LOAD_FAST                4 (item)
+            648 LOAD_METHOD              5 (get)
+            650 LOAD_CONST              26 ('allowStreaming')
+            652 LOAD_CONST              27 (True)
+            654 CALL_METHOD              2
+            656 CALL_FUNCTION            1
+            658 RETURN_VALUE
+
+120     >>  660 LOAD_CONST               1 (None)
+            662 RETURN_VALUE
+
+=== LPTidalListModel.roleNames ===
+129           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (ITEM_ID_ROLE)
+              4 LOAD_CONST               1 (b'itemId')
+
+130           6 LOAD_FAST                0 (self)
+              8 LOAD_ATTR                1 (ITEM_TYPE_ROLE)
+             10 LOAD_CONST               2 (b'itemType')
+
+131          12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                2 (TITLE_ROLE)
+             16 LOAD_CONST               3 (b'title')
+
+132          18 LOAD_FAST                0 (self)
+             20 LOAD_ATTR                3 (SUBTITLE_ROLE)
+             22 LOAD_CONST               4 (b'subtitle')
+
+133          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                4 (IMAGE_URL_ROLE)
+             28 LOAD_CONST               5 (b'imageUrl')
+
+134          30 LOAD_FAST                0 (self)
+             32 LOAD_ATTR                5 (IMAGE_PATH_ROLE)
+             34 LOAD_CONST               6 (b'imagePath')
+
+135          36 LOAD_FAST                0 (self)
+             38 LOAD_ATTR                6 (TRACK_COUNT_ROLE)
+             40 LOAD_CONST               7 (b'trackCount')
+
+136          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                7 (DURATION_ROLE)
+             46 LOAD_CONST               8 (b'duration')
+
+137          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                8 (IS_FAVORITE_ROLE)
+             52 LOAD_CONST               9 (b'isFavorite')
+
+138          54 LOAD_FAST                0 (self)
+             56 LOAD_ATTR                9 (ARTIST_NAME_ROLE)
+             58 LOAD_CONST              10 (b'artistName')
+
+139          60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR               10 (ALBUM_NAME_ROLE)
+             64 LOAD_CONST              11 (b'albumName')
+
+140          66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR               11 (YEAR_ROLE)
+             70 LOAD_CONST              12 (b'year')
+
+141          72 LOAD_FAST                0 (self)
+             74 LOAD_ATTR               12 (SECTION_KEY_ROLE)
+             76 LOAD_CONST              13 (b'sectionKey')
+
+142          78 LOAD_FAST                0 (self)
+             80 LOAD_ATTR               13 (EXTRA_ROLE)
+             82 LOAD_CONST              14 (b'extra')
+
+143          84 LOAD_FAST                0 (self)
+             86 LOAD_ATTR               14 (IS_EXPLICIT_ROLE)
+             88 LOAD_CONST              15 (b'isExplicit')
+
+144          90 LOAD_FAST                0 (self)
+             92 LOAD_ATTR               15 (ARTISTS_ROLE)
+             94 LOAD_CONST              16 (b'artists')
+
+145          96 LOAD_FAST                0 (self)
+             98 LOAD_ATTR               16 (ALBUM_ID_ROLE)
+            100 LOAD_CONST              17 (b'albumId')
+
+146         102 LOAD_FAST                0 (self)
+            104 LOAD_ATTR               17 (ARTIST_ID_ROLE)
+            106 LOAD_CONST              18 (b'artistId')
+
+147         108 LOAD_FAST                0 (self)
+            110 LOAD_ATTR               18 (PLAYLIST_INDEX_ROLE)
+            112 LOAD_CONST              19 (b'playlistIndex')
+
+148         114 LOAD_FAST                0 (self)
+            116 LOAD_ATTR               19 (IS_USER_PLAYLIST_ROLE)
+            118 LOAD_CONST              20 (b'isUserPlaylist')
+
+149         120 LOAD_FAST                0 (self)
+            122 LOAD_ATTR               20 (ALLOW_STREAMING_ROLE)
+            124 LOAD_CONST              21 (b'allowStreaming')
+
+128         126 BUILD_MAP               21
+            128 RETURN_VALUE
+
+=== LPTidalListModel.clear ===
+158           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (_items)
+              4 POP_JUMP_IF_TRUE        10
+
+159           6 LOAD_CONST               1 (None)
+              8 RETURN_VALUE
+
+160     >>   10 LOAD_FAST                0 (self)
+             12 LOAD_METHOD              1 (beginResetModel)
+             14 CALL_METHOD              0
+             16 POP_TOP
+
+161          18 BUILD_LIST               0
+             20 LOAD_FAST                0 (self)
+             22 STORE_ATTR               0 (_items)
+
+162          24 LOAD_FAST                0 (self)
+             26 LOAD_METHOD              2 (endResetModel)
+             28 CALL_METHOD              0
+             30 POP_TOP
+             32 LOAD_CONST               1 (None)
+             34 RETURN_VALUE
+
+=== LPTidalListModel.setItems ===
+171           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F3253C4920, file "StreamService\Tidal\models\LPTidalListModel.py", line 171>)
+              2 LOAD_CONST               2 ('LPTidalListModel.setItems.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                1 (items)
+              8 GET_ITER
+             10 CALL_FUNCTION            1
+             12 STORE_FAST               2 (new_items)
+
+172          14 LOAD_CONST               3 (<code object <dictcomp> at 0x000001F3253C4450, file "StreamService\Tidal\models\LPTidalListModel.py", line 172>)
+             16 LOAD_CONST               4 ('LPTidalListModel.setItems.<locals>.<dictcomp>')
+             18 MAKE_FUNCTION            0
+
+174          20 LOAD_FAST                0 (self)
+             22 LOAD_ATTR                0 (_items)
+
+172          24 GET_ITER
+             26 CALL_FUNCTION            1
+             28 STORE_FAST               3 (existing_items)
+
+177          30 LOAD_FAST                2 (new_items)
+             32 GET_ITER
+        >>   34 FOR_ITER               180 (to 216)
+             36 STORE_FAST               4 (item)
+
+178          38 LOAD_GLOBAL              1 (str)
+             40 LOAD_FAST                4 (item)
+             42 LOAD_METHOD              2 (get)
+             44 LOAD_CONST               5 ('itemId')
+             46 LOAD_CONST               6 ('')
+             48 CALL_METHOD              2
+             50 JUMP_IF_TRUE_OR_POP     54
+             52 LOAD_CONST               6 ('')
+        >>   54 CALL_FUNCTION            1
+             56 LOAD_METHOD              3 (strip)
+             58 CALL_METHOD              0
+             60 STORE_FAST               5 (item_id)
+
+179          62 LOAD_FAST                5 (item_id)
+             64 POP_JUMP_IF_TRUE        68
+
+180          66 JUMP_ABSOLUTE           34
+
+181     >>   68 LOAD_FAST                3 (existing_items)
+             70 LOAD_METHOD              2 (get)
+             72 LOAD_FAST                5 (item_id)
+             74 CALL_METHOD              1
+             76 STORE_FAST               6 (existing)
+
+182          78 LOAD_GLOBAL              4 (isinstance)
+             80 LOAD_FAST                6 (existing)
+             82 LOAD_GLOBAL              5 (dict)
+             84 CALL_FUNCTION            2
+             86 POP_JUMP_IF_TRUE        90
+
+183          88 JUMP_ABSOLUTE           34
+
+184     >>   90 LOAD_GLOBAL              1 (str)
+             92 LOAD_FAST                6 (existing)
+             94 LOAD_METHOD              2 (get)
+             96 LOAD_CONST               7 ('imagePath')
+             98 LOAD_CONST               6 ('')
+            100 CALL_METHOD              2
+            102 JUMP_IF_TRUE_OR_POP    106
+            104 LOAD_CONST               6 ('')
+        >>  106 CALL_FUNCTION            1
+            108 LOAD_METHOD              3 (strip)
+            110 CALL_METHOD              0
+            112 STORE_FAST               7 (existing_path)
+
+185         114 LOAD_GLOBAL              1 (str)
+            116 LOAD_FAST                6 (existing)
+            118 LOAD_METHOD              2 (get)
+            120 LOAD_CONST               8 ('imageUrl')
+            122 LOAD_CONST               6 ('')
+            124 CALL_METHOD              2
+            126 JUMP_IF_TRUE_OR_POP    130
+            128 LOAD_CONST               6 ('')
+        >>  130 CALL_FUNCTION            1
+            132 LOAD_METHOD              3 (strip)
+            134 CALL_METHOD              0
+            136 STORE_FAST               8 (existing_url)
+
+186         138 LOAD_GLOBAL              1 (str)
+            140 LOAD_FAST                4 (item)
+            142 LOAD_METHOD              2 (get)
+            144 LOAD_CONST               7 ('imagePath')
+            146 LOAD_CONST               6 ('')
+            148 CALL_METHOD              2
+            150 JUMP_IF_TRUE_OR_POP    154
+            152 LOAD_CONST               6 ('')
+        >>  154 CALL_FUNCTION            1
+            156 LOAD_METHOD              3 (strip)
+            158 CALL_METHOD              0
+            160 STORE_FAST               9 (next_path)
+
+187         162 LOAD_GLOBAL              1 (str)
+            164 LOAD_FAST                4 (item)
+            166 LOAD_METHOD              2 (get)
+            168 LOAD_CONST               8 ('imageUrl')
+            170 LOAD_CONST               6 ('')
+            172 CALL_METHOD              2
+            174 JUMP_IF_TRUE_OR_POP    178
+            176 LOAD_CONST               6 ('')
+        >>  178 CALL_FUNCTION            1
+            180 LOAD_METHOD              3 (strip)
+            182 CALL_METHOD              0
+            184 STORE_FAST              10 (next_url)
+
+189         186 LOAD_FAST                7 (existing_path)
+            188 POP_JUMP_IF_FALSE       34
+            190 LOAD_FAST                9 (next_path)
+            192 POP_JUMP_IF_TRUE        34
+            194 LOAD_FAST                8 (existing_url)
+            196 POP_JUMP_IF_FALSE       34
+            198 LOAD_FAST                8 (existing_url)
+            200 LOAD_FAST               10 (next_url)
+            202 COMPARE_OP               2 (==)
+            204 POP_JUMP_IF_FALSE       34
+
+190         206 LOAD_FAST                7 (existing_path)
+            208 LOAD_FAST                4 (item)
+            210 LOAD_CONST               7 ('imagePath')
+            212 STORE_SUBSCR
+            214 JUMP_ABSOLUTE           34
+
+191     >>  216 LOAD_FAST                0 (self)
+            218 LOAD_METHOD              6 (beginResetModel)
+            220 CALL_METHOD              0
+            222 POP_TOP
+
+192         224 LOAD_FAST                2 (new_items)
+            226 LOAD_FAST                0 (self)
+            228 STORE_ATTR               0 (_items)
+
+193         230 LOAD_FAST                0 (self)
+            232 LOAD_METHOD              7 (endResetModel)
+            234 CALL_METHOD              0
+            236 POP_TOP
+            238 LOAD_CONST               9 (None)
+            240 RETURN_VALUE
+
+=== LPTidalListModel.setItems.<listcomp> ===
+171           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                22 (to 28)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_GLOBAL              1 (dict)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_GLOBAL              1 (dict)
+             20 LOAD_FAST                1 (item)
+             22 CALL_FUNCTION            1
+             24 LIST_APPEND              2
+             26 JUMP_ABSOLUTE            4
+        >>   28 RETURN_VALUE
+
+=== LPTidalListModel.setItems.<dictcomp> ===
+172           0 BUILD_MAP                0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                64 (to 70)
+
+174           6 STORE_FAST               1 (item)
+
+175           8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_GLOBAL              1 (dict)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_GLOBAL              2 (str)
+             20 LOAD_FAST                1 (item)
+             22 LOAD_METHOD              3 (get)
+             24 LOAD_CONST               0 ('itemId')
+             26 LOAD_CONST               1 ('')
+             28 CALL_METHOD              2
+             30 JUMP_IF_TRUE_OR_POP     34
+             32 LOAD_CONST               1 ('')
+        >>   34 CALL_FUNCTION            1
+             36 LOAD_METHOD              4 (strip)
+             38 CALL_METHOD              0
+             40 POP_JUMP_IF_FALSE        4
+
+173          42 LOAD_GLOBAL              2 (str)
+             44 LOAD_FAST                1 (item)
+             46 LOAD_METHOD              3 (get)
+             48 LOAD_CONST               0 ('itemId')
+             50 LOAD_CONST               1 ('')
+             52 CALL_METHOD              2
+             54 JUMP_IF_TRUE_OR_POP     58
+             56 LOAD_CONST               1 ('')
+        >>   58 CALL_FUNCTION            1
+             60 LOAD_METHOD              4 (strip)
+             62 CALL_METHOD              0
+             64 LOAD_FAST                1 (item)
+             66 MAP_ADD                  2
+             68 JUMP_ABSOLUTE            4
+        >>   70 RETURN_VALUE
+
+=== LPTidalListModel.syncItemsIncrementally ===
+202           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F3253C45B0, file "StreamService\Tidal\models\LPTidalListModel.py", line 202>)
+              2 LOAD_CONST               2 ('LPTidalListModel.syncItemsIncrementally.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                1 (items)
+              8 GET_ITER
+             10 CALL_FUNCTION            1
+             12 STORE_FAST               2 (new_items)
+
+203          14 LOAD_GLOBAL              0 (len)
+             16 LOAD_FAST                2 (new_items)
+             18 CALL_FUNCTION            1
+             20 LOAD_GLOBAL              0 (len)
+             22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                1 (_items)
+             26 CALL_FUNCTION            1
+             28 COMPARE_OP               3 (!=)
+             30 POP_JUMP_IF_FALSE       46
+
+204          32 LOAD_FAST                0 (self)
+             34 LOAD_METHOD              2 (setItems)
+             36 LOAD_FAST                2 (new_items)
+             38 CALL_METHOD              1
+             40 POP_TOP
+
+205          42 LOAD_CONST               3 (True)
+             44 RETURN_VALUE
+
+207     >>   46 LOAD_FAST                2 (new_items)
+             48 POP_JUMP_IF_TRUE        60
+             50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                1 (_items)
+             54 POP_JUMP_IF_TRUE        60
+
+208          56 LOAD_CONST               4 (False)
+             58 RETURN_VALUE
+
+210     >>   60 LOAD_CONST               5 (<code object <listcomp> at 0x000001F3253C4710, file "StreamService\Tidal\models\LPTidalListModel.py", line 210>)
+             62 LOAD_CONST               2 ('LPTidalListModel.syncItemsIncrementally.<locals>.<listcomp>')
+             64 MAKE_FUNCTION            0
+             66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR                1 (_items)
+             70 GET_ITER
+             72 CALL_FUNCTION            1
+             74 STORE_FAST               3 (existing_ids)
+
+211          76 LOAD_CONST               6 (<code object <listcomp> at 0x000001F3253C4030, file "StreamService\Tidal\models\LPTidalListModel.py", line 211>)
+             78 LOAD_CONST               2 ('LPTidalListModel.syncItemsIncrementally.<locals>.<listcomp>')
+             80 MAKE_FUNCTION            0
+             82 LOAD_FAST                2 (new_items)
+             84 GET_ITER
+             86 CALL_FUNCTION            1
+             88 STORE_FAST               4 (next_ids)
+
+212          90 LOAD_FAST                3 (existing_ids)
+             92 LOAD_FAST                4 (next_ids)
+             94 COMPARE_OP               3 (!=)
+             96 POP_JUMP_IF_FALSE      112
+
+213          98 LOAD_FAST                0 (self)
+            100 LOAD_METHOD              2 (setItems)
+            102 LOAD_FAST                2 (new_items)
+            104 CALL_METHOD              1
+            106 POP_TOP
+
+214         108 LOAD_CONST               3 (True)
+            110 RETURN_VALUE
+
+216     >>  112 LOAD_CONST               4 (False)
+            114 STORE_FAST               5 (changed)
+
+217         116 LOAD_GLOBAL              3 (list)
+            118 LOAD_FAST                0 (self)
+            120 LOAD_METHOD              4 (roleNames)
+            122 CALL_METHOD              0
+            124 LOAD_METHOD              5 (keys)
+            126 CALL_METHOD              0
+            128 CALL_FUNCTION            1
+            130 STORE_FAST               6 (role_names)
+
+218         132 LOAD_GLOBAL              6 (enumerate)
+            134 LOAD_FAST                2 (new_items)
+            136 CALL_FUNCTION            1
+            138 GET_ITER
+        >>  140 FOR_ITER               204 (to 346)
+            142 UNPACK_SEQUENCE          2
+            144 STORE_FAST               7 (row)
+            146 STORE_FAST               8 (next_item)
+
+219         148 LOAD_FAST                0 (self)
+            150 LOAD_ATTR                1 (_items)
+            152 LOAD_FAST                7 (row)
+            154 BINARY_SUBSCR
+            156 STORE_FAST               9 (current_item)
+
+220         158 LOAD_GLOBAL              7 (str)
+            160 LOAD_FAST                9 (current_item)
+            162 LOAD_METHOD              8 (get)
+            164 LOAD_CONST               7 ('imagePath')
+            166 LOAD_CONST               8 ('')
+            168 CALL_METHOD              2
+            170 JUMP_IF_TRUE_OR_POP    174
+            172 LOAD_CONST               8 ('')
+        >>  174 CALL_FUNCTION            1
+            176 LOAD_METHOD              9 (strip)
+            178 CALL_METHOD              0
+            180 STORE_FAST              10 (existing_path)
+
+221         182 LOAD_GLOBAL              7 (str)
+            184 LOAD_FAST                9 (current_item)
+            186 LOAD_METHOD              8 (get)
+            188 LOAD_CONST               9 ('imageUrl')
+            190 LOAD_CONST               8 ('')
+            192 CALL_METHOD              2
+            194 JUMP_IF_TRUE_OR_POP    198
+            196 LOAD_CONST               8 ('')
+        >>  198 CALL_FUNCTION            1
+            200 LOAD_METHOD              9 (strip)
+            202 CALL_METHOD              0
+            204 STORE_FAST              11 (existing_url)
+
+222         206 LOAD_GLOBAL              7 (str)
+            208 LOAD_FAST                8 (next_item)
+            210 LOAD_METHOD              8 (get)
+            212 LOAD_CONST               7 ('imagePath')
+            214 LOAD_CONST               8 ('')
+            216 CALL_METHOD              2
+            218 JUMP_IF_TRUE_OR_POP    222
+            220 LOAD_CONST               8 ('')
+        >>  222 CALL_FUNCTION            1
+            224 LOAD_METHOD              9 (strip)
+            226 CALL_METHOD              0
+            228 STORE_FAST              12 (next_path)
+
+223         230 LOAD_GLOBAL              7 (str)
+            232 LOAD_FAST                8 (next_item)
+            234 LOAD_METHOD              8 (get)
+            236 LOAD_CONST               9 ('imageUrl')
+            238 LOAD_CONST               8 ('')
+            240 CALL_METHOD              2
+            242 JUMP_IF_TRUE_OR_POP    246
+            244 LOAD_CONST               8 ('')
+        >>  246 CALL_FUNCTION            1
+            248 LOAD_METHOD              9 (strip)
+            250 CALL_METHOD              0
+            252 STORE_FAST              13 (next_url)
+
+224         254 LOAD_FAST               10 (existing_path)
+            256 EXTENDED_ARG             1
+            258 POP_JUMP_IF_FALSE      290
+            260 LOAD_FAST               12 (next_path)
+            262 EXTENDED_ARG             1
+            264 POP_JUMP_IF_TRUE       290
+            266 LOAD_FAST               11 (existing_url)
+            268 EXTENDED_ARG             1
+            270 POP_JUMP_IF_FALSE      290
+            272 LOAD_FAST               11 (existing_url)
+            274 LOAD_FAST               13 (next_url)
+            276 COMPARE_OP               2 (==)
+            278 EXTENDED_ARG             1
+            280 POP_JUMP_IF_FALSE      290
+
+225         282 LOAD_FAST               10 (existing_path)
+            284 LOAD_FAST                8 (next_item)
+            286 LOAD_CONST               7 ('imagePath')
+            288 STORE_SUBSCR
+
+226     >>  290 LOAD_FAST                8 (next_item)
+            292 LOAD_FAST                9 (current_item)
+            294 COMPARE_OP               2 (==)
+            296 EXTENDED_ARG             1
+            298 POP_JUMP_IF_FALSE      302
+
+227         300 JUMP_ABSOLUTE          140
+
+228     >>  302 LOAD_FAST                8 (next_item)
+            304 LOAD_FAST                0 (self)
+            306 LOAD_ATTR                1 (_items)
+            308 LOAD_FAST                7 (row)
+            310 STORE_SUBSCR
+
+229         312 LOAD_FAST                0 (self)
+            314 LOAD_METHOD             10 (index)
+            316 LOAD_FAST                7 (row)
+            318 LOAD_CONST              10 (0)
+            320 CALL_METHOD              2
+            322 STORE_FAST              14 (model_index)
+
+230         324 LOAD_FAST                0 (self)
+            326 LOAD_ATTR               11 (dataChanged)
+            328 LOAD_METHOD             12 (emit)
+            330 LOAD_FAST               14 (model_index)
+            332 LOAD_FAST               14 (model_index)
+            334 LOAD_FAST                6 (role_names)
+            336 CALL_METHOD              3
+            338 POP_TOP
+
+231         340 LOAD_CONST               3 (True)
+            342 STORE_FAST               5 (changed)
+            344 JUMP_ABSOLUTE          140
+
+232     >>  346 LOAD_FAST                5 (changed)
+            348 RETURN_VALUE
+
+=== LPTidalListModel.syncItemsIncrementally.<listcomp> ===
+202           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                22 (to 28)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_GLOBAL              1 (dict)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_GLOBAL              1 (dict)
+             20 LOAD_FAST                1 (item)
+             22 CALL_FUNCTION            1
+             24 LIST_APPEND              2
+             26 JUMP_ABSOLUTE            4
+        >>   28 RETURN_VALUE
+
+=== LPTidalListModel.syncItemsIncrementally.<listcomp> ===
+210           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                28 (to 34)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (str)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_METHOD              1 (get)
+             14 LOAD_CONST               0 ('itemId')
+             16 LOAD_CONST               1 ('')
+             18 CALL_METHOD              2
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              2 (strip)
+             28 CALL_METHOD              0
+             30 LIST_APPEND              2
+             32 JUMP_ABSOLUTE            4
+        >>   34 RETURN_VALUE
+
+=== LPTidalListModel.syncItemsIncrementally.<listcomp> ===
+211           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                28 (to 34)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (str)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_METHOD              1 (get)
+             14 LOAD_CONST               0 ('itemId')
+             16 LOAD_CONST               1 ('')
+             18 CALL_METHOD              2
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              2 (strip)
+             28 CALL_METHOD              0
+             30 LIST_APPEND              2
+             32 JUMP_ABSOLUTE            4
+        >>   34 RETURN_VALUE
+
+=== LPTidalListModel.appendItems ===
+241           0 LOAD_CONST               1 (<code object <listcomp> at 0x000001F3253C4EA0, file "StreamService\Tidal\models\LPTidalListModel.py", line 241>)
+              2 LOAD_CONST               2 ('LPTidalListModel.appendItems.<locals>.<listcomp>')
+              4 MAKE_FUNCTION            0
+              6 LOAD_FAST                1 (items)
+              8 GET_ITER
+             10 CALL_FUNCTION            1
+             12 STORE_FAST               2 (new_items)
+
+242          14 LOAD_FAST                2 (new_items)
+             16 POP_JUMP_IF_TRUE        22
+
+243          18 LOAD_CONST               3 (None)
+             20 RETURN_VALUE
+
+244     >>   22 LOAD_GLOBAL              0 (len)
+             24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                1 (_items)
+             28 CALL_FUNCTION            1
+             30 STORE_FAST               3 (start_row)
+
+245          32 LOAD_FAST                3 (start_row)
+             34 LOAD_GLOBAL              0 (len)
+             36 LOAD_FAST                2 (new_items)
+             38 CALL_FUNCTION            1
+             40 BINARY_ADD
+             42 LOAD_CONST               4 (1)
+             44 BINARY_SUBTRACT
+             46 STORE_FAST               4 (end_row)
+
+246          48 LOAD_FAST                0 (self)
+             50 LOAD_METHOD              2 (beginInsertRows)
+             52 LOAD_GLOBAL              3 (QModelIndex)
+             54 CALL_FUNCTION            0
+             56 LOAD_FAST                3 (start_row)
+             58 LOAD_FAST                4 (end_row)
+             60 CALL_METHOD              3
+             62 POP_TOP
+
+247          64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                1 (_items)
+             68 LOAD_METHOD              4 (extend)
+             70 LOAD_FAST                2 (new_items)
+             72 CALL_METHOD              1
+             74 POP_TOP
+
+248          76 LOAD_FAST                0 (self)
+             78 LOAD_METHOD              5 (endInsertRows)
+             80 CALL_METHOD              0
+             82 POP_TOP
+             84 LOAD_CONST               3 (None)
+             86 RETURN_VALUE
+
+=== LPTidalListModel.appendItems.<listcomp> ===
+241           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                22 (to 28)
+              6 STORE_FAST               1 (item)
+              8 LOAD_GLOBAL              0 (isinstance)
+             10 LOAD_FAST                1 (item)
+             12 LOAD_GLOBAL              1 (dict)
+             14 CALL_FUNCTION            2
+             16 POP_JUMP_IF_FALSE        4
+             18 LOAD_GLOBAL              1 (dict)
+             20 LOAD_FAST                1 (item)
+             22 CALL_FUNCTION            1
+             24 LIST_APPEND              2
+             26 JUMP_ABSOLUTE            4
+        >>   28 RETURN_VALUE
+
+=== LPTidalListModel.itemAt ===
+257           0 LOAD_FAST                1 (row)
+              2 LOAD_CONST               1 (0)
+              4 COMPARE_OP               0 (<)
+              6 POP_JUMP_IF_TRUE        22
+              8 LOAD_FAST                1 (row)
+             10 LOAD_GLOBAL              0 (len)
+             12 LOAD_FAST                0 (self)
+             14 LOAD_ATTR                1 (_items)
+             16 CALL_FUNCTION            1
+             18 COMPARE_OP               5 (>=)
+             20 POP_JUMP_IF_FALSE       26
+
+258     >>   22 LOAD_CONST               2 (None)
+             24 RETURN_VALUE
+
+259     >>   26 LOAD_GLOBAL              2 (dict)
+             28 LOAD_FAST                0 (self)
+             30 LOAD_ATTR                1 (_items)
+             32 LOAD_FAST                1 (row)
+             34 BINARY_SUBSCR
+             36 CALL_FUNCTION            1
+             38 RETURN_VALUE
+
+=== LPTidalListModel.count ===
+268           0 LOAD_GLOBAL              0 (len)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (_items)
+              6 CALL_FUNCTION            1
+              8 RETURN_VALUE
+
+=== LPTidalListModel.itemMapAt ===
+278           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (itemAt)
+              4 LOAD_FAST                1 (row)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (item)
+
+279          10 LOAD_GLOBAL              1 (isinstance)
+             12 LOAD_FAST                2 (item)
+             14 LOAD_GLOBAL              2 (dict)
+             16 CALL_FUNCTION            2
+             18 POP_JUMP_IF_FALSE       24
+             20 LOAD_FAST                2 (item)
+             22 RETURN_VALUE
+        >>   24 BUILD_MAP                0
+             26 RETURN_VALUE
+
+=== LPTidalListModel.findIndexById ===
+288           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (itemId)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               2 (needle)
+
+289          16 LOAD_FAST                2 (needle)
+             18 POP_JUMP_IF_TRUE        24
+
+290          20 LOAD_CONST               2 (-1)
+             22 RETURN_VALUE
+
+291     >>   24 LOAD_GLOBAL              2 (enumerate)
+             26 LOAD_FAST                0 (self)
+             28 LOAD_ATTR                3 (_items)
+             30 CALL_FUNCTION            1
+             32 GET_ITER
+        >>   34 FOR_ITER                44 (to 80)
+             36 UNPACK_SEQUENCE          2
+             38 STORE_FAST               3 (index)
+             40 STORE_FAST               4 (item)
+
+292          42 LOAD_GLOBAL              0 (str)
+             44 LOAD_FAST                4 (item)
+             46 LOAD_METHOD              4 (get)
+             48 LOAD_CONST               3 ('itemId')
+             50 LOAD_CONST               1 ('')
+             52 CALL_METHOD              2
+             54 JUMP_IF_TRUE_OR_POP     58
+             56 LOAD_CONST               1 ('')
+        >>   58 CALL_FUNCTION            1
+             60 LOAD_METHOD              1 (strip)
+             62 CALL_METHOD              0
+             64 LOAD_FAST                2 (needle)
+             66 COMPARE_OP               2 (==)
+             68 POP_JUMP_IF_FALSE       34
+
+293          70 LOAD_FAST                3 (index)
+             72 ROT_TWO
+             74 POP_TOP
+             76 RETURN_VALUE
+             78 JUMP_ABSOLUTE           34
+
+294     >>   80 LOAD_CONST               2 (-1)
+             82 RETURN_VALUE
+
+=== LPTidalListModel.updateItem ===
+304           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (findIndexById)
+              4 LOAD_FAST                1 (itemId)
+              6 CALL_METHOD              1
+              8 STORE_FAST               3 (row)
+
+305          10 LOAD_FAST                3 (row)
+             12 LOAD_CONST               1 (0)
+             14 COMPARE_OP               0 (<)
+             16 POP_JUMP_IF_FALSE       22
+
+306          18 LOAD_CONST               2 (False)
+             20 RETURN_VALUE
+
+307     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_ATTR                1 (_items)
+             26 LOAD_FAST                3 (row)
+             28 BINARY_SUBSCR
+             30 LOAD_METHOD              2 (update)
+             32 LOAD_GLOBAL              3 (dict)
+             34 LOAD_FAST                2 (changes)
+             36 JUMP_IF_TRUE_OR_POP     40
+             38 BUILD_MAP                0
+        >>   40 CALL_FUNCTION            1
+             42 CALL_METHOD              1
+             44 POP_TOP
+
+308          46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              4 (index)
+             50 LOAD_FAST                3 (row)
+             52 LOAD_CONST               1 (0)
+             54 CALL_METHOD              2
+             56 STORE_FAST               4 (model_index)
+
+309          58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                5 (dataChanged)
+             62 LOAD_METHOD              6 (emit)
+             64 LOAD_FAST                4 (model_index)
+             66 LOAD_FAST                4 (model_index)
+             68 LOAD_GLOBAL              7 (list)
+             70 LOAD_FAST                0 (self)
+             72 LOAD_METHOD              8 (roleNames)
+             74 CALL_METHOD              0
+             76 LOAD_METHOD              9 (keys)
+             78 CALL_METHOD              0
+             80 CALL_FUNCTION            1
+             82 CALL_METHOD              3
+             84 POP_TOP
+
+310          86 LOAD_CONST               3 (True)
+             88 RETURN_VALUE
+
+=== LPTidalListModel.removeItem ===
+319           0 LOAD_FAST                0 (self)
+              2 LOAD_METHOD              0 (findIndexById)
+              4 LOAD_FAST                1 (itemId)
+              6 CALL_METHOD              1
+              8 STORE_FAST               2 (row)
+
+320          10 LOAD_FAST                2 (row)
+             12 LOAD_CONST               1 (0)
+             14 COMPARE_OP               0 (<)
+             16 POP_JUMP_IF_FALSE       22
+
+321          18 LOAD_CONST               2 (False)
+             20 RETURN_VALUE
+
+322     >>   22 LOAD_FAST                0 (self)
+             24 LOAD_METHOD              1 (beginRemoveRows)
+             26 LOAD_GLOBAL              2 (QModelIndex)
+             28 CALL_FUNCTION            0
+             30 LOAD_FAST                2 (row)
+             32 LOAD_FAST                2 (row)
+             34 CALL_METHOD              3
+             36 POP_TOP
+
+323          38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                3 (_items)
+             42 LOAD_METHOD              4 (pop)
+             44 LOAD_FAST                2 (row)
+             46 CALL_METHOD              1
+             48 POP_TOP
+
+324          50 LOAD_FAST                0 (self)
+             52 LOAD_METHOD              5 (endRemoveRows)
+             54 CALL_METHOD              0
+             56 POP_TOP
+
+325          58 LOAD_CONST               3 (True)
+             60 RETURN_VALUE
+
+=== LPTidalListModel.updateImagePathByUrl ===
+335           0 LOAD_GLOBAL              0 (str)
+              2 LOAD_FAST                1 (imageUrl)
+              4 JUMP_IF_TRUE_OR_POP      8
+              6 LOAD_CONST               1 ('')
+        >>    8 CALL_FUNCTION            1
+             10 LOAD_METHOD              1 (strip)
+             12 CALL_METHOD              0
+             14 STORE_FAST               3 (target_url)
+
+336          16 LOAD_GLOBAL              0 (str)
+             18 LOAD_FAST                2 (imagePath)
+             20 JUMP_IF_TRUE_OR_POP     24
+             22 LOAD_CONST               1 ('')
+        >>   24 CALL_FUNCTION            1
+             26 LOAD_METHOD              1 (strip)
+             28 CALL_METHOD              0
+             30 STORE_FAST               4 (next_path)
+
+337          32 LOAD_FAST                3 (target_url)
+             34 POP_JUMP_IF_FALSE       40
+             36 LOAD_FAST                4 (next_path)
+             38 POP_JUMP_IF_TRUE        44
+
+338     >>   40 LOAD_CONST               2 (False)
+             42 RETURN_VALUE
+
+340     >>   44 LOAD_CONST               2 (False)
+             46 STORE_FAST               5 (changed)
+
+341          48 LOAD_FAST                0 (self)
+             50 LOAD_ATTR                2 (IMAGE_PATH_ROLE)
+             52 BUILD_LIST               1
+             54 STORE_FAST               6 (role_names)
+
+342          56 LOAD_GLOBAL              3 (enumerate)
+             58 LOAD_FAST                0 (self)
+             60 LOAD_ATTR                4 (_items)
+             62 CALL_FUNCTION            1
+             64 GET_ITER
+        >>   66 FOR_ITER               108 (to 176)
+             68 UNPACK_SEQUENCE          2
+             70 STORE_FAST               7 (row)
+             72 STORE_FAST               8 (item)
+
+343          74 LOAD_GLOBAL              0 (str)
+             76 LOAD_FAST                8 (item)
+             78 LOAD_METHOD              5 (get)
+             80 LOAD_CONST               3 ('imageUrl')
+             82 LOAD_CONST               1 ('')
+             84 CALL_METHOD              2
+             86 JUMP_IF_TRUE_OR_POP     90
+             88 LOAD_CONST               1 ('')
+        >>   90 CALL_FUNCTION            1
+             92 LOAD_METHOD              1 (strip)
+             94 CALL_METHOD              0
+             96 LOAD_FAST                3 (target_url)
+             98 COMPARE_OP               3 (!=)
+            100 POP_JUMP_IF_FALSE      104
+
+344         102 JUMP_ABSOLUTE           66
+
+345     >>  104 LOAD_GLOBAL              0 (str)
+            106 LOAD_FAST                8 (item)
+            108 LOAD_METHOD              5 (get)
+            110 LOAD_CONST               4 ('imagePath')
+            112 LOAD_CONST               1 ('')
+            114 CALL_METHOD              2
+            116 JUMP_IF_TRUE_OR_POP    120
+            118 LOAD_CONST               1 ('')
+        >>  120 CALL_FUNCTION            1
+            122 LOAD_METHOD              1 (strip)
+            124 CALL_METHOD              0
+            126 LOAD_FAST                4 (next_path)
+            128 COMPARE_OP               2 (==)
+            130 POP_JUMP_IF_FALSE      134
+
+346         132 JUMP_ABSOLUTE           66
+
+347     >>  134 LOAD_FAST                4 (next_path)
+            136 LOAD_FAST                8 (item)
+            138 LOAD_CONST               4 ('imagePath')
+            140 STORE_SUBSCR
+
+348         142 LOAD_FAST                0 (self)
+            144 LOAD_METHOD              6 (index)
+            146 LOAD_FAST                7 (row)
+            148 LOAD_CONST               5 (0)
+            150 CALL_METHOD              2
+            152 STORE_FAST               9 (model_index)
+
+349         154 LOAD_FAST                0 (self)
+            156 LOAD_ATTR                7 (dataChanged)
+            158 LOAD_METHOD              8 (emit)
+            160 LOAD_FAST                9 (model_index)
+            162 LOAD_FAST                9 (model_index)
+            164 LOAD_FAST                6 (role_names)
+            166 CALL_METHOD              3
+            168 POP_TOP
+
+350         170 LOAD_CONST               6 (True)
+            172 STORE_FAST               5 (changed)
+            174 JUMP_ABSOLUTE           66
+
+351     >>  176 LOAD_FAST                5 (changed)
+            178 RETURN_VALUE
+
+=== LPTidalListModel.upsertItem ===
+360           0 LOAD_GLOBAL              0 (isinstance)
+              2 LOAD_FAST                1 (item)
+              4 LOAD_GLOBAL              1 (dict)
+              6 CALL_FUNCTION            2
+              8 POP_JUMP_IF_TRUE        14
+
+361          10 LOAD_CONST               1 (None)
+             12 RETURN_VALUE
+
+362     >>   14 LOAD_GLOBAL              2 (str)
+             16 LOAD_FAST                1 (item)
+             18 LOAD_METHOD              3 (get)
+             20 LOAD_CONST               2 ('itemId')
+             22 LOAD_CONST               3 ('')
+             24 CALL_METHOD              2
+             26 JUMP_IF_TRUE_OR_POP     30
+             28 LOAD_CONST               3 ('')
+        >>   30 CALL_FUNCTION            1
+             32 LOAD_METHOD              4 (strip)
+             34 CALL_METHOD              0
+             36 STORE_FAST               2 (item_id)
+
+363          38 LOAD_FAST                2 (item_id)
+             40 POP_JUMP_IF_TRUE        46
+
+364          42 LOAD_CONST               1 (None)
+             44 RETURN_VALUE
+
+365     >>   46 LOAD_FAST                0 (self)
+             48 LOAD_METHOD              5 (findIndexById)
+             50 LOAD_FAST                2 (item_id)
+             52 CALL_METHOD              1
+             54 STORE_FAST               3 (row)
+
+366          56 LOAD_FAST                3 (row)
+             58 LOAD_CONST               4 (0)
+             60 COMPARE_OP               5 (>=)
+             62 POP_JUMP_IF_FALSE      124
+
+367          64 LOAD_FAST                0 (self)
+             66 LOAD_ATTR                6 (_items)
+             68 LOAD_FAST                3 (row)
+             70 BINARY_SUBSCR
+             72 LOAD_METHOD              7 (update)
+             74 LOAD_FAST                1 (item)
+             76 CALL_METHOD              1
+             78 POP_TOP
+
+368          80 LOAD_FAST                0 (self)
+             82 LOAD_METHOD              8 (index)
+             84 LOAD_FAST                3 (row)
+             86 LOAD_CONST               4 (0)
+             88 CALL_METHOD              2
+             90 STORE_FAST               4 (model_index)
+
+369          92 LOAD_FAST                0 (self)
+             94 LOAD_ATTR                9 (dataChanged)
+             96 LOAD_METHOD             10 (emit)
+             98 LOAD_FAST                4 (model_index)
+            100 LOAD_FAST                4 (model_index)
+            102 LOAD_GLOBAL             11 (list)
+            104 LOAD_FAST                0 (self)
+            106 LOAD_METHOD             12 (roleNames)
+            108 CALL_METHOD              0
+            110 LOAD_METHOD             13 (keys)
+            112 CALL_METHOD              0
+            114 CALL_FUNCTION            1
+            116 CALL_METHOD              3
+            118 POP_TOP
+
+370         120 LOAD_CONST               1 (None)
+            122 RETURN_VALUE
+
+371     >>  124 LOAD_FAST                0 (self)
+            126 LOAD_METHOD             14 (appendItems)
+            128 LOAD_FAST                1 (item)
+            130 BUILD_LIST               1
+            132 CALL_METHOD              1
+            134 POP_TOP
+            136 LOAD_CONST               1 (None)
+            138 RETURN_VALUE

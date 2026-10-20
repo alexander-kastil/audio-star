@@ -1,0 +1,150 @@
+# module HOME.MyMusic.LPTrackImageLoadHelper
+
+[module] names: queue, threading, PyQt6, QtCore, Lock, _sharedTrackImageLoaderLock, _sharedTrackImageLoader, _trackImageHelperRegistryLock, _trackImageHelperRegistry, _nextTrackImageHelperToken, _registerTrackImageHelper, _unregisterTrackImageHelper, _getRegisteredTrackImageHelper, _getSharedTrackImageLoader, QObject, _LPTrackImageDispatchBridge, object, _LPSharedTrackImageLoader, LPTrackImageLoadHelper
+  str: 'QtCore'
+  str: '_registerTrackImageHelper'
+  str: '_unregisterTrackImageHelper'
+  str: '_getRegisteredTrackImageHelper'
+  str: '_getSharedTrackImageLoader'
+  str: '_LPTrackImageDispatchBridge'
+  str: '_LPSharedTrackImageLoader'
+  str: 'LPTrackImageLoadHelper'
+
+def _registerTrackImageHelper(helper)  line 14
+  names: _trackImageHelperRegistryLock, _nextTrackImageHelperToken, _trackImageHelperRegistry
+    str: '\n    为 helper 注册一个进程内唯一标识。\n\n    参数:\n        helper (LPTrackImageLoadHelper): 需要注册的 helper 对象。\n    返回:\n        int: helper 的唯一标识。\n    '
+
+def _unregisterTrackImageHelper(helperToken)  line 32
+  names: _trackImageHelperRegistryLock, _trackImageHelperRegistry, pop
+    str: '\n    注销指定 helper 的注册信息。\n\n    参数:\n        helperToken (int): helper 唯一标识。\n    返回:\n        无\n    '
+
+def _getRegisteredTrackImageHelper(helperToken)  line 45
+  names: _trackImageHelperRegistryLock, _trackImageHelperRegistry, get
+    str: '\n    获取仍处于注册状态的 helper 对象。\n\n    参数:\n        helperToken (int): helper 唯一标识。\n    返回:\n        LPTrackImageLoadHelper | None: 命中时返回 helper，否则返回 `None`。\n    '
+
+def _getSharedTrackImageLoader()  line 58
+  names: _sharedTrackImageLoaderLock, _sharedTrackImageLoader, _LPSharedTrackImageLoader
+    str: '\n    获取进程级共享封面后台加载器。\n\n    参数:\n        无\n    返回:\n        _LPSharedTrackImageLoader: 共享后台加载器实例。\n    '
+
+def _LPTrackImageDispatchBridge()  line 76
+  names: __name__, __module__, __qualname__, QtCore, pyqtSignal, int, str, taskFinishedSignal, __init__, pyqtSlot, _dispatchTaskFinished, __classcell__
+    str: '_LPTrackImageDispatchBridge'
+    str: '_LPTrackImageDispatchBridge.__init__'
+    str: '_LPTrackImageDispatchBridge._dispatchTaskFinished'
+
+  def _LPTrackImageDispatchBridge.__init__(self)  line 79
+    names: super, __init__, taskFinishedSignal, connect, _dispatchTaskFinished, QtCore, Qt, ConnectionType, QueuedConnection
+      str: '\n        初始化主线程派发桥。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def _LPTrackImageDispatchBridge._dispatchTaskFinished(self, helperToken, generation, row, imageUrl)  line 94
+    names: _getRegisteredTrackImageHelper, _handleSharedImageReady
+      str: '\n        在 Qt 主线程中把完成事件派发给仍然活跃的 helper。\n\n        参数:\n            helperToken (int): helper 唯一标识。\n            generation (int): helper 当前批次号。\n            row (int): 对应行号。\n            imageUrl (str): 当前任务图片地址。\n        返回:\n            无\n        '
+
+def _LPSharedTrackImageLoader()  line 115
+  names: __name__, __module__, __qualname__, __init__, submit, _workerLoop
+    str: '_LPSharedTrackImageLoader'
+    str: '_LPSharedTrackImageLoader.__init__'
+    str: '_LPSharedTrackImageLoader.submit'
+    str: '_LPSharedTrackImageLoader._workerLoop'
+
+  def _LPSharedTrackImageLoader.__init__(self)  line 116
+    names: _LPTrackImageDispatchBridge, _dispatchBridge, queue, Queue, _taskQueue, threading, Thread, _workerLoop, _workerThread, start
+      str: '\n        初始化共享封面后台加载器。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'LPSharedTrackImageLoader'
+      str: 'target'
+      str: 'name'
+      str: 'daemon'
+
+  def _LPSharedTrackImageLoader.submit(self, helperToken, generation, row, imageUrl, cacheSize, utilityModule)  line 134
+    names: _taskQueue, put
+      str: '\n        提交一个封面加载任务到共享后台队列。\n\n        参数:\n            helperToken (int): helper 唯一标识。\n            generation (int): helper 当前批次号。\n            row (int): 对应行号。\n            imageUrl (str): 当前任务图片地址。\n            cacheSize (int): 封面缓存尺寸。\n            utilityModule (module): `LPUtility` 模块对象。\n        返回:\n '
+      str: 'helperToken'
+      str: 'generation'
+      str: 'row'
+      str: 'imageUrl'
+      str: 'cacheSize'
+      str: 'utilityModule'
+
+  def _LPSharedTrackImageLoader._workerLoop(self)  line 160
+    names: _taskQueue, get, _getRegisteredTrackImageHelper, task_done, _isBackgroundTaskStillValid, getCachedPixmapWithUrl, fetchUrlQPixmap, _dispatchBridge, taskFinishedSignal, emit
+      str: '\n        共享后台线程主循环，负责下载封面并把完成事件回投到主线程。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'helperToken'
+      str: 'generation'
+      str: 'row'
+      str: 'imageUrl'
+      str: 'utilityModule'
+      str: 'cacheSize'
+      str: 'image'
+
+def LPTrackImageLoadHelper()  line 209
+  names: __name__, __module__, __qualname__, QtCore, pyqtSignal, int, rowImageReadySignal, __init__, attachView, refreshVisibleRows, shutdown, _disconnectViewSignals, _onVisibleRowsChanged, _submitPendingTasks, _handleSharedImageReady, _shouldNotifyRow, _isBackgroundTaskStillValid, _buildPendingTasks, _normalizeVisibleRange, _buildPriorityRows, __classcell__
+    str: 'LPTrackImageLoadHelper'
+    str: 'LPTrackImageLoadHelper.__init__'
+    str: 'LPTrackImageLoadHelper.attachView'
+    str: 'LPTrackImageLoadHelper.refreshVisibleRows'
+    str: 'LPTrackImageLoadHelper.shutdown'
+    str: 'LPTrackImageLoadHelper._disconnectViewSignals'
+    str: 'LPTrackImageLoadHelper._onVisibleRowsChanged'
+    str: 'LPTrackImageLoadHelper._submitPendingTasks'
+    str: 'LPTrackImageLoadHelper._handleSharedImageReady'
+    str: 'LPTrackImageLoadHelper._shouldNotifyRow'
+    str: 'LPTrackImageLoadHelper._isBackgroundTaskStillValid'
+    str: 'LPTrackImageLoadHelper._buildPendingTasks'
+    str: 'LPTrackImageLoadHelper._normalizeVisibleRange'
+    str: 'LPTrackImageLoadHelper._buildPriorityRows'
+
+  def LPTrackImageLoadHelper.__init__(self, imageUrlProvider, rowCountProvider, utilityModule, cacheSize, prefetchRows, parent)  line 212
+    names: super, __init__, _imageUrlProvider, _rowCountProvider, _utilityModule, _cacheSize, _prefetchRows, _view, _visibleRange, set, _pendingTaskSet, _generation, _isShutdown, _registerTrackImageHelper, _helperToken, threading, RLock, _lock
+      str: '\n        初始化曲目封面加载协调器。\n\n        参数:\n            imageUrlProvider (callable): 传入行号并返回图片地址的回调。\n            rowCountProvider (callable): 返回当前模型总行数的回调。\n            utilityModule (module): 已完成初始化的 `LPUtility` 模块对象。\n            cacheSize (int): 图片缓存尺寸。\n            prefetchRows (int): 当前可见区前后预取的行数。\n       '
+
+  def LPTrackImageLoadHelper.attachView(self, view)  line 242
+    names: _view, refreshVisibleRows, _disconnectViewSignals, visibleRowsChanged, connect, _onVisibleRowsChanged, destroyed, shutdown
+      str: '\n        绑定表格视图，并开始监听当前可见行变化。\n\n        参数:\n            view (QTableView): 需要监听可见区域的表格视图。\n        返回:\n            无\n        '
+
+  def LPTrackImageLoadHelper.refreshVisibleRows(self)  line 266
+    names: _view, getattr, callable, _visibleRange, _onVisibleRowsChanged
+      str: '\n        按当前视图状态重新构建待加载封面优先队列。\n\n        参数:\n            无\n        返回:\n            无\n        '
+      str: 'emitVisibleRowsChanged'
+
+  def LPTrackImageLoadHelper.shutdown(self)  line 284
+    names: _lock, _isShutdown, _generation, _pendingTaskSet, clear, _visibleRange, _view, _unregisterTrackImageHelper, _helperToken, _disconnectViewSignals
+      str: '\n        立即停止当前 helper 接收后台结果，并断开与视图的关联。\n\n        参数:\n            无\n        返回:\n            无\n        '
+
+  def LPTrackImageLoadHelper._disconnectViewSignals(self, view)  line 310
+    names: visibleRowsChanged, disconnect, _onVisibleRowsChanged, Exception, destroyed, shutdown
+      str: '\n        断开视图与当前 helper 的所有信号连接。\n\n        参数:\n            view (QTableView): 需要断开的表格视图。\n        返回:\n            无\n        '
+
+  def LPTrackImageLoadHelper._onVisibleRowsChanged(self, firstRow, lastRow)  line 329
+    names: _lock, _isShutdown, _visibleRange, _generation, _buildPendingTasks, _pendingTaskSet, _submitPendingTasks
+      str: '\n        处理视图可见行变化，并重建优先级加载队列。\n\n        参数:\n            firstRow (int): 当前可见首行。\n            lastRow (int): 当前可见末行。\n        返回:\n            无\n        '
+      str: 'LPTrackImageLoadHelper._onVisibleRowsChanged.<locals>.<setcomp>'
+
+    def LPTrackImageLoadHelper._onVisibleRowsChanged.<setcomp>(.0)  line 347
+
+  def LPTrackImageLoadHelper._submitPendingTasks(self, pendingTasks)  line 353
+    names: _getSharedTrackImageLoader, submit, _helperToken, _cacheSize, _utilityModule
+      str: '\n        将当前 helper 的待处理封面任务提交到共享后台加载器。\n\n        参数:\n            pendingTasks (list[tuple[int, int, str]]): 待提交任务数组。\n        返回:\n            无\n        '
+
+  def LPTrackImageLoadHelper._handleSharedImageReady(self, generation, row, imageUrl)  line 373
+    names: _lock, _isShutdown, _generation, _pendingTaskSet, discard, _shouldNotifyRow, rowImageReadySignal, emit
+      str: '\n        在主线程中处理共享后台加载器返回的封面完成事件。\n\n        参数:\n            generation (int): 任务生成批次号。\n            row (int): 当前行号。\n            imageUrl (str): 当前任务图片地址。\n        返回:\n            无\n        '
+
+  def LPTrackImageLoadHelper._shouldNotifyRow(self, generation, row, imageUrl)  line 397
+    names: _lock, _isShutdown, _generation, _rowCountProvider, _imageUrlProvider
+      str: '\n        判断图片下载完成后是否仍需要回写当前行。\n\n        参数:\n            generation (int): 任务生成批次号。\n            row (int): 当前行号。\n            imageUrl (str): 当前任务图片地址。\n        返回:\n            bool: `True` 表示仍需刷新该行，`False` 表示该任务已经过期。\n        '
+
+  def LPTrackImageLoadHelper._isBackgroundTaskStillValid(self, generation, row, imageUrl)  line 419
+    names: _lock, _isShutdown, _generation, _pendingTaskSet, _rowCountProvider, _imageUrlProvider
+      str: '\n        判断后台线程取出的封面任务是否仍然有效。\n\n        参数:\n            generation (int): 任务生成批次号。\n            row (int): 当前行号。\n            imageUrl (str): 当前任务图片地址。\n        返回:\n            bool: `True` 表示任务仍应继续执行，`False` 表示任务已经过期。\n        '
+
+  def LPTrackImageLoadHelper._buildPendingTasks(self, generation, firstRow, lastRow)  line 444
+    names: _rowCountProvider, _normalizeVisibleRange, _buildPriorityRows, set, add, _imageUrlProvider, _utilityModule, getCachedPixmapWithUrl, _cacheSize, append
+      str: '\n        按可见区和预取窗口构建新的待处理任务列表。\n\n        参数:\n            generation (int): 当前任务生成批次号。\n            firstRow (int): 当前可见首行。\n            lastRow (int): 当前可见末行。\n        返回:\n            list: 排好优先级的待处理任务数组。\n        '
+
+  def LPTrackImageLoadHelper._normalizeVisibleRange(self, totalRows, firstRow, lastRow)  line 480
+    names: min, _prefetchRows, max
+      str: '\n        归一化当前可见区范围，保证行号合法可用。\n\n        参数:\n            totalRows (int): 总行数。\n            firstRow (int): 原始可见首行。\n            lastRow (int): 原始可见末行。\n        返回:\n            tuple: 归一化后的 `(firstRow, lastRow)`。\n        '
+
+  def LPTrackImageLoadHelper._buildPriorityRows(self, totalRows, firstRow, lastRow)  line 504
+    names: list, range, _prefetchRows, append
+      str: '\n        根据可见区和预取策略生成行优先级数组。\n\n        参数:\n            totalRows (int): 总行数。\n            firstRow (int): 当前可见首行。\n            lastRow (int): 当前可见末行。\n        返回:\n            list: 按优先级排序的行号数组。\n        '

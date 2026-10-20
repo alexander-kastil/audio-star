@@ -1,0 +1,155 @@
+# module LPClientFramework.LPStreamServiceDir.LPWiiMRadioStreamService
+
+[module] names: __doc__, json, threading, LPGlobalUI, LPClientFramework, LPPublicDefine, LPClientFramework.LPFavoriteCacheManager, WIIMRADIO_LOCAL_USER_ID, LPClientFramework.LPMusicLibrary, LPRecentlyManager, LPRecentlyPlayListCodec, LPClientFramework.LPPlayList.LPWiiMRadioPlayList, LPWiiMRadioPlayHeader, LPWiiMRadioPlayItem, LPWiiMRadioPlayList, LPClientFramework.LPStreamServiceManager, LPStreamService, LPClientFramework.LPUtility, logger, WIIMRADIO_DEFAULT_GUI_BEHAVIOR, LPWiiMRadioStreamService
+  str: '\nWiiMRadio 音源服务。\n'
+  str: 'LPPublicDefine'
+  str: 'WIIMRADIO_LOCAL_USER_ID'
+  str: 'LPRecentlyManager'
+  str: 'LPRecentlyPlayListCodec'
+  str: 'LPWiiMRadioPlayHeader'
+  str: 'LPWiiMRadioPlayItem'
+  str: 'LPWiiMRadioPlayList'
+  str: 'LPStreamService'
+  str: 'logger'
+  str: '{"prev": {"enabled": false},"next": {"enabled": false},"loop": {"enabled": false}, "shuffle": {"enabled": false}, "seek": {"enabled": false}}'
+  str: 'LPWiiMRadioStreamService'
+
+def LPWiiMRadioStreamService()  line 24
+  names: __name__, __module__, __qualname__, __doc__, streamGuiBehavior, guiCan, dict, recentlyDidSelect, playRecently, _playListFromRecentlyDetail, str, bool, canFavorite, favoriteState, setFavorite, recentlyFavoriteTarget, recentlyFavoriteItemData, updateMediaInfoWithItem
+    str: 'LPWiiMRadioStreamService'
+    str: 'WiiMRadio 音源服务，负责播放态写入与设备能力解析。'
+    str: 'LPWiiMRadioStreamService.streamGuiBehavior'
+    str: 'LPWiiMRadioStreamService.guiCan'
+    str: 'detailDict'
+    str: 'LPWiiMRadioStreamService.recentlyDidSelect'
+    str: 'LPWiiMRadioStreamService.playRecently'
+    str: 'LPWiiMRadioStreamService._playListFromRecentlyDetail'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPWiiMRadioStreamService.canFavorite'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'LPWiiMRadioStreamService.favoriteState'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: 'return'
+    str: 'LPWiiMRadioStreamService.setFavorite'
+    str: 'LPWiiMRadioStreamService.recentlyFavoriteTarget'
+    str: 'LPWiiMRadioStreamService.recentlyFavoriteItemData'
+    str: 'LPWiiMRadioStreamService.updateMediaInfoWithItem'
+
+  def LPWiiMRadioStreamService.streamGuiBehavior(self, device)  line 27
+    names: json, loads, WIIMRADIO_DEFAULT_GUI_BEHAVIOR, mediaInfo, guiBehavior, isinstance, dict, items, keys, bool, get, Exception
+      str: '\n        解析 WiiMRadio 当前设备回传的 guiBehavior 能力。\n\n        :param device: 当前播放设备对象，需包含 mediaInfo.guiBehavior。\n        :return: 能力字典；无有效回传时返回 WiiMRadio 保守默认能力。\n        '
+      str: 'enabled'
+
+  def LPWiiMRadioStreamService.guiCan(self, device, key)  line 49
+    names: streamGuiBehavior, keys
+      str: '\n        判断 WiiMRadio 指定 UI 控件能力是否可用。\n\n        :param device: 当前播放设备对象。\n        :param key: 能力名称，如 prev、next、loop、shuffle、seek。\n        :return: 支持该能力时返回 True，否则返回 False。\n        '
+      str: 'enabled'
+
+  def LPWiiMRadioStreamService.recentlyDidSelect(self, detailDict, baseController)  line 67
+    names: _playListFromRecentlyDetail, logger, debug, LPGlobalUI, currentDevice, generateXML, Exception, error, list, deviceStreamServiceManager, updateMediaInfoForSource, source, header, guardMediaInfoRollback, threading, Thread, start
+      str: '\n        从 Recently 记录的 detail 恢复 WiiMRadio 电台播放。\n\n        Args:\n            detailDict: recently 记录中的 detail 字典。\n            baseController: 预留参数，电台点击后直接恢复播放。\n\n        Returns:\n            已成功发起播放返回 True，否则返回 False。\n        '
+      str: '[WiiMRadio] recentlyDidSelect ignore because playList is invalid'
+      str: '[WiiMRadio] recentlyDidSelect ignore because currentDevice is empty'
+      str: '[WiiMRadio] recentlyDidSelect generate xml failed: %s'
+      str: 'LPWiiMRadioStreamService.recentlyDidSelect.<locals>._playRecently'
+      str: 'target'
+      str: 'daemon'
+
+    def LPWiiMRadioStreamService.recentlyDidSelect._playRecently()  line 100
+      names: upnpPost, get, logger, debug, getattr, LPRecentlyManager, instance, addRecentlyPlayedWithMusicList
+        str: 'CreateQueue'
+        str: 'QueueContext'
+        str: 'error'
+        str: 'status_code'
+        str: '[WiiMRadio] recentlyDidSelect play success title=%s'
+        str: 'trackName'
+        str: 'openMore'
+        str: 'canNavigate'
+        str: '[WiiMRadio] recentlyDidSelect play failed title=%s'
+
+  def LPWiiMRadioStreamService.playRecently(self, detailDict, baseController)  line 114
+    names: recentlyDidSelect
+      str: '\n        处理 WiiMRadio Recently 播放按钮：与整卡点击一致，直接恢复播放。\n\n        Args:\n            detailDict: recently 记录中的 detail 字典。\n            baseController: 预留参数。\n\n        Returns:\n            是否已成功发起播放请求。\n        '
+
+  def LPWiiMRadioStreamService._playListFromRecentlyDetail(self, detailDict)  line 127
+    names: LPRecentlyPlayListCodec, playListFromDetail, LPWiiMRadioPlayList, LPWiiMRadioPlayHeader, LPWiiMRadioPlayItem, source
+      str: '\n        从 PC recently detail["playList"] 还原 LPWiiMRadioPlayList。\n\n        Args:\n            detailDict: recently detail 字典。\n\n        Returns:\n            可播放的 LPWiiMRadioPlayList；失败返回 None。\n        '
+
+  def LPWiiMRadioStreamService.canFavorite(self, itemType, itemId)  line 149
+    names: str, strip, lower, bool
+      str: '\n        判断 WiiMRadio 是否支持收藏指定条目，仅支持 station。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: station 且 ID 非空时返回 True。\n        '
+      str: 'station'
+
+  def LPWiiMRadioStreamService.favoriteState(self, itemType, itemId)  line 161
+    names: str, strip, lower, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioFavoriteStorage, ensureLoaded, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, isFavorite, source, WIIMRADIO_LOCAL_USER_ID, Exception, logger, warning
+      str: '\n        查询指定电台当前收藏状态。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 已收藏返回 True，未收藏返回 False，状态不可用返回 None。\n        '
+      str: 'station'
+      str: 'ensureLoaded'
+      str: 'LPFavoriteCacheManager'
+      str: '[WiiMRadio] favoriteState failed stationId=%s error=%s'
+
+  def LPWiiMRadioStreamService.setFavorite(self, itemType, itemId, desiredFavorite, callback, itemData)  line 189
+    names: str, strip, lower, bool, dict, HOME.StreamService.WiiMRadio.utils.LPWiiMRadioFavoriteStorage, applyFavoriteChange, Exception, logger, warning
+      str: '\n        异步设置电台收藏状态，新增时写入完整电台对象。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param desiredFavorite: 目标收藏状态。\n        :param callback: 结果回调，参数为结果字典。\n        :param itemData: 加入收藏时携带的完整电台对象。\n        :return: None。\n        '
+      str: 'invalid_target'
+      str: 'success'
+      str: 'error'
+      str: 'itemType'
+      str: 'itemId'
+      str: 'desiredFavorite'
+      str: 'station'
+      str: 'applyFavoriteChange'
+      str: 'success'
+      str: 'error'
+      str: '[WiiMRadio] setFavorite failed stationId=%s error=%s'
+      str: 'request_failed'
+
+  def LPWiiMRadioStreamService.recentlyFavoriteTarget(self, detailDict)  line 225
+    names: _playListFromRecentlyDetail, list, LPRecentlyPlayListCodec, currentItemFromPlayList, str, getattr, strip
+      str: '\n        推导 WiiMRadio Recently 条目加入收藏所需的类型与 ID。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: (station, stationId) 元组；无法推导时返回 None。\n        '
+      str: 'trackId'
+      str: 'station'
+
+  def LPWiiMRadioStreamService.recentlyFavoriteItemData(self, detailDict)  line 239
+    names: _playListFromRecentlyDetail, list, header, LPRecentlyPlayListCodec, currentItemFromPlayList, str, getattr, strip
+      str: '\n        从 Recently detail 还原完整电台收藏对象。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: 完整电台对象；无法还原时返回 None。\n        '
+      str: 'trackId'
+      str: 'itemName'
+      str: 'trackName'
+      str: 'headTitle'
+      str: 'trackImage'
+      str: 'imageUrl'
+      str: 'trackUrl'
+      str: 'stationId'
+      str: 'name'
+      str: 'favicon'
+      str: 'streamUrl'
+
+  def LPWiiMRadioStreamService.updateMediaInfoWithItem(self, device, item, header)  line 273
+    names: getattr, trackId, LPPublicDefine, MEDIATYPE_RADIO, trackImage, trackName, trackArtist, WIIMRADIO_DEFAULT_GUI_BEHAVIOR, source, mediaInfo, volume, loopMode, setMediaInfo
+      str: '\n        写入 WiiMRadio 本机发起播放时的临时媒体信息。\n\n        :param device: 当前播放设备对象。\n        :param item: WiiMRadio 播放条目，需包含电台 ID、名称、封面和音频 URL 等字段。\n        :param header: 播放列表头信息，提供媒体类型和电台标题。\n        :return: None。\n        '
+      str: 'mediaType'
+      str: 'itemName'
+      str: 'headTitle'
+      str: 'trackName'
+      str: 'TRANSITIONING'
+      str: '00:00:00'
+      str: 'trackId'
+      str: 'itemId'
+      str: 'mediaType'
+      str: 'playState'
+      str: 'artworkUri'
+      str: 'trackName'
+      str: 'artist'
+      str: 'itemName'
+      str: 'guiBehavior'
+      str: 'duration'
+      str: 'progress'
+      str: 'trackSource'
+      str: 'volume'
+      str: 'loopMode'

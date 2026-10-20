@@ -1,0 +1,317 @@
+
+=== <module> ===
+  1           0 LOAD_CONST               0 (0)
+              2 LOAD_CONST               1 (('QEvent', 'QSize', 'QTimer'))
+              4 IMPORT_NAME              0 (PyQt6.QtCore)
+              6 IMPORT_FROM              1 (QEvent)
+              8 STORE_NAME               1 (QEvent)
+             10 IMPORT_FROM              2 (QSize)
+             12 STORE_NAME               2 (QSize)
+             14 IMPORT_FROM              3 (QTimer)
+             16 STORE_NAME               3 (QTimer)
+             18 POP_TOP
+
+  3          20 LOAD_CONST               0 (0)
+             22 LOAD_CONST               2 (('LPSingleEventFilter',))
+             24 IMPORT_NAME              4 (LPClientFramework.LPEventFilter.LPSingleEventFilter)
+             26 IMPORT_FROM              5 (LPSingleEventFilter)
+             28 STORE_NAME               5 (LPSingleEventFilter)
+             30 POP_TOP
+
+  6          32 LOAD_BUILD_CLASS
+             34 LOAD_CONST               3 (<code object LPCheckableButtonEventFilter at 0x000001F3253C4190, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPCheckableButtonEventFilter.py", line 6>)
+             36 LOAD_CONST               4 ('LPCheckableButtonEventFilter')
+             38 MAKE_FUNCTION            0
+             40 LOAD_CONST               4 ('LPCheckableButtonEventFilter')
+             42 LOAD_NAME                5 (LPSingleEventFilter)
+             44 CALL_FUNCTION            3
+             46 STORE_NAME               6 (LPCheckableButtonEventFilter)
+             48 LOAD_CONST               5 (None)
+             50 RETURN_VALUE
+
+=== LPCheckableButtonEventFilter ===
+  6           0 LOAD_NAME                0 (__name__)
+              2 STORE_NAME               1 (__module__)
+              4 LOAD_CONST               0 ('LPCheckableButtonEventFilter')
+              6 STORE_NAME               2 (__qualname__)
+
+  7           8 LOAD_CONST              10 ((None,))
+             10 LOAD_CLOSURE             0 (__class__)
+             12 BUILD_TUPLE              1
+             14 LOAD_CONST               2 (<code object __init__ at 0x000001F3253C4EA0, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPCheckableButtonEventFilter.py", line 7>)
+             16 LOAD_CONST               3 ('LPCheckableButtonEventFilter.__init__')
+             18 MAKE_FUNCTION            9 (defaults, closure)
+             20 STORE_NAME               3 (__init__)
+
+ 32          22 LOAD_CONST               4 (<code object updateCheckIcon at 0x000001F3253C4870, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPCheckableButtonEventFilter.py", line 32>)
+             24 LOAD_CONST               5 ('LPCheckableButtonEventFilter.updateCheckIcon')
+             26 MAKE_FUNCTION            0
+             28 STORE_NAME               4 (updateCheckIcon)
+
+ 37          30 LOAD_CONST               6 (<code object updateIcon at 0x000001F3253C4240, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPCheckableButtonEventFilter.py", line 37>)
+             32 LOAD_CONST               7 ('LPCheckableButtonEventFilter.updateIcon')
+             34 MAKE_FUNCTION            0
+             36 STORE_NAME               5 (updateIcon)
+
+ 49          38 LOAD_CLOSURE             0 (__class__)
+             40 BUILD_TUPLE              1
+             42 LOAD_CONST               8 (<code object eventFilter at 0x000001F3253C4500, file "LPClientFramework\LPEventFilter\ButtonEventFilter\LPCheckableButtonEventFilter.py", line 49>)
+             44 LOAD_CONST               9 ('LPCheckableButtonEventFilter.eventFilter')
+             46 MAKE_FUNCTION            8 (closure)
+             48 STORE_NAME               6 (eventFilter)
+             50 LOAD_CLOSURE             0 (__class__)
+             52 DUP_TOP
+             54 STORE_NAME               7 (__classcell__)
+             56 RETURN_VALUE
+
+=== LPCheckableButtonEventFilter.__init__ ===
+  8           0 LOAD_GLOBAL              0 (super)
+              2 CALL_FUNCTION            0
+              4 LOAD_METHOD              1 (__init__)
+              6 LOAD_FAST                1 (widget)
+              8 CALL_METHOD              1
+             10 POP_TOP
+
+ 10          12 LOAD_FAST                5 (effect)
+             14 POP_JUMP_IF_FALSE       20
+             16 LOAD_FAST                5 (effect)
+             18 JUMP_FORWARD             2 (to 22)
+        >>   20 LOAD_CONST               1 ('bigger')
+        >>   22 LOAD_FAST                0 (self)
+             24 STORE_ATTR               2 (effect)
+
+ 11          26 LOAD_FAST                1 (widget)
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               3 (button)
+
+ 14          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                3 (button)
+             36 LOAD_METHOD              4 (underMouse)
+             38 CALL_METHOD              0
+             40 POP_JUMP_IF_FALSE       60
+             42 LOAD_FAST                3 (hoverImage)
+             44 POP_JUMP_IF_FALSE       60
+
+ 15          46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                3 (button)
+             50 LOAD_METHOD              5 (setIcon)
+             52 LOAD_FAST                3 (hoverImage)
+             54 CALL_METHOD              1
+             56 POP_TOP
+             58 JUMP_FORWARD            12 (to 72)
+
+ 17     >>   60 LOAD_FAST                0 (self)
+             62 LOAD_ATTR                3 (button)
+             64 LOAD_METHOD              5 (setIcon)
+             66 LOAD_FAST                2 (defaultImage)
+             68 CALL_METHOD              1
+             70 POP_TOP
+
+ 19     >>   72 LOAD_FAST                2 (defaultImage)
+             74 LOAD_FAST                0 (self)
+             76 STORE_ATTR               6 (defaultImage)
+
+ 20          78 LOAD_FAST                3 (hoverImage)
+             80 LOAD_FAST                0 (self)
+             82 STORE_ATTR               7 (hoverImage)
+
+ 21          84 LOAD_FAST                4 (checkedImage)
+             86 LOAD_FAST                0 (self)
+             88 STORE_ATTR               8 (checkedImage)
+
+ 23          90 LOAD_CONST               2 (False)
+             92 LOAD_FAST                0 (self)
+             94 STORE_ATTR               9 (_hovering)
+
+ 24          96 LOAD_FAST                0 (self)
+             98 LOAD_ATTR                3 (button)
+            100 LOAD_METHOD             10 (setCheckable)
+            102 LOAD_CONST               3 (True)
+            104 CALL_METHOD              1
+            106 POP_TOP
+
+ 25         108 LOAD_CONST               2 (False)
+            110 LOAD_FAST                0 (self)
+            112 STORE_ATTR              11 (_checked)
+
+ 27         114 LOAD_FAST                0 (self)
+            116 LOAD_ATTR                3 (button)
+            118 LOAD_ATTR               12 (toggled)
+            120 LOAD_METHOD             13 (connect)
+            122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR               14 (updateCheckIcon)
+            126 CALL_METHOD              1
+            128 POP_TOP
+            130 LOAD_CONST               0 (None)
+            132 RETURN_VALUE
+
+=== LPCheckableButtonEventFilter.updateCheckIcon ===
+ 33           0 LOAD_FAST                1 (checked)
+              2 LOAD_FAST                0 (self)
+              4 STORE_ATTR               0 (_checked)
+
+ 34           6 LOAD_FAST                0 (self)
+              8 LOAD_METHOD              1 (updateIcon)
+             10 CALL_METHOD              0
+             12 POP_TOP
+             14 LOAD_CONST               0 (None)
+             16 RETURN_VALUE
+
+=== LPCheckableButtonEventFilter.updateIcon ===
+ 38           0 LOAD_GLOBAL              0 (print)
+              2 LOAD_FAST                0 (self)
+              4 LOAD_ATTR                1 (button)
+              6 LOAD_METHOD              2 (isChecked)
+              8 CALL_METHOD              0
+             10 CALL_FUNCTION            1
+             12 POP_TOP
+
+ 39          14 LOAD_FAST                0 (self)
+             16 LOAD_ATTR                1 (button)
+             18 LOAD_METHOD              2 (isChecked)
+             20 CALL_METHOD              0
+             22 POP_JUMP_IF_FALSE       32
+
+ 40          24 LOAD_FAST                0 (self)
+             26 LOAD_ATTR                3 (checkedImage)
+             28 STORE_FAST               1 (image)
+             30 JUMP_FORWARD            20 (to 52)
+
+ 42     >>   32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                4 (_hovering)
+             36 POP_JUMP_IF_FALSE       46
+
+ 43          38 LOAD_FAST                0 (self)
+             40 LOAD_ATTR                5 (hoverImage)
+             42 STORE_FAST               1 (image)
+             44 JUMP_FORWARD             6 (to 52)
+
+ 45     >>   46 LOAD_FAST                0 (self)
+             48 LOAD_ATTR                6 (defaultImage)
+             50 STORE_FAST               1 (image)
+
+ 47     >>   52 LOAD_FAST                0 (self)
+             54 LOAD_ATTR                1 (button)
+             56 LOAD_METHOD              7 (setIcon)
+             58 LOAD_FAST                1 (image)
+             60 CALL_METHOD              1
+             62 POP_TOP
+             64 LOAD_CONST               0 (None)
+             66 RETURN_VALUE
+
+=== LPCheckableButtonEventFilter.eventFilter ===
+ 50           0 LOAD_FAST                0 (self)
+              2 LOAD_ATTR                0 (button)
+              4 LOAD_METHOD              1 (isEnabled)
+              6 CALL_METHOD              0
+              8 POP_JUMP_IF_FALSE      190
+
+ 51          10 LOAD_FAST                2 (event)
+             12 LOAD_METHOD              2 (type)
+             14 CALL_METHOD              0
+             16 LOAD_GLOBAL              3 (QEvent)
+             18 LOAD_ATTR                4 (Type)
+             20 LOAD_ATTR                5 (Enter)
+             22 COMPARE_OP               2 (==)
+             24 POP_JUMP_IF_FALSE      100
+
+ 52          26 LOAD_CONST               1 (True)
+             28 LOAD_FAST                0 (self)
+             30 STORE_ATTR               6 (_hovering)
+
+ 53          32 LOAD_FAST                0 (self)
+             34 LOAD_ATTR                7 (effect)
+             36 LOAD_CONST               2 ('bigger')
+             38 COMPARE_OP               2 (==)
+             40 POP_JUMP_IF_FALSE       88
+
+ 54          42 LOAD_FAST                0 (self)
+             44 LOAD_ATTR                0 (button)
+             46 LOAD_METHOD              8 (setIconSize)
+             48 LOAD_GLOBAL              9 (QSize)
+             50 LOAD_FAST                0 (self)
+             52 LOAD_ATTR                0 (button)
+             54 LOAD_METHOD             10 (iconSize)
+             56 CALL_METHOD              0
+             58 LOAD_METHOD             11 (width)
+             60 CALL_METHOD              0
+             62 LOAD_CONST               3 (2)
+             64 BINARY_ADD
+             66 LOAD_FAST                0 (self)
+             68 LOAD_ATTR                0 (button)
+             70 LOAD_METHOD             10 (iconSize)
+             72 CALL_METHOD              0
+             74 LOAD_METHOD             12 (height)
+             76 CALL_METHOD              0
+             78 LOAD_CONST               3 (2)
+             80 BINARY_ADD
+             82 CALL_FUNCTION            2
+             84 CALL_METHOD              1
+             86 POP_TOP
+
+ 56     >>   88 LOAD_FAST                0 (self)
+             90 LOAD_METHOD             13 (updateIcon)
+             92 CALL_METHOD              0
+             94 POP_TOP
+
+ 58          96 LOAD_CONST               1 (True)
+             98 RETURN_VALUE
+
+ 59     >>  100 LOAD_FAST                2 (event)
+            102 LOAD_METHOD              2 (type)
+            104 CALL_METHOD              0
+            106 LOAD_GLOBAL              3 (QEvent)
+            108 LOAD_ATTR                4 (Type)
+            110 LOAD_ATTR               14 (Leave)
+            112 COMPARE_OP               2 (==)
+            114 POP_JUMP_IF_FALSE      190
+
+ 60         116 LOAD_CONST               4 (False)
+            118 LOAD_FAST                0 (self)
+            120 STORE_ATTR               6 (_hovering)
+
+ 61         122 LOAD_FAST                0 (self)
+            124 LOAD_ATTR                7 (effect)
+            126 LOAD_CONST               2 ('bigger')
+            128 COMPARE_OP               2 (==)
+            130 POP_JUMP_IF_FALSE      178
+
+ 62         132 LOAD_FAST                0 (self)
+            134 LOAD_ATTR                0 (button)
+            136 LOAD_METHOD              8 (setIconSize)
+            138 LOAD_GLOBAL              9 (QSize)
+            140 LOAD_FAST                0 (self)
+            142 LOAD_ATTR                0 (button)
+            144 LOAD_METHOD             10 (iconSize)
+            146 CALL_METHOD              0
+            148 LOAD_METHOD             11 (width)
+            150 CALL_METHOD              0
+            152 LOAD_CONST               3 (2)
+            154 BINARY_SUBTRACT
+            156 LOAD_FAST                0 (self)
+            158 LOAD_ATTR                0 (button)
+            160 LOAD_METHOD             10 (iconSize)
+            162 CALL_METHOD              0
+            164 LOAD_METHOD             12 (height)
+            166 CALL_METHOD              0
+            168 LOAD_CONST               3 (2)
+            170 BINARY_SUBTRACT
+            172 CALL_FUNCTION            2
+            174 CALL_METHOD              1
+            176 POP_TOP
+
+ 63     >>  178 LOAD_FAST                0 (self)
+            180 LOAD_METHOD             13 (updateIcon)
+            182 CALL_METHOD              0
+            184 POP_TOP
+
+ 64         186 LOAD_CONST               1 (True)
+            188 RETURN_VALUE
+
+ 73     >>  190 LOAD_GLOBAL             15 (super)
+            192 CALL_FUNCTION            0
+            194 LOAD_METHOD             16 (eventFilter)
+            196 LOAD_FAST                1 (obj)
+            198 LOAD_FAST                2 (event)
+            200 CALL_METHOD              2
+            202 RETURN_VALUE

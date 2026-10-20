@@ -1,0 +1,76 @@
+# module HOME.StreamService.Tidal.services.LPTidalQmlContext
+
+[module] names: __doc__, pathlib, Path, PyQt6.QtCore, QUrl, QObject, PyQt6.QtQml, QQmlContext, typing, Optional, LPGlobalUI, LPClientFramework.LPConfig.LPFontConfig, Big_Title, Main_Text, Min_Text, Small_Title, Sub_Text, Sub_Title, getFontFamily, getMonospaceFontFamily, __file__, resolve, parents, _TIDAL_QML_BASE, str, resolveTidalQmlUrl, resolveTidalQmlPath, applyTidalSharedQmlContext, applyTidalCursorBridge, clearTidalCursorBridge
+  str: 'TIDAL QML 共享上下文注入工具。'
+  str: 'Path'
+  str: 'QUrl'
+  str: 'QObject'
+  str: 'QQmlContext'
+  str: 'Optional'
+  str: 'Big_Title'
+  str: 'Main_Text'
+  str: 'Min_Text'
+  str: 'Small_Title'
+  str: 'Sub_Text'
+  str: 'Sub_Title'
+  str: 'getFontFamily'
+  str: 'getMonospaceFontFamily'
+  str: 'resources'
+  str: 'qml'
+  str: 'Tidal'
+  str: 'qrcPath'
+  str: 'relativeFileName'
+  str: 'return'
+  str: 'resolveTidalQmlUrl'
+  str: 'relativeFileName'
+  str: 'return'
+  str: 'resolveTidalQmlPath'
+  str: 'ctx'
+  str: 'return'
+  str: 'applyTidalSharedQmlContext'
+  str: 'ctx'
+  str: 'owner'
+  str: 'quickWidget'
+  str: 'return'
+  str: 'applyTidalCursorBridge'
+  str: 'owner'
+  str: 'return'
+  str: 'clearTidalCursorBridge'
+
+def resolveTidalQmlUrl(qrcPath, relativeFileName)  line 25
+  names: _TIDAL_QML_BASE, exists, QUrl, fromLocalFile, str
+    str: '\n    优先返回仓库内本地 QML 文件（开发态热改），缺失时回退 qrc 资源。\n\n    :param qrcPath: qrc 资源路径，例如 LPUIPath.TidalHomeQML。\n    :param relativeFileName: 相对 resources/qml/Tidal 的路径，例如 "pages/TidalHome.qml"。\n    :return: 可直接传给 QQuickWidget.setSource 的 QUrl。\n    '
+
+def resolveTidalQmlPath(relativeFileName)  line 39
+  names: _TIDAL_QML_BASE
+    str: '\n    返回本地 QML 文件绝对路径，供需要本地路径的场景使用。\n\n    :param relativeFileName: 相对 resources/qml/Tidal 的路径。\n    :return: 本地 QML 文件 Path 对象。\n    '
+
+def applyTidalSharedQmlContext(ctx)  line 49
+  names: setContextProperty, LPGlobalUI, THEME_BACKGROUND_COLOR_UI, name, getFontFamily, getMonospaceFontFamily, THEME_FONT_COLOR_UI, THEME_TOAST_BACK_COLOR, THEME_CLOSE_BACK_COLOR, float, Big_Title, Sub_Title, Small_Title, Main_Text, Sub_Text, Min_Text
+    str: '\n    向 TIDAL QML 注入共享背景色和全局字体 token。\n\n    :param ctx: 待写入的 QML 上下文对象。\n    :return: None。\n    '
+    str: 'tidalBgColor'
+    str: 'tidalBgColorUI'
+    str: 'tidalFontFamily'
+    str: 'tidalMonospaceFontFamily'
+    str: 'tidalFontColor'
+    str: 'tidalToastBackColor'
+    str: 'tidalToastErrorBackColor'
+    str: 'tidalDefaultPointSize'
+    str: 'tidalBigTitlePointSize'
+    str: 'tidalSubTitlePointSize'
+    str: 'tidalSmallTitlePointSize'
+    str: 'tidalMainTextPointSize'
+    str: 'tidalSubTextPointSize'
+    str: 'tidalMinTextPointSize'
+
+def applyTidalCursorBridge(ctx, owner, quickWidget)  line 74
+  names: HOME.StreamService.Tidal.services.LPTidalCursorBridge, LPTidalCursorBridge, getattr, setattr, setQuickWidget, setContextProperty
+    str: '\n    创建并向 TIDAL QML 上下注入宿主光标同步桥。\n\n    :param ctx: QML 上下文对象。\n    :param owner: 持有 QQuickWidget 的页面控制器。\n    :param quickWidget: 当前页面承载 QML 的 QQuickWidget。\n    :return: None。\n    '
+    str: 'LPTidalCursorBridge'
+    str: '_tidal_cursor_bridge'
+    str: 'tidalCursorBridge'
+
+def clearTidalCursorBridge(owner)  line 96
+  names: getattr, clearHoverCursorStates
+    str: '\n    清理页面控制器持有的宿主光标状态。\n\n    :param owner: 持有宿主光标同步桥的页面控制器。\n    :return: None。\n    '
+    str: '_tidal_cursor_bridge'

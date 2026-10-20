@@ -1,0 +1,238 @@
+# module LPClientFramework.LPFeedback.LPFeedbackManager
+
+[module] names: __doc__, secrets, shutil, threading, time, uuid, dataclasses, replace, pathlib, Path, PyQt6.QtCore, QObject, pyqtSignal, LPClientFramework.LPFeedback.LPFeedbackApiClient, LPFeedbackApiClient, LPClientFramework.LPFeedback.LPFeedbackConfig, requireAesKey, requireFreshdeskCredentials, LPClientFramework.LPFeedback.LPFeedbackEventTrack, LPFeedbackErrorCode, LPFeedbackEventTrack, LPClientFramework.LPFeedback.LPFeedbackJsonStore, LPFeedbackJsonStore, LPClientFramework.LPFeedback.LPFirmwareLogCollector, LPFirmwareLogCollector, LPClientFramework.LPFeedback.LPFeedbackLogPackager, LPFeedbackLogPackager, LPFeedbackWorkDirectoryError, LPClientFramework.LPFeedback.LPFeedbackModels, LPFeedbackSubmission, LPClientFramework.LPFeedback.LPFeedbackS3Uploader, LPFeedbackS3Uploader, LPClientFramework.LPFeedback.LPFeedbackStsClient, LPFeedbackStsClient, LPClientFramework.LPUtility, logger, userDataDir, LPFeedbackSession, LPFeedbackManager
+  str: 'PC Feedback 单向提交流程编排器。'
+  str: 'replace'
+  str: 'Path'
+  str: 'QObject'
+  str: 'pyqtSignal'
+  str: 'LPFeedbackApiClient'
+  str: 'requireAesKey'
+  str: 'requireFreshdeskCredentials'
+  str: 'LPFeedbackErrorCode'
+  str: 'LPFeedbackEventTrack'
+  str: 'LPFeedbackJsonStore'
+  str: 'LPFirmwareLogCollector'
+  str: 'LPFeedbackLogPackager'
+  str: 'LPFeedbackWorkDirectoryError'
+  str: 'LPFeedbackSubmission'
+  str: 'LPFeedbackS3Uploader'
+  str: 'LPFeedbackStsClient'
+  str: 'logger'
+  str: 'userDataDir'
+  str: 'LPFeedbackSession'
+  str: 'LPFeedbackManager'
+
+def LPFeedbackSession()  line 26
+  names: __name__, __module__, __qualname__, __doc__, __init__
+    str: 'LPFeedbackSession'
+    str: '单次反馈提交的会话状态容器。\n\n    每次 submit() 都会创建独立实例，用于隔离超时标记、埋点计数器、超时计时器\n    与固件日志目录，使多次提交（含上一次超时解锁后仍在后台运行的那次）之间\n    互不影响。\n    '
+    str: 'LPFeedbackSession.__init__'
+
+  def LPFeedbackSession.__init__(self, submissionId, timeoutSeconds)  line 34
+    names: submissionId, timeoutSeconds, timeoutEmitted, threading, Event, finished, retryCount, count3001, count3002, s3UploadElapsedMs, time, startedAt, timeoutTimer, firmwareDirectory
+      str: '初始化一次提交的会话状态。\n\n        参数:\n            submissionId (str): 本地提交 ID。\n            timeoutSeconds (float): 前台等待超时秒数。\n        返回:\n            无。\n        '
+
+def LPFeedbackManager()  line 62
+  names: __name__, __module__, __qualname__, __doc__, FEEDBACK_TIMEOUT_SECONDS, MAX_ATTEMPTS, pyqtSignal, submissionCompleted, str, submissionFailed, uploadFailed, LPFeedbackErrorCode, CREATE_TICKET, UPLOAD_API, UPLOAD_S3, UPDATE_TICKET, PACK_LOGS, STAGE_ERROR_CODES, __init__, submit, _beginSession, _hasOtherActiveSession, _endSession, _runSubmission, _convertLongSubject, _createTicketWithRetry, _uploadWithRetry, _emitExceptionEvent, _collectS3Context, _emitCompleteEvent, _onSubmissionTimeout, _firmwareLogDirectoryFor, _collectFirmwareLogs, _clearFirmwareLogDirectory, _getDevices, _getApiClient, _safeCreateState, _safeUpdateState, _safeMarkFailed, _safeRemoveState, _removeCurrentThread, __classcell__
+    str: 'LPFeedbackManager'
+    str: '执行每次提交的工单创建、日志上传和工单回填，不保存或恢复上传队列。\n\n    每次 submit() 都作为一次独立过程执行：不检查是否已有提交在进行，\n    新提交持有自己的会话状态与后台线程，与未完成的旧提交互不影响。\n    '
+    str: 'creating_ticket'
+    str: 'requesting_sts'
+    str: 'uploading_s3'
+    str: 'updating_ticket'
+    str: 'packing_logs'
+    str: 'LPFeedbackManager.__init__'
+    str: 'LPFeedbackManager.submit'
+    str: 'LPFeedbackManager._beginSession'
+    str: 'LPFeedbackManager._hasOtherActiveSession'
+    str: 'LPFeedbackManager._endSession'
+    str: 'LPFeedbackManager._runSubmission'
+    str: 'LPFeedbackManager._convertLongSubject'
+    str: 'LPFeedbackManager._createTicketWithRetry'
+    str: 'LPFeedbackManager._uploadWithRetry'
+    str: 'LPFeedbackManager._emitExceptionEvent'
+    str: 'LPFeedbackManager._collectS3Context'
+    str: 'LPFeedbackManager._emitCompleteEvent'
+    str: 'LPFeedbackManager._onSubmissionTimeout'
+    str: 'LPFeedbackManager._firmwareLogDirectoryFor'
+    str: 'LPFeedbackManager._collectFirmwareLogs'
+    str: 'LPFeedbackManager._clearFirmwareLogDirectory'
+    str: 'LPFeedbackManager._getDevices'
+    str: 'LPFeedbackManager._getApiClient'
+    str: 'LPFeedbackManager._safeCreateState'
+    str: 'LPFeedbackManager._safeUpdateState'
+    str: 'LPFeedbackManager._safeMarkFailed'
+    str: 'LPFeedbackManager._safeRemoveState'
+    str: 'LPFeedbackManager._removeCurrentThread'
+
+  def LPFeedbackManager.__init__(self, parent, jsonStore, apiClient, stsClient, s3Uploader, packagerFactory, deviceListProvider, timeoutSeconds)  line 85
+    names: super, __init__, Path, userDataDir, LPFeedbackJsonStore, _jsonStore, _apiClient, LPFeedbackStsClient, _stsClient, LPFeedbackS3Uploader, _s3Uploader, _packagerFactory, _deviceListProvider, FEEDBACK_TIMEOUT_SECONDS, _timeoutSeconds, _threads, threading, RLock, _sessionLock, _sessions
+      str: '初始化任务编排器及可替换的基础设施依赖。\n\n        参数:\n            parent (QObject|None): Qt 父对象。\n            jsonStore (LPFeedbackJsonStore|None): 可注入的状态文件存储。\n            apiClient (LPFeedbackApiClient|None): 可注入的 Freshdesk 客户端。\n            stsClient (LPFeedbackStsClient|None): 可注入的 STS 客户端。\n            s3Uploader (LPF'
+      str: 'Feedback'
+      str: 'state'
+      str: 'LPFeedbackManager.__init__.<locals>.<lambda>'
+
+    def LPFeedbackManager.__init__.<lambda>(aesKey)  line 117
+      names: LPFeedbackLogPackager
+        str: 'work'
+
+  def LPFeedbackManager.submit(self, request)  line 129
+    names: uuid, uuid4, hex, _beginSession, _hasOtherActiveSession, logger, info, threading, Timer, _timeoutSeconds, _onSubmissionTimeout, timeoutTimer, daemon, start, Thread, _runSubmission, _threads, append
+      str: '在后台启动一次反馈发送任务，每次调用都是独立的提交过程。\n\n        不检查是否已有提交在进行：新提交创建自己的会话状态、超时计时器与后台\n        线程，与尚未完成的旧提交互不影响（旧提交若已超时解锁 UI，其后台结果\n        只写日志与埋点，不再向前台发信号）。\n\n        参数:\n            request (LPFeedbackRequest): 已完成 UI 校验的反馈请求。\n        返回:\n            str: 本次发送的本地提交 ID。\n        '
+      str: '[Feedback] submit while another submission is still active, run as a new independent submission.'
+      str: 'args'
+      str: 'LPFeedback-%s'
+      str: 'target'
+      str: 'args'
+      str: 'daemon'
+      str: 'name'
+
+  def LPFeedbackManager._beginSession(self, submissionId)  line 163
+    names: _sessionLock, _sessions, get, LPFeedbackSession, _timeoutSeconds
+      str: '登记并返回一次提交的独立会话状态（已登记时复用原会话）。\n\n        参数:\n            submissionId (str): 本地提交 ID。\n        返回:\n            LPFeedbackSession: 该提交的会话状态。\n        '
+
+  def LPFeedbackManager._hasOtherActiveSession(self, submissionId)  line 178
+    names: _sessionLock, any, _sessions
+      str: '判断当前是否还有其他提交正在进行。\n\n        参数:\n            submissionId (str): 本次提交 ID。\n        返回:\n            bool: 存在其他进行中的提交时为 True。\n        '
+      str: 'LPFeedbackManager._hasOtherActiveSession.<locals>.<genexpr>'
+
+    def LPFeedbackManager._hasOtherActiveSession.<genexpr>(.0)  line 187
+
+  def LPFeedbackManager._endSession(self, session)  line 189
+    names: _sessionLock, _sessions, pop, submissionId, finished, set, timeoutEmitted, timeoutTimer, cancel
+      str: '结束一次提交会话，并返回前台是否已因超时解锁过 UI。\n\n        在同一把会话锁内完成「解除登记 + 标记结束 + 读取超时标记」，与超时\n        计时线程的判定互斥，因此 ``submissionCompleted`` 对每次提交恰好发射一次。\n\n        参数:\n            session (LPFeedbackSession): 待结束的会话状态。\n        返回:\n            bool: 该会话是否已因超时向前台解锁过 UI。\n        '
+
+  def LPFeedbackManager._runSubmission(self, submissionId, request)  line 208
+    names: _beginSession, _convertLongSubject, format, secrets, randbelow, LPFeedbackSubmission, toRecord, _firmwareLogDirectoryFor, firmwareDirectory, _safeCreateState, _getApiClient, _createTicketWithRetry, ticketId, stage, _safeUpdateState, _collectFirmwareLogs, _packagerFactory, requireAesKey, createArchive, logDirectory, attachmentPaths, str, archivePath, _stsClient, requestCredential, Exception, count3001, _uploadWithRetry, _s3Uploader, updateTicket, confirmationId, downloadUrl, _safeRemoveState, logger, info, exception, _emitExceptionEvent, bool, _safeMarkFailed, timeoutEmitted, uploadFailed, emit, submissionFailed, cleanup, _clearFirmwareLogDirectory, _removeCurrentThread, _endSession, _emitCompleteEvent, submissionCompleted
+      str: '执行创建工单、上传 ZIP 与回填工单的完整后台流程。\n\n        参数:\n            submissionId (str): 本地提交 ID。\n            request (LPFeedbackRequest): 原始反馈请求。\n        返回:\n            None。\n        '
+      str: 'x'
+      str: 'creating_ticket'
+      str: 'created'
+      str: 'collecting_firmware_logs'
+      str: 'uploading'
+      str: 'uploadStage'
+      str: 'packing_logs'
+      str: 'requesting_sts'
+      str: 'uploading_s3'
+      str: 'updating_ticket'
+      str: 'completed'
+      str: '[Feedback] completed ticketId=%s'
+      str: 'Feedback submission failed.'
+      str: '[Feedback] stage=%s failed: %s'
+      str: 'archiveDeleted'
+      str: 'Feedback was submitted, but log upload failed.'
+      str: 'Failed to submit feedback. Please try again.'
+
+  def LPFeedbackManager._convertLongSubject(self, request)  line 302
+    names: subject, len, replace, email, description
+      str: 'subject 超过 200 字时对齐安卓 convertLongSubject 改写请求。\n\n        subject 改为用户邮箱，原 subject 拼接到 description 开头，\n        避免工单网关因主题过长拒绝创建。\n\n        参数:\n            request (LPFeedbackRequest): 原始反馈请求。\n        返回:\n            LPFeedbackRequest: 转换后的请求；未超长时返回原请求。\n        '
+      str: '%s\n\n%s'
+      str: 'subject'
+      str: 'description'
+
+  def LPFeedbackManager._createTicketWithRetry(self, apiClient, request, session, attempts)  line 321
+    names: range, createTicket, Exception, retryCount, logger, warning
+      str: '创建工单，失败时最多重试指定次数（对齐安卓 SubmitTicketRequest）。\n\n        参数:\n            apiClient (LPFeedbackApiClient): 工单客户端。\n            request (LPFeedbackRequest): 反馈请求。\n            session (LPFeedbackSession): 本次提交会话，用于累计重试次数。\n            attempts (int): 最大尝试次数。\n        返回:\n            str: 工单 ID。\n        异常:\n  '
+      str: '[Feedback] createTicket attempt=%s/%s failed: %s'
+
+  def LPFeedbackManager._uploadWithRetry(self, s3Uploader, archivePath, credential, session, attempts)  line 350
+    names: range, time, upload, Exception, retryCount, int, s3UploadElapsedMs, count3002, logger, warning
+      str: '上传 S3，失败时最多重试指定次数（对齐安卓 MAX_RETRY_TIMES）。\n\n        参数:\n            s3Uploader (LPFeedbackS3Uploader): S3 上传器。\n            archivePath (Path): ZIP 路径。\n            credential (LPFeedbackStsCredential): 临时凭证。\n            session (LPFeedbackSession): 本次提交会话，用于累计重试与上传耗时。\n            attempts (int): 最大尝试次数'
+      str: '[Feedback] S3 upload attempt=%s/%s failed: %s'
+
+  def LPFeedbackManager._emitExceptionEvent(self, stage, error, message, submission, session, credential, archivePath)  line 384
+    names: getattr, STAGE_ERROR_CODES, get, isinstance, LPFeedbackWorkDirectoryError, LPFeedbackErrorCode, LOG_DIRECTORY, LPFeedbackEventTrack, exception, LOG_DIRECTORY_SUB_ERROR_CODE, UPLOAD_S3, _collectS3Context
+      str: '按失败阶段上报 feedback_exception（文档码 3001/3002/3004/3005/3006/3007）。\n\n        3006 与 3007 同属 packing_logs 阶段，按异常类型区分：工作/暂存目录创建\n        失败为 3006（sub_error_code 固定 -1），其余打包或加密失败为 3007。\n        sub_error_code 取下层 HTTP 状态码，非 HTTP 失败统一为 0。\n\n        参数:\n            stage (str): 失败所在阶段。\n            error (BaseEx'
+      str: 'confirmationId'
+      str: 'packing_logs'
+      str: 'errorDescription'
+      str: 'confirmId'
+      str: 'subErrorCode'
+      str: 'error'
+      str: 'errorDescription'
+      str: 'confirmId'
+
+  def LPFeedbackManager._collectS3Context(self, session, credential, archivePath)  line 428
+    names: Path, stat, st_size, OSError, getattr, max, int
+      str: '构造 3002 的 S3 上下文参数，缺失字段留空。\n\n        参数:\n            session (LPFeedbackSession|None): 本次提交会话，用于取最近一次上传耗时。\n            credential (LPFeedbackStsCredential|None): 已取得的临时凭证。\n            archivePath (Path|str|None): 已生成的 ZIP 路径。\n        返回:\n            dict: s3_region / s3_bucket / s3_file_size / s3_upl'
+      str: 'bucketRegion'
+      str: 'bucketName'
+      str: 's3UploadElapsedMs'
+      str: 's3_region'
+      str: 's3_bucket'
+      str: 's3_file_size'
+      str: 's3_upload_time'
+
+  def LPFeedbackManager._emitCompleteEvent(self, session, submissionCompleted, submission)  line 451
+    names: startedAt, time, max, int, len, getattr, request, LPFeedbackEventTrack, complete, retryCount, count3001, count3002
+      str: '上报 feedback_complete（3003），每次提交会话仅 1 条。\n\n        result 取管道真实结果，不受前台超时解锁 UI 的影响；计数取本次会话累计值，\n        因此并发提交之间不会互相污染埋点。\n\n        参数:\n            session (LPFeedbackSession): 本次提交会话状态。\n            submissionCompleted (bool): 管道是否真正完成。\n            submission (LPFeedbackSubmission|None): 当前提交对象。\n        '
+      str: 'attachmentPaths'
+      str: 'confirmationId'
+      str: 'result'
+      str: 'confirmId'
+      str: 'retryCount'
+      str: 'count3001'
+      str: 'count3002'
+      str: 'durationMs'
+      str: 'attachmentCount'
+
+  def LPFeedbackManager._onSubmissionTimeout(self, submissionId)  line 479
+    names: _sessionLock, _sessions, get, finished, is_set, timeoutEmitted, timeoutSeconds, logger, warning, submissionCompleted, emit
+      str: '指定提交超过超时秒数时强制按成功提示解锁 UI。\n\n        对齐安卓 FEEDBACK_TIMEOUT：超时直接走成功提示，避免 UI 一直 busy；\n        被超时解锁的提交在后台继续执行，最终结果只记录日志与埋点，不再向前台发信号\n        （其会话标记使对应线程结束时不再重复发射信号）。\n\n        参数:\n            submissionId (str): 超时判定对应的提交 ID。\n        返回:\n            None。\n        '
+      str: '[Feedback] submission timeout exceeded %s seconds'
+
+  def LPFeedbackManager._firmwareLogDirectoryFor(self, session, request)  line 500
+    names: logDirectory, Path, submissionId
+      str: '计算本次提交专属的固件日志目录，避免并发提交互删或互相覆盖。\n\n        目录为 ``<logDir>/firmware/<submissionId>/``：ZIP 内仍以 ``firmware/`` 为根，\n        因此打包布局与服务端路由不变，而变化点只在本地落盘位置。\n\n        参数:\n            session (LPFeedbackSession): 本次提交会话。\n            request (LPFeedbackRequest): 当前反馈请求。\n        返回:\n            Path|None: 本次提交专属固件日'
+      str: 'firmware'
+
+  def LPFeedbackManager._collectFirmwareLogs(self, request, session)  line 516
+    names: firmwareDirectory, _clearFirmwareLogDirectory, time, bool, logDirectory, Path, is_dir, _getDevices, LPFeedbackEventTrack, logCollect, int, LPFirmwareLogCollector, collectAll, getattr, logger, info, Exception, warning
+      str: '在后台线程收集音箱固件日志到本次提交专属的 firmware/<submissionId>/ 子目录。\n\n        固件日志收集失败只记录日志，不阻断工单创建后的上传流程。\n\n        参数:\n            request (LPFeedbackRequest): 当前反馈请求。\n            session (LPFeedbackSession): 本次提交会话，提供专属固件日志目录。\n        返回:\n            None。\n        '
+      str: 'deviceTotal'
+      str: 'deviceSuccess'
+      str: 'collectDurationMs'
+      str: 'logDirOk'
+      str: 'lastDeviceTotal'
+      str: '[Feedback] firmware logs collected count=%s'
+      str: '[Feedback] collect firmware logs failed: %s'
+
+  def LPFeedbackManager._clearFirmwareLogDirectory(self, firmwareDirectory)  line 552
+    names: Path, exists, shutil, rmtree, str, Exception, logger, warning
+      str: '删除指定固件日志目录，避免旧日志进入本次 ZIP。\n\n        对齐安卓 SendDebugLogFragment.downloadLogs：每次反馈收集前清空\n        LogsFirmwareDir；提交流程结束后再清空一次，保证下次提交从空目录开始。\n\n        参数:\n            firmwareDirectory (str|Path|None): 本次提交专属固件日志目录。\n        返回:\n            None。\n        '
+      str: 'ignore_errors'
+      str: '[Feedback] clear firmware log directory failed error=%s'
+
+  def LPFeedbackManager._getDevices(self)  line 572
+    names: _deviceListProvider, list, Exception, logger, warning
+      str: '通过注入的设备列表提供者获取当前已发现音箱。\n\n        参数:\n            无。\n        返回:\n            list: LPDevice 列表；未注入提供者或获取失败时返回空列表。\n        '
+      str: '[Feedback] get device list failed: %s'
+
+  def LPFeedbackManager._getApiClient(self)  line 588
+    names: _apiClient, requireFreshdeskCredentials, LPFeedbackApiClient
+      str: '延迟创建 Freshdesk 客户端，避免未配置时影响弹窗加载。\n\n        参数:\n            无。\n        返回:\n            LPFeedbackApiClient: 可用于创建和回填工单的客户端。\n        '
+
+  def LPFeedbackManager._safeCreateState(self, record)  line 601
+    names: _jsonStore, create, Exception, logger, warning
+      str: '尝试创建状态文件，失败时仅记录应用日志。\n\n        参数:\n            record (dict): 状态记录。\n        返回:\n            None。\n        '
+      str: '[Feedback] create state file failed: %s'
+
+  def LPFeedbackManager._safeUpdateState(self, record, stage, **changes)  line 614
+    names: _jsonStore, update, Exception, logger, warning
+      str: '尝试更新状态文件，失败时不阻断已经创建的工单流程。\n\n        参数:\n            record (dict): 状态记录。\n            stage (str): 新阶段。\n            **changes: 额外状态字段。\n        返回:\n            None。\n        '
+      str: '[Feedback] update state file failed: %s'
+
+  def LPFeedbackManager._safeMarkFailed(self, record, stage, message)  line 629
+    names: _jsonStore, markFailed, Exception, logger, warning
+      str: '尽力写入失败诊断 JSON。\n\n        参数:\n            record (dict): 状态记录。\n            stage (str): 失败阶段。\n            message (str): 错误摘要。\n        返回:\n            None。\n        '
+      str: '[Feedback] save failed state file failed: %s'
+
+  def LPFeedbackManager._safeRemoveState(self, record)  line 644
+    names: _jsonStore, remove, Exception, logger, warning
+      str: '删除成功任务的临时状态文件。\n\n        参数:\n            record (dict): 状态记录。\n        返回:\n            None。\n        '
+      str: '[Feedback] remove state file failed: %s'
+
+  def LPFeedbackManager._removeCurrentThread(self)  line 657
+    names: threading, current_thread, _threads, remove, ValueError
+      str: '移除已结束线程引用，避免长期运行时列表增长。\n\n        参数:\n            无。\n        返回:\n            None。\n        '

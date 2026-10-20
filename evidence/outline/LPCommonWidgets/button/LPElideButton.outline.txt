@@ -1,0 +1,40 @@
+# module LPCommonWidgets.button.LPElideButton
+
+[module] names: __doc__, PyQt6.QtCore, QSize, Qt, QTimer, PyQt6.QtGui, QFontMetrics, PyQt6.QtWidgets, QPushButton, QSizePolicy, LPElideButton
+  str: '\n@Time ： 2025/9/4 14:29\n@Auth ： Chris\n@File ：LPElideButton.py\n@Desc:\n'
+  str: 'QSize'
+  str: 'Qt'
+  str: 'QTimer'
+  str: 'QFontMetrics'
+  str: 'QPushButton'
+  str: 'QSizePolicy'
+  str: 'LPElideButton'
+
+def LPElideButton()  line 13
+  names: __name__, __module__, __qualname__, __doc__, __init__, str, setText, minimumSizeHint, resizeEvent, _updateElidedText, __classcell__
+    str: 'LPElideButton'
+    str: '支持尾部省略号的按钮：宽度不足时按可用宽度省略文本并保留完整悬停提示。'
+    str: 'LPElideButton.__init__'
+    str: 'text'
+    str: 'LPElideButton.setText'
+    str: 'LPElideButton.minimumSizeHint'
+    str: 'LPElideButton.resizeEvent'
+    str: 'LPElideButton._updateElidedText'
+
+  def LPElideButton.__init__(self, parent)  line 16
+    names: super, __init__, full_text, maxLength, setSizePolicy, QSizePolicy, Policy, Expanding, Fixed, setStyleSheet
+      str: 'text-align: left;'
+
+  def LPElideButton.setText(self, text, maxLength)  line 23
+    names: full_text, maxLength, setToolTip, _updateElidedText
+
+  def LPElideButton.minimumSizeHint(self)  line 29
+    names: super, minimumSizeHint, QSize, height
+      str: '\n        重写最小尺寸提示：宽度固定为 0，避免完整文本把布局最小宽度撑大，\n        保证窗口回缩时控件可以收缩并重新触发省略。\n\n        返回:\n            QSize: 宽度为 0 的最小尺寸提示。\n        '
+
+  def LPElideButton.resizeEvent(self, event)  line 40
+    names: super, resizeEvent, _updateElidedText
+
+  def LPElideButton._updateElidedText(self)  line 44
+    names: QFontMetrics, font, max, width, elidedText, full_text, Qt, TextElideMode, ElideRight, super, setText
+      str: '\n        按控件当前实际宽度对完整文本做尾部省略并刷新显示。\n        宽度由布局按 Expending 策略分配，省略点跟随控件宽度变化，\n        配合 minimumSizeHint 宽度为 0 可随窗口收缩。\n        maxLength 属性保留仅为兼容旧调用方签名，不再参与省略计算。\n        '

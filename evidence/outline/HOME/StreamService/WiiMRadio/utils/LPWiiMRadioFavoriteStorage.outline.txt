@@ -1,0 +1,138 @@
+# module HOME.StreamService.WiiMRadio.utils.LPWiiMRadioFavoriteStorage
+
+[module] names: __doc__, json, threading, time, pathlib, Path, typing, Any, Dict, List, Optional, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, WIIMRADIO_LOCAL_USER_ID, LPClientFramework.LPUtility, logger, userDataDir, SOURCE, LOCAL_USER_ID, ITEM_TYPE, LEGACY_FAVORITES_PATH, RLock, _STORAGE_LOCK, str, _normalize_station_text_field, _normalize_station_country_code, extractStationLocationFields, normalizeFavoriteItem, _cache, _loadLegacyItems, _applySnapshot, ensureLoaded, saveFavorites, bool, applyFavoriteChange
+  str: '\nWiiMRadio 收藏统一缓存适配层。\n\n负责旧版 wiimradio-favorites.json 的一次性迁移、缓存缺失时从旧备份恢复，\n以及 WiiMRadio 收藏在统一 favoriteCache 中的读写。\n'
+  str: 'Path'
+  str: 'Any'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'LPFavoriteCacheManager'
+  str: 'WIIMRADIO_LOCAL_USER_ID'
+  str: 'logger'
+  str: 'userDataDir'
+  str: 'WiiMRadio'
+  str: 'station'
+  str: 'wiimradio-favorites.json'
+  str: 'value'
+  str: 'return'
+  str: '_normalize_station_text_field'
+  str: 'countryCode'
+  str: 'return'
+  str: '_normalize_station_country_code'
+  str: 'item'
+  str: 'return'
+  str: 'extractStationLocationFields'
+  str: 'normalizeFavoriteItem'
+  str: 'return'
+  str: '_cache'
+  str: '_loadLegacyItems'
+  str: 'items'
+  str: 'return'
+  str: '_applySnapshot'
+  str: 'ensureLoaded'
+  str: 'saveFavorites'
+  str: 'stationId'
+  str: 'isFavorite'
+  str: 'itemData'
+  str: 'return'
+  str: 'applyFavoriteChange'
+
+def _normalize_station_text_field(value)  line 32
+  names: str, strip
+    str: '\n    将 station 文本字段归一化为去首尾空白后的字符串。\n\n    :param value: 原始字段值。\n    :return: 归一化后的字符串。\n    '
+
+def _normalize_station_country_code(countryCode)  line 42
+  names: str, strip, upper
+    str: '\n    将 station 国家代码归一化为大写字符串。\n\n    :param countryCode: 原始国家代码。\n    :return: 归一化后的国家代码。\n    '
+
+def extractStationLocationFields(item)  line 52
+  names: isinstance, dict, _normalize_station_text_field, get, _normalize_station_country_code
+    str: '\n    从任意 station 字典中提取地点和流派相关字段。\n\n    :param item: 原始 station 字典。\n    :return: 包含 city、region、country、countryCode、genres 的字典。\n    '
+    str: 'city'
+    str: 'region'
+    str: 'country'
+    str: 'countryCode'
+    str: 'genres'
+    str: 'city'
+    str: 'City'
+    str: 'region'
+    str: 'Subcountry'
+    str: 'subcountry'
+    str: 'Region'
+    str: 'country'
+    str: 'Country'
+    str: 'countryCode'
+    str: 'CountryCode'
+    str: 'genres'
+    str: 'Genres'
+
+def normalizeFavoriteItem(item)  line 78
+  names: isinstance, dict, str, get, strip, extractStationLocationFields
+    str: '\n    归一化收藏电台条目字段。\n\n    :param item: 原始电台对象。\n    :return: 归一化条目；非法输入返回 None。\n    '
+    str: 'stationId'
+    str: 'stationID'
+    str: 'StationID'
+    str: 'name'
+    str: 'Name'
+    str: 'favicon'
+    str: 'Favicon'
+    str: 'faviconThumbPath'
+    str: 'FaviconThumbPath'
+    str: 'streamUrl'
+    str: 'StreamUrl'
+    str: 'stationId'
+    str: 'name'
+    str: 'favicon'
+    str: 'faviconThumbPath'
+    str: 'streamUrl'
+
+def _cache()  line 102
+  names: LPFavoriteCacheManager, instance
+    str: '\n    返回统一收藏缓存单例。\n\n    :return: LPFavoriteCacheManager 单例。\n    '
+
+def _loadLegacyItems()  line 111
+  names: Path, LEGACY_FAVORITES_PATH, exists, open, json, load, OSError, JSONDecodeError, logger, warning, isinstance, dict, get, list, set, normalizeFavoriteItem, add, append
+    str: '\n    读取旧版收藏文件并归一化，文件不存在或损坏时返回空列表。\n\n    :return: 归一化后的收藏电台列表。\n    '
+    str: 'r'
+    str: 'utf-8'
+    str: 'encoding'
+    str: '[WiiMRadio] load legacy favorites failed: %s'
+    str: 'favorites'
+    str: 'stationId'
+
+def _applySnapshot(items)  line 142
+  names: _cache, applyServerSnapshot, SOURCE, LOCAL_USER_ID, time
+    str: '\n    把完整收藏列表写入统一缓存并标记为已同步。\n\n    :param items: 归一化后的收藏电台列表。\n    :return: None。\n    '
+    str: '_applySnapshot.<locals>.<listcomp>'
+    str: 'stations'
+    str: 'items'
+    str: 'snapshotAt'
+
+  def _applySnapshot.<listcomp>(.0)  line 149
+    names: isinstance, dict
+
+  def _applySnapshot.<listcomp>(.0)  line 150
+      str: 'stationId'
+
+def ensureLoaded()  line 160
+  names: _STORAGE_LOCK, _cache, favoriteItems, SOURCE, LOCAL_USER_ID, ITEM_TYPE, status, markSynced, _applySnapshot, _loadLegacyItems
+    str: '\n    确保统一缓存存在 WiiMRadio 收藏条目。\n\n    WiiMRadio 是本地收藏，没有远端可等待，syncing/failed 状态必须由本地缓存立即收敛为 synced。\n    仅当缓存确实为空时才允许从旧版文件一次性迁移/恢复；缓存已有收藏时只收敛状态，\n    绝不能用不再更新的旧备份覆盖，否则每次启动都会抹掉上次会话新增的收藏。\n\n    :return: 当前收藏电台快照列表。\n    '
+    str: 'missing'
+    str: 'syncing'
+    str: 'failed'
+
+def saveFavorites(items)  line 181
+  names: _STORAGE_LOCK, _applySnapshot
+    str: '\n    把当前收藏全集写回统一缓存。\n\n    :param items: 收藏电台列表。\n    :return: None。\n    '
+
+def applyFavoriteChange(stationId, isFavorite, itemData)  line 192
+  names: str, strip, _STORAGE_LOCK, ensureLoaded, _cache, isinstance, dict, normalizeFavoriteItem, next, favoriteItems, SOURCE, LOCAL_USER_ID, ITEM_TYPE, applyLocalChange
+    str: '\n    应用一次 WiiMRadio 收藏增删；新增时优先写入完整电台对象。\n\n    :param stationId: 电台唯一标识。\n    :param isFavorite: True 加入收藏；False 移出收藏。\n    :param itemData: 加入收藏时的完整电台对象。\n    :return: 变更被接受返回 True；目标缺失或数据非法返回 False。\n    '
+    str: 'stationId'
+    str: 'applyFavoriteChange.<locals>.<genexpr>'
+    str: 'itemData'
+
+  def applyFavoriteChange.<genexpr>(.0)  line 215
+    names: get
+      str: 'stationId'

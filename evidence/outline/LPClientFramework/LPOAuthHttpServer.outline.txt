@@ -1,0 +1,61 @@
+# module LPClientFramework.LPOAuthHttpServer
+
+[module] names: cherrypy, LPGlobalUI, LPClientFramework, LPUtility, LPClientFramework.LPPlayList.LPPlayList, LPPlayListSource, LPClientFramework.LPUtility, logger, OAuthServerPage
+  str: 'LPUtility'
+  str: 'LPPlayListSource'
+  str: 'logger'
+  str: 'OAuthServerPage'
+
+def OAuthServerPage()  line 9
+  names: __name__, __module__, __qualname__, cherrypy, expose, index, qobuz, tidal, getExchangeCode, sendOAuthCodeGotNotify, build_callback_page
+    str: 'OAuthServerPage'
+    str: 'OAuthServerPage.index'
+    str: 'OAuthServerPage.qobuz'
+    str: 'OAuthServerPage.tidal'
+    str: 'OAuthServerPage.getExchangeCode'
+    str: 'OAuthServerPage.sendOAuthCodeGotNotify'
+    str: 'Authorization successful, starting WiiM Home...'
+    str: 'OAuthServerPage.build_callback_page'
+    str: 'Authorization successful, starting WiiM Home...'
+
+  def OAuthServerPage.index(self)  line 10
+      str: 'WiiM Home OAuth Service'
+
+  def OAuthServerPage.qobuz(self, *args, **params)  line 14
+    names: getExchangeCode, LPPlayListSource, Qobuz, value, sendOAuthCodeGotNotify, LPGlobalUI, currentDevice, build_callback_page
+      str: 'wiimhome'
+      str: 'exchange_code'
+      str: 'source'
+
+  def OAuthServerPage.tidal(self, *args, **params)  line 26
+    names: get, logger, info, build_callback_page, warning, getExchangeCode, LPPlayListSource, Tidal, value, sendOAuthCodeGotNotify, LPGlobalUI, currentDevice
+      str: '\n        处理 TIDAL OAuth redirect 回调。\n\n        :param args: URL 路径参数，只接受 /tidal/wiimhome。\n        :param params: query 参数。\n        :return: 授权完成页面或错误页面。\n        '
+      str: 'wiimhome'
+      str: 'error'
+      str: '[TIDAL] OAuth callback returned error=%s'
+      str: 'Authorization cancelled, return to WiiM Home.'
+      str: 'state'
+      str: 'login_state'
+      str: 'pc'
+      str: '[TIDAL] OAuth callback ignored because state mismatch: %s'
+      str: 'Authorization state mismatch, return to WiiM Home and try again.'
+      str: 'exchange_code'
+      str: 'source'
+
+  def OAuthServerPage.getExchangeCode(self, params)  line 54
+    names: get
+      str: 'code'
+
+  def OAuthServerPage.sendOAuthCodeGotNotify(self, device, notify)  line 57
+    names: LPUtility, postNotification
+      str: 'OAuthCodeChanged'
+      str: 'device'
+      str: 'notify'
+
+  def OAuthServerPage.build_callback_page(self, message)  line 60
+    names: logger, debug, cherrypy, response, headers
+      str: '\n        构建 OAuth 回调完成页并唤起 App。\n\n        :param message: 页面提示文案。\n        :return: HTML 字符串。\n        '
+      str: '[build_callback_page]'
+      str: '\n        <html>\n        <body>\n            <h2>%s</h2>\n            <p>If not redirected automatically, click <a id="link" href="wiim://active">here</a> or return to WiiM Home manually.</p>\n            <script>\n                setTimeout(() => {\n                    document.getElementById("link").cli'
+      str: 'text/html'
+      str: 'Content-Type'

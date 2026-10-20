@@ -1,0 +1,331 @@
+# module HOME.PresetQml.LPPresetQmlViewController
+
+[module] names: __doc__, copy, typing, Optional, PyQt6.QtCore, QCoreApplication, Qt, QTimer, QUrl, pyqtProperty, pyqtSignal, pyqtSlot, PyQt6.QtQml, QQmlContext, PyQt6.QtQuickWidgets, QQuickWidget, PyQt6.QtWidgets, QVBoxLayout, QWidget, bs4, BeautifulSoup, LPGlobalUI, LPClientFramework, LPStreamServiceManager, LPUtility, LPClientFramework.LPDeviceStreamServiceManager, DEVICE_ACCOUNT_UNKNOWN, HOME.PresetQml.LPPresetQmlStore, LPPresetListModel, LPPresetQmlStore, presetSourceCanPlay, presetSourceNeedsDeviceAccount, LPClientFramework.LPConfig, LPUIPath, LPClientFramework.LPConfig.LPFontConfig, StackWidget_Title, LPClientFramework.LPUtility, logger, Sub_Text, Exception, STATE_LOADING, STATE_NOT_SUPPORT, STATE_ERROR, STATE_READY, LPPresetQmlViewController
+  str: '\nPreset（预设快捷键）QML 版页面控制器。\n\n职责：\n- 作为 QWidget 宿主，内嵌 QQuickWidget 加载 LPPresetQmlPage.qml。\n- 把自身作为 QML contextProperty("controller") 暴露，提供页面状态、数据模型与交互槽。\n- viewWillAppear 时向设备请求 GetKeyMapping，解析后刷新模型。\n- 处理卡片点击（MCUKeyShortClick）与右键删除（弹通用确认框 + SetKeyMapping）。\n\n业务逻辑迁移自 HOME/LPPresetViewController.py，但与之完全解耦'
+  str: 'Optional'
+  str: 'QCoreApplication'
+  str: 'Qt'
+  str: 'QTimer'
+  str: 'QUrl'
+  str: 'pyqtProperty'
+  str: 'pyqtSignal'
+  str: 'pyqtSlot'
+  str: 'QQmlContext'
+  str: 'QQuickWidget'
+  str: 'QVBoxLayout'
+  str: 'QWidget'
+  str: 'BeautifulSoup'
+  str: 'LPStreamServiceManager'
+  str: 'LPUtility'
+  str: 'DEVICE_ACCOUNT_UNKNOWN'
+  str: 'LPPresetListModel'
+  str: 'LPPresetQmlStore'
+  str: 'presetSourceCanPlay'
+  str: 'presetSourceNeedsDeviceAccount'
+  str: 'LPUIPath'
+  str: 'StackWidget_Title'
+  str: 'logger'
+  str: 'Sub_Text'
+  str: 'loading'
+  str: 'notSupport'
+  str: 'error'
+  str: 'ready'
+  str: 'LPPresetQmlViewController'
+
+def LPPresetQmlViewController()  line 48
+  names: __name__, __module__, __qualname__, __doc__, pyqtSignal, pageStateChanged, playingInfoChanged, Optional, QWidget, __init__, _setupQmlPage, QQmlContext, _applyThemeContext, pyqtProperty, str, pageState, int, titleFontSize, playingPresetIndex, playState, pyqtSlot, onPresetClicked, dict, _showUnplayableToast, onPresetDeleteRequested, viewWillAppear, viewWillDisappear, deviceInfoUpdate, _syncCurrentDeviceState, _onAccountChanged, _refreshPlayableFlags, list, _fetchDeviceAccountsForItems, _refreshPlayingInfo, _fetchCurrentQueueName, _togglePlayback, _fetchPresetList, _removePresetItem, _setPageState, _showDeleteConfirm, __classcell__
+    str: 'LPPresetQmlViewController'
+    str: '\n    Preset QML 版页面控制器。\n\n    通过 QQuickWidget 承载 QML 视图，自身只负责动作分发与数据装配，\n    视觉与交互完全交给 LPPresetQmlPage.qml / LPPresetQmlCard.qml。\n    '
+    str: 'parent'
+    str: 'LPPresetQmlViewController.__init__'
+    str: 'return'
+    str: 'LPPresetQmlViewController._setupQmlPage'
+    str: 'ctx'
+    str: 'return'
+    str: 'LPPresetQmlViewController._applyThemeContext'
+    str: 'notify'
+    str: 'LPPresetQmlViewController.pageState'
+    str: 'constant'
+    str: 'LPPresetQmlViewController.titleFontSize'
+    str: 'LPPresetQmlViewController.playingPresetIndex'
+    str: 'LPPresetQmlViewController.playState'
+    str: 'index'
+    str: 'return'
+    str: 'LPPresetQmlViewController.onPresetClicked'
+    str: 'item'
+    str: 'return'
+    str: 'LPPresetQmlViewController._showUnplayableToast'
+    str: 'index'
+    str: 'displayName'
+    str: 'return'
+    str: 'LPPresetQmlViewController.onPresetDeleteRequested'
+    str: 'LPPresetQmlViewController.viewWillAppear'
+    str: 'LPPresetQmlViewController.viewWillDisappear'
+    str: 'LPPresetQmlViewController.deviceInfoUpdate'
+    str: 'LPPresetQmlViewController._syncCurrentDeviceState'
+    str: 'LPPresetQmlViewController._onAccountChanged'
+    str: 'LPPresetQmlViewController._refreshPlayableFlags'
+    str: 'items'
+    str: 'return'
+    str: 'LPPresetQmlViewController._fetchDeviceAccountsForItems'
+    str: 'LPPresetQmlViewController._refreshPlayingInfo'
+    str: 'LPPresetQmlViewController._fetchCurrentQueueName'
+    str: 'target_state'
+    str: 'command'
+    str: 'return'
+    str: 'LPPresetQmlViewController._togglePlayback'
+    str: 'LPPresetQmlViewController._fetchPresetList'
+    str: 'LPPresetQmlViewController._removePresetItem'
+    str: 'state'
+    str: 'return'
+    str: 'LPPresetQmlViewController._setPageState'
+    str: 'LPPresetQmlViewController._showDeleteConfirm'
+
+  def LPPresetQmlViewController.__init__(self, parent)  line 60
+    names: super, __init__, STATE_LOADING, _pageState, _playingPresetIndex, _playState, _currentQueueName, _trackedDeviceUuid, _observerRegistered, _accountObserverRegistered, set, _deviceAccountFetchInFlight, _xmlObj, deleteOnPrune, _fetchGeneration, LPPresetListModel, presetModel, LPPresetQmlStore, _store, quickWidget, QVBoxLayout, setContentsMargins, _setupQmlPage
+      str: '\n        初始化控制器：建模型、建仓库、建 QML 宿主。\n\n        :param parent: 父级 QWidget。\n        '
+
+  def LPPresetQmlViewController._setupQmlPage(self)  line 96
+    names: quickWidget, QQuickWidget, setResizeMode, ResizeMode, SizeRootObjectToView, setAttribute, Qt, WidgetAttribute, WA_TranslucentBackground, setClearColor, LPGlobalUI, THEME_BACKGROUND_COLOR, setStyleSheet, name, rootContext, setContextProperty, presetModel, _applyThemeContext, setSource, QUrl, LPUIPath, PresetQmlPageQML, status, Status, Ready, logger, error, errors, toString, debug, layout, addWidget
+      str: '\n        创建 QQuickWidget 并注入上下文属性，加载 LPPresetQmlPage.qml。\n\n        :return: None。\n        '
+      str: 'background-color: %s;'
+      str: 'controller'
+      str: 'presetModel'
+      str: '[PresetQml] QML load failed status=%s'
+      str: '[PresetQml] qml error: %s'
+      str: '[PresetQml] QML loaded successfully'
+
+  def LPPresetQmlViewController._applyThemeContext(self, ctx)  line 126
+    names: setContextProperty, LPGlobalUI, THEME_BACKGROUND_COLOR_UI, name, THEME_ITEM_BACK_COLOR, THEME_TABLE_HOVER_BACK_COLOR, THEME_DEFAULT_COLOR, THEME_DISABLE_COLOR, THEME_HIGH_HIGH_COLOR
+      str: '\n        向 QML 注入主题色与字体 token。\n\n        :param ctx: 待写入的 QML 上下文。\n        :return: None。\n        '
+      str: 'presetQmlBgColor'
+      str: 'presetQmlItemBackColor'
+      str: 'presetQmlHoverBackColor'
+      str: 'presetQmlDefaultColor'
+      str: 'presetQmlDisableColor'
+      str: 'presetQmlHighlightColor'
+
+  def LPPresetQmlViewController.pageState(self)  line 144
+    names: _pageState
+      str: '\n        当前页面状态：loading / notSupport / error / ready。\n\n        :return: 状态字符串。\n        '
+
+  def LPPresetQmlViewController.titleFontSize(self)  line 153
+    names: int, StackWidget_Title
+      str: '\n        标题字号（pt）。\n\n        :return: 标题字号整数。\n        '
+
+  def LPPresetQmlViewController.playingPresetIndex(self)  line 162
+    names: _playingPresetIndex
+      str: '\n        返回当前命中播放态的 preset 序号，-1 表示无命中。\n\n        :return: preset 序号（1 起）或 -1。\n        '
+
+  def LPPresetQmlViewController.playState(self)  line 171
+    names: _playState
+      str: '\n        返回当前命中 preset 的播放状态字符串。\n\n        :return: PLAYING / TRANSITIONING / PAUSED_PLAYBACK 或空字符串。\n        '
+
+  def LPPresetQmlViewController.onPresetClicked(self, index)  line 184
+    names: presetModel, itemByIndex, get, _showUnplayableToast, LPGlobalUI, currentDevice, logger, debug, _playingPresetIndex, _playState, _togglePlayback, commonHttpGet, Exception, error, playingInfoChanged, emit
+      str: '\n        卡片左键点击：当前项按播放态切换暂停/继续，其他项发送 MCUKeyShortClick。\n\n        不可播放的 preset（源账号未登录等）先拦截并弹提示，不发送设备命令，\n        规则与 iOS preset 页一致；灰显卡片仍可通过右键删除。\n\n        :param index: 预设序号（1 起）。\n        :return: None。\n        '
+      str: 'isEmpty'
+      str: 'canPlay'
+      str: '[PresetQml] click ignored: no current device'
+      str: '[PresetQml] click preset index=%d'
+      str: 'PLAYING'
+      str: 'TRANSITIONING'
+      str: '[PresetQml] current preset playing -> Pause index=%d'
+      str: 'PAUSED_PLAYBACK'
+      str: 'Pause'
+      str: '[PresetQml] current preset paused -> Play index=%d'
+      str: 'PLAYING'
+      str: 'Play'
+      str: 'MCUKeyShortClick:%d'
+      str: '[PresetQml] MCUKeyShortClick failed index=%s err=%s'
+      str: 'TRANSITIONING'
+
+  def LPPresetQmlViewController._showUnplayableToast(self, item)  line 224
+    names: str, get, LPStreamServiceManager, supportContents, QCoreApplication, translate, format, logger, debug, getattr, LPGlobalUI, showToast
+      str: '\n        弹“该 preset 源不可直接播放”的提示，拦截点击。\n\n        未登录源提示账号已在设备上退出登录；Pandora 旧 preset 提示已失效。\n\n        :param item: 单条 preset 字典。\n        :return: None。\n        '
+      str: 'source'
+      str: 'Pandora'
+      str: 'Pandora2'
+      str: 'title'
+      str: 'Preset'
+      str: 'Your {0} preset has expired after the {0} upgrade. Please set it again.'
+      str: 'Your {0} account has been logged out on your device.'
+      str: '[PresetQml] click blocked: source=%r canPlay=False'
+      str: 'toast'
+      str: 'mainWindow'
+
+  def LPPresetQmlViewController.onPresetDeleteRequested(self, index, displayName)  line 251
+    names: _showDeleteConfirm
+      str: '\n        卡片右键删除：弹通用确认框，确认后清空对应 Key 并 SetKeyMapping 回写设备。\n\n        :param index: 预设序号（1 起）。\n        :param displayName: 展示名称（确认框文案使用）。\n        :return: None。\n        '
+
+  def LPPresetQmlViewController.viewWillAppear(self)  line 266
+    names: _fetchPresetList, _syncCurrentDeviceState
+      str: '\n        页面即将显示：拉取设备预设列表并同步播放态。\n\n        :return: None。\n        '
+
+  def LPPresetQmlViewController.viewWillDisappear(self)  line 275
+    names: _fetchGeneration, _xmlObj, _observerRegistered, LPUtility, deRegisterDeviceInfoChanged, _accountObserverRegistered, removeNotificationObserver, _onAccountChanged
+      str: '\n        页面即将隐藏：注销设备通知监听，使在途回调失效并释放 XML 树。\n\n        页面实例被 WiiMHome 缓存复用，此处不做 QML 引擎销毁（避免下次显示时重渲染、\n        丢失滚动位置），仅做轻量资源回收：递增拉取代际使过期回调不再回写模型，\n        并清空 XML 解析树，下次显示时 viewWillAppear 会重新拉取。\n\n        :return: None。\n        '
+      str: 'accountChanged'
+
+  def LPPresetQmlViewController.deviceInfoUpdate(self, device, infoType, detail)  line 298
+    names: get, _deviceAccountFetchInFlight, discard, QTimer, singleShot, _refreshPlayableFlags, getattr, LPGlobalUI, str, strip, _currentQueueName, logger, debug, _refreshPlayingInfo
+      str: '\n        设备媒体信息通知回调：缓存 queueName 并刷新播放态。\n\n        :param device: 触发通知的设备对象。\n        :param infoType: 通知类型字符串。\n        :param detail: 通知详情字典。\n        :return: None。\n        '
+      str: 'accountRegister'
+      str: 'source'
+      str: 'accountChange'
+      str: 'media'
+      str: 'currentDevice'
+      str: 'uuid'
+      str: 'queueName'
+      str: '[PresetQml] cached queueName=%r'
+
+  def LPPresetQmlViewController._syncCurrentDeviceState(self)  line 331
+    names: getattr, LPGlobalUI, str, _trackedDeviceUuid, _currentQueueName, _playingPresetIndex, _playState, playingInfoChanged, emit, _observerRegistered, LPUtility, registerDeviceInfoChanged, _accountObserverRegistered, addNotificationObserver, _onAccountChanged, _fetchCurrentQueueName, _refreshPlayingInfo
+      str: '\n        注册设备通知观察者并按当前设备初始化播放态缓存。\n\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'uuid'
+      str: 'accountChanged'
+
+  def LPPresetQmlViewController._onAccountChanged(self, params)  line 355
+    names: get, getattr, LPGlobalUI, str, QTimer, singleShot, _refreshPlayableFlags
+      str: '\n        accountChanged 通知回调：账号变化后刷新 preset 可播放状态。\n\n        :param params: 通知参数（含 device 与 notify）。\n        :return: None。\n        '
+      str: 'device'
+      str: 'currentDevice'
+      str: 'uuid'
+
+  def LPPresetQmlViewController._refreshPlayableFlags(self)  line 371
+    names: getattr, LPGlobalUI, presetModel, items, get, presetSourceCanPlay, str, updateCanPlay, int
+      str: '\n        按当前设备账号缓存重算所有非空 preset 的 canPlay 并回写模型。\n\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'isEmpty'
+      str: 'source'
+      str: 'index'
+
+  def LPPresetQmlViewController._fetchDeviceAccountsForItems(self, items)  line 386
+    names: getattr, LPGlobalUI, get, str, presetSourceNeedsDeviceAccount, _deviceAccountFetchInFlight, deviceAccountForSource, DEVICE_ACCOUNT_UNKNOWN, add, updateUserInfoForSource
+      str: '\n        对设备账号状态未知的 preset 源逐个 GetUserInfo 补齐，完成后刷新灰显。\n\n        PC 只负责向设备下发播放命令，未实现该源不代表设备不能播放，\n        因此账号状态以设备侧上报为准，未知时乐观可播，避免误灰。\n\n        :param items: preset 条目字典列表。\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'isEmpty'
+      str: 'source'
+
+  def LPPresetQmlViewController._refreshPlayingInfo(self)  line 414
+    names: getattr, LPGlobalUI, str, _currentQueueName, presetModel, items, get, partition, int, _playingPresetIndex, _playState, logger, debug, playingInfoChanged, emit
+      str: '\n        根据当前队列名缓存与设备媒体信息重算命中 preset 并更新属性。\n\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'mediaInfo'
+      str: 'playState'
+      str: 'STOPPED'
+      str: 'NO_MEDIA_PRESENT'
+      str: 'trackSource'
+      str: 'mediaType'
+      str: 'isEmpty'
+      str: 'source'
+      str: 'name'
+      str: '_#~'
+      str: 'index'
+      str: '[PresetQml] playing info -> index=%d state=%r'
+
+  def LPPresetQmlViewController._fetchCurrentQueueName(self)  line 463
+    names: getattr, LPGlobalUI, asyncUpnpPost
+      str: '\n        通过 BrowseQueue(CurrentQueue) 拉取当前队列名作为初始匹配缓存。\n\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'LPPresetQmlViewController._fetchCurrentQueueName.<locals>._onQueue'
+      str: 'BrowseQueue'
+      str: 'QueueName'
+      str: 'CurrentQueue'
+
+    def LPPresetQmlViewController._fetchCurrentQueueName._onQueue(response)  line 473
+      names: get, getattr, str, strip, _currentQueueName, logger, debug, QTimer, singleShot, _refreshPlayingInfo
+        str: 'musicList'
+        str: 'header'
+        str: 'headTitle'
+        str: '[PresetQml] BrowseQueue listName=%r'
+
+  def LPPresetQmlViewController._togglePlayback(self, device, target_state, command)  line 484
+    names: getattr, callable, playState, asyncUpnpPost, _playState, playingInfoChanged, emit
+      str: '\n        下发设备暂停/继续命令并乐观更新本地播放态。\n\n        :param device: 当前设备对象。\n        :param target_state: 目标 playState 字符串。\n        :param command: 设备命令名（Pause 或 Play）。\n        :return: None。\n        '
+      str: 'updateMediaInfo'
+      str: 'playState'
+      str: 'mediaInfo'
+
+  def LPPresetQmlViewController._fetchPresetList(self)  line 508
+    names: LPGlobalUI, currentDevice, getattr, logger, debug, _setPageState, STATE_NOT_SUPPORT, STATE_LOADING, _fetchGeneration, asyncUpnpPost
+      str: '\n        向当前设备请求 GetKeyMapping，并按状态机刷新模型。\n\n        :return: None。\n        '
+      str: 'presetNum'
+      str: '[PresetQml] viewWillAppear fetch: device=%s presetNum=%s'
+      str: 'uuid'
+      str: '[PresetQml] -> notSupport (no device or presetNum==0)'
+      str: 'LPPresetQmlViewController._fetchPresetList.<locals>._parseXML'
+      str: 'GetKeyMapping'
+
+    def LPPresetQmlViewController._fetchPresetList._parseXML(response)  line 526
+      names: _fetchGeneration, logger, debug, get, _setPageState, STATE_ERROR, _store, parseXmlAndBuildItems, presetNum, xmlObj, _xmlObj, len, presetModel, setItems, _fetchDeviceAccountsForItems, QTimer, singleShot, _refreshPlayingInfo, getattr, ensureCoverForItem, STATE_READY
+        str: '[PresetQml] stale GetKeyMapping response ignored'
+        str: 'error'
+        str: '[PresetQml] GetKeyMapping error -> state=error'
+        str: 'xml'
+        str: '[PresetQml] GetKeyMapping parsed items=%d (presetNum=%d)'
+        str: 'mediaInfo'
+        str: 'queueManager'
+        str: 'playList'
+        str: 'header'
+        str: 'headTitle'
+        str: '[PresetQml] current media snapshot: playState=%r trackSource=%r mediaType=%r trackId=%r itemId=%r itemName=%r queueListName=%r'
+        str: 'playState'
+        str: 'trackSource'
+        str: 'mediaType'
+        str: 'trackId'
+        str: 'itemId'
+        str: 'itemName'
+        str: 'isEmpty'
+
+  def LPPresetQmlViewController._removePresetItem(self, index)  line 570
+    names: _xmlObj, logger, warning, presetModel, itemByIndex, items, index, dataChanged, emit, LPPresetListModel, DisplayNameRole, SourceIconRole, CoverUrlRole, IsEmptyRole, _refreshPlayingInfo, find, str, clear, BeautifulSoup, contents, append, copy, LPGlobalUI, currentDevice, asyncUpnpPost
+      str: '\n        清空指定 Key 的预设内容并回写设备，成功后本地刷新模型。\n\n        :param index: 预设序号（1 起）。\n        :return: None。\n        '
+      str: '[PresetQml] delete skipped: no xmlObj'
+      str: 'LPPresetQmlViewController._removePresetItem.<locals>.finishedMethod'
+      str: 'name'
+      str: 'source'
+      str: 'picUrl'
+      str: 'displayName'
+      str: 'sourceIcon'
+      str: 'coverUrl'
+      str: 'isEmpty'
+      str: 'Key'
+      str: '<RoutineId>Empty</RoutineId>'
+      str: '<container>%s</container>'
+      str: 'xml'
+      str: 'container'
+      str: 'SetKeyMapping'
+      str: 'QueueContext'
+
+    def LPPresetQmlViewController._removePresetItem.finishedMethod(response)  line 581
+      names: get, logger, debug
+        str: 'status_code'
+        str: '[PresetQml] delete index:%s success'
+        str: '[PresetQml] delete index:%s failed'
+
+  def LPPresetQmlViewController._setPageState(self, state)  line 631
+    names: _pageState, pageStateChanged, emit
+      str: '\n        切换页面状态并发信号。\n\n        :param state: 目标状态字符串。\n        :return: None。\n        '
+
+  def LPPresetQmlViewController._showDeleteConfirm(self, index, displayName)  line 643
+    names: LPCommonWidgets.dialog.LPConfirmDialogHost, LPConfirmDialogHost, instance, showDialog, QCoreApplication, translate
+      str: '\n        弹出通用删除确认弹窗，确认后异步清空对应 Key。\n\n        :param index: 预设序号（1 起）。\n        :param displayName: 待删除预设的展示名称。\n        :return: None。\n        '
+      str: 'LPConfirmDialogHost'
+      str: 'Preset'
+      str: 'Delete preset?'
+      str: 'Are you sure you want to delete “%s”? This action can’t be undone.'
+      str: 'Delete'
+      str: 'Cancel'
+      str: 'LPPresetQmlViewController._showDeleteConfirm.<locals>.<lambda>'
+      str: 'title'
+      str: 'message'
+      str: 'confirmText'
+      str: 'cancelText'
+      str: 'showCancel'
+      str: 'onConfirmed'
+
+    def LPPresetQmlViewController._showDeleteConfirm.<lambda>()  line 663
+      names: _removePresetItem

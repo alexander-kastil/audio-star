@@ -1,0 +1,101 @@
+# module LPClientFramework.LPFeedback.LPSigV4Signer
+
+[module] names: __doc__, datetime, hashlib, hmac, typing, Dict, Optional, urllib.parse, urlparse, parse_qsl, quote, LPSigV4Signer
+  str: '\nAWS Signature Version 4 签名工具。\n\n用途：feedback 日志上传到 S3 时，用 STS 下发的临时凭证\n（AccessKeyId / SecretAccessKey / SessionToken）对一次 HTTP 请求做 SigV4 签名，\n返回可直接附加到请求上的头集合。\n\n设计要点：\n- 仅依赖 Python 标准库（hashlib / hmac / datetime / urllib），不引入 boto3，\n  避免给桌面打包增加约 60MB+ 体积。\n- 纯函数式、无副作用，便于单元测试。\n- 参考实现：AWS Signature Version 4 '
+  str: 'Dict'
+  str: 'Optional'
+  str: 'urlparse'
+  str: 'parse_qsl'
+  str: 'quote'
+  str: 'LPSigV4Signer'
+
+def LPSigV4Signer()  line 23
+  names: __name__, __module__, __qualname__, __doc__, staticmethod, bytes, str, _sha256Hex, _hmacSha256, _canonicalUri, _canonicalQuery, Optional, Dict, sign
+    str: 'LPSigV4Signer'
+    str: 'AWS SigV4 签名器，提供静态签名方法。'
+    str: 'data'
+    str: 'return'
+    str: 'LPSigV4Signer._sha256Hex'
+    str: 'key'
+    str: 'msg'
+    str: 'return'
+    str: 'LPSigV4Signer._hmacSha256'
+    str: 'path'
+    str: 'return'
+    str: 'LPSigV4Signer._canonicalUri'
+    str: 'query'
+    str: 'return'
+    str: 'LPSigV4Signer._canonicalQuery'
+    str: 'sessionToken'
+    str: 'extraHeaders'
+    str: 'method'
+    str: 'url'
+    str: 'body'
+    str: 'accessKey'
+    str: 'secretKey'
+    str: 'region'
+    str: 'service'
+    str: 'sessionToken'
+    str: 'extraHeaders'
+    str: 'return'
+    str: 'LPSigV4Signer.sign'
+
+  def LPSigV4Signer._sha256Hex(data)  line 26
+    names: hashlib, sha256, hexdigest
+      str: '\n        计算 bytes 的 SHA-256 十六进制摘要。\n\n        参数:\n            data (bytes): 原始字节，可为 None / 空。\n        返回:\n            str: 小写十六进制摘要。\n        '
+
+  def LPSigV4Signer._hmacSha256(key, msg)  line 38
+    names: hmac, new, encode, hashlib, sha256, digest
+      str: '\n        HMAC-SHA256。\n\n        参数:\n            key (bytes): HMAC 密钥字节。\n            msg (str): 待签名消息（UTF-8 编码）。\n        返回:\n            bytes: HMAC 摘要字节。\n        '
+      str: 'utf-8'
+
+  def LPSigV4Signer._canonicalUri(path)  line 51
+    names: startswith, quote
+      str: "\n        规范化 URI：对路径做 URI 编码，保留 '/'。\n\n        参数:\n            path (str): URL 路径部分。\n        返回:\n            str: 规范化后的路径，至少为 '/'。\n        "
+      str: '/'
+      str: 'safe'
+
+  def LPSigV4Signer._canonicalQuery(query)  line 67
+    names: sorted, parse_qsl, join
+      str: "\n        规范化查询串：按 key 字典序排列，key/value 均 URI 编码。\n\n        参数:\n            query (str): URL 查询串（不含 '?'）。\n        返回:\n            str: 规范化后的 'k=v&k=v' 串。\n        "
+      str: 'keep_blank_values'
+      str: 'LPSigV4Signer._canonicalQuery.<locals>.<lambda>'
+      str: 'key'
+      str: 'LPSigV4Signer._canonicalQuery.<locals>.<genexpr>'
+      str: '&'
+
+    def LPSigV4Signer._canonicalQuery.<lambda>(kv)  line 79
+
+    def LPSigV4Signer._canonicalQuery.<genexpr>(.0)  line 80
+      names: quote
+        str: '-_.~'
+        str: 'safe'
+
+    def LPSigV4Signer._canonicalQuery.<genexpr>(.0)  line 81
+        str: '%s=%s'
+
+  def LPSigV4Signer.sign(method, url, body, accessKey, secretKey, region, service, sessionToken, extraHeaders)  line 83
+    names: urlparse, netloc, datetime, now, timezone, utc, strftime, items, strip, lower, LPSigV4Signer, _sha256Hex, join, sorted, upper, _canonicalUri, path, _canonicalQuery, query, encode, _hmacSha256, hmac, new, hashlib, sha256, hexdigest
+      str: "\n        对一次 HTTP 请求做 SigV4 签名，返回需要附加到请求上的头。\n\n        参数:\n            method (str): HTTP 方法（GET/PUT/POST 等）。\n            url (str): 完整 URL（含 scheme/host/path/query）。\n            body (bytes): 请求体字节（GET 传 b''）。\n            accessKey (str): 临时 AccessKeyId。\n            secretKey (str): 临时 SecretAccessK"
+      str: '%Y%m%dT%H%M%SZ'
+      str: '%Y%m%d'
+      str: 'host'
+      str: 'x-amz-date'
+      str: 'x-amz-security-token'
+      str: 'x-amz-content-sha256'
+      str: 'LPSigV4Signer.sign.<locals>.<genexpr>'
+      str: ';'
+      str: '%s/%s/%s/aws4_request'
+      str: 'utf-8'
+      str: 'AWS4-HMAC-SHA256'
+      str: 'AWS4'
+      str: 'aws4_request'
+      str: 'AWS4-HMAC-SHA256 Credential=%s/%s, SignedHeaders=%s, Signature=%s'
+      str: 'x-amz-date'
+      str: 'x-amz-content-sha256'
+      str: 'Authorization'
+
+    def LPSigV4Signer.sign.<genexpr>(.0)  line 131
+        str: '%s:%s\n'
+
+    def LPSigV4Signer.sign.<genexpr>(.0)  line 132

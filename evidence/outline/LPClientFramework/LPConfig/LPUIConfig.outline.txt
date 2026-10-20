@@ -1,0 +1,42 @@
+# module LPClientFramework.LPConfig.LPUIConfig
+
+[module] names: platform, yaml, LPClientFramework, LPUtility, UIConfig, ConfigNode
+  str: 'LPUtility'
+  str: 'UIConfig'
+  str: 'ConfigNode'
+
+def UIConfig()  line 7
+  names: __name__, __module__, __qualname__, __init__, __getattr__
+    str: 'UIConfig'
+    str: 'UIConfig.__init__'
+    str: 'UIConfig.__getattr__'
+
+  def UIConfig.__init__(self)  line 8
+    names: platform, system, LPUtility, appLocalDataPath, open, ConfigNode, yaml, safe_load, data, FileNotFoundError
+      str: 'Darwin'
+      str: 'mac-uiconfig.yml'
+      str: 'Windows'
+      str: 'win-uiconfig.yml'
+      str: 'r'
+      str: 'utf-8'
+      str: 'encoding'
+
+  def UIConfig.__getattr__(self, key)  line 23
+    names: getattr, data
+      str: '支持 config.xx 访问'
+
+def ConfigNode()  line 28
+  names: __name__, __module__, __qualname__, __init__, __getattr__
+    str: 'ConfigNode'
+    str: 'ConfigNode.__init__'
+    str: 'ConfigNode.__getattr__'
+
+  def ConfigNode.__init__(self, data)  line 29
+    names: object, __setattr__
+      str: '_data'
+
+  def ConfigNode.__getattr__(self, key)  line 34
+    names: _data, isinstance, dict, ConfigNode, AttributeError, __class__, __name__
+      str: '支持 config.a.xx 访问'
+      str: "'"
+      str: "' object has no attribute '"

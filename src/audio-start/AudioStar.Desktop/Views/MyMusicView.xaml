@@ -1,0 +1,222 @@
+<UserControl x:Class="AudioStar.Desktop.Views.MyMusicView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:AudioStar.Desktop.Views"
+             xmlns:vm="clr-namespace:AudioStar.Desktop.ViewModels"
+             xmlns:res="clr-namespace:AudioStar.Desktop.Resources">
+    <UserControl.Resources>
+        <DataTemplate x:Key="AlbumCard" DataType="{x:Type vm:AlbumRow}">
+            <Button Style="{StaticResource CardButton}"
+                    Command="{Binding DataContext.OpenAlbumCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    CommandParameter="{Binding}"
+                    ToolTip="{Binding Name}">
+                <StackPanel>
+                    <views:CoverArt Source="{Binding CoverUri}" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" />
+                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="{Binding Artist}" Style="{StaticResource Subtle}" FontSize="12" />
+                    <TextBlock Text="{Binding Details}" Style="{StaticResource Subtle}" FontSize="11" />
+                </StackPanel>
+            </Button>
+        </DataTemplate>
+
+        <ItemsPanelTemplate x:Key="CardGrid">
+            <res:AdaptiveGrid MinItemWidth="140" MaxItemWidth="320" Spacing="12" />
+        </ItemsPanelTemplate>
+
+        <ContextMenu x:Key="TrackColumnsMenu" x:Shared="False">
+            <MenuItem Header="#" IsCheckable="True" IsChecked="{Binding ShowNumber}" />
+            <MenuItem Header="Artist" IsCheckable="True" IsChecked="{Binding ShowArtist}" />
+            <MenuItem Header="Album" IsCheckable="True" IsChecked="{Binding ShowAlbum}" />
+        </ContextMenu>
+
+        <Grid x:Key="TrackHeaderRow" x:Shared="False" Margin="17,0,13,4" Background="Transparent" ContextMenu="{StaticResource TrackColumnsMenu}" ToolTip="Right-click to show or hide columns">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding NumberColumnWidth}" />
+                <ColumnDefinition Width="{Binding TitleColumnWidth, Mode=TwoWay}" MinWidth="80" />
+                <ColumnDefinition Width="{Binding ArtistColumnWidth, Mode=TwoWay}" />
+                <ColumnDefinition Width="{Binding AlbumColumnWidth, Mode=TwoWay}" />
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="#" Style="{StaticResource TrackHeader}" Visibility="{Binding ShowNumber, Converter={StaticResource BoolToVisibility}}" />
+            <TextBlock Grid.Column="1" Text="Title" Style="{StaticResource TrackHeader}" />
+            <GridSplitter Grid.Column="1" Style="{StaticResource HairlineSplitter}" HorizontalAlignment="Right" ResizeBehavior="CurrentAndNext"
+                          Visibility="{Binding ShowArtist, Converter={StaticResource BoolToVisibility}}" ToolTip="Drag to resize Title and Artist" AutomationProperties.Name="Resize title and artist" />
+            <TextBlock Grid.Column="2" Text="Artist" Style="{StaticResource TrackHeader}" Margin="12,0,0,0" Visibility="{Binding ShowArtist, Converter={StaticResource BoolToVisibility}}" />
+            <GridSplitter Grid.Column="2" Style="{StaticResource HairlineSplitter}" HorizontalAlignment="Right" ResizeBehavior="CurrentAndNext"
+                          Visibility="{Binding ShowAlbumDivider, Converter={StaticResource BoolToVisibility}}" ToolTip="Drag to resize Artist and Album" AutomationProperties.Name="Resize artist and album" />
+            <TextBlock Grid.Column="3" Text="Album" Style="{StaticResource TrackHeader}" Margin="12,0,0,0" Visibility="{Binding ShowAlbum, Converter={StaticResource BoolToVisibility}}" />
+            <TextBlock Grid.Column="4" Text="Time" Style="{StaticResource TrackHeader}" HorizontalAlignment="Right" />
+        </Grid>
+
+        <DataTemplate x:Key="TrackTemplate" DataType="{x:Type vm:TrackRow}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding DataContext.NumberColumnWidth, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    <ColumnDefinition Width="{Binding DataContext.TitleColumnWidth, RelativeSource={RelativeSource AncestorType=ListView}}" MinWidth="80" />
+                    <ColumnDefinition Width="{Binding DataContext.ArtistColumnWidth, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    <ColumnDefinition Width="{Binding DataContext.AlbumColumnWidth, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    <ColumnDefinition Width="60" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Number}" Style="{StaticResource TrackSubtle}" Visibility="{Binding DataContext.ShowNumber, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource BoolToVisibility}}" />
+                <Border Grid.Column="1" Style="{StaticResource TrackDivider}"
+                        Visibility="{Binding DataContext.ShowArtist, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource BoolToVisibility}}" />
+                <Border Grid.Column="2" Style="{StaticResource TrackDivider}"
+                        Visibility="{Binding DataContext.ShowAlbumDivider, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource BoolToVisibility}}" />
+                <TextBlock Grid.Column="1" Text="{Binding Title}" Style="{StaticResource TrackTitle}" Margin="0,0,12,0" res:Interaction.FullTextToolTip="True" />
+                <TextBlock Grid.Column="2" Text="{Binding Artist}" Style="{StaticResource TrackSubtle}" TextTrimming="CharacterEllipsis" Margin="12,0,12,0" res:Interaction.FullTextToolTip="True"
+                           Visibility="{Binding DataContext.ShowArtist, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource BoolToVisibility}}" />
+                <TextBlock Grid.Column="3" Text="{Binding Album}" Style="{StaticResource TrackSubtle}" TextTrimming="CharacterEllipsis" Margin="12,0,0,0" res:Interaction.FullTextToolTip="True"
+                           Visibility="{Binding DataContext.ShowAlbum, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource BoolToVisibility}}" />
+                <TextBlock Grid.Column="4" Text="{Binding Duration}" Style="{StaticResource TrackSubtle}" HorizontalAlignment="Right" />
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="TrackRowStyle" TargetType="ListViewItem" BasedOn="{StaticResource TrackListItem}">
+            <Setter Property="res:Interaction.DoubleClickCommand" Value="{Binding DataContext.PlayFromCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="{StaticResource PageMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <TextBlock Text="{Binding ScanText}" Style="{StaticResource Subtle}" VerticalAlignment="Center" MaxWidth="480" Margin="0,0,8,0" res:Interaction.FullTextToolTip="True"
+                               Visibility="{Binding ScanText, Converter={StaticResource NotNullToVisibility}}" />
+                    <Button Style="{StaticResource IconButton}" Content="&#xE710;" Command="{Binding AddFolderCommand}" ToolTip="Add a music folder" />
+                    <Button Style="{StaticResource IconButton}" Content="&#xE72C;" Command="{Binding ScanCommand}" ToolTip="Scan the music folders" IsEnabled="{Binding IsScanning, Converter={StaticResource InverseBool}}" />
+                    <Button Style="{StaticResource IconButton}" Content="&#xE711;" Command="{Binding CancelScanCommand}" ToolTip="Cancel the scan" Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}" />
+                </StackPanel>
+                <TextBlock Text="My Music" Style="{StaticResource PageTitle}" />
+            </DockPanel>
+            <ProgressBar IsIndeterminate="True" Height="3" Margin="0,6,0,0" Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}" />
+            <Expander Header="Music folders" Margin="0,8,0,0" IsExpanded="{Binding NoFolders, Mode=OneWay}">
+                <StackPanel>
+                    <TextBlock Text="Add a folder with your music, then scan it." Style="{StaticResource Subtle}" Margin="0,4,0,0" Visibility="{Binding NoFolders, Converter={StaticResource BoolToVisibility}}" />
+                    <ItemsControl ItemsSource="{Binding Folders}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel Margin="0,2">
+                                    <Button DockPanel.Dock="Right" Style="{StaticResource IconButton}" Width="30" Height="30" FontSize="13" Content="&#xE74D;"
+                                            Command="{Binding DataContext.RemoveFolderCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" ToolTip="Remove this folder" />
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,10,0,0" Visibility="{Binding ShowTabs, Converter={StaticResource BoolToVisibility}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,8">
+                <TextBox x:Name="LibrarySearchBox" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Search the library" ToolTip="Search the library" />
+                <TextBlock Text="Search albums, artists and tracks" Margin="11,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource Subtle}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=LibrarySearchBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+            <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedTab, Mode=TwoWay}">
+                <TabItem Header="Albums">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="{StaticResource ScrollGutter}">
+                        <ItemsControl Margin="0,12,10,0" ItemsSource="{Binding Albums}" ItemTemplate="{StaticResource AlbumCard}" ItemsPanel="{StaticResource CardGrid}" />
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Artists">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="{StaticResource ScrollGutter}">
+                        <ItemsControl Margin="0,12,10,0" ItemsSource="{Binding Artists}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource CardButton}" Margin="0,0,0,8"
+                                            Command="{Binding DataContext.OpenArtistCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
+                                        <DockPanel>
+                                            <TextBlock DockPanel.Dock="Right" Style="{StaticResource Subtle}">
+                                                <Run Text="{Binding AlbumCount, Mode=OneWay}" /><Run Text=" albums, " /><Run Text="{Binding TrackCount, Mode=OneWay}" /><Run Text=" tracks" />
+                                            </TextBlock>
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                        </DockPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Genres">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="{StaticResource ScrollGutter}">
+                        <ItemsControl Margin="0,12,10,0" ItemsSource="{Binding Genres}" ItemsPanel="{StaticResource CardGrid}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource CardButton}"
+                                            Command="{Binding DataContext.OpenGenreCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Style="{StaticResource Subtle}" FontSize="12">
+                                                <Run Text="{Binding TrackCount, Mode=OneWay}" /><Run Text=" tracks" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Tracks">
+                    <DockPanel Margin="0,8,0,0">
+                        <TextBlock DockPanel.Dock="Bottom" Text="{Binding TracksNote}" Style="{StaticResource Subtle}" Margin="0,6,0,0" Visibility="{Binding TracksNote, Converter={StaticResource NotNullToVisibility}}" />
+                        <ContentControl DockPanel.Dock="Top" Content="{StaticResource TrackHeaderRow}" IsTabStop="False" />
+                        <ListView ItemsSource="{Binding Tracks}" ItemTemplate="{StaticResource TrackTemplate}" ItemContainerStyle="{StaticResource TrackRowStyle}" BorderThickness="0" Background="Transparent"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ContextMenu="{StaticResource TrackColumnsMenu}" />
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,10,0,0" Visibility="{Binding HasDetail, Converter={StaticResource BoolToVisibility}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource IconButton}" Content="&#xE72B;" Command="{Binding BackCommand}" ToolTip="Back to the library" VerticalAlignment="Top" />
+                <views:CoverArt Grid.Column="1" Source="{Binding DetailCover}" Width="120" Height="120" Margin="8,0,16,0" Visibility="{Binding DetailCover, Converter={StaticResource NotNullToVisibility}}" />
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding DetailTitle}" FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding DetailSubtitle}" Style="{StaticResource Subtle}" />
+                </StackPanel>
+                <Button Grid.Column="3" Style="{StaticResource AccentButton}" VerticalAlignment="Center" Margin="16,0,0,0" Content="Play all" Command="{Binding PlayAllCommand}" ToolTip="Play all tracks on the current speaker" />
+            </Grid>
+            <ScrollViewer Grid.Row="1" Margin="{StaticResource ScrollGutterBelow14}" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,10,0">
+                    <TextBlock Text="Albums" Style="{StaticResource SectionTitle}" Visibility="{Binding HasDetailAlbums, Converter={StaticResource BoolToVisibility}}" />
+                    <ItemsControl ItemsSource="{Binding DetailAlbums}" ItemTemplate="{StaticResource AlbumCard}" ItemsPanel="{StaticResource CardGrid}" />
+                    <TextBlock Text="Tracks" Style="{StaticResource SectionTitle}" />
+                    <ContentControl Content="{StaticResource TrackHeaderRow}" IsTabStop="False" />
+                    <ListView ItemsSource="{Binding DetailTracks}" ItemTemplate="{StaticResource TrackTemplate}" ItemContainerStyle="{StaticResource TrackRowStyle}" BorderThickness="0" Background="Transparent"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ContextMenu="{StaticResource TrackColumnsMenu}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

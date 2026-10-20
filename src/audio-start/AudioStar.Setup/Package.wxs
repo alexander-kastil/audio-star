@@ -1,0 +1,43 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:fw="http://wixtoolset.org/schemas/v4/wxs/firewall">
+  <Package Name="Audio Star"
+           Manufacturer="integrations.at"
+           Version="$(AppVersion)"
+           UpgradeCode="83EF2852-090A-471D-A239-A97AA106296F"
+           Scope="perMachine">
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Audio Star is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="AudioStarIcon" SourceFile="Assets\AudioStar.ico" />
+    <Property Id="ARPPRODUCTICON" Value="AudioStarIcon" />
+    <Property Id="ARPURLINFOABOUT" Value="https://integrations.at" />
+    <Property Id="ARPHELPLINK" Value="https://integrations.at" />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="Audio Star" />
+    </StandardDirectory>
+
+    <Files Include="$(PublishDir)**" Directory="INSTALLFOLDER" />
+
+    <Component Id="StartMenuShortcutComponent" Directory="ProgramMenuFolder" Bitness="always64">
+      <Shortcut Id="StartMenuShortcut" Name="Audio Star" Target="[INSTALLFOLDER]AudioStar.exe" WorkingDirectory="INSTALLFOLDER" Icon="AudioStarIcon" />
+      <RegistryValue Root="HKCU" Key="Software\AudioStar" Name="StartMenuShortcut" Type="integer" Value="1" KeyPath="yes" />
+    </Component>
+
+    <!-- Speakers fetch music from the stream proxy (TCP 22545) and the media server (TCP 22534) and answer discovery on UDP 1900; allow them from the local subnet only -->
+    <Component Id="FirewallComponent" Directory="INSTALLFOLDER" Bitness="always64" Guid="82BA02FF-E2A3-4AFB-96CA-0A93962ECC63">
+      <fw:FirewallException Id="AudioStarTcp" Name="Audio Star TCP" Program="[INSTALLFOLDER]AudioStar.exe" Protocol="tcp" Port="22534,22545" Scope="localSubnet" Profile="private" />
+      <fw:FirewallException Id="AudioStarUdp" Name="Audio Star UDP" Program="[INSTALLFOLDER]AudioStar.exe" Protocol="udp" Port="1900" Scope="localSubnet" Profile="private" />
+      <RegistryValue Root="HKLM" Key="Software\AudioStar" Name="Firewall" Type="integer" Value="1" KeyPath="yes" />
+    </Component>
+
+    <Property Id="AUTOSTART" Value="1" Secure="yes" />
+    <UIRef Id="AudioStarUI" />
+
+    <Component Id="AutostartComponent" Directory="INSTALLFOLDER" Bitness="always64" Condition="AUTOSTART = &quot;1&quot;">
+      <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\Run" Name="AudioStar" Type="string" Value="&quot;[INSTALLFOLDER]AudioStar.exe&quot; --autostart" KeyPath="yes" />
+    </Component>
+
+  </Package>
+</Wix>

@@ -1,0 +1,528 @@
+# module LPClientFramework.LPWikipedia
+
+[module] names: __doc__, __version__, collections, defaultdict, enum, IntEnum, logging, re, typing, Any, Dict, List, Optional, Union, urllib, parse, requests, requests_cache, getLogger, __name__, log, str, PagesDict, ExtractFormat, Namespace, int, WikiNamespace, namespace2int, WIKI, compile, HTML, RE_SECTION, Wikipedia, WikipediaPageSection, WikipediaPage
+  str: '\nWikipedia-API is easy to use wrapper for extracting information from Wikipedia.\n\nIt supports extracting texts, sections, links, categories, translations, etc\nfrom Wikipedia. Documentation provides code snippets for the most common use\ncases.\n'
+  str: 'defaultdict'
+  str: 'IntEnum'
+  str: 'Any'
+  str: 'Dict'
+  str: 'List'
+  str: 'Optional'
+  str: 'Union'
+  str: 'parse'
+  str: 'WikipediaPage'
+  str: 'ExtractFormat'
+  str: 'Namespace'
+  str: 'namespace'
+  str: 'return'
+  str: 'namespace2int'
+  str: '\\n\\n *(===*) (.*?) (===*) *\\n'
+  str: '\\n? *<h([1-9])[^>]*?>(<span[^>]*></span>)? *(<span[^>]*>)? *(<span[^>]*></span>)? *(.*?) *(</span>)?(<span>Edit</span>)?</h[1-9]>\n?'
+  str: 'Wikipedia'
+  str: 'WikipediaPageSection'
+
+def ExtractFormat()  line 27
+  names: __name__, __module__, __qualname__, __doc__, WIKI, HTML
+    str: 'ExtractFormat'
+    str: 'Represents extraction format.'
+
+def Namespace()  line 49
+  names: __name__, __module__, __qualname__, __doc__, MAIN, TALK, USER, USER_TALK, WIKIPEDIA, WIKIPEDIA_TALK, FILE, FILE_TALK, MEDIAWIKI, MEDIAWIKI_TALK, TEMPLATE, TEMPLATE_TALK, HELP, HELP_TALK, CATEGORY, CATEGORY_TALK, PORTAL, PORTAL_TALK, PROJECT, PROJECT_TALK, REFERENCE, REFERENCE_TALK, BOOK, BOOK_TALK, DRAFT, DRAFT_TALK, EDUCATION_PROGRAM, EDUCATION_PROGRAM_TALK, TIMED_TEXT, TIMED_TEXT_TALK, MODULE, MODULE_TALK, GADGET, GADGET_TALK, GADGET_DEFINITION, GADGET_DEFINITION_TALK
+    str: 'Namespace'
+    str: '\n    Represents namespace in Wikipedia\n\n    You can gen list of possible namespaces here:\n\n    * https://en.wikipedia.org/wiki/Wikipedia:Namespace\n    * https://en.wikipedia.org/wiki/Wikipedia:Namespace#Programming\n\n    Currently following namespaces are supported:\n    '
+
+def namespace2int(namespace)  line 102
+  names: isinstance, Namespace, value
+    str: 'Converts namespace into integer'
+
+def Wikipedia()  line 123
+  names: __name__, __module__, __qualname__, __doc__, ExtractFormat, WIKI, str, Optional, Dict, Any, __init__, __del__, Namespace, MAIN, WikiNamespace, bool, page, article, extracts, info, PagesDict, langlinks, links, backlinks, categories, categorymembers, _query, _build_extracts, _create_section, _build_info, _build_langlinks, _build_links, _build_backlinks, _build_categories, _build_categorymembers, staticmethod, _common_attributes
+    str: 'Wikipedia'
+    str: 'Wikipedia is wrapper for Wikipedia API.'
+    str: 'en'
+    str: 'language'
+    str: 'extract_format'
+    str: 'headers'
+    str: 'cachePath'
+    str: 'return'
+    str: 'Wikipedia.__init__'
+    str: 'return'
+    str: 'Wikipedia.__del__'
+    str: 'WikipediaPage'
+    str: 'title'
+    str: 'ns'
+    str: 'unquote'
+    str: 'return'
+    str: 'Wikipedia.page'
+    str: 'Wikipedia.article'
+    str: 'page'
+    str: 'return'
+    str: 'Wikipedia.extracts'
+    str: 'Wikipedia.info'
+    str: 'Wikipedia.langlinks'
+    str: 'Wikipedia.links'
+    str: 'Wikipedia.backlinks'
+    str: 'Wikipedia.categories'
+    str: 'Wikipedia.categorymembers'
+    str: 'page'
+    str: 'params'
+    str: 'Wikipedia._query'
+    str: 'Wikipedia._build_extracts'
+    str: 'Wikipedia._create_section'
+    str: 'Wikipedia._build_info'
+    str: 'Wikipedia._build_langlinks'
+    str: 'Wikipedia._build_links'
+    str: 'Wikipedia._build_backlinks'
+    str: 'Wikipedia._build_categories'
+    str: 'Wikipedia._build_categorymembers'
+    str: 'page'
+    str: 'Wikipedia._common_attributes'
+
+  def Wikipedia.__init__(self, language, extract_format, headers, cachePath, **kwargs)  line 126
+    names: setdefault, strip, lower, language, extract_format, dict, requests_cache, CachedSession, _session, headers, update, _request_kwargs
+      str: '\n        Constructs Wikipedia object for extracting information Wikipedia.\n\n        :param language: Language mutation of Wikipedia -\n                http://meta.wikimedia.org/wiki/List_of_Wikipedias\n        :param extract_format: Format used for extractions\n                :class:`ExtractFormat` ob'
+      str: 'timeout'
+      str: 'User-Agent'
+      str: 'Wikipedia-API (https://github.com/martin-majlis/Wikipedia-API)'
+
+  def Wikipedia.__del__(self)  line 163
+    names: _session, close
+      str: 'Closes session.'
+
+  def Wikipedia.page(self, title, ns, unquote)  line 167
+    names: parse, unquote, WikipediaPage, language
+      str: "\n        Constructs Wikipedia page with title `title`.\n\n        Creating `WikipediaPage` object is always the first step for extracting\n        any information.\n\n        Example::\n\n            wiki_wiki = wikipediaapi.Wikipedia('en')\n            page_py = wiki_wiki.page('Python_(programming_language"
+      str: 'title'
+      str: 'ns'
+      str: 'language'
+
+  def Wikipedia.article(self, title, ns, unquote)  line 205
+    names: page
+      str: '\n        Constructs Wikipedia page with title `title`.\n\n        This function is an alias for :func:`page`\n\n        :param title: page title as used in Wikipedia URL\n        :param ns: :class:`WikiNamespace`\n        :param unquote: if true it will unquote title\n        :return: object representing :'
+      str: 'title'
+      str: 'ns'
+      str: 'unquote'
+
+  def Wikipedia.extracts(self, page, **kwargs)  line 224
+    names: title, extract_format, ExtractFormat, HTML, WIKI, update, _query, _common_attributes, items, _attributes, _build_extracts
+      str: '\n        Returns summary of the page with respect to parameters\n\n        Parameter `exsectionformat` is taken from `Wikipedia` constructor.\n\n        API Calls for parameters:\n\n        - https://www.mediawiki.org/w/api.php?action=help&modules=query%2Bextracts\n        - https://www.mediawiki.org/wiki/'
+      str: 'query'
+      str: 'extracts'
+      str: 'action'
+      str: 'prop'
+      str: 'titles'
+      str: 'explaintext'
+      str: 'wiki'
+      str: 'exsectionformat'
+      str: 'pages'
+      str: '-1'
+      str: 'pageid'
+
+  def Wikipedia.info(self, page)  line 275
+    names: title, join, _query, _common_attributes, items, _attributes, _build_info
+      str: '\n        https://www.mediawiki.org/w/api.php?action=help&modules=query%2Binfo\n        https://www.mediawiki.org/wiki/API:Info\n        '
+      str: 'query'
+      str: 'info'
+      str: '|'
+      str: 'protection'
+      str: 'talkid'
+      str: 'watched'
+      str: 'watchers'
+      str: 'visitingwatchers'
+      str: 'notificationtimestamp'
+      str: 'subjectid'
+      str: 'url'
+      str: 'readable'
+      str: 'preload'
+      str: 'displaytitle'
+      str: 'action'
+      str: 'prop'
+      str: 'titles'
+      str: 'inprop'
+      str: 'pages'
+      str: '-1'
+      str: 'pageid'
+
+  def Wikipedia.langlinks(self, page, **kwargs)  line 311
+    names: title, update, _query, _common_attributes, items, _attributes, _build_langlinks
+      str: '\n        Returns langlinks of the page with respect to parameters\n\n        API Calls for parameters:\n\n        - https://www.mediawiki.org/w/api.php?action=help&modules=query%2Blanglinks\n        - https://www.mediawiki.org/wiki/API:Langlinks\n\n        :param page: :class:`WikipediaPage`\n        :param'
+      str: 'query'
+      str: 'langlinks'
+      str: 'url'
+      str: 'action'
+      str: 'prop'
+      str: 'titles'
+      str: 'lllimit'
+      str: 'llprop'
+      str: 'pages'
+      str: '-1'
+      str: 'pageid'
+
+  def Wikipedia.links(self, page, **kwargs)  line 346
+    names: title, update, _query, _common_attributes, items, _attributes, _build_links
+      str: '\n        Returns links to other pages with respect to parameters\n\n        API Calls for parameters:\n\n        - https://www.mediawiki.org/w/api.php?action=help&modules=query%2Blinks\n        - https://www.mediawiki.org/wiki/API:Links\n\n        :param page: :class:`WikipediaPage`\n        :param kwargs: '
+      str: 'query'
+      str: 'links'
+      str: 'action'
+      str: 'prop'
+      str: 'titles'
+      str: 'pllimit'
+      str: 'pages'
+      str: '-1'
+      str: 'pageid'
+      str: 'continue'
+      str: 'plcontinue'
+
+  def Wikipedia.backlinks(self, page, **kwargs)  line 386
+    names: title, update, _query, _common_attributes, _build_backlinks
+      str: '\n        Returns backlinks from other pages with respect to parameters\n\n        API Calls for parameters:\n\n        - https://www.mediawiki.org/w/api.php?action=help&modules=query%2Bbacklinks\n        - https://www.mediawiki.org/wiki/API:Backlinks\n\n        :param page: :class:`WikipediaPage`\n        :'
+      str: 'query'
+      str: 'backlinks'
+      str: 'action'
+      str: 'list'
+      str: 'bltitle'
+      str: 'bllimit'
+      str: 'continue'
+      str: 'blcontinue'
+
+  def Wikipedia.categories(self, page, **kwargs)  line 420
+    names: title, update, _query, _common_attributes, items, _attributes, _build_categories
+      str: '\n        Returns categories for page with respect to parameters\n\n        API Calls for parameters:\n\n        - https://www.mediawiki.org/w/api.php?action=help&modules=query%2Bcategories\n        - https://www.mediawiki.org/wiki/API:Categories\n\n        :param page: :class:`WikipediaPage`\n        :param'
+      str: 'query'
+      str: 'categories'
+      str: 'action'
+      str: 'prop'
+      str: 'titles'
+      str: 'cllimit'
+      str: 'pages'
+      str: '-1'
+      str: 'pageid'
+
+  def Wikipedia.categorymembers(self, page, **kwargs)  line 453
+    names: title, update, _query, _common_attributes, _build_categorymembers
+      str: '\n        Returns pages in given category with respect to parameters\n\n        API Calls for parameters:\n\n        - https://www.mediawiki.org/w/api.php?action=help&modules=query%2Bcategorymembers\n        - https://www.mediawiki.org/wiki/API:Categorymembers\n\n        :param page: :class:`WikipediaPage`\n'
+      str: 'query'
+      str: 'categorymembers'
+      str: 'action'
+      str: 'list'
+      str: 'cmtitle'
+      str: 'cmlimit'
+      str: 'continue'
+      str: 'cmcontinue'
+
+  def Wikipedia._query(self, page, params)  line 487
+    names: language, log, info, join, items, _session, get, _request_kwargs, json
+      str: 'Queries Wikimedia API to fetch content.'
+      str: 'https://'
+      str: '.wikipedia.org/w/api.php'
+      str: 'Request URL: %s'
+      str: '?'
+      str: '&'
+      str: 'Wikipedia._query.<locals>.<listcomp>'
+      str: 'json'
+      str: 'format'
+      str: 'redirects'
+      str: 'params'
+
+    def Wikipedia._query.<listcomp>(.0)  line 492
+      names: str
+        str: '='
+
+  def Wikipedia._build_extracts(self, extract, page)  line 499
+    names: _summary, defaultdict, list, _section_mapping, _common_attributes, re, finditer, RE_SECTION, extract_format, len, start, strip, _text, _create_section, level, append, pop, range, _section, end, title
+      str: 'Constructs summary of given page.'
+      str: 'extract'
+
+  def Wikipedia._create_section(self, match)  line 544
+    names: extract_format, ExtractFormat, WIKI, group, strip, len, HTML, int, WikipediaPageSection
+      str: 'Creates section.'
+
+  def Wikipedia._build_info(self, extract, page)  line 558
+    names: _common_attributes, items, _attributes
+      str: 'Builds page from API call info.'
+
+  def Wikipedia._build_langlinks(self, extract, page)  line 566
+    names: _langlinks, _common_attributes, get, WikipediaPage, Namespace, MAIN, language
+      str: 'Builds page from API call langlinks.'
+      str: 'langlinks'
+      str: '*'
+      str: 'lang'
+      str: 'url'
+      str: 'wiki'
+      str: 'title'
+      str: 'ns'
+      str: 'language'
+      str: 'url'
+
+  def Wikipedia._build_links(self, extract, page)  line 584
+    names: _links, _common_attributes, get, WikipediaPage, int, language
+      str: 'Builds page from API call links.'
+      str: 'links'
+      str: 'title'
+      str: 'ns'
+      str: 'wiki'
+      str: 'title'
+      str: 'ns'
+      str: 'language'
+
+  def Wikipedia._build_backlinks(self, extract, page)  line 600
+    names: _backlinks, _common_attributes, get, WikipediaPage, int, language
+      str: 'Builds page from API call backlinks.'
+      str: 'backlinks'
+      str: 'title'
+      str: 'ns'
+      str: 'wiki'
+      str: 'title'
+      str: 'ns'
+      str: 'language'
+
+  def Wikipedia._build_categories(self, extract, page)  line 616
+    names: _categories, _common_attributes, get, WikipediaPage, int, language
+      str: 'Builds page from API call categories.'
+      str: 'categories'
+      str: 'title'
+      str: 'ns'
+      str: 'wiki'
+      str: 'title'
+      str: 'ns'
+      str: 'language'
+
+  def Wikipedia._build_categorymembers(self, extract, page)  line 632
+    names: _categorymembers, _common_attributes, get, WikipediaPage, int, language, pageid
+      str: 'Builds page from API call categorymembers.'
+      str: 'categorymembers'
+      str: 'title'
+      str: 'ns'
+      str: 'wiki'
+      str: 'title'
+      str: 'ns'
+      str: 'language'
+      str: 'pageid'
+
+  def Wikipedia._common_attributes(extract, page)  line 651
+    names: _attributes
+      str: 'Fills in common attributes for page.'
+      str: 'title'
+      str: 'pageid'
+      str: 'ns'
+      str: 'redirects'
+
+def WikipediaPageSection()  line 661
+  names: __name__, __module__, __qualname__, __doc__, Wikipedia, str, int, __init__, property, title, level, text, List, sections, Optional, section_by_title, full_text, __repr__
+    str: 'WikipediaPageSection'
+    str: 'WikipediaPageSection represents section in the page.'
+    str: 'wiki'
+    str: 'title'
+    str: 'level'
+    str: 'text'
+    str: 'return'
+    str: 'WikipediaPageSection.__init__'
+    str: 'return'
+    str: 'WikipediaPageSection.title'
+    str: 'WikipediaPageSection.level'
+    str: 'WikipediaPageSection.text'
+    str: 'WikipediaPageSection.sections'
+    str: 'title'
+    str: 'return'
+    str: 'WikipediaPageSection.section_by_title'
+    str: 'level'
+    str: 'return'
+    str: 'WikipediaPageSection.full_text'
+    str: 'WikipediaPageSection.__repr__'
+
+  def WikipediaPageSection.__init__(self, wiki, title, level, text)  line 664
+    names: wiki, _title, _level, _text, _section
+      str: 'Constructs WikipediaPageSection.'
+
+  def WikipediaPageSection.title(self)  line 674
+    names: _title
+      str: '\n        Returns title of the current section.\n\n        :return: title of the current section\n        '
+
+  def WikipediaPageSection.level(self)  line 683
+    names: _level
+      str: '\n        Returns indentation level of the current section.\n\n        :return: indentation level of the current section\n        '
+
+  def WikipediaPageSection.text(self)  line 692
+    names: _text
+      str: '\n        Returns text of the current section.\n\n        :return: text of the current section\n        '
+
+  def WikipediaPageSection.sections(self)  line 701
+    names: _section
+      str: '\n        Returns subsections of the current section.\n\n        :return: subsections of the current section\n        '
+
+  def WikipediaPageSection.section_by_title(self, title)  line 710
+    names: _section
+      str: '\n        Returns subsections of the current section with given title.\n\n        :param title: title of the subsection\n        :return: subsection if it exists\n        '
+      str: 'WikipediaPageSection.section_by_title.<locals>.<listcomp>'
+
+    def WikipediaPageSection.section_by_title.<listcomp>(.0)  line 717
+      names: title
+
+  def WikipediaPageSection.full_text(self, level)  line 722
+    names: wiki, extract_format, ExtractFormat, WIKI, title, HTML, NotImplementedError, _text, len, sections, full_text
+      str: '\n        Returns text of the current section as well as all its subsections.\n\n        :param level: indentation level\n        :return: text of the current section as well as all its subsections\n        '
+      str: '<h'
+      str: '>'
+      str: '</h'
+      str: 'Unknown ExtractFormat type'
+
+  def WikipediaPageSection.__repr__(self)  line 745
+    names: format, _title, _level, _text, len, _section, join, map, repr
+      str: 'Section: {} ({}):\n{}\nSubsections ({}):\n{}'
+
+def WikipediaPage()  line 755
+  names: __name__, __module__, __qualname__, __doc__, ATTRIBUTES_MAPPING, Namespace, MAIN, Wikipedia, str, WikiNamespace, Optional, __init__, __getattr__, property, language, title, int, namespace, bool, exists, summary, List, WikipediaPageSection, sections, section_by_title, sections_by_title, text, PagesDict, langlinks, links, backlinks, categories, categorymembers, _fetch, __repr__
+    str: 'WikipediaPage'
+    str: '\n    Represents Wikipedia page.\n\n    Except properties mentioned as part of documentation, there are also\n    these properties available:\n\n    * `fullurl` - full URL of the page\n    * `canonicalurl` - canonical URL of the page\n    * `pageid` - id of the current page\n    * `displaytitle` - title of t'
+    str: 'info'
+    str: 'extracts'
+    str: 'langlinks'
+    str: 'info'
+    str: 'language'
+    str: 'pageid'
+    str: 'ns'
+    str: 'title'
+    str: 'contentmodel'
+    str: 'pagelanguage'
+    str: 'pagelanguagehtmlcode'
+    str: 'pagelanguagedir'
+    str: 'touched'
+    str: 'lastrevid'
+    str: 'length'
+    str: 'protection'
+    str: 'restrictiontypes'
+    str: 'watchers'
+    str: 'visitingwatchers'
+    str: 'notificationtimestamp'
+    str: 'talkid'
+    str: 'fullurl'
+    str: 'editurl'
+    str: 'canonicalurl'
+    str: 'readable'
+    str: 'preload'
+    str: 'displaytitle'
+    str: 'en'
+    str: 'wiki'
+    str: 'title'
+    str: 'ns'
+    str: 'language'
+    str: 'url'
+    str: 'return'
+    str: 'WikipediaPage.__init__'
+    str: 'WikipediaPage.__getattr__'
+    str: 'return'
+    str: 'WikipediaPage.language'
+    str: 'WikipediaPage.title'
+    str: 'WikipediaPage.namespace'
+    str: 'WikipediaPage.exists'
+    str: 'WikipediaPage.summary'
+    str: 'WikipediaPage.sections'
+    str: 'title'
+    str: 'return'
+    str: 'WikipediaPage.section_by_title'
+    str: 'WikipediaPage.sections_by_title'
+    str: 'WikipediaPage.text'
+    str: 'WikipediaPage.langlinks'
+    str: 'WikipediaPage.links'
+    str: 'WikipediaPage.backlinks'
+    str: 'WikipediaPage.categories'
+    str: 'WikipediaPage.categorymembers'
+    str: 'WikipediaPage._fetch'
+    str: 'WikipediaPage.__repr__'
+
+  def WikipediaPage.__init__(self, wiki, title, ns, language, url)  line 796
+    names: wiki, _summary, _section, _section_mapping, _langlinks, _links, _backlinks, _categories, _categorymembers, _called, namespace2int, _attributes
+      str: 'extracts'
+      str: 'info'
+      str: 'langlinks'
+      str: 'links'
+      str: 'backlinks'
+      str: 'categories'
+      str: 'categorymembers'
+      str: 'title'
+      str: 'ns'
+      str: 'language'
+      str: 'fullurl'
+
+  def WikipediaPage.__getattr__(self, name)  line 833
+    names: ATTRIBUTES_MAPPING, __getattribute__, _attributes, _called, _fetch
+
+  def WikipediaPage.language(self)  line 845
+    names: str, _attributes
+      str: '\n        Returns language of the current page.\n\n        :return: language\n        '
+      str: 'language'
+
+  def WikipediaPage.title(self)  line 854
+    names: str, _attributes
+      str: '\n        Returns title of the current page.\n\n        :return: title\n        '
+      str: 'title'
+
+  def WikipediaPage.namespace(self)  line 863
+    names: int, _attributes
+      str: '\n        Returns namespace of the current page.\n\n        :return: namespace\n        '
+      str: 'ns'
+
+  def WikipediaPage.exists(self)  line 872
+    names: bool, pageid
+      str: '\n        Returns `True` if the current page exists, otherwise `False`.\n\n        :return: if current page existst or not\n        '
+
+  def WikipediaPage.summary(self)  line 880
+    names: _called, _fetch, _summary
+      str: '\n        Returns summary of the current page.\n\n        :return: summary\n        '
+      str: 'extracts'
+
+  def WikipediaPage.sections(self)  line 891
+    names: _called, _fetch, _section
+      str: '\n        Returns all sections of the curent page.\n\n        :return: List of :class:`WikipediaPageSection`\n        '
+      str: 'extracts'
+
+  def WikipediaPage.section_by_title(self, title)  line 902
+    names: _called, _fetch, _section_mapping, get
+      str: '\n        Returns last section of the current page with given `title`.\n\n        :param title: section title\n        :return: :class:`WikipediaPageSection`\n        '
+      str: 'extracts'
+
+  def WikipediaPage.sections_by_title(self, title)  line 919
+    names: _called, _fetch, _section_mapping, get
+      str: '\n        Returns all section of the current page with given `title`.\n\n        :param title: section title\n        :return: :class:`WikipediaPageSection`\n        '
+      str: 'extracts'
+
+  def WikipediaPage.text(self)  line 936
+    names: summary, len, sections, full_text, strip
+      str: '\n        Returns text of the current page.\n\n        :return: text of the current page\n        '
+      str: 'level'
+
+  def WikipediaPage.langlinks(self)  line 950
+    names: _called, _fetch, _langlinks
+      str: '\n        Returns all language links to pages in other languages.\n\n        This is wrapper for:\n\n        * https://www.mediawiki.org/w/api.php?action=help&modules=query%2Blanglinks\n        * https://www.mediawiki.org/wiki/API:Langlinks\n\n        :return: :class:`PagesDict`\n        '
+      str: 'langlinks'
+
+  def WikipediaPage.links(self)  line 966
+    names: _called, _fetch, _links
+      str: '\n        Returns all pages linked from the current page.\n\n        This is wrapper for:\n\n        * https://www.mediawiki.org/w/api.php?action=help&modules=query%2Blinks\n        * https://www.mediawiki.org/wiki/API:Links\n\n        :return: :class:`PagesDict`\n        '
+      str: 'links'
+
+  def WikipediaPage.backlinks(self)  line 982
+    names: _called, _fetch, _backlinks
+      str: '\n        Returns all pages linking to the current page.\n\n        This is wrapper for:\n\n        * https://www.mediawiki.org/w/api.php?action=help&modules=query%2Bbacklinks\n        * https://www.mediawiki.org/wiki/API:Backlinks\n\n        :return: :class:`PagesDict`\n        '
+      str: 'backlinks'
+
+  def WikipediaPage.categories(self)  line 998
+    names: _called, _fetch, _categories
+      str: '\n        Returns categories associated with the current page.\n\n        This is wrapper for:\n\n        * https://www.mediawiki.org/w/api.php?action=help&modules=query%2Bcategories\n        * https://www.mediawiki.org/wiki/API:Categories\n\n        :return: :class:`PagesDict`\n        '
+      str: 'categories'
+
+  def WikipediaPage.categorymembers(self)  line 1014
+    names: _called, _fetch, _categorymembers
+      str: '\n        Returns all pages belonging to the current category.\n\n        This is wrapper for:\n\n        * https://www.mediawiki.org/w/api.php?action=help&modules=query%2Bcategorymembers\n        * https://www.mediawiki.org/wiki/API:Categorymembers\n\n        :return: :class:`PagesDict`\n        '
+      str: 'categorymembers'
+
+  def WikipediaPage._fetch(self, call)  line 1030
+    names: getattr, wiki, _called
+      str: 'Fetches some data?.'
+
+  def WikipediaPage.__repr__(self)  line 1036
+    names: any, _called, values, title, pageid, ns
+      str: ' (id: '
+      str: ', ns: '
+      str: ')'
+      str: ' (id: ??, ns: '

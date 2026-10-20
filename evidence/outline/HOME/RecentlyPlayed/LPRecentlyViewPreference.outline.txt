@@ -1,0 +1,41 @@
+# module HOME.RecentlyPlayed.LPRecentlyViewPreference
+
+[module] names: __doc__, typing, Optional, LPClientFramework, LPUtility, LPClientFramework.LPUtility, logger, LPRecentlyViewPreference
+  str: '\nRecently Played 视图模式偏好服务。\n'
+  str: 'Optional'
+  str: 'LPUtility'
+  str: 'logger'
+  str: 'LPRecentlyViewPreference'
+
+def LPRecentlyViewPreference()  line 12
+  names: __name__, __module__, __qualname__, __doc__, PREFERENCE_GROUP, PREFERENCE_KEY, DEFAULT_MODE, VALID_MODES, classmethod, str, _normalizeMode, Optional, readViewMode, bool, saveViewMode
+    str: 'LPRecentlyViewPreference'
+    str: '负责维护 Recently Played 页面共享的卡片/列表视图模式偏好。'
+    str: 'RecentlyPlayed'
+    str: 'recentlyViewMode'
+    str: 'card'
+    str: 'card'
+    str: 'list'
+    str: 'mode'
+    str: 'return'
+    str: 'LPRecentlyViewPreference._normalizeMode'
+    str: 'return'
+    str: 'LPRecentlyViewPreference.readViewMode'
+    str: 'LPRecentlyViewPreference.saveViewMode'
+
+  def LPRecentlyViewPreference._normalizeMode(cls, mode)  line 21
+    names: str, strip, lower, VALID_MODES, DEFAULT_MODE
+      str: '\n        校验视图模式，非法值归一为默认卡片模式。\n\n        :param mode: 原始视图模式。\n        :return: 合法的视图模式。\n        '
+
+  def LPRecentlyViewPreference.readViewMode(cls)  line 34
+    names: getattr, LPUtility, beginGroup, PREFERENCE_GROUP, value, PREFERENCE_KEY, Exception, logger, debug, endGroup, str, strip, lower, VALID_MODES
+      str: '\n        读取 Recently Played 页面共享的视图模式偏好。\n\n        :return: 已保存的合法视图模式，未保存或无效返回 None。\n        '
+      str: 'settings'
+      str: '[RecentlyPlayed] read view mode failed error=%s'
+
+  def LPRecentlyViewPreference.saveViewMode(cls, mode)  line 63
+    names: _normalizeMode, getattr, LPUtility, beginGroup, PREFERENCE_GROUP, setValue, PREFERENCE_KEY, hasattr, sync, endGroup, Exception, logger, debug
+      str: '\n        保存 Recently Played 页面共享的视图模式偏好。\n\n        :param mode: 视图模式，`card` 或 `list`。\n        :return: 保存成功返回 True。\n        '
+      str: 'settings'
+      str: 'sync'
+      str: '[RecentlyPlayed] save view mode failed error=%s'

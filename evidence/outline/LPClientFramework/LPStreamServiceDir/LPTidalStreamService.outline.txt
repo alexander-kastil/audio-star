@@ -1,0 +1,707 @@
+# module LPClientFramework.LPStreamServiceDir.LPTidalStreamService
+
+[module] names: __doc__, json, time, typing, Any, Dict, Optional, Type, bs4, BeautifulSoup, LPGlobalUI, LPClientFramework, LPPublicDefine, LPUtility, LPClientFramework.LPDataModel.UpnpDataModel.LPUpnpAsyncDataModel, LPUpnpAsyncDataModel, LPClientFramework.LPMusicLibrary, LPRecentlyManager, LPRecentlyPlayListCodec, LPClientFramework.LPPlayList.LPPlayList, LPHeaderType, LPPlayHeader, LPPlayItem, LPPlayListSource, LPClientFramework.LPPlayList.LPTidalPlayList, LPTidalAccount, LPTidalPlayHeader, LPTidalPlayItem, LPTidalPlayList, TIDAL_RECENTLY_NAVIGATION_SEE_ALL, tidalPlayingContextForPlaylist, tidalRecentlyNavigationType, tidalRecentlySeeAllSectionKey, LPClientFramework.LPStreamServiceManager, LPStreamService, LPClientFramework.LPUtility, logger, LPClientFramework.util.aes, AESCipher, FAVORITE_RESYNC_PENDING_GRACE_SECONDS, LPTidalStreamService
+  str: '\nTIDAL 音源服务。\n'
+  str: 'Any'
+  str: 'Dict'
+  str: 'Optional'
+  str: 'Type'
+  str: 'BeautifulSoup'
+  str: 'LPPublicDefine'
+  str: 'LPUtility'
+  str: 'LPUpnpAsyncDataModel'
+  str: 'LPRecentlyManager'
+  str: 'LPRecentlyPlayListCodec'
+  str: 'LPHeaderType'
+  str: 'LPPlayHeader'
+  str: 'LPPlayItem'
+  str: 'LPPlayListSource'
+  str: 'LPTidalAccount'
+  str: 'LPTidalPlayHeader'
+  str: 'LPTidalPlayItem'
+  str: 'LPTidalPlayList'
+  str: 'TIDAL_RECENTLY_NAVIGATION_SEE_ALL'
+  str: 'tidalPlayingContextForPlaylist'
+  str: 'tidalRecentlyNavigationType'
+  str: 'tidalRecentlySeeAllSectionKey'
+  str: 'LPStreamService'
+  str: 'logger'
+  str: 'AESCipher'
+  str: 'LPTidalStreamService'
+
+def LPTidalStreamService()  line 37
+  names: __name__, __module__, __qualname__, __doc__, _prefixedDetailNavigationId, staticmethod, object, str, _metadataText, int, _durationSeconds, Optional, LPPlayItem, LPTidalPlayItem, _buildCurrentPlayItem, bool, _detailNavigationReady, tuple, _streamInfoFromSearchUrl, LPTidalPlayList, _normalizePresetPlayList, updateMediaInfoWithItem, dict, recentlyDidSelect, recentlyOpensDetail, _recentlyDetailReady, playRecently, _navigateFromRecently, _navigateRecentlySeeAll, _recentlyNavigationId, _playFromRecently, _syncRecentlyAccountContext, _playListFromRecentlyDetail, LPTidalAccount, _normalizeRecentlyAccountFromDetail, isCurrentPlayItem, currentPlayItem, parseQueuePlayItem, Dict, Any, registerAccount, _tidalCapability, _isSupportReplayGain, _isShowAutoplay, getAccount, Type, LPPlayHeader, LPTrackMoreViewControllerCanViewArtist, LPTrackMoreViewControllerCanViewAlbum, LPTrackMoreViewControllerViewArtist, _openArtistDetail, LPTrackMoreViewControllerViewAlbum, _openAlbumDetail, LPTrackMoreViewControllerCanAddToPlaylist, LPTrackMoreViewControllerAddToPlaylist, LPTrackMoreCanPreset, recentlyCanPreset, canFavorite, recentlyFavoriteTarget, favoriteState, setFavorite, favoriteStateNeedsResync, recentlyPlayListFromDetail, backupXml, replaceItemXml, logoutAccount, _clearCurrentTidalPlaybackContext, accountChanged, _handleAccountChangedNotify, _payloadFromNotify, _userPayloadFromUserInfo, _subscriptionInfoFromUserInfo, _decodeToken, _isVersionAtLeast, _currentDeviceUuid, _firstStringValue, _intValue, __classcell__
+    str: 'LPTidalStreamService'
+    str: 'TIDAL 音源服务，负责设备账号注册、登出和账号变化通知处理。'
+    str: 'metaDataObj'
+    str: 'names'
+    str: 'return'
+    str: 'LPTidalStreamService._metadataText'
+    str: 'value'
+    str: 'return'
+    str: 'LPTidalStreamService._durationSeconds'
+    str: 'device'
+    str: 'sourcePlayItem'
+    str: 'return'
+    str: 'LPTidalStreamService._buildCurrentPlayItem'
+    str: 'device'
+    str: 'return'
+    str: 'LPTidalStreamService._detailNavigationReady'
+    str: 'searchUrl'
+    str: 'return'
+    str: 'LPTidalStreamService._streamInfoFromSearchUrl'
+    str: 'playList'
+    str: 'return'
+    str: 'LPTidalStreamService._normalizePresetPlayList'
+    str: 'device'
+    str: 'item'
+    str: 'header'
+    str: 'return'
+    str: 'LPTidalStreamService.updateMediaInfoWithItem'
+    str: 'detailDict'
+    str: 'return'
+    str: 'LPTidalStreamService.recentlyDidSelect'
+    str: 'LPTidalStreamService.recentlyOpensDetail'
+    str: 'LPTidalStreamService._recentlyDetailReady'
+    str: 'LPTidalStreamService.playRecently'
+    str: 'playList'
+    str: 'navigationType'
+    str: 'return'
+    str: 'LPTidalStreamService._navigateFromRecently'
+    str: 'LPTidalStreamService._navigateRecentlySeeAll'
+    str: 'navigationType'
+    str: 'playList'
+    str: 'return'
+    str: 'LPTidalStreamService._recentlyNavigationId'
+    str: 'playList'
+    str: 'detailDict'
+    str: 'return'
+    str: 'LPTidalStreamService._playFromRecently'
+    str: 'LPTidalStreamService._syncRecentlyAccountContext'
+    str: 'LPTidalStreamService._playListFromRecentlyDetail'
+    str: 'account'
+    str: 'return'
+    str: 'LPTidalStreamService._normalizeRecentlyAccountFromDetail'
+    str: 'device'
+    str: 'playItem'
+    str: 'return'
+    str: 'LPTidalStreamService.isCurrentPlayItem'
+    str: 'LPTidalStreamService.currentPlayItem'
+    str: 'trackItemObj'
+    str: 'return'
+    str: 'LPTidalStreamService.parseQueuePlayItem'
+    str: 'userinfo'
+    str: 'return'
+    str: 'LPTidalStreamService.registerAccount'
+    str: 'return'
+    str: 'LPTidalStreamService._tidalCapability'
+    str: 'LPTidalStreamService._isSupportReplayGain'
+    str: 'LPTidalStreamService._isShowAutoplay'
+    str: 'LPTidalStreamService.getAccount'
+    str: 'playHeader'
+    str: 'playItem'
+    str: 'immediately'
+    str: 'return'
+    str: 'LPTidalStreamService.LPTrackMoreViewControllerCanViewArtist'
+    str: 'playHeader'
+    str: 'playItem'
+    str: 'artistItem'
+    str: 'immediately'
+    str: 'return'
+    str: 'LPTidalStreamService.LPTrackMoreViewControllerCanViewAlbum'
+    str: 'playHeader'
+    str: 'playItem'
+    str: 'artistItem'
+    str: 'return'
+    str: 'LPTidalStreamService.LPTrackMoreViewControllerViewArtist'
+    str: 'LPTidalStreamService._openArtistDetail'
+    str: 'playHeader'
+    str: 'playItem'
+    str: 'albumItem'
+    str: 'return'
+    str: 'LPTidalStreamService.LPTrackMoreViewControllerViewAlbum'
+    str: 'LPTidalStreamService._openAlbumDetail'
+    str: 'LPTidalStreamService.LPTrackMoreViewControllerCanAddToPlaylist'
+    str: 'LPTidalStreamService.LPTrackMoreViewControllerAddToPlaylist'
+    str: 'LPTidalStreamService.LPTrackMoreCanPreset'
+    str: 'LPTidalStreamService.recentlyCanPreset'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'return'
+    str: 'LPTidalStreamService.canFavorite'
+    str: 'detailDict'
+    str: 'LPTidalStreamService.recentlyFavoriteTarget'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'LPTidalStreamService.favoriteState'
+    str: 'itemType'
+    str: 'itemId'
+    str: 'desiredFavorite'
+    str: 'return'
+    str: 'LPTidalStreamService.setFavorite'
+    str: 'LPTidalStreamService.favoriteStateNeedsResync'
+    str: 'LPTidalStreamService.recentlyPlayListFromDetail'
+    str: 'playList'
+    str: 'listName'
+    str: 'kwargs'
+    str: 'return'
+    str: 'LPTidalStreamService.backupXml'
+    str: 'playList'
+    str: 'name'
+    str: 'return'
+    str: 'LPTidalStreamService.replaceItemXml'
+    str: 'LPTidalStreamService.logoutAccount'
+    str: 'LPTidalStreamService._clearCurrentTidalPlaybackContext'
+    str: 'notify'
+    str: 'return'
+    str: 'LPTidalStreamService.accountChanged'
+    str: 'LPTidalStreamService._handleAccountChangedNotify'
+    str: 'LPTidalStreamService._payloadFromNotify'
+    str: 'LPTidalStreamService._userPayloadFromUserInfo'
+    str: 'LPTidalStreamService._subscriptionInfoFromUserInfo'
+    str: 'token'
+    str: 'return'
+    str: 'LPTidalStreamService._decodeToken'
+    str: 'version'
+    str: 'target'
+    str: 'return'
+    str: 'LPTidalStreamService._isVersionAtLeast'
+    str: 'LPTidalStreamService._currentDeviceUuid'
+    str: 'payload'
+    str: 'keys'
+    str: 'return'
+    str: 'LPTidalStreamService._firstStringValue'
+    str: 'LPTidalStreamService._intValue'
+
+  def LPTidalStreamService._metadataText(metaDataObj, *names)  line 43
+    names: find, text, str
+      str: '\n        从 metadata XML 中读取第一个非空字段。\n\n        :param metaDataObj: BeautifulSoup 解析后的 metadata XML。\n        :param names: 候选字段名，按优先级依次尝试。\n        :return: 第一个非空字段文本；没有匹配时返回空字符串。\n        '
+
+  def LPTidalStreamService._durationSeconds(value)  line 58
+    names: str, strip, split, int, float, Exception
+      str: '\n        将队列 metadata 中的 duration 转成秒数。\n\n        :param value: 原始 duration，可能是秒数字符串或 HH:MM:SS。\n        :return: 秒数；无法解析时返回 0。\n        '
+      str: ':'
+
+  def LPTidalStreamService._buildCurrentPlayItem(self, device, sourcePlayItem)  line 83
+    names: getattr, LPTidalPlayItem, source, trackSource, trackName, trackId, trackUrl, trackImage, trackArtist, artistId, trackDuration, albumName, albumId, searchUrl, startIndex, isExplicit, allowStreaming
+      str: '\n        构造 minibar More 使用的 TIDAL 当前播放项。\n\n        :param device: 当前播放设备。\n        :param sourcePlayItem: 当前队列中匹配到的原始播放项。\n        :return: 补齐后的 TIDAL 播放项；没有设备媒体信息时返回 None。\n        '
+      str: 'mediaInfo'
+      str: 'trackSource'
+      str: 'trackName'
+      str: 'trackId'
+      str: 'trackUrl'
+      str: 'trackImage'
+      str: 'trackArtist'
+      str: 'artistId'
+      str: 'trackDuration'
+      str: 'albumName'
+      str: 'albumId'
+      str: 'searchUrl'
+      str: 'startIndex'
+      str: 'isExplicit'
+      str: 'allowStreaming'
+      str: 'artworkUri'
+      str: 'artist'
+      str: 'album'
+
+  def LPTidalStreamService._detailNavigationReady(self, device)  line 124
+    names: getattr, LPGlobalUI, accountForSource, source, getAccount, str, strip, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, instance, accountState, get, Exception, bool
+      str: '\n        判断当前上下文是否具备进入 TIDAL 详情页的条件。\n\n        除设备账号存在 userId 外，还要求 Store 已持有访问 token：详情页请求的 token\n        来自 Store（见 LPTidalDataProvider._authHeaders），而非 account 对象；只有进过\n        TIDAL home 或 login manager 跑过 syncAccountFromDevice 后 Store 才有 token。\n        未同步时直接判定不可用，避免 minibar 菜单显示后点击进入详情页拿到 403。\n\n'
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'userId'
+      str: 'LPTidalStore'
+      str: 'token'
+
+  def LPTidalStreamService._streamInfoFromSearchUrl(self, searchUrl)  line 158
+    names: str, split
+      str: '\n        从 TIDAL SearchUrl 推断 StreamType 和 StreamId。\n\n        :param searchUrl: 队列 SearchUrl。\n        :return: `(streamType, streamId)`；无法推断时返回 playlist 和空 ID。\n        '
+      str: '?'
+      str: '/'
+      str: 'playlist'
+
+  def LPTidalStreamService._normalizePresetPlayList(self, playList)  line 179
+    names: isinstance, LPTidalPlayList, __class__, getattr, LPTidalPlayHeader, _streamInfoFromSearchUrl, headTitle, headId, mediaType, headType, source, mediaSource, searchUrl, loopMode, creator, quality, imageUrl, totalTracks, describe, totalPage, currentPage, perPage, str, getAccount, userId, streamType, streamId, showName, contentType, requestQuality, header, account
+      str: '\n        将 BrowseQueue 返回的通用 playlist 归一化为 TIDAL preset XML 可用对象。\n\n        :param playList: 详情页或 BrowseQueue 返回的播放列表。\n        :return: TIDAL 播放列表对象。\n        '
+      str: 'header'
+      str: 'searchUrl'
+      str: 'headTitle'
+      str: 'CurrentQueue'
+      str: 'headId'
+      str: 'mediaType'
+      str: 'headType'
+      str: 'mediaSource'
+      str: 'loopMode'
+      str: 'creator'
+      str: 'quality'
+      str: 'imageUrl'
+      str: 'totalTracks'
+      str: 'describe'
+      str: 'totalPage'
+      str: 'currentPage'
+      str: 'perPage'
+      str: 'userId'
+      str: 'streamType'
+      str: 'streamId'
+      str: 'showName'
+      str: 'contentType'
+      str: 'songlist'
+      str: 'requestQuality'
+      str: 'account'
+
+  def LPTidalStreamService.updateMediaInfoWithItem(self, device, item, header)  line 220
+    names: getattr, trackId, LPPublicDefine, MEDIATYPE_NETLIST, trackImage, trackName, trackArtist, artistId, albumName, albumId, source, mediaInfo, volume, loopMode, setMediaInfo
+      str: '\n        写入 TIDAL 本机发起播放时的临时媒体信息。\n\n        :param device: 当前播放设备对象。\n        :param item: TIDAL 播放条目。\n        :param header: 播放列表头信息。\n        :return: None。\n        '
+      str: 'mediaType'
+      str: 'TRANSITIONING'
+      str: '{"prev": {"enabled": true},"next": {"enabled": true},"loop": {"enabled": true}, "shuffle": {"enabled": true}, "seek": {"enabled": true}}'
+      str: '00:00:00'
+      str: 'playOrigin'
+      str: 'trackId'
+      str: 'itemId'
+      str: 'mediaType'
+      str: 'playState'
+      str: 'artworkUri'
+      str: 'trackName'
+      str: 'artist'
+      str: 'artistId'
+      str: 'album'
+      str: 'albumId'
+      str: 'guiBehavior'
+      str: 'duration'
+      str: 'progress'
+      str: 'trackSource'
+      str: 'playOrigin'
+      str: 'playOriginTrackId'
+      str: 'volume'
+      str: 'loopMode'
+
+  def LPTidalStreamService.recentlyDidSelect(self, detailDict, baseController)  line 256
+    names: _playListFromRecentlyDetail, header, list, logger, debug, tidalRecentlyNavigationType, _recentlyDetailReady, _navigateFromRecently, _playFromRecently
+      str: '\n        处理 TIDAL Recently Played 点击：可跳详情/SeeAll 时进入对应页面，否则恢复播放。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :param baseController: 预留的页面控制器，作为详情页父级。\n        :return: 已处理返回 True，无法处理返回 False。\n        '
+      str: '[TIDAL][Recently] recentlyDidSelect ignore because playList is invalid'
+
+  def LPTidalStreamService.recentlyOpensDetail(self, detailDict)  line 274
+    names: _playListFromRecentlyDetail, header, bool, tidalRecentlyNavigationType, _recentlyDetailReady
+      str: '\n        判断 TIDAL Recently 条目点击后是否进入详情页。\n\n        判定前先同步账号上下文，避免首次进入 Recently 时 Store 缺少 token\n        而被误判为不可进详情（表现为第一次点击退化为恢复播放）。\n\n        :param detailDict: recently 记录 detail。\n        :return: 可进入详情页返回 True。\n        '
+
+  def LPTidalStreamService._recentlyDetailReady(self, playList)  line 289
+    names: _syncRecentlyAccountContext, _detailNavigationReady
+      str: '\n        同步 TIDAL 账号上下文后再判断 Recently 条目是否可进入详情页。\n\n        登录管理器是懒加载的，直接读 Store token 可能在首次进入 Recently 时\n        为空；先同步设备账号把 token 写入 Store，再复用详情就绪判定。\n\n        :param playList: 已还原的 TIDAL 播放列表。\n        :return: 可进入详情页返回 True。\n        '
+
+  def LPTidalStreamService.playRecently(self, detailDict, baseController)  line 302
+    names: _playListFromRecentlyDetail, header, list, logger, debug, _playFromRecently
+      str: '\n        处理 TIDAL Recently 播放按钮：直接恢复播放，不进入详情页。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :param baseController: 预留参数，直接播放不依赖页面控制器。\n        :return: 已成功发起播放返回 True。\n        '
+      str: '[TIDAL][Recently] playRecently ignore because playList is invalid'
+
+  def LPTidalStreamService._navigateFromRecently(self, playList, navigationType, baseController)  line 316
+    names: TIDAL_RECENTLY_NAVIGATION_SEE_ALL, _navigateRecentlySeeAll, _recentlyNavigationId, logger, debug, HOME.StreamService.Tidal.controllers.base.LPTidalDetailViewControllerBase, LPTidalDetailViewControllerBase, LPGlobalUI, getTopWidget, str, getattr, header, pushDetailPage, Exception, warning
+      str: '\n        从 Recently 记录进入 TIDAL 详情页或曲目列表的 See All 页面。\n\n        :param playList: 已恢复的播放列表。\n        :param navigationType: 目标类型，详情类型或 see_all。\n        :param baseController: 可选页面控制器，作为目标页父级。\n        :return: 成功发起导航返回 True。\n        '
+      str: '[TIDAL][Recently] navigateFromRecently ignore because itemId is empty'
+      str: 'LPTidalDetailViewControllerBase'
+      str: 'mix'
+      str: 'headTitle'
+      str: 'imageUrl'
+      str: 'itemTitle'
+      str: 'itemImageUrl'
+      str: '[TIDAL][Recently] navigate type=%s itemId=%s pushed=%s'
+      str: '[TIDAL][Recently] navigateFromRecently failed: %s'
+
+  def LPTidalStreamService._navigateRecentlySeeAll(self, playList, baseController)  line 354
+    names: tidalRecentlySeeAllSectionKey, logger, debug, HOME.StreamService.Tidal.controllers.pages.LPTidalSeeAllViewController, LPTidalSeeAllViewController, HOME.StreamService.Tidal.controllers.shell.LPTidalShellRouter, pushTidalPage, getattr, str, header, strip, descriptorForRecentlySection, _playFromRecently, LPGlobalUI, getTopWidget, sectionKey, endpointPath, Exception, warning
+      str: '\n        从 Recently 记录打开对应曲目列表的 See All 页面。\n\n        记录里只有列表身份（占位 id），需按身份重建 See All 描述：命中收藏曲占位 id 时\n        走 Collection 描述（接口路径带当前账号 userId），其余走首页/Featured 描述。\n        描述无法重建（例如账号 userId 缺失）时回退恢复播放，避免点击无响应。\n\n        :param playList: 已恢复的播放列表。\n        :param baseController: 可选页面控制器，作为 See All 页面父级。'
+      str: '[TIDAL][Recently] seeAll ignore because sectionKey is empty'
+      str: 'LPTidalSeeAllViewController'
+      str: 'pushTidalPage'
+      str: 'account'
+      str: 'userId'
+      str: '[TIDAL][Recently] seeAll fallback to play because descriptor is empty section=%s'
+      str: 'tidal_see_all'
+      str: '[TIDAL][Recently] navigate see_all section=%s endpoint=%s'
+      str: '[TIDAL][Recently] navigate see_all failed: %s'
+
+  def LPTidalStreamService._recentlyNavigationId(self, navigationType, playList)  line 395
+    names: header, LPRecentlyPlayListCodec, currentItemFromPlayList, str, getattr, strip
+      str: '\n        提取 Recently 跳详情所需的内容 ID。\n\n        :param navigationType: 详情类型。\n        :param playList: 已恢复的播放列表。\n        :return: 内容 ID；没有返回空字符串。\n        '
+      str: 'streamId'
+      str: 'headId'
+      str: 'album'
+      str: 'albumId'
+      str: 'artist'
+      str: 'artist_radio'
+      str: 'artistId'
+      str: 'playlist'
+      str: 'mix'
+      str: 'genre'
+      str: 'mood'
+
+  def LPTidalStreamService._playFromRecently(self, playList, detailDict)  line 416
+    names: getattr, LPGlobalUI, logger, debug, _syncRecentlyAccountContext, LPRecentlyPlayListCodec, currentItemFromPlayList, updateMediaInfoForSource, source, header, guardMediaInfoRollback, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, instance, tidalPlayingContextForPlaylist, setPlayingContext, str, setPlayingInfo, Exception, generateXML, index, warning, object, LPUpnpAsyncDataModel, palyWithSearchUrl
+      str: '\n        从 Recently 记录恢复 TIDAL 播放。\n\n        :param playList: 已恢复的播放列表。\n        :param detailDict: recently detail（保留参数，用于日志上下文）。\n        :return: 是否已成功发起播放请求。\n        '
+      str: 'currentDevice'
+      str: '[TIDAL][Recently] playFromRecently ignore because currentDevice is empty'
+      str: '[TIDAL][Recently] playFromRecently ignore because account context is invalid'
+      str: 'deviceStreamServiceManager'
+      str: 'LPTidalStore'
+      str: 'headTitle'
+      str: 'trackId'
+      str: 'TRANSITIONING'
+      str: '[TIDAL][Recently] playFromRecently generateXML failed: %s'
+      str: 'response'
+      str: 'args'
+      str: 'return'
+      str: 'LPTidalStreamService._playFromRecently.<locals>._on_play_result'
+
+    def LPTidalStreamService._playFromRecently._on_play_result(response, *args)  line 462
+      names: bool, logger, debug, getattr, LPRecentlyManager, instance, addRecentlyPlayedWithMusicList, tidalRecentlyNavigationType, Exception, warning
+        str: '\n            处理恢复播放 CreateQueue 返回。\n\n            :param response: 设备返回。\n            :param args: 透传参数。\n            :return: None。\n            '
+        str: '[TIDAL][Recently] CreateQueue result=%s title=%s'
+        str: 'trackName'
+        str: 'openMore'
+        str: 'canNavigate'
+        str: '[TIDAL][Recently] rewrite recently failed: %s'
+
+  def LPTidalStreamService._syncRecentlyAccountContext(self, playList)  line 485
+    names: LPClientFramework.LPMSManager.Tidal.LPTidalLoginManager, LPTidalLoginManager, getattr, LPGlobalUI, instance, syncAccountFromDevice, Exception, logger, debug, accountForSource, source, getAccount, str, strip, LPTidalAccount, account, setattr, header, userId
+      str: '\n        将 Recently 恢复出的播放列表账号归一化为当前设备账号。\n\n        :param playList: 已恢复的播放列表。\n        :return: 当前账号可用返回 True。\n        '
+      str: 'LPTidalLoginManager'
+      str: 'currentDevice'
+      str: '[TIDAL][Recently] sync account before restore failed: %s'
+      str: 'deviceStreamServiceManager'
+      str: 'userId'
+      str: 'account'
+      str: 'userId'
+      str: 'userName'
+      str: 'token'
+      str: 'refreshToken'
+      str: 'sessionId'
+      str: 'countryCode'
+
+  def LPTidalStreamService._playListFromRecentlyDetail(self, detailDict)  line 523
+    names: LPRecentlyPlayListCodec, playListFromDetail, LPTidalPlayList, LPTidalPlayHeader, LPTidalPlayItem, source, LPTidalAccount, _normalizeRecentlyAccountFromDetail
+      str: '\n        从 Recently detail["playList"] 还原 TIDAL 播放列表。\n\n        :param detailDict: recently detail 字典。\n        :return: 可用的 TIDAL 播放列表；无效时返回 None。\n        '
+      str: 'rawUserInfo'
+      str: 'credential'
+      str: 'accountClass'
+      str: 'accountExcludeKeys'
+      str: 'normalizeAccount'
+
+  def LPTidalStreamService._normalizeRecentlyAccountFromDetail(self, account)  line 541
+    names: getattr, source
+      str: '\n        归一化 Recently 反序列化后的 TIDAL 账号。\n\n        :param account: 从 recently detail 恢复出的账号。\n        :return: 归一化后的账号。\n        '
+      str: 'source'
+
+  def LPTidalStreamService.isCurrentPlayItem(self, device, playItem)  line 552
+    names: getattr, source, _matchesCurrentTrackId
+      str: '\n        判断指定 TIDAL 曲目是否为设备当前播放曲目。\n\n        :param device: 当前设备。\n        :param playItem: 待判断的播放条目。\n        :return: 当前播放项匹配返回 True。\n        '
+      str: 'mediaInfo'
+      str: 'trackSource'
+
+  def LPTidalStreamService.currentPlayItem(self, device)  line 565
+    names: super, currentPlayItem
+      str: '\n        返回设备当前播放的 TIDAL 播放项。\n\n        :param device: 当前播放设备。\n        :return: 当前播放项；没有可用信息时返回 None。\n        '
+
+  def LPTidalStreamService.parseQueuePlayItem(self, trackItemObj)  line 574
+    names: LPTidalPlayItem, find, text, source, trackSource, trackUrl, BeautifulSoup, _metadataText, trackName, trackId, trackImage, trackArtist, artistId, albumName, albumId, list, findAll, get, _durationSeconds, trackDuration
+      str: '\n        解析 BrowseQueue 返回的 TIDAL 单曲节点。\n\n        :param trackItemObj: 队列 XML 中的单个 Track 节点。\n        :return: 解析后的 TIDAL 播放项；缺少关键字段时返回 None。\n        '
+      str: 'Source'
+      str: 'URL'
+      str: 'Metadata'
+      str: 'xml'
+      str: 'dc:title'
+      str: 'title'
+      str: 'song:id'
+      str: 'id'
+      str: 'Id'
+      str: 'upnp:albumArtURI'
+      str: 'albumArtURI'
+      str: 'upnp:artist'
+      str: 'artist'
+      str: 'song:singerid'
+      str: 'singerid'
+      str: 'upnp:album'
+      str: 'album'
+      str: 'song:albumid'
+      str: 'albumid'
+      str: 'res'
+      str: 'duration'
+
+  def LPTidalStreamService.registerAccount(self, userinfo)  line 614
+    names: isinstance, dict, logger, debug, type, __name__, account, _userPayloadFromUserInfo, _currentDeviceUuid, sorted, keys, bool, _firstStringValue, LPTidalAccount, userName, userId, _intValue, time, expressIn, expiresIn, tokenUpdatedAt, tokenExpiresAt, showName, email, countryCode, _decodeToken, sessionId, get, credential, _subscriptionInfoFromUserInfo, subscription, _isSupportReplayGain, supportReplayGain, _isShowAutoplay, showAutoplay, token, refreshToken, rawUserInfo, str
+      str: '\n        注册设备返回的 TIDAL 账号信息。\n\n        :param userinfo: 设备 `GetUserInfo` 或账号变化通知返回的用户信息。\n        :return: TIDAL 账号对象；输入无效时返回 None。\n        '
+      str: '[TIDAL][StreamService] registerAccount invalid userinfo type=%s'
+      str: '[TIDAL][StreamService] registerAccount input device=%s keys=%s user_keys=%s has_token=%s has_session=%s'
+      str: 'accessToken'
+      str: 'token'
+      str: 'access_token'
+      str: 'sessionId'
+      str: 'session_id'
+      str: 'sid'
+      str: 'userName'
+      str: 'username'
+      str: 'login'
+      str: 'email'
+      str: 'userId'
+      str: 'user_id'
+      str: 'id'
+      str: 'expressIn'
+      str: 'expiresIn'
+      str: 'expires_in'
+      str: 'showName'
+      str: 'displayName'
+      str: 'name'
+      str: 'fullName'
+      str: 'nickname'
+      str: 'countryCode'
+      str: 'country'
+      str: 'credential'
+      str: 'refreshToken'
+      str: 'refresh_token'
+      str: '[TIDAL][StreamService] registerAccount output device=%s userId=%s userName=%s has_token=%s has_refresh=%s has_session=%s country=%s subscription_title=%s'
+      str: 'title'
+
+  def LPTidalStreamService._tidalCapability(self)  line 689
+    names: getattr, LPGlobalUI, source
+      str: '\n        从设备 StreamServicesCapability 中获取 Tidal 音源的原始能力信息。\n\n        参照 Android TidalHWController.saveUserInfo 的实现，\n        sourceVersion 和 replayGain 来自设备 capability 而非 GetUserInfo 响应。\n\n        :return: Tidal 在 streamServices 中的条目字典，未找到返回空字典。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'deviceCapabilityForSource'
+      str: 'LPTidalStreamService._tidalCapability.<locals>.<lambda>'
+
+    def LPTidalStreamService._tidalCapability.<lambda>(s)  line 702
+
+  def LPTidalStreamService._isSupportReplayGain(self, userinfo)  line 704
+    names: _tidalCapability, str, get, strip, bool, _isVersionAtLeast, logger, debug, Exception
+      str: '\n        判断设备是否支持 Replay Gain，依据 StreamServicesCapability 中的版本号和 replayGain 标志。\n\n        :param userinfo: 设备账号信息（保留参数兼容，实际从 capability 读取）。\n        :return: 支持返回 True。\n        '
+      str: 'version'
+      str: 'replayGain'
+      str: '2.2.2'
+      str: '[TIDAL][StreamService] _isSupportReplayGain cap_version=%s replayGain=%s result=%s'
+
+  def LPTidalStreamService._isShowAutoplay(self, userinfo)  line 726
+    names: _tidalCapability, str, get, strip, _isVersionAtLeast, logger, debug, Exception
+      str: '\n        判断设备是否展示 Autoplay，依据 StreamServicesCapability 中的版本号。\n\n        :param userinfo: 设备账号信息（保留参数兼容，实际从 capability 读取）。\n        :return: 展示返回 True。\n        '
+      str: 'version'
+      str: '2.3'
+      str: '[TIDAL][StreamService] _isShowAutoplay cap_version=%s result=%s'
+
+  def LPTidalStreamService.getAccount(self)  line 746
+    names: account
+      str: '\n        返回当前 TIDAL 账号。\n\n        :return: TIDAL 账号对象或 None。\n        '
+
+  def LPTidalStreamService.LPTrackMoreViewControllerCanViewArtist(self, playHeader, playItem, immediately, callback)  line 754
+    names: _canViewDetailArtist
+      str: '\n        判断 minibar More 是否可展示 TIDAL View Artist。\n\n        :param playHeader: 当前播放头，保留接口兼容。\n        :param playItem: 当前播放项。\n        :param immediately: 是否立即返回结果，保留接口兼容。\n        :param callback: 可选回调，参数为 `(canView, None)`。\n        :return: 可展示返回 True。\n        '
+
+  def LPTidalStreamService.LPTrackMoreViewControllerCanViewAlbum(self, playHeader, playItem, artistItem, immediately, callback)  line 772
+    names: _canViewDetailAlbum
+      str: '\n        判断 minibar More 是否可展示 TIDAL View Album。\n\n        :param playHeader: 当前播放头，保留接口兼容。\n        :param playItem: 当前播放项。\n        :param artistItem: 艺人项，保留接口兼容。\n        :param immediately: 是否立即返回结果，保留接口兼容。\n        :param callback: 可选回调，参数为 `(canView, None)`。\n        :return: 可展示返回 True。\n        '
+
+  def LPTidalStreamService.LPTrackMoreViewControllerViewArtist(self, playHeader, playItem, artistItem, callback)  line 792
+    names: _viewDetailArtist
+      str: '\n        从 minibar More 进入 TIDAL artist 详情页。\n\n        :param playHeader: 当前播放头。\n        :param playItem: 当前播放项。\n        :param artistItem: 艺人项，保留接口兼容。\n        :param callback: 共享菜单回调；TIDAL 通过该回调返回构造好的详情页控制器。\n        :return: None。\n        '
+
+  def LPTidalStreamService._openArtistDetail(self, playHeader, playItem, artistId, callback)  line 810
+    names: HOME.StreamService.Tidal.controllers.shell.LPTidalShellRouter, isCurrentTidalDetailPage, HOME.StreamService.Tidal.controllers.details.LPTidalArtistDetailViewController, LPTidalArtistDetailViewController, LPGlobalUI, getTopWidget
+      str: 'TIDAL 构造艺人详情控制器并通过共享菜单回调打开。'
+      str: 'isCurrentTidalDetailPage'
+      str: 'artist'
+      str: 'LPTidalArtistDetailViewController'
+
+  def LPTidalStreamService.LPTrackMoreViewControllerViewAlbum(self, playHeader, playItem, albumItem, callback)  line 823
+    names: _viewDetailAlbum
+      str: '\n        从 minibar More 进入 TIDAL album 详情页。\n\n        :param playHeader: 当前播放头。\n        :param playItem: 当前播放项。\n        :param albumItem: 专辑项，保留接口兼容。\n        :param callback: 共享菜单回调；TIDAL 通过该回调返回构造好的详情页控制器。\n        :return: None。\n        '
+
+  def LPTidalStreamService._openAlbumDetail(self, playHeader, playItem, albumId, callback)  line 841
+    names: HOME.StreamService.Tidal.controllers.shell.LPTidalShellRouter, isCurrentTidalDetailPage, HOME.StreamService.Tidal.controllers.details.LPTidalAlbumDetailViewController, LPTidalAlbumDetailViewController, LPGlobalUI, getTopWidget
+      str: 'TIDAL 构造专辑详情控制器并通过共享菜单回调打开。'
+      str: 'isCurrentTidalDetailPage'
+      str: 'album'
+      str: 'LPTidalAlbumDetailViewController'
+
+  def LPTidalStreamService.LPTrackMoreViewControllerCanAddToPlaylist(self, playHeader, playItem, artistItem, immediately, callback)  line 854
+    names: str, getattr, strip, getAccount, bool
+      str: '\n        判断 Queue TrackMore 是否可展示 Add to playlist 入口。\n\n        :param playHeader: 播放列表头。\n        :param playItem: 当前播放条目。\n        :param artistItem: 艺人条目。\n        :param immediately: 是否立即返回结果。\n        :param callback: 异步回调。\n        :return: 可展示返回 True。\n        '
+      str: 'trackId'
+      str: 'userId'
+
+  def LPTidalStreamService.LPTrackMoreViewControllerAddToPlaylist(self, playHeader, playItem, albumItem, callback)  line 880
+    names: str, getattr, strip, HOME.StreamService.Tidal.widgets.LPTidalAddToPlaylistDialogHost, LPTidalAddToPlaylistDialogHost, instance, showForTrack
+      str: '\n        从 Queue TrackMore 打开 TIDAL Add-to-playlist 对话框。\n\n        :param playHeader: 播放列表头。\n        :param playItem: 当前播放条目。\n        :param albumItem: 专辑条目。\n        :param callback: 完成回调。\n        :return: None。\n        '
+      str: 'trackId'
+      str: 'trackName'
+      str: 'LPTidalAddToPlaylistDialogHost'
+
+  def LPTidalStreamService.LPTrackMoreCanPreset(self, device)  line 910
+    names: _isSearchTrackPlayback
+      str: '\n        判断 TIDAL minibar 当前播放菜单是否展示 preset。\n\n        :param device: 当前播放设备。\n        :return: TIDAL 当前播放队列可保存 preset 时返回 True。\n        '
+
+  def LPTidalStreamService.recentlyCanPreset(self, detailDict)  line 919
+    names: _recentlyCanPresetForDetail
+      str: '\n        判断 TIDAL Recently 卡片条目是否支持保存为 preset。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: 设备支持预设、队列非搜索单曲且快照可还原时返回 True。\n        '
+
+  def LPTidalStreamService.canFavorite(self, itemType, itemId)  line 928
+    names: str, strip, lower, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, instance, favoriteState, favoriteTypeForItem, Exception, logger, debug, _detailNavigationReady
+      str: '\n        判断 TIDAL 是否支持收藏指定条目。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 类型受支持且账号与 token 就绪时返回 True。\n        '
+      str: 'LPTidalStore'
+      str: '[TIDAL] canFavorite type check failed: %s'
+
+  def LPTidalStreamService.recentlyFavoriteTarget(self, detailDict)  line 951
+    names: _playListFromRecentlyDetail, header, getattr, LPHeaderType, LP_HEADER_TYPE_ALBUM, _recentlyNavigationId, LP_HEADER_TYPE_ARTIST, LP_HEADER_TYPE_PLAYLIST, tidalRecentlyNavigationType, bool, LP_HEADER_TYPE_SONG, LPRecentlyPlayListCodec, currentItemFromPlayList, str, strip
+      str: '\n        推导 TIDAL Recently 条目加入收藏所需的类型与 ID。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: ``(itemType, itemId)`` 元组；无法推导时返回 None。\n        '
+      str: 'headType'
+      str: 'album'
+      str: 'artist'
+      str: 'playlist'
+      str: 'recentlyIsUserPlaylist'
+      str: 'trackId'
+      str: 'track'
+
+  def LPTidalStreamService.favoriteState(self, itemType, itemId)  line 986
+    names: str, strip, lower, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, instance, getattr, bool, isFavorite, Exception, logger, debug
+      str: '\n        返回 TIDAL 指定条目当前收藏状态。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 已收藏返回 True；未收藏返回 False；目标或状态不可用时返回 None。\n        '
+      str: 'LPTidalStore'
+      str: 'favoriteState'
+      str: '[TIDAL] favoriteState failed: %s'
+
+  def LPTidalStreamService.setFavorite(self, itemType, itemId, desiredFavorite, callback, itemData)  line 1010
+    names: HOME.StreamService.Tidal.services.LPTidalFavoriteService, LPTidalFavoriteService, instance, setFavorite, bool
+      str: '\n        异步设置 TIDAL 指定条目收藏状态。\n\n        委托共享的 LPTidalFavoriteService 执行乐观更新、请求调度与失败回滚。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :param desiredFavorite: 目标收藏状态。\n        :param callback: 结果回调，参数为结果字典。\n        :param itemData: 保留参数，TIDAL 使用服务端元数据，不消费。\n        :return: None。\n'
+      str: 'LPTidalFavoriteService'
+
+  def LPTidalStreamService.favoriteStateNeedsResync(self, itemType, itemId)  line 1027
+    names: str, strip, lower, getattr, LPGlobalUI, accountForSource, source, getAccount, HOME.StreamService.Tidal.state.LPTidalStore, LPTidalStore, LPClientFramework.LPFavoriteCacheManager, LPFavoriteCacheManager, instance, status, isFavorite, bool, pendingAge, FAVORITE_RESYNC_PENDING_GRACE_SECONDS, HOME.StreamService.Tidal.services.LPTidalFavoriteService, LPTidalFavoriteService, sweepStaleOperations, logger, warning, Exception, debug
+      str: '\n        判断 TIDAL 条目收藏结论是否需要与服务端做一次定向校正。\n\n        Store 的结论包含乐观状态，通用缓存只保存已确认结果；当二者在“无新发起操作”\n        前提下仍不一致时，说明缓存可能已被漏提交的操作遗漏，需要重拉一次收藏 ID。\n\n        :param itemType: 条目类型。\n        :param itemId: 条目 ID。\n        :return: 需要校正返回 True。\n        '
+      str: 'currentDevice'
+      str: 'deviceStreamServiceManager'
+      str: 'userId'
+      str: 'LPTidalStore'
+      str: 'LPFavoriteCacheManager'
+      str: 'Tidal'
+      str: 'synced'
+      str: 'stale'
+      str: 'favoriteState'
+      str: 'LPTidalFavoriteService'
+      str: '[TIDAL] favorite state diverges from cache type=%s itemId=%s cached=%s pendingAge=%s'
+      str: '[TIDAL] favoriteStateNeedsResync failed: %s'
+
+  def LPTidalStreamService.recentlyPlayListFromDetail(self, detailDict)  line 1090
+    names: _playListFromRecentlyDetail
+      str: '\n        还原 TIDAL Recently 卡片 preset 使用的播放列表。\n\n        :param detailDict: recently 记录中的 detail 字典。\n        :return: 还原成功的 TIDAL 播放列表；失败时返回 None。\n        '
+
+  def LPTidalStreamService.backupXml(self, playList, listName, **kwargs)  line 1099
+    names: _normalizePresetPlayList, generateBackupQueueXML
+      str: '\n        生成 TIDAL preset BackUpQueue XML。\n\n        :param playList: TIDAL 播放列表。\n        :param listName: preset 列表名。\n        :param kwargs: 兼容共享 preset 调用的额外参数。\n        :return: BackUpQueue XML 字符串。\n        '
+
+  def LPTidalStreamService.replaceItemXml(self, playList, name)  line 1112
+    names: _normalizePresetPlayList, generateSetKeyMappingXML
+      str: '\n        生成 TIDAL preset KeyMapping 替换片段。\n\n        :param playList: TIDAL 播放列表。\n        :param name: preset 名称。\n        :return: KeyMapping 单项 XML 片段。\n        '
+
+  def LPTidalStreamService.logoutAccount(self)  line 1123
+    names: account, getattr, LPGlobalUI, upnpPost, LPPlayListSource, Tidal, value, Exception, logger, warning, _clearCurrentTidalPlaybackContext
+      str: '\n        登出当前 TIDAL 账号并通知设备。\n\n        :return: None。\n        '
+      str: 'currentDevice'
+      str: 'UserLogout'
+      str: 'AccountSource'
+      str: '[LPTidalStreamService] logoutAccount failed: '
+
+  def LPTidalStreamService._clearCurrentTidalPlaybackContext(self, device)  line 1139
+    names: getattr, source, callable, items, hasattr, setattr, playList, version, checkSum, needsQueueRefresh
+      str: '\n        清理当前设备上仍属于 TIDAL 的本地播放上下文。\n\n        :param device: 当前播放设备。\n        :return: None。\n        '
+      str: 'mediaInfo'
+      str: 'trackSource'
+      str: 'STOPPED'
+      str: '00:00:00'
+      str: 'playState'
+      str: 'trackSource'
+      str: 'mediaType'
+      str: 'trackName'
+      str: 'trackId'
+      str: 'itemId'
+      str: 'playUri'
+      str: 'artist'
+      str: 'artistId'
+      str: 'album'
+      str: 'albumId'
+      str: 'artworkUri'
+      str: 'artworkImage'
+      str: 'customUUID'
+      str: 'guiBehavior'
+      str: 'itemName'
+      str: 'playSection'
+      str: 'duration'
+      str: 'progress'
+      str: 'updateMediaInfo'
+      str: 'queueManager'
+
+  def LPTidalStreamService.accountChanged(self, device, notify)  line 1186
+    names: _handleAccountChangedNotify
+      str: '\n        处理设备侧账号变化通知。\n\n        :param device: 触发通知的设备。\n        :param notify: 设备通知内容。\n        :return: None。\n        '
+
+  def LPTidalStreamService._handleAccountChangedNotify(self, device, notify)  line 1196
+    names: isinstance, dict, get, source, _payloadFromNotify, registerAccount, LPUtility, postNotification, account, _clearCurrentTidalPlaybackContext
+      str: '\n        解析并转发账号变化通知。\n\n        :param device: 触发通知的设备。\n        :param notify: 设备通知内容。\n        :return: None。\n        '
+      str: 'source'
+      str: 'eventType'
+      str: 'accountChange'
+      str: 'accountChangedForSource'
+      str: 'device'
+      str: 'notify'
+      str: 'logout'
+
+  def LPTidalStreamService._payloadFromNotify(self, notify)  line 1224
+    names: get, isinstance, dict, str, json, loads, Exception
+      str: '\n        从设备通知中解析用户信息。\n\n        :param notify: 设备通知内容。\n        :return: 用户信息字典。\n        '
+      str: 'payload'
+
+  def LPTidalStreamService._userPayloadFromUserInfo(self, userinfo)  line 1242
+    names: get, isinstance, dict
+      str: '\n        从设备用户信息中取出 Android 风格的 user 子对象。\n\n        :param userinfo: 设备用户信息。\n        :return: 用户子对象字典。\n        '
+      str: 'user'
+
+  def LPTidalStreamService._subscriptionInfoFromUserInfo(self, userinfo)  line 1252
+    names: get, isinstance, dict, _firstStringValue, str
+      str: '\n        从设备用户信息中提取订阅信息。\n\n        :param userinfo: 设备用户信息。\n        :return: 订阅信息字典。\n        '
+      str: 'subscription'
+      str: 'subscriptionInfo'
+      str: 'title'
+      str: 'type'
+      str: 'description'
+      str: 'status'
+      str: 'plan'
+      str: 'validUntil'
+      str: 'expiresAt'
+      str: 'expirationDate'
+      str: 'title'
+      str: 'validUntil'
+      str: 'extra'
+      str: 'credential'
+
+  def LPTidalStreamService._decodeToken(self, token)  line 1275
+    names: str, _currentDeviceUuid, AESCipher, decrypt2, Exception
+      str: '\n        使用当前设备 UUID 解密设备返回的 token，失败时保留原值。\n\n        :param token: 设备返回的 token。\n        :return: 解密后的 token 或原 token。\n        '
+
+  def LPTidalStreamService._isVersionAtLeast(self, version, target)  line 1293
+    names: str, list, int, max, len, extend
+      str: '\n        判断版本号是否不低于目标版本。\n\n        :param version: 当前版本号。\n        :param target: 目标版本号。\n        :return: 满足要求返回 True。\n        '
+      str: 'value'
+      str: 'return'
+      str: 'LPTidalStreamService._isVersionAtLeast.<locals>._parts'
+
+    def LPTidalStreamService._isVersionAtLeast._parts(value)  line 1301
+      names: str, split, append, int, Exception
+        str: '.'
+
+  def LPTidalStreamService._currentDeviceUuid(self)  line 1317
+    names: getattr, LPGlobalUI, str
+      str: '\n        返回当前设备 UUID。\n\n        :return: 设备 UUID。\n        '
+      str: 'currentDevice'
+      str: 'uuid'
+
+  def LPTidalStreamService._firstStringValue(self, payload, *keys)  line 1326
+    names: isinstance, dict, get, str, strip
+      str: '\n        从字典中按顺序读取第一个非空字符串。\n\n        :param payload: 原始字典。\n        :param keys: 候选键名。\n        :return: 字符串值。\n        '
+
+  def LPTidalStreamService._intValue(self, value)  line 1342
+    names: int, float, str, strip, Exception
+      str: '\n        将设备返回的数字字段转换为 int。\n\n        :param value: 原始字段值。\n        :return: 可转换时返回整数，否则返回 0。\n        '

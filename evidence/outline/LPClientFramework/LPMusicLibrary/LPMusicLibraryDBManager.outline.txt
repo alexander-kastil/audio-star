@@ -1,0 +1,115 @@
+# module LPClientFramework.LPMusicLibrary.LPMusicLibraryDBManager
+
+[module] names: __doc__, json, threading, datetime, LPClientFramework, LPMusicDatabase, LPClientFramework.LPUtility, logger, RECENTLY_DIRECTORY_NAME, RECENTLY_DIRECTORY_TYPE, RECENTLY_MAX_COUNT, object, LPMusicLibraryDBManager
+  str: '\nMusic Library 的 SQLite 持久化层。\n\n当前主要服务于 Recently Played：把账号、目录、播放项分别落到 ``LibAccount`` / ``LibMusicList`` / ``LibMusicItem``\n三张表，并提供按目录读写、去重裁剪、删除等能力。\n\n约束（与文档一致）：\n- Recently 使用的目录标识：``directoryName = "recently"``，``directoryType = "favorite"``\n- 整个 Recently 目录最多保留 ``RECENTLY_MAX_COUNT`` 条\n- ``checkDupl'
+  str: 'datetime'
+  str: 'LPMusicDatabase'
+  str: 'logger'
+  str: 'recently'
+  str: 'favorite'
+  str: 'LPMusicLibraryDBManager'
+
+def LPMusicLibraryDBManager()  line 30
+  names: __name__, __module__, __qualname__, __doc__, _instance, threading, Lock, _instanceLock, __init__, databasePath, classmethod, instance, _connect, _initDb, ensureDirectory, upsertAccount, staticmethod, _nowTimestamp, addRecentlyItem, getRecentlyItems, deleteRecentlyItems
+    str: 'LPMusicLibraryDBManager'
+    str: 'Music Library 的单例 DB 管理器，封装 SQLite 读写与线程锁。'
+    str: 'LPMusicLibraryDBManager.__init__'
+    str: 'LPMusicLibraryDBManager.databasePath'
+    str: 'LPMusicLibraryDBManager.instance'
+    str: 'LPMusicLibraryDBManager._connect'
+    str: 'LPMusicLibraryDBManager._initDb'
+    str: 'LPMusicLibraryDBManager.ensureDirectory'
+    str: 'LPMusicLibraryDBManager.upsertAccount'
+    str: 'LPMusicLibraryDBManager._nowTimestamp'
+    str: 'LPMusicLibraryDBManager.addRecentlyItem'
+    str: 'LPMusicLibraryDBManager.getRecentlyItems'
+    str: 'LPMusicLibraryDBManager.deleteRecentlyItems'
+
+  def LPMusicLibraryDBManager.__init__(self)  line 36
+    names: str, LPMusicDatabase, databasePath, _dbPath, threading, RLock, _lock, _initDb
+
+  def LPMusicLibraryDBManager.databasePath(self)  line 42
+    names: _dbPath
+      str: '返回 Recently 使用的共享主库路径。\n\n        参数:\n            无。\n        返回:\n            str: 共享主库文件路径。\n        '
+
+  def LPMusicLibraryDBManager.instance(cls)  line 52
+    names: _instance, _instanceLock
+
+  def LPMusicLibraryDBManager._connect(self)  line 64
+    names: LPMusicDatabase, connect, _dbPath
+      str: '创建共享主库连接；PRAGMA 与 busy_timeout 由 LPMusicDatabase 统一设置。\n\n        参数:\n            无。\n        返回:\n            sqlite3.Connection: 主库连接。\n        '
+
+  def LPMusicLibraryDBManager._initDb(self)  line 74
+    names: _lock, _connect, cursor, execute, commit, Exception, logger, error, close
+      str: '\n                    CREATE TABLE IF NOT EXISTS LibAccount (\n                        accountId TEXT PRIMARY KEY,\n                        source TEXT,\n                        userId TEXT,\n                        userName TEXT,\n                        token TEXT,\n                        refreshToken T'
+      str: '\n                    CREATE TABLE IF NOT EXISTS LibMusicList (\n                        directoryId TEXT PRIMARY KEY,\n                        directoryName TEXT,\n                        directoryType TEXT,\n                        accountId TEXT,\n                        source TEXT\n                   '
+      str: '\n                    CREATE TABLE IF NOT EXISTS LibMusicItem (\n                        itemId TEXT PRIMARY KEY,\n                        directoryId TEXT,\n                        directoryName TEXT,\n                        directoryType TEXT,\n                        accountId TEXT,\n                  '
+      str: 'CREATE INDEX IF NOT EXISTS idx_item_directory ON LibMusicItem(directoryId)'
+      str: 'CREATE INDEX IF NOT EXISTS idx_item_account_track ON LibMusicItem(directoryId, accountId, trackId)'
+      str: 'CREATE INDEX IF NOT EXISTS idx_item_create_time ON LibMusicItem(directoryId, createTime DESC)'
+      str: '[MusicLibraryDB] initDb failed: %s'
+
+  def LPMusicLibraryDBManager.ensureDirectory(self, directoryName, directoryType, accountId, source)  line 144
+    names: _lock, _connect, execute, commit, Exception, logger, error, close
+      str: '\n        确保指定目录存在，返回 directoryId。\n\n        directoryId 用 ``directoryName`` 直接表示，保证同一类目录全局唯一。\n        '
+      str: '\n                    INSERT OR IGNORE INTO LibMusicList\n                    (directoryId, directoryName, directoryType, accountId, source)\n                    VALUES (?, ?, ?, ?, ?)\n                    '
+      str: '[MusicLibraryDB] ensureDirectory failed: %s'
+
+  def LPMusicLibraryDBManager.upsertAccount(self, accountDict)  line 169
+    names: isinstance, dict, get, _lock, _connect, execute, json, dumps, commit, Exception, logger, error, close
+      str: '写入或更新账号记录，accountDict 至少需要包含 accountId。'
+      str: 'accountId'
+      str: '\n                    INSERT OR REPLACE INTO LibAccount\n                    (accountId, source, userId, userName, token, refreshToken, detail)\n                    VALUES (?, ?, ?, ?, ?, ?, ?)\n                    '
+      str: 'source'
+      str: 'userId'
+      str: 'userName'
+      str: 'token'
+      str: 'refreshToken'
+      str: 'detail'
+      str: 'ensure_ascii'
+      str: '[MusicLibraryDB] upsertAccount failed: %s'
+
+  def LPMusicLibraryDBManager._nowTimestamp()  line 202
+    names: int, datetime, now, timestamp
+
+  def LPMusicLibraryDBManager.addRecentlyItem(self, directoryId, directoryName, directoryType, itemDict)  line 206
+    names: isinstance, dict, get, _nowTimestamp, json, dumps, _lock, _connect, cursor, execute, int, RECENTLY_MAX_COUNT, commit, close, Exception, logger, error
+      str: '\n        写入一条 Recently 记录。\n\n        itemDict 需要包含的字段与 ``LibMusicItem`` 对应，detail 字段会被 JSON 序列化。\n        当 ``checkDuplicate`` 为真时，会先删除同目录、同账号、同 trackId 的旧记录。\n        写入后会裁剪到 ``RECENTLY_MAX_COUNT`` 条。\n        '
+      str: 'itemId'
+      str: '%s_%s_%s'
+      str: 'accountId'
+      str: 'trackId'
+      str: 'createTime'
+      str: 'detail'
+      str: 'ensure_ascii'
+      str: 'checkDuplicate'
+      str: '\n                        DELETE FROM LibMusicItem\n                        WHERE directoryId = ? AND accountId = ? AND trackId = ?\n                        '
+      str: '\n                    INSERT OR REPLACE INTO LibMusicItem\n                    (itemId, directoryId, directoryName, directoryType, accountId, source,\n                     trackName, trackId, trackImage, trackArtist, typeValue,\n                     openMore, canNavigate, checkDuplicate, detail, createT'
+      str: 'source'
+      str: 'trackName'
+      str: 'trackImage'
+      str: 'trackArtist'
+      str: 'typeValue'
+      str: 'openMore'
+      str: 'canNavigate'
+      str: '\n                    DELETE FROM LibMusicItem\n                    WHERE directoryId = ? AND itemId NOT IN (\n                        SELECT itemId FROM LibMusicItem\n                        WHERE directoryId = ?\n                        ORDER BY createTime DESC\n                        LIMIT ?\n         '
+      str: '[MusicLibraryDB] addRecentlyItem failed: %s'
+
+  def LPMusicLibraryDBManager.getRecentlyItems(self, directoryId, limit)  line 293
+    names: _lock, _connect, cursor, execute, int, fetchall, Exception, logger, error, close, dict, get, isinstance, str, json, loads, append
+      str: '\n        按 createTime 倒序读取 Recently 记录。\n\n        Args:\n            directoryId: 目录标识，通常是 ``recently``。\n            limit: 最多返回的条数；``-1`` 表示返回全部。\n\n        Returns:\n            字典列表，每项的字段与 ``LibMusicItem`` 对齐，detail 已反序列化。\n        '
+      str: '\n                        SELECT * FROM LibMusicItem\n                        WHERE directoryId = ?\n                        ORDER BY createTime DESC\n                        '
+      str: '\n                        SELECT * FROM LibMusicItem\n                        WHERE directoryId = ?\n                        ORDER BY createTime DESC\n                        LIMIT ?\n                        '
+      str: '[MusicLibraryDB] getRecentlyItems failed: %s'
+      str: 'detail'
+
+  def LPMusicLibraryDBManager.deleteRecentlyItems(self, directoryId, itemIds)  line 348
+    names: _lock, _connect, join, len, execute, list, commit, Exception, logger, error, close
+      str: '按 itemId 批量删除 Recently 记录。'
+      str: 'LPMusicLibraryDBManager.deleteRecentlyItems.<locals>.<listcomp>'
+      str: ','
+      str: '?'
+      str: 'DELETE FROM LibMusicItem WHERE directoryId = ? AND itemId IN (%s)'
+      str: '[MusicLibraryDB] deleteRecentlyItems failed: %s'
+
+    def LPMusicLibraryDBManager.deleteRecentlyItems.<listcomp>(.0)  line 352
