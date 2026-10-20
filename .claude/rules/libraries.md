@@ -1,0 +1,41 @@
+---
+paths:
+  - "src/audio-start/AudioStar.Core/**"
+  - "src/audio-start/AudioStar.Speakers/**"
+  - "src/audio-start/AudioStar.Devices/**"
+  - "src/audio-start/AudioStar.Library/**"
+  - "src/audio-start/AudioStar.Sources/**"
+  - "src/audio-start/AudioStar.*.Tests/**"
+  - "src/audio-start/db/**"
+---
+
+# Audio Star libraries (src/audio-start)
+
+- Owner agent: `dotnet-expert`. The WPF shell and the MSI go to `wpf-expert` (`.claude/rules/desktop.md`).
+- Solution: `src/audio-start/AudioStar.slnx`. `AudioStar.Core` holds the shared contract: `ISpeakerSession`, `ISpeakerController`, `IMusicSource`, `IMediaServer`, `IEditablePlaylistSource`, settings and `AppPaths`. Every library is UI-free so a later port only replaces `AudioStar.Desktop`.
+- `AudioStar.Speakers`: discovery (SSDP `ssdp:wiimudevice`, mDNS `_linkplay._tcp`, manual IP), UPnP SOAP and `httpapi` clients, playback, queue, presets.
+- `AudioStar.Devices`: multiroom groups, device settings.
+- `AudioStar.Library`: My Music (scan, SQLite), the media and stream-proxy HTTP server, DLNA server, Home Share, recently played.
+- `AudioStar.Sources`: YouTube and SoundCloud through yt-dlp, Spotify (Web API plus Connect), radio (radio-browser.info).
+- Build: `dotnet build src/audio-start/AudioStar.Desktop/AudioStar.Desktop.csproj`.
+- Tests: xUnit, FluentAssertions 7.2.0, NSubstitute; a library tested with NSubstitute needs `InternalsVisibleTo DynamicProxyGenAssembly2`. Run `dotnet test src/audio-start/AudioStar.Sources.Tests/AudioStar.Sources.Tests.csproj` (also `Speakers`, `Devices`, `Library`) one by one; one test with `--filter "FullyQualifiedName~PlaylistCacheTests"`.
+- Never `dotnet test AudioStar.slnx`: it does not refresh the Desktop `bin`, and because the WiX project is in the solution it also publishes and builds the MSI.
+- Speaker control: UPnP SOAP on port 59152 (`rendertransport1`, `rendercontrol1`, `PlayQueue1` for the queue). `https://<ip>/httpapi.asp?command=` also works, with no client certificate and certificate checks off.
+- State is polled: the WiiM Amp firmware sends no UPnP NOTIFY, so `SpeakerSession` polls `GetInfoEx` every 1 to 2 seconds. Events are a bonus.
+- Queueing a playlist (`FastPlayPlanner`): `CreateQueue` with the first one or two tracks, start playback, then `AppendTracksInQueueEx` in chunks of 50 with a short delay and one retry. Larger chunks make the speaker drop the connection.
+- Queue `SourceName`: never a service the speaker has built in. "SoundCloud" makes the speaker blank the URLs, so the SoundCloud source uses "SoundCloud via Audio Star".
+- Streams: the speaker never sees YouTube or SoundCloud URLs. Each queued track points at the PC, `http://<pc>:22545/stream/<sourceId>/<trackId>`; when the speaker fetches it, the source's `IStreamResolver` resolves the real stream with yt-dlp and `MediaServer` proxies it.
+- HLS (all of SoundCloud) is transcoded with ffmpeg: to WAV with an exact length whenever the duration is known, so the speaker shows the time and seeks by HTTP byte range; to a FLAC pipe only for live or unknown durations.
+- The same `TrackURI` comes back from `GetPositionInfo`, which is how the UI finds the playing row.
+- yt-dlp: a managed copy at `%LOCALAPPDATA%\AudioStar\tools\yt-dlp.exe`, self-updated by `YtDlpUpdater`; the copy on PATH is only a fallback.
+- Playlists added by URL are cached as JSON (`JsonPlaylistCache`) and refreshed in the background. `PlayAsync` plays the exact list last shown, so the start index always matches the row the user clicked.
+- Sign-in: SoundCloud and Spotify sign in through one WebView2 popup (`IWebSignIn` in Core, `Services/WebSignInService.cs` in Desktop). `ConnectAsync` may open it; `ConnectSilentlyAsync` (startup and opening a source page) never does.
+- SoundCloud: keeps the website's `oauth_token` cookie, because the official API needs a client secret and an Artist Pro app. yt-dlp gets it as `--username oauth --password <token>`, masked in logs.
+- SoundCloud metadata: yt-dlp's flat list has no covers, artist or time, so `SoundCloudSession` fills them, the card covers and the History card from api-v2 with the same token and the client id scraped from soundcloud.com.
+- Spotify: the popup catches the redirect. With no client ID, Connect first opens the popup on developer.spotify.com's Create app page (redirect URI with a Copy button) and reads the new app's client ID from the page address; App settings still accepts one.
+- Spotify Web API needs Premium since February 2026; the owner has none, so Spotify answers 403 for them.
+- YouTube: stays on browser cookies, because Google blocks sign-in inside embedded browsers.
+- Ports: media and stream proxy TCP 22545; UPnP event sink TCP 22534; Spotify redirect URI `http://127.0.0.1:22547/callback` (caught by the sign-in popup, nothing listens).
+- Firewall (elevated, once): `pwsh -ExecutionPolicy Bypass -File src/audio-start/tools/firewall.ps1`.
+- Data: settings and the SQLite library in `%APPDATA%\AudioStar\settings.json` and `audiostar.db`; sign-in tokens (DPAPI, current user) in `%APPDATA%\AudioStar\spotify-token.bin` and `soundcloud-token.bin`; logs, tools, playlist cache, speaker cache and the sign-in popup profile (`WebView2`) under `%LOCALAPPDATA%\AudioStar\`.
+- Schema changes: hand-written SQL delta scripts in `src/audio-start/db/audiostar/deltas/NNNN_name.sql`, embedded into `AudioStar.Library` and applied in version order at startup (`Data/Database.cs`); there are no EF migrations.

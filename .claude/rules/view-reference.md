@@ -7,6 +7,8 @@ paths:
 
 # Reference view: the YouTube page
 
+- Owner agent: `wpf-expert`.
+
 The YouTube source page (`Views/SourceView.xaml`, `ViewModels/SourceViewModel.cs`) is the approved layout and design, settled with the owner on 2026-10-19. When another view is restyled, it adopts these patterns; a view-specific deviation needs the owner's word.
 
 The owner's principle, in their words: "a very clean, decent layout, with the blue as indication where the action is ... smartly using available space". Every rule below serves one of those three: quiet neutral surfaces and hairlines, blue only where something can be done or is playing, and panes, cards and columns that fill the width instead of leaving empty space.
